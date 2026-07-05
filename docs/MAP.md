@@ -8,5 +8,6 @@
 | How do I cite a decision? | [`../README.md`](../README.md) — cite by number, e.g. `KFD-1` |
 | How do decisions change over time? | [`../CONTRIBUTING.md`](../CONTRIBUTING.md) — append-only; explicit supersession mints a new number |
 | How is this package versioned and released? | [KFD-1](../decisions/kfd-0001-release-versioning.md) applied to itself; Buildchain governs releases |
+| What release impact ledger should Buildchain consume for production passports? | [`../release-impact.json`](../release-impact.json) |
 | How do I verify registry/document agreement? | `node scripts/check.mjs` |
 | How do I report a vulnerability? | [`../SECURITY.md`](../SECURITY.md) |

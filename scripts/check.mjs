@@ -1,9 +1,11 @@
-// Registry conformance check: the registry and the decision documents must
-// agree, so a release cannot ship a registry that lies about its contents.
+// Registry conformance check: the registry, decision documents, and release
+// impact ledger must agree, so a release cannot ship evidence that lies about
+// its contents or versioning surface.
 import { readFileSync, existsSync } from "node:fs";
 
 const fail = (msg) => { console.error(`check: ${msg}`); process.exitCode = 1; };
 const registry = JSON.parse(readFileSync("registry.json", "utf8"));
+const releaseImpact = JSON.parse(readFileSync("release-impact.json", "utf8"));
 
 if (registry.schemaVersion !== 1) fail(`unsupported schemaVersion ${registry.schemaVersion}`);
 if (registry.contract !== "kfd-registry") fail(`unexpected contract ${registry.contract}`);
@@ -44,5 +46,33 @@ for (const [id, successors] of superseded) {
     if (!registry.entries.some((e) => e.id === successor)) fail(`${id} cites missing successor ${successor}`);
   }
 }
+const impactLevels = new Set(["patch", "minor", "major"]);
+const requiredSurfaces = new Set(["kfd-content", "kfd-registry-schema", "kfd-package-structure"]);
+
+if (releaseImpact.schemaVersion !== 1) fail(`unsupported release-impact schemaVersion ${releaseImpact.schemaVersion}`);
+if (releaseImpact.contract !== "kungfu-buildchain-impact") fail(`unexpected release-impact contract ${releaseImpact.contract}`);
+if (!releaseImpact.versionImpact || !impactLevels.has(releaseImpact.versionImpact.final)) {
+  fail("release-impact versionImpact.final must be patch, minor, or major");
+}
+if (!releaseImpact.versionImpact?.rationale) {
+  fail("release-impact versionImpact.rationale is required");
+}
+if (!Array.isArray(releaseImpact.surfaceImpacts) || releaseImpact.surfaceImpacts.length === 0) {
+  fail("release-impact surfaceImpacts[] is required");
+} else {
+  const seenSurfaces = new Set();
+  for (const [index, surface] of releaseImpact.surfaceImpacts.entries()) {
+    if (!surface.id) fail(`release-impact surfaceImpacts[${index}].id is required`);
+    else seenSurfaces.add(surface.id);
+    if (!impactLevels.has(surface.impact)) {
+      fail(`release-impact surfaceImpacts[${index}].impact must be patch, minor, or major`);
+    }
+    if (!surface.rationale) fail(`release-impact surfaceImpacts[${index}].rationale is required`);
+  }
+  for (const surfaceId of requiredSurfaces) {
+    if (!seenSurfaces.has(surfaceId)) fail(`release-impact missing surface ${surfaceId}`);
+  }
+}
+
 if (process.exitCode) process.exit(process.exitCode);
-console.log(`check: ${registry.entries.length} entries ok`);
+console.log(`check: ${registry.entries.length} entries ok; release impact ok`);

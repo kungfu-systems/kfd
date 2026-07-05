@@ -32,3 +32,15 @@ than by open proposal rounds.
 Day-to-day work lands on `dev/v1/v1.0`; releases are promoted through
 Buildchain channel pull requests (`dev -> alpha -> release`). See the
 Buildchain documentation for the release governance model.
+
+Production release passports must use `release-impact.json` as the
+surface-aware impact ledger:
+
+```yaml
+release-passport-impact-json: release-impact.json
+```
+
+Before opening a production release PR, update that ledger if the release
+changes a registered machine surface. KFD content operations are normally
+`patch`; additive registry schema or package-structure changes are `minor`;
+breaking registry schema or package-structure changes are `major`.
