@@ -37,12 +37,29 @@ reference KFDs; KFDs never depend on repository internals.
 ```text
 decisions/     one markdown file per decision (kfd-NNNN-<slug>.md)
 registry.json  machine-readable index (schemaVersion 1, contract kfd-registry)
+release-impact.json
+               Buildchain surface-aware impact ledger for production release passports
 scripts/       conformance check: registry and documents must agree
 ```
 
 `node scripts/check.mjs` (also `pnpm run check`) verifies numbering
-uniqueness, registry/document agreement, and status validity. Releases are
+uniqueness, registry/document agreement, status validity, and the release
+impact ledger required by Buildchain production release passports. Releases are
 governed by Buildchain; this package versions itself under KFD-1's own rules.
+
+## Release impact ledger
+
+`release-impact.json` is the surface-aware impact ledger passed to Buildchain
+when generating a production release passport:
+
+```yaml
+release-passport-impact-json: release-impact.json
+```
+
+For ordinary KFD content changes, keep `kfd-content` at `patch`. Move
+`kfd-registry-schema` or `kfd-package-structure` to `minor` or `major` only
+when those machine-consumed surfaces add or break fields, meanings, package
+paths, or published structure under KFD-1.
 
 ## License
 
