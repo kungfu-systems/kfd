@@ -2,8 +2,12 @@
 
 KFD is the organization-wide decision registry of kungfu-systems: the small
 set of standing, cross-repository norms that products and their consumers
-weld to. Each decision has an immutable number (`KFD-N`), a status, and a
-single authoritative text in this repository.
+weld to. Each decision has an immutable number (`KFD-N`), a kind, a status,
+and a single authoritative text in this repository.
+
+KFDs can be **principles** or **procedures**. Principles state what must remain
+true across kungfu-systems; procedures state how a class of work enforces or
+protects a principle.
 
 Rendered index: `https://kfd.libkungfu.dev` (stable machine path per entry,
 e.g. `https://kfd.libkungfu.dev/1`). This repository publishes
@@ -12,16 +16,21 @@ e.g. `https://kfd.libkungfu.dev/1`). This repository publishes
 
 ## Current decisions
 
-| ID | Title | Status |
-|---|---|---|
-| [KFD-1](decisions/kfd-0001-release-versioning.md) | Release versioning: welded-surface registers decide patch, minor, and major | active |
+| ID | Kind | Title | Status |
+|---|---|---|---|
+| [KFD-1](decisions/kfd-0001-release-versioning.md) | procedure | Release versioning: welded-surface registers decide patch, minor, and major | active |
+| [KFD-2](decisions/kfd-0002-fact-first-product-accountability.md) | principle | Fact-first product accountability: responsibility should be the path of least resistance | active |
 
 ## How to cite
 
 Cite by number: `KFD-1`. Numbers never change meaning; a superseded decision
-keeps its number and points to its successor. Repository-local engineering
-decisions stay in each repository's own ADRs and reference KFDs; KFDs never
-depend on repository internals.
+keeps its number and points to its successor. Newer KFD numbers do not
+automatically override older KFDs: supersession or override must be stated
+explicitly in the later decision and recorded in `registry.json`. Two active
+KFDs that conflict without such a relationship are a registry defect.
+
+Repository-local engineering decisions stay in each repository's own ADRs and
+reference KFDs; KFDs never depend on repository internals.
 
 ## Layout
 
