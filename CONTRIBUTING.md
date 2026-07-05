@@ -9,6 +9,13 @@ than by open proposal rounds.
 - Decision texts are **append-only**. Editorial clarification may be applied
   in place; substantive semantic change mints a new KFD that supersedes the
   old number. Numbers are never reused or renumbered.
+- Newer numbers do not automatically override older decisions. A later KFD may
+  supersede or override an earlier KFD only when the later text states that
+  relationship explicitly and `registry.json` records it. Conflicting active
+  decisions without an explicit relationship must be fixed before release.
+- Every KFD declares a `kind`: `principle` for standing cross-repository
+  truths, or `procedure` for a decision process that enforces or protects a
+  principle.
 - Every change must keep `registry.json` and `decisions/` in agreement:
   `node scripts/check.mjs` must pass (it is the Buildchain verify gate).
 - Versioning of this package follows KFD-1 itself: content operations are

@@ -2,6 +2,7 @@
 
 - Status: active
 - Number: 1
+- Kind: procedure
 - Applies to: every kungfu-systems repository (including this one)
 
 ## One sentence
