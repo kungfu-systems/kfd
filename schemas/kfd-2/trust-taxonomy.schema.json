@@ -1,0 +1,219 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-2/trust-taxonomy.schema.json",
+  "title": "KFD-2 trust taxonomy",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "contract",
+    "standard"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "contract": {
+      "const": "kfd-2-trust-taxonomy"
+    },
+    "standard": {
+      "const": "kfd-2"
+    }
+  },
+  "additionalProperties": true,
+  "x-kfd": {
+    "contract": "kfd-2-trust-taxonomy",
+    "schemaVersion": 1,
+    "allowedValues": {
+      "riskType": [
+        "natural-language-semantic-risk",
+        "external-fact-risk",
+        "partial-machine-coverage-risk",
+        "time-sensitive-state-risk",
+        "manual-review-risk"
+      ],
+      "trustImpact": [
+        "none",
+        "downgrade-warning",
+        "fail",
+        "unverifiable"
+      ],
+      "machineProvability": [
+        "machine-verifiable",
+        "partially-machine-verifiable",
+        "not-machine-verifiable",
+        "not-exhaustively-enumerable"
+      ],
+      "agentAction": [
+        "accept-with-warning",
+        "semantic-review-required",
+        "verify-external-facts",
+        "request-maintainer-review",
+        "open-kfd-extension-issue",
+        "fail-release"
+      ]
+    },
+    "extensionPolicy": {
+      "unknownValuePolicy": "schema-validation-fail",
+      "standardAction": "open-kfd-extension-issue",
+      "requestPath": {
+        "kind": "github-issue",
+        "repository": "https://github.com/kungfu-systems/kfd",
+        "issueUrl": "https://github.com/kungfu-systems/kfd/issues/new?title=KFD-2%20trust%20taxonomy%20extension%20request",
+        "appliesTo": [
+          "riskType",
+          "trustImpact",
+          "machineProvability",
+          "agentAction"
+        ]
+      }
+    }
+  },
+  "$defs": {
+    "riskType": {
+      "enum": [
+        "natural-language-semantic-risk",
+        "external-fact-risk",
+        "partial-machine-coverage-risk",
+        "time-sensitive-state-risk",
+        "manual-review-risk"
+      ]
+    },
+    "trustImpact": {
+      "enum": [
+        "none",
+        "downgrade-warning",
+        "fail",
+        "unverifiable"
+      ]
+    },
+    "machineProvability": {
+      "enum": [
+        "machine-verifiable",
+        "partially-machine-verifiable",
+        "not-machine-verifiable",
+        "not-exhaustively-enumerable"
+      ]
+    },
+    "agentAction": {
+      "enum": [
+        "accept-with-warning",
+        "semantic-review-required",
+        "verify-external-facts",
+        "request-maintainer-review",
+        "open-kfd-extension-issue",
+        "fail-release"
+      ]
+    },
+    "extensionRequest": {
+      "type": "object",
+      "required": [
+        "kind",
+        "repository",
+        "issueUrl"
+      ],
+      "properties": {
+        "kind": {
+          "const": "github-issue"
+        },
+        "repository": {
+          "const": "https://github.com/kungfu-systems/kfd"
+        },
+        "issueUrl": {
+          "type": "string",
+          "format": "uri"
+        },
+        "appliesTo": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "riskType",
+              "trustImpact",
+              "machineProvability",
+              "agentAction"
+            ]
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "residualRisk": {
+      "type": "object",
+      "required": [
+        "id",
+        "definedBy",
+        "riskType",
+        "trustImpact",
+        "machineProvability",
+        "agentAction",
+        "reason",
+        "owner"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "definedBy": {
+          "const": "https://kfd.libkungfu.dev/schemas/kfd-2/trust-taxonomy.schema.json#/$defs/residualRisk"
+        },
+        "riskType": {
+          "$ref": "#/$defs/riskType"
+        },
+        "trustImpact": {
+          "$ref": "#/$defs/trustImpact"
+        },
+        "machineProvability": {
+          "$ref": "#/$defs/machineProvability"
+        },
+        "agentAction": {
+          "$ref": "#/$defs/agentAction"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "owner": {
+          "type": "string",
+          "minLength": 1
+        },
+        "extensionRequest": {
+          "$ref": "#/$defs/extensionRequest"
+        }
+      },
+      "additionalProperties": false
+    },
+    "downgradeReason": {
+      "type": "object",
+      "required": [
+        "id",
+        "riskType",
+        "trustImpact",
+        "reason"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "riskType": {
+          "$ref": "#/$defs/riskType"
+        },
+        "trustImpact": {
+          "$ref": "#/$defs/trustImpact"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "agentAction": {
+          "$ref": "#/$defs/agentAction"
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

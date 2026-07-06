@@ -23,7 +23,7 @@
       "commitments": [
         {
           "id": "KFD-1",
-          "text": "contracts must not drift."
+          "text": "facts must not drift."
         },
         {
           "id": "KFD-2",
@@ -31,10 +31,10 @@
         },
         {
           "id": "KFD-3",
-          "text": "cooperation must start from transparent value, not coercion."
+          "text": "cooperation must start from transparent value."
         }
       ],
-      "summary": "Together they define the load-bearing path for Kungfu products: make contract worlds explicit, make important claims inspectable, and let humans and agents cooperate through visible value rather than hidden pressure."
+      "summary": "Together they define the load-bearing path for Kungfu products: make facts non-drifting, make trust inspectable from those facts, and let humans and agents cooperate through visible value rather than hidden pressure."
     },
     "foundationModel": {
       "heading": "Foundation model",
@@ -44,7 +44,7 @@
           "layer": "Fact-source ontology",
           "decision": "KFD-1",
           "readerQuestion": "What can count as a fact?",
-          "commitment": "A load-bearing fact must not drift: its contract world comes from one declared fact source."
+          "commitment": "Facts must not drift: a load-bearing contract world comes from one declared fact source."
         },
         {
           "layer": "Participant-to-object trust",
@@ -59,15 +59,15 @@
           "commitment": "Cooperation starts from transparent value, stable choice, and explainable constraints, not pressure."
         }
       ],
-      "chain": "stable facts -> trustworthy objects -> non-coercive cooperation",
+      "chain": "non-drifting facts -> inspectable trust -> transparent cooperation",
       "explanation": [
-        "This is why KFDs are not only internal governance text. KFD-1 is a procedure, but it gives the foundation model its first layer by making fact sources operational: a fact-bearing contract world must be declared, inspectable, and unable to drift invisibly. KFD-2 then defines how trust can stand on those facts. KFD-3 defines how humans and agents can cooperate once facts and trust are visible.",
+        "This is why KFDs are not only internal governance text. KFD-1 gives the foundation model its first layer by making fact sources operational: a fact-bearing contract world must be declared, inspectable, and unable to drift invisibly. KFD-2 then defines how trust can stand on those facts. KFD-3 defines how humans and agents can cooperate once facts and trust are visible.",
         "Real-world agent work turns ordinary work into a dense system of products, files, repositories, traces, policies, humans, and agents. In that world, complexity cannot be made safe by hidden state or forced compliance. It has to be compressed through non-drifting facts, inspectable trust, and voluntary cooperation. The goal is not to force increasingly capable participants into compliance through stronger pressure. It is to give humans and agents a shared worldview for adapting to a more complex world."
       ]
     },
     "productProofPath": {
       "heading": "Product proof path",
-      "body": "KFDs are not a detached manifesto, but they are not a demand that readers adopt a Kungfu product before understanding the decisions. A philosophy becomes load-bearing only when it can be seen in a concrete case. For that reference case, use the main Kungfu product entrypoint (`https://kungfu.tech`) for product philosophy, and Buildchain (`https://buildchain.libkungfu.dev`) for release and provenance accountability. This registry states the commitments; those entrypoints show how the commitments are meant to be borne in practice."
+      "body": "KFDs are not a detached manifesto, but they are not a demand that readers adopt a Kungfu product before understanding the decisions. A philosophy becomes load-bearing only when it can be seen in a concrete case. The first concrete case is this package itself: `standards.json`, `schemas/`, `docs/`, `site/kfd-site.json`, and `scripts/check.mjs` show how KFD-1, KFD-2, and KFD-3 are expressed as consumable interfaces for both humans and agents. For the broader product case, use the main Kungfu product entrypoint (`https://kungfu.tech`) for product philosophy, and Buildchain (`https://buildchain.libkungfu.dev`) for release and provenance accountability. This registry states the commitments; this package and those entrypoints show how the commitments are meant to be borne in practice."
     },
     "currentDecisions": {
       "heading": "Current decisions",
@@ -77,7 +77,34 @@
   "decisionPages": {
     "source": "registry.json",
     "bodySource": "registry.entries[].path",
-    "stableUrlField": "url"
+    "stableUrlField": "url",
+    "metadata": {
+      "licenseBoundary": {
+        "license": "Apache-2.0",
+        "licenseFile": "LICENSE",
+        "officialStatusAndTrademarks": "TRADEMARKS.md",
+        "summary": "Apache-2.0 covers repository contents; it does not grant KFD/Kungfu trademarks, official status, certification status, or endorsement."
+      },
+      "publicFactSource": {
+        "kind": "git-repository",
+        "host": "github",
+        "repository": "kungfu-systems/kfd",
+        "url": "https://github.com/kungfu-systems/kfd",
+        "loadBearingCoordinate": "commit-addressed repository contents",
+        "stableRenderedIndex": "https://kfd.libkungfu.dev",
+        "canonicalPaths": [
+          "decisions/kfd-N.md",
+          "registry.json",
+          "standards.json"
+        ],
+        "projectionSurfaces": [
+          "https://kfd.libkungfu.dev/N",
+          "npm:@kungfu-tech/kfd",
+          "Buildchain release passports"
+        ],
+        "extensionRequestNote": "GitHub issues are extension request paths; KFD facts are created only by committed repository contents."
+      }
+    }
   },
   "renderingBoundary": {
     "ownedByKfd": [
@@ -86,6 +113,8 @@
       "foundation model layers and chain",
       "product proof path text",
       "decision metadata",
+      "decision metadata fact source",
+      "license and official-status boundary",
       "decision markdown bodies"
     ],
     "ownedBySite": [

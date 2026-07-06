@@ -1,4 +1,4 @@
-# KFD-1: Contracts must not drift — contract worlds need one fact source
+# KFD-1: Facts must not drift — contract worlds need one fact source
 
 - Status: active
 - Number: 1
@@ -7,27 +7,30 @@
 
 ## One sentence
 
-A contract world must not change invisibly: any surface that users, agents, or
-systems weld to must come from one declared fact source and change only through
-an explicit compatibility boundary.
+Facts must not drift.
+
+Any contract world that users, agents, or systems weld to must come from one
+declared fact source and change only through an explicit compatibility
+boundary.
 
 ## Foundation role
 
-Within the KFD-1/2/3 foundation, this is the contract procedure:
+Within the KFD-1/2/3 foundation, this is the fact-source procedure:
 
 ```text
-contracts must not drift
+facts must not drift
 ```
 
-KFD-1 makes artifact contract worlds explicit so releases do not drift under
-changelog volume, cadence pressure, or marketing pressure. It is the concrete
-versioning procedure that lets users and agents know which artifact world they
-are integrating with, replaying, auditing, or trusting.
+KFD-1 makes fact-bearing contract worlds explicit so they do not drift under
+changelog volume, cadence pressure, implementation pressure, or marketing
+pressure. It is the procedure that lets users and agents know which fact world
+they are integrating with, replaying, auditing, or trusting.
 
-KFD-1 now has two concrete implementation surfaces in the Kungfu ecosystem:
-versioning protects release lines from contract drift, and config contracts
-protect multi-target configuration from drifting across runtimes, products, and
-agent-facing surfaces.
+KFD-1 has concrete implementation surfaces across the Kungfu ecosystem:
+versioning protects release lines from contract drift, config contracts protect
+multi-target configuration from drifting across runtimes, products, and
+agent-facing surfaces, and KFD metadata protects the decision package's own
+standard surfaces from drifting away from their declared source.
 
 ## Premise: the welded-surface register
 
@@ -140,17 +143,16 @@ table and the machine record never diverge): `schemaVersion: 1`,
 
 ## Relation to KFD-2 and KFD-3
 
-KFD-2 establishes fact-first product accountability: important claims should
-be inspectable before users or agents are asked to trust them. KFD-1 is the
-contract-layer expression of the same single-fact-source discipline: it
-preserves accountability across artifact contract worlds before those artifacts
-are used to produce runtime facts, responsibility state, or proof-backed
-decisions.
+KFD-2 establishes fact-first product accountability: trust must start from
+facts. KFD-1 defines the lower layer that makes such facts load-bearing:
+important facts must not drift from the contract world that declares them.
+Without KFD-1, KFD-2 would have facts that cannot reliably be re-read,
+replayed, audited, or trusted over time.
 
 KFD-3 establishes non-coercive cooperation with intelligent participants. That
-cooperation depends on the same contract clarity: users and agents can choose,
-delegate, replay, or refuse more honestly when the artifact world is legible
-and does not drift invisibly.
+cooperation depends on non-drifting facts: users and agents can choose,
+delegate, replay, or refuse more honestly when the fact world is legible and
+does not drift invisibly.
 
 ## How KFDs themselves are versioned
 
@@ -163,6 +165,18 @@ clarifications — are patches. Machine surfaces of the package itself (the
 registry schema, the package structure) can still require `minor` or `major`
 surface-impact review in the Buildchain release passport, but that review
 classification is not a silent package-line upgrade.
+
+## Implementation case: the KFD package
+
+The `@kungfu-tech/kfd` npm package is a self-proof case for this procedure.
+Its decision texts, `registry.json`, `standards.json`, schemas, site bundle,
+and release propagation graph are published as stable surfaces. Their contract
+world is not inferred from README prose or package version alone: it is exposed
+through `standards.json`, checked by `scripts/check.mjs`, and bound into the
+KFD-1 witness under `.buildchain/kfd-1/contract-world.witness.json`.
+
+This lets humans and agents inspect how the KFD package prevents its own
+contract surfaces from drifting while it evolves.
 
 ## Adopters
 

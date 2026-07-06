@@ -30,6 +30,7 @@ jobs:
       artifact-name-template: "{artifact}-{platform}-{shortSha}"
       artifact-paths: |
         README.md
+        TRADEMARKS.md
         kfd.release.json
         decisions
         docs
@@ -44,4 +45,4 @@ jobs:
         release-impact.json
       release-candidate: true
       expected-artifacts-json: >-
-        {"minFiles":20,"requiredPaths":["README.md","kfd.release.json","registry.json","standards.json","schemas/kfd-standards.schema.json","schemas/kfd-1/contract-world.schema.json","schemas/kfd-1/witness.schema.json","schemas/kfd-2/release-claims.schema.json","schemas/kfd-2/release-trust-passport.schema.json","schemas/kfd-3/collaboration-interface.schema.json","schemas/kfd-3/witness.schema.json","site/kfd-site.json","buildchain.release-propagation.json",".buildchain/kfd-1/contract-world.witness.json",".buildchain/kfd-3/collaboration-interface.json",".buildchain/kfd-3/collaboration-interface.prebuild.json",".buildchain/kfd-3/collaboration-interface.artifact.json","package.json","release-impact.json"]}
+        {"minFiles":21,"requiredPaths":["README.md","TRADEMARKS.md","kfd.release.json","registry.json","standards.json","schemas/kfd-standards.schema.json","schemas/kfd-1/contract-world.schema.json","schemas/kfd-1/witness.schema.json","schemas/kfd-2/release-claims.schema.json","schemas/kfd-2/release-trust-passport.schema.json","schemas/kfd-3/collaboration-interface.schema.json","schemas/kfd-3/witness.schema.json","site/kfd-site.json","buildchain.release-propagation.json",".buildchain/kfd-1/contract-world.witness.json",".buildchain/kfd-3/collaboration-interface.json",".buildchain/kfd-3/collaboration-interface.prebuild.json",".buildchain/kfd-3/collaboration-interface.artifact.json","package.json","release-impact.json"]}

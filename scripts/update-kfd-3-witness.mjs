@@ -36,6 +36,7 @@ const schemaSurfaces = [
   "schemas/kfd-standards.schema.json",
   "schemas/kfd-1/contract-world.schema.json",
   "schemas/kfd-1/witness.schema.json",
+  "schemas/kfd-2/trust-taxonomy.schema.json",
   "schemas/kfd-2/release-claims.schema.json",
   "schemas/kfd-2/release-trust-passport.schema.json",
   "schemas/kfd-3/collaboration-interface.schema.json",
@@ -49,6 +50,7 @@ const schemaSurfaces = [
 const groupedSurfaces = {
   docs: [
     { id: "doc:readme", sourcePath: "README.md", sha256: sha256File("README.md") },
+    { id: "doc:trademarks", sourcePath: "TRADEMARKS.md", sha256: sha256File("TRADEMARKS.md") },
     { id: "doc:docs-map", sourcePath: "docs/MAP.md", sha256: sha256File("docs/MAP.md") },
     { id: "doc:kfd-2-release-trust", sourcePath: "docs/kfd-2-release-trust.md", sha256: sha256File("docs/kfd-2-release-trust.md") },
     { id: "doc:kfd-3-collaboration-interface", sourcePath: "docs/kfd-3-collaboration-interface.md", sha256: sha256File("docs/kfd-3-collaboration-interface.md") },
@@ -110,7 +112,11 @@ const responsibility = {
 const residualRisk = [
   {
     id: "human-language-interpretation",
-    kind: "semantic-risk",
+    definedBy: "https://kfd.libkungfu.dev/schemas/kfd-2/trust-taxonomy.schema.json#/$defs/residualRisk",
+    riskType: "natural-language-semantic-risk",
+    trustImpact: "downgrade-warning",
+    machineProvability: "not-exhaustively-enumerable",
+    agentAction: "semantic-review-required",
     reason: "Natural-language standard interpretation is inspectable and reviewable but not exhaustively enumerable from package bytes.",
     owner: "KFD maintainers",
   },
@@ -174,6 +180,7 @@ const artifact = {
     minimalEntrypoints: collaborationInterface.minimalEntrypoints.map((entry) => pointer(entry.surface, entry.purpose)),
     discoverability: [
       pointer("README.md", "Human and agent entrypoint"),
+      pointer("TRADEMARKS.md", "Official status, trademark, and authority boundary"),
       pointer("docs/MAP.md", "Documentation routing entrypoint"),
       pointer("registry.json", "Machine-readable decision index"),
       pointer("standards.json", "Machine-readable standards metadata"),
@@ -183,6 +190,7 @@ const artifact = {
     ],
     transparentConstraints: [
       pointer("CONTRIBUTING.md", "Append-only decision and contribution constraints"),
+      pointer("TRADEMARKS.md", "Trademark and official-status constraints"),
       pointer("scripts/check.mjs", "Repository self-verification gate"),
       pointer("site/kfd-site.json", "Site rendering boundary"),
     ],
@@ -195,6 +203,7 @@ const artifact = {
     ],
     manuals: [
       pointer("docs/MAP.md"),
+      pointer("TRADEMARKS.md"),
       pointer("docs/kfd-3-collaboration-interface.md"),
     ],
   },
@@ -208,6 +217,7 @@ const artifact = {
     name: "kfd self-verification",
     command: "node scripts/check.mjs",
   },
+  residualRisk,
   result: "pass",
 };
 

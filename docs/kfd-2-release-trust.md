@@ -7,6 +7,9 @@ history.
 
 This package defines two KFD-owned machine interfaces:
 
+- `schemas/kfd-2/trust-taxonomy.schema.json`: the KFD-owned taxonomy for
+  residual-risk types, trust impact, machine provability, agent actions, and
+  downgrade reasons.
 - `schemas/kfd-2/release-claims.schema.json`: the product's declared public
   release claims.
 - `schemas/kfd-2/release-trust-passport.schema.json`: the verifier's result
@@ -23,6 +26,35 @@ machine-readable evidence, the audit boundary, residual risk, and responsibility
 state. The trust passport should then record whether each claim is bound to
 evidence, which evidence was checked, what the result was, and who owns the
 release decision.
+
+## Trust Taxonomy
+
+KFD-2 owns the vocabulary for residual risks and trust downgrades. A product,
+release tool, or agent must not invent new residual-risk values locally and
+still claim KFD-2 conformance. Unknown values fail schema validation.
+
+The current taxonomy is published in
+`schemas/kfd-2/trust-taxonomy.schema.json`. It defines:
+
+- `riskType`: what kind of trust gap remains;
+- `trustImpact`: whether the gap is informational, downgraded, failing, or
+  unverifiable;
+- `machineProvability`: whether the gap can be fully proved by machine;
+- `agentAction`: what an agent should do next;
+- `downgradeReason`: how a verifier maps residual risk into a release trust
+  result.
+
+If an agent needs a KFD-2 value that is not present, the standard extension
+path is to open an issue in the KFD repository:
+
+```text
+https://github.com/kungfu-systems/kfd/issues/new?title=KFD-2%20trust%20taxonomy%20extension%20request
+```
+
+The issue should state the missing value, the field it belongs to, the product
+or release scenario that needs it, and why existing values cannot express the
+case. Until KFD accepts the new value into the taxonomy schema, consumers
+should treat the value as invalid rather than as a soft warning.
 
 ## Interface Versioning
 

@@ -10,6 +10,28 @@
   "sourceRegistry": {
     "path": "registry.json"
   },
+  "factSources": [
+    {
+      "id": "public-kfd-fact-source",
+      "kind": "git-repository",
+      "host": "github",
+      "repository": "kungfu-systems/kfd",
+      "url": "https://github.com/kungfu-systems/kfd",
+      "loadBearingCoordinate": "commit-addressed repository contents",
+      "stableRenderedIndex": "https://kfd.libkungfu.dev",
+      "canonicalPaths": [
+        "decisions/kfd-N.md",
+        "registry.json",
+        "standards.json"
+      ],
+      "projectionSurfaces": [
+        "https://kfd.libkungfu.dev/N",
+        "npm:@kungfu-tech/kfd",
+        "Buildchain release passports"
+      ],
+      "extensionRequestNote": "GitHub issues are extension request paths; KFD facts are created only by committed repository contents."
+    }
+  ],
   "participants": [
     {
       "id": "human-reader",
@@ -54,6 +76,12 @@
       "surface": "docs/MAP.md",
       "participants": ["human-reader", "agent-reader", "maintainer"],
       "purpose": "Route readers and agents to the right KFD document or machine surface."
+    },
+    {
+      "id": "official-status-and-trademarks",
+      "surface": "TRADEMARKS.md",
+      "participants": ["human-reader", "agent-reader", "package-consumer"],
+      "purpose": "Understand what Apache-2.0 covers and what remains official, trademark-bound, or endorsement-bound."
     },
     {
       "id": "registry",
@@ -110,6 +138,14 @@
       "maturity": "stable"
     },
     {
+      "id": "official-status-and-trademarks",
+      "kind": "markdown-doc",
+      "participants": ["human-reader", "agent-reader", "package-consumer"],
+      "value": "Apache-2.0 reuse boundary, trademark boundary, official source boundary, fork/derivative guidance, and agent-facing authority rule.",
+      "discoverability": { "fromMinimalEntrypoint": true, "path": "TRADEMARKS.md" },
+      "maturity": "stable"
+    },
+    {
       "id": "decision-texts",
       "kind": "markdown-doc",
       "participants": ["human-reader", "agent-reader", "maintainer"],
@@ -153,7 +189,7 @@
       "id": "site-bundle-json",
       "kind": "json-api",
       "participants": ["site-consumer", "agent-reader"],
-      "value": "KFD-owned content projection consumed by the public site renderer.",
+      "value": "KFD-owned content projection consumed by the public site renderer, including decision metadata and the public KFD fact-source boundary.",
       "discoverability": { "fromMinimalEntrypoint": true, "path": "site/kfd-site.json" },
       "maturity": "stable"
     },
@@ -264,6 +300,19 @@
       "id": "maintain-through-pr",
       "participants": ["maintainer"],
       "choice": "Change KFD through PR review, node scripts/check.mjs, and Buildchain release gates."
+    }
+  ],
+  "extensionRequests": [
+    {
+      "id": "kfd-2-trust-taxonomy-extension",
+      "participants": ["agent-reader", "maintainer", "release-system", "package-consumer"],
+      "trigger": "A human or agent needs a residual-risk, trust-impact, machine-provability, agent-action, or downgrade-reason value that is not present in schemas/kfd-2/trust-taxonomy.schema.json.",
+      "requestPath": {
+        "kind": "github-issue",
+        "target": "https://github.com/kungfu-systems/kfd/issues/new?title=KFD-2%20trust%20taxonomy%20extension%20request",
+        "template": "State the missing value, the taxonomy field, the product or release scenario, and why existing KFD-2 values cannot express the case."
+      },
+      "expectedOutcome": "KFD maintainers either add the value to the KFD-2 trust taxonomy schema or explain which existing value should be used."
     }
   ],
   "closure": {

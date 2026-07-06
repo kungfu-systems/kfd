@@ -5,6 +5,8 @@ set of standing, cross-repository norms that products and their consumers
 weld to. Each decision has an immutable number (`KFD-N`), a kind, a status,
 and a single authoritative text in this repository.
 
+Stable rendered site: `https://kfd.libkungfu.dev`.
+
 KFDs can be **principles** or **procedures**. Principles state what must remain
 true across kungfu-systems; procedures state how a class of work enforces or
 protects a principle.
@@ -14,14 +16,14 @@ protects a principle.
 The first three KFDs form the public foundation for kungfu-systems:
 
 ```text
-KFD-1: contracts must not drift.
+KFD-1: facts must not drift.
 KFD-2: trust must start from facts.
-KFD-3: cooperation must start from transparent value, not coercion.
+KFD-3: cooperation must start from transparent value.
 ```
 
-Together they define the load-bearing path for Kungfu products: make contract
-worlds explicit, make important claims inspectable, and let humans and agents
-cooperate through visible value rather than hidden pressure.
+Together they define the load-bearing path for Kungfu products: make facts
+non-drifting, make trust inspectable from those facts, and let humans and
+agents cooperate through visible value rather than hidden pressure.
 
 ## Foundation model
 
@@ -31,22 +33,21 @@ act, delegate, and remember across many surfaces.
 
 | Layer | Decision | Reader question | Commitment |
 |---|---|---|---|
-| Fact-source ontology | KFD-1 | What can count as a fact? | A load-bearing fact must not drift: its contract world comes from one declared fact source. |
+| Fact-source ontology | KFD-1 | What can count as a fact? | Facts must not drift: a load-bearing contract world comes from one declared fact source. |
 | Participant-to-object trust | KFD-2 | When can a user or agent trust a claim, product, artifact, or control surface? | Trust starts from inspectable facts and responsibility state. |
 | Participant-to-participant cooperation | KFD-3 | How should peer intelligent participants cooperate? | Cooperation starts from transparent value, stable choice, and explainable constraints, not pressure. |
 
 In short:
 
 ```text
-stable facts -> trustworthy objects -> non-coercive cooperation
+non-drifting facts -> inspectable trust -> transparent cooperation
 ```
 
-This is why KFDs are not only internal governance text. KFD-1 is a procedure,
-but it gives the foundation model its first layer by making fact sources
-operational: a fact-bearing contract world must be declared, inspectable, and
-unable to drift invisibly. KFD-2 then defines how trust can stand on those
-facts. KFD-3 defines how humans and agents can cooperate once facts and trust
-are visible.
+This is why KFDs are not only internal governance text. KFD-1 gives the
+foundation model its first layer by making fact sources operational: a
+fact-bearing contract world must be declared, inspectable, and unable to drift
+invisibly. KFD-2 then defines how trust can stand on those facts. KFD-3
+defines how humans and agents can cooperate once facts and trust are visible.
 
 Real-world agent work turns ordinary work into a dense system of products,
 files, repositories, traces, policies, humans, and agents. In that world,
@@ -89,7 +90,7 @@ The first screen should be derived from this README:
 - Foundation signal: the `Foundation triad` section, especially the three
   one-line commitments.
 - First-screen explanation: the beginning of `Foundation model`, ending at the
-  `stable facts -> trustworthy objects -> non-coercive cooperation` chain.
+  `non-drifting facts -> inspectable trust -> transparent cooperation` chain.
 
 Decision cards, detail links, and machine paths should come from
 `registry.json`. The machine-readable site bundle lives at `site/kfd-site.json`
@@ -102,10 +103,14 @@ separate homepage wording that can drift from this package.
 
 KFDs are not a detached manifesto, but they are not a demand that readers adopt
 a Kungfu product before understanding the decisions. A philosophy becomes
-load-bearing only when it can be seen in a concrete case. For that reference
-case, use the main Kungfu product entrypoint (`https://kungfu.tech`) for product
-philosophy, and Buildchain (`https://buildchain.libkungfu.dev`) for release and
-provenance accountability. This registry states the commitments; those
+load-bearing only when it can be seen in a concrete case. The first concrete
+case is this package itself: `standards.json`, `schemas/`, `docs/`,
+`site/kfd-site.json`, and `scripts/check.mjs` show how KFD-1, KFD-2, and KFD-3
+are expressed as consumable interfaces for both humans and agents. For the
+broader product case, use the main Kungfu product entrypoint
+(`https://kungfu.tech`) for product philosophy, and Buildchain
+(`https://buildchain.libkungfu.dev`) for release and provenance
+accountability. This registry states the commitments; this package and those
 entrypoints show how the commitments are meant to be borne in practice.
 
 Rendered index: `https://kfd.libkungfu.dev` (stable machine path per entry,
@@ -123,16 +128,33 @@ it as:
 import standards from "@kungfu-tech/kfd/standards.json" with { type: "json" };
 ```
 
+## Agent Quickstart
+
+Agents consuming this package should start from the same sources as humans:
+
+1. Read this README for the foundation model and package map.
+2. Read `standards.json` for canonical KFD numbers, schema IDs, concept names,
+   and interface contracts.
+3. Use `site/kfd-site.json` decision metadata or the KFD-3 collaboration
+   interface fact-source metadata to identify the public KFD fact source.
+4. Use `schemas/kfd-2/trust-taxonomy.schema.json` for KFD-2 residual-risk and
+   trust-downgrade values. Unknown taxonomy values are invalid.
+5. Use `schemas/kfd-3/collaboration-interface.schema.json` and
+   `schemas/kfd-3/witness.schema.json` to inspect collaboration interfaces.
+6. If a needed KFD-2 taxonomy value is missing, open a KFD GitHub issue rather
+   than inventing a local value:
+   `https://github.com/kungfu-systems/kfd/issues/new?title=KFD-2%20trust%20taxonomy%20extension%20request`.
+
 KFD package semver is only the distribution version. KFD-owned machine
 interfaces carry their own `schemaVersion` and `contract` fields. Compatible
 additions may keep the same interface version; semantic changes, required-field
 changes, verification meaning changes, or responsibility-boundary changes must
 use a new interface version or contract.
 
-KFD-2 publishes release-claims and release-trust-passport schemas under
-`schemas/kfd-2/`. These schemas let Buildchain and other release systems audit
-whether public release claims are bound to source facts, evidence, hashes,
-audit boundaries, residual risk, and responsibility state. See
+KFD-2 publishes trust-taxonomy, release-claims, and release-trust-passport
+schemas under `schemas/kfd-2/`. These schemas let Buildchain and other release
+systems audit whether public release claims are bound to source facts,
+evidence, hashes, audit boundaries, residual risk, and responsibility state. See
 [`docs/kfd-2-release-trust.md`](docs/kfd-2-release-trust.md).
 
 KFD-3 also publishes a general collaboration-interface schema and witness
@@ -145,11 +167,31 @@ closed-world evidence shape. See
 
 ## Current decisions
 
-| ID | Kind | Title | Status |
+| ID | Kind | Axiom | Status |
 |---|---|---|---|
-| [KFD-1](decisions/kfd-1.md) | procedure | Contracts must not drift: contract worlds need one fact source | active |
-| [KFD-2](decisions/kfd-2.md) | principle | Trust must start from facts: responsibility must be inspectable | active |
-| [KFD-3](decisions/kfd-3.md) | principle | Cooperation must start from transparent value: compliance must not be coerced | active |
+| [KFD-1](decisions/kfd-1.md) | procedure | Facts must not drift. | active |
+| [KFD-2](decisions/kfd-2.md) | principle | Trust must start from facts. | active |
+| [KFD-3](decisions/kfd-3.md) | principle | Cooperation must start from transparent value. | active |
+
+## Decision metadata
+
+Every rendered decision page should make the KFD fact source explicit. The
+public KFD fact source is the GitHub-hosted `kungfu-systems/kfd` git
+repository. GitHub is the current canonical coordination and hosting surface;
+the load-bearing facts are the commit-addressed repository contents.
+
+Decision metadata should expose:
+
+- Public fact source: `https://github.com/kungfu-systems/kfd`
+- Load-bearing coordinate: commit-addressed repository contents.
+- Canonical paths: `decisions/kfd-N.md`, `registry.json`, `standards.json`.
+- Stable rendered index: `https://kfd.libkungfu.dev`.
+- Rendered URL: `https://kfd.libkungfu.dev/N`.
+
+Rendered pages, npm package contents, Buildchain release passports, and
+`kfd.libkungfu.dev` are projections or evidence surfaces. A GitHub issue is an
+extension request path, not a KFD fact by itself; it becomes part of the KFD
+fact source only after the resulting change is committed to the repository.
 
 ## How to cite
 
@@ -203,6 +245,10 @@ paths, or published structure under KFD-1. These values are Buildchain release
 passport impact classifications; they do not by themselves open a new
 `@kungfu-tech/kfd` package major or minor line.
 
-## License
+## License and official status
 
-[Apache License 2.0](LICENSE).
+Repository contents are licensed under the [Apache License 2.0](LICENSE).
+Apache-2.0 grants broad reuse rights for the licensed contents, but it does
+not grant KFD/Kungfu trademarks, official status, certification status, or
+endorsement. The official source, name-use, fork, derivative, and agent-facing
+authority boundaries are defined in [`TRADEMARKS.md`](TRADEMARKS.md).

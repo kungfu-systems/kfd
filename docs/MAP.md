@@ -5,10 +5,15 @@
 | What is KFD, and what decisions exist? | [`../README.md`](../README.md) |
 | What is the KFD-1/2/3 foundation triad? | [`../README.md`](../README.md#foundation-triad) |
 | What worldview structure does the foundation triad express? | [`../README.md`](../README.md#foundation-model) |
+| How should an agent quickly understand this package? | [`../README.md`](../README.md#agent-quickstart) |
+| What is the concrete self-proof case for KFD-1/2/3? | [`../README.md`](../README.md#product-proof-path) and the implementation case in each KFD |
+| Where is the public KFD fact source? | [`../README.md`](../README.md#decision-metadata) and [`../site/kfd-site.json`](../site/kfd-site.json) decision metadata |
+| What does Apache-2.0 cover, and what remains official/trademark-bound? | [`../TRADEMARKS.md`](../TRADEMARKS.md) |
 | What should a site renderer consume to render `kfd.libkungfu.dev`? | [`../site/kfd-site.json`](../site/kfd-site.json) |
 | What is the top-level product accountability principle? | [KFD-2](../decisions/kfd-2.md) |
 | What stance should products take toward humans and agents as reasoning participants? | [KFD-3](../decisions/kfd-3.md) |
 | What schema should products use for KFD-3 participant-facing collaboration interfaces? | [`kfd-3-collaboration-interface.md`](kfd-3-collaboration-interface.md) |
+| What should an agent do when a needed KFD-2 trust taxonomy value is missing? | [`kfd-2-release-trust.md`](kfd-2-release-trust.md#trust-taxonomy) — open a KFD GitHub issue |
 | What does a specific decision say? | [`../decisions/`](../decisions) (index: [`../registry.json`](../registry.json)) |
 | What machine metadata should Buildchain or another consumer import for KFD standard identity and schema IDs? | [`../standards.json`](../standards.json) |
 | What schema validates the standards metadata surface? | [`../schemas/kfd-standards.schema.json`](../schemas/kfd-standards.schema.json) |

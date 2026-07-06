@@ -124,6 +124,12 @@
         "fail",
         "warning"
       ]
+    },
+    "residualRisk": {
+      "type": "array",
+      "items": {
+        "$ref": "https://kfd.libkungfu.dev/schemas/kfd-2/trust-taxonomy.schema.json#/$defs/residualRisk"
+      }
     }
   },
   "additionalProperties": true,
