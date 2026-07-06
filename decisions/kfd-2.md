@@ -98,6 +98,21 @@ explicitly and the registry records the affected decision. Two active KFDs that
 conflict without an explicit supersession relationship are a registry defect,
 not an invitation to pick the newer text silently.
 
+## Implementation case: the KFD package
+
+The `@kungfu-tech/kfd` npm package is a self-proof case for this principle.
+It does not ask humans or agents to trust the KFD registry only because the
+README says so. It publishes inspectable facts: decision documents,
+`registry.json`, `standards.json`, JSON schemas, document hashes, release-impact
+metadata, and conformance checks.
+
+KFD-2 also owns the trust taxonomy used by release claims, release trust
+passports, and KFD-3 witnesses. Unknown residual-risk or trust-downgrade values
+fail validation until KFD records them in
+`schemas/kfd-2/trust-taxonomy.schema.json`. When an agent needs a new value,
+the declared extension path is to open an issue in
+`https://github.com/kungfu-systems/kfd` rather than inventing a private value.
+
 ## Adopters
 
 Each adopting repository cites this KFD when designing or changing a fact

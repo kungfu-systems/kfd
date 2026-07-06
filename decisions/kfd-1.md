@@ -164,6 +164,18 @@ registry schema, the package structure) can still require `minor` or `major`
 surface-impact review in the Buildchain release passport, but that review
 classification is not a silent package-line upgrade.
 
+## Implementation case: the KFD package
+
+The `@kungfu-tech/kfd` npm package is a self-proof case for this procedure.
+Its decision texts, `registry.json`, `standards.json`, schemas, site bundle,
+and release propagation graph are published as stable surfaces. Their contract
+world is not inferred from README prose or package version alone: it is exposed
+through `standards.json`, checked by `scripts/check.mjs`, and bound into the
+KFD-1 witness under `.buildchain/kfd-1/contract-world.witness.json`.
+
+This lets humans and agents inspect how the KFD package prevents its own
+contract surfaces from drifting while it evolves.
+
 ## Adopters
 
 Each adopting repository keeps an adoption record, its welded-surface
