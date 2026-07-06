@@ -163,11 +163,11 @@ closed-world evidence shape. See
 
 ## Current decisions
 
-| ID | Kind | Title | Status |
+| ID | Kind | Axiom | Status |
 |---|---|---|---|
-| [KFD-1](decisions/kfd-1.md) | procedure | Facts must not drift: contract worlds need one fact source | active |
-| [KFD-2](decisions/kfd-2.md) | principle | Trust must start from facts: responsibility must be inspectable | active |
-| [KFD-3](decisions/kfd-3.md) | principle | Cooperation must start from transparent value: compliance must not be coerced | active |
+| [KFD-1](decisions/kfd-1.md) | procedure | Facts must not drift. | active |
+| [KFD-2](decisions/kfd-2.md) | principle | Trust must start from facts. | active |
+| [KFD-3](decisions/kfd-3.md) | principle | Cooperation must start from transparent value. | active |
 
 ## How to cite
 
