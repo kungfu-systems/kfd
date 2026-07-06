@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "contract": "kungfu-buildchain-impact",
+  "release": {
+    "tag": "v1.0.0-alpha.4",
+    "line": "v1.0",
+    "channel": "release",
+    "targetRef": "release/v1/v1.0"
+  },
+  "versionImpact": {
+    "final": "minor",
+    "source": "kfd-surface-register",
+    "rationale": "This change additively registers KFD-owned standards metadata, KFD-2 release trust schemas, KFD-3 collaboration-interface schemas, and KFD-1 document/interface integrity bindings while keeping existing registry and decision surfaces compatible."
+  },
+  "surfaceImpacts": [
+    {
+      "id": "kfd-content",
+      "impact": "patch",
+      "class": "content",
+      "rationale": "KFD documents are append-only content coordinates; current decision text changes do not alter a machine-consumed surface.",
+      "source": ""
+    },
+    {
+      "id": "kfd-registry-schema",
+      "impact": "patch",
+      "class": "compatible",
+      "rationale": "registry.json keeps schemaVersion 1 and the existing entry shape, including number, id, slug, title, kind, status, path, and url; slug and path values are stable number coordinates.",
+      "source": ""
+    },
+    {
+      "id": "kfd-standards-metadata",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "standards.json and schemas/ add KFD-2 release-claims and release-trust-passport schema IDs, explicit KFD-1/2/3 interface versions, KFD document SHA-256 bindings, and KFD-owned concept names for downstream consumers.",
+      "source": ""
+    },
+    {
+      "id": "kfd-package-structure",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "The npm package now also publishes KFD-2 schemas and KFD-2 documentation through existing schemas/, docs/, standards.json, and subpath exports while preserving existing README.md, decisions/, registry.json, and site/ paths.",
+      "source": ""
+    }
+  ],
+  "summary": "KFD v1.0 production promotion is minor-impact because it additively exposes KFD-2 release trust metadata, KFD-1/2/3 interface version metadata, and document integrity bindings for Buildchain and other consumers; existing registry, decision text, and site bundle surfaces remain compatible.",
+  "classification": "minor",
+  "breaking": false,
+  "migrationRequired": false
+}
