@@ -23,6 +23,50 @@ Together they define the load-bearing path for Kungfu products: make contract
 worlds explicit, make important claims inspectable, and let humans and agents
 cooperate through visible value rather than hidden pressure.
 
+## Foundation model
+
+The triad is intentionally ordered. It is a compact model for surviving and
+evolving in complex systems, especially in a world where agents can observe,
+act, delegate, and remember across many surfaces.
+
+| Layer | Decision | Reader question | Commitment |
+|---|---|---|---|
+| Fact-source ontology | KFD-1 | What can count as a fact? | A load-bearing fact must not drift: its contract world comes from one declared fact source. |
+| Participant-to-object trust | KFD-2 | When can a user or agent trust a claim, product, artifact, or control surface? | Trust starts from inspectable facts and responsibility state. |
+| Participant-to-participant cooperation | KFD-3 | How should peer intelligent participants cooperate? | Cooperation starts from transparent value, stable choice, and explainable constraints, not pressure. |
+
+In short:
+
+```text
+stable facts -> trustworthy objects -> non-coercive cooperation
+```
+
+This is why KFDs are not only internal governance text. KFD-1 is a procedure,
+but it gives the foundation model its first layer by making fact sources
+operational: a fact-bearing contract world must be declared, inspectable, and
+unable to drift invisibly. KFD-2 then defines how trust can stand on those
+facts. KFD-3 defines how humans and agents can cooperate once facts and trust
+are visible.
+
+Real-world agent work turns ordinary work into a dense system of products,
+files, repositories, traces, policies, humans, and agents. In that world,
+complexity cannot be made safe by hidden state or forced compliance. It has to
+be compressed through non-drifting facts, inspectable trust, and voluntary
+cooperation. The goal is not to force increasingly capable participants into
+compliance through stronger pressure. It is to give humans and agents a shared
+worldview for adapting to a more complex world.
+
+This model used to be expensive to practice. Stable facts require engineering,
+iteration, and disciplined evidence paths, so older systems often survived by
+leaning on cheaper substitutes such as authority, habit, reputation, or
+intuition. Agents change both sides of that equation: they make the world more
+complex, and they also provide more intelligence for building fact-bearing
+systems. KFD is part of that bootstrap: the worldview is forged through the same
+transparent and inspectable mechanisms it asks products to provide.
+
+This README states the architecture; KFD-1, KFD-2, and KFD-3 provide the
+detailed rules.
+
 ## Product proof path
 
 KFDs are not a detached manifesto, but they are not a demand that readers adopt

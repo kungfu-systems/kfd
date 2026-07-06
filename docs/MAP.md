@@ -4,6 +4,7 @@
 |---|---|
 | What is KFD, and what decisions exist? | [`../README.md`](../README.md) |
 | What is the KFD-1/2/3 foundation triad? | [`../README.md`](../README.md#foundation-triad) |
+| What worldview structure does the foundation triad express? | [`../README.md`](../README.md#foundation-model) |
 | What is the top-level product accountability principle? | [KFD-2](../decisions/kfd-0002-fact-first-product-accountability.md) |
 | What stance should products take toward humans and agents as reasoning participants? | [KFD-3](../decisions/kfd-0003-non-coercive-intelligence.md) |
 | What does a specific decision say? | [`../decisions/`](../decisions) (index: [`../registry.json`](../registry.json)) |
