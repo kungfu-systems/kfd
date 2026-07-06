@@ -122,6 +122,14 @@ TypeScript projects, import it as:
 import standards from "@kungfu-tech/kfd/standards.json" with { type: "json" };
 ```
 
+KFD-3 also publishes a general collaboration-interface schema and witness
+schema under `schemas/kfd-3/`. These schemas are for participant-facing product
+interfaces, not only agent APIs. A product such as Kungfu may implement an
+agent-first profile, but that profile remains a product-specific realization of
+KFD-3. The KFD-owned boundary is the standard vocabulary, schema IDs, and
+closed-world evidence shape. See
+[`docs/kfd-3-collaboration-interface.md`](docs/kfd-3-collaboration-interface.md).
+
 ## Current decisions
 
 | ID | Kind | Title | Status |

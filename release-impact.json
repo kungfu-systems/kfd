@@ -9,7 +9,7 @@
   "versionImpact": {
     "final": "minor",
     "source": "kfd-surface-register",
-    "rationale": "This change additively registers a KFD standards metadata surface and package export paths while keeping existing registry and decision surfaces compatible."
+    "rationale": "This change additively registers KFD-owned standards metadata and KFD-3 collaboration-interface schemas while keeping existing registry and decision surfaces compatible."
   },
   "surfaceImpacts": [
     {
@@ -28,7 +28,7 @@
       "id": "kfd-standards-metadata",
       "impact": "minor",
       "class": "additive",
-      "rationale": "standards.json and schemas/ add a new machine-consumed surface for KFD-owned standard keys, schema IDs, and concept names."
+      "rationale": "standards.json and schemas/ add KFD-3 collaboration-interface and witness schema IDs plus KFD-owned concept names for downstream consumers."
     },
     {
       "id": "kfd-package-structure",
@@ -37,5 +37,5 @@
       "rationale": "The npm package now also publishes standards.json, schemas/, and explicit subpath exports while preserving existing README.md, decisions/, registry.json, site/, and docs/ paths."
     }
   ],
-  "summary": "KFD v1.0 production promotion is minor-impact because it additively exposes standards metadata and schema identities for Buildchain and other consumers; existing registry, decision text, and site bundle surfaces remain compatible."
+  "summary": "KFD v1.0 production promotion is minor-impact because it additively exposes standards metadata and KFD-3 collaboration-interface schema identities for Buildchain and other consumers; existing registry, decision text, and site bundle surfaces remain compatible."
 }
