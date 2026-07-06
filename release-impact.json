@@ -43,6 +43,12 @@
       "rationale": "KFD now declares its own participant-facing collaboration interface and ships pre-build plus artifact-side KFD-3 witnesses so Buildchain can audit interface closure in the release passport."
     },
     {
+      "id": "kfd-2-public-release-trust-claim",
+      "impact": "minor",
+      "class": "release-passport",
+      "rationale": "KFD now ships an explicit machine-bound public KFD-2 release trust claim and passes it into Buildchain release passport generation."
+    },
+    {
       "id": "kfd-release-anchor",
       "impact": "minor",
       "class": "release-governance",

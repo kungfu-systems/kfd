@@ -1,0 +1,107 @@
+{
+  "id": "kfd-public-release-trust",
+  "public": true,
+  "claim": "The KFD npm release is backed by declared source facts, machine-readable evidence, artifact coordinates, verification, audit boundary, responsibility, and explicit residual-risk state.",
+  "sourceBindings": [
+    {
+      "path": "package.json",
+      "sha256": "02988a8853c0293df0f80fa395caa0fd35eca65c37d5a8d8461950254c7735d6",
+      "id": "package-version-and-exports"
+    },
+    {
+      "path": "kfd.release.json",
+      "sha256": "dcc41de2815753bceffb8d106ac219ccfb701811f7b648ac702464a81a4e6121",
+      "id": "anchored-release-version"
+    },
+    {
+      "path": "registry.json",
+      "sha256": "b83cfadeb726e18f96ec4f7451c66091892f4964420dd81939d1120108991c38",
+      "id": "decision-registry"
+    },
+    {
+      "path": "standards.json",
+      "sha256": "394139c8915426e81eee7f7ea9f3d8209eb0e2b566ddadfccbddea2a3563585d",
+      "id": "standards-metadata"
+    },
+    {
+      "path": "release-impact.json",
+      "sha256": "2a2257f3f8ff03fa3091d74b1b7b9571231b223167bd646ff289d9848584edbc",
+      "id": "release-impact-ledger"
+    },
+    {
+      "path": "buildchain.toml",
+      "sha256": "0dc1179d59b634df364871ea18a66251781321c80a6f7bcb9e3fcf5a48ef738a",
+      "id": "buildchain-release-contract"
+    }
+  ],
+  "machineEvidence": [
+    {
+      "path": "scripts/check.mjs",
+      "sha256": "40bb6dfa9aef2cebe051f5183dce53aaae1ea6137b7c1abe6424baffac58db1c",
+      "id": "self-verification-command"
+    },
+    {
+      "path": ".github/workflows/build.yml",
+      "sha256": "e5b0ba54a62fef79f6a17bf1629b10801775bf3f735fea377e3944de4e5e5336",
+      "id": "buildchain-build-workflow"
+    },
+    {
+      "path": ".github/workflows/buildchain-ref-promotion.yml",
+      "sha256": "046ce8fd237b34548b9479367066503829cd0e1927403efe0776c5c5fc4b227c",
+      "id": "buildchain-promotion-workflow"
+    },
+    {
+      "path": "schemas/kfd-2/release-claims.schema.json",
+      "sha256": "cf90ef7d0a7c2abc33af0d97d793b7e9c3ed96335da0b79a082523139282963e",
+      "id": "kfd-2-release-claims-schema"
+    },
+    {
+      "path": "schemas/kfd-2/release-trust-passport.schema.json",
+      "sha256": "92bdd34c0575d18240d1c8be12e86034209f54819048ead9617e7aa2e539aaef",
+      "id": "kfd-2-release-trust-passport-schema"
+    }
+  ],
+  "hashes": {
+    "package-version-and-exports": "02988a8853c0293df0f80fa395caa0fd35eca65c37d5a8d8461950254c7735d6",
+    "anchored-release-version": "dcc41de2815753bceffb8d106ac219ccfb701811f7b648ac702464a81a4e6121",
+    "decision-registry": "b83cfadeb726e18f96ec4f7451c66091892f4964420dd81939d1120108991c38",
+    "standards-metadata": "394139c8915426e81eee7f7ea9f3d8209eb0e2b566ddadfccbddea2a3563585d",
+    "release-impact-ledger": "2a2257f3f8ff03fa3091d74b1b7b9571231b223167bd646ff289d9848584edbc",
+    "buildchain-release-contract": "0dc1179d59b634df364871ea18a66251781321c80a6f7bcb9e3fcf5a48ef738a",
+    "self-verification-command": "40bb6dfa9aef2cebe051f5183dce53aaae1ea6137b7c1abe6424baffac58db1c",
+    "buildchain-build-workflow": "e5b0ba54a62fef79f6a17bf1629b10801775bf3f735fea377e3944de4e5e5336",
+    "buildchain-promotion-workflow": "046ce8fd237b34548b9479367066503829cd0e1927403efe0776c5c5fc4b227c",
+    "kfd-2-release-claims-schema": "cf90ef7d0a7c2abc33af0d97d793b7e9c3ed96335da0b79a082523139282963e",
+    "kfd-2-release-trust-passport-schema": "92bdd34c0575d18240d1c8be12e86034209f54819048ead9617e7aa2e539aaef"
+  },
+  "artifacts": [
+    {
+      "name": "@kungfu-tech/kfd",
+      "version": "1.0.0-alpha.8",
+      "path": "package.json",
+      "sha256": "02988a8853c0293df0f80fa395caa0fd35eca65c37d5a8d8461950254c7735d6"
+    },
+    {
+      "name": "kfd-release-anchor",
+      "version": "1.0.0-alpha.8",
+      "path": "kfd.release.json",
+      "sha256": "dcc41de2815753bceffb8d106ac219ccfb701811f7b648ac702464a81a4e6121"
+    }
+  ],
+  "verification": {
+    "result": "passed",
+    "command": "node scripts/check.mjs"
+  },
+  "auditBoundary": {
+    "scope": "KFD public npm package release facts, package exports, release governance files, and Buildchain release-passport inputs",
+    "enumerability": "closed-world"
+  },
+  "responsibility": {
+    "owner": "KFD maintainers",
+    "sourceOwner": "KFD maintainers",
+    "verificationOwner": "KFD package self-verification",
+    "releaseDecisionOwner": "KFD maintainers",
+    "releasePassportProofOwner": "Buildchain"
+  },
+  "residualRisk": []
+}

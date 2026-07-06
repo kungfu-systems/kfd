@@ -128,17 +128,17 @@
     {
       "name": "buildchain-build-workflow",
       "sourcePath": ".github/workflows/build.yml",
-      "sourceSha256": "77248463bd988e603081736313026b28929029a7bd2bc250369ca1a2adcdb69f",
+      "sourceSha256": "e5b0ba54a62fef79f6a17bf1629b10801775bf3f735fea377e3944de4e5e5336",
       "artifactPath": ".github/workflows/build.yml",
-      "expectedSha256": "77248463bd988e603081736313026b28929029a7bd2bc250369ca1a2adcdb69f",
+      "expectedSha256": "e5b0ba54a62fef79f6a17bf1629b10801775bf3f735fea377e3944de4e5e5336",
       "byteForByte": true
     },
     {
       "name": "buildchain-ref-promotion-workflow",
       "sourcePath": ".github/workflows/buildchain-ref-promotion.yml",
-      "sourceSha256": "7b2d6b008440d65e2fd3bdb015e1039b8194f4fc24ef3c79d6fc73b00e308c56",
+      "sourceSha256": "046ce8fd237b34548b9479367066503829cd0e1927403efe0776c5c5fc4b227c",
       "artifactPath": ".github/workflows/buildchain-ref-promotion.yml",
-      "expectedSha256": "7b2d6b008440d65e2fd3bdb015e1039b8194f4fc24ef3c79d6fc73b00e308c56",
+      "expectedSha256": "046ce8fd237b34548b9479367066503829cd0e1927403efe0776c5c5fc4b227c",
       "byteForByte": true
     },
     {
@@ -155,6 +155,30 @@
       "sourceSha256": "448f4b6b8263399005a9866cee7906f5334cf5e3daea7d13c70768e586576947",
       "artifactPath": ".github/workflows/verify.yml",
       "expectedSha256": "448f4b6b8263399005a9866cee7906f5334cf5e3daea7d13c70768e586576947",
+      "byteForByte": true
+    },
+    {
+      "name": "kfd-package-manifest",
+      "sourcePath": "package.json",
+      "sourceSha256": "02988a8853c0293df0f80fa395caa0fd35eca65c37d5a8d8461950254c7735d6",
+      "artifactPath": "package.json",
+      "expectedSha256": "02988a8853c0293df0f80fa395caa0fd35eca65c37d5a8d8461950254c7735d6",
+      "byteForByte": true
+    },
+    {
+      "name": "kfd-release-anchor",
+      "sourcePath": "kfd.release.json",
+      "sourceSha256": "dcc41de2815753bceffb8d106ac219ccfb701811f7b648ac702464a81a4e6121",
+      "artifactPath": "kfd.release.json",
+      "expectedSha256": "dcc41de2815753bceffb8d106ac219ccfb701811f7b648ac702464a81a4e6121",
+      "byteForByte": true
+    },
+    {
+      "name": "kfd-2-public-release-trust-claim",
+      "sourcePath": ".buildchain/kfd-2/public-release-trust.claim.json",
+      "sourceSha256": "82c229b9c3a02bdd692d9344678dd8d71f54bfd9ff9bffde722d5eba47cfd28c",
+      "artifactPath": ".buildchain/kfd-2/public-release-trust.claim.json",
+      "expectedSha256": "82c229b9c3a02bdd692d9344678dd8d71f54bfd9ff9bffde722d5eba47cfd28c",
       "byteForByte": true
     }
   ]
