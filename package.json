@@ -12,6 +12,7 @@
     "site",
     "buildchain.release-propagation.json",
     ".buildchain/kfd-1/contract-world.witness.json",
+    ".buildchain/kfd-3",
     "docs"
   ],
   "exports": {
@@ -22,13 +23,17 @@
     "./site/kfd-site.json": "./site/kfd-site.json",
     "./buildchain.release-propagation.json": "./buildchain.release-propagation.json",
     "./buildchain/kfd-1/contract-world.witness.json": "./.buildchain/kfd-1/contract-world.witness.json",
+    "./buildchain/kfd-3/collaboration-interface.json": "./.buildchain/kfd-3/collaboration-interface.json",
+    "./buildchain/kfd-3/collaboration-interface.prebuild.json": "./.buildchain/kfd-3/collaboration-interface.prebuild.json",
+    "./buildchain/kfd-3/collaboration-interface.artifact.json": "./.buildchain/kfd-3/collaboration-interface.artifact.json",
     "./schemas/*.json": "./schemas/*.json",
     "./schemas/*/*.json": "./schemas/*/*.json",
     "./decisions/*.md": "./decisions/*.md",
     "./docs/*": "./docs/*"
   },
   "scripts": {
-    "check": "node scripts/check.mjs"
+    "check": "node scripts/check.mjs",
+    "update:kfd-3-witness": "node scripts/update-kfd-3-witness.mjs"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
