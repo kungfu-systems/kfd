@@ -1,0 +1,677 @@
+{
+  "schemaVersion": 1,
+  "contract": "kungfu-buildchain-kfd-3-collaboration-interface-prebuild-witness",
+  "id": "kfd-repository",
+  "standard": "kfd-3",
+  "supportLevel": "release",
+  "source": {
+    "repo": "kungfu-systems/kfd"
+  },
+  "sourceRegistry": {
+    "id": "kfd-collaboration-interface",
+    "path": ".buildchain/kfd-3/collaboration-interface.json",
+    "sha256": "838fb80ced2ceebb51c3582aca77508f42b206698e0e800b00ca606b1640c0ae"
+  },
+  "collaborationInterfaceDigest": "sha256:838fb80ced2ceebb51c3582aca77508f42b206698e0e800b00ca606b1640c0ae",
+  "collaborationInterface": {
+    "schemaVersion": 1,
+    "contract": "kfd-3-collaboration-interface",
+    "standard": "kfd-3",
+    "product": {
+      "name": "KFD",
+      "version": "v1.0",
+      "repository": "kungfu-systems/kfd"
+    },
+    "sourceRegistry": {
+      "path": "registry.json"
+    },
+    "participants": [
+      {
+        "id": "human-reader",
+        "kind": "human",
+        "description": "A person reading KFD decisions, philosophy, and release evidence."
+      },
+      {
+        "id": "agent-reader",
+        "kind": "agent",
+        "description": "An agent consuming KFD registry, standards metadata, schemas, and package exports."
+      },
+      {
+        "id": "maintainer",
+        "kind": "maintainer",
+        "description": "A human or agent maintaining KFD decisions, metadata, package surfaces, and release evidence."
+      },
+      {
+        "id": "package-consumer",
+        "kind": "api-consumer",
+        "description": "A downstream repository consuming the @kungfu-tech/kfd package."
+      },
+      {
+        "id": "site-consumer",
+        "kind": "service-integrator",
+        "description": "A site repository consuming KFD's site bundle, registry, standards metadata, and decision text."
+      },
+      {
+        "id": "release-system",
+        "kind": "service-integrator",
+        "description": "A release system consuming KFD witnesses, impact ledgers, and release propagation contracts."
+      }
+    ],
+    "minimalEntrypoints": [
+      {
+        "id": "readme",
+        "surface": "README.md",
+        "participants": [
+          "human-reader",
+          "agent-reader"
+        ],
+        "purpose": "Start from the KFD worldview and current decision set."
+      },
+      {
+        "id": "docs-map",
+        "surface": "docs/MAP.md",
+        "participants": [
+          "human-reader",
+          "agent-reader",
+          "maintainer"
+        ],
+        "purpose": "Route readers and agents to the right KFD document or machine surface."
+      },
+      {
+        "id": "registry",
+        "surface": "registry.json",
+        "participants": [
+          "agent-reader",
+          "package-consumer",
+          "site-consumer"
+        ],
+        "purpose": "Consume the authoritative decision index."
+      },
+      {
+        "id": "standards",
+        "surface": "standards.json",
+        "participants": [
+          "agent-reader",
+          "package-consumer",
+          "release-system"
+        ],
+        "purpose": "Discover KFD schema IDs, schema paths, concepts, and interface contracts."
+      },
+      {
+        "id": "package-exports",
+        "surface": "package.json#exports",
+        "participants": [
+          "package-consumer",
+          "agent-reader"
+        ],
+        "purpose": "Consume the shipped npm package surfaces."
+      },
+      {
+        "id": "site-bundle",
+        "surface": "site/kfd-site.json",
+        "participants": [
+          "site-consumer",
+          "agent-reader"
+        ],
+        "purpose": "Render KFD-owned site text and decision pages without duplicating extraction logic."
+      }
+    ],
+    "surfaces": [
+      {
+        "id": "readme",
+        "kind": "markdown-doc",
+        "participants": [
+          "human-reader",
+          "agent-reader"
+        ],
+        "value": "KFD's public worldview entrypoint and site homepage text source.",
+        "discoverability": {
+          "fromMinimalEntrypoint": true,
+          "path": "README.md"
+        },
+        "maturity": "stable"
+      },
+      {
+        "id": "docs-map",
+        "kind": "markdown-doc",
+        "participants": [
+          "human-reader",
+          "agent-reader",
+          "maintainer"
+        ],
+        "value": "Document map for routing questions to KFD decisions and machine surfaces.",
+        "discoverability": {
+          "fromMinimalEntrypoint": true,
+          "path": "docs/MAP.md"
+        },
+        "maturity": "stable"
+      },
+      {
+        "id": "decision-texts",
+        "kind": "markdown-doc",
+        "participants": [
+          "human-reader",
+          "agent-reader",
+          "maintainer"
+        ],
+        "value": "Append-only authoritative KFD decision texts.",
+        "discoverability": {
+          "fromMinimalEntrypoint": true,
+          "path": "decisions/*.md"
+        },
+        "maturity": "stable"
+      },
+      {
+        "id": "registry-json",
+        "kind": "json-api",
+        "participants": [
+          "agent-reader",
+          "package-consumer",
+          "site-consumer"
+        ],
+        "value": "Authoritative machine-readable KFD decision index.",
+        "discoverability": {
+          "fromMinimalEntrypoint": true,
+          "path": "registry.json"
+        },
+        "maturity": "stable"
+      },
+      {
+        "id": "standards-json",
+        "kind": "json-api",
+        "participants": [
+          "agent-reader",
+          "package-consumer",
+          "release-system"
+        ],
+        "value": "Machine-readable KFD standards metadata and schema/interface registry.",
+        "discoverability": {
+          "fromMinimalEntrypoint": true,
+          "path": "standards.json"
+        },
+        "maturity": "stable"
+      },
+      {
+        "id": "schemas",
+        "kind": "json-api",
+        "participants": [
+          "agent-reader",
+          "package-consumer",
+          "release-system"
+        ],
+        "value": "KFD-owned JSON schemas for standards metadata and KFD-1/2/3 interfaces.",
+        "discoverability": {
+          "fromMinimalEntrypoint": true,
+          "path": "schemas/**/*.json"
+        },
+        "maturity": "stable"
+      },
+      {
+        "id": "package-exports",
+        "kind": "package",
+        "participants": [
+          "package-consumer",
+          "agent-reader"
+        ],
+        "value": "The npm package export map for KFD registry, standards, decisions, docs, schemas, and witnesses.",
+        "discoverability": {
+          "fromMinimalEntrypoint": true,
+          "path": "package.json#exports"
+        },
+        "maturity": "stable"
+      },
+      {
+        "id": "site-bundle-json",
+        "kind": "json-api",
+        "participants": [
+          "site-consumer",
+          "agent-reader"
+        ],
+        "value": "KFD-owned content projection consumed by the public site renderer.",
+        "discoverability": {
+          "fromMinimalEntrypoint": true,
+          "path": "site/kfd-site.json"
+        },
+        "maturity": "stable"
+      },
+      {
+        "id": "release-impact-json",
+        "kind": "json-api",
+        "participants": [
+          "release-system",
+          "maintainer",
+          "agent-reader"
+        ],
+        "value": "Release impact declaration consumed by Buildchain release passports.",
+        "discoverability": {
+          "fromMinimalEntrypoint": true,
+          "path": "release-impact.json"
+        },
+        "maturity": "stable"
+      },
+      {
+        "id": "release-propagation-json",
+        "kind": "json-api",
+        "participants": [
+          "release-system",
+          "site-consumer"
+        ],
+        "value": "Release propagation graph from KFD to downstream site surfaces.",
+        "discoverability": {
+          "fromMinimalEntrypoint": true,
+          "path": "buildchain.release-propagation.json"
+        },
+        "maturity": "stable"
+      },
+      {
+        "id": "kfd-1-witness",
+        "kind": "json-api",
+        "participants": [
+          "release-system",
+          "maintainer",
+          "agent-reader"
+        ],
+        "value": "KFD-1 contract-world witness for source-to-artifact drift checks.",
+        "discoverability": {
+          "fromMinimalEntrypoint": true,
+          "path": ".buildchain/kfd-1/contract-world.witness.json"
+        },
+        "maturity": "stable"
+      },
+      {
+        "id": "kfd-3-self-witnesses",
+        "kind": "json-api",
+        "participants": [
+          "release-system",
+          "maintainer",
+          "agent-reader"
+        ],
+        "value": "KFD-3 self collaboration-interface witnesses for pre-build and artifact-side closure checks.",
+        "discoverability": {
+          "fromMinimalEntrypoint": true,
+          "path": ".buildchain/kfd-3/*.json"
+        },
+        "maturity": "stable"
+      },
+      {
+        "id": "release-workflows",
+        "kind": "config",
+        "participants": [
+          "release-system",
+          "maintainer"
+        ],
+        "value": "GitHub Actions workflows that invoke Buildchain verification, promotion, and propagation.",
+        "discoverability": {
+          "fromMinimalEntrypoint": true,
+          "path": ".github/workflows/*.yml"
+        },
+        "maturity": "stable"
+      }
+    ],
+    "transparentConstraints": [
+      {
+        "id": "append-only-decisions",
+        "surface": "decisions/*.md",
+        "constraint": "Substantive semantic changes supersede older KFD numbers instead of rewriting them.",
+        "reason": "Decision history must remain inspectable by humans and agents.",
+        "review": "CONTRIBUTING.md and node scripts/check.mjs"
+      },
+      {
+        "id": "kfd-site-boundary",
+        "surface": "site/kfd-site.json",
+        "constraint": "KFD owns homepage text, decision text, registry, and standards metadata; the site owns rendering style and layout.",
+        "reason": "Text remains a single fact source while the site stays free to render it.",
+        "review": "site/kfd-site.json renderingBoundary"
+      },
+      {
+        "id": "package-export-boundary",
+        "surface": "package.json#exports",
+        "constraint": "Public package surfaces must be explicitly exported and verified.",
+        "reason": "Agents and downstream repositories should not rely on hidden package internals.",
+        "review": "node scripts/check.mjs"
+      },
+      {
+        "id": "standard-not-runtime",
+        "surface": "README.md",
+        "constraint": "KFD provides decisions, standards metadata, schemas, and witnesses; it does not provide the Kungfu runtime, GUI, or CLI.",
+        "reason": "KFD should remain a standard/decision package, not a product runtime.",
+        "review": "docs/MAP.md"
+      }
+    ],
+    "choicePaths": [
+      {
+        "id": "read-human-docs",
+        "participants": [
+          "human-reader"
+        ],
+        "choice": "Read README.md, docs/MAP.md, and decisions/*.md directly."
+      },
+      {
+        "id": "consume-machine-metadata",
+        "participants": [
+          "agent-reader",
+          "package-consumer",
+          "release-system"
+        ],
+        "choice": "Consume registry.json, standards.json, schemas, and package exports."
+      },
+      {
+        "id": "render-site",
+        "participants": [
+          "site-consumer"
+        ],
+        "choice": "Consume site/kfd-site.json and own rendering/style decisions downstream."
+      },
+      {
+        "id": "maintain-through-pr",
+        "participants": [
+          "maintainer"
+        ],
+        "choice": "Change KFD through PR review, node scripts/check.mjs, and Buildchain release gates."
+      }
+    ],
+    "closure": {
+      "classificationMode": "closed-world",
+      "unclassifiedEntrypointsPolicy": "fail",
+      "reachableSurfaceSource": "This file plus package.json#exports, docs/MAP.md, registry.json, standards.json, and Buildchain witness files."
+    }
+  },
+  "participantProfiles": [
+    "human-reader",
+    "agent-reader",
+    "maintainer",
+    "package-consumer",
+    "site-consumer",
+    "release-system"
+  ],
+  "surfaces": [
+    {
+      "id": "readme",
+      "name": "readme",
+      "kind": "markdown-doc",
+      "participantProfile": "human-reader,agent-reader",
+      "availability": "stable",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": "README.md"
+    },
+    {
+      "id": "docs-map",
+      "name": "docs-map",
+      "kind": "markdown-doc",
+      "participantProfile": "human-reader,agent-reader,maintainer",
+      "availability": "stable",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": "docs/MAP.md"
+    },
+    {
+      "id": "decision-texts",
+      "name": "decision-texts",
+      "kind": "markdown-doc",
+      "participantProfile": "human-reader,agent-reader,maintainer",
+      "availability": "stable",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": "decisions/*.md"
+    },
+    {
+      "id": "registry-json",
+      "name": "registry-json",
+      "kind": "json-api",
+      "participantProfile": "agent-reader,package-consumer,site-consumer",
+      "availability": "stable",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": "registry.json"
+    },
+    {
+      "id": "standards-json",
+      "name": "standards-json",
+      "kind": "json-api",
+      "participantProfile": "agent-reader,package-consumer,release-system",
+      "availability": "stable",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": "standards.json"
+    },
+    {
+      "id": "schemas",
+      "name": "schemas",
+      "kind": "json-api",
+      "participantProfile": "agent-reader,package-consumer,release-system",
+      "availability": "stable",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": "schemas/**/*.json"
+    },
+    {
+      "id": "package-exports",
+      "name": "package-exports",
+      "kind": "package",
+      "participantProfile": "package-consumer,agent-reader",
+      "availability": "stable",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": "package.json#exports"
+    },
+    {
+      "id": "site-bundle-json",
+      "name": "site-bundle-json",
+      "kind": "json-api",
+      "participantProfile": "site-consumer,agent-reader",
+      "availability": "stable",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": "site/kfd-site.json"
+    },
+    {
+      "id": "release-impact-json",
+      "name": "release-impact-json",
+      "kind": "json-api",
+      "participantProfile": "release-system,maintainer,agent-reader",
+      "availability": "stable",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": "release-impact.json"
+    },
+    {
+      "id": "release-propagation-json",
+      "name": "release-propagation-json",
+      "kind": "json-api",
+      "participantProfile": "release-system,site-consumer",
+      "availability": "stable",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": "buildchain.release-propagation.json"
+    },
+    {
+      "id": "kfd-1-witness",
+      "name": "kfd-1-witness",
+      "kind": "json-api",
+      "participantProfile": "release-system,maintainer,agent-reader",
+      "availability": "stable",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": ".buildchain/kfd-1/contract-world.witness.json"
+    },
+    {
+      "id": "kfd-3-self-witnesses",
+      "name": "kfd-3-self-witnesses",
+      "kind": "json-api",
+      "participantProfile": "release-system,maintainer,agent-reader",
+      "availability": "stable",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": ".buildchain/kfd-3/*.json"
+    },
+    {
+      "id": "release-workflows",
+      "name": "release-workflows",
+      "kind": "config",
+      "participantProfile": "release-system,maintainer",
+      "availability": "stable",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": ".github/workflows/*.yml"
+    }
+  ],
+  "docs": [
+    {
+      "id": "doc:readme",
+      "sourcePath": "README.md",
+      "sha256": "f158b84881e44f32758b3ff0cc165f478bc1ab6596ad16fe941caeb51573a536"
+    },
+    {
+      "id": "doc:docs-map",
+      "sourcePath": "docs/MAP.md",
+      "sha256": "8d4d498a737aa7e3cf490653bcd1d13bc32dc057b3d322ff4a84b25f31aae47b"
+    },
+    {
+      "id": "doc:kfd-2-release-trust",
+      "sourcePath": "docs/kfd-2-release-trust.md",
+      "sha256": "90326ac403339d73cb4d3bf8a0d2e6ca33ff0988809bbc71c163cb459861ad5c"
+    },
+    {
+      "id": "doc:kfd-3-collaboration-interface",
+      "sourcePath": "docs/kfd-3-collaboration-interface.md",
+      "sha256": "63263cf25cca617ec51595b3f46ac2af541794449cfd34b3042ff657dcd7838a"
+    },
+    {
+      "id": "decision:kfd-1",
+      "sourcePath": "decisions/kfd-1.md",
+      "sha256": "2ef7438b0737009d36da248d2ecec5f788d46a93b184efadf5e2e31ca20254f0"
+    },
+    {
+      "id": "decision:kfd-2",
+      "sourcePath": "decisions/kfd-2.md",
+      "sha256": "b8be7b7526dcec9ea501998056c55f546492abc4eb63484a9bb8856eb434b710"
+    },
+    {
+      "id": "decision:kfd-3",
+      "sourcePath": "decisions/kfd-3.md",
+      "sha256": "e329bef41ab5cb689346333df317b39918ea1016424a872e438eea8090070b96"
+    }
+  ],
+  "schemas": [
+    {
+      "id": "schema:kfd-standards",
+      "sourcePath": "schemas/kfd-standards.schema.json",
+      "sha256": "2ecc7049d13463700f143f4e8c40488d6587484c94d26e827c239eeedc892336"
+    },
+    {
+      "id": "schema:kfd-1:contract-world",
+      "sourcePath": "schemas/kfd-1/contract-world.schema.json",
+      "sha256": "6be00cca75c80bf96429eb62336989d8931ea380d86388fcb8b834dcf8d3c13b"
+    },
+    {
+      "id": "schema:kfd-1:witness",
+      "sourcePath": "schemas/kfd-1/witness.schema.json",
+      "sha256": "50104a2962cb75cc1da634fa65553e993f87d8fb9b3c237f0609a2208ad4c1f3"
+    },
+    {
+      "id": "schema:kfd-2:release-claims",
+      "sourcePath": "schemas/kfd-2/release-claims.schema.json",
+      "sha256": "cf90ef7d0a7c2abc33af0d97d793b7e9c3ed96335da0b79a082523139282963e"
+    },
+    {
+      "id": "schema:kfd-2:release-trust-passport",
+      "sourcePath": "schemas/kfd-2/release-trust-passport.schema.json",
+      "sha256": "92bdd34c0575d18240d1c8be12e86034209f54819048ead9617e7aa2e539aaef"
+    },
+    {
+      "id": "schema:kfd-3:collaboration-interface",
+      "sourcePath": "schemas/kfd-3/collaboration-interface.schema.json",
+      "sha256": "03e8d54c08f26bf8aff570995142684b04f0c97578c5fb58d29bc9f1559206d6"
+    },
+    {
+      "id": "schema:kfd-3:witness",
+      "sourcePath": "schemas/kfd-3/witness.schema.json",
+      "sha256": "cb80768ab8a4f90f86d256555b1995ddb516371ccbe291a8c28581fa371ccd10"
+    }
+  ],
+  "standardsMetadata": [
+    {
+      "id": "metadata:registry",
+      "sourcePath": "registry.json",
+      "sha256": "b83cfadeb726e18f96ec4f7451c66091892f4964420dd81939d1120108991c38"
+    },
+    {
+      "id": "metadata:standards",
+      "sourcePath": "standards.json",
+      "sha256": "394139c8915426e81eee7f7ea9f3d8209eb0e2b566ddadfccbddea2a3563585d"
+    },
+    {
+      "id": "metadata:release-impact",
+      "sourcePath": "release-impact.json",
+      "sha256": "fd4e98a262aad5e219a9154e48d4cd9fecc408b15c12304959313bfd53d966f4"
+    }
+  ],
+  "packageExports": [
+    {
+      "id": "export:package-json",
+      "sourcePath": "package.json#exports",
+      "sha256": "6e36c25bcc1ad7be6886fa6b6fe53bd17a84612d764f6bafca62ecca549ff7c9"
+    },
+    {
+      "id": "export:npm-files",
+      "sourcePath": "package.json#files",
+      "sha256": "6e36c25bcc1ad7be6886fa6b6fe53bd17a84612d764f6bafca62ecca549ff7c9"
+    }
+  ],
+  "siteConsumptionContracts": [
+    {
+      "id": "site:kfd-site-bundle",
+      "sourcePath": "site/kfd-site.json",
+      "sha256": "16526aba11d87762fea41a19dd7bccd7e02a03b842144fda494c14fd1f6c565d"
+    },
+    {
+      "id": "site:release-propagation",
+      "sourcePath": "buildchain.release-propagation.json",
+      "sha256": "71f9b54b9e76111178635804615fb0b4600f3131a7871b7c7817395b708c6fb3"
+    }
+  ],
+  "auditBoundary": {
+    "mode": "closed-world",
+    "scope": "KFD participant-facing public collaboration/control surfaces shipped in the repository and npm package",
+    "reachableSurfaceMode": "declared-boundary",
+    "unclassifiedPolicy": "fail",
+    "nonExhaustivelyEnumerableSurfaces": [
+      {
+        "id": "human-language-interpretation",
+        "kind": "semantic-risk",
+        "reason": "Natural-language standard interpretation is inspectable and reviewable but not exhaustively enumerable from package bytes.",
+        "owner": "KFD maintainers"
+      }
+    ]
+  },
+  "residualRisk": [
+    {
+      "id": "human-language-interpretation",
+      "kind": "semantic-risk",
+      "reason": "Natural-language standard interpretation is inspectable and reviewable but not exhaustively enumerable from package bytes.",
+      "owner": "KFD maintainers"
+    }
+  ],
+  "responsibility": {
+    "registryFactsOwner": "KFD maintainers",
+    "artifactVerificationOwner": "KFD package self-verification",
+    "releasePassportProofOwner": "Buildchain"
+  },
+  "expectedArtifactVerification": {
+    "command": "node scripts/check.mjs"
+  }
+}

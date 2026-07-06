@@ -11,7 +11,7 @@
       "id": "site-libkungfu-dev",
       "repository": "kungfu-systems/site-libkungfu-dev",
       "lockPath": "buildchain.upstreams/kfd.release.json",
-      "baseRef": "dev/v2/v2.7"
+      "baseRef": "main"
     }
   ],
   "edges": [
@@ -19,7 +19,14 @@
       "id": "kfd-to-site-libkungfu-dev",
       "from": "kfd",
       "to": "site-libkungfu-dev",
-      "channelPolicy": "preserve"
+      "channelPolicy": "preserve",
+      "consumes": [
+        "@kungfu-tech/kfd",
+        "site/kfd-site.json",
+        "registry.json",
+        "standards.json",
+        "decisions/*.md"
+      ]
     }
   ]
 }

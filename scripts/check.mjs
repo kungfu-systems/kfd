@@ -19,6 +19,13 @@ const packageJson = JSON.parse(readFileSync("package.json", "utf8"));
 const siteBundle = JSON.parse(readFileSync("site/kfd-site.json", "utf8"));
 const kfd1WitnessPath = ".buildchain/kfd-1/contract-world.witness.json";
 const kfd1Witness = existsSync(kfd1WitnessPath) ? JSON.parse(readFileSync(kfd1WitnessPath, "utf8")) : undefined;
+const kfd3InterfacePath = ".buildchain/kfd-3/collaboration-interface.json";
+const kfd3PrebuildWitnessPath = ".buildchain/kfd-3/collaboration-interface.prebuild.json";
+const kfd3ArtifactWitnessPath = ".buildchain/kfd-3/collaboration-interface.artifact.json";
+const kfd3Interface = existsSync(kfd3InterfacePath) ? JSON.parse(readFileSync(kfd3InterfacePath, "utf8")) : undefined;
+const kfd3PrebuildWitness = existsSync(kfd3PrebuildWitnessPath) ? JSON.parse(readFileSync(kfd3PrebuildWitnessPath, "utf8")) : undefined;
+const kfd3ArtifactWitness = existsSync(kfd3ArtifactWitnessPath) ? JSON.parse(readFileSync(kfd3ArtifactWitnessPath, "utf8")) : undefined;
+const hashablePath = (filePath) => String(filePath || "").split("#", 1)[0];
 
 if (registry.schemaVersion !== 1) fail(`unsupported schemaVersion ${registry.schemaVersion}`);
 if (registry.contract !== "kfd-registry") fail(`unexpected contract ${registry.contract}`);
@@ -48,12 +55,12 @@ if (siteBundle.homepage?.title !== "KFD — Kung Fu Decisions") fail("site bundl
 if (siteBundle.homepage?.currentDecisions?.source !== "registry.json") fail("site bundle currentDecisions source must be registry.json");
 if (siteBundle.decisionPages?.source !== "registry.json") fail("site bundle decisionPages source must be registry.json");
 if (siteBundle.decisionPages?.bodySource !== "registry.entries[].path") fail("site bundle decision page body source must be registry.entries[].path");
-for (const requiredFile of ["README.md", "decisions", "registry.json", "standards.json", "schemas", "site", "buildchain.release-propagation.json", ".buildchain/kfd-1/contract-world.witness.json", "docs"]) {
+for (const requiredFile of ["README.md", "decisions", "registry.json", "standards.json", "schemas", "site", "buildchain.release-propagation.json", ".buildchain/kfd-1/contract-world.witness.json", ".buildchain/kfd-3", "docs"]) {
   if (!Array.isArray(packageJson.files) || !packageJson.files.includes(requiredFile)) {
     fail(`package.json files[] must include ${requiredFile}`);
   }
 }
-for (const requiredExport of ["./registry.json", "./standards.json", "./site/kfd-site.json", "./buildchain.release-propagation.json", "./buildchain/kfd-1/contract-world.witness.json", "./schemas/*.json", "./schemas/*/*.json"]) {
+for (const requiredExport of ["./registry.json", "./standards.json", "./site/kfd-site.json", "./buildchain.release-propagation.json", "./buildchain/kfd-1/contract-world.witness.json", "./buildchain/kfd-3/collaboration-interface.json", "./buildchain/kfd-3/collaboration-interface.prebuild.json", "./buildchain/kfd-3/collaboration-interface.artifact.json", "./schemas/*.json", "./schemas/*/*.json"]) {
   if (!packageJson.exports || !packageJson.exports[requiredExport]) {
     fail(`package.json exports must include ${requiredExport}`);
   }
@@ -275,6 +282,110 @@ if (!kfd1Witness) {
     }
   }
 }
+
+const kfd3SurfaceGroups = ["docs", "schemas", "standardsMetadata", "packageExports", "siteConsumptionContracts"];
+const kfd3SurfaceIds = (witness) => {
+  const ids = new Set();
+  for (const surface of witness?.surfaces ?? []) {
+    if (surface?.id) ids.add(surface.id);
+  }
+  for (const group of kfd3SurfaceGroups) {
+    for (const surface of witness?.[group] ?? []) {
+      if (surface?.id) ids.add(surface.id);
+    }
+  }
+  return ids;
+};
+const checkPointer = (entry, label, field = "path") => {
+  if (!entry?.[field]) {
+    fail(`${label} must include ${field}`);
+    return;
+  }
+  const filePath = hashablePath(entry[field]);
+  if (filePath.includes("*")) {
+    return;
+  }
+  if (!existsSync(filePath)) {
+    fail(`${label} points to missing ${filePath}`);
+  } else if (entry.sha256 && entry.sha256 !== sha256File(filePath)) {
+    fail(`${label}.sha256 does not match ${filePath}`);
+  }
+};
+const checkGroupedSurfaces = (witness, label) => {
+  for (const group of kfd3SurfaceGroups) {
+    if (!Array.isArray(witness?.[group]) || witness[group].length === 0) {
+      fail(`${label}.${group} must include at least one surface`);
+      continue;
+    }
+    for (const [index, surface] of witness[group].entries()) {
+      if (!surface?.id) fail(`${label}.${group}[${index}].id is required`);
+      checkPointer(surface, `${label}.${group}[${index}]`, "sourcePath");
+    }
+  }
+};
+
+if (!kfd3Interface) {
+  fail(`missing KFD-3 collaboration interface ${kfd3InterfacePath}`);
+} else {
+  if (kfd3Interface.contract !== "kfd-3-collaboration-interface") fail("KFD-3 collaboration interface contract must be kfd-3-collaboration-interface");
+  if (kfd3Interface.standard !== "kfd-3") fail("KFD-3 collaboration interface standard must be kfd-3");
+  if (!Array.isArray(kfd3Interface.participants) || kfd3Interface.participants.length === 0) fail("KFD-3 collaboration interface participants[] is required");
+  if (!Array.isArray(kfd3Interface.minimalEntrypoints) || kfd3Interface.minimalEntrypoints.length === 0) fail("KFD-3 collaboration interface minimalEntrypoints[] is required");
+  if (!Array.isArray(kfd3Interface.surfaces) || kfd3Interface.surfaces.length === 0) fail("KFD-3 collaboration interface surfaces[] is required");
+  if (kfd3Interface.closure?.classificationMode !== "closed-world") fail("KFD-3 collaboration interface closure must be closed-world");
+  if (kfd3Interface.closure?.unclassifiedEntrypointsPolicy !== "fail") fail("KFD-3 collaboration interface unclassified entrypoint policy must fail");
+}
+
+const kfd3InterfaceDigest = existsSync(kfd3InterfacePath) ? `sha256:${sha256File(kfd3InterfacePath)}` : "";
+if (!kfd3PrebuildWitness) {
+  fail(`missing KFD-3 pre-build witness ${kfd3PrebuildWitnessPath}`);
+} else {
+  if (kfd3PrebuildWitness.contract !== "kungfu-buildchain-kfd-3-collaboration-interface-prebuild-witness") {
+    fail("KFD-3 pre-build witness contract must match Buildchain KFD-3 prebuild witness");
+  }
+  if (kfd3PrebuildWitness.standard !== "kfd-3") fail("KFD-3 pre-build witness standard must be kfd-3");
+  if (kfd3PrebuildWitness.sourceRegistry?.path !== kfd3InterfacePath) fail("KFD-3 pre-build witness sourceRegistry.path must point to the collaboration interface");
+  if (kfd3PrebuildWitness.sourceRegistry?.sha256 !== sha256File(kfd3InterfacePath)) fail("KFD-3 pre-build witness sourceRegistry.sha256 does not match the collaboration interface");
+  if (kfd3PrebuildWitness.collaborationInterfaceDigest !== kfd3InterfaceDigest) fail("KFD-3 pre-build witness collaborationInterfaceDigest does not match the collaboration interface");
+  checkGroupedSurfaces(kfd3PrebuildWitness, "KFD-3 pre-build witness");
+}
+if (!kfd3ArtifactWitness) {
+  fail(`missing KFD-3 artifact witness ${kfd3ArtifactWitnessPath}`);
+} else {
+  if (kfd3ArtifactWitness.contract !== "kfd-3-witness") fail("KFD-3 artifact witness must also satisfy the KFD-3 witness contract");
+  if (kfd3ArtifactWitness.standard !== "kfd-3") fail("KFD-3 artifact witness standard must be kfd-3");
+  if (kfd3ArtifactWitness.collaborationInterface?.schemaId !== "https://kfd.libkungfu.dev/schemas/kfd-3/collaboration-interface.schema.json") {
+    fail("KFD-3 artifact witness collaborationInterface.schemaId must be canonical");
+  }
+  if (kfd3ArtifactWitness.collaborationInterface?.digest !== kfd3InterfaceDigest) {
+    fail("KFD-3 artifact witness collaborationInterface.digest does not match the collaboration interface");
+  }
+  if (kfd3ArtifactWitness.sourceRegistry?.path !== kfd3InterfacePath) fail("KFD-3 artifact witness sourceRegistry.path must point to the collaboration interface");
+  if (kfd3ArtifactWitness.sourceRegistry?.sha256 !== sha256File(kfd3InterfacePath)) fail("KFD-3 artifact witness sourceRegistry.sha256 does not match the collaboration interface");
+  if (kfd3ArtifactWitness.closure?.classificationMode !== "closed-world") fail("KFD-3 artifact witness closure must be closed-world");
+  if (!Array.isArray(kfd3ArtifactWitness.closure?.unclassifiedEntrypoints) || kfd3ArtifactWitness.closure.unclassifiedEntrypoints.length !== 0) {
+    fail("KFD-3 artifact witness must have zero unclassifiedEntrypoints");
+  }
+  for (const [section, entries] of Object.entries(kfd3ArtifactWitness.evidence ?? {})) {
+    if (Array.isArray(entries)) {
+      for (const [index, entry] of entries.entries()) {
+        checkPointer(entry, `KFD-3 artifact witness evidence.${section}[${index}]`);
+      }
+    }
+  }
+  checkGroupedSurfaces(kfd3ArtifactWitness, "KFD-3 artifact witness");
+}
+if (kfd3PrebuildWitness && kfd3ArtifactWitness) {
+  const declared = kfd3SurfaceIds(kfd3PrebuildWitness);
+  const exposed = kfd3SurfaceIds(kfd3ArtifactWitness);
+  for (const id of declared) {
+    if (!exposed.has(id)) fail(`KFD-3 artifact witness missing declared surface ${id}`);
+  }
+  for (const id of exposed) {
+    if (!declared.has(id)) fail(`KFD-3 artifact witness exposes undeclared surface ${id}`);
+  }
+}
+
 const impactLevels = new Set(["patch", "minor", "major"]);
 const requiredSurfaces = new Set(["kfd-content", "kfd-registry-schema", "kfd-standards-metadata", "kfd-package-structure"]);
 
