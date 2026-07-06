@@ -24,7 +24,8 @@
       "metadataSchemaVersion": "1",
       "document": {
         "path": "decisions/kfd-1.md",
-        "url": "https://kfd.libkungfu.dev/1"
+        "url": "https://kfd.libkungfu.dev/1",
+        "sha256": "2ef7438b0737009d36da248d2ecec5f788d46a93b184efadf5e2e31ca20254f0"
       },
       "compatibility": {
         "packageLine": "v1.0",
@@ -41,6 +42,22 @@
         "metadata": "schemas/kfd-standards.schema.json",
         "contractWorld": "schemas/kfd-1/contract-world.schema.json",
         "witness": "schemas/kfd-1/witness.schema.json"
+      },
+      "interfaces": {
+        "contractWorld": {
+          "contract": "kfd-1-contract-world",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-1/contract-world.schema.json",
+          "schemaPath": "schemas/kfd-1/contract-world.schema.json",
+          "compatibilityRule": "Compatible additions may keep schemaVersion 1; semantic or required-field changes require a new interface version or contract."
+        },
+        "witness": {
+          "contract": "kfd-1-witness",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-1/witness.schema.json",
+          "schemaPath": "schemas/kfd-1/witness.schema.json",
+          "compatibilityRule": "Compatible additions may keep schemaVersion 1; semantic or required-field changes require a new interface version or contract."
+        }
       },
       "concepts": {
         "factSource": "fact source",
@@ -61,7 +78,8 @@
       "metadataSchemaVersion": "1",
       "document": {
         "path": "decisions/kfd-2.md",
-        "url": "https://kfd.libkungfu.dev/2"
+        "url": "https://kfd.libkungfu.dev/2",
+        "sha256": "b8be7b7526dcec9ea501998056c55f546492abc4eb63484a9bb8856eb434b710"
       },
       "compatibility": {
         "packageLine": "v1.0",
@@ -70,13 +88,39 @@
         "rule": "Substantive semantic changes mint a new KFD; compatible metadata additions keep schemaVersion 1."
       },
       "schemaIds": {
-        "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json"
+        "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json",
+        "releaseClaims": "https://kfd.libkungfu.dev/schemas/kfd-2/release-claims.schema.json",
+        "releaseTrustPassport": "https://kfd.libkungfu.dev/schemas/kfd-2/release-trust-passport.schema.json"
       },
       "schemaPaths": {
-        "metadata": "schemas/kfd-standards.schema.json"
+        "metadata": "schemas/kfd-standards.schema.json",
+        "releaseClaims": "schemas/kfd-2/release-claims.schema.json",
+        "releaseTrustPassport": "schemas/kfd-2/release-trust-passport.schema.json"
+      },
+      "interfaces": {
+        "releaseClaims": {
+          "contract": "kfd-2-release-claims",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-2/release-claims.schema.json",
+          "schemaPath": "schemas/kfd-2/release-claims.schema.json",
+          "compatibilityRule": "Compatible additions may keep schemaVersion 1; semantic or required-field changes require a new interface version or contract."
+        },
+        "releaseTrustPassport": {
+          "contract": "kfd-2-release-trust-passport",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-2/release-trust-passport.schema.json",
+          "schemaPath": "schemas/kfd-2/release-trust-passport.schema.json",
+          "compatibilityRule": "Compatible additions may keep schemaVersion 1; semantic or required-field changes require a new interface version or contract."
+        }
       },
       "concepts": {
         "facts": "inspectable facts",
+        "releaseClaim": "release claim",
+        "releaseClaims": "release claims",
+        "evidenceBinding": "evidence binding",
+        "auditBoundary": "audit boundary",
+        "residualRisk": "residual risk",
+        "releaseTrustPassport": "release trust passport",
         "responsibilityState": "responsibility state",
         "trust": "trust from facts"
       }
@@ -93,7 +137,8 @@
       "metadataSchemaVersion": "1",
       "document": {
         "path": "decisions/kfd-3.md",
-        "url": "https://kfd.libkungfu.dev/3"
+        "url": "https://kfd.libkungfu.dev/3",
+        "sha256": "e329bef41ab5cb689346333df317b39918ea1016424a872e438eea8090070b96"
       },
       "compatibility": {
         "packageLine": "v1.0",
@@ -110,6 +155,22 @@
         "metadata": "schemas/kfd-standards.schema.json",
         "collaborationInterface": "schemas/kfd-3/collaboration-interface.schema.json",
         "witness": "schemas/kfd-3/witness.schema.json"
+      },
+      "interfaces": {
+        "collaborationInterface": {
+          "contract": "kfd-3-collaboration-interface",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-3/collaboration-interface.schema.json",
+          "schemaPath": "schemas/kfd-3/collaboration-interface.schema.json",
+          "compatibilityRule": "Compatible additions may keep schemaVersion 1; semantic or required-field changes require a new interface version or contract."
+        },
+        "witness": {
+          "contract": "kfd-3-witness",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-3/witness.schema.json",
+          "schemaPath": "schemas/kfd-3/witness.schema.json",
+          "compatibilityRule": "Compatible additions may keep schemaVersion 1; semantic or required-field changes require a new interface version or contract."
+        }
       },
       "concepts": {
         "transparentValue": "transparent value",

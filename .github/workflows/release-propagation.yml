@@ -1,0 +1,118 @@
+name: Release Propagation
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Published KFD tag to propagate"
+        required: true
+      dry-run:
+        description: "Plan and write lock without pushing a downstream PR"
+        required: true
+        default: "true"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  upstream:
+    name: Resolve upstream release envelope
+    runs-on: ubuntu-24.04
+    outputs:
+      graph-json: ${{ steps.envelope.outputs.graph-json }}
+      upstream-release-json: ${{ steps.envelope.outputs.upstream-release-json }}
+      channel: ${{ steps.envelope.outputs.channel }}
+    steps:
+      - name: Checkout release source
+        uses: actions/checkout@v7.0.0
+        with:
+          ref: ${{ github.event.release.tag_name || inputs.tag }}
+          persist-credentials: false
+
+      - name: Resolve upstream release envelope
+        id: envelope
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          TAG: ${{ github.event.release.tag_name || inputs.tag }}
+          RELEASE_URL: ${{ github.event.release.html_url }}
+        run: |
+          set -euo pipefail
+          mkdir -p .buildchain/release-propagation
+          gh release download "${TAG}" --repo "${REPOSITORY}" --pattern buildchain.release.json --dir .buildchain/release-propagation
+          node <<'NODE'
+          const crypto = require("crypto");
+          const fs = require("fs");
+          const { execFileSync } = require("child_process");
+
+          const tag = process.env.TAG;
+          const repository = process.env.REPOSITORY;
+          const version = tag.replace(/^v/, "");
+          const channel = version.includes("-alpha.") ? "alpha" : "release";
+          const packageName = "@kungfu-tech/kfd";
+          const graph = JSON.parse(fs.readFileSync("buildchain.release-propagation.json", "utf8"));
+          const passportPath = ".buildchain/release-propagation/buildchain.release.json";
+          const passportBytes = fs.readFileSync(passportPath);
+          const passportSha256 = crypto.createHash("sha256").update(passportBytes).digest("hex");
+          const integrity = JSON.parse(execFileSync("npm", [
+            "view",
+            `${packageName}@${version}`,
+            "dist.integrity",
+            "--json",
+            "--registry=https://registry.npmjs.org/"
+          ], { encoding: "utf8" }));
+          const ref = JSON.parse(execFileSync("gh", [
+            "api",
+            `repos/${repository}/git/ref/tags/${tag}`
+          ], { encoding: "utf8" }));
+          let sourceSha = ref.object.sha;
+          if (ref.object.type === "tag") {
+            const tagObject = JSON.parse(execFileSync("gh", [
+              "api",
+              `repos/${repository}/git/tags/${sourceSha}`
+            ], { encoding: "utf8" }));
+            sourceSha = tagObject.object.sha;
+          }
+          const upstream = {
+            repository,
+            channel,
+            tag,
+            sourceSha,
+            package: {
+              name: packageName,
+              version,
+              integrity
+            },
+            releasePassport: {
+              url: `https://github.com/${repository}/releases/download/${encodeURIComponent(tag)}/buildchain.release.json`,
+              sha256: passportSha256
+            }
+          };
+          fs.writeFileSync(".buildchain/release-propagation/upstream-release.json", `${JSON.stringify(upstream, null, 2)}\n`);
+          const output = process.env.GITHUB_OUTPUT;
+          fs.appendFileSync(output, `channel=${channel}\n`);
+          fs.appendFileSync(output, `graph-json=${JSON.stringify(graph)}\n`);
+          fs.appendFileSync(output, `upstream-release-json=${JSON.stringify(upstream)}\n`);
+          NODE
+
+  propagate-site:
+    name: Propagate KFD release to site-libkungfu-dev
+    needs: upstream
+    uses: kungfu-systems/buildchain/.github/workflows/release-propagation.yml@v2
+    with:
+      graph-json: ${{ needs.upstream.outputs.graph-json }}
+      upstream-release-json: ${{ needs.upstream.outputs.upstream-release-json }}
+      source-node: kfd
+      downstream-target: site-libkungfu-dev
+      downstream-repository: kungfu-systems/site-libkungfu-dev
+      downstream-base-ref: dev/v2/v2.7
+      downstream-branch: buildchain/release-propagation/kfd
+      pr-title: "chore: consume KFD release"
+      pr-body: "Buildchain release propagation from @kungfu-tech/kfd."
+      dry-run: ${{ github.event_name == 'workflow_dispatch' && inputs.dry-run == 'true' }}
+    secrets:
+      propagation-token: ${{ secrets.KUNGFU_GITHUB_TOKEN }}

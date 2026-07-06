@@ -1,0 +1,161 @@
+{
+  "id": "kfd-standard-package",
+  "standard": "kfd-1",
+  "source": {
+    "repo": "kungfu-systems/kfd",
+    "factSource": "standards.json"
+  },
+  "contractWorld": {
+    "id": "kfd-standard-package",
+    "kind": "standard-metadata",
+    "name": "KFD standards metadata and release propagation surfaces",
+    "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-1/contract-world.schema.json",
+    "digest": "sha256:394139c8915426e81eee7f7ea9f3d8209eb0e2b566ddadfccbddea2a3563585d"
+  },
+  "canonicalPolicy": {
+    "path": "standards.json",
+    "sha256": "394139c8915426e81eee7f7ea9f3d8209eb0e2b566ddadfccbddea2a3563585d"
+  },
+  "registry": {
+    "path": "registry.json",
+    "sha256": "b83cfadeb726e18f96ec4f7451c66091892f4964420dd81939d1120108991c38"
+  },
+  "surfaces": [
+    {
+      "name": "kfd-1-document",
+      "sourcePath": "decisions/kfd-1.md",
+      "sourceSha256": "2ef7438b0737009d36da248d2ecec5f788d46a93b184efadf5e2e31ca20254f0",
+      "artifactPath": "decisions/kfd-1.md",
+      "expectedSha256": "2ef7438b0737009d36da248d2ecec5f788d46a93b184efadf5e2e31ca20254f0",
+      "byteForByte": true
+    },
+    {
+      "name": "kfd-2-document",
+      "sourcePath": "decisions/kfd-2.md",
+      "sourceSha256": "b8be7b7526dcec9ea501998056c55f546492abc4eb63484a9bb8856eb434b710",
+      "artifactPath": "decisions/kfd-2.md",
+      "expectedSha256": "b8be7b7526dcec9ea501998056c55f546492abc4eb63484a9bb8856eb434b710",
+      "byteForByte": true
+    },
+    {
+      "name": "kfd-3-document",
+      "sourcePath": "decisions/kfd-3.md",
+      "sourceSha256": "e329bef41ab5cb689346333df317b39918ea1016424a872e438eea8090070b96",
+      "artifactPath": "decisions/kfd-3.md",
+      "expectedSha256": "e329bef41ab5cb689346333df317b39918ea1016424a872e438eea8090070b96",
+      "byteForByte": true
+    },
+    {
+      "name": "kfd-registry",
+      "sourcePath": "registry.json",
+      "sourceSha256": "b83cfadeb726e18f96ec4f7451c66091892f4964420dd81939d1120108991c38",
+      "artifactPath": "registry.json",
+      "expectedSha256": "b83cfadeb726e18f96ec4f7451c66091892f4964420dd81939d1120108991c38",
+      "byteForByte": true
+    },
+    {
+      "name": "kfd-standards",
+      "sourcePath": "standards.json",
+      "sourceSha256": "394139c8915426e81eee7f7ea9f3d8209eb0e2b566ddadfccbddea2a3563585d",
+      "artifactPath": "standards.json",
+      "expectedSha256": "394139c8915426e81eee7f7ea9f3d8209eb0e2b566ddadfccbddea2a3563585d",
+      "byteForByte": true
+    },
+    {
+      "name": "kfd-standards-schema",
+      "sourcePath": "schemas/kfd-standards.schema.json",
+      "sourceSha256": "2ecc7049d13463700f143f4e8c40488d6587484c94d26e827c239eeedc892336",
+      "artifactPath": "schemas/kfd-standards.schema.json",
+      "expectedSha256": "2ecc7049d13463700f143f4e8c40488d6587484c94d26e827c239eeedc892336",
+      "byteForByte": true
+    },
+    {
+      "name": "kfd-1-contract-world-schema",
+      "sourcePath": "schemas/kfd-1/contract-world.schema.json",
+      "sourceSha256": "6be00cca75c80bf96429eb62336989d8931ea380d86388fcb8b834dcf8d3c13b",
+      "artifactPath": "schemas/kfd-1/contract-world.schema.json",
+      "expectedSha256": "6be00cca75c80bf96429eb62336989d8931ea380d86388fcb8b834dcf8d3c13b",
+      "byteForByte": true
+    },
+    {
+      "name": "kfd-1-witness-schema",
+      "sourcePath": "schemas/kfd-1/witness.schema.json",
+      "sourceSha256": "50104a2962cb75cc1da634fa65553e993f87d8fb9b3c237f0609a2208ad4c1f3",
+      "artifactPath": "schemas/kfd-1/witness.schema.json",
+      "expectedSha256": "50104a2962cb75cc1da634fa65553e993f87d8fb9b3c237f0609a2208ad4c1f3",
+      "byteForByte": true
+    },
+    {
+      "name": "kfd-2-release-claims-schema",
+      "sourcePath": "schemas/kfd-2/release-claims.schema.json",
+      "sourceSha256": "cf90ef7d0a7c2abc33af0d97d793b7e9c3ed96335da0b79a082523139282963e",
+      "artifactPath": "schemas/kfd-2/release-claims.schema.json",
+      "expectedSha256": "cf90ef7d0a7c2abc33af0d97d793b7e9c3ed96335da0b79a082523139282963e",
+      "byteForByte": true
+    },
+    {
+      "name": "kfd-2-release-trust-passport-schema",
+      "sourcePath": "schemas/kfd-2/release-trust-passport.schema.json",
+      "sourceSha256": "92bdd34c0575d18240d1c8be12e86034209f54819048ead9617e7aa2e539aaef",
+      "artifactPath": "schemas/kfd-2/release-trust-passport.schema.json",
+      "expectedSha256": "92bdd34c0575d18240d1c8be12e86034209f54819048ead9617e7aa2e539aaef",
+      "byteForByte": true
+    },
+    {
+      "name": "kfd-3-collaboration-interface-schema",
+      "sourcePath": "schemas/kfd-3/collaboration-interface.schema.json",
+      "sourceSha256": "03e8d54c08f26bf8aff570995142684b04f0c97578c5fb58d29bc9f1559206d6",
+      "artifactPath": "schemas/kfd-3/collaboration-interface.schema.json",
+      "expectedSha256": "03e8d54c08f26bf8aff570995142684b04f0c97578c5fb58d29bc9f1559206d6",
+      "byteForByte": true
+    },
+    {
+      "name": "kfd-3-witness-schema",
+      "sourcePath": "schemas/kfd-3/witness.schema.json",
+      "sourceSha256": "cb80768ab8a4f90f86d256555b1995ddb516371ccbe291a8c28581fa371ccd10",
+      "artifactPath": "schemas/kfd-3/witness.schema.json",
+      "expectedSha256": "cb80768ab8a4f90f86d256555b1995ddb516371ccbe291a8c28581fa371ccd10",
+      "byteForByte": true
+    },
+    {
+      "name": "release-propagation-graph",
+      "sourcePath": "buildchain.release-propagation.json",
+      "sourceSha256": "007b465f3a69b25cf9bb7554e8c0e8727dbd5d5440b2e496d8c257f0ef69c011",
+      "artifactPath": "buildchain.release-propagation.json",
+      "expectedSha256": "007b465f3a69b25cf9bb7554e8c0e8727dbd5d5440b2e496d8c257f0ef69c011",
+      "byteForByte": true
+    },
+    {
+      "name": "buildchain-build-workflow",
+      "sourcePath": ".github/workflows/build.yml",
+      "sourceSha256": "a3e3f935897f16af86f468c8ee0a4500e2d68828e62411df88684087c65a73ad",
+      "artifactPath": ".github/workflows/build.yml",
+      "expectedSha256": "a3e3f935897f16af86f468c8ee0a4500e2d68828e62411df88684087c65a73ad",
+      "byteForByte": true
+    },
+    {
+      "name": "buildchain-ref-promotion-workflow",
+      "sourcePath": ".github/workflows/buildchain-ref-promotion.yml",
+      "sourceSha256": "f947f5ab19a856914ea03fb094580c9c7cf4b63d6690b88240b7558b40778e2e",
+      "artifactPath": ".github/workflows/buildchain-ref-promotion.yml",
+      "expectedSha256": "f947f5ab19a856914ea03fb094580c9c7cf4b63d6690b88240b7558b40778e2e",
+      "byteForByte": true
+    },
+    {
+      "name": "release-propagation-workflow",
+      "sourcePath": ".github/workflows/release-propagation.yml",
+      "sourceSha256": "216710af3be1ac6e85dc50836f21e4bdfe7a28fdec47647e843baa2cc7c9b4e7",
+      "artifactPath": ".github/workflows/release-propagation.yml",
+      "expectedSha256": "216710af3be1ac6e85dc50836f21e4bdfe7a28fdec47647e843baa2cc7c9b4e7",
+      "byteForByte": true
+    },
+    {
+      "name": "verify-workflow",
+      "sourcePath": ".github/workflows/verify.yml",
+      "sourceSha256": "448f4b6b8263399005a9866cee7906f5334cf5e3daea7d13c70768e586576947",
+      "artifactPath": ".github/workflows/verify.yml",
+      "expectedSha256": "448f4b6b8263399005a9866cee7906f5334cf5e3daea7d13c70768e586576947",
+      "byteForByte": true
+    }
+  ]
+}

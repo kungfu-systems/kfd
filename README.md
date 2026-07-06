@@ -115,12 +115,25 @@ e.g. `https://kfd.libkungfu.dev/1`). This repository publishes
 
 Machine consumers that need KFD-owned standard identity should read
 `standards.json`. It is the versioned metadata surface for stable standard
-keys, document routes, schema IDs, and KFD-owned concept names. In Node or
-TypeScript projects, import it as:
+keys, document routes and SHA-256 digests, schema IDs, KFD-owned concept names,
+and machine-interface contract versions. In Node or TypeScript projects, import
+it as:
 
 ```js
 import standards from "@kungfu-tech/kfd/standards.json" with { type: "json" };
 ```
+
+KFD package semver is only the distribution version. KFD-owned machine
+interfaces carry their own `schemaVersion` and `contract` fields. Compatible
+additions may keep the same interface version; semantic changes, required-field
+changes, verification meaning changes, or responsibility-boundary changes must
+use a new interface version or contract.
+
+KFD-2 publishes release-claims and release-trust-passport schemas under
+`schemas/kfd-2/`. These schemas let Buildchain and other release systems audit
+whether public release claims are bound to source facts, evidence, hashes,
+audit boundaries, residual risk, and responsibility state. See
+[`docs/kfd-2-release-trust.md`](docs/kfd-2-release-trust.md).
 
 KFD-3 also publishes a general collaboration-interface schema and witness
 schema under `schemas/kfd-3/`. These schemas are for participant-facing product
@@ -158,6 +171,8 @@ standards.json machine-readable KFD standard metadata (schemaVersion 1,
                contract kfd-standards-metadata)
 schemas/       JSON schemas for package metadata and KFD-owned schema IDs
 site/          machine-readable site bundle for kfd.libkungfu.dev renderers
+buildchain.release-propagation.json
+               Buildchain release propagation graph for KFD -> site consumers
 release-impact.json
                Buildchain surface-aware impact ledger for production release passports
 scripts/       conformance check: registry and documents must agree
@@ -165,7 +180,8 @@ scripts/       conformance check: registry and documents must agree
 
 `node scripts/check.mjs` (also `pnpm run check`) verifies numbering
 uniqueness, registry/document agreement, standards metadata/schema agreement,
-status validity, and the release impact ledger required by Buildchain
+status validity, decision document SHA-256 bindings, interface contract
+version bindings, and the release impact ledger required by Buildchain
 production release passports. Releases are governed by Buildchain; this package
 versions itself under KFD-1's own rules: the outer package line remains `v1.0`,
 while patch and prerelease numbers are advanced by Buildchain release

@@ -1,0 +1,332 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-2/release-claims.schema.json",
+  "title": "KFD-2 release claims",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "contract",
+    "standard",
+    "product",
+    "release",
+    "claims"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "contract": {
+      "const": "kfd-2-release-claims"
+    },
+    "standard": {
+      "const": "kfd-2"
+    },
+    "product": {
+      "$ref": "#/$defs/product"
+    },
+    "release": {
+      "$ref": "#/$defs/release"
+    },
+    "claims": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/claim"
+      }
+    },
+    "schemaEvolution": {
+      "$ref": "#/$defs/schemaEvolution"
+    }
+  },
+  "additionalProperties": true,
+  "$defs": {
+    "product": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "repository": {
+          "type": "string",
+          "minLength": 1
+        },
+        "package": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "release": {
+      "type": "object",
+      "required": [
+        "version",
+        "channel"
+      ],
+      "properties": {
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "channel": {
+          "type": "string",
+          "minLength": 1
+        },
+        "tag": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceSha": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "claim": {
+      "type": "object",
+      "required": [
+        "id",
+        "statement",
+        "source",
+        "evidence",
+        "auditBoundary",
+        "responsibility",
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "category": {
+          "enum": [
+            "metadata",
+            "schema",
+            "package-export",
+            "artifact",
+            "site",
+            "release",
+            "kfd-1",
+            "kfd-2",
+            "kfd-3",
+            "other"
+          ]
+        },
+        "source": {
+          "$ref": "#/$defs/artifactPointer"
+        },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/evidenceBinding"
+          }
+        },
+        "verification": {
+          "$ref": "#/$defs/verification"
+        },
+        "auditBoundary": {
+          "$ref": "#/$defs/auditBoundary"
+        },
+        "residualRisk": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "responsibility": {
+          "$ref": "#/$defs/responsibilityState"
+        },
+        "status": {
+          "enum": [
+            "declared",
+            "audited",
+            "enforced",
+            "not-applicable"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "artifactPointer": {
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "file",
+            "schema",
+            "package-export",
+            "artifact",
+            "command",
+            "witness",
+            "passport",
+            "url",
+            "other"
+          ]
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "specifier": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "schemaId": {
+          "type": "string",
+          "format": "uri"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "digest": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "evidenceBinding": {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "file",
+            "schema",
+            "package-export",
+            "artifact",
+            "hash",
+            "command-result",
+            "witness",
+            "passport-section",
+            "url",
+            "other"
+          ]
+        },
+        "pointer": {
+          "$ref": "#/$defs/artifactPointer"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "verification": {
+      "type": "object",
+      "properties": {
+        "resultRef": {
+          "$ref": "#/$defs/artifactPointer"
+        },
+        "command": {
+          "type": "string",
+          "minLength": 1
+        },
+        "expectedResult": {
+          "enum": [
+            "pass",
+            "fail",
+            "warning",
+            "unverifiable"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "auditBoundary": {
+      "type": "object",
+      "required": [
+        "scope",
+        "enumerability"
+      ],
+      "properties": {
+        "scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "enumerability": {
+          "enum": [
+            "closed-world",
+            "declared-open",
+            "sampled",
+            "manual"
+          ]
+        },
+        "exclusions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "responsibilityState": {
+      "type": "object",
+      "required": [
+        "sourceOwner",
+        "verificationOwner",
+        "releaseDecisionOwner"
+      ],
+      "properties": {
+        "sourceOwner": {
+          "type": "string",
+          "minLength": 1
+        },
+        "verificationOwner": {
+          "type": "string",
+          "minLength": 1
+        },
+        "releaseDecisionOwner": {
+          "type": "string",
+          "minLength": 1
+        },
+        "escalation": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "schemaEvolution": {
+      "type": "object",
+      "required": [
+        "interfaceVersion",
+        "compatibilityRule"
+      ],
+      "properties": {
+        "interfaceVersion": {
+          "const": 1
+        },
+        "compatibilityRule": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

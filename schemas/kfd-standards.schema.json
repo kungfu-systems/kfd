@@ -142,6 +142,10 @@
             "url": {
               "type": "string",
               "format": "uri"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
             }
           },
           "additionalProperties": false
@@ -184,6 +188,41 @@
           "minProperties": 1,
           "additionalProperties": {
             "type": "string"
+          }
+        },
+        "interfaces": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": [
+              "contract",
+              "schemaVersion",
+              "schemaId",
+              "schemaPath"
+            ],
+            "properties": {
+              "contract": {
+                "type": "string",
+                "minLength": 1
+              },
+              "schemaVersion": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "schemaId": {
+                "type": "string",
+                "format": "uri"
+              },
+              "schemaPath": {
+                "type": "string",
+                "minLength": 1
+              },
+              "compatibilityRule": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false
           }
         },
         "concepts": {
