@@ -25,13 +25,13 @@ cooperate through visible value rather than hidden pressure.
 
 ## Product proof path
 
-KFDs are not a detached manifesto. Every active KFD should have a public
-verification path. For product philosophy, start from the main Kungfu product
-entrypoint (`https://kungfu.tech`) and install or use Kungfu through its public
-docs. For release and provenance accountability, start from Buildchain
-(`https://buildchain.libkungfu.dev`). This registry states the commitments;
-those product entrypoints should show how the commitments are borne in
-practice.
+KFDs are not a detached manifesto, but they are not a demand that readers adopt
+a Kungfu product before understanding the decisions. A philosophy becomes
+load-bearing only when it can be seen in a concrete case. For that reference
+case, use the main Kungfu product entrypoint (`https://kungfu.tech`) for product
+philosophy, and Buildchain (`https://buildchain.libkungfu.dev`) for release and
+provenance accountability. This registry states the commitments; those
+entrypoints show how the commitments are meant to be borne in practice.
 
 Rendered index: `https://kfd.libkungfu.dev` (stable machine path per entry,
 e.g. `https://kfd.libkungfu.dev/1`). This repository publishes
