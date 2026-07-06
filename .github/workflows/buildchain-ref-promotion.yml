@@ -58,8 +58,8 @@ jobs:
       target-sha: ${{ github.event.workflow_run.head_sha || inputs.sha || github.sha }}
       package-manager: custom
       artifact-name: kfd
-      release-candidate-workflow-file: build.yml
-      release-candidate-workflow-name: Build
+      release-candidate-workflow-file: verify.yml
+      release-candidate-workflow-name: Verify
       required-status-check: check
       required-artifact-count: 0
       publish-required-artifacts-json: "[]"
