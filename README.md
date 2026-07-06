@@ -113,6 +113,15 @@ e.g. `https://kfd.libkungfu.dev/1`). This repository publishes
 `@kungfu-tech/kfd` — the decision texts plus a machine-readable
 `registry.json` — which the site consumes as its single fact source.
 
+Machine consumers that need KFD-owned standard identity should read
+`standards.json`. It is the versioned metadata surface for stable standard
+keys, document routes, schema IDs, and KFD-owned concept names. In Node or
+TypeScript projects, import it as:
+
+```js
+import standards from "@kungfu-tech/kfd/standards.json" with { type: "json" };
+```
+
 ## Current decisions
 
 | ID | Kind | Title | Status |
@@ -137,6 +146,9 @@ reference KFDs; KFDs never depend on repository internals.
 ```text
 decisions/     one markdown file per decision (kfd-N.md)
 registry.json  machine-readable index (schemaVersion 1, contract kfd-registry)
+standards.json machine-readable KFD standard metadata (schemaVersion 1,
+               contract kfd-standards-metadata)
+schemas/       JSON schemas for package metadata and KFD-owned schema IDs
 site/          machine-readable site bundle for kfd.libkungfu.dev renderers
 release-impact.json
                Buildchain surface-aware impact ledger for production release passports
@@ -144,11 +156,12 @@ scripts/       conformance check: registry and documents must agree
 ```
 
 `node scripts/check.mjs` (also `pnpm run check`) verifies numbering
-uniqueness, registry/document agreement, status validity, and the release
-impact ledger required by Buildchain production release passports. Releases are
-governed by Buildchain; this package versions itself under KFD-1's own rules:
-the outer package line remains `v1.0`, while patch and prerelease numbers are
-advanced by Buildchain release promotion.
+uniqueness, registry/document agreement, standards metadata/schema agreement,
+status validity, and the release impact ledger required by Buildchain
+production release passports. Releases are governed by Buildchain; this package
+versions itself under KFD-1's own rules: the outer package line remains `v1.0`,
+while patch and prerelease numbers are advanced by Buildchain release
+promotion.
 
 ## Release impact ledger
 

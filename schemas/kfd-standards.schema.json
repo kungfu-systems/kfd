@@ -1,0 +1,200 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json",
+  "title": "KFD standards metadata",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "contract",
+    "metadataSchema",
+    "source",
+    "standards"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "contract": {
+      "const": "kfd-standards-metadata"
+    },
+    "metadataSchema": {
+      "type": "object",
+      "required": [
+        "id",
+        "path",
+        "version"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uri"
+        },
+        "path": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "package",
+        "registry",
+        "decisionsDir"
+      ],
+      "properties": {
+        "package": {
+          "const": "@kungfu-tech/kfd"
+        },
+        "registry": {
+          "const": "registry.json"
+        },
+        "decisionsDir": {
+          "const": "decisions"
+        }
+      },
+      "additionalProperties": false
+    },
+    "standards": {
+      "type": "object",
+      "patternProperties": {
+        "^kfd-[1-9][0-9]*$": {
+          "$ref": "#/$defs/standard"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "standard": {
+      "type": "object",
+      "required": [
+        "key",
+        "id",
+        "number",
+        "label",
+        "title",
+        "kind",
+        "status",
+        "revision",
+        "metadataSchemaVersion",
+        "document",
+        "compatibility",
+        "schemaIds",
+        "schemaPaths",
+        "concepts"
+      ],
+      "properties": {
+        "key": {
+          "type": "string",
+          "pattern": "^kfd-[1-9][0-9]*$"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^KFD-[1-9][0-9]*$"
+        },
+        "number": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "label": {
+          "type": "string",
+          "pattern": "^KFD-[1-9][0-9]*$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "enum": [
+            "principle",
+            "procedure"
+          ]
+        },
+        "status": {
+          "enum": [
+            "draft",
+            "active",
+            "superseded"
+          ]
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "metadataSchemaVersion": {
+          "type": "string"
+        },
+        "document": {
+          "type": "object",
+          "required": [
+            "path",
+            "url"
+          ],
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string",
+              "format": "uri"
+            }
+          },
+          "additionalProperties": false
+        },
+        "compatibility": {
+          "type": "object",
+          "required": [
+            "packageLine",
+            "registrySchemaVersion",
+            "metadataSchemaVersion",
+            "rule"
+          ],
+          "properties": {
+            "packageLine": {
+              "type": "string"
+            },
+            "registrySchemaVersion": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "metadataSchemaVersion": {
+              "type": "string"
+            },
+            "rule": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "schemaIds": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "schemaPaths": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "concepts": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

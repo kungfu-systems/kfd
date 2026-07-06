@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-1/witness.schema.json",
+  "title": "KFD-1 witness",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "contract",
+    "standard",
+    "contractWorld",
+    "evidence"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "contract": {
+      "const": "kfd-1-witness"
+    },
+    "standard": {
+      "const": "kfd-1"
+    },
+    "contractWorld": {
+      "type": "object",
+      "required": [
+        "schemaId",
+        "digest"
+      ],
+      "properties": {
+        "schemaId": {
+          "const": "https://kfd.libkungfu.dev/schemas/kfd-1/contract-world.schema.json"
+        },
+        "digest": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "kind",
+          "path"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "minLength": 1
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}
