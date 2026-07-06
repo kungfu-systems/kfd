@@ -60,6 +60,7 @@ const groupedSurfaces = {
     { id: "metadata:standards", sourcePath: "standards.json", sha256: sha256File("standards.json") },
     { id: "metadata:release-impact", sourcePath: "release-impact.json", sha256: sha256File("release-impact.json") },
     { id: "metadata:release-anchor", sourcePath: "kfd.release.json", sha256: sha256File("kfd.release.json") },
+    { id: "metadata:kfd-2-public-release-trust-claim", sourcePath: ".buildchain/kfd-2/public-release-trust.claim.json", sha256: sha256File(".buildchain/kfd-2/public-release-trust.claim.json") },
   ],
   packageExports: [
     { id: "export:package-json", sourcePath: "package.json#exports", sha256: sha256File("package.json") },
@@ -82,6 +83,23 @@ const explicitSurfaces = collaborationInterface.surfaces.map((surface) => ({
   public: true,
   sourcePath: surface.discoverability?.path || "",
 }));
+
+const declaredSurfaceIds = new Set(explicitSurfaces.map((surface) => surface.id));
+for (const entrypoint of collaborationInterface.minimalEntrypoints) {
+  if (declaredSurfaceIds.has(entrypoint.id)) continue;
+  explicitSurfaces.push({
+    id: entrypoint.id,
+    name: entrypoint.id,
+    kind: "entrypoint",
+    participantProfile: Array.isArray(entrypoint.participants) ? entrypoint.participants.join(",") : "",
+    availability: "shipped",
+    visibility: "public",
+    participantFacing: true,
+    public: true,
+    sourcePath: entrypoint.surface,
+  });
+  declaredSurfaceIds.add(entrypoint.id);
+}
 
 const participantProfiles = collaborationInterface.participants.map((entry) => entry.id);
 const responsibility = {
@@ -159,6 +177,7 @@ const artifact = {
       pointer("docs/MAP.md", "Documentation routing entrypoint"),
       pointer("registry.json", "Machine-readable decision index"),
       pointer("standards.json", "Machine-readable standards metadata"),
+      pointer(".buildchain/kfd-2/public-release-trust.claim.json", "KFD-2 public release trust claim"),
       pointer("package.json", "Package export map"),
       pointer("site/kfd-site.json", "Site content projection"),
     ],
@@ -171,6 +190,7 @@ const artifact = {
       pointer("README.md", "Human reading path"),
       pointer("registry.json", "Agent registry path"),
       pointer("standards.json", "Agent standards metadata path"),
+      pointer(".buildchain/kfd-2/public-release-trust.claim.json", "Agent release trust claim path"),
       pointer("package.json", "Package consumption path"),
     ],
     manuals: [

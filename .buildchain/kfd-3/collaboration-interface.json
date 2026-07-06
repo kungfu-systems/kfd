@@ -80,6 +80,12 @@
       "purpose": "Inspect the explicit KFD package version anchor for the current Buildchain release line."
     },
     {
+      "id": "kfd-2-public-release-trust-claim",
+      "surface": ".buildchain/kfd-2/public-release-trust.claim.json",
+      "participants": ["release-system", "agent-reader", "package-consumer"],
+      "purpose": "Inspect the explicit public KFD-2 claim passed into Buildchain release passport generation."
+    },
+    {
       "id": "site-bundle",
       "surface": "site/kfd-site.json",
       "participants": ["site-consumer", "agent-reader"],
@@ -181,6 +187,14 @@
       "participants": ["release-system", "maintainer", "agent-reader"],
       "value": "KFD-1 contract-world witness for source-to-artifact drift checks.",
       "discoverability": { "fromMinimalEntrypoint": true, "path": ".buildchain/kfd-1/contract-world.witness.json" },
+      "maturity": "stable"
+    },
+    {
+      "id": "kfd-2-public-release-trust-claim",
+      "kind": "json-api",
+      "participants": ["release-system", "maintainer", "agent-reader", "package-consumer"],
+      "value": "Explicit public KFD-2 claim that binds KFD package release trust to declared source facts, machine evidence, artifacts, verification, responsibility, and residual risk.",
+      "discoverability": { "fromMinimalEntrypoint": true, "path": ".buildchain/kfd-2/public-release-trust.claim.json" },
       "maturity": "stable"
     },
     {

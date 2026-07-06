@@ -19,6 +19,8 @@ const packageJson = JSON.parse(readFileSync("package.json", "utf8"));
 const siteBundle = JSON.parse(readFileSync("site/kfd-site.json", "utf8"));
 const kfd1WitnessPath = ".buildchain/kfd-1/contract-world.witness.json";
 const kfd1Witness = existsSync(kfd1WitnessPath) ? JSON.parse(readFileSync(kfd1WitnessPath, "utf8")) : undefined;
+const kfd2ClaimPath = ".buildchain/kfd-2/public-release-trust.claim.json";
+const kfd2Claim = existsSync(kfd2ClaimPath) ? JSON.parse(readFileSync(kfd2ClaimPath, "utf8")) : undefined;
 const kfd3InterfacePath = ".buildchain/kfd-3/collaboration-interface.json";
 const kfd3PrebuildWitnessPath = ".buildchain/kfd-3/collaboration-interface.prebuild.json";
 const kfd3ArtifactWitnessPath = ".buildchain/kfd-3/collaboration-interface.artifact.json";
@@ -55,12 +57,12 @@ if (siteBundle.homepage?.title !== "KFD — Kung Fu Decisions") fail("site bundl
 if (siteBundle.homepage?.currentDecisions?.source !== "registry.json") fail("site bundle currentDecisions source must be registry.json");
 if (siteBundle.decisionPages?.source !== "registry.json") fail("site bundle decisionPages source must be registry.json");
 if (siteBundle.decisionPages?.bodySource !== "registry.entries[].path") fail("site bundle decision page body source must be registry.entries[].path");
-for (const requiredFile of ["README.md", "decisions", "registry.json", "standards.json", "kfd.release.json", "schemas", "site", "buildchain.release-propagation.json", "release-impact.json", ".buildchain/kfd-1/contract-world.witness.json", ".buildchain/kfd-3", "docs"]) {
+for (const requiredFile of ["README.md", "decisions", "registry.json", "standards.json", "kfd.release.json", "schemas", "site", "buildchain.release-propagation.json", "release-impact.json", ".buildchain/kfd-1/contract-world.witness.json", ".buildchain/kfd-2", ".buildchain/kfd-3", "docs"]) {
   if (!Array.isArray(packageJson.files) || !packageJson.files.includes(requiredFile)) {
     fail(`package.json files[] must include ${requiredFile}`);
   }
 }
-for (const requiredExport of ["./registry.json", "./standards.json", "./kfd.release.json", "./site/kfd-site.json", "./buildchain.release-propagation.json", "./release-impact.json", "./buildchain/kfd-1/contract-world.witness.json", "./buildchain/kfd-3/collaboration-interface.json", "./buildchain/kfd-3/collaboration-interface.prebuild.json", "./buildchain/kfd-3/collaboration-interface.artifact.json", "./schemas/*.json", "./schemas/*/*.json"]) {
+for (const requiredExport of ["./registry.json", "./standards.json", "./kfd.release.json", "./site/kfd-site.json", "./buildchain.release-propagation.json", "./release-impact.json", "./buildchain/kfd-1/contract-world.witness.json", "./buildchain/kfd-2/public-release-trust.claim.json", "./buildchain/kfd-3/collaboration-interface.json", "./buildchain/kfd-3/collaboration-interface.prebuild.json", "./buildchain/kfd-3/collaboration-interface.artifact.json", "./schemas/*.json", "./schemas/*/*.json"]) {
   if (!packageJson.exports || !packageJson.exports[requiredExport]) {
     fail(`package.json exports must include ${requiredExport}`);
   }
@@ -283,6 +285,61 @@ if (!kfd1Witness) {
   }
 }
 
+const checkKfd2Pointer = (entry, label) => {
+  if (!entry?.path) {
+    fail(`${label} must include path`);
+    return;
+  }
+  if (!entry?.sha256) {
+    fail(`${label} must include sha256`);
+    return;
+  }
+  const filePath = hashablePath(entry.path);
+  if (!existsSync(filePath)) {
+    fail(`${label} points to missing ${filePath}`);
+  } else if (entry.sha256 !== sha256File(filePath)) {
+    fail(`${label}.sha256 does not match ${filePath}`);
+  }
+};
+
+if (!kfd2Claim) {
+  fail(`missing KFD-2 public release trust claim ${kfd2ClaimPath}`);
+} else {
+  if (kfd2Claim.id !== "kfd-public-release-trust") fail("KFD-2 release trust claim id must be kfd-public-release-trust");
+  if (kfd2Claim.public !== true) fail("KFD-2 release trust claim must be public");
+  if (!kfd2Claim.claim) fail("KFD-2 release trust claim must include claim text");
+  for (const field of ["sourceBindings", "machineEvidence", "artifacts", "residualRisk"]) {
+    if (!Array.isArray(kfd2Claim[field])) fail(`KFD-2 release trust claim ${field} must be an array`);
+  }
+  if (!Array.isArray(kfd2Claim.sourceBindings) || kfd2Claim.sourceBindings.length === 0) {
+    fail("KFD-2 release trust claim sourceBindings[] is required");
+  } else {
+    kfd2Claim.sourceBindings.forEach((entry, index) => checkKfd2Pointer(entry, `KFD-2 release trust claim sourceBindings[${index}]`));
+  }
+  if (!Array.isArray(kfd2Claim.machineEvidence) || kfd2Claim.machineEvidence.length === 0) {
+    fail("KFD-2 release trust claim machineEvidence[] is required");
+  } else {
+    kfd2Claim.machineEvidence.forEach((entry, index) => checkKfd2Pointer(entry, `KFD-2 release trust claim machineEvidence[${index}]`));
+  }
+  if (!kfd2Claim.hashes || Object.keys(kfd2Claim.hashes).length === 0) fail("KFD-2 release trust claim hashes must be non-empty");
+  for (const entry of [...(kfd2Claim.sourceBindings ?? []), ...(kfd2Claim.machineEvidence ?? [])]) {
+    if (entry?.id && kfd2Claim.hashes?.[entry.id] !== entry.sha256) {
+      fail(`KFD-2 release trust claim hashes.${entry.id} must match its bound sha256`);
+    }
+  }
+  if (!Array.isArray(kfd2Claim.artifacts) || kfd2Claim.artifacts.length === 0) {
+    fail("KFD-2 release trust claim artifacts[] is required");
+  } else {
+    kfd2Claim.artifacts.forEach((entry, index) => checkKfd2Pointer(entry, `KFD-2 release trust claim artifacts[${index}]`));
+  }
+  if (kfd2Claim.verification?.result !== "passed") fail("KFD-2 release trust claim verification.result must be passed");
+  if (kfd2Claim.verification?.command !== "node scripts/check.mjs") fail("KFD-2 release trust claim verification.command must be node scripts/check.mjs");
+  if (!kfd2Claim.auditBoundary?.scope) fail("KFD-2 release trust claim auditBoundary.scope is required");
+  if (kfd2Claim.auditBoundary?.enumerability !== "closed-world") fail("KFD-2 release trust claim auditBoundary.enumerability must be closed-world");
+  if (!kfd2Claim.responsibility?.owner) fail("KFD-2 release trust claim responsibility.owner is required");
+  if (!Array.isArray(kfd2Claim.residualRisk)) fail("KFD-2 release trust claim residualRisk must be an array");
+}
+
 const kfd3SurfaceGroups = ["docs", "schemas", "standardsMetadata", "packageExports", "siteConsumptionContracts"];
 const kfd3SurfaceIds = (witness) => {
   const ids = new Set();
@@ -387,7 +444,7 @@ if (kfd3PrebuildWitness && kfd3ArtifactWitness) {
 }
 
 const impactLevels = new Set(["patch", "minor", "major"]);
-const requiredSurfaces = new Set(["kfd-content", "kfd-registry-schema", "kfd-standards-metadata", "kfd-package-structure"]);
+const requiredSurfaces = new Set(["kfd-content", "kfd-registry-schema", "kfd-standards-metadata", "kfd-package-structure", "kfd-2-public-release-trust-claim"]);
 
 if (releaseImpact.schemaVersion !== 1) fail(`unsupported release-impact schemaVersion ${releaseImpact.schemaVersion}`);
 if (releaseImpact.contract !== "kungfu-buildchain-impact") fail(`unexpected release-impact contract ${releaseImpact.contract}`);
