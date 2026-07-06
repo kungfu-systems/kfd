@@ -7,6 +7,8 @@
 
 ## One sentence
 
+Trust must start from facts.
+
 A product must not ask users or agents to trust important claims before the
 relevant facts are inspectable, local where possible, and connected to
 responsibility state.
@@ -19,8 +21,9 @@ KFDs can be principles or procedures:
   products, repositories, and release lines change.
 - A **procedure** states how a class of work enforces or protects a principle.
 
-This KFD is a principle. KFD-1 is a procedure that protects release and
-version responsibility under this principle.
+This KFD is a principle. KFD-1 is the procedure that keeps the fact sources
+under this principle from drifting. KFD-3 is the principle that governs how
+humans and agents cooperate once facts and trust are visible.
 
 ## Foundation role
 
@@ -31,9 +34,9 @@ trust must start from facts
 ```
 
 KFD-2 says Kungfu products should not ask users or agents to trust a claim
-before the product has made the relevant facts inspectable. KFD-1 protects
-contract truth across artifact lines. KFD-3 protects the relationship with the
-human or agent who must understand and act on those facts.
+before the product has made the relevant facts inspectable. KFD-1 protects the
+non-drifting fact source those claims stand on. KFD-3 protects the relationship
+with the human or agent who must understand and act on those facts.
 
 ## Principle
 
@@ -81,14 +84,15 @@ leaves enough evidence for later review.
 
 ## Relation to KFD-1
 
-KFD-1 is a procedure. It makes release and version responsibility legible when
-contract worlds change. KFD-2 is the higher-level principle: versioning,
-release evidence, fact ledgers, agent control panes, extension gates, and
-hosted services should all preserve the path from fact source to responsibility
-state to proof-backed decision.
+KFD-1 is a procedure. It defines what can count as a load-bearing fact source:
+facts must not drift from the contract world that declares them. KFD-2 is the
+next layer: once facts are non-drifting and inspectable, trust claims must be
+bound to those facts and to responsibility state.
 
 KFD-2 does not supersede KFD-1. KFD-1 remains active and is one concrete
-procedure that implements KFD-2 for version and release responsibility.
+procedure that implements KFD-2 wherever trust depends on contract worlds,
+release evidence, fact ledgers, agent control panes, extension gates, hosted
+surfaces, schemas, configs, or package metadata.
 
 ## Supersession rule
 

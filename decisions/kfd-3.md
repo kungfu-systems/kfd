@@ -7,6 +7,8 @@
 
 ## One sentence
 
+Cooperation must start from transparent value.
+
 A product must not obtain cooperation through pressure, manipulation, hidden
 control, or forced workflow capture. It must make value, choices, and
 constraints visible enough for intelligent participants to understand, decide,
@@ -28,11 +30,11 @@ kungfu-systems takes toward humans and agents as reasoning participants.
 Within the KFD-1/2/3 foundation, this is the relationship path:
 
 ```text
-cooperation must start from transparent value, not coercion
+cooperation must start from transparent value
 ```
 
 KFD-2 protects the truth path: show facts before asking for trust. KFD-3
-protects the relationship path: show value before asking for compliance.
+protects the relationship path: show value before asking for cooperation.
 
 ## Principle
 
@@ -151,12 +153,14 @@ KFD-3 says the path of least resistance should not be built from pressure or
 hidden control. Together:
 
 ```text
-KFD-2: show the facts before asking for trust.
-KFD-3: show the value before asking for compliance.
+KFD-1: facts must not drift.
+KFD-2: trust must start from facts.
+KFD-3: cooperation must start from transparent value.
 ```
 
-KFD-2 protects the truth path. KFD-3 protects the relationship with the
-intelligent participant who must walk that path.
+KFD-1 protects the fact-source layer. KFD-2 protects the trust layer. KFD-3
+protects the relationship with the intelligent participant who must walk that
+path.
 
 ## Implementation case: the KFD package
 
