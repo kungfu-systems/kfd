@@ -25,7 +25,7 @@
       "document": {
         "path": "decisions/kfd-1.md",
         "url": "https://kfd.libkungfu.dev/1",
-        "sha256": "2ef7438b0737009d36da248d2ecec5f788d46a93b184efadf5e2e31ca20254f0"
+        "sha256": "e553c05e689ec008528bd232bd95acaa29fcc101b101e0d77904daaf9e0b5e01"
       },
       "compatibility": {
         "packageLine": "v1.0",
@@ -79,7 +79,7 @@
       "document": {
         "path": "decisions/kfd-2.md",
         "url": "https://kfd.libkungfu.dev/2",
-        "sha256": "b8be7b7526dcec9ea501998056c55f546492abc4eb63484a9bb8856eb434b710"
+        "sha256": "06203c988cdae274762380a38ddf7ab172dcf399e8885bb31c96c5653c856c3b"
       },
       "compatibility": {
         "packageLine": "v1.0",
@@ -89,15 +89,24 @@
       },
       "schemaIds": {
         "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json",
+        "trustTaxonomy": "https://kfd.libkungfu.dev/schemas/kfd-2/trust-taxonomy.schema.json",
         "releaseClaims": "https://kfd.libkungfu.dev/schemas/kfd-2/release-claims.schema.json",
         "releaseTrustPassport": "https://kfd.libkungfu.dev/schemas/kfd-2/release-trust-passport.schema.json"
       },
       "schemaPaths": {
         "metadata": "schemas/kfd-standards.schema.json",
+        "trustTaxonomy": "schemas/kfd-2/trust-taxonomy.schema.json",
         "releaseClaims": "schemas/kfd-2/release-claims.schema.json",
         "releaseTrustPassport": "schemas/kfd-2/release-trust-passport.schema.json"
       },
       "interfaces": {
+        "trustTaxonomy": {
+          "contract": "kfd-2-trust-taxonomy",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-2/trust-taxonomy.schema.json",
+          "schemaPath": "schemas/kfd-2/trust-taxonomy.schema.json",
+          "compatibilityRule": "Compatible additions may keep schemaVersion 1; unknown taxonomy values fail validation until KFD records them in this schema."
+        },
         "releaseClaims": {
           "contract": "kfd-2-release-claims",
           "schemaVersion": 1,
@@ -120,6 +129,11 @@
         "evidenceBinding": "evidence binding",
         "auditBoundary": "audit boundary",
         "residualRisk": "residual risk",
+        "riskType": "residual risk type",
+        "trustImpact": "trust impact",
+        "machineProvability": "machine provability",
+        "agentAction": "agent action",
+        "extensionRequest": "extension request",
         "releaseTrustPassport": "release trust passport",
         "responsibilityState": "responsibility state",
         "trust": "trust from facts"
@@ -138,7 +152,7 @@
       "document": {
         "path": "decisions/kfd-3.md",
         "url": "https://kfd.libkungfu.dev/3",
-        "sha256": "e329bef41ab5cb689346333df317b39918ea1016424a872e438eea8090070b96"
+        "sha256": "26c9e9e751547c3d497ed79c9270143d740d6562b5b0f336c6a2e6c644217093"
       },
       "compatibility": {
         "packageLine": "v1.0",
@@ -182,7 +196,9 @@
         "minimalEntrypoint": "minimal entrypoint",
         "discoverability": "discoverability",
         "closure": "closed-world interface classification",
-        "choicePath": "choice path"
+        "choicePath": "choice path",
+        "extensionRequest": "extension request",
+        "extensionPath": "extension path"
       }
     }
   }

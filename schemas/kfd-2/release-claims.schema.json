@@ -140,8 +140,7 @@
         "residualRisk": {
           "type": "array",
           "items": {
-            "type": "string",
-            "minLength": 1
+            "$ref": "https://kfd.libkungfu.dev/schemas/kfd-2/trust-taxonomy.schema.json#/$defs/residualRisk"
           }
         },
         "responsibility": {

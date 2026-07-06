@@ -33,6 +33,8 @@ A product collaboration interface should identify:
 - visible constraints, including what is restricted, why, and where review or
   escalation happens;
 - choice paths that let participants choose or decline safe cooperation modes;
+- extension requests that tell participants how to ask for a new value,
+  capability, or interface when the declared interface is insufficient;
 - a closure policy for reachable participant-facing entrypoints.
 
 The KFD-3 witness schema is intentionally stricter about closure: a passing
@@ -57,3 +59,17 @@ Examples:
   requested.
 
 This keeps KFD-3 general while making real product interfaces testable.
+
+## Extension Requests
+
+KFD-3 treats extension requests as part of the collaboration interface. A
+human or agent should not have to infer how to cooperate when a declared
+interface is missing a value or capability. The interface should expose a
+visible request path, the participants it is for, the trigger, and the expected
+outcome.
+
+For KFD itself, the standard request path for missing KFD-2 trust-taxonomy
+values is a GitHub issue in `kungfu-systems/kfd`. This is both a KFD-2 trust
+rule and a KFD-3 collaboration rule: the taxonomy defines what values are valid,
+while the collaboration interface tells agents how to request an extension
+without inventing private values or relying on pressure.

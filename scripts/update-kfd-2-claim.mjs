@@ -28,6 +28,7 @@ const machineEvidence = [
   pointer("scripts/check.mjs", { id: "self-verification-command" }),
   pointer(".github/workflows/build.yml", { id: "buildchain-build-workflow" }),
   pointer(".github/workflows/buildchain-ref-promotion.yml", { id: "buildchain-promotion-workflow" }),
+  pointer("schemas/kfd-2/trust-taxonomy.schema.json", { id: "kfd-2-trust-taxonomy-schema" }),
   pointer("schemas/kfd-2/release-claims.schema.json", { id: "kfd-2-release-claims-schema" }),
   pointer("schemas/kfd-2/release-trust-passport.schema.json", { id: "kfd-2-release-trust-passport-schema" }),
 ];

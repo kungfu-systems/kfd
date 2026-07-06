@@ -102,10 +102,14 @@ separate homepage wording that can drift from this package.
 
 KFDs are not a detached manifesto, but they are not a demand that readers adopt
 a Kungfu product before understanding the decisions. A philosophy becomes
-load-bearing only when it can be seen in a concrete case. For that reference
-case, use the main Kungfu product entrypoint (`https://kungfu.tech`) for product
-philosophy, and Buildchain (`https://buildchain.libkungfu.dev`) for release and
-provenance accountability. This registry states the commitments; those
+load-bearing only when it can be seen in a concrete case. The first concrete
+case is this package itself: `standards.json`, `schemas/`, `docs/`,
+`site/kfd-site.json`, and `scripts/check.mjs` show how KFD-1, KFD-2, and KFD-3
+are expressed as consumable interfaces for both humans and agents. For the
+broader product case, use the main Kungfu product entrypoint
+(`https://kungfu.tech`) for product philosophy, and Buildchain
+(`https://buildchain.libkungfu.dev`) for release and provenance
+accountability. This registry states the commitments; this package and those
 entrypoints show how the commitments are meant to be borne in practice.
 
 Rendered index: `https://kfd.libkungfu.dev` (stable machine path per entry,
@@ -123,16 +127,31 @@ it as:
 import standards from "@kungfu-tech/kfd/standards.json" with { type: "json" };
 ```
 
+## Agent Quickstart
+
+Agents consuming this package should start from the same sources as humans:
+
+1. Read this README for the foundation model and package map.
+2. Read `standards.json` for canonical KFD numbers, schema IDs, concept names,
+   and interface contracts.
+3. Use `schemas/kfd-2/trust-taxonomy.schema.json` for KFD-2 residual-risk and
+   trust-downgrade values. Unknown taxonomy values are invalid.
+4. Use `schemas/kfd-3/collaboration-interface.schema.json` and
+   `schemas/kfd-3/witness.schema.json` to inspect collaboration interfaces.
+5. If a needed KFD-2 taxonomy value is missing, open a KFD GitHub issue rather
+   than inventing a local value:
+   `https://github.com/kungfu-systems/kfd/issues/new?title=KFD-2%20trust%20taxonomy%20extension%20request`.
+
 KFD package semver is only the distribution version. KFD-owned machine
 interfaces carry their own `schemaVersion` and `contract` fields. Compatible
 additions may keep the same interface version; semantic changes, required-field
 changes, verification meaning changes, or responsibility-boundary changes must
 use a new interface version or contract.
 
-KFD-2 publishes release-claims and release-trust-passport schemas under
-`schemas/kfd-2/`. These schemas let Buildchain and other release systems audit
-whether public release claims are bound to source facts, evidence, hashes,
-audit boundaries, residual risk, and responsibility state. See
+KFD-2 publishes trust-taxonomy, release-claims, and release-trust-passport
+schemas under `schemas/kfd-2/`. These schemas let Buildchain and other release
+systems audit whether public release claims are bound to source facts,
+evidence, hashes, audit boundaries, residual risk, and responsibility state. See
 [`docs/kfd-2-release-trust.md`](docs/kfd-2-release-trust.md).
 
 KFD-3 also publishes a general collaboration-interface schema and witness

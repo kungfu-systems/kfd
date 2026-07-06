@@ -36,6 +36,7 @@ const schemaSurfaces = [
   "schemas/kfd-standards.schema.json",
   "schemas/kfd-1/contract-world.schema.json",
   "schemas/kfd-1/witness.schema.json",
+  "schemas/kfd-2/trust-taxonomy.schema.json",
   "schemas/kfd-2/release-claims.schema.json",
   "schemas/kfd-2/release-trust-passport.schema.json",
   "schemas/kfd-3/collaboration-interface.schema.json",
@@ -110,7 +111,11 @@ const responsibility = {
 const residualRisk = [
   {
     id: "human-language-interpretation",
-    kind: "semantic-risk",
+    definedBy: "https://kfd.libkungfu.dev/schemas/kfd-2/trust-taxonomy.schema.json#/$defs/residualRisk",
+    riskType: "natural-language-semantic-risk",
+    trustImpact: "downgrade-warning",
+    machineProvability: "not-exhaustively-enumerable",
+    agentAction: "semantic-review-required",
     reason: "Natural-language standard interpretation is inspectable and reviewable but not exhaustively enumerable from package bytes.",
     owner: "KFD maintainers",
   },
@@ -208,6 +213,7 @@ const artifact = {
     name: "kfd self-verification",
     command: "node scripts/check.mjs",
   },
+  residualRisk,
   result: "pass",
 };
 

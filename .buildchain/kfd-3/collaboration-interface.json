@@ -266,6 +266,19 @@
       "choice": "Change KFD through PR review, node scripts/check.mjs, and Buildchain release gates."
     }
   ],
+  "extensionRequests": [
+    {
+      "id": "kfd-2-trust-taxonomy-extension",
+      "participants": ["agent-reader", "maintainer", "release-system", "package-consumer"],
+      "trigger": "A human or agent needs a residual-risk, trust-impact, machine-provability, agent-action, or downgrade-reason value that is not present in schemas/kfd-2/trust-taxonomy.schema.json.",
+      "requestPath": {
+        "kind": "github-issue",
+        "target": "https://github.com/kungfu-systems/kfd/issues/new?title=KFD-2%20trust%20taxonomy%20extension%20request",
+        "template": "State the missing value, the taxonomy field, the product or release scenario, and why existing KFD-2 values cannot express the case."
+      },
+      "expectedOutcome": "KFD maintainers either add the value to the KFD-2 trust taxonomy schema or explain which existing value should be used."
+    }
+  ],
   "closure": {
     "classificationMode": "closed-world",
     "unclassifiedEntrypointsPolicy": "fail",
