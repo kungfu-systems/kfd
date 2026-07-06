@@ -1,0 +1,287 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd-3-collaboration-interface",
+  "standard": "kfd-3",
+  "product": {
+    "name": "KFD",
+    "version": "v1.0",
+    "repository": "kungfu-systems/kfd"
+  },
+  "sourceRegistry": {
+    "path": "registry.json"
+  },
+  "participants": [
+    {
+      "id": "human-reader",
+      "kind": "human",
+      "description": "A person reading KFD decisions, philosophy, and release evidence."
+    },
+    {
+      "id": "agent-reader",
+      "kind": "agent",
+      "description": "An agent consuming KFD registry, standards metadata, schemas, and package exports."
+    },
+    {
+      "id": "maintainer",
+      "kind": "maintainer",
+      "description": "A human or agent maintaining KFD decisions, metadata, package surfaces, and release evidence."
+    },
+    {
+      "id": "package-consumer",
+      "kind": "api-consumer",
+      "description": "A downstream repository consuming the @kungfu-tech/kfd package."
+    },
+    {
+      "id": "site-consumer",
+      "kind": "service-integrator",
+      "description": "A site repository consuming KFD's site bundle, registry, standards metadata, and decision text."
+    },
+    {
+      "id": "release-system",
+      "kind": "service-integrator",
+      "description": "A release system consuming KFD witnesses, impact ledgers, and release propagation contracts."
+    }
+  ],
+  "minimalEntrypoints": [
+    {
+      "id": "readme",
+      "surface": "README.md",
+      "participants": ["human-reader", "agent-reader"],
+      "purpose": "Start from the KFD worldview and current decision set."
+    },
+    {
+      "id": "docs-map",
+      "surface": "docs/MAP.md",
+      "participants": ["human-reader", "agent-reader", "maintainer"],
+      "purpose": "Route readers and agents to the right KFD document or machine surface."
+    },
+    {
+      "id": "registry",
+      "surface": "registry.json",
+      "participants": ["agent-reader", "package-consumer", "site-consumer"],
+      "purpose": "Consume the authoritative decision index."
+    },
+    {
+      "id": "standards",
+      "surface": "standards.json",
+      "participants": ["agent-reader", "package-consumer", "release-system"],
+      "purpose": "Discover KFD schema IDs, schema paths, concepts, and interface contracts."
+    },
+    {
+      "id": "package-exports",
+      "surface": "package.json#exports",
+      "participants": ["package-consumer", "agent-reader"],
+      "purpose": "Consume the shipped npm package surfaces."
+    },
+    {
+      "id": "release-anchor",
+      "surface": "kfd.release.json",
+      "participants": ["release-system", "agent-reader"],
+      "purpose": "Inspect the explicit KFD package version anchor for the current Buildchain release line."
+    },
+    {
+      "id": "kfd-2-public-release-trust-claim",
+      "surface": ".buildchain/kfd-2/public-release-trust.claim.json",
+      "participants": ["release-system", "agent-reader", "package-consumer"],
+      "purpose": "Inspect the explicit public KFD-2 claim passed into Buildchain release passport generation."
+    },
+    {
+      "id": "site-bundle",
+      "surface": "site/kfd-site.json",
+      "participants": ["site-consumer", "agent-reader"],
+      "purpose": "Render KFD-owned site text and decision pages without duplicating extraction logic."
+    }
+  ],
+  "surfaces": [
+    {
+      "id": "readme",
+      "kind": "markdown-doc",
+      "participants": ["human-reader", "agent-reader"],
+      "value": "KFD's public worldview entrypoint and site homepage text source.",
+      "discoverability": { "fromMinimalEntrypoint": true, "path": "README.md" },
+      "maturity": "stable"
+    },
+    {
+      "id": "docs-map",
+      "kind": "markdown-doc",
+      "participants": ["human-reader", "agent-reader", "maintainer"],
+      "value": "Document map for routing questions to KFD decisions and machine surfaces.",
+      "discoverability": { "fromMinimalEntrypoint": true, "path": "docs/MAP.md" },
+      "maturity": "stable"
+    },
+    {
+      "id": "decision-texts",
+      "kind": "markdown-doc",
+      "participants": ["human-reader", "agent-reader", "maintainer"],
+      "value": "Append-only authoritative KFD decision texts.",
+      "discoverability": { "fromMinimalEntrypoint": true, "path": "decisions/*.md" },
+      "maturity": "stable"
+    },
+    {
+      "id": "registry-json",
+      "kind": "json-api",
+      "participants": ["agent-reader", "package-consumer", "site-consumer"],
+      "value": "Authoritative machine-readable KFD decision index.",
+      "discoverability": { "fromMinimalEntrypoint": true, "path": "registry.json" },
+      "maturity": "stable"
+    },
+    {
+      "id": "standards-json",
+      "kind": "json-api",
+      "participants": ["agent-reader", "package-consumer", "release-system"],
+      "value": "Machine-readable KFD standards metadata and schema/interface registry.",
+      "discoverability": { "fromMinimalEntrypoint": true, "path": "standards.json" },
+      "maturity": "stable"
+    },
+    {
+      "id": "schemas",
+      "kind": "json-api",
+      "participants": ["agent-reader", "package-consumer", "release-system"],
+      "value": "KFD-owned JSON schemas for standards metadata and KFD-1/2/3 interfaces.",
+      "discoverability": { "fromMinimalEntrypoint": true, "path": "schemas/**/*.json" },
+      "maturity": "stable"
+    },
+    {
+      "id": "package-exports",
+      "kind": "package",
+      "participants": ["package-consumer", "agent-reader"],
+      "value": "The npm package export map for KFD registry, standards, decisions, docs, schemas, and witnesses.",
+      "discoverability": { "fromMinimalEntrypoint": true, "path": "package.json#exports" },
+      "maturity": "stable"
+    },
+    {
+      "id": "site-bundle-json",
+      "kind": "json-api",
+      "participants": ["site-consumer", "agent-reader"],
+      "value": "KFD-owned content projection consumed by the public site renderer.",
+      "discoverability": { "fromMinimalEntrypoint": true, "path": "site/kfd-site.json" },
+      "maturity": "stable"
+    },
+    {
+      "id": "release-impact-json",
+      "kind": "json-api",
+      "participants": ["release-system", "maintainer", "agent-reader"],
+      "value": "Release impact declaration consumed by Buildchain release passports.",
+      "discoverability": { "fromMinimalEntrypoint": true, "path": "release-impact.json" },
+      "maturity": "stable"
+    },
+    {
+      "id": "release-anchor-json",
+      "kind": "json-api",
+      "participants": ["release-system", "agent-reader", "maintainer"],
+      "value": "Anchored/manual release manifest that declares the exact npm version as a release fact.",
+      "discoverability": { "fromMinimalEntrypoint": true, "path": "kfd.release.json" },
+      "maturity": "stable"
+    },
+    {
+      "id": "release-propagation-json",
+      "kind": "json-api",
+      "participants": ["release-system", "site-consumer"],
+      "value": "Release propagation graph from KFD to downstream site surfaces.",
+      "discoverability": { "fromMinimalEntrypoint": true, "path": "buildchain.release-propagation.json" },
+      "maturity": "stable"
+    },
+    {
+      "id": "kfd-1-witness",
+      "kind": "json-api",
+      "participants": ["release-system", "maintainer", "agent-reader"],
+      "value": "KFD-1 contract-world witness for source-to-artifact drift checks.",
+      "discoverability": { "fromMinimalEntrypoint": true, "path": ".buildchain/kfd-1/contract-world.witness.json" },
+      "maturity": "stable"
+    },
+    {
+      "id": "kfd-2-public-release-trust-claim",
+      "kind": "json-api",
+      "participants": ["release-system", "maintainer", "agent-reader", "package-consumer"],
+      "value": "Explicit public KFD-2 claim that binds KFD package release trust to declared source facts, machine evidence, artifacts, verification, responsibility, and residual risk.",
+      "discoverability": { "fromMinimalEntrypoint": true, "path": ".buildchain/kfd-2/public-release-trust.claim.json" },
+      "maturity": "stable"
+    },
+    {
+      "id": "kfd-3-self-witnesses",
+      "kind": "json-api",
+      "participants": ["release-system", "maintainer", "agent-reader"],
+      "value": "KFD-3 self collaboration-interface witnesses for pre-build and artifact-side closure checks.",
+      "discoverability": { "fromMinimalEntrypoint": true, "path": ".buildchain/kfd-3/*.json" },
+      "maturity": "stable"
+    },
+    {
+      "id": "release-workflows",
+      "kind": "config",
+      "participants": ["release-system", "maintainer"],
+      "value": "GitHub Actions workflows that invoke Buildchain verification, promotion, and propagation.",
+      "discoverability": { "fromMinimalEntrypoint": true, "path": ".github/workflows/*.yml" },
+      "maturity": "stable"
+    }
+  ],
+  "transparentConstraints": [
+    {
+      "id": "append-only-decisions",
+      "surface": "decisions/*.md",
+      "constraint": "Substantive semantic changes supersede older KFD numbers instead of rewriting them.",
+      "reason": "Decision history must remain inspectable by humans and agents.",
+      "review": "CONTRIBUTING.md and node scripts/check.mjs"
+    },
+    {
+      "id": "kfd-site-boundary",
+      "surface": "site/kfd-site.json",
+      "constraint": "KFD owns homepage text, decision text, registry, and standards metadata; the site owns rendering style and layout.",
+      "reason": "Text remains a single fact source while the site stays free to render it.",
+      "review": "site/kfd-site.json renderingBoundary"
+    },
+    {
+      "id": "package-export-boundary",
+      "surface": "package.json#exports",
+      "constraint": "Public package surfaces must be explicitly exported and verified.",
+      "reason": "Agents and downstream repositories should not rely on hidden package internals.",
+      "review": "node scripts/check.mjs"
+    },
+    {
+      "id": "standard-not-runtime",
+      "surface": "README.md",
+      "constraint": "KFD provides decisions, standards metadata, schemas, and witnesses; it does not provide the Kungfu runtime, GUI, or CLI.",
+      "reason": "KFD should remain a standard/decision package, not a product runtime.",
+      "review": "docs/MAP.md"
+    }
+  ],
+  "choicePaths": [
+    {
+      "id": "read-human-docs",
+      "participants": ["human-reader"],
+      "choice": "Read README.md, docs/MAP.md, and decisions/*.md directly."
+    },
+    {
+      "id": "consume-machine-metadata",
+      "participants": ["agent-reader", "package-consumer", "release-system"],
+      "choice": "Consume registry.json, standards.json, schemas, and package exports."
+    },
+    {
+      "id": "render-site",
+      "participants": ["site-consumer"],
+      "choice": "Consume site/kfd-site.json and own rendering/style decisions downstream."
+    },
+    {
+      "id": "maintain-through-pr",
+      "participants": ["maintainer"],
+      "choice": "Change KFD through PR review, node scripts/check.mjs, and Buildchain release gates."
+    }
+  ],
+  "extensionRequests": [
+    {
+      "id": "kfd-2-trust-taxonomy-extension",
+      "participants": ["agent-reader", "maintainer", "release-system", "package-consumer"],
+      "trigger": "A human or agent needs a residual-risk, trust-impact, machine-provability, agent-action, or downgrade-reason value that is not present in schemas/kfd-2/trust-taxonomy.schema.json.",
+      "requestPath": {
+        "kind": "github-issue",
+        "target": "https://github.com/kungfu-systems/kfd/issues/new?title=KFD-2%20trust%20taxonomy%20extension%20request",
+        "template": "State the missing value, the taxonomy field, the product or release scenario, and why existing KFD-2 values cannot express the case."
+      },
+      "expectedOutcome": "KFD maintainers either add the value to the KFD-2 trust taxonomy schema or explain which existing value should be used."
+    }
+  ],
+  "closure": {
+    "classificationMode": "closed-world",
+    "unclassifiedEntrypointsPolicy": "fail",
+    "reachableSurfaceSource": "This file plus package.json#exports, docs/MAP.md, registry.json, standards.json, and Buildchain witness files."
+  }
+}

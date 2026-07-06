@@ -168,17 +168,17 @@
     {
       "name": "release-impact-ledger",
       "sourcePath": "release-impact.json",
-      "sourceSha256": "d54e9a34dfe8743ba3460eea9737ae000b84910e62f4758b92f830d0faa817a6",
+      "sourceSha256": "b083b3e8f92ac1c0819ef12a47cd2d9b2fc99f45a013b685cc75b95a25d00c04",
       "artifactPath": "release-impact.json",
-      "expectedSha256": "d54e9a34dfe8743ba3460eea9737ae000b84910e62f4758b92f830d0faa817a6",
+      "expectedSha256": "b083b3e8f92ac1c0819ef12a47cd2d9b2fc99f45a013b685cc75b95a25d00c04",
       "byteForByte": true
     },
     {
       "name": "kfd-check-gate",
       "sourcePath": "scripts/check.mjs",
-      "sourceSha256": "2a9931df6f3d284374be37127940fb85dcee3e58947a2cf2a5e432df217a8700",
+      "sourceSha256": "710b1e5e137e2306138b6137305802a36474a3e96ac75b5a3168da2087fe9e94",
       "artifactPath": "scripts/check.mjs",
-      "expectedSha256": "2a9931df6f3d284374be37127940fb85dcee3e58947a2cf2a5e432df217a8700",
+      "expectedSha256": "710b1e5e137e2306138b6137305802a36474a3e96ac75b5a3168da2087fe9e94",
       "byteForByte": true
     },
     {
@@ -192,17 +192,17 @@
     {
       "name": "buildchain-build-workflow",
       "sourcePath": ".github/workflows/build.yml",
-      "sourceSha256": "a3e3f935897f16af86f468c8ee0a4500e2d68828e62411df88684087c65a73ad",
+      "sourceSha256": "d5010fb981df6bd74feb53f1cad27220a32a320c262eaecbfb6c5a585b4fe07e",
       "artifactPath": ".github/workflows/build.yml",
-      "expectedSha256": "a3e3f935897f16af86f468c8ee0a4500e2d68828e62411df88684087c65a73ad",
+      "expectedSha256": "d5010fb981df6bd74feb53f1cad27220a32a320c262eaecbfb6c5a585b4fe07e",
       "byteForByte": true
     },
     {
       "name": "buildchain-ref-promotion-workflow",
       "sourcePath": ".github/workflows/buildchain-ref-promotion.yml",
-      "sourceSha256": "f947f5ab19a856914ea03fb094580c9c7cf4b63d6690b88240b7558b40778e2e",
+      "sourceSha256": "046ce8fd237b34548b9479367066503829cd0e1927403efe0776c5c5fc4b227c",
       "artifactPath": ".github/workflows/buildchain-ref-promotion.yml",
-      "expectedSha256": "f947f5ab19a856914ea03fb094580c9c7cf4b63d6690b88240b7558b40778e2e",
+      "expectedSha256": "046ce8fd237b34548b9479367066503829cd0e1927403efe0776c5c5fc4b227c",
       "byteForByte": true
     },
     {
@@ -219,6 +219,30 @@
       "sourceSha256": "448f4b6b8263399005a9866cee7906f5334cf5e3daea7d13c70768e586576947",
       "artifactPath": ".github/workflows/verify.yml",
       "expectedSha256": "448f4b6b8263399005a9866cee7906f5334cf5e3daea7d13c70768e586576947",
+      "byteForByte": true
+    },
+    {
+      "name": "kfd-package-manifest",
+      "sourcePath": "package.json",
+      "sourceSha256": "60dad27afe2d609287718e72d3a7c4bbca2d393db3c4d615233a6ab622aaa002",
+      "artifactPath": "package.json",
+      "expectedSha256": "60dad27afe2d609287718e72d3a7c4bbca2d393db3c4d615233a6ab622aaa002",
+      "byteForByte": true
+    },
+    {
+      "name": "kfd-release-anchor",
+      "sourcePath": "kfd.release.json",
+      "sourceSha256": "d700e2011da213bb8ea7e2fa44c98163c52cd0843144b5744f4bf959c5b99c53",
+      "artifactPath": "kfd.release.json",
+      "expectedSha256": "d700e2011da213bb8ea7e2fa44c98163c52cd0843144b5744f4bf959c5b99c53",
+      "byteForByte": true
+    },
+    {
+      "name": "kfd-2-public-release-trust-claim",
+      "sourcePath": ".buildchain/kfd-2/public-release-trust.claim.json",
+      "sourceSha256": "aee541570bb26760ecce9f54af932832ab111c85a4ae9df9a367a81748431b63",
+      "artifactPath": ".buildchain/kfd-2/public-release-trust.claim.json",
+      "expectedSha256": "aee541570bb26760ecce9f54af932832ab111c85a4ae9df9a367a81748431b63",
       "byteForByte": true
     }
   ]

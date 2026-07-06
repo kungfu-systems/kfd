@@ -6,8 +6,9 @@ name = "@kungfu-tech/kfd"
 
 [version]
 required = true
-strategy = "semver"
-next = "auto"
+strategy = "anchored"
+next = "manual"
+manifest = "kfd.release.json"
 
 [[version.files]]
 type = "json"
@@ -17,11 +18,14 @@ key = "version"
 [publish]
 mode = "publish-final-version"
 auth = "trusted-publishing"
-package_set_order = "as-provided"
+package_set_order = "platforms-first-main-last"
 main_package = "@kungfu-tech/kfd"
 
 [lifecycle.install]
 command = "node -e \"console.log('kfd install: no dependencies')\""
+
+[lifecycle.build]
+command = "node -e \"console.log('kfd build: source package')\""
 
 [lifecycle.verify]
 command = "node scripts/check.mjs"
