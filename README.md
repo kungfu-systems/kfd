@@ -20,6 +20,7 @@ e.g. `https://kfd.libkungfu.dev/1`). This repository publishes
 |---|---|---|---|
 | [KFD-1](decisions/kfd-0001-release-versioning.md) | procedure | Release versioning: welded-surface registers decide patch, minor, and major | active |
 | [KFD-2](decisions/kfd-0002-fact-first-product-accountability.md) | principle | Fact-first product accountability: responsibility should be the path of least resistance | active |
+| [KFD-3](decisions/kfd-0003-non-coercive-intelligence.md) | principle | Non-coercive intelligence: transparent value should guide intelligent participants | active |
 
 ## How to cite
 
