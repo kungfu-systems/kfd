@@ -1,0 +1,420 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd-3-witness",
+  "id": "kfd-repository",
+  "standard": "kfd-3",
+  "collaborationInterface": {
+    "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-3/collaboration-interface.schema.json",
+    "digest": "sha256:838fb80ced2ceebb51c3582aca77508f42b206698e0e800b00ca606b1640c0ae"
+  },
+  "sourceRegistry": {
+    "id": "kfd-collaboration-interface",
+    "path": ".buildchain/kfd-3/collaboration-interface.json",
+    "sha256": "838fb80ced2ceebb51c3582aca77508f42b206698e0e800b00ca606b1640c0ae"
+  },
+  "artifact": {
+    "name": "@kungfu-tech/kfd",
+    "path": "npm:@kungfu-tech/kfd",
+    "digest": "sha256:838fb80ced2ceebb51c3582aca77508f42b206698e0e800b00ca606b1640c0ae"
+  },
+  "surfaces": [
+    {
+      "id": "readme",
+      "name": "readme",
+      "kind": "markdown-doc",
+      "participantProfile": "human-reader,agent-reader",
+      "availability": "stable",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": "README.md"
+    },
+    {
+      "id": "docs-map",
+      "name": "docs-map",
+      "kind": "markdown-doc",
+      "participantProfile": "human-reader,agent-reader,maintainer",
+      "availability": "stable",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": "docs/MAP.md"
+    },
+    {
+      "id": "decision-texts",
+      "name": "decision-texts",
+      "kind": "markdown-doc",
+      "participantProfile": "human-reader,agent-reader,maintainer",
+      "availability": "stable",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": "decisions/*.md"
+    },
+    {
+      "id": "registry-json",
+      "name": "registry-json",
+      "kind": "json-api",
+      "participantProfile": "agent-reader,package-consumer,site-consumer",
+      "availability": "stable",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": "registry.json"
+    },
+    {
+      "id": "standards-json",
+      "name": "standards-json",
+      "kind": "json-api",
+      "participantProfile": "agent-reader,package-consumer,release-system",
+      "availability": "stable",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": "standards.json"
+    },
+    {
+      "id": "schemas",
+      "name": "schemas",
+      "kind": "json-api",
+      "participantProfile": "agent-reader,package-consumer,release-system",
+      "availability": "stable",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": "schemas/**/*.json"
+    },
+    {
+      "id": "package-exports",
+      "name": "package-exports",
+      "kind": "package",
+      "participantProfile": "package-consumer,agent-reader",
+      "availability": "stable",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": "package.json#exports"
+    },
+    {
+      "id": "site-bundle-json",
+      "name": "site-bundle-json",
+      "kind": "json-api",
+      "participantProfile": "site-consumer,agent-reader",
+      "availability": "stable",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": "site/kfd-site.json"
+    },
+    {
+      "id": "release-impact-json",
+      "name": "release-impact-json",
+      "kind": "json-api",
+      "participantProfile": "release-system,maintainer,agent-reader",
+      "availability": "stable",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": "release-impact.json"
+    },
+    {
+      "id": "release-propagation-json",
+      "name": "release-propagation-json",
+      "kind": "json-api",
+      "participantProfile": "release-system,site-consumer",
+      "availability": "stable",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": "buildchain.release-propagation.json"
+    },
+    {
+      "id": "kfd-1-witness",
+      "name": "kfd-1-witness",
+      "kind": "json-api",
+      "participantProfile": "release-system,maintainer,agent-reader",
+      "availability": "stable",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": ".buildchain/kfd-1/contract-world.witness.json"
+    },
+    {
+      "id": "kfd-3-self-witnesses",
+      "name": "kfd-3-self-witnesses",
+      "kind": "json-api",
+      "participantProfile": "release-system,maintainer,agent-reader",
+      "availability": "stable",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": ".buildchain/kfd-3/*.json"
+    },
+    {
+      "id": "release-workflows",
+      "name": "release-workflows",
+      "kind": "config",
+      "participantProfile": "release-system,maintainer",
+      "availability": "stable",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": ".github/workflows/*.yml"
+    }
+  ],
+  "docs": [
+    {
+      "id": "doc:readme",
+      "sourcePath": "README.md",
+      "sha256": "f158b84881e44f32758b3ff0cc165f478bc1ab6596ad16fe941caeb51573a536"
+    },
+    {
+      "id": "doc:docs-map",
+      "sourcePath": "docs/MAP.md",
+      "sha256": "8d4d498a737aa7e3cf490653bcd1d13bc32dc057b3d322ff4a84b25f31aae47b"
+    },
+    {
+      "id": "doc:kfd-2-release-trust",
+      "sourcePath": "docs/kfd-2-release-trust.md",
+      "sha256": "90326ac403339d73cb4d3bf8a0d2e6ca33ff0988809bbc71c163cb459861ad5c"
+    },
+    {
+      "id": "doc:kfd-3-collaboration-interface",
+      "sourcePath": "docs/kfd-3-collaboration-interface.md",
+      "sha256": "63263cf25cca617ec51595b3f46ac2af541794449cfd34b3042ff657dcd7838a"
+    },
+    {
+      "id": "decision:kfd-1",
+      "sourcePath": "decisions/kfd-1.md",
+      "sha256": "2ef7438b0737009d36da248d2ecec5f788d46a93b184efadf5e2e31ca20254f0"
+    },
+    {
+      "id": "decision:kfd-2",
+      "sourcePath": "decisions/kfd-2.md",
+      "sha256": "b8be7b7526dcec9ea501998056c55f546492abc4eb63484a9bb8856eb434b710"
+    },
+    {
+      "id": "decision:kfd-3",
+      "sourcePath": "decisions/kfd-3.md",
+      "sha256": "e329bef41ab5cb689346333df317b39918ea1016424a872e438eea8090070b96"
+    }
+  ],
+  "schemas": [
+    {
+      "id": "schema:kfd-standards",
+      "sourcePath": "schemas/kfd-standards.schema.json",
+      "sha256": "2ecc7049d13463700f143f4e8c40488d6587484c94d26e827c239eeedc892336"
+    },
+    {
+      "id": "schema:kfd-1:contract-world",
+      "sourcePath": "schemas/kfd-1/contract-world.schema.json",
+      "sha256": "6be00cca75c80bf96429eb62336989d8931ea380d86388fcb8b834dcf8d3c13b"
+    },
+    {
+      "id": "schema:kfd-1:witness",
+      "sourcePath": "schemas/kfd-1/witness.schema.json",
+      "sha256": "50104a2962cb75cc1da634fa65553e993f87d8fb9b3c237f0609a2208ad4c1f3"
+    },
+    {
+      "id": "schema:kfd-2:release-claims",
+      "sourcePath": "schemas/kfd-2/release-claims.schema.json",
+      "sha256": "cf90ef7d0a7c2abc33af0d97d793b7e9c3ed96335da0b79a082523139282963e"
+    },
+    {
+      "id": "schema:kfd-2:release-trust-passport",
+      "sourcePath": "schemas/kfd-2/release-trust-passport.schema.json",
+      "sha256": "92bdd34c0575d18240d1c8be12e86034209f54819048ead9617e7aa2e539aaef"
+    },
+    {
+      "id": "schema:kfd-3:collaboration-interface",
+      "sourcePath": "schemas/kfd-3/collaboration-interface.schema.json",
+      "sha256": "03e8d54c08f26bf8aff570995142684b04f0c97578c5fb58d29bc9f1559206d6"
+    },
+    {
+      "id": "schema:kfd-3:witness",
+      "sourcePath": "schemas/kfd-3/witness.schema.json",
+      "sha256": "cb80768ab8a4f90f86d256555b1995ddb516371ccbe291a8c28581fa371ccd10"
+    }
+  ],
+  "standardsMetadata": [
+    {
+      "id": "metadata:registry",
+      "sourcePath": "registry.json",
+      "sha256": "b83cfadeb726e18f96ec4f7451c66091892f4964420dd81939d1120108991c38"
+    },
+    {
+      "id": "metadata:standards",
+      "sourcePath": "standards.json",
+      "sha256": "394139c8915426e81eee7f7ea9f3d8209eb0e2b566ddadfccbddea2a3563585d"
+    },
+    {
+      "id": "metadata:release-impact",
+      "sourcePath": "release-impact.json",
+      "sha256": "fd4e98a262aad5e219a9154e48d4cd9fecc408b15c12304959313bfd53d966f4"
+    }
+  ],
+  "packageExports": [
+    {
+      "id": "export:package-json",
+      "sourcePath": "package.json#exports",
+      "sha256": "6e36c25bcc1ad7be6886fa6b6fe53bd17a84612d764f6bafca62ecca549ff7c9"
+    },
+    {
+      "id": "export:npm-files",
+      "sourcePath": "package.json#files",
+      "sha256": "6e36c25bcc1ad7be6886fa6b6fe53bd17a84612d764f6bafca62ecca549ff7c9"
+    }
+  ],
+  "siteConsumptionContracts": [
+    {
+      "id": "site:kfd-site-bundle",
+      "sourcePath": "site/kfd-site.json",
+      "sha256": "16526aba11d87762fea41a19dd7bccd7e02a03b842144fda494c14fd1f6c565d"
+    },
+    {
+      "id": "site:release-propagation",
+      "sourcePath": "buildchain.release-propagation.json",
+      "sha256": "71f9b54b9e76111178635804615fb0b4600f3131a7871b7c7817395b708c6fb3"
+    }
+  ],
+  "evidence": {
+    "minimalEntrypoints": [
+      {
+        "path": "README.md",
+        "sha256": "f158b84881e44f32758b3ff0cc165f478bc1ab6596ad16fe941caeb51573a536",
+        "description": "Start from the KFD worldview and current decision set."
+      },
+      {
+        "path": "docs/MAP.md",
+        "sha256": "8d4d498a737aa7e3cf490653bcd1d13bc32dc057b3d322ff4a84b25f31aae47b",
+        "description": "Route readers and agents to the right KFD document or machine surface."
+      },
+      {
+        "path": "registry.json",
+        "sha256": "b83cfadeb726e18f96ec4f7451c66091892f4964420dd81939d1120108991c38",
+        "description": "Consume the authoritative decision index."
+      },
+      {
+        "path": "standards.json",
+        "sha256": "394139c8915426e81eee7f7ea9f3d8209eb0e2b566ddadfccbddea2a3563585d",
+        "description": "Discover KFD schema IDs, schema paths, concepts, and interface contracts."
+      },
+      {
+        "path": "package.json#exports",
+        "sha256": "6e36c25bcc1ad7be6886fa6b6fe53bd17a84612d764f6bafca62ecca549ff7c9",
+        "description": "Consume the shipped npm package surfaces."
+      },
+      {
+        "path": "site/kfd-site.json",
+        "sha256": "16526aba11d87762fea41a19dd7bccd7e02a03b842144fda494c14fd1f6c565d",
+        "description": "Render KFD-owned site text and decision pages without duplicating extraction logic."
+      }
+    ],
+    "discoverability": [
+      {
+        "path": "README.md",
+        "sha256": "f158b84881e44f32758b3ff0cc165f478bc1ab6596ad16fe941caeb51573a536",
+        "description": "Human and agent entrypoint"
+      },
+      {
+        "path": "docs/MAP.md",
+        "sha256": "8d4d498a737aa7e3cf490653bcd1d13bc32dc057b3d322ff4a84b25f31aae47b",
+        "description": "Documentation routing entrypoint"
+      },
+      {
+        "path": "registry.json",
+        "sha256": "b83cfadeb726e18f96ec4f7451c66091892f4964420dd81939d1120108991c38",
+        "description": "Machine-readable decision index"
+      },
+      {
+        "path": "standards.json",
+        "sha256": "394139c8915426e81eee7f7ea9f3d8209eb0e2b566ddadfccbddea2a3563585d",
+        "description": "Machine-readable standards metadata"
+      },
+      {
+        "path": "package.json",
+        "sha256": "6e36c25bcc1ad7be6886fa6b6fe53bd17a84612d764f6bafca62ecca549ff7c9",
+        "description": "Package export map"
+      },
+      {
+        "path": "site/kfd-site.json",
+        "sha256": "16526aba11d87762fea41a19dd7bccd7e02a03b842144fda494c14fd1f6c565d",
+        "description": "Site content projection"
+      }
+    ],
+    "transparentConstraints": [
+      {
+        "path": "CONTRIBUTING.md",
+        "sha256": "188f752e89f3af4855e92b8c3dc379e41f1e326611ccaf8851977ee04c639606",
+        "description": "Append-only decision and contribution constraints"
+      },
+      {
+        "path": "scripts/check.mjs",
+        "sha256": "533adc073d009611b55eae980e14ba54cd91a8d48f03faf2e1b7612ed7f972dc",
+        "description": "Repository self-verification gate"
+      },
+      {
+        "path": "site/kfd-site.json",
+        "sha256": "16526aba11d87762fea41a19dd7bccd7e02a03b842144fda494c14fd1f6c565d",
+        "description": "Site rendering boundary"
+      }
+    ],
+    "choicePaths": [
+      {
+        "path": "README.md",
+        "sha256": "f158b84881e44f32758b3ff0cc165f478bc1ab6596ad16fe941caeb51573a536",
+        "description": "Human reading path"
+      },
+      {
+        "path": "registry.json",
+        "sha256": "b83cfadeb726e18f96ec4f7451c66091892f4964420dd81939d1120108991c38",
+        "description": "Agent registry path"
+      },
+      {
+        "path": "standards.json",
+        "sha256": "394139c8915426e81eee7f7ea9f3d8209eb0e2b566ddadfccbddea2a3563585d",
+        "description": "Agent standards metadata path"
+      },
+      {
+        "path": "package.json",
+        "sha256": "6e36c25bcc1ad7be6886fa6b6fe53bd17a84612d764f6bafca62ecca549ff7c9",
+        "description": "Package consumption path"
+      }
+    ],
+    "manuals": [
+      {
+        "path": "docs/MAP.md",
+        "sha256": "8d4d498a737aa7e3cf490653bcd1d13bc32dc057b3d322ff4a84b25f31aae47b"
+      },
+      {
+        "path": "docs/kfd-3-collaboration-interface.md",
+        "sha256": "63263cf25cca617ec51595b3f46ac2af541794449cfd34b3042ff657dcd7838a"
+      }
+    ]
+  },
+  "closure": {
+    "classificationMode": "closed-world",
+    "reachableEntrypoints": [
+      "readme",
+      "docs-map",
+      "registry",
+      "standards",
+      "package-exports",
+      "site-bundle"
+    ],
+    "classifiedEntrypoints": [
+      "readme",
+      "docs-map",
+      "registry",
+      "standards",
+      "package-exports",
+      "site-bundle"
+    ],
+    "unclassifiedEntrypoints": []
+  },
+  "verifier": {
+    "name": "kfd self-verification",
+    "command": "node scripts/check.mjs"
+  },
+  "result": "pass"
+}
