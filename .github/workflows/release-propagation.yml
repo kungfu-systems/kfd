@@ -109,10 +109,10 @@ jobs:
       source-node: kfd
       downstream-target: site-libkungfu-dev
       downstream-repository: kungfu-systems/site-libkungfu-dev
-      downstream-base-ref: dev/v2/v2.7
+      downstream-base-ref: main
       downstream-branch: buildchain/release-propagation/kfd
       pr-title: "chore: consume KFD release"
-      pr-body: "Buildchain release propagation from @kungfu-tech/kfd."
+      pr-body: "Buildchain release propagation from @kungfu-tech/kfd into the kfd.libkungfu.dev site surface."
       dry-run: ${{ github.event_name == 'workflow_dispatch' && inputs.dry-run == 'true' }}
     secrets:
       propagation-token: ${{ secrets.KUNGFU_GITHUB_TOKEN }}
