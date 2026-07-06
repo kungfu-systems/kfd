@@ -12,6 +12,7 @@
 | What does a specific decision say? | [`../decisions/`](../decisions) (index: [`../registry.json`](../registry.json)) |
 | What machine metadata should Buildchain or another consumer import for KFD standard identity and schema IDs? | [`../standards.json`](../standards.json) |
 | What schema validates the standards metadata surface? | [`../schemas/kfd-standards.schema.json`](../schemas/kfd-standards.schema.json) |
+| What schema should release systems use for KFD-2 release claims and trust passports? | [`kfd-2-release-trust.md`](kfd-2-release-trust.md) |
 | How do I cite a decision? | [`../README.md`](../README.md) — cite by number, e.g. `KFD-1` |
 | How do decisions change over time? | [`../CONTRIBUTING.md`](../CONTRIBUTING.md) — append-only; explicit supersession mints a new number |
 | How is this package versioned and released? | [KFD-1](../decisions/kfd-1.md) applied to itself; Buildchain governs releases |

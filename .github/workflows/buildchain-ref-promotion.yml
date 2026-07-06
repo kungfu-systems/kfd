@@ -70,4 +70,5 @@ jobs:
       release-passport: true
       release-passport-product-name: KFD
       release-passport-impact-json: release-impact.json
+      release-passport-kfd-1-witness-jsons: .buildchain/kfd-1/contract-world.witness.json
       dry-run: ${{ github.event_name == 'workflow_dispatch' && inputs['dry-run'] == 'true' }}
