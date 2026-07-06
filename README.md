@@ -146,7 +146,9 @@ scripts/       conformance check: registry and documents must agree
 `node scripts/check.mjs` (also `pnpm run check`) verifies numbering
 uniqueness, registry/document agreement, status validity, and the release
 impact ledger required by Buildchain production release passports. Releases are
-governed by Buildchain; this package versions itself under KFD-1's own rules.
+governed by Buildchain; this package versions itself under KFD-1's own rules:
+the outer package line remains `v1.0`, while patch and prerelease numbers are
+advanced by Buildchain release promotion.
 
 ## Release impact ledger
 
@@ -160,7 +162,9 @@ release-passport-impact-json: release-impact.json
 For ordinary KFD content changes, keep `kfd-content` at `patch`. Move
 `kfd-registry-schema` or `kfd-package-structure` to `minor` or `major` only
 when those machine-consumed surfaces add or break fields, meanings, package
-paths, or published structure under KFD-1.
+paths, or published structure under KFD-1. These values are Buildchain release
+passport impact classifications; they do not by themselves open a new
+`@kungfu-tech/kfd` package major or minor line.
 
 ## License
 

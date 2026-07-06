@@ -1,0 +1,39 @@
+name: Build
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - dev/v*/v*.*
+      - alpha/v*/v*.*
+      - release/v*/v*.*
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  kfd:
+    uses: kungfu-systems/buildchain/.github/workflows/.build.yml@v2
+    secrets: inherit
+    with:
+      runner-preset: github-hosted
+      setup-node: true
+      node-version: "24"
+      require-install: true
+      require-build: false
+      require-verify: true
+      artifact-name: kfd
+      artifact-name-template: "{artifact}-{platform}-{shortSha}"
+      artifact-paths: |
+        README.md
+        decisions
+        docs
+        registry.json
+        site
+        package.json
+        release-impact.json
+      release-candidate: true
+      expected-artifacts-json: >-
+        {"minFiles":8,"requiredPaths":["README.md","registry.json","site/kfd-site.json","package.json","release-impact.json"]}

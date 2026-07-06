@@ -157,10 +157,12 @@ and does not drift invisibly.
 KFD documents are append-only. A KFD's number is immutable and is the
 content-layer coordinate; substantive semantic change is made by minting a new
 KFD that supersedes the old number (namespace welding applied to decisions).
-Consequently, in the `@kungfu-tech/kfd` package, content operations — new
-KFDs, status flips, editorial clarifications — are patches; only the machine
-surfaces of the package itself (the registry schema, the package structure)
-can move minor or major.
+Consequently, in the `@kungfu-tech/kfd` package, the outer package line stays
+fixed at `v1.0`. Content operations — new KFDs, status flips, editorial
+clarifications — are patches. Machine surfaces of the package itself (the
+registry schema, the package structure) can still require `minor` or `major`
+surface-impact review in the Buildchain release passport, but that review
+classification is not a silent package-line upgrade.
 
 ## Adopters
 
