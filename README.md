@@ -14,14 +14,14 @@ protects a principle.
 The first three KFDs form the public foundation for kungfu-systems:
 
 ```text
-KFD-1: contracts must not drift.
+KFD-1: facts must not drift.
 KFD-2: trust must start from facts.
-KFD-3: cooperation must start from transparent value, not coercion.
+KFD-3: cooperation must start from transparent value.
 ```
 
-Together they define the load-bearing path for Kungfu products: make contract
-worlds explicit, make important claims inspectable, and let humans and agents
-cooperate through visible value rather than hidden pressure.
+Together they define the load-bearing path for Kungfu products: make facts
+non-drifting, make trust inspectable from those facts, and let humans and
+agents cooperate through visible value rather than hidden pressure.
 
 ## Foundation model
 
@@ -31,22 +31,21 @@ act, delegate, and remember across many surfaces.
 
 | Layer | Decision | Reader question | Commitment |
 |---|---|---|---|
-| Fact-source ontology | KFD-1 | What can count as a fact? | A load-bearing fact must not drift: its contract world comes from one declared fact source. |
+| Fact-source ontology | KFD-1 | What can count as a fact? | Facts must not drift: a load-bearing contract world comes from one declared fact source. |
 | Participant-to-object trust | KFD-2 | When can a user or agent trust a claim, product, artifact, or control surface? | Trust starts from inspectable facts and responsibility state. |
 | Participant-to-participant cooperation | KFD-3 | How should peer intelligent participants cooperate? | Cooperation starts from transparent value, stable choice, and explainable constraints, not pressure. |
 
 In short:
 
 ```text
-stable facts -> trustworthy objects -> non-coercive cooperation
+non-drifting facts -> inspectable trust -> transparent cooperation
 ```
 
-This is why KFDs are not only internal governance text. KFD-1 is a procedure,
-but it gives the foundation model its first layer by making fact sources
-operational: a fact-bearing contract world must be declared, inspectable, and
-unable to drift invisibly. KFD-2 then defines how trust can stand on those
-facts. KFD-3 defines how humans and agents can cooperate once facts and trust
-are visible.
+This is why KFDs are not only internal governance text. KFD-1 gives the
+foundation model its first layer by making fact sources operational: a
+fact-bearing contract world must be declared, inspectable, and unable to drift
+invisibly. KFD-2 then defines how trust can stand on those facts. KFD-3
+defines how humans and agents can cooperate once facts and trust are visible.
 
 Real-world agent work turns ordinary work into a dense system of products,
 files, repositories, traces, policies, humans, and agents. In that world,
@@ -89,7 +88,7 @@ The first screen should be derived from this README:
 - Foundation signal: the `Foundation triad` section, especially the three
   one-line commitments.
 - First-screen explanation: the beginning of `Foundation model`, ending at the
-  `stable facts -> trustworthy objects -> non-coercive cooperation` chain.
+  `non-drifting facts -> inspectable trust -> transparent cooperation` chain.
 
 Decision cards, detail links, and machine paths should come from
 `registry.json`. The machine-readable site bundle lives at `site/kfd-site.json`
@@ -166,7 +165,7 @@ closed-world evidence shape. See
 
 | ID | Kind | Title | Status |
 |---|---|---|---|
-| [KFD-1](decisions/kfd-1.md) | procedure | Contracts must not drift: contract worlds need one fact source | active |
+| [KFD-1](decisions/kfd-1.md) | procedure | Facts must not drift: contract worlds need one fact source | active |
 | [KFD-2](decisions/kfd-2.md) | principle | Trust must start from facts: responsibility must be inspectable | active |
 | [KFD-3](decisions/kfd-3.md) | principle | Cooperation must start from transparent value: compliance must not be coerced | active |
 
