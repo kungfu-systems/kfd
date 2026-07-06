@@ -74,6 +74,30 @@ transparent and inspectable mechanisms it asks products to provide.
 This README states the architecture; KFD-1, KFD-2, and KFD-3 provide the
 detailed rules.
 
+## Homepage content contract
+
+This README is also the homepage text source for `https://kfd.libkungfu.dev`.
+When `site-libkungfu-dev` consumes the `@kungfu-tech/kfd` npm package to render
+the KFD site, it should treat this file as the canonical homepage copy, not as
+an implementation note to paraphrase in the site repository.
+
+The first screen should be derived from this README:
+
+- Page identity: the top-level heading.
+- Lead: the opening paragraph that defines KFD as the organization-wide
+  decision registry.
+- Foundation signal: the `Foundation triad` section, especially the three
+  one-line commitments.
+- First-screen explanation: the beginning of `Foundation model`, ending at the
+  `stable facts -> trustworthy objects -> non-coercive cooperation` chain.
+
+Decision cards, detail links, and machine paths should come from
+`registry.json`. The machine-readable site bundle lives at `site/kfd-site.json`
+and gives renderers stable fields for the homepage, foundation model, product
+proof path, decision routes, and rendering boundary. A site renderer may adapt
+layout, navigation, typography, and visual assets, but it should not maintain
+separate homepage wording that can drift from this package.
+
 ## Product proof path
 
 KFDs are not a detached manifesto, but they are not a demand that readers adopt
@@ -93,9 +117,9 @@ e.g. `https://kfd.libkungfu.dev/1`). This repository publishes
 
 | ID | Kind | Title | Status |
 |---|---|---|---|
-| [KFD-1](decisions/kfd-0001-release-versioning.md) | procedure | Contracts must not drift: contract worlds need one fact source | active |
-| [KFD-2](decisions/kfd-0002-fact-first-product-accountability.md) | principle | Trust must start from facts: responsibility must be inspectable | active |
-| [KFD-3](decisions/kfd-0003-non-coercive-intelligence.md) | principle | Cooperation must start from transparent value: compliance must not be coerced | active |
+| [KFD-1](decisions/kfd-1.md) | procedure | Contracts must not drift: contract worlds need one fact source | active |
+| [KFD-2](decisions/kfd-2.md) | principle | Trust must start from facts: responsibility must be inspectable | active |
+| [KFD-3](decisions/kfd-3.md) | principle | Cooperation must start from transparent value: compliance must not be coerced | active |
 
 ## How to cite
 
@@ -111,8 +135,9 @@ reference KFDs; KFDs never depend on repository internals.
 ## Layout
 
 ```text
-decisions/     one markdown file per decision (kfd-NNNN-<slug>.md)
+decisions/     one markdown file per decision (kfd-N.md)
 registry.json  machine-readable index (schemaVersion 1, contract kfd-registry)
+site/          machine-readable site bundle for kfd.libkungfu.dev renderers
 release-impact.json
                Buildchain surface-aware impact ledger for production release passports
 scripts/       conformance check: registry and documents must agree

@@ -9,7 +9,7 @@
   "versionImpact": {
     "final": "patch",
     "source": "kfd-surface-register",
-    "rationale": "The v1.0 production release preserves the current KFD content and registry schema surfaces."
+    "rationale": "The v1.0 production release establishes the current KFD content and registry schema surfaces with number-stable decision paths."
   },
   "surfaceImpacts": [
     {
@@ -22,14 +22,14 @@
       "id": "kfd-registry-schema",
       "impact": "patch",
       "class": "compatible",
-      "rationale": "registry.json keeps schemaVersion 1 and the existing entry shape, including number, id, slug, title, kind, status, path, and url."
+      "rationale": "registry.json keeps schemaVersion 1 and the existing entry shape, including number, id, slug, title, kind, status, path, and url; slug and path values are stable number coordinates."
     },
     {
       "id": "kfd-package-structure",
       "impact": "patch",
       "class": "compatible",
-      "rationale": "The npm package continues to publish decisions/, registry.json, and docs/ without changing the package surface."
+      "rationale": "The npm package continues to publish README.md, decisions/, registry.json, site/, and docs/; decision filenames use the stable kfd-N.md convention before production promotion."
     }
   ],
-  "summary": "KFD v1.0 production promotion is patch-impact across the registered KFD content, registry schema, and package structure surfaces."
+  "summary": "KFD v1.0 production promotion is patch-impact across the registered KFD content, registry schema, and package structure surfaces; README homepage copy, site bundle, and decision paths are number-stable before production promotion."
 }
