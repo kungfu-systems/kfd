@@ -15,7 +15,7 @@ permissions:
 
 jobs:
   kfd:
-    uses: kungfu-systems/buildchain/.github/workflows/.build.yml@alpha/v2/v2.8
+    uses: kungfu-systems/buildchain/.github/workflows/.build.yml@a4b2c391443d24349ac83cfe26642ce08108ae7d
     secrets: inherit
     with:
       runner-preset: custom
