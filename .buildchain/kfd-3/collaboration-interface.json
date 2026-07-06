@@ -74,6 +74,12 @@
       "purpose": "Consume the shipped npm package surfaces."
     },
     {
+      "id": "release-anchor",
+      "surface": "kfd.release.json",
+      "participants": ["release-system", "agent-reader"],
+      "purpose": "Inspect the explicit KFD package version anchor for the current Buildchain release line."
+    },
+    {
       "id": "site-bundle",
       "surface": "site/kfd-site.json",
       "participants": ["site-consumer", "agent-reader"],
@@ -151,6 +157,14 @@
       "participants": ["release-system", "maintainer", "agent-reader"],
       "value": "Release impact declaration consumed by Buildchain release passports.",
       "discoverability": { "fromMinimalEntrypoint": true, "path": "release-impact.json" },
+      "maturity": "stable"
+    },
+    {
+      "id": "release-anchor-json",
+      "kind": "json-api",
+      "participants": ["release-system", "agent-reader", "maintainer"],
+      "value": "Anchored/manual release manifest that declares the exact npm version as a release fact.",
+      "discoverability": { "fromMinimalEntrypoint": true, "path": "kfd.release.json" },
       "maturity": "stable"
     },
     {
