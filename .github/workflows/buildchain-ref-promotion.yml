@@ -71,6 +71,7 @@ jobs:
       release-passport-product-name: KFD
       release-passport-impact-json: release-impact.json
       release-passport-kfd-1-witness-jsons: .buildchain/kfd-1/contract-world.witness.json
+      release-passport-kfd-2-claim-jsons: .buildchain/kfd-2/public-release-trust.claim.json
       release-passport-kfd-3-prebuild-witness-jsons: .buildchain/kfd-3/collaboration-interface.prebuild.json
       release-passport-kfd-3-artifact-witness-jsons: .buildchain/kfd-3/collaboration-interface.artifact.json
       dry-run: ${{ github.event_name == 'workflow_dispatch' && inputs['dry-run'] == 'true' }}
