@@ -59,6 +59,7 @@ const groupedSurfaces = {
     { id: "metadata:registry", sourcePath: "registry.json", sha256: sha256File("registry.json") },
     { id: "metadata:standards", sourcePath: "standards.json", sha256: sha256File("standards.json") },
     { id: "metadata:release-impact", sourcePath: "release-impact.json", sha256: sha256File("release-impact.json") },
+    { id: "metadata:release-anchor", sourcePath: "kfd.release.json", sha256: sha256File("kfd.release.json") },
   ],
   packageExports: [
     { id: "export:package-json", sourcePath: "package.json#exports", sha256: sha256File("package.json") },

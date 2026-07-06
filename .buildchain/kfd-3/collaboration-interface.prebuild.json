@@ -10,9 +10,9 @@
   "sourceRegistry": {
     "id": "kfd-collaboration-interface",
     "path": ".buildchain/kfd-3/collaboration-interface.json",
-    "sha256": "838fb80ced2ceebb51c3582aca77508f42b206698e0e800b00ca606b1640c0ae"
+    "sha256": "5480681cc68243a5f2d5f64d550b6710b690af171775ceeadad7b731e298b8d7"
   },
-  "collaborationInterfaceDigest": "sha256:838fb80ced2ceebb51c3582aca77508f42b206698e0e800b00ca606b1640c0ae",
+  "collaborationInterfaceDigest": "sha256:5480681cc68243a5f2d5f64d550b6710b690af171775ceeadad7b731e298b8d7",
   "collaborationInterface": {
     "schemaVersion": 1,
     "contract": "kfd-3-collaboration-interface",
@@ -105,6 +105,15 @@
           "agent-reader"
         ],
         "purpose": "Consume the shipped npm package surfaces."
+      },
+      {
+        "id": "release-anchor",
+        "surface": "kfd.release.json",
+        "participants": [
+          "release-system",
+          "agent-reader"
+        ],
+        "purpose": "Inspect the explicit KFD package version anchor for the current Buildchain release line."
       },
       {
         "id": "site-bundle",
@@ -246,6 +255,21 @@
         "discoverability": {
           "fromMinimalEntrypoint": true,
           "path": "release-impact.json"
+        },
+        "maturity": "stable"
+      },
+      {
+        "id": "release-anchor-json",
+        "kind": "json-api",
+        "participants": [
+          "release-system",
+          "agent-reader",
+          "maintainer"
+        ],
+        "value": "Anchored/manual release manifest that declares the exact npm version as a release fact.",
+        "discoverability": {
+          "fromMinimalEntrypoint": true,
+          "path": "kfd.release.json"
         },
         "maturity": "stable"
       },
@@ -485,6 +509,17 @@
       "sourcePath": "release-impact.json"
     },
     {
+      "id": "release-anchor-json",
+      "name": "release-anchor-json",
+      "kind": "json-api",
+      "participantProfile": "release-system,agent-reader,maintainer",
+      "availability": "stable",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": "kfd.release.json"
+    },
+    {
       "id": "release-propagation-json",
       "name": "release-propagation-json",
       "kind": "json-api",
@@ -617,19 +652,24 @@
     {
       "id": "metadata:release-impact",
       "sourcePath": "release-impact.json",
-      "sha256": "fd4e98a262aad5e219a9154e48d4cd9fecc408b15c12304959313bfd53d966f4"
+      "sha256": "02fbc91ff6a9c7d0bc83dc255cc3e7b243a9a97aeb2e20c6be33b7b252d80099"
+    },
+    {
+      "id": "metadata:release-anchor",
+      "sourcePath": "kfd.release.json",
+      "sha256": "8afda1ba848529b2cbc589fb453cf5bb9a2392c4cbe84b83a5b9636215b56831"
     }
   ],
   "packageExports": [
     {
       "id": "export:package-json",
       "sourcePath": "package.json#exports",
-      "sha256": "6e36c25bcc1ad7be6886fa6b6fe53bd17a84612d764f6bafca62ecca549ff7c9"
+      "sha256": "5574e6324befd177c3b138da347361ae5f4b23edcbe8390d4f0d5fd3d0838ff7"
     },
     {
       "id": "export:npm-files",
       "sourcePath": "package.json#files",
-      "sha256": "6e36c25bcc1ad7be6886fa6b6fe53bd17a84612d764f6bafca62ecca549ff7c9"
+      "sha256": "5574e6324befd177c3b138da347361ae5f4b23edcbe8390d4f0d5fd3d0838ff7"
     }
   ],
   "siteConsumptionContracts": [
