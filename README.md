@@ -5,6 +5,8 @@ set of standing, cross-repository norms that products and their consumers
 weld to. Each decision has an immutable number (`KFD-N`), a kind, a status,
 and a single authoritative text in this repository.
 
+Stable rendered site: `https://kfd.libkungfu.dev`.
+
 KFDs can be **principles** or **procedures**. Principles state what must remain
 true across kungfu-systems; procedures state how a class of work enforces or
 protects a principle.
@@ -133,11 +135,13 @@ Agents consuming this package should start from the same sources as humans:
 1. Read this README for the foundation model and package map.
 2. Read `standards.json` for canonical KFD numbers, schema IDs, concept names,
    and interface contracts.
-3. Use `schemas/kfd-2/trust-taxonomy.schema.json` for KFD-2 residual-risk and
+3. Use `site/kfd-site.json` decision metadata or the KFD-3 collaboration
+   interface fact-source metadata to identify the public KFD fact source.
+4. Use `schemas/kfd-2/trust-taxonomy.schema.json` for KFD-2 residual-risk and
    trust-downgrade values. Unknown taxonomy values are invalid.
-4. Use `schemas/kfd-3/collaboration-interface.schema.json` and
+5. Use `schemas/kfd-3/collaboration-interface.schema.json` and
    `schemas/kfd-3/witness.schema.json` to inspect collaboration interfaces.
-5. If a needed KFD-2 taxonomy value is missing, open a KFD GitHub issue rather
+6. If a needed KFD-2 taxonomy value is missing, open a KFD GitHub issue rather
    than inventing a local value:
    `https://github.com/kungfu-systems/kfd/issues/new?title=KFD-2%20trust%20taxonomy%20extension%20request`.
 
@@ -168,6 +172,26 @@ closed-world evidence shape. See
 | [KFD-1](decisions/kfd-1.md) | procedure | Facts must not drift. | active |
 | [KFD-2](decisions/kfd-2.md) | principle | Trust must start from facts. | active |
 | [KFD-3](decisions/kfd-3.md) | principle | Cooperation must start from transparent value. | active |
+
+## Decision metadata
+
+Every rendered decision page should make the KFD fact source explicit. The
+public KFD fact source is the GitHub-hosted `kungfu-systems/kfd` git
+repository. GitHub is the current canonical coordination and hosting surface;
+the load-bearing facts are the commit-addressed repository contents.
+
+Decision metadata should expose:
+
+- Public fact source: `https://github.com/kungfu-systems/kfd`
+- Load-bearing coordinate: commit-addressed repository contents.
+- Canonical paths: `decisions/kfd-N.md`, `registry.json`, `standards.json`.
+- Stable rendered index: `https://kfd.libkungfu.dev`.
+- Rendered URL: `https://kfd.libkungfu.dev/N`.
+
+Rendered pages, npm package contents, Buildchain release passports, and
+`kfd.libkungfu.dev` are projections or evidence surfaces. A GitHub issue is an
+extension request path, not a KFD fact by itself; it becomes part of the KFD
+fact source only after the resulting change is committed to the repository.
 
 ## How to cite
 

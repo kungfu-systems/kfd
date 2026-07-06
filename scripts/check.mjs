@@ -68,6 +68,22 @@ if (siteBundle.homepage?.title !== "KFD — Kung Fu Decisions") fail("site bundl
 if (siteBundle.homepage?.currentDecisions?.source !== "registry.json") fail("site bundle currentDecisions source must be registry.json");
 if (siteBundle.decisionPages?.source !== "registry.json") fail("site bundle decisionPages source must be registry.json");
 if (siteBundle.decisionPages?.bodySource !== "registry.entries[].path") fail("site bundle decision page body source must be registry.entries[].path");
+const sitePublicFactSource = siteBundle.decisionPages?.metadata?.publicFactSource;
+if (sitePublicFactSource?.kind !== "git-repository") fail("site bundle decision metadata publicFactSource.kind must be git-repository");
+if (sitePublicFactSource?.host !== "github") fail("site bundle decision metadata publicFactSource.host must be github");
+if (sitePublicFactSource?.repository !== "kungfu-systems/kfd") fail("site bundle decision metadata publicFactSource.repository must be kungfu-systems/kfd");
+if (sitePublicFactSource?.url !== "https://github.com/kungfu-systems/kfd") fail("site bundle decision metadata publicFactSource.url must be the KFD GitHub repository");
+if (sitePublicFactSource?.loadBearingCoordinate !== "commit-addressed repository contents") {
+  fail("site bundle decision metadata publicFactSource.loadBearingCoordinate must be commit-addressed repository contents");
+}
+if (sitePublicFactSource?.stableRenderedIndex !== "https://kfd.libkungfu.dev") {
+  fail("site bundle decision metadata publicFactSource.stableRenderedIndex must be https://kfd.libkungfu.dev");
+}
+for (const requiredPath of ["decisions/kfd-N.md", "registry.json", "standards.json"]) {
+  if (!sitePublicFactSource?.canonicalPaths?.includes(requiredPath)) {
+    fail(`site bundle decision metadata publicFactSource.canonicalPaths must include ${requiredPath}`);
+  }
+}
 for (const requiredFile of ["README.md", "decisions", "registry.json", "standards.json", "kfd.release.json", "schemas", "site", "buildchain.release-propagation.json", "release-impact.json", ".buildchain/kfd-1/contract-world.witness.json", ".buildchain/kfd-2", ".buildchain/kfd-3", "docs"]) {
   if (!Array.isArray(packageJson.files) || !packageJson.files.includes(requiredFile)) {
     fail(`package.json files[] must include ${requiredFile}`);
@@ -299,6 +315,9 @@ if (kfd3WitnessSchema.properties?.residualRisk?.items?.$ref !== residualRiskRef)
 if (!kfd3CollaborationSchema.properties?.extensionRequests) {
   fail("KFD-3 collaborationInterface schema must expose extensionRequests");
 }
+if (!kfd3CollaborationSchema.properties?.factSources) {
+  fail("KFD-3 collaborationInterface schema must expose factSources");
+}
 if (!kfd3CollaborationSchema.$defs?.extensionRequest?.properties?.requestPath?.properties?.kind?.enum?.includes("github-issue")) {
   fail("KFD-3 extensionRequest.requestPath.kind must support github-issue");
 }
@@ -477,6 +496,21 @@ if (!kfd3Interface) {
 } else {
   if (kfd3Interface.contract !== "kfd-3-collaboration-interface") fail("KFD-3 collaboration interface contract must be kfd-3-collaboration-interface");
   if (kfd3Interface.standard !== "kfd-3") fail("KFD-3 collaboration interface standard must be kfd-3");
+  if (!Array.isArray(kfd3Interface.factSources) || kfd3Interface.factSources.length === 0) fail("KFD-3 collaboration interface factSources[] is required");
+  if (!kfd3Interface.factSources.some((entry) =>
+    entry.id === "public-kfd-fact-source" &&
+    entry.kind === "git-repository" &&
+    entry.host === "github" &&
+    entry.repository === "kungfu-systems/kfd" &&
+    entry.url === "https://github.com/kungfu-systems/kfd" &&
+    entry.loadBearingCoordinate === "commit-addressed repository contents" &&
+    entry.stableRenderedIndex === "https://kfd.libkungfu.dev" &&
+    entry.canonicalPaths?.includes("decisions/kfd-N.md") &&
+    entry.canonicalPaths?.includes("registry.json") &&
+    entry.canonicalPaths?.includes("standards.json")
+  )) {
+    fail("KFD-3 collaboration interface must declare the public KFD GitHub fact source");
+  }
   if (!Array.isArray(kfd3Interface.participants) || kfd3Interface.participants.length === 0) fail("KFD-3 collaboration interface participants[] is required");
   if (!Array.isArray(kfd3Interface.minimalEntrypoints) || kfd3Interface.minimalEntrypoints.length === 0) fail("KFD-3 collaboration interface minimalEntrypoints[] is required");
   if (!Array.isArray(kfd3Interface.surfaces) || kfd3Interface.surfaces.length === 0) fail("KFD-3 collaboration interface surfaces[] is required");

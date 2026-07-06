@@ -26,6 +26,8 @@ A product collaboration interface should identify:
 
 - participant profiles, such as `human`, `agent`, `operator`,
   `extension-author`, or `api-consumer`;
+- public fact sources that identify where load-bearing facts live and which
+  surfaces are only projections;
 - minimal entrypoints that let each participant discover the rest of the
   interface;
 - participant-visible surfaces, such as CLI commands, JSON APIs, manuals,

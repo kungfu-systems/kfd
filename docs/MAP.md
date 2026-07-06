@@ -7,6 +7,7 @@
 | What worldview structure does the foundation triad express? | [`../README.md`](../README.md#foundation-model) |
 | How should an agent quickly understand this package? | [`../README.md`](../README.md#agent-quickstart) |
 | What is the concrete self-proof case for KFD-1/2/3? | [`../README.md`](../README.md#product-proof-path) and the implementation case in each KFD |
+| Where is the public KFD fact source? | [`../README.md`](../README.md#decision-metadata) and [`../site/kfd-site.json`](../site/kfd-site.json) decision metadata |
 | What should a site renderer consume to render `kfd.libkungfu.dev`? | [`../site/kfd-site.json`](../site/kfd-site.json) |
 | What is the top-level product accountability principle? | [KFD-2](../decisions/kfd-2.md) |
 | What stance should products take toward humans and agents as reasoning participants? | [KFD-3](../decisions/kfd-3.md) |

@@ -51,6 +51,12 @@
     "sourceRegistry": {
       "$ref": "#/$defs/artifactPointer"
     },
+    "factSources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/factSource"
+      }
+    },
     "participants": {
       "type": "array",
       "minItems": 1,
@@ -167,6 +173,69 @@
           ]
         },
         "description": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "factSource": {
+      "type": "object",
+      "required": [
+        "id",
+        "kind",
+        "repository",
+        "loadBearingCoordinate"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "kind": {
+          "enum": [
+            "git-repository",
+            "package",
+            "site",
+            "release-passport",
+            "other"
+          ]
+        },
+        "host": {
+          "type": "string",
+          "minLength": 1
+        },
+        "repository": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "loadBearingCoordinate": {
+          "type": "string",
+          "minLength": 1
+        },
+        "stableRenderedIndex": {
+          "type": "string",
+          "format": "uri"
+        },
+        "canonicalPaths": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "projectionSurfaces": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "extensionRequestNote": {
           "type": "string",
           "minLength": 1
         }

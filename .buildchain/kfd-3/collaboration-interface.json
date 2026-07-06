@@ -10,6 +10,28 @@
   "sourceRegistry": {
     "path": "registry.json"
   },
+  "factSources": [
+    {
+      "id": "public-kfd-fact-source",
+      "kind": "git-repository",
+      "host": "github",
+      "repository": "kungfu-systems/kfd",
+      "url": "https://github.com/kungfu-systems/kfd",
+      "loadBearingCoordinate": "commit-addressed repository contents",
+      "stableRenderedIndex": "https://kfd.libkungfu.dev",
+      "canonicalPaths": [
+        "decisions/kfd-N.md",
+        "registry.json",
+        "standards.json"
+      ],
+      "projectionSurfaces": [
+        "https://kfd.libkungfu.dev/N",
+        "npm:@kungfu-tech/kfd",
+        "Buildchain release passports"
+      ],
+      "extensionRequestNote": "GitHub issues are extension request paths; KFD facts are created only by committed repository contents."
+    }
+  ],
   "participants": [
     {
       "id": "human-reader",
@@ -153,7 +175,7 @@
       "id": "site-bundle-json",
       "kind": "json-api",
       "participants": ["site-consumer", "agent-reader"],
-      "value": "KFD-owned content projection consumed by the public site renderer.",
+      "value": "KFD-owned content projection consumed by the public site renderer, including decision metadata and the public KFD fact-source boundary.",
       "discoverability": { "fromMinimalEntrypoint": true, "path": "site/kfd-site.json" },
       "maturity": "stable"
     },
