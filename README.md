@@ -9,6 +9,20 @@ KFDs can be **principles** or **procedures**. Principles state what must remain
 true across kungfu-systems; procedures state how a class of work enforces or
 protects a principle.
 
+## Foundation triad
+
+The first three KFDs form the public foundation for kungfu-systems:
+
+```text
+KFD-1: contracts must not drift.
+KFD-2: trust must start from facts.
+KFD-3: cooperation must start from transparent value, not coercion.
+```
+
+Together they define the load-bearing path for Kungfu products: make contract
+worlds explicit, make important claims inspectable, and let humans and agents
+cooperate through visible value rather than hidden pressure.
+
 Rendered index: `https://kfd.libkungfu.dev` (stable machine path per entry,
 e.g. `https://kfd.libkungfu.dev/1`). This repository publishes
 `@kungfu-tech/kfd` — the decision texts plus a machine-readable

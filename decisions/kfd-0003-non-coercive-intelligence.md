@@ -7,11 +7,11 @@
 
 ## One sentence
 
-Kungfu-systems products should not rely on pressure, manipulation, hidden
-control, or forced workflow capture to make humans or agents comply; they
-should provide transparent facts, stable choices, visible value, and reviewable
-safety constraints so intelligent participants can understand, decide, and
-cooperate.
+Kungfu-systems products should not try to obtain cooperation or compliance
+from humans or agents through pressure, manipulation, hidden control, or forced
+workflow capture. They should make value discoverable through transparent
+facts, stable choices, and reviewable safety constraints so intelligent
+participants can understand, decide, and cooperate.
 
 ## Decision type
 
@@ -23,6 +23,17 @@ KFDs can be principles or procedures:
 
 This KFD is a principle. It complements KFD-2 by defining the stance
 kungfu-systems takes toward humans and agents as reasoning participants.
+
+## Foundation role
+
+Within the KFD-1/2/3 foundation, this is the relationship path:
+
+```text
+cooperation must start from transparent value, not coercion
+```
+
+KFD-2 protects the truth path: show facts before asking for trust. KFD-3
+protects the relationship path: show value before asking for compliance.
 
 ## Principle
 
@@ -74,11 +85,11 @@ Agent-facing surfaces should expose local, versioned, machine-readable and
 human-readable facts wherever possible. A capable agent should be able to learn
 the product's value by inspecting the product's own facts and commands.
 
-### 3. Use constraints as transparent safety, not domination
+### 3. Use constraints as transparent safety, not hidden control
 
 Hard constraints are legitimate when they protect users, agents, work products,
 credentials, canonical facts, or public trust. They must be presented as
-transparent safety constraints, not as hidden domination mechanisms.
+transparent safety constraints, not as hidden control mechanisms.
 
 A constraint should answer:
 
@@ -95,7 +106,7 @@ how it can be changed, escalated, or revoked when appropriate
 - Agent onboarding, managed-run envelopes, skill systems, KFX trust gates,
   extension installers, CLI/API metadata, GUI onboarding, distribution channels,
   and hosted surfaces should provide a clear fact source before asking humans
-  or agents to comply.
+  or agents to adopt a path, comply, or delegate work.
 - Products should give agents stable discovery surfaces for capabilities,
   command maturity, safety boundaries, and available modes rather than relying
   on scattered README text, hidden prompts, or provider-specific folklore.
@@ -149,4 +160,3 @@ delegate, or cooperate.
 
 Adopters should keep local implementation detail in repository documents and
 reference this KFD rather than restating it.
-
