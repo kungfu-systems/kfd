@@ -18,9 +18,11 @@ than by open proposal rounds.
   principle.
 - Every change must keep `registry.json` and `decisions/` in agreement:
   `node scripts/check.mjs` must pass (it is the Buildchain verify gate).
-- Versioning of this package follows KFD-1 itself: content operations are
-  patches; only registry-schema or package-structure changes move minor or
-  major.
+- Versioning of this package follows KFD-1 itself: the outer package line is
+  fixed at `v1.0`; content operations are patches. Registry-schema or
+  package-structure changes may require `minor` or `major` surface-impact
+  review in `release-impact.json`, but they do not silently open a new package
+  major or minor line.
 
 ## Commit conventions
 
@@ -42,5 +44,7 @@ release-passport-impact-json: release-impact.json
 
 Before opening a production release PR, update that ledger if the release
 changes a registered machine surface. KFD content operations are normally
-`patch`; additive registry schema or package-structure changes are `minor`;
-breaking registry schema or package-structure changes are `major`.
+`patch`; additive registry schema or package-structure changes are `minor`
+surface impacts; breaking registry schema or package-structure changes are
+`major` surface impacts. Those impact labels are release-passport review
+signals for the fixed `v1.0` KFD package line.

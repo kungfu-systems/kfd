@@ -6,9 +6,25 @@ import { readFileSync, existsSync } from "node:fs";
 const fail = (msg) => { console.error(`check: ${msg}`); process.exitCode = 1; };
 const registry = JSON.parse(readFileSync("registry.json", "utf8"));
 const releaseImpact = JSON.parse(readFileSync("release-impact.json", "utf8"));
+const packageJson = JSON.parse(readFileSync("package.json", "utf8"));
+const siteBundle = JSON.parse(readFileSync("site/kfd-site.json", "utf8"));
 
 if (registry.schemaVersion !== 1) fail(`unsupported schemaVersion ${registry.schemaVersion}`);
 if (registry.contract !== "kfd-registry") fail(`unexpected contract ${registry.contract}`);
+if (siteBundle.schemaVersion !== 1) fail(`unsupported site bundle schemaVersion ${siteBundle.schemaVersion}`);
+if (siteBundle.contract !== "kfd-site-bundle") fail(`unexpected site bundle contract ${siteBundle.contract}`);
+if (siteBundle.source?.homepageTextSource !== "README.md") fail("site bundle homepageTextSource must be README.md");
+if (siteBundle.source?.registry !== "registry.json") fail("site bundle registry source must be registry.json");
+if (siteBundle.source?.decisionsDir !== "decisions") fail("site bundle decisionsDir must be decisions");
+if (siteBundle.homepage?.title !== "KFD — Kung Fu Decisions") fail("site bundle homepage title must match README H1 text");
+if (siteBundle.homepage?.currentDecisions?.source !== "registry.json") fail("site bundle currentDecisions source must be registry.json");
+if (siteBundle.decisionPages?.source !== "registry.json") fail("site bundle decisionPages source must be registry.json");
+if (siteBundle.decisionPages?.bodySource !== "registry.entries[].path") fail("site bundle decision page body source must be registry.entries[].path");
+for (const requiredFile of ["README.md", "decisions", "registry.json", "site", "docs"]) {
+  if (!Array.isArray(packageJson.files) || !packageJson.files.includes(requiredFile)) {
+    fail(`package.json files[] must include ${requiredFile}`);
+  }
+}
 
 const seen = new Set();
 const statuses = new Set(["draft", "active", "superseded"]);
@@ -19,6 +35,10 @@ for (const e of registry.entries) {
   if (seen.has(e.number)) fail(`duplicate number ${e.number}`);
   seen.add(e.number);
   if (e.id !== `KFD-${e.number}`) fail(`id ${e.id} does not match number ${e.number}`);
+  if (e.slug !== `kfd-${e.number}`) fail(`${e.id} slug must be kfd-${e.number}, not ${e.slug}`);
+  if (e.path !== `decisions/kfd-${e.number}.md`) {
+    fail(`${e.id} path must be decisions/kfd-${e.number}.md, not ${e.path}`);
+  }
   if (!kinds.has(e.kind)) fail(`bad kind ${e.kind} on ${e.id}`);
   if (!statuses.has(e.status)) fail(`bad status ${e.status} on ${e.id}`);
   if (e.status === "superseded") {
@@ -45,6 +65,21 @@ for (const [id, successors] of superseded) {
   for (const successor of successors) {
     if (!registry.entries.some((e) => e.id === successor)) fail(`${id} cites missing successor ${successor}`);
   }
+}
+const siteCommitments = new Map((siteBundle.homepage?.foundationTriad?.commitments ?? []).map((item) => [item.id, item]));
+for (const e of registry.entries) {
+  if (!siteCommitments.has(e.id)) fail(`site bundle foundationTriad missing ${e.id}`);
+}
+const siteLayers = new Map((siteBundle.homepage?.foundationModel?.layers ?? []).map((item) => [item.decision, item]));
+for (const e of registry.entries) {
+  if (!siteLayers.has(e.id)) fail(`site bundle foundationModel missing ${e.id}`);
+}
+const boundary = siteBundle.renderingBoundary ?? {};
+if (!Array.isArray(boundary.ownedByKfd) || !boundary.ownedByKfd.includes("homepage title and text")) {
+  fail("site bundle renderingBoundary.ownedByKfd must include homepage title and text");
+}
+if (!Array.isArray(boundary.ownedBySite) || !boundary.ownedBySite.includes("CSS")) {
+  fail("site bundle renderingBoundary.ownedBySite must include CSS");
 }
 const impactLevels = new Set(["patch", "minor", "major"]);
 const requiredSurfaces = new Set(["kfd-content", "kfd-registry-schema", "kfd-package-structure"]);

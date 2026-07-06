@@ -3,7 +3,7 @@
   "version": "1.0.0-alpha.0",
   "description": "Kung Fu Decisions (KFD): the kungfu-systems organization-wide decision registry, as a consumable artifact",
   "license": "Apache-2.0",
-  "files": ["decisions", "registry.json", "docs"],
+  "files": ["README.md", "decisions", "registry.json", "site", "docs"],
   "scripts": {"check": "node scripts/check.mjs"},
   "publishConfig": {"registry": "https://registry.npmjs.org/", "access": "public"},
   "repository": {"type": "git", "url": "git+https://github.com/kungfu-systems/kfd.git"}

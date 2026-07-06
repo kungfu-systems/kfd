@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd-site-bundle",
+  "source": {
+    "package": "@kungfu-tech/kfd",
+    "homepageTextSource": "README.md",
+    "registry": "registry.json",
+    "decisionsDir": "decisions"
+  },
+  "routes": {
+    "home": "/",
+    "decisionPattern": "/{number}",
+    "llms": "/llms.txt",
+    "manifest": "/manifest.json"
+  },
+  "homepage": {
+    "title": "KFD — Kung Fu Decisions",
+    "lead": "KFD is the organization-wide decision registry of kungfu-systems: the small set of standing, cross-repository norms that products and their consumers weld to. Each decision has an immutable number (`KFD-N`), a kind, a status, and a single authoritative text in this repository.",
+    "decisionKinds": "KFDs can be **principles** or **procedures**. Principles state what must remain true across kungfu-systems; procedures state how a class of work enforces or protects a principle.",
+    "foundationTriad": {
+      "heading": "Foundation triad",
+      "intro": "The first three KFDs form the public foundation for kungfu-systems:",
+      "commitments": [
+        {
+          "id": "KFD-1",
+          "text": "contracts must not drift."
+        },
+        {
+          "id": "KFD-2",
+          "text": "trust must start from facts."
+        },
+        {
+          "id": "KFD-3",
+          "text": "cooperation must start from transparent value, not coercion."
+        }
+      ],
+      "summary": "Together they define the load-bearing path for Kungfu products: make contract worlds explicit, make important claims inspectable, and let humans and agents cooperate through visible value rather than hidden pressure."
+    },
+    "foundationModel": {
+      "heading": "Foundation model",
+      "intro": "The triad is intentionally ordered. It is a compact model for surviving and evolving in complex systems, especially in a world where agents can observe, act, delegate, and remember across many surfaces.",
+      "layers": [
+        {
+          "layer": "Fact-source ontology",
+          "decision": "KFD-1",
+          "readerQuestion": "What can count as a fact?",
+          "commitment": "A load-bearing fact must not drift: its contract world comes from one declared fact source."
+        },
+        {
+          "layer": "Participant-to-object trust",
+          "decision": "KFD-2",
+          "readerQuestion": "When can a user or agent trust a claim, product, artifact, or control surface?",
+          "commitment": "Trust starts from inspectable facts and responsibility state."
+        },
+        {
+          "layer": "Participant-to-participant cooperation",
+          "decision": "KFD-3",
+          "readerQuestion": "How should peer intelligent participants cooperate?",
+          "commitment": "Cooperation starts from transparent value, stable choice, and explainable constraints, not pressure."
+        }
+      ],
+      "chain": "stable facts -> trustworthy objects -> non-coercive cooperation",
+      "explanation": [
+        "This is why KFDs are not only internal governance text. KFD-1 is a procedure, but it gives the foundation model its first layer by making fact sources operational: a fact-bearing contract world must be declared, inspectable, and unable to drift invisibly. KFD-2 then defines how trust can stand on those facts. KFD-3 defines how humans and agents can cooperate once facts and trust are visible.",
+        "Real-world agent work turns ordinary work into a dense system of products, files, repositories, traces, policies, humans, and agents. In that world, complexity cannot be made safe by hidden state or forced compliance. It has to be compressed through non-drifting facts, inspectable trust, and voluntary cooperation. The goal is not to force increasingly capable participants into compliance through stronger pressure. It is to give humans and agents a shared worldview for adapting to a more complex world."
+      ]
+    },
+    "productProofPath": {
+      "heading": "Product proof path",
+      "body": "KFDs are not a detached manifesto, but they are not a demand that readers adopt a Kungfu product before understanding the decisions. A philosophy becomes load-bearing only when it can be seen in a concrete case. For that reference case, use the main Kungfu product entrypoint (`https://kungfu.tech`) for product philosophy, and Buildchain (`https://buildchain.libkungfu.dev`) for release and provenance accountability. This registry states the commitments; those entrypoints show how the commitments are meant to be borne in practice."
+    },
+    "currentDecisions": {
+      "heading": "Current decisions",
+      "source": "registry.json"
+    }
+  },
+  "decisionPages": {
+    "source": "registry.json",
+    "bodySource": "registry.entries[].path",
+    "stableUrlField": "url"
+  },
+  "renderingBoundary": {
+    "ownedByKfd": [
+      "homepage title and text",
+      "foundation triad commitments",
+      "foundation model layers and chain",
+      "product proof path text",
+      "decision metadata",
+      "decision markdown bodies"
+    ],
+    "ownedBySite": [
+      "HTML structure",
+      "CSS",
+      "responsive layout",
+      "navigation layout",
+      "visual assets",
+      "decorative images",
+      "markdown-to-HTML renderer"
+    ]
+  }
+}
