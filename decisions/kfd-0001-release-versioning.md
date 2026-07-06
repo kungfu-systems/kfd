@@ -12,6 +12,19 @@ A version number is not a summary of the changelog; it is the coordinate of
 world changed, and the world may only change by opening a line — never by
 drifting inside one.
 
+## Foundation role
+
+Within the KFD-1/2/3 foundation, this is the contract procedure:
+
+```text
+contracts must not drift
+```
+
+KFD-1 makes artifact contract worlds explicit so releases do not drift under
+changelog volume, cadence pressure, or marketing pressure. It is the concrete
+versioning procedure that lets users and agents know which artifact world they
+are integrating with, replaying, auditing, or trusting.
+
 ## Premise: the welded-surface register
 
 Every product maintains a **welded-surface register**. A surface is registered
@@ -106,6 +119,18 @@ Reserved machine vocabulary (for future automated evidence, so the human
 table and the machine record never diverge): `schemaVersion: 1`,
 `contract: "versioning-decision"`, camelCase fields
 `date / action / line / faces / class / rationale / pr`.
+
+## Relation to KFD-2 and KFD-3
+
+KFD-2 establishes fact-first product accountability: important claims should
+be inspectable before users or agents are asked to trust them. KFD-1 is the
+release/versioning procedure that preserves that accountability across
+artifact contract worlds.
+
+KFD-3 establishes non-coercive cooperation with intelligent participants. That
+cooperation depends on the same contract clarity: users and agents can choose,
+delegate, replay, or refuse more honestly when the artifact world is legible
+and does not drift invisibly.
 
 ## How KFDs themselves are versioned
 

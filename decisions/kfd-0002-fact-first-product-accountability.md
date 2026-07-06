@@ -8,10 +8,9 @@
 ## One sentence
 
 Kungfu-systems products should make fact-first responsibility the path of least
-resistance: users and agents should move from captured work, to local facts, to
-responsibility state, to proof-backed control decisions, to reviewable and
-exportable records because that is the simplest reliable path the product
-offers.
+resistance. When products represent work or control, the simplest reliable path
+should lead users and agents from captured work to local facts, responsibility
+state, proof-backed control decisions, and reviewable/exportable records.
 
 ## Decision type
 
@@ -23,6 +22,19 @@ KFDs can be principles or procedures:
 
 This KFD is a principle. KFD-1 is a procedure that protects release and
 version responsibility under this principle.
+
+## Foundation role
+
+Within the KFD-1/2/3 foundation, this is the truth path:
+
+```text
+trust must start from facts
+```
+
+KFD-2 says Kungfu products should not ask users or agents to trust a claim
+before the product has made the relevant facts inspectable. KFD-1 protects
+contract truth across artifact lines. KFD-3 protects the relationship with the
+human or agent who must understand and act on those facts.
 
 ## Principle
 
