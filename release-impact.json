@@ -43,6 +43,12 @@
       "rationale": "KFD now declares its own participant-facing collaboration interface and ships pre-build plus artifact-side KFD-3 witnesses so Buildchain can audit interface closure in the release passport."
     },
     {
+      "id": "kfd-release-anchor",
+      "impact": "minor",
+      "class": "release-governance",
+      "rationale": "KFD now declares its package version through an anchored/manual release manifest so package version state is an explicit release fact rather than an auto-derived Buildchain side effect."
+    },
+    {
       "id": "kfd-release-propagation",
       "impact": "patch",
       "class": "compatible",
