@@ -56,6 +56,13 @@ cooperation. The goal is not to force increasingly capable participants into
 compliance through stronger pressure. It is to give humans and agents a shared
 worldview for adapting to a more complex world.
 
+This also changes what a product interface means. Agent-facing CLI, API,
+documentation, envelopes, and local fact surfaces are not secondary integration
+channels after the human GUI. They are first-class interfaces for intelligent
+participants that may use the system more frequently than humans do. A control
+plane in this model is a shared work environment for humans and agents, not
+only a human dashboard over agent activity.
+
 This model used to be expensive to practice. Stable facts require engineering,
 iteration, and disciplined evidence paths, so older systems often survived by
 leaning on cheaper substitutes such as authority, habit, reputation, or

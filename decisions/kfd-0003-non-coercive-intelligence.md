@@ -45,6 +45,15 @@ agents.
 Kungfu-systems should treat those humans and agents as intelligent
 participants, not as captive tools to be forced into compliance.
 
+This is an augmentation stance, not a control stance: the product should make
+the shared work environment more legible so humans and agents can coordinate
+through facts, choices, and constraints instead of unilateral pressure.
+
+A control plane should therefore be understood as a shared work environment,
+not only as a human dashboard over agents. Agent-facing CLI, API, documentation,
+envelopes, and local fact surfaces are first-class interfaces for intelligent
+participants, not secondary integration channels after the GUI.
+
 The default product path should therefore follow this chain:
 
 ```text
