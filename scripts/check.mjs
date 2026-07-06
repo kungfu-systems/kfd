@@ -2,8 +2,10 @@
 // impact ledger must agree, so a release cannot ship evidence that lies about
 // its contents or versioning surface.
 import { readFileSync, existsSync } from "node:fs";
+import crypto from "node:crypto";
 
 const fail = (msg) => { console.error(`check: ${msg}`); process.exitCode = 1; };
+const sha256File = (filePath) => crypto.createHash("sha256").update(readFileSync(filePath)).digest("hex");
 const requireFields = (value, required, label) => {
   for (const field of required ?? []) {
     if (value?.[field] === undefined) fail(`${label} missing required field ${field}`);
@@ -15,6 +17,8 @@ const standardsSchema = JSON.parse(readFileSync("schemas/kfd-standards.schema.js
 const releaseImpact = JSON.parse(readFileSync("release-impact.json", "utf8"));
 const packageJson = JSON.parse(readFileSync("package.json", "utf8"));
 const siteBundle = JSON.parse(readFileSync("site/kfd-site.json", "utf8"));
+const kfd1WitnessPath = ".buildchain/kfd-1/contract-world.witness.json";
+const kfd1Witness = existsSync(kfd1WitnessPath) ? JSON.parse(readFileSync(kfd1WitnessPath, "utf8")) : undefined;
 
 if (registry.schemaVersion !== 1) fail(`unsupported schemaVersion ${registry.schemaVersion}`);
 if (registry.contract !== "kfd-registry") fail(`unexpected contract ${registry.contract}`);
@@ -44,12 +48,12 @@ if (siteBundle.homepage?.title !== "KFD — Kung Fu Decisions") fail("site bundl
 if (siteBundle.homepage?.currentDecisions?.source !== "registry.json") fail("site bundle currentDecisions source must be registry.json");
 if (siteBundle.decisionPages?.source !== "registry.json") fail("site bundle decisionPages source must be registry.json");
 if (siteBundle.decisionPages?.bodySource !== "registry.entries[].path") fail("site bundle decision page body source must be registry.entries[].path");
-for (const requiredFile of ["README.md", "decisions", "registry.json", "standards.json", "schemas", "site", "docs"]) {
+for (const requiredFile of ["README.md", "decisions", "registry.json", "standards.json", "schemas", "site", "buildchain.release-propagation.json", ".buildchain/kfd-1/contract-world.witness.json", "docs"]) {
   if (!Array.isArray(packageJson.files) || !packageJson.files.includes(requiredFile)) {
     fail(`package.json files[] must include ${requiredFile}`);
   }
 }
-for (const requiredExport of ["./registry.json", "./standards.json", "./site/kfd-site.json", "./schemas/*.json", "./schemas/*/*.json"]) {
+for (const requiredExport of ["./registry.json", "./standards.json", "./site/kfd-site.json", "./buildchain.release-propagation.json", "./buildchain/kfd-1/contract-world.witness.json", "./schemas/*.json", "./schemas/*/*.json"]) {
   if (!packageJson.exports || !packageJson.exports[requiredExport]) {
     fail(`package.json exports must include ${requiredExport}`);
   }
@@ -102,6 +106,11 @@ for (const e of registry.entries) {
     if (standard.status !== e.status) fail(`${e.id} standard status must match registry status`);
     if (standard.document?.path !== e.path) fail(`${e.id} standard document path must match registry path`);
     if (standard.document?.url !== e.url) fail(`${e.id} standard document url must match registry url`);
+    if (!/^[0-9a-f]{64}$/.test(standard.document?.sha256 || "")) {
+      fail(`${e.id} standard document sha256 is required`);
+    } else if (existsSync(e.path) && standard.document.sha256 !== sha256File(e.path)) {
+      fail(`${e.id} standard document sha256 does not match ${e.path}`);
+    }
     if (standard.metadataSchemaVersion !== standardsMetadata.metadataSchema?.version) {
       fail(`${e.id} standard metadataSchemaVersion must match metadata schema version`);
     }
@@ -120,6 +129,28 @@ for (const e of registry.entries) {
         }
       }
     }
+    for (const [name, iface] of Object.entries(standard.interfaces ?? {})) {
+      requireFields(
+        iface,
+        standardsSchema.$defs?.standard?.properties?.interfaces?.additionalProperties?.required,
+        `${e.id} interfaces.${name}`
+      );
+      if (iface.schemaId !== standard.schemaIds?.[name]) fail(`${e.id} interfaces.${name}.schemaId must match schemaIds.${name}`);
+      if (iface.schemaPath !== standard.schemaPaths?.[name]) fail(`${e.id} interfaces.${name}.schemaPath must match schemaPaths.${name}`);
+      if (!Number.isInteger(iface.schemaVersion) || iface.schemaVersion < 1) {
+        fail(`${e.id} interfaces.${name}.schemaVersion must be a positive integer`);
+      }
+      if (!iface.compatibilityRule) fail(`${e.id} interfaces.${name}.compatibilityRule is required`);
+      if (existsSync(iface.schemaPath)) {
+        const schemaDoc = JSON.parse(readFileSync(iface.schemaPath, "utf8"));
+        if (schemaDoc.properties?.schemaVersion?.const !== iface.schemaVersion) {
+          fail(`${e.id} interfaces.${name}.schemaVersion must match schema properties.schemaVersion.const`);
+        }
+        if (schemaDoc.properties?.contract?.const !== iface.contract) {
+          fail(`${e.id} interfaces.${name}.contract must match schema properties.contract.const`);
+        }
+      }
+    }
   }
 }
 for (const key of Object.keys(standardsMetadata.standards ?? {})) {
@@ -131,6 +162,39 @@ if (kfd1?.schemaIds?.contractWorld !== "https://kfd.libkungfu.dev/schemas/kfd-1/
 }
 if (kfd1?.schemaIds?.witness !== "https://kfd.libkungfu.dev/schemas/kfd-1/witness.schema.json") {
   fail("KFD-1 standards metadata must expose the canonical witness schema URI");
+}
+for (const concept of ["factSource", "contractWorld", "weldedSurfaceRegister", "witness"]) {
+  if (!kfd1?.concepts?.[concept]) fail(`KFD-1 standards metadata missing concept ${concept}`);
+}
+for (const iface of ["contractWorld", "witness"]) {
+  if (!kfd1?.interfaces?.[iface]) fail(`KFD-1 standards metadata missing interface ${iface}`);
+}
+const kfd2 = standardsMetadata.standards?.["kfd-2"];
+if (kfd2?.schemaIds?.releaseClaims !== "https://kfd.libkungfu.dev/schemas/kfd-2/release-claims.schema.json") {
+  fail("KFD-2 standards metadata must expose the canonical releaseClaims schema URI");
+}
+if (kfd2?.schemaIds?.releaseTrustPassport !== "https://kfd.libkungfu.dev/schemas/kfd-2/release-trust-passport.schema.json") {
+  fail("KFD-2 standards metadata must expose the canonical releaseTrustPassport schema URI");
+}
+if (kfd2?.schemaPaths?.releaseClaims !== "schemas/kfd-2/release-claims.schema.json") {
+  fail("KFD-2 standards metadata must expose the releaseClaims schema path");
+}
+if (kfd2?.schemaPaths?.releaseTrustPassport !== "schemas/kfd-2/release-trust-passport.schema.json") {
+  fail("KFD-2 standards metadata must expose the releaseTrustPassport schema path");
+}
+const kfd2ClaimsSchema = JSON.parse(readFileSync("schemas/kfd-2/release-claims.schema.json", "utf8"));
+const kfd2TrustPassportSchema = JSON.parse(readFileSync("schemas/kfd-2/release-trust-passport.schema.json", "utf8"));
+if (kfd2ClaimsSchema.properties?.contract?.const !== "kfd-2-release-claims") {
+  fail("KFD-2 releaseClaims schema must describe the kfd-2-release-claims contract");
+}
+if (kfd2TrustPassportSchema.properties?.contract?.const !== "kfd-2-release-trust-passport") {
+  fail("KFD-2 releaseTrustPassport schema must describe the kfd-2-release-trust-passport contract");
+}
+for (const concept of ["facts", "releaseClaim", "releaseClaims", "evidenceBinding", "auditBoundary", "residualRisk", "releaseTrustPassport", "responsibilityState", "trust"]) {
+  if (!kfd2?.concepts?.[concept]) fail(`KFD-2 standards metadata missing concept ${concept}`);
+}
+for (const iface of ["releaseClaims", "releaseTrustPassport"]) {
+  if (!kfd2?.interfaces?.[iface]) fail(`KFD-2 standards metadata missing interface ${iface}`);
 }
 const kfd3 = standardsMetadata.standards?.["kfd-3"];
 if (kfd3?.schemaIds?.collaborationInterface !== "https://kfd.libkungfu.dev/schemas/kfd-3/collaboration-interface.schema.json") {
@@ -156,6 +220,9 @@ if (kfd3WitnessSchema.properties?.contract?.const !== "kfd-3-witness") {
 for (const concept of ["participant", "collaborationInterface", "minimalEntrypoint", "closure", "choicePath"]) {
   if (!kfd3?.concepts?.[concept]) fail(`KFD-3 standards metadata missing concept ${concept}`);
 }
+for (const iface of ["collaborationInterface", "witness"]) {
+  if (!kfd3?.interfaces?.[iface]) fail(`KFD-3 standards metadata missing interface ${iface}`);
+}
 for (const [id, successors] of superseded) {
   for (const successor of successors) {
     if (!registry.entries.some((e) => e.id === successor)) fail(`${id} cites missing successor ${successor}`);
@@ -175,6 +242,38 @@ if (!Array.isArray(boundary.ownedByKfd) || !boundary.ownedByKfd.includes("homepa
 }
 if (!Array.isArray(boundary.ownedBySite) || !boundary.ownedBySite.includes("CSS")) {
   fail("site bundle renderingBoundary.ownedBySite must include CSS");
+}
+if (!kfd1Witness) {
+  fail(`missing KFD-1 release witness ${kfd1WitnessPath}`);
+} else {
+  if (kfd1Witness.standard !== "kfd-1") fail("KFD-1 release witness standard must be kfd-1");
+  if (kfd1Witness.contractWorld?.schemaId !== "https://kfd.libkungfu.dev/schemas/kfd-1/contract-world.schema.json") {
+    fail("KFD-1 release witness contractWorld.schemaId must be canonical");
+  }
+  for (const field of ["canonicalPolicy", "registry"]) {
+    const entry = kfd1Witness[field];
+    if (!entry?.path || !entry?.sha256) fail(`KFD-1 release witness ${field} must include path and sha256`);
+    else if (!existsSync(entry.path)) fail(`KFD-1 release witness ${field} points to missing ${entry.path}`);
+    else if (entry.sha256 !== sha256File(entry.path)) fail(`KFD-1 release witness ${field}.sha256 does not match ${entry.path}`);
+  }
+  if (!Array.isArray(kfd1Witness.surfaces) || kfd1Witness.surfaces.length === 0) {
+    fail("KFD-1 release witness surfaces[] is required");
+  } else {
+    for (const [index, surface] of kfd1Witness.surfaces.entries()) {
+      if (!surface.name) fail(`KFD-1 release witness surfaces[${index}].name is required`);
+      if (!surface.artifactPath) fail(`KFD-1 release witness surfaces[${index}].artifactPath is required`);
+      else if (!existsSync(surface.artifactPath)) fail(`KFD-1 release witness surface ${surface.name || index} points to missing ${surface.artifactPath}`);
+      else {
+        const actual = sha256File(surface.artifactPath);
+        if (surface.expectedSha256 !== actual) {
+          fail(`KFD-1 release witness surface ${surface.name || index} expectedSha256 does not match ${surface.artifactPath}`);
+        }
+        if (surface.sourceSha256 && surface.sourceSha256 !== actual) {
+          fail(`KFD-1 release witness surface ${surface.name || index} sourceSha256 does not match ${surface.artifactPath}`);
+        }
+      }
+    }
+  }
 }
 const impactLevels = new Set(["patch", "minor", "major"]);
 const requiredSurfaces = new Set(["kfd-content", "kfd-registry-schema", "kfd-standards-metadata", "kfd-package-structure"]);

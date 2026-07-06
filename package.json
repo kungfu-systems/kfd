@@ -10,6 +10,8 @@
     "standards.json",
     "schemas",
     "site",
+    "buildchain.release-propagation.json",
+    ".buildchain/kfd-1/contract-world.witness.json",
     "docs"
   ],
   "exports": {
@@ -18,6 +20,8 @@
     "./registry.json": "./registry.json",
     "./standards.json": "./standards.json",
     "./site/kfd-site.json": "./site/kfd-site.json",
+    "./buildchain.release-propagation.json": "./buildchain.release-propagation.json",
+    "./buildchain/kfd-1/contract-world.witness.json": "./.buildchain/kfd-1/contract-world.witness.json",
     "./schemas/*.json": "./schemas/*.json",
     "./schemas/*/*.json": "./schemas/*/*.json",
     "./decisions/*.md": "./decisions/*.md",
