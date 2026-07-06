@@ -18,7 +18,9 @@ jobs:
     uses: kungfu-systems/buildchain/.github/workflows/.build.yml@v2
     secrets: inherit
     with:
-      runner-preset: github-hosted
+      runner-preset: custom
+      platforms-json: >-
+        [{"id":"linux-x64","name":"Linux x64","runner":"[\"ubuntu-24.04\"]"}]
       setup-node: true
       node-version: "24"
       require-install: true
@@ -31,9 +33,11 @@ jobs:
         decisions
         docs
         registry.json
+        standards.json
+        schemas
         site
         package.json
         release-impact.json
       release-candidate: true
       expected-artifacts-json: >-
-        {"minFiles":8,"requiredPaths":["README.md","registry.json","site/kfd-site.json","package.json","release-impact.json"]}
+        {"minFiles":11,"requiredPaths":["README.md","registry.json","standards.json","schemas/kfd-standards.schema.json","schemas/kfd-1/contract-world.schema.json","schemas/kfd-1/witness.schema.json","site/kfd-site.json","package.json","release-impact.json"]}

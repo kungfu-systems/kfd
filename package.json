@@ -7,9 +7,22 @@
     "README.md",
     "decisions",
     "registry.json",
+    "standards.json",
+    "schemas",
     "site",
     "docs"
   ],
+  "exports": {
+    "./package.json": "./package.json",
+    "./README.md": "./README.md",
+    "./registry.json": "./registry.json",
+    "./standards.json": "./standards.json",
+    "./site/kfd-site.json": "./site/kfd-site.json",
+    "./schemas/*.json": "./schemas/*.json",
+    "./schemas/*/*.json": "./schemas/*/*.json",
+    "./decisions/*.md": "./decisions/*.md",
+    "./docs/*": "./docs/*"
+  },
   "scripts": {
     "check": "node scripts/check.mjs"
   },
