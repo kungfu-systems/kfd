@@ -23,6 +23,15 @@ Together they define the load-bearing path for Kungfu products: make contract
 worlds explicit, make important claims inspectable, and let humans and agents
 cooperate through visible value rather than hidden pressure.
 
+## Product proof path
+
+KFDs are not a detached manifesto. Every active KFD should be reflected in
+product behavior, release evidence, documentation, or conformance checks that
+users and agents can verify. For Kungfu product philosophy, the main Kungfu
+product is the primary proof surface: users should be able to trace each
+load-bearing principle from this registry to a visible product surface,
+command, artifact, or release gate.
+
 Rendered index: `https://kfd.libkungfu.dev` (stable machine path per entry,
 e.g. `https://kfd.libkungfu.dev/1`). This repository publishes
 `@kungfu-tech/kfd` — the decision texts plus a machine-readable
