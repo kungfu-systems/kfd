@@ -78,6 +78,12 @@
       "purpose": "Route readers and agents to the right KFD document or machine surface."
     },
     {
+      "id": "official-status-and-trademarks",
+      "surface": "TRADEMARKS.md",
+      "participants": ["human-reader", "agent-reader", "package-consumer"],
+      "purpose": "Understand what Apache-2.0 covers and what remains official, trademark-bound, or endorsement-bound."
+    },
+    {
       "id": "registry",
       "surface": "registry.json",
       "participants": ["agent-reader", "package-consumer", "site-consumer"],
@@ -129,6 +135,14 @@
       "participants": ["human-reader", "agent-reader", "maintainer"],
       "value": "Document map for routing questions to KFD decisions and machine surfaces.",
       "discoverability": { "fromMinimalEntrypoint": true, "path": "docs/MAP.md" },
+      "maturity": "stable"
+    },
+    {
+      "id": "official-status-and-trademarks",
+      "kind": "markdown-doc",
+      "participants": ["human-reader", "agent-reader", "package-consumer"],
+      "value": "Apache-2.0 reuse boundary, trademark boundary, official source boundary, fork/derivative guidance, and agent-facing authority rule.",
+      "discoverability": { "fromMinimalEntrypoint": true, "path": "TRADEMARKS.md" },
       "maturity": "stable"
     },
     {

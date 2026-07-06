@@ -5,17 +5,17 @@
   "standard": "kfd-3",
   "collaborationInterface": {
     "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-3/collaboration-interface.schema.json",
-    "digest": "sha256:dd9e8fe66b26563c0081a007de782d20c2b13256ff628d4cfc45c8d41cf39e52"
+    "digest": "sha256:e32f2196399d37db202ccc656386bddc346871243c3db6782d26b5a88f831595"
   },
   "sourceRegistry": {
     "id": "kfd-collaboration-interface",
     "path": ".buildchain/kfd-3/collaboration-interface.json",
-    "sha256": "dd9e8fe66b26563c0081a007de782d20c2b13256ff628d4cfc45c8d41cf39e52"
+    "sha256": "e32f2196399d37db202ccc656386bddc346871243c3db6782d26b5a88f831595"
   },
   "artifact": {
     "name": "@kungfu-tech/kfd",
     "path": "npm:@kungfu-tech/kfd",
-    "digest": "sha256:dd9e8fe66b26563c0081a007de782d20c2b13256ff628d4cfc45c8d41cf39e52"
+    "digest": "sha256:e32f2196399d37db202ccc656386bddc346871243c3db6782d26b5a88f831595"
   },
   "surfaces": [
     {
@@ -39,6 +39,17 @@
       "participantFacing": true,
       "public": true,
       "sourcePath": "docs/MAP.md"
+    },
+    {
+      "id": "official-status-and-trademarks",
+      "name": "official-status-and-trademarks",
+      "kind": "markdown-doc",
+      "participantProfile": "human-reader,agent-reader,package-consumer",
+      "availability": "stable",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": "TRADEMARKS.md"
     },
     {
       "id": "decision-texts",
@@ -232,12 +243,17 @@
     {
       "id": "doc:readme",
       "sourcePath": "README.md",
-      "sha256": "4988ecbadfa83d1ab3bf0a383d7f9f8a646b467e6b144d76991ef0cea4c764b0"
+      "sha256": "25d733aa98a62dad100df10b9a3393364442f0cd06c2daab08e4a99471dd447b"
+    },
+    {
+      "id": "doc:trademarks",
+      "sourcePath": "TRADEMARKS.md",
+      "sha256": "c59e3e936c2a0f2e3598fc7f8977c734dfc1c23df506c8c8360eb39e8e2ee3e1"
     },
     {
       "id": "doc:docs-map",
       "sourcePath": "docs/MAP.md",
-      "sha256": "76b29836a8734328809f0bb1792b99e77b0afd1bf14859ba1546e8b8f2680c76"
+      "sha256": "c53b0d7bdc83c7e7c335e4aa23f54a76c9874908ea4d9e5d7861be3b0875bd8d"
     },
     {
       "id": "doc:kfd-2-release-trust",
@@ -321,7 +337,7 @@
     {
       "id": "metadata:release-impact",
       "sourcePath": "release-impact.json",
-      "sha256": "98a2b1aebc07a406de08baadd9916dd329712612fd0e93210828de9ea98021c5"
+      "sha256": "ae55c7758d53f7e57593e0ddec72142babd9a8ff7c9003e98f8b468b953e0d7e"
     },
     {
       "id": "metadata:release-anchor",
@@ -331,26 +347,26 @@
     {
       "id": "metadata:kfd-2-public-release-trust-claim",
       "sourcePath": ".buildchain/kfd-2/public-release-trust.claim.json",
-      "sha256": "32e9d99936110bc5f3a53b076efd38c61d67606f49ec37decf9e95f2fef04671"
+      "sha256": "a7d11efb89a19b1fa2c76d708eb3654fe3e52329c8baf4105f16f4cfddeadb33"
     }
   ],
   "packageExports": [
     {
       "id": "export:package-json",
       "sourcePath": "package.json#exports",
-      "sha256": "60dad27afe2d609287718e72d3a7c4bbca2d393db3c4d615233a6ab622aaa002"
+      "sha256": "c6e04ae6aac51b744670210bab28df8c3656f17ae7fa4ee144d86a49a9f3de33"
     },
     {
       "id": "export:npm-files",
       "sourcePath": "package.json#files",
-      "sha256": "60dad27afe2d609287718e72d3a7c4bbca2d393db3c4d615233a6ab622aaa002"
+      "sha256": "c6e04ae6aac51b744670210bab28df8c3656f17ae7fa4ee144d86a49a9f3de33"
     }
   ],
   "siteConsumptionContracts": [
     {
       "id": "site:kfd-site-bundle",
       "sourcePath": "site/kfd-site.json",
-      "sha256": "8d693d5af7c4ba01f7259c1c51baa957089286730807086b9635449cc2ecbdd3"
+      "sha256": "cb837c81d6fe02700528c5111558597225414c0c4fd9ab7279c94c61a3b4390c"
     },
     {
       "id": "site:release-propagation",
@@ -362,13 +378,18 @@
     "minimalEntrypoints": [
       {
         "path": "README.md",
-        "sha256": "4988ecbadfa83d1ab3bf0a383d7f9f8a646b467e6b144d76991ef0cea4c764b0",
+        "sha256": "25d733aa98a62dad100df10b9a3393364442f0cd06c2daab08e4a99471dd447b",
         "description": "Start from the KFD worldview and current decision set."
       },
       {
         "path": "docs/MAP.md",
-        "sha256": "76b29836a8734328809f0bb1792b99e77b0afd1bf14859ba1546e8b8f2680c76",
+        "sha256": "c53b0d7bdc83c7e7c335e4aa23f54a76c9874908ea4d9e5d7861be3b0875bd8d",
         "description": "Route readers and agents to the right KFD document or machine surface."
+      },
+      {
+        "path": "TRADEMARKS.md",
+        "sha256": "c59e3e936c2a0f2e3598fc7f8977c734dfc1c23df506c8c8360eb39e8e2ee3e1",
+        "description": "Understand what Apache-2.0 covers and what remains official, trademark-bound, or endorsement-bound."
       },
       {
         "path": "registry.json",
@@ -382,7 +403,7 @@
       },
       {
         "path": "package.json#exports",
-        "sha256": "60dad27afe2d609287718e72d3a7c4bbca2d393db3c4d615233a6ab622aaa002",
+        "sha256": "c6e04ae6aac51b744670210bab28df8c3656f17ae7fa4ee144d86a49a9f3de33",
         "description": "Consume the shipped npm package surfaces."
       },
       {
@@ -392,24 +413,29 @@
       },
       {
         "path": ".buildchain/kfd-2/public-release-trust.claim.json",
-        "sha256": "32e9d99936110bc5f3a53b076efd38c61d67606f49ec37decf9e95f2fef04671",
+        "sha256": "a7d11efb89a19b1fa2c76d708eb3654fe3e52329c8baf4105f16f4cfddeadb33",
         "description": "Inspect the explicit public KFD-2 claim passed into Buildchain release passport generation."
       },
       {
         "path": "site/kfd-site.json",
-        "sha256": "8d693d5af7c4ba01f7259c1c51baa957089286730807086b9635449cc2ecbdd3",
+        "sha256": "cb837c81d6fe02700528c5111558597225414c0c4fd9ab7279c94c61a3b4390c",
         "description": "Render KFD-owned site text and decision pages without duplicating extraction logic."
       }
     ],
     "discoverability": [
       {
         "path": "README.md",
-        "sha256": "4988ecbadfa83d1ab3bf0a383d7f9f8a646b467e6b144d76991ef0cea4c764b0",
+        "sha256": "25d733aa98a62dad100df10b9a3393364442f0cd06c2daab08e4a99471dd447b",
         "description": "Human and agent entrypoint"
       },
       {
+        "path": "TRADEMARKS.md",
+        "sha256": "c59e3e936c2a0f2e3598fc7f8977c734dfc1c23df506c8c8360eb39e8e2ee3e1",
+        "description": "Official status, trademark, and authority boundary"
+      },
+      {
         "path": "docs/MAP.md",
-        "sha256": "76b29836a8734328809f0bb1792b99e77b0afd1bf14859ba1546e8b8f2680c76",
+        "sha256": "c53b0d7bdc83c7e7c335e4aa23f54a76c9874908ea4d9e5d7861be3b0875bd8d",
         "description": "Documentation routing entrypoint"
       },
       {
@@ -424,17 +450,17 @@
       },
       {
         "path": ".buildchain/kfd-2/public-release-trust.claim.json",
-        "sha256": "32e9d99936110bc5f3a53b076efd38c61d67606f49ec37decf9e95f2fef04671",
+        "sha256": "a7d11efb89a19b1fa2c76d708eb3654fe3e52329c8baf4105f16f4cfddeadb33",
         "description": "KFD-2 public release trust claim"
       },
       {
         "path": "package.json",
-        "sha256": "60dad27afe2d609287718e72d3a7c4bbca2d393db3c4d615233a6ab622aaa002",
+        "sha256": "c6e04ae6aac51b744670210bab28df8c3656f17ae7fa4ee144d86a49a9f3de33",
         "description": "Package export map"
       },
       {
         "path": "site/kfd-site.json",
-        "sha256": "8d693d5af7c4ba01f7259c1c51baa957089286730807086b9635449cc2ecbdd3",
+        "sha256": "cb837c81d6fe02700528c5111558597225414c0c4fd9ab7279c94c61a3b4390c",
         "description": "Site content projection"
       }
     ],
@@ -445,20 +471,25 @@
         "description": "Append-only decision and contribution constraints"
       },
       {
+        "path": "TRADEMARKS.md",
+        "sha256": "c59e3e936c2a0f2e3598fc7f8977c734dfc1c23df506c8c8360eb39e8e2ee3e1",
+        "description": "Trademark and official-status constraints"
+      },
+      {
         "path": "scripts/check.mjs",
-        "sha256": "7b1e99ad9134d8d4f0ae658b3addd785949d6b7798cf57daba1078424ab8d16a",
+        "sha256": "c541d7fd8318c225fd99e042f2c8adee4be8723505c28b79acd017c7eff23d46",
         "description": "Repository self-verification gate"
       },
       {
         "path": "site/kfd-site.json",
-        "sha256": "8d693d5af7c4ba01f7259c1c51baa957089286730807086b9635449cc2ecbdd3",
+        "sha256": "cb837c81d6fe02700528c5111558597225414c0c4fd9ab7279c94c61a3b4390c",
         "description": "Site rendering boundary"
       }
     ],
     "choicePaths": [
       {
         "path": "README.md",
-        "sha256": "4988ecbadfa83d1ab3bf0a383d7f9f8a646b467e6b144d76991ef0cea4c764b0",
+        "sha256": "25d733aa98a62dad100df10b9a3393364442f0cd06c2daab08e4a99471dd447b",
         "description": "Human reading path"
       },
       {
@@ -473,19 +504,23 @@
       },
       {
         "path": ".buildchain/kfd-2/public-release-trust.claim.json",
-        "sha256": "32e9d99936110bc5f3a53b076efd38c61d67606f49ec37decf9e95f2fef04671",
+        "sha256": "a7d11efb89a19b1fa2c76d708eb3654fe3e52329c8baf4105f16f4cfddeadb33",
         "description": "Agent release trust claim path"
       },
       {
         "path": "package.json",
-        "sha256": "60dad27afe2d609287718e72d3a7c4bbca2d393db3c4d615233a6ab622aaa002",
+        "sha256": "c6e04ae6aac51b744670210bab28df8c3656f17ae7fa4ee144d86a49a9f3de33",
         "description": "Package consumption path"
       }
     ],
     "manuals": [
       {
         "path": "docs/MAP.md",
-        "sha256": "76b29836a8734328809f0bb1792b99e77b0afd1bf14859ba1546e8b8f2680c76"
+        "sha256": "c53b0d7bdc83c7e7c335e4aa23f54a76c9874908ea4d9e5d7861be3b0875bd8d"
+      },
+      {
+        "path": "TRADEMARKS.md",
+        "sha256": "c59e3e936c2a0f2e3598fc7f8977c734dfc1c23df506c8c8360eb39e8e2ee3e1"
       },
       {
         "path": "docs/kfd-3-collaboration-interface.md",
@@ -498,6 +533,7 @@
     "reachableEntrypoints": [
       "readme",
       "docs-map",
+      "official-status-and-trademarks",
       "registry",
       "standards",
       "package-exports",
@@ -508,6 +544,7 @@
     "classifiedEntrypoints": [
       "readme",
       "docs-map",
+      "official-status-and-trademarks",
       "registry",
       "standards",
       "package-exports",
