@@ -77,7 +77,28 @@
   "decisionPages": {
     "source": "registry.json",
     "bodySource": "registry.entries[].path",
-    "stableUrlField": "url"
+    "stableUrlField": "url",
+    "metadata": {
+      "publicFactSource": {
+        "kind": "git-repository",
+        "host": "github",
+        "repository": "kungfu-systems/kfd",
+        "url": "https://github.com/kungfu-systems/kfd",
+        "loadBearingCoordinate": "commit-addressed repository contents",
+        "stableRenderedIndex": "https://kfd.libkungfu.dev",
+        "canonicalPaths": [
+          "decisions/kfd-N.md",
+          "registry.json",
+          "standards.json"
+        ],
+        "projectionSurfaces": [
+          "https://kfd.libkungfu.dev/N",
+          "npm:@kungfu-tech/kfd",
+          "Buildchain release passports"
+        ],
+        "extensionRequestNote": "GitHub issues are extension request paths; KFD facts are created only by committed repository contents."
+      }
+    }
   },
   "renderingBoundary": {
     "ownedByKfd": [
@@ -86,6 +107,7 @@
       "foundation model layers and chain",
       "product proof path text",
       "decision metadata",
+      "decision metadata fact source",
       "decision markdown bodies"
     ],
     "ownedBySite": [

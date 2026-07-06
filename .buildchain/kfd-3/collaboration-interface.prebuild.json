@@ -10,9 +10,9 @@
   "sourceRegistry": {
     "id": "kfd-collaboration-interface",
     "path": ".buildchain/kfd-3/collaboration-interface.json",
-    "sha256": "1ea21fa2cd88cf3cb7348e6b37a5b106982e780a5114655e36e7535cedde3969"
+    "sha256": "dd9e8fe66b26563c0081a007de782d20c2b13256ff628d4cfc45c8d41cf39e52"
   },
-  "collaborationInterfaceDigest": "sha256:1ea21fa2cd88cf3cb7348e6b37a5b106982e780a5114655e36e7535cedde3969",
+  "collaborationInterfaceDigest": "sha256:dd9e8fe66b26563c0081a007de782d20c2b13256ff628d4cfc45c8d41cf39e52",
   "collaborationInterface": {
     "schemaVersion": 1,
     "contract": "kfd-3-collaboration-interface",
@@ -25,6 +25,28 @@
     "sourceRegistry": {
       "path": "registry.json"
     },
+    "factSources": [
+      {
+        "id": "public-kfd-fact-source",
+        "kind": "git-repository",
+        "host": "github",
+        "repository": "kungfu-systems/kfd",
+        "url": "https://github.com/kungfu-systems/kfd",
+        "loadBearingCoordinate": "commit-addressed repository contents",
+        "stableRenderedIndex": "https://kfd.libkungfu.dev",
+        "canonicalPaths": [
+          "decisions/kfd-N.md",
+          "registry.json",
+          "standards.json"
+        ],
+        "projectionSurfaces": [
+          "https://kfd.libkungfu.dev/N",
+          "npm:@kungfu-tech/kfd",
+          "Buildchain release passports"
+        ],
+        "extensionRequestNote": "GitHub issues are extension request paths; KFD facts are created only by committed repository contents."
+      }
+    ],
     "participants": [
       {
         "id": "human-reader",
@@ -246,7 +268,7 @@
           "site-consumer",
           "agent-reader"
         ],
-        "value": "KFD-owned content projection consumed by the public site renderer.",
+        "value": "KFD-owned content projection consumed by the public site renderer, including decision metadata and the public KFD fact-source boundary.",
         "discoverability": {
           "fromMinimalEntrypoint": true,
           "path": "site/kfd-site.json"
@@ -667,12 +689,12 @@
     {
       "id": "doc:readme",
       "sourcePath": "README.md",
-      "sha256": "4aadee0f7b670e8382a136399d217a2657ba3a898fcbbedbb247b13c42e3b83b"
+      "sha256": "4988ecbadfa83d1ab3bf0a383d7f9f8a646b467e6b144d76991ef0cea4c764b0"
     },
     {
       "id": "doc:docs-map",
       "sourcePath": "docs/MAP.md",
-      "sha256": "b4d32fa4668268a932c833759fff53ab532eba4ee04767c2171ab999cfc2c94d"
+      "sha256": "76b29836a8734328809f0bb1792b99e77b0afd1bf14859ba1546e8b8f2680c76"
     },
     {
       "id": "doc:kfd-2-release-trust",
@@ -682,7 +704,7 @@
     {
       "id": "doc:kfd-3-collaboration-interface",
       "sourcePath": "docs/kfd-3-collaboration-interface.md",
-      "sha256": "499718595078e5df40ba47610434c10b95b2f6051ab732bbf72b1a8f28173007"
+      "sha256": "d483ff6f8423a2e3f8e5dc547b62139d5c365678f9974d62063f8b523f14edb0"
     },
     {
       "id": "decision:kfd-1",
@@ -734,7 +756,7 @@
     {
       "id": "schema:kfd-3:collaboration-interface",
       "sourcePath": "schemas/kfd-3/collaboration-interface.schema.json",
-      "sha256": "01a7c92ee56f4a02f6fb0505d61494814f131c0c14917a8d6931716dcd6a05f5"
+      "sha256": "e8d1f67914751b956c5a075eddbcc1ba482ddd21ce7298ab3a8b9df359a0ae44"
     },
     {
       "id": "schema:kfd-3:witness",
@@ -756,7 +778,7 @@
     {
       "id": "metadata:release-impact",
       "sourcePath": "release-impact.json",
-      "sha256": "48407b3d911d69ae7140c00c3a97cd683af4f8381844ef163501becfe8ac1a78"
+      "sha256": "98a2b1aebc07a406de08baadd9916dd329712612fd0e93210828de9ea98021c5"
     },
     {
       "id": "metadata:release-anchor",
@@ -766,7 +788,7 @@
     {
       "id": "metadata:kfd-2-public-release-trust-claim",
       "sourcePath": ".buildchain/kfd-2/public-release-trust.claim.json",
-      "sha256": "27c19a2a20ef35b89e264a113d21dac0c0f9701dbcf43990bb535f3d093e74cd"
+      "sha256": "32e9d99936110bc5f3a53b076efd38c61d67606f49ec37decf9e95f2fef04671"
     }
   ],
   "packageExports": [
@@ -785,7 +807,7 @@
     {
       "id": "site:kfd-site-bundle",
       "sourcePath": "site/kfd-site.json",
-      "sha256": "79eed762358b502d2c86ec65f24a3915d53d58a055fa92cc75447d30665346ee"
+      "sha256": "8d693d5af7c4ba01f7259c1c51baa957089286730807086b9635449cc2ecbdd3"
     },
     {
       "id": "site:release-propagation",
