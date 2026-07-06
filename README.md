@@ -25,12 +25,13 @@ cooperate through visible value rather than hidden pressure.
 
 ## Product proof path
 
-KFDs are not a detached manifesto. Every active KFD should be reflected in
-product behavior, release evidence, documentation, or conformance checks that
-users and agents can verify. For Kungfu product philosophy, the main Kungfu
-product is the primary proof surface: users should be able to trace each
-load-bearing principle from this registry to a visible product surface,
-command, artifact, or release gate.
+KFDs are not a detached manifesto, but they are not a demand that readers adopt
+a Kungfu product before understanding the decisions. A philosophy becomes
+load-bearing only when it can be seen in a concrete case. For that reference
+case, use the main Kungfu product entrypoint (`https://kungfu.tech`) for product
+philosophy, and Buildchain (`https://buildchain.libkungfu.dev`) for release and
+provenance accountability. This registry states the commitments; those
+entrypoints show how the commitments are meant to be borne in practice.
 
 Rendered index: `https://kfd.libkungfu.dev` (stable machine path per entry,
 e.g. `https://kfd.libkungfu.dev/1`). This repository publishes
