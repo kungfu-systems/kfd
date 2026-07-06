@@ -55,12 +55,12 @@ if (siteBundle.homepage?.title !== "KFD — Kung Fu Decisions") fail("site bundl
 if (siteBundle.homepage?.currentDecisions?.source !== "registry.json") fail("site bundle currentDecisions source must be registry.json");
 if (siteBundle.decisionPages?.source !== "registry.json") fail("site bundle decisionPages source must be registry.json");
 if (siteBundle.decisionPages?.bodySource !== "registry.entries[].path") fail("site bundle decision page body source must be registry.entries[].path");
-for (const requiredFile of ["README.md", "decisions", "registry.json", "standards.json", "kfd.release.json", "schemas", "site", "buildchain.release-propagation.json", ".buildchain/kfd-1/contract-world.witness.json", ".buildchain/kfd-3", "docs"]) {
+for (const requiredFile of ["README.md", "decisions", "registry.json", "standards.json", "kfd.release.json", "schemas", "site", "buildchain.release-propagation.json", "release-impact.json", ".buildchain/kfd-1/contract-world.witness.json", ".buildchain/kfd-3", "docs"]) {
   if (!Array.isArray(packageJson.files) || !packageJson.files.includes(requiredFile)) {
     fail(`package.json files[] must include ${requiredFile}`);
   }
 }
-for (const requiredExport of ["./registry.json", "./standards.json", "./kfd.release.json", "./site/kfd-site.json", "./buildchain.release-propagation.json", "./buildchain/kfd-1/contract-world.witness.json", "./buildchain/kfd-3/collaboration-interface.json", "./buildchain/kfd-3/collaboration-interface.prebuild.json", "./buildchain/kfd-3/collaboration-interface.artifact.json", "./schemas/*.json", "./schemas/*/*.json"]) {
+for (const requiredExport of ["./registry.json", "./standards.json", "./kfd.release.json", "./site/kfd-site.json", "./buildchain.release-propagation.json", "./release-impact.json", "./buildchain/kfd-1/contract-world.witness.json", "./buildchain/kfd-3/collaboration-interface.json", "./buildchain/kfd-3/collaboration-interface.prebuild.json", "./buildchain/kfd-3/collaboration-interface.artifact.json", "./schemas/*.json", "./schemas/*/*.json"]) {
   if (!packageJson.exports || !packageJson.exports[requiredExport]) {
     fail(`package.json exports must include ${requiredExport}`);
   }

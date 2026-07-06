@@ -1,6 +1,6 @@
 {
   "name": "@kungfu-tech/kfd",
-  "version": "1.0.0-alpha.5",
+  "version": "1.0.0-alpha.6",
   "description": "Kung Fu Decisions (KFD): the kungfu-systems organization-wide decision registry, as a consumable artifact",
   "license": "Apache-2.0",
   "files": [
@@ -12,6 +12,7 @@
     "schemas",
     "site",
     "buildchain.release-propagation.json",
+    "release-impact.json",
     ".buildchain/kfd-1/contract-world.witness.json",
     ".buildchain/kfd-3",
     "docs"
@@ -24,6 +25,7 @@
     "./kfd.release.json": "./kfd.release.json",
     "./site/kfd-site.json": "./site/kfd-site.json",
     "./buildchain.release-propagation.json": "./buildchain.release-propagation.json",
+    "./release-impact.json": "./release-impact.json",
     "./buildchain/kfd-1/contract-world.witness.json": "./.buildchain/kfd-1/contract-world.witness.json",
     "./buildchain/kfd-3/collaboration-interface.json": "./.buildchain/kfd-3/collaboration-interface.json",
     "./buildchain/kfd-3/collaboration-interface.prebuild.json": "./.buildchain/kfd-3/collaboration-interface.prebuild.json",

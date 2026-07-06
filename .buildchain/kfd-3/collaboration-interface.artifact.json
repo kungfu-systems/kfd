@@ -266,19 +266,19 @@
     {
       "id": "metadata:release-anchor",
       "sourcePath": "kfd.release.json",
-      "sha256": "8afda1ba848529b2cbc589fb453cf5bb9a2392c4cbe84b83a5b9636215b56831"
+      "sha256": "32603e200ba75d3c2996551dec6a3441854aeede96516c6ed6fdb49da6dba311"
     }
   ],
   "packageExports": [
     {
       "id": "export:package-json",
       "sourcePath": "package.json#exports",
-      "sha256": "5574e6324befd177c3b138da347361ae5f4b23edcbe8390d4f0d5fd3d0838ff7"
+      "sha256": "560bf60bdce7350ee5720fb4e9271cfeea7d3e54344ab464bed9553af17ff85a"
     },
     {
       "id": "export:npm-files",
       "sourcePath": "package.json#files",
-      "sha256": "5574e6324befd177c3b138da347361ae5f4b23edcbe8390d4f0d5fd3d0838ff7"
+      "sha256": "560bf60bdce7350ee5720fb4e9271cfeea7d3e54344ab464bed9553af17ff85a"
     }
   ],
   "siteConsumptionContracts": [
@@ -317,12 +317,12 @@
       },
       {
         "path": "package.json#exports",
-        "sha256": "5574e6324befd177c3b138da347361ae5f4b23edcbe8390d4f0d5fd3d0838ff7",
+        "sha256": "560bf60bdce7350ee5720fb4e9271cfeea7d3e54344ab464bed9553af17ff85a",
         "description": "Consume the shipped npm package surfaces."
       },
       {
         "path": "kfd.release.json",
-        "sha256": "8afda1ba848529b2cbc589fb453cf5bb9a2392c4cbe84b83a5b9636215b56831",
+        "sha256": "32603e200ba75d3c2996551dec6a3441854aeede96516c6ed6fdb49da6dba311",
         "description": "Inspect the explicit KFD package version anchor for the current Buildchain release line."
       },
       {
@@ -354,7 +354,7 @@
       },
       {
         "path": "package.json",
-        "sha256": "5574e6324befd177c3b138da347361ae5f4b23edcbe8390d4f0d5fd3d0838ff7",
+        "sha256": "560bf60bdce7350ee5720fb4e9271cfeea7d3e54344ab464bed9553af17ff85a",
         "description": "Package export map"
       },
       {
@@ -371,7 +371,7 @@
       },
       {
         "path": "scripts/check.mjs",
-        "sha256": "9617873ab56c6df8c9d36a980c98992ab5bfd5911b317ed64764e040a2435407",
+        "sha256": "cbe8f2c20348580fad4729cc36c068f888e6216fa0c99cd13f34619b71864b11",
         "description": "Repository self-verification gate"
       },
       {
@@ -398,7 +398,7 @@
       },
       {
         "path": "package.json",
-        "sha256": "5574e6324befd177c3b138da347361ae5f4b23edcbe8390d4f0d5fd3d0838ff7",
+        "sha256": "560bf60bdce7350ee5720fb4e9271cfeea7d3e54344ab464bed9553af17ff85a",
         "description": "Package consumption path"
       }
     ],
