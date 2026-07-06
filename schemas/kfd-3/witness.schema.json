@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-3/witness.schema.json",
+  "title": "KFD-3 witness",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "contract",
+    "standard",
+    "collaborationInterface",
+    "sourceRegistry",
+    "evidence",
+    "closure"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "contract": {
+      "const": "kfd-3-witness"
+    },
+    "standard": {
+      "const": "kfd-3"
+    },
+    "collaborationInterface": {
+      "type": "object",
+      "required": [
+        "schemaId",
+        "digest"
+      ],
+      "properties": {
+        "schemaId": {
+          "const": "https://kfd.libkungfu.dev/schemas/kfd-3/collaboration-interface.schema.json"
+        },
+        "digest": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "sourceRegistry": {
+      "$ref": "#/$defs/artifactPointer"
+    },
+    "evidence": {
+      "type": "object",
+      "required": [
+        "minimalEntrypoints",
+        "discoverability",
+        "transparentConstraints",
+        "choicePaths"
+      ],
+      "properties": {
+        "minimalEntrypoints": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/artifactPointer"
+          }
+        },
+        "discoverability": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/artifactPointer"
+          }
+        },
+        "transparentConstraints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/artifactPointer"
+          }
+        },
+        "choicePaths": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/artifactPointer"
+          }
+        },
+        "manuals": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/artifactPointer"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "closure": {
+      "type": "object",
+      "required": [
+        "classificationMode",
+        "reachableEntrypoints",
+        "classifiedEntrypoints",
+        "unclassifiedEntrypoints"
+      ],
+      "properties": {
+        "classificationMode": {
+          "const": "closed-world"
+        },
+        "reachableEntrypoints": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "classifiedEntrypoints": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "unclassifiedEntrypoints": {
+          "type": "array",
+          "maxItems": 0
+        }
+      },
+      "additionalProperties": true
+    },
+    "result": {
+      "enum": [
+        "pass",
+        "fail",
+        "warning"
+      ]
+    }
+  },
+  "additionalProperties": true,
+  "$defs": {
+    "artifactPointer": {
+      "type": "object",
+      "required": [
+        "path"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

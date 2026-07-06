@@ -8,6 +8,7 @@
 | What should a site renderer consume to render `kfd.libkungfu.dev`? | [`../site/kfd-site.json`](../site/kfd-site.json) |
 | What is the top-level product accountability principle? | [KFD-2](../decisions/kfd-2.md) |
 | What stance should products take toward humans and agents as reasoning participants? | [KFD-3](../decisions/kfd-3.md) |
+| What schema should products use for KFD-3 participant-facing collaboration interfaces? | [`kfd-3-collaboration-interface.md`](kfd-3-collaboration-interface.md) |
 | What does a specific decision say? | [`../decisions/`](../decisions) (index: [`../registry.json`](../registry.json)) |
 | What machine metadata should Buildchain or another consumer import for KFD standard identity and schema IDs? | [`../standards.json`](../standards.json) |
 | What schema validates the standards metadata surface? | [`../schemas/kfd-standards.schema.json`](../schemas/kfd-standards.schema.json) |
