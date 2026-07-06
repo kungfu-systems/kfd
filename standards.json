@@ -102,16 +102,26 @@
         "rule": "Substantive semantic changes mint a new KFD; compatible metadata additions keep schemaVersion 1."
       },
       "schemaIds": {
-        "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json"
+        "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json",
+        "collaborationInterface": "https://kfd.libkungfu.dev/schemas/kfd-3/collaboration-interface.schema.json",
+        "witness": "https://kfd.libkungfu.dev/schemas/kfd-3/witness.schema.json"
       },
       "schemaPaths": {
-        "metadata": "schemas/kfd-standards.schema.json"
+        "metadata": "schemas/kfd-standards.schema.json",
+        "collaborationInterface": "schemas/kfd-3/collaboration-interface.schema.json",
+        "witness": "schemas/kfd-3/witness.schema.json"
       },
       "concepts": {
         "transparentValue": "transparent value",
         "stableChoice": "stable choice",
         "explainableConstraints": "explainable constraints",
-        "nonCoercion": "non-coercive cooperation"
+        "nonCoercion": "non-coercive cooperation",
+        "participant": "participant",
+        "collaborationInterface": "collaboration interface",
+        "minimalEntrypoint": "minimal entrypoint",
+        "discoverability": "discoverability",
+        "closure": "closed-world interface classification",
+        "choicePath": "choice path"
       }
     }
   }

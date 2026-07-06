@@ -132,6 +132,30 @@ if (kfd1?.schemaIds?.contractWorld !== "https://kfd.libkungfu.dev/schemas/kfd-1/
 if (kfd1?.schemaIds?.witness !== "https://kfd.libkungfu.dev/schemas/kfd-1/witness.schema.json") {
   fail("KFD-1 standards metadata must expose the canonical witness schema URI");
 }
+const kfd3 = standardsMetadata.standards?.["kfd-3"];
+if (kfd3?.schemaIds?.collaborationInterface !== "https://kfd.libkungfu.dev/schemas/kfd-3/collaboration-interface.schema.json") {
+  fail("KFD-3 standards metadata must expose the canonical collaborationInterface schema URI");
+}
+if (kfd3?.schemaIds?.witness !== "https://kfd.libkungfu.dev/schemas/kfd-3/witness.schema.json") {
+  fail("KFD-3 standards metadata must expose the canonical witness schema URI");
+}
+if (kfd3?.schemaPaths?.collaborationInterface !== "schemas/kfd-3/collaboration-interface.schema.json") {
+  fail("KFD-3 standards metadata must expose the collaborationInterface schema path");
+}
+if (kfd3?.schemaPaths?.witness !== "schemas/kfd-3/witness.schema.json") {
+  fail("KFD-3 standards metadata must expose the witness schema path");
+}
+const kfd3CollaborationSchema = JSON.parse(readFileSync("schemas/kfd-3/collaboration-interface.schema.json", "utf8"));
+const kfd3WitnessSchema = JSON.parse(readFileSync("schemas/kfd-3/witness.schema.json", "utf8"));
+if (kfd3CollaborationSchema.properties?.contract?.const !== "kfd-3-collaboration-interface") {
+  fail("KFD-3 collaborationInterface schema must describe the kfd-3-collaboration-interface contract");
+}
+if (kfd3WitnessSchema.properties?.contract?.const !== "kfd-3-witness") {
+  fail("KFD-3 witness schema must describe the kfd-3-witness contract");
+}
+for (const concept of ["participant", "collaborationInterface", "minimalEntrypoint", "closure", "choicePath"]) {
+  if (!kfd3?.concepts?.[concept]) fail(`KFD-3 standards metadata missing concept ${concept}`);
+}
 for (const [id, successors] of superseded) {
   for (const successor of successors) {
     if (!registry.entries.some((e) => e.id === successor)) fail(`${id} cites missing successor ${successor}`);

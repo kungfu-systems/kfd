@@ -1,0 +1,348 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-3/collaboration-interface.schema.json",
+  "title": "KFD-3 collaboration interface",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "contract",
+    "standard",
+    "product",
+    "sourceRegistry",
+    "participants",
+    "minimalEntrypoints",
+    "surfaces",
+    "transparentConstraints",
+    "choicePaths",
+    "closure"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "contract": {
+      "const": "kfd-3-collaboration-interface"
+    },
+    "standard": {
+      "const": "kfd-3"
+    },
+    "product": {
+      "type": "object",
+      "required": [
+        "name",
+        "version"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "repository": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "sourceRegistry": {
+      "$ref": "#/$defs/artifactPointer"
+    },
+    "participants": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/participant"
+      }
+    },
+    "minimalEntrypoints": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/entrypoint"
+      }
+    },
+    "surfaces": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/surface"
+      }
+    },
+    "transparentConstraints": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/transparentConstraint"
+      }
+    },
+    "choicePaths": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/choicePath"
+      }
+    },
+    "closure": {
+      "type": "object",
+      "required": [
+        "classificationMode",
+        "unclassifiedEntrypointsPolicy"
+      ],
+      "properties": {
+        "classificationMode": {
+          "enum": [
+            "closed-world",
+            "declared-open"
+          ]
+        },
+        "unclassifiedEntrypointsPolicy": {
+          "enum": [
+            "fail",
+            "warn",
+            "documented-open"
+          ]
+        },
+        "reachableSurfaceSource": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true,
+  "$defs": {
+    "artifactPointer": {
+      "type": "object",
+      "required": [
+        "path"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "schemaId": {
+          "type": "string",
+          "format": "uri"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "additionalProperties": true
+    },
+    "participant": {
+      "type": "object",
+      "required": [
+        "id",
+        "kind",
+        "description"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "kind": {
+          "enum": [
+            "human",
+            "agent",
+            "operator",
+            "extension-author",
+            "api-consumer",
+            "hosted-service-user",
+            "service-integrator",
+            "maintainer",
+            "other"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "entrypoint": {
+      "type": "object",
+      "required": [
+        "id",
+        "surface",
+        "participants"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "surface": {
+          "type": "string",
+          "minLength": 1
+        },
+        "participants": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "purpose": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "surface": {
+      "type": "object",
+      "required": [
+        "id",
+        "kind",
+        "participants",
+        "value",
+        "discoverability"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "kind": {
+          "enum": [
+            "cli-command",
+            "json-api",
+            "markdown-doc",
+            "skill",
+            "gui",
+            "web",
+            "config",
+            "envelope",
+            "package",
+            "protocol",
+            "other"
+          ]
+        },
+        "participants": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "value": {
+          "type": "string",
+          "minLength": 1
+        },
+        "discoverability": {
+          "type": "object",
+          "required": [
+            "fromMinimalEntrypoint"
+          ],
+          "properties": {
+            "fromMinimalEntrypoint": {
+              "type": "boolean"
+            },
+            "path": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": true
+        },
+        "maturity": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "transparentConstraint": {
+      "type": "object",
+      "required": [
+        "id",
+        "appliesTo",
+        "restriction",
+        "rationale",
+        "reviewPath"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "appliesTo": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "restriction": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reviewPath": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "choicePath": {
+      "type": "object",
+      "required": [
+        "id",
+        "participants",
+        "choices"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "participants": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "choices": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "label"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": true
+          }
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}
