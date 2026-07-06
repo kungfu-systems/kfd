@@ -1,0 +1,73 @@
+name: Publish npm package
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: npm dist-tag to publish
+        required: true
+        default: alpha
+        type: choice
+        options:
+          - alpha
+          - latest
+      dry_run:
+        description: Run npm publish without uploading a package
+        required: true
+        default: true
+        type: boolean
+  push:
+    tags:
+      - kfd-v*
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Use npm 11
+        run: npm install -g npm@11
+
+      - name: Verify KFD registry
+        run: node scripts/check.mjs
+
+      - name: Resolve publish parameters
+        id: publish-params
+        run: |
+          version="$(node -p "require('./package.json').version")"
+          if [ "${GITHUB_REF_TYPE}" = "tag" ]; then
+            expected_tag="kfd-v${version}"
+            if [ "${GITHUB_REF_NAME}" != "${expected_tag}" ]; then
+              echo "Tag ${GITHUB_REF_NAME} does not match package version ${version}; expected ${expected_tag}" >&2
+              exit 1
+            fi
+            case "${version}" in
+              *-alpha.*) tag="alpha" ;;
+              *) tag="latest" ;;
+            esac
+            dry_run="false"
+          else
+            tag="${{ inputs.tag }}"
+            dry_run="${{ inputs.dry_run }}"
+          fi
+          echo "tag=${tag}" >> "${GITHUB_OUTPUT}"
+          echo "dry_run=${dry_run}" >> "${GITHUB_OUTPUT}"
+
+      - name: Dry-run publish
+        if: ${{ steps.publish-params.outputs.dry_run == 'true' }}
+        run: npm publish --provenance --access public --tag "${{ steps.publish-params.outputs.tag }}" --dry-run
+
+      - name: Publish
+        if: ${{ steps.publish-params.outputs.dry_run == 'false' }}
+        run: npm publish --provenance --access public --tag "${{ steps.publish-params.outputs.tag }}"
