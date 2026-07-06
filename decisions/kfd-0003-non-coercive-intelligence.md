@@ -1,4 +1,4 @@
-# KFD-3: Non-coercive intelligence — transparent value should guide intelligent participants
+# KFD-3: Cooperation must start from transparent value — compliance must not be coerced
 
 - Status: active
 - Number: 3
@@ -7,11 +7,10 @@
 
 ## One sentence
 
-Kungfu-systems products should not try to obtain cooperation or compliance
-from humans or agents through pressure, manipulation, hidden control, or forced
-workflow capture. They should make value discoverable through transparent
-facts, stable choices, and reviewable safety constraints so intelligent
-participants can understand, decide, and cooperate.
+A product must not obtain cooperation through pressure, manipulation, hidden
+control, or forced workflow capture. It must make value, choices, and
+constraints visible enough for intelligent participants to understand, decide,
+and cooperate.
 
 ## Decision type
 

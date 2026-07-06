@@ -42,9 +42,9 @@ e.g. `https://kfd.libkungfu.dev/1`). This repository publishes
 
 | ID | Kind | Title | Status |
 |---|---|---|---|
-| [KFD-1](decisions/kfd-0001-release-versioning.md) | procedure | Release versioning: welded-surface registers decide patch, minor, and major | active |
-| [KFD-2](decisions/kfd-0002-fact-first-product-accountability.md) | principle | Fact-first product accountability: responsibility should be the path of least resistance | active |
-| [KFD-3](decisions/kfd-0003-non-coercive-intelligence.md) | principle | Non-coercive intelligence: transparent value should guide intelligent participants | active |
+| [KFD-1](decisions/kfd-0001-release-versioning.md) | procedure | Contracts must not drift: contract worlds need one fact source | active |
+| [KFD-2](decisions/kfd-0002-fact-first-product-accountability.md) | principle | Trust must start from facts: responsibility must be inspectable | active |
+| [KFD-3](decisions/kfd-0003-non-coercive-intelligence.md) | principle | Cooperation must start from transparent value: compliance must not be coerced | active |
 
 ## How to cite
 
