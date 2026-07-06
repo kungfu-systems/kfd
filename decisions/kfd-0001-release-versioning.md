@@ -1,4 +1,4 @@
-# KFD-1: Release versioning — welded-surface registers decide patch, minor, and major
+# KFD-1: Contracts must not drift — contract worlds need one fact source
 
 - Status: active
 - Number: 1
@@ -7,10 +7,9 @@
 
 ## One sentence
 
-A version number is not a summary of the changelog; it is the coordinate of
-**which contract world an artifact speaks**. A line may only open because that
-world changed, and the world may only change by opening a line — never by
-drifting inside one.
+A contract world must not change invisibly: any surface that users, agents, or
+systems weld to must come from one declared fact source and change only through
+an explicit compatibility boundary.
 
 ## Foundation role
 
@@ -24,6 +23,11 @@ KFD-1 makes artifact contract worlds explicit so releases do not drift under
 changelog volume, cadence pressure, or marketing pressure. It is the concrete
 versioning procedure that lets users and agents know which artifact world they
 are integrating with, replaying, auditing, or trusting.
+
+KFD-1 now has two concrete implementation surfaces in the Kungfu ecosystem:
+versioning protects release lines from contract drift, and config contracts
+protect multi-target configuration from drifting across runtimes, products, and
+agent-facing surfaces.
 
 ## Premise: the welded-surface register
 
@@ -39,6 +43,20 @@ when either holds:
 
 Each entry carries a stable kebab-case ID. Registers live in each repository's
 versioning document and are the input to every classification below.
+
+## Concrete case: config contracts
+
+A product's global config contract is a welded surface when multiple targets
+depend on it: users, agents, UI, CLI, packaged artifacts, release gates, or
+language runtimes. Its schema, defaults, resolution rules, and resolved-output
+metadata must not drift target by target. That contract world needs one
+declared fact source, and each target should make the exact contract world it
+speaks inspectable, for example through a packaged contract copy or content
+hash.
+The rule applies before packaging as well: development-time code, tests, build
+steps, and the final product must consume the same contract mechanism. It is
+not enough for the packaged artifact to be internally consistent if the
+developer path used a different, driftable config source.
 
 ## The decision procedure
 
@@ -124,8 +142,10 @@ table and the machine record never diverge): `schemaVersion: 1`,
 
 KFD-2 establishes fact-first product accountability: important claims should
 be inspectable before users or agents are asked to trust them. KFD-1 is the
-release/versioning procedure that preserves that accountability across
-artifact contract worlds.
+contract-layer expression of the same single-fact-source discipline: it
+preserves accountability across artifact contract worlds before those artifacts
+are used to produce runtime facts, responsibility state, or proof-backed
+decisions.
 
 KFD-3 establishes non-coercive cooperation with intelligent participants. That
 cooperation depends on the same contract clarity: users and agents can choose,

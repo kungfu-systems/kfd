@@ -1,4 +1,4 @@
-# KFD-2: Fact-first product accountability — responsibility should be the path of least resistance
+# KFD-2: Trust must start from facts — responsibility must be inspectable
 
 - Status: active
 - Number: 2
@@ -7,10 +7,9 @@
 
 ## One sentence
 
-Kungfu-systems products should make fact-first responsibility the path of least
-resistance. When products represent work or control, the simplest reliable path
-should lead users and agents from captured work to local facts, responsibility
-state, proof-backed control decisions, and reviewable/exportable records.
+A product must not ask users or agents to trust important claims before the
+relevant facts are inspectable, local where possible, and connected to
+responsibility state.
 
 ## Decision type
 
