@@ -4,13 +4,37 @@
 import { readFileSync, existsSync } from "node:fs";
 
 const fail = (msg) => { console.error(`check: ${msg}`); process.exitCode = 1; };
+const requireFields = (value, required, label) => {
+  for (const field of required ?? []) {
+    if (value?.[field] === undefined) fail(`${label} missing required field ${field}`);
+  }
+};
 const registry = JSON.parse(readFileSync("registry.json", "utf8"));
+const standardsMetadata = JSON.parse(readFileSync("standards.json", "utf8"));
+const standardsSchema = JSON.parse(readFileSync("schemas/kfd-standards.schema.json", "utf8"));
 const releaseImpact = JSON.parse(readFileSync("release-impact.json", "utf8"));
 const packageJson = JSON.parse(readFileSync("package.json", "utf8"));
 const siteBundle = JSON.parse(readFileSync("site/kfd-site.json", "utf8"));
 
 if (registry.schemaVersion !== 1) fail(`unsupported schemaVersion ${registry.schemaVersion}`);
 if (registry.contract !== "kfd-registry") fail(`unexpected contract ${registry.contract}`);
+if (standardsMetadata.schemaVersion !== 1) fail(`unsupported standards schemaVersion ${standardsMetadata.schemaVersion}`);
+if (standardsMetadata.contract !== "kfd-standards-metadata") fail(`unexpected standards contract ${standardsMetadata.contract}`);
+if (standardsMetadata.metadataSchema?.id !== "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json") {
+  fail("standards metadataSchema.id must be the canonical KFD standards schema URI");
+}
+if (standardsMetadata.metadataSchema?.path !== "schemas/kfd-standards.schema.json") {
+  fail("standards metadataSchema.path must be schemas/kfd-standards.schema.json");
+}
+if (standardsSchema.$id !== standardsMetadata.metadataSchema?.id) {
+  fail("standards schema $id must match standards metadataSchema.id");
+}
+if (standardsSchema.properties?.contract?.const !== "kfd-standards-metadata") {
+  fail("standards schema must describe the kfd-standards-metadata contract");
+}
+requireFields(standardsMetadata, standardsSchema.required, "standards metadata");
+requireFields(standardsMetadata.metadataSchema, standardsSchema.properties?.metadataSchema?.required, "standards metadataSchema");
+requireFields(standardsMetadata.source, standardsSchema.properties?.source?.required, "standards source");
 if (siteBundle.schemaVersion !== 1) fail(`unsupported site bundle schemaVersion ${siteBundle.schemaVersion}`);
 if (siteBundle.contract !== "kfd-site-bundle") fail(`unexpected site bundle contract ${siteBundle.contract}`);
 if (siteBundle.source?.homepageTextSource !== "README.md") fail("site bundle homepageTextSource must be README.md");
@@ -20,9 +44,14 @@ if (siteBundle.homepage?.title !== "KFD — Kung Fu Decisions") fail("site bundl
 if (siteBundle.homepage?.currentDecisions?.source !== "registry.json") fail("site bundle currentDecisions source must be registry.json");
 if (siteBundle.decisionPages?.source !== "registry.json") fail("site bundle decisionPages source must be registry.json");
 if (siteBundle.decisionPages?.bodySource !== "registry.entries[].path") fail("site bundle decision page body source must be registry.entries[].path");
-for (const requiredFile of ["README.md", "decisions", "registry.json", "site", "docs"]) {
+for (const requiredFile of ["README.md", "decisions", "registry.json", "standards.json", "schemas", "site", "docs"]) {
   if (!Array.isArray(packageJson.files) || !packageJson.files.includes(requiredFile)) {
     fail(`package.json files[] must include ${requiredFile}`);
+  }
+}
+for (const requiredExport of ["./registry.json", "./standards.json", "./site/kfd-site.json", "./schemas/*.json", "./schemas/*/*.json"]) {
+  if (!packageJson.exports || !packageJson.exports[requiredExport]) {
+    fail(`package.json exports must include ${requiredExport}`);
   }
 }
 
@@ -60,6 +89,48 @@ for (const e of registry.entries) {
       }
     }
   }
+  const standard = standardsMetadata.standards?.[e.slug];
+  if (!standard) fail(`standards metadata missing ${e.slug}`);
+  else {
+    requireFields(standard, standardsSchema.$defs?.standard?.required, `${e.id} standards metadata`);
+    if (standard.key !== e.slug) fail(`${e.id} standard key must be ${e.slug}`);
+    if (standard.id !== e.id) fail(`${e.id} standard id mismatch in standards metadata`);
+    if (standard.number !== e.number) fail(`${e.id} standard number mismatch in standards metadata`);
+    if (standard.label !== e.id) fail(`${e.id} standard label must be ${e.id}`);
+    if (standard.title !== e.title) fail(`${e.id} standard title must match registry title`);
+    if (standard.kind !== e.kind) fail(`${e.id} standard kind must match registry kind`);
+    if (standard.status !== e.status) fail(`${e.id} standard status must match registry status`);
+    if (standard.document?.path !== e.path) fail(`${e.id} standard document path must match registry path`);
+    if (standard.document?.url !== e.url) fail(`${e.id} standard document url must match registry url`);
+    if (standard.metadataSchemaVersion !== standardsMetadata.metadataSchema?.version) {
+      fail(`${e.id} standard metadataSchemaVersion must match metadata schema version`);
+    }
+    if (standard.schemaIds?.metadata !== standardsMetadata.metadataSchema?.id) {
+      fail(`${e.id} standard schemaIds.metadata must match metadata schema id`);
+    }
+    if (standard.schemaPaths?.metadata !== standardsMetadata.metadataSchema?.path) {
+      fail(`${e.id} standard schemaPaths.metadata must match metadata schema path`);
+    }
+    for (const [name, schemaPath] of Object.entries(standard.schemaPaths ?? {})) {
+      if (!existsSync(schemaPath)) fail(`${e.id} schemaPaths.${name} points to missing ${schemaPath}`);
+      else if (name !== "metadata") {
+        const schemaDoc = JSON.parse(readFileSync(schemaPath, "utf8"));
+        if (standard.schemaIds?.[name] && schemaDoc.$id !== standard.schemaIds[name]) {
+          fail(`${e.id} schemaPaths.${name} $id must match schemaIds.${name}`);
+        }
+      }
+    }
+  }
+}
+for (const key of Object.keys(standardsMetadata.standards ?? {})) {
+  if (!registry.entries.some((e) => e.slug === key)) fail(`standards metadata contains unknown ${key}`);
+}
+const kfd1 = standardsMetadata.standards?.["kfd-1"];
+if (kfd1?.schemaIds?.contractWorld !== "https://kfd.libkungfu.dev/schemas/kfd-1/contract-world.schema.json") {
+  fail("KFD-1 standards metadata must expose the canonical contractWorld schema URI");
+}
+if (kfd1?.schemaIds?.witness !== "https://kfd.libkungfu.dev/schemas/kfd-1/witness.schema.json") {
+  fail("KFD-1 standards metadata must expose the canonical witness schema URI");
 }
 for (const [id, successors] of superseded) {
   for (const successor of successors) {
@@ -82,7 +153,7 @@ if (!Array.isArray(boundary.ownedBySite) || !boundary.ownedBySite.includes("CSS"
   fail("site bundle renderingBoundary.ownedBySite must include CSS");
 }
 const impactLevels = new Set(["patch", "minor", "major"]);
-const requiredSurfaces = new Set(["kfd-content", "kfd-registry-schema", "kfd-package-structure"]);
+const requiredSurfaces = new Set(["kfd-content", "kfd-registry-schema", "kfd-standards-metadata", "kfd-package-structure"]);
 
 if (releaseImpact.schemaVersion !== 1) fail(`unsupported release-impact schemaVersion ${releaseImpact.schemaVersion}`);
 if (releaseImpact.contract !== "kungfu-buildchain-impact") fail(`unexpected release-impact contract ${releaseImpact.contract}`);

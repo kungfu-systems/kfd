@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd-standards-metadata",
+  "metadataSchema": {
+    "id": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json",
+    "path": "schemas/kfd-standards.schema.json",
+    "version": "1"
+  },
+  "source": {
+    "package": "@kungfu-tech/kfd",
+    "registry": "registry.json",
+    "decisionsDir": "decisions"
+  },
+  "standards": {
+    "kfd-1": {
+      "key": "kfd-1",
+      "id": "KFD-1",
+      "number": 1,
+      "label": "KFD-1",
+      "title": "Contracts must not drift: contract worlds need one fact source",
+      "kind": "procedure",
+      "status": "active",
+      "revision": 1,
+      "metadataSchemaVersion": "1",
+      "document": {
+        "path": "decisions/kfd-1.md",
+        "url": "https://kfd.libkungfu.dev/1"
+      },
+      "compatibility": {
+        "packageLine": "v1.0",
+        "registrySchemaVersion": 1,
+        "metadataSchemaVersion": "1",
+        "rule": "Substantive semantic changes mint a new KFD; compatible metadata additions keep schemaVersion 1."
+      },
+      "schemaIds": {
+        "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json",
+        "contractWorld": "https://kfd.libkungfu.dev/schemas/kfd-1/contract-world.schema.json",
+        "witness": "https://kfd.libkungfu.dev/schemas/kfd-1/witness.schema.json"
+      },
+      "schemaPaths": {
+        "metadata": "schemas/kfd-standards.schema.json",
+        "contractWorld": "schemas/kfd-1/contract-world.schema.json",
+        "witness": "schemas/kfd-1/witness.schema.json"
+      },
+      "concepts": {
+        "factSource": "fact source",
+        "contractWorld": "contract world",
+        "weldedSurfaceRegister": "welded-surface register",
+        "witness": "contract witness"
+      }
+    },
+    "kfd-2": {
+      "key": "kfd-2",
+      "id": "KFD-2",
+      "number": 2,
+      "label": "KFD-2",
+      "title": "Trust must start from facts: responsibility must be inspectable",
+      "kind": "principle",
+      "status": "active",
+      "revision": 1,
+      "metadataSchemaVersion": "1",
+      "document": {
+        "path": "decisions/kfd-2.md",
+        "url": "https://kfd.libkungfu.dev/2"
+      },
+      "compatibility": {
+        "packageLine": "v1.0",
+        "registrySchemaVersion": 1,
+        "metadataSchemaVersion": "1",
+        "rule": "Substantive semantic changes mint a new KFD; compatible metadata additions keep schemaVersion 1."
+      },
+      "schemaIds": {
+        "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json"
+      },
+      "schemaPaths": {
+        "metadata": "schemas/kfd-standards.schema.json"
+      },
+      "concepts": {
+        "facts": "inspectable facts",
+        "responsibilityState": "responsibility state",
+        "trust": "trust from facts"
+      }
+    },
+    "kfd-3": {
+      "key": "kfd-3",
+      "id": "KFD-3",
+      "number": 3,
+      "label": "KFD-3",
+      "title": "Cooperation must start from transparent value: compliance must not be coerced",
+      "kind": "principle",
+      "status": "active",
+      "revision": 1,
+      "metadataSchemaVersion": "1",
+      "document": {
+        "path": "decisions/kfd-3.md",
+        "url": "https://kfd.libkungfu.dev/3"
+      },
+      "compatibility": {
+        "packageLine": "v1.0",
+        "registrySchemaVersion": 1,
+        "metadataSchemaVersion": "1",
+        "rule": "Substantive semantic changes mint a new KFD; compatible metadata additions keep schemaVersion 1."
+      },
+      "schemaIds": {
+        "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json"
+      },
+      "schemaPaths": {
+        "metadata": "schemas/kfd-standards.schema.json"
+      },
+      "concepts": {
+        "transparentValue": "transparent value",
+        "stableChoice": "stable choice",
+        "explainableConstraints": "explainable constraints",
+        "nonCoercion": "non-coercive cooperation"
+      }
+    }
+  }
+}
