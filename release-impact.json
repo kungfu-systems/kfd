@@ -35,7 +35,13 @@
       "impact": "minor",
       "class": "additive",
       "rationale": "The npm package now also publishes KFD-2 schemas and KFD-2 documentation through existing schemas/, docs/, standards.json, and subpath exports while preserving existing README.md, decisions/, registry.json, and site/ paths."
+    },
+    {
+      "id": "kfd-release-propagation",
+      "impact": "patch",
+      "class": "compatible",
+      "rationale": "The KFD to site-libkungfu-dev propagation graph now targets the downstream site's actual main branch and documents the exact KFD package surfaces consumed by kfd.libkungfu.dev, without changing the release propagation graph contract."
     }
   ],
-  "summary": "KFD v1.0 production promotion is minor-impact because it additively exposes KFD-2 release trust metadata, KFD-1/2/3 interface version metadata, and document integrity bindings for Buildchain and other consumers; existing registry, decision text, and site bundle surfaces remain compatible."
+  "summary": "KFD v1.0 production promotion is minor-impact because it additively exposes KFD-2 release trust metadata, KFD-1/2/3 interface version metadata, document integrity bindings, and a corrected site release-propagation target for Buildchain and other consumers; existing registry, decision text, site bundle, and propagation graph contracts remain compatible."
 }
