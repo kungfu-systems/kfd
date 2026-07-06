@@ -68,6 +68,15 @@ if (siteBundle.homepage?.title !== "KFD — Kung Fu Decisions") fail("site bundl
 if (siteBundle.homepage?.currentDecisions?.source !== "registry.json") fail("site bundle currentDecisions source must be registry.json");
 if (siteBundle.decisionPages?.source !== "registry.json") fail("site bundle decisionPages source must be registry.json");
 if (siteBundle.decisionPages?.bodySource !== "registry.entries[].path") fail("site bundle decision page body source must be registry.entries[].path");
+if (siteBundle.decisionPages?.metadata?.licenseBoundary?.license !== "Apache-2.0") {
+  fail("site bundle decision metadata licenseBoundary.license must be Apache-2.0");
+}
+if (siteBundle.decisionPages?.metadata?.licenseBoundary?.licenseFile !== "LICENSE") {
+  fail("site bundle decision metadata licenseBoundary.licenseFile must be LICENSE");
+}
+if (siteBundle.decisionPages?.metadata?.licenseBoundary?.officialStatusAndTrademarks !== "TRADEMARKS.md") {
+  fail("site bundle decision metadata licenseBoundary.officialStatusAndTrademarks must be TRADEMARKS.md");
+}
 const sitePublicFactSource = siteBundle.decisionPages?.metadata?.publicFactSource;
 if (sitePublicFactSource?.kind !== "git-repository") fail("site bundle decision metadata publicFactSource.kind must be git-repository");
 if (sitePublicFactSource?.host !== "github") fail("site bundle decision metadata publicFactSource.host must be github");
@@ -84,12 +93,12 @@ for (const requiredPath of ["decisions/kfd-N.md", "registry.json", "standards.js
     fail(`site bundle decision metadata publicFactSource.canonicalPaths must include ${requiredPath}`);
   }
 }
-for (const requiredFile of ["README.md", "decisions", "registry.json", "standards.json", "kfd.release.json", "schemas", "site", "buildchain.release-propagation.json", "release-impact.json", ".buildchain/kfd-1/contract-world.witness.json", ".buildchain/kfd-2", ".buildchain/kfd-3", "docs"]) {
+for (const requiredFile of ["README.md", "TRADEMARKS.md", "decisions", "registry.json", "standards.json", "kfd.release.json", "schemas", "site", "buildchain.release-propagation.json", "release-impact.json", ".buildchain/kfd-1/contract-world.witness.json", ".buildchain/kfd-2", ".buildchain/kfd-3", "docs"]) {
   if (!Array.isArray(packageJson.files) || !packageJson.files.includes(requiredFile)) {
     fail(`package.json files[] must include ${requiredFile}`);
   }
 }
-for (const requiredExport of ["./registry.json", "./standards.json", "./kfd.release.json", "./site/kfd-site.json", "./buildchain.release-propagation.json", "./release-impact.json", "./buildchain/kfd-1/contract-world.witness.json", "./buildchain/kfd-2/public-release-trust.claim.json", "./buildchain/kfd-3/collaboration-interface.json", "./buildchain/kfd-3/collaboration-interface.prebuild.json", "./buildchain/kfd-3/collaboration-interface.artifact.json", "./schemas/*.json", "./schemas/*/*.json"]) {
+for (const requiredExport of ["./TRADEMARKS.md", "./registry.json", "./standards.json", "./kfd.release.json", "./site/kfd-site.json", "./buildchain.release-propagation.json", "./release-impact.json", "./buildchain/kfd-1/contract-world.witness.json", "./buildchain/kfd-2/public-release-trust.claim.json", "./buildchain/kfd-3/collaboration-interface.json", "./buildchain/kfd-3/collaboration-interface.prebuild.json", "./buildchain/kfd-3/collaboration-interface.artifact.json", "./schemas/*.json", "./schemas/*/*.json"]) {
   if (!packageJson.exports || !packageJson.exports[requiredExport]) {
     fail(`package.json exports must include ${requiredExport}`);
   }
@@ -513,7 +522,13 @@ if (!kfd3Interface) {
   }
   if (!Array.isArray(kfd3Interface.participants) || kfd3Interface.participants.length === 0) fail("KFD-3 collaboration interface participants[] is required");
   if (!Array.isArray(kfd3Interface.minimalEntrypoints) || kfd3Interface.minimalEntrypoints.length === 0) fail("KFD-3 collaboration interface minimalEntrypoints[] is required");
+  if (!kfd3Interface.minimalEntrypoints.some((entry) => entry.id === "official-status-and-trademarks" && entry.surface === "TRADEMARKS.md")) {
+    fail("KFD-3 collaboration interface must expose TRADEMARKS.md as an official-status-and-trademarks entrypoint");
+  }
   if (!Array.isArray(kfd3Interface.surfaces) || kfd3Interface.surfaces.length === 0) fail("KFD-3 collaboration interface surfaces[] is required");
+  if (!kfd3Interface.surfaces.some((entry) => entry.id === "official-status-and-trademarks" && entry.discoverability?.path === "TRADEMARKS.md")) {
+    fail("KFD-3 collaboration interface must expose TRADEMARKS.md as a participant-facing surface");
+  }
   if (!Array.isArray(kfd3Interface.extensionRequests) || kfd3Interface.extensionRequests.length === 0) fail("KFD-3 collaboration interface extensionRequests[] is required");
   if (!kfd3Interface.extensionRequests.some((entry) => entry.id === "kfd-2-trust-taxonomy-extension" && entry.requestPath?.kind === "github-issue" && String(entry.requestPath?.target || "").startsWith("https://github.com/kungfu-systems/kfd/issues/new"))) {
     fail("KFD-3 collaboration interface must declare the KFD-2 trust taxonomy GitHub issue extension path");

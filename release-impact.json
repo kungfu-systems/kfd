@@ -16,7 +16,7 @@
       "id": "kfd-content",
       "impact": "patch",
       "class": "content",
-      "rationale": "KFD documents are append-only content coordinates; current decision text changes clarify the KFD public fact-source boundary and do not alter the decision numbers or registry shape."
+      "rationale": "KFD documents are append-only content coordinates; current documentation changes clarify the KFD public fact-source, license, trademark, official-status, and derivative-authority boundaries without altering the decision numbers or registry shape."
     },
     {
       "id": "kfd-registry-schema",
@@ -28,13 +28,13 @@
       "id": "kfd-standards-metadata",
       "impact": "minor",
       "class": "additive",
-      "rationale": "standards.json and schemas/ add the KFD-2 trust-taxonomy schema ID, release-claims and release-trust-passport schema IDs, explicit KFD-1/2/3 interface versions, KFD document SHA-256 bindings, KFD-owned concept names, and KFD-3 fact-source interface metadata for downstream consumers."
+      "rationale": "standards.json and schemas/ add the KFD-2 trust-taxonomy schema ID, release-claims and release-trust-passport schema IDs, explicit KFD-1/2/3 interface versions, KFD document SHA-256 bindings, KFD-owned concept names, KFD-3 fact-source interface metadata, and official-status interface metadata for downstream consumers."
     },
     {
       "id": "kfd-package-structure",
       "impact": "minor",
       "class": "additive",
-      "rationale": "The npm package now publishes the KFD-2 trust taxonomy, KFD-2 schemas, KFD-2 documentation, KFD-3 self collaboration-interface witnesses, public fact-source metadata, and agent quickstart/self-proof documentation through existing schemas/, docs/, standards.json, site/, .buildchain/, and subpath exports while preserving existing README.md, decisions/, registry.json, and site/ paths."
+      "rationale": "The npm package now publishes the KFD-2 trust taxonomy, KFD-2 schemas, KFD-2 documentation, KFD-3 self collaboration-interface witnesses, TRADEMARKS.md, public fact-source metadata, and agent quickstart/self-proof documentation through existing schemas/, docs/, standards.json, site/, .buildchain/, and subpath exports while preserving existing README.md, decisions/, registry.json, and site/ paths."
     },
     {
       "id": "kfd-3-self-collaboration",

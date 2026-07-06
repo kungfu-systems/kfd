@@ -245,6 +245,10 @@ paths, or published structure under KFD-1. These values are Buildchain release
 passport impact classifications; they do not by themselves open a new
 `@kungfu-tech/kfd` package major or minor line.
 
-## License
+## License and official status
 
-[Apache License 2.0](LICENSE).
+Repository contents are licensed under the [Apache License 2.0](LICENSE).
+Apache-2.0 grants broad reuse rights for the licensed contents, but it does
+not grant KFD/Kungfu trademarks, official status, certification status, or
+endorsement. The official source, name-use, fork, derivative, and agent-facing
+authority boundaries are defined in [`TRADEMARKS.md`](TRADEMARKS.md).
