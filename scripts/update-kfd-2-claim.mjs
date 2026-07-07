@@ -22,6 +22,7 @@ const sourceBindings = [
   pointer("standards.json", { id: "standards-metadata" }),
   pointer("release-impact.json", { id: "release-impact-ledger" }),
   pointer("buildchain.toml", { id: "buildchain-release-contract" }),
+  pointer("buildchain.contract-lock.json", { id: "buildchain-runtime-contract-lock" }),
 ];
 
 const machineEvidence = [
