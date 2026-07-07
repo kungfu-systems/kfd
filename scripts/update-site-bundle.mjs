@@ -140,6 +140,15 @@ export const buildSiteBundle = ({ readmeText, registry }) => {
       firstScreen: true,
     }),
     section({
+      id: "adoption-boundary",
+      sourceHeading: "Adoption boundary",
+      title: "Adoption boundary",
+      markdown: readme.sections["Adoption boundary"],
+      role: "primary",
+      priority: 25,
+      presentation: "boundary-note",
+    }),
+    section({
       id: "product-proof-path",
       sourceHeading: "Product proof path",
       title: "Product proof path",
@@ -201,9 +210,8 @@ export const buildSiteBundle = ({ readmeText, registry }) => {
           maxPrimarySections: 2,
           note: "The first viewport should establish KFD identity and the three-decision worldview without showing renderer or developer contract text.",
         },
-        primary: ["foundation-triad", "foundation-model", "product-proof-path"],
+        primary: ["foundation-triad", "foundation-model", "adoption-boundary", "product-proof-path"],
         support: ["agent-quickstart", "decision-metadata"],
-        rendererContract: ["homepage-content-contract"],
         currentDecisions: {
           source: REGISTRY_PATH,
           placement: "after-primary",

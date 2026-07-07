@@ -16,7 +16,7 @@
       "id": "kfd-content",
       "impact": "patch",
       "class": "content",
-      "rationale": "KFD documents are append-only content coordinates; current documentation changes clarify KFD-3's foundation wording from transparent value to trusted value so the KFD-1/2/3 chain reads facts -> trust -> cooperation, while preserving the existing non-coercion and transparency requirements."
+      "rationale": "KFD documents are append-only content coordinates; current documentation changes add the public adoption boundary that keeps KFD an engineering discipline rather than a belief test, while preserving the existing decision numbers and registry shape."
     },
     {
       "id": "kfd-registry-schema",
@@ -40,7 +40,7 @@
       "id": "kfd-site-homepage-bundle",
       "impact": "minor",
       "class": "additive",
-      "rationale": "site/kfd-site.json now exposes generated README-backed homepage.sections and homepage.displayPlan fields, and scripts/check.mjs verifies the checked-in bundle matches the README projection so downstream sites can render KFD-owned homepage content without maintaining their own README parser or drifting copy."
+      "rationale": "site/kfd-site.json now exposes generated README-backed homepage.sections and homepage.displayPlan fields, including the adoption-boundary homepage section, and scripts/check.mjs verifies the checked-in bundle matches the README projection so downstream sites can render KFD-owned homepage content without maintaining their own README parser or drifting copy."
     },
     {
       "id": "kfd-3-self-collaboration",

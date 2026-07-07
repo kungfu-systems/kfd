@@ -76,10 +76,14 @@ if (!Array.isArray(siteBundle.homepage?.sections) || siteBundle.homepage.section
 if (!siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes("foundation-triad")) {
   fail("site bundle homepage displayPlan firstScreen must include foundation-triad");
 }
-for (const requiredSection of ["foundation-triad", "foundation-model", "product-proof-path", "agent-quickstart", "decision-metadata"]) {
+for (const requiredSection of ["foundation-triad", "foundation-model", "adoption-boundary", "product-proof-path", "agent-quickstart", "decision-metadata"]) {
   if (!siteBundle.homepage.sections.some((entry) => entry.id === requiredSection && entry.sourcePath === "README.md" && entry.markdown)) {
     fail(`site bundle homepage.sections must include README projection ${requiredSection}`);
   }
+}
+const adoptionBoundary = siteBundle.homepage.sections.find((entry) => entry.id === "adoption-boundary");
+if (adoptionBoundary?.includeInFirstScreen !== false || adoptionBoundary?.renderRole !== "primary") {
+  fail("site bundle adoption-boundary must be primary content outside the first screen");
 }
 if (siteBundle.homepage.sections.some((entry) => entry.id === "homepage-content-contract")) {
   fail("site bundle homepage.sections must not render the renderer contract as homepage content");
