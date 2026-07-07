@@ -99,6 +99,14 @@ proof path, decision routes, and rendering boundary. A site renderer may adapt
 layout, navigation, typography, and visual assets, but it should not maintain
 separate homepage wording that can drift from this package.
 
+`site/kfd-site.json` is generated from this README by
+`scripts/update-site-bundle.mjs`. The generated bundle exposes both compatible
+top-level homepage fields and ordered `homepage.sections` entries. The
+`homepage.displayPlan` tells renderers which sections belong in the first
+screen, primary narrative, support area, and renderer-contract area. Site
+repositories should consume that bundle instead of parsing this README
+themselves.
+
 ## Product proof path
 
 KFDs are not a detached manifesto, but they are not a demand that readers adopt

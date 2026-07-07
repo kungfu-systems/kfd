@@ -3,6 +3,7 @@
 // its contents or versioning surface.
 import { readFileSync, existsSync } from "node:fs";
 import crypto from "node:crypto";
+import { generatedSiteBundle } from "./update-site-bundle.mjs";
 
 const fail = (msg) => { console.error(`check: ${msg}`); process.exitCode = 1; };
 const sha256File = (filePath) => crypto.createHash("sha256").update(readFileSync(filePath)).digest("hex");
@@ -28,6 +29,7 @@ const standardsSchema = JSON.parse(readFileSync("schemas/kfd-standards.schema.js
 const releaseImpact = JSON.parse(readFileSync("release-impact.json", "utf8"));
 const packageJson = JSON.parse(readFileSync("package.json", "utf8"));
 const siteBundle = JSON.parse(readFileSync("site/kfd-site.json", "utf8"));
+const expectedSiteBundle = generatedSiteBundle();
 const kfd1WitnessPath = ".buildchain/kfd-1/contract-world.witness.json";
 const kfd1Witness = existsSync(kfd1WitnessPath) ? JSON.parse(readFileSync(kfd1WitnessPath, "utf8")) : undefined;
 const kfd2ClaimPath = ".buildchain/kfd-2/public-release-trust.claim.json";
@@ -61,10 +63,24 @@ requireFields(standardsMetadata.metadataSchema, standardsSchema.properties?.meta
 requireFields(standardsMetadata.source, standardsSchema.properties?.source?.required, "standards source");
 if (siteBundle.schemaVersion !== 1) fail(`unsupported site bundle schemaVersion ${siteBundle.schemaVersion}`);
 if (siteBundle.contract !== "kfd-site-bundle") fail(`unexpected site bundle contract ${siteBundle.contract}`);
+if (JSON.stringify(siteBundle) !== JSON.stringify(expectedSiteBundle)) {
+  fail("site/kfd-site.json must match the generated README.md homepage bundle; run npm run update:site-bundle");
+}
 if (siteBundle.source?.homepageTextSource !== "README.md") fail("site bundle homepageTextSource must be README.md");
 if (siteBundle.source?.registry !== "registry.json") fail("site bundle registry source must be registry.json");
 if (siteBundle.source?.decisionsDir !== "decisions") fail("site bundle decisionsDir must be decisions");
 if (siteBundle.homepage?.title !== "KFD — Kung Fu Decisions") fail("site bundle homepage title must match README H1 text");
+if (!Array.isArray(siteBundle.homepage?.sections) || siteBundle.homepage.sections.length === 0) {
+  fail("site bundle homepage.sections must expose generated README sections");
+}
+if (!siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes("foundation-triad")) {
+  fail("site bundle homepage displayPlan firstScreen must include foundation-triad");
+}
+for (const requiredSection of ["foundation-triad", "foundation-model", "product-proof-path", "agent-quickstart", "decision-metadata", "homepage-content-contract"]) {
+  if (!siteBundle.homepage.sections.some((entry) => entry.id === requiredSection && entry.sourcePath === "README.md" && entry.markdown)) {
+    fail(`site bundle homepage.sections must include README projection ${requiredSection}`);
+  }
+}
 if (siteBundle.homepage?.currentDecisions?.source !== "registry.json") fail("site bundle currentDecisions source must be registry.json");
 if (siteBundle.decisionPages?.source !== "registry.json") fail("site bundle decisionPages source must be registry.json");
 if (siteBundle.decisionPages?.bodySource !== "registry.entries[].path") fail("site bundle decision page body source must be registry.entries[].path");
@@ -352,6 +368,9 @@ for (const e of registry.entries) {
 const boundary = siteBundle.renderingBoundary ?? {};
 if (!Array.isArray(boundary.ownedByKfd) || !boundary.ownedByKfd.includes("homepage title and text")) {
   fail("site bundle renderingBoundary.ownedByKfd must include homepage title and text");
+}
+if (!Array.isArray(boundary.ownedByKfd) || !boundary.ownedByKfd.includes("homepage section projection from README.md")) {
+  fail("site bundle renderingBoundary.ownedByKfd must include homepage section projection from README.md");
 }
 if (!Array.isArray(boundary.ownedBySite) || !boundary.ownedBySite.includes("CSS")) {
   fail("site bundle renderingBoundary.ownedBySite must include CSS");
