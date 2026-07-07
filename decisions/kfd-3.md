@@ -1,4 +1,4 @@
-# KFD-3: Cooperation must start from transparent value — compliance must not be coerced
+# KFD-3: Cooperation must start from trusted value — compliance must not be coerced
 
 - Status: active
 - Number: 3
@@ -7,12 +7,12 @@
 
 ## One sentence
 
-Cooperation must start from transparent value.
+Cooperation must start from trusted value.
 
 A product must not obtain cooperation through pressure, manipulation, hidden
-control, or forced workflow capture. It must make value, choices, and
-constraints visible enough for intelligent participants to understand, decide,
-and cooperate.
+control, or forced workflow capture. It must make facts, value, choices, and
+constraints transparent enough for intelligent participants to trust what is
+being offered, understand the available path, decide, and cooperate.
 
 ## Decision type
 
@@ -30,11 +30,12 @@ kungfu-systems takes toward humans and agents as reasoning participants.
 Within the KFD-1/2/3 foundation, this is the relationship path:
 
 ```text
-cooperation must start from transparent value
+cooperation must start from trusted value
 ```
 
 KFD-2 protects the truth path: show facts before asking for trust. KFD-3
-protects the relationship path: show value before asking for cooperation.
+protects the relationship path: make value transparent enough to be trusted
+before asking for cooperation.
 
 ## Principle
 
@@ -60,7 +61,7 @@ The default product path should therefore follow this chain:
 
 ```text
 transparent facts
-  -> discoverable value
+  -> trusted value
   -> stable choice
   -> explainable constraint
   -> voluntary cooperation
@@ -85,7 +86,7 @@ Products may recommend a path, refuse unsafe actions, or require explicit
 approval. They should not pretend that forced compliance is the same as
 understanding or trust.
 
-### 2. Make value discoverable through facts
+### 2. Make value trusted through transparent facts
 
 Humans and agents should be able to discover what the product can do, why it is
 useful, what it observed, what it changed, and what boundary applies without
@@ -93,7 +94,8 @@ needing oral context, private maintainer memory, or web-only documentation.
 
 Agent-facing surfaces should expose local, versioned, machine-readable and
 human-readable facts wherever possible. A capable agent should be able to learn
-the product's value by inspecting the product's own facts and commands.
+the product's value, and why that value can be trusted, by inspecting the
+product's own facts and commands.
 
 ### 3. Use constraints as transparent safety, not hidden control
 
@@ -142,9 +144,10 @@ how it can be changed, escalated, or revoked when appropriate
 - It does not turn a private founder narrative into a public repository rule.
   This public rule is about product stance, adoption, safety, and cooperation
   with intelligent participants.
-- It does not supersede KFD-2. Facts and responsibility still come first; this
-  KFD states how those facts should be presented to humans and agents without
-  coercion.
+- It does not supersede KFD-2. Facts and responsibility still come first;
+  transparent value is the route by which value becomes trusted, not a
+  substitute for trust. This KFD states how those facts and values should be
+  presented to humans and agents without coercion.
 
 ## Relation to KFD-2
 
@@ -155,12 +158,12 @@ hidden control. Together:
 ```text
 KFD-1: facts must not drift.
 KFD-2: trust must start from facts.
-KFD-3: cooperation must start from transparent value.
+KFD-3: cooperation must start from trusted value.
 ```
 
 KFD-1 protects the fact-source layer. KFD-2 protects the trust layer. KFD-3
-protects the relationship with the intelligent participant who must walk that
-path.
+protects the relationship with the intelligent participant who must decide
+whether the offered value is trustworthy enough to walk that path.
 
 ## Implementation case: the KFD package
 
