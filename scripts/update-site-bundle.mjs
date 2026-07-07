@@ -166,15 +166,6 @@ export const buildSiteBundle = ({ readmeText, registry }) => {
       priority: 50,
       presentation: "fact-source",
     }),
-    section({
-      id: "homepage-content-contract",
-      sourceHeading: "Homepage content contract",
-      title: "Homepage content contract",
-      markdown: readme.sections["Homepage content contract"],
-      role: "renderer-contract",
-      priority: 90,
-      presentation: "developer-note",
-    }),
   ];
 
   return {
@@ -218,6 +209,19 @@ export const buildSiteBundle = ({ readmeText, registry }) => {
           placement: "after-primary",
           ids: entries.map((entry) => entry.id),
         },
+      },
+      rendererContract: {
+        ...section({
+          id: "homepage-content-contract",
+          sourceHeading: "Homepage content contract",
+          title: "Homepage content contract",
+          markdown: readme.sections["Homepage content contract"],
+          role: "renderer-contract",
+          priority: 90,
+          presentation: "developer-note",
+        }),
+        renderAsHomepageContent: false,
+        note: "This is a machine/renderer contract for site implementers. It should not be rendered as ordinary homepage content.",
       },
     },
     decisionPages: {
