@@ -62,7 +62,10 @@
       "chain": "non-drifting facts -> inspectable trust -> transparent cooperation",
       "explanation": [
         "This is why KFDs are not only internal governance text. KFD-1 gives the foundation model its first layer by making fact sources operational: a fact-bearing contract world must be declared, inspectable, and unable to drift invisibly. KFD-2 then defines how trust can stand on those facts. KFD-3 defines how humans and agents can cooperate once facts and trust are visible.",
-        "Real-world agent work turns ordinary work into a dense system of products, files, repositories, traces, policies, humans, and agents. In that world, complexity cannot be made safe by hidden state or forced compliance. It has to be compressed through non-drifting facts, inspectable trust, and voluntary cooperation. The goal is not to force increasingly capable participants into compliance through stronger pressure. It is to give humans and agents a shared worldview for adapting to a more complex world."
+        "Real-world agent work turns ordinary work into a dense system of products, files, repositories, traces, policies, humans, and agents. In that world, complexity cannot be made safe by hidden state or forced compliance. It has to be compressed through non-drifting facts, inspectable trust, and voluntary cooperation. The goal is not to force increasingly capable participants into compliance through stronger pressure. It is to give humans and agents a shared worldview for adapting to a more complex world.",
+        "This also changes what a product interface means. Agent-facing CLI, API, documentation, envelopes, and local fact surfaces are not secondary integration channels after the human GUI. They are first-class interfaces for intelligent participants that may use the system more frequently than humans do. A control plane in this model is a shared work environment for humans and agents, not only a human dashboard over agent activity.",
+        "This model used to be expensive to practice. Stable facts require engineering, iteration, and disciplined evidence paths, so older systems often survived by leaning on cheaper substitutes such as authority, habit, reputation, or intuition. Agents change both sides of that equation: they make the world more complex, and they also provide more intelligence for building fact-bearing systems. KFD is part of that bootstrap: the worldview is forged through the same transparent and inspectable mechanisms it asks products to provide.",
+        "This README states the architecture; KFD-1, KFD-2, and KFD-3 provide the detailed rules."
       ]
     },
     "productProofPath": {
@@ -72,6 +75,107 @@
     "currentDecisions": {
       "heading": "Current decisions",
       "source": "registry.json"
+    },
+    "sections": [
+      {
+        "id": "foundation-triad",
+        "sourcePath": "README.md",
+        "sourceHeading": "Foundation triad",
+        "title": "Foundation triad",
+        "renderRole": "first-screen",
+        "homepagePriority": 10,
+        "defaultPresentation": "triad-cards",
+        "includeInFirstScreen": true,
+        "markdown": "The first three KFDs form the public foundation for kungfu-systems:\n\n```text\nKFD-1: facts must not drift.\nKFD-2: trust must start from facts.\nKFD-3: cooperation must start from transparent value.\n```\n\nTogether they define the load-bearing path for Kungfu products: make facts\nnon-drifting, make trust inspectable from those facts, and let humans and\nagents cooperate through visible value rather than hidden pressure."
+      },
+      {
+        "id": "foundation-model",
+        "sourcePath": "README.md",
+        "sourceHeading": "Foundation model",
+        "title": "Foundation model",
+        "renderRole": "primary",
+        "homepagePriority": 20,
+        "defaultPresentation": "layered-model",
+        "includeInFirstScreen": true,
+        "markdown": "The triad is intentionally ordered. It is a compact model for surviving and\nevolving in complex systems, especially in a world where agents can observe,\nact, delegate, and remember across many surfaces.\n\n| Layer | Decision | Reader question | Commitment |\n|---|---|---|---|\n| Fact-source ontology | KFD-1 | What can count as a fact? | Facts must not drift: a load-bearing contract world comes from one declared fact source. |\n| Participant-to-object trust | KFD-2 | When can a user or agent trust a claim, product, artifact, or control surface? | Trust starts from inspectable facts and responsibility state. |\n| Participant-to-participant cooperation | KFD-3 | How should peer intelligent participants cooperate? | Cooperation starts from transparent value, stable choice, and explainable constraints, not pressure. |\n\nIn short:\n\n```text\nnon-drifting facts -> inspectable trust -> transparent cooperation\n```\n\nThis is why KFDs are not only internal governance text. KFD-1 gives the\nfoundation model its first layer by making fact sources operational: a\nfact-bearing contract world must be declared, inspectable, and unable to drift\ninvisibly. KFD-2 then defines how trust can stand on those facts. KFD-3\ndefines how humans and agents can cooperate once facts and trust are visible.\n\nReal-world agent work turns ordinary work into a dense system of products,\nfiles, repositories, traces, policies, humans, and agents. In that world,\ncomplexity cannot be made safe by hidden state or forced compliance. It has to\nbe compressed through non-drifting facts, inspectable trust, and voluntary\ncooperation. The goal is not to force increasingly capable participants into\ncompliance through stronger pressure. It is to give humans and agents a shared\nworldview for adapting to a more complex world.\n\nThis also changes what a product interface means. Agent-facing CLI, API,\ndocumentation, envelopes, and local fact surfaces are not secondary integration\nchannels after the human GUI. They are first-class interfaces for intelligent\nparticipants that may use the system more frequently than humans do. A control\nplane in this model is a shared work environment for humans and agents, not\nonly a human dashboard over agent activity.\n\nThis model used to be expensive to practice. Stable facts require engineering,\niteration, and disciplined evidence paths, so older systems often survived by\nleaning on cheaper substitutes such as authority, habit, reputation, or\nintuition. Agents change both sides of that equation: they make the world more\ncomplex, and they also provide more intelligence for building fact-bearing\nsystems. KFD is part of that bootstrap: the worldview is forged through the same\ntransparent and inspectable mechanisms it asks products to provide.\n\nThis README states the architecture; KFD-1, KFD-2, and KFD-3 provide the\ndetailed rules."
+      },
+      {
+        "id": "product-proof-path",
+        "sourcePath": "README.md",
+        "sourceHeading": "Product proof path",
+        "title": "Product proof path",
+        "renderRole": "primary",
+        "homepagePriority": 30,
+        "defaultPresentation": "proof-path",
+        "includeInFirstScreen": false,
+        "markdown": "KFDs are not a detached manifesto, but they are not a demand that readers adopt\na Kungfu product before understanding the decisions. A philosophy becomes\nload-bearing only when it can be seen in a concrete case. The first concrete\ncase is this package itself: `standards.json`, `schemas/`, `docs/`,\n`site/kfd-site.json`, and `scripts/check.mjs` show how KFD-1, KFD-2, and KFD-3\nare expressed as consumable interfaces for both humans and agents. For the\nbroader product case, use the main Kungfu product entrypoint\n(`https://kungfu.tech`) for product philosophy, and Buildchain\n(`https://buildchain.libkungfu.dev`) for release and provenance\naccountability. This registry states the commitments; this package and those\nentrypoints show how the commitments are meant to be borne in practice.\n\nRendered index: `https://kfd.libkungfu.dev` (stable machine path per entry,\ne.g. `https://kfd.libkungfu.dev/1`). This repository publishes\n`@kungfu-tech/kfd` — the decision texts plus a machine-readable\n`registry.json` — which the site consumes as its single fact source.\n\nMachine consumers that need KFD-owned standard identity should read\n`standards.json`. It is the versioned metadata surface for stable standard\nkeys, document routes and SHA-256 digests, schema IDs, KFD-owned concept names,\nand machine-interface contract versions. In Node or TypeScript projects, import\nit as:\n\n```js\nimport standards from \"@kungfu-tech/kfd/standards.json\" with { type: \"json\" };\n```"
+      },
+      {
+        "id": "agent-quickstart",
+        "sourcePath": "README.md",
+        "sourceHeading": "Agent Quickstart",
+        "title": "Agent Quickstart",
+        "renderRole": "support",
+        "homepagePriority": 40,
+        "defaultPresentation": "ordered-steps",
+        "includeInFirstScreen": false,
+        "markdown": "Agents consuming this package should start from the same sources as humans:\n\n1. Read this README for the foundation model and package map.\n2. Read `standards.json` for canonical KFD numbers, schema IDs, concept names,\n   and interface contracts.\n3. Use `site/kfd-site.json` decision metadata or the KFD-3 collaboration\n   interface fact-source metadata to identify the public KFD fact source.\n4. Use `schemas/kfd-2/trust-taxonomy.schema.json` for KFD-2 residual-risk and\n   trust-downgrade values. Unknown taxonomy values are invalid.\n5. Use `schemas/kfd-3/collaboration-interface.schema.json` and\n   `schemas/kfd-3/witness.schema.json` to inspect collaboration interfaces.\n6. If a needed KFD-2 taxonomy value is missing, open a KFD GitHub issue rather\n   than inventing a local value:\n   `https://github.com/kungfu-systems/kfd/issues/new?title=KFD-2%20trust%20taxonomy%20extension%20request`.\n\nKFD package semver is only the distribution version. KFD-owned machine\ninterfaces carry their own `schemaVersion` and `contract` fields. Compatible\nadditions may keep the same interface version; semantic changes, required-field\nchanges, verification meaning changes, or responsibility-boundary changes must\nuse a new interface version or contract.\n\nKFD-2 publishes trust-taxonomy, release-claims, and release-trust-passport\nschemas under `schemas/kfd-2/`. These schemas let Buildchain and other release\nsystems audit whether public release claims are bound to source facts,\nevidence, hashes, audit boundaries, residual risk, and responsibility state. See\n[`docs/kfd-2-release-trust.md`](docs/kfd-2-release-trust.md).\n\nKFD-3 also publishes a general collaboration-interface schema and witness\nschema under `schemas/kfd-3/`. These schemas are for participant-facing product\ninterfaces, not only agent APIs. A product such as Kungfu may implement an\nagent-first profile, but that profile remains a product-specific realization of\nKFD-3. The KFD-owned boundary is the standard vocabulary, schema IDs, and\nclosed-world evidence shape. See\n[`docs/kfd-3-collaboration-interface.md`](docs/kfd-3-collaboration-interface.md)."
+      },
+      {
+        "id": "decision-metadata",
+        "sourcePath": "README.md",
+        "sourceHeading": "Decision metadata",
+        "title": "Decision metadata",
+        "renderRole": "support",
+        "homepagePriority": 50,
+        "defaultPresentation": "fact-source",
+        "includeInFirstScreen": false,
+        "markdown": "Every rendered decision page should make the KFD fact source explicit. The\npublic KFD fact source is the GitHub-hosted `kungfu-systems/kfd` git\nrepository. GitHub is the current canonical coordination and hosting surface;\nthe load-bearing facts are the commit-addressed repository contents.\n\nDecision metadata should expose:\n\n- Public fact source: `https://github.com/kungfu-systems/kfd`\n- Load-bearing coordinate: commit-addressed repository contents.\n- Canonical paths: `decisions/kfd-N.md`, `registry.json`, `standards.json`.\n- Stable rendered index: `https://kfd.libkungfu.dev`.\n- Rendered URL: `https://kfd.libkungfu.dev/N`.\n\nRendered pages, npm package contents, Buildchain release passports, and\n`kfd.libkungfu.dev` are projections or evidence surfaces. A GitHub issue is an\nextension request path, not a KFD fact by itself; it becomes part of the KFD\nfact source only after the resulting change is committed to the repository."
+      },
+      {
+        "id": "homepage-content-contract",
+        "sourcePath": "README.md",
+        "sourceHeading": "Homepage content contract",
+        "title": "Homepage content contract",
+        "renderRole": "renderer-contract",
+        "homepagePriority": 90,
+        "defaultPresentation": "developer-note",
+        "includeInFirstScreen": false,
+        "markdown": "This README is also the homepage text source for `https://kfd.libkungfu.dev`.\nWhen `site-libkungfu-dev` consumes the `@kungfu-tech/kfd` npm package to render\nthe KFD site, it should treat this file as the canonical homepage copy, not as\nan implementation note to paraphrase in the site repository.\n\nThe first screen should be derived from this README:\n\n- Page identity: the top-level heading.\n- Lead: the opening paragraph that defines KFD as the organization-wide\n  decision registry.\n- Foundation signal: the `Foundation triad` section, especially the three\n  one-line commitments.\n- First-screen explanation: the beginning of `Foundation model`, ending at the\n  `non-drifting facts -> inspectable trust -> transparent cooperation` chain.\n\nDecision cards, detail links, and machine paths should come from\n`registry.json`. The machine-readable site bundle lives at `site/kfd-site.json`\nand gives renderers stable fields for the homepage, foundation model, product\nproof path, decision routes, and rendering boundary. A site renderer may adapt\nlayout, navigation, typography, and visual assets, but it should not maintain\nseparate homepage wording that can drift from this package.\n\n`site/kfd-site.json` is generated from this README by\n`scripts/update-site-bundle.mjs`. The generated bundle exposes both compatible\ntop-level homepage fields and ordered `homepage.sections` entries. The\n`homepage.displayPlan` tells renderers which sections belong in the first\nscreen, primary narrative, support area, and renderer-contract area. Site\nrepositories should consume that bundle instead of parsing this README\nthemselves."
+      }
+    ],
+    "displayPlan": {
+      "firstScreen": {
+        "include": [
+          "title",
+          "lead",
+          "foundation-triad",
+          "foundation-model.chain"
+        ],
+        "maxPrimarySections": 2,
+        "note": "The first viewport should establish KFD identity and the three-decision worldview without showing renderer or developer contract text."
+      },
+      "primary": [
+        "foundation-triad",
+        "foundation-model",
+        "product-proof-path"
+      ],
+      "support": [
+        "agent-quickstart",
+        "decision-metadata"
+      ],
+      "rendererContract": [
+        "homepage-content-contract"
+      ],
+      "currentDecisions": {
+        "source": "registry.json",
+        "placement": "after-primary",
+        "ids": [
+          "KFD-1",
+          "KFD-2",
+          "KFD-3"
+        ]
+      }
     }
   },
   "decisionPages": {
@@ -109,9 +213,11 @@
   "renderingBoundary": {
     "ownedByKfd": [
       "homepage title and text",
+      "homepage section projection from README.md",
       "foundation triad commitments",
       "foundation model layers and chain",
       "product proof path text",
+      "agent quickstart text",
       "decision metadata",
       "decision metadata fact source",
       "license and official-status boundary",
@@ -124,7 +230,8 @@
       "navigation layout",
       "visual assets",
       "decorative images",
-      "markdown-to-HTML renderer"
+      "markdown-to-HTML renderer",
+      "section presentation and progressive disclosure within KFD displayPlan constraints"
     ]
   }
 }

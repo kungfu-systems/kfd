@@ -1,6 +1,6 @@
 {
   "name": "@kungfu-tech/kfd",
-  "version": "1.0.0-alpha.14",
+  "version": "1.0.0-alpha.15",
   "description": "Kung Fu Decisions (KFD): the kungfu-systems organization-wide decision registry, as a consumable artifact",
   "license": "Apache-2.0",
   "files": [
@@ -12,6 +12,7 @@
     "kfd.release.json",
     "schemas",
     "site",
+    "scripts",
     "buildchain.release-propagation.json",
     "release-impact.json",
     ".buildchain/kfd-1/contract-world.witness.json",
@@ -29,6 +30,7 @@
     "./site/kfd-site.json": "./site/kfd-site.json",
     "./buildchain.release-propagation.json": "./buildchain.release-propagation.json",
     "./release-impact.json": "./release-impact.json",
+    "./scripts/*.mjs": "./scripts/*.mjs",
     "./buildchain/kfd-1/contract-world.witness.json": "./.buildchain/kfd-1/contract-world.witness.json",
     "./buildchain/kfd-2/public-release-trust.claim.json": "./.buildchain/kfd-2/public-release-trust.claim.json",
     "./buildchain/kfd-3/collaboration-interface.json": "./.buildchain/kfd-3/collaboration-interface.json",
@@ -41,6 +43,7 @@
   },
   "scripts": {
     "check": "node scripts/check.mjs",
+    "update:site-bundle": "node scripts/update-site-bundle.mjs",
     "update:kfd-1-witness": "node scripts/update-kfd-1-witness.mjs",
     "update:kfd-2-claim": "node scripts/update-kfd-2-claim.mjs",
     "update:kfd-3-witness": "node scripts/update-kfd-3-witness.mjs"

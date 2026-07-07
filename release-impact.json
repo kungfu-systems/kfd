@@ -9,7 +9,7 @@
   "versionImpact": {
     "final": "minor",
     "source": "kfd-surface-register",
-    "rationale": "This change additively registers KFD-owned standards metadata, the KFD-2 trust taxonomy, KFD-2 release trust schemas, KFD-3 collaboration-interface schemas, KFD-3 self-verification witnesses, and KFD-1 document/interface integrity bindings while keeping existing registry and decision surfaces compatible."
+    "rationale": "This change additively registers KFD-owned standards metadata, the KFD-2 trust taxonomy, KFD-2 release trust schemas, KFD-3 collaboration-interface schemas, KFD-3 self-verification witnesses, KFD-1 document/interface integrity bindings, and the README-backed KFD site homepage projection while keeping existing registry and decision surfaces compatible."
   },
   "surfaceImpacts": [
     {
@@ -34,7 +34,13 @@
       "id": "kfd-package-structure",
       "impact": "minor",
       "class": "additive",
-      "rationale": "The npm package now publishes the KFD-2 trust taxonomy, KFD-2 schemas, KFD-2 documentation, KFD-3 self collaboration-interface witnesses, TRADEMARKS.md, public fact-source metadata, and agent quickstart/self-proof documentation through existing schemas/, docs/, standards.json, site/, .buildchain/, and subpath exports while preserving existing README.md, decisions/, registry.json, and site/ paths."
+      "rationale": "The npm package now publishes the KFD-2 trust taxonomy, KFD-2 schemas, KFD-2 documentation, KFD-3 self collaboration-interface witnesses, TRADEMARKS.md, public fact-source metadata, agent quickstart/self-proof documentation, and repository verification scripts through existing schemas/, docs/, standards.json, site/, scripts/, .buildchain/, and subpath exports while preserving existing README.md, decisions/, registry.json, and site/ paths."
+    },
+    {
+      "id": "kfd-site-homepage-bundle",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "site/kfd-site.json now exposes generated README-backed homepage.sections and homepage.displayPlan fields, and scripts/check.mjs verifies the checked-in bundle matches the README projection so downstream sites can render KFD-owned homepage content without maintaining their own README parser or drifting copy."
     },
     {
       "id": "kfd-3-self-collaboration",
@@ -61,5 +67,5 @@
       "rationale": "The KFD to site-libkungfu-dev propagation graph now targets the downstream site's actual main branch and documents the exact KFD package surfaces consumed by kfd.libkungfu.dev, without changing the release propagation graph contract."
     }
   ],
-  "summary": "KFD v1.0 production promotion is minor-impact because it additively exposes KFD-2 trust taxonomy and release trust metadata, KFD-1/2/3 interface version metadata, KFD-3 self-verification witnesses, document integrity bindings, and a corrected site release-propagation target for Buildchain and other consumers; existing registry, decision text, site bundle, and propagation graph contracts remain compatible."
+  "summary": "KFD v1.0 production promotion is minor-impact because it additively exposes KFD-2 trust taxonomy and release trust metadata, KFD-1/2/3 interface version metadata, KFD-3 self-verification witnesses, document integrity bindings, a README-backed homepage bundle/display plan, and a corrected site release-propagation target for Buildchain and other consumers; existing registry, decision text, site bundle, and propagation graph contracts remain compatible."
 }
