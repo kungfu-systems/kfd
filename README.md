@@ -75,6 +75,16 @@ transparent and inspectable mechanisms it asks products to provide.
 This README states the architecture; KFD-1, KFD-2, and KFD-3 provide the
 detailed rules.
 
+## Adoption boundary
+
+KFD is an engineering discipline, not a belief test.
+KFD governs systems before it judges people.
+No one should be pressured to adopt KFD in the name of KFD.
+Disagreement is a valid cooperation state.
+
+A constraint can be strict and still KFD-compatible when it is fact-bound,
+explainable, auditable, and proportionate.
+
 ## Homepage content contract
 
 This README is also the homepage text source for `https://kfd.libkungfu.dev`.
@@ -104,10 +114,9 @@ separate homepage wording that can drift from this package.
 `scripts/update-site-bundle.mjs`. The generated bundle exposes both compatible
 top-level homepage fields and ordered `homepage.sections` entries. The
 `homepage.displayPlan` tells renderers which sections belong in the first
-screen, primary narrative, support area, and renderer-contract area. Site
-repositories should consume that bundle instead of parsing this README
-themselves. The renderer contract is exposed as machine/implementation
-metadata, not as ordinary homepage content.
+screen, primary narrative, and support area. Site repositories should consume
+that bundle instead of parsing this README themselves. The renderer contract is
+exposed as machine/implementation metadata, not as ordinary homepage content.
 
 ## Product proof path
 

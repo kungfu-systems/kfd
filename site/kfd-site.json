@@ -100,6 +100,17 @@
         "markdown": "The triad is intentionally ordered. It is a compact model for surviving and\nevolving in complex systems, especially in a world where agents can observe,\nact, delegate, and remember across many surfaces.\n\n| Layer | Decision | Reader question | Commitment |\n|---|---|---|---|\n| Fact-source ontology | KFD-1 | What can count as a fact? | Facts must not drift: a load-bearing contract world comes from one declared fact source. |\n| Participant-to-object trust | KFD-2 | When can a user or agent trust a claim, product, artifact, or control surface? | Trust starts from inspectable facts and responsibility state. |\n| Participant-to-participant cooperation | KFD-3 | How should peer intelligent participants cooperate? | Cooperation starts from trusted value: value becomes trustable through transparent facts, stable choice, and explainable constraints. |\n\nIn short:\n\n```text\nnon-drifting facts -> inspectable trust -> trusted value -> voluntary cooperation\n```\n\nThis is why KFDs are not only internal governance text. KFD-1 gives the\nfoundation model its first layer by making fact sources operational: a\nfact-bearing contract world must be declared, inspectable, and unable to drift\ninvisibly. KFD-2 then defines how trust can stand on those facts. KFD-3\ndefines how humans and agents can cooperate once facts and trust are visible.\n\nReal-world agent work turns ordinary work into a dense system of products,\nfiles, repositories, traces, policies, humans, and agents. In that world,\ncomplexity cannot be made safe by hidden state or forced compliance. It has to\nbe compressed through non-drifting facts, inspectable trust, and voluntary\ncooperation. The goal is not to force increasingly capable participants into\ncompliance through stronger pressure. It is to give humans and agents a shared\nworldview for adapting to a more complex world.\n\nThis also changes what a product interface means. Agent-facing CLI, API,\ndocumentation, envelopes, and local fact surfaces are not secondary integration\nchannels after the human GUI. They are first-class interfaces for intelligent\nparticipants that may use the system more frequently than humans do. A control\nplane in this model is a shared work environment for humans and agents, not\nonly a human dashboard over agent activity.\n\nThis model used to be expensive to practice. Stable facts require engineering,\niteration, and disciplined evidence paths, so older systems often survived by\nleaning on cheaper substitutes such as authority, habit, reputation, or\nintuition. Agents change both sides of that equation: they make the world more\ncomplex, and they also provide more intelligence for building fact-bearing\nsystems. KFD is part of that bootstrap: the worldview is forged through the same\ntransparent and inspectable mechanisms it asks products to provide.\n\nThis README states the architecture; KFD-1, KFD-2, and KFD-3 provide the\ndetailed rules."
       },
       {
+        "id": "adoption-boundary",
+        "sourcePath": "README.md",
+        "sourceHeading": "Adoption boundary",
+        "title": "Adoption boundary",
+        "renderRole": "primary",
+        "homepagePriority": 25,
+        "defaultPresentation": "boundary-note",
+        "includeInFirstScreen": false,
+        "markdown": "KFD is an engineering discipline, not a belief test.\nKFD governs systems before it judges people.\nNo one should be pressured to adopt KFD in the name of KFD.\nDisagreement is a valid cooperation state.\n\nA constraint can be strict and still KFD-compatible when it is fact-bound,\nexplainable, auditable, and proportionate."
+      },
+      {
         "id": "product-proof-path",
         "sourcePath": "README.md",
         "sourceHeading": "Product proof path",
@@ -147,14 +158,12 @@
       "primary": [
         "foundation-triad",
         "foundation-model",
+        "adoption-boundary",
         "product-proof-path"
       ],
       "support": [
         "agent-quickstart",
         "decision-metadata"
-      ],
-      "rendererContract": [
-        "homepage-content-contract"
       ],
       "currentDecisions": {
         "source": "registry.json",
@@ -175,7 +184,7 @@
       "homepagePriority": 90,
       "defaultPresentation": "developer-note",
       "includeInFirstScreen": false,
-      "markdown": "This README is also the homepage text source for `https://kfd.libkungfu.dev`.\nWhen `site-libkungfu-dev` consumes the `@kungfu-tech/kfd` npm package to render\nthe KFD site, it should treat this file as the canonical homepage copy, not as\nan implementation note to paraphrase in the site repository.\n\nThe first screen should be derived from this README:\n\n- Page identity: the top-level heading.\n- Lead: the opening paragraph that defines KFD as the organization-wide\n  decision registry.\n- Foundation signal: the `Foundation triad` section, especially the three\n  one-line commitments.\n- First-screen explanation: the beginning of `Foundation model`, ending at the\n  `non-drifting facts -> inspectable trust -> trusted value -> voluntary\n  cooperation` chain.\n\nDecision cards, detail links, and machine paths should come from\n`registry.json`. The machine-readable site bundle lives at `site/kfd-site.json`\nand gives renderers stable fields for the homepage, foundation model, product\nproof path, decision routes, and rendering boundary. A site renderer may adapt\nlayout, navigation, typography, and visual assets, but it should not maintain\nseparate homepage wording that can drift from this package.\n\n`site/kfd-site.json` is generated from this README by\n`scripts/update-site-bundle.mjs`. The generated bundle exposes both compatible\ntop-level homepage fields and ordered `homepage.sections` entries. The\n`homepage.displayPlan` tells renderers which sections belong in the first\nscreen, primary narrative, support area, and renderer-contract area. Site\nrepositories should consume that bundle instead of parsing this README\nthemselves. The renderer contract is exposed as machine/implementation\nmetadata, not as ordinary homepage content.",
+      "markdown": "This README is also the homepage text source for `https://kfd.libkungfu.dev`.\nWhen `site-libkungfu-dev` consumes the `@kungfu-tech/kfd` npm package to render\nthe KFD site, it should treat this file as the canonical homepage copy, not as\nan implementation note to paraphrase in the site repository.\n\nThe first screen should be derived from this README:\n\n- Page identity: the top-level heading.\n- Lead: the opening paragraph that defines KFD as the organization-wide\n  decision registry.\n- Foundation signal: the `Foundation triad` section, especially the three\n  one-line commitments.\n- First-screen explanation: the beginning of `Foundation model`, ending at the\n  `non-drifting facts -> inspectable trust -> trusted value -> voluntary\n  cooperation` chain.\n\nDecision cards, detail links, and machine paths should come from\n`registry.json`. The machine-readable site bundle lives at `site/kfd-site.json`\nand gives renderers stable fields for the homepage, foundation model, product\nproof path, decision routes, and rendering boundary. A site renderer may adapt\nlayout, navigation, typography, and visual assets, but it should not maintain\nseparate homepage wording that can drift from this package.\n\n`site/kfd-site.json` is generated from this README by\n`scripts/update-site-bundle.mjs`. The generated bundle exposes both compatible\ntop-level homepage fields and ordered `homepage.sections` entries. The\n`homepage.displayPlan` tells renderers which sections belong in the first\nscreen, primary narrative, and support area. Site repositories should consume\nthat bundle instead of parsing this README themselves. The renderer contract is\nexposed as machine/implementation metadata, not as ordinary homepage content.",
       "renderAsHomepageContent": false,
       "note": "This is a machine/renderer contract for site implementers. It should not be rendered as ordinary homepage content."
     }
