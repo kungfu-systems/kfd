@@ -18,12 +18,12 @@ The first three KFDs form the public foundation for kungfu-systems:
 ```text
 KFD-1: facts must not drift.
 KFD-2: trust must start from facts.
-KFD-3: cooperation must start from transparent value.
+KFD-3: cooperation must start from trusted value.
 ```
 
 Together they define the load-bearing path for Kungfu products: make facts
 non-drifting, make trust inspectable from those facts, and let humans and
-agents cooperate through visible value rather than hidden pressure.
+agents cooperate through trusted value rather than hidden pressure.
 
 ## Foundation model
 
@@ -35,12 +35,12 @@ act, delegate, and remember across many surfaces.
 |---|---|---|---|
 | Fact-source ontology | KFD-1 | What can count as a fact? | Facts must not drift: a load-bearing contract world comes from one declared fact source. |
 | Participant-to-object trust | KFD-2 | When can a user or agent trust a claim, product, artifact, or control surface? | Trust starts from inspectable facts and responsibility state. |
-| Participant-to-participant cooperation | KFD-3 | How should peer intelligent participants cooperate? | Cooperation starts from transparent value, stable choice, and explainable constraints, not pressure. |
+| Participant-to-participant cooperation | KFD-3 | How should peer intelligent participants cooperate? | Cooperation starts from trusted value: value becomes trustable through transparent facts, stable choice, and explainable constraints. |
 
 In short:
 
 ```text
-non-drifting facts -> inspectable trust -> transparent cooperation
+non-drifting facts -> inspectable trust -> trusted value -> voluntary cooperation
 ```
 
 This is why KFDs are not only internal governance text. KFD-1 gives the
@@ -90,7 +90,8 @@ The first screen should be derived from this README:
 - Foundation signal: the `Foundation triad` section, especially the three
   one-line commitments.
 - First-screen explanation: the beginning of `Foundation model`, ending at the
-  `non-drifting facts -> inspectable trust -> transparent cooperation` chain.
+  `non-drifting facts -> inspectable trust -> trusted value -> voluntary
+  cooperation` chain.
 
 Decision cards, detail links, and machine paths should come from
 `registry.json`. The machine-readable site bundle lives at `site/kfd-site.json`
@@ -105,7 +106,8 @@ top-level homepage fields and ordered `homepage.sections` entries. The
 `homepage.displayPlan` tells renderers which sections belong in the first
 screen, primary narrative, support area, and renderer-contract area. Site
 repositories should consume that bundle instead of parsing this README
-themselves.
+themselves. The renderer contract is exposed as machine/implementation
+metadata, not as ordinary homepage content.
 
 ## Product proof path
 
@@ -179,7 +181,7 @@ closed-world evidence shape. See
 |---|---|---|---|
 | [KFD-1](decisions/kfd-1.md) | procedure | Facts must not drift. | active |
 | [KFD-2](decisions/kfd-2.md) | principle | Trust must start from facts. | active |
-| [KFD-3](decisions/kfd-3.md) | principle | Cooperation must start from transparent value. | active |
+| [KFD-3](decisions/kfd-3.md) | principle | Cooperation must start from trusted value. | active |
 
 ## Decision metadata
 

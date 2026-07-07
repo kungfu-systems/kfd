@@ -76,10 +76,20 @@ if (!Array.isArray(siteBundle.homepage?.sections) || siteBundle.homepage.section
 if (!siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes("foundation-triad")) {
   fail("site bundle homepage displayPlan firstScreen must include foundation-triad");
 }
-for (const requiredSection of ["foundation-triad", "foundation-model", "product-proof-path", "agent-quickstart", "decision-metadata", "homepage-content-contract"]) {
+for (const requiredSection of ["foundation-triad", "foundation-model", "product-proof-path", "agent-quickstart", "decision-metadata"]) {
   if (!siteBundle.homepage.sections.some((entry) => entry.id === requiredSection && entry.sourcePath === "README.md" && entry.markdown)) {
     fail(`site bundle homepage.sections must include README projection ${requiredSection}`);
   }
+}
+if (siteBundle.homepage.sections.some((entry) => entry.id === "homepage-content-contract")) {
+  fail("site bundle homepage.sections must not render the renderer contract as homepage content");
+}
+if (
+  siteBundle.homepage?.rendererContract?.id !== "homepage-content-contract" ||
+  siteBundle.homepage?.rendererContract?.renderAsHomepageContent !== false ||
+  !siteBundle.homepage?.rendererContract?.markdown
+) {
+  fail("site bundle homepage.rendererContract must expose the README renderer contract outside homepage.sections");
 }
 if (siteBundle.homepage?.currentDecisions?.source !== "registry.json") fail("site bundle currentDecisions source must be registry.json");
 if (siteBundle.decisionPages?.source !== "registry.json") fail("site bundle decisionPages source must be registry.json");
