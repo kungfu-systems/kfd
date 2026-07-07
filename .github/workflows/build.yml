@@ -11,13 +11,15 @@ on:
 
 permissions:
   contents: read
+  issues: write
   id-token: write
 
 jobs:
   kfd:
-    uses: kungfu-systems/buildchain/.github/workflows/.build.yml@a4b2c391443d24349ac83cfe26642ce08108ae7d
+    uses: kungfu-systems/buildchain/.github/workflows/.build.yml@v2
     secrets: inherit
     with:
+      buildchain-contract-lock-path: buildchain.contract-lock.json
       runner-preset: custom
       platforms-json: >-
         [{"id":"linux-x64","name":"Linux x64","runner":"[\"ubuntu-24.04\"]"}]
@@ -39,11 +41,13 @@ jobs:
         schemas
         site
         scripts
+        buildchain.contract-lock.json
         buildchain.release-propagation.json
         .buildchain/kfd-1/contract-world.witness.json
+        .buildchain/kfd-2
         .buildchain/kfd-3
         package.json
         release-impact.json
       release-candidate: true
       expected-artifacts-json: >-
-        {"minFiles":27,"requiredPaths":["README.md","TRADEMARKS.md","kfd.release.json","registry.json","standards.json","schemas/kfd-standards.schema.json","schemas/kfd-1/contract-world.schema.json","schemas/kfd-1/witness.schema.json","schemas/kfd-2/release-claims.schema.json","schemas/kfd-2/release-trust-passport.schema.json","schemas/kfd-3/collaboration-interface.schema.json","schemas/kfd-3/witness.schema.json","site/kfd-site.json","scripts/check.mjs","scripts/update-site-bundle.mjs","scripts/update-kfd-1-witness.mjs","scripts/update-kfd-2-claim.mjs","scripts/update-kfd-3-witness.mjs","scripts/npm-publish-transaction.mjs","buildchain.release-propagation.json",".buildchain/kfd-1/contract-world.witness.json",".buildchain/kfd-3/collaboration-interface.json",".buildchain/kfd-3/collaboration-interface.prebuild.json",".buildchain/kfd-3/collaboration-interface.artifact.json","package.json","release-impact.json"]}
+        {"minFiles":29,"requiredPaths":["README.md","TRADEMARKS.md","kfd.release.json","registry.json","standards.json","schemas/kfd-standards.schema.json","schemas/kfd-1/contract-world.schema.json","schemas/kfd-1/witness.schema.json","schemas/kfd-2/release-claims.schema.json","schemas/kfd-2/release-trust-passport.schema.json","schemas/kfd-3/collaboration-interface.schema.json","schemas/kfd-3/witness.schema.json","site/kfd-site.json","scripts/check.mjs","scripts/update-site-bundle.mjs","scripts/update-kfd-1-witness.mjs","scripts/update-kfd-2-claim.mjs","scripts/update-kfd-3-witness.mjs","scripts/npm-publish-transaction.mjs","buildchain.contract-lock.json","buildchain.release-propagation.json",".buildchain/kfd-1/contract-world.witness.json",".buildchain/kfd-2/public-release-trust.claim.json",".buildchain/kfd-3/collaboration-interface.json",".buildchain/kfd-3/collaboration-interface.prebuild.json",".buildchain/kfd-3/collaboration-interface.artifact.json","package.json","release-impact.json"]}
