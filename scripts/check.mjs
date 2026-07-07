@@ -123,12 +123,12 @@ for (const requiredPath of ["decisions/kfd-N.md", "registry.json", "standards.js
     fail(`site bundle decision metadata publicFactSource.canonicalPaths must include ${requiredPath}`);
   }
 }
-for (const requiredFile of ["README.md", "TRADEMARKS.md", "decisions", "registry.json", "standards.json", "kfd.release.json", "schemas", "site", "buildchain.release-propagation.json", "release-impact.json", ".buildchain/kfd-1/contract-world.witness.json", ".buildchain/kfd-2", ".buildchain/kfd-3", "docs"]) {
+for (const requiredFile of ["README.md", "TRADEMARKS.md", "decisions", "registry.json", "standards.json", "kfd.release.json", "schemas", "site", "buildchain.contract-lock.json", "buildchain.release-propagation.json", "release-impact.json", ".buildchain/kfd-1/contract-world.witness.json", ".buildchain/kfd-2", ".buildchain/kfd-3", "docs"]) {
   if (!Array.isArray(packageJson.files) || !packageJson.files.includes(requiredFile)) {
     fail(`package.json files[] must include ${requiredFile}`);
   }
 }
-for (const requiredExport of ["./TRADEMARKS.md", "./registry.json", "./standards.json", "./kfd.release.json", "./site/kfd-site.json", "./buildchain.release-propagation.json", "./release-impact.json", "./buildchain/kfd-1/contract-world.witness.json", "./buildchain/kfd-2/public-release-trust.claim.json", "./buildchain/kfd-3/collaboration-interface.json", "./buildchain/kfd-3/collaboration-interface.prebuild.json", "./buildchain/kfd-3/collaboration-interface.artifact.json", "./schemas/*.json", "./schemas/*/*.json"]) {
+for (const requiredExport of ["./TRADEMARKS.md", "./registry.json", "./standards.json", "./kfd.release.json", "./site/kfd-site.json", "./buildchain.contract-lock.json", "./buildchain.release-propagation.json", "./release-impact.json", "./buildchain/kfd-1/contract-world.witness.json", "./buildchain/kfd-2/public-release-trust.claim.json", "./buildchain/kfd-3/collaboration-interface.json", "./buildchain/kfd-3/collaboration-interface.prebuild.json", "./buildchain/kfd-3/collaboration-interface.artifact.json", "./schemas/*.json", "./schemas/*/*.json"]) {
   if (!packageJson.exports || !packageJson.exports[requiredExport]) {
     fail(`package.json exports must include ${requiredExport}`);
   }

@@ -48,7 +48,7 @@ jobs:
           github.event.workflow_run.event == 'push'
         )
       }}
-    uses: kungfu-systems/buildchain/.github/workflows/release-candidate-promote.yml@alpha/v2/v2.8
+    uses: kungfu-systems/buildchain/.github/workflows/release-candidate-promote.yml@v2
     secrets:
       BUILDCHAIN_PROMOTION_TOKEN: ${{ secrets.KUNGFU_GITHUB_TOKEN }}
       buildchain-issue-app-id: ${{ secrets.BUILDCHAIN_ISSUE_APP_ID }}
@@ -56,6 +56,7 @@ jobs:
     with:
       target-ref: ${{ github.event.workflow_run.head_branch || inputs['target-ref'] }}
       target-sha: ${{ github.event.workflow_run.head_sha || inputs.sha || github.sha }}
+      buildchain-contract-lock-path: buildchain.contract-lock.json
       package-manager: custom
       artifact-name: kfd
       release-candidate-workflow-file: build.yml

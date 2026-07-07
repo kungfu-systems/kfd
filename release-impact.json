@@ -34,7 +34,13 @@
       "id": "kfd-package-structure",
       "impact": "minor",
       "class": "additive",
-      "rationale": "The npm package now publishes the KFD-2 trust taxonomy, KFD-2 schemas, KFD-2 documentation, KFD-3 self collaboration-interface witnesses, TRADEMARKS.md, public fact-source metadata, agent quickstart/self-proof documentation, and repository verification scripts through existing schemas/, docs/, standards.json, site/, scripts/, .buildchain/, and subpath exports while preserving existing README.md, decisions/, registry.json, and site/ paths."
+      "rationale": "The npm package now publishes the KFD-2 trust taxonomy, KFD-2 schemas, KFD-2 documentation, KFD-3 self collaboration-interface witnesses, TRADEMARKS.md, public fact-source metadata, agent quickstart/self-proof documentation, Buildchain contract lock metadata, and repository verification scripts through existing schemas/, docs/, standards.json, site/, scripts/, .buildchain/, and subpath exports while preserving existing README.md, decisions/, registry.json, and site/ paths."
+    },
+    {
+      "id": "kfd-buildchain-contract-lock",
+      "impact": "minor",
+      "class": "release-governance",
+      "rationale": "KFD now uses Buildchain v2 floating workflow refs with a consumer-owned buildchain.contract-lock.json, so Buildchain runtime contract drift is checked before heavy build or promotion work while retaining floating-ref upgrade flow."
     },
     {
       "id": "kfd-site-homepage-bundle",
@@ -67,5 +73,5 @@
       "rationale": "The KFD to site-libkungfu-dev propagation graph now targets the downstream site's actual main branch and documents the exact KFD package surfaces consumed by kfd.libkungfu.dev, without changing the release propagation graph contract."
     }
   ],
-  "summary": "KFD v1.0 production promotion is minor-impact because it additively exposes KFD-2 trust taxonomy and release trust metadata, KFD-1/2/3 interface version metadata, KFD-3 self-verification witnesses, document integrity bindings, a README-backed homepage bundle/display plan, and a corrected site release-propagation target for Buildchain and other consumers; existing registry, decision text, site bundle, and propagation graph contracts remain compatible."
+  "summary": "KFD v1.0 production promotion is minor-impact because it additively exposes KFD-2 trust taxonomy and release trust metadata, KFD-1/2/3 interface version metadata, KFD-3 self-verification witnesses, Buildchain contract lock metadata, document integrity bindings, a README-backed homepage bundle/display plan, and a corrected site release-propagation target for Buildchain and other consumers; existing registry, decision text, site bundle, and propagation graph contracts remain compatible."
 }
