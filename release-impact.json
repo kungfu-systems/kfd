@@ -9,14 +9,14 @@
   "versionImpact": {
     "final": "minor",
     "source": "kfd-surface-register",
-    "rationale": "This change additively registers KFD-owned standards metadata, the KFD-2 trust taxonomy, KFD-2 release trust schemas, KFD-3 collaboration-interface schemas, KFD-3 self-verification witnesses, KFD-1 document/interface integrity bindings, and the README-backed KFD site homepage projection while keeping existing registry and decision surfaces compatible."
+    "rationale": "This change additively registers KFD-owned standards metadata, the KFD-2 trust taxonomy, KFD-2 release trust schemas, KFD-3 collaboration-interface schemas, KFD-3 self-verification witnesses, KFD-4 observer-perspective schema, KFD-1 document/interface integrity bindings, and the README-backed KFD site homepage projection while keeping existing registry and decision surfaces compatible."
   },
   "surfaceImpacts": [
     {
       "id": "kfd-content",
       "impact": "patch",
       "class": "content",
-      "rationale": "KFD documents are append-only content coordinates; current documentation changes add the public adoption boundary that keeps KFD an engineering discipline rather than a belief test, while preserving the existing decision numbers and registry shape."
+      "rationale": "KFD documents are append-only content coordinates; current documentation changes add KFD-4 as a practice guideline for declared observer timelines, while preserving existing decision numbers and registry shape."
     },
     {
       "id": "kfd-registry-schema",
@@ -28,13 +28,13 @@
       "id": "kfd-standards-metadata",
       "impact": "minor",
       "class": "additive",
-      "rationale": "standards.json and schemas/ add the KFD-2 trust-taxonomy schema ID, release-claims and release-trust-passport schema IDs, explicit KFD-1/2/3 interface versions, KFD document SHA-256 bindings, KFD-owned concept names, KFD-3 fact-source interface metadata, and official-status interface metadata for downstream consumers."
+      "rationale": "standards.json and schemas/ add the KFD-2 trust-taxonomy schema ID, release-claims and release-trust-passport schema IDs, explicit KFD-1/2/3/4 interface versions, KFD-4 observer-perspective schema metadata, KFD document SHA-256 bindings, KFD-owned concept names, KFD-3 fact-source interface metadata, and official-status interface metadata for downstream consumers."
     },
     {
       "id": "kfd-package-structure",
       "impact": "minor",
       "class": "additive",
-      "rationale": "The npm package now publishes the KFD-2 trust taxonomy, KFD-2 schemas, KFD-2 documentation, KFD-3 self collaboration-interface witnesses, TRADEMARKS.md, public fact-source metadata, agent quickstart/self-proof documentation, Buildchain contract lock metadata, and repository verification scripts through existing schemas/, docs/, standards.json, site/, scripts/, .buildchain/, and subpath exports while preserving existing README.md, decisions/, registry.json, and site/ paths."
+      "rationale": "The npm package now publishes the KFD-2 trust taxonomy, KFD-2 schemas, KFD-2 documentation, KFD-3 self collaboration-interface witnesses, KFD-4 observer-perspective schema, TRADEMARKS.md, public fact-source metadata, agent quickstart/self-proof documentation, Buildchain contract lock metadata, and repository verification scripts through existing schemas/, docs/, standards.json, site/, scripts/, .buildchain/, and subpath exports while preserving existing README.md, decisions/, registry.json, and site/ paths."
     },
     {
       "id": "kfd-buildchain-contract-lock",
@@ -46,7 +46,7 @@
       "id": "kfd-site-homepage-bundle",
       "impact": "minor",
       "class": "additive",
-      "rationale": "site/kfd-site.json now exposes generated README-backed homepage.sections and homepage.displayPlan fields, including the adoption-boundary homepage section, and scripts/check.mjs verifies the checked-in bundle matches the README projection so downstream sites can render KFD-owned homepage content without maintaining their own README parser or drifting copy."
+      "rationale": "site/kfd-site.json now exposes generated README-backed homepage.sections and homepage.displayPlan fields, including the adoption-boundary and practice-guidelines homepage sections, and scripts/check.mjs verifies the checked-in bundle matches the README projection so downstream sites can render KFD-owned homepage content without maintaining their own README parser or drifting copy."
     },
     {
       "id": "kfd-3-self-collaboration",
@@ -73,5 +73,5 @@
       "rationale": "The KFD to site-libkungfu-dev propagation graph now targets the downstream site's actual main branch and documents the exact KFD package surfaces consumed by kfd.libkungfu.dev, without changing the release propagation graph contract."
     }
   ],
-  "summary": "KFD v1.0 production promotion is minor-impact because it additively exposes KFD-2 trust taxonomy and release trust metadata, KFD-1/2/3 interface version metadata, KFD-3 self-verification witnesses, Buildchain contract lock metadata, document integrity bindings, a README-backed homepage bundle/display plan, and a corrected site release-propagation target for Buildchain and other consumers; existing registry, decision text, site bundle, and propagation graph contracts remain compatible."
+  "summary": "KFD v1.0 production promotion is minor-impact because it additively exposes KFD-2 trust taxonomy and release trust metadata, KFD-1/2/3/4 interface version metadata, KFD-3 self-verification witnesses, KFD-4 observer-perspective schema, Buildchain contract lock metadata, document integrity bindings, a README-backed homepage bundle/display plan, and a corrected site release-propagation target for Buildchain and other consumers; existing registry, decision text, site bundle, and propagation graph contracts remain compatible."
 }

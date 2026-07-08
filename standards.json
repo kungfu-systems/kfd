@@ -201,6 +201,55 @@
         "extensionRequest": "extension request",
         "extensionPath": "extension path"
       }
+    },
+    "kfd-4": {
+      "key": "kfd-4",
+      "id": "KFD-4",
+      "number": 4,
+      "label": "KFD-4",
+      "title": "Timelines must declare their observer: useful views need a stated perspective",
+      "kind": "procedure",
+      "status": "active",
+      "revision": 1,
+      "metadataSchemaVersion": "1",
+      "document": {
+        "path": "decisions/kfd-4.md",
+        "url": "https://kfd.libkungfu.dev/4",
+        "sha256": "7077a6446c8baa60d85426780cb7b2bee488133196b6f53d74f0eb151f6e26e4"
+      },
+      "compatibility": {
+        "packageLine": "v1.0",
+        "registrySchemaVersion": 1,
+        "metadataSchemaVersion": "1",
+        "rule": "Substantive semantic changes mint a new KFD; compatible metadata additions keep schemaVersion 1."
+      },
+      "schemaIds": {
+        "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json",
+        "observerPerspective": "https://kfd.libkungfu.dev/schemas/kfd-4/observer-perspective.schema.json"
+      },
+      "schemaPaths": {
+        "metadata": "schemas/kfd-standards.schema.json",
+        "observerPerspective": "schemas/kfd-4/observer-perspective.schema.json"
+      },
+      "interfaces": {
+        "observerPerspective": {
+          "contract": "kfd-4-observer-perspective",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-4/observer-perspective.schema.json",
+          "schemaPath": "schemas/kfd-4/observer-perspective.schema.json",
+          "compatibilityRule": "Compatible additions may keep schemaVersion 1; semantic or required-field changes require a new interface version or contract."
+        }
+      },
+      "concepts": {
+        "observer": "observer",
+        "declaredPerspective": "declared perspective",
+        "observerPerspective": "observer perspective",
+        "acceptedFacts": "accepted facts",
+        "projectionPolicy": "projection policy",
+        "causalDominance": "causal dominance",
+        "degradedEvidence": "degraded evidence",
+        "timeline": "perspective-bearing timeline"
+      }
     }
   }
 }

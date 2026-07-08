@@ -41,6 +41,7 @@ const schemaSurfaces = [
   "schemas/kfd-2/release-trust-passport.schema.json",
   "schemas/kfd-3/collaboration-interface.schema.json",
   "schemas/kfd-3/witness.schema.json",
+  "schemas/kfd-4/observer-perspective.schema.json",
 ].map((filePath) => ({
   id: `schema:${filePath.replace(/^schemas\//, "").replace(/\.schema\.json$/, "").replace(/\//g, ":")}`,
   sourcePath: filePath,
