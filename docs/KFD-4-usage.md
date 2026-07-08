@@ -23,9 +23,23 @@ Use KFD-4 when a product surface represents time, history, replay, sync,
 ordering, or mixed-source work state. A product that does not present a
 perspective-bearing timeline does not need a KFD-4 gate.
 
+The gate is about the view's declared perspective. A product may pass the KFD-4
+interface boundary by exposing view-subject, observer, accepted-fact,
+projection-policy, causal-constraint, degraded-evidence, and verification
+metadata. That package or product still needs separate evidence for any
+stronger claim, such as
+"this adapter captured every remote event" or "this product timeline is
+complete and correct."
+
 ## Trust Relation
 
 KFD-4 claims can be assessed by KFD-2. The KFD package does this through
 `.buildchain/kfd-2/kfd-foundation.trust-claims.json` and
 `.buildchain/kfd-2/kfd-foundation.trust-assessment.json`, where KFD-4 is
 assessed as an `observer-perspective` subject.
+
+The KFD package's own KFD-2 assessment proves the package-level interface
+surface: decision text, standards metadata, schema, and self-check wiring. It
+does not transfer trust to an adopter's runtime timeline. Adopters should make
+their own KFD-2 claim or release passport when they want users or agents to
+trust a concrete timeline implementation.
