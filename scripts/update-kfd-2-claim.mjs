@@ -170,7 +170,7 @@ const trustClaims = {
     {
       id: "kfd-3-collaboration-interface-trust",
       statement:
-        "KFD-3 is trustable as a participant-facing collaboration interface because KFD publishes the declared interface, prebuild witness, artifact witness, extension path, and closure check.",
+        "KFD-3 is trustable as a participant-facing collaboration interface because KFD publishes the declared interface, explicit value evidence, prebuild witness, artifact witness, extension path, and closure check.",
       subject: {
         kind: "collaboration-interface",
         id: "kfd-3-collaboration-interface",
@@ -182,7 +182,7 @@ const trustClaims = {
       ],
       evidence: [
         evidence("schema", "schemas/kfd-3/collaboration-interface.schema.json", "KFD-3 collaboration interface schema is published."),
-        evidence("file", ".buildchain/kfd-3/collaboration-interface.json", "KFD-3 source collaboration interface declares reachable participant-facing surfaces."),
+        evidence("file", ".buildchain/kfd-3/collaboration-interface.json", "KFD-3 source collaboration interface declares reachable participant-facing surfaces and value evidence."),
         evidence("file", "scripts/check.mjs", "The package check gate validates KFD-3 interface closure and witness parity."),
       ],
       verification: {
@@ -293,7 +293,7 @@ const assessment = {
       id: "kfd-3-natural-language-semantics",
       riskType: "natural-language-semantic-risk",
       trustImpact: "downgrade-warning",
-      reason: "KFD-3 exposes machine-checkable collaboration surfaces, but the human-language meaning of trusted value and non-coercive cooperation remains a reviewable semantic responsibility.",
+      reason: "KFD-3 exposes machine-checkable collaboration surfaces and value evidence, but the human-language meaning of trusted value and non-coercive cooperation remains a reviewable semantic responsibility.",
       agentAction: "semantic-review-required",
       source: "kfd-3-collaboration-interface-trust",
     },

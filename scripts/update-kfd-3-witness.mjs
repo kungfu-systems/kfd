@@ -111,6 +111,24 @@ for (const entrypoint of collaborationInterface.minimalEntrypoints) {
   declaredSurfaceIds.add(entrypoint.id);
 }
 
+const valueEvidencePointers = (() => {
+  const entriesByPath = new Map();
+  for (const valueClaim of collaborationInterface.valueEvidence ?? []) {
+    for (const entry of [
+      ...(valueClaim.facts ?? []),
+      ...(valueClaim.evidence ?? []),
+      ...(valueClaim.trustAssessment ? [valueClaim.trustAssessment] : []),
+    ]) {
+      if (!entry?.path || entriesByPath.has(entry.path)) continue;
+      entriesByPath.set(
+        entry.path,
+        pointer(entry.path, `KFD-3 value evidence for ${valueClaim.id}: ${valueClaim.claim}`)
+      );
+    }
+  }
+  return [...entriesByPath.values()];
+})();
+
 const participantProfiles = collaborationInterface.participants.map((entry) => entry.id);
 const responsibility = {
   registryFactsOwner: "KFD maintainers",
@@ -198,6 +216,7 @@ const artifact = {
       pointer("package.json", "Package export map"),
       pointer("site/kfd-site.json", "Site content projection"),
     ],
+    valueEvidence: valueEvidencePointers,
     transparentConstraints: [
       pointer("CONTRIBUTING.md", "Append-only decision and contribution constraints"),
       pointer("TRADEMARKS.md", "Trademark and official-status constraints"),
