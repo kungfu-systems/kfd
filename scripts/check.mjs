@@ -428,10 +428,25 @@ if (!kfd3CollaborationSchema.properties?.extensionRequests) {
 if (!kfd3CollaborationSchema.properties?.factSources) {
   fail("KFD-3 collaborationInterface schema must expose factSources");
 }
+if (!kfd3CollaborationSchema.properties?.valueEvidence) {
+  fail("KFD-3 collaborationInterface schema must expose valueEvidence");
+}
+if (!kfd3CollaborationSchema.required?.includes("valueEvidence")) {
+  fail("KFD-3 collaborationInterface schema must require valueEvidence");
+}
+if (!kfd3CollaborationSchema.$defs?.valueEvidence?.properties?.trustAssessment) {
+  fail("KFD-3 collaborationInterface valueEvidence must support trustAssessment");
+}
+if (!kfd3WitnessSchema.properties?.evidence?.required?.includes("valueEvidence")) {
+  fail("KFD-3 witness evidence must require valueEvidence");
+}
+if (!kfd3WitnessSchema.properties?.evidence?.properties?.valueEvidence) {
+  fail("KFD-3 witness evidence must expose valueEvidence");
+}
 if (!kfd3CollaborationSchema.$defs?.extensionRequest?.properties?.requestPath?.properties?.kind?.enum?.includes("github-issue")) {
   fail("KFD-3 extensionRequest.requestPath.kind must support github-issue");
 }
-for (const concept of ["participant", "collaborationInterface", "minimalEntrypoint", "closure", "choicePath", "extensionRequest", "extensionPath"]) {
+for (const concept of ["trustedValueClaim", "valueEvidence", "trustAssessmentLink", "participant", "collaborationInterface", "minimalEntrypoint", "closure", "choicePath", "extensionRequest", "extensionPath"]) {
   if (!kfd3?.concepts?.[concept]) fail(`KFD-3 standards metadata missing concept ${concept}`);
 }
 for (const iface of ["collaborationInterface", "witness"]) {
@@ -756,6 +771,32 @@ if (!kfd3Interface) {
   if (!kfd3Interface.surfaces.some((entry) => entry.id === "official-status-and-trademarks" && entry.discoverability?.path === "TRADEMARKS.md")) {
     fail("KFD-3 collaboration interface must expose TRADEMARKS.md as a participant-facing surface");
   }
+  if (!Array.isArray(kfd3Interface.valueEvidence) || kfd3Interface.valueEvidence.length === 0) {
+    fail("KFD-3 collaboration interface valueEvidence[] is required");
+  } else {
+    for (const [index, entry] of kfd3Interface.valueEvidence.entries()) {
+      if (!entry.id) fail(`KFD-3 collaboration interface valueEvidence[${index}].id is required`);
+      if (!entry.claim) fail(`KFD-3 collaboration interface valueEvidence[${index}].claim is required`);
+      if (!Array.isArray(entry.participants) || entry.participants.length === 0) fail(`KFD-3 collaboration interface valueEvidence[${index}].participants[] is required`);
+      if (!Array.isArray(entry.facts) || entry.facts.length === 0) fail(`KFD-3 collaboration interface valueEvidence[${index}].facts[] is required`);
+      if (!Array.isArray(entry.evidence) || entry.evidence.length === 0) fail(`KFD-3 collaboration interface valueEvidence[${index}].evidence[] is required`);
+      for (const [factIndex, fact] of (entry.facts ?? []).entries()) {
+        checkPointer(fact, `KFD-3 collaboration interface valueEvidence[${index}].facts[${factIndex}]`);
+      }
+      for (const [evidenceIndex, evidenceEntry] of (entry.evidence ?? []).entries()) {
+        checkPointer(evidenceEntry, `KFD-3 collaboration interface valueEvidence[${index}].evidence[${evidenceIndex}]`);
+      }
+      if (entry.trustAssessment) {
+        checkPointer(entry.trustAssessment, `KFD-3 collaboration interface valueEvidence[${index}].trustAssessment`);
+      }
+      for (const [riskIndex, risk] of (entry.residualRisk ?? []).entries()) {
+        checkResidualRisk(risk, `KFD-3 collaboration interface valueEvidence[${index}].residualRisk[${riskIndex}]`);
+      }
+    }
+    if (!kfd3Interface.valueEvidence.some((entry) => entry.trustAssessment?.path === kfd2TrustAssessmentPath)) {
+      fail("KFD-3 collaboration interface valueEvidence must link to the KFD-2 generic trust assessment");
+    }
+  }
   if (!Array.isArray(kfd3Interface.extensionRequests) || kfd3Interface.extensionRequests.length === 0) fail("KFD-3 collaboration interface extensionRequests[] is required");
   if (!kfd3Interface.extensionRequests.some((entry) => entry.id === "kfd-2-trust-taxonomy-extension" && entry.requestPath?.kind === "github-issue" && String(entry.requestPath?.target || "").startsWith("https://github.com/kungfu-systems/kfd/issues/new"))) {
     fail("KFD-3 collaboration interface must declare the KFD-2 trust taxonomy GitHub issue extension path");
@@ -799,6 +840,9 @@ if (!kfd3ArtifactWitness) {
   for (const [index, risk] of (kfd3ArtifactWitness.residualRisk ?? []).entries()) {
     checkResidualRisk(risk, `KFD-3 artifact witness residualRisk[${index}]`);
   }
+  if (!Array.isArray(kfd3ArtifactWitness.evidence?.valueEvidence) || kfd3ArtifactWitness.evidence.valueEvidence.length === 0) {
+    fail("KFD-3 artifact witness evidence.valueEvidence[] is required");
+  }
   if (kfd3ArtifactWitness.closure?.classificationMode !== "closed-world") fail("KFD-3 artifact witness closure must be closed-world");
   if (!Array.isArray(kfd3ArtifactWitness.closure?.unclassifiedEntrypoints) || kfd3ArtifactWitness.closure.unclassifiedEntrypoints.length !== 0) {
     fail("KFD-3 artifact witness must have zero unclassifiedEntrypoints");
@@ -824,7 +868,7 @@ if (kfd3PrebuildWitness && kfd3ArtifactWitness) {
 }
 
 const impactLevels = new Set(["patch", "minor", "major"]);
-const requiredSurfaces = new Set(["kfd-content", "kfd-registry-schema", "kfd-standards-metadata", "kfd-package-structure", "kfd-2-public-release-trust-claim"]);
+const requiredSurfaces = new Set(["kfd-content", "kfd-registry-schema", "kfd-standards-metadata", "kfd-package-structure", "kfd-2-public-release-trust-claim", "kfd-3-trusted-value-evidence"]);
 
 if (releaseImpact.schemaVersion !== 1) fail(`unsupported release-impact schemaVersion ${releaseImpact.schemaVersion}`);
 if (releaseImpact.contract !== "kungfu-buildchain-impact") fail(`unexpected release-impact contract ${releaseImpact.contract}`);

@@ -97,6 +97,13 @@ human-readable facts wherever possible. A capable agent should be able to learn
 the product's value, and why that value can be trusted, by inspecting the
 product's own facts and commands.
 
+Trusted value is therefore not only a product promise or persuasive sentence.
+A collaboration interface should bind important value claims to explicit value
+evidence: the facts that make the value claim inspectable, the artifacts or
+checks that prove those facts are present, and the KFD-2 trust assessment or
+residual-risk state that tells participants how much weight to place on the
+claim.
+
 ### 3. Use constraints as transparent safety, not hidden control
 
 Hard constraints are legitimate when they protect users, agents, work products,
@@ -165,6 +172,12 @@ KFD-1 protects the fact-source layer. KFD-2 protects the trust layer. KFD-3
 protects the relationship with the intelligent participant who must decide
 whether the offered value is trustworthy enough to walk that path.
 
+In machine-readable profiles, this means KFD-3 collaboration interfaces should
+not merely list surfaces and constraints. They should also declare value
+evidence that can be evaluated through the KFD-2 trust model. KFD-2 can then
+say which parts are machine-checkable, which parts remain semantic residual
+risk, and what an agent should do next.
+
 ## Implementation case: the KFD package
 
 The `@kungfu-tech/kfd` npm package is a self-proof case for this principle.
@@ -172,7 +185,10 @@ Its README gives humans and agents the same quickstart path. `standards.json`
 gives stable standard identity, schema IDs, and concept names. The KFD-3
 schemas define collaboration interfaces, witnesses, and extension requests, so
 an agent can discover both the valid interface and the standard path for asking
-to extend it.
+to extend it. The KFD-3 collaboration interface also declares value evidence
+that points to KFD-owned facts, package surfaces, and the KFD-2 generic trust
+assessment, so an agent can inspect why KFD's claimed value is trustable before
+cooperating.
 
 For example, if an agent needs a KFD-2 trust-taxonomy value that does not
 exist, the KFD-3 collaboration path is not hidden maintainer pressure or local

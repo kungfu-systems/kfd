@@ -5,7 +5,7 @@
   "assessedClaims": {
     "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-2/trust-claims.schema.json",
     "path": ".buildchain/kfd-2/kfd-foundation.trust-claims.json",
-    "digest": "sha256:8f4d608e9ea8b2b103f0ff4b8bb911e07f8138ca60789efb012b19ac9b64d2b4"
+    "digest": "sha256:9cbce1ff79970f976c447a5932eb66dba1d15634b9371ca60312132fca790bd5"
   },
   "result": "warning",
   "projection": {
@@ -29,7 +29,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": "standards.json",
-          "digest": "sha256:bede765b95b8126a8b83510bd312869e5a97f68570a37ee0bf8a69c54e7996d6",
+          "digest": "sha256:68aae8bbfcce0776e5f5317e133ae1b494a41ecdea1f992bb51f71d1e75f2ca4",
           "description": "Fact standards.json is present and hashable."
         },
         {
@@ -55,7 +55,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": "scripts/check.mjs",
-          "digest": "sha256:adf83bb996dca9bfe3b394d71a09fe806fa4585bd85de25b7fe4ab6389b5cd72",
+          "digest": "sha256:cc7bc717f22c08f04760209dd2550184ba60984c105d520218f532f61bf1abbd",
           "description": "The package check gate validates the KFD-1 schema, surface register, witness, and hashes."
         }
       ],
@@ -87,7 +87,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": ".buildchain/kfd-3/collaboration-interface.json",
-          "digest": "sha256:f7f0d53057e71242d126ea95ee24ea8c869365752804df2674eebc2ef71537ce",
+          "digest": "sha256:fa41128be4ee57a4a40b76d4d7a063c01d7c2e5c53aec2b9c6db819c7a27b22b",
           "description": "Fact .buildchain/kfd-3/collaboration-interface.json is present and hashable."
         }
       ],
@@ -97,7 +97,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": "schemas/kfd-3/collaboration-interface.schema.json",
-          "digest": "sha256:e8d1f67914751b956c5a075eddbcc1ba482ddd21ce7298ab3a8b9df359a0ae44",
+          "digest": "sha256:6526be8e59d2f0f645e7f67a8f63a93f017a2dac62701147d49c5f391c5483a3",
           "description": "KFD-3 collaboration interface schema is published."
         },
         {
@@ -105,15 +105,15 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": ".buildchain/kfd-3/collaboration-interface.json",
-          "digest": "sha256:f7f0d53057e71242d126ea95ee24ea8c869365752804df2674eebc2ef71537ce",
-          "description": "KFD-3 source collaboration interface declares reachable participant-facing surfaces."
+          "digest": "sha256:fa41128be4ee57a4a40b76d4d7a063c01d7c2e5c53aec2b9c6db819c7a27b22b",
+          "description": "KFD-3 source collaboration interface declares reachable participant-facing surfaces and value evidence."
         },
         {
           "type": "file",
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": "scripts/check.mjs",
-          "digest": "sha256:adf83bb996dca9bfe3b394d71a09fe806fa4585bd85de25b7fe4ab6389b5cd72",
+          "digest": "sha256:cc7bc717f22c08f04760209dd2550184ba60984c105d520218f532f61bf1abbd",
           "description": "The package check gate validates KFD-3 interface closure and witness parity."
         }
       ],
@@ -164,7 +164,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": "standards.json",
-          "digest": "sha256:bede765b95b8126a8b83510bd312869e5a97f68570a37ee0bf8a69c54e7996d6",
+          "digest": "sha256:68aae8bbfcce0776e5f5317e133ae1b494a41ecdea1f992bb51f71d1e75f2ca4",
           "description": "Fact standards.json is present and hashable."
         },
         {
@@ -190,7 +190,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": "standards.json",
-          "digest": "sha256:bede765b95b8126a8b83510bd312869e5a97f68570a37ee0bf8a69c54e7996d6",
+          "digest": "sha256:68aae8bbfcce0776e5f5317e133ae1b494a41ecdea1f992bb51f71d1e75f2ca4",
           "description": "Standards metadata exposes the KFD-4 schema ID, path, interface version, and concept names."
         },
         {
@@ -198,7 +198,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": "scripts/check.mjs",
-          "digest": "sha256:adf83bb996dca9bfe3b394d71a09fe806fa4585bd85de25b7fe4ab6389b5cd72",
+          "digest": "sha256:cc7bc717f22c08f04760209dd2550184ba60984c105d520218f532f61bf1abbd",
           "description": "The package check gate validates the KFD-4 schema and standards metadata."
         }
       ],
@@ -221,7 +221,7 @@
       "id": "kfd-3-natural-language-semantics",
       "riskType": "natural-language-semantic-risk",
       "trustImpact": "downgrade-warning",
-      "reason": "KFD-3 exposes machine-checkable collaboration surfaces, but the human-language meaning of trusted value and non-coercive cooperation remains a reviewable semantic responsibility.",
+      "reason": "KFD-3 exposes machine-checkable collaboration surfaces and value evidence, but the human-language meaning of trusted value and non-coercive cooperation remains a reviewable semantic responsibility.",
       "agentAction": "semantic-review-required",
       "source": "kfd-3-collaboration-interface-trust"
     }

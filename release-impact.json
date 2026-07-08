@@ -8,8 +8,8 @@
   },
   "versionImpact": {
     "final": "minor",
-    "source": "kfd-2-generic-trust-core",
-    "rationale": "This change additively promotes KFD-2 from release-passport-specific wording to a generic trust assessment core, adds KFD-owned trust-claims and trust-assessment schemas, dogfoods KFD-2 against KFD-1/3/4, and preserves existing registry, package, and schemaVersion 1 compatibility."
+    "source": "kfd-3-trusted-value-evidence",
+    "rationale": "This change additively upgrades KFD-3 with explicit value evidence linked to KFD-2 trust assessment, while preserving existing registry, package, and schemaVersion 1 compatibility."
   },
   "surfaceImpacts": [
     {
@@ -55,6 +55,12 @@
       "rationale": "KFD now declares its own participant-facing collaboration interface and ships pre-build plus artifact-side KFD-3 witnesses so Buildchain can audit interface closure in the release passport."
     },
     {
+      "id": "kfd-3-trusted-value-evidence",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD-3 collaboration interfaces now declare explicit valueEvidence that binds participant-facing value claims to fact artifacts, evidence artifacts, KFD-2 trust assessments, and residual-risk state."
+    },
+    {
       "id": "kfd-2-public-release-trust-claim",
       "impact": "minor",
       "class": "release-passport",
@@ -97,5 +103,5 @@
       "rationale": "standards.json now publishes the KFD package surface register as the KFD-1 fact source, and the KFD-1 witness projects each registered surface class and impact projection from that fact source."
     }
   ],
-  "summary": "KFD v1.0 production promotion is minor-impact because it additively exposes KFD-2 as a generic trust assessment core, ships generic KFD-2 claims and assessment evidence for KFD-1/3/4, preserves existing package and schemaVersion 1 compatibility, and separates authoritative decision paths from numbered usage documentation."
+  "summary": "KFD v1.0 production promotion is minor-impact because it additively exposes KFD-3 trusted-value evidence, links KFD-3 value claims to the KFD-2 generic trust assessment, preserves existing package and schemaVersion 1 compatibility, and separates authoritative decision paths from numbered usage documentation."
 }

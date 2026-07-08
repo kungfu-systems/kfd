@@ -278,6 +278,76 @@
       "maturity": "stable"
     }
   ],
+  "valueEvidence": [
+    {
+      "id": "kfd-foundation-model",
+      "claim": "KFD helps humans and agents understand the foundation model before adopting or extending kungfu-systems decisions.",
+      "participants": ["human-reader", "agent-reader", "maintainer"],
+      "facts": [
+        { "path": "README.md" },
+        { "path": "decisions/KFD-1.md" },
+        { "path": "decisions/KFD-2.md" },
+        { "path": "decisions/KFD-3.md" },
+        { "path": "registry.json" },
+        { "path": "standards.json" }
+      ],
+      "evidence": [
+        { "path": "site/kfd-site.json" },
+        { "path": "scripts/check.mjs" }
+      ],
+      "trustAssessment": {
+        "path": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json"
+      },
+      "residualRisk": [
+        {
+          "id": "human-language-interpretation",
+          "definedBy": "https://kfd.libkungfu.dev/schemas/kfd-2/trust-taxonomy.schema.json#/$defs/residualRisk",
+          "riskType": "natural-language-semantic-risk",
+          "trustImpact": "downgrade-warning",
+          "machineProvability": "not-exhaustively-enumerable",
+          "agentAction": "semantic-review-required",
+          "reason": "The foundation model is published and inspectable, but its full human-language meaning cannot be exhaustively proved from package bytes.",
+          "owner": "KFD maintainers"
+        }
+      ]
+    },
+    {
+      "id": "kfd-machine-consumption",
+      "claim": "KFD gives agents and release systems machine-readable standards, schemas, package exports, and witnesses so they can consume KFD without relying on private context.",
+      "participants": ["agent-reader", "package-consumer", "site-consumer", "release-system"],
+      "facts": [
+        { "path": "standards.json" },
+        { "path": "schemas/kfd-3/collaboration-interface.schema.json" },
+        { "path": "schemas/kfd-3/witness.schema.json" },
+        { "path": "package.json#exports" }
+      ],
+      "evidence": [
+        { "path": ".buildchain/kfd-2/kfd-foundation.trust-claims.json" },
+        { "path": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json" },
+        { "path": "scripts/check.mjs" }
+      ],
+      "trustAssessment": {
+        "path": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json"
+      }
+    },
+    {
+      "id": "kfd-extension-path",
+      "claim": "KFD gives humans and agents a visible extension path when the declared interface or taxonomy is insufficient.",
+      "participants": ["agent-reader", "human-reader", "maintainer", "release-system", "package-consumer"],
+      "facts": [
+        { "path": "docs/KFD-3-usage.md" },
+        { "path": ".buildchain/kfd-3/collaboration-interface.json" },
+        { "path": "schemas/kfd-2/trust-taxonomy.schema.json" }
+      ],
+      "evidence": [
+        { "path": "docs/KFD-2-usage.md" },
+        { "path": "scripts/check.mjs" }
+      ],
+      "trustAssessment": {
+        "path": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json"
+      }
+    }
+  ],
   "transparentConstraints": [
     {
       "id": "append-only-decisions",
