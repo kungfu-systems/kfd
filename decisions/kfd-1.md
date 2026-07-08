@@ -44,8 +44,10 @@ when either holds:
 - **(b) Cross-time dependency** — its outputs remain depended on after the run
   (persisted data, audit evidence, replayable records).
 
-Each entry carries a stable kebab-case ID. Registers live in each repository's
-versioning document and are the input to every classification below.
+Each entry carries a stable kebab-case ID. A surface may be
+`integration-time`, `cross-time`, or both. Registers live in each repository's
+contract-world metadata or versioning document and are the input to every
+classification below.
 
 ## Concrete case: config contracts
 
@@ -61,20 +63,43 @@ steps, and the final product must consume the same contract mechanism. It is
 not enough for the packaged artifact to be internally consistent if the
 developer path used a different, driftable config source.
 
-## The decision procedure
+## The compatibility impact core
 
-Classify the actual diff against the register; the highest match wins:
+Classify the actual diff against the register; the strongest match wins:
 
 | # | Condition | Verdict |
 |---|---|---|
-| 1 | **Breaks** any registered surface (removal, semantic change, layout change, incompatible rename — a semantic change counts as breakage even when shapes are unchanged: changed defaults, changed channel meaning, a newly required field) | **major** |
-| 2 | **Additively evolves** a registered surface, or **adds** a surface consumers will weld to | **minor** (register the new surface at the same time) |
-| 3 | Touches no registered surface | **patch** — regardless of how large the feature is |
-| 4 | **Cannot be classified** | **Do not guess.** The register is deficient: fix the register first (a maintainer decision), then reclassify |
+| 1 | **Breaks** any registered surface (removal, semantic change, layout change, incompatible rename — a semantic change counts as breakage even when shapes are unchanged: changed defaults, changed channel meaning, a newly required field) | **breaking impact** |
+| 2 | **Additively evolves** a registered surface, or **adds** a surface consumers will weld to | **additive impact** (register the new surface at the same time) |
+| 3 | Touches no registered surface | **no registered-surface impact** — regardless of how large the implementation change is |
+| 4 | **Cannot be classified** | **unclassifiable impact. Do not guess.** The register is deficient: fix the register first (a maintainer decision), then reclassify |
 
 Rule 4 is the safety valve: it forces the irreducible judgment (what counts as
 a welded surface) to a maintainer instead of letting a change silently pick
 the convenient answer.
+
+These four impact classes are the KFD-1 core. They are not inherently release
+version numbers. A product must project them into the control action that
+matches its domain: version line movement, config migration, ABI epoch, API
+namespace, release gate, runtime compatibility bridge, or user workflow gate.
+
+## Release versioning projection
+
+For release versioning, the compatibility impact core projects to semver:
+
+| Compatibility impact | Release verdict |
+|---|---|
+| breaking impact | **major** |
+| additive impact | **minor** |
+| no registered-surface impact | **patch** |
+| unclassifiable impact | **block release; fix the register first** |
+
+This projection is the first implementation case, not the whole principle.
+Other domains must keep the same impact core while choosing their own action:
+config contracts may require a migration bridge or rejected old config, ABIs
+may require a new soname or ABI epoch, APIs may require a namespace or endpoint
+compatibility boundary, and agent/UI surfaces may require explicit workflow or
+command migration.
 
 ## Constraint clauses
 
@@ -87,7 +112,8 @@ the convenient answer.
   self-archivable inputs, and no hard coupling to a maintainer-operated
   service.
 - **Decision time.** The verdict is checked against the final diff before the
-  promotion into the alpha channel; planning-time classification is only a
+  action gate that depends on it; for releases this is checked before
+  promotion into the alpha channel. Planning-time classification is only a
   prediction.
 - **Major dignity.** A major release communicates exactly one thing: something
   you welded to broke and you must re-audit. An empty major — one that breaks
@@ -118,9 +144,11 @@ the convenient answer.
 
 ## The decision log
 
-Line openings (minor/major), register changes, and deprecations must be
-recorded in the repository's versioning document; patches stay silent —
-silence is itself the signal that no registered surface was touched.
+Line openings (minor/major), register changes, deprecations, and other
+compatibility-impact decisions must be recorded in the repository's
+contract-world or versioning document. Release patches stay silent — silence
+is itself the signal that no registered surface was touched in the release
+projection.
 
 One markdown table row per event, newest first:
 

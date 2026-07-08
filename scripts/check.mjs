@@ -238,11 +238,49 @@ if (kfd1?.schemaIds?.contractWorld !== "https://kfd.libkungfu.dev/schemas/kfd-1/
 if (kfd1?.schemaIds?.witness !== "https://kfd.libkungfu.dev/schemas/kfd-1/witness.schema.json") {
   fail("KFD-1 standards metadata must expose the canonical witness schema URI");
 }
-for (const concept of ["factSource", "contractWorld", "weldedSurfaceRegister", "witness"]) {
+for (const concept of ["factSource", "contractWorld", "weldedSurfaceRegister", "witness", "surfaceClass", "compatibilityImpact", "impactProjection"]) {
   if (!kfd1?.concepts?.[concept]) fail(`KFD-1 standards metadata missing concept ${concept}`);
 }
 for (const iface of ["contractWorld", "witness"]) {
   if (!kfd1?.interfaces?.[iface]) fail(`KFD-1 standards metadata missing interface ${iface}`);
+}
+const expectedKfd1SurfaceClasses = ["integration-time", "cross-time"];
+const expectedKfd1ImpactClasses = ["breaking", "additive", "none", "unclassifiable"];
+const kfd1ContractWorldSchema = JSON.parse(readFileSync("schemas/kfd-1/contract-world.schema.json", "utf8"));
+const kfd1WitnessSchema = JSON.parse(readFileSync("schemas/kfd-1/witness.schema.json", "utf8"));
+for (const [schemaName, schemaDoc] of [["contractWorld", kfd1ContractWorldSchema], ["witness", kfd1WitnessSchema]]) {
+  requireSameEnum(schemaDoc.$defs?.surfaceClass?.enum, expectedKfd1SurfaceClasses, `KFD-1 ${schemaName} surfaceClass`);
+  requireSameEnum(schemaDoc.$defs?.compatibilityImpact?.enum, expectedKfd1ImpactClasses, `KFD-1 ${schemaName} compatibilityImpact`);
+  for (const impact of expectedKfd1ImpactClasses) {
+    if (!schemaDoc.$defs?.impactProjection?.required?.includes(impact)) {
+      fail(`KFD-1 ${schemaName} impactProjection must require ${impact}`);
+    }
+  }
+}
+const kfd1SurfaceRegister = kfd1?.surfaceRegister;
+if (kfd1SurfaceRegister?.factSource !== "standards.json#/standards/kfd-1/surfaceRegister") {
+  fail("KFD-1 surfaceRegister must declare standards.json as its fact source");
+}
+requireSameEnum(kfd1SurfaceRegister?.surfaceClasses, expectedKfd1SurfaceClasses, "KFD-1 surfaceRegister surfaceClasses");
+requireSameEnum(kfd1SurfaceRegister?.compatibilityImpactClasses, expectedKfd1ImpactClasses, "KFD-1 surfaceRegister compatibilityImpactClasses");
+if (!Array.isArray(kfd1SurfaceRegister?.surfaces) || kfd1SurfaceRegister.surfaces.length === 0) {
+  fail("KFD-1 surfaceRegister.surfaces[] is required");
+} else {
+  const surfaceIds = new Set();
+  for (const [index, surface] of kfd1SurfaceRegister.surfaces.entries()) {
+    if (!surface.id) fail(`KFD-1 surfaceRegister.surfaces[${index}].id is required`);
+    else if (surfaceIds.has(surface.id)) fail(`KFD-1 surfaceRegister duplicate surface ${surface.id}`);
+    else surfaceIds.add(surface.id);
+    if (!expectedKfd1SurfaceClasses.includes(surface.class)) fail(`KFD-1 surfaceRegister ${surface.id} has invalid class`);
+    if (!Array.isArray(surface.classes) || !surface.classes.includes(surface.class)) {
+      fail(`KFD-1 surfaceRegister ${surface.id} classes[] must include class`);
+    }
+    if (!surface.description) fail(`KFD-1 surfaceRegister ${surface.id} description is required`);
+    if (!surface.sourcePath || !existsSync(surface.sourcePath)) fail(`KFD-1 surfaceRegister ${surface.id} sourcePath is missing`);
+    for (const impact of expectedKfd1ImpactClasses) {
+      if (!surface.impactProjection?.[impact]) fail(`KFD-1 surfaceRegister ${surface.id} missing impactProjection.${impact}`);
+    }
+  }
 }
 const kfd2 = standardsMetadata.standards?.["kfd-2"];
 if (kfd2?.schemaIds?.trustTaxonomy !== "https://kfd.libkungfu.dev/schemas/kfd-2/trust-taxonomy.schema.json") {
@@ -430,6 +468,8 @@ if (!kfd1Witness) {
   if (!Array.isArray(kfd1Witness.surfaces) || kfd1Witness.surfaces.length === 0) {
     fail("KFD-1 release witness surfaces[] is required");
   } else {
+    requireSameEnum(kfd1Witness.compatibilityImpactClasses, expectedKfd1ImpactClasses, "KFD-1 witness compatibilityImpactClasses");
+    const registeredSurfaceById = new Map((kfd1SurfaceRegister?.surfaces ?? []).map((surface) => [surface.id, surface]));
     const witnessedSurfaceNames = new Set(kfd1Witness.surfaces.map((surface) => surface.name));
     for (const requiredSurface of [
       "readme",
@@ -447,6 +487,19 @@ if (!kfd1Witness) {
     }
     for (const [index, surface] of kfd1Witness.surfaces.entries()) {
       if (!surface.name) fail(`KFD-1 release witness surfaces[${index}].name is required`);
+      const registered = registeredSurfaceById.get(surface.name);
+      if (!registered) fail(`KFD-1 release witness surface ${surface.name || index} is not in standards surfaceRegister`);
+      else {
+        if (surface.class !== registered.class) fail(`KFD-1 release witness surface ${surface.name} class must match surfaceRegister`);
+        requireSameEnum(surface.classes, registered.classes, `KFD-1 witness ${surface.name} classes`);
+        if (surface.description !== registered.description) fail(`KFD-1 release witness surface ${surface.name} description must match surfaceRegister`);
+        if (surface.weldRationale !== registered.weldRationale) fail(`KFD-1 release witness surface ${surface.name} weldRationale must match surfaceRegister`);
+        for (const impact of expectedKfd1ImpactClasses) {
+          if (surface.impactProjection?.[impact] !== registered.impactProjection?.[impact]) {
+            fail(`KFD-1 release witness surface ${surface.name} impactProjection.${impact} must match surfaceRegister`);
+          }
+        }
+      }
       if (!surface.artifactPath) fail(`KFD-1 release witness surfaces[${index}].artifactPath is required`);
       else if (!existsSync(surface.artifactPath)) fail(`KFD-1 release witness surface ${surface.name || index} points to missing ${surface.artifactPath}`);
       else {
