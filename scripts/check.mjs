@@ -102,6 +102,37 @@ if (
 if (siteBundle.homepage?.currentDecisions?.source !== "registry.json") fail("site bundle currentDecisions source must be registry.json");
 if (siteBundle.decisionPages?.source !== "registry.json") fail("site bundle decisionPages source must be registry.json");
 if (siteBundle.decisionPages?.bodySource !== "registry.entries[].path") fail("site bundle decision page body source must be registry.entries[].path");
+if (siteBundle.routes?.decisionUsagePattern !== "/{number}/usage") fail("site bundle routes.decisionUsagePattern must be /{number}/usage");
+if (siteBundle.decisionPages?.usagePages?.relationship !== "usage-child-of-decision") {
+  fail("site bundle decisionPages.usagePages.relationship must be usage-child-of-decision");
+}
+if (siteBundle.decisionPages?.usagePages?.bodySource !== "docs/KFD-{number}-usage.md") {
+  fail("site bundle decisionPages.usagePages.bodySource must be docs/KFD-{number}-usage.md");
+}
+if (siteBundle.decisionPages?.usagePages?.stableUrlPattern !== "/{number}/usage") {
+  fail("site bundle decisionPages.usagePages.stableUrlPattern must be /{number}/usage");
+}
+const usagePagesByDecision = new Map((siteBundle.decisionPages?.usagePages?.pages ?? []).map((entry) => [entry.decisionId, entry]));
+for (const e of registry.entries) {
+  const usagePage = usagePagesByDecision.get(e.id);
+  const expectedPath = `docs/KFD-${e.number}-usage.md`;
+  const expectedUrl = `${e.url}/usage`;
+  if (!usagePage) fail(`site bundle decisionPages.usagePages missing ${e.id}`);
+  else {
+    if (usagePage.parentPath !== e.path) fail(`site bundle ${e.id} usage parentPath must be ${e.path}`);
+    if (usagePage.parentUrl !== e.url) fail(`site bundle ${e.id} usage parentUrl must be ${e.url}`);
+    if (usagePage.path !== expectedPath) fail(`site bundle ${e.id} usage path must be ${expectedPath}`);
+    if (usagePage.sourcePath !== expectedPath) fail(`site bundle ${e.id} usage sourcePath must be ${expectedPath}`);
+    if (usagePage.url !== expectedUrl) fail(`site bundle ${e.id} usage url must be ${expectedUrl}`);
+    if (usagePage.sourceExists !== true) fail(`site bundle ${e.id} usage sourceExists must be true`);
+  }
+  if (!existsSync(expectedPath)) fail(`missing usage document ${expectedPath} for ${e.id}`);
+}
+for (const decisionId of usagePagesByDecision.keys()) {
+  if (!registry.entries.some((entry) => entry.id === decisionId)) {
+    fail(`site bundle decisionPages.usagePages has unknown decision ${decisionId}`);
+  }
+}
 if (siteBundle.decisionPages?.metadata?.licenseBoundary?.license !== "Apache-2.0") {
   fail("site bundle decision metadata licenseBoundary.license must be Apache-2.0");
 }
@@ -868,7 +899,7 @@ if (kfd3PrebuildWitness && kfd3ArtifactWitness) {
 }
 
 const impactLevels = new Set(["patch", "minor", "major"]);
-const requiredSurfaces = new Set(["kfd-content", "kfd-registry-schema", "kfd-standards-metadata", "kfd-package-structure", "kfd-2-public-release-trust-claim", "kfd-3-trusted-value-evidence"]);
+const requiredSurfaces = new Set(["kfd-content", "kfd-registry-schema", "kfd-standards-metadata", "kfd-package-structure", "kfd-2-public-release-trust-claim", "kfd-3-trusted-value-evidence", "kfd-site-decision-usage-pages"]);
 
 if (releaseImpact.schemaVersion !== 1) fail(`unsupported release-impact schemaVersion ${releaseImpact.schemaVersion}`);
 if (releaseImpact.contract !== "kungfu-buildchain-impact") fail(`unexpected release-impact contract ${releaseImpact.contract}`);

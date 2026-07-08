@@ -17,6 +17,7 @@
 | Where is the public KFD fact source? | [`../README.md`](../README.md#decision-metadata) and [`../site/kfd-site.json`](../site/kfd-site.json) decision metadata |
 | What does Apache-2.0 cover, and what remains official/trademark-bound? | [`../TRADEMARKS.md`](../TRADEMARKS.md) |
 | What should a site renderer consume to render `kfd.libkungfu.dev`? | [`../site/kfd-site.json`](../site/kfd-site.json) |
+| How should a site map decision pages to usage subpages? | [`../site/kfd-site.json`](../site/kfd-site.json) — `decisionPages.usagePages` maps `/N` to `/N/usage` |
 | What is the top-level product accountability principle? | [KFD-2](../decisions/KFD-2.md) |
 | What stance should products take toward humans and agents as reasoning participants? | [KFD-3](../decisions/KFD-3.md) |
 | What schema should products use for KFD-3 participant-facing collaboration interfaces? | [`KFD-3-usage.md`](KFD-3-usage.md) |

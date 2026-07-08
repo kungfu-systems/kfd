@@ -10,6 +10,7 @@
   "routes": {
     "home": "/",
     "decisionPattern": "/{number}",
+    "decisionUsagePattern": "/{number}/usage",
     "llms": "/llms.txt",
     "manifest": "/manifest.json"
   },
@@ -222,6 +223,66 @@
     "source": "registry.json",
     "bodySource": "registry.entries[].path",
     "stableUrlField": "url",
+    "usagePages": {
+      "source": "registry.entries[] + docs/KFD-N-usage.md",
+      "bodySource": "docs/KFD-{number}-usage.md",
+      "stableUrlPattern": "/{number}/usage",
+      "relationship": "usage-child-of-decision",
+      "pages": [
+        {
+          "id": "KFD-1-usage",
+          "decisionId": "KFD-1",
+          "decisionNumber": 1,
+          "parentPath": "decisions/KFD-1.md",
+          "parentUrl": "https://kfd.libkungfu.dev/1",
+          "path": "docs/KFD-1-usage.md",
+          "url": "https://kfd.libkungfu.dev/1/usage",
+          "sourcePath": "docs/KFD-1-usage.md",
+          "sourceExists": true,
+          "relationship": "usage-child-of-decision",
+          "title": "KFD-1 usage"
+        },
+        {
+          "id": "KFD-2-usage",
+          "decisionId": "KFD-2",
+          "decisionNumber": 2,
+          "parentPath": "decisions/KFD-2.md",
+          "parentUrl": "https://kfd.libkungfu.dev/2",
+          "path": "docs/KFD-2-usage.md",
+          "url": "https://kfd.libkungfu.dev/2/usage",
+          "sourcePath": "docs/KFD-2-usage.md",
+          "sourceExists": true,
+          "relationship": "usage-child-of-decision",
+          "title": "KFD-2 usage"
+        },
+        {
+          "id": "KFD-3-usage",
+          "decisionId": "KFD-3",
+          "decisionNumber": 3,
+          "parentPath": "decisions/KFD-3.md",
+          "parentUrl": "https://kfd.libkungfu.dev/3",
+          "path": "docs/KFD-3-usage.md",
+          "url": "https://kfd.libkungfu.dev/3/usage",
+          "sourcePath": "docs/KFD-3-usage.md",
+          "sourceExists": true,
+          "relationship": "usage-child-of-decision",
+          "title": "KFD-3 usage"
+        },
+        {
+          "id": "KFD-4-usage",
+          "decisionId": "KFD-4",
+          "decisionNumber": 4,
+          "parentPath": "decisions/KFD-4.md",
+          "parentUrl": "https://kfd.libkungfu.dev/4",
+          "path": "docs/KFD-4-usage.md",
+          "url": "https://kfd.libkungfu.dev/4/usage",
+          "sourcePath": "docs/KFD-4-usage.md",
+          "sourceExists": true,
+          "relationship": "usage-child-of-decision",
+          "title": "KFD-4 usage"
+        }
+      ]
+    },
     "metadata": {
       "licenseBoundary": {
         "license": "Apache-2.0",
@@ -261,7 +322,9 @@
       "decision metadata",
       "decision metadata fact source",
       "license and official-status boundary",
-      "decision markdown bodies"
+      "decision markdown bodies",
+      "decision usage page mapping",
+      "decision usage markdown bodies"
     ],
     "ownedBySite": [
       "HTML structure",
