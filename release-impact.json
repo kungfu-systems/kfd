@@ -8,8 +8,8 @@
   },
   "versionImpact": {
     "final": "minor",
-    "source": "kfd-3-trusted-value-evidence",
-    "rationale": "This change additively upgrades KFD-3 with explicit value evidence linked to KFD-2 trust assessment, while preserving existing registry, package, and schemaVersion 1 compatibility."
+    "source": "kfd-site-decision-usage-pages",
+    "rationale": "This change additively exposes decision usage subpage mapping in the KFD site bundle, while preserving existing registry, package, and schemaVersion 1 compatibility."
   },
   "surfaceImpacts": [
     {
@@ -47,6 +47,12 @@
       "impact": "minor",
       "class": "additive",
       "rationale": "site/kfd-site.json now exposes generated README-backed homepage.sections and homepage.displayPlan fields, including the adoption-boundary and practice-guidelines homepage sections, and scripts/check.mjs verifies the checked-in bundle matches the README projection so downstream sites can render KFD-owned homepage content without maintaining their own README parser or drifting copy."
+    },
+    {
+      "id": "kfd-site-decision-usage-pages",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "site/kfd-site.json now exposes decisionPages.usagePages, mapping each authoritative KFD decision page to its docs/KFD-N-usage.md child page and stable /N/usage route."
     },
     {
       "id": "kfd-3-self-collaboration",
@@ -103,5 +109,5 @@
       "rationale": "standards.json now publishes the KFD package surface register as the KFD-1 fact source, and the KFD-1 witness projects each registered surface class and impact projection from that fact source."
     }
   ],
-  "summary": "KFD v1.0 production promotion is minor-impact because it additively exposes KFD-3 trusted-value evidence, links KFD-3 value claims to the KFD-2 generic trust assessment, preserves existing package and schemaVersion 1 compatibility, and separates authoritative decision paths from numbered usage documentation."
+  "summary": "KFD v1.0 production promotion is minor-impact because it additively exposes decision usage subpage mapping in the site bundle, preserves existing package and schemaVersion 1 compatibility, and separates authoritative decision paths from numbered usage documentation."
 }
