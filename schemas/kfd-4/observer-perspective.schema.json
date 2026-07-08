@@ -27,6 +27,9 @@
       "type": "string",
       "minLength": 1
     },
+    "viewSubject": {
+      "$ref": "#/$defs/viewSubject"
+    },
     "observer": {
       "$ref": "#/$defs/observer"
     },
@@ -60,6 +63,31 @@
   },
   "additionalProperties": false,
   "$defs": {
+    "viewSubject": {
+      "type": "object",
+      "required": [
+        "kind",
+        "description"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "timeline",
+            "history",
+            "replay",
+            "sync",
+            "ordering",
+            "mixed-source-work-state",
+            "other"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
     "observer": {
       "type": "object",
       "required": [

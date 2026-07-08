@@ -494,7 +494,7 @@ const kfd4ObserverPerspectiveSchema = JSON.parse(readFileSync("schemas/kfd-4/obs
 if (kfd4ObserverPerspectiveSchema.properties?.contract?.const !== "kfd-4-observer-perspective") {
   fail("KFD-4 observerPerspective schema must describe the kfd-4-observer-perspective contract");
 }
-for (const concept of ["observer", "declaredPerspective", "observerPerspective", "acceptedFacts", "projectionPolicy", "causalDominance", "degradedEvidence", "timeline"]) {
+for (const concept of ["observer", "declaredPerspective", "observerPerspective", "viewSubject", "acceptedFacts", "projectionPolicy", "causalDominance", "degradedEvidence", "timeline"]) {
   if (!kfd4?.concepts?.[concept]) fail(`KFD-4 standards metadata missing concept ${concept}`);
 }
 if (!kfd4?.interfaces?.observerPerspective) fail("KFD-4 standards metadata missing interface observerPerspective");
