@@ -8,8 +8,8 @@
   },
   "versionImpact": {
     "final": "minor",
-    "source": "kfd-surface-register",
-    "rationale": "This change additively promotes KFD-1 from release-versioning-specific wording to a generic compatibility-impact core, adds KFD-owned surface-register metadata and KFD-1 witness classification projection, and preserves existing registry, package, and schemaVersion 1 compatibility."
+    "source": "kfd-2-generic-trust-core",
+    "rationale": "This change additively promotes KFD-2 from release-passport-specific wording to a generic trust assessment core, adds KFD-owned trust-claims and trust-assessment schemas, dogfoods KFD-2 against KFD-1/3/4, and preserves existing registry, package, and schemaVersion 1 compatibility."
   },
   "surfaceImpacts": [
     {
@@ -28,13 +28,13 @@
       "id": "kfd-standards-metadata",
       "impact": "minor",
       "class": "additive",
-      "rationale": "standards.json and schemas/ add the KFD-2 trust-taxonomy schema ID, release-claims and release-trust-passport schema IDs, explicit KFD-1/2/3/4 interface versions, KFD-4 observer-perspective schema metadata, KFD document SHA-256 bindings, KFD-owned concept names, KFD-3 fact-source interface metadata, and official-status interface metadata for downstream consumers."
+      "rationale": "standards.json and schemas/ add the KFD-2 trust-taxonomy, trust-claims, trust-assessment, release-claims, and release-trust-passport schema IDs, explicit KFD-1/2/3/4 interface versions, KFD-4 observer-perspective schema metadata, KFD document SHA-256 bindings, KFD-owned concept names, KFD-3 fact-source interface metadata, and official-status interface metadata for downstream consumers."
     },
     {
       "id": "kfd-package-structure",
       "impact": "minor",
       "class": "additive",
-      "rationale": "The npm package now publishes the KFD-2 trust taxonomy, KFD-2 schemas, KFD-2 documentation, KFD-3 self collaboration-interface witnesses, KFD-4 observer-perspective schema, TRADEMARKS.md, public fact-source metadata, agent quickstart/self-proof documentation, Buildchain contract lock metadata, and repository verification scripts through existing schemas/, docs/, standards.json, site/, scripts/, .buildchain/, and subpath exports while preserving existing README.md, decisions/, registry.json, and site/ paths."
+      "rationale": "The npm package now publishes the KFD-2 trust taxonomy, generic trust claims, generic trust assessment, release trust schemas, KFD usage documentation, KFD-3 self collaboration-interface witnesses, KFD-4 observer-perspective schema, TRADEMARKS.md, public fact-source metadata, agent quickstart/self-proof documentation, Buildchain contract lock metadata, and repository verification scripts through existing schemas/, docs/, standards.json, site/, scripts/, .buildchain/, and subpath exports while preserving README.md, decisions/, registry.json, and site/ as stable directories."
     },
     {
       "id": "kfd-buildchain-contract-lock",
@@ -61,6 +61,18 @@
       "rationale": "KFD now ships an explicit machine-bound public KFD-2 release trust claim and passes it into Buildchain release passport generation."
     },
     {
+      "id": "kfd-2-generic-trust-assessment-core",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD-2 now publishes generic trust-claims and trust-assessment schemas and dogfoods them through KFD-owned assessment files that evaluate KFD-1 contract-world, KFD-3 collaboration-interface, and KFD-4 observer-perspective claims."
+    },
+    {
+      "id": "kfd-numbered-paths",
+      "impact": "minor",
+      "class": "compatible",
+      "rationale": "Decision documents now use stable numbered paths under decisions/KFD-N.md, while usage documentation uses docs/KFD-N-usage.md to distinguish authoritative decision text from consumer implementation notes."
+    },
+    {
       "id": "kfd-release-anchor",
       "impact": "minor",
       "class": "release-governance",
@@ -85,5 +97,5 @@
       "rationale": "standards.json now publishes the KFD package surface register as the KFD-1 fact source, and the KFD-1 witness projects each registered surface class and impact projection from that fact source."
     }
   ],
-  "summary": "KFD v1.0 production promotion is minor-impact because it additively exposes KFD-1 as a generic compatibility-impact core, publishes KFD-owned surface-register metadata, projects those classifications into the KFD-1 witness, and keeps existing registry, decision text, package, site bundle, and propagation graph contracts compatible."
+  "summary": "KFD v1.0 production promotion is minor-impact because it additively exposes KFD-2 as a generic trust assessment core, ships generic KFD-2 claims and assessment evidence for KFD-1/3/4, preserves existing package and schemaVersion 1 compatibility, and separates authoritative decision paths from numbered usage documentation."
 }

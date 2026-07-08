@@ -2,15 +2,61 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import crypto from "node:crypto";
 import path from "node:path";
 
-const outputPath = ".buildchain/kfd-2/public-release-trust.claim.json";
+const releaseClaimPath = ".buildchain/kfd-2/public-release-trust.claim.json";
+const trustClaimsPath = ".buildchain/kfd-2/kfd-foundation.trust-claims.json";
+const trustAssessmentPath = ".buildchain/kfd-2/kfd-foundation.trust-assessment.json";
 
 const readJson = (filePath) => JSON.parse(readFileSync(filePath, "utf8"));
 const sha256File = (filePath) => crypto.createHash("sha256").update(readFileSync(filePath)).digest("hex");
+const digestFile = (filePath) => `sha256:${sha256File(filePath)}`;
 const pointer = (filePath, extra = {}) => ({
   path: filePath,
   sha256: sha256File(filePath),
   ...extra,
 });
+const artifactPointer = (kind, filePath, extra = {}) => ({
+  kind,
+  path: filePath,
+  sha256: sha256File(filePath),
+  ...extra,
+});
+const evidence = (type, filePath, description, extra = {}) => ({
+  type,
+  pointer: artifactPointer(type === "schema" ? "schema" : type === "witness" ? "witness" : "file", filePath),
+  machineProvability: "machine-verifiable",
+  description,
+  ...extra,
+});
+const evidenceResult = (type, filePath, description, extra = {}) => ({
+  type,
+  result: "pass",
+  machineProvability: "machine-verifiable",
+  path: filePath,
+  digest: digestFile(filePath),
+  description,
+  ...extra,
+});
+const responsibility = {
+  owner: "KFD maintainers",
+  sourceOwner: "KFD maintainers",
+  verificationOwner: "KFD package self-verification",
+  decisionOwner: "KFD maintainers",
+};
+const naturalLanguageResidualRisk = {
+  id: "human-language-interpretation",
+  definedBy: "https://kfd.libkungfu.dev/schemas/kfd-2/trust-taxonomy.schema.json#/$defs/residualRisk",
+  riskType: "natural-language-semantic-risk",
+  trustImpact: "downgrade-warning",
+  machineProvability: "not-exhaustively-enumerable",
+  agentAction: "semantic-review-required",
+  reason: "Natural-language standard interpretation is inspectable and reviewable but cannot be exhaustively proved from package bytes.",
+  owner: "KFD maintainers",
+};
+const writeJson = (filePath, value) => {
+  mkdirSync(path.dirname(filePath), { recursive: true });
+  writeFileSync(filePath, `${JSON.stringify(value, null, 2)}\n`);
+  console.log(`updated ${filePath}`);
+};
 
 const packageJson = readJson("package.json");
 const releaseAnchor = readJson("kfd.release.json");
@@ -30,6 +76,8 @@ const machineEvidence = [
   pointer(".github/workflows/build.yml", { id: "buildchain-build-workflow" }),
   pointer(".github/workflows/buildchain-ref-promotion.yml", { id: "buildchain-promotion-workflow" }),
   pointer("schemas/kfd-2/trust-taxonomy.schema.json", { id: "kfd-2-trust-taxonomy-schema" }),
+  pointer("schemas/kfd-2/trust-claims.schema.json", { id: "kfd-2-trust-claims-schema" }),
+  pointer("schemas/kfd-2/trust-assessment.schema.json", { id: "kfd-2-trust-assessment-schema" }),
   pointer("schemas/kfd-2/release-claims.schema.json", { id: "kfd-2-release-claims-schema" }),
   pointer("schemas/kfd-2/release-trust-passport.schema.json", { id: "kfd-2-release-trust-passport-schema" }),
 ];
@@ -38,7 +86,7 @@ const hashes = Object.fromEntries(
   [...sourceBindings, ...machineEvidence].map((entry) => [entry.id, entry.sha256]),
 );
 
-const claim = {
+const releaseClaim = {
   id: "kfd-public-release-trust",
   public: true,
   claim:
@@ -78,6 +126,179 @@ const claim = {
   residualRisk: [],
 };
 
-mkdirSync(path.dirname(outputPath), { recursive: true });
-writeFileSync(outputPath, `${JSON.stringify(claim, null, 2)}\n`);
-console.log(`updated ${outputPath}`);
+writeJson(releaseClaimPath, releaseClaim);
+
+const trustClaims = {
+  schemaVersion: 1,
+  contract: "kfd-2-trust-claims",
+  standard: "kfd-2",
+  projection: {
+    kind: "generic",
+    description: "KFD self-dogfood claims for assessing KFD-1, KFD-3, and KFD-4 from the generic KFD-2 trust model.",
+  },
+  claims: [
+    {
+      id: "kfd-1-contract-world-trust",
+      statement:
+        "KFD-1 is trustable as the KFD package contract-world rule because its surface register, schema, witness, and verification command are inspectable from committed package facts.",
+      subject: {
+        kind: "contract-world",
+        id: "kfd-1-surface-register",
+        standard: "kfd-1",
+        description: "KFD-1 non-drifting fact-source and compatibility-impact surface register.",
+      },
+      facts: [
+        artifactPointer("file", "standards.json"),
+        artifactPointer("schema", "schemas/kfd-1/contract-world.schema.json"),
+      ],
+      evidence: [
+        evidence("schema", "schemas/kfd-1/contract-world.schema.json", "KFD-1 contract-world schema is published as a package surface."),
+        evidence("file", "scripts/check.mjs", "The package check gate validates the KFD-1 schema, surface register, witness, and hashes."),
+      ],
+      verification: {
+        command: "node scripts/check.mjs",
+        expectedResult: "pass",
+      },
+      auditBoundary: {
+        scope: "KFD package KFD-1 surface-register, schema, witness, and self-verification gate",
+        enumerability: "closed-world",
+      },
+      residualRisk: [],
+      responsibility,
+      status: "enforced",
+    },
+    {
+      id: "kfd-3-collaboration-interface-trust",
+      statement:
+        "KFD-3 is trustable as a participant-facing collaboration interface because KFD publishes the declared interface, prebuild witness, artifact witness, extension path, and closure check.",
+      subject: {
+        kind: "collaboration-interface",
+        id: "kfd-3-collaboration-interface",
+        standard: "kfd-3",
+        description: "KFD package collaboration interface for humans, agents, maintainers, package consumers, site consumers, and release systems.",
+      },
+      facts: [
+        artifactPointer("file", ".buildchain/kfd-3/collaboration-interface.json"),
+      ],
+      evidence: [
+        evidence("schema", "schemas/kfd-3/collaboration-interface.schema.json", "KFD-3 collaboration interface schema is published."),
+        evidence("file", ".buildchain/kfd-3/collaboration-interface.json", "KFD-3 source collaboration interface declares reachable participant-facing surfaces."),
+        evidence("file", "scripts/check.mjs", "The package check gate validates KFD-3 interface closure and witness parity."),
+      ],
+      verification: {
+        command: "node scripts/check.mjs",
+        expectedResult: "warning",
+      },
+      auditBoundary: {
+        scope: "KFD participant-facing collaboration surfaces, extension paths, and shipped witness files",
+        enumerability: "closed-world",
+      },
+      residualRisk: [naturalLanguageResidualRisk],
+      responsibility,
+      status: "enforced",
+    },
+    {
+      id: "kfd-4-observer-perspective-trust",
+      statement:
+        "KFD-4 is trustable as an observer-perspective interface because KFD publishes the schema, standards metadata, decision text, and verification gate for observer-relative timeline views.",
+      subject: {
+        kind: "observer-perspective",
+        id: "kfd-4-observer-perspective",
+        standard: "kfd-4",
+        description: "KFD-4 observer-perspective schema for perspective-bearing timeline views.",
+      },
+      facts: [
+        artifactPointer("file", "decisions/KFD-4.md"),
+        artifactPointer("file", "standards.json"),
+        artifactPointer("schema", "schemas/kfd-4/observer-perspective.schema.json"),
+      ],
+      evidence: [
+        evidence("schema", "schemas/kfd-4/observer-perspective.schema.json", "KFD-4 observer-perspective schema is published."),
+        evidence("file", "standards.json", "Standards metadata exposes the KFD-4 schema ID, path, interface version, and concept names."),
+        evidence("file", "scripts/check.mjs", "The package check gate validates the KFD-4 schema and standards metadata."),
+      ],
+      verification: {
+        command: "node scripts/check.mjs",
+        expectedResult: "pass",
+      },
+      auditBoundary: {
+        scope: "KFD-4 decision text, observer-perspective schema, standards metadata, and self-verification gate",
+        enumerability: "closed-world",
+      },
+      residualRisk: [],
+      responsibility,
+      status: "enforced",
+    },
+  ],
+  schemaEvolution: {
+    compatibilityRule:
+      "Compatible additions may keep schemaVersion 1; semantic, required-field, verification-meaning, or responsibility-boundary changes require a new interface version or contract.",
+  },
+};
+writeJson(trustClaimsPath, trustClaims);
+
+const trustClaimsDigest = digestFile(trustClaimsPath);
+const assessment = {
+  schemaVersion: 1,
+  contract: "kfd-2-trust-assessment",
+  standard: "kfd-2",
+  assessedClaims: {
+    schemaId: "https://kfd.libkungfu.dev/schemas/kfd-2/trust-claims.schema.json",
+    path: trustClaimsPath,
+    digest: trustClaimsDigest,
+  },
+  result: "warning",
+  projection: {
+    kind: "generic",
+    description: "Generic KFD-2 assessment of KFD-owned foundation and practice guideline claims.",
+  },
+  assessments: [
+    {
+      id: "assess-kfd-1-contract-world-trust",
+      claimId: "kfd-1-contract-world-trust",
+      subject: trustClaims.claims[0].subject,
+      result: "pass",
+      facts: trustClaims.claims[0].facts.map((entry) => evidenceResult(entry.kind, entry.path, `Fact ${entry.path} is present and hashable.`)),
+      evidence: trustClaims.claims[0].evidence.map((entry) => evidenceResult(entry.type, entry.pointer.path, entry.description)),
+      auditBoundary: trustClaims.claims[0].auditBoundary,
+      responsibility,
+      residualRisk: [],
+    },
+    {
+      id: "assess-kfd-3-collaboration-interface-trust",
+      claimId: "kfd-3-collaboration-interface-trust",
+      subject: trustClaims.claims[1].subject,
+      result: "warning",
+      facts: trustClaims.claims[1].facts.map((entry) => evidenceResult(entry.kind, entry.path, `Fact ${entry.path} is present and hashable.`)),
+      evidence: trustClaims.claims[1].evidence.map((entry) => evidenceResult(entry.type, entry.pointer.path, entry.description)),
+      auditBoundary: trustClaims.claims[1].auditBoundary,
+      responsibility,
+      residualRisk: [naturalLanguageResidualRisk],
+    },
+    {
+      id: "assess-kfd-4-observer-perspective-trust",
+      claimId: "kfd-4-observer-perspective-trust",
+      subject: trustClaims.claims[2].subject,
+      result: "pass",
+      facts: trustClaims.claims[2].facts.map((entry) => evidenceResult(entry.kind, entry.path, `Fact ${entry.path} is present and hashable.`)),
+      evidence: trustClaims.claims[2].evidence.map((entry) => evidenceResult(entry.type, entry.pointer.path, entry.description)),
+      auditBoundary: trustClaims.claims[2].auditBoundary,
+      responsibility,
+      residualRisk: [],
+    },
+  ],
+  unboundClaims: [],
+  downgradeReasons: [
+    {
+      id: "kfd-3-natural-language-semantics",
+      riskType: "natural-language-semantic-risk",
+      trustImpact: "downgrade-warning",
+      reason: "KFD-3 exposes machine-checkable collaboration surfaces, but the human-language meaning of trusted value and non-coercive cooperation remains a reviewable semantic responsibility.",
+      agentAction: "semantic-review-required",
+      source: "kfd-3-collaboration-interface-trust",
+    },
+  ],
+  responsibility,
+  schemaEvolution: trustClaims.schemaEvolution,
+};
+writeJson(trustAssessmentPath, assessment);

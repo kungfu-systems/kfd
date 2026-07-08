@@ -23,7 +23,7 @@
       "revision": 1,
       "metadataSchemaVersion": "1",
       "document": {
-        "path": "decisions/kfd-1.md",
+        "path": "decisions/KFD-1.md",
         "url": "https://kfd.libkungfu.dev/1",
         "sha256": "0b7b1ec54d661b271f91f02cefa97b11e1d1ef9c637efd2d1878d5f9c9185d80"
       },
@@ -103,8 +103,8 @@
             "classes": [
               "cross-time"
             ],
-            "description": "Published KFD decision text at decisions/kfd-1.md.",
-            "sourcePath": "decisions/kfd-1.md",
+            "description": "Published KFD decision text at decisions/KFD-1.md.",
+            "sourcePath": "decisions/KFD-1.md",
             "weldRationale": "Consumers can audit, replay, or cite this surface after release.",
             "impactProjection": {
               "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
@@ -119,8 +119,8 @@
             "classes": [
               "cross-time"
             ],
-            "description": "Published KFD decision text at decisions/kfd-2.md.",
-            "sourcePath": "decisions/kfd-2.md",
+            "description": "Published KFD decision text at decisions/KFD-2.md.",
+            "sourcePath": "decisions/KFD-2.md",
             "weldRationale": "Consumers can audit, replay, or cite this surface after release.",
             "impactProjection": {
               "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
@@ -135,8 +135,8 @@
             "classes": [
               "cross-time"
             ],
-            "description": "Published KFD decision text at decisions/kfd-3.md.",
-            "sourcePath": "decisions/kfd-3.md",
+            "description": "Published KFD decision text at decisions/KFD-3.md.",
+            "sourcePath": "decisions/KFD-3.md",
             "weldRationale": "Consumers can audit, replay, or cite this surface after release.",
             "impactProjection": {
               "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
@@ -151,8 +151,8 @@
             "classes": [
               "cross-time"
             ],
-            "description": "Published KFD decision text at decisions/kfd-4.md.",
-            "sourcePath": "decisions/kfd-4.md",
+            "description": "Published KFD decision text at decisions/KFD-4.md.",
+            "sourcePath": "decisions/KFD-4.md",
             "weldRationale": "Consumers can audit, replay, or cite this surface after release.",
             "impactProjection": {
               "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
@@ -370,38 +370,6 @@
             }
           },
           {
-            "id": "kfd-2-release-trust-doc",
-            "class": "cross-time",
-            "classes": [
-              "cross-time"
-            ],
-            "description": "Published documentation surface at docs/kfd-2-release-trust.md.",
-            "sourcePath": "docs/kfd-2-release-trust.md",
-            "weldRationale": "Consumers can audit, replay, or cite this surface after release.",
-            "impactProjection": {
-              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
-              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
-              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
-              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
-            }
-          },
-          {
-            "id": "kfd-3-collaboration-interface-doc",
-            "class": "cross-time",
-            "classes": [
-              "cross-time"
-            ],
-            "description": "Published documentation surface at docs/kfd-3-collaboration-interface.md.",
-            "sourcePath": "docs/kfd-3-collaboration-interface.md",
-            "weldRationale": "Consumers can audit, replay, or cite this surface after release.",
-            "impactProjection": {
-              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
-              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
-              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
-              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
-            }
-          },
-          {
             "id": "release-impact-ledger",
             "class": "cross-time",
             "classes": [
@@ -562,6 +530,134 @@
               "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
               "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
             }
+          },
+          {
+            "id": "kfd-2-trust-claims-schema",
+            "class": "integration-time",
+            "classes": [
+              "integration-time"
+            ],
+            "description": "Published JSON schema surface at schemas/kfd-2/trust-claims.schema.json.",
+            "sourcePath": "schemas/kfd-2/trust-claims.schema.json",
+            "weldRationale": "Consumers can bind to this surface as an integration contract.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-2-trust-assessment-schema",
+            "class": "integration-time",
+            "classes": [
+              "integration-time"
+            ],
+            "description": "Published JSON schema surface at schemas/kfd-2/trust-assessment.schema.json.",
+            "sourcePath": "schemas/kfd-2/trust-assessment.schema.json",
+            "weldRationale": "Consumers can bind to this surface as an integration contract.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-2-foundation-trust-claims",
+            "class": "integration-time",
+            "classes": [
+              "integration-time"
+            ],
+            "description": "Buildchain evidence surface at .buildchain/kfd-2/kfd-foundation.trust-claims.json.",
+            "sourcePath": ".buildchain/kfd-2/kfd-foundation.trust-claims.json",
+            "weldRationale": "Consumers can bind to this surface as an integration contract.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-2-foundation-trust-assessment",
+            "class": "integration-time",
+            "classes": [
+              "integration-time"
+            ],
+            "description": "Buildchain evidence surface at .buildchain/kfd-2/kfd-foundation.trust-assessment.json.",
+            "sourcePath": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json",
+            "weldRationale": "Consumers can bind to this surface as an integration contract.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-1-usage-doc",
+            "class": "cross-time",
+            "classes": [
+              "cross-time"
+            ],
+            "description": "Published KFD usage documentation surface at docs/KFD-1-usage.md.",
+            "sourcePath": "docs/KFD-1-usage.md",
+            "weldRationale": "Consumers can audit, replay, or cite this surface after release.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-2-usage-doc",
+            "class": "cross-time",
+            "classes": [
+              "cross-time"
+            ],
+            "description": "Published KFD usage documentation surface at docs/KFD-2-usage.md.",
+            "sourcePath": "docs/KFD-2-usage.md",
+            "weldRationale": "Consumers can audit, replay, or cite this surface after release.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-3-usage-doc",
+            "class": "cross-time",
+            "classes": [
+              "cross-time"
+            ],
+            "description": "Published KFD usage documentation surface at docs/KFD-3-usage.md.",
+            "sourcePath": "docs/KFD-3-usage.md",
+            "weldRationale": "Consumers can audit, replay, or cite this surface after release.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-4-usage-doc",
+            "class": "cross-time",
+            "classes": [
+              "cross-time"
+            ],
+            "description": "Published KFD usage documentation surface at docs/KFD-4-usage.md.",
+            "sourcePath": "docs/KFD-4-usage.md",
+            "weldRationale": "Consumers can audit, replay, or cite this surface after release.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
           }
         ]
       }
@@ -577,9 +673,9 @@
       "revision": 1,
       "metadataSchemaVersion": "1",
       "document": {
-        "path": "decisions/kfd-2.md",
+        "path": "decisions/KFD-2.md",
         "url": "https://kfd.libkungfu.dev/2",
-        "sha256": "0c2da2113df6ef2829592f7ba67593059cb06e195ea527ee742501939efb3b9b"
+        "sha256": "6bc01776e478afc802c57c4e21a40bcfebf170f90ae039345d883c292053b622"
       },
       "compatibility": {
         "packageLine": "v1.0",
@@ -591,13 +687,17 @@
         "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json",
         "trustTaxonomy": "https://kfd.libkungfu.dev/schemas/kfd-2/trust-taxonomy.schema.json",
         "releaseClaims": "https://kfd.libkungfu.dev/schemas/kfd-2/release-claims.schema.json",
-        "releaseTrustPassport": "https://kfd.libkungfu.dev/schemas/kfd-2/release-trust-passport.schema.json"
+        "releaseTrustPassport": "https://kfd.libkungfu.dev/schemas/kfd-2/release-trust-passport.schema.json",
+        "trustClaims": "https://kfd.libkungfu.dev/schemas/kfd-2/trust-claims.schema.json",
+        "trustAssessment": "https://kfd.libkungfu.dev/schemas/kfd-2/trust-assessment.schema.json"
       },
       "schemaPaths": {
         "metadata": "schemas/kfd-standards.schema.json",
         "trustTaxonomy": "schemas/kfd-2/trust-taxonomy.schema.json",
         "releaseClaims": "schemas/kfd-2/release-claims.schema.json",
-        "releaseTrustPassport": "schemas/kfd-2/release-trust-passport.schema.json"
+        "releaseTrustPassport": "schemas/kfd-2/release-trust-passport.schema.json",
+        "trustClaims": "schemas/kfd-2/trust-claims.schema.json",
+        "trustAssessment": "schemas/kfd-2/trust-assessment.schema.json"
       },
       "interfaces": {
         "trustTaxonomy": {
@@ -620,6 +720,20 @@
           "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-2/release-trust-passport.schema.json",
           "schemaPath": "schemas/kfd-2/release-trust-passport.schema.json",
           "compatibilityRule": "Compatible additions may keep schemaVersion 1; semantic or required-field changes require a new interface version or contract."
+        },
+        "trustClaims": {
+          "contract": "kfd-2-trust-claims",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-2/trust-claims.schema.json",
+          "schemaPath": "schemas/kfd-2/trust-claims.schema.json",
+          "compatibilityRule": "Compatible additions may keep schemaVersion 1; semantic, required-field, verification-meaning, or responsibility-boundary changes require a new interface version or contract."
+        },
+        "trustAssessment": {
+          "contract": "kfd-2-trust-assessment",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-2/trust-assessment.schema.json",
+          "schemaPath": "schemas/kfd-2/trust-assessment.schema.json",
+          "compatibilityRule": "Compatible additions may keep schemaVersion 1; semantic, required-field, verification-meaning, or responsibility-boundary changes require a new interface version or contract."
         }
       },
       "concepts": {
@@ -636,7 +750,13 @@
         "extensionRequest": "extension request",
         "releaseTrustPassport": "release trust passport",
         "responsibilityState": "responsibility state",
-        "trust": "trust from facts"
+        "trust": "trust from facts",
+        "trustClaim": "generic trust claim",
+        "trustClaims": "generic trust claims",
+        "trustAssessment": "generic trust assessment",
+        "claimSubject": "claim subject",
+        "claimSubjectKind": "claim subject kind",
+        "projection": "domain-specific trust projection"
       }
     },
     "kfd-3": {
@@ -650,7 +770,7 @@
       "revision": 1,
       "metadataSchemaVersion": "1",
       "document": {
-        "path": "decisions/kfd-3.md",
+        "path": "decisions/KFD-3.md",
         "url": "https://kfd.libkungfu.dev/3",
         "sha256": "6f0bb730f87a574699f2f536ed762ab327f4f506507cf3649bbb8e90140ecdb5"
       },
@@ -713,7 +833,7 @@
       "revision": 1,
       "metadataSchemaVersion": "1",
       "document": {
-        "path": "decisions/kfd-4.md",
+        "path": "decisions/KFD-4.md",
         "url": "https://kfd.libkungfu.dev/4",
         "sha256": "7077a6446c8baa60d85426780cb7b2bee488133196b6f53d74f0eb151f6e26e4"
       },
