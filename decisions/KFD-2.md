@@ -23,7 +23,9 @@ KFDs can be principles or procedures:
 
 This KFD is a principle. KFD-1 is the procedure that keeps the fact sources
 under this principle from drifting. KFD-3 is the principle that governs how
-humans and agents cooperate once facts and trust are visible.
+humans and agents cooperate once facts and trust are visible. KFD-4 is a
+procedure whose observer-perspective claims can also be assessed under this
+principle.
 
 ## Foundation role
 
@@ -37,6 +39,10 @@ KFD-2 says Kungfu products should not ask users or agents to trust a claim
 before the product has made the relevant facts inspectable. KFD-1 protects the
 non-drifting fact source those claims stand on. KFD-3 protects the relationship
 with the human or agent who must understand and act on those facts.
+
+KFD-2 is not a checker for only one other KFD. It is the generic trust
+adjudication layer for any KFD claim, product claim, artifact claim, control
+surface claim, or release claim that asks a human or agent to rely on it.
 
 ## Principle
 
@@ -70,6 +76,27 @@ leaves enough evidence for later review.
   trust into reviewable records rather than maintainer reputation alone.
 - Hosted or cloud convenience may add synchronization, storage, compute, and
   collaboration, but it must not become the only place where the truth exists.
+
+## Generic trust assessment model
+
+Every KFD-2 trust assessment starts from a claim. The claim may be about a
+release, but it may also be about a contract world, a collaboration interface,
+an observer perspective, a config surface, an API, an ABI, a GUI surface, a
+runtime fact, documentation, or another product surface.
+
+A claim is trustable only when the assessment can state:
+
+- what the claim is about;
+- which facts the claim binds to;
+- which evidence was checked;
+- what can be machine verified;
+- what remains a residual risk;
+- who owns source facts, verification, and the trust decision;
+- whether the result is pass, warning, fail, or unverifiable.
+
+This model is intentionally general. KFD-1, KFD-3, KFD-4, and future KFDs can
+provide claims that KFD-2 assesses. Release trust passports are one projection
+of this model, not the model itself.
 
 ## What it does not require
 
@@ -111,11 +138,17 @@ README says so. It publishes inspectable facts: decision documents,
 metadata, and conformance checks.
 
 KFD-2 also owns the trust taxonomy used by release claims, release trust
-passports, and KFD-3 witnesses. Unknown residual-risk or trust-downgrade values
-fail validation until KFD records them in
-`schemas/kfd-2/trust-taxonomy.schema.json`. When an agent needs a new value,
+passports, KFD-3 witnesses, and generic trust assessments. Unknown
+residual-risk or trust-downgrade values fail validation until KFD records them
+in `schemas/kfd-2/trust-taxonomy.schema.json`. When an agent needs a new value,
 the declared extension path is to open an issue in
 `https://github.com/kungfu-systems/kfd` rather than inventing a private value.
+
+The package dogfoods this model through
+`.buildchain/kfd-2/kfd-foundation.trust-claims.json` and
+`.buildchain/kfd-2/kfd-foundation.trust-assessment.json`. Those files assess
+KFD-1's contract-world claim, KFD-3's collaboration-interface claim, and KFD-4's
+observer-perspective claim through the same KFD-2 structure.
 
 ## Adopters
 

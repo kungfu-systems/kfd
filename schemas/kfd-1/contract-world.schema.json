@@ -24,6 +24,13 @@
       "type": "string",
       "minLength": 1
     },
+    "compatibilityImpactClasses": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/compatibilityImpact"
+      },
+      "uniqueItems": true
+    },
     "surfaces": {
       "type": "array",
       "items": {
@@ -39,18 +46,74 @@
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
           },
           "class": {
-            "enum": [
-              "integration-time",
-              "cross-time"
-            ]
+            "$ref": "#/$defs/surfaceClass"
+          },
+          "classes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/surfaceClass"
+            },
+            "uniqueItems": true,
+            "minItems": 1
           },
           "description": {
             "type": "string",
             "minLength": 1
+          },
+          "weldRationale": {
+            "type": "string",
+            "minLength": 1
+          },
+          "impactProjection": {
+            "$ref": "#/$defs/impactProjection"
           }
         },
         "additionalProperties": false
       }
+    }
+  },
+  "$defs": {
+    "surfaceClass": {
+      "enum": [
+        "integration-time",
+        "cross-time"
+      ]
+    },
+    "compatibilityImpact": {
+      "enum": [
+        "breaking",
+        "additive",
+        "none",
+        "unclassifiable"
+      ]
+    },
+    "impactProjection": {
+      "type": "object",
+      "required": [
+        "breaking",
+        "additive",
+        "none",
+        "unclassifiable"
+      ],
+      "properties": {
+        "breaking": {
+          "type": "string",
+          "minLength": 1
+        },
+        "additive": {
+          "type": "string",
+          "minLength": 1
+        },
+        "none": {
+          "type": "string",
+          "minLength": 1
+        },
+        "unclassifiable": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
     }
   },
   "additionalProperties": true

@@ -32,6 +32,8 @@ A product collaboration interface should identify:
   interface;
 - participant-visible surfaces, such as CLI commands, JSON APIs, manuals,
   skills, GUI routes, envelopes, packages, or protocols;
+- value evidence that binds important participant-facing value claims to facts,
+  artifacts, checks, trust assessments, and residual-risk state;
 - visible constraints, including what is restricted, why, and where review or
   escalation happens;
 - choice paths that let participants choose or decline safe cooperation modes;
@@ -43,6 +45,25 @@ The KFD-3 witness schema is intentionally stricter about closure: a passing
 closed-world proof reports reachable entrypoints, classified entrypoints, and
 an empty `unclassifiedEntrypoints` list. This prevents a product from exposing
 a participant-facing or callable backdoor API outside the declared interface.
+
+## Value Evidence
+
+KFD-3 does not treat value as a marketing claim. A collaboration interface
+should state the value a participant is being asked to trust, then point to the
+facts and evidence that make that value inspectable.
+
+Each `valueEvidence` entry should identify:
+
+- the value claim;
+- the participants who depend on it;
+- the fact artifacts that define the claim;
+- the evidence artifacts or checks that show those facts are present;
+- a KFD-2 trust assessment or residual-risk state when the claim cannot be
+  exhaustively proved by machine.
+
+This is the engineering bridge between KFD-2 and KFD-3. KFD-2 explains how
+trust is assessed from facts. KFD-3 explains how that assessed value is exposed
+to participants before cooperation is requested.
 
 ## Product profile boundary
 

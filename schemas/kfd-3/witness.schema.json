@@ -47,6 +47,7 @@
       "required": [
         "minimalEntrypoints",
         "discoverability",
+        "valueEvidence",
         "transparentConstraints",
         "choicePaths"
       ],
@@ -60,6 +61,13 @@
         },
         "discoverability": {
           "type": "array",
+          "items": {
+            "$ref": "#/$defs/artifactPointer"
+          }
+        },
+        "valueEvidence": {
+          "type": "array",
+          "minItems": 1,
           "items": {
             "$ref": "#/$defs/artifactPointer"
           }

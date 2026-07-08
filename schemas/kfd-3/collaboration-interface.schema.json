@@ -12,6 +12,7 @@
     "participants",
     "minimalEntrypoints",
     "surfaces",
+    "valueEvidence",
     "transparentConstraints",
     "choicePaths",
     "closure"
@@ -76,6 +77,13 @@
       "minItems": 1,
       "items": {
         "$ref": "#/$defs/surface"
+      }
+    },
+    "valueEvidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/valueEvidence"
       }
     },
     "transparentConstraints": {
@@ -333,6 +341,58 @@
         "maturity": {
           "type": "string",
           "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "valueEvidence": {
+      "type": "object",
+      "required": [
+        "id",
+        "claim",
+        "participants",
+        "facts",
+        "evidence"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "claim": {
+          "type": "string",
+          "minLength": 1
+        },
+        "participants": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "facts": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/artifactPointer"
+          }
+        },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/artifactPointer"
+          }
+        },
+        "trustAssessment": {
+          "$ref": "#/$defs/artifactPointer"
+        },
+        "residualRisk": {
+          "type": "array",
+          "items": {
+            "$ref": "https://kfd.libkungfu.dev/schemas/kfd-2/trust-taxonomy.schema.json#/$defs/residualRisk"
+          }
         }
       },
       "additionalProperties": true

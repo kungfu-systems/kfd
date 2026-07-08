@@ -1,0 +1,238 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd-2-trust-assessment",
+  "standard": "kfd-2",
+  "assessedClaims": {
+    "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-2/trust-claims.schema.json",
+    "path": ".buildchain/kfd-2/kfd-foundation.trust-claims.json",
+    "digest": "sha256:516fe8d96ddecbf4ebb32315fc1b5658e3e56c4180aca97eac2a9ab2c9208679"
+  },
+  "result": "warning",
+  "projection": {
+    "kind": "generic",
+    "description": "Generic KFD-2 assessment of KFD-owned foundation and practice guideline claims."
+  },
+  "assessments": [
+    {
+      "id": "assess-kfd-1-contract-world-trust",
+      "claimId": "kfd-1-contract-world-trust",
+      "subject": {
+        "kind": "contract-world",
+        "id": "kfd-1-surface-register",
+        "standard": "kfd-1",
+        "description": "KFD-1 non-drifting fact-source and compatibility-impact surface register."
+      },
+      "result": "pass",
+      "facts": [
+        {
+          "type": "file",
+          "result": "pass",
+          "machineProvability": "machine-verifiable",
+          "path": "standards.json",
+          "digest": "sha256:68aae8bbfcce0776e5f5317e133ae1b494a41ecdea1f992bb51f71d1e75f2ca4",
+          "description": "Fact standards.json is present and hashable."
+        },
+        {
+          "type": "schema",
+          "result": "pass",
+          "machineProvability": "machine-verifiable",
+          "path": "schemas/kfd-1/contract-world.schema.json",
+          "digest": "sha256:412d22385cd81a72798cc649c5ddfa961b6ae91ec2727d4300261a55fa5036f3",
+          "description": "Fact schemas/kfd-1/contract-world.schema.json is present and hashable."
+        }
+      ],
+      "evidence": [
+        {
+          "type": "schema",
+          "result": "pass",
+          "machineProvability": "machine-verifiable",
+          "path": "schemas/kfd-1/contract-world.schema.json",
+          "digest": "sha256:412d22385cd81a72798cc649c5ddfa961b6ae91ec2727d4300261a55fa5036f3",
+          "description": "KFD-1 contract-world schema is published as a package surface."
+        },
+        {
+          "type": "file",
+          "result": "pass",
+          "machineProvability": "machine-verifiable",
+          "path": "scripts/check.mjs",
+          "digest": "sha256:43cd81dcff761004098722f4b69a7e9939fe9559d4785344dd3344933e241f82",
+          "description": "The package check gate validates the KFD-1 schema, surface register, witness, and hashes."
+        }
+      ],
+      "auditBoundary": {
+        "scope": "KFD package KFD-1 surface-register, schema, witness, and self-verification gate",
+        "enumerability": "closed-world"
+      },
+      "responsibility": {
+        "owner": "KFD maintainers",
+        "sourceOwner": "KFD maintainers",
+        "verificationOwner": "KFD package self-verification",
+        "decisionOwner": "KFD maintainers"
+      },
+      "residualRisk": []
+    },
+    {
+      "id": "assess-kfd-3-collaboration-interface-trust",
+      "claimId": "kfd-3-collaboration-interface-trust",
+      "subject": {
+        "kind": "collaboration-interface",
+        "id": "kfd-3-collaboration-interface",
+        "standard": "kfd-3",
+        "description": "KFD package collaboration interface for humans, agents, maintainers, package consumers, site consumers, and release systems."
+      },
+      "result": "warning",
+      "facts": [
+        {
+          "type": "file",
+          "result": "pass",
+          "machineProvability": "machine-verifiable",
+          "path": ".buildchain/kfd-3/collaboration-interface.json",
+          "digest": "sha256:fa41128be4ee57a4a40b76d4d7a063c01d7c2e5c53aec2b9c6db819c7a27b22b",
+          "description": "Fact .buildchain/kfd-3/collaboration-interface.json is present and hashable."
+        }
+      ],
+      "evidence": [
+        {
+          "type": "schema",
+          "result": "pass",
+          "machineProvability": "machine-verifiable",
+          "path": "schemas/kfd-3/collaboration-interface.schema.json",
+          "digest": "sha256:6526be8e59d2f0f645e7f67a8f63a93f017a2dac62701147d49c5f391c5483a3",
+          "description": "KFD-3 collaboration interface schema is published."
+        },
+        {
+          "type": "file",
+          "result": "pass",
+          "machineProvability": "machine-verifiable",
+          "path": ".buildchain/kfd-3/collaboration-interface.json",
+          "digest": "sha256:fa41128be4ee57a4a40b76d4d7a063c01d7c2e5c53aec2b9c6db819c7a27b22b",
+          "description": "KFD-3 source collaboration interface declares reachable participant-facing surfaces and value evidence."
+        },
+        {
+          "type": "file",
+          "result": "pass",
+          "machineProvability": "machine-verifiable",
+          "path": "scripts/check.mjs",
+          "digest": "sha256:43cd81dcff761004098722f4b69a7e9939fe9559d4785344dd3344933e241f82",
+          "description": "The package check gate validates KFD-3 interface closure and witness parity."
+        }
+      ],
+      "auditBoundary": {
+        "scope": "KFD participant-facing collaboration surfaces, extension paths, and shipped witness files",
+        "enumerability": "closed-world"
+      },
+      "responsibility": {
+        "owner": "KFD maintainers",
+        "sourceOwner": "KFD maintainers",
+        "verificationOwner": "KFD package self-verification",
+        "decisionOwner": "KFD maintainers"
+      },
+      "residualRisk": [
+        {
+          "id": "human-language-interpretation",
+          "definedBy": "https://kfd.libkungfu.dev/schemas/kfd-2/trust-taxonomy.schema.json#/$defs/residualRisk",
+          "riskType": "natural-language-semantic-risk",
+          "trustImpact": "downgrade-warning",
+          "machineProvability": "not-exhaustively-enumerable",
+          "agentAction": "semantic-review-required",
+          "reason": "Natural-language standard interpretation is inspectable and reviewable but cannot be exhaustively proved from package bytes.",
+          "owner": "KFD maintainers"
+        }
+      ]
+    },
+    {
+      "id": "assess-kfd-4-observer-perspective-trust",
+      "claimId": "kfd-4-observer-perspective-trust",
+      "subject": {
+        "kind": "observer-perspective",
+        "id": "kfd-4-observer-perspective",
+        "standard": "kfd-4",
+        "description": "KFD-4 observer-perspective schema for perspective-bearing timeline views."
+      },
+      "result": "pass",
+      "facts": [
+        {
+          "type": "file",
+          "result": "pass",
+          "machineProvability": "machine-verifiable",
+          "path": "decisions/KFD-4.md",
+          "digest": "sha256:7077a6446c8baa60d85426780cb7b2bee488133196b6f53d74f0eb151f6e26e4",
+          "description": "Fact decisions/KFD-4.md is present and hashable."
+        },
+        {
+          "type": "file",
+          "result": "pass",
+          "machineProvability": "machine-verifiable",
+          "path": "standards.json",
+          "digest": "sha256:68aae8bbfcce0776e5f5317e133ae1b494a41ecdea1f992bb51f71d1e75f2ca4",
+          "description": "Fact standards.json is present and hashable."
+        },
+        {
+          "type": "schema",
+          "result": "pass",
+          "machineProvability": "machine-verifiable",
+          "path": "schemas/kfd-4/observer-perspective.schema.json",
+          "digest": "sha256:e6ae8849b04c326b4ae5efafa08b08dc0f3fcf6844f6956735ff7327c2cfd69c",
+          "description": "Fact schemas/kfd-4/observer-perspective.schema.json is present and hashable."
+        }
+      ],
+      "evidence": [
+        {
+          "type": "schema",
+          "result": "pass",
+          "machineProvability": "machine-verifiable",
+          "path": "schemas/kfd-4/observer-perspective.schema.json",
+          "digest": "sha256:e6ae8849b04c326b4ae5efafa08b08dc0f3fcf6844f6956735ff7327c2cfd69c",
+          "description": "KFD-4 observer-perspective schema is published."
+        },
+        {
+          "type": "file",
+          "result": "pass",
+          "machineProvability": "machine-verifiable",
+          "path": "standards.json",
+          "digest": "sha256:68aae8bbfcce0776e5f5317e133ae1b494a41ecdea1f992bb51f71d1e75f2ca4",
+          "description": "Standards metadata exposes the KFD-4 schema ID, path, interface version, and concept names."
+        },
+        {
+          "type": "file",
+          "result": "pass",
+          "machineProvability": "machine-verifiable",
+          "path": "scripts/check.mjs",
+          "digest": "sha256:43cd81dcff761004098722f4b69a7e9939fe9559d4785344dd3344933e241f82",
+          "description": "The package check gate validates the KFD-4 schema and standards metadata."
+        }
+      ],
+      "auditBoundary": {
+        "scope": "KFD-4 decision text, observer-perspective schema, standards metadata, and self-verification gate",
+        "enumerability": "closed-world"
+      },
+      "responsibility": {
+        "owner": "KFD maintainers",
+        "sourceOwner": "KFD maintainers",
+        "verificationOwner": "KFD package self-verification",
+        "decisionOwner": "KFD maintainers"
+      },
+      "residualRisk": []
+    }
+  ],
+  "unboundClaims": [],
+  "downgradeReasons": [
+    {
+      "id": "kfd-3-natural-language-semantics",
+      "riskType": "natural-language-semantic-risk",
+      "trustImpact": "downgrade-warning",
+      "reason": "KFD-3 exposes machine-checkable collaboration surfaces and value evidence, but the human-language meaning of trusted value and non-coercive cooperation remains a reviewable semantic responsibility.",
+      "agentAction": "semantic-review-required",
+      "source": "kfd-3-collaboration-interface-trust"
+    }
+  ],
+  "responsibility": {
+    "owner": "KFD maintainers",
+    "sourceOwner": "KFD maintainers",
+    "verificationOwner": "KFD package self-verification",
+    "decisionOwner": "KFD maintainers"
+  },
+  "schemaEvolution": {
+    "compatibilityRule": "Compatible additions may keep schemaVersion 1; semantic, required-field, verification-meaning, or responsibility-boundary changes require a new interface version or contract."
+  }
+}

@@ -178,9 +178,12 @@ Agents consuming this package should start from the same sources as humans:
    interface fact-source metadata to identify the public KFD fact source.
 4. Use `schemas/kfd-2/trust-taxonomy.schema.json` for KFD-2 residual-risk and
    trust-downgrade values. Unknown taxonomy values are invalid.
-5. Use `schemas/kfd-3/collaboration-interface.schema.json` and
+5. Use `schemas/kfd-2/trust-claims.schema.json` and
+   `schemas/kfd-2/trust-assessment.schema.json` when a claim needs generic
+   KFD-2 assessment instead of a release-specific passport.
+6. Use `schemas/kfd-3/collaboration-interface.schema.json` and
    `schemas/kfd-3/witness.schema.json` to inspect collaboration interfaces.
-6. If a needed KFD-2 taxonomy value is missing, open a KFD GitHub issue rather
+7. If a needed KFD-2 taxonomy value is missing, open a KFD GitHub issue rather
    than inventing a local value:
    `https://github.com/kungfu-systems/kfd/issues/new?title=KFD-2%20trust%20taxonomy%20extension%20request`.
 
@@ -190,11 +193,13 @@ additions may keep the same interface version; semantic changes, required-field
 changes, verification meaning changes, or responsibility-boundary changes must
 use a new interface version or contract.
 
-KFD-2 publishes trust-taxonomy, release-claims, and release-trust-passport
-schemas under `schemas/kfd-2/`. These schemas let Buildchain and other release
-systems audit whether public release claims are bound to source facts,
-evidence, hashes, audit boundaries, residual risk, and responsibility state. See
-[`docs/kfd-2-release-trust.md`](docs/kfd-2-release-trust.md).
+KFD-2 publishes trust-taxonomy, trust-claims, trust-assessment,
+release-claims, and release-trust-passport schemas under `schemas/kfd-2/`.
+The generic schemas let humans, agents, Buildchain, and other systems assess
+whether claims about KFD-1, KFD-3, KFD-4, future KFDs, or product surfaces are
+bound to source facts, evidence, hashes, audit boundaries, residual risk, and
+responsibility state. The release schemas are a release-specific projection of
+that model. See [`docs/KFD-2-usage.md`](docs/KFD-2-usage.md).
 
 KFD-3 also publishes a general collaboration-interface schema and witness
 schema under `schemas/kfd-3/`. These schemas are for participant-facing product
@@ -202,7 +207,7 @@ interfaces, not only agent APIs. A product such as Kungfu may implement an
 agent-first profile, but that profile remains a product-specific realization of
 KFD-3. The KFD-owned boundary is the standard vocabulary, schema IDs, and
 closed-world evidence shape. See
-[`docs/kfd-3-collaboration-interface.md`](docs/kfd-3-collaboration-interface.md).
+[`docs/KFD-3-usage.md`](docs/KFD-3-usage.md).
 
 KFD-4 publishes an observer-perspective schema under `schemas/kfd-4/`. It gives
 humans and agents a standard vocabulary for observer, accepted facts,
@@ -213,10 +218,10 @@ state when a product shows a perspective-bearing timeline.
 
 | ID | Kind | Axiom | Status |
 |---|---|---|---|
-| [KFD-1](decisions/kfd-1.md) | procedure | Facts must not drift. | active |
-| [KFD-2](decisions/kfd-2.md) | principle | Trust must start from facts. | active |
-| [KFD-3](decisions/kfd-3.md) | principle | Cooperation must start from trusted value. | active |
-| [KFD-4](decisions/kfd-4.md) | procedure | Timelines must declare their observer. | active |
+| [KFD-1](decisions/KFD-1.md) | procedure | Facts must not drift. | active |
+| [KFD-2](decisions/KFD-2.md) | principle | Trust must start from facts. | active |
+| [KFD-3](decisions/KFD-3.md) | principle | Cooperation must start from trusted value. | active |
+| [KFD-4](decisions/KFD-4.md) | procedure | Timelines must declare their observer. | active |
 
 ## Decision metadata
 
@@ -229,7 +234,7 @@ Decision metadata should expose:
 
 - Public fact source: `https://github.com/kungfu-systems/kfd`
 - Load-bearing coordinate: commit-addressed repository contents.
-- Canonical paths: `decisions/kfd-N.md`, `registry.json`, `standards.json`.
+- Canonical paths: `decisions/KFD-N.md`, `registry.json`, `standards.json`.
 - Stable rendered index: `https://kfd.libkungfu.dev`.
 - Rendered URL: `https://kfd.libkungfu.dev/N`.
 

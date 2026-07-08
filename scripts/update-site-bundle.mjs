@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 
 const README_PATH = "README.md";
@@ -105,6 +105,26 @@ const parseProductProofPath = (markdown) => ({
   body: paragraphBlocks(markdown)[0] || "",
 });
 
+const usagePathForEntry = (entry) => `docs/KFD-${entry.number}-usage.md`;
+const usageUrlForEntry = (entry) => `${entry.url}/usage`;
+
+const buildUsagePages = (entries) => entries.map((entry) => {
+  const usagePath = usagePathForEntry(entry);
+  return {
+    id: `${entry.id}-usage`,
+    decisionId: entry.id,
+    decisionNumber: entry.number,
+    parentPath: entry.path,
+    parentUrl: entry.url,
+    path: usagePath,
+    url: usageUrlForEntry(entry),
+    sourcePath: usagePath,
+    sourceExists: existsSync(usagePath),
+    relationship: "usage-child-of-decision",
+    title: `${entry.id} usage`,
+  };
+});
+
 const section = ({ id, sourceHeading, title, markdown, role, priority, presentation, firstScreen = false }) => ({
   id,
   sourcePath: README_PATH,
@@ -206,6 +226,7 @@ export const buildSiteBundle = ({ readmeText, registry }) => {
     routes: {
       home: "/",
       decisionPattern: "/{number}",
+      decisionUsagePattern: "/{number}/usage",
       llms: "/llms.txt",
       manifest: "/manifest.json",
     },
@@ -254,6 +275,13 @@ export const buildSiteBundle = ({ readmeText, registry }) => {
       source: REGISTRY_PATH,
       bodySource: "registry.entries[].path",
       stableUrlField: "url",
+      usagePages: {
+        source: "registry.entries[] + docs/KFD-N-usage.md",
+        bodySource: "docs/KFD-{number}-usage.md",
+        stableUrlPattern: "/{number}/usage",
+        relationship: "usage-child-of-decision",
+        pages: buildUsagePages(entries),
+      },
       metadata: {
         licenseBoundary: {
           license: "Apache-2.0",
@@ -269,7 +297,7 @@ export const buildSiteBundle = ({ readmeText, registry }) => {
           loadBearingCoordinate: "commit-addressed repository contents",
           stableRenderedIndex: "https://kfd.libkungfu.dev",
           canonicalPaths: [
-            "decisions/kfd-N.md",
+            "decisions/KFD-N.md",
             REGISTRY_PATH,
             "standards.json",
           ],
@@ -294,6 +322,8 @@ export const buildSiteBundle = ({ readmeText, registry }) => {
         "decision metadata fact source",
         "license and official-status boundary",
         "decision markdown bodies",
+        "decision usage page mapping",
+        "decision usage markdown bodies",
       ],
       ownedBySite: [
         "HTML structure",

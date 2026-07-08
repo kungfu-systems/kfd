@@ -20,7 +20,7 @@
       "loadBearingCoordinate": "commit-addressed repository contents",
       "stableRenderedIndex": "https://kfd.libkungfu.dev",
       "canonicalPaths": [
-        "decisions/kfd-N.md",
+        "decisions/KFD-N.md",
         "registry.json",
         "standards.json"
       ],
@@ -112,6 +112,18 @@
       "surface": ".buildchain/kfd-2/public-release-trust.claim.json",
       "participants": ["release-system", "agent-reader", "package-consumer"],
       "purpose": "Inspect the explicit public KFD-2 claim passed into Buildchain release passport generation."
+    },
+    {
+      "id": "kfd-2-foundation-trust-claims",
+      "surface": ".buildchain/kfd-2/kfd-foundation.trust-claims.json",
+      "participants": ["release-system", "agent-reader", "package-consumer"],
+      "purpose": "Inspect generic KFD-2 claims for the KFD package self-dogfood assessment."
+    },
+    {
+      "id": "kfd-2-foundation-trust-assessment",
+      "surface": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json",
+      "participants": ["release-system", "agent-reader", "package-consumer"],
+      "purpose": "Inspect KFD-2's generic assessment of KFD-1, KFD-3, and KFD-4 claims."
     },
     {
       "id": "site-bundle",
@@ -234,6 +246,22 @@
       "maturity": "stable"
     },
     {
+      "id": "kfd-2-foundation-trust-claims",
+      "kind": "json-api",
+      "participants": ["release-system", "maintainer", "agent-reader", "package-consumer"],
+      "value": "Generic KFD-2 trust claims used to assess KFD-1, KFD-3, and KFD-4 through one trust model.",
+      "discoverability": { "fromMinimalEntrypoint": true, "path": ".buildchain/kfd-2/kfd-foundation.trust-claims.json" },
+      "maturity": "stable"
+    },
+    {
+      "id": "kfd-2-foundation-trust-assessment",
+      "kind": "json-api",
+      "participants": ["release-system", "maintainer", "agent-reader", "package-consumer"],
+      "value": "Generic KFD-2 trust assessment result for KFD's own KFD-1, KFD-3, and KFD-4 claims.",
+      "discoverability": { "fromMinimalEntrypoint": true, "path": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json" },
+      "maturity": "stable"
+    },
+    {
       "id": "kfd-3-self-witnesses",
       "kind": "json-api",
       "participants": ["release-system", "maintainer", "agent-reader"],
@@ -248,6 +276,76 @@
       "value": "GitHub Actions workflows that invoke Buildchain verification, promotion, and propagation.",
       "discoverability": { "fromMinimalEntrypoint": true, "path": ".github/workflows/*.yml" },
       "maturity": "stable"
+    }
+  ],
+  "valueEvidence": [
+    {
+      "id": "kfd-foundation-model",
+      "claim": "KFD helps humans and agents understand the foundation model before adopting or extending kungfu-systems decisions.",
+      "participants": ["human-reader", "agent-reader", "maintainer"],
+      "facts": [
+        { "path": "README.md" },
+        { "path": "decisions/KFD-1.md" },
+        { "path": "decisions/KFD-2.md" },
+        { "path": "decisions/KFD-3.md" },
+        { "path": "registry.json" },
+        { "path": "standards.json" }
+      ],
+      "evidence": [
+        { "path": "site/kfd-site.json" },
+        { "path": "scripts/check.mjs" }
+      ],
+      "trustAssessment": {
+        "path": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json"
+      },
+      "residualRisk": [
+        {
+          "id": "human-language-interpretation",
+          "definedBy": "https://kfd.libkungfu.dev/schemas/kfd-2/trust-taxonomy.schema.json#/$defs/residualRisk",
+          "riskType": "natural-language-semantic-risk",
+          "trustImpact": "downgrade-warning",
+          "machineProvability": "not-exhaustively-enumerable",
+          "agentAction": "semantic-review-required",
+          "reason": "The foundation model is published and inspectable, but its full human-language meaning cannot be exhaustively proved from package bytes.",
+          "owner": "KFD maintainers"
+        }
+      ]
+    },
+    {
+      "id": "kfd-machine-consumption",
+      "claim": "KFD gives agents and release systems machine-readable standards, schemas, package exports, and witnesses so they can consume KFD without relying on private context.",
+      "participants": ["agent-reader", "package-consumer", "site-consumer", "release-system"],
+      "facts": [
+        { "path": "standards.json" },
+        { "path": "schemas/kfd-3/collaboration-interface.schema.json" },
+        { "path": "schemas/kfd-3/witness.schema.json" },
+        { "path": "package.json#exports" }
+      ],
+      "evidence": [
+        { "path": ".buildchain/kfd-2/kfd-foundation.trust-claims.json" },
+        { "path": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json" },
+        { "path": "scripts/check.mjs" }
+      ],
+      "trustAssessment": {
+        "path": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json"
+      }
+    },
+    {
+      "id": "kfd-extension-path",
+      "claim": "KFD gives humans and agents a visible extension path when the declared interface or taxonomy is insufficient.",
+      "participants": ["agent-reader", "human-reader", "maintainer", "release-system", "package-consumer"],
+      "facts": [
+        { "path": "docs/KFD-3-usage.md" },
+        { "path": ".buildchain/kfd-3/collaboration-interface.json" },
+        { "path": "schemas/kfd-2/trust-taxonomy.schema.json" }
+      ],
+      "evidence": [
+        { "path": "docs/KFD-2-usage.md" },
+        { "path": "scripts/check.mjs" }
+      ],
+      "trustAssessment": {
+        "path": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json"
+      }
     }
   ],
   "transparentConstraints": [

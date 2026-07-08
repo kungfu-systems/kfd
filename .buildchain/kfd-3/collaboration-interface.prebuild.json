@@ -10,9 +10,9 @@
   "sourceRegistry": {
     "id": "kfd-collaboration-interface",
     "path": ".buildchain/kfd-3/collaboration-interface.json",
-    "sha256": "35ba4fc09c1a2124bbc29f4466491b7fed01410231e0f15c5a01fbe535a94690"
+    "sha256": "fa41128be4ee57a4a40b76d4d7a063c01d7c2e5c53aec2b9c6db819c7a27b22b"
   },
-  "collaborationInterfaceDigest": "sha256:35ba4fc09c1a2124bbc29f4466491b7fed01410231e0f15c5a01fbe535a94690",
+  "collaborationInterfaceDigest": "sha256:fa41128be4ee57a4a40b76d4d7a063c01d7c2e5c53aec2b9c6db819c7a27b22b",
   "collaborationInterface": {
     "schemaVersion": 1,
     "contract": "kfd-3-collaboration-interface",
@@ -35,7 +35,7 @@
         "loadBearingCoordinate": "commit-addressed repository contents",
         "stableRenderedIndex": "https://kfd.libkungfu.dev",
         "canonicalPaths": [
-          "decisions/kfd-N.md",
+          "decisions/KFD-N.md",
           "registry.json",
           "standards.json"
         ],
@@ -156,6 +156,26 @@
           "package-consumer"
         ],
         "purpose": "Inspect the explicit public KFD-2 claim passed into Buildchain release passport generation."
+      },
+      {
+        "id": "kfd-2-foundation-trust-claims",
+        "surface": ".buildchain/kfd-2/kfd-foundation.trust-claims.json",
+        "participants": [
+          "release-system",
+          "agent-reader",
+          "package-consumer"
+        ],
+        "purpose": "Inspect generic KFD-2 claims for the KFD package self-dogfood assessment."
+      },
+      {
+        "id": "kfd-2-foundation-trust-assessment",
+        "surface": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json",
+        "participants": [
+          "release-system",
+          "agent-reader",
+          "package-consumer"
+        ],
+        "purpose": "Inspect KFD-2's generic assessment of KFD-1, KFD-3, and KFD-4 claims."
       },
       {
         "id": "site-bundle",
@@ -376,6 +396,38 @@
         "maturity": "stable"
       },
       {
+        "id": "kfd-2-foundation-trust-claims",
+        "kind": "json-api",
+        "participants": [
+          "release-system",
+          "maintainer",
+          "agent-reader",
+          "package-consumer"
+        ],
+        "value": "Generic KFD-2 trust claims used to assess KFD-1, KFD-3, and KFD-4 through one trust model.",
+        "discoverability": {
+          "fromMinimalEntrypoint": true,
+          "path": ".buildchain/kfd-2/kfd-foundation.trust-claims.json"
+        },
+        "maturity": "stable"
+      },
+      {
+        "id": "kfd-2-foundation-trust-assessment",
+        "kind": "json-api",
+        "participants": [
+          "release-system",
+          "maintainer",
+          "agent-reader",
+          "package-consumer"
+        ],
+        "value": "Generic KFD-2 trust assessment result for KFD's own KFD-1, KFD-3, and KFD-4 claims.",
+        "discoverability": {
+          "fromMinimalEntrypoint": true,
+          "path": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json"
+        },
+        "maturity": "stable"
+      },
+      {
         "id": "kfd-3-self-witnesses",
         "kind": "json-api",
         "participants": [
@@ -403,6 +455,131 @@
           "path": ".github/workflows/*.yml"
         },
         "maturity": "stable"
+      }
+    ],
+    "valueEvidence": [
+      {
+        "id": "kfd-foundation-model",
+        "claim": "KFD helps humans and agents understand the foundation model before adopting or extending kungfu-systems decisions.",
+        "participants": [
+          "human-reader",
+          "agent-reader",
+          "maintainer"
+        ],
+        "facts": [
+          {
+            "path": "README.md"
+          },
+          {
+            "path": "decisions/KFD-1.md"
+          },
+          {
+            "path": "decisions/KFD-2.md"
+          },
+          {
+            "path": "decisions/KFD-3.md"
+          },
+          {
+            "path": "registry.json"
+          },
+          {
+            "path": "standards.json"
+          }
+        ],
+        "evidence": [
+          {
+            "path": "site/kfd-site.json"
+          },
+          {
+            "path": "scripts/check.mjs"
+          }
+        ],
+        "trustAssessment": {
+          "path": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json"
+        },
+        "residualRisk": [
+          {
+            "id": "human-language-interpretation",
+            "definedBy": "https://kfd.libkungfu.dev/schemas/kfd-2/trust-taxonomy.schema.json#/$defs/residualRisk",
+            "riskType": "natural-language-semantic-risk",
+            "trustImpact": "downgrade-warning",
+            "machineProvability": "not-exhaustively-enumerable",
+            "agentAction": "semantic-review-required",
+            "reason": "The foundation model is published and inspectable, but its full human-language meaning cannot be exhaustively proved from package bytes.",
+            "owner": "KFD maintainers"
+          }
+        ]
+      },
+      {
+        "id": "kfd-machine-consumption",
+        "claim": "KFD gives agents and release systems machine-readable standards, schemas, package exports, and witnesses so they can consume KFD without relying on private context.",
+        "participants": [
+          "agent-reader",
+          "package-consumer",
+          "site-consumer",
+          "release-system"
+        ],
+        "facts": [
+          {
+            "path": "standards.json"
+          },
+          {
+            "path": "schemas/kfd-3/collaboration-interface.schema.json"
+          },
+          {
+            "path": "schemas/kfd-3/witness.schema.json"
+          },
+          {
+            "path": "package.json#exports"
+          }
+        ],
+        "evidence": [
+          {
+            "path": ".buildchain/kfd-2/kfd-foundation.trust-claims.json"
+          },
+          {
+            "path": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json"
+          },
+          {
+            "path": "scripts/check.mjs"
+          }
+        ],
+        "trustAssessment": {
+          "path": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json"
+        }
+      },
+      {
+        "id": "kfd-extension-path",
+        "claim": "KFD gives humans and agents a visible extension path when the declared interface or taxonomy is insufficient.",
+        "participants": [
+          "agent-reader",
+          "human-reader",
+          "maintainer",
+          "release-system",
+          "package-consumer"
+        ],
+        "facts": [
+          {
+            "path": "docs/KFD-3-usage.md"
+          },
+          {
+            "path": ".buildchain/kfd-3/collaboration-interface.json"
+          },
+          {
+            "path": "schemas/kfd-2/trust-taxonomy.schema.json"
+          }
+        ],
+        "evidence": [
+          {
+            "path": "docs/KFD-2-usage.md"
+          },
+          {
+            "path": "scripts/check.mjs"
+          }
+        ],
+        "trustAssessment": {
+          "path": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json"
+        }
       }
     ],
     "transparentConstraints": [
@@ -655,6 +832,28 @@
       "sourcePath": ".buildchain/kfd-2/public-release-trust.claim.json"
     },
     {
+      "id": "kfd-2-foundation-trust-claims",
+      "name": "kfd-2-foundation-trust-claims",
+      "kind": "json-api",
+      "participantProfile": "release-system,maintainer,agent-reader,package-consumer",
+      "availability": "stable",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": ".buildchain/kfd-2/kfd-foundation.trust-claims.json"
+    },
+    {
+      "id": "kfd-2-foundation-trust-assessment",
+      "name": "kfd-2-foundation-trust-assessment",
+      "kind": "json-api",
+      "participantProfile": "release-system,maintainer,agent-reader,package-consumer",
+      "availability": "stable",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json"
+    },
+    {
       "id": "kfd-3-self-witnesses",
       "name": "kfd-3-self-witnesses",
       "kind": "json-api",
@@ -725,7 +924,7 @@
     {
       "id": "doc:readme",
       "sourcePath": "README.md",
-      "sha256": "2a24d110a26438681154675137ca823b870ae5df60353d72b9535b7e0a1f993b"
+      "sha256": "5843355e9758ffd06488486f77fbdbaa9afe78bee8cdde2d82c75a132ff982f5"
     },
     {
       "id": "doc:trademarks",
@@ -735,36 +934,46 @@
     {
       "id": "doc:docs-map",
       "sourcePath": "docs/MAP.md",
-      "sha256": "3a8704227d0ded104db2a47ddfd67d1b86747d6d58c7592102857f6de18cb497"
+      "sha256": "249e0d188993906aca3e0538c236e3b74fe90474dac34234d6ae83659f0627cf"
     },
     {
-      "id": "doc:kfd-2-release-trust",
-      "sourcePath": "docs/kfd-2-release-trust.md",
-      "sha256": "9ba323334750cf285f08de21286f58c04b872189febf38a4e8fd50c0791020b3"
+      "id": "doc:kfd-1-usage",
+      "sourcePath": "docs/KFD-1-usage.md",
+      "sha256": "3b9691cdd9c0a28c1e428e1cb421939cb17deab37d99c39caff13c058c63846a"
     },
     {
-      "id": "doc:kfd-3-collaboration-interface",
-      "sourcePath": "docs/kfd-3-collaboration-interface.md",
-      "sha256": "d483ff6f8423a2e3f8e5dc547b62139d5c365678f9974d62063f8b523f14edb0"
+      "id": "doc:kfd-2-usage",
+      "sourcePath": "docs/KFD-2-usage.md",
+      "sha256": "ff800c6b46d1909c2f0414d9e0c8ae2219edc83a59a066cafda5c970cac3471d"
+    },
+    {
+      "id": "doc:kfd-3-usage",
+      "sourcePath": "docs/KFD-3-usage.md",
+      "sha256": "21ffa3193fa9c74a53ac890c48591ab768fa0871cb4e9cb265e5eae199ec63f7"
+    },
+    {
+      "id": "doc:kfd-4-usage",
+      "sourcePath": "docs/KFD-4-usage.md",
+      "sha256": "4c223ab68fce18cf881efd268508f57438da8dcf22834f7c032ef3b63a905347"
     },
     {
       "id": "decision:kfd-1",
-      "sourcePath": "decisions/kfd-1.md",
-      "sha256": "32016c0962edcea9286db04ba24dab6c55400e9b26ce16a9d4b4ad647e17e7df"
+      "sourcePath": "decisions/KFD-1.md",
+      "sha256": "0b7b1ec54d661b271f91f02cefa97b11e1d1ef9c637efd2d1878d5f9c9185d80"
     },
     {
       "id": "decision:kfd-2",
-      "sourcePath": "decisions/kfd-2.md",
-      "sha256": "0c2da2113df6ef2829592f7ba67593059cb06e195ea527ee742501939efb3b9b"
+      "sourcePath": "decisions/KFD-2.md",
+      "sha256": "6bc01776e478afc802c57c4e21a40bcfebf170f90ae039345d883c292053b622"
     },
     {
       "id": "decision:kfd-3",
-      "sourcePath": "decisions/kfd-3.md",
-      "sha256": "6f0bb730f87a574699f2f536ed762ab327f4f506507cf3649bbb8e90140ecdb5"
+      "sourcePath": "decisions/KFD-3.md",
+      "sha256": "049a7694f50e48774f3f1f74edccb46f0397a61211c027ab0eaa77e12d4e3f14"
     },
     {
       "id": "decision:kfd-4",
-      "sourcePath": "decisions/kfd-4.md",
+      "sourcePath": "decisions/KFD-4.md",
       "sha256": "7077a6446c8baa60d85426780cb7b2bee488133196b6f53d74f0eb151f6e26e4"
     }
   ],
@@ -772,22 +981,32 @@
     {
       "id": "schema:kfd-standards",
       "sourcePath": "schemas/kfd-standards.schema.json",
-      "sha256": "2ecc7049d13463700f143f4e8c40488d6587484c94d26e827c239eeedc892336"
+      "sha256": "1ad05c1e3dd76571e359841f12ffc3620db8ede626eda8ff6393407ffad710c1"
     },
     {
       "id": "schema:kfd-1:contract-world",
       "sourcePath": "schemas/kfd-1/contract-world.schema.json",
-      "sha256": "6be00cca75c80bf96429eb62336989d8931ea380d86388fcb8b834dcf8d3c13b"
+      "sha256": "412d22385cd81a72798cc649c5ddfa961b6ae91ec2727d4300261a55fa5036f3"
     },
     {
       "id": "schema:kfd-1:witness",
       "sourcePath": "schemas/kfd-1/witness.schema.json",
-      "sha256": "50104a2962cb75cc1da634fa65553e993f87d8fb9b3c237f0609a2208ad4c1f3"
+      "sha256": "354e6d0691be8a4c6dfd296fa9a175bb2a3998fdefa70842f2fa2fa441f52cb1"
     },
     {
       "id": "schema:kfd-2:trust-taxonomy",
       "sourcePath": "schemas/kfd-2/trust-taxonomy.schema.json",
       "sha256": "a663d301a663cadb8567e3010361f5a630b76b6518ed7603dfd58cbd4e64a658"
+    },
+    {
+      "id": "schema:kfd-2:trust-claims",
+      "sourcePath": "schemas/kfd-2/trust-claims.schema.json",
+      "sha256": "5f452a5973502273f0249116b3a4171549a84515d8ba5286a09f173db4f0e03a"
+    },
+    {
+      "id": "schema:kfd-2:trust-assessment",
+      "sourcePath": "schemas/kfd-2/trust-assessment.schema.json",
+      "sha256": "cdb56fb16d0d2e91e4a9ebaff9cefc212a70fd22701e1185ca75d66af6172a51"
     },
     {
       "id": "schema:kfd-2:release-claims",
@@ -802,12 +1021,12 @@
     {
       "id": "schema:kfd-3:collaboration-interface",
       "sourcePath": "schemas/kfd-3/collaboration-interface.schema.json",
-      "sha256": "e8d1f67914751b956c5a075eddbcc1ba482ddd21ce7298ab3a8b9df359a0ae44"
+      "sha256": "6526be8e59d2f0f645e7f67a8f63a93f017a2dac62701147d49c5f391c5483a3"
     },
     {
       "id": "schema:kfd-3:witness",
       "sourcePath": "schemas/kfd-3/witness.schema.json",
-      "sha256": "95c25c7967e5d40a2aa2312e3cdfe984ce00e85db2457a370ce3d863cfa82c84"
+      "sha256": "86567c1d5d32ac2ce621a596c08d2702c0facea0d0cfcb836ac31a170dc19779"
     },
     {
       "id": "schema:kfd-4:observer-perspective",
@@ -819,51 +1038,61 @@
     {
       "id": "metadata:registry",
       "sourcePath": "registry.json",
-      "sha256": "9e045265bbab3611e30650d36c0b79484ec7766a18b757275b2813645a91930b"
+      "sha256": "003842480fb9b3b8847735db729bc94bace4f60a25e730df839f4cb74c9f1ab5"
     },
     {
       "id": "metadata:standards",
       "sourcePath": "standards.json",
-      "sha256": "61b274b75435a3d595f5d4d9e067177a22609114ac96518121462439fe14ee9a"
+      "sha256": "68aae8bbfcce0776e5f5317e133ae1b494a41ecdea1f992bb51f71d1e75f2ca4"
     },
     {
       "id": "metadata:release-impact",
       "sourcePath": "release-impact.json",
-      "sha256": "16e0b813225cfe6f658896d8cd3bd98ddda8693798813d02fd239a5b7abc58ed"
+      "sha256": "685f65d10491593d28321431eee315bb5fbbedd2d1ccec0747f4a37547b3124a"
     },
     {
       "id": "metadata:release-anchor",
       "sourcePath": "kfd.release.json",
-      "sha256": "8a5987f0449089d9aacc2b8b6b3f17034f6e92aca1f6065c637c7ea2bca8f618"
+      "sha256": "128788929dadbf25aa60283c5c5a7f79afd971627c378edd7d85546ee2038f22"
     },
     {
       "id": "metadata:buildchain-contract-lock",
       "sourcePath": "buildchain.contract-lock.json",
-      "sha256": "c0495e08b841c225aa309fffb8d14b1d210e03afcfe9178265e74307998ad02d"
+      "sha256": "b01c166a59bec6d73e882a69d9d91fbb98f1132558a417f4654c19889af6f0b9"
     },
     {
       "id": "metadata:kfd-2-public-release-trust-claim",
       "sourcePath": ".buildchain/kfd-2/public-release-trust.claim.json",
-      "sha256": "d3898acdef254b95404f0356aba7f025f097f0594922197b83e5a4369f895cf5"
+      "sha256": "22c5b4fcbb0f57d8b61c109e3ff9ea782847e090b577bec546d5aa129b12996a"
+    },
+    {
+      "id": "metadata:kfd-2-foundation-trust-claims",
+      "sourcePath": ".buildchain/kfd-2/kfd-foundation.trust-claims.json",
+      "sha256": "516fe8d96ddecbf4ebb32315fc1b5658e3e56c4180aca97eac2a9ab2c9208679"
+    },
+    {
+      "id": "metadata:kfd-2-foundation-trust-assessment",
+      "sourcePath": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json",
+      "sha256": "287d684a91830455580cee8dba44522a794826ce2255f4bde12f93025dc3b112"
     }
   ],
   "packageExports": [
     {
       "id": "export:package-json",
       "sourcePath": "package.json#exports",
-      "sha256": "a3f1f75622ff82b1fa1d5f9aaac8b24772b5bccf562123b2d875789793c68eb9"
+      "sha256": "25ae49f5ab1c34d07d066b7e8fbe49284808bbf10b3c3b2ebe06373be1020854"
     },
     {
       "id": "export:npm-files",
       "sourcePath": "package.json#files",
-      "sha256": "a3f1f75622ff82b1fa1d5f9aaac8b24772b5bccf562123b2d875789793c68eb9"
+      "sha256": "25ae49f5ab1c34d07d066b7e8fbe49284808bbf10b3c3b2ebe06373be1020854"
     }
   ],
   "siteConsumptionContracts": [
     {
       "id": "site:kfd-site-bundle",
       "sourcePath": "site/kfd-site.json",
-      "sha256": "3c111f4a429d22e6d01329c010762837006e3d0f1683aacf704d0e9e1d6e4a81"
+      "sha256": "f416265ea3c2aed6b8cc63f3aef35b4c2c2f8f967a0cf45433f1efcf60b3c825"
     },
     {
       "id": "site:release-propagation",

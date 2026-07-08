@@ -37,6 +37,8 @@ const schemaSurfaces = [
   "schemas/kfd-1/contract-world.schema.json",
   "schemas/kfd-1/witness.schema.json",
   "schemas/kfd-2/trust-taxonomy.schema.json",
+  "schemas/kfd-2/trust-claims.schema.json",
+  "schemas/kfd-2/trust-assessment.schema.json",
   "schemas/kfd-2/release-claims.schema.json",
   "schemas/kfd-2/release-trust-passport.schema.json",
   "schemas/kfd-3/collaboration-interface.schema.json",
@@ -53,8 +55,10 @@ const groupedSurfaces = {
     { id: "doc:readme", sourcePath: "README.md", sha256: sha256File("README.md") },
     { id: "doc:trademarks", sourcePath: "TRADEMARKS.md", sha256: sha256File("TRADEMARKS.md") },
     { id: "doc:docs-map", sourcePath: "docs/MAP.md", sha256: sha256File("docs/MAP.md") },
-    { id: "doc:kfd-2-release-trust", sourcePath: "docs/kfd-2-release-trust.md", sha256: sha256File("docs/kfd-2-release-trust.md") },
-    { id: "doc:kfd-3-collaboration-interface", sourcePath: "docs/kfd-3-collaboration-interface.md", sha256: sha256File("docs/kfd-3-collaboration-interface.md") },
+    { id: "doc:kfd-1-usage", sourcePath: "docs/KFD-1-usage.md", sha256: sha256File("docs/KFD-1-usage.md") },
+    { id: "doc:kfd-2-usage", sourcePath: "docs/KFD-2-usage.md", sha256: sha256File("docs/KFD-2-usage.md") },
+    { id: "doc:kfd-3-usage", sourcePath: "docs/KFD-3-usage.md", sha256: sha256File("docs/KFD-3-usage.md") },
+    { id: "doc:kfd-4-usage", sourcePath: "docs/KFD-4-usage.md", sha256: sha256File("docs/KFD-4-usage.md") },
     ...decisionDocs,
   ],
   schemas: schemaSurfaces,
@@ -65,6 +69,8 @@ const groupedSurfaces = {
     { id: "metadata:release-anchor", sourcePath: "kfd.release.json", sha256: sha256File("kfd.release.json") },
     { id: "metadata:buildchain-contract-lock", sourcePath: "buildchain.contract-lock.json", sha256: sha256File("buildchain.contract-lock.json") },
     { id: "metadata:kfd-2-public-release-trust-claim", sourcePath: ".buildchain/kfd-2/public-release-trust.claim.json", sha256: sha256File(".buildchain/kfd-2/public-release-trust.claim.json") },
+    { id: "metadata:kfd-2-foundation-trust-claims", sourcePath: ".buildchain/kfd-2/kfd-foundation.trust-claims.json", sha256: sha256File(".buildchain/kfd-2/kfd-foundation.trust-claims.json") },
+    { id: "metadata:kfd-2-foundation-trust-assessment", sourcePath: ".buildchain/kfd-2/kfd-foundation.trust-assessment.json", sha256: sha256File(".buildchain/kfd-2/kfd-foundation.trust-assessment.json") },
   ],
   packageExports: [
     { id: "export:package-json", sourcePath: "package.json#exports", sha256: sha256File("package.json") },
@@ -104,6 +110,24 @@ for (const entrypoint of collaborationInterface.minimalEntrypoints) {
   });
   declaredSurfaceIds.add(entrypoint.id);
 }
+
+const valueEvidencePointers = (() => {
+  const entriesByPath = new Map();
+  for (const valueClaim of collaborationInterface.valueEvidence ?? []) {
+    for (const entry of [
+      ...(valueClaim.facts ?? []),
+      ...(valueClaim.evidence ?? []),
+      ...(valueClaim.trustAssessment ? [valueClaim.trustAssessment] : []),
+    ]) {
+      if (!entry?.path || entriesByPath.has(entry.path)) continue;
+      entriesByPath.set(
+        entry.path,
+        pointer(entry.path, `KFD-3 value evidence for ${valueClaim.id}: ${valueClaim.claim}`)
+      );
+    }
+  }
+  return [...entriesByPath.values()];
+})();
 
 const participantProfiles = collaborationInterface.participants.map((entry) => entry.id);
 const responsibility = {
@@ -187,9 +211,12 @@ const artifact = {
       pointer("registry.json", "Machine-readable decision index"),
       pointer("standards.json", "Machine-readable standards metadata"),
       pointer(".buildchain/kfd-2/public-release-trust.claim.json", "KFD-2 public release trust claim"),
+      pointer(".buildchain/kfd-2/kfd-foundation.trust-claims.json", "KFD-2 generic trust claims for KFD self-dogfood"),
+      pointer(".buildchain/kfd-2/kfd-foundation.trust-assessment.json", "KFD-2 generic trust assessment for KFD self-dogfood"),
       pointer("package.json", "Package export map"),
       pointer("site/kfd-site.json", "Site content projection"),
     ],
+    valueEvidence: valueEvidencePointers,
     transparentConstraints: [
       pointer("CONTRIBUTING.md", "Append-only decision and contribution constraints"),
       pointer("TRADEMARKS.md", "Trademark and official-status constraints"),
@@ -201,12 +228,17 @@ const artifact = {
       pointer("registry.json", "Agent registry path"),
       pointer("standards.json", "Agent standards metadata path"),
       pointer(".buildchain/kfd-2/public-release-trust.claim.json", "Agent release trust claim path"),
+      pointer(".buildchain/kfd-2/kfd-foundation.trust-claims.json", "Agent generic trust claims path"),
+      pointer(".buildchain/kfd-2/kfd-foundation.trust-assessment.json", "Agent generic trust assessment path"),
       pointer("package.json", "Package consumption path"),
     ],
     manuals: [
       pointer("docs/MAP.md"),
       pointer("TRADEMARKS.md"),
-      pointer("docs/kfd-3-collaboration-interface.md"),
+      pointer("docs/KFD-1-usage.md"),
+      pointer("docs/KFD-2-usage.md"),
+      pointer("docs/KFD-3-usage.md"),
+      pointer("docs/KFD-4-usage.md"),
     ],
   },
   closure: {

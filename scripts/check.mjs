@@ -34,6 +34,10 @@ const kfd1WitnessPath = ".buildchain/kfd-1/contract-world.witness.json";
 const kfd1Witness = existsSync(kfd1WitnessPath) ? JSON.parse(readFileSync(kfd1WitnessPath, "utf8")) : undefined;
 const kfd2ClaimPath = ".buildchain/kfd-2/public-release-trust.claim.json";
 const kfd2Claim = existsSync(kfd2ClaimPath) ? JSON.parse(readFileSync(kfd2ClaimPath, "utf8")) : undefined;
+const kfd2TrustClaimsPath = ".buildchain/kfd-2/kfd-foundation.trust-claims.json";
+const kfd2TrustClaims = existsSync(kfd2TrustClaimsPath) ? JSON.parse(readFileSync(kfd2TrustClaimsPath, "utf8")) : undefined;
+const kfd2TrustAssessmentPath = ".buildchain/kfd-2/kfd-foundation.trust-assessment.json";
+const kfd2TrustAssessment = existsSync(kfd2TrustAssessmentPath) ? JSON.parse(readFileSync(kfd2TrustAssessmentPath, "utf8")) : undefined;
 const kfd3InterfacePath = ".buildchain/kfd-3/collaboration-interface.json";
 const kfd3PrebuildWitnessPath = ".buildchain/kfd-3/collaboration-interface.prebuild.json";
 const kfd3ArtifactWitnessPath = ".buildchain/kfd-3/collaboration-interface.artifact.json";
@@ -98,6 +102,37 @@ if (
 if (siteBundle.homepage?.currentDecisions?.source !== "registry.json") fail("site bundle currentDecisions source must be registry.json");
 if (siteBundle.decisionPages?.source !== "registry.json") fail("site bundle decisionPages source must be registry.json");
 if (siteBundle.decisionPages?.bodySource !== "registry.entries[].path") fail("site bundle decision page body source must be registry.entries[].path");
+if (siteBundle.routes?.decisionUsagePattern !== "/{number}/usage") fail("site bundle routes.decisionUsagePattern must be /{number}/usage");
+if (siteBundle.decisionPages?.usagePages?.relationship !== "usage-child-of-decision") {
+  fail("site bundle decisionPages.usagePages.relationship must be usage-child-of-decision");
+}
+if (siteBundle.decisionPages?.usagePages?.bodySource !== "docs/KFD-{number}-usage.md") {
+  fail("site bundle decisionPages.usagePages.bodySource must be docs/KFD-{number}-usage.md");
+}
+if (siteBundle.decisionPages?.usagePages?.stableUrlPattern !== "/{number}/usage") {
+  fail("site bundle decisionPages.usagePages.stableUrlPattern must be /{number}/usage");
+}
+const usagePagesByDecision = new Map((siteBundle.decisionPages?.usagePages?.pages ?? []).map((entry) => [entry.decisionId, entry]));
+for (const e of registry.entries) {
+  const usagePage = usagePagesByDecision.get(e.id);
+  const expectedPath = `docs/KFD-${e.number}-usage.md`;
+  const expectedUrl = `${e.url}/usage`;
+  if (!usagePage) fail(`site bundle decisionPages.usagePages missing ${e.id}`);
+  else {
+    if (usagePage.parentPath !== e.path) fail(`site bundle ${e.id} usage parentPath must be ${e.path}`);
+    if (usagePage.parentUrl !== e.url) fail(`site bundle ${e.id} usage parentUrl must be ${e.url}`);
+    if (usagePage.path !== expectedPath) fail(`site bundle ${e.id} usage path must be ${expectedPath}`);
+    if (usagePage.sourcePath !== expectedPath) fail(`site bundle ${e.id} usage sourcePath must be ${expectedPath}`);
+    if (usagePage.url !== expectedUrl) fail(`site bundle ${e.id} usage url must be ${expectedUrl}`);
+    if (usagePage.sourceExists !== true) fail(`site bundle ${e.id} usage sourceExists must be true`);
+  }
+  if (!existsSync(expectedPath)) fail(`missing usage document ${expectedPath} for ${e.id}`);
+}
+for (const decisionId of usagePagesByDecision.keys()) {
+  if (!registry.entries.some((entry) => entry.id === decisionId)) {
+    fail(`site bundle decisionPages.usagePages has unknown decision ${decisionId}`);
+  }
+}
 if (siteBundle.decisionPages?.metadata?.licenseBoundary?.license !== "Apache-2.0") {
   fail("site bundle decision metadata licenseBoundary.license must be Apache-2.0");
 }
@@ -118,7 +153,7 @@ if (sitePublicFactSource?.loadBearingCoordinate !== "commit-addressed repository
 if (sitePublicFactSource?.stableRenderedIndex !== "https://kfd.libkungfu.dev") {
   fail("site bundle decision metadata publicFactSource.stableRenderedIndex must be https://kfd.libkungfu.dev");
 }
-for (const requiredPath of ["decisions/kfd-N.md", "registry.json", "standards.json"]) {
+for (const requiredPath of ["decisions/KFD-N.md", "registry.json", "standards.json"]) {
   if (!sitePublicFactSource?.canonicalPaths?.includes(requiredPath)) {
     fail(`site bundle decision metadata publicFactSource.canonicalPaths must include ${requiredPath}`);
   }
@@ -128,7 +163,7 @@ for (const requiredFile of ["README.md", "TRADEMARKS.md", "decisions", "registry
     fail(`package.json files[] must include ${requiredFile}`);
   }
 }
-for (const requiredExport of ["./TRADEMARKS.md", "./registry.json", "./standards.json", "./kfd.release.json", "./site/kfd-site.json", "./buildchain.contract-lock.json", "./buildchain.release-propagation.json", "./release-impact.json", "./buildchain/kfd-1/contract-world.witness.json", "./buildchain/kfd-2/public-release-trust.claim.json", "./buildchain/kfd-3/collaboration-interface.json", "./buildchain/kfd-3/collaboration-interface.prebuild.json", "./buildchain/kfd-3/collaboration-interface.artifact.json", "./schemas/*.json", "./schemas/*/*.json"]) {
+for (const requiredExport of ["./TRADEMARKS.md", "./registry.json", "./standards.json", "./kfd.release.json", "./site/kfd-site.json", "./buildchain.contract-lock.json", "./buildchain.release-propagation.json", "./release-impact.json", "./buildchain/kfd-1/contract-world.witness.json", "./buildchain/kfd-2/public-release-trust.claim.json", "./buildchain/kfd-2/kfd-foundation.trust-claims.json", "./buildchain/kfd-2/kfd-foundation.trust-assessment.json", "./buildchain/kfd-3/collaboration-interface.json", "./buildchain/kfd-3/collaboration-interface.prebuild.json", "./buildchain/kfd-3/collaboration-interface.artifact.json", "./schemas/*.json", "./schemas/*/*.json"]) {
   if (!packageJson.exports || !packageJson.exports[requiredExport]) {
     fail(`package.json exports must include ${requiredExport}`);
   }
@@ -144,8 +179,8 @@ for (const e of registry.entries) {
   seen.add(e.number);
   if (e.id !== `KFD-${e.number}`) fail(`id ${e.id} does not match number ${e.number}`);
   if (e.slug !== `kfd-${e.number}`) fail(`${e.id} slug must be kfd-${e.number}, not ${e.slug}`);
-  if (e.path !== `decisions/kfd-${e.number}.md`) {
-    fail(`${e.id} path must be decisions/kfd-${e.number}.md, not ${e.path}`);
+  if (e.path !== `decisions/KFD-${e.number}.md`) {
+    fail(`${e.id} path must be decisions/KFD-${e.number}.md, not ${e.path}`);
   }
   if (!kinds.has(e.kind)) fail(`bad kind ${e.kind} on ${e.id}`);
   if (!statuses.has(e.status)) fail(`bad status ${e.status} on ${e.id}`);
@@ -238,15 +273,59 @@ if (kfd1?.schemaIds?.contractWorld !== "https://kfd.libkungfu.dev/schemas/kfd-1/
 if (kfd1?.schemaIds?.witness !== "https://kfd.libkungfu.dev/schemas/kfd-1/witness.schema.json") {
   fail("KFD-1 standards metadata must expose the canonical witness schema URI");
 }
-for (const concept of ["factSource", "contractWorld", "weldedSurfaceRegister", "witness"]) {
+for (const concept of ["factSource", "contractWorld", "weldedSurfaceRegister", "witness", "surfaceClass", "compatibilityImpact", "impactProjection"]) {
   if (!kfd1?.concepts?.[concept]) fail(`KFD-1 standards metadata missing concept ${concept}`);
 }
 for (const iface of ["contractWorld", "witness"]) {
   if (!kfd1?.interfaces?.[iface]) fail(`KFD-1 standards metadata missing interface ${iface}`);
 }
+const expectedKfd1SurfaceClasses = ["integration-time", "cross-time"];
+const expectedKfd1ImpactClasses = ["breaking", "additive", "none", "unclassifiable"];
+const kfd1ContractWorldSchema = JSON.parse(readFileSync("schemas/kfd-1/contract-world.schema.json", "utf8"));
+const kfd1WitnessSchema = JSON.parse(readFileSync("schemas/kfd-1/witness.schema.json", "utf8"));
+for (const [schemaName, schemaDoc] of [["contractWorld", kfd1ContractWorldSchema], ["witness", kfd1WitnessSchema]]) {
+  requireSameEnum(schemaDoc.$defs?.surfaceClass?.enum, expectedKfd1SurfaceClasses, `KFD-1 ${schemaName} surfaceClass`);
+  requireSameEnum(schemaDoc.$defs?.compatibilityImpact?.enum, expectedKfd1ImpactClasses, `KFD-1 ${schemaName} compatibilityImpact`);
+  for (const impact of expectedKfd1ImpactClasses) {
+    if (!schemaDoc.$defs?.impactProjection?.required?.includes(impact)) {
+      fail(`KFD-1 ${schemaName} impactProjection must require ${impact}`);
+    }
+  }
+}
+const kfd1SurfaceRegister = kfd1?.surfaceRegister;
+if (kfd1SurfaceRegister?.factSource !== "standards.json#/standards/kfd-1/surfaceRegister") {
+  fail("KFD-1 surfaceRegister must declare standards.json as its fact source");
+}
+requireSameEnum(kfd1SurfaceRegister?.surfaceClasses, expectedKfd1SurfaceClasses, "KFD-1 surfaceRegister surfaceClasses");
+requireSameEnum(kfd1SurfaceRegister?.compatibilityImpactClasses, expectedKfd1ImpactClasses, "KFD-1 surfaceRegister compatibilityImpactClasses");
+if (!Array.isArray(kfd1SurfaceRegister?.surfaces) || kfd1SurfaceRegister.surfaces.length === 0) {
+  fail("KFD-1 surfaceRegister.surfaces[] is required");
+} else {
+  const surfaceIds = new Set();
+  for (const [index, surface] of kfd1SurfaceRegister.surfaces.entries()) {
+    if (!surface.id) fail(`KFD-1 surfaceRegister.surfaces[${index}].id is required`);
+    else if (surfaceIds.has(surface.id)) fail(`KFD-1 surfaceRegister duplicate surface ${surface.id}`);
+    else surfaceIds.add(surface.id);
+    if (!expectedKfd1SurfaceClasses.includes(surface.class)) fail(`KFD-1 surfaceRegister ${surface.id} has invalid class`);
+    if (!Array.isArray(surface.classes) || !surface.classes.includes(surface.class)) {
+      fail(`KFD-1 surfaceRegister ${surface.id} classes[] must include class`);
+    }
+    if (!surface.description) fail(`KFD-1 surfaceRegister ${surface.id} description is required`);
+    if (!surface.sourcePath || !existsSync(surface.sourcePath)) fail(`KFD-1 surfaceRegister ${surface.id} sourcePath is missing`);
+    for (const impact of expectedKfd1ImpactClasses) {
+      if (!surface.impactProjection?.[impact]) fail(`KFD-1 surfaceRegister ${surface.id} missing impactProjection.${impact}`);
+    }
+  }
+}
 const kfd2 = standardsMetadata.standards?.["kfd-2"];
 if (kfd2?.schemaIds?.trustTaxonomy !== "https://kfd.libkungfu.dev/schemas/kfd-2/trust-taxonomy.schema.json") {
   fail("KFD-2 standards metadata must expose the canonical trustTaxonomy schema URI");
+}
+if (kfd2?.schemaIds?.trustClaims !== "https://kfd.libkungfu.dev/schemas/kfd-2/trust-claims.schema.json") {
+  fail("KFD-2 standards metadata must expose the canonical trustClaims schema URI");
+}
+if (kfd2?.schemaIds?.trustAssessment !== "https://kfd.libkungfu.dev/schemas/kfd-2/trust-assessment.schema.json") {
+  fail("KFD-2 standards metadata must expose the canonical trustAssessment schema URI");
 }
 if (kfd2?.schemaIds?.releaseClaims !== "https://kfd.libkungfu.dev/schemas/kfd-2/release-claims.schema.json") {
   fail("KFD-2 standards metadata must expose the canonical releaseClaims schema URI");
@@ -260,14 +339,28 @@ if (kfd2?.schemaPaths?.releaseClaims !== "schemas/kfd-2/release-claims.schema.js
 if (kfd2?.schemaPaths?.trustTaxonomy !== "schemas/kfd-2/trust-taxonomy.schema.json") {
   fail("KFD-2 standards metadata must expose the trustTaxonomy schema path");
 }
+if (kfd2?.schemaPaths?.trustClaims !== "schemas/kfd-2/trust-claims.schema.json") {
+  fail("KFD-2 standards metadata must expose the trustClaims schema path");
+}
+if (kfd2?.schemaPaths?.trustAssessment !== "schemas/kfd-2/trust-assessment.schema.json") {
+  fail("KFD-2 standards metadata must expose the trustAssessment schema path");
+}
 if (kfd2?.schemaPaths?.releaseTrustPassport !== "schemas/kfd-2/release-trust-passport.schema.json") {
   fail("KFD-2 standards metadata must expose the releaseTrustPassport schema path");
 }
 const kfd2TrustTaxonomySchema = JSON.parse(readFileSync("schemas/kfd-2/trust-taxonomy.schema.json", "utf8"));
+const kfd2TrustClaimsSchema = JSON.parse(readFileSync("schemas/kfd-2/trust-claims.schema.json", "utf8"));
+const kfd2TrustAssessmentSchema = JSON.parse(readFileSync("schemas/kfd-2/trust-assessment.schema.json", "utf8"));
 const kfd2ClaimsSchema = JSON.parse(readFileSync("schemas/kfd-2/release-claims.schema.json", "utf8"));
 const kfd2TrustPassportSchema = JSON.parse(readFileSync("schemas/kfd-2/release-trust-passport.schema.json", "utf8"));
 if (kfd2TrustTaxonomySchema.properties?.contract?.const !== "kfd-2-trust-taxonomy") {
   fail("KFD-2 trustTaxonomy schema must describe the kfd-2-trust-taxonomy contract");
+}
+if (kfd2TrustClaimsSchema.properties?.contract?.const !== "kfd-2-trust-claims") {
+  fail("KFD-2 trustClaims schema must describe the kfd-2-trust-claims contract");
+}
+if (kfd2TrustAssessmentSchema.properties?.contract?.const !== "kfd-2-trust-assessment") {
+  fail("KFD-2 trustAssessment schema must describe the kfd-2-trust-assessment contract");
 }
 if (kfd2ClaimsSchema.properties?.contract?.const !== "kfd-2-release-claims") {
   fail("KFD-2 releaseClaims schema must describe the kfd-2-release-claims contract");
@@ -315,16 +408,25 @@ const checkResidualRisk = (risk, label) => {
 if (kfd2ClaimsSchema.$defs?.claim?.properties?.residualRisk?.items?.$ref !== residualRiskRef) {
   fail("KFD-2 releaseClaims residualRisk must reference the KFD-2 trust taxonomy residualRisk definition");
 }
+if (kfd2TrustClaimsSchema.$defs?.claim?.properties?.residualRisk?.items?.$ref !== residualRiskRef) {
+  fail("KFD-2 trustClaims residualRisk must reference the KFD-2 trust taxonomy residualRisk definition");
+}
+if (kfd2TrustAssessmentSchema.$defs?.claimAssessment?.properties?.residualRisk?.items?.$ref !== residualRiskRef) {
+  fail("KFD-2 trustAssessment residualRisk must reference the KFD-2 trust taxonomy residualRisk definition");
+}
+if (kfd2TrustAssessmentSchema.properties?.downgradeReasons?.items?.$ref !== downgradeReasonRef) {
+  fail("KFD-2 trustAssessment downgradeReasons must reference the KFD-2 trust taxonomy downgradeReason definition");
+}
 if (kfd2TrustPassportSchema.$defs?.claimResult?.properties?.residualRisk?.items?.$ref !== residualRiskRef) {
   fail("KFD-2 releaseTrustPassport claim residualRisk must reference the KFD-2 trust taxonomy residualRisk definition");
 }
 if (kfd2TrustPassportSchema.properties?.downgradeReasons?.items?.$ref !== downgradeReasonRef) {
   fail("KFD-2 releaseTrustPassport downgradeReasons must reference the KFD-2 trust taxonomy downgradeReason definition");
 }
-for (const concept of ["facts", "releaseClaim", "releaseClaims", "evidenceBinding", "auditBoundary", "residualRisk", "riskType", "trustImpact", "machineProvability", "agentAction", "extensionRequest", "releaseTrustPassport", "responsibilityState", "trust"]) {
+for (const concept of ["facts", "trustClaim", "trustClaims", "trustAssessment", "claimSubject", "claimSubjectKind", "projection", "releaseClaim", "releaseClaims", "evidenceBinding", "auditBoundary", "residualRisk", "riskType", "trustImpact", "machineProvability", "agentAction", "extensionRequest", "releaseTrustPassport", "responsibilityState", "trust"]) {
   if (!kfd2?.concepts?.[concept]) fail(`KFD-2 standards metadata missing concept ${concept}`);
 }
-for (const iface of ["trustTaxonomy", "releaseClaims", "releaseTrustPassport"]) {
+for (const iface of ["trustTaxonomy", "trustClaims", "trustAssessment", "releaseClaims", "releaseTrustPassport"]) {
   if (!kfd2?.interfaces?.[iface]) fail(`KFD-2 standards metadata missing interface ${iface}`);
 }
 const kfd3 = standardsMetadata.standards?.["kfd-3"];
@@ -357,10 +459,25 @@ if (!kfd3CollaborationSchema.properties?.extensionRequests) {
 if (!kfd3CollaborationSchema.properties?.factSources) {
   fail("KFD-3 collaborationInterface schema must expose factSources");
 }
+if (!kfd3CollaborationSchema.properties?.valueEvidence) {
+  fail("KFD-3 collaborationInterface schema must expose valueEvidence");
+}
+if (!kfd3CollaborationSchema.required?.includes("valueEvidence")) {
+  fail("KFD-3 collaborationInterface schema must require valueEvidence");
+}
+if (!kfd3CollaborationSchema.$defs?.valueEvidence?.properties?.trustAssessment) {
+  fail("KFD-3 collaborationInterface valueEvidence must support trustAssessment");
+}
+if (!kfd3WitnessSchema.properties?.evidence?.required?.includes("valueEvidence")) {
+  fail("KFD-3 witness evidence must require valueEvidence");
+}
+if (!kfd3WitnessSchema.properties?.evidence?.properties?.valueEvidence) {
+  fail("KFD-3 witness evidence must expose valueEvidence");
+}
 if (!kfd3CollaborationSchema.$defs?.extensionRequest?.properties?.requestPath?.properties?.kind?.enum?.includes("github-issue")) {
   fail("KFD-3 extensionRequest.requestPath.kind must support github-issue");
 }
-for (const concept of ["participant", "collaborationInterface", "minimalEntrypoint", "closure", "choicePath", "extensionRequest", "extensionPath"]) {
+for (const concept of ["trustedValueClaim", "valueEvidence", "trustAssessmentLink", "participant", "collaborationInterface", "minimalEntrypoint", "closure", "choicePath", "extensionRequest", "extensionPath"]) {
   if (!kfd3?.concepts?.[concept]) fail(`KFD-3 standards metadata missing concept ${concept}`);
 }
 for (const iface of ["collaborationInterface", "witness"]) {
@@ -430,14 +547,22 @@ if (!kfd1Witness) {
   if (!Array.isArray(kfd1Witness.surfaces) || kfd1Witness.surfaces.length === 0) {
     fail("KFD-1 release witness surfaces[] is required");
   } else {
+    requireSameEnum(kfd1Witness.compatibilityImpactClasses, expectedKfd1ImpactClasses, "KFD-1 witness compatibilityImpactClasses");
+    const registeredSurfaceById = new Map((kfd1SurfaceRegister?.surfaces ?? []).map((surface) => [surface.id, surface]));
     const witnessedSurfaceNames = new Set(kfd1Witness.surfaces.map((surface) => surface.name));
     for (const requiredSurface of [
       "readme",
       "kfd-2-trust-taxonomy-schema",
+      "kfd-2-trust-claims-schema",
+      "kfd-2-trust-assessment-schema",
       "kfd-site-bundle",
       "kfd-doc-map",
-      "kfd-2-release-trust-doc",
-      "kfd-3-collaboration-interface-doc",
+      "kfd-1-usage-doc",
+      "kfd-2-usage-doc",
+      "kfd-3-usage-doc",
+      "kfd-4-usage-doc",
+      "kfd-2-foundation-trust-claims",
+      "kfd-2-foundation-trust-assessment",
       "release-impact-ledger",
       "kfd-check-gate"
     ]) {
@@ -447,6 +572,19 @@ if (!kfd1Witness) {
     }
     for (const [index, surface] of kfd1Witness.surfaces.entries()) {
       if (!surface.name) fail(`KFD-1 release witness surfaces[${index}].name is required`);
+      const registered = registeredSurfaceById.get(surface.name);
+      if (!registered) fail(`KFD-1 release witness surface ${surface.name || index} is not in standards surfaceRegister`);
+      else {
+        if (surface.class !== registered.class) fail(`KFD-1 release witness surface ${surface.name} class must match surfaceRegister`);
+        requireSameEnum(surface.classes, registered.classes, `KFD-1 witness ${surface.name} classes`);
+        if (surface.description !== registered.description) fail(`KFD-1 release witness surface ${surface.name} description must match surfaceRegister`);
+        if (surface.weldRationale !== registered.weldRationale) fail(`KFD-1 release witness surface ${surface.name} weldRationale must match surfaceRegister`);
+        for (const impact of expectedKfd1ImpactClasses) {
+          if (surface.impactProjection?.[impact] !== registered.impactProjection?.[impact]) {
+            fail(`KFD-1 release witness surface ${surface.name} impactProjection.${impact} must match surfaceRegister`);
+          }
+        }
+      }
       if (!surface.artifactPath) fail(`KFD-1 release witness surfaces[${index}].artifactPath is required`);
       else if (!existsSync(surface.artifactPath)) fail(`KFD-1 release witness surface ${surface.name || index} points to missing ${surface.artifactPath}`);
       else {
@@ -517,6 +655,83 @@ if (!kfd2Claim) {
   if (!Array.isArray(kfd2Claim.residualRisk)) fail("KFD-2 release trust claim residualRisk must be an array");
 }
 
+const checkKfd2AssessmentPointer = (entry, label) => {
+  if (!entry?.path) fail(`${label}.path is required`);
+  else {
+    const filePath = hashablePath(entry.path);
+    if (!existsSync(filePath)) fail(`${label} points to missing ${filePath}`);
+    else if (entry.sha256 && entry.sha256 !== sha256File(filePath)) fail(`${label}.sha256 does not match ${filePath}`);
+  }
+};
+
+if (!kfd2TrustClaims) {
+  fail(`missing KFD-2 generic trust claims ${kfd2TrustClaimsPath}`);
+} else {
+  if (kfd2TrustClaims.contract !== "kfd-2-trust-claims") fail("KFD-2 generic trust claims contract must be kfd-2-trust-claims");
+  if (kfd2TrustClaims.standard !== "kfd-2") fail("KFD-2 generic trust claims standard must be kfd-2");
+  if (kfd2TrustClaims.projection?.kind !== "generic") fail("KFD-2 generic trust claims projection.kind must be generic");
+  const claimsById = new Map((kfd2TrustClaims.claims ?? []).map((claim) => [claim.id, claim]));
+  for (const requiredClaim of ["kfd-1-contract-world-trust", "kfd-3-collaboration-interface-trust", "kfd-4-observer-perspective-trust"]) {
+    if (!claimsById.has(requiredClaim)) fail(`KFD-2 generic trust claims missing ${requiredClaim}`);
+  }
+  const expectedSubjectKinds = new Map([
+    ["kfd-1-contract-world-trust", "contract-world"],
+    ["kfd-3-collaboration-interface-trust", "collaboration-interface"],
+    ["kfd-4-observer-perspective-trust", "observer-perspective"],
+  ]);
+  for (const [claimId, expectedKind] of expectedSubjectKinds.entries()) {
+    const claim = claimsById.get(claimId);
+    if (claim?.subject?.kind !== expectedKind) fail(`KFD-2 generic trust claim ${claimId} subject.kind must be ${expectedKind}`);
+    if (!Array.isArray(claim?.facts) || claim.facts.length === 0) fail(`KFD-2 generic trust claim ${claimId} facts[] is required`);
+    else claim.facts.forEach((entry, index) => checkKfd2AssessmentPointer(entry, `KFD-2 generic trust claim ${claimId}.facts[${index}]`));
+    if (!Array.isArray(claim?.evidence) || claim.evidence.length === 0) fail(`KFD-2 generic trust claim ${claimId} evidence[] is required`);
+    for (const [index, entry] of (claim?.evidence ?? []).entries()) {
+      if (!kfd2TrustTaxonomySchema.$defs?.machineProvability?.enum?.includes(entry.machineProvability)) {
+        fail(`KFD-2 generic trust claim ${claimId}.evidence[${index}].machineProvability must be a KFD-2 value`);
+      }
+      if (entry.pointer) checkKfd2AssessmentPointer(entry.pointer, `KFD-2 generic trust claim ${claimId}.evidence[${index}].pointer`);
+    }
+    for (const [index, risk] of (claim?.residualRisk ?? []).entries()) {
+      checkResidualRisk(risk, `KFD-2 generic trust claim ${claimId}.residualRisk[${index}]`);
+    }
+  }
+}
+
+if (!kfd2TrustAssessment) {
+  fail(`missing KFD-2 generic trust assessment ${kfd2TrustAssessmentPath}`);
+} else {
+  if (kfd2TrustAssessment.contract !== "kfd-2-trust-assessment") fail("KFD-2 generic trust assessment contract must be kfd-2-trust-assessment");
+  if (kfd2TrustAssessment.standard !== "kfd-2") fail("KFD-2 generic trust assessment standard must be kfd-2");
+  if (kfd2TrustAssessment.assessedClaims?.schemaId !== "https://kfd.libkungfu.dev/schemas/kfd-2/trust-claims.schema.json") {
+    fail("KFD-2 generic trust assessment assessedClaims.schemaId must be canonical");
+  }
+  if (kfd2TrustAssessment.assessedClaims?.path !== kfd2TrustClaimsPath) {
+    fail("KFD-2 generic trust assessment assessedClaims.path must point to generic trust claims");
+  }
+  if (kfd2TrustAssessment.assessedClaims?.digest !== `sha256:${sha256File(kfd2TrustClaimsPath)}`) {
+    fail("KFD-2 generic trust assessment assessedClaims.digest must match generic trust claims");
+  }
+  if (kfd2TrustAssessment.result !== "warning") fail("KFD-2 generic trust assessment result must be warning because KFD-3 declares semantic residual risk");
+  const assessmentsByClaim = new Map((kfd2TrustAssessment.assessments ?? []).map((entry) => [entry.claimId, entry]));
+  for (const requiredClaim of ["kfd-1-contract-world-trust", "kfd-3-collaboration-interface-trust", "kfd-4-observer-perspective-trust"]) {
+    if (!assessmentsByClaim.has(requiredClaim)) fail(`KFD-2 generic trust assessment missing claim ${requiredClaim}`);
+  }
+  if (assessmentsByClaim.get("kfd-3-collaboration-interface-trust")?.result !== "warning") {
+    fail("KFD-2 generic trust assessment must downgrade KFD-3 to warning");
+  }
+  for (const [index, reason] of (kfd2TrustAssessment.downgradeReasons ?? []).entries()) {
+    if (!kfd2TrustTaxonomySchema.$defs?.riskType?.enum?.includes(reason.riskType)) fail(`KFD-2 generic trust assessment downgradeReasons[${index}].riskType must be a KFD-2 value`);
+    if (!kfd2TrustTaxonomySchema.$defs?.trustImpact?.enum?.includes(reason.trustImpact)) fail(`KFD-2 generic trust assessment downgradeReasons[${index}].trustImpact must be a KFD-2 value`);
+    if (reason.agentAction && !kfd2TrustTaxonomySchema.$defs?.agentAction?.enum?.includes(reason.agentAction)) fail(`KFD-2 generic trust assessment downgradeReasons[${index}].agentAction must be a KFD-2 value`);
+  }
+  for (const [index, entry] of (kfd2TrustAssessment.assessments ?? []).entries()) {
+    if (!["pass", "warning", "fail", "unverifiable"].includes(entry.result)) fail(`KFD-2 generic trust assessment assessments[${index}].result is invalid`);
+    for (const [riskIndex, risk] of (entry.residualRisk ?? []).entries()) {
+      checkResidualRisk(risk, `KFD-2 generic trust assessment assessments[${index}].residualRisk[${riskIndex}]`);
+    }
+  }
+}
+
 const kfd3SurfaceGroups = ["docs", "schemas", "standardsMetadata", "packageExports", "siteConsumptionContracts"];
 const kfd3SurfaceIds = (witness) => {
   const ids = new Set();
@@ -572,7 +787,7 @@ if (!kfd3Interface) {
     entry.url === "https://github.com/kungfu-systems/kfd" &&
     entry.loadBearingCoordinate === "commit-addressed repository contents" &&
     entry.stableRenderedIndex === "https://kfd.libkungfu.dev" &&
-    entry.canonicalPaths?.includes("decisions/kfd-N.md") &&
+    entry.canonicalPaths?.includes("decisions/KFD-N.md") &&
     entry.canonicalPaths?.includes("registry.json") &&
     entry.canonicalPaths?.includes("standards.json")
   )) {
@@ -586,6 +801,32 @@ if (!kfd3Interface) {
   if (!Array.isArray(kfd3Interface.surfaces) || kfd3Interface.surfaces.length === 0) fail("KFD-3 collaboration interface surfaces[] is required");
   if (!kfd3Interface.surfaces.some((entry) => entry.id === "official-status-and-trademarks" && entry.discoverability?.path === "TRADEMARKS.md")) {
     fail("KFD-3 collaboration interface must expose TRADEMARKS.md as a participant-facing surface");
+  }
+  if (!Array.isArray(kfd3Interface.valueEvidence) || kfd3Interface.valueEvidence.length === 0) {
+    fail("KFD-3 collaboration interface valueEvidence[] is required");
+  } else {
+    for (const [index, entry] of kfd3Interface.valueEvidence.entries()) {
+      if (!entry.id) fail(`KFD-3 collaboration interface valueEvidence[${index}].id is required`);
+      if (!entry.claim) fail(`KFD-3 collaboration interface valueEvidence[${index}].claim is required`);
+      if (!Array.isArray(entry.participants) || entry.participants.length === 0) fail(`KFD-3 collaboration interface valueEvidence[${index}].participants[] is required`);
+      if (!Array.isArray(entry.facts) || entry.facts.length === 0) fail(`KFD-3 collaboration interface valueEvidence[${index}].facts[] is required`);
+      if (!Array.isArray(entry.evidence) || entry.evidence.length === 0) fail(`KFD-3 collaboration interface valueEvidence[${index}].evidence[] is required`);
+      for (const [factIndex, fact] of (entry.facts ?? []).entries()) {
+        checkPointer(fact, `KFD-3 collaboration interface valueEvidence[${index}].facts[${factIndex}]`);
+      }
+      for (const [evidenceIndex, evidenceEntry] of (entry.evidence ?? []).entries()) {
+        checkPointer(evidenceEntry, `KFD-3 collaboration interface valueEvidence[${index}].evidence[${evidenceIndex}]`);
+      }
+      if (entry.trustAssessment) {
+        checkPointer(entry.trustAssessment, `KFD-3 collaboration interface valueEvidence[${index}].trustAssessment`);
+      }
+      for (const [riskIndex, risk] of (entry.residualRisk ?? []).entries()) {
+        checkResidualRisk(risk, `KFD-3 collaboration interface valueEvidence[${index}].residualRisk[${riskIndex}]`);
+      }
+    }
+    if (!kfd3Interface.valueEvidence.some((entry) => entry.trustAssessment?.path === kfd2TrustAssessmentPath)) {
+      fail("KFD-3 collaboration interface valueEvidence must link to the KFD-2 generic trust assessment");
+    }
   }
   if (!Array.isArray(kfd3Interface.extensionRequests) || kfd3Interface.extensionRequests.length === 0) fail("KFD-3 collaboration interface extensionRequests[] is required");
   if (!kfd3Interface.extensionRequests.some((entry) => entry.id === "kfd-2-trust-taxonomy-extension" && entry.requestPath?.kind === "github-issue" && String(entry.requestPath?.target || "").startsWith("https://github.com/kungfu-systems/kfd/issues/new"))) {
@@ -630,6 +871,9 @@ if (!kfd3ArtifactWitness) {
   for (const [index, risk] of (kfd3ArtifactWitness.residualRisk ?? []).entries()) {
     checkResidualRisk(risk, `KFD-3 artifact witness residualRisk[${index}]`);
   }
+  if (!Array.isArray(kfd3ArtifactWitness.evidence?.valueEvidence) || kfd3ArtifactWitness.evidence.valueEvidence.length === 0) {
+    fail("KFD-3 artifact witness evidence.valueEvidence[] is required");
+  }
   if (kfd3ArtifactWitness.closure?.classificationMode !== "closed-world") fail("KFD-3 artifact witness closure must be closed-world");
   if (!Array.isArray(kfd3ArtifactWitness.closure?.unclassifiedEntrypoints) || kfd3ArtifactWitness.closure.unclassifiedEntrypoints.length !== 0) {
     fail("KFD-3 artifact witness must have zero unclassifiedEntrypoints");
@@ -655,7 +899,7 @@ if (kfd3PrebuildWitness && kfd3ArtifactWitness) {
 }
 
 const impactLevels = new Set(["patch", "minor", "major"]);
-const requiredSurfaces = new Set(["kfd-content", "kfd-registry-schema", "kfd-standards-metadata", "kfd-package-structure", "kfd-2-public-release-trust-claim"]);
+const requiredSurfaces = new Set(["kfd-content", "kfd-registry-schema", "kfd-standards-metadata", "kfd-package-structure", "kfd-2-public-release-trust-claim", "kfd-3-trusted-value-evidence", "kfd-site-decision-usage-pages"]);
 
 if (releaseImpact.schemaVersion !== 1) fail(`unsupported release-impact schemaVersion ${releaseImpact.schemaVersion}`);
 if (releaseImpact.contract !== "kungfu-buildchain-impact") fail(`unexpected release-impact contract ${releaseImpact.contract}`);

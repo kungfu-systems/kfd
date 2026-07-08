@@ -1,0 +1,334 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-2/trust-claims.schema.json",
+  "title": "KFD-2 trust claims",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "contract",
+    "standard",
+    "claims"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "contract": {
+      "const": "kfd-2-trust-claims"
+    },
+    "standard": {
+      "const": "kfd-2"
+    },
+    "claims": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/claim"
+      }
+    },
+    "projection": {
+      "$ref": "#/$defs/projection"
+    },
+    "schemaEvolution": {
+      "$ref": "#/$defs/schemaEvolution"
+    }
+  },
+  "additionalProperties": true,
+  "$defs": {
+    "claim": {
+      "type": "object",
+      "required": [
+        "id",
+        "statement",
+        "subject",
+        "facts",
+        "evidence",
+        "auditBoundary",
+        "responsibility",
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "subject": {
+          "$ref": "#/$defs/claimSubject"
+        },
+        "facts": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/artifactPointer"
+          }
+        },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/evidenceBinding"
+          }
+        },
+        "verification": {
+          "$ref": "#/$defs/verification"
+        },
+        "auditBoundary": {
+          "$ref": "#/$defs/auditBoundary"
+        },
+        "residualRisk": {
+          "type": "array",
+          "items": {
+            "$ref": "https://kfd.libkungfu.dev/schemas/kfd-2/trust-taxonomy.schema.json#/$defs/residualRisk"
+          }
+        },
+        "responsibility": {
+          "$ref": "#/$defs/responsibilityState"
+        },
+        "status": {
+          "enum": [
+            "declared",
+            "audited",
+            "enforced",
+            "not-applicable"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "claimSubject": {
+      "type": "object",
+      "required": [
+        "kind",
+        "id"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "kfd-standard",
+            "contract-world",
+            "collaboration-interface",
+            "observer-perspective",
+            "release",
+            "artifact",
+            "config",
+            "api",
+            "abi",
+            "gui-surface",
+            "runtime-fact",
+            "documentation",
+            "other"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "standard": {
+          "type": "string",
+          "pattern": "^kfd-[1-9][0-9]*$"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "artifactPointer": {
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "file",
+            "schema",
+            "package-export",
+            "artifact",
+            "command",
+            "witness",
+            "passport",
+            "url",
+            "other"
+          ]
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "specifier": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "schemaId": {
+          "type": "string",
+          "format": "uri"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "digest": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "evidenceBinding": {
+      "type": "object",
+      "required": [
+        "type",
+        "machineProvability"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "file",
+            "schema",
+            "package-export",
+            "artifact",
+            "hash",
+            "command-result",
+            "witness",
+            "passport-section",
+            "url",
+            "manual-review",
+            "other"
+          ]
+        },
+        "pointer": {
+          "$ref": "#/$defs/artifactPointer"
+        },
+        "machineProvability": {
+          "$ref": "https://kfd.libkungfu.dev/schemas/kfd-2/trust-taxonomy.schema.json#/$defs/machineProvability"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "verification": {
+      "type": "object",
+      "properties": {
+        "command": {
+          "type": "string",
+          "minLength": 1
+        },
+        "resultRef": {
+          "$ref": "#/$defs/artifactPointer"
+        },
+        "expectedResult": {
+          "enum": [
+            "pass",
+            "fail",
+            "warning",
+            "unverifiable"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "auditBoundary": {
+      "type": "object",
+      "required": [
+        "scope",
+        "enumerability"
+      ],
+      "properties": {
+        "scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "enumerability": {
+          "enum": [
+            "closed-world",
+            "declared-open",
+            "sampled",
+            "manual"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "responsibilityState": {
+      "type": "object",
+      "required": [
+        "owner",
+        "sourceOwner",
+        "verificationOwner",
+        "decisionOwner"
+      ],
+      "properties": {
+        "owner": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceOwner": {
+          "type": "string",
+          "minLength": 1
+        },
+        "verificationOwner": {
+          "type": "string",
+          "minLength": 1
+        },
+        "decisionOwner": {
+          "type": "string",
+          "minLength": 1
+        },
+        "escalation": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "projection": {
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "generic",
+            "release",
+            "package",
+            "site",
+            "runtime",
+            "other"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "schemaEvolution": {
+      "type": "object",
+      "required": [
+        "compatibilityRule"
+      ],
+      "properties": {
+        "compatibilityRule": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}
