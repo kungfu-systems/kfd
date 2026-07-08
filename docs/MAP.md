@@ -5,8 +5,11 @@
 | What is KFD, and what decisions exist? | [`../README.md`](../README.md) |
 | What is the KFD-1/2/3 foundation triad? | [`../README.md`](../README.md#foundation-triad) |
 | What worldview structure does the foundation triad express? | [`../README.md`](../README.md#foundation-model) |
+| What practice guidelines are derived from the foundation triad? | [`../README.md`](../README.md#practice-guidelines) |
+| How should a product show timeline order from a declared perspective? | [KFD-4](../decisions/kfd-4.md) |
+| What schema should products use for KFD-4 observer-relative timeline views? | [`../schemas/kfd-4/observer-perspective.schema.json`](../schemas/kfd-4/observer-perspective.schema.json) |
 | How should an agent quickly understand this package? | [`../README.md`](../README.md#agent-quickstart) |
-| What is the concrete self-proof case for KFD-1/2/3? | [`../README.md`](../README.md#product-proof-path) and the implementation case in each KFD |
+| What is the concrete self-proof case for KFD-1/2/3/4? | [`../README.md`](../README.md#product-proof-path) and the implementation case in each KFD |
 | Where is the public KFD fact source? | [`../README.md`](../README.md#decision-metadata) and [`../site/kfd-site.json`](../site/kfd-site.json) decision metadata |
 | What does Apache-2.0 cover, and what remains official/trademark-bound? | [`../TRADEMARKS.md`](../TRADEMARKS.md) |
 | What should a site renderer consume to render `kfd.libkungfu.dev`? | [`../site/kfd-site.json`](../site/kfd-site.json) |

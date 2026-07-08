@@ -73,7 +73,25 @@ systems. KFD is part of that bootstrap: the worldview is forged through the same
 transparent and inspectable mechanisms it asks products to provide.
 
 This README states the architecture; KFD-1, KFD-2, and KFD-3 provide the
-detailed rules.
+foundation rules.
+
+## Practice guidelines
+
+KFDs after the foundation triad may define practice guidelines: procedures
+that apply the foundation to a specific class of real-world product behavior.
+They do not expand the foundation triad; they show how the foundation behaves
+when a product must make a concrete kind of reality legible.
+
+| Layer | Decision | Reader question | Commitment |
+|---|---|---|---|
+| Perspective-bearing views | KFD-4 | How should a product show time, history, replay, sync, or mixed-source work state? | Timelines must declare their observer: a useful view states who is observing, which facts were accepted, and how concurrent facts were projected. |
+
+KFD-4 is the first such guideline. It applies KFD-1/2/3 to the problem of
+perspective and timeline order. In a multi-machine or multi-agent world, a
+product should not pretend to own a universal global clock. It should preserve
+non-drifting facts, make trust start from those facts, and let participants
+cooperate by exposing the observer, accepted ranges, causal constraints, and
+projection policy behind the view.
 
 ## Adoption boundary
 
@@ -102,6 +120,8 @@ The first screen should be derived from this README:
 - First-screen explanation: the beginning of `Foundation model`, ending at the
   `non-drifting facts -> inspectable trust -> trusted value -> voluntary
   cooperation` chain.
+- Practice signal: the `Practice guidelines` section, starting with KFD-4 as
+  the declared-observer rule for perspective-bearing timeline views.
 
 Decision cards, detail links, and machine paths should come from
 `registry.json`. The machine-readable site bundle lives at `site/kfd-site.json`
@@ -124,9 +144,9 @@ KFDs are not a detached manifesto, but they are not a demand that readers adopt
 a Kungfu product before understanding the decisions. A philosophy becomes
 load-bearing only when it can be seen in a concrete case. The first concrete
 case is this package itself: `standards.json`, `schemas/`, `docs/`,
-`site/kfd-site.json`, and `scripts/check.mjs` show how KFD-1, KFD-2, and KFD-3
-are expressed as consumable interfaces for both humans and agents. For the
-broader product case, use the main Kungfu product entrypoint
+`site/kfd-site.json`, and `scripts/check.mjs` show how KFD-1, KFD-2, KFD-3,
+and KFD-4 are expressed as consumable interfaces for both humans and agents.
+For the broader product case, use the main Kungfu product entrypoint
 (`https://kungfu.tech`) for product philosophy, and Buildchain
 (`https://buildchain.libkungfu.dev`) for release and provenance
 accountability. This registry states the commitments; this package and those
@@ -184,6 +204,11 @@ KFD-3. The KFD-owned boundary is the standard vocabulary, schema IDs, and
 closed-world evidence shape. See
 [`docs/kfd-3-collaboration-interface.md`](docs/kfd-3-collaboration-interface.md).
 
+KFD-4 publishes an observer-perspective schema under `schemas/kfd-4/`. It gives
+humans and agents a standard vocabulary for observer, accepted facts,
+projection policy, causal constraints, degraded evidence, and verification
+state when a product shows a perspective-bearing timeline.
+
 ## Current decisions
 
 | ID | Kind | Axiom | Status |
@@ -191,6 +216,7 @@ closed-world evidence shape. See
 | [KFD-1](decisions/kfd-1.md) | procedure | Facts must not drift. | active |
 | [KFD-2](decisions/kfd-2.md) | principle | Trust must start from facts. | active |
 | [KFD-3](decisions/kfd-3.md) | principle | Cooperation must start from trusted value. | active |
+| [KFD-4](decisions/kfd-4.md) | procedure | Timelines must declare their observer. | active |
 
 ## Decision metadata
 
