@@ -93,6 +93,13 @@ const parseFoundationModel = (markdown) => {
   };
 };
 
+const parsePracticeGuidelines = (markdown) => ({
+  heading: "Practice guidelines",
+  intro: paragraphBlocks(markdown)[0] || "",
+  guidelines: parseMarkdownTable(markdown),
+  explanation: paragraphBlocks(markdown).slice(1),
+});
+
 const parseProductProofPath = (markdown) => ({
   heading: "Product proof path",
   body: paragraphBlocks(markdown)[0] || "",
@@ -115,6 +122,7 @@ export const buildSiteBundle = ({ readmeText, registry }) => {
   const { lead, decisionKinds } = introLead(readme.intro);
   const foundationTriad = parseFoundationTriad(readme.sections["Foundation triad"] || "");
   const foundationModel = parseFoundationModel(readme.sections["Foundation model"] || "");
+  const practiceGuidelines = parsePracticeGuidelines(readme.sections["Practice guidelines"] || "");
   const productProofPath = parseProductProofPath(readme.sections["Product proof path"] || "");
   const entries = registry.entries || [];
 
@@ -147,6 +155,15 @@ export const buildSiteBundle = ({ readmeText, registry }) => {
       role: "primary",
       priority: 25,
       presentation: "boundary-note",
+    }),
+    section({
+      id: "practice-guidelines",
+      sourceHeading: "Practice guidelines",
+      title: "Practice guidelines",
+      markdown: readme.sections["Practice guidelines"],
+      role: "primary",
+      priority: 27,
+      presentation: "practice-table",
     }),
     section({
       id: "product-proof-path",
@@ -198,6 +215,7 @@ export const buildSiteBundle = ({ readmeText, registry }) => {
       decisionKinds,
       foundationTriad,
       foundationModel,
+      practiceGuidelines,
       productProofPath,
       currentDecisions: {
         heading: "Current decisions",
@@ -210,7 +228,7 @@ export const buildSiteBundle = ({ readmeText, registry }) => {
           maxPrimarySections: 2,
           note: "The first viewport should establish KFD identity and the three-decision worldview without showing renderer or developer contract text.",
         },
-        primary: ["foundation-triad", "foundation-model", "adoption-boundary", "product-proof-path"],
+        primary: ["foundation-triad", "foundation-model", "adoption-boundary", "practice-guidelines", "product-proof-path"],
         support: ["agent-quickstart", "decision-metadata"],
         currentDecisions: {
           source: REGISTRY_PATH,

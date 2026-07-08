@@ -76,7 +76,7 @@ if (!Array.isArray(siteBundle.homepage?.sections) || siteBundle.homepage.section
 if (!siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes("foundation-triad")) {
   fail("site bundle homepage displayPlan firstScreen must include foundation-triad");
 }
-for (const requiredSection of ["foundation-triad", "foundation-model", "adoption-boundary", "product-proof-path", "agent-quickstart", "decision-metadata"]) {
+for (const requiredSection of ["foundation-triad", "foundation-model", "adoption-boundary", "practice-guidelines", "product-proof-path", "agent-quickstart", "decision-metadata"]) {
   if (!siteBundle.homepage.sections.some((entry) => entry.id === requiredSection && entry.sourcePath === "README.md" && entry.markdown)) {
     fail(`site bundle homepage.sections must include README projection ${requiredSection}`);
   }
@@ -366,18 +366,43 @@ for (const concept of ["participant", "collaborationInterface", "minimalEntrypoi
 for (const iface of ["collaborationInterface", "witness"]) {
   if (!kfd3?.interfaces?.[iface]) fail(`KFD-3 standards metadata missing interface ${iface}`);
 }
+const kfd4 = standardsMetadata.standards?.["kfd-4"];
+if (kfd4?.schemaIds?.observerPerspective !== "https://kfd.libkungfu.dev/schemas/kfd-4/observer-perspective.schema.json") {
+  fail("KFD-4 standards metadata must expose the canonical observerPerspective schema URI");
+}
+if (kfd4?.schemaPaths?.observerPerspective !== "schemas/kfd-4/observer-perspective.schema.json") {
+  fail("KFD-4 standards metadata must expose the observerPerspective schema path");
+}
+const kfd4ObserverPerspectiveSchema = JSON.parse(readFileSync("schemas/kfd-4/observer-perspective.schema.json", "utf8"));
+if (kfd4ObserverPerspectiveSchema.properties?.contract?.const !== "kfd-4-observer-perspective") {
+  fail("KFD-4 observerPerspective schema must describe the kfd-4-observer-perspective contract");
+}
+for (const concept of ["observer", "declaredPerspective", "observerPerspective", "acceptedFacts", "projectionPolicy", "causalDominance", "degradedEvidence", "timeline"]) {
+  if (!kfd4?.concepts?.[concept]) fail(`KFD-4 standards metadata missing concept ${concept}`);
+}
+if (!kfd4?.interfaces?.observerPerspective) fail("KFD-4 standards metadata missing interface observerPerspective");
 for (const [id, successors] of superseded) {
   for (const successor of successors) {
     if (!registry.entries.some((e) => e.id === successor)) fail(`${id} cites missing successor ${successor}`);
   }
 }
 const siteCommitments = new Map((siteBundle.homepage?.foundationTriad?.commitments ?? []).map((item) => [item.id, item]));
-for (const e of registry.entries) {
-  if (!siteCommitments.has(e.id)) fail(`site bundle foundationTriad missing ${e.id}`);
+for (const id of ["KFD-1", "KFD-2", "KFD-3"]) {
+  if (!siteCommitments.has(id)) fail(`site bundle foundationTriad missing ${id}`);
+}
+for (const id of siteCommitments.keys()) {
+  if (!["KFD-1", "KFD-2", "KFD-3"].includes(id)) fail(`site bundle foundationTriad must not include practice guideline ${id}`);
 }
 const siteLayers = new Map((siteBundle.homepage?.foundationModel?.layers ?? []).map((item) => [item.decision, item]));
-for (const e of registry.entries) {
-  if (!siteLayers.has(e.id)) fail(`site bundle foundationModel missing ${e.id}`);
+for (const id of ["KFD-1", "KFD-2", "KFD-3"]) {
+  if (!siteLayers.has(id)) fail(`site bundle foundationModel missing ${id}`);
+}
+for (const id of siteLayers.keys()) {
+  if (!["KFD-1", "KFD-2", "KFD-3"].includes(id)) fail(`site bundle foundationModel must not include practice guideline ${id}`);
+}
+const practiceGuidelines = new Map((siteBundle.homepage?.practiceGuidelines?.guidelines ?? []).map((item) => [item.decision, item]));
+for (const e of registry.entries.filter((entry) => !["KFD-1", "KFD-2", "KFD-3"].includes(entry.id))) {
+  if (!practiceGuidelines.has(e.id)) fail(`site bundle practiceGuidelines missing ${e.id}`);
 }
 const boundary = siteBundle.renderingBoundary ?? {};
 if (!Array.isArray(boundary.ownedByKfd) || !boundary.ownedByKfd.includes("homepage title and text")) {

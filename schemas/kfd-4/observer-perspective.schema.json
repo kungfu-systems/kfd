@@ -1,0 +1,272 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-4/observer-perspective.schema.json",
+  "title": "KFD-4 observer perspective",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "contract",
+    "standard",
+    "id",
+    "observer",
+    "acceptedFacts",
+    "projectionPolicy",
+    "verification"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "contract": {
+      "const": "kfd-4-observer-perspective"
+    },
+    "standard": {
+      "const": "kfd-4"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "observer": {
+      "$ref": "#/$defs/observer"
+    },
+    "acceptedFacts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/acceptedFactSource"
+      },
+      "minItems": 1
+    },
+    "projectionPolicy": {
+      "$ref": "#/$defs/projectionPolicy"
+    },
+    "causalConstraints": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/causalConstraint"
+      },
+      "default": []
+    },
+    "degradedEvidence": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/degradedEvidence"
+      },
+      "default": []
+    },
+    "verification": {
+      "$ref": "#/$defs/verification"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "observer": {
+      "type": "object",
+      "required": [
+        "id",
+        "kind"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "enum": [
+            "human",
+            "agent",
+            "runtime-location",
+            "product-view",
+            "service",
+            "other"
+          ]
+        },
+        "location": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "acceptedFactSource": {
+      "type": "object",
+      "required": [
+        "sourceId",
+        "sourceKind"
+      ],
+      "properties": {
+        "sourceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceKind": {
+          "enum": [
+            "local-runtime",
+            "remote-runtime",
+            "imported-bundle",
+            "adapter",
+            "repository",
+            "release-artifact",
+            "external-system",
+            "other"
+          ]
+        },
+        "location": {
+          "type": "string"
+        },
+        "acceptedRange": {
+          "type": "string"
+        },
+        "watermark": {
+          "type": "string"
+        },
+        "manifest": {
+          "type": "string"
+        },
+        "freshness": {
+          "type": "string"
+        },
+        "provenance": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "projectionPolicy": {
+      "type": "object",
+      "required": [
+        "policyVersion",
+        "causalDominance",
+        "tieBreaker"
+      ],
+      "properties": {
+        "policyVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "observerLocation": {
+          "type": "string"
+        },
+        "sourcePriority": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "causalDominance": {
+          "const": true
+        },
+        "concurrentOrdering": {
+          "type": "string",
+          "description": "How concurrent or causally unrelated facts are ordered under this perspective."
+        },
+        "tieBreaker": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "causalConstraint": {
+      "type": "object",
+      "required": [
+        "before",
+        "after",
+        "basis"
+      ],
+      "properties": {
+        "before": {
+          "type": "string",
+          "minLength": 1
+        },
+        "after": {
+          "type": "string",
+          "minLength": 1
+        },
+        "basis": {
+          "enum": [
+            "causal-parent",
+            "trigger-frame",
+            "stream-topology",
+            "manifest-boundary",
+            "accepted-range",
+            "source-local-order",
+            "other"
+          ]
+        },
+        "evidence": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "degradedEvidence": {
+      "type": "object",
+      "required": [
+        "id",
+        "state",
+        "reason"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "state": {
+          "enum": [
+            "missing-causality",
+            "missing-payload",
+            "missing-schema",
+            "stale-source",
+            "incomplete-range",
+            "unknown-policy-version",
+            "unverified-source",
+            "other"
+          ]
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "impact": {
+          "enum": [
+            "display-warning",
+            "trust-downgrade",
+            "view-invalid",
+            "action-required"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "verification": {
+      "type": "object",
+      "required": [
+        "result"
+      ],
+      "properties": {
+        "result": {
+          "enum": [
+            "pass",
+            "degraded",
+            "fail",
+            "not-checked"
+          ]
+        },
+        "command": {
+          "type": "string"
+        },
+        "checkedAt": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
