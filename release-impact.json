@@ -9,7 +9,7 @@
   "versionImpact": {
     "final": "minor",
     "source": "kfd-surface-register",
-    "rationale": "This change additively registers KFD-owned standards metadata, the KFD-2 trust taxonomy, KFD-2 release trust schemas, KFD-3 collaboration-interface schemas, KFD-3 self-verification witnesses, KFD-4 observer-perspective schema, KFD-1 document/interface integrity bindings, and the README-backed KFD site homepage projection while keeping existing registry and decision surfaces compatible."
+    "rationale": "This change additively promotes KFD-1 from release-versioning-specific wording to a generic compatibility-impact core, adds KFD-owned surface-register metadata and KFD-1 witness classification projection, and preserves existing registry, package, and schemaVersion 1 compatibility."
   },
   "surfaceImpacts": [
     {
@@ -71,7 +71,19 @@
       "impact": "patch",
       "class": "compatible",
       "rationale": "The KFD to site-libkungfu-dev propagation graph now targets the downstream site's actual main branch and documents the exact KFD package surfaces consumed by kfd.libkungfu.dev, without changing the release propagation graph contract."
+    },
+    {
+      "id": "kfd-1-compatibility-impact-core",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD-1 now defines breaking, additive, none, and unclassifiable as the generic compatibility-impact core, with release versioning as one projection rather than the only interpretation."
+    },
+    {
+      "id": "kfd-1-surface-register",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "standards.json now publishes the KFD package surface register as the KFD-1 fact source, and the KFD-1 witness projects each registered surface class and impact projection from that fact source."
     }
   ],
-  "summary": "KFD v1.0 production promotion is minor-impact because it additively exposes KFD-2 trust taxonomy and release trust metadata, KFD-1/2/3/4 interface version metadata, KFD-3 self-verification witnesses, KFD-4 observer-perspective schema, Buildchain contract lock metadata, document integrity bindings, a README-backed homepage bundle/display plan, and a corrected site release-propagation target for Buildchain and other consumers; existing registry, decision text, site bundle, and propagation graph contracts remain compatible."
+  "summary": "KFD v1.0 production promotion is minor-impact because it additively exposes KFD-1 as a generic compatibility-impact core, publishes KFD-owned surface-register metadata, projects those classifications into the KFD-1 witness, and keeps existing registry, decision text, package, site bundle, and propagation graph contracts compatible."
 }
