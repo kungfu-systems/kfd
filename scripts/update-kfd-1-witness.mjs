@@ -17,20 +17,19 @@ witness.contractWorld.digest = `sha256:${standardsSha}`;
 witness.canonicalPolicy.sha256 = standardsSha;
 witness.registry.sha256 = registrySha;
 witness.compatibilityImpactClasses = surfaceRegister?.compatibilityImpactClasses ?? [];
-
-for (const surface of witness.surfaces ?? []) {
-  if (!surface.sourcePath || !surface.artifactPath) continue;
-  const registered = registeredSurfaces.get(surface.name);
-  if (registered) {
-    surface.class = registered.class;
-    surface.classes = registered.classes ?? [registered.class];
-    surface.description = registered.description;
-    surface.weldRationale = registered.weldRationale;
-    surface.impactProjection = registered.impactProjection;
-  }
-  surface.sourceSha256 = sha256File(surface.sourcePath);
-  surface.expectedSha256 = sha256File(surface.artifactPath);
-}
+witness.surfaces = [...registeredSurfaces.values()].map((registered) => ({
+  name: registered.id,
+  sourcePath: registered.sourcePath,
+  sourceSha256: sha256File(registered.sourcePath),
+  artifactPath: registered.sourcePath,
+  expectedSha256: sha256File(registered.sourcePath),
+  byteForByte: true,
+  class: registered.class,
+  classes: registered.classes ?? [registered.class],
+  description: registered.description,
+  weldRationale: registered.weldRationale,
+  impactProjection: registered.impactProjection,
+}));
 
 writeFileSync(outputPath, `${JSON.stringify(witness, null, 2)}\n`);
 console.log(`updated ${outputPath}`);

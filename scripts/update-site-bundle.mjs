@@ -269,7 +269,7 @@ export const buildSiteBundle = ({ readmeText, registry }) => {
           loadBearingCoordinate: "commit-addressed repository contents",
           stableRenderedIndex: "https://kfd.libkungfu.dev",
           canonicalPaths: [
-            "decisions/kfd-N.md",
+            "decisions/KFD-N.md",
             REGISTRY_PATH,
             "standards.json",
           ],

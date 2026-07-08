@@ -20,7 +20,7 @@
       "loadBearingCoordinate": "commit-addressed repository contents",
       "stableRenderedIndex": "https://kfd.libkungfu.dev",
       "canonicalPaths": [
-        "decisions/kfd-N.md",
+        "decisions/KFD-N.md",
         "registry.json",
         "standards.json"
       ],
@@ -112,6 +112,18 @@
       "surface": ".buildchain/kfd-2/public-release-trust.claim.json",
       "participants": ["release-system", "agent-reader", "package-consumer"],
       "purpose": "Inspect the explicit public KFD-2 claim passed into Buildchain release passport generation."
+    },
+    {
+      "id": "kfd-2-foundation-trust-claims",
+      "surface": ".buildchain/kfd-2/kfd-foundation.trust-claims.json",
+      "participants": ["release-system", "agent-reader", "package-consumer"],
+      "purpose": "Inspect generic KFD-2 claims for the KFD package self-dogfood assessment."
+    },
+    {
+      "id": "kfd-2-foundation-trust-assessment",
+      "surface": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json",
+      "participants": ["release-system", "agent-reader", "package-consumer"],
+      "purpose": "Inspect KFD-2's generic assessment of KFD-1, KFD-3, and KFD-4 claims."
     },
     {
       "id": "site-bundle",
@@ -231,6 +243,22 @@
       "participants": ["release-system", "maintainer", "agent-reader", "package-consumer"],
       "value": "Explicit public KFD-2 claim that binds KFD package release trust to declared source facts, machine evidence, artifacts, verification, responsibility, and residual risk.",
       "discoverability": { "fromMinimalEntrypoint": true, "path": ".buildchain/kfd-2/public-release-trust.claim.json" },
+      "maturity": "stable"
+    },
+    {
+      "id": "kfd-2-foundation-trust-claims",
+      "kind": "json-api",
+      "participants": ["release-system", "maintainer", "agent-reader", "package-consumer"],
+      "value": "Generic KFD-2 trust claims used to assess KFD-1, KFD-3, and KFD-4 through one trust model.",
+      "discoverability": { "fromMinimalEntrypoint": true, "path": ".buildchain/kfd-2/kfd-foundation.trust-claims.json" },
+      "maturity": "stable"
+    },
+    {
+      "id": "kfd-2-foundation-trust-assessment",
+      "kind": "json-api",
+      "participants": ["release-system", "maintainer", "agent-reader", "package-consumer"],
+      "value": "Generic KFD-2 trust assessment result for KFD's own KFD-1, KFD-3, and KFD-4 claims.",
+      "discoverability": { "fromMinimalEntrypoint": true, "path": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json" },
       "maturity": "stable"
     },
     {
