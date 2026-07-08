@@ -394,7 +394,7 @@
     {
       "id": "metadata:release-anchor",
       "sourcePath": "kfd.release.json",
-      "sha256": "128788929dadbf25aa60283c5c5a7f79afd971627c378edd7d85546ee2038f22"
+      "sha256": "bfb302c839b6cb45204d541b5af5b1c211568efb16fb3eebbb04dc65f7de83d2"
     },
     {
       "id": "metadata:buildchain-contract-lock",
@@ -404,7 +404,7 @@
     {
       "id": "metadata:kfd-2-public-release-trust-claim",
       "sourcePath": ".buildchain/kfd-2/public-release-trust.claim.json",
-      "sha256": "e438a7d06305b709e4e27399df894b5e71f78b3edfeee967340c742cb586b395"
+      "sha256": "3780b47472762b5ce9575250da73ee800af71dd194a9b0a3f61a063569311237"
     },
     {
       "id": "metadata:kfd-2-foundation-trust-claims",
@@ -421,12 +421,12 @@
     {
       "id": "export:package-json",
       "sourcePath": "package.json#exports",
-      "sha256": "25ae49f5ab1c34d07d066b7e8fbe49284808bbf10b3c3b2ebe06373be1020854"
+      "sha256": "7773f62e7789220a9e21abe9626e7206028a2dc5de59e836595bd07be9459534"
     },
     {
       "id": "export:npm-files",
       "sourcePath": "package.json#files",
-      "sha256": "25ae49f5ab1c34d07d066b7e8fbe49284808bbf10b3c3b2ebe06373be1020854"
+      "sha256": "7773f62e7789220a9e21abe9626e7206028a2dc5de59e836595bd07be9459534"
     }
   ],
   "siteConsumptionContracts": [
@@ -470,17 +470,17 @@
       },
       {
         "path": "package.json#exports",
-        "sha256": "25ae49f5ab1c34d07d066b7e8fbe49284808bbf10b3c3b2ebe06373be1020854",
+        "sha256": "7773f62e7789220a9e21abe9626e7206028a2dc5de59e836595bd07be9459534",
         "description": "Consume the shipped npm package surfaces."
       },
       {
         "path": "kfd.release.json",
-        "sha256": "128788929dadbf25aa60283c5c5a7f79afd971627c378edd7d85546ee2038f22",
+        "sha256": "bfb302c839b6cb45204d541b5af5b1c211568efb16fb3eebbb04dc65f7de83d2",
         "description": "Inspect the explicit KFD package version anchor for the current Buildchain release line."
       },
       {
         "path": ".buildchain/kfd-2/public-release-trust.claim.json",
-        "sha256": "e438a7d06305b709e4e27399df894b5e71f78b3edfeee967340c742cb586b395",
+        "sha256": "3780b47472762b5ce9575250da73ee800af71dd194a9b0a3f61a063569311237",
         "description": "Inspect the explicit public KFD-2 claim passed into Buildchain release passport generation."
       },
       {
@@ -527,7 +527,7 @@
       },
       {
         "path": ".buildchain/kfd-2/public-release-trust.claim.json",
-        "sha256": "e438a7d06305b709e4e27399df894b5e71f78b3edfeee967340c742cb586b395",
+        "sha256": "3780b47472762b5ce9575250da73ee800af71dd194a9b0a3f61a063569311237",
         "description": "KFD-2 public release trust claim"
       },
       {
@@ -542,7 +542,7 @@
       },
       {
         "path": "package.json",
-        "sha256": "25ae49f5ab1c34d07d066b7e8fbe49284808bbf10b3c3b2ebe06373be1020854",
+        "sha256": "7773f62e7789220a9e21abe9626e7206028a2dc5de59e836595bd07be9459534",
         "description": "Package export map"
       },
       {
@@ -609,7 +609,7 @@
       },
       {
         "path": "package.json#exports",
-        "sha256": "25ae49f5ab1c34d07d066b7e8fbe49284808bbf10b3c3b2ebe06373be1020854",
+        "sha256": "7773f62e7789220a9e21abe9626e7206028a2dc5de59e836595bd07be9459534",
         "description": "KFD-3 value evidence for kfd-machine-consumption: KFD gives agents and release systems machine-readable standards, schemas, package exports, and witnesses so they can consume KFD without relying on private context."
       },
       {
@@ -678,7 +678,7 @@
       },
       {
         "path": ".buildchain/kfd-2/public-release-trust.claim.json",
-        "sha256": "e438a7d06305b709e4e27399df894b5e71f78b3edfeee967340c742cb586b395",
+        "sha256": "3780b47472762b5ce9575250da73ee800af71dd194a9b0a3f61a063569311237",
         "description": "Agent release trust claim path"
       },
       {
@@ -693,7 +693,7 @@
       },
       {
         "path": "package.json",
-        "sha256": "25ae49f5ab1c34d07d066b7e8fbe49284808bbf10b3c3b2ebe06373be1020854",
+        "sha256": "7773f62e7789220a9e21abe9626e7206028a2dc5de59e836595bd07be9459534",
         "description": "Package consumption path"
       }
     ],
