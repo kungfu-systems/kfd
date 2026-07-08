@@ -200,7 +200,7 @@ const trustClaims = {
     {
       id: "kfd-4-observer-perspective-trust",
       statement:
-        "KFD-4 is trustable as an observer-perspective interface because KFD publishes the schema, standards metadata, decision text, and verification gate for observer-relative timeline views.",
+        "KFD-4 is trustable as a package-level observer-perspective interface because KFD publishes the schema, standards metadata, decision text, and verification gate for observer-relative timeline views; adopter-specific timeline correctness remains a separate KFD-2 claim.",
       subject: {
         kind: "observer-perspective",
         id: "kfd-4-observer-perspective",
@@ -215,14 +215,14 @@ const trustClaims = {
       evidence: [
         evidence("schema", "schemas/kfd-4/observer-perspective.schema.json", "KFD-4 observer-perspective schema is published."),
         evidence("file", "standards.json", "Standards metadata exposes the KFD-4 schema ID, path, interface version, and concept names."),
-        evidence("file", "scripts/check.mjs", "The package check gate validates the KFD-4 schema and standards metadata."),
+        evidence("file", "scripts/check.mjs", "The package check gate validates the KFD-4 schema and standards metadata; it does not assess adopter-specific timeline correctness."),
       ],
       verification: {
         command: "node scripts/check.mjs",
         expectedResult: "pass",
       },
       auditBoundary: {
-        scope: "KFD-4 decision text, observer-perspective schema, standards metadata, and self-verification gate",
+        scope: "KFD-4 package decision text, observer-perspective schema, standards metadata, and self-verification gate; excludes adopter runtime timeline correctness",
         enumerability: "closed-world",
       },
       residualRisk: [],

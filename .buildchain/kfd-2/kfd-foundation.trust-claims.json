@@ -20,7 +20,7 @@
         {
           "kind": "file",
           "path": "standards.json",
-          "sha256": "68aae8bbfcce0776e5f5317e133ae1b494a41ecdea1f992bb51f71d1e75f2ca4"
+          "sha256": "4ee9e5fc732eef1b43c75a146125496e0dbd859ef5a11d0c637c41e9091c677f"
         },
         {
           "kind": "schema",
@@ -44,7 +44,7 @@
           "pointer": {
             "kind": "file",
             "path": "scripts/check.mjs",
-            "sha256": "43cd81dcff761004098722f4b69a7e9939fe9559d4785344dd3344933e241f82"
+            "sha256": "531fec64c2d570c8214bc2009569ccff4436bbabbff9a54cf5220d2c323fc974"
           },
           "machineProvability": "machine-verifiable",
           "description": "The package check gate validates the KFD-1 schema, surface register, witness, and hashes."
@@ -109,7 +109,7 @@
           "pointer": {
             "kind": "file",
             "path": "scripts/check.mjs",
-            "sha256": "43cd81dcff761004098722f4b69a7e9939fe9559d4785344dd3344933e241f82"
+            "sha256": "531fec64c2d570c8214bc2009569ccff4436bbabbff9a54cf5220d2c323fc974"
           },
           "machineProvability": "machine-verifiable",
           "description": "The package check gate validates KFD-3 interface closure and witness parity."
@@ -145,7 +145,7 @@
     },
     {
       "id": "kfd-4-observer-perspective-trust",
-      "statement": "KFD-4 is trustable as an observer-perspective interface because KFD publishes the schema, standards metadata, decision text, and verification gate for observer-relative timeline views.",
+      "statement": "KFD-4 is trustable as a package-level observer-perspective interface because KFD publishes the schema, standards metadata, decision text, and verification gate for observer-relative timeline views; adopter-specific timeline correctness remains a separate KFD-2 claim.",
       "subject": {
         "kind": "observer-perspective",
         "id": "kfd-4-observer-perspective",
@@ -156,17 +156,17 @@
         {
           "kind": "file",
           "path": "decisions/KFD-4.md",
-          "sha256": "7077a6446c8baa60d85426780cb7b2bee488133196b6f53d74f0eb151f6e26e4"
+          "sha256": "b7ae42a6f1ddb1e838b93fb33c9da5bfae28fad39d31bfca83668550e8c6335c"
         },
         {
           "kind": "file",
           "path": "standards.json",
-          "sha256": "68aae8bbfcce0776e5f5317e133ae1b494a41ecdea1f992bb51f71d1e75f2ca4"
+          "sha256": "4ee9e5fc732eef1b43c75a146125496e0dbd859ef5a11d0c637c41e9091c677f"
         },
         {
           "kind": "schema",
           "path": "schemas/kfd-4/observer-perspective.schema.json",
-          "sha256": "e6ae8849b04c326b4ae5efafa08b08dc0f3fcf6844f6956735ff7327c2cfd69c"
+          "sha256": "806bdc4e06e58ddb0833f69044c9321ea0a8e3e11fd8c662be19d1752e3b070c"
         }
       ],
       "evidence": [
@@ -175,7 +175,7 @@
           "pointer": {
             "kind": "schema",
             "path": "schemas/kfd-4/observer-perspective.schema.json",
-            "sha256": "e6ae8849b04c326b4ae5efafa08b08dc0f3fcf6844f6956735ff7327c2cfd69c"
+            "sha256": "806bdc4e06e58ddb0833f69044c9321ea0a8e3e11fd8c662be19d1752e3b070c"
           },
           "machineProvability": "machine-verifiable",
           "description": "KFD-4 observer-perspective schema is published."
@@ -185,7 +185,7 @@
           "pointer": {
             "kind": "file",
             "path": "standards.json",
-            "sha256": "68aae8bbfcce0776e5f5317e133ae1b494a41ecdea1f992bb51f71d1e75f2ca4"
+            "sha256": "4ee9e5fc732eef1b43c75a146125496e0dbd859ef5a11d0c637c41e9091c677f"
           },
           "machineProvability": "machine-verifiable",
           "description": "Standards metadata exposes the KFD-4 schema ID, path, interface version, and concept names."
@@ -195,10 +195,10 @@
           "pointer": {
             "kind": "file",
             "path": "scripts/check.mjs",
-            "sha256": "43cd81dcff761004098722f4b69a7e9939fe9559d4785344dd3344933e241f82"
+            "sha256": "531fec64c2d570c8214bc2009569ccff4436bbabbff9a54cf5220d2c323fc974"
           },
           "machineProvability": "machine-verifiable",
-          "description": "The package check gate validates the KFD-4 schema and standards metadata."
+          "description": "The package check gate validates the KFD-4 schema and standards metadata; it does not assess adopter-specific timeline correctness."
         }
       ],
       "verification": {
@@ -206,7 +206,7 @@
         "expectedResult": "pass"
       },
       "auditBoundary": {
-        "scope": "KFD-4 decision text, observer-perspective schema, standards metadata, and self-verification gate",
+        "scope": "KFD-4 package decision text, observer-perspective schema, standards metadata, and self-verification gate; excludes adopter runtime timeline correctness",
         "enumerability": "closed-world"
       },
       "residualRisk": [],

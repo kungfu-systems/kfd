@@ -45,6 +45,25 @@ In a complex world, from which declared perspective is this view useful,
 stable, and trustworthy?
 ```
 
+## Gate boundary
+
+KFD-4 is a gate for perspective-bearing views. It applies when a product,
+repository, release surface, extension surface, hosted surface, export, API,
+CLI, GUI, or agent-facing interface represents time, ordering, history,
+timeline state, replay, sync, or mixed-source work facts.
+
+A product surface that does not represent a timeline, history, replay, sync
+flow, ordering claim, or mixed-source work state does not need to pass a KFD-4
+gate. It may still be assessed by KFD-1, KFD-2, KFD-3, or other applicable
+KFDs.
+
+Passing a KFD-4 gate means the surface declares enough observer and projection
+metadata for its timeline view to be inspected, reproduced, and challenged. It
+does not by itself prove that every payload, source adapter, remote machine,
+or adopter-specific timeline implementation is correct. Those product-specific
+claims need their own facts, witnesses, verification, and responsibility
+boundary.
+
 ## Procedure
 
 When a product combines facts from multiple machines, agents, processes,
@@ -170,6 +189,14 @@ not a mandatory runtime data model for every adopter. It is the KFD-owned
 vocabulary for declaring observer, accepted facts, projection policy, causal
 constraints, and degraded evidence state in products that need a
 perspective-bearing timeline.
+
+The package proves that the KFD-4 vocabulary, schema, metadata, and
+self-verification surface are published from committed KFD facts. It does not
+claim that a specific adopter's product timeline is correct merely because the
+adopter cites or imports the schema. An adopter that claims KFD-4 conformance
+must still provide adopter-owned evidence for its accepted facts, projection
+policy, causal constraints, degraded evidence handling, and verification
+result.
 
 ## Adopters
 

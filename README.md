@@ -91,7 +91,9 @@ perspective and timeline order. In a multi-machine or multi-agent world, a
 product should not pretend to own a universal global clock. It should preserve
 non-drifting facts, make trust start from those facts, and let participants
 cooperate by exposing the observer, accepted ranges, causal constraints, and
-projection policy behind the view.
+projection policy behind the view. KFD-4 gates perspective-bearing views; it
+does not claim that importing the KFD-4 schema proves an adopter's concrete
+timeline implementation is complete or correct.
 
 ## Adoption boundary
 
@@ -212,7 +214,9 @@ closed-world evidence shape. See
 KFD-4 publishes an observer-perspective schema under `schemas/kfd-4/`. It gives
 humans and agents a standard vocabulary for observer, accepted facts,
 projection policy, causal constraints, degraded evidence, and verification
-state when a product shows a perspective-bearing timeline.
+state when a product shows a perspective-bearing timeline. The package-level
+claim proves the KFD-owned interface surface; adopter runtime correctness
+requires adopter-owned KFD-2 evidence.
 
 ## Current decisions
 
