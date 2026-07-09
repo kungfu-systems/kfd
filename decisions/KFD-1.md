@@ -29,8 +29,10 @@ they are integrating with, replaying, auditing, or trusting.
 KFD-1 has concrete implementation surfaces across the Kungfu ecosystem:
 versioning protects release lines from contract drift, config contracts protect
 multi-target configuration from drifting across runtimes, products, and
-agent-facing surfaces, and KFD metadata protects the decision package's own
-standard surfaces from drifting away from their declared source.
+agent-facing surfaces, publication URL semantics protect released documents and
+evidence from drifting across site rebuilds, and KFD metadata protects the
+decision package's own standard surfaces from drifting away from their declared
+source.
 
 ## Premise: the welded-surface register
 
@@ -62,6 +64,31 @@ The rule applies before packaging as well: development-time code, tests, build
 steps, and the final product must consume the same contract mechanism. It is
 not enough for the packaged artifact to be internally consistent if the
 developer path used a different, driftable config source.
+
+## Concrete case: publication URL semantics
+
+A public paper, specification, or long-lived document often needs two route
+classes at the same time:
+
+- a **stable reader entrypoint**, such as a product page or canonical paper
+  URL, which may point readers to the current recommended version; and
+- an **immutable version entrypoint**, where the released PDF, source bundle,
+  release passport, site bundle, registry entry, or other evidence for one
+  version remains content-addressed and does not change after publication.
+
+Those routes are welded surfaces. A site repository may render the current
+page from the latest upstream package, but it must not become the only place
+where historical artifacts live. The historical artifact fact must remain in
+an archive or release registry whose versioned URL and digest do not drift.
+Mutable pages may move; immutable version artifacts must not.
+
+The KFD-owned interface for this case is
+`schemas/kfd-1/publication-url-semantics.schema.json`. It defines the generic
+vocabulary for `canonicalUrl`, `latestUrl`, `immutableVersionBaseUrl`,
+artifact digests, source coordinates, lineage, and the archive policy that
+forbids same-version digest changes or destructive sync over immutable
+prefixes. Concrete repositories own their routes and storage layout; KFD owns
+the semantics that make those declarations auditable.
 
 ## The compatibility impact core
 
