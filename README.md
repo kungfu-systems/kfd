@@ -185,7 +185,10 @@ Agents consuming this package should start from the same sources as humans:
    KFD-2 assessment instead of a release-specific passport.
 6. Use `schemas/kfd-3/collaboration-interface.schema.json` and
    `schemas/kfd-3/witness.schema.json` to inspect collaboration interfaces.
-7. If a needed KFD-2 taxonomy value is missing, open a KFD GitHub issue rather
+7. Use `schemas/kfd-1/publication-url-semantics.schema.json` when a package,
+   paper, specification, or site bundle must distinguish stable reader URLs,
+   latest aliases, and immutable versioned artifacts.
+8. If a needed KFD-2 taxonomy value is missing, open a KFD GitHub issue rather
    than inventing a local value:
    `https://github.com/kungfu-systems/kfd/issues/new?title=KFD-2%20trust%20taxonomy%20extension%20request`.
 

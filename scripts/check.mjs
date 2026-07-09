@@ -273,16 +273,23 @@ if (kfd1?.schemaIds?.contractWorld !== "https://kfd.libkungfu.dev/schemas/kfd-1/
 if (kfd1?.schemaIds?.witness !== "https://kfd.libkungfu.dev/schemas/kfd-1/witness.schema.json") {
   fail("KFD-1 standards metadata must expose the canonical witness schema URI");
 }
-for (const concept of ["factSource", "contractWorld", "weldedSurfaceRegister", "witness", "surfaceClass", "compatibilityImpact", "impactProjection"]) {
+if (kfd1?.schemaIds?.publicationUrlSemantics !== "https://kfd.libkungfu.dev/schemas/kfd-1/publication-url-semantics.schema.json") {
+  fail("KFD-1 standards metadata must expose the canonical publicationUrlSemantics schema URI");
+}
+if (kfd1?.schemaPaths?.publicationUrlSemantics !== "schemas/kfd-1/publication-url-semantics.schema.json") {
+  fail("KFD-1 standards metadata must expose the publicationUrlSemantics schema path");
+}
+for (const concept of ["factSource", "contractWorld", "weldedSurfaceRegister", "witness", "surfaceClass", "compatibilityImpact", "impactProjection", "publicationUrlSemantics", "canonicalUrl", "latestUrl", "immutableVersionUrl", "immutableArtifact", "archivePolicy", "sourceCoordinate"]) {
   if (!kfd1?.concepts?.[concept]) fail(`KFD-1 standards metadata missing concept ${concept}`);
 }
-for (const iface of ["contractWorld", "witness"]) {
+for (const iface of ["contractWorld", "witness", "publicationUrlSemantics"]) {
   if (!kfd1?.interfaces?.[iface]) fail(`KFD-1 standards metadata missing interface ${iface}`);
 }
 const expectedKfd1SurfaceClasses = ["integration-time", "cross-time"];
 const expectedKfd1ImpactClasses = ["breaking", "additive", "none", "unclassifiable"];
 const kfd1ContractWorldSchema = JSON.parse(readFileSync("schemas/kfd-1/contract-world.schema.json", "utf8"));
 const kfd1WitnessSchema = JSON.parse(readFileSync("schemas/kfd-1/witness.schema.json", "utf8"));
+const kfd1PublicationUrlSemanticsSchema = JSON.parse(readFileSync("schemas/kfd-1/publication-url-semantics.schema.json", "utf8"));
 for (const [schemaName, schemaDoc] of [["contractWorld", kfd1ContractWorldSchema], ["witness", kfd1WitnessSchema]]) {
   requireSameEnum(schemaDoc.$defs?.surfaceClass?.enum, expectedKfd1SurfaceClasses, `KFD-1 ${schemaName} surfaceClass`);
   requireSameEnum(schemaDoc.$defs?.compatibilityImpact?.enum, expectedKfd1ImpactClasses, `KFD-1 ${schemaName} compatibilityImpact`);
@@ -290,6 +297,27 @@ for (const [schemaName, schemaDoc] of [["contractWorld", kfd1ContractWorldSchema
     if (!schemaDoc.$defs?.impactProjection?.required?.includes(impact)) {
       fail(`KFD-1 ${schemaName} impactProjection must require ${impact}`);
     }
+  }
+}
+if (kfd1PublicationUrlSemanticsSchema.properties?.contract?.const !== "kfd-1-publication-url-semantics") {
+  fail("KFD-1 publicationUrlSemantics schema must describe the kfd-1-publication-url-semantics contract");
+}
+if (kfd1PublicationUrlSemanticsSchema.properties?.standard?.const !== "kfd-1") {
+  fail("KFD-1 publicationUrlSemantics schema must declare standard kfd-1");
+}
+for (const requiredField of ["canonicalUrl", "immutableVersionBaseUrl"]) {
+  if (!kfd1PublicationUrlSemanticsSchema.$defs?.routes?.required?.includes(requiredField)) {
+    fail(`KFD-1 publicationUrlSemantics routes must require ${requiredField}`);
+  }
+}
+for (const [field, expectedConst] of [
+  ["immutability", "published-version-artifacts-are-append-only"],
+  ["sameVersionDigestPolicy", "fail-on-digest-change"],
+  ["destructiveSyncPolicy", "must-not-delete-immutable-prefix"],
+  ["historyRetention", "site-builds-must-preserve-declared-historical-versions"],
+]) {
+  if (kfd1PublicationUrlSemanticsSchema.$defs?.archivePolicy?.properties?.[field]?.const !== expectedConst) {
+    fail(`KFD-1 publicationUrlSemantics archivePolicy.${field} must be ${expectedConst}`);
   }
 }
 const kfd1SurfaceRegister = kfd1?.surfaceRegister;
@@ -552,6 +580,7 @@ if (!kfd1Witness) {
     const witnessedSurfaceNames = new Set(kfd1Witness.surfaces.map((surface) => surface.name));
     for (const requiredSurface of [
       "readme",
+      "kfd-1-publication-url-semantics-schema",
       "kfd-2-trust-taxonomy-schema",
       "kfd-2-trust-claims-schema",
       "kfd-2-trust-assessment-schema",

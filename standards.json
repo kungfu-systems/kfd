@@ -25,7 +25,7 @@
       "document": {
         "path": "decisions/KFD-1.md",
         "url": "https://kfd.libkungfu.dev/1",
-        "sha256": "0b7b1ec54d661b271f91f02cefa97b11e1d1ef9c637efd2d1878d5f9c9185d80"
+        "sha256": "dcc97d2e24ffc8f0380cd027ba973bf8268cff59fa9ab766b178e894bcf1f164"
       },
       "compatibility": {
         "packageLine": "v1.0",
@@ -36,12 +36,14 @@
       "schemaIds": {
         "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json",
         "contractWorld": "https://kfd.libkungfu.dev/schemas/kfd-1/contract-world.schema.json",
-        "witness": "https://kfd.libkungfu.dev/schemas/kfd-1/witness.schema.json"
+        "witness": "https://kfd.libkungfu.dev/schemas/kfd-1/witness.schema.json",
+        "publicationUrlSemantics": "https://kfd.libkungfu.dev/schemas/kfd-1/publication-url-semantics.schema.json"
       },
       "schemaPaths": {
         "metadata": "schemas/kfd-standards.schema.json",
         "contractWorld": "schemas/kfd-1/contract-world.schema.json",
-        "witness": "schemas/kfd-1/witness.schema.json"
+        "witness": "schemas/kfd-1/witness.schema.json",
+        "publicationUrlSemantics": "schemas/kfd-1/publication-url-semantics.schema.json"
       },
       "interfaces": {
         "contractWorld": {
@@ -57,6 +59,13 @@
           "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-1/witness.schema.json",
           "schemaPath": "schemas/kfd-1/witness.schema.json",
           "compatibilityRule": "Compatible additions may keep schemaVersion 1; semantic or required-field changes require a new interface version or contract."
+        },
+        "publicationUrlSemantics": {
+          "contract": "kfd-1-publication-url-semantics",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-1/publication-url-semantics.schema.json",
+          "schemaPath": "schemas/kfd-1/publication-url-semantics.schema.json",
+          "compatibilityRule": "Compatible additions may keep schemaVersion 1; semantic or required-field changes require a new interface version or contract."
         }
       },
       "concepts": {
@@ -66,7 +75,14 @@
         "witness": "contract witness",
         "surfaceClass": "surface class",
         "compatibilityImpact": "compatibility impact",
-        "impactProjection": "domain-specific impact projection"
+        "impactProjection": "domain-specific impact projection",
+        "publicationUrlSemantics": "publication URL semantics",
+        "canonicalUrl": "canonical reader URL",
+        "latestUrl": "latest alias URL",
+        "immutableVersionUrl": "immutable version URL",
+        "immutableArtifact": "immutable publication artifact",
+        "archivePolicy": "publication archive policy",
+        "sourceCoordinate": "publication source coordinate"
       },
       "surfaceRegister": {
         "factSource": "standards.json#/standards/kfd-1/surfaceRegister",
@@ -652,6 +668,23 @@
             "description": "Published KFD usage documentation surface at docs/KFD-4-usage.md.",
             "sourcePath": "docs/KFD-4-usage.md",
             "weldRationale": "Consumers can audit, replay, or cite this surface after release.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-1-publication-url-semantics-schema",
+            "class": "integration-time",
+            "classes": [
+              "integration-time",
+              "cross-time"
+            ],
+            "description": "Published JSON schema surface at schemas/kfd-1/publication-url-semantics.schema.json.",
+            "sourcePath": "schemas/kfd-1/publication-url-semantics.schema.json",
+            "weldRationale": "Buildchain and site repositories can bind to this surface when declaring canonical/latest/immutable publication URL semantics, and published version artifacts remain audit-relevant after release.",
             "impactProjection": {
               "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
               "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",

@@ -9,6 +9,7 @@
 | How should a product show timeline order from a declared perspective? | [KFD-4](../decisions/KFD-4.md) |
 | What schema should products use for KFD-4 observer-relative timeline views? | [`../schemas/kfd-4/observer-perspective.schema.json`](../schemas/kfd-4/observer-perspective.schema.json) |
 | What are the package implementation notes for KFD-1? | [`KFD-1-usage.md`](KFD-1-usage.md) |
+| What schema should papers, specifications, or sites use for canonical/latest/immutable publication URL semantics? | [`../schemas/kfd-1/publication-url-semantics.schema.json`](../schemas/kfd-1/publication-url-semantics.schema.json) and [`KFD-1-usage.md`](KFD-1-usage.md#publication-url-semantics) |
 | What are the package implementation notes for KFD-2? | [`KFD-2-usage.md`](KFD-2-usage.md) |
 | What are the package implementation notes for KFD-3? | [`KFD-3-usage.md`](KFD-3-usage.md) |
 | What are the package implementation notes for KFD-4? | [`KFD-4-usage.md`](KFD-4-usage.md) |
