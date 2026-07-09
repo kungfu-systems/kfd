@@ -1,0 +1,255 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-1/publication-url-semantics.schema.json",
+  "title": "KFD-1 publication URL semantics",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "contract",
+    "standard",
+    "publication",
+    "routes",
+    "immutableArtifacts",
+    "archivePolicy"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "contract": {
+      "const": "kfd-1-publication-url-semantics"
+    },
+    "standard": {
+      "const": "kfd-1"
+    },
+    "publication": {
+      "$ref": "#/$defs/publication"
+    },
+    "routes": {
+      "$ref": "#/$defs/routes"
+    },
+    "immutableArtifacts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/immutableArtifact"
+      },
+      "minItems": 1
+    },
+    "archivePolicy": {
+      "$ref": "#/$defs/archivePolicy"
+    },
+    "lineage": {
+      "$ref": "#/$defs/lineage"
+    },
+    "siteConsumption": {
+      "$ref": "#/$defs/siteConsumption"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "uri": {
+      "type": "string",
+      "format": "uri"
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "publication": {
+      "type": "object",
+      "required": [
+        "id",
+        "version",
+        "sourceCoordinate"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceCoordinate": {
+          "$ref": "#/$defs/sourceCoordinate"
+        }
+      },
+      "additionalProperties": false
+    },
+    "sourceCoordinate": {
+      "type": "object",
+      "required": [
+        "kind",
+        "repository",
+        "ref"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "git-commit",
+            "git-tag",
+            "source-bundle",
+            "release-passport",
+            "other"
+          ]
+        },
+        "repository": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "url": {
+          "$ref": "#/$defs/uri"
+        }
+      },
+      "additionalProperties": false
+    },
+    "routes": {
+      "type": "object",
+      "required": [
+        "canonicalUrl",
+        "immutableVersionBaseUrl"
+      ],
+      "properties": {
+        "canonicalUrl": {
+          "$ref": "#/$defs/uri",
+          "description": "Stable reader entrypoint. It may show the latest recommended version."
+        },
+        "latestUrl": {
+          "$ref": "#/$defs/uri",
+          "description": "Mutable latest alias or evidence entrypoint. It may move as new versions are published."
+        },
+        "evidenceUrl": {
+          "$ref": "#/$defs/uri",
+          "description": "Reader or agent entrypoint for release evidence."
+        },
+        "immutableVersionBaseUrl": {
+          "$ref": "#/$defs/uri",
+          "description": "Version-addressed base URL whose artifact contents must not change after publication."
+        }
+      },
+      "additionalProperties": false
+    },
+    "immutableArtifact": {
+      "type": "object",
+      "required": [
+        "id",
+        "kind",
+        "url",
+        "sha256"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "kind": {
+          "enum": [
+            "pdf",
+            "source-bundle",
+            "release-passport",
+            "site-bundle",
+            "publication-registry",
+            "other"
+          ]
+        },
+        "url": {
+          "$ref": "#/$defs/uri"
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "mediaType": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "$ref": "#/$defs/digest"
+        },
+        "sourceCoordinate": {
+          "$ref": "#/$defs/sourceCoordinate"
+        }
+      },
+      "additionalProperties": false
+    },
+    "archivePolicy": {
+      "type": "object",
+      "required": [
+        "immutability",
+        "sameVersionDigestPolicy",
+        "destructiveSyncPolicy",
+        "historyRetention"
+      ],
+      "properties": {
+        "immutability": {
+          "const": "published-version-artifacts-are-append-only"
+        },
+        "sameVersionDigestPolicy": {
+          "const": "fail-on-digest-change"
+        },
+        "destructiveSyncPolicy": {
+          "const": "must-not-delete-immutable-prefix"
+        },
+        "historyRetention": {
+          "const": "site-builds-must-preserve-declared-historical-versions"
+        }
+      },
+      "additionalProperties": false
+    },
+    "lineage": {
+      "type": "object",
+      "properties": {
+        "supersedes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "supersededBy": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "revisionNote": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "siteConsumption": {
+      "type": "object",
+      "required": [
+        "latestPackageRole",
+        "archiveRole",
+        "rendererRole"
+      ],
+      "properties": {
+        "latestPackageRole": {
+          "const": "may-update-canonical-and-latest-pages"
+        },
+        "archiveRole": {
+          "const": "owns-immutable-version-artifacts"
+        },
+        "rendererRole": {
+          "const": "render-and-link-without-forking-route-facts"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

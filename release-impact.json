@@ -8,8 +8,8 @@
   },
   "versionImpact": {
     "final": "minor",
-    "source": "kfd-site-decision-usage-pages",
-    "rationale": "This change additively exposes decision usage subpage mapping in the KFD site bundle, while preserving existing registry, package, and schemaVersion 1 compatibility."
+    "source": "kfd-1-publication-url-semantics",
+    "rationale": "This change additively exposes KFD-1 publication URL semantics for canonical/latest/immutable publication routes, while preserving existing registry, package, and schemaVersion 1 compatibility."
   },
   "surfaceImpacts": [
     {
@@ -107,7 +107,13 @@
       "impact": "minor",
       "class": "additive",
       "rationale": "standards.json now publishes the KFD package surface register as the KFD-1 fact source, and the KFD-1 witness projects each registered surface class and impact projection from that fact source."
+    },
+    {
+      "id": "kfd-1-publication-url-semantics",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD-1 now publishes a machine-readable schema for canonical reader URLs, latest aliases, immutable version artifact URLs, artifact digests, source coordinates, lineage, site consumption, and archive policies that prevent same-version digest drift or destructive deletion of immutable publication prefixes."
     }
   ],
-  "summary": "KFD v1.0 production promotion is minor-impact because it additively exposes decision usage subpage mapping in the site bundle, preserves existing package and schemaVersion 1 compatibility, and separates authoritative decision paths from numbered usage documentation."
+  "summary": "KFD v1.0 production promotion is minor-impact because it additively exposes publication URL semantics and related machine metadata while preserving existing package and schemaVersion 1 compatibility."
 }
