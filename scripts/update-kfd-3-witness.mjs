@@ -67,6 +67,7 @@ const groupedSurfaces = {
     { id: "metadata:standards", sourcePath: "standards.json", sha256: sha256File("standards.json") },
     { id: "metadata:release-impact", sourcePath: "release-impact.json", sha256: sha256File("release-impact.json") },
     { id: "metadata:release-anchor", sourcePath: "kfd.release.json", sha256: sha256File("kfd.release.json") },
+    { id: "metadata:buildchain-alpha-contract-lock", sourcePath: "buildchain.alpha-contract-lock.json", sha256: sha256File("buildchain.alpha-contract-lock.json") },
     { id: "metadata:buildchain-contract-lock", sourcePath: "buildchain.contract-lock.json", sha256: sha256File("buildchain.contract-lock.json") },
     { id: "metadata:kfd-2-public-release-trust-claim", sourcePath: ".buildchain/kfd-2/public-release-trust.claim.json", sha256: sha256File(".buildchain/kfd-2/public-release-trust.claim.json") },
     { id: "metadata:kfd-2-foundation-trust-claims", sourcePath: ".buildchain/kfd-2/kfd-foundation.trust-claims.json", sha256: sha256File(".buildchain/kfd-2/kfd-foundation.trust-claims.json") },
