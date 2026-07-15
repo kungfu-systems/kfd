@@ -5,12 +5,12 @@
   "sourceBindings": [
     {
       "path": "package.json",
-      "sha256": "2da7cdd8a02f50c605d5b32a47f49454e6a3cca3ba1d88c35ca7e5a337e04aea",
+      "sha256": "da42d5473ffa4c43489ce1ba62c244b61042d0b667110e2b1190f932cd59b4ec",
       "id": "package-version-and-exports"
     },
     {
       "path": "kfd.release.json",
-      "sha256": "46ccec5932209b5b8457239492f1f3ba61e13bbf6c3888d558252ef3fa5c0899",
+      "sha256": "96bac2d12b18eed53b5a28988ee75d30e4278d3d0ff32a2af42f19ebe5ffa1f9",
       "id": "anchored-release-version"
     },
     {
@@ -20,12 +20,12 @@
     },
     {
       "path": "standards.json",
-      "sha256": "028f8cbbc7fb321bf67151dcd8a5bb0c919fb20c3eedf39dcea79fb30f203888",
+      "sha256": "d674c5953efae34088ac8777fff430272fe45392cef9d8c39d1ba45094059051",
       "id": "standards-metadata"
     },
     {
       "path": "release-impact.json",
-      "sha256": "63a27e0867774d348694c59e95e3b27220392eb34475f2c8c21b52a909747e6d",
+      "sha256": "5ef052d75207cbed0d24d7e836629ff5fbe969a017345c718360af1e1e042288",
       "id": "release-impact-ledger"
     },
     {
@@ -47,7 +47,7 @@
   "machineEvidence": [
     {
       "path": "scripts/check.mjs",
-      "sha256": "47e71c8012c5b22832d5db008c35747c94ff409ff46d0b8aa7e5c344b73dab1b",
+      "sha256": "a6685d93960e3ec6739b5608940b6cd6b0ae3b26278d1b136664cc2608aa0b9f",
       "id": "self-verification-command"
     },
     {
@@ -87,15 +87,15 @@
     }
   ],
   "hashes": {
-    "package-version-and-exports": "2da7cdd8a02f50c605d5b32a47f49454e6a3cca3ba1d88c35ca7e5a337e04aea",
-    "anchored-release-version": "46ccec5932209b5b8457239492f1f3ba61e13bbf6c3888d558252ef3fa5c0899",
+    "package-version-and-exports": "da42d5473ffa4c43489ce1ba62c244b61042d0b667110e2b1190f932cd59b4ec",
+    "anchored-release-version": "96bac2d12b18eed53b5a28988ee75d30e4278d3d0ff32a2af42f19ebe5ffa1f9",
     "decision-registry": "97bf4d0433d9858d09381ea85d02481d8f1dae4614b44e571bba6baa0a0d0b03",
-    "standards-metadata": "028f8cbbc7fb321bf67151dcd8a5bb0c919fb20c3eedf39dcea79fb30f203888",
-    "release-impact-ledger": "63a27e0867774d348694c59e95e3b27220392eb34475f2c8c21b52a909747e6d",
+    "standards-metadata": "d674c5953efae34088ac8777fff430272fe45392cef9d8c39d1ba45094059051",
+    "release-impact-ledger": "5ef052d75207cbed0d24d7e836629ff5fbe969a017345c718360af1e1e042288",
     "buildchain-release-contract": "0dc1179d59b634df364871ea18a66251781321c80a6f7bcb9e3fcf5a48ef738a",
     "buildchain-alpha-runtime-contract-lock": "64c00c15bb13b2d6b38ea865cbd18ab1058d79f10ce271a0d134841066f89f87",
     "buildchain-runtime-contract-lock": "19dd7c50cb86936d2ce009a92eb33b18b35919a481831d323089523ad44e8c4a",
-    "self-verification-command": "47e71c8012c5b22832d5db008c35747c94ff409ff46d0b8aa7e5c344b73dab1b",
+    "self-verification-command": "a6685d93960e3ec6739b5608940b6cd6b0ae3b26278d1b136664cc2608aa0b9f",
     "buildchain-build-workflow": "49731fb7ef54be9064934a806af1ae7793104cca768d6908dbdff55806bcc8bf",
     "buildchain-promotion-workflow": "211c7e0ba33c8ce535b9ef36b4f8a9bfb392ab287d34917e1547e73753a498ba",
     "kfd-2-trust-taxonomy-schema": "a663d301a663cadb8567e3010361f5a630b76b6518ed7603dfd58cbd4e64a658",
@@ -107,15 +107,15 @@
   "artifacts": [
     {
       "name": "@kungfu-tech/kfd",
-      "version": "1.0.0-alpha.24",
+      "version": "1.0.0-alpha.25",
       "path": "package.json",
-      "sha256": "2da7cdd8a02f50c605d5b32a47f49454e6a3cca3ba1d88c35ca7e5a337e04aea"
+      "sha256": "da42d5473ffa4c43489ce1ba62c244b61042d0b667110e2b1190f932cd59b4ec"
     },
     {
       "name": "kfd-release-anchor",
-      "version": "1.0.0-alpha.24",
+      "version": "1.0.0-alpha.25",
       "path": "kfd.release.json",
-      "sha256": "46ccec5932209b5b8457239492f1f3ba61e13bbf6c3888d558252ef3fa5c0899"
+      "sha256": "96bac2d12b18eed53b5a28988ee75d30e4278d3d0ff32a2af42f19ebe5ffa1f9"
     }
   ],
   "verification": {

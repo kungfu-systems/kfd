@@ -18,13 +18,32 @@ reality-complete, that an agent discovered a primitive, or that the candidate
 may be promoted.
 
 An experiment must declare its corpus cut, observer, capture boundary, missing
-evidence, autonomy boundary, independent evaluation, held-out evidence, and
-promotion authority. The generator cannot be its sole verifier, and generated
-evidence cannot be the only evidence.
+evidence, boundary hypothesis, autonomy boundary, independent evaluation,
+held-out evidence, and promotion authority. The generator cannot be its sole
+verifier, and generated evidence cannot be the only evidence.
+
+## Boundary Hypothesis
+
+The version 2 experiment interface requires a boundary hypothesis between the
+experience basis and candidate generation stages. It records:
+
+- at least two contact sides;
+- the previous implicit handling mechanism;
+- pressure changes, including whether a new participant is involved;
+- observed translation, handoff, attribution, authority, or responsibility
+  failures;
+- the proposed mediation claim;
+- a narrower internal-object alternative;
+- whether the hypothesis is supported, inconclusive, or rejected.
+
+Supported boundary pressure raises the priority of a primitive candidate but
+does not certify it. A rejected hypothesis is valid evidence and must not be
+rewritten as support after the candidate has been generated.
 
 ## Activation Evidence
 
 KFD-6 remains draft until a real adopter demonstrates falsifiable discovery
 beyond retrieval or summarization baselines, including rejection of attractive
-false candidates, held-out and prospective evaluation, bounded intervention,
-transfer evidence, and a separate promotion decision.
+false candidates, discrimination between contact surfaces and internal
+patterns, held-out and prospective evaluation, bounded intervention, transfer
+evidence, and a separate promotion decision.
