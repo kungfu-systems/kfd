@@ -52,6 +52,16 @@ const naturalLanguageResidualRisk = {
   reason: "Natural-language standard interpretation is inspectable and reviewable but cannot be exhaustively proved from package bytes.",
   owner: "KFD maintainers",
 };
+const draftAutonomyResidualRisk = {
+  id: "autonomous-discovery-not-yet-proved",
+  definedBy: "https://kfd.libkungfu.dev/schemas/kfd-2/trust-taxonomy.schema.json#/$defs/residualRisk",
+  riskType: "external-fact-risk",
+  trustImpact: "downgrade-warning",
+  machineProvability: "partially-machine-verifiable",
+  agentAction: "verify-external-facts",
+  reason: "KFD-6 publishes a draft experiment contract, but no current package fact proves a conforming autonomous primitive-discovery implementation.",
+  owner: "KFD maintainers and experimental adopters",
+};
 const writeJson = (filePath, value) => {
   mkdirSync(path.dirname(filePath), { recursive: true });
   writeFileSync(filePath, `${JSON.stringify(value, null, 2)}\n`);
@@ -135,7 +145,7 @@ const trustClaims = {
   standard: "kfd-2",
   projection: {
     kind: "generic",
-    description: "KFD self-dogfood claims for assessing KFD-1, KFD-3, and KFD-4 from the generic KFD-2 trust model.",
+    description: "KFD self-dogfood claims for assessing KFD-1 and KFD-3 through KFD-6 from the generic KFD-2 trust model.",
   },
   claims: [
     {
@@ -230,6 +240,62 @@ const trustClaims = {
       responsibility,
       status: "enforced",
     },
+    {
+      id: "kfd-5-primitive-discovery-trust",
+      statement:
+        "KFD-5 is trustable as a package-level primitive-discovery interface because KFD publishes the active procedure, candidate-record schema, standards metadata, and verification gate; adopter conclusions remain separate KFD-2 claims.",
+      subject: {
+        kind: "primitive-discovery",
+        id: "kfd-5-primitive-discovery",
+        standard: "kfd-5",
+        description: "KFD-5 primitive-discovery procedure and candidate-record interface.",
+      },
+      facts: [
+        artifactPointer("file", "decisions/KFD-5.md"),
+        artifactPointer("file", "standards.json"),
+        artifactPointer("schema", "schemas/kfd-5/primitive-discovery.schema.json"),
+      ],
+      evidence: [
+        evidence("schema", "schemas/kfd-5/primitive-discovery.schema.json", "KFD-5 primitive-discovery schema is published."),
+        evidence("file", "scripts/check.mjs", "The package check gate validates the KFD-5 interface and metadata; it does not certify adopter candidates."),
+      ],
+      verification: { command: "node scripts/check.mjs", expectedResult: "pass" },
+      auditBoundary: {
+        scope: "KFD-5 package decision text, schema, standards metadata, and self-verification gate; excludes adopter candidate validity",
+        enumerability: "closed-world",
+      },
+      residualRisk: [],
+      responsibility,
+      status: "enforced",
+    },
+    {
+      id: "kfd-6-autonomous-discovery-loop-trust",
+      statement:
+        "KFD-6 is trustable only as a published draft experiment interface; KFD does not claim that a conforming autonomous primitive-discovery implementation currently exists.",
+      subject: {
+        kind: "autonomous-discovery-loop",
+        id: "kfd-6-autonomous-discovery-loop",
+        standard: "kfd-6",
+        description: "KFD-6 draft autonomous-discovery-loop experiment interface.",
+      },
+      facts: [
+        artifactPointer("file", "decisions/KFD-6.md"),
+        artifactPointer("file", "standards.json"),
+        artifactPointer("schema", "schemas/kfd-6/autonomous-discovery-loop.schema.json"),
+      ],
+      evidence: [
+        evidence("schema", "schemas/kfd-6/autonomous-discovery-loop.schema.json", "KFD-6 autonomous-discovery-loop experiment schema is published."),
+        evidence("file", "scripts/check.mjs", "The package check gate validates draft status and anti-self-certification constants."),
+      ],
+      verification: { command: "node scripts/check.mjs", expectedResult: "warning" },
+      auditBoundary: {
+        scope: "KFD-6 draft text, schema, standards metadata, and package checks; excludes any claim of a conforming autonomous implementation",
+        enumerability: "closed-world",
+      },
+      residualRisk: [draftAutonomyResidualRisk],
+      responsibility,
+      status: "declared",
+    },
   ],
   schemaEvolution: {
     compatibilityRule:
@@ -287,6 +353,28 @@ const assessment = {
       responsibility,
       residualRisk: [],
     },
+    {
+      id: "assess-kfd-5-primitive-discovery-trust",
+      claimId: "kfd-5-primitive-discovery-trust",
+      subject: trustClaims.claims[3].subject,
+      result: "pass",
+      facts: trustClaims.claims[3].facts.map((entry) => evidenceResult(entry.kind, entry.path, `Fact ${entry.path} is present and hashable.`)),
+      evidence: trustClaims.claims[3].evidence.map((entry) => evidenceResult(entry.type, entry.pointer.path, entry.description)),
+      auditBoundary: trustClaims.claims[3].auditBoundary,
+      responsibility,
+      residualRisk: [],
+    },
+    {
+      id: "assess-kfd-6-autonomous-discovery-loop-trust",
+      claimId: "kfd-6-autonomous-discovery-loop-trust",
+      subject: trustClaims.claims[4].subject,
+      result: "warning",
+      facts: trustClaims.claims[4].facts.map((entry) => evidenceResult(entry.kind, entry.path, `Fact ${entry.path} is present and hashable.`)),
+      evidence: trustClaims.claims[4].evidence.map((entry) => evidenceResult(entry.type, entry.pointer.path, entry.description)),
+      auditBoundary: trustClaims.claims[4].auditBoundary,
+      responsibility,
+      residualRisk: [draftAutonomyResidualRisk],
+    },
   ],
   unboundClaims: [],
   downgradeReasons: [
@@ -297,6 +385,14 @@ const assessment = {
       reason: "KFD-3 exposes machine-checkable collaboration surfaces and value evidence, but the human-language meaning of trusted value and non-coercive cooperation remains a reviewable semantic responsibility.",
       agentAction: "semantic-review-required",
       source: "kfd-3-collaboration-interface-trust",
+    },
+    {
+      id: "kfd-6-autonomous-discovery-not-yet-proved",
+      riskType: "external-fact-risk",
+      trustImpact: "downgrade-warning",
+      reason: "KFD-6 is a draft experiment contract and does not yet have adopter evidence for a conforming autonomous primitive-discovery loop.",
+      agentAction: "verify-external-facts",
+      source: "kfd-6-autonomous-discovery-loop-trust",
     },
   ],
   responsibility,

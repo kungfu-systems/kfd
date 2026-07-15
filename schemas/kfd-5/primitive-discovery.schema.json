@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-5/primitive-discovery.schema.json",
+  "title": "KFD-5 primitive discovery record",
+  "type": "object",
+  "required": ["schemaVersion", "contract", "standard", "candidate", "grounding", "participants", "alternatives", "contractModel", "tests", "decision"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "contract": { "const": "kfd-5-primitive-discovery" },
+    "standard": { "const": "kfd-5" },
+    "candidate": {
+      "type": "object",
+      "required": ["id", "title", "problemStatement", "scope"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "title": { "type": "string", "minLength": 1 },
+        "problemStatement": { "type": "string", "minLength": 1 },
+        "scope": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "grounding": {
+      "type": "object",
+      "required": ["pressure", "factSources", "evidenceBoundary", "knownGaps"],
+      "properties": {
+        "pressure": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "factSources": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/evidencePointer" } },
+        "evidenceBoundary": { "type": "string", "minLength": 1 },
+        "knownGaps": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "participants": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "kind", "functions"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "kind": { "enum": ["human", "agent", "collective", "other"] },
+          "functions": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": { "enum": ["grounded-judgment", "scalable-reasoning", "evidence-custody", "verification", "decision"] }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "alternatives": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "disposition", "reason"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "disposition": { "enum": ["retained", "rejected", "subsumed", "unresolved"] },
+          "reason": { "type": "string", "minLength": 1 }
+        },
+        "additionalProperties": false
+      }
+    },
+    "contractModel": {
+      "type": "object",
+      "required": ["identity", "boundary", "authority", "lifecycle", "operations"],
+      "properties": {
+        "identity": { "type": "string", "minLength": 1 },
+        "boundary": { "type": "string", "minLength": 1 },
+        "authority": { "type": "string", "minLength": 1 },
+        "lifecycle": { "type": "string", "minLength": 1 },
+        "operations": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+      },
+      "additionalProperties": false
+    },
+    "tests": {
+      "type": "object",
+      "required": ["minimumClosure", "deletion", "fuse", "falsifiers", "dogfood"],
+      "properties": {
+        "minimumClosure": { "$ref": "#/$defs/testResult" },
+        "deletion": { "$ref": "#/$defs/testResult" },
+        "fuse": { "$ref": "#/$defs/testResult" },
+        "falsifiers": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "dogfood": { "$ref": "#/$defs/testResult" }
+      },
+      "additionalProperties": false
+    },
+    "decision": {
+      "type": "object",
+      "required": ["outcome", "owner", "reason", "residualRisks"],
+      "properties": {
+        "outcome": { "enum": ["accepted", "provisional", "rejected", "subsumed", "no-new-primitive"] },
+        "owner": { "type": "string", "minLength": 1 },
+        "reason": { "type": "string", "minLength": 1 },
+        "residualRisks": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "evidencePointer": {
+      "type": "object",
+      "required": ["kind", "coordinate"],
+      "properties": {
+        "kind": { "enum": ["file", "git", "episode", "trace", "receipt", "dataset", "other"] },
+        "coordinate": { "type": "string", "minLength": 1 },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "observer": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "testResult": {
+      "type": "object",
+      "required": ["result", "evidence"],
+      "properties": {
+        "result": { "enum": ["pass", "fail", "inconclusive", "not-run"] },
+        "evidence": { "type": "array", "items": { "$ref": "#/$defs/evidencePointer" } },
+        "notes": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  }
+}

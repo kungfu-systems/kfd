@@ -44,6 +44,8 @@ const schemaSurfaces = [
   "schemas/kfd-3/collaboration-interface.schema.json",
   "schemas/kfd-3/witness.schema.json",
   "schemas/kfd-4/observer-perspective.schema.json",
+  "schemas/kfd-5/primitive-discovery.schema.json",
+  "schemas/kfd-6/autonomous-discovery-loop.schema.json",
 ].map((filePath) => ({
   id: `schema:${filePath.replace(/^schemas\//, "").replace(/\.schema\.json$/, "").replace(/\//g, ":")}`,
   sourcePath: filePath,
@@ -59,6 +61,8 @@ const groupedSurfaces = {
     { id: "doc:kfd-2-usage", sourcePath: "docs/KFD-2-usage.md", sha256: sha256File("docs/KFD-2-usage.md") },
     { id: "doc:kfd-3-usage", sourcePath: "docs/KFD-3-usage.md", sha256: sha256File("docs/KFD-3-usage.md") },
     { id: "doc:kfd-4-usage", sourcePath: "docs/KFD-4-usage.md", sha256: sha256File("docs/KFD-4-usage.md") },
+    { id: "doc:kfd-5-usage", sourcePath: "docs/KFD-5-usage.md", sha256: sha256File("docs/KFD-5-usage.md") },
+    { id: "doc:kfd-6-usage", sourcePath: "docs/KFD-6-usage.md", sha256: sha256File("docs/KFD-6-usage.md") },
     ...decisionDocs,
   ],
   schemas: schemaSurfaces,
@@ -240,6 +244,8 @@ const artifact = {
       pointer("docs/KFD-2-usage.md"),
       pointer("docs/KFD-3-usage.md"),
       pointer("docs/KFD-4-usage.md"),
+      pointer("docs/KFD-5-usage.md"),
+      pointer("docs/KFD-6-usage.md"),
     ],
   },
   closure: {

@@ -8,15 +8,15 @@
   },
   "versionImpact": {
     "final": "minor",
-    "source": "kfd-1-publication-url-semantics",
-    "rationale": "This change additively exposes KFD-1 publication URL semantics for canonical/latest/immutable publication routes, while preserving existing registry, package, and schemaVersion 1 compatibility."
+    "source": "kfd-5-6-primitive-discovery",
+    "rationale": "This change additively publishes KFD-5 and draft KFD-6 decisions, schemas, usage routes, and self-proof evidence while preserving existing registry shape, package paths, and schemaVersion 1 compatibility."
   },
   "surfaceImpacts": [
     {
       "id": "kfd-content",
       "impact": "patch",
       "class": "content",
-      "rationale": "KFD documents are append-only content coordinates; current documentation changes add KFD-4 as a practice guideline for declared observer timelines, while preserving existing decision numbers and registry shape."
+      "rationale": "KFD documents are append-only content coordinates; current documentation changes add KFD-5 as the active grounded primitive-discovery procedure and KFD-6 as a draft autonomous-discovery procedure, while preserving existing decision numbers and registry shape."
     },
     {
       "id": "kfd-registry-schema",
@@ -28,13 +28,13 @@
       "id": "kfd-standards-metadata",
       "impact": "minor",
       "class": "additive",
-      "rationale": "standards.json and schemas/ add the KFD-2 trust-taxonomy, trust-claims, trust-assessment, release-claims, and release-trust-passport schema IDs, explicit KFD-1/2/3/4 interface versions, KFD-4 observer-perspective schema metadata, KFD document SHA-256 bindings, KFD-owned concept names, KFD-3 fact-source interface metadata, and official-status interface metadata for downstream consumers."
+      "rationale": "standards.json and schemas/ add KFD-5 primitive-discovery and draft KFD-6 autonomous-discovery-loop interfaces, concept metadata, and document SHA-256 bindings while preserving existing KFD interfaces and metadata schemaVersion 1."
     },
     {
       "id": "kfd-package-structure",
       "impact": "minor",
       "class": "additive",
-      "rationale": "The npm package now publishes the KFD-2 trust taxonomy, generic trust claims, generic trust assessment, release trust schemas, KFD usage documentation, KFD-3 self collaboration-interface witnesses, KFD-4 observer-perspective schema, TRADEMARKS.md, public fact-source metadata, agent quickstart/self-proof documentation, Buildchain contract lock metadata, and repository verification scripts through existing schemas/, docs/, standards.json, site/, scripts/, .buildchain/, and subpath exports while preserving README.md, decisions/, registry.json, and site/ as stable directories."
+      "rationale": "The npm package additively publishes KFD-5 and KFD-6 decisions, usage notes, schemas, standards metadata, site routes, and self-proof evidence through existing decisions/, docs/, schemas/, standards.json, site/, scripts/, and .buildchain/ package surfaces."
     },
     {
       "id": "kfd-buildchain-contract-lock",
@@ -46,7 +46,7 @@
       "id": "kfd-site-homepage-bundle",
       "impact": "minor",
       "class": "additive",
-      "rationale": "site/kfd-site.json now exposes generated README-backed homepage.sections and homepage.displayPlan fields, including the adoption-boundary and practice-guidelines homepage sections, and scripts/check.mjs verifies the checked-in bundle matches the README projection so downstream sites can render KFD-owned homepage content without maintaining their own README parser or drifting copy."
+      "rationale": "site/kfd-site.json now projects KFD-5 and KFD-6 into the sequential practice-guideline model and current decision routes while preserving the KFD-1/2/3 foundation triad as the first-screen closed foundation."
     },
     {
       "id": "kfd-site-decision-usage-pages",
@@ -76,7 +76,7 @@
       "id": "kfd-2-generic-trust-assessment-core",
       "impact": "minor",
       "class": "additive",
-      "rationale": "KFD-2 now publishes generic trust-claims and trust-assessment schemas and dogfoods them through KFD-owned assessment files that evaluate KFD-1 contract-world, KFD-3 collaboration-interface, and KFD-4 observer-perspective claims."
+      "rationale": "KFD-2 generic trust claims and assessment now include package-level KFD-5 and KFD-6 claims, explicitly downgrading KFD-6 because the draft autonomous capability lacks adopter evidence."
     },
     {
       "id": "kfd-numbered-paths",
@@ -115,5 +115,5 @@
       "rationale": "KFD-1 now publishes a machine-readable schema for canonical reader URLs, latest aliases, immutable version artifact URLs, artifact digests, source coordinates, lineage, site consumption, and archive policies that prevent same-version digest drift or destructive deletion of immutable publication prefixes."
     }
   ],
-  "summary": "KFD v1.0 production promotion is minor-impact because it additively exposes publication URL semantics and related machine metadata while preserving existing package and schemaVersion 1 compatibility."
+  "summary": "KFD v1.0 production promotion is minor-impact because it additively exposes KFD-5 and draft KFD-6 decisions, schemas, usage routes, and self-proof metadata while preserving existing package paths and schemaVersion 1 compatibility."
 }

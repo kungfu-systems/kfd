@@ -85,6 +85,8 @@ when a product must make a concrete kind of reality legible.
 | Layer | Decision | Reader question | Commitment |
 |---|---|---|---|
 | Perspective-bearing views | KFD-4 | How should a product show time, history, replay, sync, or mixed-source work state? | Timelines must declare their observer: a useful view states who is observing, which facts were accepted, and how concurrent facts were projected. |
+| Primitive discovery | KFD-5 | How can humans and agents discover a new load-bearing object from real work? | Primitive discovery must join grounded judgment with scalable reasoning: reality pressure, alternatives, falsifiers, and responsibility stay inspectable. |
+| Autonomous discovery | KFD-6 | How may an agent discover primitives from accumulated experience without replacing reality with its own narrative? | Autonomous discovery must remain grounded in causal experience, preserve corpus boundaries, and never certify itself. |
 
 KFD-4 is the first such guideline. It applies KFD-1/2/3 to the problem of
 perspective and timeline order. In a multi-machine or multi-agent world, a
@@ -94,6 +96,13 @@ cooperate by exposing the observer, accepted ranges, causal constraints, and
 projection policy behind the view. KFD-4 gates perspective-bearing views; it
 does not claim that importing the KFD-4 schema proves an adopter's concrete
 timeline implementation is complete or correct.
+
+KFD-5 applies the same foundation to primitive discovery. Its current form
+joins human contact with reality and value judgment to agent-scale search,
+formalization, and falsification. KFD-6 is the draft next step: an agent may
+eventually derive primitive candidates from a large causal Episode corpus, but
+the loop must expose its observer and evidence cut, use independent evaluation,
+and keep discovery separate from promotion authority.
 
 ## Adoption boundary
 
@@ -122,8 +131,8 @@ The first screen should be derived from this README:
 - First-screen explanation: the beginning of `Foundation model`, ending at the
   `non-drifting facts -> inspectable trust -> trusted value -> voluntary
   cooperation` chain.
-- Practice signal: the `Practice guidelines` section, starting with KFD-4 as
-  the declared-observer rule for perspective-bearing timeline views.
+- Practice signal: the `Practice guidelines` section, starting with KFD-4 and
+  extending sequentially through later practice procedures.
 
 Decision cards, detail links, and machine paths should come from
 `registry.json`. The machine-readable site bundle lives at `site/kfd-site.json`
@@ -147,7 +156,8 @@ a Kungfu product before understanding the decisions. A philosophy becomes
 load-bearing only when it can be seen in a concrete case. The first concrete
 case is this package itself: `standards.json`, `schemas/`, `docs/`,
 `site/kfd-site.json`, and `scripts/check.mjs` show how KFD-1, KFD-2, KFD-3,
-and KFD-4 are expressed as consumable interfaces for both humans and agents.
+KFD-4, KFD-5, and KFD-6 are expressed as consumable interfaces for both humans
+and agents.
 For the broader product case, use the main Kungfu product entrypoint
 (`https://kungfu.tech`) for product philosophy, and Buildchain
 (`https://buildchain.libkungfu.dev`) for release and provenance
@@ -191,6 +201,9 @@ Agents consuming this package should start from the same sources as humans:
 8. If a needed KFD-2 taxonomy value is missing, open a KFD GitHub issue rather
    than inventing a local value:
    `https://github.com/kungfu-systems/kfd/issues/new?title=KFD-2%20trust%20taxonomy%20extension%20request`.
+9. Use `schemas/kfd-5/primitive-discovery.schema.json` to record a grounded
+   primitive candidate and `schemas/kfd-6/autonomous-discovery-loop.schema.json`
+   only for explicitly draft or experimental autonomous-discovery work.
 
 KFD package semver is only the distribution version. KFD-owned machine
 interfaces carry their own `schemaVersion` and `contract` fields. Compatible
@@ -221,6 +234,17 @@ state when a product shows a perspective-bearing timeline. The package-level
 claim proves the KFD-owned interface surface; adopter runtime correctness
 requires adopter-owned KFD-2 evidence.
 
+KFD-5 publishes a primitive-discovery record schema under `schemas/kfd-5/`.
+It binds candidate identity, grounded pressure, participant functions,
+alternatives, contract boundaries, falsifiers, dogfood evidence, and outcome.
+Validation proves record closure, not that the candidate is a real primitive.
+
+KFD-6 publishes a draft autonomous-discovery-loop schema under
+`schemas/kfd-6/`. It requires causal-experience boundaries, held-out and
+independent evaluation, bounded autonomy, and explicit separation between
+discovery and promotion. Its package presence is an experimental interface,
+not a claim that autonomous primitive discovery has been achieved.
+
 ## Current decisions
 
 | ID | Kind | Axiom | Status |
@@ -229,6 +253,8 @@ requires adopter-owned KFD-2 evidence.
 | [KFD-2](decisions/KFD-2.md) | principle | Trust must start from facts. | active |
 | [KFD-3](decisions/KFD-3.md) | principle | Cooperation must start from trusted value. | active |
 | [KFD-4](decisions/KFD-4.md) | procedure | Timelines must declare their observer. | active |
+| [KFD-5](decisions/KFD-5.md) | procedure | Primitive discovery must join grounded judgment with scalable reasoning. | active |
+| [KFD-6](decisions/KFD-6.md) | procedure | Autonomous discovery must remain grounded in causal experience. | draft |
 
 ## Decision metadata
 

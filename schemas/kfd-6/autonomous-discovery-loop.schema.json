@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-6/autonomous-discovery-loop.schema.json",
+  "title": "KFD-6 autonomous discovery loop experiment",
+  "type": "object",
+  "required": ["schemaVersion", "contract", "standard", "status", "loopId", "experienceBasis", "autonomyBoundary", "method", "evaluation", "antiSelfCertification", "promotion"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "contract": { "const": "kfd-6-autonomous-discovery-loop" },
+    "standard": { "const": "kfd-6" },
+    "status": { "enum": ["proposed", "experimental"] },
+    "loopId": { "type": "string", "minLength": 1 },
+    "experienceBasis": {
+      "type": "object",
+      "required": ["corpus", "immutableCut", "observer", "captureBoundary", "acceptedSources", "excludedSources", "knownGaps", "biases", "degradedState"],
+      "properties": {
+        "corpus": { "type": "string", "minLength": 1 },
+        "immutableCut": { "type": "string", "minLength": 1 },
+        "observer": { "type": "string", "minLength": 1 },
+        "captureBoundary": { "type": "string", "minLength": 1 },
+        "acceptedSources": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "excludedSources": { "type": "array", "items": { "type": "string" } },
+        "knownGaps": { "type": "array", "items": { "type": "string" } },
+        "biases": { "type": "array", "items": { "type": "string" } },
+        "degradedState": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "autonomyBoundary": {
+      "type": "object",
+      "required": ["allowedActions", "forbiddenActions", "safetyLimits", "valueAuthority"],
+      "properties": {
+        "allowedActions": { "type": "array", "items": { "type": "string" } },
+        "forbiddenActions": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "safetyLimits": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "valueAuthority": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "method": {
+      "type": "object",
+      "required": ["generator", "baseline", "candidateContract", "discoveryEvidenceCut", "heldOutEvidenceCut"],
+      "properties": {
+        "generator": { "type": "string", "minLength": 1 },
+        "baseline": { "type": "string", "minLength": 1 },
+        "candidateContract": { "const": "kfd-5-primitive-discovery" },
+        "discoveryEvidenceCut": { "type": "string", "minLength": 1 },
+        "heldOutEvidenceCut": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "evaluation": {
+      "type": "object",
+      "required": ["historicalReplay", "counterfactual", "shadow", "intervention", "transfer", "independentVerifier", "metrics"],
+      "properties": {
+        "historicalReplay": { "$ref": "#/$defs/evaluationStage" },
+        "counterfactual": { "$ref": "#/$defs/evaluationStage" },
+        "shadow": { "$ref": "#/$defs/evaluationStage" },
+        "intervention": { "$ref": "#/$defs/evaluationStage" },
+        "transfer": { "$ref": "#/$defs/evaluationStage" },
+        "independentVerifier": { "type": "string", "minLength": 1 },
+        "metrics": {
+          "type": "object",
+          "required": ["compression", "prediction", "intervention", "transfer", "falsifiability"],
+          "additionalProperties": { "type": "number" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "antiSelfCertification": {
+      "type": "object",
+      "required": ["generatorIsSoleVerifier", "generatedEvidenceOnly", "promotionAuthoritySeparated"],
+      "properties": {
+        "generatorIsSoleVerifier": { "const": false },
+        "generatedEvidenceOnly": { "const": false },
+        "promotionAuthoritySeparated": { "const": true }
+      },
+      "additionalProperties": false
+    },
+    "promotion": {
+      "type": "object",
+      "required": ["authority", "state", "evidence", "residualRisks"],
+      "properties": {
+        "authority": { "type": "string", "minLength": 1 },
+        "state": { "enum": ["not-requested", "requested", "rejected", "provisional"] },
+        "evidence": { "type": "array", "items": { "type": "string" } },
+        "residualRisks": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "evaluationStage": {
+      "type": "object",
+      "required": ["state", "evidenceCut", "result"],
+      "properties": {
+        "state": { "enum": ["not-run", "running", "complete"] },
+        "evidenceCut": { "type": "string", "minLength": 1 },
+        "result": { "enum": ["pass", "fail", "inconclusive", "not-run"] }
+      },
+      "additionalProperties": false
+    }
+  }
+}
