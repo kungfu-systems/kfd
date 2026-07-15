@@ -49,24 +49,52 @@ but an Episode corpus is not reality itself. Every autonomous loop must declare:
 - selection, survivorship, instrumentation, and policy bias;
 - which external consequences are represented only by proxies.
 
+## Boundary hypothesis
+
+Repeated structure alone does not explain why a pattern should become a
+primitive. Before proposing one, the loop must test whether the experience
+contains recurrent pressure at a contact surface between participants,
+systems, authority domains, representations, or stages of work.
+
+The boundary hypothesis must declare:
+
+- the sides that meet at the contact surface;
+- how the contact was previously handled through implicit coordination;
+- what changed, including any new participant, scale, frequency, authority,
+  heterogeneity, latency, or consequence;
+- which translation, handoff, attribution, authority, or responsibility
+  failures recur there;
+- how the candidate would mediate the contact as a stable object;
+- the narrower alternative that the evidence reflects only an internal model,
+  policy, label, or local abstraction.
+
+This is a discovery heuristic, not a universal ontology. A valid experiment
+may reject the boundary hypothesis and continue only if another grounded
+explanation justifies the candidate. The loop must not promote a boundary
+narrative merely because it is coherent.
+
 ## Procedure
 
 An autonomous primitive-discovery loop should:
 
 1. detect recurrent causal structures, repeated reconstruction, persistent
-   failure modes, or coordination costs across experience;
-2. propose a candidate identity, boundary, authority, lifecycle, and operation
+   failure modes, coordination costs, or cross-boundary translation and
+   responsibility failures across experience;
+2. construct and test a boundary hypothesis, including the no-boundary and
+   narrower internal-object alternatives;
+3. propose a candidate identity, boundary, authority, lifecycle, and operation
    set, including the no-new-primitive alternative;
-3. separate discovery evidence from held-out evaluation evidence;
-4. replay historical cases and test whether the candidate compresses them
+4. separate discovery evidence from held-out evaluation evidence;
+5. replay historical cases and test whether the candidate compresses them
    without deleting responsibility or contradictory facts;
-5. construct counterfactuals and search for disconfirming episodes;
-6. run a shadow evaluation before the candidate can influence real work;
-7. perform bounded interventions only within declared authority and safety
+6. construct counterfactuals and search for disconfirming episodes, including
+   cases where the same internal pattern exists without the proposed boundary;
+7. run a shadow evaluation before the candidate can influence real work;
+8. perform bounded interventions only within declared authority and safety
    limits;
-8. collect new causal experience and measure compression, prediction,
+9. collect new causal experience and measure compression, prediction,
    intervention, transfer, and falsifiability;
-9. reject, revise, retain as provisional, or submit the candidate to a separate
+10. reject, revise, retain as provisional, or submit the candidate to a separate
    promotion authority.
 
 ## No self-certification
@@ -100,7 +128,13 @@ provides the discovery structure that KFD-6 attempts to internalize.
 The long loop is:
 
 ```text
-Atlas_n -> guides action -> Episodes -> autonomous discovery -> candidate Atlas_n+1
+Atlas_n
+  -> guides action
+  -> Episodes
+  -> recurrent boundary pressure
+  -> boundary hypothesis
+  -> autonomous discovery
+  -> candidate Atlas_n+1
 ```
 
 Atlas represents a provisional semantic closure that guides action. Episodes
@@ -116,6 +150,8 @@ held-out and newly generated experience, that it can:
 
 - discover candidates that reduce repeated reconstruction beyond retrieval or
   summarization baselines;
+- distinguish a load-bearing contact surface from an internal pattern, policy,
+  label, or local abstraction using held-out and prospective evidence;
 - surface disconfirming evidence and reject attractive false candidates;
 - preserve observer, provenance, causal, responsibility, and degraded-state
   boundaries;

@@ -42,6 +42,32 @@ It is not required for every class, field, label, helper, or local abstraction.
 Most abstractions should remain local. The gate exists because a false
 primitive exports complexity, while a real primitive compresses it.
 
+## Boundary-pressure diagnostic
+
+A particularly strong, but non-exclusive, primitive signal appears when a
+candidate sits at a contact surface that was previously handled through human
+memory, convention, interpretation, or other implicit coordination, and that
+surface comes under new pressure from participants, scale, frequency,
+authority, heterogeneity, latency, or consequence.
+
+The investigation should ask:
+
+- which sides meet at the contact surface;
+- how the contact was handled implicitly before the pressure changed;
+- what changed and which failures now recur at the boundary;
+- whether the candidate turns translation, handoff, attribution, authority, or
+  responsibility into a stable and inspectable object;
+- whether deleting the candidate forces participants to reconstruct the old
+  implicit coordination;
+- whether an internal model, policy, label, or local abstraction explains the
+  evidence more narrowly.
+
+Boundary pressure is neither necessary nor sufficient proof of a primitive.
+It is a candidate-generation and falsification heuristic inside the wider
+KFD-5 procedure. The gate must remain open to primitives that do not fit this
+pattern and to the conclusion that boundary friction should be solved without
+creating a new primitive.
+
 ## Procedure
 
 A primitive-discovery record should preserve this chain:
@@ -53,7 +79,9 @@ A primitive-discovery record should preserve this chain:
    and known gaps so the problem cannot drift into a retrospective story.
 3. **Generate candidates.** Let humans and agents propose names, boundaries,
    models, and alternative explanations without treating the first coherent
-   answer as authoritative.
+   answer as authoritative. When boundary pressure is present, declare the
+   contact sides, prior implicit handling, pressure change, recurring failures,
+   mediation claim, and narrower internal-object alternative.
 4. **Search alternatives.** Compare prior art, narrower abstractions, existing
    primitives, and the option to do nothing.
 5. **Demand minimum closure.** State the smallest identity, boundary,

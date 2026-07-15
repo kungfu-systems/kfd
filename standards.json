@@ -1000,12 +1000,12 @@
       "title": "Primitive discovery must join grounded judgment with scalable reasoning: new load-bearing objects need reality pressure",
       "kind": "procedure",
       "status": "active",
-      "revision": 1,
+      "revision": 2,
       "metadataSchemaVersion": "1",
       "document": {
         "path": "decisions/KFD-5.md",
         "url": "https://kfd.libkungfu.dev/5",
-        "sha256": "cc3fe81eb57927f99296f4d700860b1a373b73ce2b600dec6dac26e85946f8fa"
+        "sha256": "f19e0ac27f5f807a31776d5a34340352e0714e2fd2f9b5b41cc80d9cf5a321b9"
       },
       "compatibility": {
         "packageLine": "v1.0",
@@ -1035,6 +1035,11 @@
         "groundedJudgment": "grounded judgment",
         "scalableReasoning": "scalable reasoning",
         "realityPressure": "reality pressure",
+        "boundaryPressure": "boundary pressure",
+        "contactSurface": "contact surface",
+        "implicitCoordination": "implicit coordination",
+        "pressureChange": "pressure change",
+        "internalObjectAlternative": "internal-object alternative",
         "primitiveCandidate": "primitive candidate",
         "minimumClosure": "minimum closure",
         "deletionTest": "deletion test",
@@ -1051,12 +1056,12 @@
       "title": "Autonomous discovery must remain grounded in causal experience: discovery loops must not certify themselves",
       "kind": "procedure",
       "status": "draft",
-      "revision": 1,
+      "revision": 2,
       "metadataSchemaVersion": "1",
       "document": {
         "path": "decisions/KFD-6.md",
         "url": "https://kfd.libkungfu.dev/6",
-        "sha256": "63bed57c0915629d5c888e3ef4fea308bd72e8abf27b86443178ad061a2ad851"
+        "sha256": "bf1df43d47cc7db369a1d5fcef38f77d4a5fdd904ed1e78f0d50dfd929567a1c"
       },
       "compatibility": {
         "packageLine": "v1.0",
@@ -1075,10 +1080,10 @@
       "interfaces": {
         "autonomousDiscoveryLoop": {
           "contract": "kfd-6-autonomous-discovery-loop",
-          "schemaVersion": 1,
+          "schemaVersion": 2,
           "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-6/autonomous-discovery-loop.schema.json",
           "schemaPath": "schemas/kfd-6/autonomous-discovery-loop.schema.json",
-          "compatibilityRule": "While KFD-6 is draft, compatible additions may keep schemaVersion 1; semantic or required-field changes require a new interface version or contract."
+          "compatibilityRule": "Draft interface v2 adds the required boundary hypothesis; further compatible additions may keep schemaVersion 2, while semantic or required-field changes require a new interface version or contract."
         }
       },
       "concepts": {
@@ -1087,6 +1092,12 @@
         "episodeCorpus": "Episode corpus",
         "experienceCut": "immutable experience cut",
         "captureBoundary": "capture boundary",
+        "boundaryPressure": "boundary pressure",
+        "boundaryHypothesis": "boundary hypothesis",
+        "contactSurface": "contact surface",
+        "implicitCoordination": "implicit coordination",
+        "pressureChange": "pressure change",
+        "internalObjectAlternative": "internal-object alternative",
         "heldOutEvaluation": "held-out evaluation",
         "boundedIntervention": "bounded intervention",
         "selfCertification": "self-certification",

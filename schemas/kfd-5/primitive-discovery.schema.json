@@ -19,6 +19,7 @@
       },
       "additionalProperties": false
     },
+    "boundaryPressure": { "$ref": "#/$defs/boundaryPressure" },
     "grounding": {
       "type": "object",
       "required": ["pressure", "factSources", "evidenceBoundary", "knownGaps"],
@@ -101,6 +102,39 @@
   },
   "additionalProperties": false,
   "$defs": {
+    "boundaryPressure": {
+      "type": "object",
+      "required": ["contactSides", "implicitHandling", "pressureChanges", "observedFailures", "mediationClaim", "internalObjectAlternative"],
+      "properties": {
+        "contactSides": {
+          "type": "array",
+          "minItems": 2,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "implicitHandling": { "type": "string", "minLength": 1 },
+        "pressureChanges": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["kind", "description"],
+            "properties": {
+              "kind": { "enum": ["new-participant", "scale", "frequency", "authority", "heterogeneity", "latency", "consequence", "other"] },
+              "description": { "type": "string", "minLength": 1 }
+            },
+            "additionalProperties": false
+          }
+        },
+        "observedFailures": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "mediationClaim": { "type": "string", "minLength": 1 },
+        "internalObjectAlternative": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
     "evidencePointer": {
       "type": "object",
       "required": ["kind", "coordinate"],
