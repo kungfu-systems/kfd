@@ -178,6 +178,34 @@
             }
           },
           {
+            "id": "kfd-5-document",
+            "class": "cross-time",
+            "classes": ["cross-time"],
+            "description": "Published KFD decision text at decisions/KFD-5.md.",
+            "sourcePath": "decisions/KFD-5.md",
+            "weldRationale": "Consumers can audit, replay, or cite this surface after release.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-6-document",
+            "class": "cross-time",
+            "classes": ["cross-time"],
+            "description": "Published KFD decision text at decisions/KFD-6.md.",
+            "sourcePath": "decisions/KFD-6.md",
+            "weldRationale": "Consumers can audit, replay, or cite this surface after release.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
             "id": "kfd-registry",
             "class": "integration-time",
             "classes": [
@@ -346,6 +374,34 @@
             "description": "Published JSON schema surface at schemas/kfd-4/observer-perspective.schema.json.",
             "sourcePath": "schemas/kfd-4/observer-perspective.schema.json",
             "weldRationale": "Consumers can bind to this surface as an integration contract.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-5-primitive-discovery-schema",
+            "class": "integration-time",
+            "classes": ["integration-time"],
+            "description": "Published JSON schema surface at schemas/kfd-5/primitive-discovery.schema.json.",
+            "sourcePath": "schemas/kfd-5/primitive-discovery.schema.json",
+            "weldRationale": "Consumers can bind to this surface as an integration contract.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-6-autonomous-discovery-loop-schema",
+            "class": "integration-time",
+            "classes": ["integration-time"],
+            "description": "Published JSON schema surface at schemas/kfd-6/autonomous-discovery-loop.schema.json.",
+            "sourcePath": "schemas/kfd-6/autonomous-discovery-loop.schema.json",
+            "weldRationale": "Consumers can bind to this draft surface as an experimental integration contract.",
             "impactProjection": {
               "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
               "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
@@ -676,6 +732,34 @@
             }
           },
           {
+            "id": "kfd-5-usage-doc",
+            "class": "cross-time",
+            "classes": ["cross-time"],
+            "description": "Published KFD usage documentation surface at docs/KFD-5-usage.md.",
+            "sourcePath": "docs/KFD-5-usage.md",
+            "weldRationale": "Consumers can audit, replay, or cite this surface after release.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-6-usage-doc",
+            "class": "cross-time",
+            "classes": ["cross-time"],
+            "description": "Published KFD usage documentation surface at docs/KFD-6-usage.md.",
+            "sourcePath": "docs/KFD-6-usage.md",
+            "weldRationale": "Consumers can audit, replay, or cite this draft surface after release.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
             "id": "kfd-1-publication-url-semantics-schema",
             "class": "integration-time",
             "classes": [
@@ -906,6 +990,108 @@
         "causalDominance": "causal dominance",
         "degradedEvidence": "degraded evidence",
         "timeline": "perspective-bearing timeline"
+      }
+    },
+    "kfd-5": {
+      "key": "kfd-5",
+      "id": "KFD-5",
+      "number": 5,
+      "label": "KFD-5",
+      "title": "Primitive discovery must join grounded judgment with scalable reasoning: new load-bearing objects need reality pressure",
+      "kind": "procedure",
+      "status": "active",
+      "revision": 1,
+      "metadataSchemaVersion": "1",
+      "document": {
+        "path": "decisions/KFD-5.md",
+        "url": "https://kfd.libkungfu.dev/5",
+        "sha256": "cc3fe81eb57927f99296f4d700860b1a373b73ce2b600dec6dac26e85946f8fa"
+      },
+      "compatibility": {
+        "packageLine": "v1.0",
+        "registrySchemaVersion": 1,
+        "metadataSchemaVersion": "1",
+        "rule": "Substantive semantic changes mint a new KFD; compatible metadata additions keep schemaVersion 1."
+      },
+      "schemaIds": {
+        "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json",
+        "primitiveDiscovery": "https://kfd.libkungfu.dev/schemas/kfd-5/primitive-discovery.schema.json"
+      },
+      "schemaPaths": {
+        "metadata": "schemas/kfd-standards.schema.json",
+        "primitiveDiscovery": "schemas/kfd-5/primitive-discovery.schema.json"
+      },
+      "interfaces": {
+        "primitiveDiscovery": {
+          "contract": "kfd-5-primitive-discovery",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-5/primitive-discovery.schema.json",
+          "schemaPath": "schemas/kfd-5/primitive-discovery.schema.json",
+          "compatibilityRule": "Compatible additions may keep schemaVersion 1; semantic or required-field changes require a new interface version or contract."
+        }
+      },
+      "concepts": {
+        "primitiveDiscovery": "primitive discovery",
+        "groundedJudgment": "grounded judgment",
+        "scalableReasoning": "scalable reasoning",
+        "realityPressure": "reality pressure",
+        "primitiveCandidate": "primitive candidate",
+        "minimumClosure": "minimum closure",
+        "deletionTest": "deletion test",
+        "fuseTest": "fuse test",
+        "falsifier": "falsifier",
+        "dogfoodEvidence": "dogfood evidence"
+      }
+    },
+    "kfd-6": {
+      "key": "kfd-6",
+      "id": "KFD-6",
+      "number": 6,
+      "label": "KFD-6",
+      "title": "Autonomous discovery must remain grounded in causal experience: discovery loops must not certify themselves",
+      "kind": "procedure",
+      "status": "draft",
+      "revision": 1,
+      "metadataSchemaVersion": "1",
+      "document": {
+        "path": "decisions/KFD-6.md",
+        "url": "https://kfd.libkungfu.dev/6",
+        "sha256": "63bed57c0915629d5c888e3ef4fea308bd72e8abf27b86443178ad061a2ad851"
+      },
+      "compatibility": {
+        "packageLine": "v1.0",
+        "registrySchemaVersion": 1,
+        "metadataSchemaVersion": "1",
+        "rule": "Substantive semantic changes mint a new KFD; compatible metadata additions keep schemaVersion 1."
+      },
+      "schemaIds": {
+        "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json",
+        "autonomousDiscoveryLoop": "https://kfd.libkungfu.dev/schemas/kfd-6/autonomous-discovery-loop.schema.json"
+      },
+      "schemaPaths": {
+        "metadata": "schemas/kfd-standards.schema.json",
+        "autonomousDiscoveryLoop": "schemas/kfd-6/autonomous-discovery-loop.schema.json"
+      },
+      "interfaces": {
+        "autonomousDiscoveryLoop": {
+          "contract": "kfd-6-autonomous-discovery-loop",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-6/autonomous-discovery-loop.schema.json",
+          "schemaPath": "schemas/kfd-6/autonomous-discovery-loop.schema.json",
+          "compatibilityRule": "While KFD-6 is draft, compatible additions may keep schemaVersion 1; semantic or required-field changes require a new interface version or contract."
+        }
+      },
+      "concepts": {
+        "autonomousDiscovery": "autonomous discovery",
+        "causalExperience": "causal experience",
+        "episodeCorpus": "Episode corpus",
+        "experienceCut": "immutable experience cut",
+        "captureBoundary": "capture boundary",
+        "heldOutEvaluation": "held-out evaluation",
+        "boundedIntervention": "bounded intervention",
+        "selfCertification": "self-certification",
+        "promotionAuthority": "promotion authority",
+        "candidateAtlas": "candidate Atlas"
       }
     }
   }
