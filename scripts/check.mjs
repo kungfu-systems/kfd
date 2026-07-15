@@ -526,6 +526,48 @@ for (const concept of ["observer", "declaredPerspective", "observerPerspective",
   if (!kfd4?.concepts?.[concept]) fail(`KFD-4 standards metadata missing concept ${concept}`);
 }
 if (!kfd4?.interfaces?.observerPerspective) fail("KFD-4 standards metadata missing interface observerPerspective");
+const kfd5 = standardsMetadata.standards?.["kfd-5"];
+if (kfd5?.schemaIds?.primitiveDiscovery !== "https://kfd.libkungfu.dev/schemas/kfd-5/primitive-discovery.schema.json") {
+  fail("KFD-5 standards metadata must expose the canonical primitiveDiscovery schema URI");
+}
+if (kfd5?.schemaPaths?.primitiveDiscovery !== "schemas/kfd-5/primitive-discovery.schema.json") {
+  fail("KFD-5 standards metadata must expose the primitiveDiscovery schema path");
+}
+const kfd5PrimitiveDiscoverySchema = JSON.parse(readFileSync("schemas/kfd-5/primitive-discovery.schema.json", "utf8"));
+if (kfd5PrimitiveDiscoverySchema.properties?.contract?.const !== "kfd-5-primitive-discovery") {
+  fail("KFD-5 primitiveDiscovery schema must describe the kfd-5-primitive-discovery contract");
+}
+if (kfd5PrimitiveDiscoverySchema.properties?.standard?.const !== "kfd-5") {
+  fail("KFD-5 primitiveDiscovery schema must declare standard kfd-5");
+}
+for (const concept of ["primitiveDiscovery", "groundedJudgment", "scalableReasoning", "realityPressure", "primitiveCandidate", "minimumClosure", "deletionTest", "fuseTest", "falsifier", "dogfoodEvidence"]) {
+  if (!kfd5?.concepts?.[concept]) fail(`KFD-5 standards metadata missing concept ${concept}`);
+}
+if (!kfd5?.interfaces?.primitiveDiscovery) fail("KFD-5 standards metadata missing interface primitiveDiscovery");
+
+const kfd6 = standardsMetadata.standards?.["kfd-6"];
+if (kfd6?.status !== "draft") fail("KFD-6 must remain draft until activation evidence is committed");
+if (kfd6?.schemaIds?.autonomousDiscoveryLoop !== "https://kfd.libkungfu.dev/schemas/kfd-6/autonomous-discovery-loop.schema.json") {
+  fail("KFD-6 standards metadata must expose the canonical autonomousDiscoveryLoop schema URI");
+}
+if (kfd6?.schemaPaths?.autonomousDiscoveryLoop !== "schemas/kfd-6/autonomous-discovery-loop.schema.json") {
+  fail("KFD-6 standards metadata must expose the autonomousDiscoveryLoop schema path");
+}
+const kfd6AutonomousDiscoveryLoopSchema = JSON.parse(readFileSync("schemas/kfd-6/autonomous-discovery-loop.schema.json", "utf8"));
+if (kfd6AutonomousDiscoveryLoopSchema.properties?.contract?.const !== "kfd-6-autonomous-discovery-loop") {
+  fail("KFD-6 autonomousDiscoveryLoop schema must describe the kfd-6-autonomous-discovery-loop contract");
+}
+if (kfd6AutonomousDiscoveryLoopSchema.properties?.standard?.const !== "kfd-6") {
+  fail("KFD-6 autonomousDiscoveryLoop schema must declare standard kfd-6");
+}
+const antiSelfCertification = kfd6AutonomousDiscoveryLoopSchema.properties?.antiSelfCertification?.properties;
+if (antiSelfCertification?.generatorIsSoleVerifier?.const !== false) fail("KFD-6 must prohibit the generator from being the sole verifier");
+if (antiSelfCertification?.generatedEvidenceOnly?.const !== false) fail("KFD-6 must prohibit generated-only evidence");
+if (antiSelfCertification?.promotionAuthoritySeparated?.const !== true) fail("KFD-6 must separate discovery from promotion authority");
+for (const concept of ["autonomousDiscovery", "causalExperience", "episodeCorpus", "experienceCut", "captureBoundary", "heldOutEvaluation", "boundedIntervention", "selfCertification", "promotionAuthority", "candidateAtlas"]) {
+  if (!kfd6?.concepts?.[concept]) fail(`KFD-6 standards metadata missing concept ${concept}`);
+}
+if (!kfd6?.interfaces?.autonomousDiscoveryLoop) fail("KFD-6 standards metadata missing interface autonomousDiscoveryLoop");
 for (const [id, successors] of superseded) {
   for (const successor of successors) {
     if (!registry.entries.some((e) => e.id === successor)) fail(`${id} cites missing successor ${successor}`);
@@ -590,6 +632,10 @@ if (!kfd1Witness) {
       "kfd-2-usage-doc",
       "kfd-3-usage-doc",
       "kfd-4-usage-doc",
+      "kfd-5-usage-doc",
+      "kfd-6-usage-doc",
+      "kfd-5-primitive-discovery-schema",
+      "kfd-6-autonomous-discovery-loop-schema",
       "kfd-2-foundation-trust-claims",
       "kfd-2-foundation-trust-assessment",
       "release-impact-ledger",
@@ -700,13 +746,15 @@ if (!kfd2TrustClaims) {
   if (kfd2TrustClaims.standard !== "kfd-2") fail("KFD-2 generic trust claims standard must be kfd-2");
   if (kfd2TrustClaims.projection?.kind !== "generic") fail("KFD-2 generic trust claims projection.kind must be generic");
   const claimsById = new Map((kfd2TrustClaims.claims ?? []).map((claim) => [claim.id, claim]));
-  for (const requiredClaim of ["kfd-1-contract-world-trust", "kfd-3-collaboration-interface-trust", "kfd-4-observer-perspective-trust"]) {
+  for (const requiredClaim of ["kfd-1-contract-world-trust", "kfd-3-collaboration-interface-trust", "kfd-4-observer-perspective-trust", "kfd-5-primitive-discovery-trust", "kfd-6-autonomous-discovery-loop-trust"]) {
     if (!claimsById.has(requiredClaim)) fail(`KFD-2 generic trust claims missing ${requiredClaim}`);
   }
   const expectedSubjectKinds = new Map([
     ["kfd-1-contract-world-trust", "contract-world"],
     ["kfd-3-collaboration-interface-trust", "collaboration-interface"],
     ["kfd-4-observer-perspective-trust", "observer-perspective"],
+    ["kfd-5-primitive-discovery-trust", "primitive-discovery"],
+    ["kfd-6-autonomous-discovery-loop-trust", "autonomous-discovery-loop"],
   ]);
   for (const [claimId, expectedKind] of expectedSubjectKinds.entries()) {
     const claim = claimsById.get(claimId);
@@ -742,11 +790,14 @@ if (!kfd2TrustAssessment) {
   }
   if (kfd2TrustAssessment.result !== "warning") fail("KFD-2 generic trust assessment result must be warning because KFD-3 declares semantic residual risk");
   const assessmentsByClaim = new Map((kfd2TrustAssessment.assessments ?? []).map((entry) => [entry.claimId, entry]));
-  for (const requiredClaim of ["kfd-1-contract-world-trust", "kfd-3-collaboration-interface-trust", "kfd-4-observer-perspective-trust"]) {
+  for (const requiredClaim of ["kfd-1-contract-world-trust", "kfd-3-collaboration-interface-trust", "kfd-4-observer-perspective-trust", "kfd-5-primitive-discovery-trust", "kfd-6-autonomous-discovery-loop-trust"]) {
     if (!assessmentsByClaim.has(requiredClaim)) fail(`KFD-2 generic trust assessment missing claim ${requiredClaim}`);
   }
   if (assessmentsByClaim.get("kfd-3-collaboration-interface-trust")?.result !== "warning") {
     fail("KFD-2 generic trust assessment must downgrade KFD-3 to warning");
+  }
+  if (assessmentsByClaim.get("kfd-6-autonomous-discovery-loop-trust")?.result !== "warning") {
+    fail("KFD-2 generic trust assessment must downgrade draft KFD-6 to warning");
   }
   for (const [index, reason] of (kfd2TrustAssessment.downgradeReasons ?? []).entries()) {
     if (!kfd2TrustTaxonomySchema.$defs?.riskType?.enum?.includes(reason.riskType)) fail(`KFD-2 generic trust assessment downgradeReasons[${index}].riskType must be a KFD-2 value`);

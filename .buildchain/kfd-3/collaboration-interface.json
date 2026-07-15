@@ -123,7 +123,7 @@
       "id": "kfd-2-foundation-trust-assessment",
       "surface": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json",
       "participants": ["release-system", "agent-reader", "package-consumer"],
-      "purpose": "Inspect KFD-2's generic assessment of KFD-1, KFD-3, and KFD-4 claims."
+      "purpose": "Inspect KFD-2's generic assessment of KFD-1 and KFD-3 through KFD-6 claims."
     },
     {
       "id": "site-bundle",
@@ -185,7 +185,7 @@
       "id": "schemas",
       "kind": "json-api",
       "participants": ["agent-reader", "package-consumer", "release-system"],
-      "value": "KFD-owned JSON schemas for standards metadata and KFD-1/2/3/4 interfaces.",
+      "value": "KFD-owned JSON schemas for standards metadata and KFD-1 through KFD-6 interfaces.",
       "discoverability": { "fromMinimalEntrypoint": true, "path": "schemas/**/*.json" },
       "maturity": "stable"
     },
@@ -249,7 +249,7 @@
       "id": "kfd-2-foundation-trust-claims",
       "kind": "json-api",
       "participants": ["release-system", "maintainer", "agent-reader", "package-consumer"],
-      "value": "Generic KFD-2 trust claims used to assess KFD-1, KFD-3, and KFD-4 through one trust model.",
+      "value": "Generic KFD-2 trust claims used to assess KFD-1 and KFD-3 through KFD-6 through one trust model.",
       "discoverability": { "fromMinimalEntrypoint": true, "path": ".buildchain/kfd-2/kfd-foundation.trust-claims.json" },
       "maturity": "stable"
     },
@@ -257,7 +257,7 @@
       "id": "kfd-2-foundation-trust-assessment",
       "kind": "json-api",
       "participants": ["release-system", "maintainer", "agent-reader", "package-consumer"],
-      "value": "Generic KFD-2 trust assessment result for KFD's own KFD-1, KFD-3, and KFD-4 claims.",
+      "value": "Generic KFD-2 trust assessment result for KFD's own KFD-1 and KFD-3 through KFD-6 claims.",
       "discoverability": { "fromMinimalEntrypoint": true, "path": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json" },
       "maturity": "stable"
     },
