@@ -202,8 +202,11 @@ Agents consuming this package should start from the same sources as humans:
    than inventing a local value:
    `https://github.com/kungfu-systems/kfd/issues/new?title=KFD-2%20trust%20taxonomy%20extension%20request`.
 9. Use `schemas/kfd-5/primitive-discovery.schema.json` to record a grounded
-   primitive candidate and `schemas/kfd-6/autonomous-discovery-loop.schema.json`
-   only for explicitly draft or experimental autonomous-discovery work.
+   primitive candidate, including the optional boundary-pressure diagnostic
+   when implicit coordination is under new pressure. Use
+   `schemas/kfd-6/autonomous-discovery-loop.schema.json` only for explicitly
+   draft or experimental autonomous-discovery work; its version 2 interface
+   requires a boundary hypothesis.
 
 KFD package semver is only the distribution version. KFD-owned machine
 interfaces carry their own `schemaVersion` and `contract` fields. Compatible
@@ -237,10 +240,14 @@ requires adopter-owned KFD-2 evidence.
 KFD-5 publishes a primitive-discovery record schema under `schemas/kfd-5/`.
 It binds candidate identity, grounded pressure, participant functions,
 alternatives, contract boundaries, falsifiers, dogfood evidence, and outcome.
-Validation proves record closure, not that the candidate is a real primitive.
+Its optional boundary-pressure diagnostic records contact sides, prior implicit
+handling, pressure changes, recurring failures, the mediation claim, and a
+narrower internal-object alternative. Validation proves record closure, not
+that the candidate is a real primitive.
 
 KFD-6 publishes a draft autonomous-discovery-loop schema under
-`schemas/kfd-6/`. It requires causal-experience boundaries, held-out and
+`schemas/kfd-6/`. Its version 2 experiment interface requires
+causal-experience boundaries, a tested boundary hypothesis, held-out and
 independent evaluation, bounded autonomy, and explicit separation between
 discovery and promotion. Its package presence is an experimental interface,
 not a claim that autonomous primitive discovery has been achieved.

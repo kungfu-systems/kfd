@@ -243,12 +243,12 @@ const trustClaims = {
     {
       id: "kfd-5-primitive-discovery-trust",
       statement:
-        "KFD-5 is trustable as a package-level primitive-discovery interface because KFD publishes the active procedure, candidate-record schema, standards metadata, and verification gate; adopter conclusions remain separate KFD-2 claims.",
+        "KFD-5 is trustable as a package-level primitive-discovery interface because KFD publishes the active procedure, candidate-record schema, optional boundary-pressure diagnostic, standards metadata, and verification gate; adopter conclusions remain separate KFD-2 claims.",
       subject: {
         kind: "primitive-discovery",
         id: "kfd-5-primitive-discovery",
         standard: "kfd-5",
-        description: "KFD-5 primitive-discovery procedure and candidate-record interface.",
+        description: "KFD-5 primitive-discovery procedure, candidate-record interface, and optional boundary-pressure diagnostic.",
       },
       facts: [
         artifactPointer("file", "decisions/KFD-5.md"),
@@ -271,12 +271,12 @@ const trustClaims = {
     {
       id: "kfd-6-autonomous-discovery-loop-trust",
       statement:
-        "KFD-6 is trustable only as a published draft experiment interface; KFD does not claim that a conforming autonomous primitive-discovery implementation currently exists.",
+        "KFD-6 is trustable only as a published draft version 2 experiment interface with a required boundary hypothesis; KFD does not claim that a conforming autonomous primitive-discovery implementation currently exists.",
       subject: {
         kind: "autonomous-discovery-loop",
         id: "kfd-6-autonomous-discovery-loop",
         standard: "kfd-6",
-        description: "KFD-6 draft autonomous-discovery-loop experiment interface.",
+        description: "KFD-6 draft autonomous-discovery-loop version 2 experiment interface with a required boundary hypothesis.",
       },
       facts: [
         artifactPointer("file", "decisions/KFD-6.md"),
@@ -284,8 +284,8 @@ const trustClaims = {
         artifactPointer("schema", "schemas/kfd-6/autonomous-discovery-loop.schema.json"),
       ],
       evidence: [
-        evidence("schema", "schemas/kfd-6/autonomous-discovery-loop.schema.json", "KFD-6 autonomous-discovery-loop experiment schema is published."),
-        evidence("file", "scripts/check.mjs", "The package check gate validates draft status and anti-self-certification constants."),
+        evidence("schema", "schemas/kfd-6/autonomous-discovery-loop.schema.json", "KFD-6 autonomous-discovery-loop version 2 experiment schema is published."),
+        evidence("file", "scripts/check.mjs", "The package check gate validates draft status, the required boundary hypothesis, and anti-self-certification constants."),
       ],
       verification: { command: "node scripts/check.mjs", expectedResult: "warning" },
       auditBoundary: {

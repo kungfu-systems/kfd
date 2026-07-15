@@ -20,7 +20,7 @@
         {
           "kind": "file",
           "path": "standards.json",
-          "sha256": "028f8cbbc7fb321bf67151dcd8a5bb0c919fb20c3eedf39dcea79fb30f203888"
+          "sha256": "d674c5953efae34088ac8777fff430272fe45392cef9d8c39d1ba45094059051"
         },
         {
           "kind": "schema",
@@ -44,7 +44,7 @@
           "pointer": {
             "kind": "file",
             "path": "scripts/check.mjs",
-            "sha256": "47e71c8012c5b22832d5db008c35747c94ff409ff46d0b8aa7e5c344b73dab1b"
+            "sha256": "a6685d93960e3ec6739b5608940b6cd6b0ae3b26278d1b136664cc2608aa0b9f"
           },
           "machineProvability": "machine-verifiable",
           "description": "The package check gate validates the KFD-1 schema, surface register, witness, and hashes."
@@ -109,7 +109,7 @@
           "pointer": {
             "kind": "file",
             "path": "scripts/check.mjs",
-            "sha256": "47e71c8012c5b22832d5db008c35747c94ff409ff46d0b8aa7e5c344b73dab1b"
+            "sha256": "a6685d93960e3ec6739b5608940b6cd6b0ae3b26278d1b136664cc2608aa0b9f"
           },
           "machineProvability": "machine-verifiable",
           "description": "The package check gate validates KFD-3 interface closure and witness parity."
@@ -161,7 +161,7 @@
         {
           "kind": "file",
           "path": "standards.json",
-          "sha256": "028f8cbbc7fb321bf67151dcd8a5bb0c919fb20c3eedf39dcea79fb30f203888"
+          "sha256": "d674c5953efae34088ac8777fff430272fe45392cef9d8c39d1ba45094059051"
         },
         {
           "kind": "schema",
@@ -185,7 +185,7 @@
           "pointer": {
             "kind": "file",
             "path": "standards.json",
-            "sha256": "028f8cbbc7fb321bf67151dcd8a5bb0c919fb20c3eedf39dcea79fb30f203888"
+            "sha256": "d674c5953efae34088ac8777fff430272fe45392cef9d8c39d1ba45094059051"
           },
           "machineProvability": "machine-verifiable",
           "description": "Standards metadata exposes the KFD-4 schema ID, path, interface version, and concept names."
@@ -195,7 +195,7 @@
           "pointer": {
             "kind": "file",
             "path": "scripts/check.mjs",
-            "sha256": "47e71c8012c5b22832d5db008c35747c94ff409ff46d0b8aa7e5c344b73dab1b"
+            "sha256": "a6685d93960e3ec6739b5608940b6cd6b0ae3b26278d1b136664cc2608aa0b9f"
           },
           "machineProvability": "machine-verifiable",
           "description": "The package check gate validates the KFD-4 schema and standards metadata; it does not assess adopter-specific timeline correctness."
@@ -220,28 +220,28 @@
     },
     {
       "id": "kfd-5-primitive-discovery-trust",
-      "statement": "KFD-5 is trustable as a package-level primitive-discovery interface because KFD publishes the active procedure, candidate-record schema, standards metadata, and verification gate; adopter conclusions remain separate KFD-2 claims.",
+      "statement": "KFD-5 is trustable as a package-level primitive-discovery interface because KFD publishes the active procedure, candidate-record schema, optional boundary-pressure diagnostic, standards metadata, and verification gate; adopter conclusions remain separate KFD-2 claims.",
       "subject": {
         "kind": "primitive-discovery",
         "id": "kfd-5-primitive-discovery",
         "standard": "kfd-5",
-        "description": "KFD-5 primitive-discovery procedure and candidate-record interface."
+        "description": "KFD-5 primitive-discovery procedure, candidate-record interface, and optional boundary-pressure diagnostic."
       },
       "facts": [
         {
           "kind": "file",
           "path": "decisions/KFD-5.md",
-          "sha256": "cc3fe81eb57927f99296f4d700860b1a373b73ce2b600dec6dac26e85946f8fa"
+          "sha256": "f19e0ac27f5f807a31776d5a34340352e0714e2fd2f9b5b41cc80d9cf5a321b9"
         },
         {
           "kind": "file",
           "path": "standards.json",
-          "sha256": "028f8cbbc7fb321bf67151dcd8a5bb0c919fb20c3eedf39dcea79fb30f203888"
+          "sha256": "d674c5953efae34088ac8777fff430272fe45392cef9d8c39d1ba45094059051"
         },
         {
           "kind": "schema",
           "path": "schemas/kfd-5/primitive-discovery.schema.json",
-          "sha256": "90c320c8321bc1b2d75c979c7b4098f3f4f483cd07f599dc0ec0dd85277e653d"
+          "sha256": "2801cca74164c283eaddfa018989afb5726a82210f7d199a58381d431d2099c1"
         }
       ],
       "evidence": [
@@ -250,7 +250,7 @@
           "pointer": {
             "kind": "schema",
             "path": "schemas/kfd-5/primitive-discovery.schema.json",
-            "sha256": "90c320c8321bc1b2d75c979c7b4098f3f4f483cd07f599dc0ec0dd85277e653d"
+            "sha256": "2801cca74164c283eaddfa018989afb5726a82210f7d199a58381d431d2099c1"
           },
           "machineProvability": "machine-verifiable",
           "description": "KFD-5 primitive-discovery schema is published."
@@ -260,7 +260,7 @@
           "pointer": {
             "kind": "file",
             "path": "scripts/check.mjs",
-            "sha256": "47e71c8012c5b22832d5db008c35747c94ff409ff46d0b8aa7e5c344b73dab1b"
+            "sha256": "a6685d93960e3ec6739b5608940b6cd6b0ae3b26278d1b136664cc2608aa0b9f"
           },
           "machineProvability": "machine-verifiable",
           "description": "The package check gate validates the KFD-5 interface and metadata; it does not certify adopter candidates."
@@ -285,28 +285,28 @@
     },
     {
       "id": "kfd-6-autonomous-discovery-loop-trust",
-      "statement": "KFD-6 is trustable only as a published draft experiment interface; KFD does not claim that a conforming autonomous primitive-discovery implementation currently exists.",
+      "statement": "KFD-6 is trustable only as a published draft version 2 experiment interface with a required boundary hypothesis; KFD does not claim that a conforming autonomous primitive-discovery implementation currently exists.",
       "subject": {
         "kind": "autonomous-discovery-loop",
         "id": "kfd-6-autonomous-discovery-loop",
         "standard": "kfd-6",
-        "description": "KFD-6 draft autonomous-discovery-loop experiment interface."
+        "description": "KFD-6 draft autonomous-discovery-loop version 2 experiment interface with a required boundary hypothesis."
       },
       "facts": [
         {
           "kind": "file",
           "path": "decisions/KFD-6.md",
-          "sha256": "63bed57c0915629d5c888e3ef4fea308bd72e8abf27b86443178ad061a2ad851"
+          "sha256": "bf1df43d47cc7db369a1d5fcef38f77d4a5fdd904ed1e78f0d50dfd929567a1c"
         },
         {
           "kind": "file",
           "path": "standards.json",
-          "sha256": "028f8cbbc7fb321bf67151dcd8a5bb0c919fb20c3eedf39dcea79fb30f203888"
+          "sha256": "d674c5953efae34088ac8777fff430272fe45392cef9d8c39d1ba45094059051"
         },
         {
           "kind": "schema",
           "path": "schemas/kfd-6/autonomous-discovery-loop.schema.json",
-          "sha256": "b991220c4914d0cb1c1ab406d7d6d68a517ca4fde09d3cb4f46d778f9d4950c9"
+          "sha256": "f9d6f2a741e36301f3f7f5a813b3e9a1dd3f2331e67243d74bd7dcf1ff75a1c1"
         }
       ],
       "evidence": [
@@ -315,20 +315,20 @@
           "pointer": {
             "kind": "schema",
             "path": "schemas/kfd-6/autonomous-discovery-loop.schema.json",
-            "sha256": "b991220c4914d0cb1c1ab406d7d6d68a517ca4fde09d3cb4f46d778f9d4950c9"
+            "sha256": "f9d6f2a741e36301f3f7f5a813b3e9a1dd3f2331e67243d74bd7dcf1ff75a1c1"
           },
           "machineProvability": "machine-verifiable",
-          "description": "KFD-6 autonomous-discovery-loop experiment schema is published."
+          "description": "KFD-6 autonomous-discovery-loop version 2 experiment schema is published."
         },
         {
           "type": "file",
           "pointer": {
             "kind": "file",
             "path": "scripts/check.mjs",
-            "sha256": "47e71c8012c5b22832d5db008c35747c94ff409ff46d0b8aa7e5c344b73dab1b"
+            "sha256": "a6685d93960e3ec6739b5608940b6cd6b0ae3b26278d1b136664cc2608aa0b9f"
           },
           "machineProvability": "machine-verifiable",
-          "description": "The package check gate validates draft status and anti-self-certification constants."
+          "description": "The package check gate validates draft status, the required boundary hypothesis, and anti-self-certification constants."
         }
       ],
       "verification": {

@@ -7,16 +7,16 @@
     "targetRef": "release/v1/v1.0"
   },
   "versionImpact": {
-    "final": "minor",
-    "source": "kfd-5-6-primitive-discovery",
-    "rationale": "This change additively publishes KFD-5 and draft KFD-6 decisions, schemas, usage routes, and self-proof evidence while preserving existing registry shape, package paths, and schemaVersion 1 compatibility."
+    "final": "major",
+    "source": "boundary-pressure-primitive-discovery",
+    "rationale": "This change compatibly adds the optional KFD-5 boundary-pressure diagnostic and deliberately advances the draft KFD-6 autonomous-discovery interface from schemaVersion 1 to 2 because boundaryHypothesis becomes required. The fixed outer KFD package line remains v1.0; major is the honest interface-impact signal."
   },
   "surfaceImpacts": [
     {
       "id": "kfd-content",
       "impact": "patch",
       "class": "content",
-      "rationale": "KFD documents are append-only content coordinates; current documentation changes add KFD-5 as the active grounded primitive-discovery procedure and KFD-6 as a draft autonomous-discovery procedure, while preserving existing decision numbers and registry shape."
+      "rationale": "KFD-5 receives an editorially compatible boundary-pressure diagnostic while retaining its active one-sentence rule; draft KFD-6 gains a required boundary-hypothesis stage without changing decision numbers, titles, or registry shape."
     },
     {
       "id": "kfd-registry-schema",
@@ -26,15 +26,15 @@
     },
     {
       "id": "kfd-standards-metadata",
-      "impact": "minor",
-      "class": "additive",
-      "rationale": "standards.json and schemas/ add KFD-5 primitive-discovery and draft KFD-6 autonomous-discovery-loop interfaces, concept metadata, and document SHA-256 bindings while preserving existing KFD interfaces and metadata schemaVersion 1."
+      "impact": "major",
+      "class": "breaking",
+      "rationale": "KFD-5 schemaVersion 1 additively accepts optional boundaryPressure records, while the draft KFD-6 autonomousDiscoveryLoop interface advances to schemaVersion 2 and requires boundaryHypothesis. Existing KFD-6 version 1 experiment records require an explicit migration."
     },
     {
       "id": "kfd-package-structure",
-      "impact": "minor",
-      "class": "additive",
-      "rationale": "The npm package additively publishes KFD-5 and KFD-6 decisions, usage notes, schemas, standards metadata, site routes, and self-proof evidence through existing decisions/, docs/, schemas/, standards.json, site/, scripts/, and .buildchain/ package surfaces."
+      "impact": "patch",
+      "class": "compatible",
+      "rationale": "The npm package keeps the same paths and exports while publishing updated KFD-5/6 text, schemas, metadata, checks, and evidence at version 1.0.0-alpha.25."
     },
     {
       "id": "kfd-buildchain-contract-lock",
@@ -44,15 +44,15 @@
     },
     {
       "id": "kfd-site-homepage-bundle",
-      "impact": "minor",
-      "class": "additive",
-      "rationale": "site/kfd-site.json now projects KFD-5 and KFD-6 into the sequential practice-guideline model and current decision routes while preserving the KFD-1/2/3 foundation triad as the first-screen closed foundation."
+      "impact": "patch",
+      "class": "compatible",
+      "rationale": "site/kfd-site.json preserves the existing KFD-5/6 routes and foundation layout while refreshing homepage source content and decision metadata for the boundary-pressure clarification."
     },
     {
       "id": "kfd-site-decision-usage-pages",
-      "impact": "minor",
-      "class": "additive",
-      "rationale": "site/kfd-site.json now exposes decisionPages.usagePages, mapping each authoritative KFD decision page to its docs/KFD-N-usage.md child page and stable /N/usage route."
+      "impact": "patch",
+      "class": "compatible",
+      "rationale": "KFD-5 and KFD-6 usage bodies gain boundary-pressure guidance while their stable /5/usage and /6/usage routes and parent relationships remain unchanged."
     },
     {
       "id": "kfd-3-self-collaboration",
@@ -76,7 +76,7 @@
       "id": "kfd-2-generic-trust-assessment-core",
       "impact": "minor",
       "class": "additive",
-      "rationale": "KFD-2 generic trust claims and assessment now include package-level KFD-5 and KFD-6 claims, explicitly downgrading KFD-6 because the draft autonomous capability lacks adopter evidence."
+      "rationale": "KFD-2 generic trust claims now identify KFD-5 boundary-pressure support and the KFD-6 version 2 boundary-hypothesis requirement while continuing to downgrade KFD-6 because no adopter has proved the draft autonomous capability."
     },
     {
       "id": "kfd-numbered-paths",
@@ -115,5 +115,5 @@
       "rationale": "KFD-1 now publishes a machine-readable schema for canonical reader URLs, latest aliases, immutable version artifact URLs, artifact digests, source coordinates, lineage, site consumption, and archive policies that prevent same-version digest drift or destructive deletion of immutable publication prefixes."
     }
   ],
-  "summary": "KFD v1.0 production promotion is minor-impact because it additively exposes KFD-5 and draft KFD-6 decisions, schemas, usage routes, and self-proof metadata while preserving existing package paths and schemaVersion 1 compatibility."
+  "summary": "KFD v1.0 records a major interface impact for the deliberate draft KFD-6 schemaVersion 2 migration, while KFD-5 boundary-pressure support and all package, registry, route, and export changes remain compatible."
 }

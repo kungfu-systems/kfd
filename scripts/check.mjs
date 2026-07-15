@@ -540,7 +540,16 @@ if (kfd5PrimitiveDiscoverySchema.properties?.contract?.const !== "kfd-5-primitiv
 if (kfd5PrimitiveDiscoverySchema.properties?.standard?.const !== "kfd-5") {
   fail("KFD-5 primitiveDiscovery schema must declare standard kfd-5");
 }
-for (const concept of ["primitiveDiscovery", "groundedJudgment", "scalableReasoning", "realityPressure", "primitiveCandidate", "minimumClosure", "deletionTest", "fuseTest", "falsifier", "dogfoodEvidence"]) {
+if (kfd5PrimitiveDiscoverySchema.properties?.boundaryPressure?.$ref !== "#/$defs/boundaryPressure") {
+  fail("KFD-5 primitiveDiscovery schema must expose the optional boundaryPressure diagnostic");
+}
+if (kfd5PrimitiveDiscoverySchema.required?.includes("boundaryPressure")) {
+  fail("KFD-5 boundaryPressure must remain an optional heuristic in interface v1");
+}
+if (!kfd5PrimitiveDiscoverySchema.$defs?.boundaryPressure?.properties?.pressureChanges?.items?.properties?.kind?.enum?.includes("new-participant")) {
+  fail("KFD-5 boundaryPressure must classify new-participant pressure");
+}
+for (const concept of ["primitiveDiscovery", "groundedJudgment", "scalableReasoning", "realityPressure", "boundaryPressure", "contactSurface", "implicitCoordination", "pressureChange", "internalObjectAlternative", "primitiveCandidate", "minimumClosure", "deletionTest", "fuseTest", "falsifier", "dogfoodEvidence"]) {
   if (!kfd5?.concepts?.[concept]) fail(`KFD-5 standards metadata missing concept ${concept}`);
 }
 if (!kfd5?.interfaces?.primitiveDiscovery) fail("KFD-5 standards metadata missing interface primitiveDiscovery");
@@ -560,11 +569,27 @@ if (kfd6AutonomousDiscoveryLoopSchema.properties?.contract?.const !== "kfd-6-aut
 if (kfd6AutonomousDiscoveryLoopSchema.properties?.standard?.const !== "kfd-6") {
   fail("KFD-6 autonomousDiscoveryLoop schema must declare standard kfd-6");
 }
+if (kfd6?.interfaces?.autonomousDiscoveryLoop?.schemaVersion !== 2 || kfd6AutonomousDiscoveryLoopSchema.properties?.schemaVersion?.const !== 2) {
+  fail("KFD-6 autonomousDiscoveryLoop boundary-hypothesis interface must use schemaVersion 2");
+}
+if (!kfd6AutonomousDiscoveryLoopSchema.required?.includes("boundaryHypothesis")) {
+  fail("KFD-6 autonomousDiscoveryLoop interface v2 must require boundaryHypothesis");
+}
+if (kfd6AutonomousDiscoveryLoopSchema.properties?.boundaryHypothesis?.$ref !== "#/$defs/boundaryHypothesis") {
+  fail("KFD-6 autonomousDiscoveryLoop schema must expose the boundaryHypothesis contract");
+}
+const boundaryHypothesis = kfd6AutonomousDiscoveryLoopSchema.$defs?.boundaryHypothesis;
+for (const field of ["contactSides", "implicitHandling", "pressureChanges", "observedFailures", "mediationClaim", "internalObjectAlternative", "status"]) {
+  if (!boundaryHypothesis?.required?.includes(field)) fail(`KFD-6 boundaryHypothesis must require ${field}`);
+}
+if (!boundaryHypothesis?.properties?.pressureChanges?.items?.properties?.kind?.enum?.includes("new-participant")) {
+  fail("KFD-6 boundaryHypothesis must classify new-participant pressure");
+}
 const antiSelfCertification = kfd6AutonomousDiscoveryLoopSchema.properties?.antiSelfCertification?.properties;
 if (antiSelfCertification?.generatorIsSoleVerifier?.const !== false) fail("KFD-6 must prohibit the generator from being the sole verifier");
 if (antiSelfCertification?.generatedEvidenceOnly?.const !== false) fail("KFD-6 must prohibit generated-only evidence");
 if (antiSelfCertification?.promotionAuthoritySeparated?.const !== true) fail("KFD-6 must separate discovery from promotion authority");
-for (const concept of ["autonomousDiscovery", "causalExperience", "episodeCorpus", "experienceCut", "captureBoundary", "heldOutEvaluation", "boundedIntervention", "selfCertification", "promotionAuthority", "candidateAtlas"]) {
+for (const concept of ["autonomousDiscovery", "causalExperience", "episodeCorpus", "experienceCut", "captureBoundary", "boundaryPressure", "boundaryHypothesis", "contactSurface", "implicitCoordination", "pressureChange", "internalObjectAlternative", "heldOutEvaluation", "boundedIntervention", "selfCertification", "promotionAuthority", "candidateAtlas"]) {
   if (!kfd6?.concepts?.[concept]) fail(`KFD-6 standards metadata missing concept ${concept}`);
 }
 if (!kfd6?.interfaces?.autonomousDiscoveryLoop) fail("KFD-6 standards metadata missing interface autonomousDiscoveryLoop");
