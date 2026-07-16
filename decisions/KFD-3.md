@@ -37,6 +37,15 @@ KFD-2 protects the truth path: show facts before asking for trust. KFD-3
 protects the relationship path: make value transparent enough to be trusted
 before asking for cooperation.
 
+## Reality-correction role
+
+KFD-3 prevents a shared model from becoming hidden authority over intelligent
+participants. Humans and agents may use, challenge, refuse, or help reconstruct
+the offered model because its value, facts, choices, and constraints remain
+inspectable. Cooperation therefore preserves more than consent: it preserves
+the plurality of participants through which missing facts, counterexamples,
+and better primitives can reach the system.
+
 ## Principle
 
 As software systems increasingly work with agents, the product relationship is

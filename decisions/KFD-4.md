@@ -45,6 +45,14 @@ In a complex world, from which declared perspective is this view useful,
 stable, and trustworthy?
 ```
 
+## Reality-correction role
+
+KFD-4 makes every perspective-bearing model admit that it is a projection, not
+a view from nowhere. Declaring the observer, accepted facts, evidence cut, and
+ordering policy keeps another participant able to reproduce or challenge the
+view. The procedure does not weaken facts; it prevents one useful projection
+from silently becoming final reality.
+
 ## Gate boundary
 
 KFD-4 is a gate for perspective-bearing views. It applies when a product,
