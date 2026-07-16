@@ -47,6 +47,22 @@ declared, inspectable, and unable to drift invisibly. KFD-2 defines how trust
 can stand on those facts. KFD-3 defines how humans and agents can cooperate
 once facts, responsibility, and value are visible.
 
+KFD-4 is the first complete operating application of that foundation:
+
+```text
+KFD-1 makes timelines evidentiary.
+KFD-2 makes replay trustworthy.
+KFD-3 makes contrastive replay cooperative.
+KFD-4 makes perspective transformation operational.
+```
+
+A timeline without non-drifting facts can become retrospective narrative. A
+replay without inspectable trust can become an unverifiable simulation. Views
+without cooperation can remain isolated even when each is locally valid.
+Competition or independent action may diversify perspectives; cooperation
+turns their trusted differences into shared discovery. KFD-4 depends on all
+three foundation principles without becoming a fourth foundation principle.
+
 ## Capability and discovery
 
 KFD does not reject stronger models. It rejects the assumption that model

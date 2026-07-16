@@ -46,6 +46,14 @@ inspectable. Cooperation therefore preserves more than consent: it preserves
 the plurality of participants through which missing facts, counterexamples,
 and better primitives can reach the system.
 
+Perspective diversity alone does not create shared correction. Competition or
+independent action may produce different views, but those views remain isolated
+unless participants can expose and compare them without surrendering their
+fact boundaries or being forced into one account. Cooperation makes trusted
+differences available for contrastive replay and shared discovery. In that
+role, cooperation is not only a coordination preference; it is epistemic
+infrastructure for finding what no single perspective can make visible alone.
+
 ## Principle
 
 As software systems increasingly work with agents, the product relationship is
