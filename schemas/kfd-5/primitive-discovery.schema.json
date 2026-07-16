@@ -3,9 +3,9 @@
   "$id": "https://kfd.libkungfu.dev/schemas/kfd-5/primitive-discovery.schema.json",
   "title": "KFD-5 primitive discovery record",
   "type": "object",
-  "required": ["schemaVersion", "contract", "standard", "candidate", "grounding", "participants", "alternatives", "contractModel", "tests", "decision"],
+  "required": ["schemaVersion", "contract", "standard", "candidate", "perspectiveGenesis", "grounding", "participants", "alternatives", "contractModel", "tests", "decision"],
   "properties": {
-    "schemaVersion": { "const": 1 },
+    "schemaVersion": { "const": 2 },
     "contract": { "const": "kfd-5-primitive-discovery" },
     "standard": { "const": "kfd-5" },
     "candidate": {
@@ -17,6 +17,48 @@
         "problemStatement": { "type": "string", "minLength": 1 },
         "scope": { "type": "string", "minLength": 1 }
       },
+      "additionalProperties": false
+    },
+    "perspectiveGenesis": {
+      "type": "object",
+      "required": ["genesisMethod", "originPerspective", "transformedPerspective", "transformation", "situatedObservation", "newlyVisibleNeed", "candidateObject", "claimBoundary"],
+      "properties": {
+        "genesisMethod": {
+          "enum": ["direct-situated-experience", "perspective-replay", "contrastive-replay", "other"]
+        },
+        "originPerspective": { "$ref": "#/$defs/perspective" },
+        "transformedPerspective": { "$ref": "#/$defs/perspective" },
+        "transformation": { "type": "string", "minLength": 1 },
+        "situatedObservation": { "type": "string", "minLength": 1 },
+        "newlyVisibleNeed": { "type": "string", "minLength": 1 },
+        "candidateObject": { "type": "string", "minLength": 1 },
+        "claimBoundary": { "type": "string", "minLength": 1 },
+        "replayBasis": { "$ref": "#/$defs/replayBasis" }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "genesisMethod": { "enum": ["perspective-replay", "contrastive-replay"] }
+            },
+            "required": ["genesisMethod"]
+          },
+          "then": { "required": ["replayBasis"] }
+        },
+        {
+          "if": {
+            "properties": { "genesisMethod": { "const": "contrastive-replay" } },
+            "required": ["genesisMethod"]
+          },
+          "then": {
+            "properties": {
+              "replayBasis": {
+                "properties": { "sourceViewIds": { "minItems": 2 } }
+              }
+            }
+          }
+        }
+      ],
       "additionalProperties": false
     },
     "boundaryPressure": { "$ref": "#/$defs/boundaryPressure" },
@@ -44,7 +86,7 @@
             "type": "array",
             "minItems": 1,
             "uniqueItems": true,
-            "items": { "enum": ["grounded-judgment", "scalable-reasoning", "evidence-custody", "verification", "decision"] }
+            "items": { "enum": ["perspective-grounded-judgment", "scalable-reasoning", "evidence-custody", "verification", "decision"] }
           }
         },
         "additionalProperties": false
@@ -102,6 +144,36 @@
   },
   "additionalProperties": false,
   "$defs": {
+    "perspective": {
+      "type": "object",
+      "required": ["id", "bearer", "role", "proximity", "consequences"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "bearer": { "type": "string", "minLength": 1 },
+        "role": { "type": "string", "minLength": 1 },
+        "proximity": { "type": "string", "minLength": 1 },
+        "consequences": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "naturalObjects": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+      },
+      "additionalProperties": false
+    },
+    "replayBasis": {
+      "type": "object",
+      "required": ["replayRecord", "sourceViewIds", "sharedContext", "preservationClaim", "degradedState"],
+      "properties": {
+        "replayRecord": { "$ref": "#/$defs/evidencePointer" },
+        "sourceViewIds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "sharedContext": { "type": "string", "minLength": 1 },
+        "preservationClaim": { "type": "string", "minLength": 1 },
+        "degradedState": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
     "boundaryPressure": {
       "type": "object",
       "required": ["contactSides", "implicitHandling", "pressureChanges", "observedFailures", "mediationClaim", "internalObjectAlternative"],

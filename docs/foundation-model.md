@@ -59,15 +59,53 @@ discovery loop:  reality -> facts -> model -> action -> consequence
                          -> correction or primitive reconstruction
 ```
 
-The loops are complementary, not interchangeable. When persistent reality
-pressure cannot be resolved inside the current model, the system must be able
-to challenge its observer, evidence cut, object boundaries, and load-bearing
-primitives rather than merely optimize within them.
+The loops are complementary, not interchangeable. Discovery does not always
+begin with repeated failure inside the current model. Repeated observation
+through a database-shaped ontology tends to produce a better database-shaped
+answer. An object outside that horizon may first become visible only when the
+participant, consequence, or action perspective changes.
 
-KFD-4, KFD-5, and KFD-6 extend the foundation into this discovery path. A
-perspective-bearing view declares its observer. Human-agent primitive discovery
-joins grounded judgment with scalable reasoning. Autonomous discovery remains
-grounded in causal experience and cannot promote its own conclusions.
+KFD-4, KFD-5, and KFD-6 make that motion explicit:
+
+```text
+declare a situated perspective
+  -> transform perspective
+  -> a previously hidden object becomes visible
+  -> qualify the candidate against facts and consequences
+  -> return to reality through action
+```
+
+KFD-4 says that every view remains bound to a perspective and that perspectives
+can be intentionally transformed. KFD-5 separates perspective-grounded genesis
+from scalable qualification. KFD-6 asks whether an agent can eventually
+internalize both functions from causal experience without replacing reality or
+certifying itself.
+
+## Engineering witnesses
+
+Buildchain is the first dense engineering witness for the foundation triad. It
+keeps release facts from drifting, binds trust to inspectable passports and
+responsibility, and exposes cooperation constraints through declared
+interfaces rather than hidden process.
+
+Kungfu is the first product witness for KFD-4. Its public product category
+remains Agent Runtime; its deeper role in the KFD model is expressed by this
+claim:
+
+> Kungfu is an infrastructure for reality-preserving perspective
+> transformation.
+
+Episodes preserve bounded causal experience. Observer-bound timelines make a
+perspective durable. Replay makes a perspective transferable with declared
+loss. Contrastive replay compares multiple views without collapsing them into
+an absolute history. Together they lower the marginal cost of perspective
+change while preserving facts, consequences, and degraded state.
+
+KFD-5 and KFD-6 describe how to use that capability. KFD-5 lets humans and
+agents turn cross-perspective object mismatch into a qualified Primitive
+candidate. KFD-6 asks whether an agent can perform the replay, comparison,
+discovery, and qualification loop autonomously across large bodies of causal
+experience.
 
 ## Real-world agent work
 
@@ -133,19 +171,25 @@ product consequences.
 
 ## Practice guidelines
 
-KFDs after the foundation triad may define procedures that apply the foundation
-to a specific class of real-world product behavior. They do not expand the
-foundation triad; they show how it behaves when a product must make a concrete
-kind of reality legible.
+KFDs after the foundation triad may define derived principles or procedures
+that apply the foundation to real-world behavior. They do not expand the
+foundation triad; they show how a fact-bound, trustable, cooperative system can
+change its view, discover missing objects, and remain correctable while doing
+so.
 
 | Layer | Decision | Reader question | Commitment |
 |---|---|---|---|
-| Perspective-bearing views | KFD-4 | How should a product show time, history, replay, sync, or mixed-source work state? | Timelines must declare their observer: a useful view states who is observing, which facts were accepted, and how concurrent facts were projected. |
-| Primitive discovery | KFD-5 | How can humans and agents discover a new load-bearing object from real work? | Primitive discovery must join grounded judgment with scalable reasoning: reality pressure, alternatives, falsifiers, and responsibility stay inspectable. |
-| Autonomous discovery | KFD-6 | How may an agent discover primitives from accumulated experience without replacing reality with its own narrative? | Autonomous discovery must remain grounded in causal experience, preserve corpus boundaries, and never certify itself. |
+| Declared perspective | KFD-4 | How can a situated view become durable, transferable, and comparable without being flattened? | Views remain bound to declared perspectives. Timelines preserve perspective; replay transfers it; contrast exposes hidden object mismatch. |
+| Primitive discovery | KFD-5 | How does a newly visible object become a load-bearing primitive rather than a private intuition? | Perspective-grounded judgment generates the candidate; scalable reasoning qualifies it through facts, alternatives, falsifiers, and real work. |
+| Autonomous discovery | KFD-6 | Can an agent move beyond a fixed ontology without replacing reality with generated narrative? | Autonomous discovery remains grounded in causal experience, runs explicit perspective experiments, and never certifies itself. |
 
-KFD-4 applies KFD-1/2/3 to perspective and timeline order. KFD-5 applies the
-same foundation to human-agent primitive discovery. KFD-6 is the draft next
-step: an agent may eventually derive primitive candidates from a large causal
-Episode corpus, but the loop must expose its observer and evidence cut, use
-independent evaluation, and keep discovery separate from promotion authority.
+The continuity is generative rather than merely classificatory. KFD-4 allows the
+visible horizon to move. KFD-5 turns an object revealed by that movement into a
+testable shared candidate. KFD-6 attempts to autonomize the complete loop.
+
+Observer-bound timeline and replay are the first concrete KFD-4 profiles, just
+as release versioning is one concrete KFD-1 profile. Episode and Atlas are
+KFD-5 cases: each became natural when the view moved from an implementation
+object to the participant who had to understand and act. A future KFD-6 system
+must replay and test such participant views from causal Episode experience, not
+merely cluster more patterns inside the old object set.

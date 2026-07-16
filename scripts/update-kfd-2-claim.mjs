@@ -211,29 +211,31 @@ const trustClaims = {
     {
       id: "kfd-4-observer-perspective-trust",
       statement:
-        "KFD-4 is trustable as a package-level observer-perspective interface because KFD publishes the schema, standards metadata, decision text, and verification gate for observer-relative timeline views; adopter-specific timeline correctness remains a separate KFD-2 claim.",
+        "KFD-4 is trustable as a declared-perspective principle with package-level observer-timeline and perspective-replay profiles because KFD publishes the decision, schemas, standards metadata, and verification gate; adopter-specific capture, replay fidelity, and runtime correctness remain separate KFD-2 claims.",
       subject: {
         kind: "observer-perspective",
         id: "kfd-4-observer-perspective",
         standard: "kfd-4",
-        description: "KFD-4 observer-perspective schema for perspective-bearing timeline views.",
+        description: "KFD-4 declared-perspective principle with observer-timeline and perspective-replay profiles.",
       },
       facts: [
         artifactPointer("file", "decisions/KFD-4.md"),
         artifactPointer("file", "standards.json"),
         artifactPointer("schema", "schemas/kfd-4/observer-perspective.schema.json"),
+        artifactPointer("schema", "schemas/kfd-4/perspective-replay.schema.json"),
       ],
       evidence: [
         evidence("schema", "schemas/kfd-4/observer-perspective.schema.json", "KFD-4 observer-perspective schema is published."),
+        evidence("schema", "schemas/kfd-4/perspective-replay.schema.json", "KFD-4 perspective-preserving and contrastive replay schema is published."),
         evidence("file", "standards.json", "Standards metadata exposes the KFD-4 schema ID, path, interface version, and concept names."),
-        evidence("file", "scripts/check.mjs", "The package check gate validates the KFD-4 schema and standards metadata; it does not assess adopter-specific timeline correctness."),
+        evidence("file", "scripts/check.mjs", "The package check gate validates the KFD-4 timeline and replay schemas plus standards metadata; it does not assess adopter-specific capture or replay fidelity."),
       ],
       verification: {
         command: "node scripts/check.mjs",
         expectedResult: "pass",
       },
       auditBoundary: {
-        scope: "KFD-4 package decision text, observer-perspective schema, standards metadata, and self-verification gate; excludes adopter runtime timeline correctness",
+        scope: "KFD-4 package principle, observer-timeline and perspective-replay profiles, standards metadata, and self-verification gate; excludes adopter capture, replay fidelity, and runtime correctness",
         enumerability: "closed-world",
       },
       residualRisk: [],
@@ -243,12 +245,12 @@ const trustClaims = {
     {
       id: "kfd-5-primitive-discovery-trust",
       statement:
-        "KFD-5 is trustable as a package-level primitive-discovery interface because KFD publishes the active procedure, candidate-record schema, optional boundary-pressure diagnostic, standards metadata, and verification gate; adopter conclusions remain separate KFD-2 claims.",
+        "KFD-5 is trustable as a package-level version 2 primitive-discovery interface because KFD publishes the active procedure, required perspective-genesis record, scalable qualification record, optional boundary-pressure diagnostic, standards metadata, and verification gate; adopter conclusions remain separate KFD-2 claims.",
       subject: {
         kind: "primitive-discovery",
         id: "kfd-5-primitive-discovery",
         standard: "kfd-5",
-        description: "KFD-5 primitive-discovery procedure, candidate-record interface, and optional boundary-pressure diagnostic.",
+        description: "KFD-5 version 2 perspective-genesis and primitive-qualification interface.",
       },
       facts: [
         artifactPointer("file", "decisions/KFD-5.md"),
@@ -271,12 +273,12 @@ const trustClaims = {
     {
       id: "kfd-6-autonomous-discovery-loop-trust",
       statement:
-        "KFD-6 is trustable only as a published draft version 2 experiment interface with a required boundary hypothesis; KFD does not claim that a conforming autonomous primitive-discovery implementation currently exists.",
+        "KFD-6 is trustable only as a published draft version 3 experiment interface with required grounded perspective experiments and conditional boundary hypothesis; KFD does not claim that a conforming autonomous primitive-discovery implementation currently exists.",
       subject: {
         kind: "autonomous-discovery-loop",
         id: "kfd-6-autonomous-discovery-loop",
         standard: "kfd-6",
-        description: "KFD-6 draft autonomous-discovery-loop version 2 experiment interface with a required boundary hypothesis.",
+        description: "KFD-6 draft autonomous-discovery-loop version 3 interface with grounded perspective experiments.",
       },
       facts: [
         artifactPointer("file", "decisions/KFD-6.md"),
@@ -284,8 +286,8 @@ const trustClaims = {
         artifactPointer("schema", "schemas/kfd-6/autonomous-discovery-loop.schema.json"),
       ],
       evidence: [
-        evidence("schema", "schemas/kfd-6/autonomous-discovery-loop.schema.json", "KFD-6 autonomous-discovery-loop version 2 experiment schema is published."),
-        evidence("file", "scripts/check.mjs", "The package check gate validates draft status, the required boundary hypothesis, and anti-self-certification constants."),
+        evidence("schema", "schemas/kfd-6/autonomous-discovery-loop.schema.json", "KFD-6 autonomous-discovery-loop version 3 experiment schema is published."),
+        evidence("file", "scripts/check.mjs", "The package check gate validates draft status, required perspective experiments, conditional boundary hypothesis, and anti-self-certification constants."),
       ],
       verification: { command: "node scripts/check.mjs", expectedResult: "warning" },
       auditBoundary: {

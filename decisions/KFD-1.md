@@ -220,15 +220,21 @@ does not drift invisibly.
 
 ## How KFDs themselves are versioned
 
-KFD documents are append-only. A KFD's number is immutable and is the
-content-layer coordinate; substantive semantic change is made by minting a new
-KFD that supersedes the old number (namespace welding applied to decisions).
-Consequently, in the `@kungfu-tech/kfd` package, the outer package line stays
-fixed at `v1.0`. Content operations — new KFDs, status flips, editorial
-clarifications — are patches. Machine surfaces of the package itself (the
-registry schema, the package structure) can still require `minor` or `major`
-surface-impact review in the Buildchain release passport, but that review
-classification is not a silent package-line upgrade.
+Every published KFD package, tag, and commit is immutable. A KFD's number is
+the content-layer coordinate. Before the first stable release, an explicitly
+maintainer-authorized semantic refinement may update a numbered decision in a
+later prerelease, but it must preserve prior prerelease artifacts and declare a
+breaking decision-surface impact. Consumers that need prerelease precision cite
+the number together with package version or commit.
+
+After the first stable release, KFD documents are append-only: substantive
+semantic change is made by minting a new KFD that supersedes the old number
+(namespace welding applied to decisions). Consequently, the outer
+`@kungfu-tech/kfd` package line stays fixed at `v1.0`. Stable content operations
+such as new KFDs, status flips, and editorial clarifications are patches.
+Machine surfaces can still require `minor` or `major` surface-impact review in
+the Buildchain release passport, but that review classification is not a silent
+package-line upgrade.
 
 ## Implementation case: the KFD package
 

@@ -3,9 +3,9 @@
   "$id": "https://kfd.libkungfu.dev/schemas/kfd-6/autonomous-discovery-loop.schema.json",
   "title": "KFD-6 autonomous discovery loop experiment",
   "type": "object",
-  "required": ["schemaVersion", "contract", "standard", "status", "loopId", "experienceBasis", "boundaryHypothesis", "autonomyBoundary", "method", "evaluation", "antiSelfCertification", "promotion"],
+  "required": ["schemaVersion", "contract", "standard", "status", "loopId", "experienceBasis", "perspectiveExperiments", "autonomyBoundary", "method", "evaluation", "antiSelfCertification", "promotion"],
   "properties": {
-    "schemaVersion": { "const": 2 },
+    "schemaVersion": { "const": 3 },
     "contract": { "const": "kfd-6-autonomous-discovery-loop" },
     "standard": { "const": "kfd-6" },
     "status": { "enum": ["proposed", "experimental"] },
@@ -26,6 +26,11 @@
       },
       "additionalProperties": false
     },
+    "perspectiveExperiments": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/perspectiveExperiment" }
+    },
     "boundaryHypothesis": { "$ref": "#/$defs/boundaryHypothesis" },
     "autonomyBoundary": {
       "type": "object",
@@ -40,11 +45,16 @@
     },
     "method": {
       "type": "object",
-      "required": ["generator", "baseline", "candidateContract", "discoveryEvidenceCut", "heldOutEvidenceCut"],
+      "required": ["generator", "baseline", "candidateContract", "candidateSchemaVersion", "discoveryEvidenceCut", "heldOutEvidenceCut"],
       "properties": {
         "generator": { "type": "string", "minLength": 1 },
-        "baseline": { "type": "string", "minLength": 1 },
+        "baseline": {
+          "type": "string",
+          "minLength": 1,
+          "description": "A fixed-ontology retrieval, pattern-mining, policy, or prediction baseline that does not transform perspective."
+        },
         "candidateContract": { "const": "kfd-5-primitive-discovery" },
+        "candidateSchemaVersion": { "const": 2 },
         "discoveryEvidenceCut": { "type": "string", "minLength": 1 },
         "heldOutEvidenceCut": { "type": "string", "minLength": 1 }
       },
@@ -92,6 +102,58 @@
   },
   "additionalProperties": false,
   "$defs": {
+    "perspectiveExperiment": {
+      "type": "object",
+      "required": ["replayMode", "sourceViewCoordinates", "sharedContext", "preservationClaim", "degradedState", "originPerspective", "transformedPerspective", "causalBasis", "transformation", "newlyVisibleNeed", "candidateObject", "disconfirmingTest"],
+      "properties": {
+        "replayMode": { "enum": ["perspective-preserving", "contrastive"] },
+        "sourceViewCoordinates": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "sharedContext": { "type": "string", "minLength": 1 },
+        "preservationClaim": { "type": "string", "minLength": 1 },
+        "degradedState": { "type": "string", "minLength": 1 },
+        "originPerspective": { "$ref": "#/$defs/perspective" },
+        "transformedPerspective": { "$ref": "#/$defs/perspective" },
+        "causalBasis": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "transformation": { "type": "string", "minLength": 1 },
+        "newlyVisibleNeed": { "type": "string", "minLength": 1 },
+        "candidateObject": { "type": "string", "minLength": 1 },
+        "disconfirmingTest": { "type": "string", "minLength": 1 }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "replayMode": { "const": "contrastive" } },
+            "required": ["replayMode"]
+          },
+          "then": {
+            "properties": { "sourceViewCoordinates": { "minItems": 2 } }
+          }
+        }
+      ],
+      "additionalProperties": false
+    },
+    "perspective": {
+      "type": "object",
+      "required": ["id", "bearer", "role", "proximity", "consequences"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "bearer": { "type": "string", "minLength": 1 },
+        "role": { "type": "string", "minLength": 1 },
+        "proximity": { "type": "string", "minLength": 1 },
+        "consequences": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "naturalObjects": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+      },
+      "additionalProperties": false
+    },
     "boundaryHypothesis": {
       "type": "object",
       "required": ["contactSides", "implicitHandling", "pressureChanges", "observedFailures", "mediationClaim", "internalObjectAlternative", "status"],
