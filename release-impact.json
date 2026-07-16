@@ -16,7 +16,7 @@
       "id": "kfd-content",
       "impact": "patch",
       "class": "content",
-      "rationale": "The foundation text now distinguishes model capability from reality-correctability and makes inspectable product witnesses the load-bearing path from KFD principles to Kungfu products, without changing decision numbers, axioms, statuses, gates, or registry shape."
+      "rationale": "README now leads with the civilizational shift, Kungfu path, foundation triad, and product-witness rule, while the complete explanation moves to a non-numbered foundation document without changing decision numbers, axioms, statuses, gates, or registry shape."
     },
     {
       "id": "kfd-registry-schema",
@@ -28,13 +28,13 @@
       "id": "kfd-standards-metadata",
       "impact": "major",
       "class": "breaking",
-      "rationale": "KFD-5 schemaVersion 1 additively accepts optional boundaryPressure records, while the draft KFD-6 autonomousDiscoveryLoop interface advances to schemaVersion 2 and requires boundaryHypothesis. Existing KFD-6 version 1 experiment records require an explicit migration."
+      "rationale": "KFD-5 schemaVersion 1 additively accepts optional boundaryPressure records, while the draft KFD-6 autonomousDiscoveryLoop interface advances to schemaVersion 2 and requires boundaryHypothesis. The foundation explanation is additively registered as a KFD-1 cross-time surface; the existing KFD-6 version 1 migration remains the major impact."
     },
     {
       "id": "kfd-package-structure",
-      "impact": "patch",
-      "class": "compatible",
-      "rationale": "The npm package keeps the same paths and exports while publishing updated KFD-5/6 text, schemas, metadata, checks, and evidence at version 1.0.0-alpha.25."
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "The existing docs wildcard additively publishes docs/foundation-model.md, and package scripts add one ordered update:evidence entrypoint without removing or renaming any package path or export."
     },
     {
       "id": "kfd-buildchain-contract-lock",
@@ -44,9 +44,9 @@
     },
     {
       "id": "kfd-site-homepage-bundle",
-      "impact": "patch",
-      "class": "compatible",
-      "rationale": "site/kfd-site.json preserves existing routes and fields while additively exposing the load-bearing product-witness section and its first-screen presentation contract."
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "site/kfd-site.json preserves existing fields while adding the /foundation route, foundationPage projection, futurePicture structure, and explicit first-screen/detail separation."
     },
     {
       "id": "kfd-site-decision-usage-pages",
@@ -58,7 +58,7 @@
       "id": "kfd-3-self-collaboration",
       "impact": "minor",
       "class": "release-passport",
-      "rationale": "KFD now declares its own participant-facing collaboration interface and ships pre-build plus artifact-side KFD-3 witnesses so Buildchain can audit interface closure in the release passport."
+      "rationale": "KFD declares docs/foundation-model.md as a human, agent, and site-consumer entrypoint and refreshes pre-build plus artifact-side KFD-3 witnesses so Buildchain can audit the split reading path."
     },
     {
       "id": "kfd-3-trusted-value-evidence",
@@ -106,7 +106,7 @@
       "id": "kfd-1-surface-register",
       "impact": "minor",
       "class": "additive",
-      "rationale": "standards.json now publishes the KFD package surface register as the KFD-1 fact source, and the KFD-1 witness projects each registered surface class and impact projection from that fact source."
+      "rationale": "standards.json additively registers docs/foundation-model.md as a cross-time explanatory surface, and the KFD-1 witness binds its source and artifact digest from that fact source."
     },
     {
       "id": "kfd-1-publication-url-semantics",
@@ -115,5 +115,5 @@
       "rationale": "KFD-1 now publishes a machine-readable schema for canonical reader URLs, latest aliases, immutable version artifact URLs, artifact digests, source coordinates, lineage, site consumption, and archive policies that prevent same-version digest drift or destructive deletion of immutable publication prefixes."
     }
   ],
-  "summary": "KFD v1.0 records a major interface impact for the deliberate draft KFD-6 schemaVersion 2 migration, while KFD-5 boundary-pressure support and all package, registry, route, and export changes remain compatible."
+  "summary": "KFD v1.0 retains the major interface impact for the deliberate draft KFD-6 schemaVersion 2 migration and additively separates the concise homepage from the complete foundation explanation with KFD-1/2/3 evidence closure."
 }
