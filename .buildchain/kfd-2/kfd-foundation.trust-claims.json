@@ -44,7 +44,7 @@
           "pointer": {
             "kind": "file",
             "path": "scripts/check.mjs",
-            "sha256": "39cec6c7fac1ba0216fc189edb98b48428c1b77de2ae0c5f5ee74e5dbf99a589"
+            "sha256": "f73028a628943f458240af0f2ff98785c1d7f95c1a7ea3bfc8466b1dd64f90d3"
           },
           "machineProvability": "machine-verifiable",
           "description": "The package check gate validates the KFD-1 schema, surface register, witness, and hashes."
@@ -80,7 +80,7 @@
         {
           "kind": "file",
           "path": ".buildchain/kfd-3/collaboration-interface.json",
-          "sha256": "075559d907cd61d48b5d36bf7fd0bee7346c11edd4615b0e05b823bd0621dc1b"
+          "sha256": "0467a22fa3fcce8ad4259294f03b31624da3937722e536fc73fe127c69916f6d"
         }
       ],
       "evidence": [
@@ -99,7 +99,7 @@
           "pointer": {
             "kind": "file",
             "path": ".buildchain/kfd-3/collaboration-interface.json",
-            "sha256": "075559d907cd61d48b5d36bf7fd0bee7346c11edd4615b0e05b823bd0621dc1b"
+            "sha256": "0467a22fa3fcce8ad4259294f03b31624da3937722e536fc73fe127c69916f6d"
           },
           "machineProvability": "machine-verifiable",
           "description": "KFD-3 source collaboration interface declares reachable participant-facing surfaces and value evidence."
@@ -109,7 +109,7 @@
           "pointer": {
             "kind": "file",
             "path": "scripts/check.mjs",
-            "sha256": "39cec6c7fac1ba0216fc189edb98b48428c1b77de2ae0c5f5ee74e5dbf99a589"
+            "sha256": "f73028a628943f458240af0f2ff98785c1d7f95c1a7ea3bfc8466b1dd64f90d3"
           },
           "machineProvability": "machine-verifiable",
           "description": "The package check gate validates KFD-3 interface closure and witness parity."
@@ -210,7 +210,7 @@
           "pointer": {
             "kind": "file",
             "path": "scripts/check.mjs",
-            "sha256": "39cec6c7fac1ba0216fc189edb98b48428c1b77de2ae0c5f5ee74e5dbf99a589"
+            "sha256": "f73028a628943f458240af0f2ff98785c1d7f95c1a7ea3bfc8466b1dd64f90d3"
           },
           "machineProvability": "machine-verifiable",
           "description": "The package check gate validates the KFD-4 timeline and replay schemas plus standards metadata; it does not assess adopter-specific capture or replay fidelity."
@@ -275,7 +275,7 @@
           "pointer": {
             "kind": "file",
             "path": "scripts/check.mjs",
-            "sha256": "39cec6c7fac1ba0216fc189edb98b48428c1b77de2ae0c5f5ee74e5dbf99a589"
+            "sha256": "f73028a628943f458240af0f2ff98785c1d7f95c1a7ea3bfc8466b1dd64f90d3"
           },
           "machineProvability": "machine-verifiable",
           "description": "The package check gate validates the KFD-5 interface and metadata; it does not certify adopter candidates."
@@ -340,7 +340,7 @@
           "pointer": {
             "kind": "file",
             "path": "scripts/check.mjs",
-            "sha256": "39cec6c7fac1ba0216fc189edb98b48428c1b77de2ae0c5f5ee74e5dbf99a589"
+            "sha256": "f73028a628943f458240af0f2ff98785c1d7f95c1a7ea3bfc8466b1dd64f90d3"
           },
           "machineProvability": "machine-verifiable",
           "description": "The package check gate validates draft status, required perspective experiments, conditional boundary hypothesis, and anti-self-certification constants."

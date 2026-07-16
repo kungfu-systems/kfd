@@ -6,6 +6,8 @@
 | What is the KFD-1/2/3 foundation triad? | [`../README.md`](../README.md#foundation-triad) |
 | What worldview structure does the foundation triad express? | [`foundation-model.md`](foundation-model.md) |
 | How do capability loops, discovery loops, and product witnesses fit together? | [`foundation-model.md`](foundation-model.md) |
+| What is a primitive, why is primitive discovery difficult, and how does KFD address the missing process? | [`foundation-model.md`](foundation-model.md) |
+| How can I test the KFD primitive-discovery lens against Git, VisiCalc, the log, and an ordinary trace view? | [`primitive-discovery-cases.md`](primitive-discovery-cases.md) |
 | What practice guidelines are derived from the foundation triad? | [`foundation-model.md`](foundation-model.md#practice-guidelines) |
 | How should a product show timeline order from a declared perspective? | [KFD-4](../decisions/KFD-4.md) |
 | What schema should products use for KFD-4 observer-relative timeline views? | [`../schemas/kfd-4/observer-perspective.schema.json`](../schemas/kfd-4/observer-perspective.schema.json) |
@@ -20,7 +22,7 @@
 | What are the package implementation notes for KFD-4? | [`KFD-4-usage.md`](KFD-4-usage.md) |
 | What are the package implementation notes for KFD-5? | [`KFD-5-usage.md`](KFD-5-usage.md) |
 | What are the package implementation notes for KFD-6? | [`KFD-6-usage.md`](KFD-6-usage.md) |
-| How should an agent quickly understand this package? | [`../README.md`](../README.md#agent-quickstart), then [`foundation-model.md`](foundation-model.md) |
+| How should an agent quickly understand this package? | [`../README.md`](../README.md#agent-quickstart), then [`foundation-model.md`](foundation-model.md), then [`primitive-discovery-cases.md`](primitive-discovery-cases.md) |
 | What is the concrete self-proof case for KFD-1/2/3/4? | [`../README.md`](../README.md#product-proof-path) and the implementation case in each KFD |
 | Where is the public KFD fact source? | [`../README.md`](../README.md#decision-metadata) and [`../site/kfd-site.json`](../site/kfd-site.json) decision metadata |
 | What does Apache-2.0 cover, and what remains official/trademark-bound? | [`../TRADEMARKS.md`](../TRADEMARKS.md) |

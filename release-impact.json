@@ -8,8 +8,8 @@
   },
   "versionImpact": {
     "final": "major",
-    "source": "foundation-triad-kfd4-closure",
-    "rationale": "This pre-stable maintainer-authorized refinement makes prerelease immutability explicit in KFD-1, makes KFD-3 cooperation an epistemic condition for shared cross-perspective discovery, makes KFD-4 the first complete operating application of the foundation triad through timeline and replay engineering profiles, separates KFD-5 perspective genesis from qualification, advances the KFD-5 interface to version 2, and advances draft KFD-6 to version 3 with required replay-grounded perspective experiments. The fixed outer package line remains v1.0; major is the honest decision and machine-interface impact."
+    "source": "reader-context-primitive-cases",
+    "rationale": "This pre-stable maintainer-authorized refinement makes prerelease immutability explicit in KFD-1, makes KFD-3 cooperation an epistemic condition for shared cross-perspective discovery, makes KFD-4 the first complete operating application of the foundation triad through timeline and replay engineering profiles, separates KFD-5 perspective genesis from qualification, advances the KFD-5 interface to version 2, and advances draft KFD-6 to version 3 with required replay-grounded perspective experiments. It also adds a non-normative reader path from familiar historical primitives to the KFD discovery process. The fixed outer package line remains v1.0; major remains the honest decision and machine-interface impact."
   },
   "surfaceImpacts": [
     {
@@ -34,7 +34,7 @@
       "id": "kfd-package-structure",
       "impact": "minor",
       "class": "additive",
-      "rationale": "The package additively publishes schemas/kfd-4/perspective-replay.schema.json through the existing schema wildcard and strengthens expected release artifacts without removing or renaming a package path or export."
+      "rationale": "The package additively publishes schemas/kfd-4/perspective-replay.schema.json and docs/primitive-discovery-cases.md through existing wildcards, and strengthens expected release artifacts without removing or renaming a package path or export."
     },
     {
       "id": "kfd-buildchain-contract-lock",
@@ -46,7 +46,7 @@
       "id": "kfd-site-homepage-bundle",
       "impact": "minor",
       "class": "additive",
-      "rationale": "site/kfd-site.json preserves existing fields while adding the /foundation route, foundationPage projection, futurePicture structure, and explicit first-screen/detail separation."
+      "rationale": "site/kfd-site.json preserves existing fields while adding the /foundation and /cases routes, foundationPage and casesPage projections, a primitive-first futurePicture, and explicit first-screen/detail separation."
     },
     {
       "id": "kfd-site-decision-usage-pages",
@@ -58,7 +58,7 @@
       "id": "kfd-3-self-collaboration",
       "impact": "minor",
       "class": "release-passport",
-      "rationale": "KFD refreshes pre-build and artifact-side KFD-3 witnesses to include the new participant-consumable perspective replay schema and updated foundation explanation."
+      "rationale": "KFD refreshes pre-build and artifact-side KFD-3 witnesses to include the participant-consumable perspective replay schema, the updated foundation explanation, and the source-bound historical cases companion."
     },
     {
       "id": "kfd-3-trusted-value-evidence",

@@ -1,10 +1,15 @@
 # KFD — Kung Fu Decisions
 
-Humans first named the world, then built machines to find better answers within
-it. As agents become capable participants in reality, the next step is for
-humans and agents to discover when those names are wrong—and to build new
-primitives from inspectable consequences.
+Most progress gives us better answers inside a world we already know how to
+describe. Some progress changes what that world contains. A spreadsheet cell
+made dependencies and recalculation directly manipulable. A Git commit made
+distributed history something software could preserve, compare, and exchange.
+Once such a primitive exists, it feels obvious; before it exists, whole fields
+may work around its absence.
 
+We know how to use primitives after they exist. We do not yet have a generally
+adopted, reliable process for discovering the ones reality is already
+demanding. KFD asks how humans and agents can make that process inspectable.
 Kungfu opens the path from agents that answer questions to a civilization that
 can discover when it has named reality incorrectly.
 
@@ -25,6 +30,7 @@ agents cooperate through trusted value rather than hidden pressure.
 No principle is load-bearing until it has an inspectable product witness.
 
 [Read the foundation model](docs/foundation-model.md) ·
+[See primitives in history](docs/primitive-discovery-cases.md) ·
 [Explore current decisions](#current-decisions) ·
 [Inspect the product proof path](#product-proof-path)
 
@@ -66,14 +72,14 @@ an implementation note to paraphrase in the site repository.
 The first screen should be derived from this README:
 
 - Page identity: the top-level heading.
-- Future picture: the opening two paragraphs must preserve the shift from
-  machines answering inside a human-named world to humans and agents discovering
-  when that world was named incorrectly.
+- Future picture: the opening two paragraphs must first make primitive discovery
+  concrete, then preserve the shift from machines answering inside a human-named
+  world to humans and agents discovering when that world was named incorrectly.
 - Foundation signal: the `Foundation triad` section, especially the three
   one-line commitments and the product-witness rule immediately below them.
 - Depth choice: the foundation link must route to the non-numbered explanatory
-  page at `/foundation`; registry, renderer, and implementation detail stay
-  outside the first screen.
+  page at `/foundation`, and the historical cases link must route to `/cases`;
+  registry, renderer, and implementation detail stay outside the first screen.
 
 Decision cards, detail links, and machine paths should come from
 `registry.json`. The machine-readable site bundle lives at `site/kfd-site.json`
@@ -83,13 +89,14 @@ renderer may adapt layout, navigation, typography, and visual assets, but it
 should not maintain separate wording that can drift from this package.
 
 `site/kfd-site.json` is generated from this README and
-`docs/foundation-model.md` by `scripts/update-site-bundle.mjs`. The README owns
-the concise homepage; the foundation document owns the complete explanation.
-The generated bundle exposes ordered homepage sections, the `/foundation`
-page, and a display plan that separates first-screen, primary, detail, and
-support content. Site repositories should consume that bundle instead of
-parsing either Markdown file. The renderer contract remains machine metadata,
-not ordinary homepage content.
+`docs/foundation-model.md` and `docs/primitive-discovery-cases.md` by
+`scripts/update-site-bundle.mjs`. The README owns the concise homepage; the
+foundation document owns the complete explanation; the cases document owns
+the non-normative historical anchors. The generated bundle exposes ordered
+homepage sections, the `/foundation` and `/cases` pages, and a display plan that
+separates first-screen, primary, detail, and support content. Site repositories
+should consume that bundle instead of parsing the Markdown files. The renderer
+contract remains machine metadata, not ordinary homepage content.
 
 ## Product proof path
 
@@ -134,24 +141,26 @@ Agents consuming this package should start from the same sources as humans:
 
 1. Read this README for the future picture, foundation triad, and package map.
 2. Read `docs/foundation-model.md` for the complete non-numbered explanation.
-3. Read `standards.json` for canonical KFD numbers, schema IDs, concept names,
+3. Read `docs/primitive-discovery-cases.md` to test the KFD lens against familiar
+   historical cases and an ordinary cross-machine trace vignette.
+4. Read `standards.json` for canonical KFD numbers, schema IDs, concept names,
    and interface contracts.
-4. Use `site/kfd-site.json` decision metadata or the KFD-3 collaboration
+5. Use `site/kfd-site.json` decision metadata or the KFD-3 collaboration
    interface fact-source metadata to identify the public KFD fact source.
-5. Use `schemas/kfd-2/trust-taxonomy.schema.json` for KFD-2 residual-risk and
+6. Use `schemas/kfd-2/trust-taxonomy.schema.json` for KFD-2 residual-risk and
    trust-downgrade values. Unknown taxonomy values are invalid.
-6. Use `schemas/kfd-2/trust-claims.schema.json` and
+7. Use `schemas/kfd-2/trust-claims.schema.json` and
    `schemas/kfd-2/trust-assessment.schema.json` when a claim needs generic
    KFD-2 assessment instead of a release-specific passport.
-7. Use `schemas/kfd-3/collaboration-interface.schema.json` and
+8. Use `schemas/kfd-3/collaboration-interface.schema.json` and
    `schemas/kfd-3/witness.schema.json` to inspect collaboration interfaces.
-8. Use `schemas/kfd-1/publication-url-semantics.schema.json` when a package,
+9. Use `schemas/kfd-1/publication-url-semantics.schema.json` when a package,
    paper, specification, or site bundle must distinguish stable reader URLs,
    latest aliases, and immutable versioned artifacts.
-9. If a needed KFD-2 taxonomy value is missing, open a KFD GitHub issue rather
+10. If a needed KFD-2 taxonomy value is missing, open a KFD GitHub issue rather
    than inventing a local value:
    `https://github.com/kungfu-systems/kfd/issues/new?title=KFD-2%20trust%20taxonomy%20extension%20request`.
-10. Use `schemas/kfd-4/observer-perspective.schema.json` to bind timelines to
+11. Use `schemas/kfd-4/observer-perspective.schema.json` to bind timelines to
    their observers and `schemas/kfd-4/perspective-replay.schema.json` to record
    perspective-preserving or contrastive replay. Use
    `schemas/kfd-5/primitive-discovery.schema.json` version 2 to record the

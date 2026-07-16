@@ -57,6 +57,7 @@ const groupedSurfaces = {
   docs: [
     { id: "doc:readme", sourcePath: "README.md", sha256: sha256File("README.md") },
     { id: "doc:foundation-model", sourcePath: "docs/foundation-model.md", sha256: sha256File("docs/foundation-model.md") },
+    { id: "doc:primitive-discovery-cases", sourcePath: "docs/primitive-discovery-cases.md", sha256: sha256File("docs/primitive-discovery-cases.md") },
     { id: "doc:trademarks", sourcePath: "TRADEMARKS.md", sha256: sha256File("TRADEMARKS.md") },
     { id: "doc:docs-map", sourcePath: "docs/MAP.md", sha256: sha256File("docs/MAP.md") },
     { id: "doc:kfd-1-usage", sourcePath: "docs/KFD-1-usage.md", sha256: sha256File("docs/KFD-1-usage.md") },
@@ -214,6 +215,7 @@ const artifact = {
     discoverability: [
       pointer("README.md", "Human and agent entrypoint"),
       pointer("docs/foundation-model.md", "Complete non-numbered foundation explanation"),
+      pointer("docs/primitive-discovery-cases.md", "Source-bound historical anchors for primitive discovery"),
       pointer("TRADEMARKS.md", "Official status, trademark, and authority boundary"),
       pointer("docs/MAP.md", "Documentation routing entrypoint"),
       pointer("registry.json", "Machine-readable decision index"),
@@ -234,6 +236,7 @@ const artifact = {
     choicePaths: [
       pointer("README.md", "Human reading path"),
       pointer("docs/foundation-model.md", "Human and agent foundation reading path"),
+      pointer("docs/primitive-discovery-cases.md", "Human and agent historical case path"),
       pointer("registry.json", "Agent registry path"),
       pointer("standards.json", "Agent standards metadata path"),
       pointer(".buildchain/kfd-2/public-release-trust.claim.json", "Agent release trust claim path"),
@@ -244,6 +247,7 @@ const artifact = {
     manuals: [
       pointer("docs/MAP.md"),
       pointer("docs/foundation-model.md"),
+      pointer("docs/primitive-discovery-cases.md"),
       pointer("TRADEMARKS.md"),
       pointer("docs/KFD-1-usage.md"),
       pointer("docs/KFD-2-usage.md"),
