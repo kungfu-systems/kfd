@@ -245,9 +245,15 @@ export const buildSiteBundle = ({ readmeText, registry }) => {
       sections: homepageSections,
       displayPlan: {
         firstScreen: {
-          include: ["title", "lead", "foundation-triad", "foundation-model.chain"],
+          include: [
+            "title",
+            "lead",
+            "foundation-triad",
+            "foundation-model.intro",
+            "foundation-model.chain",
+          ],
           maxPrimarySections: 2,
-          note: "The first viewport should establish KFD identity and the three-decision worldview without showing renderer or developer contract text.",
+          note: "The first viewport should establish KFD as a reality-correctability foundation, not a model architecture or agent framework, without showing renderer or developer contract text.",
         },
         primary: ["foundation-triad", "foundation-model", "adoption-boundary", "practice-guidelines", "product-proof-path"],
         support: ["agent-quickstart", "decision-metadata"],

@@ -27,9 +27,13 @@ agents cooperate through trusted value rather than hidden pressure.
 
 ## Foundation model
 
-The triad is intentionally ordered. It is a compact model for surviving and
-evolving in complex systems, especially in a world where agents can observe,
-act, delegate, and remember across many surfaces.
+The triad is intentionally ordered. KFD is not a model architecture or an
+agent framework. Stronger models improve reasoning inside a world already
+named; KFD addresses the harder problem of keeping reality able to correct that
+world, including the primitives from which it is built. The triad is a compact
+foundation for surviving and evolving in complex systems, especially in a
+world where agents can observe, act, delegate, and remember across many
+surfaces.
 
 | Layer | Decision | Reader question | Commitment |
 |---|---|---|---|
@@ -40,8 +44,27 @@ act, delegate, and remember across many surfaces.
 In short:
 
 ```text
-non-drifting facts -> inspectable trust -> trusted value -> voluntary cooperation
+reality pressure -> non-drifting facts -> inspectable trust
+                 -> trusted value -> voluntary cooperation
 ```
+
+KFD does not seek a final world model. It defines a foundation for systems that
+remain correctable by reality. A capable model may improve prediction,
+reasoning, simulation, or action, but capability alone does not make the model
+a fact source or give it authority over the reality it represents.
+
+```text
+capability loop: model -> prediction -> evaluation -> stronger model
+
+KFD loop:        reality -> facts -> model -> action -> consequence
+                         -> correction or primitive reconstruction
+```
+
+The loops are complementary, not interchangeable. Model improvement matters;
+KFD rejects the assumption that it is sufficient. When persistent reality
+pressure cannot be resolved inside the current model, the system must be able
+to challenge its observer, evidence cut, object boundaries, and load-bearing
+primitives rather than merely optimize within them.
 
 This is why KFDs are not only internal governance text. KFD-1 gives the
 foundation model its first layer by making fact sources operational: a
@@ -128,9 +151,10 @@ The first screen should be derived from this README:
   decision registry.
 - Foundation signal: the `Foundation triad` section, especially the three
   one-line commitments.
-- First-screen explanation: the beginning of `Foundation model`, ending at the
-  `non-drifting facts -> inspectable trust -> trusted value -> voluntary
-  cooperation` chain.
+- First-screen explanation: the opening of `Foundation model` must preserve the
+  distinction between stronger reasoning inside an already named world and a
+  system that remains correctable by reality, followed by the ordered
+  foundation chain.
 - Practice signal: the `Practice guidelines` section, starting with KFD-4 and
   extending sequentially through later practice procedures.
 

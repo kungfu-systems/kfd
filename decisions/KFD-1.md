@@ -34,6 +34,15 @@ evidence from drifting across site rebuilds, and KFD metadata protects the
 decision package's own standard surfaces from drifting away from their declared
 source.
 
+## Reality-correction role
+
+KFD-1 does not claim that a declared fact source is reality itself. It keeps the
+load-bearing record stable enough for reality pressure to challenge a model,
+claim, or contract without the evidence changing with the explanation. If the
+fact source can drift whenever the model is revised, correction collapses into
+self-confirmation. KFD-1 preserves a stable reference from which every model
+can be inspected, contradicted, and explicitly replaced.
+
 ## Premise: the welded-surface register
 
 Every product maintains a **welded-surface register**. A surface is registered

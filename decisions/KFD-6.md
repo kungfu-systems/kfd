@@ -21,6 +21,14 @@ here has not yet been demonstrated as a load-bearing organizational capability.
 The draft defines an experiment and a gate; it does not claim that current
 agents can already satisfy it.
 
+## Reality-correction role
+
+KFD-6 asks whether an autonomous system can revise not only a model's answers
+but also the primitives from which its model world is built. The loop remains
+correctable only when causal experience can contradict its narrative,
+discovery evidence is separated from independent evaluation, and the system
+cannot promote its own reconstruction merely because it generated it.
+
 ## Gate boundary
 
 KFD-6 applies when an agent system mines accumulated experience to propose a
