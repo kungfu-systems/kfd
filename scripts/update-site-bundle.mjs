@@ -3,10 +3,13 @@ import { pathToFileURL } from "node:url";
 
 const README_PATH = "README.md";
 const FOUNDATION_PATH = "docs/foundation-model.md";
+const CASES_PATH = "docs/primitive-discovery-cases.md";
 const REGISTRY_PATH = "registry.json";
 const SITE_BUNDLE_PATH = "site/kfd-site.json";
 
 const normalizeLines = (value) => String(value || "").replace(/\r\n/g, "\n").trim();
+
+const stripFrontmatter = (value) => normalizeLines(value).replace(/^---\n[\s\S]*?\n---\n+/, "");
 
 const paragraphBlocks = (markdown) => normalizeLines(markdown)
   .split(/\n{2,}/)
@@ -71,7 +74,11 @@ const parseFoundationTriad = (markdown) => {
   const links = [...after.matchAll(/\[([^\]]+)\]\(([^)]+)\)/g)].map((link) => ({
     label: link[1],
     sourceTarget: link[2],
-    url: link[2] === FOUNDATION_PATH ? "/foundation" : link[2],
+    url: link[2] === FOUNDATION_PATH
+      ? "/foundation"
+      : link[2] === CASES_PATH
+        ? "/cases"
+        : link[2],
   }));
   return {
     heading: "Foundation triad",
@@ -162,9 +169,10 @@ const section = ({ id, sourceHeading, title, markdown, role, priority, presentat
   markdown: normalizeLines(markdown),
 });
 
-export const buildSiteBundle = ({ readmeText, foundationText, registry }) => {
+export const buildSiteBundle = ({ readmeText, foundationText, casesText, registry }) => {
   const readme = parseReadme(readmeText);
   const foundationDocument = parseReadme(foundationText);
+  const casesDocument = parseReadme(casesText);
   const futurePicture = parseFuturePicture(readme.intro);
   const { lead } = introLead(readme.intro);
   const { decisionKinds } = introLead(readme.sections["What KFD is"] || "");
@@ -280,12 +288,14 @@ export const buildSiteBundle = ({ readmeText, foundationText, registry }) => {
       package: "@kungfu-tech/kfd",
       homepageTextSource: README_PATH,
       foundationTextSource: FOUNDATION_PATH,
+      casesTextSource: CASES_PATH,
       registry: REGISTRY_PATH,
       decisionsDir: "decisions",
     },
     routes: {
       home: "/",
       foundation: "/foundation",
+      cases: "/cases",
       decisionPattern: "/{number}",
       decisionUsagePattern: "/{number}/usage",
       llms: "/llms.txt",
@@ -325,6 +335,7 @@ export const buildSiteBundle = ({ readmeText, foundationText, registry }) => {
           source: FOUNDATION_PATH,
           sections: ["foundation-model", "load-bearing-product-witness", "practice-guidelines"],
         },
+        readingPath: ["/", "/foundation", "/cases", "/{number}"],
         support: ["agent-quickstart", "decision-metadata"],
         currentDecisions: {
           source: REGISTRY_PATH,
@@ -355,6 +366,16 @@ export const buildSiteBundle = ({ readmeText, foundationText, registry }) => {
       normative: false,
       authorityNote: "The numbered texts in decisions/KFD-N.md remain authoritative.",
       markdown: normalizeLines(foundationText),
+    },
+    casesPage: {
+      id: "primitive-discovery-cases",
+      title: casesDocument.title,
+      sourcePath: CASES_PATH,
+      url: "/cases",
+      relationship: "historical-companion-to-foundation-model",
+      normative: false,
+      authorityNote: "Historical facts are source-bound; KFD replay is explanatory. Numbered KFD decisions remain authoritative.",
+      markdown: stripFrontmatter(casesText),
     },
     decisionPages: {
       source: REGISTRY_PATH,
@@ -400,6 +421,7 @@ export const buildSiteBundle = ({ readmeText, foundationText, registry }) => {
         "homepage title and text",
         "homepage section projection from README.md",
         "foundation explanation page from docs/foundation-model.md",
+        "historical cases page from docs/primitive-discovery-cases.md",
         "foundation triad commitments",
         "foundation model layers and chain",
         "product proof path text",
@@ -428,6 +450,7 @@ export const buildSiteBundle = ({ readmeText, foundationText, registry }) => {
 export const readInputs = () => ({
   readmeText: readFileSync(README_PATH, "utf8"),
   foundationText: readFileSync(FOUNDATION_PATH, "utf8"),
+  casesText: readFileSync(CASES_PATH, "utf8"),
   registry: JSON.parse(readFileSync(REGISTRY_PATH, "utf8")),
 });
 

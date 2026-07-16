@@ -79,6 +79,9 @@ if (siteBundle.source?.homepageTextSource !== "README.md") fail("site bundle hom
 if (siteBundle.source?.foundationTextSource !== "docs/foundation-model.md") {
   fail("site bundle foundationTextSource must be docs/foundation-model.md");
 }
+if (siteBundle.source?.casesTextSource !== "docs/primitive-discovery-cases.md") {
+  fail("site bundle casesTextSource must be docs/primitive-discovery-cases.md");
+}
 if (siteBundle.source?.registry !== "registry.json") fail("site bundle registry source must be registry.json");
 if (siteBundle.source?.decisionsDir !== "decisions") fail("site bundle decisionsDir must be decisions");
 if (siteBundle.homepage?.title !== "KFD — Kung Fu Decisions") fail("site bundle homepage title must match README H1 text");
@@ -86,6 +89,7 @@ if (!Array.isArray(siteBundle.homepage?.sections) || siteBundle.homepage.section
   fail("site bundle homepage.sections must expose generated homepage and foundation sections");
 }
 if (siteBundle.routes?.foundation !== "/foundation") fail("site bundle routes.foundation must be /foundation");
+if (siteBundle.routes?.cases !== "/cases") fail("site bundle routes.cases must be /cases");
 if (!siteBundle.homepage?.futurePicture?.pastToFuture || !siteBundle.homepage?.futurePicture?.kungfuPath) {
   fail("site bundle homepage.futurePicture must expose the civilizational shift and Kungfu path");
 }
@@ -106,6 +110,9 @@ if (!siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes("foundatio
 }
 if (!siteBundle.homepage?.foundationTriad?.links?.some((entry) => entry.url === "/foundation")) {
   fail("site bundle homepage foundation triad must expose the /foundation depth choice");
+}
+if (!siteBundle.homepage?.foundationTriad?.links?.some((entry) => entry.url === "/cases")) {
+  fail("site bundle homepage foundation triad must expose the /cases historical depth choice");
 }
 const requiredHomepageSections = {
   "future-picture": "README.md",
@@ -139,9 +146,28 @@ if (
 ) {
   fail("site bundle foundationPage must expose the non-normative /foundation explanation from docs/foundation-model.md");
 }
+if (
+  siteBundle.casesPage?.id !== "primitive-discovery-cases" ||
+  siteBundle.casesPage?.sourcePath !== "docs/primitive-discovery-cases.md" ||
+  siteBundle.casesPage?.url !== "/cases" ||
+  siteBundle.casesPage?.normative !== false ||
+  !siteBundle.casesPage?.markdown
+) {
+  fail("site bundle casesPage must expose the non-normative /cases companion from docs/primitive-discovery-cases.md");
+}
+if (!siteBundle.casesPage?.markdown?.startsWith("# Primitive Discovery in History")) {
+  fail("site bundle casesPage markdown must strip source frontmatter and begin with its H1");
+}
+if (!siteBundle.homepage?.displayPlan?.readingPath?.includes("/cases")) {
+  fail("site bundle homepage displayPlan readingPath must include /cases");
+}
 if (!existsSync("docs/foundation-model.md")) fail("missing docs/foundation-model.md");
 else if (!readFileSync("docs/foundation-model.md", "utf8").startsWith("# KFD Foundation Model")) {
   fail("docs/foundation-model.md must start with the KFD Foundation Model H1");
+}
+if (!existsSync("docs/primitive-discovery-cases.md")) fail("missing docs/primitive-discovery-cases.md");
+else if (!readFileSync("docs/primitive-discovery-cases.md", "utf8").includes("# Primitive Discovery in History")) {
+  fail("docs/primitive-discovery-cases.md must contain the Primitive Discovery in History H1");
 }
 const adoptionBoundary = siteBundle.homepage.sections.find((entry) => entry.id === "adoption-boundary");
 if (adoptionBoundary?.includeInFirstScreen !== false || adoptionBoundary?.renderRole !== "primary") {
@@ -736,6 +762,9 @@ if (!Array.isArray(boundary.ownedByKfd) || !boundary.ownedByKfd.includes("homepa
 }
 if (!Array.isArray(boundary.ownedByKfd) || !boundary.ownedByKfd.includes("homepage section projection from README.md")) {
   fail("site bundle renderingBoundary.ownedByKfd must include homepage section projection from README.md");
+}
+if (!Array.isArray(boundary.ownedByKfd) || !boundary.ownedByKfd.includes("historical cases page from docs/primitive-discovery-cases.md")) {
+  fail("site bundle renderingBoundary.ownedByKfd must include the historical cases page");
 }
 if (!Array.isArray(boundary.ownedBySite) || !boundary.ownedBySite.includes("CSS")) {
   fail("site bundle renderingBoundary.ownedBySite must include CSS");
