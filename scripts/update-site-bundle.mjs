@@ -93,6 +93,15 @@ const parseFoundationModel = (markdown) => {
   };
 };
 
+const parseProductWitness = (markdown) => {
+  const blocks = paragraphBlocks(markdown);
+  return {
+    heading: "Load-bearing product witness",
+    principle: blocks[0] || "",
+    explanation: blocks.slice(1),
+  };
+};
+
 const parsePracticeGuidelines = (markdown) => ({
   heading: "Practice guidelines",
   intro: paragraphBlocks(markdown)[0] || "",
@@ -142,6 +151,7 @@ export const buildSiteBundle = ({ readmeText, registry }) => {
   const { lead, decisionKinds } = introLead(readme.intro);
   const foundationTriad = parseFoundationTriad(readme.sections["Foundation triad"] || "");
   const foundationModel = parseFoundationModel(readme.sections["Foundation model"] || "");
+  const productWitness = parseProductWitness(readme.sections["Load-bearing product witness"] || "");
   const practiceGuidelines = parsePracticeGuidelines(readme.sections["Practice guidelines"] || "");
   const productProofPath = parseProductProofPath(readme.sections["Product proof path"] || "");
   const entries = registry.entries || [];
@@ -165,6 +175,16 @@ export const buildSiteBundle = ({ readmeText, registry }) => {
       role: "primary",
       priority: 20,
       presentation: "layered-model",
+      firstScreen: true,
+    }),
+    section({
+      id: "load-bearing-product-witness",
+      sourceHeading: "Load-bearing product witness",
+      title: "Load-bearing product witness",
+      markdown: readme.sections["Load-bearing product witness"],
+      role: "primary",
+      priority: 23,
+      presentation: "product-witness",
       firstScreen: true,
     }),
     section({
@@ -236,6 +256,7 @@ export const buildSiteBundle = ({ readmeText, registry }) => {
       decisionKinds,
       foundationTriad,
       foundationModel,
+      productWitness,
       practiceGuidelines,
       productProofPath,
       currentDecisions: {
@@ -251,11 +272,12 @@ export const buildSiteBundle = ({ readmeText, registry }) => {
             "foundation-triad",
             "foundation-model.intro",
             "foundation-model.chain",
+            "product-witness.principle",
           ],
-          maxPrimarySections: 2,
-          note: "The first viewport should establish KFD as a reality-correctability foundation, not a model architecture or agent framework, without showing renderer or developer contract text.",
+          maxPrimarySections: 3,
+          note: "The first viewport should establish KFD as a reality-correctability foundation backed by inspectable product witnesses, not a model architecture, agent framework, or abstract manifesto, without showing renderer or developer contract text.",
         },
-        primary: ["foundation-triad", "foundation-model", "adoption-boundary", "practice-guidelines", "product-proof-path"],
+        primary: ["foundation-triad", "foundation-model", "load-bearing-product-witness", "adoption-boundary", "practice-guidelines", "product-proof-path"],
         support: ["agent-quickstart", "decision-metadata"],
         currentDecisions: {
           source: REGISTRY_PATH,

@@ -30,10 +30,10 @@ agents cooperate through trusted value rather than hidden pressure.
 The triad is intentionally ordered. KFD is not a model architecture or an
 agent framework. Stronger models improve reasoning inside a world already
 named; KFD addresses the harder problem of keeping reality able to correct that
-world, including the primitives from which it is built. The triad is a compact
-foundation for surviving and evolving in complex systems, especially in a
-world where agents can observe, act, delegate, and remember across many
-surfaces.
+world, including the primitives from which it is built. Its claims become
+load-bearing only through inspectable product witnesses. The triad is a compact
+foundation for surviving and evolving in complex systems, especially in a world
+where agents can observe, act, delegate, and remember across many surfaces.
 
 | Layer | Decision | Reader question | Commitment |
 |---|---|---|---|
@@ -98,6 +98,45 @@ transparent and inspectable mechanisms it asks products to provide.
 This README states the architecture; KFD-1, KFD-2, and KFD-3 provide the
 foundation rules.
 
+## Load-bearing product witness
+
+KFD does not ask readers to believe its worldview. No principle is load-bearing
+until it is embodied in an inspectable product witness: an implementation that
+humans and agents can use, audit, challenge, and compare with its claimed
+consequences.
+
+Self-evident does not mean simple or documentation-free. It means that a
+product's declared value, mechanisms, constraints, and residual risks can be
+traced through its public interfaces, source, build and release evidence, and
+runtime facts without depending on hidden organizational context. Open source
+is necessary for Kungfu's proof path, but it is not sufficient: source
+availability alone does not create a witness when the product cannot be used at
+its declared surfaces or its claims tested against consequences.
+
+Kungfu products are therefore not illustrations placed beside KFD. They are
+the concrete surfaces through which KFD is made responsible to reality. Their
+breadth comes from the closure required by that responsibility: facts, trust,
+cooperation, perspective, action, consequence, and discovery must remain
+connected across the interfaces that humans and agents actually use.
+
+That closure requires substantial engineering, but complexity is not evidence
+by itself. Complexity is justified only when it can be traced to at least one
+of three responsibilities: preserving a KFD invariant, reducing friction for
+human or agent participants, or producing an inspectable product witness.
+Complexity that cannot carry one of those responsibilities remains debt.
+
+This is not a rejection of the existing technical world. Kungfu depends on the
+capabilities accumulated through open source, version control, programming
+languages, operating systems, build systems, and high-capability agents. Those
+capabilities are the departure ground and construction material for the passage
+into a new reality-correctable world. The new direction comes from organizing
+them under a different responsibility: keeping the shared world correctable by
+reality and able to reconstruct its ontology when the old map fails.
+
+Kungfu's product program is to open paths into that reality-correctable world
+for humans and agents. The route is built with the capabilities of the existing
+world; whether it carries weight is judged by inspectable product consequences.
+
 ## Practice guidelines
 
 KFDs after the foundation triad may define practice guidelines: procedures
@@ -155,6 +194,10 @@ The first screen should be derived from this README:
   distinction between stronger reasoning inside an already named world and a
   system that remains correctable by reality, followed by the ordered
   foundation chain.
+- Product witness signal: `Load-bearing product witness` must preserve the rule
+  that principles earn weight through inspectable product reality, together
+  with the boundary that inherited technical capability is necessary while
+  unjustified complexity remains debt.
 - Practice signal: the `Practice guidelines` section, starting with KFD-4 and
   extending sequentially through later practice procedures.
 
@@ -176,17 +219,19 @@ exposed as machine/implementation metadata, not as ordinary homepage content.
 ## Product proof path
 
 KFDs are not a detached manifesto, but they are not a demand that readers adopt
-a Kungfu product before understanding the decisions. A philosophy becomes
-load-bearing only when it can be seen in a concrete case. The first concrete
-case is this package itself: `standards.json`, `schemas/`, `docs/`,
+a Kungfu product before understanding the decisions. The product-witness rule
+starts with this package itself: `standards.json`, `schemas/`, `docs/`,
 `site/kfd-site.json`, and `scripts/check.mjs` show how KFD-1, KFD-2, KFD-3,
 KFD-4, KFD-5, and KFD-6 are expressed as consumable interfaces for both humans
-and agents.
-For the broader product case, use the main Kungfu product entrypoint
+and agents. These surfaces do not prove every adopter or product correct; they
+make the KFD package's own claims inspectable and falsifiable.
+
+For the broader witness set, use the main Kungfu product entrypoint
 (`https://kungfu.tech`) for product philosophy, and Buildchain
 (`https://buildchain.libkungfu.dev`) for release and provenance
-accountability. This registry states the commitments; this package and those
-entrypoints show how the commitments are meant to be borne in practice.
+accountability. This registry states the commitments; the open products expose
+where those commitments are carried, where evidence can be inspected, and
+where remaining risk still belongs.
 
 Rendered index: `https://kfd.libkungfu.dev` (stable machine path per entry,
 e.g. `https://kfd.libkungfu.dev/1`). This repository publishes
