@@ -36,7 +36,7 @@
 | What schema validates the standards metadata surface? | [`../schemas/kfd-standards.schema.json`](../schemas/kfd-standards.schema.json) |
 | What schema should release systems use for KFD-2 release claims and trust passports? | [`KFD-2-usage.md`](KFD-2-usage.md) — release passports are a KFD-2 projection |
 | How do I cite a decision? | [`../README.md`](../README.md) — cite by number, e.g. `KFD-1` |
-| How do decisions change over time? | [`../CONTRIBUTING.md`](../CONTRIBUTING.md) — append-only; explicit supersession mints a new number |
+| How do decisions change over time? | [`../CONTRIBUTING.md`](../CONTRIBUTING.md) — prerelease refinement preserves immutable artifacts; after stable, explicit supersession mints a new number |
 | How is this package versioned and released? | [KFD-1](../decisions/KFD-1.md) applied to itself; Buildchain governs releases |
 | What release impact ledger should Buildchain consume for production passports? | [`../release-impact.json`](../release-impact.json) |
 | What release provenance path must alpha promotion use? | [`release-governance.md`](release-governance.md) |

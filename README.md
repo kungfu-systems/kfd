@@ -37,7 +37,11 @@ single authoritative text in this repository.
 
 KFDs can be **principles** or **procedures**. Principles state what must remain
 true across kungfu-systems; procedures state how a class of work enforces or
-protects a principle. The numbered decisions remain authoritative; the
+protects a principle. During the pre-stable line, maintainer-authorized
+semantic refinement remains possible and every published prerelease stays
+immutable. After the first stable release, substantive change mints a new KFD
+that explicitly supersedes the old number. The numbered decisions remain
+authoritative; the
 [foundation model](docs/foundation-model.md) explains how they fit together.
 
 Stable rendered site: `https://kfd.libkungfu.dev`.
@@ -147,12 +151,17 @@ Agents consuming this package should start from the same sources as humans:
 9. If a needed KFD-2 taxonomy value is missing, open a KFD GitHub issue rather
    than inventing a local value:
    `https://github.com/kungfu-systems/kfd/issues/new?title=KFD-2%20trust%20taxonomy%20extension%20request`.
-10. Use `schemas/kfd-5/primitive-discovery.schema.json` to record a grounded
-   primitive candidate, including the optional boundary-pressure diagnostic
-   when implicit coordination is under new pressure. Use
+10. Use `schemas/kfd-4/observer-perspective.schema.json` to bind timelines to
+   their observers and `schemas/kfd-4/perspective-replay.schema.json` to record
+   perspective-preserving or contrastive replay. Use
+   `schemas/kfd-5/primitive-discovery.schema.json` version 2 to record the
+   perspective genesis and scalable qualification of a primitive candidate,
+   including the optional boundary-pressure diagnostic when implicit
+   coordination is under new pressure. Use
    `schemas/kfd-6/autonomous-discovery-loop.schema.json` only for explicitly
-   draft or experimental autonomous-discovery work; its version 2 interface
-   requires a boundary hypothesis.
+   draft or experimental autonomous-discovery work; its version 3 interface
+   requires grounded perspective experiments and treats boundary hypothesis as
+   conditional.
 
 KFD package semver is only the distribution version. KFD-owned machine
 interfaces carry their own `schemaVersion` and `contract` fields. Compatible
@@ -176,25 +185,25 @@ KFD-3. The KFD-owned boundary is the standard vocabulary, schema IDs, and
 closed-world evidence shape. See
 [`docs/KFD-3-usage.md`](docs/KFD-3-usage.md).
 
-KFD-4 publishes an observer-perspective schema under `schemas/kfd-4/`. It gives
-humans and agents a standard vocabulary for observer, accepted facts,
-projection policy, causal constraints, degraded evidence, and verification
-state when a product shows a perspective-bearing timeline. The package-level
-claim proves the KFD-owned interface surface; adopter runtime correctness
-requires adopter-owned KFD-2 evidence.
+KFD-4 says that views remain bound to declared perspectives and that a
+perspective transformation must stay inspectable when it is used to reveal a
+different object or guide action. Its two schemas under `schemas/kfd-4/` define
+the first concrete path: observer-bound timelines make a perspective durable;
+perspective-preserving and contrastive replay make perspectives transferable
+and comparable without flattening their fact boundaries. They are not a
+universal schema for every perspective.
 
-KFD-5 publishes a primitive-discovery record schema under `schemas/kfd-5/`.
-It binds candidate identity, grounded pressure, participant functions,
-alternatives, contract boundaries, falsifiers, dogfood evidence, and outcome.
-Its optional boundary-pressure diagnostic records contact sides, prior implicit
-handling, pressure changes, recurring failures, the mediation claim, and a
-narrower internal-object alternative. Validation proves record closure, not
-that the candidate is a real primitive.
+KFD-5 publishes a version 2 primitive-discovery record schema under
+`schemas/kfd-5/`. It separates perspective-grounded genesis from scalable
+qualification and records whether genesis came from direct experience,
+perspective replay, or contrastive replay. It then binds facts, alternatives,
+contract boundaries, falsifiers, dogfood evidence, and outcome. Validation
+proves record closure, not that the candidate is a real primitive.
 
 KFD-6 publishes a draft autonomous-discovery-loop schema under
-`schemas/kfd-6/`. Its version 2 experiment interface requires
-causal-experience boundaries, a tested boundary hypothesis, held-out and
-independent evaluation, bounded autonomy, and explicit separation between
+`schemas/kfd-6/`. Its version 3 experiment interface requires causal-experience
+boundaries, grounded perspective experiments, a fixed-ontology baseline,
+held-out and independent evaluation, bounded autonomy, and separation between
 discovery and promotion. Its package presence is an experimental interface,
 not a claim that autonomous primitive discovery has been achieved.
 
@@ -205,8 +214,8 @@ not a claim that autonomous primitive discovery has been achieved.
 | [KFD-1](decisions/KFD-1.md) | procedure | Facts must not drift. | active |
 | [KFD-2](decisions/KFD-2.md) | principle | Trust must start from facts. | active |
 | [KFD-3](decisions/KFD-3.md) | principle | Cooperation must start from trusted value. | active |
-| [KFD-4](decisions/KFD-4.md) | procedure | Timelines must declare their observer. | active |
-| [KFD-5](decisions/KFD-5.md) | procedure | Primitive discovery must join grounded judgment with scalable reasoning. | active |
+| [KFD-4](decisions/KFD-4.md) | principle | Views must remain bound to declared perspectives. | active |
+| [KFD-5](decisions/KFD-5.md) | procedure | Primitive discovery must join perspective-grounded judgment with scalable reasoning. | active |
 | [KFD-6](decisions/KFD-6.md) | procedure | Autonomous discovery must remain grounded in causal experience. | draft |
 
 ## Decision metadata
@@ -231,11 +240,14 @@ fact source only after the resulting change is committed to the repository.
 
 ## How to cite
 
-Cite by number: `KFD-1`. Numbers never change meaning; a superseded decision
-keeps its number and points to its successor. Newer KFD numbers do not
-automatically override older KFDs: supersession or override must be stated
-explicitly in the later decision and recorded in `registry.json`. Two active
-KFDs that conflict without such a relationship are a registry defect.
+Cite by number and released coordinate: `KFD-1` plus the package version or git
+commit when prerelease precision matters. Every published package and commit is
+immutable. Before the first stable release, explicit maintainer-authorized
+semantic refinement may update a numbered draft line and must be declared as a
+breaking decision-surface impact. After stable, numbers never change meaning: a
+superseded decision keeps its number and points to its successor. Newer KFD
+numbers do not automatically override older KFDs; supersession or override must
+be explicit in the later decision and `registry.json`.
 
 Repository-local engineering decisions stay in each repository's own ADRs and
 reference KFDs; KFDs never depend on repository internals.

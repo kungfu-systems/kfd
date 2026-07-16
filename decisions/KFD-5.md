@@ -1,4 +1,4 @@
-# KFD-5: Primitive discovery must join grounded judgment with scalable reasoning — new load-bearing objects need reality pressure
+# KFD-5: Primitive discovery must join perspective-grounded judgment with scalable reasoning — discovery and qualification are different acts
 
 - Status: active
 - Number: 5
@@ -7,166 +7,218 @@
 
 ## One sentence
 
-Primitive discovery must join grounded judgment with scalable reasoning.
+Primitive discovery must join perspective-grounded judgment with scalable
+reasoning.
 
-A primitive is not justified because a name is elegant or a model is coherent.
-It becomes a candidate only when repeated reality pressure is preserved as
-facts, scalable reasoning compresses that evidence into a falsifiable object,
-and grounded judgment remains responsible for what matters.
+A missing object may first become visible when a participant changes
+perspective. Facts and scalable reasoning do not have to generate that moment;
+they make the candidate inspectable, falsifiable, shareable, and eligible to
+carry responsibility.
 
 ## Decision type
 
-This KFD is a procedure derived from KFD-1/2/3. It does not add a fourth
-foundation principle. It defines how humans and agents can discover a
-load-bearing object without reducing either participant to a tool.
+This KFD is a procedure derived from KFD-1/2/3 and enabled by KFD-4. It defines
+how humans and agents may discover and qualify a load-bearing object without
+reducing either participant to a tool.
+
+The procedure separates two acts:
+
+- **Genesis**: a situated participant changes or reconstructs perspective and
+  notices a natural object, burden, or boundary that the current ontology does
+  not express.
+- **Qualification**: participants use scalable reasoning, facts, alternatives,
+  counterexamples, tests, and real work to decide whether the candidate should
+  become load-bearing.
+
+Confusing these acts makes discovery look like induction inside an existing
+ontology. Repeated analysis of database-shaped evidence naturally tends to
+produce a better database. It does not guarantee that Episode, Atlas, Release
+Passport, or another object outside that horizon will become visible.
+
+## Participant functions
 
 The current executable form is human-agent coupling:
 
-- humans contribute contact with reality, value judgment, consequence, and
-  the ability to notice that a recurring burden matters;
-- agents contribute scalable search, comparison, reconstruction, formalization,
-  counterexample generation, and verification;
-- committed artifacts keep the reasoning inspectable by both.
+- perspective-grounded judgment contributes situated contact with reality,
+  consequence, value, and the ability to notice that the current view lacks a
+  natural object;
+- scalable reasoning contributes search, comparison, reconstruction,
+  formalization, prior art, counterexamples, verification, and compression;
+- committed artifacts keep both genesis and qualification inspectable.
 
-These are functions, not permanent species boundaries. A participant may
-perform either function when it can provide the required evidence.
+These are functions, not permanent species boundaries. A human, agent,
+collective, or future participant may perform either function when it can
+provide the required evidence. Perspective-grounded judgment must not be silently
+synthesized and attributed to another participant; scalable reasoning must not
+be reduced to an opaque answer.
 
-## Reality-correction role
+## Primitive genesis
 
-KFD-5 applies when improving a model inside its current set of objects is no
-longer an adequate response to repeated reality pressure. It allows the
-objects, boundaries, authority, lifecycle, and operations assumed by that model
-to become candidates for reconstruction. Primitive discovery is not the
-default answer to every failure; it is the disciplined path for testing whether
-the world has been named incorrectly or incompletely.
+Primitive genesis begins by declaring the current perspective and a participant
+perspective closer to the consequences under investigation. The transformation
+may be lived directly, intentionally adopted, reconstructed from causal
+experience, or proposed for testing.
 
-## Gate boundary
+The discovery record should preserve:
 
-KFD-5 applies when a change claims that a concept should become a durable,
-first-class object with its own identity, boundary, authority, lifecycle, or
-operations. It also applies when authority is being moved into a new object or
-when many workflows repeatedly reconstruct the same missing object.
+- the origin perspective and the objects it made natural;
+- the transformed perspective and who bears its consequences;
+- what changed between the perspectives;
+- the situated observation or unmet need that became visible;
+- the candidate object that could carry that burden;
+- the boundary between local epistemic priority and any wider claim.
 
-It is not required for every class, field, label, helper, or local abstraction.
-Most abstractions should remain local. The gate exists because a false
-primitive exports complexity, while a real primitive compresses it.
+The candidate can precede repeated failure data. A participant does not have to
+first misuse a database, RAG system, journal, or session model in order to know
+that those objects are not natural from the participant's view. Reality
+pressure, recurrent failure, and boundary friction remain valuable signals,
+but they are not the only permitted source of genesis.
 
-## Boundary-pressure diagnostic
+## Replay and the local-optimization trap
 
-A particularly strong, but non-exclusive, primitive signal appears when a
-candidate sits at a contact surface that was previously handled through human
-memory, convention, interpretation, or other implicit coordination, and that
-surface comes under new pressure from participants, scale, frequency,
-authority, heterogeneity, latency, or consequence.
+Perspective-grounded judgment may come from direct experience. When multiple
+views have already been captured, contrastive replay is the preferred
+engineering path because it lowers the cost of moving between them while
+preserving their differences.
 
-The investigation should ask:
+Consider two timelines over the same Journal release:
 
-- which sides meet at the contact surface;
-- how the contact was handled implicitly before the pressure changed;
-- what changed and which failures now recur at the boundary;
-- whether the candidate turns translation, handoff, attribution, authority, or
-  responsibility into a stable and inspectable object;
-- whether deleting the candidate forces participants to reconstruct the old
-  implicit coordination;
-- whether an internal model, policy, label, or local abstraction explains the
-  evidence more narrowly.
+- a development agent records mmap design, Journal APIs, tests, and
+  qualification friction; abstraction within that view tends toward a better
+  Journal API;
+- a user agent records CLI mistakes, query scripts, missing action context, and
+  reconstruction cost; abstraction within that view tends toward a better
+  query script.
 
-Boundary pressure is neither necessary nor sufficient proof of a primitive.
-It is a candidate-generation and falsification heuristic inside the wider
-KFD-5 procedure. The gate must remain open to primitives that do not fit this
-pattern and to the conclusion that boundary friction should be solved without
-creating a new primitive.
+Both local conclusions may be rational and still miss the same object. When
+the timelines are replayed in one declared comparison context, the mismatch
+becomes visible: the developer's natural object is a storage mechanism while
+the user's natural object is the bounded action that happened. That mismatch
+is a primitive signal, not primitive proof.
 
-## Procedure
+KFD-5 uses replay to escape local optimization, then uses facts and scalable
+reasoning to qualify what the contrast revealed. It does not infer that every
+cross-perspective disagreement requires a new primitive.
 
-A primitive-discovery record should preserve this chain:
+## Qualification procedure
 
-1. **Ground the pressure.** Identify real work, failures, repeated decisions,
-   coordination costs, or reconstruction costs that exist before the proposed
-   primitive.
+After genesis, a primitive-discovery record should preserve this chain:
+
+1. **Bind the genesis.** Record whether it came from direct situated
+   experience, reconstructed replay, or contrastive replay; then bind the
+   origin view, transformed view, situated observation, newly visible need,
+   candidate, and claim boundary.
 2. **Bind the facts.** Record source coordinates, evidence cuts, observers,
-   and known gaps so the problem cannot drift into a retrospective story.
-3. **Generate candidates.** Let humans and agents propose names, boundaries,
-   models, and alternative explanations without treating the first coherent
-   answer as authoritative. When boundary pressure is present, declare the
-   contact sides, prior implicit handling, pressure change, recurring failures,
-   mediation claim, and narrower internal-object alternative.
-4. **Search alternatives.** Compare prior art, narrower abstractions, existing
-   primitives, and the option to do nothing.
-5. **Demand minimum closure.** State the smallest identity, boundary,
+   consequences, and known gaps so the candidate cannot drift into a
+   retrospective story.
+3. **Search alternatives.** Compare prior art, narrower abstractions, existing
+   primitives, different perspective explanations, and the option to do
+   nothing.
+4. **Demand minimum closure.** State the smallest identity, boundary,
    authority, lifecycle, and operation set that makes the candidate useful.
-6. **Run deletion and fuse tests.** Ask what work becomes repeatedly
+5. **Run deletion and fuse tests.** Ask what work becomes repeatedly
    reconstructed if the object is removed, and whether previously separate
    mechanisms become one explainable system when it exists.
-7. **Declare falsifiers.** State evidence that would reject, subsume, narrow,
-   or reopen the candidate.
-8. **Dogfood under load.** Use the candidate in real work and measure whether
+6. **Declare falsifiers.** State evidence that would reject, subsume, narrow,
+   or reopen the candidate, including evidence that the apparent object was
+   only an artifact of the transformed view.
+7. **Dogfood under load.** Use the candidate in real work and measure whether
    it reduces reconstruction, coordination, or explanation cost without hiding
    responsibility.
-9. **Record the outcome.** Accept, keep provisional, reject, or subsume it.
-   `No new primitive is justified` is a successful outcome.
+8. **Record the outcome.** Accept, keep provisional, reject, subsume, or record
+   `no new primitive is justified`.
 
 The procedure is reproducible; the discovery outcome is not deterministic.
 Two honest investigations may reach different candidates because their facts,
-observers, values, or operating boundaries differ. KFD-4 requires those
-perspectives to remain visible.
+perspectives, values, or operating boundaries differ.
+
+## Boundary-pressure diagnostic
+
+A strong but non-exclusive signal appears when a candidate mediates a contact
+surface previously handled through memory, convention, interpretation, or
+implicit coordination, and a new participant, scale, frequency, authority,
+heterogeneity, latency, or consequence makes that boundary load-bearing.
+
+When present, the investigation should ask which sides meet, how contact was
+handled implicitly, what pressure changed, which failures recur, how the
+candidate mediates the contact, and whether a narrower internal object explains
+the evidence.
+
+Boundary pressure can corroborate genesis or generate a candidate of its own.
+It is neither necessary nor sufficient proof. A real primitive may first
+become visible through perspective transformation before repeated boundary
+failures accumulate.
 
 ## Required declaration
 
 A KFD-5 candidate should declare:
 
-- the candidate identity and scope;
-- the grounded pressure and its fact sources;
-- the participants and which grounded-judgment or scalable-reasoning functions
-  they performed;
-- alternatives and prior art considered;
-- the proposed identity, boundary, authority, lifecycle, and operations;
-- minimum-closure, deletion, fuse, falsification, and dogfood results;
-- the decision owner, evidence boundary, residual risks, and outcome.
+- candidate identity and scope;
+- origin and transformed perspectives, the transformation, situated
+  observation, newly visible need, and claim boundary;
+- the genesis method and, when replay was used, its KFD-4 replay record,
+  preserved source views, shared context, and degraded state;
+- grounded pressure, fact sources, evidence boundary, and known gaps;
+- participants and the functions they performed;
+- alternatives and prior art;
+- proposed identity, boundary, authority, lifecycle, and operations;
+- minimum-closure, deletion, fuse, falsifier, and dogfood results;
+- decision owner, residual risks, and outcome.
 
-Grounded judgment must not be silently synthesized by an agent and attributed
-to a human. Scalable reasoning must not be reduced to an opaque answer that
-other participants cannot inspect or challenge.
+## Gate boundary
 
-## Relation to KFD-1, KFD-2, KFD-3, and KFD-4
+KFD-5 applies when a change claims that a concept should become a durable,
+first-class object with its own identity, boundary, authority, lifecycle, or
+operations. It also applies when authority is moved into a new object or many
+workflows repeatedly reconstruct the same missing object.
 
-KFD-1 requires the discovery record to stand on non-drifting facts. KFD-2
-requires confidence in the candidate to start from those facts and expose its
-responsibility boundary. KFD-3 requires participants to cooperate through
-trusted value rather than pressure. KFD-4 requires the evidence cut and the
-view from which the pressure is judged to be declared.
+It is not required for every class, field, label, helper, or local abstraction.
+Most abstractions should remain local. A false primitive exports complexity; a
+real primitive compresses it.
+
+## Relation to KFD-1 through KFD-4
+
+KFD-1 keeps genesis and qualification facts from drifting. KFD-2 keeps
+confidence bound to those facts and exposes residual risk. KFD-3 lets
+participants contribute value without coercion. KFD-4 makes perspectives
+declarable and transformable.
 
 ```text
-non-drifting facts
-  -> inspectable trust
-  -> trusted cooperation
-  -> declared perspective
-  -> grounded judgment + scalable reasoning
+declared perspective
+  -> perspective transformation
+  -> a missing object becomes visible
   -> primitive candidate
+  -> fact-bound scalable qualification
+  -> provisional or load-bearing primitive
 ```
+
+KFD-4 explains how the horizon can move. KFD-5 explains how an object revealed
+outside the old horizon becomes testable and shareable.
 
 ## Implementation cases
 
-Xinfa Atlas, Kungfu Episode, and Buildchain Release Passport are current
-discovery cases. They name different recurring burdens: human-agent action
-guidance, agent-runtime causal closure, and release responsibility proof.
-Their existence motivates and dogfoods this procedure; it does not prove that
-they are historically important or that every named concept is a primitive.
-That judgment remains open to reality, adoption, deletion tests, and time.
+Kungfu Episode, Xinfa Atlas, and Buildchain Release Passport are current cases.
+Episode was not inferred only after journal or session machinery failed; it
+became natural from the view of a participant reasoning about the bounded thing
+that happened. Atlas became natural from the view of a reader and actor who
+needed a navigable semantic closure rather than another context container.
+Release Passport made release responsibility inspectable at the boundary
+between code and delivered product.
 
-In the current KFD-5 form, Atlas is a useful shared cognitive object: it keeps
-the mission, candidate, evidence, choices, falsifiers, and next actions visible
-while humans and agents iterate against real work.
+Their existence motivates and dogfoods this procedure. It does not prove that
+they are historically important or universally applicable. That judgment
+remains open to facts, alternatives, deletion tests, adoption, and time.
 
 ## Implementation case: the KFD package
 
-The `@kungfu-tech/kfd` package publishes the KFD-5 candidate-record schema at
-`schemas/kfd-5/primitive-discovery.schema.json`. The schema makes the procedure
-available to humans and agents; it does not certify a candidate merely because
-the record validates.
+The `@kungfu-tech/kfd` package publishes the KFD-5 version 2 candidate-record
+schema at `schemas/kfd-5/primitive-discovery.schema.json`. Version 2 makes
+perspective genesis a required input distinct from qualification evidence.
+Schema validity proves record closure, not that a candidate is a real
+primitive.
 
 ## Adopters
 
 Adopters cite KFD-5 when promoting a concept into a durable primitive. Local
-evidence and candidate records remain adopter-owned. KFD owns the procedure and
-machine vocabulary, not the adopter's conclusion.
+genesis, evidence, and candidate records remain adopter-owned. KFD owns the
+procedure and machine vocabulary, not the adopter's conclusion.
