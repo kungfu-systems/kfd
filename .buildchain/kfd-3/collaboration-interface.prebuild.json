@@ -10,9 +10,9 @@
   "sourceRegistry": {
     "id": "kfd-collaboration-interface",
     "path": ".buildchain/kfd-3/collaboration-interface.json",
-    "sha256": "7130fad9993926d581ec861e943f5caf6287a211f898ab8242b85bf857b1e8cd"
+    "sha256": "075559d907cd61d48b5d36bf7fd0bee7346c11edd4615b0e05b823bd0621dc1b"
   },
-  "collaborationInterfaceDigest": "sha256:7130fad9993926d581ec861e943f5caf6287a211f898ab8242b85bf857b1e8cd",
+  "collaborationInterfaceDigest": "sha256:075559d907cd61d48b5d36bf7fd0bee7346c11edd4615b0e05b823bd0621dc1b",
   "collaborationInterface": {
     "schemaVersion": 1,
     "contract": "kfd-3-collaboration-interface",
@@ -88,6 +88,16 @@
           "agent-reader"
         ],
         "purpose": "Start from the KFD worldview and current decision set."
+      },
+      {
+        "id": "foundation-model",
+        "surface": "docs/foundation-model.md",
+        "participants": [
+          "human-reader",
+          "agent-reader",
+          "site-consumer"
+        ],
+        "purpose": "Read or render the complete non-numbered explanation behind the concise KFD homepage."
       },
       {
         "id": "docs-map",
@@ -184,7 +194,7 @@
           "site-consumer",
           "agent-reader"
         ],
-        "purpose": "Render KFD-owned site text and decision pages without duplicating extraction logic."
+        "purpose": "Render KFD-owned homepage, foundation explanation, and decision pages without duplicating extraction logic."
       }
     ],
     "surfaces": [
@@ -199,6 +209,21 @@
         "discoverability": {
           "fromMinimalEntrypoint": true,
           "path": "README.md"
+        },
+        "maturity": "stable"
+      },
+      {
+        "id": "foundation-model",
+        "kind": "markdown-doc",
+        "participants": [
+          "human-reader",
+          "agent-reader",
+          "site-consumer"
+        ],
+        "value": "Complete non-numbered explanation of the KFD worldview and its path from capability to discovery.",
+        "discoverability": {
+          "fromMinimalEntrypoint": true,
+          "path": "docs/foundation-model.md"
         },
         "maturity": "stable"
       },
@@ -471,6 +496,9 @@
             "path": "README.md"
           },
           {
+            "path": "docs/foundation-model.md"
+          },
+          {
             "path": "decisions/KFD-1.md"
           },
           {
@@ -593,7 +621,7 @@
       {
         "id": "kfd-site-boundary",
         "surface": "site/kfd-site.json",
-        "constraint": "KFD owns homepage text, decision text, registry, and standards metadata; the site owns rendering style and layout.",
+        "constraint": "KFD owns homepage text, foundation explanation, decision text, registry, and standards metadata; the site owns rendering style and layout.",
         "reason": "Text remains a single fact source while the site stays free to render it.",
         "review": "site/kfd-site.json renderingBoundary"
       },
@@ -618,7 +646,7 @@
         "participants": [
           "human-reader"
         ],
-        "choice": "Read README.md, docs/MAP.md, and decisions/*.md directly."
+        "choice": "Read README.md, docs/foundation-model.md, docs/MAP.md, and decisions/*.md directly."
       },
       {
         "id": "consume-machine-metadata",
@@ -665,7 +693,7 @@
     "closure": {
       "classificationMode": "closed-world",
       "unclassifiedEntrypointsPolicy": "fail",
-      "reachableSurfaceSource": "This file plus package.json#exports, docs/MAP.md, registry.json, standards.json, and Buildchain witness files."
+      "reachableSurfaceSource": "This file plus package.json#exports, docs/foundation-model.md, docs/MAP.md, registry.json, standards.json, and Buildchain witness files."
     }
   },
   "participantProfiles": [
@@ -687,6 +715,17 @@
       "participantFacing": true,
       "public": true,
       "sourcePath": "README.md"
+    },
+    {
+      "id": "foundation-model",
+      "name": "foundation-model",
+      "kind": "markdown-doc",
+      "participantProfile": "human-reader,agent-reader,site-consumer",
+      "availability": "stable",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": "docs/foundation-model.md"
     },
     {
       "id": "docs-map",
@@ -924,7 +963,12 @@
     {
       "id": "doc:readme",
       "sourcePath": "README.md",
-      "sha256": "2484847eda2d013b25f0e1bbea69777013edd6a3b1e15c43c054c93343e1c1d1"
+      "sha256": "04e30fdeb6fa05629bd5af6ac74ac57c00b9d52440ed93ac8c3764a6faeb810e"
+    },
+    {
+      "id": "doc:foundation-model",
+      "sourcePath": "docs/foundation-model.md",
+      "sha256": "0b5490b5b4b289853824dcbef22321d571d7f152fb989d24464d4f206392a1a5"
     },
     {
       "id": "doc:trademarks",
@@ -934,7 +978,7 @@
     {
       "id": "doc:docs-map",
       "sourcePath": "docs/MAP.md",
-      "sha256": "2603ed6d1bcc4e5f0a7a32d6face6e763fe1b24ac6d7f773c4da2320a03984d5"
+      "sha256": "74e7af35b6c1af70cb7e0db275133ca21c41c1b4dff80ba11d8fc1975e3507a0"
     },
     {
       "id": "doc:kfd-1-usage",
@@ -1073,12 +1117,12 @@
     {
       "id": "metadata:standards",
       "sourcePath": "standards.json",
-      "sha256": "83b4274a33328e053be5022b8a3c7ba86610b3812ad62e4da4c2ce23a5ce558d"
+      "sha256": "3fceb7cf6e2a3257c61adcbd56b8101f475d7e4d34fb077c99962b93b433e75b"
     },
     {
       "id": "metadata:release-impact",
       "sourcePath": "release-impact.json",
-      "sha256": "df46ce750a80b13584ff63ff3e1287c6081084570f5e10848cee39beebd82aa7"
+      "sha256": "af597cbbb56957ec0ea5bfa3e9138ab689eb6ad15128be2817283d000007d005"
     },
     {
       "id": "metadata:release-anchor",
@@ -1098,36 +1142,36 @@
     {
       "id": "metadata:kfd-2-public-release-trust-claim",
       "sourcePath": ".buildchain/kfd-2/public-release-trust.claim.json",
-      "sha256": "1dae232d852734c578e96b6a763b318af82a06ba2469cc9f1d394e73497e82e2"
+      "sha256": "920a2df54e63efd10acda9501dbff8cc2eaeec248c67546c4b5076f3ff3ab502"
     },
     {
       "id": "metadata:kfd-2-foundation-trust-claims",
       "sourcePath": ".buildchain/kfd-2/kfd-foundation.trust-claims.json",
-      "sha256": "f3ac02e52d355f7bb1f719f8b83d836572ecbb8bf26a484deffc4cc31c6718a3"
+      "sha256": "e8f1f02167abd083d5fe68c0178ab5af382fe7903dec52b7ebedb953572529c0"
     },
     {
       "id": "metadata:kfd-2-foundation-trust-assessment",
       "sourcePath": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json",
-      "sha256": "fd03952734c94dc3309715ac273d83a3ada106756af03b135605c0f5c55990aa"
+      "sha256": "d89a6bc71c0191306f0ee52b0afdd1c7578d662a1672d5b5d35b661ea9574319"
     }
   ],
   "packageExports": [
     {
       "id": "export:package-json",
       "sourcePath": "package.json#exports",
-      "sha256": "da42d5473ffa4c43489ce1ba62c244b61042d0b667110e2b1190f932cd59b4ec"
+      "sha256": "8dab54a86a4e8d073d46ce2d490f3637a4a2fe27f486fab3cf419c89af666c44"
     },
     {
       "id": "export:npm-files",
       "sourcePath": "package.json#files",
-      "sha256": "da42d5473ffa4c43489ce1ba62c244b61042d0b667110e2b1190f932cd59b4ec"
+      "sha256": "8dab54a86a4e8d073d46ce2d490f3637a4a2fe27f486fab3cf419c89af666c44"
     }
   ],
   "siteConsumptionContracts": [
     {
       "id": "site:kfd-site-bundle",
       "sourcePath": "site/kfd-site.json",
-      "sha256": "1001f5a4c491ea275b9f53a49197e9031114965fc730b24f4c5da60056d7dde9"
+      "sha256": "2ac629b18f95c570260cb92ad3f32ef8bc780ae2256da0c0022ecb0a6670ca9f"
     },
     {
       "id": "site:release-propagation",

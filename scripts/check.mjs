@@ -46,6 +46,11 @@ const kfd3PrebuildWitness = existsSync(kfd3PrebuildWitnessPath) ? JSON.parse(rea
 const kfd3ArtifactWitness = existsSync(kfd3ArtifactWitnessPath) ? JSON.parse(readFileSync(kfd3ArtifactWitnessPath, "utf8")) : undefined;
 const hashablePath = (filePath) => String(filePath || "").split("#", 1)[0];
 
+const expectedEvidenceUpdate = "node scripts/update-site-bundle.mjs && node scripts/update-kfd-2-claim.mjs && node scripts/update-kfd-1-witness.mjs && node scripts/update-kfd-3-witness.mjs";
+if (packageJson.scripts?.["update:evidence"] !== expectedEvidenceUpdate) {
+  fail("package.json update:evidence must preserve the site -> KFD-2 -> KFD-1 -> KFD-3 dependency order");
+}
+
 if (registry.schemaVersion !== 1) fail(`unsupported schemaVersion ${registry.schemaVersion}`);
 if (registry.contract !== "kfd-registry") fail(`unexpected contract ${registry.contract}`);
 if (standardsMetadata.schemaVersion !== 1) fail(`unsupported standards schemaVersion ${standardsMetadata.schemaVersion}`);
@@ -71,19 +76,72 @@ if (JSON.stringify(siteBundle) !== JSON.stringify(expectedSiteBundle)) {
   fail("site/kfd-site.json must match the generated README.md homepage bundle; run npm run update:site-bundle");
 }
 if (siteBundle.source?.homepageTextSource !== "README.md") fail("site bundle homepageTextSource must be README.md");
+if (siteBundle.source?.foundationTextSource !== "docs/foundation-model.md") {
+  fail("site bundle foundationTextSource must be docs/foundation-model.md");
+}
 if (siteBundle.source?.registry !== "registry.json") fail("site bundle registry source must be registry.json");
 if (siteBundle.source?.decisionsDir !== "decisions") fail("site bundle decisionsDir must be decisions");
 if (siteBundle.homepage?.title !== "KFD — Kung Fu Decisions") fail("site bundle homepage title must match README H1 text");
 if (!Array.isArray(siteBundle.homepage?.sections) || siteBundle.homepage.sections.length === 0) {
-  fail("site bundle homepage.sections must expose generated README sections");
+  fail("site bundle homepage.sections must expose generated homepage and foundation sections");
+}
+if (siteBundle.routes?.foundation !== "/foundation") fail("site bundle routes.foundation must be /foundation");
+if (!siteBundle.homepage?.futurePicture?.pastToFuture || !siteBundle.homepage?.futurePicture?.kungfuPath) {
+  fail("site bundle homepage.futurePicture must expose the civilizational shift and Kungfu path");
+}
+if (!siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes("future-picture.pastToFuture")) {
+  fail("site bundle homepage displayPlan firstScreen must include future-picture.pastToFuture");
+}
+if (!siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes("future-picture.kungfuPath")) {
+  fail("site bundle homepage displayPlan firstScreen must include future-picture.kungfuPath");
 }
 if (!siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes("foundation-triad")) {
   fail("site bundle homepage displayPlan firstScreen must include foundation-triad");
 }
-for (const requiredSection of ["foundation-triad", "foundation-model", "adoption-boundary", "practice-guidelines", "product-proof-path", "agent-quickstart", "decision-metadata"]) {
-  if (!siteBundle.homepage.sections.some((entry) => entry.id === requiredSection && entry.sourcePath === "README.md" && entry.markdown)) {
-    fail(`site bundle homepage.sections must include README projection ${requiredSection}`);
+if (!siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes("product-witness.principle")) {
+  fail("site bundle homepage displayPlan firstScreen must include product-witness.principle");
+}
+if (!siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes("foundation-triad.links")) {
+  fail("site bundle homepage displayPlan firstScreen must include foundation-triad.links");
+}
+if (!siteBundle.homepage?.foundationTriad?.links?.some((entry) => entry.url === "/foundation")) {
+  fail("site bundle homepage foundation triad must expose the /foundation depth choice");
+}
+const requiredHomepageSections = {
+  "future-picture": "README.md",
+  "foundation-triad": "README.md",
+  "what-kfd-is": "README.md",
+  "adoption-boundary": "README.md",
+  "product-proof-path": "README.md",
+  "agent-quickstart": "README.md",
+  "decision-metadata": "README.md",
+  "foundation-model": "docs/foundation-model.md",
+  "load-bearing-product-witness": "docs/foundation-model.md",
+  "practice-guidelines": "docs/foundation-model.md",
+};
+for (const [requiredSection, sourcePath] of Object.entries(requiredHomepageSections)) {
+  if (!siteBundle.homepage.sections.some((entry) => entry.id === requiredSection && entry.sourcePath === sourcePath && entry.markdown)) {
+    fail(`site bundle homepage.sections must include ${sourcePath} projection ${requiredSection}`);
   }
+}
+if (
+  siteBundle.homepage?.displayPlan?.detail?.route !== "/foundation" ||
+  siteBundle.homepage?.displayPlan?.detail?.source !== "docs/foundation-model.md"
+) {
+  fail("site bundle homepage displayPlan.detail must route foundation detail to docs/foundation-model.md");
+}
+if (
+  siteBundle.foundationPage?.id !== "foundation-model" ||
+  siteBundle.foundationPage?.sourcePath !== "docs/foundation-model.md" ||
+  siteBundle.foundationPage?.url !== "/foundation" ||
+  siteBundle.foundationPage?.normative !== false ||
+  !siteBundle.foundationPage?.markdown
+) {
+  fail("site bundle foundationPage must expose the non-normative /foundation explanation from docs/foundation-model.md");
+}
+if (!existsSync("docs/foundation-model.md")) fail("missing docs/foundation-model.md");
+else if (!readFileSync("docs/foundation-model.md", "utf8").startsWith("# KFD Foundation Model")) {
+  fail("docs/foundation-model.md must start with the KFD Foundation Model H1");
 }
 const adoptionBoundary = siteBundle.homepage.sections.find((entry) => entry.id === "adoption-boundary");
 if (adoptionBoundary?.includeInFirstScreen !== false || adoptionBoundary?.renderRole !== "primary") {
@@ -163,7 +221,7 @@ for (const requiredFile of ["README.md", "TRADEMARKS.md", "decisions", "registry
     fail(`package.json files[] must include ${requiredFile}`);
   }
 }
-for (const requiredExport of ["./TRADEMARKS.md", "./registry.json", "./standards.json", "./kfd.release.json", "./site/kfd-site.json", "./buildchain.contract-lock.json", "./buildchain.release-propagation.json", "./release-impact.json", "./buildchain/kfd-1/contract-world.witness.json", "./buildchain/kfd-2/public-release-trust.claim.json", "./buildchain/kfd-2/kfd-foundation.trust-claims.json", "./buildchain/kfd-2/kfd-foundation.trust-assessment.json", "./buildchain/kfd-3/collaboration-interface.json", "./buildchain/kfd-3/collaboration-interface.prebuild.json", "./buildchain/kfd-3/collaboration-interface.artifact.json", "./schemas/*.json", "./schemas/*/*.json"]) {
+for (const requiredExport of ["./TRADEMARKS.md", "./registry.json", "./standards.json", "./kfd.release.json", "./site/kfd-site.json", "./buildchain.contract-lock.json", "./buildchain.release-propagation.json", "./release-impact.json", "./buildchain/kfd-1/contract-world.witness.json", "./buildchain/kfd-2/public-release-trust.claim.json", "./buildchain/kfd-2/kfd-foundation.trust-claims.json", "./buildchain/kfd-2/kfd-foundation.trust-assessment.json", "./buildchain/kfd-3/collaboration-interface.json", "./buildchain/kfd-3/collaboration-interface.prebuild.json", "./buildchain/kfd-3/collaboration-interface.artifact.json", "./docs/*", "./schemas/*.json", "./schemas/*/*.json"]) {
   if (!packageJson.exports || !packageJson.exports[requiredExport]) {
     fail(`package.json exports must include ${requiredExport}`);
   }
@@ -900,10 +958,16 @@ if (!kfd3Interface) {
   }
   if (!Array.isArray(kfd3Interface.participants) || kfd3Interface.participants.length === 0) fail("KFD-3 collaboration interface participants[] is required");
   if (!Array.isArray(kfd3Interface.minimalEntrypoints) || kfd3Interface.minimalEntrypoints.length === 0) fail("KFD-3 collaboration interface minimalEntrypoints[] is required");
+  if (!kfd3Interface.minimalEntrypoints.some((entry) => entry.id === "foundation-model" && entry.surface === "docs/foundation-model.md")) {
+    fail("KFD-3 collaboration interface must expose docs/foundation-model.md as a minimal entrypoint");
+  }
   if (!kfd3Interface.minimalEntrypoints.some((entry) => entry.id === "official-status-and-trademarks" && entry.surface === "TRADEMARKS.md")) {
     fail("KFD-3 collaboration interface must expose TRADEMARKS.md as an official-status-and-trademarks entrypoint");
   }
   if (!Array.isArray(kfd3Interface.surfaces) || kfd3Interface.surfaces.length === 0) fail("KFD-3 collaboration interface surfaces[] is required");
+  if (!kfd3Interface.surfaces.some((entry) => entry.id === "foundation-model" && entry.discoverability?.path === "docs/foundation-model.md")) {
+    fail("KFD-3 collaboration interface must classify docs/foundation-model.md as a participant-facing surface");
+  }
   if (!kfd3Interface.surfaces.some((entry) => entry.id === "official-status-and-trademarks" && entry.discoverability?.path === "TRADEMARKS.md")) {
     fail("KFD-3 collaboration interface must expose TRADEMARKS.md as a participant-facing surface");
   }
@@ -931,6 +995,9 @@ if (!kfd3Interface) {
     }
     if (!kfd3Interface.valueEvidence.some((entry) => entry.trustAssessment?.path === kfd2TrustAssessmentPath)) {
       fail("KFD-3 collaboration interface valueEvidence must link to the KFD-2 generic trust assessment");
+    }
+    if (!kfd3Interface.valueEvidence.some((entry) => entry.id === "kfd-foundation-model" && entry.facts?.some((fact) => fact.path === "docs/foundation-model.md"))) {
+      fail("KFD-3 foundation value evidence must bind docs/foundation-model.md");
     }
   }
   if (!Array.isArray(kfd3Interface.extensionRequests) || kfd3Interface.extensionRequests.length === 0) fail("KFD-3 collaboration interface extensionRequests[] is required");

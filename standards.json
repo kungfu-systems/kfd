@@ -114,6 +114,22 @@
             }
           },
           {
+            "id": "foundation-model-doc",
+            "class": "cross-time",
+            "classes": [
+              "cross-time"
+            ],
+            "description": "Published non-numbered KFD foundation explanation at docs/foundation-model.md.",
+            "sourcePath": "docs/foundation-model.md",
+            "weldRationale": "Humans, agents, and site consumers can audit the complete explanatory path while numbered KFD texts retain normative authority.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
             "id": "kfd-1-document",
             "class": "cross-time",
             "classes": [
