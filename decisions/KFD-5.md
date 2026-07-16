@@ -31,6 +31,15 @@ The current executable form is human-agent coupling:
 These are functions, not permanent species boundaries. A participant may
 perform either function when it can provide the required evidence.
 
+## Reality-correction role
+
+KFD-5 applies when improving a model inside its current set of objects is no
+longer an adequate response to repeated reality pressure. It allows the
+objects, boundaries, authority, lifecycle, and operations assumed by that model
+to become candidates for reconstruction. Primitive discovery is not the
+default answer to every failure; it is the disciplined path for testing whether
+the world has been named incorrectly or incompletely.
+
 ## Gate boundary
 
 KFD-5 applies when a change claims that a concept should become a durable,

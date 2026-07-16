@@ -44,6 +44,15 @@ KFD-2 is not a checker for only one other KFD. It is the generic trust
 adjudication layer for any KFD claim, product claim, artifact claim, control
 surface claim, or release claim that asks a human or agent to rely on it.
 
+## Reality-correction role
+
+KFD-2 prevents capability from becoming authority by itself. Accuracy,
+calibration, scale, or persuasive explanation may support a claim, but none
+removes the need to bind trust to inspectable facts, residual risk, and
+responsibility. Trust remains bounded and revisable so contradictory evidence
+from reality can lower, withdraw, or redirect it without first defeating the
+reputation of the model or system that made the claim.
+
 ## Principle
 
 When a kungfu-systems product represents work or control, its default path

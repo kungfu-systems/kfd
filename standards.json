@@ -25,7 +25,7 @@
       "document": {
         "path": "decisions/KFD-1.md",
         "url": "https://kfd.libkungfu.dev/1",
-        "sha256": "dcc97d2e24ffc8f0380cd027ba973bf8268cff59fa9ab766b178e894bcf1f164"
+        "sha256": "31ef9f7df544bc99f6c6eb94e35a2498748bffdf803746a458ccd0e6f896dfb3"
       },
       "compatibility": {
         "packageLine": "v1.0",
@@ -106,6 +106,22 @@
             "description": "Published KFD package surface at README.md.",
             "sourcePath": "README.md",
             "weldRationale": "Consumers can audit, replay, or cite this surface after release.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "foundation-model-doc",
+            "class": "cross-time",
+            "classes": [
+              "cross-time"
+            ],
+            "description": "Published non-numbered KFD foundation explanation at docs/foundation-model.md.",
+            "sourcePath": "docs/foundation-model.md",
+            "weldRationale": "Humans, agents, and site consumers can audit the complete explanatory path while numbered KFD texts retain normative authority.",
             "impactProjection": {
               "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
               "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
@@ -792,7 +808,7 @@
       "document": {
         "path": "decisions/KFD-2.md",
         "url": "https://kfd.libkungfu.dev/2",
-        "sha256": "6bc01776e478afc802c57c4e21a40bcfebf170f90ae039345d883c292053b622"
+        "sha256": "fb274b1fdff7267a8ca7ce0d2e82b9f8c68c16cbcf4b4653de4a6e2c1397942d"
       },
       "compatibility": {
         "packageLine": "v1.0",
@@ -889,7 +905,7 @@
       "document": {
         "path": "decisions/KFD-3.md",
         "url": "https://kfd.libkungfu.dev/3",
-        "sha256": "049a7694f50e48774f3f1f74edccb46f0397a61211c027ab0eaa77e12d4e3f14"
+        "sha256": "87512ac0aa028c336538ea6728e559c651b8e7b7cfb7e7fece827b3eff83d599"
       },
       "compatibility": {
         "packageLine": "v1.0",
@@ -955,7 +971,7 @@
       "document": {
         "path": "decisions/KFD-4.md",
         "url": "https://kfd.libkungfu.dev/4",
-        "sha256": "b7ae42a6f1ddb1e838b93fb33c9da5bfae28fad39d31bfca83668550e8c6335c"
+        "sha256": "03e9ee7cf0c067f508a93b95ca3dd45179fb9dc3b77999b28b8cddbd7acc90a6"
       },
       "compatibility": {
         "packageLine": "v1.0",
@@ -1005,7 +1021,7 @@
       "document": {
         "path": "decisions/KFD-5.md",
         "url": "https://kfd.libkungfu.dev/5",
-        "sha256": "f19e0ac27f5f807a31776d5a34340352e0714e2fd2f9b5b41cc80d9cf5a321b9"
+        "sha256": "64efc1ed108260c9d58dd893fdd9adc41012254cbe402d285eb7693c0d5c402e"
       },
       "compatibility": {
         "packageLine": "v1.0",
@@ -1061,7 +1077,7 @@
       "document": {
         "path": "decisions/KFD-6.md",
         "url": "https://kfd.libkungfu.dev/6",
-        "sha256": "bf1df43d47cc7db369a1d5fcef38f77d4a5fdd904ed1e78f0d50dfd929567a1c"
+        "sha256": "9f5aad3047566a84372c2c7c4ced68fd55d3f478c8ae7b16080d0625d22e00c7"
       },
       "compatibility": {
         "packageLine": "v1.0",

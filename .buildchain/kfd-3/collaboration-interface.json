@@ -72,6 +72,12 @@
       "purpose": "Start from the KFD worldview and current decision set."
     },
     {
+      "id": "foundation-model",
+      "surface": "docs/foundation-model.md",
+      "participants": ["human-reader", "agent-reader", "site-consumer"],
+      "purpose": "Read or render the complete non-numbered explanation behind the concise KFD homepage."
+    },
+    {
       "id": "docs-map",
       "surface": "docs/MAP.md",
       "participants": ["human-reader", "agent-reader", "maintainer"],
@@ -129,7 +135,7 @@
       "id": "site-bundle",
       "surface": "site/kfd-site.json",
       "participants": ["site-consumer", "agent-reader"],
-      "purpose": "Render KFD-owned site text and decision pages without duplicating extraction logic."
+      "purpose": "Render KFD-owned homepage, foundation explanation, and decision pages without duplicating extraction logic."
     }
   ],
   "surfaces": [
@@ -139,6 +145,14 @@
       "participants": ["human-reader", "agent-reader"],
       "value": "KFD's public worldview entrypoint and site homepage text source.",
       "discoverability": { "fromMinimalEntrypoint": true, "path": "README.md" },
+      "maturity": "stable"
+    },
+    {
+      "id": "foundation-model",
+      "kind": "markdown-doc",
+      "participants": ["human-reader", "agent-reader", "site-consumer"],
+      "value": "Complete non-numbered explanation of the KFD worldview and its path from capability to discovery.",
+      "discoverability": { "fromMinimalEntrypoint": true, "path": "docs/foundation-model.md" },
       "maturity": "stable"
     },
     {
@@ -285,6 +299,7 @@
       "participants": ["human-reader", "agent-reader", "maintainer"],
       "facts": [
         { "path": "README.md" },
+        { "path": "docs/foundation-model.md" },
         { "path": "decisions/KFD-1.md" },
         { "path": "decisions/KFD-2.md" },
         { "path": "decisions/KFD-3.md" },
@@ -359,7 +374,7 @@
     {
       "id": "kfd-site-boundary",
       "surface": "site/kfd-site.json",
-      "constraint": "KFD owns homepage text, decision text, registry, and standards metadata; the site owns rendering style and layout.",
+      "constraint": "KFD owns homepage text, foundation explanation, decision text, registry, and standards metadata; the site owns rendering style and layout.",
       "reason": "Text remains a single fact source while the site stays free to render it.",
       "review": "site/kfd-site.json renderingBoundary"
     },
@@ -382,7 +397,7 @@
     {
       "id": "read-human-docs",
       "participants": ["human-reader"],
-      "choice": "Read README.md, docs/MAP.md, and decisions/*.md directly."
+      "choice": "Read README.md, docs/foundation-model.md, docs/MAP.md, and decisions/*.md directly."
     },
     {
       "id": "consume-machine-metadata",
@@ -416,6 +431,6 @@
   "closure": {
     "classificationMode": "closed-world",
     "unclassifiedEntrypointsPolicy": "fail",
-    "reachableSurfaceSource": "This file plus package.json#exports, docs/MAP.md, registry.json, standards.json, and Buildchain witness files."
+    "reachableSurfaceSource": "This file plus package.json#exports, docs/foundation-model.md, docs/MAP.md, registry.json, standards.json, and Buildchain witness files."
   }
 }

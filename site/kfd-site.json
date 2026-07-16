@@ -4,11 +4,13 @@
   "source": {
     "package": "@kungfu-tech/kfd",
     "homepageTextSource": "README.md",
+    "foundationTextSource": "docs/foundation-model.md",
     "registry": "registry.json",
     "decisionsDir": "decisions"
   },
   "routes": {
     "home": "/",
+    "foundation": "/foundation",
     "decisionPattern": "/{number}",
     "decisionUsagePattern": "/{number}/usage",
     "llms": "/llms.txt",
@@ -16,8 +18,13 @@
   },
   "homepage": {
     "title": "KFD — Kung Fu Decisions",
-    "lead": "KFD is the organization-wide decision registry of kungfu-systems: the small set of standing, cross-repository norms that products and their consumers weld to. Each decision has an immutable number (`KFD-N`), a kind, a status, and a single authoritative text in this repository.",
-    "decisionKinds": "KFDs can be **principles** or **procedures**. Principles state what must remain true across kungfu-systems; procedures state how a class of work enforces or protects a principle.",
+    "lead": "Humans first named the world, then built machines to find better answers within it. As agents become capable participants in reality, the next step is for humans and agents to discover when those names are wrong—and to build new primitives from inspectable consequences.",
+    "decisionKinds": "KFDs can be **principles** or **procedures**. Principles state what must remain true across kungfu-systems; procedures state how a class of work enforces or protects a principle. The numbered decisions remain authoritative; the [foundation model](docs/foundation-model.md) explains how they fit together.",
+    "futurePicture": {
+      "heading": "Future picture",
+      "pastToFuture": "Humans first named the world, then built machines to find better answers within it. As agents become capable participants in reality, the next step is for humans and agents to discover when those names are wrong—and to build new primitives from inspectable consequences.",
+      "kungfuPath": "Kungfu opens the path from agents that answer questions to a civilization that can discover when it has named reality incorrectly."
+    },
     "foundationTriad": {
       "heading": "Foundation triad",
       "intro": "The first three KFDs form the public foundation for kungfu-systems:",
@@ -35,11 +42,28 @@
           "text": "cooperation must start from trusted value."
         }
       ],
-      "summary": "Together they define the load-bearing path for Kungfu products: make facts non-drifting, make trust inspectable from those facts, and let humans and agents cooperate through trusted value rather than hidden pressure."
+      "summary": "Together they define the load-bearing path for Kungfu products: make facts non-drifting, make trust inspectable from those facts, and let humans and agents cooperate through trusted value rather than hidden pressure.",
+      "links": [
+        {
+          "label": "Read the foundation model",
+          "sourceTarget": "docs/foundation-model.md",
+          "url": "/foundation"
+        },
+        {
+          "label": "Explore current decisions",
+          "sourceTarget": "#current-decisions",
+          "url": "#current-decisions"
+        },
+        {
+          "label": "Inspect the product proof path",
+          "sourceTarget": "#product-proof-path",
+          "url": "#product-proof-path"
+        }
+      ]
     },
     "foundationModel": {
       "heading": "Foundation model",
-      "intro": "The triad is intentionally ordered. It is a compact model for surviving and evolving in complex systems, especially in a world where agents can observe, act, delegate, and remember across many surfaces.",
+      "intro": "The first three KFDs are intentionally ordered:",
       "layers": [
         {
           "layer": "Fact-source ontology",
@@ -60,18 +84,23 @@
           "commitment": "Cooperation starts from trusted value: value becomes trustable through transparent facts, stable choice, and explainable constraints."
         }
       ],
-      "chain": "non-drifting facts -> inspectable trust -> trusted value -> voluntary cooperation",
+      "chain": "reality pressure -> non-drifting facts -> inspectable trust\n                 -> trusted value -> voluntary cooperation",
       "explanation": [
-        "This is why KFDs are not only internal governance text. KFD-1 gives the foundation model its first layer by making fact sources operational: a fact-bearing contract world must be declared, inspectable, and unable to drift invisibly. KFD-2 then defines how trust can stand on those facts. KFD-3 defines how humans and agents can cooperate once facts and trust are visible.",
-        "Real-world agent work turns ordinary work into a dense system of products, files, repositories, traces, policies, humans, and agents. In that world, complexity cannot be made safe by hidden state or forced compliance. It has to be compressed through non-drifting facts, inspectable trust, and voluntary cooperation. The goal is not to force increasingly capable participants into compliance through stronger pressure. It is to give humans and agents a shared worldview for adapting to a more complex world.",
-        "This also changes what a product interface means. Agent-facing CLI, API, documentation, envelopes, and local fact surfaces are not secondary integration channels after the human GUI. They are first-class interfaces for intelligent participants that may use the system more frequently than humans do. A control plane in this model is a shared work environment for humans and agents, not only a human dashboard over agent activity.",
-        "This model used to be expensive to practice. Stable facts require engineering, iteration, and disciplined evidence paths, so older systems often survived by leaning on cheaper substitutes such as authority, habit, reputation, or intuition. Agents change both sides of that equation: they make the world more complex, and they also provide more intelligence for building fact-bearing systems. KFD is part of that bootstrap: the worldview is forged through the same transparent and inspectable mechanisms it asks products to provide.",
-        "This README states the architecture; KFD-1, KFD-2, and KFD-3 provide the foundation rules."
+        "KFD-1 makes fact sources operational: a fact-bearing contract world must be declared, inspectable, and unable to drift invisibly. KFD-2 defines how trust can stand on those facts. KFD-3 defines how humans and agents can cooperate once facts, responsibility, and value are visible."
+      ]
+    },
+    "productWitness": {
+      "heading": "Load-bearing product witness",
+      "principle": "KFD does not ask readers to believe its worldview. No principle is load-bearing until it is embodied in an inspectable product witness: an implementation that humans and agents can use, audit, challenge, and compare with its claimed consequences.",
+      "explanation": [
+        "Self-evident does not mean simple or documentation-free. It means that a product's declared value, mechanisms, constraints, and residual risks can be traced through its public interfaces, source, build and release evidence, and runtime facts without depending on hidden organizational context. Open source is necessary for Kungfu's proof path, but source availability alone does not create a witness when the product cannot be used at its declared surfaces or its claims tested against consequences.",
+        "Kungfu products are not illustrations placed beside KFD. They are the concrete surfaces through which KFD is made responsible to reality. Their breadth comes from the closure required by that responsibility: facts, trust, cooperation, perspective, action, consequence, and discovery must remain connected across the interfaces that humans and agents actually use.",
+        "That closure requires substantial engineering, but complexity is not evidence by itself. Complexity is justified only when it preserves a KFD invariant, reduces friction for human or agent participants, or produces an inspectable product witness. Complexity that cannot carry one of those responsibilities remains debt."
       ]
     },
     "practiceGuidelines": {
       "heading": "Practice guidelines",
-      "intro": "KFDs after the foundation triad may define practice guidelines: procedures that apply the foundation to a specific class of real-world product behavior. They do not expand the foundation triad; they show how the foundation behaves when a product must make a concrete kind of reality legible.",
+      "intro": "KFDs after the foundation triad may define procedures that apply the foundation to a specific class of real-world product behavior. They do not expand the foundation triad; they show how it behaves when a product must make a concrete kind of reality legible.",
       "guidelines": [
         {
           "layer": "Perspective-bearing views",
@@ -94,19 +123,29 @@
       ],
       "explanation": [
         "| Layer | Decision | Reader question | Commitment | |---|---|---|---| | Perspective-bearing views | KFD-4 | How should a product show time, history, replay, sync, or mixed-source work state? | Timelines must declare their observer: a useful view states who is observing, which facts were accepted, and how concurrent facts were projected. | | Primitive discovery | KFD-5 | How can humans and agents discover a new load-bearing object from real work? | Primitive discovery must join grounded judgment with scalable reasoning: reality pressure, alternatives, falsifiers, and responsibility stay inspectable. | | Autonomous discovery | KFD-6 | How may an agent discover primitives from accumulated experience without replacing reality with its own narrative? | Autonomous discovery must remain grounded in causal experience, preserve corpus boundaries, and never certify itself. |",
-        "KFD-4 is the first such guideline. It applies KFD-1/2/3 to the problem of perspective and timeline order. In a multi-machine or multi-agent world, a product should not pretend to own a universal global clock. It should preserve non-drifting facts, make trust start from those facts, and let participants cooperate by exposing the observer, accepted ranges, causal constraints, and projection policy behind the view. KFD-4 gates perspective-bearing views; it does not claim that importing the KFD-4 schema proves an adopter's concrete timeline implementation is complete or correct.",
-        "KFD-5 applies the same foundation to primitive discovery. Its current form joins human contact with reality and value judgment to agent-scale search, formalization, and falsification. KFD-6 is the draft next step: an agent may eventually derive primitive candidates from a large causal Episode corpus, but the loop must expose its observer and evidence cut, use independent evaluation, and keep discovery separate from promotion authority."
+        "KFD-4 applies KFD-1/2/3 to perspective and timeline order. KFD-5 applies the same foundation to human-agent primitive discovery. KFD-6 is the draft next step: an agent may eventually derive primitive candidates from a large causal Episode corpus, but the loop must expose its observer and evidence cut, use independent evaluation, and keep discovery separate from promotion authority."
       ]
     },
     "productProofPath": {
       "heading": "Product proof path",
-      "body": "KFDs are not a detached manifesto, but they are not a demand that readers adopt a Kungfu product before understanding the decisions. A philosophy becomes load-bearing only when it can be seen in a concrete case. The first concrete case is this package itself: `standards.json`, `schemas/`, `docs/`, `site/kfd-site.json`, and `scripts/check.mjs` show how KFD-1, KFD-2, KFD-3, KFD-4, KFD-5, and KFD-6 are expressed as consumable interfaces for both humans and agents. For the broader product case, use the main Kungfu product entrypoint (`https://kungfu.tech`) for product philosophy, and Buildchain (`https://buildchain.libkungfu.dev`) for release and provenance accountability. This registry states the commitments; this package and those entrypoints show how the commitments are meant to be borne in practice."
+      "body": "KFDs are not a detached manifesto, but they are not a demand that readers adopt a Kungfu product before understanding the decisions. The product-witness rule starts with this package itself: `standards.json`, `schemas/`, `docs/`, `site/kfd-site.json`, and `scripts/check.mjs` show how KFD-1, KFD-2, KFD-3, KFD-4, KFD-5, and KFD-6 are expressed as consumable interfaces for both humans and agents. These surfaces do not prove every adopter or product correct; they make the KFD package's own claims inspectable and falsifiable."
     },
     "currentDecisions": {
       "heading": "Current decisions",
       "source": "registry.json"
     },
     "sections": [
+      {
+        "id": "future-picture",
+        "sourcePath": "README.md",
+        "sourceHeading": "KFD — Kung Fu Decisions",
+        "title": "Future picture",
+        "renderRole": "first-screen",
+        "homepagePriority": 5,
+        "defaultPresentation": "future-picture",
+        "includeInFirstScreen": true,
+        "markdown": "Humans first named the world, then built machines to find better answers within\nit. As agents become capable participants in reality, the next step is for\nhumans and agents to discover when those names are wrong—and to build new\nprimitives from inspectable consequences.\n\nKungfu opens the path from agents that answer questions to a civilization that\ncan discover when it has named reality incorrectly."
+      },
       {
         "id": "foundation-triad",
         "sourcePath": "README.md",
@@ -116,18 +155,40 @@
         "homepagePriority": 10,
         "defaultPresentation": "triad-cards",
         "includeInFirstScreen": true,
-        "markdown": "The first three KFDs form the public foundation for kungfu-systems:\n\n```text\nKFD-1: facts must not drift.\nKFD-2: trust must start from facts.\nKFD-3: cooperation must start from trusted value.\n```\n\nTogether they define the load-bearing path for Kungfu products: make facts\nnon-drifting, make trust inspectable from those facts, and let humans and\nagents cooperate through trusted value rather than hidden pressure."
+        "markdown": "The first three KFDs form the public foundation for kungfu-systems:\n\n```text\nKFD-1: facts must not drift.\nKFD-2: trust must start from facts.\nKFD-3: cooperation must start from trusted value.\n```\n\nTogether they define the load-bearing path for Kungfu products: make facts\nnon-drifting, make trust inspectable from those facts, and let humans and\nagents cooperate through trusted value rather than hidden pressure.\n\nNo principle is load-bearing until it has an inspectable product witness.\n\n[Read the foundation model](docs/foundation-model.md) ·\n[Explore current decisions](#current-decisions) ·\n[Inspect the product proof path](#product-proof-path)"
       },
       {
         "id": "foundation-model",
-        "sourcePath": "README.md",
+        "sourcePath": "docs/foundation-model.md",
         "sourceHeading": "Foundation model",
         "title": "Foundation model",
+        "renderRole": "detail",
+        "homepagePriority": 70,
+        "defaultPresentation": "layered-model",
+        "includeInFirstScreen": false,
+        "markdown": "The first three KFDs are intentionally ordered:\n\n| Layer | Decision | Reader question | Commitment |\n|---|---|---|---|\n| Fact-source ontology | KFD-1 | What can count as a fact? | Facts must not drift: a load-bearing contract world comes from one declared fact source. |\n| Participant-to-object trust | KFD-2 | When can a user or agent trust a claim, product, artifact, or control surface? | Trust starts from inspectable facts and responsibility state. |\n| Participant-to-participant cooperation | KFD-3 | How should peer intelligent participants cooperate? | Cooperation starts from trusted value: value becomes trustable through transparent facts, stable choice, and explainable constraints. |\n\nIn short:\n\n```text\nreality pressure -> non-drifting facts -> inspectable trust\n                 -> trusted value -> voluntary cooperation\n```\n\nKFD-1 makes fact sources operational: a fact-bearing contract world must be\ndeclared, inspectable, and unable to drift invisibly. KFD-2 defines how trust\ncan stand on those facts. KFD-3 defines how humans and agents can cooperate\nonce facts, responsibility, and value are visible."
+      },
+      {
+        "id": "load-bearing-product-witness",
+        "sourcePath": "docs/foundation-model.md",
+        "sourceHeading": "Load-bearing product witness",
+        "title": "Load-bearing product witness",
+        "renderRole": "detail",
+        "homepagePriority": 71,
+        "defaultPresentation": "product-witness",
+        "includeInFirstScreen": false,
+        "markdown": "KFD does not ask readers to believe its worldview. No principle is load-bearing\nuntil it is embodied in an inspectable product witness: an implementation that\nhumans and agents can use, audit, challenge, and compare with its claimed\nconsequences.\n\nSelf-evident does not mean simple or documentation-free. It means that a\nproduct's declared value, mechanisms, constraints, and residual risks can be\ntraced through its public interfaces, source, build and release evidence, and\nruntime facts without depending on hidden organizational context. Open source\nis necessary for Kungfu's proof path, but source availability alone does not\ncreate a witness when the product cannot be used at its declared surfaces or\nits claims tested against consequences.\n\nKungfu products are not illustrations placed beside KFD. They are the concrete\nsurfaces through which KFD is made responsible to reality. Their breadth comes\nfrom the closure required by that responsibility: facts, trust, cooperation,\nperspective, action, consequence, and discovery must remain connected across\nthe interfaces that humans and agents actually use.\n\nThat closure requires substantial engineering, but complexity is not evidence\nby itself. Complexity is justified only when it preserves a KFD invariant,\nreduces friction for human or agent participants, or produces an inspectable\nproduct witness. Complexity that cannot carry one of those responsibilities\nremains debt."
+      },
+      {
+        "id": "what-kfd-is",
+        "sourcePath": "README.md",
+        "sourceHeading": "What KFD is",
+        "title": "What KFD is",
         "renderRole": "primary",
         "homepagePriority": 20,
-        "defaultPresentation": "layered-model",
-        "includeInFirstScreen": true,
-        "markdown": "The triad is intentionally ordered. It is a compact model for surviving and\nevolving in complex systems, especially in a world where agents can observe,\nact, delegate, and remember across many surfaces.\n\n| Layer | Decision | Reader question | Commitment |\n|---|---|---|---|\n| Fact-source ontology | KFD-1 | What can count as a fact? | Facts must not drift: a load-bearing contract world comes from one declared fact source. |\n| Participant-to-object trust | KFD-2 | When can a user or agent trust a claim, product, artifact, or control surface? | Trust starts from inspectable facts and responsibility state. |\n| Participant-to-participant cooperation | KFD-3 | How should peer intelligent participants cooperate? | Cooperation starts from trusted value: value becomes trustable through transparent facts, stable choice, and explainable constraints. |\n\nIn short:\n\n```text\nnon-drifting facts -> inspectable trust -> trusted value -> voluntary cooperation\n```\n\nThis is why KFDs are not only internal governance text. KFD-1 gives the\nfoundation model its first layer by making fact sources operational: a\nfact-bearing contract world must be declared, inspectable, and unable to drift\ninvisibly. KFD-2 then defines how trust can stand on those facts. KFD-3\ndefines how humans and agents can cooperate once facts and trust are visible.\n\nReal-world agent work turns ordinary work into a dense system of products,\nfiles, repositories, traces, policies, humans, and agents. In that world,\ncomplexity cannot be made safe by hidden state or forced compliance. It has to\nbe compressed through non-drifting facts, inspectable trust, and voluntary\ncooperation. The goal is not to force increasingly capable participants into\ncompliance through stronger pressure. It is to give humans and agents a shared\nworldview for adapting to a more complex world.\n\nThis also changes what a product interface means. Agent-facing CLI, API,\ndocumentation, envelopes, and local fact surfaces are not secondary integration\nchannels after the human GUI. They are first-class interfaces for intelligent\nparticipants that may use the system more frequently than humans do. A control\nplane in this model is a shared work environment for humans and agents, not\nonly a human dashboard over agent activity.\n\nThis model used to be expensive to practice. Stable facts require engineering,\niteration, and disciplined evidence paths, so older systems often survived by\nleaning on cheaper substitutes such as authority, habit, reputation, or\nintuition. Agents change both sides of that equation: they make the world more\ncomplex, and they also provide more intelligence for building fact-bearing\nsystems. KFD is part of that bootstrap: the worldview is forged through the same\ntransparent and inspectable mechanisms it asks products to provide.\n\nThis README states the architecture; KFD-1, KFD-2, and KFD-3 provide the\nfoundation rules."
+        "defaultPresentation": "registry-introduction",
+        "includeInFirstScreen": false,
+        "markdown": "KFD is the organization-wide decision registry of kungfu-systems: the small\nset of standing, cross-repository norms that products and their consumers weld\nto. Each decision has an immutable number (`KFD-N`), a kind, a status, and a\nsingle authoritative text in this repository.\n\nKFDs can be **principles** or **procedures**. Principles state what must remain\ntrue across kungfu-systems; procedures state how a class of work enforces or\nprotects a principle. The numbered decisions remain authoritative; the\n[foundation model](docs/foundation-model.md) explains how they fit together.\n\nStable rendered site: `https://kfd.libkungfu.dev`."
       },
       {
         "id": "adoption-boundary",
@@ -142,14 +203,14 @@
       },
       {
         "id": "practice-guidelines",
-        "sourcePath": "README.md",
+        "sourcePath": "docs/foundation-model.md",
         "sourceHeading": "Practice guidelines",
         "title": "Practice guidelines",
-        "renderRole": "primary",
-        "homepagePriority": 27,
+        "renderRole": "detail",
+        "homepagePriority": 72,
         "defaultPresentation": "practice-table",
         "includeInFirstScreen": false,
-        "markdown": "KFDs after the foundation triad may define practice guidelines: procedures\nthat apply the foundation to a specific class of real-world product behavior.\nThey do not expand the foundation triad; they show how the foundation behaves\nwhen a product must make a concrete kind of reality legible.\n\n| Layer | Decision | Reader question | Commitment |\n|---|---|---|---|\n| Perspective-bearing views | KFD-4 | How should a product show time, history, replay, sync, or mixed-source work state? | Timelines must declare their observer: a useful view states who is observing, which facts were accepted, and how concurrent facts were projected. |\n| Primitive discovery | KFD-5 | How can humans and agents discover a new load-bearing object from real work? | Primitive discovery must join grounded judgment with scalable reasoning: reality pressure, alternatives, falsifiers, and responsibility stay inspectable. |\n| Autonomous discovery | KFD-6 | How may an agent discover primitives from accumulated experience without replacing reality with its own narrative? | Autonomous discovery must remain grounded in causal experience, preserve corpus boundaries, and never certify itself. |\n\nKFD-4 is the first such guideline. It applies KFD-1/2/3 to the problem of\nperspective and timeline order. In a multi-machine or multi-agent world, a\nproduct should not pretend to own a universal global clock. It should preserve\nnon-drifting facts, make trust start from those facts, and let participants\ncooperate by exposing the observer, accepted ranges, causal constraints, and\nprojection policy behind the view. KFD-4 gates perspective-bearing views; it\ndoes not claim that importing the KFD-4 schema proves an adopter's concrete\ntimeline implementation is complete or correct.\n\nKFD-5 applies the same foundation to primitive discovery. Its current form\njoins human contact with reality and value judgment to agent-scale search,\nformalization, and falsification. KFD-6 is the draft next step: an agent may\neventually derive primitive candidates from a large causal Episode corpus, but\nthe loop must expose its observer and evidence cut, use independent evaluation,\nand keep discovery separate from promotion authority."
+        "markdown": "KFDs after the foundation triad may define procedures that apply the foundation\nto a specific class of real-world product behavior. They do not expand the\nfoundation triad; they show how it behaves when a product must make a concrete\nkind of reality legible.\n\n| Layer | Decision | Reader question | Commitment |\n|---|---|---|---|\n| Perspective-bearing views | KFD-4 | How should a product show time, history, replay, sync, or mixed-source work state? | Timelines must declare their observer: a useful view states who is observing, which facts were accepted, and how concurrent facts were projected. |\n| Primitive discovery | KFD-5 | How can humans and agents discover a new load-bearing object from real work? | Primitive discovery must join grounded judgment with scalable reasoning: reality pressure, alternatives, falsifiers, and responsibility stay inspectable. |\n| Autonomous discovery | KFD-6 | How may an agent discover primitives from accumulated experience without replacing reality with its own narrative? | Autonomous discovery must remain grounded in causal experience, preserve corpus boundaries, and never certify itself. |\n\nKFD-4 applies KFD-1/2/3 to perspective and timeline order. KFD-5 applies the\nsame foundation to human-agent primitive discovery. KFD-6 is the draft next\nstep: an agent may eventually derive primitive candidates from a large causal\nEpisode corpus, but the loop must expose its observer and evidence cut, use\nindependent evaluation, and keep discovery separate from promotion authority."
       },
       {
         "id": "product-proof-path",
@@ -160,7 +221,7 @@
         "homepagePriority": 30,
         "defaultPresentation": "proof-path",
         "includeInFirstScreen": false,
-        "markdown": "KFDs are not a detached manifesto, but they are not a demand that readers adopt\na Kungfu product before understanding the decisions. A philosophy becomes\nload-bearing only when it can be seen in a concrete case. The first concrete\ncase is this package itself: `standards.json`, `schemas/`, `docs/`,\n`site/kfd-site.json`, and `scripts/check.mjs` show how KFD-1, KFD-2, KFD-3,\nKFD-4, KFD-5, and KFD-6 are expressed as consumable interfaces for both humans\nand agents.\nFor the broader product case, use the main Kungfu product entrypoint\n(`https://kungfu.tech`) for product philosophy, and Buildchain\n(`https://buildchain.libkungfu.dev`) for release and provenance\naccountability. This registry states the commitments; this package and those\nentrypoints show how the commitments are meant to be borne in practice.\n\nRendered index: `https://kfd.libkungfu.dev` (stable machine path per entry,\ne.g. `https://kfd.libkungfu.dev/1`). This repository publishes\n`@kungfu-tech/kfd` — the decision texts plus a machine-readable\n`registry.json` — which the site consumes as its single fact source.\n\nMachine consumers that need KFD-owned standard identity should read\n`standards.json`. It is the versioned metadata surface for stable standard\nkeys, document routes and SHA-256 digests, schema IDs, KFD-owned concept names,\nand machine-interface contract versions. In Node or TypeScript projects, import\nit as:\n\n```js\nimport standards from \"@kungfu-tech/kfd/standards.json\" with { type: \"json\" };\n```"
+        "markdown": "KFDs are not a detached manifesto, but they are not a demand that readers adopt\na Kungfu product before understanding the decisions. The product-witness rule\nstarts with this package itself: `standards.json`, `schemas/`, `docs/`,\n`site/kfd-site.json`, and `scripts/check.mjs` show how KFD-1, KFD-2, KFD-3,\nKFD-4, KFD-5, and KFD-6 are expressed as consumable interfaces for both humans\nand agents. These surfaces do not prove every adopter or product correct; they\nmake the KFD package's own claims inspectable and falsifiable.\n\nThe complete explanatory path is published at\n[`docs/foundation-model.md`](docs/foundation-model.md) and projected to the\nstable site route `/foundation`. It explains the decisions without replacing\ntheir numbered authoritative texts.\n\nFor the broader witness set, use the main Kungfu product entrypoint\n(`https://kungfu.tech`) for product philosophy, and Buildchain\n(`https://buildchain.libkungfu.dev`) for release and provenance\naccountability. This registry states the commitments; the open products expose\nwhere those commitments are carried, where evidence can be inspected, and\nwhere remaining risk still belongs.\n\nRendered index: `https://kfd.libkungfu.dev` (stable machine path per entry,\ne.g. `https://kfd.libkungfu.dev/1`). This repository publishes\n`@kungfu-tech/kfd` — the decision texts plus a machine-readable\n`registry.json` — which the site consumes as its single fact source.\n\nMachine consumers that need KFD-owned standard identity should read\n`standards.json`. It is the versioned metadata surface for stable standard\nkeys, document routes and SHA-256 digests, schema IDs, KFD-owned concept names,\nand machine-interface contract versions. In Node or TypeScript projects, import\nit as:\n\n```js\nimport standards from \"@kungfu-tech/kfd/standards.json\" with { type: \"json\" };\n```"
       },
       {
         "id": "agent-quickstart",
@@ -171,7 +232,7 @@
         "homepagePriority": 40,
         "defaultPresentation": "ordered-steps",
         "includeInFirstScreen": false,
-        "markdown": "Agents consuming this package should start from the same sources as humans:\n\n1. Read this README for the foundation model and package map.\n2. Read `standards.json` for canonical KFD numbers, schema IDs, concept names,\n   and interface contracts.\n3. Use `site/kfd-site.json` decision metadata or the KFD-3 collaboration\n   interface fact-source metadata to identify the public KFD fact source.\n4. Use `schemas/kfd-2/trust-taxonomy.schema.json` for KFD-2 residual-risk and\n   trust-downgrade values. Unknown taxonomy values are invalid.\n5. Use `schemas/kfd-2/trust-claims.schema.json` and\n   `schemas/kfd-2/trust-assessment.schema.json` when a claim needs generic\n   KFD-2 assessment instead of a release-specific passport.\n6. Use `schemas/kfd-3/collaboration-interface.schema.json` and\n   `schemas/kfd-3/witness.schema.json` to inspect collaboration interfaces.\n7. Use `schemas/kfd-1/publication-url-semantics.schema.json` when a package,\n   paper, specification, or site bundle must distinguish stable reader URLs,\n   latest aliases, and immutable versioned artifacts.\n8. If a needed KFD-2 taxonomy value is missing, open a KFD GitHub issue rather\n   than inventing a local value:\n   `https://github.com/kungfu-systems/kfd/issues/new?title=KFD-2%20trust%20taxonomy%20extension%20request`.\n9. Use `schemas/kfd-5/primitive-discovery.schema.json` to record a grounded\n   primitive candidate, including the optional boundary-pressure diagnostic\n   when implicit coordination is under new pressure. Use\n   `schemas/kfd-6/autonomous-discovery-loop.schema.json` only for explicitly\n   draft or experimental autonomous-discovery work; its version 2 interface\n   requires a boundary hypothesis.\n\nKFD package semver is only the distribution version. KFD-owned machine\ninterfaces carry their own `schemaVersion` and `contract` fields. Compatible\nadditions may keep the same interface version; semantic changes, required-field\nchanges, verification meaning changes, or responsibility-boundary changes must\nuse a new interface version or contract.\n\nKFD-2 publishes trust-taxonomy, trust-claims, trust-assessment,\nrelease-claims, and release-trust-passport schemas under `schemas/kfd-2/`.\nThe generic schemas let humans, agents, Buildchain, and other systems assess\nwhether claims about KFD-1, KFD-3, KFD-4, future KFDs, or product surfaces are\nbound to source facts, evidence, hashes, audit boundaries, residual risk, and\nresponsibility state. The release schemas are a release-specific projection of\nthat model. See [`docs/KFD-2-usage.md`](docs/KFD-2-usage.md).\n\nKFD-3 also publishes a general collaboration-interface schema and witness\nschema under `schemas/kfd-3/`. These schemas are for participant-facing product\ninterfaces, not only agent APIs. A product such as Kungfu may implement an\nagent-first profile, but that profile remains a product-specific realization of\nKFD-3. The KFD-owned boundary is the standard vocabulary, schema IDs, and\nclosed-world evidence shape. See\n[`docs/KFD-3-usage.md`](docs/KFD-3-usage.md).\n\nKFD-4 publishes an observer-perspective schema under `schemas/kfd-4/`. It gives\nhumans and agents a standard vocabulary for observer, accepted facts,\nprojection policy, causal constraints, degraded evidence, and verification\nstate when a product shows a perspective-bearing timeline. The package-level\nclaim proves the KFD-owned interface surface; adopter runtime correctness\nrequires adopter-owned KFD-2 evidence.\n\nKFD-5 publishes a primitive-discovery record schema under `schemas/kfd-5/`.\nIt binds candidate identity, grounded pressure, participant functions,\nalternatives, contract boundaries, falsifiers, dogfood evidence, and outcome.\nIts optional boundary-pressure diagnostic records contact sides, prior implicit\nhandling, pressure changes, recurring failures, the mediation claim, and a\nnarrower internal-object alternative. Validation proves record closure, not\nthat the candidate is a real primitive.\n\nKFD-6 publishes a draft autonomous-discovery-loop schema under\n`schemas/kfd-6/`. Its version 2 experiment interface requires\ncausal-experience boundaries, a tested boundary hypothesis, held-out and\nindependent evaluation, bounded autonomy, and explicit separation between\ndiscovery and promotion. Its package presence is an experimental interface,\nnot a claim that autonomous primitive discovery has been achieved."
+        "markdown": "Agents consuming this package should start from the same sources as humans:\n\n1. Read this README for the future picture, foundation triad, and package map.\n2. Read `docs/foundation-model.md` for the complete non-numbered explanation.\n3. Read `standards.json` for canonical KFD numbers, schema IDs, concept names,\n   and interface contracts.\n4. Use `site/kfd-site.json` decision metadata or the KFD-3 collaboration\n   interface fact-source metadata to identify the public KFD fact source.\n5. Use `schemas/kfd-2/trust-taxonomy.schema.json` for KFD-2 residual-risk and\n   trust-downgrade values. Unknown taxonomy values are invalid.\n6. Use `schemas/kfd-2/trust-claims.schema.json` and\n   `schemas/kfd-2/trust-assessment.schema.json` when a claim needs generic\n   KFD-2 assessment instead of a release-specific passport.\n7. Use `schemas/kfd-3/collaboration-interface.schema.json` and\n   `schemas/kfd-3/witness.schema.json` to inspect collaboration interfaces.\n8. Use `schemas/kfd-1/publication-url-semantics.schema.json` when a package,\n   paper, specification, or site bundle must distinguish stable reader URLs,\n   latest aliases, and immutable versioned artifacts.\n9. If a needed KFD-2 taxonomy value is missing, open a KFD GitHub issue rather\n   than inventing a local value:\n   `https://github.com/kungfu-systems/kfd/issues/new?title=KFD-2%20trust%20taxonomy%20extension%20request`.\n10. Use `schemas/kfd-5/primitive-discovery.schema.json` to record a grounded\n   primitive candidate, including the optional boundary-pressure diagnostic\n   when implicit coordination is under new pressure. Use\n   `schemas/kfd-6/autonomous-discovery-loop.schema.json` only for explicitly\n   draft or experimental autonomous-discovery work; its version 2 interface\n   requires a boundary hypothesis.\n\nKFD package semver is only the distribution version. KFD-owned machine\ninterfaces carry their own `schemaVersion` and `contract` fields. Compatible\nadditions may keep the same interface version; semantic changes, required-field\nchanges, verification meaning changes, or responsibility-boundary changes must\nuse a new interface version or contract.\n\nKFD-2 publishes trust-taxonomy, trust-claims, trust-assessment,\nrelease-claims, and release-trust-passport schemas under `schemas/kfd-2/`.\nThe generic schemas let humans, agents, Buildchain, and other systems assess\nwhether claims about KFD-1, KFD-3, KFD-4, future KFDs, or product surfaces are\nbound to source facts, evidence, hashes, audit boundaries, residual risk, and\nresponsibility state. The release schemas are a release-specific projection of\nthat model. See [`docs/KFD-2-usage.md`](docs/KFD-2-usage.md).\n\nKFD-3 also publishes a general collaboration-interface schema and witness\nschema under `schemas/kfd-3/`. These schemas are for participant-facing product\ninterfaces, not only agent APIs. A product such as Kungfu may implement an\nagent-first profile, but that profile remains a product-specific realization of\nKFD-3. The KFD-owned boundary is the standard vocabulary, schema IDs, and\nclosed-world evidence shape. See\n[`docs/KFD-3-usage.md`](docs/KFD-3-usage.md).\n\nKFD-4 publishes an observer-perspective schema under `schemas/kfd-4/`. It gives\nhumans and agents a standard vocabulary for observer, accepted facts,\nprojection policy, causal constraints, degraded evidence, and verification\nstate when a product shows a perspective-bearing timeline. The package-level\nclaim proves the KFD-owned interface surface; adopter runtime correctness\nrequires adopter-owned KFD-2 evidence.\n\nKFD-5 publishes a primitive-discovery record schema under `schemas/kfd-5/`.\nIt binds candidate identity, grounded pressure, participant functions,\nalternatives, contract boundaries, falsifiers, dogfood evidence, and outcome.\nIts optional boundary-pressure diagnostic records contact sides, prior implicit\nhandling, pressure changes, recurring failures, the mediation claim, and a\nnarrower internal-object alternative. Validation proves record closure, not\nthat the candidate is a real primitive.\n\nKFD-6 publishes a draft autonomous-discovery-loop schema under\n`schemas/kfd-6/`. Its version 2 experiment interface requires\ncausal-experience boundaries, a tested boundary hypothesis, held-out and\nindependent evaluation, bounded autonomy, and explicit separation between\ndiscovery and promotion. Its package presence is an experimental interface,\nnot a claim that autonomous primitive discovery has been achieved."
       },
       {
         "id": "decision-metadata",
@@ -189,20 +250,31 @@
       "firstScreen": {
         "include": [
           "title",
-          "lead",
+          "future-picture.pastToFuture",
+          "future-picture.kungfuPath",
           "foundation-triad",
-          "foundation-model.chain"
+          "product-witness.principle",
+          "foundation-triad.links"
         ],
         "maxPrimarySections": 2,
-        "note": "The first viewport should establish KFD identity and the three-decision worldview without showing renderer or developer contract text."
+        "note": "The first viewport should show the civilizational shift, the Kungfu path, the foundation triad, and the product-witness rule before registry, renderer, or implementation detail."
       },
       "primary": [
+        "future-picture",
         "foundation-triad",
-        "foundation-model",
+        "what-kfd-is",
         "adoption-boundary",
-        "practice-guidelines",
         "product-proof-path"
       ],
+      "detail": {
+        "route": "/foundation",
+        "source": "docs/foundation-model.md",
+        "sections": [
+          "foundation-model",
+          "load-bearing-product-witness",
+          "practice-guidelines"
+        ]
+      },
       "support": [
         "agent-quickstart",
         "decision-metadata"
@@ -229,10 +301,20 @@
       "homepagePriority": 90,
       "defaultPresentation": "developer-note",
       "includeInFirstScreen": false,
-      "markdown": "This README is also the homepage text source for `https://kfd.libkungfu.dev`.\nWhen `site-libkungfu-dev` consumes the `@kungfu-tech/kfd` npm package to render\nthe KFD site, it should treat this file as the canonical homepage copy, not as\nan implementation note to paraphrase in the site repository.\n\nThe first screen should be derived from this README:\n\n- Page identity: the top-level heading.\n- Lead: the opening paragraph that defines KFD as the organization-wide\n  decision registry.\n- Foundation signal: the `Foundation triad` section, especially the three\n  one-line commitments.\n- First-screen explanation: the beginning of `Foundation model`, ending at the\n  `non-drifting facts -> inspectable trust -> trusted value -> voluntary\n  cooperation` chain.\n- Practice signal: the `Practice guidelines` section, starting with KFD-4 and\n  extending sequentially through later practice procedures.\n\nDecision cards, detail links, and machine paths should come from\n`registry.json`. The machine-readable site bundle lives at `site/kfd-site.json`\nand gives renderers stable fields for the homepage, foundation model, product\nproof path, decision routes, and rendering boundary. A site renderer may adapt\nlayout, navigation, typography, and visual assets, but it should not maintain\nseparate homepage wording that can drift from this package.\n\n`site/kfd-site.json` is generated from this README by\n`scripts/update-site-bundle.mjs`. The generated bundle exposes both compatible\ntop-level homepage fields and ordered `homepage.sections` entries. The\n`homepage.displayPlan` tells renderers which sections belong in the first\nscreen, primary narrative, and support area. Site repositories should consume\nthat bundle instead of parsing this README themselves. The renderer contract is\nexposed as machine/implementation metadata, not as ordinary homepage content.",
+      "markdown": "This README is also the homepage text source for `https://kfd.libkungfu.dev`.\nWhen `site-libkungfu-dev` consumes the `@kungfu-tech/kfd` npm package to render\nthe KFD site, it should treat this file as the canonical homepage copy, not as\nan implementation note to paraphrase in the site repository.\n\nThe first screen should be derived from this README:\n\n- Page identity: the top-level heading.\n- Future picture: the opening two paragraphs must preserve the shift from\n  machines answering inside a human-named world to humans and agents discovering\n  when that world was named incorrectly.\n- Foundation signal: the `Foundation triad` section, especially the three\n  one-line commitments and the product-witness rule immediately below them.\n- Depth choice: the foundation link must route to the non-numbered explanatory\n  page at `/foundation`; registry, renderer, and implementation detail stay\n  outside the first screen.\n\nDecision cards, detail links, and machine paths should come from\n`registry.json`. The machine-readable site bundle lives at `site/kfd-site.json`\nand gives renderers stable fields for the homepage, the foundation explanation\npage, product proof path, decision routes, and rendering boundary. A site\nrenderer may adapt layout, navigation, typography, and visual assets, but it\nshould not maintain separate wording that can drift from this package.\n\n`site/kfd-site.json` is generated from this README and\n`docs/foundation-model.md` by `scripts/update-site-bundle.mjs`. The README owns\nthe concise homepage; the foundation document owns the complete explanation.\nThe generated bundle exposes ordered homepage sections, the `/foundation`\npage, and a display plan that separates first-screen, primary, detail, and\nsupport content. Site repositories should consume that bundle instead of\nparsing either Markdown file. The renderer contract remains machine metadata,\nnot ordinary homepage content.",
       "renderAsHomepageContent": false,
       "note": "This is a machine/renderer contract for site implementers. It should not be rendered as ordinary homepage content."
     }
+  },
+  "foundationPage": {
+    "id": "foundation-model",
+    "title": "KFD Foundation Model",
+    "sourcePath": "docs/foundation-model.md",
+    "url": "/foundation",
+    "relationship": "explanation-of-numbered-decisions",
+    "normative": false,
+    "authorityNote": "The numbered texts in decisions/KFD-N.md remain authoritative.",
+    "markdown": "# KFD Foundation Model\n\nKFD is not a model architecture or an agent framework. It is a foundation for\nsystems that remain correctable by reality, including when reality challenges\nthe objects and primitives from which their world models are built.\n\nThis document explains the public worldview shared by the numbered KFDs. It is\nnot a numbered decision and does not create an additional normative rule. When\nan explanation and a decision differ, the text in `decisions/KFD-N.md` remains\nauthoritative.\n\n## Civilizational shift\n\nHumans first named the world, then built machines to find better answers within\nit. Stronger models improve prediction, reasoning, simulation, and action in\nthat already named world. Those capabilities remain necessary, but they do not\nguarantee that the world was named correctly.\n\nAs agents become capable participants in reality, the next frontier is not only\nto improve answers. Humans and agents can also use inspectable consequences to\ndiscover when a question, object boundary, evidence cut, or load-bearing\nprimitive is wrong. A civilization that can repeat this process gains the\nability to reconstruct its ontology rather than only optimize within it.\n\nKungfu opens the path from agents that answer questions to a civilization that\ncan discover when it has named reality incorrectly.\n\n## Foundation model\n\nThe first three KFDs are intentionally ordered:\n\n| Layer | Decision | Reader question | Commitment |\n|---|---|---|---|\n| Fact-source ontology | KFD-1 | What can count as a fact? | Facts must not drift: a load-bearing contract world comes from one declared fact source. |\n| Participant-to-object trust | KFD-2 | When can a user or agent trust a claim, product, artifact, or control surface? | Trust starts from inspectable facts and responsibility state. |\n| Participant-to-participant cooperation | KFD-3 | How should peer intelligent participants cooperate? | Cooperation starts from trusted value: value becomes trustable through transparent facts, stable choice, and explainable constraints. |\n\nIn short:\n\n```text\nreality pressure -> non-drifting facts -> inspectable trust\n                 -> trusted value -> voluntary cooperation\n```\n\nKFD-1 makes fact sources operational: a fact-bearing contract world must be\ndeclared, inspectable, and unable to drift invisibly. KFD-2 defines how trust\ncan stand on those facts. KFD-3 defines how humans and agents can cooperate\nonce facts, responsibility, and value are visible.\n\n## Capability and discovery\n\nKFD does not reject stronger models. It rejects the assumption that model\nimprovement is sufficient for every next step.\n\n```text\ncapability loop: model -> prediction -> evaluation -> stronger model\n\ndiscovery loop:  reality -> facts -> model -> action -> consequence\n                         -> correction or primitive reconstruction\n```\n\nThe loops are complementary, not interchangeable. When persistent reality\npressure cannot be resolved inside the current model, the system must be able\nto challenge its observer, evidence cut, object boundaries, and load-bearing\nprimitives rather than merely optimize within them.\n\nKFD-4, KFD-5, and KFD-6 extend the foundation into this discovery path. A\nperspective-bearing view declares its observer. Human-agent primitive discovery\njoins grounded judgment with scalable reasoning. Autonomous discovery remains\ngrounded in causal experience and cannot promote its own conclusions.\n\n## Real-world agent work\n\nReal-world agent work turns ordinary work into a dense system of products,\nfiles, repositories, traces, policies, humans, and agents. Complexity cannot be\nmade safe by hidden state or forced compliance. It has to be compressed through\nnon-drifting facts, inspectable trust, voluntary cooperation, and perspectives\nthat expose how reality was projected.\n\nThis changes what a product interface means. Agent-facing CLI, API,\ndocumentation, envelopes, and local fact surfaces are not secondary integration\nchannels after the human GUI. They are first-class interfaces for intelligent\nparticipants. A control plane in this model is a shared work environment for\nhumans and agents, not only a human dashboard over agent activity.\n\nThis model used to be expensive to practice. Stable facts require engineering,\niteration, and disciplined evidence paths, so older systems often survived by\nleaning on cheaper substitutes such as authority, habit, reputation, or\nintuition. Agents change both sides of that equation: they make the world more\ncomplex, and they also provide more intelligence for building fact-bearing\nsystems. KFD is part of that bootstrap.\n\n## Load-bearing product witness\n\nKFD does not ask readers to believe its worldview. No principle is load-bearing\nuntil it is embodied in an inspectable product witness: an implementation that\nhumans and agents can use, audit, challenge, and compare with its claimed\nconsequences.\n\nSelf-evident does not mean simple or documentation-free. It means that a\nproduct's declared value, mechanisms, constraints, and residual risks can be\ntraced through its public interfaces, source, build and release evidence, and\nruntime facts without depending on hidden organizational context. Open source\nis necessary for Kungfu's proof path, but source availability alone does not\ncreate a witness when the product cannot be used at its declared surfaces or\nits claims tested against consequences.\n\nKungfu products are not illustrations placed beside KFD. They are the concrete\nsurfaces through which KFD is made responsible to reality. Their breadth comes\nfrom the closure required by that responsibility: facts, trust, cooperation,\nperspective, action, consequence, and discovery must remain connected across\nthe interfaces that humans and agents actually use.\n\nThat closure requires substantial engineering, but complexity is not evidence\nby itself. Complexity is justified only when it preserves a KFD invariant,\nreduces friction for human or agent participants, or produces an inspectable\nproduct witness. Complexity that cannot carry one of those responsibilities\nremains debt.\n\n## Existing capabilities and the passage\n\nThe new direction does not reject the existing technical world. Kungfu depends\non capabilities accumulated through open source, version control, programming\nlanguages, operating systems, build systems, and high-capability agents. They\nare the departure ground and construction material for the passage into a new\nreality-correctable world.\n\nThe difference is the responsibility under which those capabilities are\norganized: keep the shared world correctable by reality, and reconstruct its\nontology when the old map fails. Kungfu's product program is to open that path\nfor humans and agents. Whether the path carries weight is judged by inspectable\nproduct consequences.\n\n## Practice guidelines\n\nKFDs after the foundation triad may define procedures that apply the foundation\nto a specific class of real-world product behavior. They do not expand the\nfoundation triad; they show how it behaves when a product must make a concrete\nkind of reality legible.\n\n| Layer | Decision | Reader question | Commitment |\n|---|---|---|---|\n| Perspective-bearing views | KFD-4 | How should a product show time, history, replay, sync, or mixed-source work state? | Timelines must declare their observer: a useful view states who is observing, which facts were accepted, and how concurrent facts were projected. |\n| Primitive discovery | KFD-5 | How can humans and agents discover a new load-bearing object from real work? | Primitive discovery must join grounded judgment with scalable reasoning: reality pressure, alternatives, falsifiers, and responsibility stay inspectable. |\n| Autonomous discovery | KFD-6 | How may an agent discover primitives from accumulated experience without replacing reality with its own narrative? | Autonomous discovery must remain grounded in causal experience, preserve corpus boundaries, and never certify itself. |\n\nKFD-4 applies KFD-1/2/3 to perspective and timeline order. KFD-5 applies the\nsame foundation to human-agent primitive discovery. KFD-6 is the draft next\nstep: an agent may eventually derive primitive candidates from a large causal\nEpisode corpus, but the loop must expose its observer and evidence cut, use\nindependent evaluation, and keep discovery separate from promotion authority."
   },
   "decisionPages": {
     "source": "registry.json",
@@ -356,6 +438,7 @@
     "ownedByKfd": [
       "homepage title and text",
       "homepage section projection from README.md",
+      "foundation explanation page from docs/foundation-model.md",
       "foundation triad commitments",
       "foundation model layers and chain",
       "product proof path text",

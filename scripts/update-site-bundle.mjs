@@ -2,6 +2,7 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 
 const README_PATH = "README.md";
+const FOUNDATION_PATH = "docs/foundation-model.md";
 const REGISTRY_PATH = "registry.json";
 const SITE_BUNDLE_PATH = "site/kfd-site.json";
 
@@ -48,6 +49,15 @@ const introLead = (intro) => {
   };
 };
 
+const parseFuturePicture = (intro) => {
+  const blocks = paragraphBlocks(intro);
+  return {
+    heading: "Future picture",
+    pastToFuture: blocks[0] || "",
+    kungfuPath: blocks[1] || "",
+  };
+};
+
 const parseFoundationTriad = (markdown) => {
   const code = markdown.match(/```text\n([\s\S]*?)\n```/);
   if (!code) throw new Error("Foundation triad must include a text code block");
@@ -58,11 +68,17 @@ const parseFoundationTriad = (markdown) => {
     if (!item) throw new Error(`invalid foundation triad line: ${line}`);
     return { id: item[1], text: item[2] };
   });
+  const links = [...after.matchAll(/\[([^\]]+)\]\(([^)]+)\)/g)].map((link) => ({
+    label: link[1],
+    sourceTarget: link[2],
+    url: link[2] === FOUNDATION_PATH ? "/foundation" : link[2],
+  }));
   return {
     heading: "Foundation triad",
     intro: paragraphBlocks(before)[0] || "",
     commitments,
     summary: paragraphBlocks(after)[0] || "",
+    links,
   };
 };
 
@@ -90,6 +106,15 @@ const parseFoundationModel = (markdown) => {
     layers: parseMarkdownTable(beforeChain),
     chain: chainMatch[1].trim(),
     explanation: paragraphBlocks(afterChain),
+  };
+};
+
+const parseProductWitness = (markdown) => {
+  const blocks = paragraphBlocks(markdown);
+  return {
+    heading: "Load-bearing product witness",
+    principle: blocks[0] || "",
+    explanation: blocks.slice(1),
   };
 };
 
@@ -125,9 +150,9 @@ const buildUsagePages = (entries) => entries.map((entry) => {
   };
 });
 
-const section = ({ id, sourceHeading, title, markdown, role, priority, presentation, firstScreen = false }) => ({
+const section = ({ id, sourceHeading, title, markdown, role, priority, presentation, firstScreen = false, sourcePath = README_PATH }) => ({
   id,
-  sourcePath: README_PATH,
+  sourcePath,
   sourceHeading,
   title,
   renderRole: role,
@@ -137,16 +162,30 @@ const section = ({ id, sourceHeading, title, markdown, role, priority, presentat
   markdown: normalizeLines(markdown),
 });
 
-export const buildSiteBundle = ({ readmeText, registry }) => {
+export const buildSiteBundle = ({ readmeText, foundationText, registry }) => {
   const readme = parseReadme(readmeText);
-  const { lead, decisionKinds } = introLead(readme.intro);
+  const foundationDocument = parseReadme(foundationText);
+  const futurePicture = parseFuturePicture(readme.intro);
+  const { lead } = introLead(readme.intro);
+  const { decisionKinds } = introLead(readme.sections["What KFD is"] || "");
   const foundationTriad = parseFoundationTriad(readme.sections["Foundation triad"] || "");
-  const foundationModel = parseFoundationModel(readme.sections["Foundation model"] || "");
-  const practiceGuidelines = parsePracticeGuidelines(readme.sections["Practice guidelines"] || "");
+  const foundationModel = parseFoundationModel(foundationDocument.sections["Foundation model"] || "");
+  const productWitness = parseProductWitness(foundationDocument.sections["Load-bearing product witness"] || "");
+  const practiceGuidelines = parsePracticeGuidelines(foundationDocument.sections["Practice guidelines"] || "");
   const productProofPath = parseProductProofPath(readme.sections["Product proof path"] || "");
   const entries = registry.entries || [];
 
   const homepageSections = [
+    section({
+      id: "future-picture",
+      sourceHeading: "KFD — Kung Fu Decisions",
+      title: "Future picture",
+      markdown: readme.intro,
+      role: "first-screen",
+      priority: 5,
+      presentation: "future-picture",
+      firstScreen: true,
+    }),
     section({
       id: "foundation-triad",
       sourceHeading: "Foundation triad",
@@ -161,11 +200,30 @@ export const buildSiteBundle = ({ readmeText, registry }) => {
       id: "foundation-model",
       sourceHeading: "Foundation model",
       title: "Foundation model",
-      markdown: readme.sections["Foundation model"],
+      markdown: foundationDocument.sections["Foundation model"],
+      role: "detail",
+      priority: 70,
+      presentation: "layered-model",
+      sourcePath: FOUNDATION_PATH,
+    }),
+    section({
+      id: "load-bearing-product-witness",
+      sourceHeading: "Load-bearing product witness",
+      title: "Load-bearing product witness",
+      markdown: foundationDocument.sections["Load-bearing product witness"],
+      role: "detail",
+      priority: 71,
+      presentation: "product-witness",
+      sourcePath: FOUNDATION_PATH,
+    }),
+    section({
+      id: "what-kfd-is",
+      sourceHeading: "What KFD is",
+      title: "What KFD is",
+      markdown: readme.sections["What KFD is"],
       role: "primary",
       priority: 20,
-      presentation: "layered-model",
-      firstScreen: true,
+      presentation: "registry-introduction",
     }),
     section({
       id: "adoption-boundary",
@@ -180,10 +238,11 @@ export const buildSiteBundle = ({ readmeText, registry }) => {
       id: "practice-guidelines",
       sourceHeading: "Practice guidelines",
       title: "Practice guidelines",
-      markdown: readme.sections["Practice guidelines"],
-      role: "primary",
-      priority: 27,
+      markdown: foundationDocument.sections["Practice guidelines"],
+      role: "detail",
+      priority: 72,
       presentation: "practice-table",
+      sourcePath: FOUNDATION_PATH,
     }),
     section({
       id: "product-proof-path",
@@ -220,11 +279,13 @@ export const buildSiteBundle = ({ readmeText, registry }) => {
     source: {
       package: "@kungfu-tech/kfd",
       homepageTextSource: README_PATH,
+      foundationTextSource: FOUNDATION_PATH,
       registry: REGISTRY_PATH,
       decisionsDir: "decisions",
     },
     routes: {
       home: "/",
+      foundation: "/foundation",
       decisionPattern: "/{number}",
       decisionUsagePattern: "/{number}/usage",
       llms: "/llms.txt",
@@ -234,8 +295,10 @@ export const buildSiteBundle = ({ readmeText, registry }) => {
       title: readme.title,
       lead,
       decisionKinds,
+      futurePicture,
       foundationTriad,
       foundationModel,
+      productWitness,
       practiceGuidelines,
       productProofPath,
       currentDecisions: {
@@ -245,11 +308,23 @@ export const buildSiteBundle = ({ readmeText, registry }) => {
       sections: homepageSections,
       displayPlan: {
         firstScreen: {
-          include: ["title", "lead", "foundation-triad", "foundation-model.chain"],
+          include: [
+            "title",
+            "future-picture.pastToFuture",
+            "future-picture.kungfuPath",
+            "foundation-triad",
+            "product-witness.principle",
+            "foundation-triad.links",
+          ],
           maxPrimarySections: 2,
-          note: "The first viewport should establish KFD identity and the three-decision worldview without showing renderer or developer contract text.",
+          note: "The first viewport should show the civilizational shift, the Kungfu path, the foundation triad, and the product-witness rule before registry, renderer, or implementation detail.",
         },
-        primary: ["foundation-triad", "foundation-model", "adoption-boundary", "practice-guidelines", "product-proof-path"],
+        primary: ["future-picture", "foundation-triad", "what-kfd-is", "adoption-boundary", "product-proof-path"],
+        detail: {
+          route: "/foundation",
+          source: FOUNDATION_PATH,
+          sections: ["foundation-model", "load-bearing-product-witness", "practice-guidelines"],
+        },
         support: ["agent-quickstart", "decision-metadata"],
         currentDecisions: {
           source: REGISTRY_PATH,
@@ -270,6 +345,16 @@ export const buildSiteBundle = ({ readmeText, registry }) => {
         renderAsHomepageContent: false,
         note: "This is a machine/renderer contract for site implementers. It should not be rendered as ordinary homepage content.",
       },
+    },
+    foundationPage: {
+      id: "foundation-model",
+      title: foundationDocument.title,
+      sourcePath: FOUNDATION_PATH,
+      url: "/foundation",
+      relationship: "explanation-of-numbered-decisions",
+      normative: false,
+      authorityNote: "The numbered texts in decisions/KFD-N.md remain authoritative.",
+      markdown: normalizeLines(foundationText),
     },
     decisionPages: {
       source: REGISTRY_PATH,
@@ -314,6 +399,7 @@ export const buildSiteBundle = ({ readmeText, registry }) => {
       ownedByKfd: [
         "homepage title and text",
         "homepage section projection from README.md",
+        "foundation explanation page from docs/foundation-model.md",
         "foundation triad commitments",
         "foundation model layers and chain",
         "product proof path text",
@@ -341,6 +427,7 @@ export const buildSiteBundle = ({ readmeText, registry }) => {
 
 export const readInputs = () => ({
   readmeText: readFileSync(README_PATH, "utf8"),
+  foundationText: readFileSync(FOUNDATION_PATH, "utf8"),
   registry: JSON.parse(readFileSync(REGISTRY_PATH, "utf8")),
 });
 
