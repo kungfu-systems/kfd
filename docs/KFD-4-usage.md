@@ -1,45 +1,70 @@
 # KFD-4 Implementation Notes
 
-KFD-4 defines the observer-perspective rule: timelines must declare their
-observer. This page is the package implementation note for machine consumers
-and products that show perspective-bearing timelines. The authoritative
-decision text remains `decisions/KFD-4.md`.
+KFD-4 defines the perspective rule: views must remain bound to declared
+perspectives, and perspective transformations must remain inspectable when they
+are used to reveal different objects or guide action. The authoritative text is
+`decisions/KFD-4.md`.
 
 ## Package Surface
 
-The KFD package implements KFD-4 through:
+The KFD package implements two connected machine-checkable KFD-4 profiles:
 
-- `decisions/KFD-4.md`: the authoritative procedure text.
-- `schemas/kfd-4/observer-perspective.schema.json`: the KFD-owned schema for
+- `decisions/KFD-4.md`: the authoritative principle.
+- `schemas/kfd-4/observer-perspective.schema.json`: the profile for
   observer-relative timeline views.
-- `standards.json#/standards/kfd-4`: metadata that exposes the schema ID, schema
-  path, interface contract, and concept names.
-- `scripts/check.mjs`: verification that KFD-4 metadata and schema remain
-  wired into the package.
+- `schemas/kfd-4/perspective-replay.schema.json`: the profile for
+  perspective-preserving and contrastive replay.
+- `standards.json#/standards/kfd-4`: schema identity, interface contract, and
+  concept names.
+- `scripts/check.mjs`: package wiring and contract verification.
+
+These profiles implement the first engineering path:
+
+```text
+perspective-bound timeline
+  -> perspective-preserving replay
+  -> contrastive replay
+  -> visible cross-perspective object mismatch
+```
+
+They are not a universal model for perspective. Other domains may define their
+own KFD-4 profiles while preserving the decision's observer, fact,
+transformation, causal, degradation, and responsibility boundaries.
 
 ## When To Use The Gate
 
-Use KFD-4 when a product surface represents time, history, replay, sync,
-ordering, or mixed-source work state. A product that does not present a
-perspective-bearing timeline does not need a KFD-4 gate.
+Use KFD-4 when observer position can materially change interpretation,
+ordering, relevance, visible object boundaries, or action. Declare the current
+perspective and, when a transformation is claimed, what changed and what became
+newly visible.
 
-The gate is about the view's declared perspective. A product may pass the KFD-4
-interface boundary by exposing view-subject, observer, accepted-fact,
-projection-policy, causal-constraint, degraded-evidence, and verification
-metadata. That package or product still needs separate evidence for any
-stronger claim, such as
-"this adapter captured every remote event" or "this product timeline is
-complete and correct."
+For mixed-source timelines, expose view subject, observer, accepted facts,
+projection policy, causal constraints, degraded evidence, and verification.
+Schema validity proves that this declaration exists. It does not prove that an
+adapter captured every fact or that a runtime timeline is complete.
+
+For replay, expose the source views, replay observer, shared context,
+reconstruction policy, preserved elements, declared loss, degraded state, and
+verification. Contrastive mode requires at least two source views and an
+explicit mismatch record. A `primitiveSignal: candidate` is an input to KFD-5,
+not certification.
+
+## Perspective Transformation Record
+
+A domain-specific record should preserve at least:
+
+1. the origin perspective and its natural objects;
+2. the transformed perspective and consequence-bearing participant;
+3. the transformation performed;
+4. the accepted facts and known gaps;
+5. the burden, boundary, or object that became visible;
+6. the boundary between local epistemic priority and wider claims.
+
+KFD-5 turns that last output into a primitive candidate and qualifies it.
 
 ## Trust Relation
 
-KFD-4 claims can be assessed by KFD-2. The KFD package does this through
-`.buildchain/kfd-2/kfd-foundation.trust-claims.json` and
-`.buildchain/kfd-2/kfd-foundation.trust-assessment.json`, where KFD-4 is
-assessed as an `observer-perspective` subject.
-
-The KFD package's own KFD-2 assessment proves the package-level interface
-surface: decision text, standards metadata, schema, and self-check wiring. It
-does not transfer trust to an adopter's runtime timeline. Adopters should make
-their own KFD-2 claim or release passport when they want users or agents to
-trust a concrete timeline implementation.
+KFD-4 claims can be assessed by KFD-2. The KFD package's assessment proves the
+decision text, timeline and replay profile schemas, standards metadata, and
+self-check wiring. Adopters own evidence for their runtime view, replay
+fidelity, or perspective transformation.

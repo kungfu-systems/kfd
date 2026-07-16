@@ -6,9 +6,14 @@ than by open proposal rounds.
 
 ## Ground rules
 
-- Decision texts are **append-only**. Editorial clarification may be applied
-  in place; substantive semantic change mints a new KFD that supersedes the
-  old number. Numbers are never reused or renumbered.
+- Every published package, tag, and commit is immutable. Before the first
+  stable KFD release, a maintainer may explicitly authorize substantive
+  refinement of an existing numbered decision in place. Such a change must be
+  identified as a breaking decision-surface impact in `release-impact.json`,
+  preserve prior prerelease artifacts, and never rewrite a published tag.
+  After the first stable release, decision texts are **append-only**:
+  substantive semantic change mints a new KFD that supersedes the old number.
+  Numbers are never reused or renumbered.
 - Newer numbers do not automatically override older decisions. A later KFD may
   supersede or override an earlier KFD only when the later text states that
   relationship explicitly and `registry.json` records it. Conflicting active

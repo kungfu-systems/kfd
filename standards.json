@@ -20,18 +20,18 @@
       "title": "Facts must not drift: contract worlds need one fact source",
       "kind": "procedure",
       "status": "active",
-      "revision": 1,
+      "revision": 2,
       "metadataSchemaVersion": "1",
       "document": {
         "path": "decisions/KFD-1.md",
         "url": "https://kfd.libkungfu.dev/1",
-        "sha256": "31ef9f7df544bc99f6c6eb94e35a2498748bffdf803746a458ccd0e6f896dfb3"
+        "sha256": "75c6bcb3abbaec88490d3d000fd6a3abf1d44df5d9a448530c56e505909dd70e"
       },
       "compatibility": {
         "packageLine": "v1.0",
         "registrySchemaVersion": 1,
         "metadataSchemaVersion": "1",
-        "rule": "Substantive semantic changes mint a new KFD; compatible metadata additions keep schemaVersion 1."
+        "rule": "Before the first stable release, maintainer-authorized semantic refinement must declare breaking decision-surface impact; after stable, substantive change mints a new KFD."
       },
       "schemaIds": {
         "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json",
@@ -390,6 +390,22 @@
             "description": "Published JSON schema surface at schemas/kfd-4/observer-perspective.schema.json.",
             "sourcePath": "schemas/kfd-4/observer-perspective.schema.json",
             "weldRationale": "Consumers can bind to this surface as an integration contract.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-4-perspective-replay-schema",
+            "class": "integration-time",
+            "classes": [
+              "integration-time"
+            ],
+            "description": "Published JSON schema surface at schemas/kfd-4/perspective-replay.schema.json.",
+            "sourcePath": "schemas/kfd-4/perspective-replay.schema.json",
+            "weldRationale": "Consumers can bind to this surface as a perspective-preserving and contrastive replay contract.",
             "impactProjection": {
               "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
               "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
@@ -814,7 +830,7 @@
         "packageLine": "v1.0",
         "registrySchemaVersion": 1,
         "metadataSchemaVersion": "1",
-        "rule": "Substantive semantic changes mint a new KFD; compatible metadata additions keep schemaVersion 1."
+        "rule": "Before the first stable release, maintainer-authorized semantic refinement must declare breaking decision-surface impact; after stable, substantive change mints a new KFD."
       },
       "schemaIds": {
         "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json",
@@ -911,7 +927,7 @@
         "packageLine": "v1.0",
         "registrySchemaVersion": 1,
         "metadataSchemaVersion": "1",
-        "rule": "Substantive semantic changes mint a new KFD; compatible metadata additions keep schemaVersion 1."
+        "rule": "Before the first stable release, maintainer-authorized semantic refinement must declare breaking decision-surface impact; after stable, substantive change mints a new KFD."
       },
       "schemaIds": {
         "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json",
@@ -963,29 +979,31 @@
       "id": "KFD-4",
       "number": 4,
       "label": "KFD-4",
-      "title": "Timelines must declare their observer: useful views need a stated perspective",
-      "kind": "procedure",
+      "title": "Views must remain bound to declared perspectives: timelines make perspective durable and replay makes it transferable",
+      "kind": "principle",
       "status": "active",
-      "revision": 1,
+      "revision": 3,
       "metadataSchemaVersion": "1",
       "document": {
         "path": "decisions/KFD-4.md",
         "url": "https://kfd.libkungfu.dev/4",
-        "sha256": "03e9ee7cf0c067f508a93b95ca3dd45179fb9dc3b77999b28b8cddbd7acc90a6"
+        "sha256": "06441c684b15b8fe0b9457cd1a74eb9cf155348eed001d0fadc2564d15fc3d36"
       },
       "compatibility": {
         "packageLine": "v1.0",
         "registrySchemaVersion": 1,
         "metadataSchemaVersion": "1",
-        "rule": "Substantive semantic changes mint a new KFD; compatible metadata additions keep schemaVersion 1."
+        "rule": "Before the first stable release, maintainer-authorized semantic refinement must declare breaking decision-surface impact; after stable, substantive change mints a new KFD."
       },
       "schemaIds": {
         "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json",
-        "observerPerspective": "https://kfd.libkungfu.dev/schemas/kfd-4/observer-perspective.schema.json"
+        "observerPerspective": "https://kfd.libkungfu.dev/schemas/kfd-4/observer-perspective.schema.json",
+        "perspectiveReplay": "https://kfd.libkungfu.dev/schemas/kfd-4/perspective-replay.schema.json"
       },
       "schemaPaths": {
         "metadata": "schemas/kfd-standards.schema.json",
-        "observerPerspective": "schemas/kfd-4/observer-perspective.schema.json"
+        "observerPerspective": "schemas/kfd-4/observer-perspective.schema.json",
+        "perspectiveReplay": "schemas/kfd-4/perspective-replay.schema.json"
       },
       "interfaces": {
         "observerPerspective": {
@@ -994,12 +1012,28 @@
           "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-4/observer-perspective.schema.json",
           "schemaPath": "schemas/kfd-4/observer-perspective.schema.json",
           "compatibilityRule": "Compatible additions may keep schemaVersion 1; semantic or required-field changes require a new interface version or contract."
+        },
+        "perspectiveReplay": {
+          "contract": "kfd-4-perspective-replay",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-4/perspective-replay.schema.json",
+          "schemaPath": "schemas/kfd-4/perspective-replay.schema.json",
+          "compatibilityRule": "Compatible additions may keep schemaVersion 1; semantic or required-field changes require a new interface version or contract."
         }
       },
       "concepts": {
         "observer": "observer",
         "declaredPerspective": "declared perspective",
         "observerPerspective": "observer perspective",
+        "perspectiveTransformation": "perspective transformation",
+        "realityPreservingTransformation": "reality-preserving perspective transformation",
+        "perspectiveBoundTimeline": "perspective-bound timeline",
+        "perspectiveReplay": "perspective-preserving replay",
+        "contrastiveReplay": "contrastive replay",
+        "marginalTransformationCost": "marginal perspective-transformation cost",
+        "situatedView": "situated view",
+        "localPriority": "local epistemic priority",
+        "visibleHorizon": "visible horizon",
         "viewSubject": "view subject",
         "acceptedFacts": "accepted facts",
         "projectionPolicy": "projection policy",
@@ -1013,21 +1047,21 @@
       "id": "KFD-5",
       "number": 5,
       "label": "KFD-5",
-      "title": "Primitive discovery must join grounded judgment with scalable reasoning: new load-bearing objects need reality pressure",
+      "title": "Primitive discovery must join perspective-grounded judgment with scalable reasoning: discovery and qualification are different acts",
       "kind": "procedure",
       "status": "active",
-      "revision": 2,
+      "revision": 4,
       "metadataSchemaVersion": "1",
       "document": {
         "path": "decisions/KFD-5.md",
         "url": "https://kfd.libkungfu.dev/5",
-        "sha256": "64efc1ed108260c9d58dd893fdd9adc41012254cbe402d285eb7693c0d5c402e"
+        "sha256": "7ac5fda29246d67222d375a3c5dcfd9dad188172a90d5defd3a7947667375ac3"
       },
       "compatibility": {
         "packageLine": "v1.0",
         "registrySchemaVersion": 1,
         "metadataSchemaVersion": "1",
-        "rule": "Substantive semantic changes mint a new KFD; compatible metadata additions keep schemaVersion 1."
+        "rule": "Before the first stable release, maintainer-authorized semantic refinement must declare breaking decision-surface impact; after stable, substantive change mints a new KFD."
       },
       "schemaIds": {
         "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json",
@@ -1040,15 +1074,24 @@
       "interfaces": {
         "primitiveDiscovery": {
           "contract": "kfd-5-primitive-discovery",
-          "schemaVersion": 1,
+          "schemaVersion": 2,
           "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-5/primitive-discovery.schema.json",
           "schemaPath": "schemas/kfd-5/primitive-discovery.schema.json",
-          "compatibilityRule": "Compatible additions may keep schemaVersion 1; semantic or required-field changes require a new interface version or contract."
+          "compatibilityRule": "Version 2 requires perspectiveGenesis and separates candidate genesis from qualification; further semantic or required-field changes require a new interface version or contract."
         }
       },
       "concepts": {
         "primitiveDiscovery": "primitive discovery",
-        "groundedJudgment": "grounded judgment",
+        "groundedJudgment": "perspective-grounded judgment",
+        "perspectiveGenesis": "perspective genesis",
+        "perspectiveTransformation": "perspective transformation",
+        "genesisMethod": "primitive-genesis method",
+        "replayBasis": "perspective-replay basis",
+        "localOptimizationTrap": "local-optimization trap",
+        "situatedObservation": "situated observation",
+        "newlyVisibleNeed": "newly visible need",
+        "claimBoundary": "local-to-general claim boundary",
+        "qualification": "primitive qualification",
         "scalableReasoning": "scalable reasoning",
         "realityPressure": "reality pressure",
         "boundaryPressure": "boundary pressure",
@@ -1069,21 +1112,21 @@
       "id": "KFD-6",
       "number": 6,
       "label": "KFD-6",
-      "title": "Autonomous discovery must remain grounded in causal experience: discovery loops must not certify themselves",
+      "title": "Autonomous discovery must remain grounded in causal experience: the loop must transform perspectives, not only mine patterns",
       "kind": "procedure",
       "status": "draft",
-      "revision": 2,
+      "revision": 4,
       "metadataSchemaVersion": "1",
       "document": {
         "path": "decisions/KFD-6.md",
         "url": "https://kfd.libkungfu.dev/6",
-        "sha256": "9f5aad3047566a84372c2c7c4ced68fd55d3f478c8ae7b16080d0625d22e00c7"
+        "sha256": "a385de6b9c9efdf0a316444862ce7c2cde8e906d552b570bf80d7deadfbbf29a"
       },
       "compatibility": {
         "packageLine": "v1.0",
         "registrySchemaVersion": 1,
         "metadataSchemaVersion": "1",
-        "rule": "Substantive semantic changes mint a new KFD; compatible metadata additions keep schemaVersion 1."
+        "rule": "Before the first stable release, maintainer-authorized semantic refinement must declare breaking decision-surface impact; after stable, substantive change mints a new KFD."
       },
       "schemaIds": {
         "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json",
@@ -1096,10 +1139,10 @@
       "interfaces": {
         "autonomousDiscoveryLoop": {
           "contract": "kfd-6-autonomous-discovery-loop",
-          "schemaVersion": 2,
+          "schemaVersion": 3,
           "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-6/autonomous-discovery-loop.schema.json",
           "schemaPath": "schemas/kfd-6/autonomous-discovery-loop.schema.json",
-          "compatibilityRule": "Draft interface v2 adds the required boundary hypothesis; further compatible additions may keep schemaVersion 2, while semantic or required-field changes require a new interface version or contract."
+          "compatibilityRule": "Draft interface v3 requires perspective experiments and makes boundary hypothesis conditional; further semantic or required-field changes require a new interface version or contract."
         }
       },
       "concepts": {
@@ -1108,6 +1151,12 @@
         "episodeCorpus": "Episode corpus",
         "experienceCut": "immutable experience cut",
         "captureBoundary": "capture boundary",
+        "perspectiveExperiment": "perspective experiment",
+        "perspectiveTransformation": "perspective transformation",
+        "perspectiveReplay": "perspective-preserving replay",
+        "contrastiveReplay": "contrastive replay",
+        "fixedOntologyBaseline": "fixed-ontology baseline",
+        "projectionArtifact": "perspective projection artifact",
         "boundaryPressure": "boundary pressure",
         "boundaryHypothesis": "boundary hypothesis",
         "contactSurface": "contact surface",

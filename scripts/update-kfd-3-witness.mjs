@@ -44,6 +44,7 @@ const schemaSurfaces = [
   "schemas/kfd-3/collaboration-interface.schema.json",
   "schemas/kfd-3/witness.schema.json",
   "schemas/kfd-4/observer-perspective.schema.json",
+  "schemas/kfd-4/perspective-replay.schema.json",
   "schemas/kfd-5/primitive-discovery.schema.json",
   "schemas/kfd-6/autonomous-discovery-loop.schema.json",
 ].map((filePath) => ({
