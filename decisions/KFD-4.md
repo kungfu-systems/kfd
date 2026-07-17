@@ -66,6 +66,18 @@ objects, burdens, and boundaries hidden by the current view. A primitive may
 already be real as a causal or coordination burden while remaining invisible
 inside the prevailing ontology.
 
+Perspective transformation is an important discovery method, not the only
+possible source of a primitive candidate. An anomaly, repeated reconstruction,
+causal-variable investigation, structural compression, direct situated
+judgment, or a hybrid process may also generate a candidate. KFD-4 governs all
+of them at a prior boundary: the facts, signals, variables, and compression
+claims they use are observed from a perspective that must remain declared.
+
+This distinction prevents an operating principle from becoming an unsupported
+ranking theorem. KFD-4 makes perspective transformation possible and
+auditable. It does not claim that perspective transformation is always more
+productive than another grounded genesis method.
+
 ## Engineering conditions for perspective transformation
 
 Perspective transformation remains expensive when another participant must
@@ -155,6 +167,8 @@ a KFD-4 gate. It remains subject to any other applicable KFD.
 - It does not require a global observer, global clock, or universal ontology.
 - It does not certify a newly visible object as a primitive. KFD-5 performs
   that qualification.
+- It does not require every primitive candidate to originate in a perspective
+  transformation or rank discovery methods by doctrine.
 - It does not let a participant escape responsibility by calling a claim
   "only a perspective."
 
@@ -189,9 +203,10 @@ turns their trusted differences into shared discovery. KFD-4 is therefore the
 first complete operating application of the foundation triad, not an expansion
 of the foundation itself.
 
-KFD-5 begins from that capability. It asks whether a perspective transformation
-has revealed a missing load-bearing object and then subjects the candidate to
-scalable qualification.
+KFD-5 begins from the declared-perspective boundary. It records which genesis
+method or combination produced a candidate, then subjects that candidate to
+fact-bound qualification. Perspective transformation and replay remain
+first-class methods without becoming mandatory origin stories.
 
 ## Implementation case: observer-relative timelines
 
@@ -249,6 +264,8 @@ reader's perspective.
 These cases do not prove that perspective switching always produces a
 primitive. They demonstrate the KFD-4 function: changing perspective can move
 a real burden into view before the prevailing model has a name for it.
+They also do not show that another method could not have generated the same
+candidate earlier, more cheaply, or with fewer false positives.
 
 ## Adopters
 

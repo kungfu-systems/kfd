@@ -3,9 +3,9 @@
   "$id": "https://kfd.libkungfu.dev/schemas/kfd-6/autonomous-discovery-loop.schema.json",
   "title": "KFD-6 autonomous discovery loop experiment",
   "type": "object",
-  "required": ["schemaVersion", "contract", "standard", "status", "loopId", "experienceBasis", "perspectiveExperiments", "autonomyBoundary", "method", "evaluation", "antiSelfCertification", "promotion"],
+  "required": ["schemaVersion", "contract", "standard", "status", "loopId", "experienceBasis", "generationExperiments", "methodComparison", "autonomyBoundary", "evaluation", "antiSelfCertification", "promotion"],
   "properties": {
-    "schemaVersion": { "const": 3 },
+    "schemaVersion": { "const": 4 },
     "contract": { "const": "kfd-6-autonomous-discovery-loop" },
     "standard": { "const": "kfd-6" },
     "status": { "enum": ["proposed", "experimental"] },
@@ -26,10 +26,10 @@
       },
       "additionalProperties": false
     },
-    "perspectiveExperiments": {
+    "generationExperiments": {
       "type": "array",
-      "minItems": 1,
-      "items": { "$ref": "#/$defs/perspectiveExperiment" }
+      "minItems": 2,
+      "items": { "$ref": "#/$defs/generationExperiment" }
     },
     "boundaryHypothesis": { "$ref": "#/$defs/boundaryHypothesis" },
     "autonomyBoundary": {
@@ -43,21 +43,41 @@
       },
       "additionalProperties": false
     },
-    "method": {
+    "methodComparison": {
       "type": "object",
-      "required": ["generator", "baseline", "candidateContract", "candidateSchemaVersion", "discoveryEvidenceCut", "heldOutEvidenceCut"],
+      "required": ["sharedEvidenceCut", "resourceBudget", "methodsCompared", "baselines", "qualificationMetrics", "result", "limitations", "candidateContract", "candidateSchemaVersion", "discoveryEvidenceCut", "heldOutEvidenceCut"],
       "properties": {
-        "generator": { "type": "string", "minLength": 1 },
-        "baseline": {
-          "type": "string",
-          "minLength": 1,
-          "description": "A fixed-ontology retrieval, pattern-mining, policy, or prediction baseline that does not transform perspective."
+        "sharedEvidenceCut": { "type": "string", "minLength": 1 },
+        "resourceBudget": { "type": "string", "minLength": 1 },
+        "methodsCompared": {
+          "type": "array",
+          "minItems": 2,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/genesisMethod" }
         },
+        "baselines": {
+          "type": "array",
+          "minItems": 2,
+          "uniqueItems": true,
+          "items": { "enum": ["fixed-ontology", "no-new-primitive", "incumbent-process", "other"] }
+        },
+        "qualificationMetrics": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "enum": ["candidate-yield", "false-candidate-rate", "ontology-distance", "compression", "prediction", "intervention", "transfer", "falsifiability", "cost", "auditability"] }
+        },
+        "result": { "enum": ["no-dominant-method", "conditional-advantage", "inconclusive"] },
+        "limitations": { "type": "array", "items": { "type": "string" } },
         "candidateContract": { "const": "kfd-5-primitive-discovery" },
-        "candidateSchemaVersion": { "const": 2 },
+        "candidateSchemaVersion": { "const": 3 },
         "discoveryEvidenceCut": { "type": "string", "minLength": 1 },
         "heldOutEvidenceCut": { "type": "string", "minLength": 1 }
       },
+      "allOf": [
+        { "properties": { "baselines": { "contains": { "const": "fixed-ontology" } } } },
+        { "properties": { "baselines": { "contains": { "const": "no-new-primitive" } } } }
+      ],
       "additionalProperties": false
     },
     "evaluation": {
@@ -72,7 +92,7 @@
         "independentVerifier": { "type": "string", "minLength": 1 },
         "metrics": {
           "type": "object",
-          "required": ["compression", "prediction", "intervention", "transfer", "falsifiability"],
+          "required": ["falseCandidateRate", "ontologyDistance", "compression", "prediction", "intervention", "transfer", "falsifiability", "cost", "auditability"],
           "additionalProperties": { "type": "number" }
         }
       },
@@ -102,10 +122,35 @@
   },
   "additionalProperties": false,
   "$defs": {
-    "perspectiveExperiment": {
+    "generationExperiment": {
       "type": "object",
-      "required": ["replayMode", "sourceViewCoordinates", "sharedContext", "preservationClaim", "degradedState", "originPerspective", "transformedPerspective", "causalBasis", "transformation", "newlyVisibleNeed", "candidateObject", "disconfirmingTest"],
+      "required": ["id", "methods", "observationPerspective", "currentOntology", "causalBasis", "procedure", "evidenceCut", "resourceBudget", "result", "disconfirmingTest"],
       "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "methods": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/genesisMethod" }
+        },
+        "observationPerspective": { "$ref": "#/$defs/perspective" },
+        "currentOntology": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "causalBasis": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "procedure": { "type": "string", "minLength": 1 },
+        "evidenceCut": { "type": "string", "minLength": 1 },
+        "resourceBudget": { "type": "string", "minLength": 1 },
+        "result": { "enum": ["candidate", "no-candidate", "inconclusive"] },
+        "candidateObject": { "type": "string", "minLength": 1 },
+        "disconfirmingTest": { "type": "string", "minLength": 1 },
         "replayMode": { "enum": ["perspective-preserving", "contrastive"] },
         "sourceViewCoordinates": {
           "type": "array",
@@ -116,23 +161,37 @@
         "sharedContext": { "type": "string", "minLength": 1 },
         "preservationClaim": { "type": "string", "minLength": 1 },
         "degradedState": { "type": "string", "minLength": 1 },
-        "originPerspective": { "$ref": "#/$defs/perspective" },
         "transformedPerspective": { "$ref": "#/$defs/perspective" },
-        "causalBasis": {
-          "type": "array",
-          "minItems": 1,
-          "items": { "type": "string", "minLength": 1 }
-        },
         "transformation": { "type": "string", "minLength": 1 },
-        "newlyVisibleNeed": { "type": "string", "minLength": 1 },
-        "candidateObject": { "type": "string", "minLength": 1 },
-        "disconfirmingTest": { "type": "string", "minLength": 1 }
+        "newlyVisibleNeed": { "type": "string", "minLength": 1 }
       },
       "allOf": [
         {
           "if": {
-            "properties": { "replayMode": { "const": "contrastive" } },
-            "required": ["replayMode"]
+            "properties": {
+              "methods": {
+                "contains": { "enum": ["perspective-transformation", "perspective-replay", "contrastive-replay"] }
+              }
+            },
+            "required": ["methods"]
+          },
+          "then": { "required": ["transformedPerspective", "transformation", "newlyVisibleNeed"] }
+        },
+        {
+          "if": {
+            "properties": {
+              "methods": { "contains": { "enum": ["perspective-replay", "contrastive-replay"] } }
+            },
+            "required": ["methods"]
+          },
+          "then": { "required": ["replayMode", "sourceViewCoordinates", "sharedContext", "preservationClaim", "degradedState"] }
+        },
+        {
+          "if": {
+            "properties": {
+              "methods": { "contains": { "const": "contrastive-replay" } }
+            },
+            "required": ["methods"]
           },
           "then": {
             "properties": { "sourceViewCoordinates": { "minItems": 2 } }
@@ -140,6 +199,9 @@
         }
       ],
       "additionalProperties": false
+    },
+    "genesisMethod": {
+      "enum": ["direct-situated-judgment", "perspective-transformation", "perspective-replay", "contrastive-replay", "anomaly-driven", "reconstruction-pressure", "causal-variable-discovery", "structural-compression", "other"]
     },
     "perspective": {
       "type": "object",

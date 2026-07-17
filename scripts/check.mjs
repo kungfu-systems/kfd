@@ -669,35 +669,37 @@ if (kfd5PrimitiveDiscoverySchema.properties?.contract?.const !== "kfd-5-primitiv
 if (kfd5PrimitiveDiscoverySchema.properties?.standard?.const !== "kfd-5") {
   fail("KFD-5 primitiveDiscovery schema must declare standard kfd-5");
 }
-if (kfd5?.interfaces?.primitiveDiscovery?.schemaVersion !== 2 || kfd5PrimitiveDiscoverySchema.properties?.schemaVersion?.const !== 2) {
-  fail("KFD-5 primitiveDiscovery perspective-genesis interface must use schemaVersion 2");
+if (kfd5?.interfaces?.primitiveDiscovery?.schemaVersion !== 3 || kfd5PrimitiveDiscoverySchema.properties?.schemaVersion?.const !== 3) {
+  fail("KFD-5 primitiveDiscovery method-plural interface must use schemaVersion 3");
 }
-if (!kfd5PrimitiveDiscoverySchema.required?.includes("perspectiveGenesis")) {
-  fail("KFD-5 primitiveDiscovery interface v2 must require perspectiveGenesis");
+if (!kfd5PrimitiveDiscoverySchema.required?.includes("genesis")) {
+  fail("KFD-5 primitiveDiscovery interface v3 must require genesis");
 }
-const perspectiveGenesis = kfd5PrimitiveDiscoverySchema.properties?.perspectiveGenesis;
-for (const field of ["genesisMethod", "originPerspective", "transformedPerspective", "transformation", "situatedObservation", "newlyVisibleNeed", "candidateObject", "claimBoundary"]) {
-  if (!perspectiveGenesis?.required?.includes(field)) fail(`KFD-5 perspectiveGenesis must require ${field}`);
+const kfd5Genesis = kfd5PrimitiveDiscoverySchema.properties?.genesis;
+for (const field of ["methods", "observationPerspective", "currentOntology", "observation", "candidateObject", "claimBoundary", "methodEvidence"]) {
+  if (!kfd5Genesis?.required?.includes(field)) fail(`KFD-5 genesis must require ${field}`);
 }
-for (const method of ["direct-situated-experience", "perspective-replay", "contrastive-replay"]) {
-  if (!perspectiveGenesis?.properties?.genesisMethod?.enum?.includes(method)) fail(`KFD-5 genesisMethod missing ${method}`);
+for (const method of ["direct-situated-judgment", "perspective-transformation", "perspective-replay", "contrastive-replay", "anomaly-driven", "reconstruction-pressure", "causal-variable-discovery", "structural-compression"]) {
+  if (!kfd5PrimitiveDiscoverySchema.$defs?.genesisMethod?.enum?.includes(method)) fail(`KFD-5 genesisMethod missing ${method}`);
 }
-if (perspectiveGenesis?.properties?.replayBasis?.$ref !== "#/$defs/replayBasis") {
-  fail("KFD-5 perspectiveGenesis must expose replayBasis");
+if (kfd5Genesis?.properties?.replayBasis?.$ref !== "#/$defs/replayBasis") {
+  fail("KFD-5 genesis must expose replayBasis");
 }
-if (!kfd5PrimitiveDiscoverySchema.properties?.participants?.items?.properties?.functions?.items?.enum?.includes("perspective-grounded-judgment")) {
-  fail("KFD-5 primitiveDiscovery interface v2 must expose perspective-grounded-judgment");
+for (const participantFunction of ["perspective-declaration", "candidate-generation", "scalable-reasoning"]) {
+  if (!kfd5PrimitiveDiscoverySchema.properties?.participants?.items?.properties?.functions?.items?.enum?.includes(participantFunction)) {
+    fail(`KFD-5 primitiveDiscovery interface v3 must expose ${participantFunction}`);
+  }
 }
 if (kfd5PrimitiveDiscoverySchema.properties?.boundaryPressure?.$ref !== "#/$defs/boundaryPressure") {
   fail("KFD-5 primitiveDiscovery schema must expose the optional boundaryPressure diagnostic");
 }
 if (kfd5PrimitiveDiscoverySchema.required?.includes("boundaryPressure")) {
-  fail("KFD-5 boundaryPressure must remain an optional diagnostic in interface v2");
+  fail("KFD-5 boundaryPressure must remain an optional diagnostic in interface v3");
 }
 if (!kfd5PrimitiveDiscoverySchema.$defs?.boundaryPressure?.properties?.pressureChanges?.items?.properties?.kind?.enum?.includes("new-participant")) {
   fail("KFD-5 boundaryPressure must classify new-participant pressure");
 }
-for (const concept of ["primitiveDiscovery", "groundedJudgment", "perspectiveGenesis", "perspectiveTransformation", "genesisMethod", "replayBasis", "localOptimizationTrap", "situatedObservation", "newlyVisibleNeed", "claimBoundary", "qualification", "scalableReasoning", "realityPressure", "boundaryPressure", "contactSurface", "implicitCoordination", "pressureChange", "internalObjectAlternative", "primitiveCandidate", "minimumClosure", "deletionTest", "fuseTest", "falsifier", "dogfoodEvidence"]) {
+for (const concept of ["primitiveDiscovery", "perspectiveDeclaration", "methodPluralGenesis", "observationPerspective", "currentOntology", "perspectiveTransformation", "genesisMethod", "methodEvidence", "replayBasis", "anomalyDriven", "reconstructionPressure", "causalVariableDiscovery", "structuralCompression", "methodArtifact", "localOptimizationTrap", "situatedObservation", "newlyVisibleNeed", "claimBoundary", "qualification", "scalableReasoning", "realityPressure", "boundaryPressure", "contactSurface", "implicitCoordination", "pressureChange", "internalObjectAlternative", "primitiveCandidate", "minimumClosure", "deletionTest", "fuseTest", "falsifier", "dogfoodEvidence"]) {
   if (!kfd5?.concepts?.[concept]) fail(`KFD-5 standards metadata missing concept ${concept}`);
 }
 if (!kfd5?.interfaces?.primitiveDiscovery) fail("KFD-5 standards metadata missing interface primitiveDiscovery");
@@ -717,24 +719,28 @@ if (kfd6AutonomousDiscoveryLoopSchema.properties?.contract?.const !== "kfd-6-aut
 if (kfd6AutonomousDiscoveryLoopSchema.properties?.standard?.const !== "kfd-6") {
   fail("KFD-6 autonomousDiscoveryLoop schema must declare standard kfd-6");
 }
-if (kfd6?.interfaces?.autonomousDiscoveryLoop?.schemaVersion !== 3 || kfd6AutonomousDiscoveryLoopSchema.properties?.schemaVersion?.const !== 3) {
-  fail("KFD-6 autonomousDiscoveryLoop perspective-experiment interface must use schemaVersion 3");
+if (kfd6?.interfaces?.autonomousDiscoveryLoop?.schemaVersion !== 4 || kfd6AutonomousDiscoveryLoopSchema.properties?.schemaVersion?.const !== 4) {
+  fail("KFD-6 autonomousDiscoveryLoop method-comparison interface must use schemaVersion 4");
 }
-if (!kfd6AutonomousDiscoveryLoopSchema.required?.includes("perspectiveExperiments")) {
-  fail("KFD-6 autonomousDiscoveryLoop interface v3 must require perspectiveExperiments");
+for (const field of ["generationExperiments", "methodComparison"]) {
+  if (!kfd6AutonomousDiscoveryLoopSchema.required?.includes(field)) fail(`KFD-6 autonomousDiscoveryLoop interface v4 must require ${field}`);
 }
 if (kfd6AutonomousDiscoveryLoopSchema.required?.includes("boundaryHypothesis")) {
-  fail("KFD-6 boundaryHypothesis must remain conditional in interface v3");
+  fail("KFD-6 boundaryHypothesis must remain conditional in interface v4");
 }
-const perspectiveExperiment = kfd6AutonomousDiscoveryLoopSchema.$defs?.perspectiveExperiment;
-for (const field of ["replayMode", "sourceViewCoordinates", "sharedContext", "preservationClaim", "degradedState", "originPerspective", "transformedPerspective", "causalBasis", "transformation", "newlyVisibleNeed", "candidateObject", "disconfirmingTest"]) {
-  if (!perspectiveExperiment?.required?.includes(field)) fail(`KFD-6 perspectiveExperiment must require ${field}`);
+const generationExperiment = kfd6AutonomousDiscoveryLoopSchema.$defs?.generationExperiment;
+for (const field of ["id", "methods", "observationPerspective", "currentOntology", "causalBasis", "procedure", "evidenceCut", "resourceBudget", "result", "disconfirmingTest"]) {
+  if (!generationExperiment?.required?.includes(field)) fail(`KFD-6 generationExperiment must require ${field}`);
 }
-if (!perspectiveExperiment?.properties?.replayMode?.enum?.includes("contrastive")) {
-  fail("KFD-6 perspectiveExperiment must support contrastive replay");
+for (const method of ["perspective-transformation", "anomaly-driven", "reconstruction-pressure", "causal-variable-discovery", "structural-compression"]) {
+  if (!kfd6AutonomousDiscoveryLoopSchema.$defs?.genesisMethod?.enum?.includes(method)) fail(`KFD-6 genesisMethod missing ${method}`);
 }
-if (kfd6AutonomousDiscoveryLoopSchema.properties?.method?.properties?.candidateSchemaVersion?.const !== 2) {
-  fail("KFD-6 autonomousDiscoveryLoop interface v3 must hand candidates to KFD-5 schemaVersion 2");
+const methodComparison = kfd6AutonomousDiscoveryLoopSchema.properties?.methodComparison;
+if (methodComparison?.properties?.candidateSchemaVersion?.const !== 3) {
+  fail("KFD-6 autonomousDiscoveryLoop interface v4 must hand candidates to KFD-5 schemaVersion 3");
+}
+for (const baseline of ["fixed-ontology", "no-new-primitive"]) {
+  if (!methodComparison?.properties?.baselines?.items?.enum?.includes(baseline)) fail(`KFD-6 methodComparison missing ${baseline} baseline`);
 }
 if (kfd6AutonomousDiscoveryLoopSchema.properties?.boundaryHypothesis?.$ref !== "#/$defs/boundaryHypothesis") {
   fail("KFD-6 autonomousDiscoveryLoop schema must expose the boundaryHypothesis contract");
@@ -750,7 +756,7 @@ const antiSelfCertification = kfd6AutonomousDiscoveryLoopSchema.properties?.anti
 if (antiSelfCertification?.generatorIsSoleVerifier?.const !== false) fail("KFD-6 must prohibit the generator from being the sole verifier");
 if (antiSelfCertification?.generatedEvidenceOnly?.const !== false) fail("KFD-6 must prohibit generated-only evidence");
 if (antiSelfCertification?.promotionAuthoritySeparated?.const !== true) fail("KFD-6 must separate discovery from promotion authority");
-for (const concept of ["autonomousDiscovery", "causalExperience", "episodeCorpus", "experienceCut", "captureBoundary", "perspectiveExperiment", "perspectiveTransformation", "perspectiveReplay", "contrastiveReplay", "fixedOntologyBaseline", "projectionArtifact", "boundaryPressure", "boundaryHypothesis", "contactSurface", "implicitCoordination", "pressureChange", "internalObjectAlternative", "heldOutEvaluation", "boundedIntervention", "selfCertification", "promotionAuthority", "candidateAtlas"]) {
+for (const concept of ["autonomousDiscovery", "causalExperience", "episodeCorpus", "experienceCut", "captureBoundary", "generationExperiment", "genesisMethod", "methodComparison", "sharedEvidenceCut", "resourceBudget", "perspectiveTransformation", "perspectiveReplay", "contrastiveReplay", "fixedOntologyBaseline", "noNewPrimitiveBaseline", "falseCandidateRate", "ontologyDistance", "methodArtifact", "projectionArtifact", "boundaryPressure", "boundaryHypothesis", "contactSurface", "implicitCoordination", "pressureChange", "internalObjectAlternative", "heldOutEvaluation", "boundedIntervention", "selfCertification", "promotionAuthority", "candidateAtlas"]) {
   if (!kfd6?.concepts?.[concept]) fail(`KFD-6 standards metadata missing concept ${concept}`);
 }
 if (!kfd6?.interfaces?.autonomousDiscoveryLoop) fail("KFD-6 standards metadata missing interface autonomousDiscoveryLoop");

@@ -163,14 +163,14 @@ Agents consuming this package should start from the same sources as humans:
 11. Use `schemas/kfd-4/observer-perspective.schema.json` to bind timelines to
    their observers and `schemas/kfd-4/perspective-replay.schema.json` to record
    perspective-preserving or contrastive replay. Use
-   `schemas/kfd-5/primitive-discovery.schema.json` version 2 to record the
-   perspective genesis and scalable qualification of a primitive candidate,
+   `schemas/kfd-5/primitive-discovery.schema.json` version 3 to record
+   perspective-declared, method-plural genesis and fact-bound qualification,
    including the optional boundary-pressure diagnostic when implicit
    coordination is under new pressure. Use
    `schemas/kfd-6/autonomous-discovery-loop.schema.json` only for explicitly
-   draft or experimental autonomous-discovery work; its version 3 interface
-   requires grounded perspective experiments and treats boundary hypothesis as
-   conditional.
+   draft or experimental autonomous-discovery work; its version 4 interface
+   requires plural generation experiments, bounded method comparison, and a
+   conditional boundary hypothesis.
 
 KFD package semver is only the distribution version. KFD-owned machine
 interfaces carry their own `schemaVersion` and `contract` fields. Compatible
@@ -202,19 +202,21 @@ perspective-preserving and contrastive replay make perspectives transferable
 and comparable without flattening their fact boundaries. They are not a
 universal schema for every perspective.
 
-KFD-5 publishes a version 2 primitive-discovery record schema under
-`schemas/kfd-5/`. It separates perspective-grounded genesis from scalable
-qualification and records whether genesis came from direct experience,
-perspective replay, or contrastive replay. It then binds facts, alternatives,
-contract boundaries, falsifiers, dogfood evidence, and outcome. Validation
-proves record closure, not that the candidate is a real primitive.
+KFD-5 publishes a version 3 primitive-discovery record schema under
+`schemas/kfd-5/`. It requires every genesis to declare its observation
+perspective and current ontology while allowing perspective, anomaly,
+reconstruction, causal-variable, compression, and hybrid methods. It then
+binds facts, alternatives, contract boundaries, falsifiers, dogfood evidence,
+and outcome. Validation proves record closure, not that the candidate is a
+real primitive or that one method is superior.
 
 KFD-6 publishes a draft autonomous-discovery-loop schema under
-`schemas/kfd-6/`. Its version 3 experiment interface requires causal-experience
-boundaries, grounded perspective experiments, a fixed-ontology baseline,
-held-out and independent evaluation, bounded autonomy, and separation between
-discovery and promotion. Its package presence is an experimental interface,
-not a claim that autonomous primitive discovery has been achieved.
+`schemas/kfd-6/`. Its version 4 experiment interface requires causal-experience
+boundaries, plural generation methods, fixed-ontology and no-new-primitive
+baselines, shared-budget method comparison, held-out and independent
+evaluation, bounded autonomy, and separation between discovery and promotion.
+Its package presence is an experimental interface, not a claim that autonomous
+primitive discovery or method dominance has been achieved.
 
 ## Current decisions
 
@@ -224,7 +226,7 @@ not a claim that autonomous primitive discovery has been achieved.
 | [KFD-2](decisions/KFD-2.md) | principle | Trust must start from facts. | active |
 | [KFD-3](decisions/KFD-3.md) | principle | Cooperation must start from trusted value. | active |
 | [KFD-4](decisions/KFD-4.md) | principle | Views must remain bound to declared perspectives. | active |
-| [KFD-5](decisions/KFD-5.md) | procedure | Primitive discovery must join perspective-grounded judgment with scalable reasoning. | active |
+| [KFD-5](decisions/KFD-5.md) | procedure | Primitive discovery must keep genesis perspective-declared, method-plural, and fact-qualified. | active |
 | [KFD-6](decisions/KFD-6.md) | procedure | Autonomous discovery must remain grounded in causal experience. | draft |
 
 ## Decision metadata

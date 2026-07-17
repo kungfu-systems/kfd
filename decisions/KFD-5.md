@@ -1,4 +1,4 @@
-# KFD-5: Primitive discovery must join perspective-grounded judgment with scalable reasoning — discovery and qualification are different acts
+# KFD-5: Primitive discovery must keep genesis perspective-declared, method-plural, and fact-qualified — discovery and qualification are different acts
 
 - Status: active
 - Number: 5
@@ -7,13 +7,16 @@
 
 ## One sentence
 
-Primitive discovery must join perspective-grounded judgment with scalable
-reasoning.
+Primitive discovery must keep genesis perspective-declared, method-plural, and
+fact-qualified.
 
-A missing object may first become visible when a participant changes
-perspective. Facts and scalable reasoning do not have to generate that moment;
-they make the candidate inspectable, falsifiable, shareable, and eligible to
-carry responsibility.
+A missing object may become visible through perspective transformation, direct
+situated judgment, anomaly, repeated reconstruction, causal-variable discovery,
+structural compression, or a hybrid process. No method receives causal priority
+by declaration. Every genesis must state the perspective and ontology under
+which its evidence became meaningful; facts and scalable reasoning then make
+the candidate inspectable, falsifiable, shareable, and eligible to carry
+responsibility.
 
 ## Decision type
 
@@ -23,63 +26,85 @@ reducing either participant to a tool.
 
 The procedure separates two acts:
 
-- **Genesis**: a situated participant changes or reconstructs perspective and
-  notices a natural object, burden, or boundary that the current ontology does
-  not express.
+- **Genesis**: one or more declared methods propose a natural object, burden,
+  variable, or boundary that the current ontology does not express, while
+  preserving the observation perspective and method evidence that produced it.
 - **Qualification**: participants use scalable reasoning, facts, alternatives,
   counterexamples, tests, and real work to decide whether the candidate should
   become load-bearing.
 
-Confusing these acts makes discovery look like induction inside an existing
-ontology. Repeated analysis of database-shaped evidence naturally tends to
-produce a better database. It does not guarantee that Episode, Atlas, Release
-Passport, or another object outside that horizon will become visible.
+Confusing these acts makes a successful qualification look like proof that the
+generator was uniquely correct. Repeated analysis of database-shaped evidence
+may produce a better database, but anomaly, causal-variable, or compression
+methods can also change an ontology when their representation and candidate
+space permit it. Perspective transformation directly changes that
+representation boundary; this makes it a powerful method, not a proven
+superior one.
 
 ## Participant functions
 
 The current executable form is human-agent coupling:
 
-- perspective-grounded judgment contributes situated contact with reality,
-  consequence, value, and the ability to notice that the current view lacks a
-  natural object;
+- perspective-declared judgment contributes situated contact with reality,
+  consequence, value, and an explicit account of where a candidate became
+  meaningful;
+- generation methods contribute anomalies, reconstruction burdens, candidate
+  variables, structural compression, transformed views, or combinations of
+  those signals;
 - scalable reasoning contributes search, comparison, reconstruction,
   formalization, prior art, counterexamples, verification, and compression;
 - committed artifacts keep both genesis and qualification inspectable.
 
 These are functions, not permanent species boundaries. A human, agent,
-collective, or future participant may perform either function when it can
-provide the required evidence. Perspective-grounded judgment must not be silently
-synthesized and attributed to another participant; scalable reasoning must not
-be reduced to an opaque answer.
+collective, or future participant may perform any function when it can provide
+the required evidence. A perspective must not be silently synthesized and
+attributed to another participant; a generation method must not hide its model
+class or evidence cut; scalable reasoning must not be reduced to an opaque
+answer.
 
 ## Primitive genesis
 
-Primitive genesis begins by declaring the current perspective and a participant
-perspective closer to the consequences under investigation. The transformation
-may be lived directly, intentionally adopted, reconstructed from causal
-experience, or proposed for testing.
+Primitive genesis begins by declaring the observation perspective, current
+ontology, evidence cut, and one or more generation methods. Supported method
+families include:
+
+- direct situated judgment;
+- perspective transformation, perspective-preserving replay, and contrastive
+  replay;
+- anomaly-driven search;
+- repeated-reconstruction or boundary-pressure analysis;
+- causal-variable discovery;
+- structural compression;
+- explicit hybrids and other declared methods.
+
+The list is an interface vocabulary, not a completeness claim. A new method may
+be proposed without rewriting KFD-5, but it must preserve enough of its
+procedure and evidence for independent qualification.
 
 The discovery record should preserve:
 
-- the origin perspective and the objects it made natural;
-- the transformed perspective and who bears its consequences;
-- what changed between the perspectives;
-- the situated observation or unmet need that became visible;
+- the observation perspective and current ontology;
+- the selected method or methods and their evidence;
+- any transformed perspective, replay basis, anomaly, reconstruction burden,
+  candidate causal variable, or compression claim used by those methods;
+- the observation, unmet need, or structure that motivated the candidate;
 - the candidate object that could carry that burden;
 - the boundary between local epistemic priority and any wider claim.
 
 The candidate can precede repeated failure data. A participant does not have to
 first misuse a database, RAG system, journal, or session model in order to know
-that those objects are not natural from the participant's view. Reality
-pressure, recurrent failure, and boundary friction remain valuable signals,
-but they are not the only permitted source of genesis.
+that those objects are not natural from the participant's view. Conversely, a
+candidate produced by anomaly, repeated reconstruction, causality, or
+compression does not become secondary merely because no perspective
+transformation generated it.
 
 ## Replay and the local-optimization trap
 
-Perspective-grounded judgment may come from direct experience. When multiple
+Perspective-declared judgment may come from direct experience. When multiple
 views have already been captured, contrastive replay is the preferred
-engineering path because it lowers the cost of moving between them while
-preserving their differences.
+engineering path for comparing those views because it lowers the cost of
+moving between them while preserving their differences. It is not the default
+generator for every discovery problem.
 
 Consider two timelines over the same Journal release:
 
@@ -96,32 +121,34 @@ becomes visible: the developer's natural object is a storage mechanism while
 the user's natural object is the bounded action that happened. That mismatch
 is a primitive signal, not primitive proof.
 
-KFD-5 uses replay to escape local optimization, then uses facts and scalable
-reasoning to qualify what the contrast revealed. It does not infer that every
-cross-perspective disagreement requires a new primitive.
+KFD-5 can use replay to escape local optimization, anomaly to expose residuals,
+reconstruction analysis to expose recurring missing work, causal methods to
+propose variables, and compression to expose reusable structure. It does not
+infer that any one signal requires a new primitive.
 
 ## Qualification procedure
 
 After genesis, a primitive-discovery record should preserve this chain:
 
-1. **Bind the genesis.** Record whether it came from direct situated
-   experience, reconstructed replay, or contrastive replay; then bind the
-   origin view, transformed view, situated observation, newly visible need,
-   candidate, and claim boundary.
+1. **Bind the genesis.** Record the observation perspective, current ontology,
+   method set, method evidence, candidate, and claim boundary. When a method
+   transforms or replays perspective, also bind the source and transformed
+   views, reconstruction loss, and newly visible need.
 2. **Bind the facts.** Record source coordinates, evidence cuts, observers,
    consequences, and known gaps so the candidate cannot drift into a
    retrospective story.
 3. **Search alternatives.** Compare prior art, narrower abstractions, existing
-   primitives, different perspective explanations, and the option to do
-   nothing.
+   primitives, different perspective explanations, other generation methods,
+   and the option to do nothing.
 4. **Demand minimum closure.** State the smallest identity, boundary,
    authority, lifecycle, and operation set that makes the candidate useful.
 5. **Run deletion and fuse tests.** Ask what work becomes repeatedly
    reconstructed if the object is removed, and whether previously separate
    mechanisms become one explainable system when it exists.
 6. **Declare falsifiers.** State evidence that would reject, subsume, narrow,
-   or reopen the candidate, including evidence that the apparent object was
-   only an artifact of the transformed view.
+   or reopen the candidate, including evidence that the apparent object was a
+   perspective artifact, anomaly artifact, model-class artifact, causal
+   confounder, or compression artifact.
 7. **Dogfood under load.** Use the candidate in real work and measure whether
    it reduces reconstruction, coordination, or explanation cost without hiding
    responsibility.
@@ -145,19 +172,18 @@ candidate mediates the contact, and whether a narrower internal object explains
 the evidence.
 
 Boundary pressure can corroborate genesis or generate a candidate of its own.
-It is neither necessary nor sufficient proof. A real primitive may first
-become visible through perspective transformation before repeated boundary
-failures accumulate.
+It is neither necessary nor sufficient proof. The same is true of every other
+genesis method: generation produces a candidate, not its authority.
 
 ## Required declaration
 
 A KFD-5 candidate should declare:
 
 - candidate identity and scope;
-- origin and transformed perspectives, the transformation, situated
-  observation, newly visible need, and claim boundary;
-- the genesis method and, when replay was used, its KFD-4 replay record,
-  preserved source views, shared context, and degraded state;
+- observation perspective, current ontology, method set, method evidence,
+  motivating observation, candidate object, and claim boundary;
+- when transformation or replay was used, the KFD-4 record, preserved source
+  views, shared context, transformed view, and degraded state;
 - grounded pressure, fact sources, evidence boundary, and known gaps;
 - participants and the functions they performed;
 - alternatives and prior art;
@@ -180,20 +206,23 @@ real primitive compresses it.
 
 KFD-1 keeps genesis and qualification facts from drifting. KFD-2 keeps
 confidence bound to those facts and exposes residual risk. KFD-3 lets
-participants contribute value without coercion. KFD-4 makes perspectives
-declarable and transformable.
+participants contribute value without coercion. KFD-4 keeps every observation
+bound to a declared perspective and makes perspective transformation available
+as an auditable method.
 
 ```text
 declared perspective
-  -> perspective transformation
-  -> a missing object becomes visible
+  + current ontology
+  + one or more declared genesis methods
   -> primitive candidate
+  -> method alternatives and disconfirming tests
   -> fact-bound scalable qualification
   -> provisional or load-bearing primitive
 ```
 
-KFD-4 explains how the horizon can move. KFD-5 explains how an object revealed
-outside the old horizon becomes testable and shareable.
+KFD-4 explains why every horizon remains situated and how one method can move
+it. KFD-5 keeps the generation boundary open while explaining how an object
+proposed outside the old ontology becomes testable and shareable.
 
 ## Implementation cases
 
@@ -211,11 +240,11 @@ remains open to facts, alternatives, deletion tests, adoption, and time.
 
 ## Implementation case: the KFD package
 
-The `@kungfu-tech/kfd` package publishes the KFD-5 version 2 candidate-record
-schema at `schemas/kfd-5/primitive-discovery.schema.json`. Version 2 makes
-perspective genesis a required input distinct from qualification evidence.
-Schema validity proves record closure, not that a candidate is a real
-primitive.
+The `@kungfu-tech/kfd` package publishes the KFD-5 version 3 candidate-record
+schema at `schemas/kfd-5/primitive-discovery.schema.json`. Version 3 replaces
+mandatory perspective genesis with perspective-declared, method-plural
+genesis. Schema validity proves record closure, not that a candidate is a real
+primitive or that one generation method dominates another.
 
 ## Adopters
 

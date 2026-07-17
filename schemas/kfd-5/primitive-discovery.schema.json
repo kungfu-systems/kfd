@@ -3,9 +3,9 @@
   "$id": "https://kfd.libkungfu.dev/schemas/kfd-5/primitive-discovery.schema.json",
   "title": "KFD-5 primitive discovery record",
   "type": "object",
-  "required": ["schemaVersion", "contract", "standard", "candidate", "perspectiveGenesis", "grounding", "participants", "alternatives", "contractModel", "tests", "decision"],
+  "required": ["schemaVersion", "contract", "standard", "candidate", "genesis", "grounding", "participants", "alternatives", "contractModel", "tests", "decision"],
   "properties": {
-    "schemaVersion": { "const": 2 },
+    "schemaVersion": { "const": 3 },
     "contract": { "const": "kfd-5-primitive-discovery" },
     "standard": { "const": "kfd-5" },
     "candidate": {
@@ -19,36 +19,64 @@
       },
       "additionalProperties": false
     },
-    "perspectiveGenesis": {
+    "genesis": {
       "type": "object",
-      "required": ["genesisMethod", "originPerspective", "transformedPerspective", "transformation", "situatedObservation", "newlyVisibleNeed", "candidateObject", "claimBoundary"],
+      "required": ["methods", "observationPerspective", "currentOntology", "observation", "candidateObject", "claimBoundary", "methodEvidence"],
       "properties": {
-        "genesisMethod": {
-          "enum": ["direct-situated-experience", "perspective-replay", "contrastive-replay", "other"]
+        "methods": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/genesisMethod" }
         },
-        "originPerspective": { "$ref": "#/$defs/perspective" },
-        "transformedPerspective": { "$ref": "#/$defs/perspective" },
-        "transformation": { "type": "string", "minLength": 1 },
-        "situatedObservation": { "type": "string", "minLength": 1 },
-        "newlyVisibleNeed": { "type": "string", "minLength": 1 },
+        "observationPerspective": { "$ref": "#/$defs/perspective" },
+        "currentOntology": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "observation": { "type": "string", "minLength": 1 },
         "candidateObject": { "type": "string", "minLength": 1 },
         "claimBoundary": { "type": "string", "minLength": 1 },
-        "replayBasis": { "$ref": "#/$defs/replayBasis" }
+        "methodEvidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/evidencePointer" }
+        },
+        "transformedPerspective": { "$ref": "#/$defs/perspective" },
+        "transformation": { "type": "string", "minLength": 1 },
+        "newlyVisibleNeed": { "type": "string", "minLength": 1 },
+        "replayBasis": { "$ref": "#/$defs/replayBasis" },
+        "methodNotes": { "type": "string" }
       },
       "allOf": [
         {
           "if": {
             "properties": {
-              "genesisMethod": { "enum": ["perspective-replay", "contrastive-replay"] }
+              "methods": {
+                "contains": { "enum": ["perspective-transformation", "perspective-replay", "contrastive-replay"] }
+              }
             },
-            "required": ["genesisMethod"]
+            "required": ["methods"]
+          },
+          "then": { "required": ["transformedPerspective", "transformation", "newlyVisibleNeed"] }
+        },
+        {
+          "if": {
+            "properties": {
+              "methods": { "contains": { "enum": ["perspective-replay", "contrastive-replay"] } }
+            },
+            "required": ["methods"]
           },
           "then": { "required": ["replayBasis"] }
         },
         {
           "if": {
-            "properties": { "genesisMethod": { "const": "contrastive-replay" } },
-            "required": ["genesisMethod"]
+            "properties": {
+              "methods": { "contains": { "const": "contrastive-replay" } }
+            },
+            "required": ["methods"]
           },
           "then": {
             "properties": {
@@ -86,7 +114,7 @@
             "type": "array",
             "minItems": 1,
             "uniqueItems": true,
-            "items": { "enum": ["perspective-grounded-judgment", "scalable-reasoning", "evidence-custody", "verification", "decision"] }
+            "items": { "enum": ["perspective-declaration", "candidate-generation", "scalable-reasoning", "evidence-custody", "verification", "decision"] }
           }
         },
         "additionalProperties": false
@@ -144,6 +172,9 @@
   },
   "additionalProperties": false,
   "$defs": {
+    "genesisMethod": {
+      "enum": ["direct-situated-judgment", "perspective-transformation", "perspective-replay", "contrastive-replay", "anomaly-driven", "reconstruction-pressure", "causal-variable-discovery", "structural-compression", "other"]
+    },
     "perspective": {
       "type": "object",
       "required": ["id", "bearer", "role", "proximity", "consequences"],
