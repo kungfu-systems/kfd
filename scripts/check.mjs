@@ -1,7 +1,7 @@
 // Registry conformance check: the registry, decision documents, and release
 // impact ledger must agree, so a release cannot ship evidence that lies about
 // its contents or versioning surface.
-import { readFileSync, existsSync } from "node:fs";
+import { readFileSync, existsSync, readdirSync } from "node:fs";
 import crypto from "node:crypto";
 import { generatedSiteBundle } from "./update-site-bundle.mjs";
 
@@ -45,6 +45,27 @@ const kfd3Interface = existsSync(kfd3InterfacePath) ? JSON.parse(readFileSync(kf
 const kfd3PrebuildWitness = existsSync(kfd3PrebuildWitnessPath) ? JSON.parse(readFileSync(kfd3PrebuildWitnessPath, "utf8")) : undefined;
 const kfd3ArtifactWitness = existsSync(kfd3ArtifactWitnessPath) ? JSON.parse(readFileSync(kfd3ArtifactWitnessPath, "utf8")) : undefined;
 const hashablePath = (filePath) => String(filePath || "").split("#", 1)[0];
+
+const markdownPaths = [];
+const collectMarkdownPaths = (directory = ".") => {
+  for (const entry of readdirSync(directory, { withFileTypes: true })) {
+    if (entry.name === ".buildchain" || entry.name === ".git" || entry.name === "node_modules") continue;
+    const path = directory === "." ? entry.name : `${directory}/${entry.name}`;
+    if (entry.isDirectory()) collectMarkdownPaths(path);
+    else if (entry.isFile() && entry.name.endsWith(".md")) markdownPaths.push(path);
+  }
+};
+collectMarkdownPaths();
+for (const markdownPath of markdownPaths) {
+  const markdown = readFileSync(markdownPath, "utf8");
+  if (!markdown.startsWith("---\n")) continue;
+  const frontmatterEnd = markdown.indexOf("\n---", 4);
+  if (frontmatterEnd === -1) continue;
+  const frontmatter = markdown.slice(4, frontmatterEnd);
+  if (/^ai_provenance\s*:/m.test(frontmatter)) {
+    fail(`${markdownPath} public frontmatter must not expose ai_provenance`);
+  }
+}
 
 const expectedEvidenceUpdate = "node scripts/update-site-bundle.mjs && node scripts/update-kfd-2-claim.mjs && node scripts/update-kfd-1-witness.mjs && node scripts/update-kfd-3-witness.mjs";
 if (packageJson.scripts?.["update:evidence"] !== expectedEvidenceUpdate) {
