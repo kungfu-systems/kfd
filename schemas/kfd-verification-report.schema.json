@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-verification-report.schema.json",
+  "title": "KFD independent verification report",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "contract",
+    "profile",
+    "valid",
+    "qualifying",
+    "selfCertified",
+    "offline",
+    "checks",
+    "issues"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "contract": {
+      "const": "kfd.verification-report/v1"
+    },
+    "profile": {
+      "type": "string",
+      "minLength": 1
+    },
+    "valid": {
+      "type": "boolean"
+    },
+    "qualifying": {
+      "const": false
+    },
+    "selfCertified": {
+      "const": false
+    },
+    "offline": {
+      "const": true
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "enum": [
+              "pass",
+              "fail"
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "code",
+          "path",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "string",
+            "minLength": 1
+          },
+          "path": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

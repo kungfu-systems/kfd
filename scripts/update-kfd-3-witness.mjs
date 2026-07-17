@@ -24,6 +24,7 @@ const packageJson = readJson("package.json");
 const registry = readJson("registry.json");
 const standards = readJson("standards.json");
 const liveCaseRegistry = readJson("cases/registry.json");
+const candidateRegistry = readJson("drafts/registry.json");
 const collaborationInterface = readJson(interfacePath);
 const interfaceSha = sha256File(interfacePath);
 const interfaceDigest = `sha256:${interfaceSha}`;
@@ -44,11 +45,31 @@ const liveCaseSurfaces = liveCaseRegistry.cases.flatMap((entry) => [
   { id: `case:${entry.id}:method-trace`, sourcePath: entry.methodTrace, sha256: sha256File(entry.methodTrace) },
   { id: `case:${entry.id}:propagation-hypothesis`, sourcePath: entry.propagationHypothesis, sha256: sha256File(entry.propagationHypothesis) },
   { id: `case:${entry.id}:review-index`, sourcePath: entry.reviewIndex, sha256: sha256File(entry.reviewIndex) },
-  { id: `case:${entry.id}:current-cut`, sourcePath: entry.currentCut.path, sha256: sha256File(entry.currentCut.path) },
+  { id: `case:${entry.id}:ontology-split`, sourcePath: entry.ontologySplit, sha256: sha256File(entry.ontologySplit) },
+  {
+    id: `case:${entry.id}:distinguishability-argument`,
+    sourcePath: entry.distinguishabilityArgument,
+    sha256: sha256File(entry.distinguishabilityArgument),
+  },
+  ...entry.candidateTracks.map((track) => ({
+    id: `case:${entry.id}:candidate:${track.id}:current-cut`,
+    sourcePath: track.currentCut.path,
+    sha256: sha256File(track.currentCut.path),
+  })),
 ]);
+const candidateSurfaces = [
+  { id: "candidate:index", sourcePath: "drafts/README.md", sha256: sha256File("drafts/README.md") },
+  { id: "candidate:registry", sourcePath: "drafts/registry.json", sha256: sha256File("drafts/registry.json") },
+  ...candidateRegistry.candidates.map((entry) => ({
+    id: `candidate:${entry.id}`,
+    sourcePath: entry.path,
+    sha256: sha256File(entry.path),
+  })),
+];
 const schemaSurfaces = [
   "schemas/kfd-standards.schema.json",
   "schemas/kfd-live-case-registry.schema.json",
+  "schemas/kfd-candidate-registry.schema.json",
   "schemas/kfd-1/contract-world.schema.json",
   "schemas/kfd-1/witness.schema.json",
   "schemas/kfd-2/trust-taxonomy.schema.json",
@@ -83,6 +104,7 @@ const groupedSurfaces = {
     { id: "doc:kfd-5-usage", sourcePath: "docs/KFD-5-usage.md", sha256: sha256File("docs/KFD-5-usage.md") },
     { id: "doc:kfd-6-usage", sourcePath: "docs/KFD-6-usage.md", sha256: sha256File("docs/KFD-6-usage.md") },
     ...liveCaseSurfaces,
+    ...candidateSurfaces,
     ...formalDocs,
     ...decisionDocs,
   ],
@@ -91,6 +113,7 @@ const groupedSurfaces = {
     { id: "metadata:registry", sourcePath: "registry.json", sha256: sha256File("registry.json") },
     { id: "metadata:standards", sourcePath: "standards.json", sha256: sha256File("standards.json") },
     { id: "metadata:live-case-registry", sourcePath: "cases/registry.json", sha256: sha256File("cases/registry.json") },
+    { id: "metadata:candidate-registry", sourcePath: "drafts/registry.json", sha256: sha256File("drafts/registry.json") },
     { id: "metadata:release-impact", sourcePath: "release-impact.json", sha256: sha256File("release-impact.json") },
     { id: "metadata:release-anchor", sourcePath: "kfd.release.json", sha256: sha256File("kfd.release.json") },
     { id: "metadata:buildchain-alpha-contract-lock", sourcePath: "buildchain.alpha-contract-lock.json", sha256: sha256File("buildchain.alpha-contract-lock.json") },
@@ -237,6 +260,7 @@ const artifact = {
       pointer("docs/formal-model.md", "Shared formal notation and authority boundary"),
       pointer("docs/primitive-discovery-cases.md", "Source-bound historical anchors for primitive discovery"),
       pointer("cases/registry.json", "Machine-readable provisional Primitive case registry"),
+      pointer("drafts/registry.json", "Machine-readable pre-number KFD Candidate registry"),
       pointer("TRADEMARKS.md", "Official status, trademark, and authority boundary"),
       pointer("docs/MAP.md", "Documentation routing entrypoint"),
       pointer("registry.json", "Machine-readable decision index"),
@@ -260,6 +284,7 @@ const artifact = {
       pointer("docs/formal-model.md", "Human and agent formal reference entrypoint"),
       pointer("docs/primitive-discovery-cases.md", "Human and agent historical case path"),
       pointer("cases/registry.json", "Human and agent provisional live case path"),
+      pointer("drafts/registry.json", "Human and agent pre-number KFD Candidate path"),
       pointer("registry.json", "Agent registry path"),
       pointer("standards.json", "Agent standards metadata path"),
       pointer(".buildchain/kfd-2/public-release-trust.claim.json", "Agent release trust claim path"),
@@ -273,6 +298,8 @@ const artifact = {
       pointer("docs/formal-model.md"),
       pointer("docs/primitive-discovery-cases.md"),
       pointer("cases/registry.json"),
+      pointer("drafts/README.md"),
+      pointer("drafts/registry.json"),
       pointer("TRADEMARKS.md"),
       pointer("docs/KFD-1-usage.md"),
       pointer("docs/KFD-2-usage.md"),
@@ -282,6 +309,7 @@ const artifact = {
       pointer("docs/KFD-6-usage.md"),
       ...formalDocs.map((entry) => pointer(entry.sourcePath)),
       ...liveCaseSurfaces.map((entry) => pointer(entry.sourcePath)),
+      ...candidateRegistry.candidates.map((entry) => pointer(entry.path)),
     ],
   },
   closure: {

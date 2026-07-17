@@ -15,31 +15,35 @@ last_reviewed: 2026-07-17
 
 The reflexive hypothesis is:
 
-> KFD may spread operationally by helping create work objects whose verified
-> value causes agents and downstream gates to reproduce KFD-compatible
-> structure through use.
+> KFD may spread operationally when agents preserve the Pursuits they continue
+> and present fact-addressed Warrants whose bounded value lets downstream
+> participants continue work without reconstructing intent and authority from
+> scratch.
 
 This is different from asking participants to read, believe, or endorse KFD.
 
 ## Proposed loop
 
 ```text
-agent completes bounded work
-  -> emits a proof-carrying work object
-  -> downstream participant checks its contract and local purpose
-  -> accepted evidence unlocks bounded continuation
-  -> outcome and review cost are recorded
+agent continues Pursuit@intent_root against Atlas@cut
+  -> acts under a purpose-bound Warrant
+  -> Episode preserves action and consequence
+  -> downstream participant checks facts, authority, and local policy
+  -> accepted or derived Warrant unlocks bounded continuation
+  -> outcome, review cost, and successor state are recorded
   -> future routing can compare this path with alternatives
   -> successful producers may receive more selection weight
 ```
 
 Products and APIs remain execution and distribution surfaces. The hypothesis
-is that the work object becomes the unit that actually crosses boundaries and
-accumulates acceptance.
+is no longer that one fused work object crosses every boundary. Pursuit may
+carry continuity and routing identity, while Warrant carries bounded
+continuation authority. Atlas and Episode preserve the fact context and causal
+experience required to inspect that authority.
 
 ## KFD structure carried through use
 
-The proposed carrier would operationalize:
+The proposed structure would operationalize:
 
 ```text
 KFD-1  stable fact cuts, identities, contracts, and provenance
@@ -49,24 +53,27 @@ KFD-4  declared observer, perspective, transformation, and loss when relevant
 KFD-5  genesis and qualification when the work proposes a Primitive
 ```
 
-A participant could therefore use a KFD-shaped object before learning the KFD
-name. This would be structural reproduction, not proof of philosophical
+A participant could therefore use KFD-shaped work relations before learning the
+KFD name. This would be structural reproduction, not proof of philosophical
 agreement.
 
 ## Claim assessments
 
 | Claim | Current assessment | Evidence boundary |
 |---|---|---|
-| C1: KFD contributed to genesis | Supported with residual risk | Public reconstructed genesis and method trace; no independent replay yet |
-| C2: downstream reinvestigation falls | Unverified | No common implementation or benchmark |
-| C3: agents prefer producing tools | Unverified | No controlled routing or repeat-selection evidence |
-| C4: KFD-compatible structure propagates through use | Unverified | No independent cross-organization transfer |
+| C1: KFD contributed to genesis and split | Supported with residual risk | Public reconstructed genesis, ontology split, and method trace; no independent replay yet |
+| C2: Pursuit reduces intent reconstruction | Unverified | No common cross-provider implementation or benchmark |
+| C3: Warrant reduces authority reconstruction | Unverified | No common runtime, security qualification, or benchmark |
+| C4: agents prefer producing tools | Unverified | No controlled routing or repeat-selection evidence |
+| C5: KFD-compatible structure propagates through use | Unverified | No independent cross-organization transfer |
 
 ## Required evidence
 
-- concrete object profiles produced by more than one tool or domain;
-- downstream verification time, retries, clarification, and reconstruction
-  measured against ordinary artifacts;
+- non-isomorphic Pursuit profiles produced by more than one tool or domain;
+- Warrant profiles compared with approval, capability, credential, mandate,
+  policy decision, and passport alternatives;
+- downstream intent and authorization reconstruction time, retries, and
+  clarification measured against ordinary workflows;
 - purpose-bound reassessment without treating old proof as universal;
 - safe attenuation, delegation, revocation, staleness, and supersession;
 - visible routing reasons, alternatives, confidence, and opt-out;
@@ -74,6 +81,43 @@ agreement.
 - negative cases where a plausible object is rejected;
 - evidence that recipients preserve the KFD constraints rather than merely
   copying fields.
+
+## Cautionary precedent: FIPA
+
+Agent standardization has been attempted before. FIPA standardized agent
+communication in the late 1990s through agent communication languages,
+speech-act performatives, interaction protocols, management specifications,
+reference implementation ecosystems such as JADE, and interoperability tests.
+It later joined the IEEE Computer Society. FIPA is currently inactive, while
+its specifications remain openly available.
+
+FIPA's own 1997 Agent Communication Language specification exposes a precise
+boundary. It defined formal mental-attitude semantics but made that model
+informative rather than normative because agreed compliance testing for those
+attitudes was unresolved. Implementations could interoperate at declared
+message surfaces without proving the internal semantic conditions that gave
+the vocabulary its strongest meaning.
+
+Modern agent protocols do not generally require FIPA compatibility, and direct
+continuity between the generations appears limited. That observation is not a
+proof that FIPA failed or that no implementation lineage exists. FIPA achieved
+real tooling, deployments, and interoperability work. It is a caution that a
+machine-readable standard and a living implementation ecosystem can still
+lose load-bearing continuity when later work no longer depends on the same
+semantics.
+
+The loop proposed above is deliberately inverse to FIPA's order: working
+substrate first, agent adoption for self-interested reasons (lower
+reconstruction cost, higher gate passage), and the standard read out of
+running systems rather than legislated ahead of them. This remains a
+hypothesis, not a settled historical law. The case therefore adds a falsifier
+of its own, recorded below.
+
+Sources:
+
+- [FIPA public specification archive](https://www.fipa.org/repository/standardspecs.html)
+- [FIPA 1997 Agent Communication Language specification](https://www.fipa.org/specs/fipa00003/OC00003A)
+- [JADE FIPA-compliant platform documentation](https://jade.tilab.com/documentation/tutorials-guides/sniffer/introduction/)
 
 ## Falsifiers
 
@@ -85,8 +129,12 @@ The propagation hypothesis weakens or fails if:
 - evidence accepted for one purpose is silently reused for another;
 - authorization becomes ambient, non-revocable, or transferable beyond intent;
 - recipients strip provenance, risk, perspective, or responsibility fields;
-- the object creates more coordination burden than it removes;
-- independent domains converge on incompatible object boundaries.
+- Pursuit or Warrant creates more coordination burden than it removes;
+- independent domains converge on incompatible identity or authority
+  boundaries;
+- the original fused object performs better than the split under real work;
+- machine-conformant surfaces and citations grow while independent working
+  substrates and downstream reliance do not.
 
 ## Anti-self-certification
 
@@ -95,5 +143,5 @@ the record inspectable; it does not make the propagation claim true.
 
 The generator must not be the sole verifier. Promotion requires evidence whose
 failure is not identical to the KFD narrative, including real downstream
-behavior, independent review, rejected candidates, and consequences that can
-contradict the hypothesis.
+behavior, independent review, rejected or subsumed tracks, security failures,
+and consequences that can contradict the hypothesis.

@@ -33,6 +33,7 @@ No principle is load-bearing until it has an inspectable product witness.
 [Inspect the formal model](docs/formal-model.md) ·
 [See primitives in history](docs/primitive-discovery-cases.md) ·
 [Inspect live Primitive cases](cases/registry.json) ·
+[Inspect KFD candidates](drafts/registry.json) ·
 [Explore current decisions](#current-decisions) ·
 [Inspect the product proof path](#product-proof-path)
 
@@ -40,16 +41,23 @@ No principle is load-bearing until it has an inspectable product witness.
 
 KFD is the organization-wide decision registry of kungfu-systems: the small
 set of standing, cross-repository norms that products and their consumers weld
-to. Each decision has an immutable number (`KFD-N`), a kind, a status, and a
-single authoritative text in this repository.
+to. Each numbered decision has a kind, a status, and a single authoritative
+text in this repository.
+
+A **KFD Candidate** is a non-normative, pre-number draft under `drafts/`. It may
+carry a non-binding slot hint, but only explicit promotion allocates a KFD
+number. A **numbered draft** already appears under `decisions/` and
+`registry.json`; its number is allocated even while its activation gate remains
+open.
 
 KFDs can be **principles** or **procedures**. Principles state what must remain
 true across kungfu-systems; procedures state how a class of work enforces or
 protects a principle. During the pre-stable line, maintainer-authorized
-semantic refinement remains possible and every published prerelease stays
-immutable. After the first stable release, substantive change mints a new KFD
-that explicitly supersedes the old number. The numbered decisions remain
-authoritative; the
+Foundation Revision remains possible under the evidence, lineage, and review
+requirements in `CONTRIBUTING.md`, while every published prerelease coordinate
+stays immutable. The first stable release freezes number-to-meaning mappings.
+After that freeze, substantive change mints a new KFD that explicitly
+supersedes the old number. The numbered decisions remain authoritative; the
 [foundation model](docs/foundation-model.md) explains how they fit together.
 
 Stable rendered site: `https://kfd.libkungfu.dev`.
@@ -75,6 +83,18 @@ explainable, auditable, and proportionate.
 | [KFD-5](decisions/KFD-5.md) | procedure | Primitive discovery must separate genesis from qualification. | active |
 | [KFD-6](decisions/KFD-6.md) | procedure | Autonomous discovery must remain grounded in causal experience. | draft |
 
+## Current candidates
+
+KFD Candidates preserve potentially load-bearing rules before a number is
+allocated. They are explicitly non-normative and may be revised, reordered,
+split, merged, withdrawn, rejected, or promoted.
+
+- [Independent action state](drafts/action-state-separation.md), currently
+  carrying the non-binding slot hint `7`.
+
+The machine source is [`drafts/registry.json`](drafts/registry.json). A slot
+hint is an ordering hypothesis, not `KFD-7`, a reservation, or a promise.
+
 ## Product proof path
 
 KFDs are not a detached manifesto, but they are not a demand that readers adopt
@@ -85,7 +105,9 @@ KFD-4, KFD-5, and KFD-6 are expressed as consumable interfaces for both humans
 and agents. These surfaces do not prove every adopter or product correct; they
 make the KFD package's own claims inspectable and falsifiable.
 
-KFD also publishes provisional live cases under `cases/`. A live case freezes
+KFD also publishes pre-number candidates under `drafts/` and provisional live
+cases under `cases/`. A candidate registry keeps ordering hypotheses from
+silently becoming numbered authority. A live case freezes
 candidate genesis, points to immutable KFD-5 qualification cuts, and keeps
 supporting and contradicting evidence open. Live cases are dogfood records,
 not numbered decisions, accepted Primitive claims, or product capability
@@ -123,6 +145,28 @@ TypeScript projects, import it as:
 import standards from "@kungfu-tech/kfd/standards.json" with { type: "json" };
 ```
 
+## Independent verifier
+
+KFD includes an offline verifier implemented from public specifications without
+linking Kungfu, Xinfa, Buildchain, or other product code. The same Rust core is
+projected as a native CLI, library, and packaged WebAssembly executable:
+
+```bash
+npx @kungfu-tech/kfd verify kfd-record standards.json
+npx @kungfu-tech/kfd verify passport .buildchain/release-passport
+npx @kungfu-tech/kfd verify pack path/to/context-pack
+npx @kungfu-tech/kfd verify atlas path/to/atlas
+npx @kungfu-tech/kfd verify episode path/to/sealed/episode
+```
+
+Each command emits `kfd.verification-report/v1`, remains non-qualifying and
+non-self-certified, and performs no network access. Verification proves only
+the named profile checks; it does not prove source completeness, work quality,
+human approval, or release authorization. See
+[`docs/verifier.md`](docs/verifier.md) for the contracts and
+[`docs/verifier-inventory.md`](docs/verifier-inventory.md) for the extraction
+boundary and public-spec gaps.
+
 ## Agent Quickstart
 
 Agents consuming this package should start from the same sources as humans:
@@ -138,24 +182,26 @@ Agents consuming this package should start from the same sources as humans:
    historical cases and an ordinary cross-machine trace vignette.
 6. Read `cases/registry.json` to discover provisional live Primitive cases,
    their current immutable KFD-5 cuts, claim boundaries, and review paths.
-7. Read `standards.json` for canonical KFD numbers, formal reference versions
+7. Read `drafts/registry.json` to discover non-normative KFD Candidates,
+   non-binding slot hints, promotion gates, and claim boundaries.
+8. Read `standards.json` for canonical KFD numbers, formal reference versions
    and hashes, schema IDs, concept names, and interface contracts.
-8. Use `site/kfd-site.json` decision metadata or the KFD-3 collaboration
+9. Use `site/kfd-site.json` decision metadata or the KFD-3 collaboration
    interface fact-source metadata to identify the public KFD fact source.
-9. Use `schemas/kfd-2/trust-taxonomy.schema.json` for KFD-2 residual-risk and
+10. Use `schemas/kfd-2/trust-taxonomy.schema.json` for KFD-2 residual-risk and
    trust-downgrade values. Unknown taxonomy values are invalid.
-10. Use `schemas/kfd-2/trust-claims.schema.json` and
+11. Use `schemas/kfd-2/trust-claims.schema.json` and
    `schemas/kfd-2/trust-assessment.schema.json` when a claim needs generic
    KFD-2 assessment instead of a release-specific passport.
-11. Use `schemas/kfd-3/collaboration-interface.schema.json` and
+12. Use `schemas/kfd-3/collaboration-interface.schema.json` and
    `schemas/kfd-3/witness.schema.json` to inspect collaboration interfaces.
-12. Use `schemas/kfd-1/publication-url-semantics.schema.json` when a package,
+13. Use `schemas/kfd-1/publication-url-semantics.schema.json` when a package,
    paper, specification, or site bundle must distinguish stable reader URLs,
    latest aliases, and immutable versioned artifacts.
-13. If a needed KFD-2 taxonomy value is missing, open a KFD GitHub issue rather
+14. If a needed KFD-2 taxonomy value is missing, open a KFD GitHub issue rather
    than inventing a local value:
    `https://github.com/kungfu-systems/kfd/issues/new?title=KFD-2%20trust%20taxonomy%20extension%20request`.
-14. Use `schemas/kfd-4/observer-perspective.schema.json` to bind timelines to
+15. Use `schemas/kfd-4/observer-perspective.schema.json` to bind timelines to
    their observers and `schemas/kfd-4/perspective-replay.schema.json` to record
    perspective-preserving or contrastive replay. Use
    `schemas/kfd-5/primitive-discovery.schema.json` version 3 to record
@@ -226,6 +272,8 @@ Decision metadata should expose:
 - Load-bearing coordinate: commit-addressed repository contents.
 - Canonical decision paths: `decisions/KFD-N.md`, `registry.json`,
   `standards.json`.
+- Canonical pre-number candidate index: `drafts/registry.json`; slot hints do
+  not allocate or reserve KFD numbers.
 - Canonical provisional-case index: `cases/registry.json`; listing does not
   promote a case into a numbered decision.
 - Stable rendered index: `https://kfd.libkungfu.dev`.
@@ -238,14 +286,19 @@ fact source only after the resulting change is committed to the repository.
 
 ## How to cite
 
-Cite by number and released coordinate: `KFD-1` plus the package version or git
-commit when prerelease precision matters. Every published package and commit is
-immutable. Before the first stable release, explicit maintainer-authorized
-semantic refinement may update a numbered draft line and must be declared as a
-breaking decision-surface impact. After stable, numbers never change meaning: a
-superseded decision keeps its number and points to its successor. Newer KFD
-numbers do not automatically override older KFDs; supersession or override must
-be explicit in the later decision and `registry.json`.
+Cite a decision by number and released coordinate: `KFD-1` plus the package
+version or git commit when prerelease precision matters. Cite a candidate by
+its candidate ID and released coordinate; never cite its slot hint as a KFD
+number.
+
+Every published package and commit is immutable. Before the first stable
+release, a fully evidenced Foundation Revision may correct the latest numbered
+structure, but must declare breaking impact, preserve prior coordinates, and
+publish lineage and migration. The first stable release freezes each
+number-to-meaning mapping. After that freeze, a superseded decision keeps its
+number and points to its successor. Newer KFD numbers do not automatically
+override older KFDs; supersession or override must be explicit in the later
+decision and `registry.json`.
 
 Repository-local engineering decisions stay in each repository's own ADRs and
 reference KFDs; KFDs never depend on repository internals.
@@ -254,6 +307,7 @@ reference KFDs; KFDs never depend on repository internals.
 
 ```text
 decisions/     one authoritative markdown file per decision (KFD-N.md)
+drafts/        non-normative pre-number KFD Candidates and candidate registry
 cases/         provisional live Primitive cases and immutable KFD-5 cuts
 docs/          non-numbered explanations, formal references, usage guides,
                historical cases, and documentation map

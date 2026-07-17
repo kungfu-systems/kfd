@@ -1,13 +1,17 @@
 {
   "name": "@kungfu-tech/kfd",
-  "version": "1.0.0-alpha.28",
+  "version": "1.0.0-alpha.29",
   "description": "Kung Fu Decisions (KFD): the kungfu-systems organization-wide decision registry, as a consumable artifact",
   "license": "Apache-2.0",
+  "bin": {
+    "kfd": "./bin/kfd.mjs"
+  },
   "files": [
     "README.md",
     "TRADEMARKS.md",
     "cases",
     "decisions",
+    "drafts",
     "registry.json",
     "standards.json",
     "kfd.release.json",
@@ -20,7 +24,15 @@
     ".buildchain/kfd-1/contract-world.witness.json",
     ".buildchain/kfd-2",
     ".buildchain/kfd-3",
-    "docs"
+    "docs",
+    "bin",
+    "verifier/Cargo.toml",
+    "verifier/Cargo.lock",
+    "verifier/crates",
+    "verifier/dist",
+    "verifier/extraction-manifest.json",
+    "verifier/fixtures",
+    "verifier/specs"
   ],
   "exports": {
     "./package.json": "./package.json",
@@ -28,6 +40,8 @@
     "./TRADEMARKS.md": "./TRADEMARKS.md",
     "./cases/registry.json": "./cases/registry.json",
     "./cases/*": "./cases/*",
+    "./drafts/registry.json": "./drafts/registry.json",
+    "./drafts/*": "./drafts/*",
     "./registry.json": "./registry.json",
     "./standards.json": "./standards.json",
     "./kfd.release.json": "./kfd.release.json",
@@ -35,6 +49,9 @@
     "./buildchain.contract-lock.json": "./buildchain.contract-lock.json",
     "./buildchain.release-propagation.json": "./buildchain.release-propagation.json",
     "./release-impact.json": "./release-impact.json",
+    "./verifier/bundle.schema.json": "./schemas/kfd-verification-bundle.schema.json",
+    "./verifier/report.schema.json": "./schemas/kfd-verification-report.schema.json",
+    "./verifier/wasm": "./verifier/dist/kfd_verifier.wasm",
     "./scripts/*.mjs": "./scripts/*.mjs",
     "./buildchain/kfd-1/contract-world.witness.json": "./.buildchain/kfd-1/contract-world.witness.json",
     "./buildchain/kfd-2/public-release-trust.claim.json": "./.buildchain/kfd-2/public-release-trust.claim.json",
@@ -49,7 +66,11 @@
     "./docs/*": "./docs/*"
   },
   "scripts": {
-    "check": "node scripts/check.mjs",
+    "check": "node scripts/check.mjs && npm run check:verifier",
+    "check:verifier": "cargo test --locked --manifest-path verifier/Cargo.toml --workspace && node scripts/check-verifier.mjs && node scripts/check-verifier-extraction.mjs",
+    "check:verifier-artifact": "node scripts/check-verifier-artifact.mjs",
+    "build:verifier": "node scripts/build-verifier.mjs",
+    "prepack": "npm run check:verifier-artifact",
     "update:evidence": "node scripts/update-site-bundle.mjs && node scripts/update-kfd-2-claim.mjs && node scripts/update-kfd-1-witness.mjs && node scripts/update-kfd-3-witness.mjs",
     "update:site-bundle": "node scripts/update-site-bundle.mjs",
     "update:kfd-1-witness": "node scripts/update-kfd-1-witness.mjs",

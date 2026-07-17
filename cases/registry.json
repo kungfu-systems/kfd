@@ -1,26 +1,50 @@
 {
   "$schema": "https://kfd.libkungfu.dev/schemas/kfd-live-case-registry.schema.json",
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "contract": "kfd-live-case-registry",
   "cases": [
     {
       "id": "proof-carrying-work-object",
-      "title": "Proof-Carrying Work Object",
-      "kind": "primitive-candidate",
-      "status": "provisional",
+      "title": "Pursuit and Warrant",
+      "kind": "primitive-discovery-case",
+      "status": "active",
       "standard": "kfd-5",
       "humanEntry": "cases/live/proof-carrying-work-object/README.md",
       "genesis": "cases/live/proof-carrying-work-object/genesis.md",
       "methodTrace": "cases/live/proof-carrying-work-object/kfd-method-trace.md",
       "propagationHypothesis": "cases/live/proof-carrying-work-object/propagation-hypothesis.md",
       "reviewIndex": "cases/live/proof-carrying-work-object/reviews/README.md",
-      "currentCut": {
-        "path": "cases/live/proof-carrying-work-object/cuts/0001-genesis.json",
-        "sha256": "fae8a67bd3d1cd90c9a349cc2f5d4720e81993da480f880f2d55bad4853abbb1",
-        "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-5/primitive-discovery.schema.json",
-        "schemaVersion": 3
-      },
-      "claimBoundary": "This case records a provisional shared object hypothesis and a reflexive KFD dogfood process. It does not establish novelty, universality, product readiness, method superiority, or accepted Primitive status."
+      "ontologySplit": "cases/live/proof-carrying-work-object/ontology-split.md",
+      "distinguishabilityArgument": "cases/live/proof-carrying-work-object/distinguishability.md",
+      "candidateTracks": [
+        {
+          "id": "pursuit",
+          "title": "Pursuit",
+          "status": "provisional",
+          "definition": "The durable identity of an intended reality change across revisions, actors, actions, and evidence.",
+          "currentCut": {
+            "path": "cases/live/proof-carrying-work-object/cuts/0002-pursuit.json",
+            "sha256": "f927611ce8ad78d7ada87ca92c5b14fca5f6672d001f1b34b99a2526d9f9d6ee",
+            "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-5/primitive-discovery.schema.json",
+            "schemaVersion": 3
+          },
+          "claimBoundary": "This track does not establish that Pursuit is the final name, a universal work ontology, historically novel, product-ready, or an accepted Primitive."
+        },
+        {
+          "id": "warrant",
+          "title": "Warrant",
+          "status": "provisional",
+          "definition": "A purpose-bound, fact-addressed authorization for bounded continuation.",
+          "currentCut": {
+            "path": "cases/live/proof-carrying-work-object/cuts/0002-warrant.json",
+            "sha256": "c1c4c619a0d5ae4eef238b4766ec6a8bb8a3d8bbf61f2365a94a3a6aedb67b49",
+            "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-5/primitive-discovery.schema.json",
+            "schemaVersion": 3
+          },
+          "claimBoundary": "This track does not establish that Warrant is the final name, replaces enforcement or existing authorization systems, is universally valid, historically novel, product-ready, or an accepted Primitive."
+        }
+      ],
+      "claimBoundary": "This case preserves the fused Proof-Carrying Work Object genesis and tracks provisional Pursuit and Warrant candidates. It does not establish novelty, universality, product readiness, method superiority, or accepted Primitive status for either track."
     }
   ]
 }

@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "contract": "kungfu-buildchain-artifact-evidence",
+  "repository": "example/fixture",
+  "release": {
+    "tag": "v1.2.3",
+    "sourceSha": "1111111111111111111111111111111111111111"
+  },
+  "generatedAt": "2026-07-17T11:13:35.510Z",
+  "runner": {
+    "kind": "",
+    "os": "",
+    "arch": "",
+    "labels": [],
+    "image": ""
+  },
+  "workflow": {
+    "name": "",
+    "runId": "",
+    "runAttempt": "",
+    "url": ""
+  },
+  "artifacts": [
+    {
+      "name": "buildchain-darwin-arm64.tar.gz",
+      "kind": "release-asset",
+      "platform": "darwin-arm64",
+      "size": 31,
+      "sha256": "dd98eb8657439c40717b5256891837468ab54a2c18ca4e98251152a40e42c85e",
+      "url": "",
+      "githubAssetId": "",
+      "attestation": ""
+    },
+    {
+      "name": "checksums.txt",
+      "kind": "release-asset",
+      "platform": "",
+      "size": 14,
+      "sha256": "6d247fcf0e5346087f016c9ec43e29344e02ea12549214424d09676a9a76cb79",
+      "url": "",
+      "githubAssetId": "",
+      "attestation": ""
+    }
+  ]
+}

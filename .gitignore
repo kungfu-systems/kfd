@@ -1,5 +1,9 @@
 node_modules/
 dist/
+/verifier/target/
+!/verifier/dist/
+!/verifier/dist/kfd_verifier.wasm
+!/verifier/dist/kfd_verifier.wasm.sha256
 .buildchain/*
 !.buildchain/kfd-1/
 !.buildchain/kfd-1/contract-world.witness.json

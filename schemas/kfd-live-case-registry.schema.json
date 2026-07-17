@@ -8,7 +8,7 @@
     "$schema": {
       "const": "https://kfd.libkungfu.dev/schemas/kfd-live-case-registry.schema.json"
     },
-    "schemaVersion": { "const": 1 },
+    "schemaVersion": { "const": 2 },
     "contract": { "const": "kfd-live-case-registry" },
     "cases": {
       "type": "array",
@@ -31,7 +31,8 @@
         "methodTrace",
         "propagationHypothesis",
         "reviewIndex",
-        "currentCut",
+        "ontologySplit",
+        "candidateTracks",
         "claimBoundary"
       ],
       "properties": {
@@ -40,9 +41,9 @@
           "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
         },
         "title": { "type": "string", "minLength": 1 },
-        "kind": { "const": "primitive-candidate" },
+        "kind": { "const": "primitive-discovery-case" },
         "status": {
-          "enum": ["provisional", "accepted", "rejected", "subsumed", "no-new-primitive"]
+          "enum": ["active", "closed", "archived"]
         },
         "standard": { "const": "kfd-5" },
         "humanEntry": {
@@ -65,26 +66,64 @@
           "type": "string",
           "pattern": "^cases/live/[a-z0-9-]+/reviews/README\\.md$"
         },
-        "currentCut": {
-          "type": "object",
-          "required": ["path", "sha256", "schemaId", "schemaVersion"],
-          "properties": {
-            "path": {
-              "type": "string",
-              "pattern": "^cases/live/[a-z0-9-]+/cuts/[0-9]{4}-[a-z0-9-]+\\.json$"
-            },
-            "sha256": {
-              "type": "string",
-              "pattern": "^[0-9a-f]{64}$"
-            },
-            "schemaId": {
-              "const": "https://kfd.libkungfu.dev/schemas/kfd-5/primitive-discovery.schema.json"
-            },
-            "schemaVersion": { "const": 3 }
-          },
-          "additionalProperties": false
+        "ontologySplit": {
+          "type": "string",
+          "pattern": "^cases/live/[a-z0-9-]+/ontology-split\\.md$"
+        },
+        "distinguishabilityArgument": {
+          "type": "string",
+          "pattern": "^cases/live/[a-z0-9-]+/distinguishability\\.md$"
+        },
+        "candidateTracks": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/candidateTrack" }
         },
         "claimBoundary": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "candidateTrack": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "status",
+        "definition",
+        "currentCut",
+        "claimBoundary"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "title": { "type": "string", "minLength": 1 },
+        "status": {
+          "enum": ["provisional", "accepted", "rejected", "subsumed", "no-new-primitive"]
+        },
+        "definition": { "type": "string", "minLength": 1 },
+        "currentCut": { "$ref": "#/$defs/currentCut" },
+        "claimBoundary": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "currentCut": {
+      "type": "object",
+      "required": ["path", "sha256", "schemaId", "schemaVersion"],
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^cases/live/[a-z0-9-]+/cuts/[0-9]{4}-[a-z0-9-]+\\.json$"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "schemaId": {
+          "const": "https://kfd.libkungfu.dev/schemas/kfd-5/primitive-discovery.schema.json"
+        },
+        "schemaVersion": { "const": 3 }
       },
       "additionalProperties": false
     }

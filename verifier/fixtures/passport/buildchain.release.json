@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "contract": "kungfu-buildchain-release-passport",
+  "generatedAt": "2026-07-17T11:13:35.514Z",
+  "surfaceTimestampPolicy": {
+    "generatedAt": "2026-07-17T11:13:35.514Z",
+    "publishedAt": "2026-07-17T11:13:35.514Z",
+    "reproducible": true,
+    "timestampPolicy": "ci-injected",
+    "deterministicInputs": [
+      "release.sourceSha",
+      "release.releaseSha",
+      "release.releaseMaterialSha",
+      "artifact-evidence.json",
+      "publish evidence",
+      "release-state transaction",
+      "sourceRevision",
+      "sourceDateEpoch",
+      "package content",
+      "declared Buildchain surface manifest contract"
+    ],
+    "sourceDateEpoch": "0",
+    "sourceRevision": "1111111111111111111111111111111111111111",
+    "timestampPolicyDetails": {
+      "contract": "kungfu-buildchain-surface-timestamp-policy",
+      "timestampFields": [
+        "generatedAt",
+        "publishedAt",
+        "surfaceTimestampPolicy.generatedAt",
+        "surfaceTimestampPolicy.publishedAt"
+      ],
+      "timestampFieldsParticipateInArtifactDigest": true,
+      "artifactDigestScope": "release passport JSON and release evidence bundle",
+      "note": "Human-readable timestamps are separate from reproducibility inputs; do not infer reproducibility from epoch timestamps."
+    }
+  },
+  "product": {
+    "name": "Buildchain",
+    "repository": "example/fixture",
+    "mechanism": "product-mechanism.json"
+  },
+  "release": {
+    "tag": "v1.2.3",
+    "publicTag": "v1.2.3",
+    "internalTag": "v1.2.3",
+    "internalVersion": "",
+    "publishedVersion": "2.12.2-alpha.0",
+    "versionLabel": "2.12.2-alpha.0",
+    "line": "v1",
+    "sourceSha": "1111111111111111111111111111111111111111",
+    "channel": "",
+    "targetRef": "",
+    "releaseSha": "",
+    "releaseMaterialSha": "",
+    "builtSourceSha": "",
+    "builtSourceTreeSha": "",
+    "promotionChannelSha": "",
+    "promotionChannelTreeSha": "",
+    "publishToolingSha": "",
+    "releaseStateRef": "refs/heads/buildchain/release-state/1-2-3",
+    "releaseStateSha": "",
+    "package": {
+      "name": "@kungfu-tech/buildchain",
+      "version": "2.12.2-alpha.0"
+    },
+    "exactRef": "refs/tags/v1.2.3"
+  },
+  "workflow": {
+    "name": "",
+    "runId": "",
+    "runAttempt": "",
+    "url": ""
+  },
+  "runnerPolicy": {
+    "productionDefault": "github-hosted",
+    "compatibilityFixture": "self-hosted",
+    "note": "Runner facts are recorded in artifact evidence; the protocol does not require self-hosted runners."
+  },
+  "versionImpact": {
+    "final": "unknown",
+    "source": "default",
+    "rationale": "No surface impact classification was supplied."
+  },
+  "surfaceImpacts": [],
+  "artifacts": [
+    {
+      "group": "release",
+      "kind": "release-asset",
+      "name": "buildchain-darwin-arm64.tar.gz",
+      "platform": "darwin-arm64",
+      "ref": "v1.2.3",
+      "sha256": "dd98eb8657439c40717b5256891837468ab54a2c18ca4e98251152a40e42c85e",
+      "digest": "sha256:dd98eb8657439c40717b5256891837468ab54a2c18ca4e98251152a40e42c85e",
+      "evidence": "artifact-evidence.json",
+      "url": ""
+    },
+    {
+      "group": "release",
+      "kind": "release-asset",
+      "name": "checksums.txt",
+      "platform": "",
+      "ref": "v1.2.3",
+      "sha256": "6d247fcf0e5346087f016c9ec43e29344e02ea12549214424d09676a9a76cb79",
+      "digest": "sha256:6d247fcf0e5346087f016c9ec43e29344e02ea12549214424d09676a9a76cb79",
+      "evidence": "artifact-evidence.json",
+      "url": ""
+    }
+  ],
+  "evidence": {
+    "artifactEvidence": "artifact-evidence.json",
+    "publishEvidence": "",
+    "transactionState": "",
+    "buildSummary": "",
+    "buildFacts": [],
+    "platformArtifactManifests": [],
+    "distTagPromotionEvidence": "",
+    "kfd1": "",
+    "kfd2": "",
+    "kfd3": "",
+    "impact": "impact.json",
+    "checkReport": "check-report.json",
+    "agentIndex": "agent-index.json"
+  },
+  "recovery": {
+    "rollback": "Use the previous exact release tag or previous floating channel ref.",
+    "verify": "buildchain verify release-passport buildchain.release.json"
+  }
+}
