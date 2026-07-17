@@ -1,4 +1,4 @@
-# KFD-4: Views must remain bound to declared perspectives — timelines make perspective durable and replay makes it transferable
+# KFD-4: Views must remain bound to declared perspectives
 
 - Status: active
 - Number: 4
@@ -9,187 +9,94 @@
 
 Views must remain bound to declared perspectives.
 
-There is no useful view from nowhere. A view must preserve enough of its
-observer, accepted facts, position, and transformation history for another
-participant to understand what it can reveal, reproduce it where possible, and
-challenge what it cannot support.
+There is no useful view from nowhere. A view preserves enough of its observer,
+accepted facts, position, and transformation history for another participant
+to understand, reproduce where possible, and challenge it.
 
-## Decision type
-
-This KFD is a principle derived from the KFD-1/2/3 foundation triad. It does not
-add a fourth foundation principle. It states what must remain true whenever a
-product turns facts into a view for a human, agent, runtime, organization, or
-other participant.
-
-KFD-1/2/3 make shared reality correctable through non-drifting facts,
-inspectable trust, and trusted cooperation. KFD-4 adds a necessary operating
-rule: every interpretation remains situated, and a participant may
-intentionally change perspective rather than mistake one situated model for
-final reality.
-
-## Perspective is not error
+## Decision
 
 A perspective is the position from which facts become relevant, objects become
-visible, and consequences are borne. It may belong to a user, developer,
-reader, agent, runtime location, product surface, organization, or other
-participant.
+visible, and consequences are borne. It may belong to a user, developer, agent,
+runtime, product surface, organization, or later auditor.
 
 Different perspectives may accept the same causal facts while exposing
-different natural boundaries. A developer may see journals and sessions while
-a user sees the bounded thing that happened. An author may see an argument as
-continuous while a reader encounters a missing step. Neither difference makes
-facts arbitrary. It shows that facts do not select one complete view by
-themselves.
+different natural objects and boundaries. Consensus, authority, aggregate
+statistics, and model output remain perspectives; scale does not turn them
+into final reality. Perspective is therefore not error, and facts are not
+arbitrary.
 
-Consensus, convention, aggregate statistics, model output, and expert judgment
-are also perspectives. Their scale or authority does not turn them into a view
-from nowhere.
+KFD-4 requires perspective-bearing views to remain declared and intentionally
+transformable. A transformation changes observer, role, consequence,
+proximity, accepted evidence, or action boundary to test what the current view
+hides.
 
-## Perspective transformation
+Perspective transformation is one discovery method, not a ranking theorem.
+Direct judgment, anomaly, repeated reconstruction, causal-variable discovery,
+structural compression, and hybrid methods may also generate primitive
+candidates. KFD-4 governs their prior boundary: every observation remains
+situated and auditable.
 
-A participant should be able to declare, compare, and intentionally transform
-perspective. A transformation asks what becomes visible when the observer,
-role, consequence, proximity, accepted evidence, or action boundary changes.
+## Engineering objects
 
-Useful transformations include:
+Reliable perspective transformation depends on three connected objects:
 
-- author to reader;
-- implementer to user;
-- operator to affected participant;
-- local runtime to remote observer;
-- individual to organization;
-- present actor to later auditor;
-- one agent or human participant to another.
+- A **perspective-bound timeline** preserves an observer, accepted facts,
+  natural objects, consequences, causal order, evidence boundary, and degraded
+  state.
+- A **perspective-preserving replay** reconstructs a source view for another
+  participant without claiming to become the source observer or filling gaps
+  with generated certainty.
+- A **contrastive replay** compares two or more preserved views in one declared
+  context while keeping their observers and fact cuts distinct.
 
-The purpose is not empathy theater or arbitrary narrative. It is to expose
-objects, burdens, and boundaries hidden by the current view. A primitive may
-already be real as a causal or coordination burden while remaining invisible
-inside the prevailing ontology.
+The goal is low marginal transformation cost, not fictional zero cost.
+Capture, privacy, redaction, reconstruction, and interpretation remain real
+costs. Missing context remains visible as degradation.
 
-Perspective transformation is an important discovery method, not the only
-possible source of a primitive candidate. An anomaly, repeated reconstruction,
-causal-variable investigation, structural compression, direct situated
-judgment, or a hybrid process may also generate a candidate. KFD-4 governs all
-of them at a prior boundary: the facts, signals, variables, and compression
-claims they use are observed from a perspective that must remain declared.
+Without perspective-bound timelines, replay loses the view that made facts
+meaningful. Without replay, a durable view remains locally trapped. Without
+source-preserving contrast, comparison creates another undeclared synthetic
+perspective.
 
-This distinction prevents an operating principle from becoming an unsupported
-ranking theorem. KFD-4 makes perspective transformation possible and
-auditable. It does not claim that perspective transformation is always more
-productive than another grounded genesis method.
+## Gate
 
-## Engineering conditions for perspective transformation
+KFD-4 applies when observer position can materially change interpretation,
+ordering, relevance, object boundaries, consequences, or action. The
+declaration may be natural language, structured metadata, or a domain-specific
+contract. Reproducible projection, transformation, or comparison claims should
+use a machine gate.
 
-Perspective transformation remains expensive when another participant must
-repeat the original work, reconstruct missing context by hand, or depend on the
-original observer's memory. High reconstruction cost is a practical barrier to
-changing perspective even when participants agree that another view matters.
+A conforming claim:
 
-KFD-4 therefore identifies three connected engineering objects:
-
-- A **perspective-bound timeline** makes one situated observation durable. It
-  preserves the observer, accepted facts, natural objects, consequences,
-  causal order, evidence boundary, and degraded state instead of flattening
-  them into an anonymous event stream.
-- A **perspective-preserving replay** makes that observation transferable. It
-  lets another participant reconstruct the source view without claiming to
-  become the source observer or silently replacing missing experience.
-- A **contrastive replay** places two or more preserved views into one declared
-  comparison context while keeping their observers and fact cuts distinct. It
-  exposes where the same reality is organized through incompatible natural
-  objects, burdens, authority boundaries, or action costs.
-
-The target is low marginal transformation cost, not fictional zero cost.
-Capture, storage, privacy, redaction, reconstruction, and interpretation still
-consume resources. Missing context must remain visible as degradation rather
-than being filled with generated certainty.
-
-If timeline records are not perspective-bound, replay reproduces an event log
-without the view that made it meaningful. If replay is unavailable, a durable
-perspective remains locally trapped. If contrast erases source boundaries, the
-result becomes another undeclared synthetic perspective. All three failures
-block reliable perspective transformation.
-
-## Local priority, not universal authority
-
-A participant has special epistemic proximity to consequences it directly
-bears. A statement such as "this workflow imposes a missing cognitive object
-on me" is a situated observation. The report and its consequences can be
-preserved as facts; their wider interpretation remains a claim. They are not
-yet proof that the proposed object is universal, correctly bounded, or worthy
-of promotion.
-
-Perspective therefore grants local priority, not universal authority. Stronger
-claims still require KFD-1 facts, KFD-2 trust assessment, KFD-3 cooperation, and
-the KFD-5 qualification procedure.
-
-## Gate boundary
-
-KFD-4 applies whenever a product or decision presents a view whose observer or
-position can materially change interpretation, ordering, relevance, object
-boundaries, or action. The surface should declare enough perspective metadata
-for the claim it makes.
-
-The declaration may be natural language, structured metadata, or a
-domain-specific machine contract. KFD-4 does not require one universal schema
-for every kind of perspective. A machine gate is appropriate when a product
-claims reproducible projection, transformation, or comparison.
+- identifies the observer and useful position;
+- exposes accepted facts, evidence cuts, gaps, and degraded states;
+- states what changed in a transformation and what became visible;
+- identifies replay sources, reconstruction policy, preserved elements, loss,
+  and verification state;
+- preserves source perspectives and declares the shared context in contrastive
+  replay;
+- obeys known causality and does not invent evidence;
+- does not silently promote a default, consensus, developer, or model view into
+  final reality;
+- represents the affected participant when consequences are asymmetric.
 
 A purely local operation that makes no perspective-bearing claim does not need
-a KFD-4 gate. It remains subject to any other applicable KFD.
+a KFD-4 gate.
 
-## What it requires
+## Authority boundary
 
-- A perspective-bearing claim identifies who or what is observing and the
-  position from which the view is useful.
-- Accepted facts, evidence cuts, known gaps, and degraded states remain
-  inspectable.
-- A claimed perspective transformation states what changed and which newly
-  visible burden, boundary, or object it exposed.
-- A replay claim identifies its source views, reconstruction policy, preserved
-  elements, new observer, known loss, and verification state.
-- A contrastive replay preserves each source perspective while declaring the
-  shared comparison context and the mismatch being tested.
-- Causal facts constrain every perspective; a transformation may change
-  relevance or projection but must not invent evidence or invert known
-  causality.
-- Products do not silently promote a default, consensus, developer, or model
-  perspective into final reality.
-- When consequences are borne asymmetrically, the affected participant's view
-  is represented rather than inferred away by a more powerful participant.
+A participant has local epistemic priority over consequences it directly
+bears. Its report can be preserved as a fact; its wider interpretation remains
+a claim. Perspective does not make first-person experience infallible, require
+agreement, imply a global observer, or certify a primitive. KFD-5 qualifies
+primitive candidates.
 
-## What it does not require
+KFD-4 does not claim that all interpretations are equally supported, that
+causal facts are relative, or that perspective transformation is the unique or
+superior genesis method. Calling a claim "only a perspective" does not remove
+responsibility for its use or consequences.
 
-- It does not say there are no facts or that all interpretations are equally
-  supported.
-- It does not make first-person experience infallible or universally binding.
-- It does not require agreement between perspectives.
-- It does not require a global observer, global clock, or universal ontology.
-- It does not certify a newly visible object as a primitive. KFD-5 performs
-  that qualification.
-- It does not require every primitive candidate to originate in a perspective
-  transformation or rank discovery methods by doctrine.
-- It does not let a participant escape responsibility by calling a claim
-  "only a perspective."
-
-## Relation to KFD-1, KFD-2, and KFD-3
-
-KFD-1 keeps the facts under a view from drifting. KFD-2 keeps trust in that
-view bound to evidence and responsibility. KFD-3 lets participants expose and
-compare perspectives through trusted value rather than pressure.
-
-Each dependency carries a distinct part of perspective transformation:
-
-- Without KFD-1, a timeline can preserve a retrospective story without
-  preserving the facts that constrain it.
-- Without KFD-2, replay can reconstruct a view without giving another
-  participant reason to trust its fidelity, degradation, or responsibility.
-- Without KFD-3, preserved views can remain privately valid but unavailable for
-  voluntary comparison; contrastive replay cannot become a trusted shared act
-  and risks turning into extraction, coercion, or another unilateral synthetic
-  view.
-
-KFD-4 makes the next move possible:
+## Relation to KFD-1 through KFD-3
 
 ```text
 KFD-1 makes timelines evidentiary.
@@ -198,78 +105,20 @@ KFD-3 makes contrastive replay cooperative.
 KFD-4 makes perspective transformation operational.
 ```
 
-Competition or independent action may diversify perspectives. Cooperation
-turns their trusted differences into shared discovery. KFD-4 is therefore the
-first complete operating application of the foundation triad, not an expansion
-of the foundation itself.
+KFD-4 is the first operating application of the foundation triad. KFD-5 begins
+at its declared-perspective boundary and separately qualifies any candidate
+produced by perspective or another declared method.
 
-KFD-5 begins from the declared-perspective boundary. It records which genesis
-method or combination produced a candidate, then subjects that candidate to
-fact-bound qualification. Perspective transformation and replay remain
-first-class methods without becoming mandatory origin stories.
+## Verification
 
-## Implementation case: observer-relative timelines
-
-Timeline ordering is the first concrete KFD-4 profile. When facts arrive from
-multiple machines, agents, processes, or sources, a visible timeline is an
-observer-relative projection over accepted facts, not proof of one absolute
-global clock.
-
-Such a timeline declares the observer, accepted ranges, projection policy,
-causal constraints, deterministic tie-breakers, and degraded evidence. Causal
-facts dominate projection policy. Concurrent facts may be ordered by declared
-policy, but known causal dependency must not be inverted.
-
-The `@kungfu-tech/kfd` package publishes this profile at
-`schemas/kfd-4/observer-perspective.schema.json`. The schema proves the
-package-owned vocabulary and wiring, not the correctness of an adopter's
-runtime timeline. It is one implementation of KFD-4, not the complete ontology
-of perspective.
-
-## Implementation case: Kungfu perspective infrastructure
-
-Kungfu is an Agent Runtime at its product surface. Its deeper KFD-4
-significance is the infrastructure formed by Episodes, observer-bound
-timelines, replay, and contrast:
-
-> Kungfu is an infrastructure for reality-preserving perspective
-> transformation.
-
-An Episode preserves a bounded causal experience. A timeline projects Episodes
-from a declared observer. Replay reconstructs that view for another participant
-with explicit loss and degradation. Contrastive replay lets multiple views of
-related work be examined together without collapsing them into one absolute
-history.
-
-This does not mean Kungfu can reproduce another participant's consciousness.
-`Reality-preserving` means that causal facts, observer identity, evidence cuts,
-consequences, natural objects, and known gaps survive the transformation well
-enough for the reconstructed view to be inspected and challenged.
-
-The `@kungfu-tech/kfd` package publishes the replay profile at
-`schemas/kfd-4/perspective-replay.schema.json`. Together with the observer
-timeline profile, it makes the KFD-4 engineering claim available to both human
-and agent consumers. Adopters still own evidence that a concrete capture or
-replay is faithful.
-
-## Implementation cases: Episode, Atlas, and this KFD
-
-Kungfu Episode became visible when the view changed from runtime implementer to
-the participant asking for "the thing that happened." Xinfa Atlas became
-visible when the view changed from context packaging to the reader and actor
-who needed a navigable semantic closure. The discontinuity between earlier
-versions of KFD-4 and KFD-5 became visible when the author changed to the
-reader's perspective.
-
-These cases do not prove that perspective switching always produces a
-primitive. They demonstrate the KFD-4 function: changing perspective can move
-a real burden into view before the prevailing model has a name for it.
-They also do not show that another method could not have generated the same
-candidate earlier, more cheaply, or with fewer false positives.
+The `@kungfu-tech/kfd` package publishes observer-timeline and
+perspective-replay profiles under `schemas/kfd-4/`. Package wiring, the Kungfu
+perspective-infrastructure case, and adopter responsibilities are documented in
+`docs/KFD-4-usage.md` and `docs/foundation-model.md`. Historical and product
+cases remain explanatory, not normative.
 
 ## Adopters
 
-Adopters cite KFD-4 when a view, interpretation, ordering, or decision depends
-materially on observer position. Domain-specific implementation details remain
-in adopter repositories. Claims that a transformation revealed a durable
-primitive continue through KFD-5 rather than treating KFD-4 as certification.
+Adopters cite KFD-4 when a view or action depends materially on observer
+position. They own evidence that a concrete capture, replay, or transformation
+is faithful.

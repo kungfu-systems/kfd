@@ -24,7 +24,7 @@
 | What are the package implementation notes for KFD-5? | [`KFD-5-usage.md`](KFD-5-usage.md) |
 | What are the package implementation notes for KFD-6? | [`KFD-6-usage.md`](KFD-6-usage.md) |
 | How should an agent quickly understand this package? | [`../README.md`](../README.md#agent-quickstart), then [`foundation-model.md`](foundation-model.md), then [`primitive-discovery-cases.md`](primitive-discovery-cases.md) |
-| What is the concrete self-proof case for KFD-1/2/3/4? | [`../README.md`](../README.md#product-proof-path) and the implementation case in each KFD |
+| What is the concrete self-proof path for KFD-1/2/3/4? | [`../README.md`](../README.md#product-proof-path), the KFD usage pages, and the package witnesses under [`../.buildchain/`](../.buildchain/) |
 | Where is the public KFD fact source? | [`../README.md`](../README.md#decision-metadata) and [`../site/kfd-site.json`](../site/kfd-site.json) decision metadata |
 | What does Apache-2.0 cover, and what remains official/trademark-bound? | [`../TRADEMARKS.md`](../TRADEMARKS.md) |
 | What should a site renderer consume to render `kfd.libkungfu.dev`? | [`../site/kfd-site.json`](../site/kfd-site.json) |
