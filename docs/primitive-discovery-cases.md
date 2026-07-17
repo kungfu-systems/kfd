@@ -195,8 +195,25 @@ who can safely act next.
 
 KFD-4 does not require one of these perspectives to become the universal truth.
 It requires each view to remain declared and makes replay or contrast available
-when another perspective is needed. KFD-5 begins only if the contrast reveals a
-candidate object that deserves its own durable boundary.
+when another perspective is needed. KFD-5 begins when any declared genesis
+method proposes a candidate object that may deserve its own durable boundary.
+
+## What these cases cannot rank
+
+The cases are compatible with several genesis explanations at once:
+
+| Case | Plausible genesis mechanisms |
+|---|---|
+| Git | integrated perspective, anomaly in incumbent tools, repeated reconstruction, boundary pressure, structural compression |
+| VisiCalc | user perspective, repeated recalculation, causal dependency discovery, structural compression |
+| Log | organization-wide perspective, integration anomalies, boundary pressure, causal history, architectural compression |
+
+A retrospective replay cannot identify which mechanism was necessary, which
+was sufficient, or which would have found the candidate first under equal
+evidence and resource budgets. The same success can often be narrated through
+several methods after the primitive is known. KFD therefore treats these cases
+as evidence that the methods are plausible, not evidence that perspective
+transformation dominates anomaly, reconstruction, causality, or compression.
 
 ## The recurring structure
 
@@ -210,8 +227,8 @@ The common structure is not "a brilliant person had an idea." It is:
 
 ```text
 reality pressure
-  -> a perspective in which the old object set becomes unnatural
-  -> a candidate object that compresses the burden
+  -> a declared perspective and current ontology
+  -> one or more genesis methods propose a candidate
   -> qualification through use, consequences, and transfer
 ```
 
@@ -231,10 +248,12 @@ rationale. KFD proposes a stronger path:
 1. KFD-1 keeps pressure, evidence, and candidate contracts from drifting.
 2. KFD-2 keeps confidence bound to those facts and exposes residual risk.
 3. KFD-3 lets participants contribute trusted value without coercion.
-4. KFD-4 makes situated perspectives durable, transferable, and comparable.
-5. KFD-5 separates the genesis of a candidate from its scalable qualification.
-6. KFD-6 asks whether causal experience can eventually sustain that loop with
-   less direct human translation.
+4. KFD-4 makes observation perspectives declared and makes transformation
+   durable, transferable, and comparable.
+5. KFD-5 keeps genesis method-plural and separates it from fact-bound
+   qualification.
+6. KFD-6 asks whether causal experience can eventually sustain and compare
+   that loop with less direct human translation.
 
 This does not turn discovery into a deterministic formula. It changes the
 default from an unrepeatable convergence inside one life to an inspectable
@@ -253,6 +272,8 @@ A KFD replay should therefore remain open to at least these alternatives:
   missing;
 - the candidate reflected one perspective artifact rather than a durable
   object;
+- the candidate reflected an anomaly threshold, model class, causal confounder,
+  or compression language rather than a durable object;
 - a narrower abstraction explains the same compression;
 - the object transferred poorly outside its original pressure field;
 - historical evidence is too incomplete to support the proposed replay.

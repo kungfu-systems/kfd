@@ -245,12 +245,12 @@ const trustClaims = {
     {
       id: "kfd-5-primitive-discovery-trust",
       statement:
-        "KFD-5 is trustable as a package-level version 2 primitive-discovery interface because KFD publishes the active procedure, required perspective-genesis record, scalable qualification record, optional boundary-pressure diagnostic, standards metadata, and verification gate; adopter conclusions remain separate KFD-2 claims.",
+        "KFD-5 is trustable as a package-level version 3 primitive-discovery interface because KFD publishes the active procedure, required perspective-declared method-plural genesis record, fact-bound qualification record, optional boundary-pressure diagnostic, standards metadata, and verification gate; adopter conclusions and method-superiority claims remain separate KFD-2 claims.",
       subject: {
         kind: "primitive-discovery",
         id: "kfd-5-primitive-discovery",
         standard: "kfd-5",
-        description: "KFD-5 version 2 perspective-genesis and primitive-qualification interface.",
+        description: "KFD-5 version 3 method-plural genesis and primitive-qualification interface.",
       },
       facts: [
         artifactPointer("file", "decisions/KFD-5.md"),
@@ -273,12 +273,12 @@ const trustClaims = {
     {
       id: "kfd-6-autonomous-discovery-loop-trust",
       statement:
-        "KFD-6 is trustable only as a published draft version 3 experiment interface with required grounded perspective experiments and conditional boundary hypothesis; KFD does not claim that a conforming autonomous primitive-discovery implementation currently exists.",
+        "KFD-6 is trustable only as a published draft version 4 experiment interface with required grounded generation experiments, bounded method comparison, and conditional boundary hypothesis; KFD does not claim that a conforming autonomous primitive-discovery implementation or dominant generation method currently exists.",
       subject: {
         kind: "autonomous-discovery-loop",
         id: "kfd-6-autonomous-discovery-loop",
         standard: "kfd-6",
-        description: "KFD-6 draft autonomous-discovery-loop version 3 interface with grounded perspective experiments.",
+        description: "KFD-6 draft autonomous-discovery-loop version 4 interface with grounded method-plural experiments.",
       },
       facts: [
         artifactPointer("file", "decisions/KFD-6.md"),
@@ -286,8 +286,8 @@ const trustClaims = {
         artifactPointer("schema", "schemas/kfd-6/autonomous-discovery-loop.schema.json"),
       ],
       evidence: [
-        evidence("schema", "schemas/kfd-6/autonomous-discovery-loop.schema.json", "KFD-6 autonomous-discovery-loop version 3 experiment schema is published."),
-        evidence("file", "scripts/check.mjs", "The package check gate validates draft status, required perspective experiments, conditional boundary hypothesis, and anti-self-certification constants."),
+        evidence("schema", "schemas/kfd-6/autonomous-discovery-loop.schema.json", "KFD-6 autonomous-discovery-loop version 4 experiment schema is published."),
+        evidence("file", "scripts/check.mjs", "The package check gate validates draft status, required generation experiments, bounded method comparison, conditional boundary hypothesis, and anti-self-certification constants."),
       ],
       verification: { command: "node scripts/check.mjs", expectedResult: "warning" },
       auditBoundary: {

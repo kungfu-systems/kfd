@@ -982,12 +982,12 @@
       "title": "Views must remain bound to declared perspectives: timelines make perspective durable and replay makes it transferable",
       "kind": "principle",
       "status": "active",
-      "revision": 4,
+      "revision": 5,
       "metadataSchemaVersion": "1",
       "document": {
         "path": "decisions/KFD-4.md",
         "url": "https://kfd.libkungfu.dev/4",
-        "sha256": "cd67e09ed42fb2b7e7dda3c114360f4c70c77af502c3c5ce2314a64e7f4b9919"
+        "sha256": "f9784e6f3b360815b2597b75a6dea6d407264e47b5b034e0a31993531bad8f1d"
       },
       "compatibility": {
         "packageLine": "v1.0",
@@ -1047,15 +1047,15 @@
       "id": "KFD-5",
       "number": 5,
       "label": "KFD-5",
-      "title": "Primitive discovery must join perspective-grounded judgment with scalable reasoning: discovery and qualification are different acts",
+      "title": "Primitive discovery must keep genesis perspective-declared, method-plural, and fact-qualified: discovery and qualification are different acts",
       "kind": "procedure",
       "status": "active",
-      "revision": 4,
+      "revision": 5,
       "metadataSchemaVersion": "1",
       "document": {
         "path": "decisions/KFD-5.md",
         "url": "https://kfd.libkungfu.dev/5",
-        "sha256": "7ac5fda29246d67222d375a3c5dcfd9dad188172a90d5defd3a7947667375ac3"
+        "sha256": "a936aa59f945518152eada3c9a74f52243a516386d4ebaf102499208bae170c4"
       },
       "compatibility": {
         "packageLine": "v1.0",
@@ -1074,19 +1074,27 @@
       "interfaces": {
         "primitiveDiscovery": {
           "contract": "kfd-5-primitive-discovery",
-          "schemaVersion": 2,
+          "schemaVersion": 3,
           "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-5/primitive-discovery.schema.json",
           "schemaPath": "schemas/kfd-5/primitive-discovery.schema.json",
-          "compatibilityRule": "Version 2 requires perspectiveGenesis and separates candidate genesis from qualification; further semantic or required-field changes require a new interface version or contract."
+          "compatibilityRule": "Version 3 requires perspective-declared, method-plural genesis and separates candidate generation from fact-bound qualification; further semantic or required-field changes require a new interface version or contract."
         }
       },
       "concepts": {
         "primitiveDiscovery": "primitive discovery",
-        "groundedJudgment": "perspective-grounded judgment",
-        "perspectiveGenesis": "perspective genesis",
+        "perspectiveDeclaration": "perspective declaration",
+        "methodPluralGenesis": "method-plural genesis",
+        "observationPerspective": "observation perspective",
+        "currentOntology": "current ontology",
         "perspectiveTransformation": "perspective transformation",
         "genesisMethod": "primitive-genesis method",
+        "methodEvidence": "genesis-method evidence",
         "replayBasis": "perspective-replay basis",
+        "anomalyDriven": "anomaly-driven genesis",
+        "reconstructionPressure": "reconstruction-pressure genesis",
+        "causalVariableDiscovery": "causal-variable discovery",
+        "structuralCompression": "structural-compression genesis",
+        "methodArtifact": "genesis-method artifact",
         "localOptimizationTrap": "local-optimization trap",
         "situatedObservation": "situated observation",
         "newlyVisibleNeed": "newly visible need",
@@ -1112,15 +1120,15 @@
       "id": "KFD-6",
       "number": 6,
       "label": "KFD-6",
-      "title": "Autonomous discovery must remain grounded in causal experience: the loop must transform perspectives, not only mine patterns",
+      "title": "Autonomous discovery must remain grounded in causal experience: the loop must compare generation methods, not canonize one",
       "kind": "procedure",
       "status": "draft",
-      "revision": 4,
+      "revision": 5,
       "metadataSchemaVersion": "1",
       "document": {
         "path": "decisions/KFD-6.md",
         "url": "https://kfd.libkungfu.dev/6",
-        "sha256": "a385de6b9c9efdf0a316444862ce7c2cde8e906d552b570bf80d7deadfbbf29a"
+        "sha256": "e31ca6c3ea16e03b56f056209b26b5952253087a6442097db9a3c1c9c6b9832d"
       },
       "compatibility": {
         "packageLine": "v1.0",
@@ -1139,10 +1147,10 @@
       "interfaces": {
         "autonomousDiscoveryLoop": {
           "contract": "kfd-6-autonomous-discovery-loop",
-          "schemaVersion": 3,
+          "schemaVersion": 4,
           "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-6/autonomous-discovery-loop.schema.json",
           "schemaPath": "schemas/kfd-6/autonomous-discovery-loop.schema.json",
-          "compatibilityRule": "Draft interface v3 requires perspective experiments and makes boundary hypothesis conditional; further semantic or required-field changes require a new interface version or contract."
+          "compatibilityRule": "Draft interface v4 requires method-plural generation experiments, bounded method comparison, and a conditional boundary hypothesis; further semantic or required-field changes require a new interface version or contract."
         }
       },
       "concepts": {
@@ -1151,11 +1159,19 @@
         "episodeCorpus": "Episode corpus",
         "experienceCut": "immutable experience cut",
         "captureBoundary": "capture boundary",
-        "perspectiveExperiment": "perspective experiment",
+        "generationExperiment": "generation experiment",
+        "genesisMethod": "primitive-genesis method",
+        "methodComparison": "bounded genesis-method comparison",
+        "sharedEvidenceCut": "shared comparison evidence cut",
+        "resourceBudget": "declared comparison resource budget",
         "perspectiveTransformation": "perspective transformation",
         "perspectiveReplay": "perspective-preserving replay",
         "contrastiveReplay": "contrastive replay",
         "fixedOntologyBaseline": "fixed-ontology baseline",
+        "noNewPrimitiveBaseline": "no-new-primitive baseline",
+        "falseCandidateRate": "false-candidate rate",
+        "ontologyDistance": "ontology distance",
+        "methodArtifact": "genesis-method artifact",
         "projectionArtifact": "perspective projection artifact",
         "boundaryPressure": "boundary pressure",
         "boundaryHypothesis": "boundary hypothesis",

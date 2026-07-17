@@ -1,4 +1,4 @@
-# KFD-6: Autonomous discovery must remain grounded in causal experience — the loop must transform perspectives, not only mine patterns
+# KFD-6: Autonomous discovery must remain grounded in causal experience — the loop must compare generation methods, not canonize one
 
 - Status: draft
 - Number: 6
@@ -9,16 +9,16 @@
 
 Autonomous discovery must remain grounded in causal experience.
 
-An autonomous loop must be able to generate, reconstruct, compare, and test
-perspectives that can reveal objects outside its current ontology. It must not
-replace reality with its own narrative or certify a candidate using only
-evidence produced by the same loop.
+An autonomous loop must be able to generate and compare candidates through
+multiple declared methods, including perspective transformation and replay,
+without replacing reality with its own narrative or certifying a candidate
+using only evidence produced by the same loop.
 
 ## Decision type and status
 
 This KFD is a proposed procedure derived from KFD-1/2/3 and extended through
-KFD-4/5. Its registry status is `draft` because perspective-transforming
-autonomous primitive discovery has not yet been demonstrated as a load-bearing
+KFD-4/5. Its registry status is `draft` because method-plural autonomous
+primitive discovery has not yet been demonstrated as a load-bearing
 organizational capability.
 
 The draft defines an experiment and a gate. It does not claim that current
@@ -28,14 +28,17 @@ agents can already satisfy it.
 
 KFD-6 asks whether an autonomous system can revise not only answers inside a
 model, but also the primitives from which its model world is built. Pattern
-mining, retrieval, clustering, anomaly detection, and better prediction remain
-inside the current horizon unless the loop can also vary the perspective from
-which objects become visible.
+mining, retrieval, clustering, anomaly detection, causal-variable discovery,
+structural compression, reconstruction analysis, and perspective
+transformation may each generate candidates when their representation and
+search space permit it. None proves ontology change merely by producing a
+better score.
 
 The loop remains correctable only when causal experience can contradict its
-narrative, perspective transformations are explicit experiments, discovery
-evidence is separated from independent evaluation, and promotion authority is
-not identical to generation authority.
+narrative, every method and observation perspective is explicit, competing
+methods can be compared under bounded conditions, discovery evidence is
+separated from independent evaluation, and promotion authority is not
+identical to generation authority.
 
 ## Gate boundary
 
@@ -60,32 +63,36 @@ the corpus and immutable evidence cut, observer and capture boundary, accepted
 and excluded sources, missing or degraded evidence, known biases, and external
 consequences represented only by proxies.
 
-## Perspective experiments
+## Generation experiments
 
-An autonomous loop cannot discover beyond its current ontology by analyzing
-the same view more intensely. It must use perspective-bound causal experience
-to run explicit replay and perspective experiments.
-Each experiment should declare:
+KFD does not yet have evidence that one genesis method dominates the others.
+An autonomous loop must therefore treat method choice as an experiment rather
+than a doctrine. Each generation experiment should declare:
 
-- the origin perspective and its natural objects;
-- a generated, reconstructed, or transformed participant perspective;
+- the observation perspective and current ontology;
+- the selected generation method or method combination;
 - the causal experience used to ground that perspective;
-- what changed between the views;
-- which unmet need or candidate object became newly visible;
-- evidence that would show the result is projection artifact rather than a
-  load-bearing object.
+- its procedure, model class, evidence cut, and resource budget;
+- the candidate object, if any;
+- evidence that would show the result is a method artifact rather than a
+  load-bearing object;
+- when perspective transformation or replay is selected, its source views,
+  transformed view, preservation claim, and degraded state.
 
 Episodes are not merely a larger training or retrieval corpus in this
 procedure. They are bounded carriers of situated causal experience. The loop
-must preserve their observer and consequence boundaries, replay source views,
-and compare them under a declared context. Flattening Episodes into anonymous
-tokens or events may improve a fixed-ontology model, but it does not satisfy
-the KFD-6 discovery claim.
+must preserve their observer and consequence boundaries regardless of which
+generation method consumes them. Flattening Episodes into anonymous tokens or
+events hides the observation boundary and does not satisfy the KFD-6 discovery
+claim even when the resulting method proposes a useful candidate.
 
-The loop should compare perspective-transforming discovery against a
-fixed-ontology baseline. Producing a better policy, retrieval result, cluster,
-or prediction under the original object set is not evidence that primitive
-discovery occurred.
+The loop should compare perspective transformation, anomaly-driven search,
+reconstruction pressure, causal-variable discovery, structural compression,
+and useful hybrids against appropriate fixed-ontology and no-new-primitive
+baselines. The comparison must use a shared evidence cut, declared resource
+budget, common qualification metrics, and independent evaluation. Producing a
+better policy, retrieval result, cluster, compression score, or causal graph is
+not by itself evidence that primitive discovery occurred.
 
 ## Boundary hypothesis
 
@@ -95,8 +102,8 @@ coordination, pressure change, recurring failures, mediation claim, and a
 narrower internal-object alternative.
 
 Repeated structure alone does not justify a primitive, and lack of accumulated
-boundary failures does not disqualify a candidate first revealed through a
-grounded perspective transformation.
+boundary failures does not disqualify a candidate generated through another
+grounded method.
 
 ## Procedure
 
@@ -106,12 +113,14 @@ An autonomous primitive-discovery loop should:
    and biases;
 2. declare the ontology and perspective under which the corpus is currently
    interpreted;
-3. replay or reconstruct participant perspectives grounded in causal
-   experience rather than free narrative;
-4. run contrastive replay under a declared shared context, preserving source
-   observers, fact cuts, natural objects, consequences, and degraded states;
-5. transform and compare perspectives, recording newly visible needs, objects,
-   and disconfirming tests;
+3. declare the generation methods, model classes, procedures, evidence cuts,
+   resource budgets, and disconfirming tests;
+4. run perspective transformation, anomaly, reconstruction, causal-variable,
+   compression, or hybrid experiments as applicable without requiring every
+   method to produce a candidate;
+5. compare methods over shared evidence and qualification metrics, recording
+   candidate yield, false candidates, ontology distance, compression,
+   intervention value, transfer, falsifiability, cost, and auditability;
 6. propose candidate identity, boundary, authority, lifecycle, and operations,
    including the no-new-primitive alternative;
 7. optionally construct and test a boundary hypothesis when contact-surface
@@ -119,11 +128,13 @@ An autonomous primitive-discovery loop should:
 8. hand the candidate to the KFD-5 qualification structure;
 9. separate discovery evidence from held-out evaluation evidence;
 10. replay historical cases, construct counterfactuals, search for
-   disconfirming experience, and compare with a fixed-ontology baseline;
+   disconfirming experience, and compare with fixed-ontology,
+   no-new-primitive, and alternative-method baselines;
 11. run shadow evaluation and only then bounded interventions within declared
     authority and safety limits;
-12. collect new causal experience and measure compression, intervention,
-    transfer, falsifiability, and whether the candidate survives perspective
+12. collect new causal experience and measure false-candidate rate, ontology
+    distance, compression, intervention, transfer, falsifiability, cost,
+    auditability, and whether the candidate survives perspective and method
     change;
 13. reject, revise, retain as provisional, or submit the candidate to a
     separate promotion authority.
@@ -143,25 +154,25 @@ change product, organizational, safety, or value boundaries.
 
 KFD-6 does not remove humans from the wider system. Humans may still own value,
 safety, legal, allocation, or irreversible promotion decisions. The narrower
-claim is that sufficiently rich causal experience and perspective
-reconstruction may let an agent perform primitive genesis without a human
-translating every reality pressure.
+claim is that sufficiently rich causal experience and method-plural generation
+may let an agent perform primitive genesis without a human translating every
+reality pressure.
 
 ## Relation to KFD-1 through KFD-5
 
 KFD-1 keeps experience and candidate contracts from drifting. KFD-2 binds trust
 to facts and residual risk. KFD-3 keeps the loop inside transparent value and
-participant choice. KFD-4 supplies declared, transformable perspectives. KFD-5
-separates perspective-grounded genesis from scalable qualification. KFD-6
-attempts to internalize the correct use of perspective-bound causal experience
-across that complete motion.
+participant choice. KFD-4 keeps observations perspective-declared and makes
+perspective transformation auditable. KFD-5 separates method-plural genesis
+from fact-bound qualification. KFD-6 attempts to internalize and compare that
+complete motion over causal experience.
 
 ```text
 Atlas_n
   -> guides action from a provisional perspective
   -> Episodes return causal experience
-  -> perspective experiments move the visible horizon
-  -> a missing object becomes visible
+  -> plural generation experiments propose or reject candidates
+  -> method comparison tests what moved the visible horizon
   -> KFD-5 qualification
   -> candidate Atlas_n+1
 ```
@@ -175,9 +186,12 @@ the candidate is valuable.
 
 KFD-6 remains draft until a real implementation demonstrates that it can:
 
-- generate and test participant perspectives grounded in causal experience;
-- discover candidates beyond retrieval, pattern-mining, and fixed-ontology
-  baselines;
+- run multiple generation methods over declared perspectives and causal
+  experience;
+- compare perspective, anomaly, reconstruction, causal-variable, compression,
+  hybrid, fixed-ontology, and no-new-primitive baselines under bounded budgets;
+- discover candidates that survive both method comparison and KFD-5
+  qualification;
 - distinguish a load-bearing object from a projection artifact, internal
   pattern, policy, label, or local abstraction;
 - surface disconfirming evidence and reject attractive false candidates;
@@ -185,18 +199,20 @@ KFD-6 remains draft until a real implementation demonstrates that it can:
   boundaries;
 - avoid self-certification;
 - transfer at least one candidate across contexts without hiding local facts;
-- leave an auditable path from experience cut through perspective experiment,
-  candidate, qualification, and promotion decision.
+- leave an auditable path from experience cut through generation experiment,
+  method comparison, candidate, qualification, and promotion decision.
 
 Failure is evidence against activation, not a reason to weaken the gate.
 
 ## Implementation case: the KFD package
 
-The `@kungfu-tech/kfd` package publishes the proposed version 3 autonomous-loop
-schema at `schemas/kfd-6/autonomous-discovery-loop.schema.json`. Version 3
-requires perspective experiments and makes boundary hypothesis conditional.
-The schema records experiments consistently; it does not prove that a
-conforming implementation exists.
+The `@kungfu-tech/kfd` package publishes the proposed version 4 autonomous-loop
+schema at `schemas/kfd-6/autonomous-discovery-loop.schema.json`. Version 4
+requires method-plural generation experiments and bounded method comparison;
+perspective transformation remains a first-class method and boundary
+hypothesis remains conditional. The schema records experiments consistently;
+it does not prove that a conforming implementation exists or that one method
+is superior.
 
 ## Adopters
 
