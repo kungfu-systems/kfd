@@ -10,7 +10,9 @@
     "registry": "registry.json",
     "standards": "standards.json",
     "liveCaseRegistry": "cases/registry.json",
-    "decisionsDir": "decisions"
+    "candidateRegistry": "drafts/registry.json",
+    "decisionsDir": "decisions",
+    "candidatesDir": "drafts"
   },
   "routes": {
     "home": "/",
@@ -18,6 +20,8 @@
     "formal": "/formal",
     "cases": "/cases",
     "liveCasePattern": "/cases/live/{id}",
+    "candidates": "/drafts",
+    "candidatePattern": "/drafts/{id}",
     "decisionPattern": "/{number}",
     "decisionUsagePattern": "/{number}/usage",
     "decisionFormalPattern": "/{number}/formal",
@@ -27,7 +31,7 @@
   "homepage": {
     "title": "KFD — Kung Fu Decisions",
     "lead": "Most progress gives us better answers inside a world we already know how to describe. Some progress changes what that world contains. A spreadsheet cell made dependencies and recalculation directly manipulable. A Git commit made distributed history something software could preserve, compare, and exchange. Once such a primitive exists, it feels obvious; before it exists, whole fields may work around its absence.",
-    "decisionKinds": "KFDs can be **principles** or **procedures**. Principles state what must remain true across kungfu-systems; procedures state how a class of work enforces or protects a principle. During the pre-stable line, maintainer-authorized semantic refinement remains possible and every published prerelease stays immutable. After the first stable release, substantive change mints a new KFD that explicitly supersedes the old number. The numbered decisions remain authoritative; the [foundation model](docs/foundation-model.md) explains how they fit together.",
+    "decisionKinds": "KFDs can be **principles** or **procedures**. Principles state what must remain true across kungfu-systems; procedures state how a class of work enforces or protects a principle. During the pre-stable line, maintainer-authorized Foundation Revision remains possible under the evidence, lineage, and review requirements in `CONTRIBUTING.md`, while every published prerelease coordinate stays immutable. The first stable release freezes number-to-meaning mappings. After that freeze, substantive change mints a new KFD that explicitly supersedes the old number. The numbered decisions remain authoritative; the [foundation model](docs/foundation-model.md) explains how they fit together.",
     "futurePicture": {
       "heading": "Future picture",
       "pastToFuture": "Most progress gives us better answers inside a world we already know how to describe. Some progress changes what that world contains. A spreadsheet cell made dependencies and recalculation directly manipulable. A Git commit made distributed history something software could preserve, compare, and exchange. Once such a primitive exists, it feels obvious; before it exists, whole fields may work around its absence.",
@@ -71,6 +75,11 @@
           "label": "Inspect live Primitive cases",
           "sourceTarget": "cases/registry.json",
           "url": "cases/registry.json"
+        },
+        {
+          "label": "Inspect KFD candidates",
+          "sourceTarget": "drafts/registry.json",
+          "url": "drafts/registry.json"
         },
         {
           "label": "Explore current decisions",
@@ -183,7 +192,7 @@
         "homepagePriority": 10,
         "defaultPresentation": "triad-cards",
         "includeInFirstScreen": true,
-        "markdown": "The first three KFDs form the public foundation for kungfu-systems:\n\n```text\nKFD-1: facts must not drift.\nKFD-2: trust must start from facts.\nKFD-3: cooperation must start from trusted value.\n```\n\nTogether they define the load-bearing path for Kungfu products: make facts\nnon-drifting, make trust inspectable from those facts, and let humans and\nagents cooperate through trusted value rather than hidden pressure.\n\nNo principle is load-bearing until it has an inspectable product witness.\n\n[Read the foundation model](docs/foundation-model.md) ·\n[Inspect the formal model](docs/formal-model.md) ·\n[See primitives in history](docs/primitive-discovery-cases.md) ·\n[Inspect live Primitive cases](cases/registry.json) ·\n[Explore current decisions](#current-decisions) ·\n[Inspect the product proof path](#product-proof-path)"
+        "markdown": "The first three KFDs form the public foundation for kungfu-systems:\n\n```text\nKFD-1: facts must not drift.\nKFD-2: trust must start from facts.\nKFD-3: cooperation must start from trusted value.\n```\n\nTogether they define the load-bearing path for Kungfu products: make facts\nnon-drifting, make trust inspectable from those facts, and let humans and\nagents cooperate through trusted value rather than hidden pressure.\n\nNo principle is load-bearing until it has an inspectable product witness.\n\n[Read the foundation model](docs/foundation-model.md) ·\n[Inspect the formal model](docs/formal-model.md) ·\n[See primitives in history](docs/primitive-discovery-cases.md) ·\n[Inspect live Primitive cases](cases/registry.json) ·\n[Inspect KFD candidates](drafts/registry.json) ·\n[Explore current decisions](#current-decisions) ·\n[Inspect the product proof path](#product-proof-path)"
       },
       {
         "id": "foundation-model",
@@ -216,7 +225,7 @@
         "homepagePriority": 20,
         "defaultPresentation": "registry-introduction",
         "includeInFirstScreen": false,
-        "markdown": "KFD is the organization-wide decision registry of kungfu-systems: the small\nset of standing, cross-repository norms that products and their consumers weld\nto. Each decision has an immutable number (`KFD-N`), a kind, a status, and a\nsingle authoritative text in this repository.\n\nKFDs can be **principles** or **procedures**. Principles state what must remain\ntrue across kungfu-systems; procedures state how a class of work enforces or\nprotects a principle. During the pre-stable line, maintainer-authorized\nsemantic refinement remains possible and every published prerelease stays\nimmutable. After the first stable release, substantive change mints a new KFD\nthat explicitly supersedes the old number. The numbered decisions remain\nauthoritative; the\n[foundation model](docs/foundation-model.md) explains how they fit together.\n\nStable rendered site: `https://kfd.libkungfu.dev`."
+        "markdown": "KFD is the organization-wide decision registry of kungfu-systems: the small\nset of standing, cross-repository norms that products and their consumers weld\nto. Each numbered decision has a kind, a status, and a single authoritative\ntext in this repository.\n\nA **KFD Candidate** is a non-normative, pre-number draft under `drafts/`. It may\ncarry a non-binding slot hint, but only explicit promotion allocates a KFD\nnumber. A **numbered draft** already appears under `decisions/` and\n`registry.json`; its number is allocated even while its activation gate remains\nopen.\n\nKFDs can be **principles** or **procedures**. Principles state what must remain\ntrue across kungfu-systems; procedures state how a class of work enforces or\nprotects a principle. During the pre-stable line, maintainer-authorized\nFoundation Revision remains possible under the evidence, lineage, and review\nrequirements in `CONTRIBUTING.md`, while every published prerelease coordinate\nstays immutable. The first stable release freezes number-to-meaning mappings.\nAfter that freeze, substantive change mints a new KFD that explicitly\nsupersedes the old number. The numbered decisions remain authoritative; the\n[foundation model](docs/foundation-model.md) explains how they fit together.\n\nStable rendered site: `https://kfd.libkungfu.dev`."
       },
       {
         "id": "adoption-boundary",
@@ -228,6 +237,17 @@
         "defaultPresentation": "boundary-note",
         "includeInFirstScreen": false,
         "markdown": "KFD is an engineering discipline, not a belief test.\nKFD governs systems before it judges people.\nNo one should be pressured to adopt KFD in the name of KFD.\nDisagreement is a valid cooperation state.\n\nA constraint can be strict and still KFD-compatible when it is fact-bound,\nexplainable, auditable, and proportionate."
+      },
+      {
+        "id": "current-candidates",
+        "sourcePath": "README.md",
+        "sourceHeading": "Current candidates",
+        "title": "Current candidates",
+        "renderRole": "primary",
+        "homepagePriority": 27,
+        "defaultPresentation": "candidate-summary",
+        "includeInFirstScreen": false,
+        "markdown": "KFD Candidates preserve potentially load-bearing rules before a number is\nallocated. They are explicitly non-normative and may be revised, reordered,\nsplit, merged, withdrawn, rejected, or promoted.\n\n- [Independent action state](drafts/action-state-separation.md), currently\n  carrying the non-binding slot hint `7`.\n\nThe machine source is [`drafts/registry.json`](drafts/registry.json). A slot\nhint is an ordering hypothesis, not `KFD-7`, a reservation, or a promise."
       },
       {
         "id": "practice-guidelines",
@@ -249,7 +269,7 @@
         "homepagePriority": 30,
         "defaultPresentation": "proof-path",
         "includeInFirstScreen": false,
-        "markdown": "KFDs are not a detached manifesto, but they are not a demand that readers adopt\na Kungfu product before understanding the decisions. The product-witness rule\nstarts with this package itself: `standards.json`, `schemas/`, `docs/`,\n`site/kfd-site.json`, and `scripts/check.mjs` show how KFD-1, KFD-2, KFD-3,\nKFD-4, KFD-5, and KFD-6 are expressed as consumable interfaces for both humans\nand agents. These surfaces do not prove every adopter or product correct; they\nmake the KFD package's own claims inspectable and falsifiable.\n\nKFD also publishes provisional live cases under `cases/`. A live case freezes\ncandidate genesis, points to immutable KFD-5 qualification cuts, and keeps\nsupporting and contradicting evidence open. Live cases are dogfood records,\nnot numbered decisions, accepted Primitive claims, or product capability\nannouncements.\n\nThe complete explanatory path is published at\n[`docs/foundation-model.md`](docs/foundation-model.md) and projected to the\nstable site route `/foundation`. It explains the decisions without replacing\ntheir numbered authoritative texts. The non-normative formal layer begins at\n[`docs/formal-model.md`](docs/formal-model.md), with one versioned formal\nreference under `docs/KFD-N-formal.md` and the stable route `/N/formal` for\neach decision. It makes objects, invariants, transitions, invalid states, and\nproof obligations explicit without claiming to replace the decisions or prove\nnatural-language meaning from package bytes.\n\nFor the broader witness set, use the main Kungfu product entrypoint\n(`https://kungfu.tech`) for product philosophy, and Buildchain\n(`https://buildchain.libkungfu.dev`) for release and provenance\naccountability. This registry states the commitments; the open products expose\nwhere those commitments are carried, where evidence can be inspected, and\nwhere remaining risk still belongs.\n\nRendered index: `https://kfd.libkungfu.dev` (stable machine path per entry,\ne.g. `https://kfd.libkungfu.dev/1`). This repository publishes\n`@kungfu-tech/kfd` — the decision texts plus a machine-readable\n`registry.json` — which the site consumes as its single fact source.\n\nMachine consumers that need KFD-owned standard identity should read\n`standards.json`. It is the versioned metadata surface for stable standard\nkeys, decision and formal-reference routes and SHA-256 digests, schema IDs,\nKFD-owned concept names, and machine-interface contract versions. In Node or\nTypeScript projects, import it as:\n\n```js\nimport standards from \"@kungfu-tech/kfd/standards.json\" with { type: \"json\" };\n```"
+        "markdown": "KFDs are not a detached manifesto, but they are not a demand that readers adopt\na Kungfu product before understanding the decisions. The product-witness rule\nstarts with this package itself: `standards.json`, `schemas/`, `docs/`,\n`site/kfd-site.json`, and `scripts/check.mjs` show how KFD-1, KFD-2, KFD-3,\nKFD-4, KFD-5, and KFD-6 are expressed as consumable interfaces for both humans\nand agents. These surfaces do not prove every adopter or product correct; they\nmake the KFD package's own claims inspectable and falsifiable.\n\nKFD also publishes pre-number candidates under `drafts/` and provisional live\ncases under `cases/`. A candidate registry keeps ordering hypotheses from\nsilently becoming numbered authority. A live case freezes\ncandidate genesis, points to immutable KFD-5 qualification cuts, and keeps\nsupporting and contradicting evidence open. Live cases are dogfood records,\nnot numbered decisions, accepted Primitive claims, or product capability\nannouncements.\n\nThe complete explanatory path is published at\n[`docs/foundation-model.md`](docs/foundation-model.md) and projected to the\nstable site route `/foundation`. It explains the decisions without replacing\ntheir numbered authoritative texts. The non-normative formal layer begins at\n[`docs/formal-model.md`](docs/formal-model.md), with one versioned formal\nreference under `docs/KFD-N-formal.md` and the stable route `/N/formal` for\neach decision. It makes objects, invariants, transitions, invalid states, and\nproof obligations explicit without claiming to replace the decisions or prove\nnatural-language meaning from package bytes.\n\nFor the broader witness set, use the main Kungfu product entrypoint\n(`https://kungfu.tech`) for product philosophy, and Buildchain\n(`https://buildchain.libkungfu.dev`) for release and provenance\naccountability. This registry states the commitments; the open products expose\nwhere those commitments are carried, where evidence can be inspected, and\nwhere remaining risk still belongs.\n\nRendered index: `https://kfd.libkungfu.dev` (stable machine path per entry,\ne.g. `https://kfd.libkungfu.dev/1`). This repository publishes\n`@kungfu-tech/kfd` — the decision texts plus a machine-readable\n`registry.json` — which the site consumes as its single fact source.\n\nMachine consumers that need KFD-owned standard identity should read\n`standards.json`. It is the versioned metadata surface for stable standard\nkeys, decision and formal-reference routes and SHA-256 digests, schema IDs,\nKFD-owned concept names, and machine-interface contract versions. In Node or\nTypeScript projects, import it as:\n\n```js\nimport standards from \"@kungfu-tech/kfd/standards.json\" with { type: \"json\" };\n```"
       },
       {
         "id": "agent-quickstart",
@@ -260,7 +280,7 @@
         "homepagePriority": 40,
         "defaultPresentation": "ordered-steps",
         "includeInFirstScreen": false,
-        "markdown": "Agents consuming this package should start from the same sources as humans:\n\n1. Read this README for the future picture, foundation triad, and package map.\n2. Read `docs/foundation-model.md` for the complete non-numbered explanation.\n3. Read `docs/formal-model.md` for the authority boundary, shared notation, and\n   the `Decision -> Formal -> Schema -> Usage -> Witness` traceability chain.\n4. Read `docs/KFD-N-formal.md` when precise domain objects, invariants,\n   transitions, invalid states, and proof obligations are needed for a\n   particular decision.\n5. Read `docs/primitive-discovery-cases.md` to test the KFD lens against familiar\n   historical cases and an ordinary cross-machine trace vignette.\n6. Read `cases/registry.json` to discover provisional live Primitive cases,\n   their current immutable KFD-5 cuts, claim boundaries, and review paths.\n7. Read `standards.json` for canonical KFD numbers, formal reference versions\n   and hashes, schema IDs, concept names, and interface contracts.\n8. Use `site/kfd-site.json` decision metadata or the KFD-3 collaboration\n   interface fact-source metadata to identify the public KFD fact source.\n9. Use `schemas/kfd-2/trust-taxonomy.schema.json` for KFD-2 residual-risk and\n   trust-downgrade values. Unknown taxonomy values are invalid.\n10. Use `schemas/kfd-2/trust-claims.schema.json` and\n   `schemas/kfd-2/trust-assessment.schema.json` when a claim needs generic\n   KFD-2 assessment instead of a release-specific passport.\n11. Use `schemas/kfd-3/collaboration-interface.schema.json` and\n   `schemas/kfd-3/witness.schema.json` to inspect collaboration interfaces.\n12. Use `schemas/kfd-1/publication-url-semantics.schema.json` when a package,\n   paper, specification, or site bundle must distinguish stable reader URLs,\n   latest aliases, and immutable versioned artifacts.\n13. If a needed KFD-2 taxonomy value is missing, open a KFD GitHub issue rather\n   than inventing a local value:\n   `https://github.com/kungfu-systems/kfd/issues/new?title=KFD-2%20trust%20taxonomy%20extension%20request`.\n14. Use `schemas/kfd-4/observer-perspective.schema.json` to bind timelines to\n   their observers and `schemas/kfd-4/perspective-replay.schema.json` to record\n   perspective-preserving or contrastive replay. Use\n   `schemas/kfd-5/primitive-discovery.schema.json` version 3 to record\n   perspective-declared, method-plural genesis and fact-bound qualification,\n   including the optional boundary-pressure diagnostic when implicit\n   coordination is under new pressure. Use\n   `schemas/kfd-6/autonomous-discovery-loop.schema.json` only for explicitly\n   draft or experimental autonomous-discovery work; its version 4 interface\n   requires plural generation experiments, bounded method comparison, and a\n   conditional boundary hypothesis.\n\nKFD package semver is only the distribution version. KFD-owned machine\ninterfaces carry their own `schemaVersion` and `contract` fields. Compatible\nadditions may keep the same interface version; semantic changes, required-field\nchanges, verification meaning changes, or responsibility-boundary changes must\nuse a new interface version or contract.\n\nKFD-2 publishes trust-taxonomy, trust-claims, trust-assessment,\nrelease-claims, and release-trust-passport schemas under `schemas/kfd-2/`.\nThe generic schemas let humans, agents, Buildchain, and other systems assess\nwhether claims about KFD-1, KFD-3, KFD-4, future KFDs, or product surfaces are\nbound to source facts, evidence, hashes, audit boundaries, residual risk, and\nresponsibility state. The release schemas are a release-specific projection of\nthat model. See [`docs/KFD-2-usage.md`](docs/KFD-2-usage.md).\n\nKFD-3 also publishes a general collaboration-interface schema and witness\nschema under `schemas/kfd-3/`. These schemas are for participant-facing product\ninterfaces, not only agent APIs. A product such as Kungfu may implement an\nagent-first profile, but that profile remains a product-specific realization of\nKFD-3. The KFD-owned boundary is the standard vocabulary, schema IDs, and\nclosed-world evidence shape. See\n[`docs/KFD-3-usage.md`](docs/KFD-3-usage.md).\n\nKFD-4 says that views remain bound to declared perspectives and that a\nperspective transformation must stay inspectable when it is used to reveal a\ndifferent object or guide action. Its two schemas under `schemas/kfd-4/` define\nthe first concrete path: observer-bound timelines make a perspective durable;\nperspective-preserving and contrastive replay make perspectives transferable\nand comparable without flattening their fact boundaries. They are not a\nuniversal schema for every perspective.\n\nKFD-5 publishes a version 3 primitive-discovery record schema under\n`schemas/kfd-5/`. It requires every genesis to declare its observation\nperspective and current ontology while allowing perspective, anomaly,\nreconstruction, causal-variable, compression, and hybrid methods. It then\nbinds facts, alternatives, contract boundaries, falsifiers, dogfood evidence,\nand outcome. Validation proves record closure, not that the candidate is a\nreal primitive or that one method is superior.\n\nKFD-6 publishes a draft autonomous-discovery-loop schema under\n`schemas/kfd-6/`. Its version 4 experiment interface requires causal-experience\nboundaries, plural generation methods, fixed-ontology and no-new-primitive\nbaselines, shared-budget method comparison, held-out and independent\nevaluation, bounded autonomy, and separation between discovery and promotion.\nIts package presence is an experimental interface, not a claim that autonomous\nprimitive discovery or method dominance has been achieved."
+        "markdown": "Agents consuming this package should start from the same sources as humans:\n\n1. Read this README for the future picture, foundation triad, and package map.\n2. Read `docs/foundation-model.md` for the complete non-numbered explanation.\n3. Read `docs/formal-model.md` for the authority boundary, shared notation, and\n   the `Decision -> Formal -> Schema -> Usage -> Witness` traceability chain.\n4. Read `docs/KFD-N-formal.md` when precise domain objects, invariants,\n   transitions, invalid states, and proof obligations are needed for a\n   particular decision.\n5. Read `docs/primitive-discovery-cases.md` to test the KFD lens against familiar\n   historical cases and an ordinary cross-machine trace vignette.\n6. Read `cases/registry.json` to discover provisional live Primitive cases,\n   their current immutable KFD-5 cuts, claim boundaries, and review paths.\n7. Read `drafts/registry.json` to discover non-normative KFD Candidates,\n   non-binding slot hints, promotion gates, and claim boundaries.\n8. Read `standards.json` for canonical KFD numbers, formal reference versions\n   and hashes, schema IDs, concept names, and interface contracts.\n9. Use `site/kfd-site.json` decision metadata or the KFD-3 collaboration\n   interface fact-source metadata to identify the public KFD fact source.\n10. Use `schemas/kfd-2/trust-taxonomy.schema.json` for KFD-2 residual-risk and\n   trust-downgrade values. Unknown taxonomy values are invalid.\n11. Use `schemas/kfd-2/trust-claims.schema.json` and\n   `schemas/kfd-2/trust-assessment.schema.json` when a claim needs generic\n   KFD-2 assessment instead of a release-specific passport.\n12. Use `schemas/kfd-3/collaboration-interface.schema.json` and\n   `schemas/kfd-3/witness.schema.json` to inspect collaboration interfaces.\n13. Use `schemas/kfd-1/publication-url-semantics.schema.json` when a package,\n   paper, specification, or site bundle must distinguish stable reader URLs,\n   latest aliases, and immutable versioned artifacts.\n14. If a needed KFD-2 taxonomy value is missing, open a KFD GitHub issue rather\n   than inventing a local value:\n   `https://github.com/kungfu-systems/kfd/issues/new?title=KFD-2%20trust%20taxonomy%20extension%20request`.\n15. Use `schemas/kfd-4/observer-perspective.schema.json` to bind timelines to\n   their observers and `schemas/kfd-4/perspective-replay.schema.json` to record\n   perspective-preserving or contrastive replay. Use\n   `schemas/kfd-5/primitive-discovery.schema.json` version 3 to record\n   perspective-declared, method-plural genesis and fact-bound qualification,\n   including the optional boundary-pressure diagnostic when implicit\n   coordination is under new pressure. Use\n   `schemas/kfd-6/autonomous-discovery-loop.schema.json` only for explicitly\n   draft or experimental autonomous-discovery work; its version 4 interface\n   requires plural generation experiments, bounded method comparison, and a\n   conditional boundary hypothesis.\n\nKFD package semver is only the distribution version. KFD-owned machine\ninterfaces carry their own `schemaVersion` and `contract` fields. Compatible\nadditions may keep the same interface version; semantic changes, required-field\nchanges, verification meaning changes, or responsibility-boundary changes must\nuse a new interface version or contract.\n\nKFD-2 publishes trust-taxonomy, trust-claims, trust-assessment,\nrelease-claims, and release-trust-passport schemas under `schemas/kfd-2/`.\nThe generic schemas let humans, agents, Buildchain, and other systems assess\nwhether claims about KFD-1, KFD-3, KFD-4, future KFDs, or product surfaces are\nbound to source facts, evidence, hashes, audit boundaries, residual risk, and\nresponsibility state. The release schemas are a release-specific projection of\nthat model. See [`docs/KFD-2-usage.md`](docs/KFD-2-usage.md).\n\nKFD-3 also publishes a general collaboration-interface schema and witness\nschema under `schemas/kfd-3/`. These schemas are for participant-facing product\ninterfaces, not only agent APIs. A product such as Kungfu may implement an\nagent-first profile, but that profile remains a product-specific realization of\nKFD-3. The KFD-owned boundary is the standard vocabulary, schema IDs, and\nclosed-world evidence shape. See\n[`docs/KFD-3-usage.md`](docs/KFD-3-usage.md).\n\nKFD-4 says that views remain bound to declared perspectives and that a\nperspective transformation must stay inspectable when it is used to reveal a\ndifferent object or guide action. Its two schemas under `schemas/kfd-4/` define\nthe first concrete path: observer-bound timelines make a perspective durable;\nperspective-preserving and contrastive replay make perspectives transferable\nand comparable without flattening their fact boundaries. They are not a\nuniversal schema for every perspective.\n\nKFD-5 publishes a version 3 primitive-discovery record schema under\n`schemas/kfd-5/`. It requires every genesis to declare its observation\nperspective and current ontology while allowing perspective, anomaly,\nreconstruction, causal-variable, compression, and hybrid methods. It then\nbinds facts, alternatives, contract boundaries, falsifiers, dogfood evidence,\nand outcome. Validation proves record closure, not that the candidate is a\nreal primitive or that one method is superior.\n\nKFD-6 publishes a draft autonomous-discovery-loop schema under\n`schemas/kfd-6/`. Its version 4 experiment interface requires causal-experience\nboundaries, plural generation methods, fixed-ontology and no-new-primitive\nbaselines, shared-budget method comparison, held-out and independent\nevaluation, bounded autonomy, and separation between discovery and promotion.\nIts package presence is an experimental interface, not a claim that autonomous\nprimitive discovery or method dominance has been achieved."
       },
       {
         "id": "decision-metadata",
@@ -271,7 +291,7 @@
         "homepagePriority": 50,
         "defaultPresentation": "fact-source",
         "includeInFirstScreen": false,
-        "markdown": "Every rendered decision page should make the KFD fact source explicit. The\npublic KFD fact source is the GitHub-hosted `kungfu-systems/kfd` git\nrepository. GitHub is the current canonical coordination and hosting surface;\nthe load-bearing facts are the commit-addressed repository contents.\n\nDecision metadata should expose:\n\n- Public fact source: `https://github.com/kungfu-systems/kfd`\n- Load-bearing coordinate: commit-addressed repository contents.\n- Canonical decision paths: `decisions/KFD-N.md`, `registry.json`,\n  `standards.json`.\n- Canonical provisional-case index: `cases/registry.json`; listing does not\n  promote a case into a numbered decision.\n- Stable rendered index: `https://kfd.libkungfu.dev`.\n- Rendered URL: `https://kfd.libkungfu.dev/N`.\n\nRendered pages, npm package contents, Buildchain release passports, and\n`kfd.libkungfu.dev` are projections or evidence surfaces. A GitHub issue is an\nextension request path, not a KFD fact by itself; it becomes part of the KFD\nfact source only after the resulting change is committed to the repository."
+        "markdown": "Every rendered decision page should make the KFD fact source explicit. The\npublic KFD fact source is the GitHub-hosted `kungfu-systems/kfd` git\nrepository. GitHub is the current canonical coordination and hosting surface;\nthe load-bearing facts are the commit-addressed repository contents.\n\nDecision metadata should expose:\n\n- Public fact source: `https://github.com/kungfu-systems/kfd`\n- Load-bearing coordinate: commit-addressed repository contents.\n- Canonical decision paths: `decisions/KFD-N.md`, `registry.json`,\n  `standards.json`.\n- Canonical pre-number candidate index: `drafts/registry.json`; slot hints do\n  not allocate or reserve KFD numbers.\n- Canonical provisional-case index: `cases/registry.json`; listing does not\n  promote a case into a numbered decision.\n- Stable rendered index: `https://kfd.libkungfu.dev`.\n- Rendered URL: `https://kfd.libkungfu.dev/N`.\n\nRendered pages, npm package contents, Buildchain release passports, and\n`kfd.libkungfu.dev` are projections or evidence surfaces. A GitHub issue is an\nextension request path, not a KFD fact by itself; it becomes part of the KFD\nfact source only after the resulting change is committed to the repository."
       }
     ],
     "displayPlan": {
@@ -292,6 +312,7 @@
         "foundation-triad",
         "what-kfd-is",
         "adoption-boundary",
+        "current-candidates",
         "product-proof-path"
       ],
       "detail": {
@@ -308,6 +329,7 @@
         "/foundation",
         "/formal",
         "/cases",
+        "/drafts",
         "/{number}"
       ],
       "support": [
@@ -1004,6 +1026,53 @@
       }
     ]
   },
+  "kfdCandidates": {
+    "source": "drafts/registry.json",
+    "indexSource": "drafts/README.md",
+    "indexUrl": "/drafts",
+    "stableUrlPattern": "/drafts/{id}",
+    "relationship": "pre-number-non-normative-candidates",
+    "normative": false,
+    "authorityNote": "Candidates preserve hypotheses before number allocation. Only explicit promotion into decisions/ and registry.json creates numbered KFD authority.",
+    "numberingPolicy": {
+      "allocation": "promotion-only",
+      "slotHints": "non-binding",
+      "numberedDraftSource": "registry.json",
+      "stableFreeze": "first-non-prerelease-release"
+    },
+    "indexMarkdown": "# KFD Candidates\n\nKFD Candidates preserve potentially load-bearing organization rules before a\nKFD number is allocated. They are pre-number drafts, not numbered decisions.\n\nThe machine source is [`registry.json`](registry.json). A candidate may carry\na non-binding `slotHint` to preserve the current ordering hypothesis. The hint\ndoes not reserve, allocate, or promise that number. Only an explicit promotion\ncreates a numbered KFD under `decisions/` and `registry.json`.\n\n```text\ncandidate\n  -> qualification\n  -> explicit promotion\n  -> numbered draft\n  -> activation evidence\n  -> active KFD\n```\n\nCandidates may be revised, reordered, merged, split, withdrawn, rejected, or\npromoted while their published coordinates remain immutable. Their current\nstatus and claim boundary must remain machine-readable.\n\nCurrent candidate:\n\n- [Independent action state](action-state-separation.md), currently carrying\n  the non-binding slot hint `7`.\n\nSee [Contributing](../CONTRIBUTING.md) for candidate promotion, pre-stable\nFoundation Revision, and Foundation Freeze rules.",
+    "candidates": [
+      {
+        "id": "action-state-separation",
+        "title": "Independent action state",
+        "status": "incubating",
+        "kindCandidate": "principle",
+        "slotHint": 7,
+        "slotBinding": "non-binding",
+        "oneSentence": "Real-world work must preserve intent, perspective, authority, and consequence as independently addressable facts.",
+        "path": "drafts/action-state-separation.md",
+        "sourceCases": [
+          {
+            "id": "proof-carrying-work-object",
+            "path": "cases/live/proof-carrying-work-object/README.md"
+          }
+        ],
+        "promotionGate": [
+          "observed-deletion-witnesses",
+          "cross-domain-transfer",
+          "rival-model-comparison",
+          "counterexample-review",
+          "product-witness"
+        ],
+        "claimBoundary": "This candidate does not allocate KFD-7, require four named storage objects, establish universal necessity, or create a normative organization decision.",
+        "url": "/drafts/action-state-separation",
+        "sourcePath": "drafts/action-state-separation.md",
+        "relationship": "pre-number-non-normative-candidate",
+        "normative": false,
+        "markdown": "# KFD Candidate: Independent Action State\n\n- Candidate status: incubating\n- Kind candidate: principle\n- Current slot hint: 7\n- Slot binding: non-binding\n\n## One sentence\n\nReal-world work must preserve intent, perspective, authority, and consequence\nas independently addressable facts.\n\n## Candidate rule\n\nA system that coordinates consequential work must not silently collapse:\n\n- the intended reality change that persists across actions;\n- the declared perspective and fact cut used to judge the situation;\n- the authority that permits a bounded continuation;\n- the action and consequence that actually occurred.\n\nThe current working objects are:\n\n```text\nintent continuity    -> Pursuit\nperspective and cut  -> Atlas\nauthority boundary   -> Warrant\ncausal experience    -> Episode\n```\n\nThese names and storage boundaries are not part of the candidate rule. An\nequivalent implementation may combine physical storage if every dimension\nremains independently addressable, revisable, auditable, and incapable of\nsilently implying another dimension's state.\n\n## Why the candidate exists\n\nThe Pursuit and Warrant live case exposed four decisions that can diverge:\n\n```text\nwhat change continues\nwhat view of reality supports judgment\nwhat continuation is permitted\nwhat action and consequence occurred\n```\n\nThe\n[conditional distinguishability argument](../cases/live/proof-carrying-work-object/distinguishability.md)\nprovides analytic deletion witnesses for those dimensions. It establishes a\nconditional information-separation result, not universal necessity.\n\nA Pursuit may decompose into child Pursuits. The primary decomposition can be\nrendered as a tree, while typed dependency, successor, and contribution\nrelations form a wider graph. Parent context may be referenced, but authority\ndoes not automatically flow to descendants and child completion does not\nsettle the parent.\n\n## Invalid compressions\n\nThe candidate rejects systems that infer:\n\n- authorization from an active goal;\n- reality completeness from available context;\n- occurrence from a plan or authorization;\n- success or completion from occurrence;\n- descendant authority from a parent Warrant without an explicit derivation;\n- durable intent identity from a provider session or mutable task body.\n\n## Qualification gate\n\nPromotion requires:\n\n1. observed histories where deleting each dimension changes a real action or\n   audit conclusion;\n2. transfer across non-isomorphic work domains;\n3. comparison with task, session, case, log, approval, capability, and fused\n   alternatives;\n4. counterexamples where one or more dimensions are legitimately absent;\n5. a product witness that demonstrates lower reconstruction or authority risk\n   without imposing greater lifecycle burden;\n6. independent review of whether the rule belongs at organization level.\n\n## Falsifiers\n\nThe candidate weakens or fails if:\n\n- one dimension is consistently derivable from the others without loss;\n- deleting a dimension does not change safe action or audit;\n- valid work cannot vary the dimensions independently;\n- a rival representation preserves equivalent decisions at lower cost;\n- the proposed rule forces irrelevant state into ordinary low-consequence\n  interactions;\n- product evidence cannot distinguish ontology value from implementation\n  preference.\n\n## Numbering boundary\n\nThe slot hint `7` records the current ordering hypothesis only. This document\nis not `KFD-7`, does not reserve that number, and may later be promoted under a\ndifferent number, merged into another candidate, withdrawn, or rejected.\n\nPromotion requires an explicit maintainer decision that creates\n`decisions/KFD-N.md`, updates the numbered `registry.json`, and records the\ncandidate lineage. Until then this document is non-normative."
+      }
+    ]
+  },
   "decisionPages": {
     "source": "registry.json",
     "bodySource": "registry.entries[].path",
@@ -1113,10 +1182,10 @@
           "sourceExists": true,
           "relationship": "formal-reference-child-of-decision",
           "normative": false,
-          "formalModelVersion": 1,
+          "formalModelVersion": 2,
           "formalModelStatus": "experimental",
           "authorityPath": "decisions/KFD-1.md",
-          "sha256": "544836fe327033def4170d7a7aadde9d816f1ee8e52f2573f988823e99b2c0b6",
+          "sha256": "739bbfa03a026a15411db0ef4270d36a0a5e3e6ec51f3f6dfcce61e78a47033e",
           "title": "KFD-1 formal reference"
         },
         {
@@ -1229,7 +1298,8 @@
           "decisions/KFD-N.md",
           "registry.json",
           "standards.json",
-          "cases/registry.json"
+          "cases/registry.json",
+          "drafts/registry.json"
         ],
         "projectionSurfaces": [
           "https://kfd.libkungfu.dev/N",
@@ -1248,6 +1318,7 @@
       "formal reference overview from docs/formal-model.md",
       "historical cases page from docs/primitive-discovery-cases.md",
       "live Primitive case registry and case bodies from cases/",
+      "pre-number KFD candidate registry, index, and bodies from drafts/",
       "foundation triad commitments",
       "foundation model layers and chain",
       "product proof path text",

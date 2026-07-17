@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-candidate-registry.schema.json",
+  "title": "KFD candidate registry",
+  "type": "object",
+  "required": ["schemaVersion", "contract", "numberingPolicy", "candidates"],
+  "properties": {
+    "$schema": {
+      "const": "https://kfd.libkungfu.dev/schemas/kfd-candidate-registry.schema.json"
+    },
+    "schemaVersion": { "const": 1 },
+    "contract": { "const": "kfd-candidate-registry" },
+    "numberingPolicy": {
+      "type": "object",
+      "required": ["allocation", "slotHints", "numberedDraftSource", "stableFreeze"],
+      "properties": {
+        "allocation": { "const": "promotion-only" },
+        "slotHints": { "const": "non-binding" },
+        "numberedDraftSource": { "const": "registry.json" },
+        "stableFreeze": { "const": "first-non-prerelease-release" }
+      },
+      "additionalProperties": false
+    },
+    "candidates": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/candidate" }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "candidate": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "status",
+        "kindCandidate",
+        "slotBinding",
+        "oneSentence",
+        "path",
+        "sourceCases",
+        "promotionGate",
+        "claimBoundary"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "title": { "type": "string", "minLength": 1 },
+        "status": {
+          "enum": [
+            "incubating",
+            "qualifying",
+            "ready-for-promotion",
+            "promoted",
+            "merged",
+            "withdrawn",
+            "rejected"
+          ]
+        },
+        "kindCandidate": {
+          "enum": ["principle", "procedure"]
+        },
+        "slotHint": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "slotBinding": {
+          "const": "non-binding"
+        },
+        "oneSentence": {
+          "type": "string",
+          "minLength": 1
+        },
+        "path": {
+          "type": "string",
+          "pattern": "^drafts/[a-z0-9]+(?:-[a-z0-9]+)*\\.md$"
+        },
+        "sourceCases": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["id", "path"],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+              },
+              "path": {
+                "type": "string",
+                "pattern": "^cases/live/[a-z0-9-]+/README\\.md$"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "promotionGate": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          }
+        },
+        "claimBoundary": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

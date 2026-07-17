@@ -1,0 +1,37 @@
+{
+  "$schema": "https://kfd.libkungfu.dev/schemas/kfd-candidate-registry.schema.json",
+  "schemaVersion": 1,
+  "contract": "kfd-candidate-registry",
+  "numberingPolicy": {
+    "allocation": "promotion-only",
+    "slotHints": "non-binding",
+    "numberedDraftSource": "registry.json",
+    "stableFreeze": "first-non-prerelease-release"
+  },
+  "candidates": [
+    {
+      "id": "action-state-separation",
+      "title": "Independent action state",
+      "status": "incubating",
+      "kindCandidate": "principle",
+      "slotHint": 7,
+      "slotBinding": "non-binding",
+      "oneSentence": "Real-world work must preserve intent, perspective, authority, and consequence as independently addressable facts.",
+      "path": "drafts/action-state-separation.md",
+      "sourceCases": [
+        {
+          "id": "proof-carrying-work-object",
+          "path": "cases/live/proof-carrying-work-object/README.md"
+        }
+      ],
+      "promotionGate": [
+        "observed-deletion-witnesses",
+        "cross-domain-transfer",
+        "rival-model-comparison",
+        "counterexample-review",
+        "product-witness"
+      ],
+      "claimBoundary": "This candidate does not allocate KFD-7, require four named storage objects, establish universal necessity, or create a normative organization decision."
+    }
+  ]
+}
