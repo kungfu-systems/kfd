@@ -9,7 +9,7 @@
   "versionImpact": {
     "final": "major",
     "source": "live-primitive-case-registry",
-    "rationale": "This pre-stable line includes the concise KFD-1 through KFD-6 decision refinement, the experimental non-normative formal reference layer, and now a machine-readable live Primitive case registry. The first case preserves a provisional candidate genesis, an immutable KFD-5 version 3 cut, a KFD method trace, a separately falsifiable propagation hypothesis, and open review paths without changing numbered decision authority. Major remains the honest cumulative pre-stable decision and machine-surface impact while the fixed outer package line remains v1.0."
+    "rationale": "This pre-stable line includes the concise KFD-1 through KFD-6 decision refinement, the experimental non-normative formal reference layer, and a machine-readable live Primitive case registry. The first case now preserves its fused genesis while independently tracking Pursuit and Warrant through an ontology split, two immutable KFD-5 version 3 cuts, a KFD method trace, a separately falsifiable propagation hypothesis, and open review paths without changing numbered decision authority. Major remains the honest cumulative pre-stable decision and machine-surface impact while the fixed outer package line remains v1.0."
   },
   "surfaceImpacts": [
     {
@@ -34,7 +34,7 @@
       "id": "kfd-package-structure",
       "impact": "minor",
       "class": "additive",
-      "rationale": "The package additively publishes cases/ through explicit registry and wildcard exports, including the live-case registry schema, provisional case documents, immutable KFD-5 cut, method trace, propagation hypothesis, and review index, without removing or renaming a package path or export."
+      "rationale": "The package additively publishes cases/ through explicit registry and wildcard exports, including the live-case registry schema, provisional case documents, ontology split, independently immutable Pursuit and Warrant KFD-5 cuts, method trace, propagation hypothesis, and review index, without removing or renaming a package path or export."
     },
     {
       "id": "kfd-buildchain-contract-lock",
@@ -44,9 +44,9 @@
     },
     {
       "id": "kfd-site-homepage-bundle",
-      "impact": "minor",
-      "class": "additive",
-      "rationale": "site/kfd-site.json preserves existing fields while adding a /cases/live/{id} route and complete live-case projections from cases/registry.json, including candidate state, claim boundary, documents, review index, and immutable current cut."
+      "impact": "major",
+      "class": "breaking",
+      "rationale": "The pre-stable site bundle advances from schemaVersion 1 to 2, preserves the stable /cases/live/{id} route and shared genesis, and replaces the fused live-case currentCut projection with ontologySplit plus candidateTracks, each carrying independent status, claim boundary, current cut, and record. Consumers of the alpha live-case shape must adopt registry version 2 and site bundle version 2."
     },
     {
       "id": "kfd-site-decision-usage-pages",
@@ -106,7 +106,7 @@
       "id": "kfd-1-surface-register",
       "impact": "minor",
       "class": "additive",
-      "rationale": "standards.json additively registers the live-case registry schema, live-case index, first provisional case documents, immutable KFD-5 cut, and review index as cross-time surfaces; the KFD-1 witness binds their source and artifact digests from that fact source."
+      "rationale": "standards.json registers the live-case registry schema, live-case index, preserved genesis, ontology split, independently immutable Pursuit and Warrant KFD-5 cuts, and review index as cross-time surfaces; the KFD-1 witness binds their source and artifact digests from that fact source."
     },
     {
       "id": "kfd-formal-reference-layer",
@@ -122,9 +122,9 @@
     },
     {
       "id": "kfd-5-live-case-registry",
-      "impact": "minor",
-      "class": "additive",
-      "rationale": "KFD-5 additively publishes a version 1 live-case registry that binds provisional case identity and status to human entrypoints, genesis, method trace, propagation hypothesis, review index, and a SHA-256-addressed KFD-5 version 3 current cut. Registry closure does not qualify or promote the candidate."
+      "impact": "major",
+      "class": "breaking",
+      "rationale": "The pre-stable KFD-5 live-case registry advances from version 1 to version 2. Stable case identity and genesis remain preserved, case lifecycle is separated into active/closed/archived, and every case exposes an ontology-split surface plus one or more independently named candidate tracks with their own qualification status, claim boundary, and SHA-256-addressed KFD-5 version 3 current cut. The first case therefore tracks Pursuit and Warrant without rewriting the fused Proof-Carrying Work Object genesis. Registry closure does not qualify or promote either candidate."
     },
     {
       "id": "kfd-1-publication-url-semantics",
@@ -133,5 +133,5 @@
       "rationale": "KFD-1 now publishes a machine-readable schema for canonical reader URLs, latest aliases, immutable version artifact URLs, artifact digests, source coordinates, lineage, site consumption, and archive policies that prevent same-version digest drift or destructive deletion of immutable publication prefixes."
     }
   ],
-  "summary": "KFD v1.0 records a pre-stable major decision and machine-surface refinement with immutable prior artifacts: six authoritative decisions retain their gates and boundaries, while the package now dogfoods KFD-5 through a discoverable provisional live case whose genesis, current cut, method trace, propagation hypothesis, and residual uncertainty remain independently inspectable."
+  "summary": "KFD v1.0 records a pre-stable major decision and machine-surface refinement with immutable prior artifacts: six authoritative decisions retain their gates and boundaries, while the package now dogfoods KFD-5 through a discoverable live case that preserves its fused genesis and independently tracks provisional Pursuit and Warrant cuts, method trace, propagation hypothesis, and residual uncertainty."
 }

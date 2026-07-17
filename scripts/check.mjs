@@ -104,20 +104,22 @@ if (liveCaseRegistrySchema.$id !== "https://kfd.libkungfu.dev/schemas/kfd-live-c
 if (liveCaseRegistrySchema.properties?.contract?.const !== "kfd-live-case-registry") {
   fail("live case registry schema must describe the kfd-live-case-registry contract");
 }
-if (liveCaseRegistrySchema.properties?.schemaVersion?.const !== 1) {
-  fail("live case registry schemaVersion must be 1");
+if (liveCaseRegistrySchema.properties?.schemaVersion?.const !== 2) {
+  fail("live case registry schemaVersion must be 2");
 }
 requireFields(liveCaseRegistry, liveCaseRegistrySchema.required, "live case registry");
 if (liveCaseRegistry.$schema !== liveCaseRegistrySchema.$id) {
   fail("live case registry $schema must match the canonical registry schema URI");
 }
-if (liveCaseRegistry.schemaVersion !== 1) fail(`unsupported live case registry schemaVersion ${liveCaseRegistry.schemaVersion}`);
+if (liveCaseRegistry.schemaVersion !== 2) fail(`unsupported live case registry schemaVersion ${liveCaseRegistry.schemaVersion}`);
 if (liveCaseRegistry.contract !== "kfd-live-case-registry") fail(`unexpected live case registry contract ${liveCaseRegistry.contract}`);
 if (!Array.isArray(liveCaseRegistry.cases) || liveCaseRegistry.cases.length === 0) {
   fail("live case registry cases[] must include at least one case");
 }
 const liveCaseIds = new Set();
 const liveCaseDefinition = liveCaseRegistrySchema.$defs?.liveCase;
+const candidateTrackDefinition = liveCaseRegistrySchema.$defs?.candidateTrack;
+const currentCutDefinition = liveCaseRegistrySchema.$defs?.currentCut;
 const kfd5PrimitiveDiscoverySchemaPath = "schemas/kfd-5/primitive-discovery.schema.json";
 const kfd5PrimitiveDiscoverySchemaForCases = JSON.parse(readFileSync(kfd5PrimitiveDiscoverySchemaPath, "utf8"));
 for (const [index, liveCase] of (liveCaseRegistry.cases ?? []).entries()) {
@@ -126,7 +128,7 @@ for (const [index, liveCase] of (liveCaseRegistry.cases ?? []).entries()) {
   if (liveCaseIds.has(liveCase.id)) fail(`${label} duplicates id ${liveCase.id}`);
   liveCaseIds.add(liveCase.id);
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(liveCase.id ?? "")) fail(`${label}.id must be a stable lowercase slug`);
-  if (liveCase.kind !== "primitive-candidate") fail(`${label}.kind must be primitive-candidate`);
+  if (liveCase.kind !== "primitive-discovery-case") fail(`${label}.kind must be primitive-discovery-case`);
   if (!liveCaseDefinition?.properties?.status?.enum?.includes(liveCase.status)) fail(`${label}.status is not registered`);
   if (liveCase.standard !== "kfd-5") fail(`${label}.standard must be kfd-5`);
   const caseRoot = `cases/live/${liveCase.id}`;
@@ -136,41 +138,56 @@ for (const [index, liveCase] of (liveCaseRegistry.cases ?? []).entries()) {
     methodTrace: `${caseRoot}/kfd-method-trace.md`,
     propagationHypothesis: `${caseRoot}/propagation-hypothesis.md`,
     reviewIndex: `${caseRoot}/reviews/README.md`,
+    ontologySplit: `${caseRoot}/ontology-split.md`,
   };
-  for (const field of ["humanEntry", "genesis", "methodTrace", "propagationHypothesis", "reviewIndex"]) {
+  for (const field of ["humanEntry", "genesis", "methodTrace", "propagationHypothesis", "reviewIndex", "ontologySplit"]) {
     if (liveCase[field] !== expectedCasePaths[field]) fail(`${label}.${field} must stay inside ${caseRoot}`);
     if (!existsSync(liveCase[field])) fail(`${label}.${field} points to missing ${liveCase[field]}`);
   }
-  requireFields(liveCase.currentCut, liveCaseDefinition?.properties?.currentCut?.required, `${label}.currentCut`);
-  if (!String(liveCase.currentCut?.path ?? "").startsWith(`${caseRoot}/cuts/`)) {
-    fail(`${label}.currentCut.path must stay inside ${caseRoot}/cuts`);
+  if (!Array.isArray(liveCase.candidateTracks) || liveCase.candidateTracks.length === 0) {
+    fail(`${label}.candidateTracks must include at least one candidate`);
   }
-  if (!existsSync(liveCase.currentCut?.path)) {
-    fail(`${label}.currentCut.path points to missing ${liveCase.currentCut?.path}`);
-    continue;
+  const candidateTrackIds = new Set();
+  for (const [trackIndex, track] of (liveCase.candidateTracks ?? []).entries()) {
+    const trackLabel = `${label}.candidateTracks[${trackIndex}]`;
+    requireFields(track, candidateTrackDefinition?.required, trackLabel);
+    if (candidateTrackIds.has(track.id)) fail(`${trackLabel} duplicates id ${track.id}`);
+    candidateTrackIds.add(track.id);
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(track.id ?? "")) fail(`${trackLabel}.id must be a stable lowercase slug`);
+    if (!candidateTrackDefinition?.properties?.status?.enum?.includes(track.status)) fail(`${trackLabel}.status is not registered`);
+    if (!track.definition?.trim()) fail(`${trackLabel}.definition must remain explicit`);
+    if (!track.claimBoundary?.trim()) fail(`${trackLabel}.claimBoundary must remain explicit`);
+    requireFields(track.currentCut, currentCutDefinition?.required, `${trackLabel}.currentCut`);
+    if (!String(track.currentCut?.path ?? "").startsWith(`${caseRoot}/cuts/`)) {
+      fail(`${trackLabel}.currentCut.path must stay inside ${caseRoot}/cuts`);
+    }
+    if (!existsSync(track.currentCut?.path)) {
+      fail(`${trackLabel}.currentCut.path points to missing ${track.currentCut?.path}`);
+      continue;
+    }
+    if (sha256File(track.currentCut.path) !== track.currentCut.sha256) {
+      fail(`${trackLabel}.currentCut.sha256 does not match ${track.currentCut.path}`);
+    }
+    if (track.currentCut.schemaId !== kfd5PrimitiveDiscoverySchemaForCases.$id) {
+      fail(`${trackLabel}.currentCut.schemaId must match the KFD-5 primitive discovery schema`);
+    }
+    if (track.currentCut.schemaVersion !== kfd5PrimitiveDiscoverySchemaForCases.properties?.schemaVersion?.const) {
+      fail(`${trackLabel}.currentCut.schemaVersion must match the KFD-5 primitive discovery schema`);
+    }
+    const cut = JSON.parse(readFileSync(track.currentCut.path, "utf8"));
+    requireFields(cut, kfd5PrimitiveDiscoverySchemaForCases.required, `${trackLabel}.currentCut record`);
+    requireFields(cut.candidate, kfd5PrimitiveDiscoverySchemaForCases.properties?.candidate?.required, `${trackLabel}.currentCut candidate`);
+    requireFields(cut.genesis, kfd5PrimitiveDiscoverySchemaForCases.properties?.genesis?.required, `${trackLabel}.currentCut genesis`);
+    requireFields(cut.decision, kfd5PrimitiveDiscoverySchemaForCases.properties?.decision?.required, `${trackLabel}.currentCut decision`);
+    if (cut.contract !== "kfd-5-primitive-discovery" || cut.standard !== "kfd-5" || cut.schemaVersion !== 3) {
+      fail(`${trackLabel}.currentCut record must be a KFD-5 primitive discovery version 3 record`);
+    }
+    if (cut.candidate?.id !== track.id) fail(`${trackLabel}.currentCut candidate id must match the track id`);
+    if (cut.decision?.outcome !== track.status) fail(`${trackLabel}.status must match currentCut decision.outcome`);
   }
-  if (sha256File(liveCase.currentCut.path) !== liveCase.currentCut.sha256) {
-    fail(`${label}.currentCut.sha256 does not match ${liveCase.currentCut.path}`);
-  }
-  if (liveCase.currentCut.schemaId !== kfd5PrimitiveDiscoverySchemaForCases.$id) {
-    fail(`${label}.currentCut.schemaId must match the KFD-5 primitive discovery schema`);
-  }
-  if (liveCase.currentCut.schemaVersion !== kfd5PrimitiveDiscoverySchemaForCases.properties?.schemaVersion?.const) {
-    fail(`${label}.currentCut.schemaVersion must match the KFD-5 primitive discovery schema`);
-  }
-  const cut = JSON.parse(readFileSync(liveCase.currentCut.path, "utf8"));
-  requireFields(cut, kfd5PrimitiveDiscoverySchemaForCases.required, `${label}.currentCut record`);
-  requireFields(cut.candidate, kfd5PrimitiveDiscoverySchemaForCases.properties?.candidate?.required, `${label}.currentCut candidate`);
-  requireFields(cut.genesis, kfd5PrimitiveDiscoverySchemaForCases.properties?.genesis?.required, `${label}.currentCut genesis`);
-  requireFields(cut.decision, kfd5PrimitiveDiscoverySchemaForCases.properties?.decision?.required, `${label}.currentCut decision`);
-  if (cut.contract !== "kfd-5-primitive-discovery" || cut.standard !== "kfd-5" || cut.schemaVersion !== 3) {
-    fail(`${label}.currentCut record must be a KFD-5 primitive discovery version 3 record`);
-  }
-  if (cut.candidate?.id !== liveCase.id) fail(`${label}.currentCut candidate id must match the registry id`);
-  if (cut.decision?.outcome !== liveCase.status) fail(`${label}.status must match currentCut decision.outcome`);
   if (!liveCase.claimBoundary?.trim()) fail(`${label}.claimBoundary must remain explicit`);
 }
-if (siteBundle.schemaVersion !== 1) fail(`unsupported site bundle schemaVersion ${siteBundle.schemaVersion}`);
+if (siteBundle.schemaVersion !== 2) fail(`unsupported site bundle schemaVersion ${siteBundle.schemaVersion}`);
 if (siteBundle.contract !== "kfd-site-bundle") fail(`unexpected site bundle contract ${siteBundle.contract}`);
 if (JSON.stringify(siteBundle) !== JSON.stringify(expectedSiteBundle)) {
   fail("site/kfd-site.json must match the generated README.md homepage bundle; run npm run update:site-bundle");
@@ -303,12 +320,34 @@ for (const liveCase of liveCaseRegistry.cases ?? []) {
   if (projected.status !== liveCase.status) fail(`site bundle live case ${liveCase.id} status must match registry`);
   if (projected.claimBoundary !== liveCase.claimBoundary) fail(`site bundle live case ${liveCase.id} claimBoundary must match registry`);
   if (projected.url !== `/cases/live/${liveCase.id}`) fail(`site bundle live case ${liveCase.id} URL is invalid`);
-  if (projected.currentCut?.path !== liveCase.currentCut.path || projected.currentCut?.sha256 !== liveCase.currentCut.sha256) {
-    fail(`site bundle live case ${liveCase.id} current cut must match registry`);
+  if (projected.ontologySplit?.path !== liveCase.ontologySplit || !projected.ontologySplit?.markdown) {
+    fail(`site bundle live case ${liveCase.id} must project ontologySplit`);
   }
   for (const field of ["humanEntry", "genesis", "methodTrace", "propagationHypothesis", "reviewIndex"]) {
     if (projected[field]?.path !== liveCase[field] || !projected[field]?.markdown) {
       fail(`site bundle live case ${liveCase.id} must project ${field}`);
+    }
+  }
+  const projectedTracks = new Map((projected.candidateTracks ?? []).map((entry) => [entry.id, entry]));
+  for (const track of liveCase.candidateTracks ?? []) {
+    const projectedTrack = projectedTracks.get(track.id);
+    if (!projectedTrack) {
+      fail(`site bundle live case ${liveCase.id} missing candidate track ${track.id}`);
+      continue;
+    }
+    if (projectedTrack.status !== track.status || projectedTrack.definition !== track.definition) {
+      fail(`site bundle live case ${liveCase.id} candidate track ${track.id} must match registry`);
+    }
+    if (projectedTrack.claimBoundary !== track.claimBoundary) {
+      fail(`site bundle live case ${liveCase.id} candidate track ${track.id} claim boundary must match registry`);
+    }
+    if (projectedTrack.currentCut?.path !== track.currentCut.path || projectedTrack.currentCut?.sha256 !== track.currentCut.sha256) {
+      fail(`site bundle live case ${liveCase.id} candidate track ${track.id} current cut must match registry`);
+    }
+  }
+  for (const projectedTrackId of projectedTracks.keys()) {
+    if (!(liveCase.candidateTracks ?? []).some((track) => track.id === projectedTrackId)) {
+      fail(`site bundle live case ${liveCase.id} has unknown candidate track ${projectedTrackId}`);
     }
   }
 }
@@ -907,8 +946,8 @@ for (const concept of ["primitiveDiscovery", "perspectiveDeclaration", "methodPl
   if (!kfd5?.concepts?.[concept]) fail(`KFD-5 standards metadata missing concept ${concept}`);
 }
 if (!kfd5?.interfaces?.primitiveDiscovery) fail("KFD-5 standards metadata missing interface primitiveDiscovery");
-if (kfd5?.interfaces?.liveCaseRegistry?.schemaVersion !== 1) {
-  fail("KFD-5 standards metadata liveCaseRegistry interface must use schemaVersion 1");
+if (kfd5?.interfaces?.liveCaseRegistry?.schemaVersion !== 2) {
+  fail("KFD-5 standards metadata liveCaseRegistry interface must use schemaVersion 2");
 }
 
 const kfd6 = standardsMetadata.standards?.["kfd-6"];

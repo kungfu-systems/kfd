@@ -178,7 +178,7 @@
             ],
             "description": "Published provisional live case registry at cases/registry.json.",
             "sourcePath": "cases/registry.json",
-            "weldRationale": "Consumers can discover stable case identities, explicit provisional status, claim boundaries, and the digest-bound current immutable cut.",
+            "weldRationale": "Consumers can discover stable case identities, preserved genesis, ontology splits, explicit provisional status, claim boundaries, and digest-bound immutable cuts for each candidate track.",
             "impactProjection": {
               "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
               "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
@@ -192,9 +192,9 @@
             "classes": [
               "cross-time"
             ],
-            "description": "Human entrypoint for the provisional proof-carrying-work-object live case.",
+            "description": "Human entrypoint for the live case that preserves the proof-carrying-work-object genesis and tracks Pursuit and Warrant.",
             "sourcePath": "cases/live/proof-carrying-work-object/README.md",
-            "weldRationale": "Humans and agents receive the same candidate status, claim boundary, current cut, and qualification path.",
+            "weldRationale": "Humans and agents receive the same case status, candidate tracks, claim boundaries, current cuts, and qualification paths.",
             "impactProjection": {
               "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
               "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
@@ -259,6 +259,54 @@
             "description": "Immutable KFD-5 version 3 genesis cut for the provisional live case.",
             "sourcePath": "cases/live/proof-carrying-work-object/cuts/0001-genesis.json",
             "weldRationale": "The package preserves the exact machine-readable candidate state that the registry identifies by SHA-256.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "proof-carrying-work-object-ontology-split",
+            "class": "cross-time",
+            "classes": [
+              "cross-time"
+            ],
+            "description": "Public ontology split from the fused work-object hypothesis to independently qualified Pursuit and Warrant candidates.",
+            "sourcePath": "cases/live/proof-carrying-work-object/ontology-split.md",
+            "weldRationale": "The case must preserve why identity continuity and continuation authority were separated without rewriting the genesis.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "pursuit-current-cut",
+            "class": "cross-time",
+            "classes": [
+              "cross-time"
+            ],
+            "description": "Immutable KFD-5 version 3 current cut for the provisional Pursuit candidate track.",
+            "sourcePath": "cases/live/proof-carrying-work-object/cuts/0002-pursuit.json",
+            "weldRationale": "The Pursuit candidate state, alternatives, falsifiers, and residual risks remain independently digest-bound and reviewable.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "warrant-current-cut",
+            "class": "cross-time",
+            "classes": [
+              "cross-time"
+            ],
+            "description": "Immutable KFD-5 version 3 current cut for the provisional Warrant candidate track.",
+            "sourcePath": "cases/live/proof-carrying-work-object/cuts/0002-warrant.json",
+            "weldRationale": "The Warrant candidate state, alternatives, falsifiers, security boundary, and residual risks remain independently digest-bound and reviewable.",
             "impactProjection": {
               "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
               "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
@@ -600,9 +648,9 @@
             "classes": [
               "cross-time"
             ],
-            "description": "Published KFD package surface at site/kfd-site.json.",
+            "description": "Published KFD site bundle version 2 surface at site/kfd-site.json.",
             "sourcePath": "site/kfd-site.json",
-            "weldRationale": "Consumers can audit, replay, or cite this surface after release.",
+            "weldRationale": "Consumers can audit, replay, or cite this surface after release; version 2 projects multi-track live discovery cases without treating one fused current cut as authority.",
             "impactProjection": {
               "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
               "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
@@ -1354,12 +1402,12 @@
           "schemaPath": "schemas/kfd-5/primitive-discovery.schema.json",
           "compatibilityRule": "Version 3 requires perspective-declared, method-plural genesis and separates candidate generation from fact-bound qualification; further semantic or required-field changes require a new interface version or contract."
         },
-        "liveCaseRegistry": {
-          "contract": "kfd-live-case-registry",
-          "schemaVersion": 1,
-          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-live-case-registry.schema.json",
-          "schemaPath": "schemas/kfd-live-case-registry.schema.json",
-          "compatibilityRule": "Version 1 additively indexes provisional KFD-5 cases and immutable current cuts; semantic, required-field, status-meaning, or identity changes require a new interface version or contract."
+    "liveCaseRegistry": {
+      "contract": "kfd-live-case-registry",
+      "schemaVersion": 2,
+      "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-live-case-registry.schema.json",
+      "schemaPath": "schemas/kfd-live-case-registry.schema.json",
+      "compatibilityRule": "Version 2 preserves stable live-case identity and genesis, gives the case an independent active/closed/archived lifecycle, and requires one or more independently qualified candidate tracks with their own qualification status, claim boundary, and immutable current cut. Semantic, required-field, status-meaning, candidate-track, or identity changes require a new interface version or contract."
         }
       },
       "concepts": {
@@ -1395,7 +1443,12 @@
         "fuseTest": "fuse test",
         "falsifier": "falsifier",
         "dogfoodEvidence": "dogfood evidence",
-        "liveCaseRegistry": "live Primitive case registry"
+    "liveCaseRegistry": "live Primitive case registry",
+    "primitiveDiscoveryCase": "stable live discovery case that may preserve and qualify multiple candidate tracks",
+    "candidateTrack": "independently named and qualified Primitive candidate within a live case",
+    "ontologySplit": "preserved transition from a fused candidate boundary to independently qualified candidate tracks",
+    "pursuit": "provisional intended-change continuity candidate",
+    "warrant": "provisional purpose-bound fact-addressed authorization candidate"
       }
     },
     "kfd-6": {

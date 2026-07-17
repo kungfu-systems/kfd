@@ -18,11 +18,12 @@ This directory is the append-only human review path for the
 
 A review is required when:
 
+- a candidate is split, fused, renamed, rejected, or subsumed;
 - a new concrete domain profile is added;
 - an alternative is rejected or subsumed;
 - a falsifier is triggered or retired;
 - a qualification test changes state;
-- a new immutable KFD-5 cut is proposed;
+- a new immutable KFD-5 cut is proposed for either candidate track;
 - the case is used in a product or adoption claim;
 - the outcome may change from `provisional`.
 
@@ -34,8 +35,10 @@ Each review records:
 4. verification responsibility;
 5. decision responsibility;
 6. the reason for retaining or changing the outcome;
-7. the path and digest of any new cut.
+7. the affected candidate track;
+8. the path and digest of any new cut.
 
 Reviews do not rewrite prior cuts. A correction identifies the affected claim,
-preserves the old coordinate, and creates a new cut when the current candidate
-state changes.
+preserves the old coordinate, and creates a new cut for the affected track when
+its current candidate state changes. Pursuit and Warrant may qualify, fail,
+rename, or be subsumed independently.

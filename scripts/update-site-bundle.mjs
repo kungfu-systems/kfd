@@ -214,10 +214,17 @@ const buildLiveCasePages = (liveCaseRegistry) => (liveCaseRegistry.cases ?? []).
     path: entry.reviewIndex,
     markdown: stripFrontmatter(readFileSync(entry.reviewIndex, "utf8")),
   },
-  currentCut: {
-    ...entry.currentCut,
-    record: JSON.parse(readFileSync(entry.currentCut.path, "utf8")),
+  ontologySplit: {
+    path: entry.ontologySplit,
+    markdown: stripFrontmatter(readFileSync(entry.ontologySplit, "utf8")),
   },
+  candidateTracks: entry.candidateTracks.map((track) => ({
+    ...track,
+    currentCut: {
+      ...track.currentCut,
+      record: JSON.parse(readFileSync(track.currentCut.path, "utf8")),
+    },
+  })),
 }));
 
 const section = ({ id, sourceHeading, title, markdown, role, priority, presentation, firstScreen = false, sourcePath = README_PATH }) => ({
@@ -347,7 +354,7 @@ export const buildSiteBundle = ({ readmeText, foundationText, formalText, casesT
   ];
 
   return {
-    schemaVersion: 1,
+    schemaVersion: 2,
     contract: "kfd-site-bundle",
     source: {
       package: "@kungfu-tech/kfd",
