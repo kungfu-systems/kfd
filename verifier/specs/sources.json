@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.verifier-spec-sources/v1",
+  "sources": [
+    {
+      "repository": "https://github.com/kungfu-systems/kungfu",
+      "commit": "167eae777ee46e52258df6d05a969e8c5af8c61b",
+      "scope": [
+        "xinfa/schema",
+        "xinfa/fixtures/golden",
+        "xinfa/fixtures/repository-small/.kungfu/episodes",
+        "docs/adr/ADR-0093-xinfa-dual-first-verified-context-contract.md",
+        "docs/adr/ADR-0094-xinfa-repository-context-pack.md",
+        "docs/adr/ADR-0099-git-workspace-episode-provider.md",
+        "docs/architecture/episode-manifest-trust-boundary.md"
+      ]
+    },
+    {
+      "repository": "https://github.com/kungfu-systems/buildchain",
+      "commit": "76a795e7021875da85ecd7198085856154a77f2a",
+      "scope": [
+        "docs/release-passport.md"
+      ]
+    }
+  ],
+  "vendoredSchemas": {
+    "atlas-manifest-v1.schema.json": "sha256:39614a8ccd6ee7ca1b1777f75594f473ef6cb74ead8f4072b73a79003a188b1f",
+    "atlas-receipt-v1.schema.json": "sha256:16bee3a42295065f18e1c5c776ae5f999b7564756d95c64b105e36cb04dc8a33",
+    "atlas-v1.schema.json": "sha256:139b582073f35c5a2ff0557a9be9781b700432bc7667fc458f6679f7c3dd660f",
+    "atlas-view-v1.schema.json": "sha256:cffcf69013b6f3b6f622e81a5fb00453a8ef5cd2b50099ca8279670204c3b5ae",
+    "context-pack-manifest-v1.schema.json": "sha256:3a6cc41fa9e774bb0edd71fdc151d6c96d97a09792249ddaf16814cedbfb3aaf",
+    "context-pack-receipt-v1.schema.json": "sha256:58dfd7a06add591225c424f2ec0b0376aaa76b2aa73ce45d1c5052f0d65c4697",
+    "context-pack-v1.schema.json": "sha256:c0336285b2ab5a5094f792ebba0c6f2cdfa7eba38ee9bf4026d3ca0b687c0c5a",
+    "project-v1.schema.json": "sha256:826da7a7af893b0565a0af92a554c8584e7cdbef726a501d704e3b7ab1fe165f"
+  }
+}

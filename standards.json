@@ -47,14 +47,18 @@
         "contractWorld": "https://kfd.libkungfu.dev/schemas/kfd-1/contract-world.schema.json",
         "witness": "https://kfd.libkungfu.dev/schemas/kfd-1/witness.schema.json",
         "publicationUrlSemantics": "https://kfd.libkungfu.dev/schemas/kfd-1/publication-url-semantics.schema.json",
-        "candidateRegistry": "https://kfd.libkungfu.dev/schemas/kfd-candidate-registry.schema.json"
+        "candidateRegistry": "https://kfd.libkungfu.dev/schemas/kfd-candidate-registry.schema.json",
+        "verificationBundle": "https://kfd.libkungfu.dev/schemas/kfd-verification-bundle.schema.json",
+        "verificationReport": "https://kfd.libkungfu.dev/schemas/kfd-verification-report.schema.json"
       },
       "schemaPaths": {
         "metadata": "schemas/kfd-standards.schema.json",
         "contractWorld": "schemas/kfd-1/contract-world.schema.json",
         "witness": "schemas/kfd-1/witness.schema.json",
         "publicationUrlSemantics": "schemas/kfd-1/publication-url-semantics.schema.json",
-        "candidateRegistry": "schemas/kfd-candidate-registry.schema.json"
+        "candidateRegistry": "schemas/kfd-candidate-registry.schema.json",
+        "verificationBundle": "schemas/kfd-verification-bundle.schema.json",
+        "verificationReport": "schemas/kfd-verification-report.schema.json"
       },
       "interfaces": {
         "contractWorld": {
@@ -84,6 +88,20 @@
           "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-candidate-registry.schema.json",
           "schemaPath": "schemas/kfd-candidate-registry.schema.json",
           "compatibilityRule": "Compatible additions may keep schemaVersion 1; changes to candidate identity, numbering allocation, slot binding, or promotion meaning require a new interface version or contract."
+        },
+        "verificationBundle": {
+          "contract": "kfd.verification-bundle/v1",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-verification-bundle.schema.json",
+          "schemaPath": "schemas/kfd-verification-bundle.schema.json",
+          "compatibilityRule": "Compatible additions may keep schemaVersion 1; path-safety, canonicalization, required-input, or kind changes require a new interface version or contract."
+        },
+        "verificationReport": {
+          "contract": "kfd.verification-report/v1",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-verification-report.schema.json",
+          "schemaPath": "schemas/kfd-verification-report.schema.json",
+          "compatibilityRule": "Compatible additions may keep schemaVersion 1; validity, qualification, check, issue, or responsibility meaning changes require a new interface version or contract."
         }
       },
       "concepts": {
@@ -104,7 +122,9 @@
         "kfdCandidate": "non-normative pre-number KFD Candidate",
         "slotHint": "non-binding candidate ordering hypothesis",
         "foundationRevision": "fully evidenced pre-stable correction of the latest numbered foundation",
-        "foundationFreeze": "first-stable lock of KFD number-to-meaning mappings"
+        "foundationFreeze": "first-stable lock of KFD number-to-meaning mappings",
+        "independentVerifier": "independent verifier",
+        "verificationProfile": "verification profile"
       },
       "surfaceRegister": {
         "factSource": "standards.json#/standards/kfd-1/surfaceRegister",
@@ -119,6 +139,102 @@
           "unclassifiable"
         ],
         "surfaces": [
+          {
+            "id": "kfd-verifier-specification",
+            "class": "cross-time",
+            "classes": [
+              "cross-time"
+            ],
+            "description": "Published independent verifier contract and responsibility boundary at docs/verifier.md.",
+            "sourcePath": "docs/verifier.md",
+            "weldRationale": "Consumers can audit exactly what each offline profile proves and what remains outside the verifier's authority.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-verification-bundle-schema",
+            "class": "integration-time",
+            "classes": [
+              "integration-time"
+            ],
+            "description": "Published JSON schema for closed local verifier inputs.",
+            "sourcePath": "schemas/kfd-verification-bundle.schema.json",
+            "weldRationale": "Native and WebAssembly callers bind to one closed input contract without product-specific runtime state.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-verification-report-schema",
+            "class": "integration-time",
+            "classes": [
+              "integration-time"
+            ],
+            "description": "Published JSON schema for deterministic independent verification reports.",
+            "sourcePath": "schemas/kfd-verification-report.schema.json",
+            "weldRationale": "Humans, agents, CI systems, and package consumers receive the same explicit non-qualifying result contract.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-verifier-rust-core",
+            "class": "integration-time",
+            "classes": [
+              "integration-time"
+            ],
+            "description": "Published dependency-free product-boundary verifier library entrypoint.",
+            "sourcePath": "verifier/crates/core/src/lib.rs",
+            "weldRationale": "Native CLI and WebAssembly projections must continue to share one independently extractable verification core.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-verifier-npm-bin",
+            "class": "integration-time",
+            "classes": [
+              "integration-time"
+            ],
+            "description": "Packaged kfd command that materializes local bundles and invokes the common WebAssembly core.",
+            "sourcePath": "bin/kfd.mjs",
+            "weldRationale": "npx consumers receive the same offline verification semantics and path-safety boundary as native callers.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-verifier-wasm",
+            "class": "cross-time",
+            "classes": [
+              "cross-time"
+            ],
+            "description": "Platform-neutral WebAssembly projection of the independent verifier core.",
+            "sourcePath": "verifier/dist/kfd_verifier.wasm",
+            "weldRationale": "Package consumers can verify exact shipped executable bytes while native/WASM parity remains testable.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
           {
             "id": "readme",
             "class": "cross-time",
