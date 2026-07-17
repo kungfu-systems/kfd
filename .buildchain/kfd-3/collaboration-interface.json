@@ -78,6 +78,12 @@
       "purpose": "Read or render the complete non-numbered explanation behind the concise KFD homepage."
     },
     {
+      "id": "primitive-discovery-cases",
+      "surface": "docs/primitive-discovery-cases.md",
+      "participants": ["human-reader", "agent-reader", "site-consumer"],
+      "purpose": "Test the KFD primitive-discovery lens against source-bound historical cases without changing normative KFD text."
+    },
+    {
       "id": "docs-map",
       "surface": "docs/MAP.md",
       "participants": ["human-reader", "agent-reader", "maintainer"],
@@ -135,7 +141,7 @@
       "id": "site-bundle",
       "surface": "site/kfd-site.json",
       "participants": ["site-consumer", "agent-reader"],
-      "purpose": "Render KFD-owned homepage, foundation explanation, and decision pages without duplicating extraction logic."
+      "purpose": "Render KFD-owned homepage, foundation explanation, historical cases, and decision pages without duplicating extraction logic."
     }
   ],
   "surfaces": [
@@ -153,6 +159,14 @@
       "participants": ["human-reader", "agent-reader", "site-consumer"],
       "value": "Complete non-numbered explanation of the KFD worldview and its path from capability to discovery.",
       "discoverability": { "fromMinimalEntrypoint": true, "path": "docs/foundation-model.md" },
+      "maturity": "stable"
+    },
+    {
+      "id": "primitive-discovery-cases",
+      "kind": "markdown-doc",
+      "participants": ["human-reader", "agent-reader", "site-consumer"],
+      "value": "Non-normative historical anchors that let readers test the KFD primitive-discovery lens against familiar experience.",
+      "discoverability": { "fromMinimalEntrypoint": true, "path": "docs/primitive-discovery-cases.md" },
       "maturity": "stable"
     },
     {
@@ -300,6 +314,7 @@
       "facts": [
         { "path": "README.md" },
         { "path": "docs/foundation-model.md" },
+        { "path": "docs/primitive-discovery-cases.md" },
         { "path": "decisions/KFD-1.md" },
         { "path": "decisions/KFD-2.md" },
         { "path": "decisions/KFD-3.md" },

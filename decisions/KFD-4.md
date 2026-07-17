@@ -164,14 +164,30 @@ KFD-1 keeps the facts under a view from drifting. KFD-2 keeps trust in that
 view bound to evidence and responsibility. KFD-3 lets participants expose and
 compare perspectives through trusted value rather than pressure.
 
+Each dependency carries a distinct part of perspective transformation:
+
+- Without KFD-1, a timeline can preserve a retrospective story without
+  preserving the facts that constrain it.
+- Without KFD-2, replay can reconstruct a view without giving another
+  participant reason to trust its fidelity, degradation, or responsibility.
+- Without KFD-3, preserved views can remain privately valid but unavailable for
+  voluntary comparison; contrastive replay cannot become a trusted shared act
+  and risks turning into extraction, coercion, or another unilateral synthetic
+  view.
+
 KFD-4 makes the next move possible:
 
 ```text
-non-drifting facts
-  -> inspectable trust
-  -> trusted cooperation
-  -> declared and transformable perspectives
+KFD-1 makes timelines evidentiary.
+KFD-2 makes replay trustworthy.
+KFD-3 makes contrastive replay cooperative.
+KFD-4 makes perspective transformation operational.
 ```
+
+Competition or independent action may diversify perspectives. Cooperation
+turns their trusted differences into shared discovery. KFD-4 is therefore the
+first complete operating application of the foundation triad, not an expansion
+of the foundation itself.
 
 KFD-5 begins from that capability. It asks whether a perspective transformation
 has revealed a missing load-bearing object and then subjects the candidate to

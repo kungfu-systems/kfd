@@ -62,7 +62,14 @@ A domain-specific record should preserve at least:
 
 KFD-5 turns that last output into a primitive candidate and qualifies it.
 
-## Trust Relation
+## Foundation Closure And Trust Relation
+
+The two KFD-4 profiles depend on the complete foundation triad. KFD-1 keeps the
+facts beneath a timeline from drifting. KFD-2 makes replay fidelity,
+degradation, and responsibility assessable. KFD-3 lets participants expose and
+compare preserved views through trusted value rather than coercion. Schema
+validity without those dependencies does not establish a trustworthy
+perspective transformation.
 
 KFD-4 claims can be assessed by KFD-2. The KFD package's assessment proves the
 decision text, timeline and replay profile schemas, standards metadata, and

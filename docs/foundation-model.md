@@ -9,21 +9,125 @@ not a numbered decision and does not create an additional normative rule. When
 an explanation and a decision differ, the text in `decisions/KFD-N.md` remains
 authoritative.
 
-## Civilizational shift
+## Better answers are not always enough
 
-Humans first named the world, then built machines to find better answers within
-it. Stronger models improve prediction, reasoning, simulation, and action in
-that already named world. Those capabilities remain necessary, but they do not
-guarantee that the world was named correctly.
+Most progress improves an answer inside a world we already know how to
+describe. Some progress changes the objects with which the world can be
+described.
 
-As agents become capable participants in reality, the next frontier is not only
-to improve answers. Humans and agents can also use inspectable consequences to
-discover when a question, object boundary, evidence cut, or load-bearing
-primitive is wrong. A civilization that can repeat this process gains the
-ability to reconstruct its ontology rather than only optimize within it.
+A spreadsheet did not merely calculate faster. It made cells, dependencies,
+and recalculation into objects a person could manipulate directly. A Git commit
+did not merely store files. It made a distributed change, its parents, its
+content, and its authorship into an object software could preserve, compare,
+and exchange. A log did not become important because append-only records were
+new. It became transformative when an internal mechanism could be treated as a
+first-class record of what happened and projected into many systems.
 
-Kungfu opens the path from agents that answer questions to a civilization that
-can discover when it has named reality incorrectly.
+KFD calls such a load-bearing object a **primitive**. A primitive gives a
+recurring part of reality an identity, boundary, authority, lifecycle, and set
+of operations. Once it exists, new questions become cheap to ask and whole
+classes of reconstruction work can disappear.
+
+```text
+a fact answers inside an existing world
+a primitive changes what that world contains
+```
+
+This is why primitive discovery matters to knowledge. Knowledge does not grow
+only by accumulating more facts or improving predictions. It also grows when a
+previously implicit object becomes explicit enough to reason about, test,
+share, and build upon.
+
+## Why primitive discovery remains rare
+
+Missing primitives are difficult to see from inside inherited vocabulary. If a
+database-shaped view is painful, local optimization usually produces a better
+database. If a trace view is painful, it usually produces another query or
+visualization. Both may be useful while leaving the missing object outside the
+visible horizon.
+
+Historically, a candidate often became visible only when several conditions
+met in one place:
+
+- a participant lived inside a saturated field of real consequences;
+- that participant occupied a perspective that integrated pressures others
+  encountered only separately;
+- a forcing event made the old workaround impossible or no longer tolerable;
+- the participant had enough judgment and authority to give the new object a
+  durable form.
+
+The events and artifacts could be distributed across an organization. The
+integrated perspective usually was not. Discovery therefore depended on a
+rare biographical convergence rather than an inspectable process.
+
+## Git: ten days after years of pressure
+
+The Linux kernel exchanged changes as patches and archived files from 1991 to
+2002, then used BitKeeper until that relationship broke down in 2005. Linus
+Torvalds later described Git as self-hosting after about one day and usable for
+his first kernel commit after about ten days. He also said that the decisive
+work was not the amount of code but getting the data organization right, after
+years of seeing what existing systems made difficult.
+
+The asymmetry is the point: construction took days; the pressure field and the
+perspective able to compress it took years. Git was not the sudden invention of
+every technical ingredient it used. It joined prior lessons, integrity needs,
+distributed authority, nonlinear history, performance constraints, and a
+workflow containing tens of merges a day into one load-bearing object model.
+
+BitKeeper's withdrawal can be replayed through the KFD lens as a forcing
+evidence cut: a condition that could previously be endured became a decision
+that had to be made. That is a KFD interpretation of the historical record, not
+terminology used by the historical actors themselves.
+
+The [historical cases companion](primitive-discovery-cases.md) develops this
+case and compares it with VisiCalc, the log as a standalone architecture
+primitive, and an ordinary cross-machine trace view.
+
+## What history does not provide
+
+Historical creators often left code, design explanations, interviews, and
+retrospective accounts. These materials can explain why a result worked. They
+do not yet form a procedure that another participant can repeatedly execute to
+discover the next missing primitive.
+
+There is no generally adopted standard pipeline that preserves situated
+pressure, makes perspectives replayable, compares their natural objects,
+separates candidate genesis from qualification, and keeps promotion answerable
+to facts and later consequences. The result survives; much of the path by which
+the object became visible remains dependent on biography.
+
+KFD addresses that missing path. It does not promise deterministic invention.
+It asks whether the conditions of discovery can become durable, inspectable,
+and increasingly repeatable without flattening the reality that made judgment
+possible.
+
+## Why the foundation begins with procedure
+
+KFD-1 is a procedure rather than a principle by necessity. A fact-grounded
+system cannot place another fact claim beneath its facts without restarting the
+demand for justification, and it cannot use a self-certifying axiom without
+asking participants to trust what the system is meant to keep inspectable. KFD
+therefore chooses a maintained practice as its operational ground: declare the
+fact source, register welded surfaces, classify change, and run the gate.
+"Facts must not drift" carries weight only while those acts continue to be
+performed and audited.
+
+This gives the six KFDs an intentional practice-invariant-practice shape:
+
+```text
+KFD-1       foundational practice that maintains the fact base
+KFD-2/3     foundation principles for trust and cooperation
+KFD-4       first derived principle for perspective-bound action
+KFD-5/6     discovery procedures that extend the describable world
+```
+
+KFD begins in procedure, states the invariants under which facts can support
+trust, cooperation, and perspective transformation, then returns to procedure
+to extend the world those invariants can govern. The two practice layers are
+not illustrations around a propositional core. They express KFD's operational
+claim that knowledge remains load-bearing through maintained, inspectable, and
+correctable practice.
 
 ## Foundation model
 
@@ -47,7 +151,23 @@ declared, inspectable, and unable to drift invisibly. KFD-2 defines how trust
 can stand on those facts. KFD-3 defines how humans and agents can cooperate
 once facts, responsibility, and value are visible.
 
-## Capability and discovery
+KFD-4 is the first complete operating application of that foundation:
+
+```text
+KFD-1 makes timelines evidentiary.
+KFD-2 makes replay trustworthy.
+KFD-3 makes contrastive replay cooperative.
+KFD-4 makes perspective transformation operational.
+```
+
+A timeline without non-drifting facts can become retrospective narrative. A
+replay without inspectable trust can become an unverifiable simulation. Views
+without cooperation can remain isolated even when each is locally valid.
+Competition or independent action may diversify perspectives; cooperation
+turns their trusted differences into shared discovery. KFD-4 depends on all
+three foundation principles without becoming a fourth foundation principle.
+
+## From capability to discovery
 
 KFD does not reject stronger models. It rejects the assumption that model
 improvement is sufficient for every next step.
@@ -59,7 +179,9 @@ discovery loop:  reality -> facts -> model -> action -> consequence
                          -> correction or primitive reconstruction
 ```
 
-The loops are complementary, not interchangeable. Discovery does not always
+The loops are complementary, not interchangeable. Stronger models remain
+necessary construction material, but capability alone does not decide whether
+the current object set is adequate. Discovery does not always
 begin with repeated failure inside the current model. Repeated observation
 through a database-shaped ontology tends to produce a better database-shaped
 answer. An object outside that horizon may first become visible only when the
@@ -193,3 +315,7 @@ KFD-5 cases: each became natural when the view moved from an implementation
 object to the participant who had to understand and act. A future KFD-6 system
 must replay and test such participant views from causal Episode experience, not
 merely cluster more patterns inside the old object set.
+
+Continue with [Primitive Discovery in History](primitive-discovery-cases.md) to
+test this model against external cases. Continue with the numbered KFD texts
+for the authoritative principles and procedures.
