@@ -36,6 +36,19 @@ structural compression, and hybrid methods may also generate primitive
 candidates. KFD-4 governs their prior boundary: every observation remains
 situated and auditable.
 
+Once KFD-1 through KFD-3 already preserve fact cuts, make reconstruction trust
+assessable, and enable trusted exchange among participants, perspective
+transformation is the smallest new general operator: change a declared
+position, replay existing evidence with declared loss, and contrast the natural
+objects that appear. Under that installed foundation, it is the
+lowest-marginal-cost default probe for moving the observation horizon.
+
+This is a bounded engineering hypothesis, not a universal ranking theorem.
+Unavailable source perspectives, privacy constraints, capture or
+reconstruction cost, replay loss, or a cheap domain-specific anomaly, causal,
+or compression method may reverse the comparison. KFD-5 still qualifies every
+candidate against facts and consequences.
+
 ## Engineering objects
 
 Reliable perspective transformation depends on three connected objects:

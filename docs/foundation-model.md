@@ -171,6 +171,44 @@ Competition or independent action may diversify perspectives; cooperation
 turns their trusted differences into shared discovery. KFD-4 depends on all
 three foundation principles without becoming a fourth foundation principle.
 
+### Why KFD-4 is the first derived operator
+
+The placement is structural. Once the foundation preserves non-drifting fact
+cuts, makes reconstruction trust assessable, and supports trusted exchange
+among participants, multiple declared positions become available. The smallest
+new general operator is then to change position without discarding the fact
+base:
+
+```text
+non-drifting fact cuts
+  -> assessable replay trust
+  -> trusted exchange among participants
+  -> multiple declared positions
+  -> perspective transformation
+```
+
+Under that installed foundation, perspective transformation is the
+lowest-marginal-cost default probe for moving the observation horizon. It can
+reuse preserved evidence and add only missing capture, replay, and contrast,
+rather than necessarily waiting for repeated failure, introducing a causal
+intervention, or searching a large corpus under a new compression objective.
+This is a bounded engineering hypothesis, not a universal ranking theorem.
+
+The relevant comparison is total cost per qualified Primitive:
+
+```text
+qualified cost =
+    genesis
+  + qualification
+  + false-candidate handling
+  + real-world validation
+```
+
+Perspective transformation may lose when source views are unavailable, privacy
+or reconstruction dominates, replay creates many false candidates, or a
+domain-specific anomaly, causal, or compression method is cheaper. KFD-5
+qualifies the result; KFD-6 must compare the methods over causal experience.
+
 ## From capability to discovery
 
 KFD does not reject stronger models. It rejects the assumption that model
