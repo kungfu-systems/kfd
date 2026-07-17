@@ -48,7 +48,7 @@
 | What does Apache-2.0 cover, and what remains official/trademark-bound? | [`../TRADEMARKS.md`](../TRADEMARKS.md) |
 | What should a site renderer consume to render `kfd.libkungfu.dev`? | [`../site/kfd-site.json`](../site/kfd-site.json) |
 | How should a site render provisional live cases? | [`../site/kfd-site.json`](../site/kfd-site.json) — `liveCases` maps the registry to `/cases/live/{id}` |
-| How should a site render pre-number candidates? | [`../site/kfd-site.json`](../site/kfd-site.json) — `kfdCandidates` maps the registry to `/drafts/{id}` |
+| How should a site render pre-number candidates? | [`../site/kfd-site.json`](../site/kfd-site.json) — `candidatePages` owns `/drafts/` and `/drafts/{id}/`; `kfdCandidates` preserves candidate-domain metadata |
 | How should a site map decision pages to usage subpages? | [`../site/kfd-site.json`](../site/kfd-site.json) — `decisionPages.usagePages` maps `/N` to `/N/usage` |
 | How should a site map formal references? | [`../site/kfd-site.json`](../site/kfd-site.json) — `formalPage` maps `/formal`, and `decisionPages.formalPages` maps `/N` to `/N/formal` |
 | What is the top-level product accountability principle? | [KFD-2](../decisions/KFD-2.md) |

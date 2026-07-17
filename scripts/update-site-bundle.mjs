@@ -280,6 +280,16 @@ export const buildSiteBundle = ({
   const entries = registry.entries || [];
   const liveCasePages = buildLiveCasePages(liveCaseRegistry);
   const candidatePages = buildCandidatePages(candidateRegistry);
+  const candidatePageDeclarations = candidatePages.map((entry) => ({
+    id: entry.id,
+    title: entry.title,
+    status: entry.status,
+    sourcePath: entry.sourcePath,
+    url: `${entry.url}/`,
+    slotHint: entry.slotHint,
+    claimBoundary: entry.claimBoundary,
+    markdown: entry.markdown,
+  }));
 
   const homepageSections = [
     section({
@@ -524,6 +534,14 @@ export const buildSiteBundle = ({
       numberingPolicy: candidateRegistry.numberingPolicy,
       indexMarkdown: stripFrontmatter(candidateIndexText),
       candidates: candidatePages,
+    },
+    candidatePages: {
+      source: CANDIDATE_REGISTRY_PATH,
+      indexUrl: "/drafts/",
+      stableUrlPattern: "/drafts/{id}/",
+      relationship: "candidate-before-promotion",
+      normative: false,
+      pages: candidatePageDeclarations,
     },
     decisionPages: {
       source: REGISTRY_PATH,

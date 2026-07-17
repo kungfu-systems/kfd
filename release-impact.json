@@ -70,7 +70,7 @@
       "id": "kfd-site-homepage-bundle",
       "impact": "major",
       "class": "breaking",
-      "rationale": "The pre-stable site bundle previously advanced from schemaVersion 1 to 2 for the candidate-track live-case shape and now additively exposes KFD Candidates at /drafts and /drafts/{id}, including registry policy, non-normative status, claim boundaries, and candidate markdown. Existing decision, formal, historical-case, and live-case routes remain unchanged."
+      "rationale": "The pre-stable site bundle previously advanced from schemaVersion 1 to 2 for the candidate-track live-case shape and now additively exposes KFD Candidates at /drafts and /drafts/{id}, including registry policy, non-normative status, claim boundaries, and candidate markdown. A dedicated candidatePages projection now owns the renderer-facing /drafts/ index and /drafts/{id}/ page declarations, including source paths, slot hints, and claim boundaries, so site consumers do not infer routes from package layout. Existing decision, formal, historical-case, and live-case routes remain unchanged."
     },
     {
       "id": "kfd-site-decision-usage-pages",
