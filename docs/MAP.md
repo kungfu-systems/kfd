@@ -12,6 +12,10 @@
 | What is a primitive, why is primitive discovery difficult, and how does KFD address the missing process? | [`foundation-model.md`](foundation-model.md) |
 | How can I test the KFD primitive-discovery lens against Git, VisiCalc, the log, and an ordinary trace view? | [`primitive-discovery-cases.md`](primitive-discovery-cases.md) |
 | Where are provisional Primitive candidates tracked as live KFD dogfood? | [`../cases/registry.json`](../cases/registry.json) |
+| Where are pre-number KFD Candidates tracked? | [`../drafts/registry.json`](../drafts/registry.json) |
+| What is the current action-state candidate and why is its slot hint non-binding? | [`../drafts/action-state-separation.md`](../drafts/action-state-separation.md) |
+| How does a candidate become a numbered draft? | [`../CONTRIBUTING.md`](../CONTRIBUTING.md#candidates-and-numbered-drafts) |
+| When may the pre-stable foundation be revised, and what freezes at stable? | [`../CONTRIBUTING.md`](../CONTRIBUTING.md#pre-stable-foundation-revision) |
 | How did the first live case split a fused work-object hypothesis into Pursuit and Warrant candidate tracks? | [`../cases/live/proof-carrying-work-object/README.md`](../cases/live/proof-carrying-work-object/README.md) |
 | What four-object agent work state connects Pursuit, Atlas, Warrant, and Episode? | [`../cases/live/proof-carrying-work-object/ontology-split.md`](../cases/live/proof-carrying-work-object/ontology-split.md) |
 | Are Pursuit, Atlas, Warrant, and Episode conditionally distinguishable, and what remains unproved? | [`../cases/live/proof-carrying-work-object/distinguishability.md`](../cases/live/proof-carrying-work-object/distinguishability.md) |
@@ -42,6 +46,7 @@
 | What does Apache-2.0 cover, and what remains official/trademark-bound? | [`../TRADEMARKS.md`](../TRADEMARKS.md) |
 | What should a site renderer consume to render `kfd.libkungfu.dev`? | [`../site/kfd-site.json`](../site/kfd-site.json) |
 | How should a site render provisional live cases? | [`../site/kfd-site.json`](../site/kfd-site.json) — `liveCases` maps the registry to `/cases/live/{id}` |
+| How should a site render pre-number candidates? | [`../site/kfd-site.json`](../site/kfd-site.json) — `kfdCandidates` maps the registry to `/drafts/{id}` |
 | How should a site map decision pages to usage subpages? | [`../site/kfd-site.json`](../site/kfd-site.json) — `decisionPages.usagePages` maps `/N` to `/N/usage` |
 | How should a site map formal references? | [`../site/kfd-site.json`](../site/kfd-site.json) — `formalPage` maps `/formal`, and `decisionPages.formalPages` maps `/N` to `/N/formal` |
 | What is the top-level product accountability principle? | [KFD-2](../decisions/KFD-2.md) |

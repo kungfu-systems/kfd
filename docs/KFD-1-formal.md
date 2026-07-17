@@ -7,13 +7,14 @@
 
 - Status: experimental
 - Normative: no
-- Formal model version: 1
+- Formal model version: 2
 - Authority: `decisions/KFD-1.md`
 
 ## Imported vocabulary
 
 `FactSource`, `ContractWorld`, `WeldedSurface`, `SurfaceRegister`,
-`CompatibilityImpact`, `ImpactProjection`, `Witness`.
+`CompatibilityImpact`, `ImpactProjection`, `Witness`, `Candidate`,
+`SlotHint`, `FoundationRevision`, `FoundationFreeze`.
 
 ## Domain objects
 
@@ -39,6 +40,8 @@ Drifts(a, C, k)        a conflicts with Source(C) at coordinate k without a
                        declared compatibility boundary
 Classified(delta, R)   Impact(delta, R) is breaking, additive, none, or
                        unclassifiable
+Allocated(c, n)        candidate c has been promoted to KFD number n
+Frozen(n)              the number and meaning at n passed Foundation Freeze
 ```
 
 ## Invariants
@@ -50,6 +53,13 @@ I3  Projects(a, Source(C)) -> not Drifts(a, C, k)
 I4  Gate(delta, C) -> Classified(delta, R(C))
 I5  Impact(delta, R(C)) = unclassifiable -> Gate(delta, C) = blocked
 I6  PublishedAtImmutableCoordinate(a, k) -> Immutable(a, k)
+I7  Candidate(c) and not Promoted(c) -> not exists n: Allocated(c, n)
+I8  SlotHint(c, n) -> not Allocated(c, n)
+I9  FoundationRevision(delta) -> PreStable(delta)
+     and BreakingImpact(delta)
+     and PreservesPublishedCoordinates(delta)
+     and PublishesLineage(delta)
+I10 Frozen(n) -> MeaningAt(n) changes only through explicit supersession
 ```
 
 `I3` does not require every projection to be byte-identical. It requires the
@@ -66,6 +76,21 @@ unregistered
   -> gated
   -> published
 ```
+
+KFD candidate and foundation states use a separate transition:
+
+```text
+candidate
+  -> qualified
+  -> explicitly-promoted
+  -> numbered-draft
+  -> active
+  -> foundation-freeze
+  -> superseded-by-new-number
+```
+
+A pre-stable Foundation Revision may return the latest numbered structure to a
+reviewed candidate or draft state, but it cannot mutate a published coordinate.
 
 Allowed classification results:
 
@@ -84,6 +109,11 @@ unclassifiable -> block and repair the register
 - Classify the final diff, not only the planned change.
 - Show the domain action corresponding to the classification.
 - Preserve declared immutable publication coordinates and witnesses.
+- Keep candidate slot hints non-binding until explicit promotion.
+- For a Foundation Revision, prove pre-stable status, breaking impact,
+  authorization, preserved coordinates, lineage, migration, and projection
+  closure.
+- At Foundation Freeze, record the final number-to-meaning mapping.
 
 ## Invalid states
 
@@ -92,6 +122,10 @@ unclassifiable -> block and repair the register
 - Development and delivered config consume different undeclared sources.
 - The same published coordinate resolves to incompatible bytes or semantics.
 - An unclassifiable change is treated as permission to guess.
+- A candidate slot hint is presented as an allocated KFD number.
+- A Foundation Revision rewrites a prior commit, tag, package, digest, or
+  immutable rendered coordinate.
+- A stable number changes meaning without explicit supersession.
 
 ## Machine mappings
 
@@ -99,6 +133,7 @@ unclassifiable -> block and repair the register
 |---|---|---|---|
 | `I1-I5` | Welded-surface register, Compatibility impact, Constraints | `schemas/kfd-1/contract-world.schema.json` | Mixed |
 | `I3`, `I6` | Decision, KFD self-application | `schemas/kfd-1/witness.schema.json` | Machine for declared hashes |
+| `I7-I10` | KFD self-application, contribution governance | `schemas/kfd-candidate-registry.schema.json`, `drafts/registry.json`, `CONTRIBUTING.md` | Mixed |
 | Publication immutability | Compatibility impact, Constraints | `schemas/kfd-1/publication-url-semantics.schema.json` | Mixed |
 | KFD package register closure | KFD self-application | `standards.json`, `scripts/check.mjs` | Machine |
 

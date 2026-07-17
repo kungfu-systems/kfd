@@ -122,10 +122,25 @@ offered to them.
 
 ## KFD self-application
 
-Published KFD artifacts are immutable. Before the first stable release,
-maintainer-authorized refinement may replace a numbered text only in a new
-prerelease with explicit breaking decision-surface impact. After stable,
-substantive change mints a new KFD that explicitly supersedes the old one.
+Published KFD artifacts are immutable. Unnumbered KFD Candidates may preserve
+an ordering hypothesis through a non-binding slot hint, but only explicit
+promotion allocates a KFD number.
+
+Before the first stable release, a fully evidenced Foundation Revision may
+revise, reorder, split, merge, withdraw, or renumber the latest numbered
+decisions when preserving the current structure would make a demonstrably
+weaker foundation load-bearing. It must declare breaking decision-surface
+impact, preserve every published prerelease coordinate, publish old-to-new
+lineage and migration mapping, update all projections together, and receive
+explicit authorization and review.
+
+This does not suspend KFD-1: before stable, immutable published coordinates
+and procedurally revisable latest meaning are both declared parts of the
+contract world.
+
+The first non-prerelease KFD release performs the Foundation Freeze. After that
+freeze, a number and its meaning cannot change in place; substantive change
+mints a new KFD that explicitly supersedes the old one.
 The outer KFD package line remains `v1.0`; content operations are patches, while
 machine-surface impact remains explicit release-passport evidence.
 

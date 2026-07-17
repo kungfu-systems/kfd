@@ -20,39 +20,41 @@
       "title": "Facts must not drift",
       "kind": "procedure",
       "status": "active",
-      "revision": 3,
+      "revision": 4,
       "metadataSchemaVersion": "2",
       "document": {
         "path": "decisions/KFD-1.md",
         "url": "https://kfd.libkungfu.dev/1",
-        "sha256": "4ac99d594518e1b55512ddef5bb05441a23ff2970d07bc8afe4718840a8c36d1"
+        "sha256": "d9e433f98eaf80f3fcf75986d073446bd73fbd385b9c6ba96fc3186e0da62a09"
       },
       "formalModel": {
         "path": "docs/KFD-1-formal.md",
         "url": "https://kfd.libkungfu.dev/1/formal",
-        "version": 1,
+        "version": 2,
         "status": "experimental",
         "normative": false,
         "authorityPath": "decisions/KFD-1.md",
-        "sha256": "544836fe327033def4170d7a7aadde9d816f1ee8e52f2573f988823e99b2c0b6"
+        "sha256": "739bbfa03a026a15411db0ef4270d36a0a5e3e6ec51f3f6dfcce61e78a47033e"
       },
       "compatibility": {
         "packageLine": "v1.0",
         "registrySchemaVersion": 1,
         "metadataSchemaVersion": "2",
-        "rule": "Before the first stable release, maintainer-authorized semantic refinement must declare breaking decision-surface impact; after stable, substantive change mints a new KFD."
+        "rule": "Before the first stable release, fully evidenced Foundation Revision may correct the latest numbered structure while preserving published coordinates and lineage; Foundation Freeze then requires later substantive change to mint a new KFD."
       },
       "schemaIds": {
         "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json",
         "contractWorld": "https://kfd.libkungfu.dev/schemas/kfd-1/contract-world.schema.json",
         "witness": "https://kfd.libkungfu.dev/schemas/kfd-1/witness.schema.json",
-        "publicationUrlSemantics": "https://kfd.libkungfu.dev/schemas/kfd-1/publication-url-semantics.schema.json"
+        "publicationUrlSemantics": "https://kfd.libkungfu.dev/schemas/kfd-1/publication-url-semantics.schema.json",
+        "candidateRegistry": "https://kfd.libkungfu.dev/schemas/kfd-candidate-registry.schema.json"
       },
       "schemaPaths": {
         "metadata": "schemas/kfd-standards.schema.json",
         "contractWorld": "schemas/kfd-1/contract-world.schema.json",
         "witness": "schemas/kfd-1/witness.schema.json",
-        "publicationUrlSemantics": "schemas/kfd-1/publication-url-semantics.schema.json"
+        "publicationUrlSemantics": "schemas/kfd-1/publication-url-semantics.schema.json",
+        "candidateRegistry": "schemas/kfd-candidate-registry.schema.json"
       },
       "interfaces": {
         "contractWorld": {
@@ -75,6 +77,13 @@
           "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-1/publication-url-semantics.schema.json",
           "schemaPath": "schemas/kfd-1/publication-url-semantics.schema.json",
           "compatibilityRule": "Compatible additions may keep schemaVersion 1; semantic or required-field changes require a new interface version or contract."
+        },
+        "candidateRegistry": {
+          "contract": "kfd-candidate-registry",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-candidate-registry.schema.json",
+          "schemaPath": "schemas/kfd-candidate-registry.schema.json",
+          "compatibilityRule": "Compatible additions may keep schemaVersion 1; changes to candidate identity, numbering allocation, slot binding, or promotion meaning require a new interface version or contract."
         }
       },
       "concepts": {
@@ -91,7 +100,11 @@
         "immutableVersionUrl": "immutable version URL",
         "immutableArtifact": "immutable publication artifact",
         "archivePolicy": "publication archive policy",
-        "sourceCoordinate": "publication source coordinate"
+        "sourceCoordinate": "publication source coordinate",
+        "kfdCandidate": "non-normative pre-number KFD Candidate",
+        "slotHint": "non-binding candidate ordering hypothesis",
+        "foundationRevision": "fully evidenced pre-stable correction of the latest numbered foundation",
+        "foundationFreeze": "first-stable lock of KFD number-to-meaning mappings"
       },
       "surfaceRegister": {
         "factSource": "standards.json#/standards/kfd-1/surfaceRegister",
@@ -1085,6 +1098,62 @@
             "description": "Published KFD-6 draft formal reference at docs/KFD-6-formal.md.",
             "sourcePath": "docs/KFD-6-formal.md",
             "weldRationale": "Consumers can audit and cite the versioned non-normative reference semantics for the draft KFD-6 decision.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-candidate-registry-schema",
+            "class": "integration-time",
+            "classes": ["integration-time", "cross-time"],
+            "description": "Published JSON schema for pre-number KFD Candidate identity, status, slot hints, and promotion boundaries.",
+            "sourcePath": "schemas/kfd-candidate-registry.schema.json",
+            "weldRationale": "Humans, agents, packages, and site renderers bind to one machine contract that prevents a candidate ordering hypothesis from drifting into number allocation.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-candidate-registry",
+            "class": "cross-time",
+            "classes": ["cross-time"],
+            "description": "Published non-normative pre-number KFD Candidate registry.",
+            "sourcePath": "drafts/registry.json",
+            "weldRationale": "Consumers can discover stable candidate identities, non-binding slot hints, promotion gates, and claim boundaries without treating them as numbered decisions.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-candidate-index",
+            "class": "cross-time",
+            "classes": ["cross-time"],
+            "description": "Published human and agent entrypoint for pre-number KFD Candidates.",
+            "sourcePath": "drafts/README.md",
+            "weldRationale": "The candidate lifecycle, numbering boundary, and current candidate path remain equally discoverable to human and agent participants.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "action-state-separation-candidate",
+            "class": "cross-time",
+            "classes": ["cross-time"],
+            "description": "Published pre-number candidate for independently addressable intent, perspective, authority, and consequence state.",
+            "sourcePath": "drafts/action-state-separation.md",
+            "weldRationale": "The current candidate meaning, evidence requirements, falsifiers, and explicit non-allocation of KFD-7 remain inspectable across releases.",
             "impactProjection": {
               "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
               "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
