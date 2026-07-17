@@ -283,6 +283,22 @@
             }
           },
           {
+            "id": "proof-carrying-work-object-distinguishability",
+            "class": "cross-time",
+            "classes": [
+              "cross-time"
+            ],
+            "description": "Conditional deletion argument separating the information dimensions attributed to Pursuit, Atlas, Warrant, and Episode.",
+            "sourcePath": "cases/live/proof-carrying-work-object/distinguishability.md",
+            "weldRationale": "Humans and agents can inspect the decision semantics, witness pairs, evidence ladder, non-claims, and falsifiers without treating analytic separation as Primitive qualification.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
             "id": "pursuit-current-cut",
             "class": "cross-time",
             "classes": [
@@ -1407,7 +1423,7 @@
       "schemaVersion": 2,
       "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-live-case-registry.schema.json",
       "schemaPath": "schemas/kfd-live-case-registry.schema.json",
-      "compatibilityRule": "Version 2 preserves stable live-case identity and genesis, gives the case an independent active/closed/archived lifecycle, and requires one or more independently qualified candidate tracks with their own qualification status, claim boundary, and immutable current cut. Semantic, required-field, status-meaning, candidate-track, or identity changes require a new interface version or contract."
+      "compatibilityRule": "Version 2 preserves stable live-case identity and genesis, gives the case an independent active/closed/archived lifecycle, and requires one or more independently qualified candidate tracks with their own qualification status, claim boundary, and immutable current cut. Optional qualification arguments may be added without changing candidate status. Semantic, required-field, status-meaning, candidate-track, or identity changes require a new interface version or contract."
         }
       },
       "concepts": {
@@ -1447,6 +1463,7 @@
     "primitiveDiscoveryCase": "stable live discovery case that may preserve and qualify multiple candidate tracks",
     "candidateTrack": "independently named and qualified Primitive candidate within a live case",
     "ontologySplit": "preserved transition from a fused candidate boundary to independently qualified candidate tracks",
+    "distinguishabilityArgument": "conditional deletion argument for decision-relevant information dimensions without a universality or implementation-shape claim",
     "pursuit": "provisional intended-change continuity candidate",
     "warrant": "provisional purpose-bound fact-addressed authorization candidate"
       }

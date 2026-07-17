@@ -218,6 +218,10 @@ const buildLiveCasePages = (liveCaseRegistry) => (liveCaseRegistry.cases ?? []).
     path: entry.ontologySplit,
     markdown: stripFrontmatter(readFileSync(entry.ontologySplit, "utf8")),
   },
+  distinguishabilityArgument: {
+    path: entry.distinguishabilityArgument,
+    markdown: stripFrontmatter(readFileSync(entry.distinguishabilityArgument, "utf8")),
+  },
   candidateTracks: entry.candidateTracks.map((track) => ({
     ...track,
     currentCut: {

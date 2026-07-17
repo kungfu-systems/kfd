@@ -14,6 +14,7 @@
 | Where are provisional Primitive candidates tracked as live KFD dogfood? | [`../cases/registry.json`](../cases/registry.json) |
 | How did the first live case split a fused work-object hypothesis into Pursuit and Warrant candidate tracks? | [`../cases/live/proof-carrying-work-object/README.md`](../cases/live/proof-carrying-work-object/README.md) |
 | What four-object agent work state connects Pursuit, Atlas, Warrant, and Episode? | [`../cases/live/proof-carrying-work-object/ontology-split.md`](../cases/live/proof-carrying-work-object/ontology-split.md) |
+| Are Pursuit, Atlas, Warrant, and Episode conditionally distinguishable, and what remains unproved? | [`../cases/live/proof-carrying-work-object/distinguishability.md`](../cases/live/proof-carrying-work-object/distinguishability.md) |
 | What are the current immutable KFD-5 cuts for Pursuit and Warrant? | [`../cases/live/proof-carrying-work-object/cuts/0002-pursuit.json`](../cases/live/proof-carrying-work-object/cuts/0002-pursuit.json) and [`../cases/live/proof-carrying-work-object/cuts/0002-warrant.json`](../cases/live/proof-carrying-work-object/cuts/0002-warrant.json) |
 | What practice guidelines are derived from the foundation triad? | [`foundation-model.md`](foundation-model.md#practice-guidelines) |
 | How should a product show timeline order from a declared perspective? | [KFD-4](../decisions/KFD-4.md) |

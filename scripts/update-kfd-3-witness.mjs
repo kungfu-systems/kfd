@@ -45,6 +45,11 @@ const liveCaseSurfaces = liveCaseRegistry.cases.flatMap((entry) => [
   { id: `case:${entry.id}:propagation-hypothesis`, sourcePath: entry.propagationHypothesis, sha256: sha256File(entry.propagationHypothesis) },
   { id: `case:${entry.id}:review-index`, sourcePath: entry.reviewIndex, sha256: sha256File(entry.reviewIndex) },
   { id: `case:${entry.id}:ontology-split`, sourcePath: entry.ontologySplit, sha256: sha256File(entry.ontologySplit) },
+  {
+    id: `case:${entry.id}:distinguishability-argument`,
+    sourcePath: entry.distinguishabilityArgument,
+    sha256: sha256File(entry.distinguishabilityArgument),
+  },
   ...entry.candidateTracks.map((track) => ({
     id: `case:${entry.id}:candidate:${track.id}:current-cut`,
     sourcePath: track.currentCut.path,

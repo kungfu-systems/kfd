@@ -173,6 +173,76 @@ The model rejects these shortcuts:
 - one fused work object may overwrite independent intent, knowledge,
   authorization, and experience lifecycles.
 
+## Prior art and independent convergence: BDI
+
+The four-object model has an independent theory-first ancestor. The
+Belief-Desire-Intention line began from the philosophy of action (Bratman,
+*Intention, Plans, and Practical Reason*, 1987): intentions are not reducible
+to beliefs plus desires; they are persisting commitments that constrain later
+deliberation because deliberation is resource-bounded. Rao and Georgeff
+subsequently formalized BDI agents and connected the theory to executable
+systems. BDI architectures also reached real deployments and mature agent
+tooling.
+
+The comparison is useful, but it does not yield a one-to-one mapping:
+
+| BDI concept | Closest four-object relation | Boundary |
+|---|---|---|
+| Belief base | `Atlas` | Partial: both condition action on a represented world, but Atlas declares perspective, cut, provenance, and loss rather than merely storing current beliefs |
+| Desire or goal | Candidate input to `Pursuit` | Partial: a desired state can motivate a Pursuit but does not by itself provide durable identity, revision lineage, or settlement conditions |
+| Intention or committed plan | `Pursuit` | Strongest correspondence: both preserve commitment across bounded deliberation, while Pursuit externalizes identity across actors and execution surfaces |
+| Authorization or permission | `Warrant` | No direct counterpart in the classical BDI core; a Warrant adds an external deontic and authority boundary rather than another private mental attitude |
+| Action, event, or percept history | `Episode` | Operational BDI systems can record these, but the core model does not require a first-class, durable, replayable causal-evidence object |
+
+The missing direct counterpart for Warrant is informative. A BDI intention is
+the agent's own commitment to act; a Warrant addresses whether a recognized
+authority permits bounded continuation. Multi-agent BDI research does not make
+BDI a single-owner theory, but the classical belief-desire-intention core does
+not itself make external authority, delegation, revocation, and evidential
+basis first-class attitudes.
+
+Limits exposed by BDI's adoption history also identify risks for this model:
+
+- beliefs and plan libraries were hand-authored, reproducing the knowledge
+  engineering bottleneck;
+- formal semantics and executable implementations have a standing
+  correspondence and verification burden;
+- provenance, evidence cuts, content addressing, and external authority are
+  not guaranteed by the three-attitude core;
+- real deployments did not make BDI the dominant general substrate for
+  cross-boundary agent work.
+
+Two implications follow. First, an independent theory-first path and this
+pressure-first path converging on related commitment and represented-world
+dimensions raises prior confidence that those dimensions are not merely one
+organization's taste. It does not prove the four-object model, its names, or
+its minimum closure. Second, BDI's mixed record of formal maturity, real
+deployment, and limited general infrastructure adoption is a standing warning:
+an ontology does not transfer merely because it is coherent.
+
+This mapping is a comparison instrument, not a lineage claim. The candidates
+were not derived from BDI, and every row remains open to stronger historical
+and empirical review.
+
+The BDI literature also contributes reusable probes for the qualification
+plan: intention-reconsideration policies (bold versus cautious agents, Kinny
+and Georgeff 1991) probe when a Pursuit should retain or revise commitment.
+They do not determine Warrant expiry or renewal, which remains an authority
+policy. BDI maintenance goals -- goals with no terminal acceptance state --
+probe the continuing-process boundary already listed as a required Pursuit
+counterexample.
+
+Sources:
+
+- [Michael Bratman, *Intention, Plans, and Practical Reason*](https://press.uchicago.edu/ucp/books/book/distributed/I/bo3629095.html)
+- [Anand Rao and Michael Georgeff, *BDI Agents: From Theory to Practice*](https://aaai.org/papers/icmas95-042-bdi-agents-from-theory-to-practice/)
+
+The separate
+[conditional distinguishability argument](distinguishability.md) now tests
+whether the information attributed to Pursuit, Atlas, Warrant, and Episode can
+be deleted without changing a required decision. It is stronger than analogy
+to prior art but still does not establish universal necessity.
+
 ## Current confidence
 
 The strongest current claim is structural:

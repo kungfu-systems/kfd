@@ -139,8 +139,9 @@ for (const [index, liveCase] of (liveCaseRegistry.cases ?? []).entries()) {
     propagationHypothesis: `${caseRoot}/propagation-hypothesis.md`,
     reviewIndex: `${caseRoot}/reviews/README.md`,
     ontologySplit: `${caseRoot}/ontology-split.md`,
+    distinguishabilityArgument: `${caseRoot}/distinguishability.md`,
   };
-  for (const field of ["humanEntry", "genesis", "methodTrace", "propagationHypothesis", "reviewIndex", "ontologySplit"]) {
+  for (const field of ["humanEntry", "genesis", "methodTrace", "propagationHypothesis", "reviewIndex", "ontologySplit", "distinguishabilityArgument"]) {
     if (liveCase[field] !== expectedCasePaths[field]) fail(`${label}.${field} must stay inside ${caseRoot}`);
     if (!existsSync(liveCase[field])) fail(`${label}.${field} points to missing ${liveCase[field]}`);
   }
@@ -322,6 +323,12 @@ for (const liveCase of liveCaseRegistry.cases ?? []) {
   if (projected.url !== `/cases/live/${liveCase.id}`) fail(`site bundle live case ${liveCase.id} URL is invalid`);
   if (projected.ontologySplit?.path !== liveCase.ontologySplit || !projected.ontologySplit?.markdown) {
     fail(`site bundle live case ${liveCase.id} must project ontologySplit`);
+  }
+  if (
+    projected.distinguishabilityArgument?.path !== liveCase.distinguishabilityArgument
+    || !projected.distinguishabilityArgument?.markdown
+  ) {
+    fail(`site bundle live case ${liveCase.id} must project distinguishabilityArgument`);
   }
   for (const field of ["humanEntry", "genesis", "methodTrace", "propagationHypothesis", "reviewIndex"]) {
     if (projected[field]?.path !== liveCase[field] || !projected[field]?.markdown) {
@@ -1375,6 +1382,17 @@ if (!kfd3Interface) {
     }
     if (!kfd3Interface.valueEvidence.some((entry) => entry.id === "kfd-live-case-dogfood" && entry.facts?.some((fact) => fact.path === liveCaseRegistryPath))) {
       fail("KFD-3 live-case value evidence must bind the live case registry");
+    }
+    const liveCaseEvidence = kfd3Interface.valueEvidence.find((entry) => entry.id === "kfd-live-case-dogfood");
+    for (const requiredPath of [
+      "cases/live/proof-carrying-work-object/ontology-split.md",
+      "cases/live/proof-carrying-work-object/distinguishability.md",
+      "cases/live/proof-carrying-work-object/cuts/0002-pursuit.json",
+      "cases/live/proof-carrying-work-object/cuts/0002-warrant.json",
+    ]) {
+      if (!liveCaseEvidence?.facts?.some((fact) => fact.path === requiredPath)) {
+        fail(`KFD-3 live-case value evidence must bind ${requiredPath}`);
+      }
     }
   }
   if (!Array.isArray(kfd3Interface.extensionRequests) || kfd3Interface.extensionRequests.length === 0) fail("KFD-3 collaboration interface extensionRequests[] is required");

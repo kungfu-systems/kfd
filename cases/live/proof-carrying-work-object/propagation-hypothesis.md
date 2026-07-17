@@ -82,6 +82,43 @@ agreement.
 - evidence that recipients preserve the KFD constraints rather than merely
   copying fields.
 
+## Cautionary precedent: FIPA
+
+Agent standardization has been attempted before. FIPA standardized agent
+communication in the late 1990s through agent communication languages,
+speech-act performatives, interaction protocols, management specifications,
+reference implementation ecosystems such as JADE, and interoperability tests.
+It later joined the IEEE Computer Society. FIPA is currently inactive, while
+its specifications remain openly available.
+
+FIPA's own 1997 Agent Communication Language specification exposes a precise
+boundary. It defined formal mental-attitude semantics but made that model
+informative rather than normative because agreed compliance testing for those
+attitudes was unresolved. Implementations could interoperate at declared
+message surfaces without proving the internal semantic conditions that gave
+the vocabulary its strongest meaning.
+
+Modern agent protocols do not generally require FIPA compatibility, and direct
+continuity between the generations appears limited. That observation is not a
+proof that FIPA failed or that no implementation lineage exists. FIPA achieved
+real tooling, deployments, and interoperability work. It is a caution that a
+machine-readable standard and a living implementation ecosystem can still
+lose load-bearing continuity when later work no longer depends on the same
+semantics.
+
+The loop proposed above is deliberately inverse to FIPA's order: working
+substrate first, agent adoption for self-interested reasons (lower
+reconstruction cost, higher gate passage), and the standard read out of
+running systems rather than legislated ahead of them. This remains a
+hypothesis, not a settled historical law. The case therefore adds a falsifier
+of its own, recorded below.
+
+Sources:
+
+- [FIPA public specification archive](https://www.fipa.org/repository/standardspecs.html)
+- [FIPA 1997 Agent Communication Language specification](https://www.fipa.org/specs/fipa00003/OC00003A)
+- [JADE FIPA-compliant platform documentation](https://jade.tilab.com/documentation/tutorials-guides/sniffer/introduction/)
+
 ## Falsifiers
 
 The propagation hypothesis weakens or fails if:
@@ -95,7 +132,9 @@ The propagation hypothesis weakens or fails if:
 - Pursuit or Warrant creates more coordination burden than it removes;
 - independent domains converge on incompatible identity or authority
   boundaries;
-- the original fused object performs better than the split under real work.
+- the original fused object performs better than the split under real work;
+- machine-conformant surfaces and citations grow while independent working
+  substrates and downstream reliance do not.
 
 ## Anti-self-certification
 
