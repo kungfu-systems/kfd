@@ -82,6 +82,28 @@ agreement.
 - evidence that recipients preserve the KFD constraints rather than merely
   copying fields.
 
+## Cautionary precedent: FIPA
+
+Agent standardization has been attempted before. FIPA standardized agent
+communication in the late 1990s — an agent communication language with
+speech-act performatives, interaction protocols, and reference implementations
+such as JADE — and later became an IEEE Computer Society standards activity.
+The standard accumulated conformance citations. Today's agent-to-agent
+protocols were nevertheless built with no FIPA inheritance: the problem
+returned, and the standard was not consulted.
+
+The KFD reading of that record: a standard published ahead of a living
+substrate dies with its generation of implementations, because nothing keeps
+its constraints load-bearing between generations. Conformance without value
+evidence is exactly the hollow state KFD-3 names — surfaces that cite the
+vocabulary while nothing downstream depends on its guarantees.
+
+The loop proposed above is deliberately inverse to FIPA's order: working
+substrate first, agent adoption for self-interested reasons (lower
+reconstruction cost, higher gate passage), and the standard read out of
+running systems rather than legislated ahead of them. This precedent therefore
+adds a falsifier of its own, recorded below.
+
 ## Falsifiers
 
 The propagation hypothesis weakens or fails if:
@@ -95,7 +117,9 @@ The propagation hypothesis weakens or fails if:
 - Pursuit or Warrant creates more coordination burden than it removes;
 - independent domains converge on incompatible identity or authority
   boundaries;
-- the original fused object performs better than the split under real work.
+- the original fused object performs better than the split under real work;
+- schema-conformance citations accumulate faster than working adopter
+  substrates — the FIPA failure mode reproducing under a KFD name.
 
 ## Anti-self-certification
 

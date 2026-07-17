@@ -173,6 +173,65 @@ The model rejects these shortcuts:
 - one fused work object may overwrite independent intent, knowledge,
   authorization, and experience lifecycles.
 
+## Prior art and convergent structure: BDI
+
+The four-object model has an independent theory-first ancestor. The
+Belief-Desire-Intention line began from the philosophy of action (Bratman,
+*Intention, Plans, and Practical Reason*, 1987): intentions are not reducible
+to beliefs plus desires; they are persisting commitments that constrain later
+deliberation because deliberation is resource-bounded. Rao and Georgeff
+formalized the model (*BDI Agents: From Theory to Practice*, ICMAS 1995), and
+implementations were deployed on real systems: PRS for Space Shuttle reaction
+control system malfunction handling, OASIS for Sydney air traffic sequencing,
+and commercial platforms such as JACK.
+
+The structural correspondence is close but not exact:
+
+| BDI object | Four-object counterpart | Fidelity |
+|---|---|---|
+| Desire / goal | `Pursuit` | High: durable intended change independent of any one plan or session |
+| Belief base | `Atlas` | Medium: same role, but BDI beliefs were unaddressed assertions without provenance or cut identity |
+| Intention (committed plan) | `Warrant` | Partial: see divergence below |
+| — no counterpart — | `Episode` | BDI had no evidence object at all |
+
+The Intention/Warrant divergence is itself informative. A BDI intention is the
+agent's own commitment to act; a Warrant is an authorization issued by a
+recognized authority. BDI assumed single-owner closed systems in which
+authority was implicit and trust was not a design concern. A multi-participant
+economy forces authority out of the agent's head and into an explicit,
+fact-addressed, revocable object.
+
+Why BDI did not industrialize also names what this model must not omit:
+
+- beliefs and plan libraries were hand-authored, reproducing the knowledge
+  engineering bottleneck;
+- the formal layer (modal logics) diverged from what implementations actually
+  ran, so its cost stayed while its guarantees evaporated;
+- there was no provenance, evidence, or content-addressed identity anywhere in
+  the model;
+- work never crossed organizational boundaries, so no propagation economics
+  existed.
+
+Two implications follow. First, an independent theory-first path and this
+pressure-first path converging on homologous structure raises confidence that
+the structure belongs to reality rather than to one organization's taste — the
+same class of evidence as independent mandate-shaped authorization objects
+appearing in agent payment protocols. Second, BDI's thirty years without
+industrial adoption is a standing warning: a correct ontology without
+fact-addressing and evidence-grade records does not transfer.
+
+This mapping is a comparison instrument, not a lineage claim. The candidates
+were not derived from BDI, and contested rows — especially
+Intention/`Warrant` — should remain open questions for review rather than be
+treated as settled.
+
+The BDI literature also contributes reusable probes for the qualification
+plan: intention-reconsideration policies (bold versus cautious agents, Kinny
+and Georgeff 1991) map onto Warrant expiry and renewal policy; BDI maintenance
+goals — goals with no terminal acceptance state — probe exactly the
+continuing-process boundary already listed as a required Pursuit
+counterexample.
+
 ## Current confidence
 
 The strongest current claim is structural:
