@@ -1,6 +1,7 @@
 # KFD-5 Implementation Notes
 
 [Authoritative decision](../decisions/KFD-5.md) ·
+[Formal reference](KFD-5-formal.md) ·
 [Documentation map](MAP.md)
 
 KFD-5 separates primitive genesis from primitive qualification. Genesis may use

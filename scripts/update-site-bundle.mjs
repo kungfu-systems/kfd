@@ -3,8 +3,10 @@ import { pathToFileURL } from "node:url";
 
 const README_PATH = "README.md";
 const FOUNDATION_PATH = "docs/foundation-model.md";
+const FORMAL_PATH = "docs/formal-model.md";
 const CASES_PATH = "docs/primitive-discovery-cases.md";
 const REGISTRY_PATH = "registry.json";
+const STANDARDS_PATH = "standards.json";
 const SITE_BUNDLE_PATH = "site/kfd-site.json";
 
 const normalizeLines = (value) => String(value || "").replace(/\r\n/g, "\n").trim();
@@ -76,6 +78,8 @@ const parseFoundationTriad = (markdown) => {
     sourceTarget: link[2],
     url: link[2] === FOUNDATION_PATH
       ? "/foundation"
+      : link[2] === FORMAL_PATH
+        ? "/formal"
       : link[2] === CASES_PATH
         ? "/cases"
         : link[2],
@@ -157,6 +161,29 @@ const buildUsagePages = (entries) => entries.map((entry) => {
   };
 });
 
+const buildFormalPages = (entries, standards) => entries.map((entry) => {
+  const formalModel = standards.standards?.[entry.slug]?.formalModel;
+  const formalPath = formalModel?.path || "";
+  return {
+    id: `${entry.id}-formal`,
+    decisionId: entry.id,
+    decisionNumber: entry.number,
+    parentPath: entry.path,
+    parentUrl: entry.url,
+    path: formalPath,
+    url: formalModel?.url || "",
+    sourcePath: formalPath,
+    sourceExists: existsSync(formalPath),
+    relationship: "formal-reference-child-of-decision",
+    normative: formalModel?.normative,
+    formalModelVersion: formalModel?.version,
+    formalModelStatus: formalModel?.status,
+    authorityPath: formalModel?.authorityPath,
+    sha256: formalModel?.sha256,
+    title: `${entry.id} formal reference`,
+  };
+});
+
 const section = ({ id, sourceHeading, title, markdown, role, priority, presentation, firstScreen = false, sourcePath = README_PATH }) => ({
   id,
   sourcePath,
@@ -169,9 +196,10 @@ const section = ({ id, sourceHeading, title, markdown, role, priority, presentat
   markdown: normalizeLines(markdown),
 });
 
-export const buildSiteBundle = ({ readmeText, foundationText, casesText, registry }) => {
+export const buildSiteBundle = ({ readmeText, foundationText, formalText, casesText, registry, standards }) => {
   const readme = parseReadme(readmeText);
   const foundationDocument = parseReadme(foundationText);
+  const formalDocument = parseReadme(formalText);
   const casesDocument = parseReadme(casesText);
   const futurePicture = parseFuturePicture(readme.intro);
   const { lead } = introLead(readme.intro);
@@ -288,16 +316,20 @@ export const buildSiteBundle = ({ readmeText, foundationText, casesText, registr
       package: "@kungfu-tech/kfd",
       homepageTextSource: README_PATH,
       foundationTextSource: FOUNDATION_PATH,
+      formalTextSource: FORMAL_PATH,
       casesTextSource: CASES_PATH,
       registry: REGISTRY_PATH,
+      standards: STANDARDS_PATH,
       decisionsDir: "decisions",
     },
     routes: {
       home: "/",
       foundation: "/foundation",
+      formal: "/formal",
       cases: "/cases",
       decisionPattern: "/{number}",
       decisionUsagePattern: "/{number}/usage",
+      decisionFormalPattern: "/{number}/formal",
       llms: "/llms.txt",
       manifest: "/manifest.json",
     },
@@ -335,7 +367,7 @@ export const buildSiteBundle = ({ readmeText, foundationText, casesText, registr
           source: FOUNDATION_PATH,
           sections: ["foundation-model", "load-bearing-product-witness", "practice-guidelines"],
         },
-        readingPath: ["/", "/foundation", "/cases", "/{number}"],
+        readingPath: ["/", "/foundation", "/formal", "/cases", "/{number}"],
         support: ["agent-quickstart", "decision-metadata"],
         currentDecisions: {
           source: REGISTRY_PATH,
@@ -367,6 +399,17 @@ export const buildSiteBundle = ({ readmeText, foundationText, casesText, registr
       authorityNote: "The numbered texts in decisions/KFD-N.md remain authoritative.",
       markdown: normalizeLines(foundationText),
     },
+    formalPage: {
+      id: "formal-model",
+      title: formalDocument.title,
+      sourcePath: FORMAL_PATH,
+      url: "/formal",
+      relationship: "non-normative-reference-semantics-for-numbered-decisions",
+      normative: false,
+      formalModelVersion: 1,
+      authorityNote: "The numbered texts in decisions/KFD-N.md remain authoritative.",
+      markdown: normalizeLines(formalText),
+    },
     casesPage: {
       id: "primitive-discovery-cases",
       title: casesDocument.title,
@@ -387,6 +430,14 @@ export const buildSiteBundle = ({ readmeText, foundationText, casesText, registr
         stableUrlPattern: "/{number}/usage",
         relationship: "usage-child-of-decision",
         pages: buildUsagePages(entries),
+      },
+      formalPages: {
+        source: "registry.entries[] + standards.json + docs/KFD-N-formal.md",
+        bodySource: "docs/KFD-{number}-formal.md",
+        stableUrlPattern: "/{number}/formal",
+        relationship: "formal-reference-child-of-decision",
+        normative: false,
+        pages: buildFormalPages(entries, standards),
       },
       metadata: {
         licenseBoundary: {
@@ -421,6 +472,7 @@ export const buildSiteBundle = ({ readmeText, foundationText, casesText, registr
         "homepage title and text",
         "homepage section projection from README.md",
         "foundation explanation page from docs/foundation-model.md",
+        "formal reference overview from docs/formal-model.md",
         "historical cases page from docs/primitive-discovery-cases.md",
         "foundation triad commitments",
         "foundation model layers and chain",
@@ -432,6 +484,8 @@ export const buildSiteBundle = ({ readmeText, foundationText, casesText, registr
         "decision markdown bodies",
         "decision usage page mapping",
         "decision usage markdown bodies",
+        "decision formal reference mapping",
+        "decision formal reference markdown bodies",
       ],
       ownedBySite: [
         "HTML structure",
@@ -450,8 +504,10 @@ export const buildSiteBundle = ({ readmeText, foundationText, casesText, registr
 export const readInputs = () => ({
   readmeText: readFileSync(README_PATH, "utf8"),
   foundationText: readFileSync(FOUNDATION_PATH, "utf8"),
+  formalText: readFileSync(FORMAL_PATH, "utf8"),
   casesText: readFileSync(CASES_PATH, "utf8"),
   registry: JSON.parse(readFileSync(REGISTRY_PATH, "utf8")),
+  standards: JSON.parse(readFileSync(STANDARDS_PATH, "utf8")),
 });
 
 export const generatedSiteBundle = () => buildSiteBundle(readInputs());

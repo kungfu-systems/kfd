@@ -1,10 +1,10 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "contract": "kfd-standards-metadata",
   "metadataSchema": {
     "id": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json",
     "path": "schemas/kfd-standards.schema.json",
-    "version": "1"
+    "version": "2"
   },
   "source": {
     "package": "@kungfu-tech/kfd",
@@ -21,16 +21,25 @@
       "kind": "procedure",
       "status": "active",
       "revision": 3,
-      "metadataSchemaVersion": "1",
+      "metadataSchemaVersion": "2",
       "document": {
         "path": "decisions/KFD-1.md",
         "url": "https://kfd.libkungfu.dev/1",
         "sha256": "4ac99d594518e1b55512ddef5bb05441a23ff2970d07bc8afe4718840a8c36d1"
       },
+      "formalModel": {
+        "path": "docs/KFD-1-formal.md",
+        "url": "https://kfd.libkungfu.dev/1/formal",
+        "version": 1,
+        "status": "experimental",
+        "normative": false,
+        "authorityPath": "decisions/KFD-1.md",
+        "sha256": "544836fe327033def4170d7a7aadde9d816f1ee8e52f2573f988823e99b2c0b6"
+      },
       "compatibility": {
         "packageLine": "v1.0",
         "registrySchemaVersion": 1,
-        "metadataSchemaVersion": "1",
+        "metadataSchemaVersion": "2",
         "rule": "Before the first stable release, maintainer-authorized semantic refinement must declare breaking decision-surface impact; after stable, substantive change mints a new KFD."
       },
       "schemaIds": {
@@ -122,6 +131,22 @@
             "description": "Published non-numbered KFD foundation explanation at docs/foundation-model.md.",
             "sourcePath": "docs/foundation-model.md",
             "weldRationale": "Humans, agents, and site consumers can audit the complete explanatory path while numbered KFD texts retain normative authority.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "formal-model-doc",
+            "class": "cross-time",
+            "classes": [
+              "cross-time"
+            ],
+            "description": "Published non-normative KFD formal overview at docs/formal-model.md.",
+            "sourcePath": "docs/formal-model.md",
+            "weldRationale": "Humans, agents, and site consumers can rely on one versioned reference-semantics entrypoint while numbered decisions retain normative authority.",
             "impactProjection": {
               "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
               "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
@@ -792,6 +817,90 @@
             }
           },
           {
+            "id": "kfd-1-formal-doc",
+            "class": "cross-time",
+            "classes": ["cross-time"],
+            "description": "Published KFD-1 formal reference at docs/KFD-1-formal.md.",
+            "sourcePath": "docs/KFD-1-formal.md",
+            "weldRationale": "Consumers can audit and cite the versioned non-normative reference semantics for KFD-1.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-2-formal-doc",
+            "class": "cross-time",
+            "classes": ["cross-time"],
+            "description": "Published KFD-2 formal reference at docs/KFD-2-formal.md.",
+            "sourcePath": "docs/KFD-2-formal.md",
+            "weldRationale": "Consumers can audit and cite the versioned non-normative reference semantics for KFD-2.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-3-formal-doc",
+            "class": "cross-time",
+            "classes": ["cross-time"],
+            "description": "Published KFD-3 formal reference at docs/KFD-3-formal.md.",
+            "sourcePath": "docs/KFD-3-formal.md",
+            "weldRationale": "Consumers can audit and cite the versioned non-normative reference semantics for KFD-3.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-4-formal-doc",
+            "class": "cross-time",
+            "classes": ["cross-time"],
+            "description": "Published KFD-4 formal reference at docs/KFD-4-formal.md.",
+            "sourcePath": "docs/KFD-4-formal.md",
+            "weldRationale": "Consumers can audit and cite the versioned non-normative reference semantics for KFD-4.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-5-formal-doc",
+            "class": "cross-time",
+            "classes": ["cross-time"],
+            "description": "Published KFD-5 formal reference at docs/KFD-5-formal.md.",
+            "sourcePath": "docs/KFD-5-formal.md",
+            "weldRationale": "Consumers can audit and cite the versioned non-normative reference semantics for KFD-5.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-6-formal-doc",
+            "class": "cross-time",
+            "classes": ["cross-time"],
+            "description": "Published KFD-6 draft formal reference at docs/KFD-6-formal.md.",
+            "sourcePath": "docs/KFD-6-formal.md",
+            "weldRationale": "Consumers can audit and cite the versioned non-normative reference semantics for the draft KFD-6 decision.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
             "id": "kfd-1-publication-url-semantics-schema",
             "class": "integration-time",
             "classes": [
@@ -820,16 +929,25 @@
       "kind": "principle",
       "status": "active",
       "revision": 2,
-      "metadataSchemaVersion": "1",
+      "metadataSchemaVersion": "2",
       "document": {
         "path": "decisions/KFD-2.md",
         "url": "https://kfd.libkungfu.dev/2",
         "sha256": "d4f0b56f3f09d4aaa2053c9b382f58f8f6dc726acdba333d33dd2f71d84fba2c"
       },
+      "formalModel": {
+        "path": "docs/KFD-2-formal.md",
+        "url": "https://kfd.libkungfu.dev/2/formal",
+        "version": 1,
+        "status": "experimental",
+        "normative": false,
+        "authorityPath": "decisions/KFD-2.md",
+        "sha256": "8684c9ffac6069dc03a0aa751f1146e57b779907d8ec78f11007ee8b2dea0916"
+      },
       "compatibility": {
         "packageLine": "v1.0",
         "registrySchemaVersion": 1,
-        "metadataSchemaVersion": "1",
+        "metadataSchemaVersion": "2",
         "rule": "Before the first stable release, maintainer-authorized semantic refinement must declare breaking decision-surface impact; after stable, substantive change mints a new KFD."
       },
       "schemaIds": {
@@ -917,16 +1035,25 @@
       "kind": "principle",
       "status": "active",
       "revision": 3,
-      "metadataSchemaVersion": "1",
+      "metadataSchemaVersion": "2",
       "document": {
         "path": "decisions/KFD-3.md",
         "url": "https://kfd.libkungfu.dev/3",
         "sha256": "b3723cec308ae8516ed211c211a45f669533c8712d538ef8dcbc60630214c29a"
       },
+      "formalModel": {
+        "path": "docs/KFD-3-formal.md",
+        "url": "https://kfd.libkungfu.dev/3/formal",
+        "version": 1,
+        "status": "experimental",
+        "normative": false,
+        "authorityPath": "decisions/KFD-3.md",
+        "sha256": "ab97acc5e0c9acdc5ac7e20b36f597b0ea981e21c7cbad2ca39e5bb9d1f69cce"
+      },
       "compatibility": {
         "packageLine": "v1.0",
         "registrySchemaVersion": 1,
-        "metadataSchemaVersion": "1",
+        "metadataSchemaVersion": "2",
         "rule": "Before the first stable release, maintainer-authorized semantic refinement must declare breaking decision-surface impact; after stable, substantive change mints a new KFD."
       },
       "schemaIds": {
@@ -983,16 +1110,25 @@
       "kind": "principle",
       "status": "active",
       "revision": 7,
-      "metadataSchemaVersion": "1",
+      "metadataSchemaVersion": "2",
       "document": {
         "path": "decisions/KFD-4.md",
         "url": "https://kfd.libkungfu.dev/4",
         "sha256": "b6670285407dae2c189d099c2eecfbb6dccefd7867e2480b11949243780b91f3"
       },
+      "formalModel": {
+        "path": "docs/KFD-4-formal.md",
+        "url": "https://kfd.libkungfu.dev/4/formal",
+        "version": 1,
+        "status": "experimental",
+        "normative": false,
+        "authorityPath": "decisions/KFD-4.md",
+        "sha256": "168fce2d5dc8a810733f0c404b2d595603eeca11153edb88b3db52ceaf164676"
+      },
       "compatibility": {
         "packageLine": "v1.0",
         "registrySchemaVersion": 1,
-        "metadataSchemaVersion": "1",
+        "metadataSchemaVersion": "2",
         "rule": "Before the first stable release, maintainer-authorized semantic refinement must declare breaking decision-surface impact; after stable, substantive change mints a new KFD."
       },
       "schemaIds": {
@@ -1051,16 +1187,25 @@
       "kind": "procedure",
       "status": "active",
       "revision": 6,
-      "metadataSchemaVersion": "1",
+      "metadataSchemaVersion": "2",
       "document": {
         "path": "decisions/KFD-5.md",
         "url": "https://kfd.libkungfu.dev/5",
         "sha256": "597e3f22f2e6b830f532f7a426900b112a19b80de43ace8ab42bf78157aced5b"
       },
+      "formalModel": {
+        "path": "docs/KFD-5-formal.md",
+        "url": "https://kfd.libkungfu.dev/5/formal",
+        "version": 1,
+        "status": "experimental",
+        "normative": false,
+        "authorityPath": "decisions/KFD-5.md",
+        "sha256": "c4ea4effd0e547e46c66496115f8b11434abe5f80096dad3e90c73ce8056cd3f"
+      },
       "compatibility": {
         "packageLine": "v1.0",
         "registrySchemaVersion": 1,
-        "metadataSchemaVersion": "1",
+        "metadataSchemaVersion": "2",
         "rule": "Before the first stable release, maintainer-authorized semantic refinement must declare breaking decision-surface impact; after stable, substantive change mints a new KFD."
       },
       "schemaIds": {
@@ -1124,16 +1269,25 @@
       "kind": "procedure",
       "status": "draft",
       "revision": 7,
-      "metadataSchemaVersion": "1",
+      "metadataSchemaVersion": "2",
       "document": {
         "path": "decisions/KFD-6.md",
         "url": "https://kfd.libkungfu.dev/6",
         "sha256": "1e40e0848fc7bd51abeb5ea8b70efd3b444acbdafaed097bf029e9ed6394292f"
       },
+      "formalModel": {
+        "path": "docs/KFD-6-formal.md",
+        "url": "https://kfd.libkungfu.dev/6/formal",
+        "version": 1,
+        "status": "experimental",
+        "normative": false,
+        "authorityPath": "decisions/KFD-6.md",
+        "sha256": "ab4accd65a7d94bfccb85c987b26bf7b7220f1e5bd1f6b648ffdc5cfc4df9022"
+      },
       "compatibility": {
         "packageLine": "v1.0",
         "registrySchemaVersion": 1,
-        "metadataSchemaVersion": "1",
+        "metadataSchemaVersion": "2",
         "rule": "Before the first stable release, maintainer-authorized semantic refinement must declare breaking decision-surface impact; after stable, substantive change mints a new KFD."
       },
       "schemaIds": {

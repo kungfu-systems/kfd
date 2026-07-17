@@ -1,6 +1,7 @@
 # KFD-3 Collaboration Interface
 
 [Authoritative decision](../decisions/KFD-3.md) ·
+[Formal reference](KFD-3-formal.md) ·
 [Documentation map](MAP.md)
 
 KFD-3 is a cooperation standard for intelligent participants. It is not an

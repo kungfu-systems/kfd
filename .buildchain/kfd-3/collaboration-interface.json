@@ -78,6 +78,12 @@
       "purpose": "Read or render the complete non-numbered explanation behind the concise KFD homepage."
     },
     {
+      "id": "formal-model",
+      "surface": "docs/formal-model.md",
+      "participants": ["human-reader", "agent-reader", "site-consumer", "package-consumer"],
+      "purpose": "Inspect the shared notation, authority boundary, and traceability contract for non-normative KFD formal references."
+    },
+    {
       "id": "primitive-discovery-cases",
       "surface": "docs/primitive-discovery-cases.md",
       "participants": ["human-reader", "agent-reader", "site-consumer"],
@@ -141,7 +147,7 @@
       "id": "site-bundle",
       "surface": "site/kfd-site.json",
       "participants": ["site-consumer", "agent-reader"],
-      "purpose": "Render KFD-owned homepage, foundation explanation, historical cases, and decision pages without duplicating extraction logic."
+      "purpose": "Render KFD-owned homepage, foundation explanation, formal references, historical cases, and decision pages without duplicating extraction logic."
     }
   ],
   "surfaces": [
@@ -160,6 +166,22 @@
       "value": "Complete non-numbered explanation of the KFD worldview and its path from capability to discovery.",
       "discoverability": { "fromMinimalEntrypoint": true, "path": "docs/foundation-model.md" },
       "maturity": "stable"
+    },
+    {
+      "id": "formal-model",
+      "kind": "markdown-doc",
+      "participants": ["human-reader", "agent-reader", "site-consumer", "package-consumer"],
+      "value": "Versioned non-normative reference semantics that make KFD objects, invariants, transitions, invalid states, and proof obligations explicit.",
+      "discoverability": { "fromMinimalEntrypoint": true, "path": "docs/formal-model.md" },
+      "maturity": "experimental"
+    },
+    {
+      "id": "formal-references",
+      "kind": "markdown-doc",
+      "participants": ["human-reader", "agent-reader", "site-consumer", "package-consumer"],
+      "value": "One formal reference per numbered KFD, each bound to its authoritative decision and published through standards metadata.",
+      "discoverability": { "fromMinimalEntrypoint": true, "path": "docs/KFD-*-formal.md" },
+      "maturity": "experimental"
     },
     {
       "id": "primitive-discovery-cases",
@@ -229,7 +251,7 @@
       "id": "site-bundle-json",
       "kind": "json-api",
       "participants": ["site-consumer", "agent-reader"],
-      "value": "KFD-owned content projection consumed by the public site renderer, including decision metadata and the public KFD fact-source boundary.",
+      "value": "KFD-owned content projection consumed by the public site renderer, including formal-reference mappings, decision metadata, and the public KFD fact-source boundary.",
       "discoverability": { "fromMinimalEntrypoint": true, "path": "site/kfd-site.json" },
       "maturity": "stable"
     },
@@ -309,11 +331,18 @@
   "valueEvidence": [
     {
       "id": "kfd-foundation-model",
-      "claim": "KFD helps humans and agents understand the foundation model before adopting or extending kungfu-systems decisions.",
+      "claim": "KFD helps humans and agents understand the foundation model and inspect precise non-normative formal references before adopting or extending kungfu-systems decisions.",
       "participants": ["human-reader", "agent-reader", "maintainer"],
       "facts": [
         { "path": "README.md" },
         { "path": "docs/foundation-model.md" },
+        { "path": "docs/formal-model.md" },
+        { "path": "docs/KFD-1-formal.md" },
+        { "path": "docs/KFD-2-formal.md" },
+        { "path": "docs/KFD-3-formal.md" },
+        { "path": "docs/KFD-4-formal.md" },
+        { "path": "docs/KFD-5-formal.md" },
+        { "path": "docs/KFD-6-formal.md" },
         { "path": "docs/primitive-discovery-cases.md" },
         { "path": "decisions/KFD-1.md" },
         { "path": "decisions/KFD-2.md" },
@@ -336,7 +365,7 @@
           "trustImpact": "downgrade-warning",
           "machineProvability": "not-exhaustively-enumerable",
           "agentAction": "semantic-review-required",
-          "reason": "The foundation model is published and inspectable, but its full human-language meaning cannot be exhaustively proved from package bytes.",
+          "reason": "The foundation and formal models are published and inspectable, but their full human-language meaning cannot be exhaustively proved from package bytes.",
           "owner": "KFD maintainers"
         }
       ]
@@ -412,7 +441,7 @@
     {
       "id": "read-human-docs",
       "participants": ["human-reader"],
-      "choice": "Read README.md, docs/foundation-model.md, docs/MAP.md, and decisions/*.md directly."
+      "choice": "Read README.md, docs/foundation-model.md, docs/formal-model.md, docs/MAP.md, decisions/*.md, and docs/KFD-N-formal.md directly."
     },
     {
       "id": "consume-machine-metadata",
@@ -446,6 +475,6 @@
   "closure": {
     "classificationMode": "closed-world",
     "unclassifiedEntrypointsPolicy": "fail",
-    "reachableSurfaceSource": "This file plus package.json#exports, docs/foundation-model.md, docs/MAP.md, registry.json, standards.json, and Buildchain witness files."
+    "reachableSurfaceSource": "This file plus package.json#exports, docs/foundation-model.md, docs/formal-model.md, docs/KFD-*-formal.md, docs/MAP.md, registry.json, standards.json, and Buildchain witness files."
   }
 }

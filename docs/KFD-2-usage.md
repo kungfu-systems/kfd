@@ -1,6 +1,7 @@
 # KFD-2 Trust Assessment Metadata
 
 [Authoritative decision](../decisions/KFD-2.md) ·
+[Formal reference](KFD-2-formal.md) ·
 [Documentation map](MAP.md)
 
 KFD-2 says that trust must start from inspectable facts and responsibility

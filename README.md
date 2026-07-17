@@ -30,6 +30,7 @@ agents cooperate through trusted value rather than hidden pressure.
 No principle is load-bearing until it has an inspectable product witness.
 
 [Read the foundation model](docs/foundation-model.md) ·
+[Inspect the formal model](docs/formal-model.md) ·
 [See primitives in history](docs/primitive-discovery-cases.md) ·
 [Explore current decisions](#current-decisions) ·
 [Inspect the product proof path](#product-proof-path)
@@ -86,7 +87,12 @@ make the KFD package's own claims inspectable and falsifiable.
 The complete explanatory path is published at
 [`docs/foundation-model.md`](docs/foundation-model.md) and projected to the
 stable site route `/foundation`. It explains the decisions without replacing
-their numbered authoritative texts.
+their numbered authoritative texts. The non-normative formal layer begins at
+[`docs/formal-model.md`](docs/formal-model.md), with one versioned formal
+reference under `docs/KFD-N-formal.md` and the stable route `/N/formal` for
+each decision. It makes objects, invariants, transitions, invalid states, and
+proof obligations explicit without claiming to replace the decisions or prove
+natural-language meaning from package bytes.
 
 For the broader witness set, use the main Kungfu product entrypoint
 (`https://kungfu.tech`) for product philosophy, and Buildchain
@@ -102,9 +108,9 @@ e.g. `https://kfd.libkungfu.dev/1`). This repository publishes
 
 Machine consumers that need KFD-owned standard identity should read
 `standards.json`. It is the versioned metadata surface for stable standard
-keys, document routes and SHA-256 digests, schema IDs, KFD-owned concept names,
-and machine-interface contract versions. In Node or TypeScript projects, import
-it as:
+keys, decision and formal-reference routes and SHA-256 digests, schema IDs,
+KFD-owned concept names, and machine-interface contract versions. In Node or
+TypeScript projects, import it as:
 
 ```js
 import standards from "@kungfu-tech/kfd/standards.json" with { type: "json" };
@@ -116,26 +122,31 @@ Agents consuming this package should start from the same sources as humans:
 
 1. Read this README for the future picture, foundation triad, and package map.
 2. Read `docs/foundation-model.md` for the complete non-numbered explanation.
-3. Read `docs/primitive-discovery-cases.md` to test the KFD lens against familiar
+3. Read `docs/formal-model.md` for the authority boundary, shared notation, and
+   the `Decision -> Formal -> Schema -> Usage -> Witness` traceability chain.
+4. Read `docs/KFD-N-formal.md` when precise domain objects, invariants,
+   transitions, invalid states, and proof obligations are needed for a
+   particular decision.
+5. Read `docs/primitive-discovery-cases.md` to test the KFD lens against familiar
    historical cases and an ordinary cross-machine trace vignette.
-4. Read `standards.json` for canonical KFD numbers, schema IDs, concept names,
-   and interface contracts.
-5. Use `site/kfd-site.json` decision metadata or the KFD-3 collaboration
+6. Read `standards.json` for canonical KFD numbers, formal reference versions
+   and hashes, schema IDs, concept names, and interface contracts.
+7. Use `site/kfd-site.json` decision metadata or the KFD-3 collaboration
    interface fact-source metadata to identify the public KFD fact source.
-6. Use `schemas/kfd-2/trust-taxonomy.schema.json` for KFD-2 residual-risk and
+8. Use `schemas/kfd-2/trust-taxonomy.schema.json` for KFD-2 residual-risk and
    trust-downgrade values. Unknown taxonomy values are invalid.
-7. Use `schemas/kfd-2/trust-claims.schema.json` and
+9. Use `schemas/kfd-2/trust-claims.schema.json` and
    `schemas/kfd-2/trust-assessment.schema.json` when a claim needs generic
    KFD-2 assessment instead of a release-specific passport.
-8. Use `schemas/kfd-3/collaboration-interface.schema.json` and
+10. Use `schemas/kfd-3/collaboration-interface.schema.json` and
    `schemas/kfd-3/witness.schema.json` to inspect collaboration interfaces.
-9. Use `schemas/kfd-1/publication-url-semantics.schema.json` when a package,
+11. Use `schemas/kfd-1/publication-url-semantics.schema.json` when a package,
    paper, specification, or site bundle must distinguish stable reader URLs,
    latest aliases, and immutable versioned artifacts.
-10. If a needed KFD-2 taxonomy value is missing, open a KFD GitHub issue rather
+12. If a needed KFD-2 taxonomy value is missing, open a KFD GitHub issue rather
    than inventing a local value:
    `https://github.com/kungfu-systems/kfd/issues/new?title=KFD-2%20trust%20taxonomy%20extension%20request`.
-11. Use `schemas/kfd-4/observer-perspective.schema.json` to bind timelines to
+13. Use `schemas/kfd-4/observer-perspective.schema.json` to bind timelines to
    their observers and `schemas/kfd-4/perspective-replay.schema.json` to record
    perspective-preserving or contrastive replay. Use
    `schemas/kfd-5/primitive-discovery.schema.json` version 3 to record
@@ -231,9 +242,10 @@ reference KFDs; KFDs never depend on repository internals.
 
 ```text
 decisions/     one authoritative markdown file per decision (KFD-N.md)
-docs/          non-numbered explanations, usage guides, and documentation map
+docs/          non-numbered explanations, formal references, usage guides,
+               historical cases, and documentation map
 registry.json  machine-readable index (schemaVersion 1, contract kfd-registry)
-standards.json machine-readable KFD standard metadata (schemaVersion 1,
+standards.json machine-readable KFD standard metadata (schemaVersion 2,
                contract kfd-standards-metadata)
 schemas/       JSON schemas for package metadata and KFD-owned schema IDs
 site/          machine-readable site bundle for kfd.libkungfu.dev renderers

@@ -74,13 +74,16 @@ if (packageJson.scripts?.["update:evidence"] !== expectedEvidenceUpdate) {
 
 if (registry.schemaVersion !== 1) fail(`unsupported schemaVersion ${registry.schemaVersion}`);
 if (registry.contract !== "kfd-registry") fail(`unexpected contract ${registry.contract}`);
-if (standardsMetadata.schemaVersion !== 1) fail(`unsupported standards schemaVersion ${standardsMetadata.schemaVersion}`);
+if (standardsMetadata.schemaVersion !== 2) fail(`unsupported standards schemaVersion ${standardsMetadata.schemaVersion}`);
 if (standardsMetadata.contract !== "kfd-standards-metadata") fail(`unexpected standards contract ${standardsMetadata.contract}`);
 if (standardsMetadata.metadataSchema?.id !== "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json") {
   fail("standards metadataSchema.id must be the canonical KFD standards schema URI");
 }
 if (standardsMetadata.metadataSchema?.path !== "schemas/kfd-standards.schema.json") {
   fail("standards metadataSchema.path must be schemas/kfd-standards.schema.json");
+}
+if (standardsMetadata.metadataSchema?.version !== "2") {
+  fail("standards metadataSchema.version must be 2 for the required formalModel binding");
 }
 if (standardsSchema.$id !== standardsMetadata.metadataSchema?.id) {
   fail("standards schema $id must match standards metadataSchema.id");
@@ -100,16 +103,21 @@ if (siteBundle.source?.homepageTextSource !== "README.md") fail("site bundle hom
 if (siteBundle.source?.foundationTextSource !== "docs/foundation-model.md") {
   fail("site bundle foundationTextSource must be docs/foundation-model.md");
 }
+if (siteBundle.source?.formalTextSource !== "docs/formal-model.md") {
+  fail("site bundle formalTextSource must be docs/formal-model.md");
+}
 if (siteBundle.source?.casesTextSource !== "docs/primitive-discovery-cases.md") {
   fail("site bundle casesTextSource must be docs/primitive-discovery-cases.md");
 }
 if (siteBundle.source?.registry !== "registry.json") fail("site bundle registry source must be registry.json");
+if (siteBundle.source?.standards !== "standards.json") fail("site bundle standards source must be standards.json");
 if (siteBundle.source?.decisionsDir !== "decisions") fail("site bundle decisionsDir must be decisions");
 if (siteBundle.homepage?.title !== "KFD — Kung Fu Decisions") fail("site bundle homepage title must match README H1 text");
 if (!Array.isArray(siteBundle.homepage?.sections) || siteBundle.homepage.sections.length === 0) {
   fail("site bundle homepage.sections must expose generated homepage and foundation sections");
 }
 if (siteBundle.routes?.foundation !== "/foundation") fail("site bundle routes.foundation must be /foundation");
+if (siteBundle.routes?.formal !== "/formal") fail("site bundle routes.formal must be /formal");
 if (siteBundle.routes?.cases !== "/cases") fail("site bundle routes.cases must be /cases");
 if (!siteBundle.homepage?.futurePicture?.pastToFuture || !siteBundle.homepage?.futurePicture?.kungfuPath) {
   fail("site bundle homepage.futurePicture must expose the civilizational shift and Kungfu path");
@@ -131,6 +139,9 @@ if (!siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes("foundatio
 }
 if (!siteBundle.homepage?.foundationTriad?.links?.some((entry) => entry.url === "/foundation")) {
   fail("site bundle homepage foundation triad must expose the /foundation depth choice");
+}
+if (!siteBundle.homepage?.foundationTriad?.links?.some((entry) => entry.url === "/formal")) {
+  fail("site bundle homepage foundation triad must expose the /formal depth choice");
 }
 if (!siteBundle.homepage?.foundationTriad?.links?.some((entry) => entry.url === "/cases")) {
   fail("site bundle homepage foundation triad must expose the /cases historical depth choice");
@@ -168,6 +179,16 @@ if (
   fail("site bundle foundationPage must expose the non-normative /foundation explanation from docs/foundation-model.md");
 }
 if (
+  siteBundle.formalPage?.id !== "formal-model" ||
+  siteBundle.formalPage?.sourcePath !== "docs/formal-model.md" ||
+  siteBundle.formalPage?.url !== "/formal" ||
+  siteBundle.formalPage?.normative !== false ||
+  siteBundle.formalPage?.formalModelVersion !== 1 ||
+  !siteBundle.formalPage?.markdown
+) {
+  fail("site bundle formalPage must expose the non-normative formal model version 1 at /formal");
+}
+if (
   siteBundle.casesPage?.id !== "primitive-discovery-cases" ||
   siteBundle.casesPage?.sourcePath !== "docs/primitive-discovery-cases.md" ||
   siteBundle.casesPage?.url !== "/cases" ||
@@ -182,9 +203,16 @@ if (!siteBundle.casesPage?.markdown?.startsWith("# Primitive Discovery in Histor
 if (!siteBundle.homepage?.displayPlan?.readingPath?.includes("/cases")) {
   fail("site bundle homepage displayPlan readingPath must include /cases");
 }
+if (!siteBundle.homepage?.displayPlan?.readingPath?.includes("/formal")) {
+  fail("site bundle homepage displayPlan readingPath must include /formal");
+}
 if (!existsSync("docs/foundation-model.md")) fail("missing docs/foundation-model.md");
 else if (!readFileSync("docs/foundation-model.md", "utf8").startsWith("# KFD Foundation Model")) {
   fail("docs/foundation-model.md must start with the KFD Foundation Model H1");
+}
+if (!existsSync("docs/formal-model.md")) fail("missing docs/formal-model.md");
+else if (!readFileSync("docs/formal-model.md", "utf8").startsWith("# KFD Formal Model")) {
+  fail("docs/formal-model.md must start with the KFD Formal Model H1");
 }
 if (!existsSync("docs/primitive-discovery-cases.md")) fail("missing docs/primitive-discovery-cases.md");
 else if (!readFileSync("docs/primitive-discovery-cases.md", "utf8").includes("# Primitive Discovery in History")) {
@@ -208,6 +236,7 @@ if (siteBundle.homepage?.currentDecisions?.source !== "registry.json") fail("sit
 if (siteBundle.decisionPages?.source !== "registry.json") fail("site bundle decisionPages source must be registry.json");
 if (siteBundle.decisionPages?.bodySource !== "registry.entries[].path") fail("site bundle decision page body source must be registry.entries[].path");
 if (siteBundle.routes?.decisionUsagePattern !== "/{number}/usage") fail("site bundle routes.decisionUsagePattern must be /{number}/usage");
+if (siteBundle.routes?.decisionFormalPattern !== "/{number}/formal") fail("site bundle routes.decisionFormalPattern must be /{number}/formal");
 if (siteBundle.decisionPages?.usagePages?.relationship !== "usage-child-of-decision") {
   fail("site bundle decisionPages.usagePages.relationship must be usage-child-of-decision");
 }
@@ -236,6 +265,53 @@ for (const e of registry.entries) {
 for (const decisionId of usagePagesByDecision.keys()) {
   if (!registry.entries.some((entry) => entry.id === decisionId)) {
     fail(`site bundle decisionPages.usagePages has unknown decision ${decisionId}`);
+  }
+}
+if (siteBundle.decisionPages?.formalPages?.relationship !== "formal-reference-child-of-decision") {
+  fail("site bundle decisionPages.formalPages.relationship must be formal-reference-child-of-decision");
+}
+if (siteBundle.decisionPages?.formalPages?.bodySource !== "docs/KFD-{number}-formal.md") {
+  fail("site bundle decisionPages.formalPages.bodySource must be docs/KFD-{number}-formal.md");
+}
+if (siteBundle.decisionPages?.formalPages?.stableUrlPattern !== "/{number}/formal") {
+  fail("site bundle decisionPages.formalPages.stableUrlPattern must be /{number}/formal");
+}
+if (siteBundle.decisionPages?.formalPages?.normative !== false) {
+  fail("site bundle decisionPages.formalPages must remain non-normative");
+}
+const formalPagesByDecision = new Map((siteBundle.decisionPages?.formalPages?.pages ?? []).map((entry) => [entry.decisionId, entry]));
+for (const e of registry.entries) {
+  const formalPage = formalPagesByDecision.get(e.id);
+  const expectedPath = `docs/KFD-${e.number}-formal.md`;
+  const expectedUrl = `${e.url}/formal`;
+  const formalModel = standardsMetadata.standards?.[e.slug]?.formalModel;
+  if (!formalPage) fail(`site bundle decisionPages.formalPages missing ${e.id}`);
+  else {
+    if (formalPage.parentPath !== e.path) fail(`site bundle ${e.id} formal parentPath must be ${e.path}`);
+    if (formalPage.parentUrl !== e.url) fail(`site bundle ${e.id} formal parentUrl must be ${e.url}`);
+    if (formalPage.path !== expectedPath) fail(`site bundle ${e.id} formal path must be ${expectedPath}`);
+    if (formalPage.sourcePath !== expectedPath) fail(`site bundle ${e.id} formal sourcePath must be ${expectedPath}`);
+    if (formalPage.url !== expectedUrl) fail(`site bundle ${e.id} formal url must be ${expectedUrl}`);
+    if (formalPage.sourceExists !== true) fail(`site bundle ${e.id} formal sourceExists must be true`);
+    if (formalPage.normative !== false) fail(`site bundle ${e.id} formal reference must be non-normative`);
+    if (formalPage.formalModelVersion !== 1) fail(`site bundle ${e.id} formal model version must be 1`);
+    if (formalPage.formalModelStatus !== formalModel?.status) fail(`site bundle ${e.id} formal status must come from standards.json`);
+    if (formalPage.authorityPath !== e.path) fail(`site bundle ${e.id} formal authorityPath must be ${e.path}`);
+    if (formalPage.sha256 !== formalModel?.sha256) fail(`site bundle ${e.id} formal sha256 must come from standards.json`);
+  }
+  if (!existsSync(expectedPath)) fail(`missing formal document ${expectedPath} for ${e.id}`);
+  else {
+    const formalDoc = readFileSync(expectedPath, "utf8");
+    if (!formalDoc.startsWith(`# ${e.id} Formal Reference`)) fail(`${expectedPath} must start with the ${e.id} formal reference H1`);
+    if (!formalDoc.includes("- Status: experimental")) fail(`${expectedPath} must declare experimental status`);
+    if (!formalDoc.includes("- Normative: no")) fail(`${expectedPath} must declare that it is non-normative`);
+    if (!formalDoc.includes("- Formal model version: 1")) fail(`${expectedPath} must declare formal model version 1`);
+    if (!formalDoc.includes(`- Authority: \`${e.path}\``)) fail(`${expectedPath} must bind authority to ${e.path}`);
+  }
+}
+for (const decisionId of formalPagesByDecision.keys()) {
+  if (!registry.entries.some((entry) => entry.id === decisionId)) {
+    fail(`site bundle decisionPages.formalPages has unknown decision ${decisionId}`);
   }
 }
 if (siteBundle.decisionPages?.metadata?.licenseBoundary?.license !== "Apache-2.0") {
@@ -325,6 +401,19 @@ for (const e of registry.entries) {
       fail(`${e.id} standard document sha256 is required`);
     } else if (existsSync(e.path) && standard.document.sha256 !== sha256File(e.path)) {
       fail(`${e.id} standard document sha256 does not match ${e.path}`);
+    }
+    const expectedFormalPath = `docs/KFD-${e.number}-formal.md`;
+    const expectedFormalUrl = `${e.url}/formal`;
+    requireFields(standard.formalModel, standardsSchema.$defs?.formalReference?.required, `${e.id} formal model`);
+    if (standard.formalModel?.path !== expectedFormalPath) fail(`${e.id} formalModel.path must be ${expectedFormalPath}`);
+    if (standard.formalModel?.url !== expectedFormalUrl) fail(`${e.id} formalModel.url must be ${expectedFormalUrl}`);
+    if (standard.formalModel?.version !== 1) fail(`${e.id} formalModel.version must be 1`);
+    if (standard.formalModel?.status !== "experimental") fail(`${e.id} formalModel.status must be experimental`);
+    if (standard.formalModel?.normative !== false) fail(`${e.id} formalModel.normative must be false`);
+    if (standard.formalModel?.authorityPath !== e.path) fail(`${e.id} formalModel.authorityPath must match the decision path`);
+    if (!existsSync(expectedFormalPath)) fail(`${e.id} formalModel.path points to missing ${expectedFormalPath}`);
+    else if (standard.formalModel?.sha256 !== sha256File(expectedFormalPath)) {
+      fail(`${e.id} formalModel.sha256 does not match ${expectedFormalPath}`);
     }
     if (standard.metadataSchemaVersion !== standardsMetadata.metadataSchema?.version) {
       fail(`${e.id} standard metadataSchemaVersion must match metadata schema version`);
@@ -1073,12 +1162,21 @@ if (!kfd3Interface) {
   if (!kfd3Interface.minimalEntrypoints.some((entry) => entry.id === "foundation-model" && entry.surface === "docs/foundation-model.md")) {
     fail("KFD-3 collaboration interface must expose docs/foundation-model.md as a minimal entrypoint");
   }
+  if (!kfd3Interface.minimalEntrypoints.some((entry) => entry.id === "formal-model" && entry.surface === "docs/formal-model.md")) {
+    fail("KFD-3 collaboration interface must expose docs/formal-model.md as a minimal entrypoint");
+  }
   if (!kfd3Interface.minimalEntrypoints.some((entry) => entry.id === "official-status-and-trademarks" && entry.surface === "TRADEMARKS.md")) {
     fail("KFD-3 collaboration interface must expose TRADEMARKS.md as an official-status-and-trademarks entrypoint");
   }
   if (!Array.isArray(kfd3Interface.surfaces) || kfd3Interface.surfaces.length === 0) fail("KFD-3 collaboration interface surfaces[] is required");
   if (!kfd3Interface.surfaces.some((entry) => entry.id === "foundation-model" && entry.discoverability?.path === "docs/foundation-model.md")) {
     fail("KFD-3 collaboration interface must classify docs/foundation-model.md as a participant-facing surface");
+  }
+  if (!kfd3Interface.surfaces.some((entry) => entry.id === "formal-model" && entry.discoverability?.path === "docs/formal-model.md")) {
+    fail("KFD-3 collaboration interface must classify docs/formal-model.md as a participant-facing surface");
+  }
+  if (!kfd3Interface.surfaces.some((entry) => entry.id === "formal-references" && entry.discoverability?.path === "docs/KFD-*-formal.md")) {
+    fail("KFD-3 collaboration interface must classify per-decision formal references as participant-facing surfaces");
   }
   if (!kfd3Interface.surfaces.some((entry) => entry.id === "official-status-and-trademarks" && entry.discoverability?.path === "TRADEMARKS.md")) {
     fail("KFD-3 collaboration interface must expose TRADEMARKS.md as a participant-facing surface");

@@ -10,9 +10,9 @@
   "sourceRegistry": {
     "id": "kfd-collaboration-interface",
     "path": ".buildchain/kfd-3/collaboration-interface.json",
-    "sha256": "0467a22fa3fcce8ad4259294f03b31624da3937722e536fc73fe127c69916f6d"
+    "sha256": "768804741cc7da5767f1e4e2b6bbbe979be671b271f15af845d1fdcfe8925686"
   },
-  "collaborationInterfaceDigest": "sha256:0467a22fa3fcce8ad4259294f03b31624da3937722e536fc73fe127c69916f6d",
+  "collaborationInterfaceDigest": "sha256:768804741cc7da5767f1e4e2b6bbbe979be671b271f15af845d1fdcfe8925686",
   "collaborationInterface": {
     "schemaVersion": 1,
     "contract": "kfd-3-collaboration-interface",
@@ -98,6 +98,17 @@
           "site-consumer"
         ],
         "purpose": "Read or render the complete non-numbered explanation behind the concise KFD homepage."
+      },
+      {
+        "id": "formal-model",
+        "surface": "docs/formal-model.md",
+        "participants": [
+          "human-reader",
+          "agent-reader",
+          "site-consumer",
+          "package-consumer"
+        ],
+        "purpose": "Inspect the shared notation, authority boundary, and traceability contract for non-normative KFD formal references."
       },
       {
         "id": "primitive-discovery-cases",
@@ -204,7 +215,7 @@
           "site-consumer",
           "agent-reader"
         ],
-        "purpose": "Render KFD-owned homepage, foundation explanation, historical cases, and decision pages without duplicating extraction logic."
+        "purpose": "Render KFD-owned homepage, foundation explanation, formal references, historical cases, and decision pages without duplicating extraction logic."
       }
     ],
     "surfaces": [
@@ -236,6 +247,38 @@
           "path": "docs/foundation-model.md"
         },
         "maturity": "stable"
+      },
+      {
+        "id": "formal-model",
+        "kind": "markdown-doc",
+        "participants": [
+          "human-reader",
+          "agent-reader",
+          "site-consumer",
+          "package-consumer"
+        ],
+        "value": "Versioned non-normative reference semantics that make KFD objects, invariants, transitions, invalid states, and proof obligations explicit.",
+        "discoverability": {
+          "fromMinimalEntrypoint": true,
+          "path": "docs/formal-model.md"
+        },
+        "maturity": "experimental"
+      },
+      {
+        "id": "formal-references",
+        "kind": "markdown-doc",
+        "participants": [
+          "human-reader",
+          "agent-reader",
+          "site-consumer",
+          "package-consumer"
+        ],
+        "value": "One formal reference per numbered KFD, each bound to its authoritative decision and published through standards metadata.",
+        "discoverability": {
+          "fromMinimalEntrypoint": true,
+          "path": "docs/KFD-*-formal.md"
+        },
+        "maturity": "experimental"
       },
       {
         "id": "primitive-discovery-cases",
@@ -363,7 +406,7 @@
           "site-consumer",
           "agent-reader"
         ],
-        "value": "KFD-owned content projection consumed by the public site renderer, including decision metadata and the public KFD fact-source boundary.",
+        "value": "KFD-owned content projection consumed by the public site renderer, including formal-reference mappings, decision metadata, and the public KFD fact-source boundary.",
         "discoverability": {
           "fromMinimalEntrypoint": true,
           "path": "site/kfd-site.json"
@@ -510,7 +553,7 @@
     "valueEvidence": [
       {
         "id": "kfd-foundation-model",
-        "claim": "KFD helps humans and agents understand the foundation model before adopting or extending kungfu-systems decisions.",
+        "claim": "KFD helps humans and agents understand the foundation model and inspect precise non-normative formal references before adopting or extending kungfu-systems decisions.",
         "participants": [
           "human-reader",
           "agent-reader",
@@ -522,6 +565,27 @@
           },
           {
             "path": "docs/foundation-model.md"
+          },
+          {
+            "path": "docs/formal-model.md"
+          },
+          {
+            "path": "docs/KFD-1-formal.md"
+          },
+          {
+            "path": "docs/KFD-2-formal.md"
+          },
+          {
+            "path": "docs/KFD-3-formal.md"
+          },
+          {
+            "path": "docs/KFD-4-formal.md"
+          },
+          {
+            "path": "docs/KFD-5-formal.md"
+          },
+          {
+            "path": "docs/KFD-6-formal.md"
           },
           {
             "path": "docs/primitive-discovery-cases.md"
@@ -561,7 +625,7 @@
             "trustImpact": "downgrade-warning",
             "machineProvability": "not-exhaustively-enumerable",
             "agentAction": "semantic-review-required",
-            "reason": "The foundation model is published and inspectable, but its full human-language meaning cannot be exhaustively proved from package bytes.",
+            "reason": "The foundation and formal models are published and inspectable, but their full human-language meaning cannot be exhaustively proved from package bytes.",
             "owner": "KFD maintainers"
           }
         ]
@@ -674,7 +738,7 @@
         "participants": [
           "human-reader"
         ],
-        "choice": "Read README.md, docs/foundation-model.md, docs/MAP.md, and decisions/*.md directly."
+        "choice": "Read README.md, docs/foundation-model.md, docs/formal-model.md, docs/MAP.md, decisions/*.md, and docs/KFD-N-formal.md directly."
       },
       {
         "id": "consume-machine-metadata",
@@ -721,7 +785,7 @@
     "closure": {
       "classificationMode": "closed-world",
       "unclassifiedEntrypointsPolicy": "fail",
-      "reachableSurfaceSource": "This file plus package.json#exports, docs/foundation-model.md, docs/MAP.md, registry.json, standards.json, and Buildchain witness files."
+      "reachableSurfaceSource": "This file plus package.json#exports, docs/foundation-model.md, docs/formal-model.md, docs/KFD-*-formal.md, docs/MAP.md, registry.json, standards.json, and Buildchain witness files."
     }
   },
   "participantProfiles": [
@@ -754,6 +818,28 @@
       "participantFacing": true,
       "public": true,
       "sourcePath": "docs/foundation-model.md"
+    },
+    {
+      "id": "formal-model",
+      "name": "formal-model",
+      "kind": "markdown-doc",
+      "participantProfile": "human-reader,agent-reader,site-consumer,package-consumer",
+      "availability": "experimental",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": "docs/formal-model.md"
+    },
+    {
+      "id": "formal-references",
+      "name": "formal-references",
+      "kind": "markdown-doc",
+      "participantProfile": "human-reader,agent-reader,site-consumer,package-consumer",
+      "availability": "experimental",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": "docs/KFD-*-formal.md"
     },
     {
       "id": "primitive-discovery-cases",
@@ -1002,12 +1088,17 @@
     {
       "id": "doc:readme",
       "sourcePath": "README.md",
-      "sha256": "3b93ae059b374f6e0eb9a923e7a671a6a320bdc9ffe8a141b2c62ae6423d1108"
+      "sha256": "35a057c05f1385cbc7818791c80badb5847723b7aa341c34e22d4514469d7623"
     },
     {
       "id": "doc:foundation-model",
       "sourcePath": "docs/foundation-model.md",
       "sha256": "7f5f7fc63367221a508346563e17fcb15f3a51e42ebe89206a9d3853ae406039"
+    },
+    {
+      "id": "doc:formal-model",
+      "sourcePath": "docs/formal-model.md",
+      "sha256": "d78c78baf8adf3272b22198f8f2dac3148f987ec915ce040b84b98c3a1ef144e"
     },
     {
       "id": "doc:primitive-discovery-cases",
@@ -1022,37 +1113,67 @@
     {
       "id": "doc:docs-map",
       "sourcePath": "docs/MAP.md",
-      "sha256": "0f27c1ebbda24f06dbc63b9ade76eda1f53073d29db5de866e915738eca28cdc"
+      "sha256": "5dba2dadb64a067804217a0792a41c4e6d5e4eb7ee88057c0a05aae91d418be4"
     },
     {
       "id": "doc:kfd-1-usage",
       "sourcePath": "docs/KFD-1-usage.md",
-      "sha256": "ae38efb822a069ff77b9d6f96e0adf979906386c6b5f232c6c8adfa49ac02bd9"
+      "sha256": "6effb2ea8d58c70bbbdcdf995e6a81d6d7fd6d2e15829f78fe3d4621914661d3"
     },
     {
       "id": "doc:kfd-2-usage",
       "sourcePath": "docs/KFD-2-usage.md",
-      "sha256": "461f9d11c4d443f420413a0c0bcb8e522fbd92abc6c0018275e10be257c2531a"
+      "sha256": "d473c636ca23670fc5aea76287c60c4cddbf9e11224cea79799b12e8b0a9bb9d"
     },
     {
       "id": "doc:kfd-3-usage",
       "sourcePath": "docs/KFD-3-usage.md",
-      "sha256": "4c4830a814a5c85f005f236994c49fd3f9a2251d248688b2c3e5436144141e73"
+      "sha256": "c047161c3fa0aff8ebca7564cb1052288a02a4fe35b6bdc81f2846fafe4d7bcc"
     },
     {
       "id": "doc:kfd-4-usage",
       "sourcePath": "docs/KFD-4-usage.md",
-      "sha256": "9cc07cb6c6c5ed230c056e574891a27a55259e2b1aa140217192b0ae1fffd4b3"
+      "sha256": "70dc81500bd37381290d45b04a203462ce8f0656ec3047749db60b5ebb9cec20"
     },
     {
       "id": "doc:kfd-5-usage",
       "sourcePath": "docs/KFD-5-usage.md",
-      "sha256": "8f23a52b5ae743e150ae58d10db1d74e5082241eeb29e13d45e79b03fa777832"
+      "sha256": "1dc3f163a004ca8314ef3c45fe7dc413d34563655f6112b5e878b01c4f31144f"
     },
     {
       "id": "doc:kfd-6-usage",
       "sourcePath": "docs/KFD-6-usage.md",
-      "sha256": "56fdad1b0cbdb437a40315ecf0a9d27e3a2b467ee1aa4fb828f1a32084a8a02f"
+      "sha256": "5cc26c61148c4e8f5ec609e2d1029437b92f4d16202975daaa34cf6dd14d1029"
+    },
+    {
+      "id": "doc:kfd-1-formal",
+      "sourcePath": "docs/KFD-1-formal.md",
+      "sha256": "544836fe327033def4170d7a7aadde9d816f1ee8e52f2573f988823e99b2c0b6"
+    },
+    {
+      "id": "doc:kfd-2-formal",
+      "sourcePath": "docs/KFD-2-formal.md",
+      "sha256": "8684c9ffac6069dc03a0aa751f1146e57b779907d8ec78f11007ee8b2dea0916"
+    },
+    {
+      "id": "doc:kfd-3-formal",
+      "sourcePath": "docs/KFD-3-formal.md",
+      "sha256": "ab97acc5e0c9acdc5ac7e20b36f597b0ea981e21c7cbad2ca39e5bb9d1f69cce"
+    },
+    {
+      "id": "doc:kfd-4-formal",
+      "sourcePath": "docs/KFD-4-formal.md",
+      "sha256": "168fce2d5dc8a810733f0c404b2d595603eeca11153edb88b3db52ceaf164676"
+    },
+    {
+      "id": "doc:kfd-5-formal",
+      "sourcePath": "docs/KFD-5-formal.md",
+      "sha256": "c4ea4effd0e547e46c66496115f8b11434abe5f80096dad3e90c73ce8056cd3f"
+    },
+    {
+      "id": "doc:kfd-6-formal",
+      "sourcePath": "docs/KFD-6-formal.md",
+      "sha256": "ab4accd65a7d94bfccb85c987b26bf7b7220f1e5bd1f6b648ffdc5cfc4df9022"
     },
     {
       "id": "decision:kfd-1",
@@ -1089,7 +1210,7 @@
     {
       "id": "schema:kfd-standards",
       "sourcePath": "schemas/kfd-standards.schema.json",
-      "sha256": "1ad05c1e3dd76571e359841f12ffc3620db8ede626eda8ff6393407ffad710c1"
+      "sha256": "d1baed3ff8648a4f951531788f07e0179e02183dbf727cadf53b8fa6572dc1d5"
     },
     {
       "id": "schema:kfd-1:contract-world",
@@ -1166,12 +1287,12 @@
     {
       "id": "metadata:standards",
       "sourcePath": "standards.json",
-      "sha256": "c8aab99f379e260a96ba462cca0ec0f3b5217bf408b1124a138d7c5c670e5ab2"
+      "sha256": "c12f3c5d0b50f16a2c12eb70405f54200df292e5eabe4fd4697e212e1553a054"
     },
     {
       "id": "metadata:release-impact",
       "sourcePath": "release-impact.json",
-      "sha256": "b5701f36b8fd25bca2fb871941140ea3da7d15c5059cddb55ca3e7fff717f853"
+      "sha256": "9216d4aa5ab32a5360e348793156f1880b4b406541af23bd384239bb9b26ddad"
     },
     {
       "id": "metadata:release-anchor",
@@ -1191,17 +1312,17 @@
     {
       "id": "metadata:kfd-2-public-release-trust-claim",
       "sourcePath": ".buildchain/kfd-2/public-release-trust.claim.json",
-      "sha256": "520a417bbd196c9e4872d59a2cb812f314793a3a9cca3dcdb3148d7e025fbb69"
+      "sha256": "c2bd6fab0f4efdc232c2200846233b94432b14611555b12b2d374098933e83a0"
     },
     {
       "id": "metadata:kfd-2-foundation-trust-claims",
       "sourcePath": ".buildchain/kfd-2/kfd-foundation.trust-claims.json",
-      "sha256": "4d10554cab42c32dd523dfe3f56b1652ab5cda2cc126f2a253dbddd40a2c7334"
+      "sha256": "16075a506dd0d47ff410c46d5bfe9eea3a23a1d7978ab8150abc94e1e63b7102"
     },
     {
       "id": "metadata:kfd-2-foundation-trust-assessment",
       "sourcePath": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json",
-      "sha256": "a39300fa22b10912318dc92bef0d73a871b2fd9a79b8baa7383902aeb7bb335a"
+      "sha256": "b711b47c62048a4b2ca3f43d6d984d3494d80c048d96d00e55ddf48f3fc57771"
     }
   ],
   "packageExports": [
@@ -1220,7 +1341,7 @@
     {
       "id": "site:kfd-site-bundle",
       "sourcePath": "site/kfd-site.json",
-      "sha256": "aa1985d8f08f4b048e238f2c92a515b722d443914e4e915f933992bc48a7257c"
+      "sha256": "663fe3a2b61d1ceeea21eee2f03377c138627177206f08b55a23de077a9c283b"
     },
     {
       "id": "site:release-propagation",

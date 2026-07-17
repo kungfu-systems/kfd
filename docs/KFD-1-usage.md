@@ -1,6 +1,7 @@
 # KFD-1 Implementation Notes
 
 [Authoritative decision](../decisions/KFD-1.md) ·
+[Formal reference](KFD-1-formal.md) ·
 [Documentation map](MAP.md)
 
 KFD-1 defines the fact-source rule: facts must not drift. This page is the
