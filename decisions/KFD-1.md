@@ -1,4 +1,4 @@
-# KFD-1: Facts must not drift — contract worlds need one fact source
+# KFD-1: Facts must not drift
 
 - Status: active
 - Number: 1
@@ -9,247 +9,147 @@
 
 Facts must not drift.
 
-Any contract world that users, agents, or systems weld to must come from one
+A contract world that users, agents, or systems weld to must come from one
 declared fact source and change only through an explicit compatibility
 boundary.
 
-## Foundation role
+## Decision
 
-Within the KFD-1/2/3 foundation, this is the fact-source procedure:
+KFD-1 is the fact-source procedure beneath the KFD foundation. It makes
+load-bearing contracts stable enough to integrate with, replay, audit, trust,
+and correct. A declared source is not reality itself; it is the reference that
+lets reality contradict a model without the evidence changing with the
+explanation.
 
-```text
-facts must not drift
-```
+## Welded-surface register
 
-KFD-1 makes fact-bearing contract worlds explicit so they do not drift under
-changelog volume, cadence pressure, implementation pressure, or marketing
-pressure. It is the procedure that lets users and agents know which fact world
-they are integrating with, replaying, auditing, or trusting.
+Every product maintains a **welded-surface register**. Register a surface when
+either condition holds:
 
-KFD-1 has concrete implementation surfaces across the Kungfu ecosystem:
-versioning protects release lines from contract drift, config contracts protect
-multi-target configuration from drifting across runtimes, products, and
-agent-facing surfaces, publication URL semantics protect released documents and
-evidence from drifting across site rebuilds, and KFD metadata protects the
-decision package's own standard surfaces from drifting away from their declared
-source.
+- **Integration-time welding**: consumers bind to it and cannot negotiate or
+  feature-detect it at runtime, such as an ABI, schema, CLI, SDK export,
+  workflow contract, or channel ontology.
+- **Cross-time dependency**: consumers continue to depend on its output after
+  the run, such as persisted data, audit evidence, or replayable records.
 
-## Reality-correction role
+Each entry has a stable kebab-case ID and is classified as
+`integration-time`, `cross-time`, or both. The register is the input to every
+KFD-1 classification.
 
-KFD-1 does not claim that a declared fact source is reality itself. It keeps the
-load-bearing record stable enough for reality pressure to challenge a model,
-claim, or contract without the evidence changing with the explanation. If the
-fact source can drift whenever the model is revised, correction collapses into
-self-confirmation. KFD-1 preserves a stable reference from which every model
-can be inspected, contradicted, and explicitly replaced.
+## Compatibility impact
 
-## Premise: the welded-surface register
+Classify the final diff against the register. The strongest match wins:
 
-Every product maintains a **welded-surface register**. A surface is registered
-when either holds:
+| Condition | Verdict |
+|---|---|
+| A registered surface is removed, renamed incompatibly, changes layout, or changes semantics, defaults, required fields, or channel meaning | **breaking impact** |
+| A registered surface evolves additively, or a new surface is added | **additive impact**; register the new surface |
+| No registered surface changes | **no registered-surface impact** |
+| The diff cannot be classified | **unclassifiable impact**; fix the register before proceeding |
 
-- **(a) Integration-time welding** — consumers bind to it at integration time
-  and cannot negotiate or feature-detect at runtime (an ABI, a schema, an
-  action or workflow contract, CLI semantics, SDK exports, channel/tag
-  ontology).
-- **(b) Cross-time dependency** — its outputs remain depended on after the run
-  (persisted data, audit evidence, replayable records).
+The last verdict is a gate, not permission to guess. It moves the irreducible
+judgment about what users weld to back to an accountable maintainer.
 
-Each entry carries a stable kebab-case ID. A surface may be
-`integration-time`, `cross-time`, or both. Registers live in each repository's
-contract-world metadata or versioning document and are the input to every
-classification below.
+These classes are domain-neutral. A product projects them into the control
+action its domain requires: a version line, config migration, ABI epoch, API
+namespace, compatibility bridge, release gate, or workflow migration.
 
-## Concrete case: config contracts
-
-A product's global config contract is a welded surface when multiple targets
-depend on it: users, agents, UI, CLI, packaged artifacts, release gates, or
-language runtimes. Its schema, defaults, resolution rules, and resolved-output
-metadata must not drift target by target. That contract world needs one
-declared fact source, and each target should make the exact contract world it
-speaks inspectable, for example through a packaged contract copy or content
-hash.
-The rule applies before packaging as well: development-time code, tests, build
-steps, and the final product must consume the same contract mechanism. It is
-not enough for the packaged artifact to be internally consistent if the
-developer path used a different, driftable config source.
-
-## Concrete case: publication URL semantics
-
-A public paper, specification, or long-lived document often needs two route
-classes at the same time:
-
-- a **stable reader entrypoint**, such as a product page or canonical paper
-  URL, which may point readers to the current recommended version; and
-- an **immutable version entrypoint**, where the released PDF, source bundle,
-  release passport, site bundle, registry entry, or other evidence for one
-  version remains content-addressed and does not change after publication.
-
-Those routes are welded surfaces. A site repository may render the current
-page from the latest upstream package, but it must not become the only place
-where historical artifacts live. The historical artifact fact must remain in
-an archive or release registry whose versioned URL and digest do not drift.
-Mutable pages may move; immutable version artifacts must not.
-
-The KFD-owned interface for this case is
-`schemas/kfd-1/publication-url-semantics.schema.json`. It defines the generic
-vocabulary for `canonicalUrl`, `latestUrl`, `immutableVersionBaseUrl`,
-artifact digests, source coordinates, lineage, and the archive policy that
-forbids same-version digest changes or destructive sync over immutable
-prefixes. Concrete repositories own their routes and storage layout; KFD owns
-the semantics that make those declarations auditable.
-
-## The compatibility impact core
-
-Classify the actual diff against the register; the strongest match wins:
-
-| # | Condition | Verdict |
-|---|---|---|
-| 1 | **Breaks** any registered surface (removal, semantic change, layout change, incompatible rename — a semantic change counts as breakage even when shapes are unchanged: changed defaults, changed channel meaning, a newly required field) | **breaking impact** |
-| 2 | **Additively evolves** a registered surface, or **adds** a surface consumers will weld to | **additive impact** (register the new surface at the same time) |
-| 3 | Touches no registered surface | **no registered-surface impact** — regardless of how large the implementation change is |
-| 4 | **Cannot be classified** | **unclassifiable impact. Do not guess.** The register is deficient: fix the register first (a maintainer decision), then reclassify |
-
-Rule 4 is the safety valve: it forces the irreducible judgment (what counts as
-a welded surface) to a maintainer instead of letting a change silently pick
-the convenient answer.
-
-These four impact classes are the KFD-1 core. They are not inherently release
-version numbers. A product must project them into the control action that
-matches its domain: version line movement, config migration, ABI epoch, API
-namespace, release gate, runtime compatibility bridge, or user workflow gate.
-
-## Release versioning projection
-
-For release versioning, the compatibility impact core projects to semver:
+For release versioning, the projection is:
 
 | Compatibility impact | Release verdict |
 |---|---|
-| breaking impact | **major** |
-| additive impact | **minor** |
-| no registered-surface impact | **patch** |
-| unclassifiable impact | **block release; fix the register first** |
+| breaking | major |
+| additive | minor |
+| none | patch |
+| unclassifiable | block release and repair the register |
 
-This projection is the first implementation case, not the whole principle.
-Other domains must keep the same impact core while choosing their own action:
-config contracts may require a migration bridge or rejected old config, ABIs
-may require a new soname or ABI epoch, APIs may require a namespace or endpoint
-compatibility boundary, and agent/UI surfaces may require explicit workflow or
-command migration.
+Release versioning is one profile, not the whole procedure. Config contracts,
+publication URLs, ABIs, APIs, persisted evidence, and agent-facing workflows
+use the same impact core with domain-specific actions. Their concrete package
+profiles are documented in `docs/KFD-1-usage.md`.
 
-## Constraint clauses
+For config, development code, tests, builds, and delivered artifacts must
+consume one contract source; packaged consistency cannot excuse drift from the
+development path. For publications, mutable reader routes may move while
+versioned artifacts and digests remain immutable.
 
-- **Reverse prohibition.** A line must not be opened for feature volume,
-  milestones, cadence, or marketing. Lines open only because the contract
-  world changed.
-- **A line is a standing commitment.** Every opened line inherits the
-  maintainability-openness obligations: branch isolation, a permissive
-  license, a self-consistent contract world, reproducible builds from
-  self-archivable inputs, and no hard coupling to a maintainer-operated
-  service.
-- **Decision time.** The verdict is checked against the final diff before the
-  action gate that depends on it; for releases this is checked before
-  promotion into the alpha channel. Planning-time classification is only a
-  prediction.
-- **Major dignity.** A major release communicates exactly one thing: something
-  you welded to broke and you must re-audit. An empty major — one that breaks
-  nothing — devalues that signal and teaches consumers to ignore the next real
-  one.
-- **Two-layer versioning.** A registered surface may carry its own inner
-  schema version for cold-path evolution (additive fields, defaults); the
-  outer line version pins which set of contract epochs the line speaks.
-- **Namespace welding (a legal reroute).** A breaking change may be rerouted
-  into an additive one by minting the contract major into the artifact's name
-  (`node24-pnpm` → `node26-pnpm`; Go's `/v2` import paths). The old name's
-  semantics freeze forever; the new name is a new surface → minor. Removing
-  the old name is the major. This applies only where the namespace is cheap
-  (image names, paths, tags) — an ABI or layout with no name to mint cannot
-  use it.
-- **Welding-strength gradient (rationale, not procedure).** The closer a weld
-  is to content addressing (a digest pin is the strongest weld and protects
-  itself), the more a version line serves as a coordinate for floating
-  consumers rather than as protection. Coordinates still forbid in-line drift;
-  the procedure is unchanged.
-- **Deprecation protocol.** Planned breakage is a process, not an event.
-  Deprecating a surface is an additive act (a "this will go away" marking) →
-  minor, logged with the target removal major. Removal is the breakage →
-  major, and the surface must already carry its deprecation marking on at
-  least one **released** minor line before it may be removed.
-- **Major migration guide.** A decision-log entry that opens a major must link
-  migration or announcement notes; "explicitly announced" has minimum content.
+## Constraints
 
-## The decision log
+- **No reverse classification.** Feature volume, milestones, cadence, or
+  marketing do not open a line or determine impact.
+- **Decision time.** Classify the final diff before the action gate. A
+  planning-time verdict is only a prediction.
+- **Standing commitment.** An opened release line remains branch-isolated,
+  maintainable, permissively licensed, internally self-consistent,
+  reproducible from self-archivable inputs, and not hard-coupled to a
+  maintainer-operated service.
+- **Major dignity.** A major means something consumers welded to broke and
+  must be re-audited. An empty major devalues that signal.
+- **Inner versions.** A surface may carry its own schema version; the outer
+  line identifies the set of contract epochs the line speaks.
+- **Namespace welding.** A break may become additive by minting a new
+  namespace while freezing the old one, but only where namespaces are cheap
+  and both can coexist. Removing the old namespace remains breaking.
+- **Deprecation.** Marking a future removal is additive and names its target
+  major. Removal is breaking and requires at least one released deprecation
+  line first.
+- **Migration evidence.** A major-opening decision links migration or
+  announcement notes.
 
-Line openings (minor/major), register changes, deprecations, and other
-compatibility-impact decisions must be recorded in the repository's
-contract-world or versioning document. Release patches stay silent — silence
-is itself the signal that no registered surface was touched in the release
-projection.
+## Decision record
 
-One markdown table row per event, newest first:
+Register changes, deprecations, and line openings are recorded in the adopting
+repository's contract-world or versioning document. Release patches remain
+silent; that silence means no registered surface changed.
 
 ```markdown
 | Date | Action | Line | Faces | Class | Rationale | PR |
 |---|---|---|---|---|---|---|
-| 2026-07-15 | open-minor | v2.1 | event-protocol, sdk-logging | additive | Toolkit adds new welded surfaces; nothing existing breaks | #123 |
+| 2026-07-15 | open-minor | v2.1 | event-protocol, sdk-logging | additive | Adds welded surfaces without breaking existing ones | #123 |
 ```
 
-- `Action`: `open-minor | open-major | register | deprecate`.
-- `Faces`: register IDs, not prose.
-- `Class`: `additive | breaking`.
-- `Rationale`: one sentence; `open-major` must link migration notes;
-  `deprecate` must name the target removal major.
-
-Reserved machine vocabulary (for future automated evidence, so the human
-table and the machine record never diverge): `schemaVersion: 1`,
-`contract: "versioning-decision"`, camelCase fields
+`Action` is `open-minor`, `open-major`, `register`, or `deprecate`; `Faces`
+contains register IDs; `Class` is `additive` or `breaking`; rationale is one
+sentence and links required migration evidence. Reserved machine vocabulary is
+`schemaVersion: 1`, `contract: "versioning-decision"`, and
 `date / action / line / faces / class / rationale / pr`.
 
 ## Relation to KFD-2 and KFD-3
 
-KFD-2 establishes fact-first product accountability: trust must start from
-facts. KFD-1 defines the lower layer that makes such facts load-bearing:
-important facts must not drift from the contract world that declares them.
-Without KFD-1, KFD-2 would have facts that cannot reliably be re-read,
-replayed, audited, or trusted over time.
+KFD-1 keeps facts load-bearing. KFD-2 binds trust to those facts. KFD-3 lets
+participants choose and cooperate without hidden drift in the world being
+offered to them.
 
-KFD-3 establishes non-coercive cooperation with intelligent participants. That
-cooperation depends on non-drifting facts: users and agents can choose,
-delegate, replay, or refuse more honestly when the fact world is legible and
-does not drift invisibly.
+## KFD self-application
 
-## How KFDs themselves are versioned
+Published KFD artifacts are immutable. Unnumbered KFD Candidates may preserve
+an ordering hypothesis through a non-binding slot hint, but only explicit
+promotion allocates a KFD number.
 
-Every published KFD package, tag, and commit is immutable. A KFD's number is
-the content-layer coordinate. Before the first stable release, an explicitly
-maintainer-authorized semantic refinement may update a numbered decision in a
-later prerelease, but it must preserve prior prerelease artifacts and declare a
-breaking decision-surface impact. Consumers that need prerelease precision cite
-the number together with package version or commit.
+Before the first stable release, a fully evidenced Foundation Revision may
+revise, reorder, split, merge, withdraw, or renumber the latest numbered
+decisions when preserving the current structure would make a demonstrably
+weaker foundation load-bearing. It must declare breaking decision-surface
+impact, preserve every published prerelease coordinate, publish old-to-new
+lineage and migration mapping, update all projections together, and receive
+explicit authorization and review.
 
-After the first stable release, KFD documents are append-only: substantive
-semantic change is made by minting a new KFD that supersedes the old number
-(namespace welding applied to decisions). Consequently, the outer
-`@kungfu-tech/kfd` package line stays fixed at `v1.0`. Stable content operations
-such as new KFDs, status flips, and editorial clarifications are patches.
-Machine surfaces can still require `minor` or `major` surface-impact review in
-the Buildchain release passport, but that review classification is not a silent
-package-line upgrade.
+This does not suspend KFD-1: before stable, immutable published coordinates
+and procedurally revisable latest meaning are both declared parts of the
+contract world.
 
-## Implementation case: the KFD package
+The first non-prerelease KFD release performs the Foundation Freeze. After that
+freeze, a number and its meaning cannot change in place; substantive change
+mints a new KFD that explicitly supersedes the old one.
+The outer KFD package line remains `v1.0`; content operations are patches, while
+machine-surface impact remains explicit release-passport evidence.
 
-The `@kungfu-tech/kfd` npm package is a self-proof case for this procedure.
-Its decision texts, `registry.json`, `standards.json`, schemas, site bundle,
-and release propagation graph are published as stable surfaces. Their contract
-world is not inferred from README prose or package version alone: it is exposed
-through `standards.json`, checked by `scripts/check.mjs`, and bound into the
-KFD-1 witness under `.buildchain/kfd-1/contract-world.witness.json`.
-
-This lets humans and agents inspect how the KFD package prevents its own
-contract surfaces from drifting while it evolves.
+The `@kungfu-tech/kfd` package exposes its own contract world through
+`standards.json`, the schemas under `schemas/kfd-1/`, the KFD-1 witness, and
+`scripts/check.mjs`. Package implementation and self-proof details live in
+`docs/KFD-1-usage.md`.
 
 ## Adopters
 
-Each adopting repository keeps an adoption record, its welded-surface
-register, and its decision log in its own versioning document, and does not
-restate this rule. This document is the single authoritative text.
+Adopters keep their register, decision record, and implementation evidence in
+their own repository and cite KFD-1 rather than restating it.

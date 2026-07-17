@@ -1,0 +1,273 @@
+{
+  "schemaVersion": 3,
+  "contract": "kfd-5-primitive-discovery",
+  "standard": "kfd-5",
+  "candidate": {
+    "id": "pursuit",
+    "title": "Pursuit",
+    "problemStatement": "Long-running real-world agent work is repeatedly represented by provider sessions, goals, task cards, issues, traces, and mutable prose, none of which reliably preserve one intended-change identity across revisions, actors, actions, evidence, pause, and recovery.",
+    "scope": "A provisional generic continuity object behind profiles such as Atlas Go. The name, universal minimum closure, cross-domain applicability, novelty, and Primitive status remain open."
+  },
+  "genesis": {
+    "methods": [
+      "direct-situated-judgment",
+      "perspective-transformation",
+      "reconstruction-pressure",
+      "structural-compression"
+    ],
+    "observationPerspective": {
+      "id": "provider-task-state",
+      "bearer": "agent or operator viewing work through one task card, chat, session, or provider goal",
+      "role": "current execution participant",
+      "proximity": "inside one execution surface but outside the full cross-session continuity",
+      "consequences": [
+        "bears context loss, scope reconstruction, handoff, recovery, and completion ambiguity"
+      ],
+      "naturalObjects": [
+        "prompt",
+        "session",
+        "goal",
+        "task card",
+        "issue",
+        "workflow run"
+      ]
+    },
+    "currentOntology": [
+      "task",
+      "goal",
+      "issue",
+      "session",
+      "work item",
+      "mission",
+      "job",
+      "plan",
+      "workflow run",
+      "agent thread"
+    ],
+    "observation": "Separating context, authorization, and execution history from a long-running Atlas Go still left one necessary object: the stable identity of an intended reality change whose current specification can be revised while the work remains recognizable across agents and execution providers.",
+    "candidateObject": "A Pursuit is the durable identity of an intended reality change across revisions, actors, actions, and evidence.",
+    "claimBoundary": "This cut records a provisional continuity-object hypothesis grounded in maintainer experience and structural analysis. It does not establish a universal work ontology, final name, historical novelty, product readiness, or accepted Primitive status.",
+    "methodEvidence": [
+      {
+        "kind": "file",
+        "coordinate": "cases/live/proof-carrying-work-object/ontology-split.md",
+        "observer": "KFD maintainers"
+      },
+      {
+        "kind": "file",
+        "coordinate": "cases/live/proof-carrying-work-object/genesis.md",
+        "observer": "KFD maintainers"
+      }
+    ],
+    "transformedPerspective": {
+      "id": "cross-execution-intent-continuity",
+      "bearer": "human and agents jointly continuing one intended change across sessions and providers",
+      "role": "long-lived work participant and successor",
+      "proximity": "inside the continuity, revision, and recovery burden",
+      "consequences": [
+        "bears identity drift, intent revision, attribution, resumption, and settlement consequences"
+      ],
+      "naturalObjects": [
+        "stable pursuit identity",
+        "immutable intent revision",
+        "typed work relation",
+        "execution binding",
+        "settlement state"
+      ]
+    },
+    "transformation": "The observer moved from one provider's current task representation to the participant responsible for preserving one intended change across many representations and executions.",
+    "newlyVisibleNeed": "A stable work identity must survive provider goals and mutable projections while material intent changes produce exact successor roots rather than retroactively changing old context or authority.",
+    "methodNotes": "The original fused Proof-Carrying Work Object was decomposed after Warrant, Atlas, and Episode responsibilities were removed and an intended-change continuity object still remained."
+  },
+  "boundaryPressure": {
+    "contactSides": [
+      "one execution session, agent, provider goal, or task projection",
+      "future agents, operators, tools, and settlement processes continuing the same intended change"
+    ],
+    "implicitHandling": "Continuity is reconstructed from mutable task prose, chat history, issue state, branch names, human memory, and provider-specific identifiers.",
+    "pressureChanges": [
+      {
+        "kind": "new-participant",
+        "description": "Different humans and agents increasingly continue the same work without sharing transient context."
+      },
+      {
+        "kind": "scale",
+        "description": "Long-running and multi-agent work creates many provider-local goals, sessions, and task projections for one intended change."
+      },
+      {
+        "kind": "heterogeneity",
+        "description": "The same work crosses repositories, devices, models, task systems, and domain vocabularies."
+      },
+      {
+        "kind": "consequence",
+        "description": "Identity or scope drift changes what work is attributed, authorized, assessed, and declared complete."
+      }
+    ],
+    "observedFailures": [
+      "A new agent cannot tell whether two task records continue the same intended change.",
+      "Editing mutable scope text silently changes the meaning of prior approval and evidence.",
+      "A provider goal disappears while the real work remains active.",
+      "Execution completion is mistaken for satisfaction of the enduring intent."
+    ],
+    "mediationClaim": "A stable Pursuit reference plus immutable successor intent roots may preserve intended-change continuity while allowing provider-specific task and goal projections.",
+    "internalObjectAlternative": "The same behavior may be implemented by disciplined issue, case, workflow, or event-sourced aggregate contracts without a distinct Pursuit Primitive."
+  },
+  "grounding": {
+    "pressure": [
+      "Cross-session and cross-agent continuity reconstruction",
+      "Mutable task descriptions expanding prior meaning",
+      "Provider-local goals failing to survive the real work lifecycle",
+      "Need to join context, authorization, episodes, and settlement to one stable intended change"
+    ],
+    "factSources": [
+      {
+        "kind": "file",
+        "coordinate": "cases/live/proof-carrying-work-object/ontology-split.md",
+        "observer": "KFD maintainers"
+      },
+      {
+        "kind": "file",
+        "coordinate": "cases/live/proof-carrying-work-object/genesis.md",
+        "observer": "KFD maintainers"
+      }
+    ],
+    "evidenceBoundary": "Public reconstruction of maintainer experience with long-running agent work and the ontology split recorded on 2026-07-17. No independent adopter, cross-domain implementation, benchmark, or universal deletion test is included.",
+    "knownGaps": [
+      "No final name or proven universal minimum closure",
+      "No independent non-software implementation",
+      "No measured comparison with issue, case, workflow, or provider-goal alternatives",
+      "No proof that acceptance and safety belong in every Pursuit profile",
+      "No common runtime contract for intent-root revision and relation semantics"
+    ]
+  },
+  "participants": [
+    {
+      "id": "human-perspective-source",
+      "kind": "human",
+      "functions": [
+        "perspective-declaration",
+        "candidate-generation",
+        "decision"
+      ]
+    },
+    {
+      "id": "reasoning-agent",
+      "kind": "agent",
+      "functions": [
+        "candidate-generation",
+        "scalable-reasoning"
+      ]
+    },
+    {
+      "id": "future-independent-reviewer",
+      "kind": "collective",
+      "functions": [
+        "evidence-custody",
+        "verification"
+      ]
+    }
+  ],
+  "alternatives": [
+    {
+      "name": "Work or work item",
+      "disposition": "unresolved",
+      "reason": "This is the safest generic vocabulary but may conflate intended continuity, performed activity, and produced result."
+    },
+    {
+      "name": "Goal, task, issue, case, incident, job, or plan",
+      "disposition": "unresolved",
+      "reason": "These may be sufficient domain profiles, or their repeated cross-domain structure may indicate a shared underlying object."
+    },
+    {
+      "name": "Purpose or intent",
+      "disposition": "unresolved",
+      "reason": "Purpose explains why and intent specifies one cut, but neither clearly preserves the identity that survives intent revision."
+    },
+    {
+      "name": "Event-sourced workflow aggregate",
+      "disposition": "unresolved",
+      "reason": "A generic aggregate with domain events may implement the required behavior without a separately named Primitive."
+    },
+    {
+      "name": "No new Primitive",
+      "disposition": "unresolved",
+      "reason": "The continuity may be a common product requirement rather than an independently useful object."
+    }
+  ],
+  "contractModel": {
+    "identity": "A stable pursuit_ref for one intended reality change, with immutable intent_root successors for material revisions.",
+    "boundary": "Purpose, desired change, current intent root, scope, acceptance or settlement conditions, safety boundaries, and typed parent, dependency, and successor relations; context, authorization, execution history, and provider projections remain external references.",
+    "authority": "Creating or revising a Pursuit declares an intended change but does not itself authorize execution, certify facts, or decide completion. Those responsibilities remain with Warrant, evidence, assessment, and authorized decision processes.",
+    "lifecycle": "proposed -> available or active -> paused or revised -> settled, abandoned, or superseded; exact state vocabulary remains profile-dependent",
+    "operations": [
+      "create",
+      "inspect",
+      "revise",
+      "relate",
+      "bind-execution",
+      "pause",
+      "resume",
+      "claim-result",
+      "settle",
+      "abandon",
+      "supersede"
+    ]
+  },
+  "tests": {
+    "minimumClosure": {
+      "result": "inconclusive",
+      "evidence": [
+        {
+          "kind": "file",
+          "coordinate": "cases/live/proof-carrying-work-object/ontology-split.md"
+        }
+      ],
+      "notes": "Stable identity and successor intent roots appear load-bearing, but purpose, acceptance, safety, and relation fields have not survived non-isomorphic domain implementations."
+    },
+    "deletion": {
+      "result": "inconclusive",
+      "evidence": [
+        {
+          "kind": "file",
+          "coordinate": "cases/live/proof-carrying-work-object/ontology-split.md"
+        }
+      ],
+      "notes": "Without a continuity object, Atlas selection, Warrant subject binding, Episode attribution, and settlement each need another task identity, but existing issue or case systems may already supply it."
+    },
+    "fuse": {
+      "result": "inconclusive",
+      "evidence": [
+        {
+          "kind": "file",
+          "coordinate": "cases/live/proof-carrying-work-object/ontology-split.md"
+        }
+      ],
+      "notes": "Task, case, incident, investigation, and Go appear related, but no shared contract has been implemented across them."
+    },
+    "falsifiers": [
+      "Provider goals or ordinary issue systems preserve all required continuity without repeated reconstruction.",
+      "Intent-root versioning creates more coordination cost than scope drift prevents.",
+      "Non-software domains require incompatible identity or lifecycle semantics.",
+      "Pursuit cannot be separated cleanly from Mission, workflow, or actor commitment.",
+      "The object has no reusable operations beyond generic event-sourced aggregate behavior.",
+      "Users or agents cannot map their work without unnatural mandatory fields."
+    ],
+    "dogfood": {
+      "result": "not-run",
+      "evidence": [],
+      "notes": "Long-running Atlas Go experience motivates the candidate, but this public cut contains no common Pursuit runtime contract or comparative qualification."
+    }
+  },
+  "decision": {
+    "outcome": "provisional",
+    "owner": "KFD maintainers",
+    "reason": "Removing Atlas, Warrant, Episode, and provider-goal responsibilities leaves a coherent intended-change continuity object, but naming, minimum closure, transfer, deletion, fuse, and dogfood evidence remain unresolved.",
+    "residualRisks": [
+      "The candidate may rename an ordinary work-item aggregate.",
+      "Atlas Go experience may overfit software and maintainer workflow.",
+      "The poetic name may obscure simpler domain vocabulary.",
+      "A universal schema may force bounded-task assumptions onto exploration or continuing processes.",
+      "Identity revision rules may become administrative burden rather than useful compression."
+    ]
+  }
+}

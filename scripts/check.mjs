@@ -1,7 +1,7 @@
 // Registry conformance check: the registry, decision documents, and release
 // impact ledger must agree, so a release cannot ship evidence that lies about
 // its contents or versioning surface.
-import { readFileSync, existsSync } from "node:fs";
+import { readFileSync, existsSync, readdirSync } from "node:fs";
 import crypto from "node:crypto";
 import { generatedSiteBundle } from "./update-site-bundle.mjs";
 
@@ -26,6 +26,14 @@ const requireSameEnum = (actual, expected, label) => {
 const registry = JSON.parse(readFileSync("registry.json", "utf8"));
 const standardsMetadata = JSON.parse(readFileSync("standards.json", "utf8"));
 const standardsSchema = JSON.parse(readFileSync("schemas/kfd-standards.schema.json", "utf8"));
+const liveCaseRegistryPath = "cases/registry.json";
+const liveCaseRegistrySchemaPath = "schemas/kfd-live-case-registry.schema.json";
+const liveCaseRegistry = JSON.parse(readFileSync(liveCaseRegistryPath, "utf8"));
+const liveCaseRegistrySchema = JSON.parse(readFileSync(liveCaseRegistrySchemaPath, "utf8"));
+const candidateRegistryPath = "drafts/registry.json";
+const candidateRegistrySchemaPath = "schemas/kfd-candidate-registry.schema.json";
+const candidateRegistry = JSON.parse(readFileSync(candidateRegistryPath, "utf8"));
+const candidateRegistrySchema = JSON.parse(readFileSync(candidateRegistrySchemaPath, "utf8"));
 const releaseImpact = JSON.parse(readFileSync("release-impact.json", "utf8"));
 const packageJson = JSON.parse(readFileSync("package.json", "utf8"));
 const siteBundle = JSON.parse(readFileSync("site/kfd-site.json", "utf8"));
@@ -46,20 +54,70 @@ const kfd3PrebuildWitness = existsSync(kfd3PrebuildWitnessPath) ? JSON.parse(rea
 const kfd3ArtifactWitness = existsSync(kfd3ArtifactWitnessPath) ? JSON.parse(readFileSync(kfd3ArtifactWitnessPath, "utf8")) : undefined;
 const hashablePath = (filePath) => String(filePath || "").split("#", 1)[0];
 
+const markdownPaths = [];
+const collectMarkdownPaths = (directory = ".") => {
+  for (const entry of readdirSync(directory, { withFileTypes: true })) {
+    if (entry.name === ".buildchain" || entry.name === ".git" || entry.name === "node_modules") continue;
+    const path = directory === "." ? entry.name : `${directory}/${entry.name}`;
+    if (entry.isDirectory()) collectMarkdownPaths(path);
+    else if (entry.isFile() && entry.name.endsWith(".md")) markdownPaths.push(path);
+  }
+};
+collectMarkdownPaths();
+for (const markdownPath of markdownPaths) {
+  const markdown = readFileSync(markdownPath, "utf8");
+  if (!markdown.startsWith("---\n")) continue;
+  const frontmatterEnd = markdown.indexOf("\n---", 4);
+  if (frontmatterEnd === -1) continue;
+  const frontmatter = markdown.slice(4, frontmatterEnd);
+  if (/^ai_provenance\s*:/m.test(frontmatter)) {
+    fail(`${markdownPath} public frontmatter must not expose ai_provenance`);
+  }
+}
+
 const expectedEvidenceUpdate = "node scripts/update-site-bundle.mjs && node scripts/update-kfd-2-claim.mjs && node scripts/update-kfd-1-witness.mjs && node scripts/update-kfd-3-witness.mjs";
 if (packageJson.scripts?.["update:evidence"] !== expectedEvidenceUpdate) {
   fail("package.json update:evidence must preserve the site -> KFD-2 -> KFD-1 -> KFD-3 dependency order");
 }
+if (packageJson.bin?.kfd !== "./bin/kfd.mjs") {
+  fail("package.json must publish the kfd verifier bin");
+}
+if (packageJson.exports?.["./verifier/bundle.schema.json"] !== "./schemas/kfd-verification-bundle.schema.json") {
+  fail("package.json must export the verifier bundle schema");
+}
+if (packageJson.exports?.["./verifier/report.schema.json"] !== "./schemas/kfd-verification-report.schema.json") {
+  fail("package.json must export the verifier report schema");
+}
+for (const verifierPath of [
+  "bin/kfd.mjs",
+  "docs/verifier.md",
+  "schemas/kfd-verification-bundle.schema.json",
+  "schemas/kfd-verification-report.schema.json",
+  "scripts/build-verifier.mjs",
+  "scripts/check-verifier.mjs",
+  "scripts/check-verifier-artifact.mjs",
+  "scripts/check-verifier-extraction.mjs",
+  "verifier/Cargo.toml",
+  "verifier/Cargo.lock",
+  "verifier/extraction-manifest.json",
+  "verifier/dist/kfd_verifier.wasm",
+  "verifier/dist/kfd_verifier.wasm.sha256",
+]) {
+  if (!existsSync(verifierPath)) fail(`missing independent verifier surface ${verifierPath}`);
+}
 
 if (registry.schemaVersion !== 1) fail(`unsupported schemaVersion ${registry.schemaVersion}`);
 if (registry.contract !== "kfd-registry") fail(`unexpected contract ${registry.contract}`);
-if (standardsMetadata.schemaVersion !== 1) fail(`unsupported standards schemaVersion ${standardsMetadata.schemaVersion}`);
+if (standardsMetadata.schemaVersion !== 2) fail(`unsupported standards schemaVersion ${standardsMetadata.schemaVersion}`);
 if (standardsMetadata.contract !== "kfd-standards-metadata") fail(`unexpected standards contract ${standardsMetadata.contract}`);
 if (standardsMetadata.metadataSchema?.id !== "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json") {
   fail("standards metadataSchema.id must be the canonical KFD standards schema URI");
 }
 if (standardsMetadata.metadataSchema?.path !== "schemas/kfd-standards.schema.json") {
   fail("standards metadataSchema.path must be schemas/kfd-standards.schema.json");
+}
+if (standardsMetadata.metadataSchema?.version !== "2") {
+  fail("standards metadataSchema.version must be 2 for the required formalModel binding");
 }
 if (standardsSchema.$id !== standardsMetadata.metadataSchema?.id) {
   fail("standards schema $id must match standards metadataSchema.id");
@@ -70,7 +128,154 @@ if (standardsSchema.properties?.contract?.const !== "kfd-standards-metadata") {
 requireFields(standardsMetadata, standardsSchema.required, "standards metadata");
 requireFields(standardsMetadata.metadataSchema, standardsSchema.properties?.metadataSchema?.required, "standards metadataSchema");
 requireFields(standardsMetadata.source, standardsSchema.properties?.source?.required, "standards source");
-if (siteBundle.schemaVersion !== 1) fail(`unsupported site bundle schemaVersion ${siteBundle.schemaVersion}`);
+if (liveCaseRegistrySchema.$id !== "https://kfd.libkungfu.dev/schemas/kfd-live-case-registry.schema.json") {
+  fail("live case registry schema must use the canonical KFD URI");
+}
+if (liveCaseRegistrySchema.properties?.contract?.const !== "kfd-live-case-registry") {
+  fail("live case registry schema must describe the kfd-live-case-registry contract");
+}
+if (liveCaseRegistrySchema.properties?.schemaVersion?.const !== 2) {
+  fail("live case registry schemaVersion must be 2");
+}
+requireFields(liveCaseRegistry, liveCaseRegistrySchema.required, "live case registry");
+if (liveCaseRegistry.$schema !== liveCaseRegistrySchema.$id) {
+  fail("live case registry $schema must match the canonical registry schema URI");
+}
+if (liveCaseRegistry.schemaVersion !== 2) fail(`unsupported live case registry schemaVersion ${liveCaseRegistry.schemaVersion}`);
+if (liveCaseRegistry.contract !== "kfd-live-case-registry") fail(`unexpected live case registry contract ${liveCaseRegistry.contract}`);
+if (!Array.isArray(liveCaseRegistry.cases) || liveCaseRegistry.cases.length === 0) {
+  fail("live case registry cases[] must include at least one case");
+}
+const liveCaseIds = new Set();
+const liveCaseDefinition = liveCaseRegistrySchema.$defs?.liveCase;
+const candidateTrackDefinition = liveCaseRegistrySchema.$defs?.candidateTrack;
+const currentCutDefinition = liveCaseRegistrySchema.$defs?.currentCut;
+const kfd5PrimitiveDiscoverySchemaPath = "schemas/kfd-5/primitive-discovery.schema.json";
+const kfd5PrimitiveDiscoverySchemaForCases = JSON.parse(readFileSync(kfd5PrimitiveDiscoverySchemaPath, "utf8"));
+for (const [index, liveCase] of (liveCaseRegistry.cases ?? []).entries()) {
+  const label = `live case registry cases[${index}]`;
+  requireFields(liveCase, liveCaseDefinition?.required, label);
+  if (liveCaseIds.has(liveCase.id)) fail(`${label} duplicates id ${liveCase.id}`);
+  liveCaseIds.add(liveCase.id);
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(liveCase.id ?? "")) fail(`${label}.id must be a stable lowercase slug`);
+  if (liveCase.kind !== "primitive-discovery-case") fail(`${label}.kind must be primitive-discovery-case`);
+  if (!liveCaseDefinition?.properties?.status?.enum?.includes(liveCase.status)) fail(`${label}.status is not registered`);
+  if (liveCase.standard !== "kfd-5") fail(`${label}.standard must be kfd-5`);
+  const caseRoot = `cases/live/${liveCase.id}`;
+  const expectedCasePaths = {
+    humanEntry: `${caseRoot}/README.md`,
+    genesis: `${caseRoot}/genesis.md`,
+    methodTrace: `${caseRoot}/kfd-method-trace.md`,
+    propagationHypothesis: `${caseRoot}/propagation-hypothesis.md`,
+    reviewIndex: `${caseRoot}/reviews/README.md`,
+    ontologySplit: `${caseRoot}/ontology-split.md`,
+    distinguishabilityArgument: `${caseRoot}/distinguishability.md`,
+  };
+  for (const field of ["humanEntry", "genesis", "methodTrace", "propagationHypothesis", "reviewIndex", "ontologySplit", "distinguishabilityArgument"]) {
+    if (liveCase[field] !== expectedCasePaths[field]) fail(`${label}.${field} must stay inside ${caseRoot}`);
+    if (!existsSync(liveCase[field])) fail(`${label}.${field} points to missing ${liveCase[field]}`);
+  }
+  if (!Array.isArray(liveCase.candidateTracks) || liveCase.candidateTracks.length === 0) {
+    fail(`${label}.candidateTracks must include at least one candidate`);
+  }
+  const candidateTrackIds = new Set();
+  for (const [trackIndex, track] of (liveCase.candidateTracks ?? []).entries()) {
+    const trackLabel = `${label}.candidateTracks[${trackIndex}]`;
+    requireFields(track, candidateTrackDefinition?.required, trackLabel);
+    if (candidateTrackIds.has(track.id)) fail(`${trackLabel} duplicates id ${track.id}`);
+    candidateTrackIds.add(track.id);
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(track.id ?? "")) fail(`${trackLabel}.id must be a stable lowercase slug`);
+    if (!candidateTrackDefinition?.properties?.status?.enum?.includes(track.status)) fail(`${trackLabel}.status is not registered`);
+    if (!track.definition?.trim()) fail(`${trackLabel}.definition must remain explicit`);
+    if (!track.claimBoundary?.trim()) fail(`${trackLabel}.claimBoundary must remain explicit`);
+    requireFields(track.currentCut, currentCutDefinition?.required, `${trackLabel}.currentCut`);
+    if (!String(track.currentCut?.path ?? "").startsWith(`${caseRoot}/cuts/`)) {
+      fail(`${trackLabel}.currentCut.path must stay inside ${caseRoot}/cuts`);
+    }
+    if (!existsSync(track.currentCut?.path)) {
+      fail(`${trackLabel}.currentCut.path points to missing ${track.currentCut?.path}`);
+      continue;
+    }
+    if (sha256File(track.currentCut.path) !== track.currentCut.sha256) {
+      fail(`${trackLabel}.currentCut.sha256 does not match ${track.currentCut.path}`);
+    }
+    if (track.currentCut.schemaId !== kfd5PrimitiveDiscoverySchemaForCases.$id) {
+      fail(`${trackLabel}.currentCut.schemaId must match the KFD-5 primitive discovery schema`);
+    }
+    if (track.currentCut.schemaVersion !== kfd5PrimitiveDiscoverySchemaForCases.properties?.schemaVersion?.const) {
+      fail(`${trackLabel}.currentCut.schemaVersion must match the KFD-5 primitive discovery schema`);
+    }
+    const cut = JSON.parse(readFileSync(track.currentCut.path, "utf8"));
+    requireFields(cut, kfd5PrimitiveDiscoverySchemaForCases.required, `${trackLabel}.currentCut record`);
+    requireFields(cut.candidate, kfd5PrimitiveDiscoverySchemaForCases.properties?.candidate?.required, `${trackLabel}.currentCut candidate`);
+    requireFields(cut.genesis, kfd5PrimitiveDiscoverySchemaForCases.properties?.genesis?.required, `${trackLabel}.currentCut genesis`);
+    requireFields(cut.decision, kfd5PrimitiveDiscoverySchemaForCases.properties?.decision?.required, `${trackLabel}.currentCut decision`);
+    if (cut.contract !== "kfd-5-primitive-discovery" || cut.standard !== "kfd-5" || cut.schemaVersion !== 3) {
+      fail(`${trackLabel}.currentCut record must be a KFD-5 primitive discovery version 3 record`);
+    }
+    if (cut.candidate?.id !== track.id) fail(`${trackLabel}.currentCut candidate id must match the track id`);
+    if (cut.decision?.outcome !== track.status) fail(`${trackLabel}.status must match currentCut decision.outcome`);
+  }
+  if (!liveCase.claimBoundary?.trim()) fail(`${label}.claimBoundary must remain explicit`);
+}
+if (candidateRegistrySchema.$id !== "https://kfd.libkungfu.dev/schemas/kfd-candidate-registry.schema.json") {
+  fail("candidate registry schema must use the canonical KFD URI");
+}
+if (candidateRegistrySchema.properties?.contract?.const !== "kfd-candidate-registry") {
+  fail("candidate registry schema must describe the kfd-candidate-registry contract");
+}
+requireFields(candidateRegistry, candidateRegistrySchema.required, "candidate registry");
+if (candidateRegistry.$schema !== candidateRegistrySchema.$id) {
+  fail("candidate registry $schema must match the canonical registry schema URI");
+}
+if (candidateRegistry.schemaVersion !== 1) fail(`unsupported candidate registry schemaVersion ${candidateRegistry.schemaVersion}`);
+if (candidateRegistry.contract !== "kfd-candidate-registry") fail(`unexpected candidate registry contract ${candidateRegistry.contract}`);
+for (const [field, expected] of [
+  ["allocation", "promotion-only"],
+  ["slotHints", "non-binding"],
+  ["numberedDraftSource", "registry.json"],
+  ["stableFreeze", "first-non-prerelease-release"],
+]) {
+  if (candidateRegistry.numberingPolicy?.[field] !== expected) {
+    fail(`candidate registry numberingPolicy.${field} must be ${expected}`);
+  }
+}
+if (!Array.isArray(candidateRegistry.candidates) || candidateRegistry.candidates.length === 0) {
+  fail("candidate registry candidates[] must include at least one candidate");
+}
+const candidateIds = new Set();
+const candidateDefinition = candidateRegistrySchema.$defs?.candidate;
+for (const [index, candidate] of (candidateRegistry.candidates ?? []).entries()) {
+  const label = `candidate registry candidates[${index}]`;
+  requireFields(candidate, candidateDefinition?.required, label);
+  if (candidateIds.has(candidate.id)) fail(`${label} duplicates id ${candidate.id}`);
+  candidateIds.add(candidate.id);
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(candidate.id ?? "")) fail(`${label}.id must be a stable lowercase slug`);
+  if (!candidateDefinition?.properties?.status?.enum?.includes(candidate.status)) fail(`${label}.status is not registered`);
+  if (!candidateDefinition?.properties?.kindCandidate?.enum?.includes(candidate.kindCandidate)) fail(`${label}.kindCandidate is not registered`);
+  if (candidate.slotBinding !== "non-binding") fail(`${label}.slotBinding must be non-binding`);
+  if (candidate.slotHint !== undefined && (!Number.isInteger(candidate.slotHint) || candidate.slotHint < 1)) {
+    fail(`${label}.slotHint must be a positive integer when present`);
+  }
+  if (candidate.path !== `drafts/${candidate.id}.md`) fail(`${label}.path must be drafts/${candidate.id}.md`);
+  if (!existsSync(candidate.path)) fail(`${label}.path points to missing ${candidate.path}`);
+  if (!candidate.oneSentence?.trim()) fail(`${label}.oneSentence must remain explicit`);
+  if (!candidate.claimBoundary?.trim()) fail(`${label}.claimBoundary must remain explicit`);
+  if (!Array.isArray(candidate.sourceCases) || candidate.sourceCases.length === 0) fail(`${label}.sourceCases must not be empty`);
+  for (const sourceCase of candidate.sourceCases ?? []) {
+    if (!existsSync(sourceCase.path)) fail(`${label}.sourceCases points to missing ${sourceCase.path}`);
+    const registeredCase = (liveCaseRegistry.cases ?? []).find((entry) => entry.id === sourceCase.id);
+    if (!registeredCase) fail(`${label}.sourceCases references unknown case ${sourceCase.id}`);
+    else if (registeredCase.humanEntry !== sourceCase.path) {
+      fail(`${label}.sourceCases path must match the registered human entry for ${sourceCase.id}`);
+    }
+  }
+  if (!Array.isArray(candidate.promotionGate) || candidate.promotionGate.length === 0) fail(`${label}.promotionGate must not be empty`);
+  if (registry.entries.some((entry) => entry.slug === candidate.id || entry.id === candidate.id)) {
+    fail(`${label} must not appear in the numbered registry before explicit promotion`);
+  }
+}
+if (siteBundle.schemaVersion !== 2) fail(`unsupported site bundle schemaVersion ${siteBundle.schemaVersion}`);
 if (siteBundle.contract !== "kfd-site-bundle") fail(`unexpected site bundle contract ${siteBundle.contract}`);
 if (JSON.stringify(siteBundle) !== JSON.stringify(expectedSiteBundle)) {
   fail("site/kfd-site.json must match the generated README.md homepage bundle; run npm run update:site-bundle");
@@ -79,17 +284,35 @@ if (siteBundle.source?.homepageTextSource !== "README.md") fail("site bundle hom
 if (siteBundle.source?.foundationTextSource !== "docs/foundation-model.md") {
   fail("site bundle foundationTextSource must be docs/foundation-model.md");
 }
+if (siteBundle.source?.formalTextSource !== "docs/formal-model.md") {
+  fail("site bundle formalTextSource must be docs/formal-model.md");
+}
 if (siteBundle.source?.casesTextSource !== "docs/primitive-discovery-cases.md") {
   fail("site bundle casesTextSource must be docs/primitive-discovery-cases.md");
 }
+if (siteBundle.source?.liveCaseRegistry !== liveCaseRegistryPath) {
+  fail(`site bundle liveCaseRegistry source must be ${liveCaseRegistryPath}`);
+}
+if (siteBundle.source?.candidateRegistry !== candidateRegistryPath) {
+  fail(`site bundle candidateRegistry source must be ${candidateRegistryPath}`);
+}
 if (siteBundle.source?.registry !== "registry.json") fail("site bundle registry source must be registry.json");
+if (siteBundle.source?.standards !== "standards.json") fail("site bundle standards source must be standards.json");
 if (siteBundle.source?.decisionsDir !== "decisions") fail("site bundle decisionsDir must be decisions");
 if (siteBundle.homepage?.title !== "KFD — Kung Fu Decisions") fail("site bundle homepage title must match README H1 text");
 if (!Array.isArray(siteBundle.homepage?.sections) || siteBundle.homepage.sections.length === 0) {
   fail("site bundle homepage.sections must expose generated homepage and foundation sections");
 }
 if (siteBundle.routes?.foundation !== "/foundation") fail("site bundle routes.foundation must be /foundation");
+if (siteBundle.routes?.formal !== "/formal") fail("site bundle routes.formal must be /formal");
 if (siteBundle.routes?.cases !== "/cases") fail("site bundle routes.cases must be /cases");
+if (siteBundle.routes?.liveCasePattern !== "/cases/live/{id}") {
+  fail("site bundle routes.liveCasePattern must be /cases/live/{id}");
+}
+if (siteBundle.routes?.candidates !== "/drafts") fail("site bundle routes.candidates must be /drafts");
+if (siteBundle.routes?.candidatePattern !== "/drafts/{id}") {
+  fail("site bundle routes.candidatePattern must be /drafts/{id}");
+}
 if (!siteBundle.homepage?.futurePicture?.pastToFuture || !siteBundle.homepage?.futurePicture?.kungfuPath) {
   fail("site bundle homepage.futurePicture must expose the civilizational shift and Kungfu path");
 }
@@ -111,6 +334,9 @@ if (!siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes("foundatio
 if (!siteBundle.homepage?.foundationTriad?.links?.some((entry) => entry.url === "/foundation")) {
   fail("site bundle homepage foundation triad must expose the /foundation depth choice");
 }
+if (!siteBundle.homepage?.foundationTriad?.links?.some((entry) => entry.url === "/formal")) {
+  fail("site bundle homepage foundation triad must expose the /formal depth choice");
+}
 if (!siteBundle.homepage?.foundationTriad?.links?.some((entry) => entry.url === "/cases")) {
   fail("site bundle homepage foundation triad must expose the /cases historical depth choice");
 }
@@ -119,6 +345,7 @@ const requiredHomepageSections = {
   "foundation-triad": "README.md",
   "what-kfd-is": "README.md",
   "adoption-boundary": "README.md",
+  "current-candidates": "README.md",
   "product-proof-path": "README.md",
   "agent-quickstart": "README.md",
   "decision-metadata": "README.md",
@@ -147,6 +374,16 @@ if (
   fail("site bundle foundationPage must expose the non-normative /foundation explanation from docs/foundation-model.md");
 }
 if (
+  siteBundle.formalPage?.id !== "formal-model" ||
+  siteBundle.formalPage?.sourcePath !== "docs/formal-model.md" ||
+  siteBundle.formalPage?.url !== "/formal" ||
+  siteBundle.formalPage?.normative !== false ||
+  siteBundle.formalPage?.formalModelVersion !== 1 ||
+  !siteBundle.formalPage?.markdown
+) {
+  fail("site bundle formalPage must expose the non-normative formal model version 1 at /formal");
+}
+if (
   siteBundle.casesPage?.id !== "primitive-discovery-cases" ||
   siteBundle.casesPage?.sourcePath !== "docs/primitive-discovery-cases.md" ||
   siteBundle.casesPage?.url !== "/cases" ||
@@ -161,9 +398,104 @@ if (!siteBundle.casesPage?.markdown?.startsWith("# Primitive Discovery in Histor
 if (!siteBundle.homepage?.displayPlan?.readingPath?.includes("/cases")) {
   fail("site bundle homepage displayPlan readingPath must include /cases");
 }
+if (!siteBundle.homepage?.displayPlan?.readingPath?.includes("/formal")) {
+  fail("site bundle homepage displayPlan readingPath must include /formal");
+}
+if (!siteBundle.homepage?.displayPlan?.readingPath?.includes("/drafts")) {
+  fail("site bundle homepage displayPlan readingPath must include /drafts");
+}
+if (siteBundle.liveCases?.source !== liveCaseRegistryPath) fail(`site bundle liveCases source must be ${liveCaseRegistryPath}`);
+if (siteBundle.liveCases?.stableUrlPattern !== "/cases/live/{id}") {
+  fail("site bundle liveCases stableUrlPattern must be /cases/live/{id}");
+}
+if (siteBundle.liveCases?.normative !== false) fail("site bundle liveCases must remain non-normative");
+const siteLiveCases = new Map((siteBundle.liveCases?.cases ?? []).map((entry) => [entry.id, entry]));
+for (const liveCase of liveCaseRegistry.cases ?? []) {
+  const projected = siteLiveCases.get(liveCase.id);
+  if (!projected) {
+    fail(`site bundle liveCases missing ${liveCase.id}`);
+    continue;
+  }
+  if (projected.status !== liveCase.status) fail(`site bundle live case ${liveCase.id} status must match registry`);
+  if (projected.claimBoundary !== liveCase.claimBoundary) fail(`site bundle live case ${liveCase.id} claimBoundary must match registry`);
+  if (projected.url !== `/cases/live/${liveCase.id}`) fail(`site bundle live case ${liveCase.id} URL is invalid`);
+  if (projected.ontologySplit?.path !== liveCase.ontologySplit || !projected.ontologySplit?.markdown) {
+    fail(`site bundle live case ${liveCase.id} must project ontologySplit`);
+  }
+  if (
+    projected.distinguishabilityArgument?.path !== liveCase.distinguishabilityArgument
+    || !projected.distinguishabilityArgument?.markdown
+  ) {
+    fail(`site bundle live case ${liveCase.id} must project distinguishabilityArgument`);
+  }
+  for (const field of ["humanEntry", "genesis", "methodTrace", "propagationHypothesis", "reviewIndex"]) {
+    if (projected[field]?.path !== liveCase[field] || !projected[field]?.markdown) {
+      fail(`site bundle live case ${liveCase.id} must project ${field}`);
+    }
+  }
+  const projectedTracks = new Map((projected.candidateTracks ?? []).map((entry) => [entry.id, entry]));
+  for (const track of liveCase.candidateTracks ?? []) {
+    const projectedTrack = projectedTracks.get(track.id);
+    if (!projectedTrack) {
+      fail(`site bundle live case ${liveCase.id} missing candidate track ${track.id}`);
+      continue;
+    }
+    if (projectedTrack.status !== track.status || projectedTrack.definition !== track.definition) {
+      fail(`site bundle live case ${liveCase.id} candidate track ${track.id} must match registry`);
+    }
+    if (projectedTrack.claimBoundary !== track.claimBoundary) {
+      fail(`site bundle live case ${liveCase.id} candidate track ${track.id} claim boundary must match registry`);
+    }
+    if (projectedTrack.currentCut?.path !== track.currentCut.path || projectedTrack.currentCut?.sha256 !== track.currentCut.sha256) {
+      fail(`site bundle live case ${liveCase.id} candidate track ${track.id} current cut must match registry`);
+    }
+  }
+  for (const projectedTrackId of projectedTracks.keys()) {
+    if (!(liveCase.candidateTracks ?? []).some((track) => track.id === projectedTrackId)) {
+      fail(`site bundle live case ${liveCase.id} has unknown candidate track ${projectedTrackId}`);
+    }
+  }
+}
+for (const liveCaseId of siteLiveCases.keys()) {
+  if (!liveCaseIds.has(liveCaseId)) fail(`site bundle liveCases has unknown case ${liveCaseId}`);
+}
+if (siteBundle.kfdCandidates?.source !== candidateRegistryPath) {
+  fail(`site bundle kfdCandidates source must be ${candidateRegistryPath}`);
+}
+if (siteBundle.kfdCandidates?.indexSource !== "drafts/README.md") {
+  fail("site bundle kfdCandidates indexSource must be drafts/README.md");
+}
+if (siteBundle.kfdCandidates?.stableUrlPattern !== "/drafts/{id}") {
+  fail("site bundle kfdCandidates stableUrlPattern must be /drafts/{id}");
+}
+if (siteBundle.kfdCandidates?.normative !== false) fail("site bundle kfdCandidates must remain non-normative");
+if (JSON.stringify(siteBundle.kfdCandidates?.numberingPolicy) !== JSON.stringify(candidateRegistry.numberingPolicy)) {
+  fail("site bundle kfdCandidates numberingPolicy must match the candidate registry");
+}
+const siteCandidates = new Map((siteBundle.kfdCandidates?.candidates ?? []).map((entry) => [entry.id, entry]));
+for (const candidate of candidateRegistry.candidates ?? []) {
+  const projected = siteCandidates.get(candidate.id);
+  if (!projected) {
+    fail(`site bundle kfdCandidates missing ${candidate.id}`);
+    continue;
+  }
+  if (projected.status !== candidate.status || projected.slotBinding !== "non-binding") {
+    fail(`site bundle candidate ${candidate.id} must match registry status and slot binding`);
+  }
+  if (projected.url !== `/drafts/${candidate.id}` || projected.sourcePath !== candidate.path || !projected.markdown) {
+    fail(`site bundle candidate ${candidate.id} must expose its stable route and body`);
+  }
+}
+for (const candidateId of siteCandidates.keys()) {
+  if (!candidateIds.has(candidateId)) fail(`site bundle kfdCandidates has unknown candidate ${candidateId}`);
+}
 if (!existsSync("docs/foundation-model.md")) fail("missing docs/foundation-model.md");
 else if (!readFileSync("docs/foundation-model.md", "utf8").startsWith("# KFD Foundation Model")) {
   fail("docs/foundation-model.md must start with the KFD Foundation Model H1");
+}
+if (!existsSync("docs/formal-model.md")) fail("missing docs/formal-model.md");
+else if (!readFileSync("docs/formal-model.md", "utf8").startsWith("# KFD Formal Model")) {
+  fail("docs/formal-model.md must start with the KFD Formal Model H1");
 }
 if (!existsSync("docs/primitive-discovery-cases.md")) fail("missing docs/primitive-discovery-cases.md");
 else if (!readFileSync("docs/primitive-discovery-cases.md", "utf8").includes("# Primitive Discovery in History")) {
@@ -187,6 +519,7 @@ if (siteBundle.homepage?.currentDecisions?.source !== "registry.json") fail("sit
 if (siteBundle.decisionPages?.source !== "registry.json") fail("site bundle decisionPages source must be registry.json");
 if (siteBundle.decisionPages?.bodySource !== "registry.entries[].path") fail("site bundle decision page body source must be registry.entries[].path");
 if (siteBundle.routes?.decisionUsagePattern !== "/{number}/usage") fail("site bundle routes.decisionUsagePattern must be /{number}/usage");
+if (siteBundle.routes?.decisionFormalPattern !== "/{number}/formal") fail("site bundle routes.decisionFormalPattern must be /{number}/formal");
 if (siteBundle.decisionPages?.usagePages?.relationship !== "usage-child-of-decision") {
   fail("site bundle decisionPages.usagePages.relationship must be usage-child-of-decision");
 }
@@ -217,6 +550,55 @@ for (const decisionId of usagePagesByDecision.keys()) {
     fail(`site bundle decisionPages.usagePages has unknown decision ${decisionId}`);
   }
 }
+if (siteBundle.decisionPages?.formalPages?.relationship !== "formal-reference-child-of-decision") {
+  fail("site bundle decisionPages.formalPages.relationship must be formal-reference-child-of-decision");
+}
+if (siteBundle.decisionPages?.formalPages?.bodySource !== "docs/KFD-{number}-formal.md") {
+  fail("site bundle decisionPages.formalPages.bodySource must be docs/KFD-{number}-formal.md");
+}
+if (siteBundle.decisionPages?.formalPages?.stableUrlPattern !== "/{number}/formal") {
+  fail("site bundle decisionPages.formalPages.stableUrlPattern must be /{number}/formal");
+}
+if (siteBundle.decisionPages?.formalPages?.normative !== false) {
+  fail("site bundle decisionPages.formalPages must remain non-normative");
+}
+const formalPagesByDecision = new Map((siteBundle.decisionPages?.formalPages?.pages ?? []).map((entry) => [entry.decisionId, entry]));
+for (const e of registry.entries) {
+  const formalPage = formalPagesByDecision.get(e.id);
+  const expectedPath = `docs/KFD-${e.number}-formal.md`;
+  const expectedUrl = `${e.url}/formal`;
+  const formalModel = standardsMetadata.standards?.[e.slug]?.formalModel;
+  if (!formalPage) fail(`site bundle decisionPages.formalPages missing ${e.id}`);
+  else {
+    if (formalPage.parentPath !== e.path) fail(`site bundle ${e.id} formal parentPath must be ${e.path}`);
+    if (formalPage.parentUrl !== e.url) fail(`site bundle ${e.id} formal parentUrl must be ${e.url}`);
+    if (formalPage.path !== expectedPath) fail(`site bundle ${e.id} formal path must be ${expectedPath}`);
+    if (formalPage.sourcePath !== expectedPath) fail(`site bundle ${e.id} formal sourcePath must be ${expectedPath}`);
+    if (formalPage.url !== expectedUrl) fail(`site bundle ${e.id} formal url must be ${expectedUrl}`);
+    if (formalPage.sourceExists !== true) fail(`site bundle ${e.id} formal sourceExists must be true`);
+    if (formalPage.normative !== false) fail(`site bundle ${e.id} formal reference must be non-normative`);
+    if (formalPage.formalModelVersion !== formalModel?.version) fail(`site bundle ${e.id} formal model version must match standards.json`);
+    if (formalPage.formalModelStatus !== formalModel?.status) fail(`site bundle ${e.id} formal status must come from standards.json`);
+    if (formalPage.authorityPath !== e.path) fail(`site bundle ${e.id} formal authorityPath must be ${e.path}`);
+    if (formalPage.sha256 !== formalModel?.sha256) fail(`site bundle ${e.id} formal sha256 must come from standards.json`);
+  }
+  if (!existsSync(expectedPath)) fail(`missing formal document ${expectedPath} for ${e.id}`);
+  else {
+    const formalDoc = readFileSync(expectedPath, "utf8");
+    if (!formalDoc.startsWith(`# ${e.id} Formal Reference`)) fail(`${expectedPath} must start with the ${e.id} formal reference H1`);
+    if (!formalDoc.includes("- Status: experimental")) fail(`${expectedPath} must declare experimental status`);
+    if (!formalDoc.includes("- Normative: no")) fail(`${expectedPath} must declare that it is non-normative`);
+    if (!formalDoc.includes(`- Formal model version: ${formalModel?.version}`)) {
+      fail(`${expectedPath} must declare formal model version ${formalModel?.version}`);
+    }
+    if (!formalDoc.includes(`- Authority: \`${e.path}\``)) fail(`${expectedPath} must bind authority to ${e.path}`);
+  }
+}
+for (const decisionId of formalPagesByDecision.keys()) {
+  if (!registry.entries.some((entry) => entry.id === decisionId)) {
+    fail(`site bundle decisionPages.formalPages has unknown decision ${decisionId}`);
+  }
+}
 if (siteBundle.decisionPages?.metadata?.licenseBoundary?.license !== "Apache-2.0") {
   fail("site bundle decision metadata licenseBoundary.license must be Apache-2.0");
 }
@@ -237,17 +619,17 @@ if (sitePublicFactSource?.loadBearingCoordinate !== "commit-addressed repository
 if (sitePublicFactSource?.stableRenderedIndex !== "https://kfd.libkungfu.dev") {
   fail("site bundle decision metadata publicFactSource.stableRenderedIndex must be https://kfd.libkungfu.dev");
 }
-for (const requiredPath of ["decisions/KFD-N.md", "registry.json", "standards.json"]) {
+for (const requiredPath of ["decisions/KFD-N.md", "registry.json", "standards.json", liveCaseRegistryPath, candidateRegistryPath]) {
   if (!sitePublicFactSource?.canonicalPaths?.includes(requiredPath)) {
     fail(`site bundle decision metadata publicFactSource.canonicalPaths must include ${requiredPath}`);
   }
 }
-for (const requiredFile of ["README.md", "TRADEMARKS.md", "decisions", "registry.json", "standards.json", "kfd.release.json", "schemas", "site", "buildchain.contract-lock.json", "buildchain.release-propagation.json", "release-impact.json", ".buildchain/kfd-1/contract-world.witness.json", ".buildchain/kfd-2", ".buildchain/kfd-3", "docs"]) {
+for (const requiredFile of ["README.md", "TRADEMARKS.md", "cases", "decisions", "drafts", "registry.json", "standards.json", "kfd.release.json", "schemas", "site", "buildchain.contract-lock.json", "buildchain.release-propagation.json", "release-impact.json", ".buildchain/kfd-1/contract-world.witness.json", ".buildchain/kfd-2", ".buildchain/kfd-3", "docs"]) {
   if (!Array.isArray(packageJson.files) || !packageJson.files.includes(requiredFile)) {
     fail(`package.json files[] must include ${requiredFile}`);
   }
 }
-for (const requiredExport of ["./TRADEMARKS.md", "./registry.json", "./standards.json", "./kfd.release.json", "./site/kfd-site.json", "./buildchain.contract-lock.json", "./buildchain.release-propagation.json", "./release-impact.json", "./buildchain/kfd-1/contract-world.witness.json", "./buildchain/kfd-2/public-release-trust.claim.json", "./buildchain/kfd-2/kfd-foundation.trust-claims.json", "./buildchain/kfd-2/kfd-foundation.trust-assessment.json", "./buildchain/kfd-3/collaboration-interface.json", "./buildchain/kfd-3/collaboration-interface.prebuild.json", "./buildchain/kfd-3/collaboration-interface.artifact.json", "./docs/*", "./schemas/*.json", "./schemas/*/*.json"]) {
+for (const requiredExport of ["./TRADEMARKS.md", "./cases/registry.json", "./cases/*", "./drafts/registry.json", "./drafts/*", "./registry.json", "./standards.json", "./kfd.release.json", "./site/kfd-site.json", "./buildchain.contract-lock.json", "./buildchain.release-propagation.json", "./release-impact.json", "./buildchain/kfd-1/contract-world.witness.json", "./buildchain/kfd-2/public-release-trust.claim.json", "./buildchain/kfd-2/kfd-foundation.trust-claims.json", "./buildchain/kfd-2/kfd-foundation.trust-assessment.json", "./buildchain/kfd-3/collaboration-interface.json", "./buildchain/kfd-3/collaboration-interface.prebuild.json", "./buildchain/kfd-3/collaboration-interface.artifact.json", "./docs/*", "./schemas/*.json", "./schemas/*/*.json"]) {
   if (!packageJson.exports || !packageJson.exports[requiredExport]) {
     fail(`package.json exports must include ${requiredExport}`);
   }
@@ -305,6 +687,21 @@ for (const e of registry.entries) {
     } else if (existsSync(e.path) && standard.document.sha256 !== sha256File(e.path)) {
       fail(`${e.id} standard document sha256 does not match ${e.path}`);
     }
+    const expectedFormalPath = `docs/KFD-${e.number}-formal.md`;
+    const expectedFormalUrl = `${e.url}/formal`;
+    requireFields(standard.formalModel, standardsSchema.$defs?.formalReference?.required, `${e.id} formal model`);
+    if (standard.formalModel?.path !== expectedFormalPath) fail(`${e.id} formalModel.path must be ${expectedFormalPath}`);
+    if (standard.formalModel?.url !== expectedFormalUrl) fail(`${e.id} formalModel.url must be ${expectedFormalUrl}`);
+    if (!Number.isInteger(standard.formalModel?.version) || standard.formalModel.version < 1) {
+      fail(`${e.id} formalModel.version must be a positive integer`);
+    }
+    if (standard.formalModel?.status !== "experimental") fail(`${e.id} formalModel.status must be experimental`);
+    if (standard.formalModel?.normative !== false) fail(`${e.id} formalModel.normative must be false`);
+    if (standard.formalModel?.authorityPath !== e.path) fail(`${e.id} formalModel.authorityPath must match the decision path`);
+    if (!existsSync(expectedFormalPath)) fail(`${e.id} formalModel.path points to missing ${expectedFormalPath}`);
+    else if (standard.formalModel?.sha256 !== sha256File(expectedFormalPath)) {
+      fail(`${e.id} formalModel.sha256 does not match ${expectedFormalPath}`);
+    }
     if (standard.metadataSchemaVersion !== standardsMetadata.metadataSchema?.version) {
       fail(`${e.id} standard metadataSchemaVersion must match metadata schema version`);
     }
@@ -350,6 +747,20 @@ for (const e of registry.entries) {
 for (const key of Object.keys(standardsMetadata.standards ?? {})) {
   if (!registry.entries.some((e) => e.slug === key)) fail(`standards metadata contains unknown ${key}`);
 }
+const registeredDecisionPaths = new Set((registry.entries ?? []).map((entry) => entry.path));
+for (const fileName of readdirSync("decisions").filter((name) => /^KFD-[0-9]+\.md$/.test(name))) {
+  const decisionPath = `decisions/${fileName}`;
+  if (!registeredDecisionPaths.has(decisionPath)) {
+    fail(`${decisionPath} allocates a numbered decision path without registry promotion`);
+  }
+}
+const registeredCandidatePaths = new Set((candidateRegistry.candidates ?? []).map((entry) => entry.path));
+for (const fileName of readdirSync("drafts").filter((name) => name.endsWith(".md") && name !== "README.md")) {
+  const candidatePath = `drafts/${fileName}`;
+  if (!registeredCandidatePaths.has(candidatePath)) {
+    fail(`${candidatePath} is not declared in the candidate registry`);
+  }
+}
 const kfd1 = standardsMetadata.standards?.["kfd-1"];
 if (kfd1?.schemaIds?.contractWorld !== "https://kfd.libkungfu.dev/schemas/kfd-1/contract-world.schema.json") {
   fail("KFD-1 standards metadata must expose the canonical contractWorld schema URI");
@@ -360,13 +771,19 @@ if (kfd1?.schemaIds?.witness !== "https://kfd.libkungfu.dev/schemas/kfd-1/witnes
 if (kfd1?.schemaIds?.publicationUrlSemantics !== "https://kfd.libkungfu.dev/schemas/kfd-1/publication-url-semantics.schema.json") {
   fail("KFD-1 standards metadata must expose the canonical publicationUrlSemantics schema URI");
 }
+if (kfd1?.schemaIds?.candidateRegistry !== candidateRegistrySchema.$id) {
+  fail("KFD-1 standards metadata must expose the canonical candidateRegistry schema URI");
+}
+if (kfd1?.schemaPaths?.candidateRegistry !== candidateRegistrySchemaPath) {
+  fail("KFD-1 standards metadata must expose the candidateRegistry schema path");
+}
 if (kfd1?.schemaPaths?.publicationUrlSemantics !== "schemas/kfd-1/publication-url-semantics.schema.json") {
   fail("KFD-1 standards metadata must expose the publicationUrlSemantics schema path");
 }
-for (const concept of ["factSource", "contractWorld", "weldedSurfaceRegister", "witness", "surfaceClass", "compatibilityImpact", "impactProjection", "publicationUrlSemantics", "canonicalUrl", "latestUrl", "immutableVersionUrl", "immutableArtifact", "archivePolicy", "sourceCoordinate"]) {
+for (const concept of ["factSource", "contractWorld", "weldedSurfaceRegister", "witness", "surfaceClass", "compatibilityImpact", "impactProjection", "publicationUrlSemantics", "canonicalUrl", "latestUrl", "immutableVersionUrl", "immutableArtifact", "archivePolicy", "sourceCoordinate", "kfdCandidate", "slotHint", "foundationRevision", "foundationFreeze"]) {
   if (!kfd1?.concepts?.[concept]) fail(`KFD-1 standards metadata missing concept ${concept}`);
 }
-for (const iface of ["contractWorld", "witness", "publicationUrlSemantics"]) {
+for (const iface of ["contractWorld", "witness", "publicationUrlSemantics", "candidateRegistry"]) {
   if (!kfd1?.interfaces?.[iface]) fail(`KFD-1 standards metadata missing interface ${iface}`);
 }
 const expectedKfd1SurfaceClasses = ["integration-time", "cross-time"];
@@ -641,6 +1058,12 @@ if (kfd5?.schemaIds?.primitiveDiscovery !== "https://kfd.libkungfu.dev/schemas/k
 if (kfd5?.schemaPaths?.primitiveDiscovery !== "schemas/kfd-5/primitive-discovery.schema.json") {
   fail("KFD-5 standards metadata must expose the primitiveDiscovery schema path");
 }
+if (kfd5?.schemaIds?.liveCaseRegistry !== liveCaseRegistrySchema.$id) {
+  fail("KFD-5 standards metadata must expose the canonical liveCaseRegistry schema URI");
+}
+if (kfd5?.schemaPaths?.liveCaseRegistry !== liveCaseRegistrySchemaPath) {
+  fail("KFD-5 standards metadata must expose the liveCaseRegistry schema path");
+}
 const kfd5PrimitiveDiscoverySchema = JSON.parse(readFileSync("schemas/kfd-5/primitive-discovery.schema.json", "utf8"));
 if (kfd5PrimitiveDiscoverySchema.properties?.contract?.const !== "kfd-5-primitive-discovery") {
   fail("KFD-5 primitiveDiscovery schema must describe the kfd-5-primitive-discovery contract");
@@ -648,38 +1071,43 @@ if (kfd5PrimitiveDiscoverySchema.properties?.contract?.const !== "kfd-5-primitiv
 if (kfd5PrimitiveDiscoverySchema.properties?.standard?.const !== "kfd-5") {
   fail("KFD-5 primitiveDiscovery schema must declare standard kfd-5");
 }
-if (kfd5?.interfaces?.primitiveDiscovery?.schemaVersion !== 2 || kfd5PrimitiveDiscoverySchema.properties?.schemaVersion?.const !== 2) {
-  fail("KFD-5 primitiveDiscovery perspective-genesis interface must use schemaVersion 2");
+if (kfd5?.interfaces?.primitiveDiscovery?.schemaVersion !== 3 || kfd5PrimitiveDiscoverySchema.properties?.schemaVersion?.const !== 3) {
+  fail("KFD-5 primitiveDiscovery method-plural interface must use schemaVersion 3");
 }
-if (!kfd5PrimitiveDiscoverySchema.required?.includes("perspectiveGenesis")) {
-  fail("KFD-5 primitiveDiscovery interface v2 must require perspectiveGenesis");
+if (!kfd5PrimitiveDiscoverySchema.required?.includes("genesis")) {
+  fail("KFD-5 primitiveDiscovery interface v3 must require genesis");
 }
-const perspectiveGenesis = kfd5PrimitiveDiscoverySchema.properties?.perspectiveGenesis;
-for (const field of ["genesisMethod", "originPerspective", "transformedPerspective", "transformation", "situatedObservation", "newlyVisibleNeed", "candidateObject", "claimBoundary"]) {
-  if (!perspectiveGenesis?.required?.includes(field)) fail(`KFD-5 perspectiveGenesis must require ${field}`);
+const kfd5Genesis = kfd5PrimitiveDiscoverySchema.properties?.genesis;
+for (const field of ["methods", "observationPerspective", "currentOntology", "observation", "candidateObject", "claimBoundary", "methodEvidence"]) {
+  if (!kfd5Genesis?.required?.includes(field)) fail(`KFD-5 genesis must require ${field}`);
 }
-for (const method of ["direct-situated-experience", "perspective-replay", "contrastive-replay"]) {
-  if (!perspectiveGenesis?.properties?.genesisMethod?.enum?.includes(method)) fail(`KFD-5 genesisMethod missing ${method}`);
+for (const method of ["direct-situated-judgment", "perspective-transformation", "perspective-replay", "contrastive-replay", "anomaly-driven", "reconstruction-pressure", "causal-variable-discovery", "structural-compression"]) {
+  if (!kfd5PrimitiveDiscoverySchema.$defs?.genesisMethod?.enum?.includes(method)) fail(`KFD-5 genesisMethod missing ${method}`);
 }
-if (perspectiveGenesis?.properties?.replayBasis?.$ref !== "#/$defs/replayBasis") {
-  fail("KFD-5 perspectiveGenesis must expose replayBasis");
+if (kfd5Genesis?.properties?.replayBasis?.$ref !== "#/$defs/replayBasis") {
+  fail("KFD-5 genesis must expose replayBasis");
 }
-if (!kfd5PrimitiveDiscoverySchema.properties?.participants?.items?.properties?.functions?.items?.enum?.includes("perspective-grounded-judgment")) {
-  fail("KFD-5 primitiveDiscovery interface v2 must expose perspective-grounded-judgment");
+for (const participantFunction of ["perspective-declaration", "candidate-generation", "scalable-reasoning"]) {
+  if (!kfd5PrimitiveDiscoverySchema.properties?.participants?.items?.properties?.functions?.items?.enum?.includes(participantFunction)) {
+    fail(`KFD-5 primitiveDiscovery interface v3 must expose ${participantFunction}`);
+  }
 }
 if (kfd5PrimitiveDiscoverySchema.properties?.boundaryPressure?.$ref !== "#/$defs/boundaryPressure") {
   fail("KFD-5 primitiveDiscovery schema must expose the optional boundaryPressure diagnostic");
 }
 if (kfd5PrimitiveDiscoverySchema.required?.includes("boundaryPressure")) {
-  fail("KFD-5 boundaryPressure must remain an optional diagnostic in interface v2");
+  fail("KFD-5 boundaryPressure must remain an optional diagnostic in interface v3");
 }
 if (!kfd5PrimitiveDiscoverySchema.$defs?.boundaryPressure?.properties?.pressureChanges?.items?.properties?.kind?.enum?.includes("new-participant")) {
   fail("KFD-5 boundaryPressure must classify new-participant pressure");
 }
-for (const concept of ["primitiveDiscovery", "groundedJudgment", "perspectiveGenesis", "perspectiveTransformation", "genesisMethod", "replayBasis", "localOptimizationTrap", "situatedObservation", "newlyVisibleNeed", "claimBoundary", "qualification", "scalableReasoning", "realityPressure", "boundaryPressure", "contactSurface", "implicitCoordination", "pressureChange", "internalObjectAlternative", "primitiveCandidate", "minimumClosure", "deletionTest", "fuseTest", "falsifier", "dogfoodEvidence"]) {
+for (const concept of ["primitiveDiscovery", "perspectiveDeclaration", "methodPluralGenesis", "observationPerspective", "currentOntology", "perspectiveTransformation", "genesisMethod", "methodEvidence", "replayBasis", "anomalyDriven", "reconstructionPressure", "causalVariableDiscovery", "structuralCompression", "methodArtifact", "localOptimizationTrap", "situatedObservation", "newlyVisibleNeed", "claimBoundary", "qualification", "scalableReasoning", "realityPressure", "boundaryPressure", "contactSurface", "implicitCoordination", "pressureChange", "internalObjectAlternative", "primitiveCandidate", "minimumClosure", "deletionTest", "fuseTest", "falsifier", "dogfoodEvidence"]) {
   if (!kfd5?.concepts?.[concept]) fail(`KFD-5 standards metadata missing concept ${concept}`);
 }
 if (!kfd5?.interfaces?.primitiveDiscovery) fail("KFD-5 standards metadata missing interface primitiveDiscovery");
+if (kfd5?.interfaces?.liveCaseRegistry?.schemaVersion !== 2) {
+  fail("KFD-5 standards metadata liveCaseRegistry interface must use schemaVersion 2");
+}
 
 const kfd6 = standardsMetadata.standards?.["kfd-6"];
 if (kfd6?.status !== "draft") fail("KFD-6 must remain draft until activation evidence is committed");
@@ -696,24 +1124,28 @@ if (kfd6AutonomousDiscoveryLoopSchema.properties?.contract?.const !== "kfd-6-aut
 if (kfd6AutonomousDiscoveryLoopSchema.properties?.standard?.const !== "kfd-6") {
   fail("KFD-6 autonomousDiscoveryLoop schema must declare standard kfd-6");
 }
-if (kfd6?.interfaces?.autonomousDiscoveryLoop?.schemaVersion !== 3 || kfd6AutonomousDiscoveryLoopSchema.properties?.schemaVersion?.const !== 3) {
-  fail("KFD-6 autonomousDiscoveryLoop perspective-experiment interface must use schemaVersion 3");
+if (kfd6?.interfaces?.autonomousDiscoveryLoop?.schemaVersion !== 4 || kfd6AutonomousDiscoveryLoopSchema.properties?.schemaVersion?.const !== 4) {
+  fail("KFD-6 autonomousDiscoveryLoop method-comparison interface must use schemaVersion 4");
 }
-if (!kfd6AutonomousDiscoveryLoopSchema.required?.includes("perspectiveExperiments")) {
-  fail("KFD-6 autonomousDiscoveryLoop interface v3 must require perspectiveExperiments");
+for (const field of ["generationExperiments", "methodComparison"]) {
+  if (!kfd6AutonomousDiscoveryLoopSchema.required?.includes(field)) fail(`KFD-6 autonomousDiscoveryLoop interface v4 must require ${field}`);
 }
 if (kfd6AutonomousDiscoveryLoopSchema.required?.includes("boundaryHypothesis")) {
-  fail("KFD-6 boundaryHypothesis must remain conditional in interface v3");
+  fail("KFD-6 boundaryHypothesis must remain conditional in interface v4");
 }
-const perspectiveExperiment = kfd6AutonomousDiscoveryLoopSchema.$defs?.perspectiveExperiment;
-for (const field of ["replayMode", "sourceViewCoordinates", "sharedContext", "preservationClaim", "degradedState", "originPerspective", "transformedPerspective", "causalBasis", "transformation", "newlyVisibleNeed", "candidateObject", "disconfirmingTest"]) {
-  if (!perspectiveExperiment?.required?.includes(field)) fail(`KFD-6 perspectiveExperiment must require ${field}`);
+const generationExperiment = kfd6AutonomousDiscoveryLoopSchema.$defs?.generationExperiment;
+for (const field of ["id", "methods", "observationPerspective", "currentOntology", "causalBasis", "procedure", "evidenceCut", "resourceBudget", "result", "disconfirmingTest"]) {
+  if (!generationExperiment?.required?.includes(field)) fail(`KFD-6 generationExperiment must require ${field}`);
 }
-if (!perspectiveExperiment?.properties?.replayMode?.enum?.includes("contrastive")) {
-  fail("KFD-6 perspectiveExperiment must support contrastive replay");
+for (const method of ["perspective-transformation", "anomaly-driven", "reconstruction-pressure", "causal-variable-discovery", "structural-compression"]) {
+  if (!kfd6AutonomousDiscoveryLoopSchema.$defs?.genesisMethod?.enum?.includes(method)) fail(`KFD-6 genesisMethod missing ${method}`);
 }
-if (kfd6AutonomousDiscoveryLoopSchema.properties?.method?.properties?.candidateSchemaVersion?.const !== 2) {
-  fail("KFD-6 autonomousDiscoveryLoop interface v3 must hand candidates to KFD-5 schemaVersion 2");
+const methodComparison = kfd6AutonomousDiscoveryLoopSchema.properties?.methodComparison;
+if (methodComparison?.properties?.candidateSchemaVersion?.const !== 3) {
+  fail("KFD-6 autonomousDiscoveryLoop interface v4 must hand candidates to KFD-5 schemaVersion 3");
+}
+for (const baseline of ["fixed-ontology", "no-new-primitive"]) {
+  if (!methodComparison?.properties?.baselines?.items?.enum?.includes(baseline)) fail(`KFD-6 methodComparison missing ${baseline} baseline`);
 }
 if (kfd6AutonomousDiscoveryLoopSchema.properties?.boundaryHypothesis?.$ref !== "#/$defs/boundaryHypothesis") {
   fail("KFD-6 autonomousDiscoveryLoop schema must expose the boundaryHypothesis contract");
@@ -729,7 +1161,7 @@ const antiSelfCertification = kfd6AutonomousDiscoveryLoopSchema.properties?.anti
 if (antiSelfCertification?.generatorIsSoleVerifier?.const !== false) fail("KFD-6 must prohibit the generator from being the sole verifier");
 if (antiSelfCertification?.generatedEvidenceOnly?.const !== false) fail("KFD-6 must prohibit generated-only evidence");
 if (antiSelfCertification?.promotionAuthoritySeparated?.const !== true) fail("KFD-6 must separate discovery from promotion authority");
-for (const concept of ["autonomousDiscovery", "causalExperience", "episodeCorpus", "experienceCut", "captureBoundary", "perspectiveExperiment", "perspectiveTransformation", "perspectiveReplay", "contrastiveReplay", "fixedOntologyBaseline", "projectionArtifact", "boundaryPressure", "boundaryHypothesis", "contactSurface", "implicitCoordination", "pressureChange", "internalObjectAlternative", "heldOutEvaluation", "boundedIntervention", "selfCertification", "promotionAuthority", "candidateAtlas"]) {
+for (const concept of ["autonomousDiscovery", "causalExperience", "episodeCorpus", "experienceCut", "captureBoundary", "generationExperiment", "genesisMethod", "methodComparison", "sharedEvidenceCut", "resourceBudget", "perspectiveTransformation", "perspectiveReplay", "contrastiveReplay", "fixedOntologyBaseline", "noNewPrimitiveBaseline", "falseCandidateRate", "ontologyDistance", "methodArtifact", "projectionArtifact", "boundaryPressure", "boundaryHypothesis", "contactSurface", "implicitCoordination", "pressureChange", "internalObjectAlternative", "heldOutEvaluation", "boundedIntervention", "selfCertification", "promotionAuthority", "candidateAtlas"]) {
   if (!kfd6?.concepts?.[concept]) fail(`KFD-6 standards metadata missing concept ${concept}`);
 }
 if (!kfd6?.interfaces?.autonomousDiscoveryLoop) fail("KFD-6 standards metadata missing interface autonomousDiscoveryLoop");
@@ -1037,7 +1469,9 @@ if (!kfd3Interface) {
     entry.stableRenderedIndex === "https://kfd.libkungfu.dev" &&
     entry.canonicalPaths?.includes("decisions/KFD-N.md") &&
     entry.canonicalPaths?.includes("registry.json") &&
-    entry.canonicalPaths?.includes("standards.json")
+    entry.canonicalPaths?.includes("standards.json") &&
+    entry.canonicalPaths?.includes(liveCaseRegistryPath) &&
+    entry.canonicalPaths?.includes(candidateRegistryPath)
   )) {
     fail("KFD-3 collaboration interface must declare the public KFD GitHub fact source");
   }
@@ -1046,12 +1480,33 @@ if (!kfd3Interface) {
   if (!kfd3Interface.minimalEntrypoints.some((entry) => entry.id === "foundation-model" && entry.surface === "docs/foundation-model.md")) {
     fail("KFD-3 collaboration interface must expose docs/foundation-model.md as a minimal entrypoint");
   }
+  if (!kfd3Interface.minimalEntrypoints.some((entry) => entry.id === "formal-model" && entry.surface === "docs/formal-model.md")) {
+    fail("KFD-3 collaboration interface must expose docs/formal-model.md as a minimal entrypoint");
+  }
+  if (!kfd3Interface.minimalEntrypoints.some((entry) => entry.id === "live-primitive-cases" && entry.surface === liveCaseRegistryPath)) {
+    fail("KFD-3 collaboration interface must expose the live case registry as a minimal entrypoint");
+  }
+  if (!kfd3Interface.minimalEntrypoints.some((entry) => entry.id === "kfd-candidates" && entry.surface === candidateRegistryPath)) {
+    fail("KFD-3 collaboration interface must expose the candidate registry as a minimal entrypoint");
+  }
   if (!kfd3Interface.minimalEntrypoints.some((entry) => entry.id === "official-status-and-trademarks" && entry.surface === "TRADEMARKS.md")) {
     fail("KFD-3 collaboration interface must expose TRADEMARKS.md as an official-status-and-trademarks entrypoint");
   }
   if (!Array.isArray(kfd3Interface.surfaces) || kfd3Interface.surfaces.length === 0) fail("KFD-3 collaboration interface surfaces[] is required");
   if (!kfd3Interface.surfaces.some((entry) => entry.id === "foundation-model" && entry.discoverability?.path === "docs/foundation-model.md")) {
     fail("KFD-3 collaboration interface must classify docs/foundation-model.md as a participant-facing surface");
+  }
+  if (!kfd3Interface.surfaces.some((entry) => entry.id === "formal-model" && entry.discoverability?.path === "docs/formal-model.md")) {
+    fail("KFD-3 collaboration interface must classify docs/formal-model.md as a participant-facing surface");
+  }
+  if (!kfd3Interface.surfaces.some((entry) => entry.id === "formal-references" && entry.discoverability?.path === "docs/KFD-*-formal.md")) {
+    fail("KFD-3 collaboration interface must classify per-decision formal references as participant-facing surfaces");
+  }
+  if (!kfd3Interface.surfaces.some((entry) => entry.id === "live-primitive-cases" && entry.discoverability?.path === liveCaseRegistryPath)) {
+    fail("KFD-3 collaboration interface must classify live cases as a participant-facing surface");
+  }
+  if (!kfd3Interface.surfaces.some((entry) => entry.id === "kfd-candidates" && entry.discoverability?.path === candidateRegistryPath)) {
+    fail("KFD-3 collaboration interface must classify KFD candidates as a participant-facing surface");
   }
   if (!kfd3Interface.surfaces.some((entry) => entry.id === "official-status-and-trademarks" && entry.discoverability?.path === "TRADEMARKS.md")) {
     fail("KFD-3 collaboration interface must expose TRADEMARKS.md as a participant-facing surface");
@@ -1083,6 +1538,32 @@ if (!kfd3Interface) {
     }
     if (!kfd3Interface.valueEvidence.some((entry) => entry.id === "kfd-foundation-model" && entry.facts?.some((fact) => fact.path === "docs/foundation-model.md"))) {
       fail("KFD-3 foundation value evidence must bind docs/foundation-model.md");
+    }
+    if (!kfd3Interface.valueEvidence.some((entry) => entry.id === "kfd-live-case-dogfood" && entry.facts?.some((fact) => fact.path === liveCaseRegistryPath))) {
+      fail("KFD-3 live-case value evidence must bind the live case registry");
+    }
+    const candidateEvidence = kfd3Interface.valueEvidence.find((entry) => entry.id === "kfd-candidate-incubation");
+    for (const requiredPath of [
+      candidateRegistryPath,
+      candidateRegistrySchemaPath,
+      "drafts/README.md",
+      "drafts/action-state-separation.md",
+      "CONTRIBUTING.md",
+    ]) {
+      if (!candidateEvidence?.facts?.some((fact) => fact.path === requiredPath)) {
+        fail(`KFD-3 candidate value evidence must bind ${requiredPath}`);
+      }
+    }
+    const liveCaseEvidence = kfd3Interface.valueEvidence.find((entry) => entry.id === "kfd-live-case-dogfood");
+    for (const requiredPath of [
+      "cases/live/proof-carrying-work-object/ontology-split.md",
+      "cases/live/proof-carrying-work-object/distinguishability.md",
+      "cases/live/proof-carrying-work-object/cuts/0002-pursuit.json",
+      "cases/live/proof-carrying-work-object/cuts/0002-warrant.json",
+    ]) {
+      if (!liveCaseEvidence?.facts?.some((fact) => fact.path === requiredPath)) {
+        fail(`KFD-3 live-case value evidence must bind ${requiredPath}`);
+      }
     }
   }
   if (!Array.isArray(kfd3Interface.extensionRequests) || kfd3Interface.extensionRequests.length === 0) fail("KFD-3 collaboration interface extensionRequests[] is required");
@@ -1156,7 +1637,7 @@ if (kfd3PrebuildWitness && kfd3ArtifactWitness) {
 }
 
 const impactLevels = new Set(["patch", "minor", "major"]);
-const requiredSurfaces = new Set(["kfd-content", "kfd-registry-schema", "kfd-standards-metadata", "kfd-package-structure", "kfd-2-public-release-trust-claim", "kfd-3-trusted-value-evidence", "kfd-site-decision-usage-pages"]);
+const requiredSurfaces = new Set(["kfd-content", "kfd-registry-schema", "kfd-candidate-registry", "kfd-standards-metadata", "kfd-package-structure", "kfd-independent-verifier", "kfd-verifier-contracts", "kfd-2-public-release-trust-claim", "kfd-3-trusted-value-evidence", "kfd-site-decision-usage-pages"]);
 
 if (releaseImpact.schemaVersion !== 1) fail(`unsupported release-impact schemaVersion ${releaseImpact.schemaVersion}`);
 if (releaseImpact.contract !== "kungfu-buildchain-impact") fail(`unexpected release-impact contract ${releaseImpact.contract}`);

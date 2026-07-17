@@ -1,0 +1,291 @@
+{
+  "schemaVersion": 3,
+  "contract": "kfd-5-primitive-discovery",
+  "standard": "kfd-5",
+  "candidate": {
+    "id": "proof-carrying-work-object",
+    "title": "Proof-Carrying Work Object",
+    "problemStatement": "When bounded work crosses agent, tool, or organization boundaries, downstream participants often have to reconstruct the result, source facts, verification state, responsibility, residual risk, and authority conditions before they can safely continue.",
+    "scope": "A provisional cross-domain object hypothesis for carrying a bounded work result and its inspectable continuation basis. The working title, common contract, novelty, universality, and Primitive status remain open."
+  },
+  "genesis": {
+    "methods": [
+      "direct-situated-judgment",
+      "perspective-transformation",
+      "reconstruction-pressure",
+      "structural-compression"
+    ],
+    "observationPerspective": {
+      "id": "human-organization-adoption",
+      "bearer": "organization considering KFD adoption",
+      "role": "management and governance observer",
+      "proximity": "outside the execution handoff",
+      "consequences": [
+        "bears persuasion, rollout, governance, and organizational adoption cost"
+      ],
+      "naturalObjects": [
+        "brand",
+        "standard",
+        "management approval",
+        "team rollout",
+        "engineering integration"
+      ]
+    },
+    "currentOntology": [
+      "product",
+      "API",
+      "artifact",
+      "attestation",
+      "credential",
+      "capability",
+      "workflow",
+      "trace",
+      "memory",
+      "tool routing"
+    ],
+    "observation": "Changing the observer from the adopting organization to the agent executing and handing off work made several previously separate product categories appear as stages in one possible propagation loop.",
+    "candidateObject": "A bounded work object that carries result, facts, verification, responsibility, residual risk, and purpose-bound continuation conditions across participant boundaries.",
+    "claimBoundary": "The cut records a provisional shared-object hypothesis. It does not claim a final name, historical novelty, universal applicability, product readiness, method superiority, or accepted Primitive status.",
+    "methodEvidence": [
+      {
+        "kind": "file",
+        "coordinate": "cases/live/proof-carrying-work-object/genesis.md",
+        "observer": "KFD maintainers"
+      },
+      {
+        "kind": "file",
+        "coordinate": "cases/live/proof-carrying-work-object/kfd-method-trace.md",
+        "observer": "KFD maintainers"
+      }
+    ],
+    "transformedPerspective": {
+      "id": "agent-work-handoff",
+      "bearer": "agent producing or consuming bounded work",
+      "role": "execution and downstream judgment participant",
+      "proximity": "inside the work handoff and gate",
+      "consequences": [
+        "bears tool discovery, execution, verification, retry, continuation, and failure cost"
+      ],
+      "naturalObjects": [
+        "discoverable capability",
+        "machine contract",
+        "work result",
+        "evidence",
+        "continuation condition",
+        "routing outcome"
+      ]
+    },
+    "transformation": "The observer moved from organizational adoption to the agent and downstream participant crossing the execution boundary.",
+    "newlyVisibleNeed": "The basis for trusting and continuing work must travel with the work so that every boundary crossing does not require full epistemic reconstruction.",
+    "methodNotes": "Perspective transformation exposed the chain; reconstruction pressure and structural compression separated the chain dynamics from the object repeatedly bearing its burden."
+  },
+  "boundaryPressure": {
+    "contactSides": [
+      "work-producing agent or tool",
+      "downstream agent, gate, operator, or organization"
+    ],
+    "implicitHandling": "Results, provenance, evidence, responsibility, risk, and authorization are commonly reconstructed from files, logs, messages, policy, and participant memory.",
+    "pressureChanges": [
+      {
+        "kind": "new-participant",
+        "description": "Agents increasingly produce and consume work without sharing the same transient context."
+      },
+      {
+        "kind": "scale",
+        "description": "High-frequency delegated work makes repeated downstream reinvestigation and manual explanation expensive."
+      },
+      {
+        "kind": "authority",
+        "description": "A downstream participant must know not only what happened but which bounded action may legitimately follow."
+      },
+      {
+        "kind": "heterogeneity",
+        "description": "The handoff crosses tools, runtimes, organizations, policies, and domain vocabularies."
+      }
+    ],
+    "observedFailures": [
+      "A downstream participant must rediscover why an output should be trusted.",
+      "Verification state and residual risk become detached from the result.",
+      "Authorization is reconstructed from ambient context or hidden policy.",
+      "Successful execution does not create a reusable basis for future routing."
+    ],
+    "mediationClaim": "A proof-carrying work object may mediate the boundary by preserving a purpose-bound basis for independent judgment and continuation.",
+    "internalObjectAlternative": "The candidate may be only a composition of attestation, credential, capability, workflow artifact, event log, and signed envelope rather than a new Primitive."
+  },
+  "grounding": {
+    "pressure": [
+      "Repeated downstream reconstruction of work validity and continuation authority",
+      "Separation between evidence objects and operational permission",
+      "Agent execution and handoff across heterogeneous context boundaries",
+      "Need for machine-readable routing outcomes without hidden workflow capture"
+    ],
+    "factSources": [
+      {
+        "kind": "file",
+        "coordinate": "cases/live/proof-carrying-work-object/genesis.md",
+        "observer": "KFD maintainers"
+      },
+      {
+        "kind": "file",
+        "coordinate": "schemas/kfd-2/release-trust-passport.schema.json",
+        "observer": "KFD package"
+      },
+      {
+        "kind": "file",
+        "coordinate": "schemas/kfd-4/perspective-replay.schema.json",
+        "observer": "KFD package"
+      },
+      {
+        "kind": "file",
+        "coordinate": "schemas/kfd-5/primitive-discovery.schema.json",
+        "observer": "KFD package"
+      }
+    ],
+    "evidenceBoundary": "Public KFD records and first-party object examples available at the 2026-07-17 genesis cut. No common implementation, benchmark, independent adopter, controlled routing evidence, or cross-organization transfer is included.",
+    "knownGaps": [
+      "No final name or stable common contract",
+      "No measured downstream reinvestigation reduction",
+      "No safe common authority attenuation and revocation model",
+      "No independent domain implementation",
+      "No evidence of agent routing preference",
+      "No evidence that operational use reproduces KFD-compatible behavior"
+    ]
+  },
+  "participants": [
+    {
+      "id": "human-perspective-source",
+      "kind": "human",
+      "functions": [
+        "perspective-declaration",
+        "candidate-generation",
+        "decision"
+      ]
+    },
+    {
+      "id": "reasoning-agent",
+      "kind": "agent",
+      "functions": [
+        "candidate-generation",
+        "scalable-reasoning"
+      ]
+    },
+    {
+      "id": "future-independent-reviewer",
+      "kind": "collective",
+      "functions": [
+        "evidence-custody",
+        "verification"
+      ]
+    }
+  ],
+  "alternatives": [
+    {
+      "name": "Product or API as the propagation unit",
+      "disposition": "retained",
+      "reason": "Products and APIs remain execution and distribution surfaces, but may not be the object that crosses and accumulates acceptance at work boundaries."
+    },
+    {
+      "name": "Agent adoption loop as the Primitive",
+      "disposition": "retained",
+      "reason": "The loop may be a useful system model, but currently has weaker independent identity, boundary, authority, and lifecycle than the carried work object."
+    },
+    {
+      "name": "Attestation or verifiable credential",
+      "disposition": "unresolved",
+      "reason": "These may cover the epistemic side but may not include bounded work lifecycle and continuation authority."
+    },
+    {
+      "name": "Capability token or transaction mandate",
+      "disposition": "unresolved",
+      "reason": "These may cover action authority but may not carry the complete fact, evidence, responsibility, and result boundary."
+    },
+    {
+      "name": "Workflow artifact, event log, or signed envelope",
+      "disposition": "unresolved",
+      "reason": "A composition of existing objects may provide all required behavior without a new Primitive."
+    },
+    {
+      "name": "No new Primitive",
+      "disposition": "unresolved",
+      "reason": "The current convergence may be conceptual similarity rather than a durable shared object."
+    }
+  ],
+  "contractModel": {
+    "identity": "A stable identity for one bounded work claim and the basis on which a downstream participant may judge continuation.",
+    "boundary": "Work result, source fact cut, provenance, verification state, responsibility, residual risk, degraded state, lineage, and purpose-bound continuation conditions.",
+    "authority": "The producer declares the work result; independent evidence and verification support or contradict it; each downstream participant decides under its own purpose and policy. The object does not grant ambient or unlimited authority.",
+    "lifecycle": "proposed -> produced -> assessed -> accepted or rejected -> authorized -> consumed -> stale, revoked, or superseded",
+    "operations": [
+      "inspect",
+      "verify",
+      "accept",
+      "reject",
+      "continue",
+      "delegate",
+      "attenuate",
+      "revoke",
+      "replay",
+      "supersede"
+    ]
+  },
+  "tests": {
+    "minimumClosure": {
+      "result": "inconclusive",
+      "evidence": [
+        {
+          "kind": "file",
+          "coordinate": "cases/live/proof-carrying-work-object/genesis.md"
+        }
+      ],
+      "notes": "A preliminary identity, boundary, authority, lifecycle, and operation set exists, but no common implementation has tested whether it is minimal."
+    },
+    "deletion": {
+      "result": "inconclusive",
+      "evidence": [
+        {
+          "kind": "file",
+          "coordinate": "cases/live/proof-carrying-work-object/genesis.md"
+        }
+      ],
+      "notes": "The candidate plausibly compresses repeated reinvestigation, but the cost has not been measured against existing compositions."
+    },
+    "fuse": {
+      "result": "inconclusive",
+      "evidence": [
+        {
+          "kind": "file",
+          "coordinate": "cases/live/proof-carrying-work-object/genesis.md"
+        }
+      ],
+      "notes": "Several domain examples appear structurally related, but shared fields and operations have not survived cross-domain implementation."
+    },
+    "falsifiers": [
+      "No reusable operations exist beyond similar metadata fields.",
+      "Downstream participants do not measurably reduce reinvestigation.",
+      "Evidence cannot be safely reassessed for a new purpose.",
+      "Continuation authority cannot be attenuated, revoked, or delegated safely.",
+      "A common envelope erases natural domain boundaries.",
+      "Acceptance is dominated by hidden defaults, bundling, or brand rather than evidence.",
+      "First-party examples do not transfer to an independent context.",
+      "The producer remains the sole verifier or promotion authority."
+    ],
+    "dogfood": {
+      "result": "not-run",
+      "evidence": [],
+      "notes": "Existing examples motivate the candidate but do not yet implement and compare one common cross-domain contract."
+    }
+  },
+  "decision": {
+    "outcome": "provisional",
+    "owner": "KFD maintainers",
+    "reason": "The perspective transformation and structural compression justify preserving the candidate, but minimum closure, deletion, fuse, dogfood, independent transfer, and propagation claims remain unresolved.",
+    "residualRisks": [
+      "The working title may anchor the object too strongly around proof.",
+      "The candidate may be only a composition pattern over existing standards.",
+      "First-party examples may create confirmation bias.",
+      "Authority semantics may not generalize safely.",
+      "Operational propagation may be driven by platform defaults rather than verified value.",
+      "KFD self-application may be mistaken for independent validation."
+    ]
+  }
+}

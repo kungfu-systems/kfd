@@ -3,8 +3,13 @@ import { pathToFileURL } from "node:url";
 
 const README_PATH = "README.md";
 const FOUNDATION_PATH = "docs/foundation-model.md";
+const FORMAL_PATH = "docs/formal-model.md";
 const CASES_PATH = "docs/primitive-discovery-cases.md";
 const REGISTRY_PATH = "registry.json";
+const CANDIDATE_INDEX_PATH = "drafts/README.md";
+const CANDIDATE_REGISTRY_PATH = "drafts/registry.json";
+const STANDARDS_PATH = "standards.json";
+const LIVE_CASE_REGISTRY_PATH = "cases/registry.json";
 const SITE_BUNDLE_PATH = "site/kfd-site.json";
 
 const normalizeLines = (value) => String(value || "").replace(/\r\n/g, "\n").trim();
@@ -76,6 +81,8 @@ const parseFoundationTriad = (markdown) => {
     sourceTarget: link[2],
     url: link[2] === FOUNDATION_PATH
       ? "/foundation"
+      : link[2] === FORMAL_PATH
+        ? "/formal"
       : link[2] === CASES_PATH
         ? "/cases"
         : link[2],
@@ -157,6 +164,84 @@ const buildUsagePages = (entries) => entries.map((entry) => {
   };
 });
 
+const buildFormalPages = (entries, standards) => entries.map((entry) => {
+  const formalModel = standards.standards?.[entry.slug]?.formalModel;
+  const formalPath = formalModel?.path || "";
+  return {
+    id: `${entry.id}-formal`,
+    decisionId: entry.id,
+    decisionNumber: entry.number,
+    parentPath: entry.path,
+    parentUrl: entry.url,
+    path: formalPath,
+    url: formalModel?.url || "",
+    sourcePath: formalPath,
+    sourceExists: existsSync(formalPath),
+    relationship: "formal-reference-child-of-decision",
+    normative: formalModel?.normative,
+    formalModelVersion: formalModel?.version,
+    formalModelStatus: formalModel?.status,
+    authorityPath: formalModel?.authorityPath,
+    sha256: formalModel?.sha256,
+    title: `${entry.id} formal reference`,
+  };
+});
+
+const buildLiveCasePages = (liveCaseRegistry) => (liveCaseRegistry.cases ?? []).map((entry) => ({
+  id: entry.id,
+  title: entry.title,
+  kind: entry.kind,
+  status: entry.status,
+  standard: entry.standard,
+  url: `/cases/live/${entry.id}`,
+  relationship: "provisional-live-case",
+  claimBoundary: entry.claimBoundary,
+  humanEntry: {
+    path: entry.humanEntry,
+    markdown: stripFrontmatter(readFileSync(entry.humanEntry, "utf8")),
+  },
+  genesis: {
+    path: entry.genesis,
+    markdown: stripFrontmatter(readFileSync(entry.genesis, "utf8")),
+  },
+  methodTrace: {
+    path: entry.methodTrace,
+    markdown: stripFrontmatter(readFileSync(entry.methodTrace, "utf8")),
+  },
+  propagationHypothesis: {
+    path: entry.propagationHypothesis,
+    markdown: stripFrontmatter(readFileSync(entry.propagationHypothesis, "utf8")),
+  },
+  reviewIndex: {
+    path: entry.reviewIndex,
+    markdown: stripFrontmatter(readFileSync(entry.reviewIndex, "utf8")),
+  },
+  ontologySplit: {
+    path: entry.ontologySplit,
+    markdown: stripFrontmatter(readFileSync(entry.ontologySplit, "utf8")),
+  },
+  distinguishabilityArgument: {
+    path: entry.distinguishabilityArgument,
+    markdown: stripFrontmatter(readFileSync(entry.distinguishabilityArgument, "utf8")),
+  },
+  candidateTracks: entry.candidateTracks.map((track) => ({
+    ...track,
+    currentCut: {
+      ...track.currentCut,
+      record: JSON.parse(readFileSync(track.currentCut.path, "utf8")),
+    },
+  })),
+}));
+
+const buildCandidatePages = (candidateRegistry) => (candidateRegistry.candidates ?? []).map((entry) => ({
+  ...entry,
+  url: `/drafts/${entry.id}`,
+  sourcePath: entry.path,
+  relationship: "pre-number-non-normative-candidate",
+  normative: false,
+  markdown: stripFrontmatter(readFileSync(entry.path, "utf8")),
+}));
+
 const section = ({ id, sourceHeading, title, markdown, role, priority, presentation, firstScreen = false, sourcePath = README_PATH }) => ({
   id,
   sourcePath,
@@ -169,9 +254,20 @@ const section = ({ id, sourceHeading, title, markdown, role, priority, presentat
   markdown: normalizeLines(markdown),
 });
 
-export const buildSiteBundle = ({ readmeText, foundationText, casesText, registry }) => {
+export const buildSiteBundle = ({
+  readmeText,
+  foundationText,
+  formalText,
+  casesText,
+  candidateIndexText,
+  candidateRegistry,
+  registry,
+  standards,
+  liveCaseRegistry,
+}) => {
   const readme = parseReadme(readmeText);
   const foundationDocument = parseReadme(foundationText);
+  const formalDocument = parseReadme(formalText);
   const casesDocument = parseReadme(casesText);
   const futurePicture = parseFuturePicture(readme.intro);
   const { lead } = introLead(readme.intro);
@@ -182,6 +278,8 @@ export const buildSiteBundle = ({ readmeText, foundationText, casesText, registr
   const practiceGuidelines = parsePracticeGuidelines(foundationDocument.sections["Practice guidelines"] || "");
   const productProofPath = parseProductProofPath(readme.sections["Product proof path"] || "");
   const entries = registry.entries || [];
+  const liveCasePages = buildLiveCasePages(liveCaseRegistry);
+  const candidatePages = buildCandidatePages(candidateRegistry);
 
   const homepageSections = [
     section({
@@ -243,6 +341,15 @@ export const buildSiteBundle = ({ readmeText, foundationText, casesText, registr
       presentation: "boundary-note",
     }),
     section({
+      id: "current-candidates",
+      sourceHeading: "Current candidates",
+      title: "Current candidates",
+      markdown: readme.sections["Current candidates"],
+      role: "primary",
+      priority: 27,
+      presentation: "candidate-summary",
+    }),
+    section({
       id: "practice-guidelines",
       sourceHeading: "Practice guidelines",
       title: "Practice guidelines",
@@ -282,22 +389,32 @@ export const buildSiteBundle = ({ readmeText, foundationText, casesText, registr
   ];
 
   return {
-    schemaVersion: 1,
+    schemaVersion: 2,
     contract: "kfd-site-bundle",
     source: {
       package: "@kungfu-tech/kfd",
       homepageTextSource: README_PATH,
       foundationTextSource: FOUNDATION_PATH,
+      formalTextSource: FORMAL_PATH,
       casesTextSource: CASES_PATH,
       registry: REGISTRY_PATH,
+      standards: STANDARDS_PATH,
+      liveCaseRegistry: LIVE_CASE_REGISTRY_PATH,
+      candidateRegistry: CANDIDATE_REGISTRY_PATH,
       decisionsDir: "decisions",
+      candidatesDir: "drafts",
     },
     routes: {
       home: "/",
       foundation: "/foundation",
+      formal: "/formal",
       cases: "/cases",
+      liveCasePattern: "/cases/live/{id}",
+      candidates: "/drafts",
+      candidatePattern: "/drafts/{id}",
       decisionPattern: "/{number}",
       decisionUsagePattern: "/{number}/usage",
+      decisionFormalPattern: "/{number}/formal",
       llms: "/llms.txt",
       manifest: "/manifest.json",
     },
@@ -329,13 +446,13 @@ export const buildSiteBundle = ({ readmeText, foundationText, casesText, registr
           maxPrimarySections: 2,
           note: "The first viewport should show the civilizational shift, the Kungfu path, the foundation triad, and the product-witness rule before registry, renderer, or implementation detail.",
         },
-        primary: ["future-picture", "foundation-triad", "what-kfd-is", "adoption-boundary", "product-proof-path"],
+        primary: ["future-picture", "foundation-triad", "what-kfd-is", "adoption-boundary", "current-candidates", "product-proof-path"],
         detail: {
           route: "/foundation",
           source: FOUNDATION_PATH,
           sections: ["foundation-model", "load-bearing-product-witness", "practice-guidelines"],
         },
-        readingPath: ["/", "/foundation", "/cases", "/{number}"],
+        readingPath: ["/", "/foundation", "/formal", "/cases", "/drafts", "/{number}"],
         support: ["agent-quickstart", "decision-metadata"],
         currentDecisions: {
           source: REGISTRY_PATH,
@@ -367,6 +484,17 @@ export const buildSiteBundle = ({ readmeText, foundationText, casesText, registr
       authorityNote: "The numbered texts in decisions/KFD-N.md remain authoritative.",
       markdown: normalizeLines(foundationText),
     },
+    formalPage: {
+      id: "formal-model",
+      title: formalDocument.title,
+      sourcePath: FORMAL_PATH,
+      url: "/formal",
+      relationship: "non-normative-reference-semantics-for-numbered-decisions",
+      normative: false,
+      formalModelVersion: 1,
+      authorityNote: "The numbered texts in decisions/KFD-N.md remain authoritative.",
+      markdown: normalizeLines(formalText),
+    },
     casesPage: {
       id: "primitive-discovery-cases",
       title: casesDocument.title,
@@ -376,6 +504,26 @@ export const buildSiteBundle = ({ readmeText, foundationText, casesText, registr
       normative: false,
       authorityNote: "Historical facts are source-bound; KFD replay is explanatory. Numbered KFD decisions remain authoritative.",
       markdown: stripFrontmatter(casesText),
+    },
+    liveCases: {
+      source: LIVE_CASE_REGISTRY_PATH,
+      stableUrlPattern: "/cases/live/{id}",
+      relationship: "provisional-live-cases-of-kfd-5",
+      normative: false,
+      authorityNote: "Live cases preserve candidate genesis and qualification state. They are not numbered KFD decisions or accepted Primitive claims.",
+      cases: liveCasePages,
+    },
+    kfdCandidates: {
+      source: CANDIDATE_REGISTRY_PATH,
+      indexSource: CANDIDATE_INDEX_PATH,
+      indexUrl: "/drafts",
+      stableUrlPattern: "/drafts/{id}",
+      relationship: "pre-number-non-normative-candidates",
+      normative: false,
+      authorityNote: "Candidates preserve hypotheses before number allocation. Only explicit promotion into decisions/ and registry.json creates numbered KFD authority.",
+      numberingPolicy: candidateRegistry.numberingPolicy,
+      indexMarkdown: stripFrontmatter(candidateIndexText),
+      candidates: candidatePages,
     },
     decisionPages: {
       source: REGISTRY_PATH,
@@ -387,6 +535,14 @@ export const buildSiteBundle = ({ readmeText, foundationText, casesText, registr
         stableUrlPattern: "/{number}/usage",
         relationship: "usage-child-of-decision",
         pages: buildUsagePages(entries),
+      },
+      formalPages: {
+        source: "registry.entries[] + standards.json + docs/KFD-N-formal.md",
+        bodySource: "docs/KFD-{number}-formal.md",
+        stableUrlPattern: "/{number}/formal",
+        relationship: "formal-reference-child-of-decision",
+        normative: false,
+        pages: buildFormalPages(entries, standards),
       },
       metadata: {
         licenseBoundary: {
@@ -406,6 +562,8 @@ export const buildSiteBundle = ({ readmeText, foundationText, casesText, registr
             "decisions/KFD-N.md",
             REGISTRY_PATH,
             "standards.json",
+            LIVE_CASE_REGISTRY_PATH,
+            CANDIDATE_REGISTRY_PATH,
           ],
           projectionSurfaces: [
             "https://kfd.libkungfu.dev/N",
@@ -421,7 +579,10 @@ export const buildSiteBundle = ({ readmeText, foundationText, casesText, registr
         "homepage title and text",
         "homepage section projection from README.md",
         "foundation explanation page from docs/foundation-model.md",
+        "formal reference overview from docs/formal-model.md",
         "historical cases page from docs/primitive-discovery-cases.md",
+        "live Primitive case registry and case bodies from cases/",
+        "pre-number KFD candidate registry, index, and bodies from drafts/",
         "foundation triad commitments",
         "foundation model layers and chain",
         "product proof path text",
@@ -432,6 +593,8 @@ export const buildSiteBundle = ({ readmeText, foundationText, casesText, registr
         "decision markdown bodies",
         "decision usage page mapping",
         "decision usage markdown bodies",
+        "decision formal reference mapping",
+        "decision formal reference markdown bodies",
       ],
       ownedBySite: [
         "HTML structure",
@@ -450,8 +613,13 @@ export const buildSiteBundle = ({ readmeText, foundationText, casesText, registr
 export const readInputs = () => ({
   readmeText: readFileSync(README_PATH, "utf8"),
   foundationText: readFileSync(FOUNDATION_PATH, "utf8"),
+  formalText: readFileSync(FORMAL_PATH, "utf8"),
   casesText: readFileSync(CASES_PATH, "utf8"),
+  candidateIndexText: readFileSync(CANDIDATE_INDEX_PATH, "utf8"),
+  candidateRegistry: JSON.parse(readFileSync(CANDIDATE_REGISTRY_PATH, "utf8")),
   registry: JSON.parse(readFileSync(REGISTRY_PATH, "utf8")),
+  standards: JSON.parse(readFileSync(STANDARDS_PATH, "utf8")),
+  liveCaseRegistry: JSON.parse(readFileSync(LIVE_CASE_REGISTRY_PATH, "utf8")),
 });
 
 export const generatedSiteBundle = () => buildSiteBundle(readInputs());

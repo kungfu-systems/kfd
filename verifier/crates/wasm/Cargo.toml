@@ -1,0 +1,13 @@
+[package]
+name = "kfd-verifier-wasm"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Raw WebAssembly ABI for the independent KFD verifier"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+kfd-verifier-core = { path = "../core" }

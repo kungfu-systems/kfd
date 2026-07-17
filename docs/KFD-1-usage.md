@@ -1,5 +1,9 @@
 # KFD-1 Implementation Notes
 
+[Authoritative decision](../decisions/KFD-1.md) ·
+[Formal reference](KFD-1-formal.md) ·
+[Documentation map](MAP.md)
+
 KFD-1 defines the fact-source rule: facts must not drift. This page is the
 package implementation note for machine consumers and release systems. The
 authoritative decision text remains `decisions/KFD-1.md`.
@@ -15,6 +19,9 @@ The KFD package implements KFD-1 through a declared contract world:
 - `schemas/kfd-1/publication-url-semantics.schema.json` defines the
   canonical/latest/immutable publication URL contract for papers,
   specifications, release notes, and other long-lived publication artifacts.
+- `schemas/kfd-candidate-registry.schema.json` defines pre-number KFD
+  Candidate identity, non-binding slot hints, and promotion-only numbering.
+- `drafts/registry.json` is the package-owned candidate source.
 - `.buildchain/kfd-1/contract-world.witness.json` projects registered surfaces,
   source hashes, artifact hashes, surface classes, and impact projections.
 - `scripts/check.mjs` verifies the register, schema enums, witness hashes, and
@@ -77,3 +84,13 @@ This connects the foundation triad:
 This package uses KFD-1 on itself. New public package surfaces should be added
 to `standards.json#/standards/kfd-1/surfaceRegister`, then projected into the
 KFD-1 witness by `node scripts/update-kfd-1-witness.mjs`.
+
+The candidate registry prevents an ordering hypothesis from drifting into a
+number allocation. `slotHint` is always non-binding; promotion creates the
+numbered source under `decisions/` and `registry.json`.
+
+Before the first non-prerelease package release, an evidence-backed Foundation
+Revision may correct the latest numbered structure while preserving every
+published coordinate and publishing lineage and migration. The first stable
+release freezes number-to-meaning mappings. Later semantic change uses a new
+KFD and explicit supersession.

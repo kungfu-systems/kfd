@@ -75,6 +75,10 @@ every technical ingredient it used. It joined prior lessons, integrity needs,
 distributed authority, nonlinear history, performance constraints, and a
 workflow containing tens of merges a day into one load-bearing object model.
 
+An **evidence cut** is the declared boundary of evidence available to a claim
+or decision at a given point. Keeping that cut stable prevents later knowledge
+from being silently projected backward into the decision.
+
 BitKeeper's withdrawal can be replayed through the KFD lens as a forcing
 evidence cut: a condition that could previously be endured became a decision
 that had to be made. That is a KFD interpretation of the historical record, not
@@ -181,27 +185,32 @@ discovery loop:  reality -> facts -> model -> action -> consequence
 
 The loops are complementary, not interchangeable. Stronger models remain
 necessary construction material, but capability alone does not decide whether
-the current object set is adequate. Discovery does not always
-begin with repeated failure inside the current model. Repeated observation
-through a database-shaped ontology tends to produce a better database-shaped
-answer. An object outside that horizon may first become visible only when the
-participant, consequence, or action perspective changes.
+the current object set is adequate. Discovery does not always begin with
+repeated failure inside the current model. Repeated observation through a
+database-shaped ontology may tend toward a better database-shaped answer, but
+anomaly, reconstruction pressure, causal-variable discovery, structural
+compression, direct judgment, and perspective transformation can all generate
+candidates when their search space permits it. KFD does not yet have
+comparative evidence that one method dominates the others.
 
 KFD-4, KFD-5, and KFD-6 make that motion explicit:
 
 ```text
 declare a situated perspective
-  -> transform perspective
-  -> a previously hidden object becomes visible
+  + declare the current ontology
+  + run one or more genesis methods
+  -> propose or reject a candidate object
   -> qualify the candidate against facts and consequences
   -> return to reality through action
 ```
 
 KFD-4 says that every view remains bound to a perspective and that perspectives
-can be intentionally transformed. KFD-5 separates perspective-grounded genesis
-from scalable qualification. KFD-6 asks whether an agent can eventually
-internalize both functions from causal experience without replacing reality or
-certifying itself.
+can be intentionally transformed. That makes perspective transformation an
+auditable method, not an exclusive generator. KFD-5 separates
+perspective-declared, method-plural genesis from fact-bound qualification.
+KFD-6 asks whether an agent can eventually compare and internalize those
+functions from causal experience without replacing reality or certifying
+itself.
 
 ## Engineering witnesses
 
@@ -223,11 +232,12 @@ loss. Contrastive replay compares multiple views without collapsing them into
 an absolute history. Together they lower the marginal cost of perspective
 change while preserving facts, consequences, and degraded state.
 
-KFD-5 and KFD-6 describe how to use that capability. KFD-5 lets humans and
-agents turn cross-perspective object mismatch into a qualified Primitive
-candidate. KFD-6 asks whether an agent can perform the replay, comparison,
-discovery, and qualification loop autonomously across large bodies of causal
-experience.
+KFD-5 and KFD-6 describe how to use that capability without making it the only
+path. KFD-5 lets humans and agents turn cross-perspective mismatch, anomaly,
+reconstruction burden, candidate causal variables, structural compression, or
+hybrids into qualified Primitive candidates. KFD-6 asks whether an agent can
+compare those methods and perform discovery and qualification autonomously
+across large bodies of causal experience.
 
 ## Real-world agent work
 
@@ -302,19 +312,22 @@ so.
 | Layer | Decision | Reader question | Commitment |
 |---|---|---|---|
 | Declared perspective | KFD-4 | How can a situated view become durable, transferable, and comparable without being flattened? | Views remain bound to declared perspectives. Timelines preserve perspective; replay transfers it; contrast exposes hidden object mismatch. |
-| Primitive discovery | KFD-5 | How does a newly visible object become a load-bearing primitive rather than a private intuition? | Perspective-grounded judgment generates the candidate; scalable reasoning qualifies it through facts, alternatives, falsifiers, and real work. |
-| Autonomous discovery | KFD-6 | Can an agent move beyond a fixed ontology without replacing reality with generated narrative? | Autonomous discovery remains grounded in causal experience, runs explicit perspective experiments, and never certifies itself. |
+| Primitive discovery | KFD-5 | How does a candidate object become load-bearing rather than remain a private intuition or method artifact? | Genesis remains perspective-declared and method-plural; qualification binds the candidate to facts, alternatives, falsifiers, and real work. |
+| Autonomous discovery | KFD-6 | Can an agent move beyond a fixed ontology without replacing reality with generated narrative or canonizing one generator? | Autonomous discovery remains grounded in causal experience, compares generation methods under bounded conditions, and never certifies itself. |
 
-The continuity is generative rather than merely classificatory. KFD-4 allows the
-visible horizon to move. KFD-5 turns an object revealed by that movement into a
-testable shared candidate. KFD-6 attempts to autonomize the complete loop.
+The continuity is generative rather than merely classificatory. KFD-4 declares
+the observation horizon and allows perspective transformation to move it.
+KFD-5 keeps candidate generation open to multiple methods and makes every
+candidate testable. KFD-6 attempts to autonomize both generation and comparison.
 
 Observer-bound timeline and replay are the first concrete KFD-4 profiles, just
 as release versioning is one concrete KFD-1 profile. Episode and Atlas are
 KFD-5 cases: each became natural when the view moved from an implementation
-object to the participant who had to understand and act. A future KFD-6 system
-must replay and test such participant views from causal Episode experience, not
-merely cluster more patterns inside the old object set.
+object to the participant who had to understand and act. That history supports
+perspective transformation as a candidate method, not its dominance. A future
+KFD-6 system must test such participant views alongside anomaly,
+reconstruction, causal-variable, compression, and hybrid methods over causal
+Episode experience.
 
 Continue with [Primitive Discovery in History](primitive-discovery-cases.md) to
 test this model against external cases. Continue with the numbered KFD texts

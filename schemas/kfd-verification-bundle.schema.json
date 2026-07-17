@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-verification-bundle.schema.json",
+  "title": "KFD offline verification bundle",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "contract",
+    "kind",
+    "primary",
+    "artifacts"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "contract": {
+      "const": "kfd.verification-bundle/v1"
+    },
+    "kind": {
+      "enum": [
+        "kfd-record",
+        "passport",
+        "pack",
+        "atlas",
+        "episode"
+      ]
+    },
+    "primary": {
+      "type": "string"
+    },
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": false
+}

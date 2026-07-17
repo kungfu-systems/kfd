@@ -22,7 +22,9 @@
       "canonicalPaths": [
         "decisions/KFD-N.md",
         "registry.json",
-        "standards.json"
+        "standards.json",
+        "cases/registry.json",
+        "drafts/registry.json"
       ],
       "projectionSurfaces": [
         "https://kfd.libkungfu.dev/N",
@@ -78,10 +80,28 @@
       "purpose": "Read or render the complete non-numbered explanation behind the concise KFD homepage."
     },
     {
+      "id": "formal-model",
+      "surface": "docs/formal-model.md",
+      "participants": ["human-reader", "agent-reader", "site-consumer", "package-consumer"],
+      "purpose": "Inspect the shared notation, authority boundary, and traceability contract for non-normative KFD formal references."
+    },
+    {
       "id": "primitive-discovery-cases",
       "surface": "docs/primitive-discovery-cases.md",
       "participants": ["human-reader", "agent-reader", "site-consumer"],
       "purpose": "Test the KFD primitive-discovery lens against source-bound historical cases without changing normative KFD text."
+    },
+    {
+      "id": "live-primitive-cases",
+      "surface": "cases/registry.json",
+      "participants": ["human-reader", "agent-reader", "site-consumer", "package-consumer"],
+      "purpose": "Discover provisional Primitive candidates, immutable KFD-5 cuts, claim boundaries, and open review paths without treating a live case as a numbered decision."
+    },
+    {
+      "id": "kfd-candidates",
+      "surface": "drafts/registry.json",
+      "participants": ["human-reader", "agent-reader", "site-consumer", "package-consumer"],
+      "purpose": "Discover non-normative pre-number KFD Candidates, non-binding slot hints, promotion gates, and claim boundaries."
     },
     {
       "id": "docs-map",
@@ -141,7 +161,7 @@
       "id": "site-bundle",
       "surface": "site/kfd-site.json",
       "participants": ["site-consumer", "agent-reader"],
-      "purpose": "Render KFD-owned homepage, foundation explanation, historical cases, and decision pages without duplicating extraction logic."
+      "purpose": "Render KFD-owned homepage, foundation explanation, formal references, historical and live cases, and decision pages without duplicating extraction logic."
     }
   ],
   "surfaces": [
@@ -162,12 +182,44 @@
       "maturity": "stable"
     },
     {
+      "id": "formal-model",
+      "kind": "markdown-doc",
+      "participants": ["human-reader", "agent-reader", "site-consumer", "package-consumer"],
+      "value": "Versioned non-normative reference semantics that make KFD objects, invariants, transitions, invalid states, and proof obligations explicit.",
+      "discoverability": { "fromMinimalEntrypoint": true, "path": "docs/formal-model.md" },
+      "maturity": "experimental"
+    },
+    {
+      "id": "formal-references",
+      "kind": "markdown-doc",
+      "participants": ["human-reader", "agent-reader", "site-consumer", "package-consumer"],
+      "value": "One formal reference per numbered KFD, each bound to its authoritative decision and published through standards metadata.",
+      "discoverability": { "fromMinimalEntrypoint": true, "path": "docs/KFD-*-formal.md" },
+      "maturity": "experimental"
+    },
+    {
       "id": "primitive-discovery-cases",
       "kind": "markdown-doc",
       "participants": ["human-reader", "agent-reader", "site-consumer"],
       "value": "Non-normative historical anchors that let readers test the KFD primitive-discovery lens against familiar experience.",
       "discoverability": { "fromMinimalEntrypoint": true, "path": "docs/primitive-discovery-cases.md" },
       "maturity": "stable"
+    },
+    {
+      "id": "live-primitive-cases",
+      "kind": "json-api",
+      "participants": ["human-reader", "agent-reader", "site-consumer", "package-consumer"],
+      "value": "Machine-readable provisional case registry with immutable KFD-5 cuts, explicit claim boundaries, and human review paths.",
+      "discoverability": { "fromMinimalEntrypoint": true, "path": "cases/registry.json" },
+      "maturity": "experimental"
+    },
+    {
+      "id": "kfd-candidates",
+      "kind": "json-api",
+      "participants": ["human-reader", "agent-reader", "site-consumer", "package-consumer"],
+      "value": "Machine-readable pre-number KFD Candidate registry with non-binding slot hints and explicit promotion boundaries.",
+      "discoverability": { "fromMinimalEntrypoint": true, "path": "drafts/registry.json" },
+      "maturity": "experimental"
     },
     {
       "id": "docs-map",
@@ -229,7 +281,7 @@
       "id": "site-bundle-json",
       "kind": "json-api",
       "participants": ["site-consumer", "agent-reader"],
-      "value": "KFD-owned content projection consumed by the public site renderer, including decision metadata and the public KFD fact-source boundary.",
+      "value": "KFD-owned content projection consumed by the public site renderer, including formal-reference mappings, decision metadata, and the public KFD fact-source boundary.",
       "discoverability": { "fromMinimalEntrypoint": true, "path": "site/kfd-site.json" },
       "maturity": "stable"
     },
@@ -309,11 +361,18 @@
   "valueEvidence": [
     {
       "id": "kfd-foundation-model",
-      "claim": "KFD helps humans and agents understand the foundation model before adopting or extending kungfu-systems decisions.",
+      "claim": "KFD helps humans and agents understand the foundation model and inspect precise non-normative formal references before adopting or extending kungfu-systems decisions.",
       "participants": ["human-reader", "agent-reader", "maintainer"],
       "facts": [
         { "path": "README.md" },
         { "path": "docs/foundation-model.md" },
+        { "path": "docs/formal-model.md" },
+        { "path": "docs/KFD-1-formal.md" },
+        { "path": "docs/KFD-2-formal.md" },
+        { "path": "docs/KFD-3-formal.md" },
+        { "path": "docs/KFD-4-formal.md" },
+        { "path": "docs/KFD-5-formal.md" },
+        { "path": "docs/KFD-6-formal.md" },
         { "path": "docs/primitive-discovery-cases.md" },
         { "path": "decisions/KFD-1.md" },
         { "path": "decisions/KFD-2.md" },
@@ -336,7 +395,7 @@
           "trustImpact": "downgrade-warning",
           "machineProvability": "not-exhaustively-enumerable",
           "agentAction": "semantic-review-required",
-          "reason": "The foundation model is published and inspectable, but its full human-language meaning cannot be exhaustively proved from package bytes.",
+          "reason": "The foundation and formal models are published and inspectable, but their full human-language meaning cannot be exhaustively proved from package bytes.",
           "owner": "KFD maintainers"
         }
       ]
@@ -361,6 +420,70 @@
       }
     },
     {
+      "id": "kfd-live-case-dogfood",
+      "claim": "KFD gives humans and agents an inspectable path from provisional Primitive genesis through immutable KFD-5 cuts and open qualification without promoting the candidate by self-certification.",
+      "participants": ["human-reader", "agent-reader", "maintainer", "package-consumer", "site-consumer"],
+      "facts": [
+        { "path": "cases/registry.json" },
+        { "path": "cases/live/proof-carrying-work-object/README.md" },
+        { "path": "cases/live/proof-carrying-work-object/genesis.md" },
+        { "path": "cases/live/proof-carrying-work-object/ontology-split.md" },
+        { "path": "cases/live/proof-carrying-work-object/distinguishability.md" },
+        { "path": "cases/live/proof-carrying-work-object/kfd-method-trace.md" },
+        { "path": "cases/live/proof-carrying-work-object/propagation-hypothesis.md" },
+        { "path": "cases/live/proof-carrying-work-object/cuts/0001-genesis.json" },
+        { "path": "cases/live/proof-carrying-work-object/cuts/0002-pursuit.json" },
+        { "path": "cases/live/proof-carrying-work-object/cuts/0002-warrant.json" },
+        { "path": "cases/live/proof-carrying-work-object/reviews/README.md" },
+        { "path": "schemas/kfd-live-case-registry.schema.json" },
+        { "path": "schemas/kfd-5/primitive-discovery.schema.json" }
+      ],
+      "evidence": [
+        { "path": "scripts/check.mjs" },
+        { "path": "site/kfd-site.json" }
+      ],
+      "residualRisk": [
+        {
+          "id": "live-case-semantic-qualification",
+          "definedBy": "https://kfd.libkungfu.dev/schemas/kfd-2/trust-taxonomy.schema.json#/$defs/residualRisk",
+          "riskType": "natural-language-semantic-risk",
+          "trustImpact": "downgrade-warning",
+          "machineProvability": "not-exhaustively-enumerable",
+          "agentAction": "semantic-review-required",
+          "reason": "Machine checks can validate case structure, immutable cut identity, and declared status, but cannot prove Primitive truth, propagation power, or method superiority.",
+          "owner": "KFD maintainers"
+        }
+      ]
+    },
+    {
+      "id": "kfd-candidate-incubation",
+      "claim": "KFD gives humans and agents a shared, machine-readable path for preserving a possible organization rule without prematurely allocating a KFD number or normative authority.",
+      "participants": ["human-reader", "agent-reader", "maintainer", "package-consumer", "site-consumer"],
+      "facts": [
+        { "path": "drafts/registry.json" },
+        { "path": "schemas/kfd-candidate-registry.schema.json" },
+        { "path": "drafts/README.md" },
+        { "path": "drafts/action-state-separation.md" },
+        { "path": "CONTRIBUTING.md" }
+      ],
+      "evidence": [
+        { "path": "scripts/check.mjs" },
+        { "path": "site/kfd-site.json" }
+      ],
+      "residualRisk": [
+        {
+          "id": "candidate-semantic-qualification",
+          "definedBy": "https://kfd.libkungfu.dev/schemas/kfd-2/trust-taxonomy.schema.json#/$defs/residualRisk",
+          "riskType": "natural-language-semantic-risk",
+          "trustImpact": "downgrade-warning",
+          "machineProvability": "not-exhaustively-enumerable",
+          "agentAction": "semantic-review-required",
+          "reason": "Machine checks can prove candidate identity, status, slot non-binding, and promotion boundaries, but cannot prove that the candidate should become an organization decision.",
+          "owner": "KFD maintainers"
+        }
+      ]
+    },
+    {
       "id": "kfd-extension-path",
       "claim": "KFD gives humans and agents a visible extension path when the declared interface or taxonomy is insufficient.",
       "participants": ["agent-reader", "human-reader", "maintainer", "release-system", "package-consumer"],
@@ -380,10 +503,10 @@
   ],
   "transparentConstraints": [
     {
-      "id": "append-only-decisions",
+      "id": "foundation-revision-and-freeze",
       "surface": "decisions/*.md",
-      "constraint": "Substantive semantic changes supersede older KFD numbers instead of rewriting them.",
-      "reason": "Decision history must remain inspectable by humans and agents.",
+      "constraint": "Before stable, fully evidenced foundation correction preserves published coordinates and lineage; after Foundation Freeze, substantive semantic changes supersede older KFD numbers instead of changing them in place.",
+      "reason": "Decision history and the current number-to-meaning mapping must remain inspectable by humans and agents.",
       "review": "CONTRIBUTING.md and node scripts/check.mjs"
     },
     {
@@ -412,12 +535,12 @@
     {
       "id": "read-human-docs",
       "participants": ["human-reader"],
-      "choice": "Read README.md, docs/foundation-model.md, docs/MAP.md, and decisions/*.md directly."
+      "choice": "Read README.md, docs/foundation-model.md, docs/formal-model.md, docs/MAP.md, decisions/*.md, docs/KFD-N-formal.md, pre-number candidates through drafts/registry.json, and provisional cases through cases/registry.json directly."
     },
     {
       "id": "consume-machine-metadata",
       "participants": ["agent-reader", "package-consumer", "release-system"],
-      "choice": "Consume registry.json, standards.json, schemas, and package exports."
+      "choice": "Consume registry.json, drafts/registry.json, standards.json, schemas, and package exports."
     },
     {
       "id": "render-site",
@@ -446,6 +569,6 @@
   "closure": {
     "classificationMode": "closed-world",
     "unclassifiedEntrypointsPolicy": "fail",
-    "reachableSurfaceSource": "This file plus package.json#exports, docs/foundation-model.md, docs/MAP.md, registry.json, standards.json, and Buildchain witness files."
+    "reachableSurfaceSource": "This file plus package.json#exports, docs/foundation-model.md, docs/formal-model.md, docs/KFD-*-formal.md, docs/MAP.md, cases/registry.json, drafts/registry.json, registry.json, standards.json, and Buildchain witness files."
   }
 }
