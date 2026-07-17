@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "contract": "kungfu-buildchain-impact",
+  "release": {
+    "tag": "v1.0.0-alpha.28",
+    "line": "v1.0",
+    "channel": "release",
+    "targetRef": "release/v1/v1.0"
+  },
+  "versionImpact": {
+    "final": "major",
+    "source": "reader-context-primitive-cases",
+    "rationale": "This pre-stable maintainer-authorized refinement makes prerelease immutability explicit in KFD-1, makes KFD-3 cooperation an epistemic condition for shared cross-perspective discovery, makes KFD-4 the first complete operating application of the foundation triad through timeline and replay engineering profiles, separates KFD-5 perspective genesis from qualification, advances the KFD-5 interface to version 2, and advances draft KFD-6 to version 3 with required replay-grounded perspective experiments. It also adds a non-normative reader path from familiar historical primitives to the KFD discovery process. The fixed outer package line remains v1.0; major remains the honest decision and machine-interface impact."
+  },
+  "surfaceImpacts": [
+    {
+      "id": "kfd-content",
+      "impact": "major",
+      "class": "breaking",
+      "rationale": "Before the first stable release, maintainer-authorized KFD-1/3/4/5/6 refinement changes decision meaning in place while preserving every prior prerelease artifact. KFD-1 makes that boundary explicit; KFD-3 makes trusted cooperation an epistemic condition for shared contrast; KFD-4 becomes the declared-perspective principle and the first complete operating application of the foundation triad; KFD-5 separates perspective genesis from qualification; KFD-6 requires perspective experiments. Consumers must bind prerelease citations to package version or commit.",
+      "source": ""
+    },
+    {
+      "id": "kfd-registry-schema",
+      "impact": "patch",
+      "class": "compatible",
+      "rationale": "registry.json keeps schemaVersion 1 and the existing entry shape, including number, id, slug, title, kind, status, path, and url; slug and path values are stable number coordinates.",
+      "source": ""
+    },
+    {
+      "id": "kfd-standards-metadata",
+      "impact": "major",
+      "class": "breaking",
+      "rationale": "KFD-4 additively publishes the perspectiveReplay version 1 interface. KFD-5 primitiveDiscovery advances from schemaVersion 1 to 2 and requires perspectiveGenesis with explicit genesis method and replay basis. Draft KFD-6 advances from schemaVersion 2 to 3, requires replay-grounded perspectiveExperiments, and makes boundaryHypothesis conditional.",
+      "source": ""
+    },
+    {
+      "id": "kfd-package-structure",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "The package additively publishes schemas/kfd-4/perspective-replay.schema.json and docs/primitive-discovery-cases.md through existing wildcards, and strengthens expected release artifacts without removing or renaming a package path or export.",
+      "source": ""
+    },
+    {
+      "id": "kfd-buildchain-contract-lock",
+      "impact": "minor",
+      "class": "release-governance",
+      "rationale": "KFD now uses Buildchain v2 floating workflow refs with a consumer-owned buildchain.contract-lock.json, so Buildchain runtime contract drift is checked before heavy build or promotion work while retaining floating-ref upgrade flow.",
+      "source": ""
+    },
+    {
+      "id": "kfd-site-homepage-bundle",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "site/kfd-site.json preserves existing fields while adding the /foundation and /cases routes, foundationPage and casesPage projections, a primitive-first futurePicture, and explicit first-screen/detail separation.",
+      "source": ""
+    },
+    {
+      "id": "kfd-site-decision-usage-pages",
+      "impact": "patch",
+      "class": "compatible",
+      "rationale": "KFD-4/5/6 usage bodies explain observer-bound timelines, perspective-preserving and contrastive replay, the KFD-1/2/3 foundation closure beneath those profiles, perspective genesis, qualification, and autonomous replay experiments while stable /N/usage routes remain unchanged.",
+      "source": ""
+    },
+    {
+      "id": "kfd-3-self-collaboration",
+      "impact": "minor",
+      "class": "release-passport",
+      "rationale": "KFD refreshes pre-build and artifact-side KFD-3 witnesses to include the participant-consumable perspective replay schema, the updated foundation explanation, and the source-bound historical cases companion.",
+      "source": ""
+    },
+    {
+      "id": "kfd-3-trusted-value-evidence",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD-3 collaboration interfaces now declare explicit valueEvidence that binds participant-facing value claims to fact artifacts, evidence artifacts, KFD-2 trust assessments, and residual-risk state.",
+      "source": ""
+    },
+    {
+      "id": "kfd-2-public-release-trust-claim",
+      "impact": "minor",
+      "class": "release-passport",
+      "rationale": "KFD now ships an explicit machine-bound public KFD-2 release trust claim and passes it into Buildchain release passport generation.",
+      "source": ""
+    },
+    {
+      "id": "kfd-2-generic-trust-assessment-core",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD-2 generic trust claims identify both KFD-4 timeline and replay profiles, KFD-5 version 2 replay-aware perspective genesis, and KFD-6 version 3 replay-grounded experiments while continuing to downgrade KFD-6 because no adopter has proved the draft autonomous capability.",
+      "source": ""
+    },
+    {
+      "id": "kfd-numbered-paths",
+      "impact": "minor",
+      "class": "compatible",
+      "rationale": "Decision documents now use stable numbered paths under decisions/KFD-N.md, while usage documentation uses docs/KFD-N-usage.md to distinguish authoritative decision text from consumer implementation notes.",
+      "source": ""
+    },
+    {
+      "id": "kfd-release-anchor",
+      "impact": "minor",
+      "class": "release-governance",
+      "rationale": "KFD now declares its package version through an anchored/manual release manifest so package version state is an explicit release fact rather than an auto-derived Buildchain side effect.",
+      "source": ""
+    },
+    {
+      "id": "kfd-release-propagation",
+      "impact": "patch",
+      "class": "compatible",
+      "rationale": "The KFD to site-libkungfu-dev propagation graph now targets the downstream site's actual main branch and documents the exact KFD package surfaces consumed by kfd.libkungfu.dev, without changing the release propagation graph contract.",
+      "source": ""
+    },
+    {
+      "id": "kfd-1-compatibility-impact-core",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD-1 now defines breaking, additive, none, and unclassifiable as the generic compatibility-impact core, with release versioning as one projection rather than the only interpretation.",
+      "source": ""
+    },
+    {
+      "id": "kfd-1-surface-register",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "standards.json additively registers the KFD-4 perspective replay schema as an integration-time surface, and the KFD-1 witness binds its source and artifact digest from that fact source.",
+      "source": ""
+    },
+    {
+      "id": "kfd-4-perspective-replay-interface",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD-4 additively publishes a version 1 contract for perspective-preserving and contrastive replay, including source-view boundaries, reconstruction loss, degraded state, and primitive-signal mismatches.",
+      "source": ""
+    },
+    {
+      "id": "kfd-1-publication-url-semantics",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD-1 now publishes a machine-readable schema for canonical reader URLs, latest aliases, immutable version artifact URLs, artifact digests, source coordinates, lineage, site consumption, and archive policies that prevent same-version digest drift or destructive deletion of immutable publication prefixes.",
+      "source": ""
+    }
+  ],
+  "summary": "KFD v1.0 records a pre-stable major refinement with immutable prior artifacts: KFD-3 makes cooperation epistemic infrastructure for shared discovery; KFD-4 applies the complete foundation triad to reality-preserving perspective transformation through timelines and replay; KFD-5 qualifies Primitive signals exposed by cross-perspective contrast; and KFD-6 attempts to autonomize that replay-grounded loop.",
+  "classification": "major",
+  "breaking": true,
+  "migrationRequired": true
+}
