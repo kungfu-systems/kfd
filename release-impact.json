@@ -25,6 +25,12 @@
       "rationale": "KFD additively publishes version 1 verification-bundle and verification-report schemas, registers both interfaces in standards.json, and welds the executable, schema, and responsibility-boundary surfaces under KFD-1."
     },
     {
+      "id": "kfd-verifier-xinfa-route-resolution",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "The packaged verifier additively synchronizes Kungfu's structured Go route-resolution vocabulary and current Atlas golden roots from the format owner's f24721f9073bc24000343c838bb755c13c06bce0 source commit. Existing project documents remain valid because the resolution field is optional."
+    },
+    {
       "id": "kfd-content",
       "impact": "major",
       "class": "breaking",
