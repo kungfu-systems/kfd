@@ -53,6 +53,26 @@ verification. Contrastive mode requires at least two source views and an
 explicit mismatch record. A `primitiveSignal: candidate` is an input to KFD-5,
 not certification.
 
+## Choosing The First Genesis Probe
+
+When the KFD-1 through KFD-3 foundation is already installed, use perspective
+transformation as the default first probe when:
+
+- relevant causal facts are already preserved;
+- two or more materially different roles, participants, or consequence
+  positions are available;
+- replay loss and degraded evidence can be declared; and
+- the suspected gap concerns a hidden object, burden, boundary, or action
+  surface.
+
+In that setting, the marginal operation is to change the declared position,
+replay existing evidence, and compare what becomes natural. Do not force this
+profile when source perspectives are unavailable, capture or privacy cost
+dominates, the target is an in-view statistical anomaly, causal intervention is
+required, or corpus compression is the cheaper search. Those methods still
+declare the perspective from which their evidence was selected and hand any
+candidate to KFD-5 for qualification.
+
 ## Perspective Transformation Record
 
 A domain-specific record should preserve at least:
