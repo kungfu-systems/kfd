@@ -1,0 +1,26 @@
+{
+  "$schema": "https://kfd.libkungfu.dev/schemas/kfd-live-case-registry.schema.json",
+  "schemaVersion": 1,
+  "contract": "kfd-live-case-registry",
+  "cases": [
+    {
+      "id": "proof-carrying-work-object",
+      "title": "Proof-Carrying Work Object",
+      "kind": "primitive-candidate",
+      "status": "provisional",
+      "standard": "kfd-5",
+      "humanEntry": "cases/live/proof-carrying-work-object/README.md",
+      "genesis": "cases/live/proof-carrying-work-object/genesis.md",
+      "methodTrace": "cases/live/proof-carrying-work-object/kfd-method-trace.md",
+      "propagationHypothesis": "cases/live/proof-carrying-work-object/propagation-hypothesis.md",
+      "reviewIndex": "cases/live/proof-carrying-work-object/reviews/README.md",
+      "currentCut": {
+        "path": "cases/live/proof-carrying-work-object/cuts/0001-genesis.json",
+        "sha256": "fae8a67bd3d1cd90c9a349cc2f5d4720e81993da480f880f2d55bad4853abbb1",
+        "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-5/primitive-discovery.schema.json",
+        "schemaVersion": 3
+      },
+      "claimBoundary": "This case records a provisional shared object hypothesis and a reflexive KFD dogfood process. It does not establish novelty, universality, product readiness, method superiority, or accepted Primitive status."
+    }
+  ]
+}

@@ -9,6 +9,7 @@
     "casesTextSource": "docs/primitive-discovery-cases.md",
     "registry": "registry.json",
     "standards": "standards.json",
+    "liveCaseRegistry": "cases/registry.json",
     "decisionsDir": "decisions"
   },
   "routes": {
@@ -16,6 +17,7 @@
     "foundation": "/foundation",
     "formal": "/formal",
     "cases": "/cases",
+    "liveCasePattern": "/cases/live/{id}",
     "decisionPattern": "/{number}",
     "decisionUsagePattern": "/{number}/usage",
     "decisionFormalPattern": "/{number}/formal",
@@ -64,6 +66,11 @@
           "label": "See primitives in history",
           "sourceTarget": "docs/primitive-discovery-cases.md",
           "url": "/cases"
+        },
+        {
+          "label": "Inspect live Primitive cases",
+          "sourceTarget": "cases/registry.json",
+          "url": "cases/registry.json"
         },
         {
           "label": "Explore current decisions",
@@ -176,7 +183,7 @@
         "homepagePriority": 10,
         "defaultPresentation": "triad-cards",
         "includeInFirstScreen": true,
-        "markdown": "The first three KFDs form the public foundation for kungfu-systems:\n\n```text\nKFD-1: facts must not drift.\nKFD-2: trust must start from facts.\nKFD-3: cooperation must start from trusted value.\n```\n\nTogether they define the load-bearing path for Kungfu products: make facts\nnon-drifting, make trust inspectable from those facts, and let humans and\nagents cooperate through trusted value rather than hidden pressure.\n\nNo principle is load-bearing until it has an inspectable product witness.\n\n[Read the foundation model](docs/foundation-model.md) ·\n[Inspect the formal model](docs/formal-model.md) ·\n[See primitives in history](docs/primitive-discovery-cases.md) ·\n[Explore current decisions](#current-decisions) ·\n[Inspect the product proof path](#product-proof-path)"
+        "markdown": "The first three KFDs form the public foundation for kungfu-systems:\n\n```text\nKFD-1: facts must not drift.\nKFD-2: trust must start from facts.\nKFD-3: cooperation must start from trusted value.\n```\n\nTogether they define the load-bearing path for Kungfu products: make facts\nnon-drifting, make trust inspectable from those facts, and let humans and\nagents cooperate through trusted value rather than hidden pressure.\n\nNo principle is load-bearing until it has an inspectable product witness.\n\n[Read the foundation model](docs/foundation-model.md) ·\n[Inspect the formal model](docs/formal-model.md) ·\n[See primitives in history](docs/primitive-discovery-cases.md) ·\n[Inspect live Primitive cases](cases/registry.json) ·\n[Explore current decisions](#current-decisions) ·\n[Inspect the product proof path](#product-proof-path)"
       },
       {
         "id": "foundation-model",
@@ -242,7 +249,7 @@
         "homepagePriority": 30,
         "defaultPresentation": "proof-path",
         "includeInFirstScreen": false,
-        "markdown": "KFDs are not a detached manifesto, but they are not a demand that readers adopt\na Kungfu product before understanding the decisions. The product-witness rule\nstarts with this package itself: `standards.json`, `schemas/`, `docs/`,\n`site/kfd-site.json`, and `scripts/check.mjs` show how KFD-1, KFD-2, KFD-3,\nKFD-4, KFD-5, and KFD-6 are expressed as consumable interfaces for both humans\nand agents. These surfaces do not prove every adopter or product correct; they\nmake the KFD package's own claims inspectable and falsifiable.\n\nThe complete explanatory path is published at\n[`docs/foundation-model.md`](docs/foundation-model.md) and projected to the\nstable site route `/foundation`. It explains the decisions without replacing\ntheir numbered authoritative texts. The non-normative formal layer begins at\n[`docs/formal-model.md`](docs/formal-model.md), with one versioned formal\nreference under `docs/KFD-N-formal.md` and the stable route `/N/formal` for\neach decision. It makes objects, invariants, transitions, invalid states, and\nproof obligations explicit without claiming to replace the decisions or prove\nnatural-language meaning from package bytes.\n\nFor the broader witness set, use the main Kungfu product entrypoint\n(`https://kungfu.tech`) for product philosophy, and Buildchain\n(`https://buildchain.libkungfu.dev`) for release and provenance\naccountability. This registry states the commitments; the open products expose\nwhere those commitments are carried, where evidence can be inspected, and\nwhere remaining risk still belongs.\n\nRendered index: `https://kfd.libkungfu.dev` (stable machine path per entry,\ne.g. `https://kfd.libkungfu.dev/1`). This repository publishes\n`@kungfu-tech/kfd` — the decision texts plus a machine-readable\n`registry.json` — which the site consumes as its single fact source.\n\nMachine consumers that need KFD-owned standard identity should read\n`standards.json`. It is the versioned metadata surface for stable standard\nkeys, decision and formal-reference routes and SHA-256 digests, schema IDs,\nKFD-owned concept names, and machine-interface contract versions. In Node or\nTypeScript projects, import it as:\n\n```js\nimport standards from \"@kungfu-tech/kfd/standards.json\" with { type: \"json\" };\n```"
+        "markdown": "KFDs are not a detached manifesto, but they are not a demand that readers adopt\na Kungfu product before understanding the decisions. The product-witness rule\nstarts with this package itself: `standards.json`, `schemas/`, `docs/`,\n`site/kfd-site.json`, and `scripts/check.mjs` show how KFD-1, KFD-2, KFD-3,\nKFD-4, KFD-5, and KFD-6 are expressed as consumable interfaces for both humans\nand agents. These surfaces do not prove every adopter or product correct; they\nmake the KFD package's own claims inspectable and falsifiable.\n\nKFD also publishes provisional live cases under `cases/`. A live case freezes\ncandidate genesis, points to immutable KFD-5 qualification cuts, and keeps\nsupporting and contradicting evidence open. Live cases are dogfood records,\nnot numbered decisions, accepted Primitive claims, or product capability\nannouncements.\n\nThe complete explanatory path is published at\n[`docs/foundation-model.md`](docs/foundation-model.md) and projected to the\nstable site route `/foundation`. It explains the decisions without replacing\ntheir numbered authoritative texts. The non-normative formal layer begins at\n[`docs/formal-model.md`](docs/formal-model.md), with one versioned formal\nreference under `docs/KFD-N-formal.md` and the stable route `/N/formal` for\neach decision. It makes objects, invariants, transitions, invalid states, and\nproof obligations explicit without claiming to replace the decisions or prove\nnatural-language meaning from package bytes.\n\nFor the broader witness set, use the main Kungfu product entrypoint\n(`https://kungfu.tech`) for product philosophy, and Buildchain\n(`https://buildchain.libkungfu.dev`) for release and provenance\naccountability. This registry states the commitments; the open products expose\nwhere those commitments are carried, where evidence can be inspected, and\nwhere remaining risk still belongs.\n\nRendered index: `https://kfd.libkungfu.dev` (stable machine path per entry,\ne.g. `https://kfd.libkungfu.dev/1`). This repository publishes\n`@kungfu-tech/kfd` — the decision texts plus a machine-readable\n`registry.json` — which the site consumes as its single fact source.\n\nMachine consumers that need KFD-owned standard identity should read\n`standards.json`. It is the versioned metadata surface for stable standard\nkeys, decision and formal-reference routes and SHA-256 digests, schema IDs,\nKFD-owned concept names, and machine-interface contract versions. In Node or\nTypeScript projects, import it as:\n\n```js\nimport standards from \"@kungfu-tech/kfd/standards.json\" with { type: \"json\" };\n```"
       },
       {
         "id": "agent-quickstart",
@@ -253,7 +260,7 @@
         "homepagePriority": 40,
         "defaultPresentation": "ordered-steps",
         "includeInFirstScreen": false,
-        "markdown": "Agents consuming this package should start from the same sources as humans:\n\n1. Read this README for the future picture, foundation triad, and package map.\n2. Read `docs/foundation-model.md` for the complete non-numbered explanation.\n3. Read `docs/formal-model.md` for the authority boundary, shared notation, and\n   the `Decision -> Formal -> Schema -> Usage -> Witness` traceability chain.\n4. Read `docs/KFD-N-formal.md` when precise domain objects, invariants,\n   transitions, invalid states, and proof obligations are needed for a\n   particular decision.\n5. Read `docs/primitive-discovery-cases.md` to test the KFD lens against familiar\n   historical cases and an ordinary cross-machine trace vignette.\n6. Read `standards.json` for canonical KFD numbers, formal reference versions\n   and hashes, schema IDs, concept names, and interface contracts.\n7. Use `site/kfd-site.json` decision metadata or the KFD-3 collaboration\n   interface fact-source metadata to identify the public KFD fact source.\n8. Use `schemas/kfd-2/trust-taxonomy.schema.json` for KFD-2 residual-risk and\n   trust-downgrade values. Unknown taxonomy values are invalid.\n9. Use `schemas/kfd-2/trust-claims.schema.json` and\n   `schemas/kfd-2/trust-assessment.schema.json` when a claim needs generic\n   KFD-2 assessment instead of a release-specific passport.\n10. Use `schemas/kfd-3/collaboration-interface.schema.json` and\n   `schemas/kfd-3/witness.schema.json` to inspect collaboration interfaces.\n11. Use `schemas/kfd-1/publication-url-semantics.schema.json` when a package,\n   paper, specification, or site bundle must distinguish stable reader URLs,\n   latest aliases, and immutable versioned artifacts.\n12. If a needed KFD-2 taxonomy value is missing, open a KFD GitHub issue rather\n   than inventing a local value:\n   `https://github.com/kungfu-systems/kfd/issues/new?title=KFD-2%20trust%20taxonomy%20extension%20request`.\n13. Use `schemas/kfd-4/observer-perspective.schema.json` to bind timelines to\n   their observers and `schemas/kfd-4/perspective-replay.schema.json` to record\n   perspective-preserving or contrastive replay. Use\n   `schemas/kfd-5/primitive-discovery.schema.json` version 3 to record\n   perspective-declared, method-plural genesis and fact-bound qualification,\n   including the optional boundary-pressure diagnostic when implicit\n   coordination is under new pressure. Use\n   `schemas/kfd-6/autonomous-discovery-loop.schema.json` only for explicitly\n   draft or experimental autonomous-discovery work; its version 4 interface\n   requires plural generation experiments, bounded method comparison, and a\n   conditional boundary hypothesis.\n\nKFD package semver is only the distribution version. KFD-owned machine\ninterfaces carry their own `schemaVersion` and `contract` fields. Compatible\nadditions may keep the same interface version; semantic changes, required-field\nchanges, verification meaning changes, or responsibility-boundary changes must\nuse a new interface version or contract.\n\nKFD-2 publishes trust-taxonomy, trust-claims, trust-assessment,\nrelease-claims, and release-trust-passport schemas under `schemas/kfd-2/`.\nThe generic schemas let humans, agents, Buildchain, and other systems assess\nwhether claims about KFD-1, KFD-3, KFD-4, future KFDs, or product surfaces are\nbound to source facts, evidence, hashes, audit boundaries, residual risk, and\nresponsibility state. The release schemas are a release-specific projection of\nthat model. See [`docs/KFD-2-usage.md`](docs/KFD-2-usage.md).\n\nKFD-3 also publishes a general collaboration-interface schema and witness\nschema under `schemas/kfd-3/`. These schemas are for participant-facing product\ninterfaces, not only agent APIs. A product such as Kungfu may implement an\nagent-first profile, but that profile remains a product-specific realization of\nKFD-3. The KFD-owned boundary is the standard vocabulary, schema IDs, and\nclosed-world evidence shape. See\n[`docs/KFD-3-usage.md`](docs/KFD-3-usage.md).\n\nKFD-4 says that views remain bound to declared perspectives and that a\nperspective transformation must stay inspectable when it is used to reveal a\ndifferent object or guide action. Its two schemas under `schemas/kfd-4/` define\nthe first concrete path: observer-bound timelines make a perspective durable;\nperspective-preserving and contrastive replay make perspectives transferable\nand comparable without flattening their fact boundaries. They are not a\nuniversal schema for every perspective.\n\nKFD-5 publishes a version 3 primitive-discovery record schema under\n`schemas/kfd-5/`. It requires every genesis to declare its observation\nperspective and current ontology while allowing perspective, anomaly,\nreconstruction, causal-variable, compression, and hybrid methods. It then\nbinds facts, alternatives, contract boundaries, falsifiers, dogfood evidence,\nand outcome. Validation proves record closure, not that the candidate is a\nreal primitive or that one method is superior.\n\nKFD-6 publishes a draft autonomous-discovery-loop schema under\n`schemas/kfd-6/`. Its version 4 experiment interface requires causal-experience\nboundaries, plural generation methods, fixed-ontology and no-new-primitive\nbaselines, shared-budget method comparison, held-out and independent\nevaluation, bounded autonomy, and separation between discovery and promotion.\nIts package presence is an experimental interface, not a claim that autonomous\nprimitive discovery or method dominance has been achieved."
+        "markdown": "Agents consuming this package should start from the same sources as humans:\n\n1. Read this README for the future picture, foundation triad, and package map.\n2. Read `docs/foundation-model.md` for the complete non-numbered explanation.\n3. Read `docs/formal-model.md` for the authority boundary, shared notation, and\n   the `Decision -> Formal -> Schema -> Usage -> Witness` traceability chain.\n4. Read `docs/KFD-N-formal.md` when precise domain objects, invariants,\n   transitions, invalid states, and proof obligations are needed for a\n   particular decision.\n5. Read `docs/primitive-discovery-cases.md` to test the KFD lens against familiar\n   historical cases and an ordinary cross-machine trace vignette.\n6. Read `cases/registry.json` to discover provisional live Primitive cases,\n   their current immutable KFD-5 cuts, claim boundaries, and review paths.\n7. Read `standards.json` for canonical KFD numbers, formal reference versions\n   and hashes, schema IDs, concept names, and interface contracts.\n8. Use `site/kfd-site.json` decision metadata or the KFD-3 collaboration\n   interface fact-source metadata to identify the public KFD fact source.\n9. Use `schemas/kfd-2/trust-taxonomy.schema.json` for KFD-2 residual-risk and\n   trust-downgrade values. Unknown taxonomy values are invalid.\n10. Use `schemas/kfd-2/trust-claims.schema.json` and\n   `schemas/kfd-2/trust-assessment.schema.json` when a claim needs generic\n   KFD-2 assessment instead of a release-specific passport.\n11. Use `schemas/kfd-3/collaboration-interface.schema.json` and\n   `schemas/kfd-3/witness.schema.json` to inspect collaboration interfaces.\n12. Use `schemas/kfd-1/publication-url-semantics.schema.json` when a package,\n   paper, specification, or site bundle must distinguish stable reader URLs,\n   latest aliases, and immutable versioned artifacts.\n13. If a needed KFD-2 taxonomy value is missing, open a KFD GitHub issue rather\n   than inventing a local value:\n   `https://github.com/kungfu-systems/kfd/issues/new?title=KFD-2%20trust%20taxonomy%20extension%20request`.\n14. Use `schemas/kfd-4/observer-perspective.schema.json` to bind timelines to\n   their observers and `schemas/kfd-4/perspective-replay.schema.json` to record\n   perspective-preserving or contrastive replay. Use\n   `schemas/kfd-5/primitive-discovery.schema.json` version 3 to record\n   perspective-declared, method-plural genesis and fact-bound qualification,\n   including the optional boundary-pressure diagnostic when implicit\n   coordination is under new pressure. Use\n   `schemas/kfd-6/autonomous-discovery-loop.schema.json` only for explicitly\n   draft or experimental autonomous-discovery work; its version 4 interface\n   requires plural generation experiments, bounded method comparison, and a\n   conditional boundary hypothesis.\n\nKFD package semver is only the distribution version. KFD-owned machine\ninterfaces carry their own `schemaVersion` and `contract` fields. Compatible\nadditions may keep the same interface version; semantic changes, required-field\nchanges, verification meaning changes, or responsibility-boundary changes must\nuse a new interface version or contract.\n\nKFD-2 publishes trust-taxonomy, trust-claims, trust-assessment,\nrelease-claims, and release-trust-passport schemas under `schemas/kfd-2/`.\nThe generic schemas let humans, agents, Buildchain, and other systems assess\nwhether claims about KFD-1, KFD-3, KFD-4, future KFDs, or product surfaces are\nbound to source facts, evidence, hashes, audit boundaries, residual risk, and\nresponsibility state. The release schemas are a release-specific projection of\nthat model. See [`docs/KFD-2-usage.md`](docs/KFD-2-usage.md).\n\nKFD-3 also publishes a general collaboration-interface schema and witness\nschema under `schemas/kfd-3/`. These schemas are for participant-facing product\ninterfaces, not only agent APIs. A product such as Kungfu may implement an\nagent-first profile, but that profile remains a product-specific realization of\nKFD-3. The KFD-owned boundary is the standard vocabulary, schema IDs, and\nclosed-world evidence shape. See\n[`docs/KFD-3-usage.md`](docs/KFD-3-usage.md).\n\nKFD-4 says that views remain bound to declared perspectives and that a\nperspective transformation must stay inspectable when it is used to reveal a\ndifferent object or guide action. Its two schemas under `schemas/kfd-4/` define\nthe first concrete path: observer-bound timelines make a perspective durable;\nperspective-preserving and contrastive replay make perspectives transferable\nand comparable without flattening their fact boundaries. They are not a\nuniversal schema for every perspective.\n\nKFD-5 publishes a version 3 primitive-discovery record schema under\n`schemas/kfd-5/`. It requires every genesis to declare its observation\nperspective and current ontology while allowing perspective, anomaly,\nreconstruction, causal-variable, compression, and hybrid methods. It then\nbinds facts, alternatives, contract boundaries, falsifiers, dogfood evidence,\nand outcome. Validation proves record closure, not that the candidate is a\nreal primitive or that one method is superior.\n\nKFD-6 publishes a draft autonomous-discovery-loop schema under\n`schemas/kfd-6/`. Its version 4 experiment interface requires causal-experience\nboundaries, plural generation methods, fixed-ontology and no-new-primitive\nbaselines, shared-budget method comparison, held-out and independent\nevaluation, bounded autonomy, and separation between discovery and promotion.\nIts package presence is an experimental interface, not a claim that autonomous\nprimitive discovery or method dominance has been achieved."
       },
       {
         "id": "decision-metadata",
@@ -264,7 +271,7 @@
         "homepagePriority": 50,
         "defaultPresentation": "fact-source",
         "includeInFirstScreen": false,
-        "markdown": "Every rendered decision page should make the KFD fact source explicit. The\npublic KFD fact source is the GitHub-hosted `kungfu-systems/kfd` git\nrepository. GitHub is the current canonical coordination and hosting surface;\nthe load-bearing facts are the commit-addressed repository contents.\n\nDecision metadata should expose:\n\n- Public fact source: `https://github.com/kungfu-systems/kfd`\n- Load-bearing coordinate: commit-addressed repository contents.\n- Canonical paths: `decisions/KFD-N.md`, `registry.json`, `standards.json`.\n- Stable rendered index: `https://kfd.libkungfu.dev`.\n- Rendered URL: `https://kfd.libkungfu.dev/N`.\n\nRendered pages, npm package contents, Buildchain release passports, and\n`kfd.libkungfu.dev` are projections or evidence surfaces. A GitHub issue is an\nextension request path, not a KFD fact by itself; it becomes part of the KFD\nfact source only after the resulting change is committed to the repository."
+        "markdown": "Every rendered decision page should make the KFD fact source explicit. The\npublic KFD fact source is the GitHub-hosted `kungfu-systems/kfd` git\nrepository. GitHub is the current canonical coordination and hosting surface;\nthe load-bearing facts are the commit-addressed repository contents.\n\nDecision metadata should expose:\n\n- Public fact source: `https://github.com/kungfu-systems/kfd`\n- Load-bearing coordinate: commit-addressed repository contents.\n- Canonical decision paths: `decisions/KFD-N.md`, `registry.json`,\n  `standards.json`.\n- Canonical provisional-case index: `cases/registry.json`; listing does not\n  promote a case into a numbered decision.\n- Stable rendered index: `https://kfd.libkungfu.dev`.\n- Rendered URL: `https://kfd.libkungfu.dev/N`.\n\nRendered pages, npm package contents, Buildchain release passports, and\n`kfd.libkungfu.dev` are projections or evidence surfaces. A GitHub issue is an\nextension request path, not a KFD fact by itself; it becomes part of the KFD\nfact source only after the resulting change is committed to the repository."
       }
     ],
     "displayPlan": {
@@ -363,7 +370,343 @@
     "relationship": "historical-companion-to-foundation-model",
     "normative": false,
     "authorityNote": "Historical facts are source-bound; KFD replay is explanatory. Numbered KFD decisions remain authoritative.",
-    "markdown": "# Primitive Discovery in History\n\nThis document gives readers external anchors for the KFD foundation model. It\nis explanatory, not normative. The numbered texts in `decisions/KFD-N.md`\nremain authoritative.\n\nEach case has two layers:\n\n- **Historical record** states what the cited sources support.\n- **KFD replay** asks what becomes visible when that record is examined through\n  declared perspective, reality pressure, candidate genesis, and qualification.\n\nThe replay is an interpretation, not a claim that KFD caused the history or\nthat a successful product proves every KFD proposition.\n\n## What a primitive changes\n\nMost work improves an answer within an existing vocabulary. A primitive changes\nthe vocabulary itself.\n\n| Primitive | What became directly manageable |\n|---|---|\n| Spreadsheet cell | A value, its dependencies, and its recalculation |\n| Git commit | A distributed change with content, parents, authorship, and identity |\n| Log | An ordered record of what happened that many projections can replay |\n\nThe code implementing these objects matters. The deeper change is that people\nand machines can now point to the same object, assign responsibility to it,\ncompose it with other objects, and ask questions that were previously expensive\nor unnatural.\n\n## Case 1: Git after years of kernel pressure\n\n### The scene\n\nThe Linux kernel project exchanged changes as patches and archived files from\n1991 to 2002. It then used the proprietary distributed version-control system\nBitKeeper. In 2005, the relationship with BitKeeper's developer broke down and\nfree use was withdrawn. The kernel community needed another system.\n\nTorvalds later described an unusually short construction interval. Git became\nself-hosting after roughly one day, and after roughly ten days he used it for\nhis first kernel commit. He emphasized that the hard part was not the amount of\ncode. It was deciding how to organize the data. He had already been thinking\nabout the problem, studying failures in other systems, and working inside a\nkernel workflow that could require tens of merges per day.\n\nSources:\n\n- [Git, *A Short History of Git*](https://git-scm.com/book/en/v2/Getting-Started-A-Short-History-of-Git)\n- [Linux Foundation, *10 Years of Git: An Interview with Git Creator Linus Torvalds*](https://www.linuxfoundation.org/blog/blog/10-years-of-git-an-interview-with-git-creator-linus-torvalds)\n\n### What changed\n\nGit did not merely automate patch copying. Its object model made content,\nhistory, ancestry, integrity, branching, and distributed authority composable.\nMany technical ingredients and neighboring systems predated Git. The primitive\nwas the operational compression that made them fit the Linux workflow and then\ntravel beyond it.\n\n```text\nyears of integrated pressure -> about ten days of construction\n```\n\nThis asymmetry is consistent with a discovery bottleneck. It is not proof by\nitself. Prior systems, prior art, implementation ability, and adoption all\nremain part of the causal history.\n\n### KFD replay\n\n| KFD question | Replay of the Git case |\n|---|---|\n| Pressure field | Kernel-scale patch flow, merge frequency, integrity, performance, and governance |\n| Integrated perspective | Torvalds occupied the position where those pressures were experienced together in daily work |\n| Forcing event | Loss of usable BitKeeper access ended the option to continue tolerating the existing arrangement |\n| Candidate move | Treat distributed history and change identity as a coherent object world rather than a central sequence of file revisions |\n| Qualification | Immediate kernel use, public source history, later adoption, and continued performance under load |\n\nThe historical events were not literally confined to one person's nervous\nsystem. Patches, repositories, discussions, and failures existed elsewhere.\nWhat was scarce was the integrated observer position from which all those\npressures formed one actionable object problem.\n\n## Case 2: VisiCalc and the object hidden inside recalculation\n\n### The scene\n\nIn 1978, Harvard Business School student Dan Bricklin watched a professor sketch\na complex business model. Changing one parameter required the later entries to\nbe recalculated. Bricklin saw that a computer could carry that burden. The idea\nbecame VisiCalc, created with Bob Frankston and released in 1979.\n\nSource:\n\n- [Harvard Gazette, *A vision of computing's future*](https://news.harvard.edu/gazette/story/2012/03/a-vision-of-the-computing-future/)\n\n### What changed\n\nThe missing object was not arithmetic. Computers could already calculate. The\nchange was to make a model visible as a grid of addressable cells whose values\nand dependencies could be edited and recalculated interactively.\n\nThe spreadsheet therefore changed the unit of knowledge work. A business model\nwas no longer only a static document plus a person's reconstruction procedure.\nIt became a manipulable dependency space.\n\n### KFD replay\n\n| KFD question | Replay of the VisiCalc case |\n|---|---|\n| Pressure field | Repeated manual propagation of changes through a model |\n| Perspective | The person responsible for exploring the model, not the machine operator executing isolated calculations |\n| Newly visible need | Preserve relationships so changed assumptions can propagate without rebuilding the model by hand |\n| Candidate move | The cell and its dependency graph become first-class interactive objects |\n| Qualification | The object proved useful in real business work and made the personal computer valuable to a new class of participant |\n\nNo dramatic forcing event is required in every case. Here, a perspective shift\nmade an ordinary burden suddenly legible as an object problem. That variation\nmatters: KFD-5 permits direct situated judgment as genesis and does not require\nfailure accumulation before a candidate may be proposed.\n\n## Case 3: The log becomes architecture\n\n### The scene\n\nIn 2013, Jay Kreps described lessons from LinkedIn's transition from one\ncentralized database to many specialized distributed systems. Logs were not\nnew. Kreps noted that they had existed almost as long as computers and appeared\nat least as early as IBM System R. They were commonly hidden inside databases\nfor recovery and replication.\n\nLinkedIn's data-integration pressure changed the useful boundary. Instead of\ntreating the log only as an internal implementation mechanism, Kreps presented\nit as a standalone service: a persistent, replayable record of history that\ncould connect many producers, consumers, and projections. He also traced this\nexperience to the focus that produced Kafka.\n\nSource:\n\n- [Jay Kreps, *The Log: What every software engineer should know about real-time data's unifying abstraction*](https://www.linkedin.com/blog/engineering/distributed-systems/log-what-every-software-engineer-should-know-about-real-time-datas-unifying)\n\n### What changed\n\nThis is a case of promotion rather than invention from nothing. The mechanism\nalready existed, but its previous boundary kept it subordinate to another\nobject. A new pressure field made it useful to name the mechanism, expose its\nauthority, and organize systems around it.\n\n```text\ndatabase implementation detail -> standalone integration primitive\n```\n\n### KFD replay\n\n| KFD question | Replay of the log case |\n|---|---|\n| Pressure field | Rapid growth of specialized systems and repeated point-to-point data integration |\n| Perspective | Organization-wide data flow rather than one database's internal recovery path |\n| Newly visible need | One replayable history that many systems can consume at their own rate |\n| Candidate move | Promote the log from internal mechanism to explicit architectural authority |\n| Qualification | Kafka, integration use, replay semantics, and transfer across system categories |\n\nThe case warns against equating primitive discovery with inventing a new data\nstructure. Sometimes reality is asking for an old mechanism to receive a new\nidentity, boundary, and responsibility.\n\n## Everyday vignette: the trace with no declared observer\n\nA cross-machine trace screen often looks like one coherent history. The user\nsees a single ordered list and naturally reads it as what happened.\n\nBut the screen may silently combine process clocks, collection delays, missing\nevents, retries, sampling, inferred parentage, and projection rules. It is not\nnecessarily false. It is a view whose observer and evidence boundary have been\nhidden by presentation.\n\nFrom an implementation perspective, the local answer may be a better clock\ncorrection or query. From an operator perspective, the missing object may be a\nbounded action whose consequence must be reconstructed across machines. From a\nuser perspective, the real question may be whether delegated work finished and\nwho can safely act next.\n\nKFD-4 does not require one of these perspectives to become the universal truth.\nIt requires each view to remain declared and makes replay or contrast available\nwhen another perspective is needed. KFD-5 begins when any declared genesis\nmethod proposes a candidate object that may deserve its own durable boundary.\n\n## What these cases cannot rank\n\nThe cases are compatible with several genesis explanations at once:\n\n| Case | Plausible genesis mechanisms |\n|---|---|\n| Git | integrated perspective, anomaly in incumbent tools, repeated reconstruction, boundary pressure, structural compression |\n| VisiCalc | user perspective, repeated recalculation, causal dependency discovery, structural compression |\n| Log | organization-wide perspective, integration anomalies, boundary pressure, causal history, architectural compression |\n\nA retrospective replay cannot identify which mechanism was necessary, which\nwas sufficient, or which would have found the candidate first under equal\nevidence and resource budgets. The same success can often be narrated through\nseveral methods after the primitive is known. KFD therefore treats these cases\nas evidence that the methods are plausible, not evidence that perspective\ntransformation dominates anomaly, reconstruction, causality, or compression.\n\n## The recurring structure\n\n| Case | Existing capability | Situated pressure | Primitive move |\n|---|---|---|---|\n| Git | Patches, source control, distributed-system lessons | Kernel-scale merging, integrity, performance, and authority | Distributed change history becomes a content-addressed object world |\n| VisiCalc | Arithmetic and programmable computers | Manual model recalculation | Cells and dependencies become an interactive model |\n| Log | Write-ahead and transaction logs | Organization-wide data integration | Internal history becomes standalone replay infrastructure |\n\nThe common structure is not \"a brilliant person had an idea.\" It is:\n\n```text\nreality pressure\n  -> a declared perspective and current ontology\n  -> one or more genesis methods propose a candidate\n  -> qualification through use, consequences, and transfer\n```\n\nThe historical participants still matter. Judgment, taste, implementation,\nauthority, and timing cannot be removed from the record. The KFD claim is\nnarrower: more of the path can be preserved and examined than biography alone\nnormally preserves.\n\n## From historical accident to inspectable process\n\nThese cases do not prove that primitive discovery can be industrialized. They\nshow why the missing method matters.\n\nHistory usually gives later readers the promoted object and fragments of its\nrationale. KFD proposes a stronger path:\n\n1. KFD-1 keeps pressure, evidence, and candidate contracts from drifting.\n2. KFD-2 keeps confidence bound to those facts and exposes residual risk.\n3. KFD-3 lets participants contribute trusted value without coercion.\n4. KFD-4 makes observation perspectives declared and makes transformation\n   durable, transferable, and comparable.\n5. KFD-5 keeps genesis method-plural and separates it from fact-bound\n   qualification.\n6. KFD-6 asks whether causal experience can eventually sustain and compare\n   that loop with less direct human translation.\n\nThis does not turn discovery into a deterministic formula. It changes the\ndefault from an unrepeatable convergence inside one life to an inspectable\nprocess that later participants can replay, challenge, and improve.\n\n## Limits and falsifiers\n\nFamous successes create survivorship bias. A pressure field can produce no new\nprimitive. A candidate may be only a useful local abstraction. A later system\nmay subsume it. Adoption can reflect distribution power rather than object\nquality.\n\nA KFD replay should therefore remain open to at least these alternatives:\n\n- the existing object set was adequate and only implementation quality was\n  missing;\n- the candidate reflected one perspective artifact rather than a durable\n  object;\n- the candidate reflected an anomaly threshold, model class, causal confounder,\n  or compression language rather than a durable object;\n- a narrower abstraction explains the same compression;\n- the object transferred poorly outside its original pressure field;\n- historical evidence is too incomplete to support the proposed replay.\n\nThe cases are valuable when readers can test the lens against their own\nexperience and reject an interpretation that does not fit. They are not origin\nmyths and should not become one."
+    "markdown": "# Primitive Discovery in History\n\nThis document gives readers external anchors for the KFD foundation model. It\nis explanatory, not normative. The numbered texts in `decisions/KFD-N.md`\nremain authoritative.\n\nEach case has two layers:\n\n- **Historical record** states what the cited sources support.\n- **KFD replay** asks what becomes visible when that record is examined through\n  declared perspective, reality pressure, candidate genesis, and qualification.\n\nThe replay is an interpretation, not a claim that KFD caused the history or\nthat a successful product proves every KFD proposition.\n\nThis document contains retrospective historical anchors. Provisional\ncandidates whose genesis and qualification are still unfolding live under\n[`cases/`](../cases/registry.json). The first live case records how applying\nKFD to its own propagation problem exposed a candidate currently called\n[`Proof-Carrying Work Object`](../cases/live/proof-carrying-work-object/README.md).\nIt remains provisional and is not evidence that KFD has already discovered a\nnew Primitive.\n\n## What a primitive changes\n\nMost work improves an answer within an existing vocabulary. A primitive changes\nthe vocabulary itself.\n\n| Primitive | What became directly manageable |\n|---|---|\n| Spreadsheet cell | A value, its dependencies, and its recalculation |\n| Git commit | A distributed change with content, parents, authorship, and identity |\n| Log | An ordered record of what happened that many projections can replay |\n\nThe code implementing these objects matters. The deeper change is that people\nand machines can now point to the same object, assign responsibility to it,\ncompose it with other objects, and ask questions that were previously expensive\nor unnatural.\n\n## Case 1: Git after years of kernel pressure\n\n### The scene\n\nThe Linux kernel project exchanged changes as patches and archived files from\n1991 to 2002. It then used the proprietary distributed version-control system\nBitKeeper. In 2005, the relationship with BitKeeper's developer broke down and\nfree use was withdrawn. The kernel community needed another system.\n\nTorvalds later described an unusually short construction interval. Git became\nself-hosting after roughly one day, and after roughly ten days he used it for\nhis first kernel commit. He emphasized that the hard part was not the amount of\ncode. It was deciding how to organize the data. He had already been thinking\nabout the problem, studying failures in other systems, and working inside a\nkernel workflow that could require tens of merges per day.\n\nSources:\n\n- [Git, *A Short History of Git*](https://git-scm.com/book/en/v2/Getting-Started-A-Short-History-of-Git)\n- [Linux Foundation, *10 Years of Git: An Interview with Git Creator Linus Torvalds*](https://www.linuxfoundation.org/blog/blog/10-years-of-git-an-interview-with-git-creator-linus-torvalds)\n\n### What changed\n\nGit did not merely automate patch copying. Its object model made content,\nhistory, ancestry, integrity, branching, and distributed authority composable.\nMany technical ingredients and neighboring systems predated Git. The primitive\nwas the operational compression that made them fit the Linux workflow and then\ntravel beyond it.\n\n```text\nyears of integrated pressure -> about ten days of construction\n```\n\nThis asymmetry is consistent with a discovery bottleneck. It is not proof by\nitself. Prior systems, prior art, implementation ability, and adoption all\nremain part of the causal history.\n\n### KFD replay\n\n| KFD question | Replay of the Git case |\n|---|---|\n| Pressure field | Kernel-scale patch flow, merge frequency, integrity, performance, and governance |\n| Integrated perspective | Torvalds occupied the position where those pressures were experienced together in daily work |\n| Forcing event | Loss of usable BitKeeper access ended the option to continue tolerating the existing arrangement |\n| Candidate move | Treat distributed history and change identity as a coherent object world rather than a central sequence of file revisions |\n| Qualification | Immediate kernel use, public source history, later adoption, and continued performance under load |\n\nThe historical events were not literally confined to one person's nervous\nsystem. Patches, repositories, discussions, and failures existed elsewhere.\nWhat was scarce was the integrated observer position from which all those\npressures formed one actionable object problem.\n\n## Case 2: VisiCalc and the object hidden inside recalculation\n\n### The scene\n\nIn 1978, Harvard Business School student Dan Bricklin watched a professor sketch\na complex business model. Changing one parameter required the later entries to\nbe recalculated. Bricklin saw that a computer could carry that burden. The idea\nbecame VisiCalc, created with Bob Frankston and released in 1979.\n\nSource:\n\n- [Harvard Gazette, *A vision of computing's future*](https://news.harvard.edu/gazette/story/2012/03/a-vision-of-the-computing-future/)\n\n### What changed\n\nThe missing object was not arithmetic. Computers could already calculate. The\nchange was to make a model visible as a grid of addressable cells whose values\nand dependencies could be edited and recalculated interactively.\n\nThe spreadsheet therefore changed the unit of knowledge work. A business model\nwas no longer only a static document plus a person's reconstruction procedure.\nIt became a manipulable dependency space.\n\n### KFD replay\n\n| KFD question | Replay of the VisiCalc case |\n|---|---|\n| Pressure field | Repeated manual propagation of changes through a model |\n| Perspective | The person responsible for exploring the model, not the machine operator executing isolated calculations |\n| Newly visible need | Preserve relationships so changed assumptions can propagate without rebuilding the model by hand |\n| Candidate move | The cell and its dependency graph become first-class interactive objects |\n| Qualification | The object proved useful in real business work and made the personal computer valuable to a new class of participant |\n\nNo dramatic forcing event is required in every case. Here, a perspective shift\nmade an ordinary burden suddenly legible as an object problem. That variation\nmatters: KFD-5 permits direct situated judgment as genesis and does not require\nfailure accumulation before a candidate may be proposed.\n\n## Case 3: The log becomes architecture\n\n### The scene\n\nIn 2013, Jay Kreps described lessons from LinkedIn's transition from one\ncentralized database to many specialized distributed systems. Logs were not\nnew. Kreps noted that they had existed almost as long as computers and appeared\nat least as early as IBM System R. They were commonly hidden inside databases\nfor recovery and replication.\n\nLinkedIn's data-integration pressure changed the useful boundary. Instead of\ntreating the log only as an internal implementation mechanism, Kreps presented\nit as a standalone service: a persistent, replayable record of history that\ncould connect many producers, consumers, and projections. He also traced this\nexperience to the focus that produced Kafka.\n\nSource:\n\n- [Jay Kreps, *The Log: What every software engineer should know about real-time data's unifying abstraction*](https://www.linkedin.com/blog/engineering/distributed-systems/log-what-every-software-engineer-should-know-about-real-time-datas-unifying)\n\n### What changed\n\nThis is a case of promotion rather than invention from nothing. The mechanism\nalready existed, but its previous boundary kept it subordinate to another\nobject. A new pressure field made it useful to name the mechanism, expose its\nauthority, and organize systems around it.\n\n```text\ndatabase implementation detail -> standalone integration primitive\n```\n\n### KFD replay\n\n| KFD question | Replay of the log case |\n|---|---|\n| Pressure field | Rapid growth of specialized systems and repeated point-to-point data integration |\n| Perspective | Organization-wide data flow rather than one database's internal recovery path |\n| Newly visible need | One replayable history that many systems can consume at their own rate |\n| Candidate move | Promote the log from internal mechanism to explicit architectural authority |\n| Qualification | Kafka, integration use, replay semantics, and transfer across system categories |\n\nThe case warns against equating primitive discovery with inventing a new data\nstructure. Sometimes reality is asking for an old mechanism to receive a new\nidentity, boundary, and responsibility.\n\n## Everyday vignette: the trace with no declared observer\n\nA cross-machine trace screen often looks like one coherent history. The user\nsees a single ordered list and naturally reads it as what happened.\n\nBut the screen may silently combine process clocks, collection delays, missing\nevents, retries, sampling, inferred parentage, and projection rules. It is not\nnecessarily false. It is a view whose observer and evidence boundary have been\nhidden by presentation.\n\nFrom an implementation perspective, the local answer may be a better clock\ncorrection or query. From an operator perspective, the missing object may be a\nbounded action whose consequence must be reconstructed across machines. From a\nuser perspective, the real question may be whether delegated work finished and\nwho can safely act next.\n\nKFD-4 does not require one of these perspectives to become the universal truth.\nIt requires each view to remain declared and makes replay or contrast available\nwhen another perspective is needed. KFD-5 begins when any declared genesis\nmethod proposes a candidate object that may deserve its own durable boundary.\n\n## What these cases cannot rank\n\nThe cases are compatible with several genesis explanations at once:\n\n| Case | Plausible genesis mechanisms |\n|---|---|\n| Git | integrated perspective, anomaly in incumbent tools, repeated reconstruction, boundary pressure, structural compression |\n| VisiCalc | user perspective, repeated recalculation, causal dependency discovery, structural compression |\n| Log | organization-wide perspective, integration anomalies, boundary pressure, causal history, architectural compression |\n\nA retrospective replay cannot identify which mechanism was necessary, which\nwas sufficient, or which would have found the candidate first under equal\nevidence and resource budgets. The same success can often be narrated through\nseveral methods after the primitive is known. KFD therefore treats these cases\nas evidence that the methods are plausible, not evidence that perspective\ntransformation dominates anomaly, reconstruction, causality, or compression.\n\n## The recurring structure\n\n| Case | Existing capability | Situated pressure | Primitive move |\n|---|---|---|---|\n| Git | Patches, source control, distributed-system lessons | Kernel-scale merging, integrity, performance, and authority | Distributed change history becomes a content-addressed object world |\n| VisiCalc | Arithmetic and programmable computers | Manual model recalculation | Cells and dependencies become an interactive model |\n| Log | Write-ahead and transaction logs | Organization-wide data integration | Internal history becomes standalone replay infrastructure |\n\nThe common structure is not \"a brilliant person had an idea.\" It is:\n\n```text\nreality pressure\n  -> a declared perspective and current ontology\n  -> one or more genesis methods propose a candidate\n  -> qualification through use, consequences, and transfer\n```\n\nThe historical participants still matter. Judgment, taste, implementation,\nauthority, and timing cannot be removed from the record. The KFD claim is\nnarrower: more of the path can be preserved and examined than biography alone\nnormally preserves.\n\n## From historical accident to inspectable process\n\nThese cases do not prove that primitive discovery can be industrialized. They\nshow why the missing method matters.\n\nHistory usually gives later readers the promoted object and fragments of its\nrationale. KFD proposes a stronger path:\n\n1. KFD-1 keeps pressure, evidence, and candidate contracts from drifting.\n2. KFD-2 keeps confidence bound to those facts and exposes residual risk.\n3. KFD-3 lets participants contribute trusted value without coercion.\n4. KFD-4 makes observation perspectives declared and makes transformation\n   durable, transferable, and comparable.\n5. KFD-5 keeps genesis method-plural and separates it from fact-bound\n   qualification.\n6. KFD-6 asks whether causal experience can eventually sustain and compare\n   that loop with less direct human translation.\n\nThis does not turn discovery into a deterministic formula. It changes the\ndefault from an unrepeatable convergence inside one life to an inspectable\nprocess that later participants can replay, challenge, and improve.\n\n## Limits and falsifiers\n\nFamous successes create survivorship bias. A pressure field can produce no new\nprimitive. A candidate may be only a useful local abstraction. A later system\nmay subsume it. Adoption can reflect distribution power rather than object\nquality.\n\nA KFD replay should therefore remain open to at least these alternatives:\n\n- the existing object set was adequate and only implementation quality was\n  missing;\n- the candidate reflected one perspective artifact rather than a durable\n  object;\n- the candidate reflected an anomaly threshold, model class, causal confounder,\n  or compression language rather than a durable object;\n- a narrower abstraction explains the same compression;\n- the object transferred poorly outside its original pressure field;\n- historical evidence is too incomplete to support the proposed replay.\n\nThe cases are valuable when readers can test the lens against their own\nexperience and reject an interpretation that does not fit. They are not origin\nmyths and should not become one."
+  },
+  "liveCases": {
+    "source": "cases/registry.json",
+    "stableUrlPattern": "/cases/live/{id}",
+    "relationship": "provisional-live-cases-of-kfd-5",
+    "normative": false,
+    "authorityNote": "Live cases preserve candidate genesis and qualification state. They are not numbered KFD decisions or accepted Primitive claims.",
+    "cases": [
+      {
+        "id": "proof-carrying-work-object",
+        "title": "Proof-Carrying Work Object",
+        "kind": "primitive-candidate",
+        "status": "provisional",
+        "standard": "kfd-5",
+        "url": "/cases/live/proof-carrying-work-object",
+        "relationship": "provisional-live-case",
+        "claimBoundary": "This case records a provisional shared object hypothesis and a reflexive KFD dogfood process. It does not establish novelty, universality, product readiness, method superiority, or accepted Primitive status.",
+        "humanEntry": {
+          "path": "cases/live/proof-carrying-work-object/README.md",
+          "markdown": "# Proof-Carrying Work Object\n\n`Proof-Carrying Work Object` is a working title for a provisional KFD-5\nPrimitive candidate. Naming remains open.\n\n## Candidate\n\nA proof-carrying work object is a bounded unit of completed or proposed work\nthat carries enough facts, evidence, responsibility, residual risk, and\ncontinuation conditions for a downstream participant to judge what may safely\nhappen next without reconstructing the whole basis from scratch.\n\nThe candidate is both epistemic and operational:\n\n```text\nwhy a bounded claim may be relied upon\n  -> what a downstream participant may do next\n```\n\nPossible domain profiles include a Buildchain Release Passport, a replayable\nKungfu Episode, a qualified Primitive Candidate, a source- and\nloss-declared Perspective Replay, and a revocable transaction mandate. These\nexamples motivate the candidate; they do not prove that one common Primitive\nexists.\n\n## Current status\n\n```text\nstatus: provisional\ngenesis: captured\nminimum closure: inconclusive\ndeletion test: inconclusive\nfuse test: inconclusive\ndogfood: not run as a common cross-domain contract\n```\n\nThe current machine record is the immutable cut referenced by\n[`cases/registry.json`](../../registry.json). A later assessment creates a new\nnumbered cut; it does not rewrite the genesis cut.\n\n## Why this is a reflexive KFD case\n\nThis candidate appeared while KFD was applied to its own propagation problem:\n\n1. KFD-3 reframed propagation as earning cooperation through trusted value\n   rather than persuading or pressuring participants.\n2. KFD-4 changed the observer from a human organization adopting a standard to\n   an agent executing and handing off work.\n3. The new view exposed a propagation loop based on discoverable tools,\n   verifiable outputs, downstream acceptance, and future routing.\n4. KFD-5 separated the loop from the object repeatedly bearing its\n   cross-boundary burden.\n\nThe resulting hypothesis is that KFD may spread operationally through useful\nwork objects before participants explicitly study or adopt KFD as a\nphilosophy. This is a hypothesis, not self-proof.\n\n## Claim boundary\n\nThis case does not claim:\n\n- that the working title is final;\n- that the candidate is historically novel or universally applicable;\n- that the listed examples already implement one shared contract;\n- that schema validity or KFD origin proves Primitive status;\n- that agents will prefer producers of these objects;\n- that operational use will necessarily reproduce KFD behavior;\n- that a producer may certify its own work or transfer unlimited authority.\n\nIn this case, `proof` means an inspectable, purpose-bound basis for independent\njudgment. It does not mean absolute truth or mathematical proof.\n\n## Case surfaces\n\n- [Genesis](genesis.md)\n- [KFD method trace](kfd-method-trace.md)\n- [Propagation hypothesis](propagation-hypothesis.md)\n- [Current KFD-5 cut](cuts/0001-genesis.json)\n- [Qualification reviews](reviews/README.md)\n- [Live case registry](../../registry.json)\n\n## Qualification direction\n\nThe candidate becomes stronger only if reality shows reusable cross-domain\noperations, measurable reduction in downstream reinvestigation, safe\npurpose-bound reassessment, attenuable and revocable continuation authority,\nand transfer beyond first-party examples. Evidence against any of those\nproperties must remain visible and may result in rejection, subsumption, or a\n`no-new-primitive` outcome."
+        },
+        "genesis": {
+          "path": "cases/live/proof-carrying-work-object/genesis.md",
+          "markdown": "# Genesis: Proof-Carrying Work Object\n\nThis document freezes the first public reconstruction of the candidate's\ngenesis. It preserves the initial uncertainty and must not be rewritten into a\nlater success narrative. Factual errata may be appended with an explicit date.\n\n## Initial question\n\nThe inquiry began with KFD propagation. The original observer was a human\norganization deciding whether to adopt a philosophy or standard:\n\n```text\ncompany understands KFD\n  -> management approves\n  -> team adopts\n  -> engineers integrate\n```\n\nUnder this view, propagation appeared to depend mainly on branding, commercial\ncommunication, governance, and organizational persuasion.\n\n## Perspective transformation\n\nThe observer was changed from the adopting organization to the agent performing\nwork and handing it to another participant:\n\n```text\ntool becomes discoverable\n  -> agent invokes it\n  -> verifiable output is produced\n  -> downstream review cost falls\n  -> the output passes a gate more easily\n  -> success enters memory and routing\n  -> similar tools receive more future selection weight\n```\n\nFrom this position, tool discovery, machine protocols, authorization,\nsupply-chain evidence, memory, routing, and downstream gates no longer appeared\nonly as separate product categories. They appeared as stages in one possible\nwork-propagation loop.\n\n## Compression from chain to object\n\nThe propagation chain was not itself the strongest Primitive candidate. The\nrepeated burden fell on the object crossing each boundary.\n\nThat object had to carry more than an output:\n\n- the work result;\n- source facts and provenance;\n- verification state;\n- responsibility and claim boundaries;\n- residual risk and degraded state;\n- purpose-bound conditions for continuation;\n- machine semantics for downstream judgment.\n\nThis produced the working candidate `Proof-Carrying Work Object`.\n\n## Initial examples\n\nThe candidate became visible across examples that currently belong to different\ndomains:\n\n| Example | Possible shared function |\n|---|---|\n| Buildchain Release Passport | Carries release result, provenance, verification, responsibility, and publication conditions. |\n| Kungfu Episode | Carries bounded causal work history for replay, recovery, audit, and continuation. |\n| Primitive Candidate | Carries genesis, grounding, qualification, falsifiers, risk, and promotion state. |\n| Perspective Replay | Carries source views, reconstruction policy, preserved elements, loss, and verification state. |\n| Transaction mandate | Could carry intent, limits, authority, revocation, evidence, and execution conditions. |\n\nThe transaction mandate remains a hypothetical comparison in this evidence\ncut. The table does not establish a shared contract.\n\n## Initial Primitive shape\n\n```text\nidentity:\n  one bounded work claim and its continuation basis\n\nboundary:\n  result + fact cut + evidence + responsibility + residual risk\n  + continuation conditions\n\nauthority:\n  producer declares; verifier assesses; downstream participant decides\n  under its own purpose and policy\n\nlifecycle:\n  proposed -> produced -> assessed -> accepted or rejected\n           -> authorized -> consumed -> stale, revoked, or superseded\n\noperations:\n  inspect, verify, accept, reject, continue, delegate, attenuate,\n  revoke, replay, supersede\n```\n\n## Alternatives visible at genesis\n\nThe candidate may be:\n\n- only a common envelope over attestations, credentials, capability tokens,\n  workflow artifacts, event logs, and signed records;\n- a composition pattern rather than an independent Primitive;\n- a useful local abstraction whose semantics do not transfer across domains;\n- the wrong boundary around several narrower objects;\n- unnecessary if downstream participants still need full reinvestigation.\n\n`No new Primitive` remains a required alternative.\n\n## Initial falsifiers\n\nThe candidate weakens or fails if:\n\n- there are no reusable operations beyond similar metadata fields;\n- downstream participants do not measurably reduce reinvestigation;\n- evidence cannot be safely reassessed for a new purpose;\n- continuation authority cannot be attenuated, revoked, or delegated safely;\n- a common envelope erases natural domain boundaries;\n- acceptance depends mainly on vendor defaults or brand rather than evidence;\n- first-party examples cannot transfer to an independent context;\n- the producer remains the sole verifier or promotion authority.\n\n## Evidence cut and known gaps\n\nThis genesis cut records a conceptual convergence on 2026-07-17. It does not\ncontain a common implementation, cross-domain benchmark, independent adopter,\nmeasured routing preference, or evidence that operational use reproduces KFD\nbehavior. Those absences are qualification requirements, not editorial gaps to\nbe filled by stronger wording."
+        },
+        "methodTrace": {
+          "path": "cases/live/proof-carrying-work-object/kfd-method-trace.md",
+          "markdown": "# KFD Method Trace\n\nThis trace records how KFD contributed to candidate genesis. It does not claim\nthat KFD uniquely caused the candidate or that the candidate proves KFD.\n\n## KFD-1: preserve the discovery cut\n\nThe genesis, current ontology, candidate shape, alternatives, falsifiers, and\nknown gaps are stored as public repository facts. Later qualification creates a\nnew immutable cut instead of editing the initial uncertainty away.\n\n## KFD-2: separate four claims\n\nThe case keeps these claims independent:\n\n```text\nC1  KFD-4 and KFD-5 materially contributed to candidate genesis.\nC2  The candidate can reduce downstream reconstruction of work validity.\nC3  Agents will prefer tools whose outputs are accepted through this object.\nC4  Repeated use can reproduce KFD-compatible work structure without prior\n    philosophical adoption.\n```\n\nThe genesis record supports a bounded version of C1. C2 through C4 remain\nunverified.\n\n## KFD-3: propagation begins with trusted value\n\nThe original propagation problem assumed that humans first had to understand\nand accept KFD. KFD-3 changed the constraint: cooperation should be earned by\ndiscoverable, inspectable, trusted value rather than pressure or hidden\nworkflow capture.\n\nThis opened the possibility that an agent could select a tool because its\noutput is easier for downstream participants to verify and continue, without\nfirst adopting KFD as an explicit doctrine.\n\nThe mechanism would violate KFD-3 if routing were hidden, alternatives were\nsuppressed, constraints were unreviewable, or past success were used to force\nfuture selection.\n\n## KFD-4: move to the executing agent's position\n\nChanging the observer from organizational management to the executing and\ndownstream agents changed the natural objects:\n\n| Organization-adoption view | Agent-work view |\n|---|---|\n| Product category | Discoverable capability |\n| Standard adoption | Machine contract acceptance |\n| Brand trust | Inspectable evidence and residual risk |\n| Organizational rollout | Work-object handoff |\n| User retention | Future routing weight |\n\nThis transformation exposed the possible propagation loop. It did not by\nitself identify the Primitive.\n\n## KFD-5: separate the loop from its load-bearing object\n\nStructural compression and reconstruction-pressure analysis asked what would\nhave to be rebuilt if the chain lacked a durable carrier. The answer was the\nbasis on which downstream participants decide whether to trust and continue\nwork.\n\nThe chain describes system dynamics. The candidate object has the stronger\nPrimitive shape: identity, boundary, authority, lifecycle, and operations.\n\nKFD-5 now prevents the discovery story from promoting its own result. The\ncandidate remains provisional until alternatives, falsifiers, dogfood, and\nindependent transfer are examined.\n\n## KFD-6 boundary\n\nNo autonomous discovery claim is made. A later KFD-6 experiment could compare\nwhether causal work corpora repeatedly expose this object or competing\nboundaries, but this case currently depends on direct human judgment and\nscalable agent reasoning under human-held promotion authority.\n\n## Reflexive dogfood claim\n\nThe live case demonstrates that KFD can be applied to its own propagation\nproblem and produce an inspectable candidate record. It does not yet\ndemonstrate that KFD reliably discovers valid Primitives or that the proposed\ncarrier has high propagation power."
+        },
+        "propagationHypothesis": {
+          "path": "cases/live/proof-carrying-work-object/propagation-hypothesis.md",
+          "markdown": "# Propagation Hypothesis\n\nThe reflexive hypothesis is:\n\n> KFD may spread operationally by helping create work objects whose verified\n> value causes agents and downstream gates to reproduce KFD-compatible\n> structure through use.\n\nThis is different from asking participants to read, believe, or endorse KFD.\n\n## Proposed loop\n\n```text\nagent completes bounded work\n  -> emits a proof-carrying work object\n  -> downstream participant checks its contract and local purpose\n  -> accepted evidence unlocks bounded continuation\n  -> outcome and review cost are recorded\n  -> future routing can compare this path with alternatives\n  -> successful producers may receive more selection weight\n```\n\nProducts and APIs remain execution and distribution surfaces. The hypothesis\nis that the work object becomes the unit that actually crosses boundaries and\naccumulates acceptance.\n\n## KFD structure carried through use\n\nThe proposed carrier would operationalize:\n\n```text\nKFD-1  stable fact cuts, identities, contracts, and provenance\nKFD-2  bounded claims, assessments, responsibility, and residual risk\nKFD-3  inspectable value, choices, constraints, and continuation conditions\nKFD-4  declared observer, perspective, transformation, and loss when relevant\nKFD-5  genesis and qualification when the work proposes a Primitive\n```\n\nA participant could therefore use a KFD-shaped object before learning the KFD\nname. This would be structural reproduction, not proof of philosophical\nagreement.\n\n## Claim assessments\n\n| Claim | Current assessment | Evidence boundary |\n|---|---|---|\n| C1: KFD contributed to genesis | Supported with residual risk | Public reconstructed genesis and method trace; no independent replay yet |\n| C2: downstream reinvestigation falls | Unverified | No common implementation or benchmark |\n| C3: agents prefer producing tools | Unverified | No controlled routing or repeat-selection evidence |\n| C4: KFD-compatible structure propagates through use | Unverified | No independent cross-organization transfer |\n\n## Required evidence\n\n- concrete object profiles produced by more than one tool or domain;\n- downstream verification time, retries, clarification, and reconstruction\n  measured against ordinary artifacts;\n- purpose-bound reassessment without treating old proof as universal;\n- safe attenuation, delegation, revocation, staleness, and supersession;\n- visible routing reasons, alternatives, confidence, and opt-out;\n- at least one transfer outside first-party examples;\n- negative cases where a plausible object is rejected;\n- evidence that recipients preserve the KFD constraints rather than merely\n  copying fields.\n\n## Falsifiers\n\nThe propagation hypothesis weakens or fails if:\n\n- downstream review cost does not fall;\n- agents cannot discover or interpret the object without private context;\n- routing preference is dominated by hidden defaults, bundling, or brand;\n- evidence accepted for one purpose is silently reused for another;\n- authorization becomes ambient, non-revocable, or transferable beyond intent;\n- recipients strip provenance, risk, perspective, or responsibility fields;\n- the object creates more coordination burden than it removes;\n- independent domains converge on incompatible object boundaries.\n\n## Anti-self-certification\n\nKFD produced the method trace and currently owns the case record. That makes\nthe record inspectable; it does not make the propagation claim true.\n\nThe generator must not be the sole verifier. Promotion requires evidence whose\nfailure is not identical to the KFD narrative, including real downstream\nbehavior, independent review, rejected candidates, and consequences that can\ncontradict the hypothesis."
+        },
+        "reviewIndex": {
+          "path": "cases/live/proof-carrying-work-object/reviews/README.md",
+          "markdown": "# Qualification Reviews\n\nThis directory is the append-only human review path for the\n`proof-carrying-work-object` live case.\n\nA review is required when:\n\n- a new concrete domain profile is added;\n- an alternative is rejected or subsumed;\n- a falsifier is triggered or retired;\n- a qualification test changes state;\n- a new immutable KFD-5 cut is proposed;\n- the case is used in a product or adoption claim;\n- the outcome may change from `provisional`.\n\nEach review records:\n\n1. the previous cut and digest;\n2. new supporting and contradicting facts;\n3. changed alternatives, tests, and residual risks;\n4. verification responsibility;\n5. decision responsibility;\n6. the reason for retaining or changing the outcome;\n7. the path and digest of any new cut.\n\nReviews do not rewrite prior cuts. A correction identifies the affected claim,\npreserves the old coordinate, and creates a new cut when the current candidate\nstate changes."
+        },
+        "currentCut": {
+          "path": "cases/live/proof-carrying-work-object/cuts/0001-genesis.json",
+          "sha256": "fae8a67bd3d1cd90c9a349cc2f5d4720e81993da480f880f2d55bad4853abbb1",
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-5/primitive-discovery.schema.json",
+          "schemaVersion": 3,
+          "record": {
+            "schemaVersion": 3,
+            "contract": "kfd-5-primitive-discovery",
+            "standard": "kfd-5",
+            "candidate": {
+              "id": "proof-carrying-work-object",
+              "title": "Proof-Carrying Work Object",
+              "problemStatement": "When bounded work crosses agent, tool, or organization boundaries, downstream participants often have to reconstruct the result, source facts, verification state, responsibility, residual risk, and authority conditions before they can safely continue.",
+              "scope": "A provisional cross-domain object hypothesis for carrying a bounded work result and its inspectable continuation basis. The working title, common contract, novelty, universality, and Primitive status remain open."
+            },
+            "genesis": {
+              "methods": [
+                "direct-situated-judgment",
+                "perspective-transformation",
+                "reconstruction-pressure",
+                "structural-compression"
+              ],
+              "observationPerspective": {
+                "id": "human-organization-adoption",
+                "bearer": "organization considering KFD adoption",
+                "role": "management and governance observer",
+                "proximity": "outside the execution handoff",
+                "consequences": [
+                  "bears persuasion, rollout, governance, and organizational adoption cost"
+                ],
+                "naturalObjects": [
+                  "brand",
+                  "standard",
+                  "management approval",
+                  "team rollout",
+                  "engineering integration"
+                ]
+              },
+              "currentOntology": [
+                "product",
+                "API",
+                "artifact",
+                "attestation",
+                "credential",
+                "capability",
+                "workflow",
+                "trace",
+                "memory",
+                "tool routing"
+              ],
+              "observation": "Changing the observer from the adopting organization to the agent executing and handing off work made several previously separate product categories appear as stages in one possible propagation loop.",
+              "candidateObject": "A bounded work object that carries result, facts, verification, responsibility, residual risk, and purpose-bound continuation conditions across participant boundaries.",
+              "claimBoundary": "The cut records a provisional shared-object hypothesis. It does not claim a final name, historical novelty, universal applicability, product readiness, method superiority, or accepted Primitive status.",
+              "methodEvidence": [
+                {
+                  "kind": "file",
+                  "coordinate": "cases/live/proof-carrying-work-object/genesis.md",
+                  "observer": "KFD maintainers"
+                },
+                {
+                  "kind": "file",
+                  "coordinate": "cases/live/proof-carrying-work-object/kfd-method-trace.md",
+                  "observer": "KFD maintainers"
+                }
+              ],
+              "transformedPerspective": {
+                "id": "agent-work-handoff",
+                "bearer": "agent producing or consuming bounded work",
+                "role": "execution and downstream judgment participant",
+                "proximity": "inside the work handoff and gate",
+                "consequences": [
+                  "bears tool discovery, execution, verification, retry, continuation, and failure cost"
+                ],
+                "naturalObjects": [
+                  "discoverable capability",
+                  "machine contract",
+                  "work result",
+                  "evidence",
+                  "continuation condition",
+                  "routing outcome"
+                ]
+              },
+              "transformation": "The observer moved from organizational adoption to the agent and downstream participant crossing the execution boundary.",
+              "newlyVisibleNeed": "The basis for trusting and continuing work must travel with the work so that every boundary crossing does not require full epistemic reconstruction.",
+              "methodNotes": "Perspective transformation exposed the chain; reconstruction pressure and structural compression separated the chain dynamics from the object repeatedly bearing its burden."
+            },
+            "boundaryPressure": {
+              "contactSides": [
+                "work-producing agent or tool",
+                "downstream agent, gate, operator, or organization"
+              ],
+              "implicitHandling": "Results, provenance, evidence, responsibility, risk, and authorization are commonly reconstructed from files, logs, messages, policy, and participant memory.",
+              "pressureChanges": [
+                {
+                  "kind": "new-participant",
+                  "description": "Agents increasingly produce and consume work without sharing the same transient context."
+                },
+                {
+                  "kind": "scale",
+                  "description": "High-frequency delegated work makes repeated downstream reinvestigation and manual explanation expensive."
+                },
+                {
+                  "kind": "authority",
+                  "description": "A downstream participant must know not only what happened but which bounded action may legitimately follow."
+                },
+                {
+                  "kind": "heterogeneity",
+                  "description": "The handoff crosses tools, runtimes, organizations, policies, and domain vocabularies."
+                }
+              ],
+              "observedFailures": [
+                "A downstream participant must rediscover why an output should be trusted.",
+                "Verification state and residual risk become detached from the result.",
+                "Authorization is reconstructed from ambient context or hidden policy.",
+                "Successful execution does not create a reusable basis for future routing."
+              ],
+              "mediationClaim": "A proof-carrying work object may mediate the boundary by preserving a purpose-bound basis for independent judgment and continuation.",
+              "internalObjectAlternative": "The candidate may be only a composition of attestation, credential, capability, workflow artifact, event log, and signed envelope rather than a new Primitive."
+            },
+            "grounding": {
+              "pressure": [
+                "Repeated downstream reconstruction of work validity and continuation authority",
+                "Separation between evidence objects and operational permission",
+                "Agent execution and handoff across heterogeneous context boundaries",
+                "Need for machine-readable routing outcomes without hidden workflow capture"
+              ],
+              "factSources": [
+                {
+                  "kind": "file",
+                  "coordinate": "cases/live/proof-carrying-work-object/genesis.md",
+                  "observer": "KFD maintainers"
+                },
+                {
+                  "kind": "file",
+                  "coordinate": "schemas/kfd-2/release-trust-passport.schema.json",
+                  "observer": "KFD package"
+                },
+                {
+                  "kind": "file",
+                  "coordinate": "schemas/kfd-4/perspective-replay.schema.json",
+                  "observer": "KFD package"
+                },
+                {
+                  "kind": "file",
+                  "coordinate": "schemas/kfd-5/primitive-discovery.schema.json",
+                  "observer": "KFD package"
+                }
+              ],
+              "evidenceBoundary": "Public KFD records and first-party object examples available at the 2026-07-17 genesis cut. No common implementation, benchmark, independent adopter, controlled routing evidence, or cross-organization transfer is included.",
+              "knownGaps": [
+                "No final name or stable common contract",
+                "No measured downstream reinvestigation reduction",
+                "No safe common authority attenuation and revocation model",
+                "No independent domain implementation",
+                "No evidence of agent routing preference",
+                "No evidence that operational use reproduces KFD-compatible behavior"
+              ]
+            },
+            "participants": [
+              {
+                "id": "human-perspective-source",
+                "kind": "human",
+                "functions": [
+                  "perspective-declaration",
+                  "candidate-generation",
+                  "decision"
+                ]
+              },
+              {
+                "id": "reasoning-agent",
+                "kind": "agent",
+                "functions": [
+                  "candidate-generation",
+                  "scalable-reasoning"
+                ]
+              },
+              {
+                "id": "future-independent-reviewer",
+                "kind": "collective",
+                "functions": [
+                  "evidence-custody",
+                  "verification"
+                ]
+              }
+            ],
+            "alternatives": [
+              {
+                "name": "Product or API as the propagation unit",
+                "disposition": "retained",
+                "reason": "Products and APIs remain execution and distribution surfaces, but may not be the object that crosses and accumulates acceptance at work boundaries."
+              },
+              {
+                "name": "Agent adoption loop as the Primitive",
+                "disposition": "retained",
+                "reason": "The loop may be a useful system model, but currently has weaker independent identity, boundary, authority, and lifecycle than the carried work object."
+              },
+              {
+                "name": "Attestation or verifiable credential",
+                "disposition": "unresolved",
+                "reason": "These may cover the epistemic side but may not include bounded work lifecycle and continuation authority."
+              },
+              {
+                "name": "Capability token or transaction mandate",
+                "disposition": "unresolved",
+                "reason": "These may cover action authority but may not carry the complete fact, evidence, responsibility, and result boundary."
+              },
+              {
+                "name": "Workflow artifact, event log, or signed envelope",
+                "disposition": "unresolved",
+                "reason": "A composition of existing objects may provide all required behavior without a new Primitive."
+              },
+              {
+                "name": "No new Primitive",
+                "disposition": "unresolved",
+                "reason": "The current convergence may be conceptual similarity rather than a durable shared object."
+              }
+            ],
+            "contractModel": {
+              "identity": "A stable identity for one bounded work claim and the basis on which a downstream participant may judge continuation.",
+              "boundary": "Work result, source fact cut, provenance, verification state, responsibility, residual risk, degraded state, lineage, and purpose-bound continuation conditions.",
+              "authority": "The producer declares the work result; independent evidence and verification support or contradict it; each downstream participant decides under its own purpose and policy. The object does not grant ambient or unlimited authority.",
+              "lifecycle": "proposed -> produced -> assessed -> accepted or rejected -> authorized -> consumed -> stale, revoked, or superseded",
+              "operations": [
+                "inspect",
+                "verify",
+                "accept",
+                "reject",
+                "continue",
+                "delegate",
+                "attenuate",
+                "revoke",
+                "replay",
+                "supersede"
+              ]
+            },
+            "tests": {
+              "minimumClosure": {
+                "result": "inconclusive",
+                "evidence": [
+                  {
+                    "kind": "file",
+                    "coordinate": "cases/live/proof-carrying-work-object/genesis.md"
+                  }
+                ],
+                "notes": "A preliminary identity, boundary, authority, lifecycle, and operation set exists, but no common implementation has tested whether it is minimal."
+              },
+              "deletion": {
+                "result": "inconclusive",
+                "evidence": [
+                  {
+                    "kind": "file",
+                    "coordinate": "cases/live/proof-carrying-work-object/genesis.md"
+                  }
+                ],
+                "notes": "The candidate plausibly compresses repeated reinvestigation, but the cost has not been measured against existing compositions."
+              },
+              "fuse": {
+                "result": "inconclusive",
+                "evidence": [
+                  {
+                    "kind": "file",
+                    "coordinate": "cases/live/proof-carrying-work-object/genesis.md"
+                  }
+                ],
+                "notes": "Several domain examples appear structurally related, but shared fields and operations have not survived cross-domain implementation."
+              },
+              "falsifiers": [
+                "No reusable operations exist beyond similar metadata fields.",
+                "Downstream participants do not measurably reduce reinvestigation.",
+                "Evidence cannot be safely reassessed for a new purpose.",
+                "Continuation authority cannot be attenuated, revoked, or delegated safely.",
+                "A common envelope erases natural domain boundaries.",
+                "Acceptance is dominated by hidden defaults, bundling, or brand rather than evidence.",
+                "First-party examples do not transfer to an independent context.",
+                "The producer remains the sole verifier or promotion authority."
+              ],
+              "dogfood": {
+                "result": "not-run",
+                "evidence": [],
+                "notes": "Existing examples motivate the candidate but do not yet implement and compare one common cross-domain contract."
+              }
+            },
+            "decision": {
+              "outcome": "provisional",
+              "owner": "KFD maintainers",
+              "reason": "The perspective transformation and structural compression justify preserving the candidate, but minimum closure, deletion, fuse, dogfood, independent transfer, and propagation claims remain unresolved.",
+              "residualRisks": [
+                "The working title may anchor the object too strongly around proof.",
+                "The candidate may be only a composition pattern over existing standards.",
+                "First-party examples may create confirmation bias.",
+                "Authority semantics may not generalize safely.",
+                "Operational propagation may be driven by platform defaults rather than verified value.",
+                "KFD self-application may be mistaken for independent validation."
+              ]
+            }
+          }
+        }
+      }
+    ]
   },
   "decisionPages": {
     "source": "registry.json",
@@ -589,7 +932,8 @@
         "canonicalPaths": [
           "decisions/KFD-N.md",
           "registry.json",
-          "standards.json"
+          "standards.json",
+          "cases/registry.json"
         ],
         "projectionSurfaces": [
           "https://kfd.libkungfu.dev/N",
@@ -607,6 +951,7 @@
       "foundation explanation page from docs/foundation-model.md",
       "formal reference overview from docs/formal-model.md",
       "historical cases page from docs/primitive-discovery-cases.md",
+      "live Primitive case registry and case bodies from cases/",
       "foundation triad commitments",
       "foundation model layers and chain",
       "product proof path text",

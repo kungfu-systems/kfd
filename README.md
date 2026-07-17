@@ -32,6 +32,7 @@ No principle is load-bearing until it has an inspectable product witness.
 [Read the foundation model](docs/foundation-model.md) ·
 [Inspect the formal model](docs/formal-model.md) ·
 [See primitives in history](docs/primitive-discovery-cases.md) ·
+[Inspect live Primitive cases](cases/registry.json) ·
 [Explore current decisions](#current-decisions) ·
 [Inspect the product proof path](#product-proof-path)
 
@@ -84,6 +85,12 @@ KFD-4, KFD-5, and KFD-6 are expressed as consumable interfaces for both humans
 and agents. These surfaces do not prove every adopter or product correct; they
 make the KFD package's own claims inspectable and falsifiable.
 
+KFD also publishes provisional live cases under `cases/`. A live case freezes
+candidate genesis, points to immutable KFD-5 qualification cuts, and keeps
+supporting and contradicting evidence open. Live cases are dogfood records,
+not numbered decisions, accepted Primitive claims, or product capability
+announcements.
+
 The complete explanatory path is published at
 [`docs/foundation-model.md`](docs/foundation-model.md) and projected to the
 stable site route `/foundation`. It explains the decisions without replacing
@@ -129,24 +136,26 @@ Agents consuming this package should start from the same sources as humans:
    particular decision.
 5. Read `docs/primitive-discovery-cases.md` to test the KFD lens against familiar
    historical cases and an ordinary cross-machine trace vignette.
-6. Read `standards.json` for canonical KFD numbers, formal reference versions
+6. Read `cases/registry.json` to discover provisional live Primitive cases,
+   their current immutable KFD-5 cuts, claim boundaries, and review paths.
+7. Read `standards.json` for canonical KFD numbers, formal reference versions
    and hashes, schema IDs, concept names, and interface contracts.
-7. Use `site/kfd-site.json` decision metadata or the KFD-3 collaboration
+8. Use `site/kfd-site.json` decision metadata or the KFD-3 collaboration
    interface fact-source metadata to identify the public KFD fact source.
-8. Use `schemas/kfd-2/trust-taxonomy.schema.json` for KFD-2 residual-risk and
+9. Use `schemas/kfd-2/trust-taxonomy.schema.json` for KFD-2 residual-risk and
    trust-downgrade values. Unknown taxonomy values are invalid.
-9. Use `schemas/kfd-2/trust-claims.schema.json` and
+10. Use `schemas/kfd-2/trust-claims.schema.json` and
    `schemas/kfd-2/trust-assessment.schema.json` when a claim needs generic
    KFD-2 assessment instead of a release-specific passport.
-10. Use `schemas/kfd-3/collaboration-interface.schema.json` and
+11. Use `schemas/kfd-3/collaboration-interface.schema.json` and
    `schemas/kfd-3/witness.schema.json` to inspect collaboration interfaces.
-11. Use `schemas/kfd-1/publication-url-semantics.schema.json` when a package,
+12. Use `schemas/kfd-1/publication-url-semantics.schema.json` when a package,
    paper, specification, or site bundle must distinguish stable reader URLs,
    latest aliases, and immutable versioned artifacts.
-12. If a needed KFD-2 taxonomy value is missing, open a KFD GitHub issue rather
+13. If a needed KFD-2 taxonomy value is missing, open a KFD GitHub issue rather
    than inventing a local value:
    `https://github.com/kungfu-systems/kfd/issues/new?title=KFD-2%20trust%20taxonomy%20extension%20request`.
-13. Use `schemas/kfd-4/observer-perspective.schema.json` to bind timelines to
+14. Use `schemas/kfd-4/observer-perspective.schema.json` to bind timelines to
    their observers and `schemas/kfd-4/perspective-replay.schema.json` to record
    perspective-preserving or contrastive replay. Use
    `schemas/kfd-5/primitive-discovery.schema.json` version 3 to record
@@ -215,7 +224,10 @@ Decision metadata should expose:
 
 - Public fact source: `https://github.com/kungfu-systems/kfd`
 - Load-bearing coordinate: commit-addressed repository contents.
-- Canonical paths: `decisions/KFD-N.md`, `registry.json`, `standards.json`.
+- Canonical decision paths: `decisions/KFD-N.md`, `registry.json`,
+  `standards.json`.
+- Canonical provisional-case index: `cases/registry.json`; listing does not
+  promote a case into a numbered decision.
 - Stable rendered index: `https://kfd.libkungfu.dev`.
 - Rendered URL: `https://kfd.libkungfu.dev/N`.
 
@@ -242,6 +254,7 @@ reference KFDs; KFDs never depend on repository internals.
 
 ```text
 decisions/     one authoritative markdown file per decision (KFD-N.md)
+cases/         provisional live Primitive cases and immutable KFD-5 cuts
 docs/          non-numbered explanations, formal references, usage guides,
                historical cases, and documentation map
 registry.json  machine-readable index (schemaVersion 1, contract kfd-registry)

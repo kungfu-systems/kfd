@@ -5,7 +5,7 @@
   "assessedClaims": {
     "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-2/trust-claims.schema.json",
     "path": ".buildchain/kfd-2/kfd-foundation.trust-claims.json",
-    "digest": "sha256:16075a506dd0d47ff410c46d5bfe9eea3a23a1d7978ab8150abc94e1e63b7102"
+    "digest": "sha256:1a97b6c175c59e626c1cdb3bd521f761a9af01799f0d4e1e75a14bb12eb49f94"
   },
   "result": "warning",
   "projection": {
@@ -29,7 +29,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": "standards.json",
-          "digest": "sha256:c12f3c5d0b50f16a2c12eb70405f54200df292e5eabe4fd4697e212e1553a054",
+          "digest": "sha256:fa759c61df51cc6d2786868da672997c896d13666506c6b10e664b450f319674",
           "description": "Fact standards.json is present and hashable."
         },
         {
@@ -55,7 +55,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": "scripts/check.mjs",
-          "digest": "sha256:26159ee00310de897ba2086fa351c4f4c142351d0af1b903fcf43b14973de6e0",
+          "digest": "sha256:ad7dfef4554ac24595379467fe1bcdf1b00ae230d7469e56c99d4d6d5492c0de",
           "description": "The package check gate validates the KFD-1 schema, surface register, witness, and hashes."
         }
       ],
@@ -87,7 +87,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": ".buildchain/kfd-3/collaboration-interface.json",
-          "digest": "sha256:768804741cc7da5767f1e4e2b6bbbe979be671b271f15af845d1fdcfe8925686",
+          "digest": "sha256:a3334a75366144afde328f2c602260e67adcbf97714ba0199944bd6844ee2c8d",
           "description": "Fact .buildchain/kfd-3/collaboration-interface.json is present and hashable."
         }
       ],
@@ -105,7 +105,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": ".buildchain/kfd-3/collaboration-interface.json",
-          "digest": "sha256:768804741cc7da5767f1e4e2b6bbbe979be671b271f15af845d1fdcfe8925686",
+          "digest": "sha256:a3334a75366144afde328f2c602260e67adcbf97714ba0199944bd6844ee2c8d",
           "description": "KFD-3 source collaboration interface declares reachable participant-facing surfaces and value evidence."
         },
         {
@@ -113,7 +113,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": "scripts/check.mjs",
-          "digest": "sha256:26159ee00310de897ba2086fa351c4f4c142351d0af1b903fcf43b14973de6e0",
+          "digest": "sha256:ad7dfef4554ac24595379467fe1bcdf1b00ae230d7469e56c99d4d6d5492c0de",
           "description": "The package check gate validates KFD-3 interface closure and witness parity."
         }
       ],
@@ -164,7 +164,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": "standards.json",
-          "digest": "sha256:c12f3c5d0b50f16a2c12eb70405f54200df292e5eabe4fd4697e212e1553a054",
+          "digest": "sha256:fa759c61df51cc6d2786868da672997c896d13666506c6b10e664b450f319674",
           "description": "Fact standards.json is present and hashable."
         },
         {
@@ -206,7 +206,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": "standards.json",
-          "digest": "sha256:c12f3c5d0b50f16a2c12eb70405f54200df292e5eabe4fd4697e212e1553a054",
+          "digest": "sha256:fa759c61df51cc6d2786868da672997c896d13666506c6b10e664b450f319674",
           "description": "Standards metadata exposes the KFD-4 schema ID, path, interface version, and concept names."
         },
         {
@@ -214,7 +214,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": "scripts/check.mjs",
-          "digest": "sha256:26159ee00310de897ba2086fa351c4f4c142351d0af1b903fcf43b14973de6e0",
+          "digest": "sha256:ad7dfef4554ac24595379467fe1bcdf1b00ae230d7469e56c99d4d6d5492c0de",
           "description": "The package check gate validates the KFD-4 timeline and replay schemas plus standards metadata; it does not assess adopter-specific capture or replay fidelity."
         }
       ],
@@ -254,7 +254,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": "standards.json",
-          "digest": "sha256:c12f3c5d0b50f16a2c12eb70405f54200df292e5eabe4fd4697e212e1553a054",
+          "digest": "sha256:fa759c61df51cc6d2786868da672997c896d13666506c6b10e664b450f319674",
           "description": "Fact standards.json is present and hashable."
         },
         {
@@ -280,7 +280,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": "scripts/check.mjs",
-          "digest": "sha256:26159ee00310de897ba2086fa351c4f4c142351d0af1b903fcf43b14973de6e0",
+          "digest": "sha256:ad7dfef4554ac24595379467fe1bcdf1b00ae230d7469e56c99d4d6d5492c0de",
           "description": "The package check gate validates the KFD-5 interface and metadata; it does not certify adopter candidates."
         }
       ],
@@ -320,7 +320,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": "standards.json",
-          "digest": "sha256:c12f3c5d0b50f16a2c12eb70405f54200df292e5eabe4fd4697e212e1553a054",
+          "digest": "sha256:fa759c61df51cc6d2786868da672997c896d13666506c6b10e664b450f319674",
           "description": "Fact standards.json is present and hashable."
         },
         {
@@ -346,7 +346,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": "scripts/check.mjs",
-          "digest": "sha256:26159ee00310de897ba2086fa351c4f4c142351d0af1b903fcf43b14973de6e0",
+          "digest": "sha256:ad7dfef4554ac24595379467fe1bcdf1b00ae230d7469e56c99d4d6d5492c0de",
           "description": "The package check gate validates draft status, required generation experiments, bounded method comparison, conditional boundary hypothesis, and anti-self-certification constants."
         }
       ],
