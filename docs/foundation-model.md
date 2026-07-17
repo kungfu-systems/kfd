@@ -102,6 +102,33 @@ It asks whether the conditions of discovery can become durable, inspectable,
 and increasingly repeatable without flattening the reality that made judgment
 possible.
 
+## Why the foundation begins with procedure
+
+KFD-1 is a procedure rather than a principle by necessity. A fact-grounded
+system cannot place another fact claim beneath its facts without restarting the
+demand for justification, and it cannot use a self-certifying axiom without
+asking participants to trust what the system is meant to keep inspectable. KFD
+therefore chooses a maintained practice as its operational ground: declare the
+fact source, register welded surfaces, classify change, and run the gate.
+"Facts must not drift" carries weight only while those acts continue to be
+performed and audited.
+
+This gives the six KFDs an intentional practice-invariant-practice shape:
+
+```text
+KFD-1       foundational practice that maintains the fact base
+KFD-2/3     foundation principles for trust and cooperation
+KFD-4       first derived principle for perspective-bound action
+KFD-5/6     discovery procedures that extend the describable world
+```
+
+KFD begins in procedure, states the invariants under which facts can support
+trust, cooperation, and perspective transformation, then returns to procedure
+to extend the world those invariants can govern. The two practice layers are
+not illustrations around a propositional core. They express KFD's operational
+claim that knowledge remains load-bearing through maintained, inspectable, and
+correctable practice.
+
 ## Foundation model
 
 The first three KFDs are intentionally ordered:
