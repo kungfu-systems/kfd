@@ -354,9 +354,12 @@ The first screen should be derived from this README:
 Decision cards, detail links, and machine paths should come from
 `registry.json`. The machine-readable site bundle lives at `site/kfd-site.json`
 and gives renderers stable fields for the homepage, the foundation explanation
-page, product proof path, decision routes, and rendering boundary. A site
-renderer may adapt layout, navigation, typography, and visual assets, but it
-should not maintain separate wording that can drift from this package.
+page, product proof path, decision routes, candidate routes, and rendering
+boundary. `candidatePages` owns the `/drafts/` index and stable
+`/drafts/{id}/` page declarations; renderers must not infer those routes from
+the package directory layout. A site renderer may adapt layout, navigation,
+typography, and visual assets, but it should not maintain separate wording that
+can drift from this package.
 
 `site/kfd-site.json` is generated from this README and
 `docs/foundation-model.md` and `docs/primitive-discovery-cases.md` by
