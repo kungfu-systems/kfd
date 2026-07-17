@@ -34,7 +34,7 @@
       "id": "kfd-package-structure",
       "impact": "minor",
       "class": "additive",
-      "rationale": "The package additively publishes cases/ through explicit registry and wildcard exports, including the live-case registry schema, provisional case documents, ontology split, independently immutable Pursuit and Warrant KFD-5 cuts, method trace, propagation hypothesis, and review index, without removing or renaming a package path or export."
+      "rationale": "The package additively publishes cases/ through explicit registry and wildcard exports, including the live-case registry schema, provisional case documents, ontology split, conditional distinguishability argument, independently immutable Pursuit and Warrant KFD-5 cuts, method trace, propagation hypothesis, and review index, without removing or renaming a package path or export."
     },
     {
       "id": "kfd-buildchain-contract-lock",
@@ -58,7 +58,7 @@
       "id": "kfd-3-self-collaboration",
       "impact": "minor",
       "class": "release-passport",
-      "rationale": "KFD refreshes its collaboration interface and pre-build/artifact witnesses to classify the live-case registry, provisional case records, immutable KFD-5 cuts, claim boundaries, and review paths as participant-consumable surfaces for humans, agents, package consumers, and site consumers."
+      "rationale": "KFD refreshes its collaboration interface and pre-build/artifact witnesses to classify the live-case registry, provisional case records, conditional distinguishability argument, immutable KFD-5 cuts, claim boundaries, and review paths as participant-consumable surfaces for humans, agents, package consumers, and site consumers."
     },
     {
       "id": "kfd-3-trusted-value-evidence",
@@ -106,7 +106,7 @@
       "id": "kfd-1-surface-register",
       "impact": "minor",
       "class": "additive",
-      "rationale": "standards.json registers the live-case registry schema, live-case index, preserved genesis, ontology split, independently immutable Pursuit and Warrant KFD-5 cuts, and review index as cross-time surfaces; the KFD-1 witness binds their source and artifact digests from that fact source."
+      "rationale": "standards.json registers the live-case registry schema, live-case index, preserved genesis, ontology split, conditional distinguishability argument, independently immutable Pursuit and Warrant KFD-5 cuts, and review index as cross-time surfaces; the KFD-1 witness binds their source and artifact digests from that fact source."
     },
     {
       "id": "kfd-formal-reference-layer",
@@ -124,7 +124,7 @@
       "id": "kfd-5-live-case-registry",
       "impact": "major",
       "class": "breaking",
-      "rationale": "The pre-stable KFD-5 live-case registry advances from version 1 to version 2. Stable case identity and genesis remain preserved, case lifecycle is separated into active/closed/archived, and every case exposes an ontology-split surface plus one or more independently named candidate tracks with their own qualification status, claim boundary, and SHA-256-addressed KFD-5 version 3 current cut. The first case therefore tracks Pursuit and Warrant without rewriting the fused Proof-Carrying Work Object genesis. Registry closure does not qualify or promote either candidate."
+      "rationale": "The pre-stable KFD-5 live-case registry advances from version 1 to version 2. Stable case identity and genesis remain preserved, case lifecycle is separated into active/closed/archived, and every case exposes an ontology-split surface plus one or more independently named candidate tracks with their own qualification status, claim boundary, and SHA-256-addressed KFD-5 version 3 current cut. Version 2 also permits additive qualification arguments without treating them as candidate promotion. The first case therefore tracks Pursuit and Warrant and their conditional distinguishability obligations without rewriting the fused Proof-Carrying Work Object genesis. Registry closure does not qualify or promote either candidate."
     },
     {
       "id": "kfd-1-publication-url-semantics",
@@ -133,5 +133,5 @@
       "rationale": "KFD-1 now publishes a machine-readable schema for canonical reader URLs, latest aliases, immutable version artifact URLs, artifact digests, source coordinates, lineage, site consumption, and archive policies that prevent same-version digest drift or destructive deletion of immutable publication prefixes."
     }
   ],
-  "summary": "KFD v1.0 records a pre-stable major decision and machine-surface refinement with immutable prior artifacts: six authoritative decisions retain their gates and boundaries, while the package now dogfoods KFD-5 through a discoverable live case that preserves its fused genesis and independently tracks provisional Pursuit and Warrant cuts, method trace, propagation hypothesis, and residual uncertainty."
+  "summary": "KFD v1.0 records a pre-stable major decision and machine-surface refinement with immutable prior artifacts: six authoritative decisions retain their gates and boundaries, while the package now dogfoods KFD-5 through a discoverable live case that preserves its fused genesis and independently tracks provisional Pursuit and Warrant cuts, a conditional distinguishability argument, method trace, propagation hypothesis, and residual uncertainty."
 }

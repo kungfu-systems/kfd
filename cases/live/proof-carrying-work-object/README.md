@@ -46,6 +46,9 @@ The split also made two adjacent independent objects explicit:
 
 See [Ontology split](ontology-split.md) for definitions, typed relations,
 invalid compressions, confidence boundaries, and qualification requirements.
+See the
+[conditional distinguishability argument](distinguishability.md) for the
+current deletion proof obligations and their explicit non-claims.
 
 ## Current status
 
@@ -55,13 +58,13 @@ genesis: preserved as Proof-Carrying Work Object
 
 Pursuit:
   minimum closure: inconclusive
-  deletion test: inconclusive
+  deletion test: conditional analytic witness; reality evidence pending
   fuse test: inconclusive
   dogfood: not run as a common contract
 
 Warrant:
   minimum closure: inconclusive
-  deletion test: inconclusive
+  deletion test: conditional analytic witness; reality evidence pending
   fuse test: inconclusive
   dogfood: not run as a common contract
 ```
@@ -114,6 +117,7 @@ or universal local permission.
 
 - [Genesis](genesis.md)
 - [Ontology split](ontology-split.md)
+- [Conditional distinguishability argument](distinguishability.md)
 - [KFD method trace](kfd-method-trace.md)
 - [Propagation hypothesis](propagation-hypothesis.md)
 - [Genesis KFD-5 cut](cuts/0001-genesis.json)

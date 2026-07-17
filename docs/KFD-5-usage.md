@@ -16,7 +16,8 @@ The authoritative text is `decisions/KFD-5.md`.
 - `decisions/KFD-5.md`: authoritative procedure.
 - `schemas/kfd-5/primitive-discovery.schema.json`: version 3 candidate record.
 - `cases/registry.json`: discoverable index of provisional live cases and their
-  independently qualified candidate tracks and immutable current cuts.
+  independently qualified candidate tracks, immutable current cuts, and
+  optional qualification arguments.
 - `schemas/kfd-live-case-registry.schema.json`: version 2 live-case registry
   contract; stable cases may preserve one genesis while tracking multiple
   candidate lines.
@@ -96,4 +97,6 @@ independently qualified `Pursuit` and `Warrant` candidate tracks. Each track
 binds its own status, claim boundary, and immutable version 3 candidate cut
 without rewriting the shared genesis or the other track. The case dogfoods
 KFD-5 record evolution; neither schema validity nor KFD self-application
-promotes either candidate.
+promotes either candidate. Its optional `distinguishabilityArgument` surface
+records conditional deletion witnesses without upgrading analytic reasoning
+into observed evidence or Primitive acceptance.
