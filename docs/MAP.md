@@ -5,6 +5,7 @@
 | What future does KFD describe, and what decisions exist? | [`../README.md`](../README.md) |
 | What is the KFD-1/2/3 foundation triad? | [`../README.md`](../README.md#foundation-triad) |
 | What worldview structure does the foundation triad express? | [`foundation-model.md`](foundation-model.md) |
+| Why does the foundation begin with a procedure rather than a principle? | [`foundation-model.md`](foundation-model.md#why-the-foundation-begins-with-procedure) |
 | How do capability loops, discovery loops, and product witnesses fit together? | [`foundation-model.md`](foundation-model.md) |
 | What is a primitive, why is primitive discovery difficult, and how does KFD address the missing process? | [`foundation-model.md`](foundation-model.md) |
 | How can I test the KFD primitive-discovery lens against Git, VisiCalc, the log, and an ordinary trace view? | [`primitive-discovery-cases.md`](primitive-discovery-cases.md) |
