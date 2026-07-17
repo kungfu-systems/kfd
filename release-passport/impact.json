@@ -1,0 +1,182 @@
+{
+  "schemaVersion": 1,
+  "contract": "kungfu-buildchain-impact",
+  "release": {
+    "tag": "v1.0.0-alpha.29",
+    "line": "v1.0",
+    "channel": "release",
+    "targetRef": "release/v1/v1.0"
+  },
+  "versionImpact": {
+    "final": "major",
+    "source": "kfd-candidate-governance",
+    "rationale": "This pre-stable line includes KFD-1 through KFD-6, the formal reference layer, live Primitive cases, and a new machine-readable pre-number KFD Candidate registry. KFD-1 now defines the bounded Foundation Revision window and the first-stable Foundation Freeze while preserving every published coordinate. The initial action-state candidate carries a non-binding slot hint without allocating KFD-7. Major remains the honest cumulative pre-stable decision and machine-surface impact while the fixed outer package line remains v1.0."
+  },
+  "surfaceImpacts": [
+    {
+      "id": "kfd-independent-verifier",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD additively publishes an independently extractable Rust verifier core, native CLI, raw WebAssembly projection, and npm bin for KFD records, Buildchain release passports, Xinfa Context Packs, Xinfa Atlases, and qualified Git Workspace Episode shadows. The verifier uses only packaged public schemas and specifications, performs no network access, and remains explicitly non-qualifying and non-self-certified.",
+      "source": ""
+    },
+    {
+      "id": "kfd-verifier-contracts",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD additively publishes version 1 verification-bundle and verification-report schemas, registers both interfaces in standards.json, and welds the executable, schema, and responsibility-boundary surfaces under KFD-1.",
+      "source": ""
+    },
+    {
+      "id": "kfd-content",
+      "impact": "major",
+      "class": "breaking",
+      "rationale": "The pre-stable line includes substantive refinement of KFD-1 through KFD-6 and now makes Candidate, Foundation Revision, and Foundation Freeze semantics explicit. Before the first stable release, fully evidenced correction may change the latest numbered structure only with breaking impact, preserved coordinates, old-to-new lineage, migration, and review. The first stable release freezes number-to-meaning mappings; later substantive change uses supersession. Consumers must bind prerelease citations to package version or commit.",
+      "source": ""
+    },
+    {
+      "id": "kfd-registry-schema",
+      "impact": "patch",
+      "class": "compatible",
+      "rationale": "registry.json keeps schemaVersion 1 and the existing entry shape, including number, id, slug, title, kind, status, path, and url; slug and path values are stable number coordinates.",
+      "source": ""
+    },
+    {
+      "id": "kfd-candidate-registry",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD additively publishes a version 1 pre-number candidate registry and schema. Candidate IDs are stable, slot hints are explicitly non-binding, only promotion allocates a number, and the initial action-state candidate does not create KFD-7 or normative authority.",
+      "source": ""
+    },
+    {
+      "id": "kfd-standards-metadata",
+      "impact": "major",
+      "class": "breaking",
+      "rationale": "The standards metadata interface advances from version 1 to 2 and now requires every standard to publish a non-normative formalModel binding with path, stable URL, formal model version, status, authority path, and SHA-256 digest. This required-field addition is breaking for consumers of the prerelease metadata contract. KFD-4 keeps its version 1 perspective interfaces, KFD-5 remains at method-plural schemaVersion 3, and draft KFD-6 remains at method-comparison schemaVersion 4.",
+      "source": ""
+    },
+    {
+      "id": "kfd-package-structure",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "The package additively publishes cases/ and drafts/ through explicit registry and wildcard exports. Live-case records, immutable KFD-5 cuts, candidate registry, candidate index, and candidate bodies are public package surfaces without removing or renaming an existing path or export.",
+      "source": ""
+    },
+    {
+      "id": "kfd-buildchain-contract-lock",
+      "impact": "minor",
+      "class": "release-governance",
+      "rationale": "KFD now uses Buildchain v2 floating workflow refs with a consumer-owned buildchain.contract-lock.json, so Buildchain runtime contract drift is checked before heavy build or promotion work while retaining floating-ref upgrade flow.",
+      "source": ""
+    },
+    {
+      "id": "kfd-site-homepage-bundle",
+      "impact": "major",
+      "class": "breaking",
+      "rationale": "The pre-stable site bundle previously advanced from schemaVersion 1 to 2 for the candidate-track live-case shape and now additively exposes KFD Candidates at /drafts and /drafts/{id}, including registry policy, non-normative status, claim boundaries, and candidate markdown. Existing decision, formal, historical-case, and live-case routes remain unchanged.",
+      "source": ""
+    },
+    {
+      "id": "kfd-site-decision-usage-pages",
+      "impact": "patch",
+      "class": "compatible",
+      "rationale": "KFD usage pages add consistent links to their authoritative decision, formal reference, and documentation map while stable /N/usage routes and implementation guidance remain unchanged.",
+      "source": ""
+    },
+    {
+      "id": "kfd-3-self-collaboration",
+      "impact": "minor",
+      "class": "release-passport",
+      "rationale": "KFD refreshes its collaboration interface and pre-build/artifact witnesses to classify live-case records together with the candidate registry, schema, index, first candidate, governance rules, site projection, and package export as participant-consumable surfaces for humans, agents, package consumers, and site consumers.",
+      "source": ""
+    },
+    {
+      "id": "kfd-3-trusted-value-evidence",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD-3 collaboration interfaces now declare explicit valueEvidence that binds participant-facing value claims to fact artifacts, evidence artifacts, KFD-2 trust assessments, and residual-risk state.",
+      "source": ""
+    },
+    {
+      "id": "kfd-2-public-release-trust-claim",
+      "impact": "minor",
+      "class": "release-passport",
+      "rationale": "KFD now ships an explicit machine-bound public KFD-2 release trust claim and passes it into Buildchain release passport generation.",
+      "source": ""
+    },
+    {
+      "id": "kfd-2-generic-trust-assessment-core",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD-2 generic trust claims identify KFD-4 timeline and replay profiles, KFD-5 version 3 method-plural genesis, and KFD-6 version 4 method-comparison experiments while continuing to downgrade KFD-6 because no adopter has proved the draft autonomous capability or a dominant genesis method.",
+      "source": ""
+    },
+    {
+      "id": "kfd-numbered-paths",
+      "impact": "minor",
+      "class": "compatible",
+      "rationale": "Decision documents now use stable numbered paths under decisions/KFD-N.md, while usage documentation uses docs/KFD-N-usage.md to distinguish authoritative decision text from consumer implementation notes.",
+      "source": ""
+    },
+    {
+      "id": "kfd-release-anchor",
+      "impact": "minor",
+      "class": "release-governance",
+      "rationale": "KFD now declares its package version through an anchored/manual release manifest so package version state is an explicit release fact rather than an auto-derived Buildchain side effect.",
+      "source": ""
+    },
+    {
+      "id": "kfd-release-propagation",
+      "impact": "patch",
+      "class": "compatible",
+      "rationale": "The KFD to site-libkungfu-dev propagation graph now targets the downstream site's actual main branch and documents the exact KFD package surfaces consumed by kfd.libkungfu.dev, without changing the release propagation graph contract.",
+      "source": ""
+    },
+    {
+      "id": "kfd-1-compatibility-impact-core",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD-1 now defines breaking, additive, none, and unclassifiable as the generic compatibility-impact core, with release versioning as one projection rather than the only interpretation.",
+      "source": ""
+    },
+    {
+      "id": "kfd-1-surface-register",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "standards.json retains the live-case registry and immutable qualification surfaces, and adds the candidate registry schema, candidate registry, candidate index, and action-state candidate as integration-time or cross-time surfaces. The KFD-1 witness binds all registered source and artifact digests from that fact source.",
+      "source": ""
+    },
+    {
+      "id": "kfd-formal-reference-layer",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD additively publishes an experimental non-normative formal layer with shared notation plus one formal page per decision. It makes objects, invariants, transitions, invalid states, proof obligations, machine mappings, non-claims, and extension points explicit while preserving decisions/KFD-N.md as the sole normative authority.",
+      "source": ""
+    },
+    {
+      "id": "kfd-4-perspective-replay-interface",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD-4 additively publishes a version 1 contract for perspective-preserving and contrastive replay, including source-view boundaries, reconstruction loss, degraded state, and primitive-signal mismatches.",
+      "source": ""
+    },
+    {
+      "id": "kfd-5-live-case-registry",
+      "impact": "major",
+      "class": "breaking",
+      "rationale": "The pre-stable KFD-5 live-case registry advances from version 1 to version 2. Stable case identity and genesis remain preserved, case lifecycle is separated into active/closed/archived, and every case exposes an ontology-split surface plus one or more independently named candidate tracks with their own qualification status, claim boundary, and SHA-256-addressed KFD-5 version 3 current cut. Version 2 also permits additive qualification arguments without treating them as candidate promotion. The first case therefore tracks Pursuit and Warrant and their conditional distinguishability obligations without rewriting the fused Proof-Carrying Work Object genesis. Registry closure does not qualify or promote either candidate.",
+      "source": ""
+    },
+    {
+      "id": "kfd-1-publication-url-semantics",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD-1 now publishes a machine-readable schema for canonical reader URLs, latest aliases, immutable version artifact URLs, artifact digests, source coordinates, lineage, site consumption, and archive policies that prevent same-version digest drift or destructive deletion of immutable publication prefixes.",
+      "source": ""
+    }
+  ],
+  "summary": "KFD v1.0 preserves six authoritative decisions and its live Primitive case system while adding a pre-number Candidate lifecycle without allocating KFD-7. The pre-stable Foundation Revision and first-stable Foundation Freeze are explicit; candidate identity, slot non-binding, promotion boundaries, package exports, site projection, and KFD-1/KFD-3 evidence are machine-auditable while all prior published coordinates remain immutable.",
+  "classification": "major",
+  "breaking": true,
+  "migrationRequired": true
+}
