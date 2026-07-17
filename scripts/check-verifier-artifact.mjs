@@ -22,4 +22,4 @@ const module = await WebAssembly.instantiate(bytes, {});
 for (const name of ["memory", "kfd_alloc", "kfd_free", "kfd_verify"]) {
   assert.ok(module.instance.exports[name], `packaged verifier WASM is missing ${name}`);
 }
-console.log(`check-verifier-artifact: sha256:${actual} exports ok`);
+console.error(`check-verifier-artifact: sha256:${actual} exports ok`);
