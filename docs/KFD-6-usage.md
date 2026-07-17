@@ -1,6 +1,7 @@
 # KFD-6 Implementation Notes
 
 [Authoritative decision](../decisions/KFD-6.md) ·
+[Formal reference](KFD-6-formal.md) ·
 [Documentation map](MAP.md)
 
 KFD-6 defines a proposed autonomous discovery loop that is grounded in causal

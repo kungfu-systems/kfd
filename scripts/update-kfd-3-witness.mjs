@@ -32,6 +32,11 @@ const decisionDocs = registry.entries.map((entry) => ({
   sourcePath: entry.path,
   sha256: sha256File(entry.path),
 }));
+const formalDocs = registry.entries.map((entry) => ({
+  id: `doc:${entry.slug}-formal`,
+  sourcePath: standards.standards[entry.slug].formalModel.path,
+  sha256: sha256File(standards.standards[entry.slug].formalModel.path),
+}));
 const schemaSurfaces = [
   "schemas/kfd-standards.schema.json",
   "schemas/kfd-1/contract-world.schema.json",
@@ -57,6 +62,7 @@ const groupedSurfaces = {
   docs: [
     { id: "doc:readme", sourcePath: "README.md", sha256: sha256File("README.md") },
     { id: "doc:foundation-model", sourcePath: "docs/foundation-model.md", sha256: sha256File("docs/foundation-model.md") },
+    { id: "doc:formal-model", sourcePath: "docs/formal-model.md", sha256: sha256File("docs/formal-model.md") },
     { id: "doc:primitive-discovery-cases", sourcePath: "docs/primitive-discovery-cases.md", sha256: sha256File("docs/primitive-discovery-cases.md") },
     { id: "doc:trademarks", sourcePath: "TRADEMARKS.md", sha256: sha256File("TRADEMARKS.md") },
     { id: "doc:docs-map", sourcePath: "docs/MAP.md", sha256: sha256File("docs/MAP.md") },
@@ -66,6 +72,7 @@ const groupedSurfaces = {
     { id: "doc:kfd-4-usage", sourcePath: "docs/KFD-4-usage.md", sha256: sha256File("docs/KFD-4-usage.md") },
     { id: "doc:kfd-5-usage", sourcePath: "docs/KFD-5-usage.md", sha256: sha256File("docs/KFD-5-usage.md") },
     { id: "doc:kfd-6-usage", sourcePath: "docs/KFD-6-usage.md", sha256: sha256File("docs/KFD-6-usage.md") },
+    ...formalDocs,
     ...decisionDocs,
   ],
   schemas: schemaSurfaces,
@@ -215,6 +222,7 @@ const artifact = {
     discoverability: [
       pointer("README.md", "Human and agent entrypoint"),
       pointer("docs/foundation-model.md", "Complete non-numbered foundation explanation"),
+      pointer("docs/formal-model.md", "Shared formal notation and authority boundary"),
       pointer("docs/primitive-discovery-cases.md", "Source-bound historical anchors for primitive discovery"),
       pointer("TRADEMARKS.md", "Official status, trademark, and authority boundary"),
       pointer("docs/MAP.md", "Documentation routing entrypoint"),
@@ -236,6 +244,7 @@ const artifact = {
     choicePaths: [
       pointer("README.md", "Human reading path"),
       pointer("docs/foundation-model.md", "Human and agent foundation reading path"),
+      pointer("docs/formal-model.md", "Human and agent formal reference entrypoint"),
       pointer("docs/primitive-discovery-cases.md", "Human and agent historical case path"),
       pointer("registry.json", "Agent registry path"),
       pointer("standards.json", "Agent standards metadata path"),
@@ -247,6 +256,7 @@ const artifact = {
     manuals: [
       pointer("docs/MAP.md"),
       pointer("docs/foundation-model.md"),
+      pointer("docs/formal-model.md"),
       pointer("docs/primitive-discovery-cases.md"),
       pointer("TRADEMARKS.md"),
       pointer("docs/KFD-1-usage.md"),
@@ -255,6 +265,7 @@ const artifact = {
       pointer("docs/KFD-4-usage.md"),
       pointer("docs/KFD-5-usage.md"),
       pointer("docs/KFD-6-usage.md"),
+      ...formalDocs.map((entry) => pointer(entry.sourcePath)),
     ],
   },
   closure: {

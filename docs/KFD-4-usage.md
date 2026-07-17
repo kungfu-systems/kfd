@@ -1,6 +1,7 @@
 # KFD-4 Implementation Notes
 
 [Authoritative decision](../decisions/KFD-4.md) ·
+[Formal reference](KFD-4-formal.md) ·
 [Documentation map](MAP.md)
 
 KFD-4 defines the perspective rule: views must remain bound to declared
