@@ -9,12 +9,6 @@ sensitivity: public
 evidence_grade: B
 review_state: unreviewed
 last_reviewed: 2026-07-17
-ai_provenance:
-  model_family: GPT-5
-  product: Codex
-  generated_at: 2026-07-17
-  visible_context: KFD-1 through KFD-6, public historical sources, and maintainer discussion
-  invisible_context_boundary: No private historical source or unrecorded intent was treated as evidence
 ---
 
 # Primitive Discovery in History
