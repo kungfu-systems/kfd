@@ -28,7 +28,7 @@ command = "node -e \"console.log('kfd install: no dependencies')\""
 command = "node -e \"console.log('kfd build: source package')\""
 
 [lifecycle.verify]
-command = "node scripts/check.mjs"
+command = "npm run check"
 
 [lifecycle.publish]
 command = "node scripts/npm-publish-transaction.mjs"

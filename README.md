@@ -145,6 +145,28 @@ TypeScript projects, import it as:
 import standards from "@kungfu-tech/kfd/standards.json" with { type: "json" };
 ```
 
+## Independent verifier
+
+KFD includes an offline verifier implemented from public specifications without
+linking Kungfu, Xinfa, Buildchain, or other product code. The same Rust core is
+projected as a native CLI, library, and packaged WebAssembly executable:
+
+```bash
+npx @kungfu-tech/kfd verify kfd-record standards.json
+npx @kungfu-tech/kfd verify passport .buildchain/release-passport
+npx @kungfu-tech/kfd verify pack path/to/context-pack
+npx @kungfu-tech/kfd verify atlas path/to/atlas
+npx @kungfu-tech/kfd verify episode path/to/sealed/episode
+```
+
+Each command emits `kfd.verification-report/v1`, remains non-qualifying and
+non-self-certified, and performs no network access. Verification proves only
+the named profile checks; it does not prove source completeness, work quality,
+human approval, or release authorization. See
+[`docs/verifier.md`](docs/verifier.md) for the contracts and
+[`docs/verifier-inventory.md`](docs/verifier-inventory.md) for the extraction
+boundary and public-spec gaps.
+
 ## Agent Quickstart
 
 Agents consuming this package should start from the same sources as humans:

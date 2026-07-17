@@ -79,6 +79,32 @@ const expectedEvidenceUpdate = "node scripts/update-site-bundle.mjs && node scri
 if (packageJson.scripts?.["update:evidence"] !== expectedEvidenceUpdate) {
   fail("package.json update:evidence must preserve the site -> KFD-2 -> KFD-1 -> KFD-3 dependency order");
 }
+if (packageJson.bin?.kfd !== "./bin/kfd.mjs") {
+  fail("package.json must publish the kfd verifier bin");
+}
+if (packageJson.exports?.["./verifier/bundle.schema.json"] !== "./schemas/kfd-verification-bundle.schema.json") {
+  fail("package.json must export the verifier bundle schema");
+}
+if (packageJson.exports?.["./verifier/report.schema.json"] !== "./schemas/kfd-verification-report.schema.json") {
+  fail("package.json must export the verifier report schema");
+}
+for (const verifierPath of [
+  "bin/kfd.mjs",
+  "docs/verifier.md",
+  "schemas/kfd-verification-bundle.schema.json",
+  "schemas/kfd-verification-report.schema.json",
+  "scripts/build-verifier.mjs",
+  "scripts/check-verifier.mjs",
+  "scripts/check-verifier-artifact.mjs",
+  "scripts/check-verifier-extraction.mjs",
+  "verifier/Cargo.toml",
+  "verifier/Cargo.lock",
+  "verifier/extraction-manifest.json",
+  "verifier/dist/kfd_verifier.wasm",
+  "verifier/dist/kfd_verifier.wasm.sha256",
+]) {
+  if (!existsSync(verifierPath)) fail(`missing independent verifier surface ${verifierPath}`);
+}
 
 if (registry.schemaVersion !== 1) fail(`unsupported schemaVersion ${registry.schemaVersion}`);
 if (registry.contract !== "kfd-registry") fail(`unexpected contract ${registry.contract}`);
@@ -1611,7 +1637,7 @@ if (kfd3PrebuildWitness && kfd3ArtifactWitness) {
 }
 
 const impactLevels = new Set(["patch", "minor", "major"]);
-const requiredSurfaces = new Set(["kfd-content", "kfd-registry-schema", "kfd-candidate-registry", "kfd-standards-metadata", "kfd-package-structure", "kfd-2-public-release-trust-claim", "kfd-3-trusted-value-evidence", "kfd-site-decision-usage-pages"]);
+const requiredSurfaces = new Set(["kfd-content", "kfd-registry-schema", "kfd-candidate-registry", "kfd-standards-metadata", "kfd-package-structure", "kfd-independent-verifier", "kfd-verifier-contracts", "kfd-2-public-release-trust-claim", "kfd-3-trusted-value-evidence", "kfd-site-decision-usage-pages"]);
 
 if (releaseImpact.schemaVersion !== 1) fail(`unsupported release-impact schemaVersion ${releaseImpact.schemaVersion}`);
 if (releaseImpact.contract !== "kungfu-buildchain-impact") fail(`unexpected release-impact contract ${releaseImpact.contract}`);

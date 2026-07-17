@@ -13,6 +13,18 @@
   },
   "surfaceImpacts": [
     {
+      "id": "kfd-independent-verifier",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD additively publishes an independently extractable Rust verifier core, native CLI, raw WebAssembly projection, and npm bin for KFD records, Buildchain release passports, Xinfa Context Packs, Xinfa Atlases, and qualified Git Workspace Episode shadows. The verifier uses only packaged public schemas and specifications, performs no network access, and remains explicitly non-qualifying and non-self-certified."
+    },
+    {
+      "id": "kfd-verifier-contracts",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD additively publishes version 1 verification-bundle and verification-report schemas, registers both interfaces in standards.json, and welds the executable, schema, and responsibility-boundary surfaces under KFD-1."
+    },
+    {
       "id": "kfd-content",
       "impact": "major",
       "class": "breaking",

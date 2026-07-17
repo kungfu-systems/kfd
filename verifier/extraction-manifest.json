@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.verifier-extraction-manifest/v1",
+  "include": [
+    "LICENSE",
+    "schemas",
+    "standards.json",
+    "verifier/Cargo.toml",
+    "verifier/Cargo.lock",
+    "verifier/crates",
+    "verifier/fixtures",
+    "verifier/specs"
+  ],
+  "forbiddenDependencyKinds": [
+    "git",
+    "private-registry",
+    "product-code",
+    "path-outside-extraction"
+  ],
+  "verification": "cargo test --locked --offline --manifest-path verifier/Cargo.toml --workspace"
+}

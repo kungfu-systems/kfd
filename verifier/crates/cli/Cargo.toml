@@ -1,0 +1,15 @@
+[package]
+name = "kfd-verifier-cli"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Native CLI for the independent KFD verifier"
+
+[[bin]]
+name = "kfd"
+path = "src/main.rs"
+
+[dependencies]
+kfd-verifier-core = { path = "../core" }
+serde_json.workspace = true
