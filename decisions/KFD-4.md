@@ -69,7 +69,8 @@ use a machine gate.
 A conforming claim:
 
 - identifies the observer and useful position;
-- exposes accepted facts, evidence cuts, gaps, and degraded states;
+- exposes accepted facts, the evidence cut defining what evidence was
+  available at that point, gaps, and degraded states;
 - states what changed in a transformation and what became visible;
 - identifies replay sources, reconstruction policy, preserved elements, loss,
   and verification state;

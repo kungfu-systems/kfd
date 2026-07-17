@@ -1,5 +1,8 @@
 # KFD-3 Collaboration Interface
 
+[Authoritative decision](../decisions/KFD-3.md) ·
+[Documentation map](MAP.md)
+
 KFD-3 is a cooperation standard for intelligent participants. It is not an
 agent-only standard. Products can use it for humans, agents, operators,
 extension authors, API consumers, hosted-service users, service integrators,

@@ -8,15 +8,15 @@
   },
   "versionImpact": {
     "final": "major",
-    "source": "concise-kfd-decisions",
-    "rationale": "This pre-stable maintainer-authorized refinement compresses KFD-1 through KFD-6 into their normative core, aligns every title with its one-sentence decision, and separates authoritative constraints from explanatory usage and case material. KFD-5 states its central separation of genesis from qualification while preserving perspective-declared, method-plural schema version 3. The fixed outer package line remains v1.0; major remains the honest decision-surface impact."
+    "source": "concise-kfd-reader-flow-closure",
+    "rationale": "This pre-stable maintainer-authorized refinement compresses KFD-1 through KFD-6 into their normative core, aligns every title with its one-sentence decision, and separates authoritative constraints from explanatory usage and case material. The reader-flow closure moves the decision registry ahead of implementation detail, defines evidence cut at first use, and expresses the KFD-6 loop without requiring product-specific vocabulary. KFD-5 preserves perspective-declared, method-plural schema version 3. The fixed outer package line remains v1.0; major remains the honest decision-surface impact."
   },
   "surfaceImpacts": [
     {
       "id": "kfd-content",
       "impact": "major",
       "class": "breaking",
-      "rationale": "Before the first stable release, maintainer-authorized refinement compresses all six decision texts and their public titles while preserving prior prerelease artifacts. Normative gates remain in decisions; package mechanics and cases route to usage and companion documents. KFD-5 now foregrounds the separation of genesis from qualification while preserving its version 3 method-plural interface. Consumers must bind prerelease citations to package version or commit."
+      "rationale": "Before the first stable release, maintainer-authorized refinement compresses all six decision texts and their public titles while preserving prior prerelease artifacts. Normative gates remain in decisions; package mechanics and cases route to usage and companion documents. KFD-4 now defines evidence cut at its first normative use, and KFD-6 expresses its causal loop in domain-neutral ontology terms. KFD-5 continues to foreground the separation of genesis from qualification while preserving its version 3 method-plural interface. Consumers must bind prerelease citations to package version or commit."
     },
     {
       "id": "kfd-registry-schema",
@@ -52,7 +52,7 @@
       "id": "kfd-site-decision-usage-pages",
       "impact": "patch",
       "class": "compatible",
-      "rationale": "KFD-4/5/6 usage bodies explain observer-bound timelines, perspective-preserving and contrastive replay, method-plural genesis, fact-bound qualification, and autonomous method comparison while stable /N/usage routes remain unchanged."
+      "rationale": "KFD usage pages add consistent links to their authoritative decision and documentation map. KFD-4/5/6 usage bodies continue to explain observer-bound timelines, perspective-preserving and contrastive replay, method-plural genesis, fact-bound qualification, and autonomous method comparison while stable /N/usage routes remain unchanged."
     },
     {
       "id": "kfd-3-self-collaboration",
@@ -121,5 +121,5 @@
       "rationale": "KFD-1 now publishes a machine-readable schema for canonical reader URLs, latest aliases, immutable version artifact URLs, artifact digests, source coordinates, lineage, site consumption, and archive policies that prevent same-version digest drift or destructive deletion of immutable publication prefixes."
     }
   ],
-  "summary": "KFD v1.0 records a pre-stable major editorial and decision-surface refinement with immutable prior artifacts: six concise authoritative decisions retain their gates and boundaries while implementation, self-proof, and case detail route to companion surfaces."
+  "summary": "KFD v1.0 records a pre-stable major editorial and decision-surface refinement with immutable prior artifacts: six concise authoritative decisions retain their gates and boundaries, reader navigation reaches decisions before implementation detail, and supporting definitions, self-proof, and cases remain available through companion surfaces."
 }
