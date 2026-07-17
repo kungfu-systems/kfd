@@ -489,6 +489,43 @@ for (const candidate of candidateRegistry.candidates ?? []) {
 for (const candidateId of siteCandidates.keys()) {
   if (!candidateIds.has(candidateId)) fail(`site bundle kfdCandidates has unknown candidate ${candidateId}`);
 }
+if (siteBundle.candidatePages?.source !== candidateRegistryPath) {
+  fail(`site bundle candidatePages source must be ${candidateRegistryPath}`);
+}
+if (siteBundle.candidatePages?.indexUrl !== "/drafts/") {
+  fail("site bundle candidatePages indexUrl must be /drafts/");
+}
+if (siteBundle.candidatePages?.stableUrlPattern !== "/drafts/{id}/") {
+  fail("site bundle candidatePages stableUrlPattern must be /drafts/{id}/");
+}
+if (siteBundle.candidatePages?.relationship !== "candidate-before-promotion") {
+  fail("site bundle candidatePages relationship must be candidate-before-promotion");
+}
+if (siteBundle.candidatePages?.normative !== false) {
+  fail("site bundle candidatePages must remain non-normative");
+}
+const candidateRenderPages = new Map((siteBundle.candidatePages?.pages ?? []).map((entry) => [entry.id, entry]));
+for (const candidate of candidateRegistry.candidates ?? []) {
+  const page = candidateRenderPages.get(candidate.id);
+  if (!page) {
+    fail(`site bundle candidatePages missing ${candidate.id}`);
+    continue;
+  }
+  if (
+    page.title !== candidate.title ||
+    page.status !== candidate.status ||
+    page.sourcePath !== candidate.path ||
+    page.url !== `/drafts/${candidate.id}/` ||
+    page.slotHint !== candidate.slotHint ||
+    page.claimBoundary !== candidate.claimBoundary ||
+    !page.markdown
+  ) {
+    fail(`site bundle candidatePages page ${candidate.id} must match the candidate registry and body`);
+  }
+}
+for (const candidateId of candidateRenderPages.keys()) {
+  if (!candidateIds.has(candidateId)) fail(`site bundle candidatePages has unknown candidate ${candidateId}`);
+}
 if (!existsSync("docs/foundation-model.md")) fail("missing docs/foundation-model.md");
 else if (!readFileSync("docs/foundation-model.md", "utf8").startsWith("# KFD Foundation Model")) {
   fail("docs/foundation-model.md must start with the KFD Foundation Model H1");
