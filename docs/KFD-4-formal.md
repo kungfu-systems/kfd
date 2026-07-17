@@ -106,6 +106,45 @@ declare source perspective and evidence cut
 | Primitive signal handoff | Authority boundary | KFD-4 replay profile to KFD-5 candidate record | Machine for declared linkage |
 | KFD package profile wiring | Verification | `standards.json`, `scripts/check.mjs` | Machine |
 
+## Non-normative marginal-cost hypothesis
+
+Let `B123` denote an installed KFD-1 through KFD-3 foundation and let
+`Cq(m | B123, E)` be the total cost of producing a KFD-5-qualified Primitive
+from evidence `E` with genesis method `m`:
+
+```text
+Cq = Cgenesis + Cqualification + Cfalse-candidates + Creality-validation
+```
+
+For perspective transformation, the marginal genesis cost after `B123` is
+installed is approximately:
+
+```text
+Delta Cperspective =
+    Cmissing-capture + Creplay + Ccontrast
+```
+
+`H4` is the bounded hypothesis that, where trusted multi-perspective evidence
+already exists and object boundaries materially depend on position,
+perspective transformation is the smallest new general operator and therefore
+the lowest-marginal-cost default probe for moving the observation horizon.
+`H4` does not claim the lowest total `Cq` in every domain or superiority over
+specialized methods.
+
+Evidence against `H4` includes:
+
+- capture, privacy, reconstruction, or replay loss dominating the search cost;
+- anomaly, causal, compression, reconstruction, or hybrid methods producing
+  equally qualified candidates at lower total cost under comparable evidence
+  and budgets;
+- perspective transformation producing enough false candidates that
+  qualification cost dominates; or
+- the same candidate becoming visible without a material change in observation
+  horizon.
+
+This hypothesis is not enforced by the current schemas. KFD-5 and KFD-6 provide
+the qualification and comparative-learning boundaries needed to test it.
+
 ## Non-claims and extension points
 
 KFD-4 does not claim that all interpretations are equally supported, that
