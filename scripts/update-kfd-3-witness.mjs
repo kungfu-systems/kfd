@@ -44,7 +44,12 @@ const liveCaseSurfaces = liveCaseRegistry.cases.flatMap((entry) => [
   { id: `case:${entry.id}:method-trace`, sourcePath: entry.methodTrace, sha256: sha256File(entry.methodTrace) },
   { id: `case:${entry.id}:propagation-hypothesis`, sourcePath: entry.propagationHypothesis, sha256: sha256File(entry.propagationHypothesis) },
   { id: `case:${entry.id}:review-index`, sourcePath: entry.reviewIndex, sha256: sha256File(entry.reviewIndex) },
-  { id: `case:${entry.id}:current-cut`, sourcePath: entry.currentCut.path, sha256: sha256File(entry.currentCut.path) },
+  { id: `case:${entry.id}:ontology-split`, sourcePath: entry.ontologySplit, sha256: sha256File(entry.ontologySplit) },
+  ...entry.candidateTracks.map((track) => ({
+    id: `case:${entry.id}:candidate:${track.id}:current-cut`,
+    sourcePath: track.currentCut.path,
+    sha256: sha256File(track.currentCut.path),
+  })),
 ]);
 const schemaSurfaces = [
   "schemas/kfd-standards.schema.json",

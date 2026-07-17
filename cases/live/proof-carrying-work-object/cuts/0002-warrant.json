@@ -1,0 +1,284 @@
+{
+  "schemaVersion": 3,
+  "contract": "kfd-5-primitive-discovery",
+  "standard": "kfd-5",
+  "candidate": {
+    "id": "warrant",
+    "title": "Warrant",
+    "problemStatement": "Agent action authority is commonly reconstructed from chat, transient approval dialogs, hidden policy, credentials, evidence, and human memory, so downstream participants cannot reliably determine why a bounded action may continue, what exact subject and purpose were authorized, or whether authority has expired, narrowed, or been revoked.",
+    "scope": "A provisional purpose-bound, fact-addressed authorization object for bounded continuation. The name, universal contract, relation to existing capability and mandate systems, cross-domain applicability, novelty, and Primitive status remain open."
+  },
+  "genesis": {
+    "methods": [
+      "direct-situated-judgment",
+      "perspective-transformation",
+      "reconstruction-pressure",
+      "structural-compression"
+    ],
+    "observationPerspective": {
+      "id": "transient-approval-interface",
+      "bearer": "human or agent viewing one permission prompt, task authorization block, credential, or policy result",
+      "role": "current approver or executor",
+      "proximity": "inside one authorization event but outside durable work and evidence lineage",
+      "consequences": [
+        "bears repeated approval, unclear scope, authority drift, revocation, and audit cost"
+      ],
+      "naturalObjects": [
+        "approval",
+        "permission",
+        "credential",
+        "capability token",
+        "policy decision",
+        "task authorization"
+      ]
+    },
+    "currentOntology": [
+      "approval",
+      "permission",
+      "capability",
+      "credential",
+      "mandate",
+      "policy decision",
+      "access token",
+      "attestation",
+      "passport",
+      "task authorization"
+    ],
+    "observation": "Separating a persistent Pursuit, contextual Atlas, and experienced Episode from the fused Proof-Carrying Work Object still left one necessary boundary: a durable decision that binds exact subject, purpose, facts, authority, holder, allowed continuation, constraints, and residual risk.",
+    "candidateObject": "A Warrant is a purpose-bound, fact-addressed authorization for bounded continuation.",
+    "claimBoundary": "This cut records a provisional authorization-object hypothesis. It does not claim that every approval requires a durable Warrant, that Warrant replaces enforcement or assessment, that remote authority is locally valid, or that the candidate is novel, universal, product-ready, or accepted.",
+    "methodEvidence": [
+      {
+        "kind": "file",
+        "coordinate": "cases/live/proof-carrying-work-object/ontology-split.md",
+        "observer": "KFD maintainers"
+      },
+      {
+        "kind": "file",
+        "coordinate": "cases/live/proof-carrying-work-object/genesis.md",
+        "observer": "KFD maintainers"
+      }
+    ],
+    "transformedPerspective": {
+      "id": "cross-boundary-continuation",
+      "bearer": "downstream participant deciding whether a specific action may continue for a specific purpose",
+      "role": "authority issuer, holder, local acceptor, or later auditor",
+      "proximity": "inside the fact, authority, action, and consequence boundary",
+      "consequences": [
+        "bears unauthorized action, repeated investigation, over-broad delegation, stale authority, and revocation failure"
+      ],
+      "naturalObjects": [
+        "exact subject revision",
+        "fact-addressed basis",
+        "recognized authority",
+        "bounded continuation",
+        "attenuation lineage",
+        "lifecycle event"
+      ]
+    },
+    "transformation": "The observer moved from one approval interaction to the participant who must later explain and enforce why an exact continuation was legitimate across agents, tools, and organizations.",
+    "newlyVisibleNeed": "Authorization must become an independently addressable, purpose-bound fact object rather than remain ambient in chat, credentials, mutable task text, or hidden policy.",
+    "methodNotes": "The original fused candidate combined epistemic basis, work identity, execution history, and continuation permission. Structural compression retained the minimum object joining facts and recognized authority to an exact bounded action."
+  },
+  "boundaryPressure": {
+    "contactSides": [
+      "authority issuer, policy, evidence producer, or approving participant",
+      "agent, tool, downstream gate, operator, or organization deciding whether to continue"
+    ],
+    "implicitHandling": "Purpose, evidence, scope, issuer authority, holder, constraints, and revocation are reconstructed from prompts, policy engines, credentials, task text, logs, and human memory.",
+    "pressureChanges": [
+      {
+        "kind": "new-participant",
+        "description": "Agents increasingly request, derive, exercise, and inspect authority without sharing one conversational context."
+      },
+      {
+        "kind": "authority",
+        "description": "Real-world agent actions require exact limits, recognized issuers, local acceptance, attenuation, expiry, and revocation."
+      },
+      {
+        "kind": "heterogeneity",
+        "description": "Authorization crosses provider approval systems, operating-system enforcement, organization policy, and domain-specific evidence."
+      },
+      {
+        "kind": "consequence",
+        "description": "Over-broad or stale authority can change source, publish artifacts, move money, disclose information, or alter real systems."
+      }
+    ],
+    "observedFailures": [
+      "A downstream participant must reconstruct why an action was permitted.",
+      "Mutable task scope silently broadens a prior approval.",
+      "Remote or producer-declared authority is mistaken for local permission.",
+      "Revocation edits or deletes history instead of preserving an auditable lifecycle.",
+      "Successful execution is mistaken for legitimate authorization."
+    ],
+    "mediationClaim": "A Warrant may bind exact subject, purpose, basis, authority, holder, action set, constraints, and lifecycle so continuation can be independently inspected and locally accepted.",
+    "internalObjectAlternative": "Existing capability, authorization decision, verifiable credential, mandate, policy, and event-log compositions may provide all required behavior without a new Warrant Primitive."
+  },
+  "grounding": {
+    "pressure": [
+      "Repeated reconstruction of action legitimacy",
+      "Task and approval scope drifting independently",
+      "Need for revocable and attenuable cross-agent continuation",
+      "Separation between epistemic evidence and operational permission"
+    ],
+    "factSources": [
+      {
+        "kind": "file",
+        "coordinate": "cases/live/proof-carrying-work-object/ontology-split.md",
+        "observer": "KFD maintainers"
+      },
+      {
+        "kind": "file",
+        "coordinate": "cases/live/proof-carrying-work-object/genesis.md",
+        "observer": "KFD maintainers"
+      }
+    ],
+    "evidenceBoundary": "Public reconstruction of the authorization split recorded on 2026-07-17. No common implementation, enforcement integration, independent adopter, multi-domain attenuation test, benchmark, or security review is included.",
+    "knownGaps": [
+      "No final name or proven universal minimum closure",
+      "No common local and remote acceptance protocol",
+      "No implementation of immutable body plus append-only lifecycle events",
+      "No measured reduction in repeated approval cost",
+      "No adversarial delegation, revocation, expiry, or confused-deputy qualification",
+      "No proof that existing capability or mandate standards are insufficient"
+    ]
+  },
+  "participants": [
+    {
+      "id": "human-perspective-source",
+      "kind": "human",
+      "functions": [
+        "perspective-declaration",
+        "candidate-generation",
+        "decision"
+      ]
+    },
+    {
+      "id": "reasoning-agent",
+      "kind": "agent",
+      "functions": [
+        "candidate-generation",
+        "scalable-reasoning"
+      ]
+    },
+    {
+      "id": "future-independent-security-reviewer",
+      "kind": "collective",
+      "functions": [
+        "evidence-custody",
+        "verification"
+      ]
+    }
+  ],
+  "alternatives": [
+    {
+      "name": "Transient approval or provider permission",
+      "disposition": "unresolved",
+      "reason": "This may be sufficient for one local execution but usually lacks durable purpose, fact basis, cross-agent identity, lineage, and later reassessment."
+    },
+    {
+      "name": "Capability token",
+      "disposition": "unresolved",
+      "reason": "Capabilities strongly represent exercisable authority but may not preserve the purpose-bound epistemic basis, residual risk, and independent judgment expected here."
+    },
+    {
+      "name": "Verifiable credential or authorization credential",
+      "disposition": "unresolved",
+      "reason": "Credentials may carry signed claims and authority but may not define the full continuation lifecycle or local purpose-bound acceptance."
+    },
+    {
+      "name": "Mandate, permit, policy decision, or access-control record",
+      "disposition": "unresolved",
+      "reason": "One of these existing domain objects may already be the correct boundary, with Warrant only a naming profile."
+    },
+    {
+      "name": "Passport or proof-carrying artifact",
+      "disposition": "unresolved",
+      "reason": "A passport may justify trust in a result but does not necessarily authorize a holder to take the next action."
+    },
+    {
+      "name": "No new Primitive",
+      "disposition": "unresolved",
+      "reason": "The candidate may be a composition profile across evidence, policy, capability, credential, and lifecycle event standards."
+    }
+  ],
+  "contractModel": {
+    "identity": "An immutable warrant_ref for one purpose-bound authorization decision, with exact subject revision, issuer, holder, and lineage.",
+    "boundary": "Exact subject and revision root, purpose, issuer and recognized authority, holder, allowed and forbidden actions, fact and evidence basis, constraints, expiry, delegation and attenuation rules, residual risk, and lifecycle references.",
+    "authority": "The issuer must possess recognized authority for the bounded continuation; the recipient or local policy independently decides whether to accept an imported Warrant. A Warrant explains authorization but does not replace operating-system, sandbox, provider, or domain enforcement.",
+    "lifecycle": "requested -> issued, conditionally issued, or denied -> accepted or rejected locally -> exercised -> expired, revoked, exhausted, or superseded",
+    "operations": [
+      "request",
+      "issue",
+      "inspect",
+      "verify-basis",
+      "accept",
+      "reject",
+      "derive",
+      "attenuate",
+      "exercise",
+      "revoke",
+      "expire",
+      "supersede"
+    ]
+  },
+  "tests": {
+    "minimumClosure": {
+      "result": "inconclusive",
+      "evidence": [
+        {
+          "kind": "file",
+          "coordinate": "cases/live/proof-carrying-work-object/ontology-split.md"
+        }
+      ],
+      "notes": "Exact subject, purpose, basis, authority, holder, action set, constraints, and lifecycle appear load-bearing, but no common implementation has tested whether all fields are minimal."
+    },
+    "deletion": {
+      "result": "inconclusive",
+      "evidence": [
+        {
+          "kind": "file",
+          "coordinate": "cases/live/proof-carrying-work-object/ontology-split.md"
+        }
+      ],
+      "notes": "Without Warrant, authority remains ambient or reconstructed, but an existing capability, mandate, or policy-decision composition may already remove that burden."
+    },
+    "fuse": {
+      "result": "inconclusive",
+      "evidence": [
+        {
+          "kind": "file",
+          "coordinate": "cases/live/proof-carrying-work-object/ontology-split.md"
+        }
+      ],
+      "notes": "Approvals, mandates, capabilities, credentials, and policy decisions appear structurally related, but shared operations and security semantics have not survived cross-domain implementation."
+    },
+    "falsifiers": [
+      "Existing capability, credential, mandate, or policy systems provide the full contract without repeated reconstruction.",
+      "Fact-addressed authorization does not reduce clarification, approval, or audit cost.",
+      "Purpose-bound evidence cannot be safely interpreted across local policy boundaries.",
+      "Attenuation, delegation, expiry, and revocation cannot be made safe and comprehensible.",
+      "The Warrant becomes an ambient permission, hidden routing mechanism, or self-certification path.",
+      "The object adds bureaucracy while enforcement systems still require unrelated approvals.",
+      "A common contract erases necessary domain-specific authority distinctions."
+    ],
+    "dogfood": {
+      "result": "not-run",
+      "evidence": [],
+      "notes": "Embedded standing authorization and release/continuation examples motivate the candidate, but this public cut contains no common Warrant runtime or independent security qualification."
+    }
+  },
+  "decision": {
+    "outcome": "provisional",
+    "owner": "KFD maintainers",
+    "reason": "Separating persistent work identity, contextual facts, and execution history leaves a coherent fact-to-action authorization object, but minimum closure, relation to existing standards, security, transfer, deletion, fuse, and dogfood evidence remain unresolved.",
+    "residualRisks": [
+      "The candidate may rename an existing capability or mandate composition.",
+      "The legal and epistemic meanings of Warrant may create false assurance.",
+      "A machine-readable Warrant may be mistaken for enforcement or universal validity.",
+      "Multi-Pursuit or dynamic subject selectors may silently expand authority.",
+      "First-party workflow may overfit software and release governance.",
+      "Authorization convenience may outrun security review."
+    ]
+  }
+}
