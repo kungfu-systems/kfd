@@ -1,5 +1,8 @@
 # KFD-2 Trust Assessment Metadata
 
+[Authoritative decision](../decisions/KFD-2.md) ·
+[Documentation map](MAP.md)
+
 KFD-2 says that trust must start from inspectable facts and responsibility
 state. A product must not ask users or agents to trust load-bearing claims only
 because they appear in prose, changelogs, repository history, generated UI, or

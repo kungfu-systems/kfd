@@ -75,6 +75,10 @@ every technical ingredient it used. It joined prior lessons, integrity needs,
 distributed authority, nonlinear history, performance constraints, and a
 workflow containing tens of merges a day into one load-bearing object model.
 
+An **evidence cut** is the declared boundary of evidence available to a claim
+or decision at a given point. Keeping that cut stable prevents later knowledge
+from being silently projected backward into the decision.
+
 BitKeeper's withdrawal can be replayed through the KFD lens as a forcing
 evidence cut: a condition that could previously be endured became a decision
 that had to be made. That is a KFD interpretation of the historical record, not

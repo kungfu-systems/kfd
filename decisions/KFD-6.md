@@ -115,8 +115,8 @@ KFD-5 separates genesis from qualification. KFD-6 attempts to internalize and
 compare that complete motion:
 
 ```text
-Atlas_n -> action -> Episodes -> generation experiments
-        -> KFD-5 qualification -> candidate Atlas_n+1
+ontology_n -> action -> causal experience -> generation experiments
+           -> KFD-5 qualification -> candidate ontology_n+1
 ```
 
 ## Verification

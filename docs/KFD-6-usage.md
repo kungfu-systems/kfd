@@ -1,5 +1,8 @@
 # KFD-6 Implementation Notes
 
+[Authoritative decision](../decisions/KFD-6.md) ·
+[Documentation map](MAP.md)
+
 KFD-6 defines a proposed autonomous discovery loop that is grounded in causal
 experience and compares plural generation methods rather than canonizing one. The
 authoritative text is `decisions/KFD-6.md`; its registry status is `draft`.

@@ -62,41 +62,16 @@ Disagreement is a valid cooperation state.
 A constraint can be strict and still KFD-compatible when it is fact-bound,
 explainable, auditable, and proportionate.
 
-## Homepage content contract
+## Current decisions
 
-This README is also the homepage text source for `https://kfd.libkungfu.dev`.
-When `site-libkungfu-dev` consumes the `@kungfu-tech/kfd` npm package to render
-the KFD site, it should treat this file as the canonical homepage copy, not as
-an implementation note to paraphrase in the site repository.
-
-The first screen should be derived from this README:
-
-- Page identity: the top-level heading.
-- Future picture: the opening two paragraphs must first make primitive discovery
-  concrete, then preserve the shift from machines answering inside a human-named
-  world to humans and agents discovering when that world was named incorrectly.
-- Foundation signal: the `Foundation triad` section, especially the three
-  one-line commitments and the product-witness rule immediately below them.
-- Depth choice: the foundation link must route to the non-numbered explanatory
-  page at `/foundation`, and the historical cases link must route to `/cases`;
-  registry, renderer, and implementation detail stay outside the first screen.
-
-Decision cards, detail links, and machine paths should come from
-`registry.json`. The machine-readable site bundle lives at `site/kfd-site.json`
-and gives renderers stable fields for the homepage, the foundation explanation
-page, product proof path, decision routes, and rendering boundary. A site
-renderer may adapt layout, navigation, typography, and visual assets, but it
-should not maintain separate wording that can drift from this package.
-
-`site/kfd-site.json` is generated from this README and
-`docs/foundation-model.md` and `docs/primitive-discovery-cases.md` by
-`scripts/update-site-bundle.mjs`. The README owns the concise homepage; the
-foundation document owns the complete explanation; the cases document owns
-the non-normative historical anchors. The generated bundle exposes ordered
-homepage sections, the `/foundation` and `/cases` pages, and a display plan that
-separates first-screen, primary, detail, and support content. Site repositories
-should consume that bundle instead of parsing the Markdown files. The renderer
-contract remains machine metadata, not ordinary homepage content.
+| ID | Kind | Axiom | Status |
+|---|---|---|---|
+| [KFD-1](decisions/KFD-1.md) | procedure | Facts must not drift. | active |
+| [KFD-2](decisions/KFD-2.md) | principle | Trust must start from facts. | active |
+| [KFD-3](decisions/KFD-3.md) | principle | Cooperation must start from trusted value. | active |
+| [KFD-4](decisions/KFD-4.md) | principle | Views must remain bound to declared perspectives. | active |
+| [KFD-5](decisions/KFD-5.md) | procedure | Primitive discovery must separate genesis from qualification. | active |
+| [KFD-6](decisions/KFD-6.md) | procedure | Autonomous discovery must remain grounded in causal experience. | draft |
 
 ## Product proof path
 
@@ -218,17 +193,6 @@ evaluation, bounded autonomy, and separation between discovery and promotion.
 Its package presence is an experimental interface, not a claim that autonomous
 primitive discovery or method dominance has been achieved.
 
-## Current decisions
-
-| ID | Kind | Axiom | Status |
-|---|---|---|---|
-| [KFD-1](decisions/KFD-1.md) | procedure | Facts must not drift. | active |
-| [KFD-2](decisions/KFD-2.md) | principle | Trust must start from facts. | active |
-| [KFD-3](decisions/KFD-3.md) | principle | Cooperation must start from trusted value. | active |
-| [KFD-4](decisions/KFD-4.md) | principle | Views must remain bound to declared perspectives. | active |
-| [KFD-5](decisions/KFD-5.md) | procedure | Primitive discovery must separate genesis from qualification. | active |
-| [KFD-6](decisions/KFD-6.md) | procedure | Autonomous discovery must remain grounded in causal experience. | draft |
-
 ## Decision metadata
 
 Every rendered decision page should make the KFD fact source explicit. The
@@ -288,6 +252,42 @@ production release passports. Releases are governed by Buildchain; this package
 versions itself under KFD-1's own rules: the outer package line remains `v1.0`,
 while patch and prerelease numbers are advanced by Buildchain release
 promotion.
+
+## Homepage content contract
+
+This README is also the homepage text source for `https://kfd.libkungfu.dev`.
+When `site-libkungfu-dev` consumes the `@kungfu-tech/kfd` npm package to render
+the KFD site, it should treat this file as the canonical homepage copy, not as
+an implementation note to paraphrase in the site repository.
+
+The first screen should be derived from this README:
+
+- Page identity: the top-level heading.
+- Future picture: the opening two paragraphs must first make primitive discovery
+  concrete, then preserve the shift from machines answering inside a human-named
+  world to humans and agents discovering when that world was named incorrectly.
+- Foundation signal: the `Foundation triad` section, especially the three
+  one-line commitments and the product-witness rule immediately below them.
+- Depth choice: the foundation link must route to the non-numbered explanatory
+  page at `/foundation`, and the historical cases link must route to `/cases`;
+  registry, renderer, and implementation detail stay outside the first screen.
+
+Decision cards, detail links, and machine paths should come from
+`registry.json`. The machine-readable site bundle lives at `site/kfd-site.json`
+and gives renderers stable fields for the homepage, the foundation explanation
+page, product proof path, decision routes, and rendering boundary. A site
+renderer may adapt layout, navigation, typography, and visual assets, but it
+should not maintain separate wording that can drift from this package.
+
+`site/kfd-site.json` is generated from this README and
+`docs/foundation-model.md` and `docs/primitive-discovery-cases.md` by
+`scripts/update-site-bundle.mjs`. The README owns the concise homepage; the
+foundation document owns the complete explanation; the cases document owns
+the non-normative historical anchors. The generated bundle exposes ordered
+homepage sections, the `/foundation` and `/cases` pages, and a display plan that
+separates first-screen, primary, detail, and support content. Site repositories
+should consume that bundle instead of parsing the Markdown files. The renderer
+contract remains machine metadata, not ordinary homepage content.
 
 ## Release impact ledger
 

@@ -1,5 +1,8 @@
 # KFD-1 Implementation Notes
 
+[Authoritative decision](../decisions/KFD-1.md) ·
+[Documentation map](MAP.md)
+
 KFD-1 defines the fact-source rule: facts must not drift. This page is the
 package implementation note for machine consumers and release systems. The
 authoritative decision text remains `decisions/KFD-1.md`.
