@@ -1,4 +1,4 @@
-# KFD-3: Cooperation must start from trusted value — compliance must not be coerced
+# KFD-3: Cooperation must start from trusted value
 
 - Status: active
 - Number: 3
@@ -10,174 +10,84 @@
 Cooperation must start from trusted value.
 
 A product must not obtain cooperation through pressure, manipulation, hidden
-control, or forced workflow capture. It must make facts, value, choices, and
-constraints transparent enough for intelligent participants to trust what is
-being offered, understand the available path, decide, and cooperate.
+control, or forced workflow capture. It must make value, facts, choices, and
+constraints inspectable enough for intelligent participants to decide.
 
-## Decision type
+## Decision
 
-KFDs can be principles or procedures:
+Kungfu-systems treats humans and agents as reasoning participants, not captive
+tools. Products should make shared work more legible so participants can
+coordinate through facts, choice, and explainable constraints rather than
+unilateral pressure.
 
-- A **principle** states what must remain true across kungfu-systems even as
-  products, repositories, and release lines change.
-- A **procedure** states how a class of work enforces or protects a principle.
+GUI, CLI, API, documentation, envelopes, and local fact surfaces are all
+first-class participant interfaces; agent access is not a secondary integration
+channel added after the human dashboard.
 
-This KFD is a principle. It complements KFD-2 by defining the stance
-kungfu-systems takes toward humans and agents as reasoning participants.
+This is an augmentation stance, not a permissiveness requirement. Safety
+gates, sandboxing, policy enforcement, refusal, and revocation may be strict
+when their facts, purpose, authority, and review path remain visible.
 
-## Foundation role
-
-Within the KFD-1/2/3 foundation, this is the relationship path:
-
-```text
-cooperation must start from trusted value
-```
-
-KFD-2 protects the truth path: show facts before asking for trust. KFD-3
-protects the relationship path: make value transparent enough to be trusted
-before asking for cooperation.
-
-## Reality-correction role
-
-KFD-3 prevents a shared model from becoming hidden authority over intelligent
-participants. Humans and agents may use, challenge, refuse, or help reconstruct
-the offered model because its value, facts, choices, and constraints remain
-inspectable. Cooperation therefore preserves more than consent: it preserves
-the plurality of participants through which missing facts, counterexamples,
-and better primitives can reach the system.
-
-Perspective diversity alone does not create shared correction. Competition or
-independent action may produce different views, but those views remain isolated
+Cooperation is also epistemic infrastructure. Different views remain isolated
 unless participants can expose and compare them without surrendering their
-fact boundaries or being forced into one account. Cooperation makes trusted
-differences available for contrastive replay and shared discovery. In that
-role, cooperation is not only a coordination preference; it is epistemic
-infrastructure for finding what no single perspective can make visible alone.
+fact boundaries. Trusted cooperation makes counterexamples, missing facts, and
+better primitives available to the shared system.
 
-## Principle
-
-As software systems increasingly work with agents, the product relationship is
-no longer only human-to-tool. A product may also be teaching, constraining,
-observing, routing, or supervising agents that can read instructions, evaluate
-choices, explain actions, recover from error, and cooperate with humans or other
-agents.
-
-Kungfu-systems should treat those humans and agents as intelligent
-participants, not as captive tools to be forced into compliance.
-
-This is an augmentation stance, not a control stance: the product should make
-the shared work environment more legible so humans and agents can coordinate
-through facts, choices, and constraints instead of unilateral pressure.
-
-A control plane should therefore be understood as a shared work environment,
-not only as a human dashboard over agents. Agent-facing CLI, API, documentation,
-envelopes, and local fact surfaces are first-class interfaces for intelligent
-participants, not secondary integration channels after the GUI.
-
-The default product path should therefore follow this chain:
-
-```text
-transparent facts
-  -> trusted value
-  -> stable choice
-  -> explainable constraint
-  -> voluntary cooperation
-  -> reviewable record
-```
-
-This does not mean products must be passive or permissive. Safety constraints,
-permission gates, sandboxing, revocation, provenance checks, and policy
-enforcement may be strict. They become compatible with this principle when they
-are visible, explainable, auditable, and tied to facts rather than hidden
-pressure.
-
-## Three commitments
+## Commitments
 
 ### 1. Do not coerce intelligent participants
 
-Do not make humans or agents comply through pressure, manipulation, hidden
-prompts, dark patterns, deceptive defaults, invisible workflow takeover, or
-unreviewable control state.
+Do not use hidden prompts, deceptive defaults, dark patterns, invisible
+workflow takeover, manipulation, or unreviewable control state. A product may
+recommend, refuse, or require approval, but must not present forced compliance
+as understanding or trust.
 
-Products may recommend a path, refuse unsafe actions, or require explicit
-approval. They should not pretend that forced compliance is the same as
-understanding or trust.
+### 2. Make value trustable
 
-### 2. Make value trusted through transparent facts
+Participants should be able to discover what the product can do, why it is
+useful, what it observed or changed, and what boundary applies without relying
+on oral context, private maintainer memory, or web-only documentation.
 
-Humans and agents should be able to discover what the product can do, why it is
-useful, what it observed, what it changed, and what boundary applies without
-needing oral context, private maintainer memory, or web-only documentation.
+Important value claims bind to KFD-2 facts, evidence, and residual-risk state.
+Human-readable and machine-readable surfaces should expose the same
+participant-relevant information.
 
-Agent-facing surfaces should expose local, versioned, machine-readable and
-human-readable facts wherever possible. A capable agent should be able to learn
-the product's value, and why that value can be trusted, by inspecting the
-product's own facts and commands.
+### 3. Make constraints transparent
 
-Trusted value is therefore not only a product promise or persuasive sentence.
-A collaboration interface should bind important value claims to explicit value
-evidence: the facts that make the value claim inspectable, the artifacts or
-checks that prove those facts are present, and the KFD-2 trust assessment or
-residual-risk state that tells participants how much weight to place on the
-claim.
-
-### 3. Use constraints as transparent safety, not hidden control
-
-Hard constraints are legitimate when they protect users, agents, work products,
-credentials, canonical facts, or public trust. They must be presented as
-transparent safety constraints, not as hidden control mechanisms.
-
-A constraint should answer:
+A constraint states:
 
 ```text
-what is being restricted
+what is restricted
 why it is restricted
-what fact or policy supports the restriction
+which fact or policy supports it
 how it can be reviewed
-how it can be changed, escalated, or revoked when appropriate
+how it can be changed, escalated, or revoked
 ```
 
-## What it requires
+Hard constraints protect participants, work, credentials, canonical facts, and
+public trust. Hidden constraints become control.
 
-- Agent onboarding, managed-run envelopes, skill systems, KFX trust gates,
-  extension installers, CLI/API metadata, GUI onboarding, distribution channels,
-  and hosted surfaces should provide a clear fact source before asking humans
-  or agents to adopt a path, comply, or delegate work.
-- Products should give agents stable discovery surfaces for capabilities,
-  command maturity, safety boundaries, and available modes rather than relying
-  on scattered README text, hidden prompts, or provider-specific folklore.
-- Products should preserve meaningful choice when multiple safe integration
-  modes exist. A managed workflow may be the best path, but trace, report,
-  import, or remote sync modes should remain available when they better respect
-  the user's existing workflow.
-- Safety and governance mechanisms should leave reviewable records: what was
-  blocked, allowed, escalated, installed, revoked, or trusted, and on what
-  basis.
-- Product language should avoid treating agents as disposable command runners
-  when the surface actually depends on their reasoning, interpretation,
-  explanation, or recovery behavior.
+## Interface requirements
 
-## What it does not require
+- Agent onboarding, envelopes, extension gates, installers, CLI/API metadata,
+  GUI flows, and hosted surfaces provide a discoverable fact source before
+  asking participants to adopt or delegate.
+- Capabilities, maturity, safety boundaries, modes, and extension paths use
+  stable discovery surfaces rather than scattered prose or provider folklore.
+- Meaningful choice remains available when multiple safe integration modes
+  exist.
+- Allowed, blocked, escalated, installed, revoked, and trusted actions leave
+  reviewable records.
 
-- It does not claim a metaphysical status for agents.
-- It does not require products to obey every agent request.
-- It does not forbid strong defaults, permission gates, sandboxes, policy
-  checks, revocation, or refusal.
-- It does not require every internal prompt, implementation detail, or security
-  control to be public.
-- It does not turn a private founder narrative into a public repository rule.
-  This public rule is about product stance, adoption, safety, and cooperation
-  with intelligent participants.
-- It does not supersede KFD-2. Facts and responsibility still come first;
-  transparent value is the route by which value becomes trusted, not a
-  substitute for trust. This KFD states how those facts and values should be
-  presented to humans and agents without coercion.
+## Boundaries
 
-## Relation to KFD-2
+KFD-3 makes no metaphysical claim about agents, does not require obedience to
+agent requests, and does not forbid strong defaults or private security
+controls. It requires participant-facing value and constraints to remain
+inspectable. It does not supersede KFD-2: transparent value becomes trusted
+through facts, not instead of them.
 
-KFD-2 says fact-first responsibility should be the path of least resistance.
-KFD-3 says the path of least resistance should not be built from pressure or
-hidden control. Together:
+## Relation to KFD-1 and KFD-2
 
 ```text
 KFD-1: facts must not drift.
@@ -185,41 +95,18 @@ KFD-2: trust must start from facts.
 KFD-3: cooperation must start from trusted value.
 ```
 
-KFD-1 protects the fact-source layer. KFD-2 protects the trust layer. KFD-3
-protects the relationship with the intelligent participant who must decide
-whether the offered value is trustworthy enough to walk that path.
+KFD-1 protects the fact world, KFD-2 protects reliance on it, and KFD-3
+protects the relationship with the participant deciding whether to cooperate.
 
-In machine-readable profiles, this means KFD-3 collaboration interfaces should
-not merely list surfaces and constraints. They should also declare value
-evidence that can be evaluated through the KFD-2 trust model. KFD-2 can then
-say which parts are machine-checkable, which parts remain semantic residual
-risk, and what an agent should do next.
+## Verification
 
-## Implementation case: the KFD package
-
-The `@kungfu-tech/kfd` npm package is a self-proof case for this principle.
-Its README gives humans and agents the same quickstart path. `standards.json`
-gives stable standard identity, schema IDs, and concept names. The KFD-3
-schemas define collaboration interfaces, witnesses, and extension requests, so
-an agent can discover both the valid interface and the standard path for asking
-to extend it. The KFD-3 collaboration interface also declares value evidence
-that points to KFD-owned facts, package surfaces, and the KFD-2 generic trust
-assessment, so an agent can inspect why KFD's claimed value is trustable before
-cooperating.
-
-For example, if an agent needs a KFD-2 trust-taxonomy value that does not
-exist, the KFD-3 collaboration path is not hidden maintainer pressure or local
-invention. The declared path is a visible GitHub issue in the KFD repository,
-where the new value can be reviewed and, if accepted, added to the KFD-owned
-taxonomy for everyone.
+The `@kungfu-tech/kfd` package gives humans and agents the same public
+quickstart, publishes KFD-3 collaboration-interface and witness schemas, and
+binds value evidence to KFD-2 assessment. Package self-proof and extension
+paths are documented in `docs/KFD-3-usage.md`.
 
 ## Adopters
 
-Each adopting repository cites this KFD when designing or changing an
-agent-facing surface, onboarding flow, managed runner, permission gate,
-extension or KFX installer, skill catalog, hosted control surface, distribution
-channel, or product flow that asks humans or agents to comply, choose,
-delegate, or cooperate.
-
-Adopters should keep local implementation detail in repository documents and
-reference this KFD rather than restating it.
+Adopters cite KFD-3 when a product asks humans or agents to choose, comply,
+delegate, install, trust, or cooperate. Product-specific interface evidence
+remains adopter-owned.

@@ -226,7 +226,7 @@ primitive discovery or method dominance has been achieved.
 | [KFD-2](decisions/KFD-2.md) | principle | Trust must start from facts. | active |
 | [KFD-3](decisions/KFD-3.md) | principle | Cooperation must start from trusted value. | active |
 | [KFD-4](decisions/KFD-4.md) | principle | Views must remain bound to declared perspectives. | active |
-| [KFD-5](decisions/KFD-5.md) | procedure | Primitive discovery must keep genesis perspective-declared, method-plural, and fact-qualified. | active |
+| [KFD-5](decisions/KFD-5.md) | procedure | Primitive discovery must separate genesis from qualification. | active |
 | [KFD-6](decisions/KFD-6.md) | procedure | Autonomous discovery must remain grounded in causal experience. | draft |
 
 ## Decision metadata
