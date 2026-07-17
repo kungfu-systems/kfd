@@ -49,7 +49,7 @@ const hashablePath = (filePath) => String(filePath || "").split("#", 1)[0];
 const markdownPaths = [];
 const collectMarkdownPaths = (directory = ".") => {
   for (const entry of readdirSync(directory, { withFileTypes: true })) {
-    if (entry.name === ".git" || entry.name === "node_modules") continue;
+    if (entry.name === ".buildchain" || entry.name === ".git" || entry.name === "node_modules") continue;
     const path = directory === "." ? entry.name : `${directory}/${entry.name}`;
     if (entry.isDirectory()) collectMarkdownPaths(path);
     else if (entry.isFile() && entry.name.endsWith(".md")) markdownPaths.push(path);
