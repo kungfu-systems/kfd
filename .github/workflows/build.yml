@@ -45,7 +45,13 @@ jobs:
         site
         scripts
         bin
-        verifier
+        verifier/Cargo.toml
+        verifier/Cargo.lock
+        verifier/crates
+        verifier/dist
+        verifier/extraction-manifest.json
+        verifier/fixtures
+        verifier/specs
         buildchain.alpha-contract-lock.json
         buildchain.contract-lock.json
         buildchain.release-propagation.json
