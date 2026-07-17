@@ -26,6 +26,14 @@ Each case has two layers:
 The replay is an interpretation, not a claim that KFD caused the history or
 that a successful product proves every KFD proposition.
 
+This document contains retrospective historical anchors. Provisional
+candidates whose genesis and qualification are still unfolding live under
+[`cases/`](../cases/registry.json). The first live case records how applying
+KFD to its own propagation problem exposed a candidate currently called
+[`Proof-Carrying Work Object`](../cases/live/proof-carrying-work-object/README.md).
+It remains provisional and is not evidence that KFD has already discovered a
+new Primitive.
+
 ## What a primitive changes
 
 Most work improves an answer within an existing vocabulary. A primitive changes

@@ -7,6 +7,7 @@ const FORMAL_PATH = "docs/formal-model.md";
 const CASES_PATH = "docs/primitive-discovery-cases.md";
 const REGISTRY_PATH = "registry.json";
 const STANDARDS_PATH = "standards.json";
+const LIVE_CASE_REGISTRY_PATH = "cases/registry.json";
 const SITE_BUNDLE_PATH = "site/kfd-site.json";
 
 const normalizeLines = (value) => String(value || "").replace(/\r\n/g, "\n").trim();
@@ -184,6 +185,41 @@ const buildFormalPages = (entries, standards) => entries.map((entry) => {
   };
 });
 
+const buildLiveCasePages = (liveCaseRegistry) => (liveCaseRegistry.cases ?? []).map((entry) => ({
+  id: entry.id,
+  title: entry.title,
+  kind: entry.kind,
+  status: entry.status,
+  standard: entry.standard,
+  url: `/cases/live/${entry.id}`,
+  relationship: "provisional-live-case",
+  claimBoundary: entry.claimBoundary,
+  humanEntry: {
+    path: entry.humanEntry,
+    markdown: stripFrontmatter(readFileSync(entry.humanEntry, "utf8")),
+  },
+  genesis: {
+    path: entry.genesis,
+    markdown: stripFrontmatter(readFileSync(entry.genesis, "utf8")),
+  },
+  methodTrace: {
+    path: entry.methodTrace,
+    markdown: stripFrontmatter(readFileSync(entry.methodTrace, "utf8")),
+  },
+  propagationHypothesis: {
+    path: entry.propagationHypothesis,
+    markdown: stripFrontmatter(readFileSync(entry.propagationHypothesis, "utf8")),
+  },
+  reviewIndex: {
+    path: entry.reviewIndex,
+    markdown: stripFrontmatter(readFileSync(entry.reviewIndex, "utf8")),
+  },
+  currentCut: {
+    ...entry.currentCut,
+    record: JSON.parse(readFileSync(entry.currentCut.path, "utf8")),
+  },
+}));
+
 const section = ({ id, sourceHeading, title, markdown, role, priority, presentation, firstScreen = false, sourcePath = README_PATH }) => ({
   id,
   sourcePath,
@@ -196,7 +232,7 @@ const section = ({ id, sourceHeading, title, markdown, role, priority, presentat
   markdown: normalizeLines(markdown),
 });
 
-export const buildSiteBundle = ({ readmeText, foundationText, formalText, casesText, registry, standards }) => {
+export const buildSiteBundle = ({ readmeText, foundationText, formalText, casesText, registry, standards, liveCaseRegistry }) => {
   const readme = parseReadme(readmeText);
   const foundationDocument = parseReadme(foundationText);
   const formalDocument = parseReadme(formalText);
@@ -210,6 +246,7 @@ export const buildSiteBundle = ({ readmeText, foundationText, formalText, casesT
   const practiceGuidelines = parsePracticeGuidelines(foundationDocument.sections["Practice guidelines"] || "");
   const productProofPath = parseProductProofPath(readme.sections["Product proof path"] || "");
   const entries = registry.entries || [];
+  const liveCasePages = buildLiveCasePages(liveCaseRegistry);
 
   const homepageSections = [
     section({
@@ -320,6 +357,7 @@ export const buildSiteBundle = ({ readmeText, foundationText, formalText, casesT
       casesTextSource: CASES_PATH,
       registry: REGISTRY_PATH,
       standards: STANDARDS_PATH,
+      liveCaseRegistry: LIVE_CASE_REGISTRY_PATH,
       decisionsDir: "decisions",
     },
     routes: {
@@ -327,6 +365,7 @@ export const buildSiteBundle = ({ readmeText, foundationText, formalText, casesT
       foundation: "/foundation",
       formal: "/formal",
       cases: "/cases",
+      liveCasePattern: "/cases/live/{id}",
       decisionPattern: "/{number}",
       decisionUsagePattern: "/{number}/usage",
       decisionFormalPattern: "/{number}/formal",
@@ -420,6 +459,14 @@ export const buildSiteBundle = ({ readmeText, foundationText, formalText, casesT
       authorityNote: "Historical facts are source-bound; KFD replay is explanatory. Numbered KFD decisions remain authoritative.",
       markdown: stripFrontmatter(casesText),
     },
+    liveCases: {
+      source: LIVE_CASE_REGISTRY_PATH,
+      stableUrlPattern: "/cases/live/{id}",
+      relationship: "provisional-live-cases-of-kfd-5",
+      normative: false,
+      authorityNote: "Live cases preserve candidate genesis and qualification state. They are not numbered KFD decisions or accepted Primitive claims.",
+      cases: liveCasePages,
+    },
     decisionPages: {
       source: REGISTRY_PATH,
       bodySource: "registry.entries[].path",
@@ -457,6 +504,7 @@ export const buildSiteBundle = ({ readmeText, foundationText, formalText, casesT
             "decisions/KFD-N.md",
             REGISTRY_PATH,
             "standards.json",
+            LIVE_CASE_REGISTRY_PATH,
           ],
           projectionSurfaces: [
             "https://kfd.libkungfu.dev/N",
@@ -474,6 +522,7 @@ export const buildSiteBundle = ({ readmeText, foundationText, formalText, casesT
         "foundation explanation page from docs/foundation-model.md",
         "formal reference overview from docs/formal-model.md",
         "historical cases page from docs/primitive-discovery-cases.md",
+        "live Primitive case registry and case bodies from cases/",
         "foundation triad commitments",
         "foundation model layers and chain",
         "product proof path text",
@@ -508,6 +557,7 @@ export const readInputs = () => ({
   casesText: readFileSync(CASES_PATH, "utf8"),
   registry: JSON.parse(readFileSync(REGISTRY_PATH, "utf8")),
   standards: JSON.parse(readFileSync(STANDARDS_PATH, "utf8")),
+  liveCaseRegistry: JSON.parse(readFileSync(LIVE_CASE_REGISTRY_PATH, "utf8")),
 });
 
 export const generatedSiteBundle = () => buildSiteBundle(readInputs());

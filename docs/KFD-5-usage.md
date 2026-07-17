@@ -15,6 +15,10 @@ The authoritative text is `decisions/KFD-5.md`.
 
 - `decisions/KFD-5.md`: authoritative procedure.
 - `schemas/kfd-5/primitive-discovery.schema.json`: version 3 candidate record.
+- `cases/registry.json`: discoverable index of provisional live cases and their
+  immutable current cuts.
+- `schemas/kfd-live-case-registry.schema.json`: version 1 live-case registry
+  contract.
 - `standards.json#/standards/kfd-5`: schema identity, interface, and concepts.
 - `scripts/check.mjs`: package wiring and contract verification.
 
@@ -83,3 +87,10 @@ or proof of primitives.
 Kungfu Episode, Xinfa Atlas, and Buildchain Release Passport can be studied as
 KFD-5 cases. They are evidence for the procedure's development, not automatic
 proof of historical importance or universal applicability.
+
+The package also publishes a provisional live case registry at
+`cases/registry.json`. Its first record preserves the genesis, KFD method
+trace, propagation hypothesis, immutable version 3 candidate cut, and open
+qualification path for the working candidate `Proof-Carrying Work Object`.
+The case dogfoods KFD-5 record closure; neither schema validity nor KFD
+self-application promotes the candidate.
