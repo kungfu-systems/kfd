@@ -1,7 +1,7 @@
 # KFD Formal Model
 
 This document defines the shared notation and authority boundary for the
-non-normative formal references published with KFD-1 through KFD-6.
+non-normative formal references published with KFD-1 through KFD-7.
 
 - Status: experimental
 - Normative: no
@@ -76,20 +76,21 @@ The formal references reuse these object classes:
 | Object | Meaning |
 |---|---|
 | `FactSource` | A declared reference from which a contract world obtains load-bearing facts. |
+| `FactCut` | An independently addressable state admitted at a declared authority and evidence boundary. |
 | `Claim` | A bounded statement about a subject. |
 | `EvidenceCut` | The declared boundary of evidence available to a claim or decision. |
 | `ResponsibilityState` | The named owners of source facts, verification, and decision authority. |
 | `Participant` | A human, agent, operator, system, or other reasoning party in cooperation. |
 | `Perspective` | A declared position from which facts become relevant and consequences are borne. |
 | `PrimitiveCandidate` | A proposed object with independent identity, boundary, authority, lifecycle, and operations. |
-| `CausalExperience` | Preserved action, consequence, and evidence within a declared capture boundary. |
+| `CausalExperience` | A bounded causal path or partial order between fact cuts, preserving action, consequence, and evidence rather than only endpoint difference. |
 
 The same concrete artifact may play more than one role. Role identity must be
 declared rather than inferred from file type or product vocabulary.
 
 ## Cross-KFD composition
 
-The six references compose as follows:
+The seven references compose as follows:
 
 ```text
 KFD-1 maintains a non-drifting fact base.
@@ -98,12 +99,26 @@ KFD-3 makes trusted value available for cooperation.
 KFD-4 preserves and transforms declared perspectives.
 KFD-5 separates candidate genesis from qualification.
 KFD-6 repeats bounded discovery over causal experience without self-certification.
+KFD-7 keeps direction, perspective, authority, and occurrence independently
+      addressable in real-world action.
 ```
 
 This composition does not make every later KFD a theorem of the earlier ones.
 It states dependency: a later procedure cannot claim KFD conformance while
 bypassing the earlier fact, trust, cooperation, or perspective boundaries it
 uses.
+
+## Action extension
+
+KFD-7 extends the shared model by treating fact cuts as object-like admitted
+states and Episodes as morphism-like causal paths. Atlas, Pursuit, and Warrant
+are the first action profiles for observation, direction, and admissible
+action.
+
+This numbered draft is intentionally falsifiable. It does not prove that the
+proposed roles are universally minimal or claim a literal physical geometry.
+Its source-candidate lineage remains at
+[`drafts/action-state-separation.md`](../drafts/action-state-separation.md).
 
 ## Formal reference contract
 

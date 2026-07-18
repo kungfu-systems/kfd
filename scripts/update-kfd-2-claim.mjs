@@ -62,6 +62,16 @@ const draftAutonomyResidualRisk = {
   reason: "KFD-6 publishes a draft experiment contract, but no current package fact proves a conforming autonomous primitive-discovery implementation.",
   owner: "KFD maintainers and experimental adopters",
 };
+const draftActionModelResidualRisk = {
+  id: "action-model-activation-not-yet-proved",
+  definedBy: "https://kfd.libkungfu.dev/schemas/kfd-2/trust-taxonomy.schema.json#/$defs/residualRisk",
+  riskType: "external-fact-risk",
+  trustImpact: "downgrade-warning",
+  machineProvability: "partially-machine-verifiable",
+  agentAction: "verify-external-facts",
+  reason: "KFD-7 is a numbered draft with published reference semantics, but no current package fact proves cross-domain minimality, product usability, or activation.",
+  owner: "KFD maintainers and experimental adopters",
+};
 const writeJson = (filePath, value) => {
   mkdirSync(path.dirname(filePath), { recursive: true });
   writeFileSync(filePath, `${JSON.stringify(value, null, 2)}\n`);
@@ -145,7 +155,7 @@ const trustClaims = {
   standard: "kfd-2",
   projection: {
     kind: "generic",
-    description: "KFD self-dogfood claims for assessing KFD-1 and KFD-3 through KFD-6 from the generic KFD-2 trust model.",
+    description: "KFD self-dogfood claims for assessing KFD-1 and KFD-3 through KFD-7 from the generic KFD-2 trust model.",
   },
   claims: [
     {
@@ -298,6 +308,37 @@ const trustClaims = {
       responsibility,
       status: "declared",
     },
+    {
+      id: "kfd-7-action-responsibility-trust",
+      statement:
+        "KFD-7 is trustable as a numbered draft action-responsibility principle because KFD publishes its decision, formal reference, usage boundary, standards metadata, promotion lineage, and verification gate; KFD does not claim that cross-domain minimality, product usability, or activation is already proved.",
+      subject: {
+        kind: "action-responsibility",
+        id: "kfd-7-action-responsibility",
+        standard: "kfd-7",
+        description: "KFD-7 draft separation of direction, perspective, authority, and realized occurrence over Fact cuts and causal records.",
+      },
+      facts: [
+        artifactPointer("file", "decisions/KFD-7.md"),
+        artifactPointer("file", "docs/KFD-7-formal.md"),
+        artifactPointer("file", "docs/KFD-7-usage.md"),
+        artifactPointer("file", "standards.json"),
+        artifactPointer("file", "drafts/action-state-separation.md"),
+      ],
+      evidence: [
+        evidence("file", "registry.json", "The numbered registry allocates KFD-7 with draft status."),
+        evidence("file", "drafts/registry.json", "The candidate registry preserves the promoted source lineage and keeps KFD-8 through KFD-10 non-binding."),
+        evidence("file", "scripts/check.mjs", "The package check gate validates KFD-7 identity, formal binding, concepts, draft status, trust projection, and participant-facing closure."),
+      ],
+      verification: { command: "node scripts/check.mjs", expectedResult: "warning" },
+      auditBoundary: {
+        scope: "KFD-7 numbered draft text, formal and usage references, standards metadata, promotion lineage, and package checks; excludes cross-domain minimality, adopter implementation correctness, product usability, and activation",
+        enumerability: "closed-world",
+      },
+      residualRisk: [draftActionModelResidualRisk],
+      responsibility,
+      status: "declared",
+    },
   ],
   schemaEvolution: {
     compatibilityRule:
@@ -377,6 +418,17 @@ const assessment = {
       responsibility,
       residualRisk: [draftAutonomyResidualRisk],
     },
+    {
+      id: "assess-kfd-7-action-responsibility-trust",
+      claimId: "kfd-7-action-responsibility-trust",
+      subject: trustClaims.claims[5].subject,
+      result: "warning",
+      facts: trustClaims.claims[5].facts.map((entry) => evidenceResult(entry.kind, entry.path, `Fact ${entry.path} is present and hashable.`)),
+      evidence: trustClaims.claims[5].evidence.map((entry) => evidenceResult(entry.type, entry.pointer.path, entry.description)),
+      auditBoundary: trustClaims.claims[5].auditBoundary,
+      responsibility,
+      residualRisk: [draftActionModelResidualRisk],
+    },
   ],
   unboundClaims: [],
   downgradeReasons: [
@@ -395,6 +447,14 @@ const assessment = {
       reason: "KFD-6 is a draft experiment contract and does not yet have adopter evidence for a conforming autonomous primitive-discovery loop.",
       agentAction: "verify-external-facts",
       source: "kfd-6-autonomous-discovery-loop-trust",
+    },
+    {
+      id: "kfd-7-action-model-activation-not-yet-proved",
+      riskType: "external-fact-risk",
+      trustImpact: "downgrade-warning",
+      reason: "KFD-7 is a numbered draft whose package identity and reference model are proved, while cross-domain minimality, product usability, and activation remain external evidence obligations.",
+      agentAction: "verify-external-facts",
+      source: "kfd-7-action-responsibility-trust",
     },
   ],
   responsibility,

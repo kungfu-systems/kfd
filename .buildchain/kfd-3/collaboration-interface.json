@@ -155,7 +155,7 @@
       "id": "kfd-2-foundation-trust-assessment",
       "surface": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json",
       "participants": ["release-system", "agent-reader", "package-consumer"],
-      "purpose": "Inspect KFD-2's generic assessment of KFD-1 and KFD-3 through KFD-6 claims."
+      "purpose": "Inspect KFD-2's generic assessment of KFD-1 and KFD-3 through KFD-7 claims."
     },
     {
       "id": "site-bundle",
@@ -265,7 +265,7 @@
       "id": "schemas",
       "kind": "json-api",
       "participants": ["agent-reader", "package-consumer", "release-system"],
-      "value": "KFD-owned JSON schemas for standards metadata and KFD-1 through KFD-6 interfaces.",
+      "value": "KFD-owned JSON schemas used by standards metadata and numbered decisions through KFD-7; KFD-7 intentionally exposes metadata only.",
       "discoverability": { "fromMinimalEntrypoint": true, "path": "schemas/**/*.json" },
       "maturity": "stable"
     },
@@ -329,7 +329,7 @@
       "id": "kfd-2-foundation-trust-claims",
       "kind": "json-api",
       "participants": ["release-system", "maintainer", "agent-reader", "package-consumer"],
-      "value": "Generic KFD-2 trust claims used to assess KFD-1 and KFD-3 through KFD-6 through one trust model.",
+      "value": "Generic KFD-2 trust claims used to assess KFD-1 and KFD-3 through KFD-7 through one trust model.",
       "discoverability": { "fromMinimalEntrypoint": true, "path": ".buildchain/kfd-2/kfd-foundation.trust-claims.json" },
       "maturity": "stable"
     },
@@ -337,7 +337,7 @@
       "id": "kfd-2-foundation-trust-assessment",
       "kind": "json-api",
       "participants": ["release-system", "maintainer", "agent-reader", "package-consumer"],
-      "value": "Generic KFD-2 trust assessment result for KFD's own KFD-1 and KFD-3 through KFD-6 claims.",
+      "value": "Generic KFD-2 trust assessment result for KFD's own KFD-1 and KFD-3 through KFD-7 claims.",
       "discoverability": { "fromMinimalEntrypoint": true, "path": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json" },
       "maturity": "stable"
     },
@@ -373,10 +373,13 @@
         { "path": "docs/KFD-4-formal.md" },
         { "path": "docs/KFD-5-formal.md" },
         { "path": "docs/KFD-6-formal.md" },
+        { "path": "docs/KFD-7-formal.md" },
+        { "path": "docs/KFD-7-usage.md" },
         { "path": "docs/primitive-discovery-cases.md" },
         { "path": "decisions/KFD-1.md" },
         { "path": "decisions/KFD-2.md" },
         { "path": "decisions/KFD-3.md" },
+        { "path": "decisions/KFD-7.md" },
         { "path": "registry.json" },
         { "path": "standards.json" }
       ],
@@ -457,7 +460,7 @@
     },
     {
       "id": "kfd-candidate-incubation",
-      "claim": "KFD gives humans and agents a shared, machine-readable path for preserving a possible organization rule without prematurely allocating a KFD number or normative authority.",
+      "claim": "KFD gives humans and agents a shared, machine-readable path for preserving pre-number candidates, recording explicit promotion into KFD-7, and keeping remaining slot hints non-binding.",
       "participants": ["human-reader", "agent-reader", "maintainer", "package-consumer", "site-consumer"],
       "facts": [
         { "path": "drafts/registry.json" },
@@ -481,7 +484,7 @@
           "trustImpact": "downgrade-warning",
           "machineProvability": "not-exhaustively-enumerable",
           "agentAction": "semantic-review-required",
-          "reason": "Machine checks can prove candidate identity, status, slot non-binding, and promotion boundaries, but cannot prove that the candidate should become an organization decision.",
+          "reason": "Machine checks can prove candidate identity, status, slot non-binding, promotion lineage, and numbering boundaries, but cannot prove semantic qualification of an unpromoted candidate or activation of a promoted numbered draft.",
           "owner": "KFD maintainers"
         }
       ]

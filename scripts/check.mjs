@@ -1202,6 +1202,17 @@ for (const concept of ["autonomousDiscovery", "causalExperience", "episodeCorpus
   if (!kfd6?.concepts?.[concept]) fail(`KFD-6 standards metadata missing concept ${concept}`);
 }
 if (!kfd6?.interfaces?.autonomousDiscoveryLoop) fail("KFD-6 standards metadata missing interface autonomousDiscoveryLoop");
+const kfd7 = standardsMetadata.standards?.["kfd-7"];
+if (kfd7?.status !== "draft") fail("KFD-7 must remain draft until activation evidence is committed");
+if (Object.keys(kfd7?.schemaIds ?? {}).some((name) => name !== "metadata")) {
+  fail("KFD-7 must not publish a universal action schema before product dogfood fixes its interface boundary");
+}
+if (Object.keys(kfd7?.schemaPaths ?? {}).some((name) => name !== "metadata")) {
+  fail("KFD-7 must not publish a universal action schema path before product dogfood fixes its interface boundary");
+}
+for (const concept of ["factCut", "causalRecord", "episode", "atlas", "pursuit", "warrant", "direction", "perspective", "authorityBoundary", "occurrence", "actionGeometry", "observationProjection", "targetRelation", "admissibleTransition", "realizedPath", "validActionSet", "conditionalIrreducibility", "counterfactualIndependence", "explicitAdmission", "progressiveDisclosure", "conservativeSessionLimit", "complexityBreakpoint"]) {
+  if (!kfd7?.concepts?.[concept]) fail(`KFD-7 standards metadata missing concept ${concept}`);
+}
 for (const [id, successors] of superseded) {
   for (const successor of successors) {
     if (!registry.entries.some((e) => e.id === successor)) fail(`${id} cites missing successor ${successor}`);
@@ -1271,6 +1282,7 @@ if (!kfd1Witness) {
       "kfd-4-usage-doc",
       "kfd-5-usage-doc",
       "kfd-6-usage-doc",
+      "kfd-7-usage-doc",
       "kfd-5-primitive-discovery-schema",
       "kfd-6-autonomous-discovery-loop-schema",
       "kfd-2-foundation-trust-claims",
@@ -1383,7 +1395,7 @@ if (!kfd2TrustClaims) {
   if (kfd2TrustClaims.standard !== "kfd-2") fail("KFD-2 generic trust claims standard must be kfd-2");
   if (kfd2TrustClaims.projection?.kind !== "generic") fail("KFD-2 generic trust claims projection.kind must be generic");
   const claimsById = new Map((kfd2TrustClaims.claims ?? []).map((claim) => [claim.id, claim]));
-  for (const requiredClaim of ["kfd-1-contract-world-trust", "kfd-3-collaboration-interface-trust", "kfd-4-observer-perspective-trust", "kfd-5-primitive-discovery-trust", "kfd-6-autonomous-discovery-loop-trust"]) {
+  for (const requiredClaim of ["kfd-1-contract-world-trust", "kfd-3-collaboration-interface-trust", "kfd-4-observer-perspective-trust", "kfd-5-primitive-discovery-trust", "kfd-6-autonomous-discovery-loop-trust", "kfd-7-action-responsibility-trust"]) {
     if (!claimsById.has(requiredClaim)) fail(`KFD-2 generic trust claims missing ${requiredClaim}`);
   }
   const expectedSubjectKinds = new Map([
@@ -1392,6 +1404,7 @@ if (!kfd2TrustClaims) {
     ["kfd-4-observer-perspective-trust", "observer-perspective"],
     ["kfd-5-primitive-discovery-trust", "primitive-discovery"],
     ["kfd-6-autonomous-discovery-loop-trust", "autonomous-discovery-loop"],
+    ["kfd-7-action-responsibility-trust", "action-responsibility"],
   ]);
   for (const [claimId, expectedKind] of expectedSubjectKinds.entries()) {
     const claim = claimsById.get(claimId);
@@ -1427,7 +1440,7 @@ if (!kfd2TrustAssessment) {
   }
   if (kfd2TrustAssessment.result !== "warning") fail("KFD-2 generic trust assessment result must be warning because KFD-3 declares semantic residual risk");
   const assessmentsByClaim = new Map((kfd2TrustAssessment.assessments ?? []).map((entry) => [entry.claimId, entry]));
-  for (const requiredClaim of ["kfd-1-contract-world-trust", "kfd-3-collaboration-interface-trust", "kfd-4-observer-perspective-trust", "kfd-5-primitive-discovery-trust", "kfd-6-autonomous-discovery-loop-trust"]) {
+  for (const requiredClaim of ["kfd-1-contract-world-trust", "kfd-3-collaboration-interface-trust", "kfd-4-observer-perspective-trust", "kfd-5-primitive-discovery-trust", "kfd-6-autonomous-discovery-loop-trust", "kfd-7-action-responsibility-trust"]) {
     if (!assessmentsByClaim.has(requiredClaim)) fail(`KFD-2 generic trust assessment missing claim ${requiredClaim}`);
   }
   if (assessmentsByClaim.get("kfd-3-collaboration-interface-trust")?.result !== "warning") {
@@ -1435,6 +1448,9 @@ if (!kfd2TrustAssessment) {
   }
   if (assessmentsByClaim.get("kfd-6-autonomous-discovery-loop-trust")?.result !== "warning") {
     fail("KFD-2 generic trust assessment must downgrade draft KFD-6 to warning");
+  }
+  if (assessmentsByClaim.get("kfd-7-action-responsibility-trust")?.result !== "warning") {
+    fail("KFD-2 generic trust assessment must downgrade draft KFD-7 to warning");
   }
   for (const [index, reason] of (kfd2TrustAssessment.downgradeReasons ?? []).entries()) {
     if (!kfd2TrustTaxonomySchema.$defs?.riskType?.enum?.includes(reason.riskType)) fail(`KFD-2 generic trust assessment downgradeReasons[${index}].riskType must be a KFD-2 value`);
@@ -1575,6 +1591,12 @@ if (!kfd3Interface) {
     }
     if (!kfd3Interface.valueEvidence.some((entry) => entry.id === "kfd-foundation-model" && entry.facts?.some((fact) => fact.path === "docs/foundation-model.md"))) {
       fail("KFD-3 foundation value evidence must bind docs/foundation-model.md");
+    }
+    const foundationEvidence = kfd3Interface.valueEvidence.find((entry) => entry.id === "kfd-foundation-model");
+    for (const requiredPath of ["decisions/KFD-7.md", "docs/KFD-7-formal.md", "docs/KFD-7-usage.md"]) {
+      if (!foundationEvidence?.facts?.some((fact) => fact.path === requiredPath)) {
+        fail(`KFD-3 foundation value evidence must bind ${requiredPath}`);
+      }
     }
     if (!kfd3Interface.valueEvidence.some((entry) => entry.id === "kfd-live-case-dogfood" && entry.facts?.some((fact) => fact.path === liveCaseRegistryPath))) {
       fail("KFD-3 live-case value evidence must bind the live case registry");
