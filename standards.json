@@ -353,7 +353,7 @@
             "classes": [
               "cross-time"
             ],
-            "description": "Public trace of how KFD-1 through KFD-6 bound the candidate generation and anti-self-certification boundary.",
+            "description": "Public trace of how KFD-1 through KFD-7 bound the candidate generation and anti-self-certification boundary.",
             "sourcePath": "cases/live/proof-carrying-work-object/kfd-method-trace.md",
             "weldRationale": "The reflexive dogfood claim remains inspectable without being promoted into proof of the candidate.",
             "impactProjection": {
@@ -1246,6 +1246,20 @@
             }
           },
           {
+            "id": "kfd-7-action-contract-schema",
+            "class": "integration-time",
+            "classes": ["integration-time", "cross-time"],
+            "description": "Published version 1 KFD-7 action-contract Profile schema.",
+            "sourcePath": "schemas/kfd-7/action-contract.schema.json",
+            "weldRationale": "Human, agent, product, verifier, and release consumers bind to the same role, transition, evidence, non-claim, and activation declaration.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
             "id": "kfd-candidate-registry-schema",
             "class": "integration-time",
             "classes": [
@@ -1399,7 +1413,7 @@
             ],
             "description": "Published KFD-7 draft usage documentation surface at docs/KFD-7-usage.md.",
             "sourcePath": "docs/KFD-7-usage.md",
-            "weldRationale": "Humans and agents can inspect package surfaces, progressive-disclosure guidance, adoption obligations, and the explicit absence of a universal KFD-7 schema.",
+            "weldRationale": "Humans and agents can inspect package surfaces, progressive-disclosure guidance, draft Profile declarations, adoption obligations, and the explicit non-qualifying activation boundary.",
             "impactProjection": {
               "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
               "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
@@ -1875,7 +1889,7 @@
       "document": {
         "path": "decisions/KFD-7.md",
         "url": "https://kfd.libkungfu.dev/7",
-        "sha256": "ded7a5460c6879e312e2fc29503c12a12d5b67869d274e6aa095db39ccc53bf1"
+        "sha256": "741047661fda21679f1cff58a67dbf23ba872c74017c0a9d7c1dfe6f5d87f385"
       },
       "formalModel": {
         "path": "docs/KFD-7-formal.md",
@@ -1884,19 +1898,30 @@
         "status": "experimental",
         "normative": false,
         "authorityPath": "decisions/KFD-7.md",
-        "sha256": "991e67497b68d655461ae0981eb9ef8f1ea294bebaea5447d83a2220f0d15f47"
+        "sha256": "d74d9907614d0dc09498b0dba2cd2f572ff7d5dc315628063d67e768d4ae1fad"
       },
       "compatibility": {
         "packageLine": "v1.0",
         "registrySchemaVersion": 1,
         "metadataSchemaVersion": "2",
-        "rule": "Before the first stable release, maintainer-authorized semantic refinement must declare breaking decision-surface impact; after stable, substantive change mints a new KFD."
+        "rule": "Before the first stable release, maintainer-authorized semantic refinement must declare breaking decision-surface impact. Compatible draft Profile additions may keep action-contract schemaVersion 1; changes to responsibility, transition validity, prohibited inference, evidence closure, activation meaning, or required fields require a new interface version or explicit Foundation Revision. After stable, substantive decision change mints a new KFD."
       },
       "schemaIds": {
-        "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json"
+        "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json",
+        "actionContract": "https://kfd.libkungfu.dev/schemas/kfd-7/action-contract.schema.json"
       },
       "schemaPaths": {
-        "metadata": "schemas/kfd-standards.schema.json"
+        "metadata": "schemas/kfd-standards.schema.json",
+        "actionContract": "schemas/kfd-7/action-contract.schema.json"
+      },
+      "interfaces": {
+        "actionContract": {
+          "contract": "kfd-7-action-contract",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-7/action-contract.schema.json",
+          "schemaPath": "schemas/kfd-7/action-contract.schema.json",
+          "compatibilityRule": "Compatible Profile-owned lifecycle additions may keep schemaVersion 1; semantic or required-field changes to responsibility, transition, evidence, non-claim, or activation meaning require a new interface version or contract."
+        }
       },
       "concepts": {
         "factCut": "declared fact cut",
@@ -1920,7 +1945,18 @@
         "explicitAdmission": "separate admission of successor facts after occurrence",
         "progressiveDisclosure": "low-friction interface that preserves inspectable responsibility",
         "conservativeSessionLimit": "lossless session-compatible projection for bounded low-complexity work",
-        "complexityBreakpoint": "condition that makes an independent action responsibility decision-relevant and addressable"
+        "complexityBreakpoint": "condition that makes an independent action responsibility decision-relevant and addressable",
+        "actionProfile": "versioned product-owned action Profile",
+        "roleIndependence": "independently addressable semantic responsibility",
+        "profileLifecycleVocabulary": "Profile-owned lifecycle vocabulary",
+        "transitionContract": "precondition-effect-receipt-denial-evidence transition contract",
+        "prohibitedInference": "fail-visible prohibited cross-role inference",
+        "roleDeletionExperiment": "role deletion or fusion experiment",
+        "evidenceObligation": "retained Profile evidence obligation",
+        "activationDecision": "activate, revise, reject, or pending verdict",
+        "qualificationCut": "exact evidence cut and independent review binding",
+        "residualRisk": "declared remaining risk",
+        "extensionPoint": "versioned Profile-owned extension"
       }
     }
   }

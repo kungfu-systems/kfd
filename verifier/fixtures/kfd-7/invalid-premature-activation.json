@@ -1,0 +1,28 @@
+{
+  "$schema": "https://kfd.libkungfu.dev/schemas/kfd-7/action-contract.schema.json",
+  "schemaVersion": 1,
+  "contract": "kfd-7-action-contract",
+  "standard": "kfd-7",
+  "profile": {
+    "id": "invalid-activation-profile",
+    "version": "0.1.0",
+    "product": "example",
+    "implementation": "git+https://example.invalid/action@bad",
+    "qualificationStatus": "provisional"
+  },
+  "roles": [],
+  "transitions": [],
+  "prohibitedInferences": [],
+  "evidenceObligations": [],
+  "nonClaims": [
+    "invalid fixture"
+  ],
+  "extensions": [],
+  "activation": {
+    "decision": "activate",
+    "evidenceCut": "missing",
+    "independentReview": "missing",
+    "productWitnesses": [],
+    "residualRisk": "activation is unsupported"
+  }
+}

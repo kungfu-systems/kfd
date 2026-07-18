@@ -133,6 +133,25 @@ A conforming claim:
 - does not infer completion, success, permission, or reality completeness from
   the wrong object.
 
+## Reference Profile contract
+
+KFD publishes `schemas/kfd-7/action-contract.schema.json` as a version 1 draft
+Profile declaration. It does not prescribe a universal product object model.
+It gives products and release systems one machine-readable place to declare:
+
+- the Fact, Episode, Pursuit, Atlas, and Warrant responsibility mappings;
+- Profile-owned lifecycle vocabulary and implementation coordinates;
+- supported transitions with preconditions, effects, receipts, evidence,
+  denial reasons, and residual risks;
+- prohibited cross-role inferences and retained evidence obligations;
+- extension ownership, non-claims, qualification state, and activation verdict.
+
+All five responsibility declarations remain required even when a product uses
+one physical record or a low-complexity session projection. The declaration
+explains the mapping or inspectable default; it does not require five stores,
+forms, or commands. Schema conformance proves declaration closure only. It does
+not prove role necessity, runtime behavior, product fitness, or activation.
+
 ## Activation
 
 KFD-7 remains draft until real product evidence:
@@ -149,6 +168,11 @@ KFD-7 remains draft until real product evidence:
 - compares task, goal, workflow, session, approval, capability, and fused
   alternatives;
 - demonstrates lower total lifecycle cost or materially safer action.
+
+An `activate` verdict additionally binds an exact evidence cut, independent
+review, at least one retained product witness, and no planned or failed
+evidence obligation. Missing evidence remains visible; it is never projected
+as pass.
 
 Failure is evidence for revision, simplification, or rejection of the proposed
 profiles. It is not permission to infer one responsibility from another.
@@ -175,9 +199,12 @@ non-drifting facts
 ## Verification
 
 The non-normative reference semantics are published in
-`docs/KFD-7-formal.md`. Current package verification proves document,
-metadata, route, digest, and evidence closure. It does not prove cross-domain
-minimality, product usability, or activation.
+`docs/KFD-7-formal.md`. The draft Profile contract is published at
+`schemas/kfd-7/action-contract.schema.json` and is implemented independently by
+the native and WebAssembly verifier projections. Current package verification
+proves document, metadata, route, digest, declaration, and negative-fixture
+closure. It does not prove cross-domain minimality, runtime behavior, product
+usability, or activation.
 
 ## Adopters
 

@@ -22,13 +22,42 @@ authoritative text is `decisions/KFD-7.md`; its registry status is `draft`.
   candidate.
 - `standards.json#/standards/kfd-7`: identity, status, formal reference,
   concepts, and digests.
+- `schemas/kfd-7/action-contract.schema.json`: version 1 draft Profile
+  declaration.
+- `verifier/fixtures/kfd-7/`: conforming draft and fail-visible negative
+  declarations.
 - `scripts/check.mjs`: registry, document, metadata, route, and evidence
   closure.
 
-KFD-7 does not yet publish a universal machine schema. A schema would need to
-choose boundaries for Fact cuts, causal records, role references, derivation,
-composition, defaults, and responsibility. Those choices require product
-dogfood before KFD can weld them as a general interface.
+The action-contract schema fixes only the reference declaration and activation
+boundary. It does not choose a product store, API, CLI, GUI, Git coordinate,
+database key, or universal lifecycle vocabulary. Product dogfood still decides
+whether any concrete Profile deserves stable activation.
+
+## Draft Profile declaration
+
+A Profile declares its product and implementation coordinate, qualification
+state, five responsibility mappings, Profile-owned lifecycle terms, supported
+transitions, prohibited inferences, evidence obligations, non-claims,
+extensions, and activation verdict. The complete draft example is
+`verifier/fixtures/kfd-7/valid-action-contract.json`.
+
+Products may map several responsibilities to one physical record or familiar
+session surface. They still declare all five mappings so an independent reader
+can see which default, projection, or source authority carries each decision.
+This requirement preserves inspectability without requiring five user-facing
+objects.
+
+Each supported transition declares its subject role, operation, Profile state
+terms, preconditions, effect, receipt, evidence, denial reasons, and residual
+risk. Unknown mappings and transitions fail closed. Profile state strings do
+not become universal KFD enums merely because one adopter uses them.
+
+The evidence statuses are `planned`, `passed`, `failed`, and
+`not-applicable`. `passed` binds retained artifacts; `not-applicable` requires
+a bounded reason. Activation requires a qualified Profile, no planned or
+failed obligations, an exact evidence cut, independent review, and retained
+product witnesses.
 
 ## Adoption profile
 
@@ -81,9 +110,24 @@ An adopter should test both directions: simple work round-trips through the
 action model without semantic loss or object ceremony, and complex work
 reveals the role whose independence has become decision-relevant.
 
+## Independent verification
+
+The native and WebAssembly verifier projections package the same schema:
+
+```bash
+npx @kungfu-tech/kfd verify kfd-record \
+  verifier/fixtures/kfd-7/valid-action-contract.json
+```
+
+The verifier rejects missing roles, unknown closed-vocabulary values,
+incomplete transitions, and premature activation. It remains offline,
+non-qualifying, and non-self-certified. Passing proves only record structure;
+runtime and qualification evidence remain product and release responsibilities.
+
 ## Draft evidence boundary
 
 The package proves that KFD-7 is numbered, routed, digest-bound, formally
-described, and exposed to humans and agents from one source. It does not prove
-that the proposed action roles are universally minimal, that one product has
-implemented them correctly, or that the activation gate has passed.
+described, machine-declarable, and exposed to humans and agents from one
+source. It does not prove that the proposed action roles are universally
+minimal, that one product has implemented them correctly, or that the
+activation gate has passed.

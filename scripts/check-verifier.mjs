@@ -39,6 +39,10 @@ const cases = [
     ".buildchain/kfd-3/collaboration-interface.artifact.json",
   ],
   [
+    "kfd-record",
+    "verifier/fixtures/kfd-7/valid-action-contract.json",
+  ],
+  [
     "passport",
     "verifier/fixtures/passport",
   ],
@@ -65,6 +69,28 @@ for (const [kind, fixture] of cases) {
   assert.equal(report.offline, true, `${kind} fixture must remain offline`);
   assert.equal(report.qualifying, false, `${kind} verifier must not self-qualify`);
   assert.equal(report.selfCertified, false, `${kind} verifier must not self-certify`);
+}
+
+const rejectedKfd7Records = [
+  "verifier/fixtures/kfd-7/invalid-missing-warrant.json",
+  "verifier/fixtures/kfd-7/invalid-premature-activation.json",
+];
+for (const fixture of rejectedKfd7Records) {
+  const native = run("cargo", [...nativeArgs, "verify", "kfd-record", fixture, "--json"], 1);
+  const wasm = run("node", ["bin/kfd.mjs", "verify", "kfd-record", fixture, "--json"], 1);
+  assert.equal(wasm, native, `${fixture} native and WASM rejections differ`);
+  const report = JSON.parse(native);
+  assert.equal(report.valid, false, `${fixture} must fail closed`);
+  assert.equal(report.qualifying, false, `${fixture} rejection must not qualify the profile`);
+  assert.equal(report.selfCertified, false, `${fixture} rejection must not self-certify`);
+  const issueKeys = new Set(report.issues.map((issue) => `${issue.code}:${issue.path}`));
+  if (fixture.endsWith("invalid-missing-warrant.json")) {
+    assert.equal(issueKeys.has("schema-contains:/roles"), true, "missing Warrant must fail the required-role closure");
+  }
+  if (fixture.endsWith("invalid-premature-activation.json")) {
+    assert.equal(issueKeys.has("schema-const:/profile/qualificationStatus"), true, "activation must require a qualified Profile");
+    assert.equal(issueKeys.has("schema-min-items:/activation/productWitnesses"), true, "activation must retain product witnesses");
+  }
 }
 
 const generatedPack = JSON.parse(
@@ -99,6 +125,38 @@ assert.deepEqual(buildchainSelfCheck.issues, []);
 
 const temporary = fs.mkdtempSync(path.join(os.tmpdir(), "kfd-verifier-"));
 try {
+  const activationWithPlannedEvidencePath = path.join(temporary, "activation-with-planned-evidence.json");
+  const activationWithPlannedEvidence = JSON.parse(
+    fs.readFileSync(path.join(root, "verifier/fixtures/kfd-7/valid-action-contract.json"), "utf8"),
+  );
+  activationWithPlannedEvidence.profile.qualificationStatus = "qualified";
+  activationWithPlannedEvidence.activation.decision = "activate";
+  activationWithPlannedEvidence.activation.independentReview = "review:retained";
+  activationWithPlannedEvidence.activation.productWitnesses = ["witness:retained"];
+  fs.writeFileSync(activationWithPlannedEvidencePath, `${JSON.stringify(activationWithPlannedEvidence)}\n`);
+  const nativeActivationWithPlannedEvidence = run(
+    "cargo",
+    [...nativeArgs, "verify", "kfd-record", activationWithPlannedEvidencePath, "--json"],
+    1,
+  );
+  const wasmActivationWithPlannedEvidence = run(
+    "node",
+    ["bin/kfd.mjs", "verify", "kfd-record", activationWithPlannedEvidencePath, "--json"],
+    1,
+  );
+  assert.equal(
+    wasmActivationWithPlannedEvidence,
+    nativeActivationWithPlannedEvidence,
+    "activation with planned evidence rejection must match byte for byte",
+  );
+  assert.equal(
+    JSON.parse(nativeActivationWithPlannedEvidence).issues.some(
+      (issue) => issue.code === "schema-enum" && issue.path.endsWith("/status"),
+    ),
+    true,
+    "activation must reject planned evidence obligations",
+  );
+
   fs.cpSync(
     path.join(verifier, "fixtures", "episode", "sealed", "sha256", "aa",
       "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"),
@@ -197,4 +255,4 @@ assert.doesNotMatch(
   fs.readFileSync(path.join(root, "bin", "kfd.mjs"), "utf8"),
   /\b(fetch|https?\.request)\s*\(/u,
 );
-console.log(`check-verifier: ${cases.length} native/WASM parity fixtures and 6 adversarial rejections ok`);
+console.log(`check-verifier: ${cases.length} native/WASM parity fixtures and ${7 + rejectedKfd7Records.length} adversarial rejections ok`);
