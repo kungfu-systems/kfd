@@ -11,12 +11,12 @@
   "candidates": [
     {
       "id": "action-state-separation",
-      "title": "Independent action state",
+      "title": "Cross-domain action primitives",
       "status": "incubating",
       "kindCandidate": "principle",
       "slotHint": 7,
       "slotBinding": "non-binding",
-      "oneSentence": "Real-world work must preserve intent, perspective, authority, and consequence as independently addressable facts.",
+      "oneSentence": "Real-world action must begin from independently addressable, fact-bound direction, perspective, and authority, and return as independently replayable causal experience.",
       "path": "drafts/action-state-separation.md",
       "sourceCases": [
         {
@@ -31,7 +31,79 @@
         "counterexample-review",
         "product-witness"
       ],
-      "claimBoundary": "This candidate does not allocate KFD-7, require four named storage objects, establish universal necessity, or create a normative organization decision."
+      "claimBoundary": "This candidate does not allocate KFD-7, turn Fact or Episode into a domain-Primitive claim, require named physical stores, establish universal necessity, or create a normative organization decision. Its elaboration candidates carry non-binding slot hints only."
+    },
+    {
+      "id": "atlas-action-perspective",
+      "title": "Atlas action perspective",
+      "status": "incubating",
+      "kindCandidate": "principle",
+      "slotHint": 8,
+      "slotBinding": "non-binding",
+      "oneSentence": "Every consequential action must bind to an addressable perspective and fact cut.",
+      "path": "drafts/atlas-action-perspective.md",
+      "sourceCases": [
+        {
+          "id": "proof-carrying-work-object",
+          "path": "cases/live/proof-carrying-work-object/README.md"
+        }
+      ],
+      "promotionGate": [
+        "perspective-deletion-witnesses",
+        "cross-domain-transfer",
+        "context-alternative-comparison",
+        "perspective-replay-evidence",
+        "dual-first-product-witness"
+      ],
+      "claimBoundary": "This candidate does not allocate KFD-8, require the name Atlas, mandate one serialization or product surface, claim perspective completeness, or create a normative organization decision."
+    },
+    {
+      "id": "pursuit-intent-continuity",
+      "title": "Pursuit intent continuity",
+      "status": "incubating",
+      "kindCandidate": "principle",
+      "slotHint": 9,
+      "slotBinding": "non-binding",
+      "oneSentence": "Intent that survives an action must have an identity independent of the action that advances it.",
+      "path": "drafts/pursuit-intent-continuity.md",
+      "sourceCases": [
+        {
+          "id": "proof-carrying-work-object",
+          "path": "cases/live/proof-carrying-work-object/README.md"
+        }
+      ],
+      "promotionGate": [
+        "continuity-deletion-witnesses",
+        "cross-domain-transfer",
+        "goal-alternative-comparison",
+        "settlement-distinguishability",
+        "product-witness"
+      ],
+      "claimBoundary": "This candidate does not allocate KFD-9, require the name Pursuit, mandate one decomposition shape or workflow, establish universal necessity, or create a normative organization decision."
+    },
+    {
+      "id": "warrant-bounded-authority",
+      "title": "Warrant bounded authority",
+      "status": "incubating",
+      "kindCandidate": "principle",
+      "slotHint": 10,
+      "slotBinding": "non-binding",
+      "oneSentence": "Permission to act must remain explicit, bounded, derivable, and independently revocable.",
+      "path": "drafts/warrant-bounded-authority.md",
+      "sourceCases": [
+        {
+          "id": "proof-carrying-work-object",
+          "path": "cases/live/proof-carrying-work-object/README.md"
+        }
+      ],
+      "promotionGate": [
+        "authority-deletion-witnesses",
+        "cross-domain-transfer",
+        "authorization-alternative-comparison",
+        "revocation-and-attenuation-evidence",
+        "product-witness"
+      ],
+      "claimBoundary": "This candidate does not allocate KFD-10, require the name Warrant, replace domain authorization systems, establish universal necessity, or create a normative organization decision."
     }
   ]
 }

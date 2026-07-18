@@ -89,11 +89,17 @@ KFD Candidates preserve potentially load-bearing rules before a number is
 allocated. They are explicitly non-normative and may be revised, reordered,
 split, merged, withdrawn, rejected, or promoted.
 
-- [Independent action state](drafts/action-state-separation.md), currently
-  carrying the non-binding slot hint `7`.
+- [Cross-domain action primitives](drafts/action-state-separation.md), slot hint
+  `7`.
+- [Atlas action perspective](drafts/atlas-action-perspective.md), slot hint `8`.
+- [Pursuit intent continuity](drafts/pursuit-intent-continuity.md), slot hint
+  `9`.
+- [Warrant bounded authority](drafts/warrant-bounded-authority.md), slot hint
+  `10`.
 
 The machine source is [`drafts/registry.json`](drafts/registry.json). A slot
-hint is an ordering hypothesis, not `KFD-7`, a reservation, or a promise.
+hint is an ordering hypothesis, not an allocated KFD number, a reservation, or
+a promise.
 
 ## Product proof path
 

@@ -9,7 +9,7 @@
   "versionImpact": {
     "final": "major",
     "source": "kfd-candidate-governance",
-    "rationale": "This pre-stable line includes KFD-1 through KFD-6, the formal reference layer, live Primitive cases, and a new machine-readable pre-number KFD Candidate registry. KFD-1 now defines the bounded Foundation Revision window and the first-stable Foundation Freeze while preserving every published coordinate. The initial action-state candidate carries a non-binding slot hint without allocating KFD-7. Major remains the honest cumulative pre-stable decision and machine-surface impact while the fixed outer package line remains v1.0."
+    "rationale": "This pre-stable line includes KFD-1 through KFD-6, the formal reference layer, live Primitive cases, and a machine-readable pre-number KFD Candidate registry. KFD-1 defines the bounded Foundation Revision window and the first-stable Foundation Freeze while preserving every published coordinate. The cross-domain action umbrella and its Atlas, Pursuit, and Warrant elaborations carry non-binding slot hints without allocating KFD-7 through KFD-10. Major remains the honest cumulative pre-stable decision and machine-surface impact while the fixed outer package line remains v1.0."
   },
   "surfaceImpacts": [
     {
@@ -46,7 +46,13 @@
       "id": "kfd-candidate-registry",
       "impact": "minor",
       "class": "additive",
-      "rationale": "KFD additively publishes a version 1 pre-number candidate registry and schema. Candidate IDs are stable, slot hints are explicitly non-binding, only promotion allocates a number, and the initial action-state candidate does not create KFD-7 or normative authority."
+      "rationale": "KFD additively publishes a version 1 pre-number candidate registry and schema. Candidate IDs are stable, slot hints are explicitly non-binding, only promotion allocates a number, and the cross-domain action umbrella plus its Atlas, Pursuit, and Warrant elaborations do not create KFD-7 through KFD-10 or normative authority."
+    },
+    {
+      "id": "kfd-action-primitive-candidate-system",
+      "impact": "major",
+      "class": "breaking",
+      "rationale": "Before stable publication, KFD refines the initial action-state candidate into one cross-domain action-Primitive umbrella and three independently qualifiable Atlas, Pursuit, and Warrant candidates. The original candidate ID and path remain stable; the new candidate identities and non-binding slot hints remain provisional, and implementation design is intentionally outside the KFD package."
     },
     {
       "id": "kfd-standards-metadata",
@@ -82,7 +88,7 @@
       "id": "kfd-3-self-collaboration",
       "impact": "minor",
       "class": "release-passport",
-      "rationale": "KFD refreshes its collaboration interface and pre-build/artifact witnesses to classify live-case records together with the candidate registry, schema, index, first candidate, governance rules, site projection, and package export as participant-consumable surfaces for humans, agents, package consumers, and site consumers."
+      "rationale": "KFD refreshes its collaboration interface and pre-build/artifact witnesses to classify live-case records together with the candidate registry, schema, index, four action-Primitive candidates, governance rules, site projection, and package export as participant-consumable surfaces for humans, agents, package consumers, and site consumers."
     },
     {
       "id": "kfd-3-trusted-value-evidence",
@@ -130,7 +136,7 @@
       "id": "kfd-1-surface-register",
       "impact": "minor",
       "class": "additive",
-      "rationale": "standards.json retains the live-case registry and immutable qualification surfaces, and adds the candidate registry schema, candidate registry, candidate index, and action-state candidate as integration-time or cross-time surfaces. The KFD-1 witness binds all registered source and artifact digests from that fact source."
+      "rationale": "standards.json retains the live-case registry and immutable qualification surfaces, and registers the candidate registry schema, candidate registry, candidate index, cross-domain action umbrella, and Atlas, Pursuit, and Warrant candidate documents as integration-time or cross-time surfaces. The KFD-1 witness binds all registered source and artifact digests from that fact source."
     },
     {
       "id": "kfd-formal-reference-layer",
@@ -157,5 +163,5 @@
       "rationale": "KFD-1 now publishes a machine-readable schema for canonical reader URLs, latest aliases, immutable version artifact URLs, artifact digests, source coordinates, lineage, site consumption, and archive policies that prevent same-version digest drift or destructive deletion of immutable publication prefixes."
     }
   ],
-  "summary": "KFD v1.0 preserves six authoritative decisions and its live Primitive case system while adding a pre-number Candidate lifecycle without allocating KFD-7. The pre-stable Foundation Revision and first-stable Foundation Freeze are explicit; candidate identity, slot non-binding, promotion boundaries, package exports, site projection, and KFD-1/KFD-3 evidence are machine-auditable while all prior published coordinates remain immutable."
+  "summary": "KFD v1.0 preserves six authoritative decisions and its live Primitive case system while adding a pre-number Candidate lifecycle without allocating KFD-7 through KFD-10. The action-system hypothesis is expressed as a cross-domain action-Primitive umbrella plus independently qualifiable Atlas, Pursuit, and Warrant candidates over the Fact and Episode substrate. KFD retains principles and generation mechanisms while product implementation design remains with the implementing repository. The pre-stable Foundation Revision and first-stable Foundation Freeze are explicit; candidate identity, slot non-binding, promotion boundaries, package exports, site projection, and KFD-1/KFD-3 evidence are machine-auditable while all prior published coordinates remain immutable."
 }

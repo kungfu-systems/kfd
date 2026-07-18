@@ -13,7 +13,10 @@
 | How can I test the KFD primitive-discovery lens against Git, VisiCalc, the log, and an ordinary trace view? | [`primitive-discovery-cases.md`](primitive-discovery-cases.md) |
 | Where are provisional Primitive candidates tracked as live KFD dogfood? | [`../cases/registry.json`](../cases/registry.json) |
 | Where are pre-number KFD Candidates tracked? | [`../drafts/registry.json`](../drafts/registry.json) |
-| What is the current action-state candidate and why is its slot hint non-binding? | [`../drafts/action-state-separation.md`](../drafts/action-state-separation.md) |
+| How does the current action-system candidate relate Fact, Episode, Atlas, Pursuit, and Warrant without allocating KFD-7? | [`../drafts/action-state-separation.md`](../drafts/action-state-separation.md) |
+| Why might consequential action require an independently addressable perspective and fact cut? | [`../drafts/atlas-action-perspective.md`](../drafts/atlas-action-perspective.md) |
+| Why might intent continuity require an identity independent of the actions that advance it? | [`../drafts/pursuit-intent-continuity.md`](../drafts/pursuit-intent-continuity.md) |
+| Why might bounded authority require an explicit, derivable, and revocable Warrant? | [`../drafts/warrant-bounded-authority.md`](../drafts/warrant-bounded-authority.md) |
 | How does a candidate become a numbered draft? | [`../CONTRIBUTING.md`](../CONTRIBUTING.md#candidates-and-numbered-drafts) |
 | When may the pre-stable foundation be revised, and what freezes at stable? | [`../CONTRIBUTING.md`](../CONTRIBUTING.md#pre-stable-foundation-revision) |
 | How did the first live case split a fused work-object hypothesis into Pursuit and Warrant candidate tracks? | [`../cases/live/proof-carrying-work-object/README.md`](../cases/live/proof-carrying-work-object/README.md) |
