@@ -20,21 +20,21 @@
       "title": "Facts must not drift",
       "kind": "procedure",
       "status": "active",
-      "revision": 4,
+      "revision": 5,
       "metadataSchemaVersion": "2",
       "document": {
         "path": "decisions/KFD-1.md",
         "url": "https://kfd.libkungfu.dev/1",
-        "sha256": "d9e433f98eaf80f3fcf75986d073446bd73fbd385b9c6ba96fc3186e0da62a09"
+        "sha256": "5b91d4693a70d13d8fb11756b4281205ff911bc5386472f7c0af8477e2b095a1"
       },
       "formalModel": {
         "path": "docs/KFD-1-formal.md",
         "url": "https://kfd.libkungfu.dev/1/formal",
-        "version": 2,
+        "version": 3,
         "status": "experimental",
         "normative": false,
         "authorityPath": "decisions/KFD-1.md",
-        "sha256": "739bbfa03a026a15411db0ef4270d36a0a5e3e6ec51f3f6dfcce61e78a47033e"
+        "sha256": "6cac3e9a0b63bf004f12373c243e976fe4441831cdd3019142e6850bef72e3ab"
       },
       "compatibility": {
         "packageLine": "v1.0",
@@ -542,7 +542,9 @@
           {
             "id": "kfd-5-document",
             "class": "cross-time",
-            "classes": ["cross-time"],
+            "classes": [
+              "cross-time"
+            ],
             "description": "Published KFD decision text at decisions/KFD-5.md.",
             "sourcePath": "decisions/KFD-5.md",
             "weldRationale": "Consumers can audit, replay, or cite this surface after release.",
@@ -556,7 +558,9 @@
           {
             "id": "kfd-6-document",
             "class": "cross-time",
-            "classes": ["cross-time"],
+            "classes": [
+              "cross-time"
+            ],
             "description": "Published KFD decision text at decisions/KFD-6.md.",
             "sourcePath": "decisions/KFD-6.md",
             "weldRationale": "Consumers can audit, replay, or cite this surface after release.",
@@ -762,7 +766,9 @@
           {
             "id": "kfd-5-primitive-discovery-schema",
             "class": "integration-time",
-            "classes": ["integration-time"],
+            "classes": [
+              "integration-time"
+            ],
             "description": "Published JSON schema surface at schemas/kfd-5/primitive-discovery.schema.json.",
             "sourcePath": "schemas/kfd-5/primitive-discovery.schema.json",
             "weldRationale": "Consumers can bind to this surface as an integration contract.",
@@ -776,7 +782,9 @@
           {
             "id": "kfd-6-autonomous-discovery-loop-schema",
             "class": "integration-time",
-            "classes": ["integration-time"],
+            "classes": [
+              "integration-time"
+            ],
             "description": "Published JSON schema surface at schemas/kfd-6/autonomous-discovery-loop.schema.json.",
             "sourcePath": "schemas/kfd-6/autonomous-discovery-loop.schema.json",
             "weldRationale": "Consumers can bind to this draft surface as an experimental integration contract.",
@@ -1112,7 +1120,9 @@
           {
             "id": "kfd-5-usage-doc",
             "class": "cross-time",
-            "classes": ["cross-time"],
+            "classes": [
+              "cross-time"
+            ],
             "description": "Published KFD usage documentation surface at docs/KFD-5-usage.md.",
             "sourcePath": "docs/KFD-5-usage.md",
             "weldRationale": "Consumers can audit, replay, or cite this surface after release.",
@@ -1126,7 +1136,9 @@
           {
             "id": "kfd-6-usage-doc",
             "class": "cross-time",
-            "classes": ["cross-time"],
+            "classes": [
+              "cross-time"
+            ],
             "description": "Published KFD usage documentation surface at docs/KFD-6-usage.md.",
             "sourcePath": "docs/KFD-6-usage.md",
             "weldRationale": "Consumers can audit, replay, or cite this draft surface after release.",
@@ -1140,7 +1152,9 @@
           {
             "id": "kfd-1-formal-doc",
             "class": "cross-time",
-            "classes": ["cross-time"],
+            "classes": [
+              "cross-time"
+            ],
             "description": "Published KFD-1 formal reference at docs/KFD-1-formal.md.",
             "sourcePath": "docs/KFD-1-formal.md",
             "weldRationale": "Consumers can audit and cite the versioned non-normative reference semantics for KFD-1.",
@@ -1154,7 +1168,9 @@
           {
             "id": "kfd-2-formal-doc",
             "class": "cross-time",
-            "classes": ["cross-time"],
+            "classes": [
+              "cross-time"
+            ],
             "description": "Published KFD-2 formal reference at docs/KFD-2-formal.md.",
             "sourcePath": "docs/KFD-2-formal.md",
             "weldRationale": "Consumers can audit and cite the versioned non-normative reference semantics for KFD-2.",
@@ -1168,7 +1184,9 @@
           {
             "id": "kfd-3-formal-doc",
             "class": "cross-time",
-            "classes": ["cross-time"],
+            "classes": [
+              "cross-time"
+            ],
             "description": "Published KFD-3 formal reference at docs/KFD-3-formal.md.",
             "sourcePath": "docs/KFD-3-formal.md",
             "weldRationale": "Consumers can audit and cite the versioned non-normative reference semantics for KFD-3.",
@@ -1182,7 +1200,9 @@
           {
             "id": "kfd-4-formal-doc",
             "class": "cross-time",
-            "classes": ["cross-time"],
+            "classes": [
+              "cross-time"
+            ],
             "description": "Published KFD-4 formal reference at docs/KFD-4-formal.md.",
             "sourcePath": "docs/KFD-4-formal.md",
             "weldRationale": "Consumers can audit and cite the versioned non-normative reference semantics for KFD-4.",
@@ -1196,7 +1216,9 @@
           {
             "id": "kfd-5-formal-doc",
             "class": "cross-time",
-            "classes": ["cross-time"],
+            "classes": [
+              "cross-time"
+            ],
             "description": "Published KFD-5 formal reference at docs/KFD-5-formal.md.",
             "sourcePath": "docs/KFD-5-formal.md",
             "weldRationale": "Consumers can audit and cite the versioned non-normative reference semantics for KFD-5.",
@@ -1210,7 +1232,9 @@
           {
             "id": "kfd-6-formal-doc",
             "class": "cross-time",
-            "classes": ["cross-time"],
+            "classes": [
+              "cross-time"
+            ],
             "description": "Published KFD-6 draft formal reference at docs/KFD-6-formal.md.",
             "sourcePath": "docs/KFD-6-formal.md",
             "weldRationale": "Consumers can audit and cite the versioned non-normative reference semantics for the draft KFD-6 decision.",
@@ -1224,7 +1248,10 @@
           {
             "id": "kfd-candidate-registry-schema",
             "class": "integration-time",
-            "classes": ["integration-time", "cross-time"],
+            "classes": [
+              "integration-time",
+              "cross-time"
+            ],
             "description": "Published JSON schema for pre-number KFD Candidate identity, status, slot hints, and promotion boundaries.",
             "sourcePath": "schemas/kfd-candidate-registry.schema.json",
             "weldRationale": "Humans, agents, packages, and site renderers bind to one machine contract that prevents a candidate ordering hypothesis from drifting into number allocation.",
@@ -1238,7 +1265,9 @@
           {
             "id": "kfd-candidate-registry",
             "class": "cross-time",
-            "classes": ["cross-time"],
+            "classes": [
+              "cross-time"
+            ],
             "description": "Published non-normative pre-number KFD Candidate registry.",
             "sourcePath": "drafts/registry.json",
             "weldRationale": "Consumers can discover stable candidate identities, non-binding slot hints, promotion gates, and claim boundaries without treating them as numbered decisions.",
@@ -1252,7 +1281,9 @@
           {
             "id": "kfd-candidate-index",
             "class": "cross-time",
-            "classes": ["cross-time"],
+            "classes": [
+              "cross-time"
+            ],
             "description": "Published human and agent entrypoint for pre-number KFD Candidates.",
             "sourcePath": "drafts/README.md",
             "weldRationale": "The candidate lifecycle, numbering boundary, and current candidate path remain equally discoverable to human and agent participants.",
@@ -1266,10 +1297,12 @@
           {
             "id": "action-state-separation-candidate",
             "class": "cross-time",
-            "classes": ["cross-time"],
-            "description": "Published pre-number candidate for cross-domain action primitives over a Fact and Episode substrate.",
+            "classes": [
+              "cross-time"
+            ],
+            "description": "Preserved source-candidate lineage for the cross-domain action principle promoted into numbered draft KFD-7.",
             "sourcePath": "drafts/action-state-separation.md",
-            "weldRationale": "The proposed category, separation rule, generative ladder, falsifiers, and explicit non-allocation of KFD-7 remain inspectable across releases.",
+            "weldRationale": "The candidate genesis, separation argument, falsifiers, promotion event, and continuing KFD-8 through KFD-10 non-allocation remain inspectable across releases.",
             "impactProjection": {
               "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
               "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
@@ -1280,7 +1313,9 @@
           {
             "id": "atlas-action-perspective-candidate",
             "class": "cross-time",
-            "classes": ["cross-time"],
+            "classes": [
+              "cross-time"
+            ],
             "description": "Published pre-number candidate for binding consequential action to an addressable perspective and Fact cut.",
             "sourcePath": "drafts/atlas-action-perspective.md",
             "weldRationale": "The proposed Atlas role, deletion witnesses, alternatives, falsifiers, and explicit non-allocation of KFD-8 remain inspectable across releases.",
@@ -1294,7 +1329,9 @@
           {
             "id": "pursuit-intent-continuity-candidate",
             "class": "cross-time",
-            "classes": ["cross-time"],
+            "classes": [
+              "cross-time"
+            ],
             "description": "Published pre-number candidate for intent continuity independent of the actions that advance it.",
             "sourcePath": "drafts/pursuit-intent-continuity.md",
             "weldRationale": "The proposed Pursuit role, continuity and settlement obligations, falsifiers, and explicit non-allocation of KFD-9 remain inspectable across releases.",
@@ -1308,7 +1345,9 @@
           {
             "id": "warrant-bounded-authority-candidate",
             "class": "cross-time",
-            "classes": ["cross-time"],
+            "classes": [
+              "cross-time"
+            ],
             "description": "Published pre-number candidate for explicit, bounded, derivable, and independently revocable authority.",
             "sourcePath": "drafts/warrant-bounded-authority.md",
             "weldRationale": "The proposed Warrant role, derivation and revocation obligations, falsifiers, and explicit non-allocation of KFD-10 remain inspectable across releases.",
@@ -1329,6 +1368,54 @@
             "description": "Published JSON schema surface at schemas/kfd-1/publication-url-semantics.schema.json.",
             "sourcePath": "schemas/kfd-1/publication-url-semantics.schema.json",
             "weldRationale": "Buildchain and site repositories can bind to this surface when declaring canonical/latest/immutable publication URL semantics, and published version artifacts remain audit-relevant after release.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-7-document",
+            "class": "cross-time",
+            "classes": [
+              "cross-time"
+            ],
+            "description": "Published numbered draft KFD-7 decision at decisions/KFD-7.md.",
+            "sourcePath": "decisions/KFD-7.md",
+            "weldRationale": "Consumers can audit KFD-7 identity, draft status, action-responsibility separation, activation gate, and relationship to KFD-1 through KFD-6.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-7-usage-doc",
+            "class": "cross-time",
+            "classes": [
+              "cross-time"
+            ],
+            "description": "Published KFD-7 draft usage documentation surface at docs/KFD-7-usage.md.",
+            "sourcePath": "docs/KFD-7-usage.md",
+            "weldRationale": "Humans and agents can inspect package surfaces, progressive-disclosure guidance, adoption obligations, and the explicit absence of a universal KFD-7 schema.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-7-formal-doc",
+            "class": "cross-time",
+            "classes": [
+              "cross-time"
+            ],
+            "description": "Published KFD-7 draft formal reference at docs/KFD-7-formal.md.",
+            "sourcePath": "docs/KFD-7-formal.md",
+            "weldRationale": "Consumers can audit and cite the versioned non-normative Fact/Episode and action-responsibility reference model for KFD-7.",
             "impactProjection": {
               "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
               "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
@@ -1528,21 +1615,21 @@
       "title": "Views must remain bound to declared perspectives",
       "kind": "principle",
       "status": "active",
-      "revision": 8,
+      "revision": 9,
       "metadataSchemaVersion": "2",
       "document": {
         "path": "decisions/KFD-4.md",
         "url": "https://kfd.libkungfu.dev/4",
-        "sha256": "df36dd99404ea1a9ee0ab6f5fae4acf3b98a762b08d33e59f657f909dc04d012"
+        "sha256": "c624a7a606d4e3a66c40dd88baf1532c7aef9d238c3fb04ade583b5e22b4aba7"
       },
       "formalModel": {
         "path": "docs/KFD-4-formal.md",
         "url": "https://kfd.libkungfu.dev/4/formal",
-        "version": 1,
+        "version": 2,
         "status": "experimental",
         "normative": false,
         "authorityPath": "decisions/KFD-4.md",
-        "sha256": "2dc22b5ad4ca8ea217d6a52545d038a5047343252d02e8bad856952d7455b2b8"
+        "sha256": "4bee9aa85e2c2f9c35abe3ec1eb0663e8e242fa9dc4a36a7f55caeac78ce9012"
       },
       "compatibility": {
         "packageLine": "v1.0",
@@ -1645,12 +1732,12 @@
           "schemaPath": "schemas/kfd-5/primitive-discovery.schema.json",
           "compatibilityRule": "Version 3 requires perspective-declared, method-plural genesis and separates candidate generation from fact-bound qualification; further semantic or required-field changes require a new interface version or contract."
         },
-    "liveCaseRegistry": {
-      "contract": "kfd-live-case-registry",
-      "schemaVersion": 2,
-      "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-live-case-registry.schema.json",
-      "schemaPath": "schemas/kfd-live-case-registry.schema.json",
-      "compatibilityRule": "Version 2 preserves stable live-case identity and genesis, gives the case an independent active/closed/archived lifecycle, and requires one or more independently qualified candidate tracks with their own qualification status, claim boundary, and immutable current cut. Optional qualification arguments may be added without changing candidate status. Semantic, required-field, status-meaning, candidate-track, or identity changes require a new interface version or contract."
+        "liveCaseRegistry": {
+          "contract": "kfd-live-case-registry",
+          "schemaVersion": 2,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-live-case-registry.schema.json",
+          "schemaPath": "schemas/kfd-live-case-registry.schema.json",
+          "compatibilityRule": "Version 2 preserves stable live-case identity and genesis, gives the case an independent active/closed/archived lifecycle, and requires one or more independently qualified candidate tracks with their own qualification status, claim boundary, and immutable current cut. Optional qualification arguments may be added without changing candidate status. Semantic, required-field, status-meaning, candidate-track, or identity changes require a new interface version or contract."
         }
       },
       "concepts": {
@@ -1686,13 +1773,13 @@
         "fuseTest": "fuse test",
         "falsifier": "falsifier",
         "dogfoodEvidence": "dogfood evidence",
-    "liveCaseRegistry": "live Primitive case registry",
-    "primitiveDiscoveryCase": "stable live discovery case that may preserve and qualify multiple candidate tracks",
-    "candidateTrack": "independently named and qualified Primitive candidate within a live case",
-    "ontologySplit": "preserved transition from a fused candidate boundary to independently qualified candidate tracks",
-    "distinguishabilityArgument": "conditional deletion argument for decision-relevant information dimensions without a universality or implementation-shape claim",
-    "pursuit": "provisional intended-change continuity candidate",
-    "warrant": "provisional purpose-bound fact-addressed authorization candidate"
+        "liveCaseRegistry": "live Primitive case registry",
+        "primitiveDiscoveryCase": "stable live discovery case that may preserve and qualify multiple candidate tracks",
+        "candidateTrack": "independently named and qualified Primitive candidate within a live case",
+        "ontologySplit": "preserved transition from a fused candidate boundary to independently qualified candidate tracks",
+        "distinguishabilityArgument": "conditional deletion argument for decision-relevant information dimensions without a universality or implementation-shape claim",
+        "pursuit": "provisional intended-change continuity candidate",
+        "warrant": "provisional purpose-bound fact-addressed authorization candidate"
       }
     },
     "kfd-6": {
@@ -1773,6 +1860,67 @@
         "selfCertification": "self-certification",
         "promotionAuthority": "promotion authority",
         "candidateAtlas": "candidate Atlas"
+      }
+    },
+    "kfd-7": {
+      "key": "kfd-7",
+      "id": "KFD-7",
+      "number": 7,
+      "label": "KFD-7",
+      "title": "Real-world action must keep its responsibilities distinct",
+      "kind": "principle",
+      "status": "draft",
+      "revision": 1,
+      "metadataSchemaVersion": "2",
+      "document": {
+        "path": "decisions/KFD-7.md",
+        "url": "https://kfd.libkungfu.dev/7",
+        "sha256": "ded7a5460c6879e312e2fc29503c12a12d5b67869d274e6aa095db39ccc53bf1"
+      },
+      "formalModel": {
+        "path": "docs/KFD-7-formal.md",
+        "url": "https://kfd.libkungfu.dev/7/formal",
+        "version": 1,
+        "status": "experimental",
+        "normative": false,
+        "authorityPath": "decisions/KFD-7.md",
+        "sha256": "991e67497b68d655461ae0981eb9ef8f1ea294bebaea5447d83a2220f0d15f47"
+      },
+      "compatibility": {
+        "packageLine": "v1.0",
+        "registrySchemaVersion": 1,
+        "metadataSchemaVersion": "2",
+        "rule": "Before the first stable release, maintainer-authorized semantic refinement must declare breaking decision-surface impact; after stable, substantive change mints a new KFD."
+      },
+      "schemaIds": {
+        "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json"
+      },
+      "schemaPaths": {
+        "metadata": "schemas/kfd-standards.schema.json"
+      },
+      "concepts": {
+        "factCut": "declared fact cut",
+        "causalRecord": "bounded causal record",
+        "episode": "independently replayable causal experience",
+        "atlas": "addressable action perspective and accepted fact cut",
+        "pursuit": "continuing action direction",
+        "warrant": "bounded authority for admissible transition",
+        "direction": "intended consequence and progress relation",
+        "perspective": "declared observation and judgment frame",
+        "authorityBoundary": "independently derivable and revocable action boundary",
+        "occurrence": "realized action and consequence",
+        "actionGeometry": "non-physical geometry of action responsibilities",
+        "observationProjection": "perspective-bound projection over admitted facts",
+        "targetRelation": "directional relation over reachable fact cuts",
+        "admissibleTransition": "authority-permitted candidate transition",
+        "realizedPath": "causal path actually traversed",
+        "validActionSet": "intersection of supported, advancing, and authorized actions",
+        "conditionalIrreducibility": "conditional non-derivability of action responsibilities",
+        "counterfactualIndependence": "role independence tested by controlled variation",
+        "explicitAdmission": "separate admission of successor facts after occurrence",
+        "progressiveDisclosure": "low-friction interface that preserves inspectable responsibility",
+        "conservativeSessionLimit": "lossless session-compatible projection for bounded low-complexity work",
+        "complexityBreakpoint": "condition that makes an independent action responsibility decision-relevant and addressable"
       }
     }
   }

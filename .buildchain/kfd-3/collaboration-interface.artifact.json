@@ -5,17 +5,17 @@
   "standard": "kfd-3",
   "collaborationInterface": {
     "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-3/collaboration-interface.schema.json",
-    "digest": "sha256:b9cdca46e0e57e35e7fae6246452d80b339878c7139a632da297cd302d12fa3d"
+    "digest": "sha256:604f20a3e975d00a33275b29bf05776116d3c8a83a3f135911a90d8e6055517d"
   },
   "sourceRegistry": {
     "id": "kfd-collaboration-interface",
     "path": ".buildchain/kfd-3/collaboration-interface.json",
-    "sha256": "b9cdca46e0e57e35e7fae6246452d80b339878c7139a632da297cd302d12fa3d"
+    "sha256": "604f20a3e975d00a33275b29bf05776116d3c8a83a3f135911a90d8e6055517d"
   },
   "artifact": {
     "name": "@kungfu-tech/kfd",
     "path": "npm:@kungfu-tech/kfd",
-    "digest": "sha256:b9cdca46e0e57e35e7fae6246452d80b339878c7139a632da297cd302d12fa3d"
+    "digest": "sha256:604f20a3e975d00a33275b29bf05776116d3c8a83a3f135911a90d8e6055517d"
   },
   "surfaces": [
     {
@@ -331,17 +331,17 @@
     {
       "id": "doc:readme",
       "sourcePath": "README.md",
-      "sha256": "ce3f91871b5054460f75ed15403806554ed049c1b150ec1d4075009b0e007b2f"
+      "sha256": "09594e990f0a7337190dee62e48ee03bb4546971975e05240b75edafd32e0a43"
     },
     {
       "id": "doc:foundation-model",
       "sourcePath": "docs/foundation-model.md",
-      "sha256": "4dcb79c45a0370e78a2304a059e6fb754b3796280b6cd2d7a3d107d1b0b7962b"
+      "sha256": "f09724cf07c16c1cf5d3b038bb50cc6a7391ed1ec389d2d5fa561a0b41a52683"
     },
     {
       "id": "doc:formal-model",
       "sourcePath": "docs/formal-model.md",
-      "sha256": "d78c78baf8adf3272b22198f8f2dac3148f987ec915ce040b84b98c3a1ef144e"
+      "sha256": "5de1856d8b9c4ced915bbeccd34a52a3ead19d0073b620d906686e75c7d2ceff"
     },
     {
       "id": "doc:primitive-discovery-cases",
@@ -356,7 +356,7 @@
     {
       "id": "doc:docs-map",
       "sourcePath": "docs/MAP.md",
-      "sha256": "1171828848bebd1565d5b662802ff40d91b470da06ed4bfaf08b457d7caa14f2"
+      "sha256": "14af94b5a7e08ffbd84e7beca3fa60d9bbf38198847cd39db20e66e4ebd01b1c"
     },
     {
       "id": "doc:kfd-1-usage",
@@ -387,6 +387,11 @@
       "id": "doc:kfd-6-usage",
       "sourcePath": "docs/KFD-6-usage.md",
       "sha256": "5cc26c61148c4e8f5ec609e2d1029437b92f4d16202975daaa34cf6dd14d1029"
+    },
+    {
+      "id": "doc:kfd-7-usage",
+      "sourcePath": "docs/KFD-7-usage.md",
+      "sha256": "bc49249aacd45ba89ca4ce48a1992493663a7dc638eb13555ebf05a3a2d7b7d0"
     },
     {
       "id": "case:proof-carrying-work-object:entry",
@@ -421,7 +426,7 @@
     {
       "id": "case:proof-carrying-work-object:distinguishability-argument",
       "sourcePath": "cases/live/proof-carrying-work-object/distinguishability.md",
-      "sha256": "c22374f0005e9c7ab2bfbc753636dccdeccbfa6a055c4afac42027aaa0ad1f73"
+      "sha256": "978656ceeefba60b4d6aada3b8a1ea9bd6fae856765ac42b8866dd0fc3c4e893"
     },
     {
       "id": "case:proof-carrying-work-object:candidate:pursuit:current-cut",
@@ -436,17 +441,17 @@
     {
       "id": "candidate:index",
       "sourcePath": "drafts/README.md",
-      "sha256": "fe23b50c2b19155ff37fffa3c23427c346f322509f8faff5ba3509e16e513bd1"
+      "sha256": "366473e17b985fe72bdda0d474ce81ca1ec0627b2b39d55d6b2fed9f0e560613"
     },
     {
       "id": "candidate:registry",
       "sourcePath": "drafts/registry.json",
-      "sha256": "7a61812c1227e392b3b23503dc2d9f04e506f7c2647d6d9001faac91e10385ef"
+      "sha256": "1e9172f4d3bf4ef903106eb80f3af8beca7114f05107f2acf72cb1b60edf8cec"
     },
     {
       "id": "candidate:action-state-separation",
       "sourcePath": "drafts/action-state-separation.md",
-      "sha256": "66685bcddf3422888e47c381f44f9f61ead302eb7042ccf25a3b417de553e02c"
+      "sha256": "ec11a002c0b89124add3ed68b1b2e0d083461f1fc8f2c9572ecd5404afd0193a"
     },
     {
       "id": "candidate:atlas-action-perspective",
@@ -466,7 +471,7 @@
     {
       "id": "doc:kfd-1-formal",
       "sourcePath": "docs/KFD-1-formal.md",
-      "sha256": "739bbfa03a026a15411db0ef4270d36a0a5e3e6ec51f3f6dfcce61e78a47033e"
+      "sha256": "6cac3e9a0b63bf004f12373c243e976fe4441831cdd3019142e6850bef72e3ab"
     },
     {
       "id": "doc:kfd-2-formal",
@@ -481,7 +486,7 @@
     {
       "id": "doc:kfd-4-formal",
       "sourcePath": "docs/KFD-4-formal.md",
-      "sha256": "2dc22b5ad4ca8ea217d6a52545d038a5047343252d02e8bad856952d7455b2b8"
+      "sha256": "4bee9aa85e2c2f9c35abe3ec1eb0663e8e242fa9dc4a36a7f55caeac78ce9012"
     },
     {
       "id": "doc:kfd-5-formal",
@@ -494,9 +499,14 @@
       "sha256": "ab4accd65a7d94bfccb85c987b26bf7b7220f1e5bd1f6b648ffdc5cfc4df9022"
     },
     {
+      "id": "doc:kfd-7-formal",
+      "sourcePath": "docs/KFD-7-formal.md",
+      "sha256": "991e67497b68d655461ae0981eb9ef8f1ea294bebaea5447d83a2220f0d15f47"
+    },
+    {
       "id": "decision:kfd-1",
       "sourcePath": "decisions/KFD-1.md",
-      "sha256": "d9e433f98eaf80f3fcf75986d073446bd73fbd385b9c6ba96fc3186e0da62a09"
+      "sha256": "5b91d4693a70d13d8fb11756b4281205ff911bc5386472f7c0af8477e2b095a1"
     },
     {
       "id": "decision:kfd-2",
@@ -511,7 +521,7 @@
     {
       "id": "decision:kfd-4",
       "sourcePath": "decisions/KFD-4.md",
-      "sha256": "df36dd99404ea1a9ee0ab6f5fae4acf3b98a762b08d33e59f657f909dc04d012"
+      "sha256": "c624a7a606d4e3a66c40dd88baf1532c7aef9d238c3fb04ade583b5e22b4aba7"
     },
     {
       "id": "decision:kfd-5",
@@ -522,6 +532,11 @@
       "id": "decision:kfd-6",
       "sourcePath": "decisions/KFD-6.md",
       "sha256": "1e40e0848fc7bd51abeb5ea8b70efd3b444acbdafaed097bf029e9ed6394292f"
+    },
+    {
+      "id": "decision:kfd-7",
+      "sourcePath": "decisions/KFD-7.md",
+      "sha256": "ded7a5460c6879e312e2fc29503c12a12d5b67869d274e6aa095db39ccc53bf1"
     }
   ],
   "schemas": [
@@ -610,12 +625,12 @@
     {
       "id": "metadata:registry",
       "sourcePath": "registry.json",
-      "sha256": "b0210d74da6af49a433a257e50e7a63761c3b2ad00c63262d161add571644447"
+      "sha256": "e1614792e92c837c22d69628d06ace626e94dbc2a42f58123913cdb79914c6bf"
     },
     {
       "id": "metadata:standards",
       "sourcePath": "standards.json",
-      "sha256": "9a62e08bf01f6dc9072a2eb546f1da7e2e8d3b88862b381beb56700cbe7bbe93"
+      "sha256": "f9a606534694f982f10e1b6d06bdf029627eebf7049553dc3a387d4c5f6cb120"
     },
     {
       "id": "metadata:live-case-registry",
@@ -625,12 +640,12 @@
     {
       "id": "metadata:candidate-registry",
       "sourcePath": "drafts/registry.json",
-      "sha256": "7a61812c1227e392b3b23503dc2d9f04e506f7c2647d6d9001faac91e10385ef"
+      "sha256": "1e9172f4d3bf4ef903106eb80f3af8beca7114f05107f2acf72cb1b60edf8cec"
     },
     {
       "id": "metadata:release-impact",
       "sourcePath": "release-impact.json",
-      "sha256": "60974ec5c31bdfa0e56b9170d6aa2da197197414cc4c63369250d1473ec2116e"
+      "sha256": "ff77c3fd8a256f11ba6dae8268b450d4f655368769a873b4a3080ee18a5ef412"
     },
     {
       "id": "metadata:release-anchor",
@@ -650,17 +665,17 @@
     {
       "id": "metadata:kfd-2-public-release-trust-claim",
       "sourcePath": ".buildchain/kfd-2/public-release-trust.claim.json",
-      "sha256": "fadbe005dc00f4a14271acbfa64b1b8ae3e31a58f2f9970d2a30e46749c8d6d3"
+      "sha256": "82223ce8620bdf752b4a29aa54d1e76998f255bb512e0c524944337e669edf7c"
     },
     {
       "id": "metadata:kfd-2-foundation-trust-claims",
       "sourcePath": ".buildchain/kfd-2/kfd-foundation.trust-claims.json",
-      "sha256": "9e0da29f6f123d9f6c9feacf0eda590318c41d304c67780a7a74859acd595a42"
+      "sha256": "ca0f57f08df1fa5d387566494a7239431a73eb12e7d3f33daf318bd1500f06f1"
     },
     {
       "id": "metadata:kfd-2-foundation-trust-assessment",
       "sourcePath": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json",
-      "sha256": "6f8a38456f74c6adbd1955382c0d1849339f369a3961aa0b845c9f0d63729a9c"
+      "sha256": "696c045d21e087961479212010ecb5804a0d53af5a1c91fd450624ef49c7e8b9"
     }
   ],
   "packageExports": [
@@ -679,7 +694,7 @@
     {
       "id": "site:kfd-site-bundle",
       "sourcePath": "site/kfd-site.json",
-      "sha256": "f1668b6fe6243807c0874d3a29b8bc72d83ab4d1e11248bafaee230cdb1a1b0d"
+      "sha256": "de33f75fe6e6cca7cbad919d1c43732c366c31704a51fed4903a102501aec4d6"
     },
     {
       "id": "site:release-propagation",
@@ -691,17 +706,17 @@
     "minimalEntrypoints": [
       {
         "path": "README.md",
-        "sha256": "ce3f91871b5054460f75ed15403806554ed049c1b150ec1d4075009b0e007b2f",
+        "sha256": "09594e990f0a7337190dee62e48ee03bb4546971975e05240b75edafd32e0a43",
         "description": "Start from the KFD worldview and current decision set."
       },
       {
         "path": "docs/foundation-model.md",
-        "sha256": "4dcb79c45a0370e78a2304a059e6fb754b3796280b6cd2d7a3d107d1b0b7962b",
+        "sha256": "f09724cf07c16c1cf5d3b038bb50cc6a7391ed1ec389d2d5fa561a0b41a52683",
         "description": "Read or render the complete non-numbered explanation behind the concise KFD homepage."
       },
       {
         "path": "docs/formal-model.md",
-        "sha256": "d78c78baf8adf3272b22198f8f2dac3148f987ec915ce040b84b98c3a1ef144e",
+        "sha256": "5de1856d8b9c4ced915bbeccd34a52a3ead19d0073b620d906686e75c7d2ceff",
         "description": "Inspect the shared notation, authority boundary, and traceability contract for non-normative KFD formal references."
       },
       {
@@ -716,12 +731,12 @@
       },
       {
         "path": "drafts/registry.json",
-        "sha256": "7a61812c1227e392b3b23503dc2d9f04e506f7c2647d6d9001faac91e10385ef",
+        "sha256": "1e9172f4d3bf4ef903106eb80f3af8beca7114f05107f2acf72cb1b60edf8cec",
         "description": "Discover non-normative pre-number KFD Candidates, non-binding slot hints, promotion gates, and claim boundaries."
       },
       {
         "path": "docs/MAP.md",
-        "sha256": "1171828848bebd1565d5b662802ff40d91b470da06ed4bfaf08b457d7caa14f2",
+        "sha256": "14af94b5a7e08ffbd84e7beca3fa60d9bbf38198847cd39db20e66e4ebd01b1c",
         "description": "Route readers and agents to the right KFD document or machine surface."
       },
       {
@@ -731,12 +746,12 @@
       },
       {
         "path": "registry.json",
-        "sha256": "b0210d74da6af49a433a257e50e7a63761c3b2ad00c63262d161add571644447",
+        "sha256": "e1614792e92c837c22d69628d06ace626e94dbc2a42f58123913cdb79914c6bf",
         "description": "Consume the authoritative decision index."
       },
       {
         "path": "standards.json",
-        "sha256": "9a62e08bf01f6dc9072a2eb546f1da7e2e8d3b88862b381beb56700cbe7bbe93",
+        "sha256": "f9a606534694f982f10e1b6d06bdf029627eebf7049553dc3a387d4c5f6cb120",
         "description": "Discover KFD schema IDs, schema paths, concepts, and interface contracts."
       },
       {
@@ -751,39 +766,39 @@
       },
       {
         "path": ".buildchain/kfd-2/public-release-trust.claim.json",
-        "sha256": "fadbe005dc00f4a14271acbfa64b1b8ae3e31a58f2f9970d2a30e46749c8d6d3",
+        "sha256": "82223ce8620bdf752b4a29aa54d1e76998f255bb512e0c524944337e669edf7c",
         "description": "Inspect the explicit public KFD-2 claim passed into Buildchain release passport generation."
       },
       {
         "path": ".buildchain/kfd-2/kfd-foundation.trust-claims.json",
-        "sha256": "9e0da29f6f123d9f6c9feacf0eda590318c41d304c67780a7a74859acd595a42",
+        "sha256": "ca0f57f08df1fa5d387566494a7239431a73eb12e7d3f33daf318bd1500f06f1",
         "description": "Inspect generic KFD-2 claims for the KFD package self-dogfood assessment."
       },
       {
         "path": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json",
-        "sha256": "6f8a38456f74c6adbd1955382c0d1849339f369a3961aa0b845c9f0d63729a9c",
-        "description": "Inspect KFD-2's generic assessment of KFD-1 and KFD-3 through KFD-6 claims."
+        "sha256": "696c045d21e087961479212010ecb5804a0d53af5a1c91fd450624ef49c7e8b9",
+        "description": "Inspect KFD-2's generic assessment of KFD-1 and KFD-3 through KFD-7 claims."
       },
       {
         "path": "site/kfd-site.json",
-        "sha256": "f1668b6fe6243807c0874d3a29b8bc72d83ab4d1e11248bafaee230cdb1a1b0d",
+        "sha256": "de33f75fe6e6cca7cbad919d1c43732c366c31704a51fed4903a102501aec4d6",
         "description": "Render KFD-owned homepage, foundation explanation, formal references, historical and live cases, and decision pages without duplicating extraction logic."
       }
     ],
     "discoverability": [
       {
         "path": "README.md",
-        "sha256": "ce3f91871b5054460f75ed15403806554ed049c1b150ec1d4075009b0e007b2f",
+        "sha256": "09594e990f0a7337190dee62e48ee03bb4546971975e05240b75edafd32e0a43",
         "description": "Human and agent entrypoint"
       },
       {
         "path": "docs/foundation-model.md",
-        "sha256": "4dcb79c45a0370e78a2304a059e6fb754b3796280b6cd2d7a3d107d1b0b7962b",
+        "sha256": "f09724cf07c16c1cf5d3b038bb50cc6a7391ed1ec389d2d5fa561a0b41a52683",
         "description": "Complete non-numbered foundation explanation"
       },
       {
         "path": "docs/formal-model.md",
-        "sha256": "d78c78baf8adf3272b22198f8f2dac3148f987ec915ce040b84b98c3a1ef144e",
+        "sha256": "5de1856d8b9c4ced915bbeccd34a52a3ead19d0073b620d906686e75c7d2ceff",
         "description": "Shared formal notation and authority boundary"
       },
       {
@@ -798,7 +813,7 @@
       },
       {
         "path": "drafts/registry.json",
-        "sha256": "7a61812c1227e392b3b23503dc2d9f04e506f7c2647d6d9001faac91e10385ef",
+        "sha256": "1e9172f4d3bf4ef903106eb80f3af8beca7114f05107f2acf72cb1b60edf8cec",
         "description": "Machine-readable pre-number KFD Candidate registry"
       },
       {
@@ -808,32 +823,32 @@
       },
       {
         "path": "docs/MAP.md",
-        "sha256": "1171828848bebd1565d5b662802ff40d91b470da06ed4bfaf08b457d7caa14f2",
+        "sha256": "14af94b5a7e08ffbd84e7beca3fa60d9bbf38198847cd39db20e66e4ebd01b1c",
         "description": "Documentation routing entrypoint"
       },
       {
         "path": "registry.json",
-        "sha256": "b0210d74da6af49a433a257e50e7a63761c3b2ad00c63262d161add571644447",
+        "sha256": "e1614792e92c837c22d69628d06ace626e94dbc2a42f58123913cdb79914c6bf",
         "description": "Machine-readable decision index"
       },
       {
         "path": "standards.json",
-        "sha256": "9a62e08bf01f6dc9072a2eb546f1da7e2e8d3b88862b381beb56700cbe7bbe93",
+        "sha256": "f9a606534694f982f10e1b6d06bdf029627eebf7049553dc3a387d4c5f6cb120",
         "description": "Machine-readable standards metadata"
       },
       {
         "path": ".buildchain/kfd-2/public-release-trust.claim.json",
-        "sha256": "fadbe005dc00f4a14271acbfa64b1b8ae3e31a58f2f9970d2a30e46749c8d6d3",
+        "sha256": "82223ce8620bdf752b4a29aa54d1e76998f255bb512e0c524944337e669edf7c",
         "description": "KFD-2 public release trust claim"
       },
       {
         "path": ".buildchain/kfd-2/kfd-foundation.trust-claims.json",
-        "sha256": "9e0da29f6f123d9f6c9feacf0eda590318c41d304c67780a7a74859acd595a42",
+        "sha256": "ca0f57f08df1fa5d387566494a7239431a73eb12e7d3f33daf318bd1500f06f1",
         "description": "KFD-2 generic trust claims for KFD self-dogfood"
       },
       {
         "path": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json",
-        "sha256": "6f8a38456f74c6adbd1955382c0d1849339f369a3961aa0b845c9f0d63729a9c",
+        "sha256": "696c045d21e087961479212010ecb5804a0d53af5a1c91fd450624ef49c7e8b9",
         "description": "KFD-2 generic trust assessment for KFD self-dogfood"
       },
       {
@@ -843,29 +858,29 @@
       },
       {
         "path": "site/kfd-site.json",
-        "sha256": "f1668b6fe6243807c0874d3a29b8bc72d83ab4d1e11248bafaee230cdb1a1b0d",
+        "sha256": "de33f75fe6e6cca7cbad919d1c43732c366c31704a51fed4903a102501aec4d6",
         "description": "Site content projection"
       }
     ],
     "valueEvidence": [
       {
         "path": "README.md",
-        "sha256": "ce3f91871b5054460f75ed15403806554ed049c1b150ec1d4075009b0e007b2f",
+        "sha256": "09594e990f0a7337190dee62e48ee03bb4546971975e05240b75edafd32e0a43",
         "description": "KFD-3 value evidence for kfd-foundation-model: KFD helps humans and agents understand the foundation model and inspect precise non-normative formal references before adopting or extending kungfu-systems decisions."
       },
       {
         "path": "docs/foundation-model.md",
-        "sha256": "4dcb79c45a0370e78a2304a059e6fb754b3796280b6cd2d7a3d107d1b0b7962b",
+        "sha256": "f09724cf07c16c1cf5d3b038bb50cc6a7391ed1ec389d2d5fa561a0b41a52683",
         "description": "KFD-3 value evidence for kfd-foundation-model: KFD helps humans and agents understand the foundation model and inspect precise non-normative formal references before adopting or extending kungfu-systems decisions."
       },
       {
         "path": "docs/formal-model.md",
-        "sha256": "d78c78baf8adf3272b22198f8f2dac3148f987ec915ce040b84b98c3a1ef144e",
+        "sha256": "5de1856d8b9c4ced915bbeccd34a52a3ead19d0073b620d906686e75c7d2ceff",
         "description": "KFD-3 value evidence for kfd-foundation-model: KFD helps humans and agents understand the foundation model and inspect precise non-normative formal references before adopting or extending kungfu-systems decisions."
       },
       {
         "path": "docs/KFD-1-formal.md",
-        "sha256": "739bbfa03a026a15411db0ef4270d36a0a5e3e6ec51f3f6dfcce61e78a47033e",
+        "sha256": "6cac3e9a0b63bf004f12373c243e976fe4441831cdd3019142e6850bef72e3ab",
         "description": "KFD-3 value evidence for kfd-foundation-model: KFD helps humans and agents understand the foundation model and inspect precise non-normative formal references before adopting or extending kungfu-systems decisions."
       },
       {
@@ -880,7 +895,7 @@
       },
       {
         "path": "docs/KFD-4-formal.md",
-        "sha256": "2dc22b5ad4ca8ea217d6a52545d038a5047343252d02e8bad856952d7455b2b8",
+        "sha256": "4bee9aa85e2c2f9c35abe3ec1eb0663e8e242fa9dc4a36a7f55caeac78ce9012",
         "description": "KFD-3 value evidence for kfd-foundation-model: KFD helps humans and agents understand the foundation model and inspect precise non-normative formal references before adopting or extending kungfu-systems decisions."
       },
       {
@@ -894,13 +909,23 @@
         "description": "KFD-3 value evidence for kfd-foundation-model: KFD helps humans and agents understand the foundation model and inspect precise non-normative formal references before adopting or extending kungfu-systems decisions."
       },
       {
+        "path": "docs/KFD-7-formal.md",
+        "sha256": "991e67497b68d655461ae0981eb9ef8f1ea294bebaea5447d83a2220f0d15f47",
+        "description": "KFD-3 value evidence for kfd-foundation-model: KFD helps humans and agents understand the foundation model and inspect precise non-normative formal references before adopting or extending kungfu-systems decisions."
+      },
+      {
+        "path": "docs/KFD-7-usage.md",
+        "sha256": "bc49249aacd45ba89ca4ce48a1992493663a7dc638eb13555ebf05a3a2d7b7d0",
+        "description": "KFD-3 value evidence for kfd-foundation-model: KFD helps humans and agents understand the foundation model and inspect precise non-normative formal references before adopting or extending kungfu-systems decisions."
+      },
+      {
         "path": "docs/primitive-discovery-cases.md",
         "sha256": "eb357c0568e8f4490437374b2d0e5ee4b7ac9804d3a43b23945f8a1341082516",
         "description": "KFD-3 value evidence for kfd-foundation-model: KFD helps humans and agents understand the foundation model and inspect precise non-normative formal references before adopting or extending kungfu-systems decisions."
       },
       {
         "path": "decisions/KFD-1.md",
-        "sha256": "d9e433f98eaf80f3fcf75986d073446bd73fbd385b9c6ba96fc3186e0da62a09",
+        "sha256": "5b91d4693a70d13d8fb11756b4281205ff911bc5386472f7c0af8477e2b095a1",
         "description": "KFD-3 value evidence for kfd-foundation-model: KFD helps humans and agents understand the foundation model and inspect precise non-normative formal references before adopting or extending kungfu-systems decisions."
       },
       {
@@ -914,28 +939,33 @@
         "description": "KFD-3 value evidence for kfd-foundation-model: KFD helps humans and agents understand the foundation model and inspect precise non-normative formal references before adopting or extending kungfu-systems decisions."
       },
       {
+        "path": "decisions/KFD-7.md",
+        "sha256": "ded7a5460c6879e312e2fc29503c12a12d5b67869d274e6aa095db39ccc53bf1",
+        "description": "KFD-3 value evidence for kfd-foundation-model: KFD helps humans and agents understand the foundation model and inspect precise non-normative formal references before adopting or extending kungfu-systems decisions."
+      },
+      {
         "path": "registry.json",
-        "sha256": "b0210d74da6af49a433a257e50e7a63761c3b2ad00c63262d161add571644447",
+        "sha256": "e1614792e92c837c22d69628d06ace626e94dbc2a42f58123913cdb79914c6bf",
         "description": "KFD-3 value evidence for kfd-foundation-model: KFD helps humans and agents understand the foundation model and inspect precise non-normative formal references before adopting or extending kungfu-systems decisions."
       },
       {
         "path": "standards.json",
-        "sha256": "9a62e08bf01f6dc9072a2eb546f1da7e2e8d3b88862b381beb56700cbe7bbe93",
+        "sha256": "f9a606534694f982f10e1b6d06bdf029627eebf7049553dc3a387d4c5f6cb120",
         "description": "KFD-3 value evidence for kfd-foundation-model: KFD helps humans and agents understand the foundation model and inspect precise non-normative formal references before adopting or extending kungfu-systems decisions."
       },
       {
         "path": "site/kfd-site.json",
-        "sha256": "f1668b6fe6243807c0874d3a29b8bc72d83ab4d1e11248bafaee230cdb1a1b0d",
+        "sha256": "de33f75fe6e6cca7cbad919d1c43732c366c31704a51fed4903a102501aec4d6",
         "description": "KFD-3 value evidence for kfd-foundation-model: KFD helps humans and agents understand the foundation model and inspect precise non-normative formal references before adopting or extending kungfu-systems decisions."
       },
       {
         "path": "scripts/check.mjs",
-        "sha256": "45a60c53c7cfa87dcfdaada3be88a9276d279112d7f3af4d9b4a24989cdb7750",
+        "sha256": "981ad38e942970d02440d186306db3f493121b16415986b3f836458b02eb9bb5",
         "description": "KFD-3 value evidence for kfd-foundation-model: KFD helps humans and agents understand the foundation model and inspect precise non-normative formal references before adopting or extending kungfu-systems decisions."
       },
       {
         "path": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json",
-        "sha256": "6f8a38456f74c6adbd1955382c0d1849339f369a3961aa0b845c9f0d63729a9c",
+        "sha256": "696c045d21e087961479212010ecb5804a0d53af5a1c91fd450624ef49c7e8b9",
         "description": "KFD-3 value evidence for kfd-foundation-model: KFD helps humans and agents understand the foundation model and inspect precise non-normative formal references before adopting or extending kungfu-systems decisions."
       },
       {
@@ -955,7 +985,7 @@
       },
       {
         "path": ".buildchain/kfd-2/kfd-foundation.trust-claims.json",
-        "sha256": "9e0da29f6f123d9f6c9feacf0eda590318c41d304c67780a7a74859acd595a42",
+        "sha256": "ca0f57f08df1fa5d387566494a7239431a73eb12e7d3f33daf318bd1500f06f1",
         "description": "KFD-3 value evidence for kfd-machine-consumption: KFD gives agents and release systems machine-readable standards, schemas, package exports, and witnesses so they can consume KFD without relying on private context."
       },
       {
@@ -980,7 +1010,7 @@
       },
       {
         "path": "cases/live/proof-carrying-work-object/distinguishability.md",
-        "sha256": "c22374f0005e9c7ab2bfbc753636dccdeccbfa6a055c4afac42027aaa0ad1f73",
+        "sha256": "978656ceeefba60b4d6aada3b8a1ea9bd6fae856765ac42b8866dd0fc3c4e893",
         "description": "KFD-3 value evidence for kfd-live-case-dogfood: KFD gives humans and agents an inspectable path from provisional Primitive genesis through immutable KFD-5 cuts and open qualification without promoting the candidate by self-certification."
       },
       {
@@ -1025,43 +1055,43 @@
       },
       {
         "path": "drafts/registry.json",
-        "sha256": "7a61812c1227e392b3b23503dc2d9f04e506f7c2647d6d9001faac91e10385ef",
-        "description": "KFD-3 value evidence for kfd-candidate-incubation: KFD gives humans and agents a shared, machine-readable path for preserving a possible organization rule without prematurely allocating a KFD number or normative authority."
+        "sha256": "1e9172f4d3bf4ef903106eb80f3af8beca7114f05107f2acf72cb1b60edf8cec",
+        "description": "KFD-3 value evidence for kfd-candidate-incubation: KFD gives humans and agents a shared, machine-readable path for preserving pre-number candidates, recording explicit promotion into KFD-7, and keeping remaining slot hints non-binding."
       },
       {
         "path": "schemas/kfd-candidate-registry.schema.json",
         "sha256": "71658c33346a302d704b55db3e116f80f3c42bab4a59d2a2bb6b3daa0a5f8e03",
-        "description": "KFD-3 value evidence for kfd-candidate-incubation: KFD gives humans and agents a shared, machine-readable path for preserving a possible organization rule without prematurely allocating a KFD number or normative authority."
+        "description": "KFD-3 value evidence for kfd-candidate-incubation: KFD gives humans and agents a shared, machine-readable path for preserving pre-number candidates, recording explicit promotion into KFD-7, and keeping remaining slot hints non-binding."
       },
       {
         "path": "drafts/README.md",
-        "sha256": "fe23b50c2b19155ff37fffa3c23427c346f322509f8faff5ba3509e16e513bd1",
-        "description": "KFD-3 value evidence for kfd-candidate-incubation: KFD gives humans and agents a shared, machine-readable path for preserving a possible organization rule without prematurely allocating a KFD number or normative authority."
+        "sha256": "366473e17b985fe72bdda0d474ce81ca1ec0627b2b39d55d6b2fed9f0e560613",
+        "description": "KFD-3 value evidence for kfd-candidate-incubation: KFD gives humans and agents a shared, machine-readable path for preserving pre-number candidates, recording explicit promotion into KFD-7, and keeping remaining slot hints non-binding."
       },
       {
         "path": "drafts/action-state-separation.md",
-        "sha256": "66685bcddf3422888e47c381f44f9f61ead302eb7042ccf25a3b417de553e02c",
-        "description": "KFD-3 value evidence for kfd-candidate-incubation: KFD gives humans and agents a shared, machine-readable path for preserving a possible organization rule without prematurely allocating a KFD number or normative authority."
+        "sha256": "ec11a002c0b89124add3ed68b1b2e0d083461f1fc8f2c9572ecd5404afd0193a",
+        "description": "KFD-3 value evidence for kfd-candidate-incubation: KFD gives humans and agents a shared, machine-readable path for preserving pre-number candidates, recording explicit promotion into KFD-7, and keeping remaining slot hints non-binding."
       },
       {
         "path": "drafts/atlas-action-perspective.md",
         "sha256": "0c1ff4a322fbd817509f9be8e32f80baf907e01089cca760f93162b64625c278",
-        "description": "KFD-3 value evidence for kfd-candidate-incubation: KFD gives humans and agents a shared, machine-readable path for preserving a possible organization rule without prematurely allocating a KFD number or normative authority."
+        "description": "KFD-3 value evidence for kfd-candidate-incubation: KFD gives humans and agents a shared, machine-readable path for preserving pre-number candidates, recording explicit promotion into KFD-7, and keeping remaining slot hints non-binding."
       },
       {
         "path": "drafts/pursuit-intent-continuity.md",
         "sha256": "ab1920ebfa5d92c23e739609a260da35edc4dac6e0f21056aa656771a48f1c08",
-        "description": "KFD-3 value evidence for kfd-candidate-incubation: KFD gives humans and agents a shared, machine-readable path for preserving a possible organization rule without prematurely allocating a KFD number or normative authority."
+        "description": "KFD-3 value evidence for kfd-candidate-incubation: KFD gives humans and agents a shared, machine-readable path for preserving pre-number candidates, recording explicit promotion into KFD-7, and keeping remaining slot hints non-binding."
       },
       {
         "path": "drafts/warrant-bounded-authority.md",
         "sha256": "4922e6d353028039d2cc4baf8ab112bef40438ad1fab39c319c51632a48abaee",
-        "description": "KFD-3 value evidence for kfd-candidate-incubation: KFD gives humans and agents a shared, machine-readable path for preserving a possible organization rule without prematurely allocating a KFD number or normative authority."
+        "description": "KFD-3 value evidence for kfd-candidate-incubation: KFD gives humans and agents a shared, machine-readable path for preserving pre-number candidates, recording explicit promotion into KFD-7, and keeping remaining slot hints non-binding."
       },
       {
         "path": "CONTRIBUTING.md",
         "sha256": "63c3729049a0c3081026ee6c66c6dfd2fb2e049cf3bfe41d0f1956ecce2be365",
-        "description": "KFD-3 value evidence for kfd-candidate-incubation: KFD gives humans and agents a shared, machine-readable path for preserving a possible organization rule without prematurely allocating a KFD number or normative authority."
+        "description": "KFD-3 value evidence for kfd-candidate-incubation: KFD gives humans and agents a shared, machine-readable path for preserving pre-number candidates, recording explicit promotion into KFD-7, and keeping remaining slot hints non-binding."
       },
       {
         "path": "docs/KFD-3-usage.md",
@@ -1070,7 +1100,7 @@
       },
       {
         "path": ".buildchain/kfd-3/collaboration-interface.json",
-        "sha256": "b9cdca46e0e57e35e7fae6246452d80b339878c7139a632da297cd302d12fa3d",
+        "sha256": "604f20a3e975d00a33275b29bf05776116d3c8a83a3f135911a90d8e6055517d",
         "description": "KFD-3 value evidence for kfd-extension-path: KFD gives humans and agents a visible extension path when the declared interface or taxonomy is insufficient."
       },
       {
@@ -1097,29 +1127,29 @@
       },
       {
         "path": "scripts/check.mjs",
-        "sha256": "45a60c53c7cfa87dcfdaada3be88a9276d279112d7f3af4d9b4a24989cdb7750",
+        "sha256": "981ad38e942970d02440d186306db3f493121b16415986b3f836458b02eb9bb5",
         "description": "Repository self-verification gate"
       },
       {
         "path": "site/kfd-site.json",
-        "sha256": "f1668b6fe6243807c0874d3a29b8bc72d83ab4d1e11248bafaee230cdb1a1b0d",
+        "sha256": "de33f75fe6e6cca7cbad919d1c43732c366c31704a51fed4903a102501aec4d6",
         "description": "Site rendering boundary"
       }
     ],
     "choicePaths": [
       {
         "path": "README.md",
-        "sha256": "ce3f91871b5054460f75ed15403806554ed049c1b150ec1d4075009b0e007b2f",
+        "sha256": "09594e990f0a7337190dee62e48ee03bb4546971975e05240b75edafd32e0a43",
         "description": "Human reading path"
       },
       {
         "path": "docs/foundation-model.md",
-        "sha256": "4dcb79c45a0370e78a2304a059e6fb754b3796280b6cd2d7a3d107d1b0b7962b",
+        "sha256": "f09724cf07c16c1cf5d3b038bb50cc6a7391ed1ec389d2d5fa561a0b41a52683",
         "description": "Human and agent foundation reading path"
       },
       {
         "path": "docs/formal-model.md",
-        "sha256": "d78c78baf8adf3272b22198f8f2dac3148f987ec915ce040b84b98c3a1ef144e",
+        "sha256": "5de1856d8b9c4ced915bbeccd34a52a3ead19d0073b620d906686e75c7d2ceff",
         "description": "Human and agent formal reference entrypoint"
       },
       {
@@ -1134,32 +1164,32 @@
       },
       {
         "path": "drafts/registry.json",
-        "sha256": "7a61812c1227e392b3b23503dc2d9f04e506f7c2647d6d9001faac91e10385ef",
+        "sha256": "1e9172f4d3bf4ef903106eb80f3af8beca7114f05107f2acf72cb1b60edf8cec",
         "description": "Human and agent pre-number KFD Candidate path"
       },
       {
         "path": "registry.json",
-        "sha256": "b0210d74da6af49a433a257e50e7a63761c3b2ad00c63262d161add571644447",
+        "sha256": "e1614792e92c837c22d69628d06ace626e94dbc2a42f58123913cdb79914c6bf",
         "description": "Agent registry path"
       },
       {
         "path": "standards.json",
-        "sha256": "9a62e08bf01f6dc9072a2eb546f1da7e2e8d3b88862b381beb56700cbe7bbe93",
+        "sha256": "f9a606534694f982f10e1b6d06bdf029627eebf7049553dc3a387d4c5f6cb120",
         "description": "Agent standards metadata path"
       },
       {
         "path": ".buildchain/kfd-2/public-release-trust.claim.json",
-        "sha256": "fadbe005dc00f4a14271acbfa64b1b8ae3e31a58f2f9970d2a30e46749c8d6d3",
+        "sha256": "82223ce8620bdf752b4a29aa54d1e76998f255bb512e0c524944337e669edf7c",
         "description": "Agent release trust claim path"
       },
       {
         "path": ".buildchain/kfd-2/kfd-foundation.trust-claims.json",
-        "sha256": "9e0da29f6f123d9f6c9feacf0eda590318c41d304c67780a7a74859acd595a42",
+        "sha256": "ca0f57f08df1fa5d387566494a7239431a73eb12e7d3f33daf318bd1500f06f1",
         "description": "Agent generic trust claims path"
       },
       {
         "path": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json",
-        "sha256": "6f8a38456f74c6adbd1955382c0d1849339f369a3961aa0b845c9f0d63729a9c",
+        "sha256": "696c045d21e087961479212010ecb5804a0d53af5a1c91fd450624ef49c7e8b9",
         "description": "Agent generic trust assessment path"
       },
       {
@@ -1171,15 +1201,15 @@
     "manuals": [
       {
         "path": "docs/MAP.md",
-        "sha256": "1171828848bebd1565d5b662802ff40d91b470da06ed4bfaf08b457d7caa14f2"
+        "sha256": "14af94b5a7e08ffbd84e7beca3fa60d9bbf38198847cd39db20e66e4ebd01b1c"
       },
       {
         "path": "docs/foundation-model.md",
-        "sha256": "4dcb79c45a0370e78a2304a059e6fb754b3796280b6cd2d7a3d107d1b0b7962b"
+        "sha256": "f09724cf07c16c1cf5d3b038bb50cc6a7391ed1ec389d2d5fa561a0b41a52683"
       },
       {
         "path": "docs/formal-model.md",
-        "sha256": "d78c78baf8adf3272b22198f8f2dac3148f987ec915ce040b84b98c3a1ef144e"
+        "sha256": "5de1856d8b9c4ced915bbeccd34a52a3ead19d0073b620d906686e75c7d2ceff"
       },
       {
         "path": "docs/primitive-discovery-cases.md",
@@ -1191,11 +1221,11 @@
       },
       {
         "path": "drafts/README.md",
-        "sha256": "fe23b50c2b19155ff37fffa3c23427c346f322509f8faff5ba3509e16e513bd1"
+        "sha256": "366473e17b985fe72bdda0d474ce81ca1ec0627b2b39d55d6b2fed9f0e560613"
       },
       {
         "path": "drafts/registry.json",
-        "sha256": "7a61812c1227e392b3b23503dc2d9f04e506f7c2647d6d9001faac91e10385ef"
+        "sha256": "1e9172f4d3bf4ef903106eb80f3af8beca7114f05107f2acf72cb1b60edf8cec"
       },
       {
         "path": "TRADEMARKS.md",
@@ -1226,8 +1256,12 @@
         "sha256": "5cc26c61148c4e8f5ec609e2d1029437b92f4d16202975daaa34cf6dd14d1029"
       },
       {
+        "path": "docs/KFD-7-usage.md",
+        "sha256": "bc49249aacd45ba89ca4ce48a1992493663a7dc638eb13555ebf05a3a2d7b7d0"
+      },
+      {
         "path": "docs/KFD-1-formal.md",
-        "sha256": "739bbfa03a026a15411db0ef4270d36a0a5e3e6ec51f3f6dfcce61e78a47033e"
+        "sha256": "6cac3e9a0b63bf004f12373c243e976fe4441831cdd3019142e6850bef72e3ab"
       },
       {
         "path": "docs/KFD-2-formal.md",
@@ -1239,7 +1273,7 @@
       },
       {
         "path": "docs/KFD-4-formal.md",
-        "sha256": "2dc22b5ad4ca8ea217d6a52545d038a5047343252d02e8bad856952d7455b2b8"
+        "sha256": "4bee9aa85e2c2f9c35abe3ec1eb0663e8e242fa9dc4a36a7f55caeac78ce9012"
       },
       {
         "path": "docs/KFD-5-formal.md",
@@ -1248,6 +1282,10 @@
       {
         "path": "docs/KFD-6-formal.md",
         "sha256": "ab4accd65a7d94bfccb85c987b26bf7b7220f1e5bd1f6b648ffdc5cfc4df9022"
+      },
+      {
+        "path": "docs/KFD-7-formal.md",
+        "sha256": "991e67497b68d655461ae0981eb9ef8f1ea294bebaea5447d83a2220f0d15f47"
       },
       {
         "path": "cases/live/proof-carrying-work-object/README.md",
@@ -1275,7 +1313,7 @@
       },
       {
         "path": "cases/live/proof-carrying-work-object/distinguishability.md",
-        "sha256": "c22374f0005e9c7ab2bfbc753636dccdeccbfa6a055c4afac42027aaa0ad1f73"
+        "sha256": "978656ceeefba60b4d6aada3b8a1ea9bd6fae856765ac42b8866dd0fc3c4e893"
       },
       {
         "path": "cases/live/proof-carrying-work-object/cuts/0002-pursuit.json",
@@ -1287,7 +1325,7 @@
       },
       {
         "path": "drafts/action-state-separation.md",
-        "sha256": "66685bcddf3422888e47c381f44f9f61ead302eb7042ccf25a3b417de553e02c"
+        "sha256": "ec11a002c0b89124add3ed68b1b2e0d083461f1fc8f2c9572ecd5404afd0193a"
       },
       {
         "path": "drafts/atlas-action-perspective.md",

@@ -36,15 +36,18 @@ status and claim boundary must remain machine-readable.
 
 Current candidates:
 
-- [Cross-domain action primitives](action-state-separation.md), slot hint `7`;
 - [Atlas action perspective](atlas-action-perspective.md), slot hint `8`;
 - [Pursuit intent continuity](pursuit-intent-continuity.md), slot hint `9`;
 - [Warrant bounded authority](warrant-bounded-authority.md), slot hint `10`.
 
-The first candidate defines the proposed action-Primitive category and
-separation rule. The other three elaborate independently qualifiable
-cross-domain candidates. None of the slot hints allocates or reserves a KFD
-number.
+Promoted lineage:
+
+- [Cross-domain action primitives](action-state-separation.md) was explicitly
+  promoted into numbered draft [KFD-7](../decisions/KFD-7.md).
+
+The three remaining candidates elaborate independently qualifiable
+cross-domain action Primitives. None of their slot hints allocates or reserves
+a KFD number.
 
 See [Contributing](../CONTRIBUTING.md) for candidate promotion, pre-stable
 Foundation Revision, and Foundation Freeze rules.
