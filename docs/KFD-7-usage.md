@@ -4,13 +4,17 @@
 [Formal reference](KFD-7-formal.md) ·
 [Documentation map](MAP.md)
 
-KFD-7 defines a proposed cross-domain action model that keeps direction,
+KFD-7 defines an active cross-domain action model that keeps direction,
 perspective, authority, and occurrence independently addressable. The
-authoritative text is `decisions/KFD-7.md`; its registry status is `draft`.
+authoritative text is `decisions/KFD-7.md`; its registry status is `active`.
 
 ## Package surface
 
-- `decisions/KFD-7.md`: the authoritative numbered draft.
+- `decisions/KFD-7.md`: the authoritative active decision.
+- `docs/KFD-7-activation.md`: the retained cross-product qualification cut,
+  review boundary, and non-claims.
+- `evidence/kfd-7/activation-record.json`: the machine activation verdict and
+  commit-addressed product witnesses.
 - `docs/KFD-7-formal.md`: the non-normative Fact/Episode and action-geometry
   reference.
 - `drafts/action-state-separation.md`: preserved source-candidate lineage.
@@ -152,10 +156,10 @@ offline, non-qualifying, and non-self-certified. Passing proves only record
 structure; runtime and qualification evidence remain product and release
 responsibilities.
 
-## Draft evidence boundary
+## Activation evidence boundary
 
-The package proves that KFD-7 is numbered, routed, digest-bound, formally
-described, machine-declarable, and exposed to humans and agents from one
-source. It does not prove that the proposed action roles are universally
-minimal, that one product has implemented them correctly, or that the
-activation gate has passed.
+The package proves that KFD-7 is numbered, active, routed, digest-bound,
+formally described, machine-declarable, and backed by two independently
+reviewed product Profiles at exact availability cuts. The activation record
+does not prove universal minimality, require one physical product shape, or
+qualify a future adopter's implementation.

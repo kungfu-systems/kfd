@@ -82,7 +82,7 @@ explainable, auditable, and proportionate.
 | [KFD-4](decisions/KFD-4.md) | principle | Views must remain bound to declared perspectives. | active |
 | [KFD-5](decisions/KFD-5.md) | procedure | Primitive discovery must separate genesis from qualification. | active |
 | [KFD-6](decisions/KFD-6.md) | procedure | Autonomous discovery must remain grounded in causal experience. | draft |
-| [KFD-7](decisions/KFD-7.md) | principle | Real-world action must keep direction, perspective, authority, and occurrence independently addressable. | draft |
+| [KFD-7](decisions/KFD-7.md) | principle | Real-world action must keep direction, perspective, authority, and occurrence independently addressable. | active |
 
 ## Current candidates
 
@@ -269,15 +269,17 @@ evaluation, bounded autonomy, and separation between discovery and promotion.
 Its package presence is an experimental interface, not a claim that autonomous
 primitive discovery or method dominance has been achieved.
 
-KFD-7 is a numbered draft for real-world action. It keeps direction,
+KFD-7 is an active decision for real-world action. It keeps direction,
 perspective, authority, and occurrence independently addressable over Fact cuts
 and causal records. Its package surface includes the authoritative decision,
 formal reference, usage boundary, standards metadata, preserved candidate
 lineage, and a version 2 action-contract Profile declaration. The schema fixes
 the responsibility, transition, theorem-reference, qualification-evidence,
 non-claim, and activation declaration without fixing product storage or
-lifecycle vocabulary. Product dogfood and independent review still determine
-whether a Profile can be activated.
+lifecycle vocabulary. The retained
+[activation evidence](docs/KFD-7-activation.md) binds independently reviewed
+Buildchain and Kungfu Profiles while preserving product-owned qualification and
+the decision's explicit non-claims.
 
 ## Decision metadata
 

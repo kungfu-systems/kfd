@@ -1,5 +1,5 @@
 ---
-status: draft
+status: active
 period: 2026-07-18
 theme: kfd-7-activation
 doc_type: qualification-record
@@ -7,7 +7,7 @@ source_level: public-repositories
 confidence: high
 sensitivity: public
 evidence_grade: A
-review_state: unreviewed
+review_state: independently-reviewed
 last_reviewed: 2026-07-18
 ---
 
@@ -55,10 +55,12 @@ implementation shape.
 
 ## Decision boundary
 
-This qualification record does not activate KFD-7 by itself. The KFD-level
-activation cut still requires independent review of the exact machine record.
-Until that review is retained and a separate verdict changes the numbered
-decision, `registry.json` and `standards.json` remain `draft`.
+The exact qualified cut was independently approved in
+[review 4728837515](https://github.com/kungfu-systems/kfd/pull/190#pullrequestreview-4728837515)
+at commit `bb6f651480efb165fd15798bd9d0c029821a8f06`. The separate activation
+verdict cites that immutable review and changes `registry.json` and
+`standards.json` to `active`. Later Profile qualification does not rewrite this
+cut or inherit its verdict.
 
 ## Non-claims
 

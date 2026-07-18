@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "contract": "kfd-7-activation-evidence",
   "standard": "kfd-7",
-  "status": "qualified",
+  "status": "activated",
   "evidenceCut": {
     "kfdPackage": "npm:@kungfu-tech/kfd@1.0.0-alpha.35",
     "buildchain": {
@@ -55,9 +55,9 @@
     "residualRisk": []
   },
   "activation": {
-    "decision": "pending",
-    "independentReview": "pending:kfd-level-qualification-review",
-    "activatedAt": null
+    "decision": "activate",
+    "independentReview": "https://github.com/kungfu-systems/kfd/pull/190#pullrequestreview-4728837515",
+    "activatedAt": "2026-07-18T16:12:08Z"
   },
   "nonClaims": [
     "Two qualified first-party Profiles do not prove one universal storage shape, user interface, lifecycle vocabulary, or globally minimal ontology.",

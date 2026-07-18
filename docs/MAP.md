@@ -38,7 +38,7 @@
 | How should an autonomous discovery loop remain grounded in causal experience? | [KFD-6](../decisions/KFD-6.md) |
 | What schema records a KFD-6 autonomous discovery experiment? | [`../schemas/kfd-6/autonomous-discovery-loop.schema.json`](../schemas/kfd-6/autonomous-discovery-loop.schema.json) |
 | How must real-world action keep direction, perspective, authority, and occurrence distinct? | [KFD-7](../decisions/KFD-7.md) |
-| What schema declares a draft KFD-7 product Profile and activation evidence boundary? | [`../schemas/kfd-7/action-contract.schema.json`](../schemas/kfd-7/action-contract.schema.json) |
+| What schema declares a KFD-7 product Profile and activation evidence boundary? | [`../schemas/kfd-7/action-contract.schema.json`](../schemas/kfd-7/action-contract.schema.json) |
 | What are the package implementation notes for KFD-1? | [`KFD-1-usage.md`](KFD-1-usage.md) |
 | What is the formal reference for KFD-1? | [`KFD-1-formal.md`](KFD-1-formal.md) |
 | What schema should papers, specifications, or sites use for canonical/latest/immutable publication URL semantics? | [`../schemas/kfd-1/publication-url-semantics.schema.json`](../schemas/kfd-1/publication-url-semantics.schema.json) and [`KFD-1-usage.md`](KFD-1-usage.md#publication-url-semantics) |

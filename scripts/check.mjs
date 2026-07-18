@@ -1261,12 +1261,12 @@ for (const concept of ["autonomousDiscovery", "causalExperience", "episodeCorpus
 }
 if (!kfd6?.interfaces?.autonomousDiscoveryLoop) fail("KFD-6 standards metadata missing interface autonomousDiscoveryLoop");
 const kfd7 = standardsMetadata.standards?.["kfd-7"];
-if (kfd7?.status !== "draft") fail("KFD-7 must remain draft until activation evidence is committed");
+if (kfd7?.status !== "active") fail("KFD-7 must be active after independent activation review");
 if (kfd7ActivationEvidence.contract !== "kfd-7-activation-evidence" || kfd7ActivationEvidence.standard !== "kfd-7") {
   fail("KFD-7 activation evidence must declare the canonical contract and standard");
 }
-if (kfd7ActivationEvidence.status !== "qualified") {
-  fail("KFD-7 activation evidence must remain qualified until independent KFD-level review");
+if (kfd7ActivationEvidence.status !== "activated") {
+  fail("KFD-7 activation evidence must retain the activated verdict");
 }
 if (kfd7ActivationEvidence.qualification?.result !== "passed") {
   fail("KFD-7 activation evidence qualification must pass");
@@ -1277,8 +1277,14 @@ if (kfd7ActivationEvidence.qualification?.profileCount !== 2) {
 if (kfd7ActivationEvidence.qualification?.openRequiredEvidenceCategories !== 0) {
   fail("KFD-7 activation evidence must have no open required evidence categories");
 }
-if (kfd7ActivationEvidence.activation?.decision !== "pending") {
-  fail("KFD-7 activation verdict must remain pending until independent KFD-level review");
+if (kfd7ActivationEvidence.activation?.decision !== "activate") {
+  fail("KFD-7 activation evidence must declare activate");
+}
+if (kfd7ActivationEvidence.activation?.independentReview !== "https://github.com/kungfu-systems/kfd/pull/190#pullrequestreview-4728837515") {
+  fail("KFD-7 activation evidence must bind the independent KFD-level review");
+}
+if (kfd7ActivationEvidence.activation?.activatedAt !== "2026-07-18T16:12:08Z") {
+  fail("KFD-7 activation evidence must bind the reviewed activation time");
 }
 if (kfd7?.surfaceRegister?.factSource !== kfd7ActivationEvidencePath) {
   fail("KFD-7 surface register must bind the activation evidence fact source");
@@ -1614,8 +1620,8 @@ if (!kfd2TrustAssessment) {
   if (assessmentsByClaim.get("kfd-6-autonomous-discovery-loop-trust")?.result !== "warning") {
     fail("KFD-2 generic trust assessment must downgrade draft KFD-6 to warning");
   }
-  if (assessmentsByClaim.get("kfd-7-action-responsibility-trust")?.result !== "warning") {
-    fail("KFD-2 generic trust assessment must downgrade draft KFD-7 to warning");
+  if (assessmentsByClaim.get("kfd-7-action-responsibility-trust")?.result !== "pass") {
+    fail("KFD-2 generic trust assessment must pass activated KFD-7 evidence closure");
   }
   for (const [index, reason] of (kfd2TrustAssessment.downgradeReasons ?? []).entries()) {
     if (!kfd2TrustTaxonomySchema.$defs?.riskType?.enum?.includes(reason.riskType)) fail(`KFD-2 generic trust assessment downgradeReasons[${index}].riskType must be a KFD-2 value`);

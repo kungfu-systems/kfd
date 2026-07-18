@@ -20,7 +20,7 @@
         {
           "kind": "file",
           "path": "standards.json",
-          "sha256": "fa3cd883eeb7b5d24d74ab0b1a968de0cf619ee2ecb2cc9c3d45a0f72515fa04"
+          "sha256": "d1ce12f124a3bb7e88b5cdae985f1a31ac5ce0003f15cf36263a8c461d5cdf54"
         },
         {
           "kind": "schema",
@@ -44,7 +44,7 @@
           "pointer": {
             "kind": "file",
             "path": "scripts/check.mjs",
-            "sha256": "5dcc1344df2267c6b655c96d9c6984a8d1c52f906e04ae5d4537dd86a16acc6b"
+            "sha256": "9c3591c8ae64c483828d0315071dcde783ee4fc51e8ae359c1e6a3613bfa1006"
           },
           "machineProvability": "machine-verifiable",
           "description": "The package check gate validates the KFD-1 schema, surface register, witness, and hashes."
@@ -109,7 +109,7 @@
           "pointer": {
             "kind": "file",
             "path": "scripts/check.mjs",
-            "sha256": "5dcc1344df2267c6b655c96d9c6984a8d1c52f906e04ae5d4537dd86a16acc6b"
+            "sha256": "9c3591c8ae64c483828d0315071dcde783ee4fc51e8ae359c1e6a3613bfa1006"
           },
           "machineProvability": "machine-verifiable",
           "description": "The package check gate validates KFD-3 interface closure and witness parity."
@@ -161,7 +161,7 @@
         {
           "kind": "file",
           "path": "standards.json",
-          "sha256": "fa3cd883eeb7b5d24d74ab0b1a968de0cf619ee2ecb2cc9c3d45a0f72515fa04"
+          "sha256": "d1ce12f124a3bb7e88b5cdae985f1a31ac5ce0003f15cf36263a8c461d5cdf54"
         },
         {
           "kind": "schema",
@@ -200,7 +200,7 @@
           "pointer": {
             "kind": "file",
             "path": "standards.json",
-            "sha256": "fa3cd883eeb7b5d24d74ab0b1a968de0cf619ee2ecb2cc9c3d45a0f72515fa04"
+            "sha256": "d1ce12f124a3bb7e88b5cdae985f1a31ac5ce0003f15cf36263a8c461d5cdf54"
           },
           "machineProvability": "machine-verifiable",
           "description": "Standards metadata exposes the KFD-4 schema ID, path, interface version, and concept names."
@@ -210,7 +210,7 @@
           "pointer": {
             "kind": "file",
             "path": "scripts/check.mjs",
-            "sha256": "5dcc1344df2267c6b655c96d9c6984a8d1c52f906e04ae5d4537dd86a16acc6b"
+            "sha256": "9c3591c8ae64c483828d0315071dcde783ee4fc51e8ae359c1e6a3613bfa1006"
           },
           "machineProvability": "machine-verifiable",
           "description": "The package check gate validates the KFD-4 timeline and replay schemas plus standards metadata; it does not assess adopter-specific capture or replay fidelity."
@@ -251,7 +251,7 @@
         {
           "kind": "file",
           "path": "standards.json",
-          "sha256": "fa3cd883eeb7b5d24d74ab0b1a968de0cf619ee2ecb2cc9c3d45a0f72515fa04"
+          "sha256": "d1ce12f124a3bb7e88b5cdae985f1a31ac5ce0003f15cf36263a8c461d5cdf54"
         },
         {
           "kind": "schema",
@@ -275,7 +275,7 @@
           "pointer": {
             "kind": "file",
             "path": "scripts/check.mjs",
-            "sha256": "5dcc1344df2267c6b655c96d9c6984a8d1c52f906e04ae5d4537dd86a16acc6b"
+            "sha256": "9c3591c8ae64c483828d0315071dcde783ee4fc51e8ae359c1e6a3613bfa1006"
           },
           "machineProvability": "machine-verifiable",
           "description": "The package check gate validates the KFD-5 interface and metadata; it does not certify adopter candidates."
@@ -316,7 +316,7 @@
         {
           "kind": "file",
           "path": "standards.json",
-          "sha256": "fa3cd883eeb7b5d24d74ab0b1a968de0cf619ee2ecb2cc9c3d45a0f72515fa04"
+          "sha256": "d1ce12f124a3bb7e88b5cdae985f1a31ac5ce0003f15cf36263a8c461d5cdf54"
         },
         {
           "kind": "schema",
@@ -340,7 +340,7 @@
           "pointer": {
             "kind": "file",
             "path": "scripts/check.mjs",
-            "sha256": "5dcc1344df2267c6b655c96d9c6984a8d1c52f906e04ae5d4537dd86a16acc6b"
+            "sha256": "9c3591c8ae64c483828d0315071dcde783ee4fc51e8ae359c1e6a3613bfa1006"
           },
           "machineProvability": "machine-verifiable",
           "description": "The package check gate validates draft status, required generation experiments, bounded method comparison, conditional boundary hypothesis, and anti-self-certification constants."
@@ -376,33 +376,43 @@
     },
     {
       "id": "kfd-7-action-responsibility-trust",
-      "statement": "KFD-7 is trustable as a numbered draft action-responsibility principle because KFD publishes its decision, formal reference, usage boundary, standards metadata, promotion lineage, conditional session theorem, context-insufficiency corollary, and verification gate; KFD does not claim that a concrete Profile refinement, cross-domain minimality, product usability, or activation is already proved.",
+      "statement": "KFD-7 is trustable as an active action-responsibility principle because KFD publishes its decision, formal reference, usage boundary, standards metadata, promotion lineage, conditional session theorem, context-insufficiency corollary, and a commit-addressed activation record for two independently reviewed product Profiles; activation does not imply universal minimality or qualify future Profiles by inheritance.",
       "subject": {
         "kind": "action-responsibility",
         "id": "kfd-7-action-responsibility",
         "standard": "kfd-7",
-        "description": "KFD-7 draft separation of direction, perspective, authority, and realized occurrence over Fact cuts and causal records."
+        "description": "KFD-7 active separation of direction, perspective, authority, and realized occurrence over Fact cuts and causal records."
       },
       "facts": [
         {
           "kind": "file",
           "path": "decisions/KFD-7.md",
-          "sha256": "5cdde3f7dffabbee5da1edbea462a7c0b5d0c4650bec9cbd602bbad6aad2869f"
+          "sha256": "e64176dbfe45221956074f7de06f093da5d1697b90e58fbe6b8b9d6384055075"
         },
         {
           "kind": "file",
           "path": "docs/KFD-7-formal.md",
-          "sha256": "a588862b9f64a33d111c343ee1cc2c84a2e789049b345b549bf3dba3d95203ea"
+          "sha256": "5f123e8f561767db2b40f15c9f3bbebb0d54f3f3644e725c12cd6be613db3e46"
         },
         {
           "kind": "file",
           "path": "docs/KFD-7-usage.md",
-          "sha256": "6292a41ec9f06a6bb70b9d285dc5f9a1cd478dcf8040fe59115dc05fb6325bcc"
+          "sha256": "214675feff8f93b7c84906534fae4282d3a2801c087a9a176223cb23cc9753ff"
+        },
+        {
+          "kind": "file",
+          "path": "docs/KFD-7-activation.md",
+          "sha256": "0c225fc60bb8f8b4db648868f1daba45edb3205ef338252bbbacc3cfbd2b7b2e"
+        },
+        {
+          "kind": "file",
+          "path": "evidence/kfd-7/activation-record.json",
+          "sha256": "813b6dbe04a62ca8e926ff4bc7a4de8c6b3faefef695d8cbebf4759ba1447280"
         },
         {
           "kind": "file",
           "path": "standards.json",
-          "sha256": "fa3cd883eeb7b5d24d74ab0b1a968de0cf619ee2ecb2cc9c3d45a0f72515fa04"
+          "sha256": "d1ce12f124a3bb7e88b5cdae985f1a31ac5ce0003f15cf36263a8c461d5cdf54"
         },
         {
           "kind": "file",
@@ -416,10 +426,10 @@
           "pointer": {
             "kind": "file",
             "path": "registry.json",
-            "sha256": "e1614792e92c837c22d69628d06ace626e94dbc2a42f58123913cdb79914c6bf"
+            "sha256": "7cb1b4459c6fdf1fa981cb8298312565a5f9ef8931391a532174036544b2ec05"
           },
           "machineProvability": "machine-verifiable",
-          "description": "The numbered registry allocates KFD-7 with draft status."
+          "description": "The numbered registry declares KFD-7 active."
         },
         {
           "type": "file",
@@ -435,33 +445,32 @@
           "type": "file",
           "pointer": {
             "kind": "file",
-            "path": "scripts/check.mjs",
-            "sha256": "5dcc1344df2267c6b655c96d9c6984a8d1c52f906e04ae5d4537dd86a16acc6b"
+            "path": "evidence/kfd-7/activation-record.json",
+            "sha256": "813b6dbe04a62ca8e926ff4bc7a4de8c6b3faefef695d8cbebf4759ba1447280"
           },
           "machineProvability": "machine-verifiable",
-          "description": "The package check gate validates KFD-7 identity, formal binding, theorem and corollary references, Profile evidence categories, draft status, trust projection, and participant-facing closure."
+          "description": "The activation record binds two exact product availability cuts, product and KFD-level reviews, runtime evidence, zero open required obligations, and explicit non-claims."
+        },
+        {
+          "type": "file",
+          "pointer": {
+            "kind": "file",
+            "path": "scripts/check.mjs",
+            "sha256": "9c3591c8ae64c483828d0315071dcde783ee4fc51e8ae359c1e6a3613bfa1006"
+          },
+          "machineProvability": "machine-verifiable",
+          "description": "The package check gate validates KFD-7 identity, formal binding, theorem and corollary references, Profile evidence categories, active status, activation review, trust projection, and participant-facing closure."
         }
       ],
       "verification": {
         "command": "node scripts/check.mjs",
-        "expectedResult": "warning"
+        "expectedResult": "pass"
       },
       "auditBoundary": {
-        "scope": "KFD-7 numbered draft text, formal and usage references, standards metadata, promotion lineage, qualification-basis structure, and package checks; excludes concrete Profile refinement, cross-domain minimality, adopter runtime correctness, product usability, and activation",
+        "scope": "KFD-7 active text, formal and usage references, standards metadata, promotion lineage, two exact first-party Profile cuts, activation review, and package checks; excludes universal minimality, provider-wide correctness, and future adopter qualification",
         "enumerability": "closed-world"
       },
-      "residualRisk": [
-        {
-          "id": "action-model-activation-not-yet-proved",
-          "definedBy": "https://kfd.libkungfu.dev/schemas/kfd-2/trust-taxonomy.schema.json#/$defs/residualRisk",
-          "riskType": "external-fact-risk",
-          "trustImpact": "downgrade-warning",
-          "machineProvability": "partially-machine-verifiable",
-          "agentAction": "verify-external-facts",
-          "reason": "KFD-7 is a numbered draft with published reference semantics, but no current package fact proves cross-domain minimality, product usability, or activation.",
-          "owner": "KFD maintainers and experimental adopters"
-        }
-      ],
+      "residualRisk": [],
       "responsibility": {
         "owner": "KFD maintainers",
         "sourceOwner": "KFD maintainers",
