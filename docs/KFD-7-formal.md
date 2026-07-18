@@ -13,159 +13,332 @@
 
 ## Imported vocabulary
 
-`Fact`, `Episode`, `Pursuit`, `Atlas`, `Warrant`, `Profile`, `Transition`,
-`Receipt`, `EvidenceCut`, `Denial`, `ResidualRisk`, `Qualification`.
+`FactCut`, `CausalRecord`, `Episode`, `Atlas`, `Pursuit`, `Warrant`,
+`ActionSpace`, `ObservationProjection`, `TargetRelation`,
+`AdmissibleTransition`, `RealizedPath`.
 
-## Role domains
+## Domain objects
 
-For a Profile `P`:
-
-```text
-F_P  addressable Fact identities and cuts
-E_P  addressable bounded causal Episodes
-U_P  continuing Pursuit identities
-A_P  declared Atlas perspectives and fact cuts
-W_P  bounded Warrants and derivation chains
-```
-
-The sets may share a physical substrate. Their semantic identity functions
-remain distinguishable:
+Let `F` be a state space admitted by declared fact sources. A fact cut is an
+independently addressable state:
 
 ```text
-id_F(x), id_E(x), id_U(x), id_A(x), id_W(x)
+f_c in F
 ```
 
-## Action declaration
-
-A consequential transition is represented abstractly as:
+A causal record connects declared cuts:
 
 ```text
-T = (subject, role, prior, operation, preconditions,
-     warrant?, atlas?, pursuit?, effect, receipt, evidence, denial?, risk)
+E: f_c0 -> f_c1
+Before(E) = f_c0
+After(E)  = f_c1
 ```
 
-`warrant?`, `atlas?`, and `pursuit?` may be absent only under a declared Profile
-rule. Absence is not permission to infer the missing role from another field.
-
-## Core predicates
+For sequential work:
 
 ```text
-Holds(f, authority, cut)        Fact f is asserted under authority and cut
-Occurred(e, boundary)           Episode e records a bounded occurrence
-Continues(u, e)                 Episode e contributes to Pursuit u
-JudgedFrom(t, a)                transition t is judged from Atlas a
-PermittedBy(t, w)               transition t is permitted by Warrant w
-Derives(w_child, w_parent)      child Warrant passes checked attenuation
-Succeeds(x_new, x_old)          identity has a declared successor relation
-Binds(r, t)                     receipt r binds the exact transition claim
-Denies(d, t)                    denial d explains why t was rejected
+f_c0 --(u1, r1)--> f_c1 --(u2, r2)--> ... --(un, rn)--> f_cn
 ```
 
-## Separation invariants
+Concurrent work may require a causal DAG or partial order rather than one
+universal clock. `E` is not the endpoint difference:
 
 ```text
-I1  Continues(u, e) does not imply PermittedBy(e, w)
-I2  JudgedFrom(t, a) does not imply CompleteReality(a)
-I3  PermittedBy(t, w) does not imply Occurred(e)
-I4  Occurred(e) does not imply Authorized(e) or Completed(u)
-I5  Holds(f, authority, cut) does not imply Occurred(e)
-I6  Derives(w_child, w_parent) requires explicit attenuation and preconditions
-I7  Completed(u) requires the Pursuit consequence/settlement predicate
-I8  SameEndpoint(e1, e2) does not imply SameCausalExperience(e1, e2)
-I9  UnknownRole or UnknownTransition fails closed
-I10 Profile state names do not become universal KFD enums by adoption
+Before(E) = After(E) does not imply Empty(E)
 ```
 
-## Abstract lifecycle obligations
-
-KFD-7 constrains questions, not one universal state vocabulary:
+The object-and-path interpretation is:
 
 ```text
-Fact:    assert -> inspect -> supersede/degrade/invalidate
-Episode: open -> act -> seal/reconcile -> replay/export or declared contraction
-Pursuit: create -> advance/revise/pause -> settle/abandon/terminate/succeed
-Atlas:   compile/declare -> consume -> stale/conflict -> successor or reject
-Warrant: issue -> derive/attenuate -> exercise -> expire/revoke/refuse/renew
+Fact cuts  -> object-like admitted states
+Episodes   -> morphism-like realized causal transitions
+compose(E1, E2) only when After(E1) = Before(E2)
 ```
 
-A Profile maps each arrow to a versioned operation with preconditions, effect,
-receipt, evidence, denial reasons, and residual risk. It may add states and
-operations without weakening the invariants.
+This is a responsibility model, not a claim that every domain is literally a
+mathematical category.
 
-## Transition validity
+## Action geometry
+
+The three action responsibilities constrain different structures over `F`:
 
 ```text
-Valid_P(T) :=
-  KnownRole_P(T.role)
-  and KnownOperation_P(T.operation)
-  and IdentityBound_P(T.subject, T.prior)
-  and PreconditionsHold_P(T)
-  and AuthoritySatisfied_P(T)
-  and PerspectiveSatisfied_P(T)
-  and EffectDeclared_P(T)
-  and ReceiptAndEvidenceBound_P(T)
+Atlas:    pi_A: F -> O_A
+Pursuit:  target set G_P within F, or ordering/value V_P over reachable states
+Warrant:  admissible transition set C_W(f) from fact cut f
+Episode:  realized causal path gamma_E through F
 ```
 
-If any term is false or unknown, the result is a structured denial or explicit
-unsupported result, never compatible success.
+`pi_A` is the observation projection: it determines which facts and relations
+are visible from an addressable perspective. `G_P` or `V_P` supplies
+direction: which consequences count as progress. `C_W(f)` is the permission
+cone: which next transitions are authorized. `gamma_E` preserves what actually
+happened.
 
-## Evidence closure
+The term `cone` means a local set of admissible directions. It does not require
+a differentiable manifold. Each responsibility may itself be internally
+high-dimensional.
+
+## Relations and predicates
+
+For candidate action `u`:
+
+```text
+Supported_A(f, u)    action u is supported by Atlas A at cut f
+Advances_P(f, u)     action u can advance Pursuit P
+Authorized_W(f, u)   action u is permitted by Warrant W
+Realizes(E, u)       causal record E preserves the realized action
+Admits(f', C)        successor cut f' becomes visible in contract world C
+```
+
+The valid action set is:
+
+```text
+U_valid(f) = {u |
+  Supported_A(f, u)
+  and Advances_P(f, u)
+  and Authorized_W(f, u)}
+```
+
+A policy may choose:
+
+```text
+u* in Select_P(U_valid(f))
+E = Execute(f, u*) = (f, u*, observed consequences, f')
+```
+
+`Select_P` need not be scalar optimization. It may be a partial order,
+multi-objective judgment, policy, deliberation, or accountable human choice.
+
+## Invariants
+
+```text
+I1  Consequential(u) -> BoundToFactCut(u) and BoundToPerspective(u)
+I2  Valid(u) -> Supported_A(f, u) and Advances_P(f, u)
+                and Authorized_W(f, u)
+I3  Atlas does not imply Pursuit or Warrant
+I4  Pursuit does not imply Atlas or Warrant
+I5  Warrant does not imply Atlas or Pursuit
+I6  Planned(u) or Authorized(u) does not imply Occurred(u)
+I7  Occurred(u) does not imply Authorized(u), Advanced(u), or Completed(u)
+I8  SameEndpoints(E1, E2) does not imply Equivalent(E1, E2)
+I9  Compose(E1, E2) -> After(E1) = Before(E2)
+I10 Sealed(E) does not silently imply Admitted(After(E), C)
+I11 SimplifiedInterface(u) may hide ceremony but not fuse responsibility
+I12 Missing or derived responsibility remains inspectable when consequence is
+    material
+I13 SessionCompressible(h) -> RoundTrip(Sigma(h)) preserves the bounded
+    decision semantics of h
+I14 not SessionCompressible(h) -> the independently relevant roles become
+    addressable
+```
+
+## Conservative session projection
+
+Let a bounded history `h` be session-compressible when:
+
+```text
+SessionCompressible(h) =
+  OneLocalPursuit(h)
+  and OneAdequateAtlas(h)
+  and OneStableWarrant(h)
+  and OneContiguousEpisode(h)
+  and SparseFactChange(h)
+```
+
+Define a session projection:
+
+```text
+Sigma(h) = (
+  goal        := Pursuit(h),
+  context     := Atlas(h),
+  permissions := Warrant(h),
+  run         := Episode(h),
+  input       := Before(Episode(h)),
+  result      := After(Episode(h))
+)
+```
+
+For the decisions inside the declared bounded history, expansion followed by
+projection must be conservative:
+
+```text
+SessionCompressible(h)
+  -> Equivalent_D(Sigma(Expand(Sigma(h))), Sigma(h))
+```
+
+`Equivalent_D` means that the goal, context boundary, effective permissions,
+realized execution, and result needed for those decisions are preserved. It
+does not mean the underlying responsibilities become identical.
+
+Compression must stop when any assumption becomes decision-relevant:
+
+```text
+SeveralPursuits
+or PerspectiveOrFreshnessChange
+or DelegatedExpiredOrRevokedAuthority
+or SeveralEpisodes
+or MaterialFactBranch
+  -> not SessionCompressible(h)
+```
+
+At that breakpoint, an implementation exposes the affected independent roles
+instead of silently retaining a lossy session projection. This makes KFD-7 a
+conservative extension of ordinary session work rather than a requirement for
+permanent five-object ceremony.
+
+## Conditional irreducibility
+
+The current minimality claim is conditional non-derivability:
+
+```text
+Atlas does not imply Pursuit
+(Atlas, Pursuit) does not imply Warrant
+(Atlas, Warrant) does not imply Pursuit
+(Pursuit, Warrant) does not imply Atlas
+```
+
+Test it counterfactually:
+
+- hold Atlas and Warrant fixed; vary Pursuit;
+- hold Pursuit and Warrant fixed; vary Atlas;
+- hold Atlas and Pursuit fixed; vary Warrant;
+- hold all three fixed; vary the realized Episode.
+
+If a substitution changes safe action, expected value, authority, or audit
+conclusions, the varied role carries independent decision-relevant
+information. If repeated cross-domain evidence shows that one role is
+losslessly derivable, the minimality claim weakens.
+
+## Categorical compression
+
+```text
+Fact cuts        -> objects
+possible actions -> candidate morphisms
+Atlas            -> observation projection over objects and morphisms
+Warrant          -> predicate or subspace of admissible morphisms
+Pursuit          -> target relation or ordering over reachable objects
+Episode          -> realized morphism or composable causal path
+```
+
+This compression explains why occurrence is not a fourth state coordinate.
+Atlas, Pursuit, and Warrant constrain possible action at a cut; Episode
+preserves movement between cuts.
+
+## Action transition
+
+```text
+declare current Fact cut
+  -> resolve Atlas, Pursuit, and Warrant
+  -> compute or deliberate over U_valid
+  -> select and perform bounded action
+  -> preserve realized Episode
+  -> assess claims, consequences, and responsibility
+  -> explicitly admit successor Fact cut
+```
+
+## Proof obligations
+
+- Identify the fact source and cut used for action.
+- Preserve Atlas, Pursuit, and Warrant as independently addressable roles.
+- Show the derivation of defaults without fusing responsibility.
+- Prove applicable Warrant scope, derivation, expiry, and revocation state.
+- Preserve causal ordering, failures, retries, cost, and consequences.
+- Distinguish occurrence from success, progress, completion, and admission.
+- Round-trip low-complexity work through the session projection without losing
+  bounded decision semantics or requiring manual object management.
+- Expose the independently relevant roles when a session-compressibility
+  assumption fails.
+- Test counterfactual independence and fused alternatives.
+- Demonstrate cross-domain transfer and progressive disclosure before
+  activation.
+
+## Profile declaration and evidence closure
+
+The draft machine contract records a Profile declaration rather than one
+physical state machine:
+
+```text
+Profile = (
+  implementation coordinate,
+  qualification status,
+  five responsibility declarations,
+  Profile-owned lifecycle vocabulary,
+  transitions,
+  prohibited inferences,
+  evidence obligations,
+  non-claims and extensions,
+  activation verdict
+)
+```
+
+Each transition declaration binds:
+
+```text
+subject role + prior Profile state + operation + preconditions
+  -> effect + receipt + evidence + denial reasons + residual risks
+```
 
 For Profile claim `C` at evidence cut `K`:
 
 ```text
 Qualified(C, K) :=
-  schema_conformance
-  and positive_transition_evidence
-  and negative_transition_evidence
-  and deletion_or_fusion_evidence
-  and migration_and_rebuild_evidence
-  and concurrency_or_compensation_evidence
-  and retained_residual_risk
-  and independent_review
+  schema conformance
+  and positive and negative transition evidence
+  and role deletion or fusion evidence
+  and export, rebuild, and migration evidence
+  and concurrency, retry, or compensation evidence
+  and Warrant decay and revocation evidence
+  and Atlas staleness and loss evidence
+  and Pursuit continuity and settlement evidence
+  and Episode replay or declared contraction evidence
+  and cold-start continuation evidence
+  and retained residual risk
+  and independent review
 ```
 
-An evidence category may be `not-applicable` only with a bounded reason.
-Qualification is relative to the declared Profile and cut; it is not universal
-necessity.
-
-## Activation transition
-
-```text
-pending --sufficient retained evidence + independent review--> activate
-pending --contract/profile defect-----------------------------> revise
-pending --separation/profile falsified------------------------> reject
-```
-
-Only the `activate` transition may publish a stable Profile claim. Draft KFD-7
-currently remains before this transition.
+`not-applicable` requires a bounded reason. An `activate` verdict requires a
+qualified Profile, an exact evidence cut, independent review, retained product
+witnesses, and no planned or failed obligation. Qualification remains relative
+to that Profile and cut; it does not establish universal minimality.
 
 ## Invalid states
 
-- Pursuit identity is treated as an authorization token.
-- Retrieved context is treated as complete reality or current Atlas authority.
+- Intention or assignment is treated as authorization.
+- Available context is presented as complete reality.
 - Authentication or capability is treated as a Warrant.
-- A plan or Warrant is treated as evidence that action occurred.
-- An Episode or successful command is treated as Pursuit completion.
-- Child authority is inherited without a checked derivation.
-- A Profile silently changes state names, denial meaning, or evidence meaning.
-- A conforming JSON record is presented as product qualification.
-- Missing evidence is projected as pass.
+- A plan, expected transition, or permission is presented as occurrence.
+- Technical success or Episode sealing is presented as completion.
+- Before-and-after state is presented as the complete causal record.
+- Equal-endpoint Episodes are treated as equivalent without causal comparison.
+- A parent object silently supplies child authority.
+- A low-friction interface makes hidden, stale, or missing responsibility
+  impossible to inspect.
+- Simple work requires permanent explicit management of all action roles.
+- Complex work remains compressed after a session assumption becomes
+  decision-relevant and false.
 
-## Machine mapping
+## Machine mappings
 
-| Formal statement | Decision source | Machine surface | Verification |
+| Formal statement | Decision source | Schema or check | Verification |
 |---|---|---|---|
-| role responsibilities | Reference roles | `roles[]` | closed structure and required roles |
-| `I1-I10` | Independence rule | `prohibitedInferences[]` | closed vocabulary |
-| `Valid_P(T)` | Profile contract | `transitions[]` | required precondition/effect/receipt/denial/evidence shape |
-| evidence closure | Evidence contract | `evidenceObligations[]` | category/status/artifact/risk closure |
-| activation transition | Activation decision | `activation` | decision/evidence/review binding |
+| Fact-cut and causal-record separation | Substrate boundary | KFD-1 formal reference and KFD-7 Profile role declarations | Structural plus product evidence |
+| Atlas/Pursuit/Warrant separation | Action responsibilities | `schemas/kfd-7/action-contract.schema.json` required role closure | Structural plus product and semantic review |
+| `I3-I8` conditional independence | Gate and Activation | Counterfactual product fixtures | Not yet implemented |
+| `I13-I14` conservative session limit | Conservative session limit | Session round-trip and complexity-breakpoint fixtures | Not yet implemented |
+| `I9-I10` path composition and admission | Action closure | Domain Episode/Fact profiles | Mixed |
+| transition and denial declaration | Reference Profile contract | `transitions[]` | Independent schema verification |
+| evidence and non-claim closure | Activation | `evidenceObligations[]`, `nonClaims[]`, `activation` | Independent schema verification; runtime proof remains external |
+| Decision/formal/package identity | Verification | `registry.json`, `standards.json`, `scripts/check.mjs` | Machine |
+| KFD-7 activation | Activation | qualified Profile, exact evidence cut, independent review, product witnesses | Not yet proved |
 
-## Non-claims and extensions
+## Confidence and non-claims
 
-The model does not fix storage, APIs, command names, GUI states, domain terms,
-or a universal lifecycle enum. Profiles extend lifecycle vocabulary and domain
-relations through versioned declarations. A later formal revision may refine
-the predicates without weakening independence, fail-visible denial, or retained
-evidence obligations.
+The state/path distinction has high confidence as a model of admitted facts and
+causal experience. The minimality and cross-domain transfer of Atlas, Pursuit,
+and Warrant have medium-high architectural confidence and remain subject to
+the activation gate.
+
+KFD-7 does not claim literal physical spacetime, three Euclidean dimensions, a
+global clock, a total causal order, one storage engine, one serialization, one
+mandatory interface sequence, or a complete ontology of action.

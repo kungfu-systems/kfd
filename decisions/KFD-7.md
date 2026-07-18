@@ -1,170 +1,214 @@
-# KFD-7: Consequential action must keep direction, perspective, authority, and occurrence independently addressable
+# KFD-7: Real-world action must keep its responsibilities distinct
 
 - Status: draft
 - Number: 7
 - Kind: principle
-- Applies to: every kungfu-systems product or process that represents consequential human or agent action
+- Applies to: every kungfu-systems product, repository, agent workflow, and participant-facing interface that represents consequential real-world action
 
 ## One sentence
 
-Consequential action must keep direction, perspective, authority, and
-occurrence independently addressable.
+Real-world action must keep direction, perspective, authority, and occurrence
+independently addressable.
 
-## Status and activation boundary
+Action begins from fact-bound direction, perspective, and authority, encounters
+reality, and returns as independently replayable causal experience.
 
-KFD-7 is a numbered draft promoted from the cross-domain action-Primitives
-candidate. It allocates the decision number and publishes a reference contract;
-it does not yet activate a universal product profile or prove that the current
-role names are final across domains.
+## Status and gate
 
-Activation requires retained product evidence, independent review, negative
-tests, migration and deletion experiments, and a release-qualified profile.
-Until that gate closes, adopters label KFD-7 support `provisional` and must not
-present schema conformance as proof of product fitness.
+KFD-7 is a numbered draft promoted from the
+[cross-domain action-Primitive candidate](../drafts/action-state-separation.md).
+Its number and authority are allocated; its activation evidence remains open.
 
-## Reference roles
+The current model has enough theoretical closure to become an organization
+decision: state and occurrence are not interchangeable, and direction,
+perspective, and authority can change safe action independently. Activation
+still requires product evidence that this separation transfers across domains
+and lowers total reconstruction, authority, and consequence risk without
+forcing unnecessary ceremony on ordinary work.
 
-KFD-7 separates five semantic responsibilities:
+## Substrate boundary
 
-```text
-Fact     what is asserted to hold under a declared authority and cut
-Episode  what occurred through a bounded causal encounter with reality
-Pursuit  what intended change continues across actions
-Atlas    from which perspective, accepted facts, cut, and loss action is judged
-Warrant  which bounded transition is permitted, by whom, and under which constraints
-```
-
-Fact and Episode are the operational substrate. Pursuit, Atlas, and Warrant are
-provisional cross-domain action-role names. A conforming Profile may use domain
-language, but it must preserve the responsibilities and publish an explicit
-mapping rather than silently fusing them.
-
-These roles do not require five physical stores, five user forms, or five
-commands. Low-consequence work may derive inspectable defaults. Progressive
-disclosure may reduce ceremony; it may not erase responsibility.
-
-## Independence rule
-
-No role silently supplies another:
-
-- a Pursuit does not grant authority;
-- an Atlas does not claim complete reality or grant permission;
-- a Warrant does not prove that an action occurred or succeeded;
-- an Episode does not retroactively authorize action or prove completion;
-- a Fact does not imply how it was produced, what should happen next, or who may act;
-- parent direction, context, or authority does not silently become child authority;
-- technical success does not settle a Pursuit without its declared consequence test;
-- equal before-and-after state does not prove equal causal experience.
-
-A system may omit a distinct physical representation only when the Profile's
-required role declaration explains why the role is inapplicable or how an
-inspectable default preserves the same decision boundary.
-
-## Profile contract
-
-A versioned KFD-7 Profile declares:
-
-1. the product, domain, Profile version, implementation coordinate, and
-   qualification status;
-2. identity and source authority for each role it implements;
-3. Profile-owned lifecycle vocabulary without claiming that its state names are
-   universal KFD enums;
-4. relations among roles and the checks that prevent invalid inheritance;
-5. every supported transition's subject, preconditions, effect, receipt,
-   evidence, denial reasons, and residual risk;
-6. omitted physical representations, derived defaults, extension fields, and
-   unsupported claims while retaining all five responsibility declarations;
-7. migration, rebuild, export/import, deletion, concurrency, revocation,
-   invalid-transition, and cold-start evidence where applicable;
-8. the exact evidence cut and independent review behind any qualification or
-   activation claim.
-
-The Profile owns storage, API, CLI, GUI, state-machine, and adapter details.
-KFD owns the responsibility separation, declaration shape, evidence categories,
-failure visibility, and non-claims.
-
-## Abstract lifecycle obligations
-
-KFD-7 does not freeze one shared state machine. It requires every Profile to
-make these lifecycle questions decidable:
-
-- **Fact:** creation authority, cut identity, provenance, successor rules,
-  conflict, supersession, degradation, and invalidation;
-- **Episode:** start boundary, causal parents, admitted actions, seal, outcome,
-  evidence level, replay/export capability, and reconciliation after failure;
-- **Pursuit:** creation, revision, dependency, contribution, pause, settlement,
-  completion, abandonment, termination, and successor continuity;
-- **Atlas:** source admission, observer/perspective, cut, scope, projection,
-  omission, conflict, staleness, successor, and declared loss;
-- **Warrant:** issue, derivation, attenuation, scope, precondition, expiry,
-  revocation, refusal, renewal, and retained responsibility.
-
-Profile-specific transitions must fail visibly when their preconditions or
-authority bindings do not hold. Unknown transitions and unknown role mappings
-are not treated as compatible success.
-
-## Evidence contract
-
-Every transition claim binds:
+KFD-7 distinguishes two complementary operational substrates:
 
 ```text
-subject identity + prior state/cut + operation + preconditions
-  -> effect + receipt + evidence + denial or residual risk
+Fact cut       what holds at a declared authority and evidence boundary
+Causal record  what occurred between declared boundaries
 ```
 
-Qualification evidence is retained, independently inspectable, and able to
-contradict the Profile. At minimum the activation review considers:
+A causal record may be carried by an Episode. It preserves action,
+consequence, cost, failure, retry, authority use, and causal order rather than
+only before-and-after state. Equal endpoints do not imply equal experience.
 
-- role-deletion and role-fusion experiments;
-- invalid transition and prohibited-inference fixtures;
-- export/import and deterministic rebuild;
-- backend or representation migration;
-- concurrent action, retry, compensation, and crash recovery;
-- Warrant derivation, attenuation, expiry, and revocation;
-- Atlas staleness, loss, source removal, and successor cuts;
-- Pursuit continuation across participants, tools, and Episodes;
-- Episode replay or declared evidence-level contraction;
-- cold-start continuation without oral context from the previous actor.
+Fact cuts and causal records remain independently addressable. A causal record
+does not silently admit its endpoint as current fact, and a state transition
+does not erase the path that produced it.
 
-`not-applicable` is evidence only when the Profile gives a bounded reason.
-Missing evidence is not converted to pass.
+## Action responsibilities
 
-## Activation decision
+Consequential action requires three independently addressable responsibilities:
 
-The activation verdict is one of:
+```text
+direction             Pursuit
+perspective and cut   Atlas
+authority boundary    Warrant
+realized occurrence   Episode or another bounded causal record
+```
 
-- `activate`: retained evidence supports the declared Profile and the stable
-  KFD-7 surface;
-- `revise`: the separation remains promising but the contract, role mapping, or
-  evidence obligation needs a successor draft;
-- `reject`: evidence shows the proposed separation or Profile is not fit;
-- `pending`: qualification is incomplete.
+The names Atlas, Pursuit, Warrant, and Episode identify the first
+kungfu-systems action profiles. The principle is the separation of semantic
+responsibility:
 
-Only `activate`, bound to an exact evidence cut and independent review, may
-support a stable KFD-7 Profile claim. A product may remain provisional after the
-decision itself becomes active.
+- direction states which continuing change and consequences matter;
+- perspective states from where, from which accepted facts, and at which cut
+  action is judged;
+- authority states which transition may be performed, by whom, and under which
+  constraints;
+- occurrence preserves what actually happened.
+
+None may be silently derived from another. Intention does not grant authority.
+Available perspective is not complete reality. Permission or planning does not
+prove occurrence. Occurrence does not prove progress, completion, or
+authorization.
+
+## Action closure
+
+The normative closure is:
+
+```text
+declared Fact cut
+  -> independently addressable direction, perspective, and authority
+  -> bounded action encounters reality
+  -> independently replayable causal record
+  -> claims, review, correction, and explicit admission
+  -> successor Fact cut
+```
+
+The order is semantic, not a mandatory interface sequence. Low-consequence
+work may use inspectable defaults and progressive disclosure. Simplification
+may reduce ceremony but must not fuse responsibility or fabricate a missing
+role from another one.
+
+## Conservative session limit
+
+KFD-7 is a conservative extension of ordinary agent sessions. When work has
+one local direction, one adequate bounded context, one stable authority grant,
+one contiguous execution, and sparse Fact change, an implementation must be
+able to project:
+
+```text
+Pursuit  -> goal
+Atlas    -> context
+Warrant  -> tool permissions
+Episode  -> session, run, or transcript
+Fact     -> input state and result
+```
+
+The participant need not manage five explicit objects in this limit. The
+session-compatible surface is conforming when it preserves the relevant
+direction, perspective boundary, effective authority, realized occurrence,
+and admitted result, and keeps its defaults inspectable.
+
+This compression is conditional. The independent responsibilities must become
+addressable when work crosses directions, perspectives or freshness cuts,
+authority states, causal Episodes, or material Fact branches. A session
+therefore remains a valid local interaction and runtime object; it is not the
+sole model of consequential real-world work.
+
+## Gate
+
+KFD-7 applies when an action has durable, cross-participant, cross-tool,
+authority-bearing, safety-relevant, or materially costly consequences. A
+purely local reversible operation may rely on defaults when the defaults and
+their consequence boundary remain inspectable.
+
+A conforming claim:
+
+- binds action to a declared fact cut and perspective;
+- preserves continuing direction independently of one execution;
+- identifies applicable authority and its constraints;
+- records realized occurrence independently of planned or expected state;
+- preserves causal boundaries and composition across successor cuts;
+- keeps missing, defaulted, derived, expired, revoked, or degraded
+  responsibilities visible;
+- does not infer completion, success, permission, or reality completeness from
+  the wrong object.
+
+## Reference Profile contract
+
+KFD publishes `schemas/kfd-7/action-contract.schema.json` as a version 1 draft
+Profile declaration. It does not prescribe a universal product object model.
+It gives products and release systems one machine-readable place to declare:
+
+- the Fact, Episode, Pursuit, Atlas, and Warrant responsibility mappings;
+- Profile-owned lifecycle vocabulary and implementation coordinates;
+- supported transitions with preconditions, effects, receipts, evidence,
+  denial reasons, and residual risks;
+- prohibited cross-role inferences and retained evidence obligations;
+- extension ownership, non-claims, qualification state, and activation verdict.
+
+All five responsibility declarations remain required even when a product uses
+one physical record or a low-complexity session projection. The declaration
+explains the mapping or inspectable default; it does not require five stores,
+forms, or commands. Schema conformance proves declaration closure only. It does
+not prove role necessity, runtime behavior, product fitness, or activation.
+
+## Activation
+
+KFD-7 remains draft until real product evidence:
+
+- demonstrates counterfactual independence by holding two action
+  responsibilities fixed while varying the third;
+- transfers the model across non-isomorphic work domains;
+- distinguishes equal-endpoint but causally different Episodes;
+- represents concurrency, compensation, failure, and retry without hidden
+  reconstruction;
+- demonstrates a low-complexity session round trip without semantic loss or
+  manual object ceremony;
+- shows that complexity breakpoints expose the required independent roles;
+- compares task, goal, workflow, session, approval, capability, and fused
+  alternatives;
+- demonstrates lower total lifecycle cost or materially safer action.
+
+An `activate` verdict additionally binds an exact evidence cut, independent
+review, at least one retained product witness, and no planned or failed
+evidence obligation. Missing evidence remains visible; it is never projected
+as pass.
+
+Failure is evidence for revision, simplification, or rejection of the proposed
+profiles. It is not permission to infer one responsibility from another.
 
 ## Relation to KFD-1 through KFD-6
 
-KFD-1 keeps role identities and Profile contracts from drifting. KFD-2 binds
-trust to retained facts, evidence, risk, and responsibility. KFD-3 prevents
-authority from being synthesized through pressure or hidden capture. KFD-4
-binds Atlas views to declared perspectives. KFD-5 qualifies whether the
-proposed roles are load-bearing rather than method artifacts. KFD-6 may later
-discover or revise such roles from causal experience without self-certifying.
+KFD-1 keeps fact cuts and causal records from drifting. KFD-2 makes claims about
+them assessable. KFD-3 lets participants exchange trusted value without hidden
+pressure. KFD-4 supplies declared reference frames and inspectable
+transformations. KFD-5 separates the genesis of action Primitives from their
+qualification. KFD-6 asks whether causal experience can sustain autonomous
+discovery. KFD-7 turns those foundations back toward action:
+
+```text
+non-drifting facts
+  -> bounded trust
+  -> transparent cooperation
+  -> declared perspective
+  -> qualified Primitives
+  -> grounded discovery
+  -> fact-bound real-world action
+```
 
 ## Verification
 
-The `@kungfu-tech/kfd` package publishes
-`schemas/kfd-7/action-contract.schema.json`. The independent verifier can check
-closed record structure and reject unknown or incomplete declarations. Passing
-that check proves only conformance to the declared record shape; it does not
-prove that an action occurred, was authorized, completed a Pursuit, or qualifies
-the Profile for activation.
+The non-normative reference semantics are published in
+`docs/KFD-7-formal.md`. The draft Profile contract is published at
+`schemas/kfd-7/action-contract.schema.json` and is implemented independently by
+the native and WebAssembly verifier projections. Current package verification
+proves document, metadata, route, digest, declaration, and negative-fixture
+closure. It does not prove cross-domain minimality, runtime behavior, product
+usability, or activation.
 
-## Non-claims
+## Adopters
 
-KFD-7 does not require Kungfu storage, Git, SQLite, RocksDB, journal records,
-specific commands, a GUI workflow, one universal ontology, or the current role
-names in every domain. It does not authorize action, settle work, certify
-implementation quality, or turn a product witness into universal proof.
+Experimental adopters cite KFD-7 when they expose the action model and keep its
+status `draft`. They own the evidence for role independence, fact-cut
+admission, causal fidelity, authority correctness, progressive disclosure, and
+domain transfer.

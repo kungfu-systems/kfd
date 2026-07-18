@@ -4,19 +4,32 @@ period: 2026-07-18
 theme: cross-domain-action-primitives
 doc_type: kfd-candidate
 source_level: maintainer-consensus
-confidence: medium
+confidence: high
 sensitivity: public
-evidence_grade: C
+evidence_grade: B
 review_state: self-reviewed
 last_reviewed: 2026-07-18
 ---
 
 # KFD Candidate: Cross-Domain Action Primitives
 
-- Candidate status: incubating
+- Candidate status: promoted to KFD-7
 - Kind candidate: principle
 - Current slot hint: 7
 - Slot binding: non-binding
+
+## Promotion
+
+This candidate was promoted on 2026-07-18 to
+[KFD-7](../decisions/KFD-7.md). The numbered decision is now the authoritative
+rule. The independent
+[KFD-7 formal reference](../docs/KFD-7-formal.md) owns the current
+non-normative action geometry.
+
+This document remains as source-candidate lineage. Its original slot hint was
+non-binding until the explicit promotion allocated KFD-7. The Atlas, Pursuit,
+and Warrant elaboration candidates remain non-binding and independently
+qualifiable.
 
 ## One sentence
 
@@ -63,6 +76,10 @@ non-binding elaboration hypotheses are:
 - [Pursuit intent continuity](pursuit-intent-continuity.md), slot hint `9`;
 - [Warrant bounded authority](warrant-bounded-authority.md), slot hint `10`.
 
+The promoted formal model, conditional non-derivability argument, valid-action
+intersection, object/path interpretation, and confidence boundary now live in
+`docs/KFD-7-formal.md`.
+
 ## Action loop
 
 The proposed closure is:
@@ -81,6 +98,30 @@ Fact cut
 The order is explanatory, not a mandatory user-interface sequence. Low-
 consequence work may derive inspectable defaults. Simplification may reduce
 ceremony but must not fuse semantic responsibility.
+
+## Low-complexity session limit
+
+KFD-7 is more general than a session model only if it conservatively recovers
+the familiar session experience when work is locally simple. A representative
+limit has one local Pursuit, one Atlas adequately represented by the bounded
+context, one stable Warrant, one contiguous Episode, and sparse Fact change.
+
+Under those conditions, a product may project:
+
+```text
+Pursuit  -> goal
+Atlas    -> context
+Warrant  -> tool permissions
+Episode  -> session, run, or transcript
+Fact     -> input state and result
+```
+
+The participant should not manage five explicit objects in this limit. The
+projection must preserve the goal, context boundary, effective permissions,
+realized execution, and result. It must expand when work crosses Pursuits,
+perspectives or freshness cuts, authority states, Episodes, or material Fact
+branches. The session remains a valid local object; it stops being sufficient
+as the sole model of complex real-world work.
 
 ## Why the candidate exists
 
@@ -132,22 +173,36 @@ The candidate rejects systems that infer:
 - child authority from parent context without explicit derivation;
 - durable direction from a provider session or mutable task body.
 
-## Qualification gate
+## Activation handoff
 
-Promotion requires:
+Promotion allocated KFD-7 after the responsibility split, substrate boundary,
+conditional distinguishability argument, source lineage, and explicit
+maintainer judgment became sufficiently coherent for a numbered organization
+decision. Numbering does not certify activation.
+
+The remaining activation gate is owned by `decisions/KFD-7.md` and requires:
 
 1. deletion witnesses showing that direction, perspective, authority, and
    occurrence independently change real action or audit conclusions;
-2. transfer across non-isomorphic work domains;
-3. comparison with task, case, workflow, session, goal, approval, capability,
+2. counterfactual tests that hold two action roles fixed while varying the
+   third;
+3. transfer across non-isomorphic work domains;
+4. comparison with task, case, workflow, session, goal, approval, capability,
    and fused alternatives;
-4. counterexamples where one or more roles are legitimately absent or safely
+5. counterexamples where one or more roles are legitimately absent or safely
    defaulted;
-5. product evidence that the separation lowers reconstruction, authority, or
+6. product evidence that the separation lowers reconstruction, authority, or
    consequence risk without imposing greater total lifecycle burden;
-6. evidence that equal state endpoints can contain materially different causal
+7. a conservative-reduction witness in which a simple task round-trips through
+   the action model and a session-compatible view without semantic loss or
+   manual object ceremony;
+8. complexity-breakpoint evidence showing that the product exposes the
+   relevant roles when the low-complexity assumptions fail;
+9. evidence that equal state endpoints can contain materially different causal
    experience;
-7. independent review of whether this is an organization-level action rule.
+10. composition evidence showing that causal paths preserve aligned fact-cut
+   boundaries;
+11. independent review of whether the rule is ready to become active.
 
 ## Falsifiers
 
@@ -159,20 +214,20 @@ The candidate weakens or fails if:
 - another representation preserves equivalent decisions at lower total cost;
 - progressive disclosure cannot prevent the model from burdening ordinary
   low-consequence work;
+- a simple session cannot be projected into and out of the action model while
+  preserving its bounded decision semantics;
+- the product keeps all roles permanently explicit or fails to expand them
+  when the session compression becomes insufficient;
 - the three proposed action Primitives do not transfer beyond their originating
   software-work context;
+- the state/path model cannot represent concurrency, compensation, or equal-
+  endpoint causal differences without hidden reconstruction;
 - product evidence cannot distinguish ontology value from implementation
   preference.
 
-## Promotion lineage and activation boundary
+## Numbering boundary
 
-This candidate was explicitly promoted to numbered draft
-[KFD-7](../decisions/KFD-7.md). The promotion allocates KFD-7 and publishes a
-reference contract while preserving this candidate coordinate as its genesis
-record.
-
-Promotion does not activate a universal product Profile, prove cross-domain
-necessity, turn Fact or Episode into domain Primitives, or allocate the
-non-binding slot hints of the Atlas, Pursuit, and Warrant elaboration
-candidates. KFD-7 remains draft until its retained product-evidence and
-independent-review activation gate closes.
+The original slot hint did not allocate or reserve a number. Explicit promotion
+created `decisions/KFD-7.md`, updated the numbered registry, and made KFD-7 the
+authority. This lineage document does not allocate the slot hints of its
+elaboration candidates.

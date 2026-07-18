@@ -82,7 +82,7 @@ explainable, auditable, and proportionate.
 | [KFD-4](decisions/KFD-4.md) | principle | Views must remain bound to declared perspectives. | active |
 | [KFD-5](decisions/KFD-5.md) | procedure | Primitive discovery must separate genesis from qualification. | active |
 | [KFD-6](decisions/KFD-6.md) | procedure | Autonomous discovery must remain grounded in causal experience. | draft |
-| [KFD-7](decisions/KFD-7.md) | principle | Consequential action must keep direction, perspective, authority, and occurrence independently addressable. | draft |
+| [KFD-7](decisions/KFD-7.md) | principle | Real-world action must keep direction, perspective, authority, and occurrence independently addressable. | draft |
 
 ## Current candidates
 
@@ -90,27 +90,26 @@ KFD Candidates preserve potentially load-bearing rules before a number is
 allocated. They are explicitly non-normative and may be revised, reordered,
 split, merged, withdrawn, rejected, or promoted.
 
-- [Cross-domain action primitives](drafts/action-state-separation.md), promoted
-  to numbered draft `KFD-7`.
 - [Atlas action perspective](drafts/atlas-action-perspective.md), slot hint `8`.
 - [Pursuit intent continuity](drafts/pursuit-intent-continuity.md), slot hint
   `9`.
 - [Warrant bounded authority](drafts/warrant-bounded-authority.md), slot hint
   `10`.
 
-The machine source is [`drafts/registry.json`](drafts/registry.json). A slot
-hint is an ordering hypothesis, not an allocated KFD number, a reservation, or
-a promise.
+The [cross-domain action candidate](drafts/action-state-separation.md) is
+preserved as the lineage promoted into numbered draft KFD-7. The machine source
+is [`drafts/registry.json`](drafts/registry.json). Remaining slot hints are
+ordering hypotheses, not allocated KFD numbers, reservations, or promises.
 
 ## Product proof path
 
 KFDs are not a detached manifesto, but they are not a demand that readers adopt
 a Kungfu product before understanding the decisions. The product-witness rule
 starts with this package itself: `standards.json`, `schemas/`, `docs/`,
-`site/kfd-site.json`, and `scripts/check.mjs` show how KFD-1, KFD-2, KFD-3,
-KFD-4, KFD-5, and KFD-6 are expressed as consumable interfaces for both humans
-and agents. These surfaces do not prove every adopter or product correct; they
-make the KFD package's own claims inspectable and falsifiable.
+`site/kfd-site.json`, and `scripts/check.mjs` show how KFD-1 through KFD-7 are
+expressed as consumable interfaces for both humans and agents. These surfaces
+do not prove every adopter or product correct; they make the KFD package's own
+claims inspectable and falsifiable.
 
 KFD also publishes pre-number candidates under `drafts/` and provisional live
 cases under `cases/`. A candidate registry keeps ordering hypotheses from
@@ -218,11 +217,11 @@ Agents consuming this package should start from the same sources as humans:
    `schemas/kfd-6/autonomous-discovery-loop.schema.json` only for explicitly
    draft or experimental autonomous-discovery work; its version 4 interface
    requires plural generation experiments, bounded method comparison, and a
-   conditional boundary hypothesis.
-16. Use `schemas/kfd-7/action-contract.schema.json` to publish a versioned,
-    provisional action Profile whose Fact, Episode, Pursuit, Atlas, and Warrant
-    responsibilities, transitions, evidence obligations, non-claims, and
-    activation state remain independently inspectable.
+   conditional boundary hypothesis. Read `docs/KFD-7-formal.md` for the
+   current Fact/Episode and action-responsibility reference model. Use
+   `schemas/kfd-7/action-contract.schema.json` for a draft, product-neutral
+   Profile declaration; schema validity is non-qualifying and does not activate
+   a concrete product Profile.
 
 KFD package semver is only the distribution version. KFD-owned machine
 interfaces carry their own `schemaVersion` and `contract` fields. Compatible
@@ -269,6 +268,15 @@ baselines, shared-budget method comparison, held-out and independent
 evaluation, bounded autonomy, and separation between discovery and promotion.
 Its package presence is an experimental interface, not a claim that autonomous
 primitive discovery or method dominance has been achieved.
+
+KFD-7 is a numbered draft for real-world action. It keeps direction,
+perspective, authority, and occurrence independently addressable over Fact cuts
+and causal records. Its package surface includes the authoritative decision,
+formal reference, usage boundary, standards metadata, preserved candidate
+lineage, and a version 1 action-contract Profile declaration. The schema fixes
+the responsibility, transition, evidence, non-claim, and activation declaration
+without fixing product storage or lifecycle vocabulary. Product dogfood and
+independent review still determine whether a Profile can be activated.
 
 ## Decision metadata
 

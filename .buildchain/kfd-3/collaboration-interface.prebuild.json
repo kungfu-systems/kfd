@@ -10,9 +10,9 @@
   "sourceRegistry": {
     "id": "kfd-collaboration-interface",
     "path": ".buildchain/kfd-3/collaboration-interface.json",
-    "sha256": "b9cdca46e0e57e35e7fae6246452d80b339878c7139a632da297cd302d12fa3d"
+    "sha256": "604f20a3e975d00a33275b29bf05776116d3c8a83a3f135911a90d8e6055517d"
   },
-  "collaborationInterfaceDigest": "sha256:b9cdca46e0e57e35e7fae6246452d80b339878c7139a632da297cd302d12fa3d",
+  "collaborationInterfaceDigest": "sha256:604f20a3e975d00a33275b29bf05776116d3c8a83a3f135911a90d8e6055517d",
   "collaborationInterface": {
     "schemaVersion": 1,
     "contract": "kfd-3-collaboration-interface",
@@ -230,7 +230,7 @@
           "agent-reader",
           "package-consumer"
         ],
-        "purpose": "Inspect KFD-2's generic assessment of KFD-1 and KFD-3 through KFD-6 claims."
+        "purpose": "Inspect KFD-2's generic assessment of KFD-1 and KFD-3 through KFD-7 claims."
       },
       {
         "id": "site-bundle",
@@ -434,7 +434,7 @@
           "package-consumer",
           "release-system"
         ],
-        "value": "KFD-owned JSON schemas for standards metadata and KFD-1 through KFD-6 interfaces.",
+        "value": "KFD-owned JSON schemas used by standards metadata and numbered decisions through KFD-7; KFD-7 intentionally exposes metadata only.",
         "discoverability": {
           "fromMinimalEntrypoint": true,
           "path": "schemas/**/*.json"
@@ -553,7 +553,7 @@
           "agent-reader",
           "package-consumer"
         ],
-        "value": "Generic KFD-2 trust claims used to assess KFD-1 and KFD-3 through KFD-6 through one trust model.",
+        "value": "Generic KFD-2 trust claims used to assess KFD-1 and KFD-3 through KFD-7 through one trust model.",
         "discoverability": {
           "fromMinimalEntrypoint": true,
           "path": ".buildchain/kfd-2/kfd-foundation.trust-claims.json"
@@ -569,7 +569,7 @@
           "agent-reader",
           "package-consumer"
         ],
-        "value": "Generic KFD-2 trust assessment result for KFD's own KFD-1 and KFD-3 through KFD-6 claims.",
+        "value": "Generic KFD-2 trust assessment result for KFD's own KFD-1 and KFD-3 through KFD-7 claims.",
         "discoverability": {
           "fromMinimalEntrypoint": true,
           "path": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json"
@@ -644,6 +644,12 @@
             "path": "docs/KFD-6-formal.md"
           },
           {
+            "path": "docs/KFD-7-formal.md"
+          },
+          {
+            "path": "docs/KFD-7-usage.md"
+          },
+          {
             "path": "docs/primitive-discovery-cases.md"
           },
           {
@@ -654,6 +660,9 @@
           },
           {
             "path": "decisions/KFD-3.md"
+          },
+          {
+            "path": "decisions/KFD-7.md"
           },
           {
             "path": "registry.json"
@@ -798,7 +807,7 @@
       },
       {
         "id": "kfd-candidate-incubation",
-        "claim": "KFD gives humans and agents a shared, machine-readable path for preserving a possible organization rule without prematurely allocating a KFD number or normative authority.",
+        "claim": "KFD gives humans and agents a shared, machine-readable path for preserving pre-number candidates, recording explicit promotion into KFD-7, and keeping remaining slot hints non-binding.",
         "participants": [
           "human-reader",
           "agent-reader",
@@ -848,7 +857,7 @@
             "trustImpact": "downgrade-warning",
             "machineProvability": "not-exhaustively-enumerable",
             "agentAction": "semantic-review-required",
-            "reason": "Machine checks can prove candidate identity, status, slot non-binding, and promotion boundaries, but cannot prove that the candidate should become an organization decision.",
+            "reason": "Machine checks can prove candidate identity, status, slot non-binding, promotion lineage, and numbering boundaries, but cannot prove semantic qualification of an unpromoted candidate or activation of a promoted numbered draft.",
             "owner": "KFD maintainers"
           }
         ]
@@ -1295,17 +1304,17 @@
     {
       "id": "doc:readme",
       "sourcePath": "README.md",
-      "sha256": "9fa22d56156a0cac278cf9d030168de011fd1d071bed8ac2dff7d2ba9a683d6c"
+      "sha256": "5e3bd5ceb9f492cffe3561b855445a6914f9d445d98f55d5e9541ca6439e0671"
     },
     {
       "id": "doc:foundation-model",
       "sourcePath": "docs/foundation-model.md",
-      "sha256": "a84d07369e898d3d963c56827007d6746308dc55fdf2390db080ace7690468a5"
+      "sha256": "f09724cf07c16c1cf5d3b038bb50cc6a7391ed1ec389d2d5fa561a0b41a52683"
     },
     {
       "id": "doc:formal-model",
       "sourcePath": "docs/formal-model.md",
-      "sha256": "b4c1191a6410c45b0a6fab0cc1dfe9360eaff2b1774caeae956b64e7f526cc8c"
+      "sha256": "5de1856d8b9c4ced915bbeccd34a52a3ead19d0073b620d906686e75c7d2ceff"
     },
     {
       "id": "doc:primitive-discovery-cases",
@@ -1320,7 +1329,7 @@
     {
       "id": "doc:docs-map",
       "sourcePath": "docs/MAP.md",
-      "sha256": "2924a8070a61d432ae852d8cea47e297adc9085ad098827377696841803d3e88"
+      "sha256": "eccbf046b168a34b694405c194291d73a16aaff1c087edf8c0fd87221b8014f4"
     },
     {
       "id": "doc:kfd-1-usage",
@@ -1351,6 +1360,11 @@
       "id": "doc:kfd-6-usage",
       "sourcePath": "docs/KFD-6-usage.md",
       "sha256": "5cc26c61148c4e8f5ec609e2d1029437b92f4d16202975daaa34cf6dd14d1029"
+    },
+    {
+      "id": "doc:kfd-7-usage",
+      "sourcePath": "docs/KFD-7-usage.md",
+      "sha256": "587ce2d864bdc640ffbc63114a9a6130ea72c4e8522f8d2cbe09876bf33c0acd"
     },
     {
       "id": "case:proof-carrying-work-object:entry",
@@ -1385,7 +1399,7 @@
     {
       "id": "case:proof-carrying-work-object:distinguishability-argument",
       "sourcePath": "cases/live/proof-carrying-work-object/distinguishability.md",
-      "sha256": "c22374f0005e9c7ab2bfbc753636dccdeccbfa6a055c4afac42027aaa0ad1f73"
+      "sha256": "978656ceeefba60b4d6aada3b8a1ea9bd6fae856765ac42b8866dd0fc3c4e893"
     },
     {
       "id": "case:proof-carrying-work-object:candidate:pursuit:current-cut",
@@ -1400,17 +1414,17 @@
     {
       "id": "candidate:index",
       "sourcePath": "drafts/README.md",
-      "sha256": "e21fdf269d5557e600f829eeb21fe718c67b7edcdf4e59a2bdb018503207eee3"
+      "sha256": "366473e17b985fe72bdda0d474ce81ca1ec0627b2b39d55d6b2fed9f0e560613"
     },
     {
       "id": "candidate:registry",
       "sourcePath": "drafts/registry.json",
-      "sha256": "88c42c0925aba9661b0ea169a4df434235b214c25b98de1957978a00d2fb035e"
+      "sha256": "1e9172f4d3bf4ef903106eb80f3af8beca7114f05107f2acf72cb1b60edf8cec"
     },
     {
       "id": "candidate:action-state-separation",
       "sourcePath": "drafts/action-state-separation.md",
-      "sha256": "c400d81243be9404dfca525e7fb5ecda219b4b4d67a80b08b5fd1918e1c90776"
+      "sha256": "ec11a002c0b89124add3ed68b1b2e0d083461f1fc8f2c9572ecd5404afd0193a"
     },
     {
       "id": "candidate:atlas-action-perspective",
@@ -1430,7 +1444,7 @@
     {
       "id": "doc:kfd-1-formal",
       "sourcePath": "docs/KFD-1-formal.md",
-      "sha256": "739bbfa03a026a15411db0ef4270d36a0a5e3e6ec51f3f6dfcce61e78a47033e"
+      "sha256": "6cac3e9a0b63bf004f12373c243e976fe4441831cdd3019142e6850bef72e3ab"
     },
     {
       "id": "doc:kfd-2-formal",
@@ -1445,7 +1459,7 @@
     {
       "id": "doc:kfd-4-formal",
       "sourcePath": "docs/KFD-4-formal.md",
-      "sha256": "2dc22b5ad4ca8ea217d6a52545d038a5047343252d02e8bad856952d7455b2b8"
+      "sha256": "4bee9aa85e2c2f9c35abe3ec1eb0663e8e242fa9dc4a36a7f55caeac78ce9012"
     },
     {
       "id": "doc:kfd-5-formal",
@@ -1460,12 +1474,12 @@
     {
       "id": "doc:kfd-7-formal",
       "sourcePath": "docs/KFD-7-formal.md",
-      "sha256": "4f5ab1c249b38f79fcf6a9fe59c84c691bcd686590265690a90eb054e7affb15"
+      "sha256": "d74d9907614d0dc09498b0dba2cd2f572ff7d5dc315628063d67e768d4ae1fad"
     },
     {
       "id": "decision:kfd-1",
       "sourcePath": "decisions/KFD-1.md",
-      "sha256": "d9e433f98eaf80f3fcf75986d073446bd73fbd385b9c6ba96fc3186e0da62a09"
+      "sha256": "5b91d4693a70d13d8fb11756b4281205ff911bc5386472f7c0af8477e2b095a1"
     },
     {
       "id": "decision:kfd-2",
@@ -1480,7 +1494,7 @@
     {
       "id": "decision:kfd-4",
       "sourcePath": "decisions/KFD-4.md",
-      "sha256": "df36dd99404ea1a9ee0ab6f5fae4acf3b98a762b08d33e59f657f909dc04d012"
+      "sha256": "c624a7a606d4e3a66c40dd88baf1532c7aef9d238c3fb04ade583b5e22b4aba7"
     },
     {
       "id": "decision:kfd-5",
@@ -1495,7 +1509,7 @@
     {
       "id": "decision:kfd-7",
       "sourcePath": "decisions/KFD-7.md",
-      "sha256": "d7c2471e86d56605bb27a9983a8f306f022b63e3f536c43d26d86cdd2d1fab1d"
+      "sha256": "741047661fda21679f1cff58a67dbf23ba872c74017c0a9d7c1dfe6f5d87f385"
     }
   ],
   "schemas": [
@@ -1584,12 +1598,12 @@
     {
       "id": "metadata:registry",
       "sourcePath": "registry.json",
-      "sha256": "48a04105d7b0ec18631d82b0e34627b7840189d987aab41b582eb362903018a8"
+      "sha256": "e1614792e92c837c22d69628d06ace626e94dbc2a42f58123913cdb79914c6bf"
     },
     {
       "id": "metadata:standards",
       "sourcePath": "standards.json",
-      "sha256": "e5cfdfd65ff5526524f44dbe70ba022feac792483f83b670e811aaba35cb1c67"
+      "sha256": "015f5cad8038657c3887516ff3bd7472bebeecfdef6b16ce5bf39501998ce60b"
     },
     {
       "id": "metadata:live-case-registry",
@@ -1599,17 +1613,17 @@
     {
       "id": "metadata:candidate-registry",
       "sourcePath": "drafts/registry.json",
-      "sha256": "88c42c0925aba9661b0ea169a4df434235b214c25b98de1957978a00d2fb035e"
+      "sha256": "1e9172f4d3bf4ef903106eb80f3af8beca7114f05107f2acf72cb1b60edf8cec"
     },
     {
       "id": "metadata:release-impact",
       "sourcePath": "release-impact.json",
-      "sha256": "ce4918c986cf4edd5e04e18e5744046a9258aafca808aabd214203ca601a58be"
+      "sha256": "b0e0507c986751ee901f8da5bd0a71905129f83ca2feedc27c243d4c117b251f"
     },
     {
       "id": "metadata:release-anchor",
       "sourcePath": "kfd.release.json",
-      "sha256": "662c7a13f28f57da367540cac7c5727e93f0842c66a3ff276b9068a42de61a08"
+      "sha256": "3e82d759f04225a257ec059833545af5532632bc5ccc99007d414dbbb97cf013"
     },
     {
       "id": "metadata:buildchain-alpha-contract-lock",
@@ -1624,36 +1638,36 @@
     {
       "id": "metadata:kfd-2-public-release-trust-claim",
       "sourcePath": ".buildchain/kfd-2/public-release-trust.claim.json",
-      "sha256": "42e57528d160f65258ae9fe7c7f3b0ec9d43cab9c0239eddda9d7d1898915445"
+      "sha256": "d6009a19347e0aed4a98db6777dabb1733a3bacd1b6c6716f0b15d7c7af7861f"
     },
     {
       "id": "metadata:kfd-2-foundation-trust-claims",
       "sourcePath": ".buildchain/kfd-2/kfd-foundation.trust-claims.json",
-      "sha256": "b15e9ff6cf29fe80a277793731d866219c54d8257df5ed70df413810e904411f"
+      "sha256": "cb8e3aaffb15fab6c6438ef54203a83883c0bcb7ed84be11f3c408ac5e2bf1a8"
     },
     {
       "id": "metadata:kfd-2-foundation-trust-assessment",
       "sourcePath": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json",
-      "sha256": "08a5ce0b1bb449ebfca1a3984b9ea15ebaa6256b4e21d19e8a557fc415f284a6"
+      "sha256": "38210287b0328283d50d337408fe2051fdef7b2eb422bbd1e07fb69f8c07e4f1"
     }
   ],
   "packageExports": [
     {
       "id": "export:package-json",
       "sourcePath": "package.json#exports",
-      "sha256": "dca3f71f375b020627853f1770235bf763245752199449000beccbee3686f23c"
+      "sha256": "43653927da7dd365ba6e398647b470635b4dbbc85f365f90d4b172002e6c6242"
     },
     {
       "id": "export:npm-files",
       "sourcePath": "package.json#files",
-      "sha256": "dca3f71f375b020627853f1770235bf763245752199449000beccbee3686f23c"
+      "sha256": "43653927da7dd365ba6e398647b470635b4dbbc85f365f90d4b172002e6c6242"
     }
   ],
   "siteConsumptionContracts": [
     {
       "id": "site:kfd-site-bundle",
       "sourcePath": "site/kfd-site.json",
-      "sha256": "7778fa6bc7c4cc03576e6d6160cf21e53d5d4fb8f0769c12129b8b16a6c8928b"
+      "sha256": "a93b45d06e8cf6ed4f404e63cc544176dbc49a12f187319dd0ace5c9b72e0405"
     },
     {
       "id": "site:release-propagation",

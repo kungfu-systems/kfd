@@ -117,13 +117,16 @@ fact source, register welded surfaces, classify change, and run the gate.
 "Facts must not drift" carries weight only while those acts continue to be
 performed and audited.
 
-This gives the six KFDs an intentional practice-invariant-practice shape:
+This gives the first six KFDs an intentional practice-invariant-practice
+shape, and KFD-7 begins the action layer built over it:
 
 ```text
 KFD-1       foundational practice that maintains the fact base
 KFD-2/3     foundation principles for trust and cooperation
 KFD-4       first derived principle for perspective-bound action
 KFD-5/6     discovery procedures that extend the describable world
+KFD-7       action principle that uses the extended world without fusing
+            direction, perspective, authority, or occurrence
 ```
 
 KFD begins in procedure, states the invariants under which facts can support
@@ -352,15 +355,15 @@ so.
 | Declared perspective | KFD-4 | How can a situated view become durable, transferable, and comparable without being flattened? | Views remain bound to declared perspectives. Timelines preserve perspective; replay transfers it; contrast exposes hidden object mismatch. |
 | Primitive discovery | KFD-5 | How does a candidate object become load-bearing rather than remain a private intuition or method artifact? | Genesis remains perspective-declared and method-plural; qualification binds the candidate to facts, alternatives, falsifiers, and real work. |
 | Autonomous discovery | KFD-6 | Can an agent move beyond a fixed ontology without replacing reality with generated narrative or canonizing one generator? | Autonomous discovery remains grounded in causal experience, compares generation methods under bounded conditions, and never certifies itself. |
-| Consequential action | KFD-7 | How can intended change, situated facts, bounded authority, and realized occurrence remain reviewable without becoming one mutable task record? | Direction, perspective, authority, and occurrence remain independently addressable; Profiles own implementation detail and must retain fail-visible transition and qualification evidence. |
+| Fact-bound action | KFD-7 | How can an intelligent participant act without confusing what it wants, sees, may do, and actually did? | Direction, perspective, authority, and occurrence remain independently addressable over Fact cuts and causal experience. |
 
 The continuity is generative rather than merely classificatory. KFD-4 declares
 the observation horizon and allows perspective transformation to move it.
 KFD-5 keeps candidate generation open to multiple methods and makes every
-candidate testable. KFD-6 attempts to autonomize both generation and comparison.
-KFD-7 applies that reality-correctable discipline to consequential action while
-remaining draft until product evidence qualifies its reference roles and
-Profile contract.
+candidate testable. KFD-6 attempts to autonomize both generation and
+comparison. KFD-7 closes the first return to action: the resulting world model
+still cannot synthesize intent, perspective, permission, or occurrence from
+one another.
 
 Observer-bound timeline and replay are the first concrete KFD-4 profiles, just
 as release versioning is one concrete KFD-1 profile. Episode and Atlas are
