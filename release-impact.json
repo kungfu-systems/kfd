@@ -46,7 +46,7 @@
       "id": "kfd-candidate-registry",
       "impact": "minor",
       "class": "additive",
-      "rationale": "KFD keeps a version 1 candidate registry and records explicit promotion of the cross-domain action candidate into numbered draft KFD-7. Candidate IDs remain stable, promotion lineage remains inspectable, and Atlas, Pursuit, and Warrant slot hints remain non-binding without allocating KFD-8 through KFD-10."
+      "rationale": "KFD keeps a version 1 candidate registry and additively gives the Atlas, Pursuit, and Warrant candidates explicit non-normative formal-reference metadata. Candidate IDs, promotion meaning, and slot binding remain unchanged; the formal pages do not allocate KFD-8 through KFD-10."
     },
     {
       "id": "kfd-action-primitive-candidate-system",
@@ -58,19 +58,19 @@
       "id": "kfd-7-reference-contract",
       "impact": "major",
       "class": "breaking",
-      "rationale": "KFD explicitly promotes the cross-domain action umbrella to numbered draft KFD-7 and publishes a version 1 action-contract Profile. Direction, perspective, authority, and occurrence remain independently addressable; lifecycle vocabulary stays Profile-owned; schema conformance remains non-qualifying; stable activation requires retained product evidence, independent review, and a separate verdict."
+      "rationale": "KFD explicitly promotes the cross-domain action umbrella to numbered draft KFD-7 and advances its action-contract Profile to version 2. Direction, perspective, authority, and occurrence remain independently addressable; the contract binds the conditional session round-trip theorem, the context-insufficiency corollary, concrete Profile refinement, complexity-breakpoint evidence, and same-payload counterexamples. Schema conformance remains non-qualifying; stable activation requires retained product evidence, independent review, and a separate verdict."
     },
     {
       "id": "kfd-standards-metadata",
       "impact": "major",
       "class": "breaking",
-      "rationale": "The version 2 standards metadata registers numbered draft KFD-7, binds its decision and formal digests, publishes its action-responsibility concept vocabulary, and exposes a version 1 draft Profile declaration. The contract fixes responsibility, transition, evidence, non-claim, and activation declaration while leaving product storage, lifecycle vocabulary, and stable activation to retained dogfood evidence."
+      "rationale": "The version 2 standards metadata registers numbered draft KFD-7, binds its decision and formal digests, publishes its action-responsibility concept vocabulary, and exposes a version 2 draft Profile declaration. The contract fixes responsibility, transition, theorem-reference, qualification-evidence, non-claim, and activation declaration while leaving product storage, lifecycle vocabulary, and stable activation to retained dogfood evidence."
     },
     {
       "id": "kfd-package-structure",
       "impact": "minor",
       "class": "additive",
-      "rationale": "The package additively publishes the KFD-7 decision, formal reference, usage page, action-contract schema, verifier fixtures, and independent verifier support while preserving the promoted source-candidate lineage and remaining candidate registry surfaces."
+      "rationale": "The package additively publishes formal child pages for the Atlas, Pursuit, and Warrant candidates under drafts/formal while preserving the KFD-7 decision, promoted source-candidate lineage, and all existing package paths."
     },
     {
       "id": "kfd-buildchain-contract-lock",
@@ -82,7 +82,7 @@
       "id": "kfd-site-homepage-bundle",
       "impact": "major",
       "class": "breaking",
-      "rationale": "The pre-stable site bundle previously advanced from schemaVersion 1 to 2 for the candidate-track live-case shape and now additively exposes KFD Candidates at /drafts and /drafts/{id}, including registry policy, non-normative status, claim boundaries, and candidate markdown. A dedicated candidatePages projection now owns the renderer-facing /drafts/ index and /drafts/{id}/ page declarations, including source paths, slot hints, and claim boundaries, so site consumers do not infer routes from package layout. Existing decision, formal, historical-case, and live-case routes remain unchanged."
+      "rationale": "The schemaVersion 2 site bundle additively exposes explicit non-normative formal child pages at /drafts/{id}/formal/ for candidates that declare a formalReference. Existing candidate, decision, formal, historical-case, and live-case routes remain unchanged, and renderers still do not infer routes from package layout."
     },
     {
       "id": "kfd-site-decision-usage-pages",

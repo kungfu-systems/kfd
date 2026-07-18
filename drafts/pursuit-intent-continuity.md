@@ -18,6 +18,8 @@ last_reviewed: 2026-07-18
 - Current slot hint: 9
 - Slot binding: non-binding
 
+[Formal candidate](formal/pursuit-intent-continuity.md)
+
 ## One sentence
 
 Intent that survives an action must have an identity independent of the action
@@ -65,6 +67,10 @@ revision, and settlement remain.
 
 The candidate should be tested against goals, tasks, projects, cases,
 workflows, missions, plans, and provider-specific long-running job objects.
+
+The non-normative formal candidate defines Pursuit versions, prospective
+direction, consequence review, typed relation graphs, transitions, session
+projection, and proof obligations without fixing one product workflow.
 
 ## Invalid compressions
 

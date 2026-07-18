@@ -1,6 +1,6 @@
 {
   "$schema": "https://kfd.libkungfu.dev/schemas/kfd-7/action-contract.schema.json",
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "contract": "kfd-7-action-contract",
   "standard": "kfd-7",
   "profile": {
@@ -73,6 +73,37 @@
     "child-authority-from-parent",
     "causal-equivalence-from-equal-endpoints"
   ],
+  "qualificationBasis": {
+    "sessionRoundTrip": {
+      "theoremId": "kfd-7-session-round-trip-preservation",
+      "theoremVersion": 1,
+      "source": "docs/KFD-7-formal.md#session-round-trip-preservation-theorem",
+      "applicability": "session-compressible-only",
+      "semanticDimensions": [
+        "direction",
+        "perspective-boundary",
+        "effective-authority",
+        "causal-process",
+        "admitted-result"
+      ],
+      "implementationRefs": {
+        "expand": "example://session/expand",
+        "project": "example://session/project",
+        "compressibilityPredicate": "example://session/compressible"
+      }
+    },
+    "contextInsufficiency": {
+      "corollaryId": "kfd-7-context-insufficiency",
+      "corollaryVersion": 1,
+      "source": "docs/KFD-7-formal.md#context-insufficiency-corollary",
+      "conclusion": "context-alone-is-not-sufficient"
+    },
+    "evidenceCategories": {
+      "roundTripRefinement": "session-round-trip-refinement",
+      "complexityBreakpoint": "session-complexity-breakpoint",
+      "contextCounterexample": "context-insufficiency-counterexample"
+    }
+  },
   "evidenceObligations": [
     {
       "category": "role-deletion-or-fusion",
@@ -130,6 +161,24 @@
     },
     {
       "category": "cold-start-continuation",
+      "status": "planned",
+      "artifactRefs": [],
+      "residualRisk": "unqualified"
+    },
+    {
+      "category": "session-round-trip-refinement",
+      "status": "planned",
+      "artifactRefs": [],
+      "residualRisk": "unqualified"
+    },
+    {
+      "category": "session-complexity-breakpoint",
+      "status": "planned",
+      "artifactRefs": [],
+      "residualRisk": "unqualified"
+    },
+    {
+      "category": "context-insufficiency-counterexample",
       "status": "planned",
       "artifactRefs": [],
       "residualRisk": "unqualified"

@@ -273,10 +273,11 @@ KFD-7 is a numbered draft for real-world action. It keeps direction,
 perspective, authority, and occurrence independently addressable over Fact cuts
 and causal records. Its package surface includes the authoritative decision,
 formal reference, usage boundary, standards metadata, preserved candidate
-lineage, and a version 1 action-contract Profile declaration. The schema fixes
-the responsibility, transition, evidence, non-claim, and activation declaration
-without fixing product storage or lifecycle vocabulary. Product dogfood and
-independent review still determine whether a Profile can be activated.
+lineage, and a version 2 action-contract Profile declaration. The schema fixes
+the responsibility, transition, theorem-reference, qualification-evidence,
+non-claim, and activation declaration without fixing product storage or
+lifecycle vocabulary. Product dogfood and independent review still determine
+whether a Profile can be activated.
 
 ## Decision metadata
 

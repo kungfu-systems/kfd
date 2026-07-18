@@ -259,6 +259,18 @@ for (const [index, candidate] of (candidateRegistry.candidates ?? []).entries())
   }
   if (candidate.path !== `drafts/${candidate.id}.md`) fail(`${label}.path must be drafts/${candidate.id}.md`);
   if (!existsSync(candidate.path)) fail(`${label}.path points to missing ${candidate.path}`);
+  if (candidate.formalReference) {
+    const formal = candidate.formalReference;
+    const expectedPath = `drafts/formal/${candidate.id}.md`;
+    const expectedUrl = `https://kfd.libkungfu.dev/drafts/${candidate.id}/formal`;
+    if (formal.path !== expectedPath) fail(`${label}.formalReference.path must be ${expectedPath}`);
+    if (formal.url !== expectedUrl) fail(`${label}.formalReference.url must be ${expectedUrl}`);
+    if (formal.authorityPath !== candidate.path) fail(`${label}.formalReference.authorityPath must match candidate.path`);
+    if (formal.normative !== false) fail(`${label}.formalReference must remain non-normative`);
+    if (!Number.isInteger(formal.version) || formal.version < 1) fail(`${label}.formalReference.version must be positive`);
+    if (formal.status !== "experimental") fail(`${label}.formalReference.status must be experimental`);
+    if (!existsSync(formal.path)) fail(`${label}.formalReference.path points to missing ${formal.path}`);
+  }
   if (!candidate.oneSentence?.trim()) fail(`${label}.oneSentence must remain explicit`);
   if (!candidate.claimBoundary?.trim()) fail(`${label}.claimBoundary must remain explicit`);
   if (!Array.isArray(candidate.sourceCases) || candidate.sourceCases.length === 0) fail(`${label}.sourceCases must not be empty`);
@@ -312,6 +324,9 @@ if (siteBundle.routes?.liveCasePattern !== "/cases/live/{id}") {
 if (siteBundle.routes?.candidates !== "/drafts") fail("site bundle routes.candidates must be /drafts");
 if (siteBundle.routes?.candidatePattern !== "/drafts/{id}") {
   fail("site bundle routes.candidatePattern must be /drafts/{id}");
+}
+if (siteBundle.routes?.candidateFormalPattern !== "/drafts/{id}/formal") {
+  fail("site bundle routes.candidateFormalPattern must be /drafts/{id}/formal");
 }
 if (!siteBundle.homepage?.futurePicture?.pastToFuture || !siteBundle.homepage?.futurePicture?.kungfuPath) {
   fail("site bundle homepage.futurePicture must expose the civilizational shift and Kungfu path");
@@ -525,6 +540,44 @@ for (const candidate of candidateRegistry.candidates ?? []) {
 }
 for (const candidateId of candidateRenderPages.keys()) {
   if (!candidateIds.has(candidateId)) fail(`site bundle candidatePages has unknown candidate ${candidateId}`);
+}
+const candidateFormalSection = siteBundle.candidatePages?.formalPages;
+if (candidateFormalSection?.stableUrlPattern !== "/drafts/{id}/formal/") {
+  fail("site bundle candidate formal stableUrlPattern must be /drafts/{id}/formal/");
+}
+if (candidateFormalSection?.relationship !== "formal-candidate-child-of-candidate") {
+  fail("site bundle candidate formal relationship must be formal-candidate-child-of-candidate");
+}
+if (candidateFormalSection?.normative !== false) {
+  fail("site bundle candidate formal pages must remain non-normative");
+}
+const candidateFormalRenderPages = new Map(
+  (candidateFormalSection?.pages ?? []).map((entry) => [entry.candidateId, entry]),
+);
+for (const candidate of candidateRegistry.candidates ?? []) {
+  const page = candidateFormalRenderPages.get(candidate.id);
+  if (!candidate.formalReference) {
+    if (page) fail(`site bundle candidate formal pages includes undeclared ${candidate.id}`);
+    continue;
+  }
+  if (
+    !page ||
+    page.id !== `${candidate.id}-formal` ||
+    page.parentPath !== candidate.path ||
+    page.parentUrl !== `/drafts/${candidate.id}/` ||
+    page.sourcePath !== candidate.formalReference.path ||
+    page.url !== `/drafts/${candidate.id}/formal/` ||
+    page.formalCandidateVersion !== candidate.formalReference.version ||
+    page.formalCandidateStatus !== candidate.formalReference.status ||
+    page.authorityPath !== candidate.path ||
+    page.normative !== false ||
+    !page.markdown
+  ) {
+    fail(`site bundle candidate formal page ${candidate.id} must match the candidate registry`);
+  }
+}
+for (const candidateId of candidateFormalRenderPages.keys()) {
+  if (!candidateIds.has(candidateId)) fail(`site bundle candidate formal pages has unknown candidate ${candidateId}`);
 }
 if (!existsSync("docs/foundation-model.md")) fail("missing docs/foundation-model.md");
 else if (!readFileSync("docs/foundation-model.md", "utf8").startsWith("# KFD Foundation Model")) {
@@ -1210,7 +1263,7 @@ if (kfd7?.schemaIds?.actionContract !== "https://kfd.libkungfu.dev/schemas/kfd-7
 if (kfd7?.schemaPaths?.actionContract !== "schemas/kfd-7/action-contract.schema.json") {
   fail("KFD-7 standards metadata must expose the actionContract schema path");
 }
-for (const concept of ["factCut", "causalRecord", "episode", "atlas", "pursuit", "warrant", "direction", "perspective", "authorityBoundary", "occurrence", "actionGeometry", "observationProjection", "targetRelation", "admissibleTransition", "realizedPath", "validActionSet", "conditionalIrreducibility", "counterfactualIndependence", "explicitAdmission", "progressiveDisclosure", "conservativeSessionLimit", "complexityBreakpoint"]) {
+for (const concept of ["factCut", "causalRecord", "episode", "atlas", "pursuit", "warrant", "direction", "perspective", "authorityBoundary", "occurrence", "actionGeometry", "observationProjection", "targetRelation", "admissibleTransition", "realizedPath", "validActionSet", "conditionalIrreducibility", "counterfactualIndependence", "explicitAdmission", "progressiveDisclosure", "conservativeSessionLimit", "complexityBreakpoint", "decisionObservationalEquivalence", "sessionRoundTripTheorem", "contextInsufficiency"]) {
   if (!kfd7?.concepts?.[concept]) fail(`KFD-7 standards metadata missing concept ${concept}`);
 }
 const kfd7ActionContractSchema = JSON.parse(readFileSync("schemas/kfd-7/action-contract.schema.json", "utf8"));
@@ -1220,10 +1273,10 @@ if (kfd7ActionContractSchema.properties?.contract?.const !== "kfd-7-action-contr
 if (kfd7ActionContractSchema.properties?.standard?.const !== "kfd-7") {
   fail("KFD-7 actionContract schema must declare standard kfd-7");
 }
-if (kfd7?.interfaces?.actionContract?.schemaVersion !== 1 || kfd7ActionContractSchema.properties?.schemaVersion?.const !== 1) {
-  fail("KFD-7 actionContract interface must use schemaVersion 1");
+if (kfd7?.interfaces?.actionContract?.schemaVersion !== 2 || kfd7ActionContractSchema.properties?.schemaVersion?.const !== 2) {
+  fail("KFD-7 actionContract interface must use schemaVersion 2");
 }
-for (const field of ["profile", "roles", "transitions", "prohibitedInferences", "evidenceObligations", "nonClaims", "extensions", "activation"]) {
+for (const field of ["profile", "roles", "transitions", "prohibitedInferences", "qualificationBasis", "evidenceObligations", "nonClaims", "extensions", "activation"]) {
   if (!kfd7ActionContractSchema.required?.includes(field)) fail(`KFD-7 actionContract must require ${field}`);
 }
 const kfd7RoleContains = kfd7ActionContractSchema.properties?.roles?.allOf ?? [];
@@ -1238,9 +1291,34 @@ for (const prohibitedInference of ["authority-from-pursuit", "complete-reality-f
   }
 }
 const kfd7EvidenceContains = kfd7ActionContractSchema.properties?.evidenceObligations?.allOf ?? [];
-for (const category of ["role-deletion-or-fusion", "invalid-transition", "export-import-rebuild", "backend-migration", "concurrency-retry-compensation", "warrant-decay-revocation", "atlas-staleness-loss", "pursuit-continuity-settlement", "episode-replay-contraction", "cold-start-continuation"]) {
+for (const category of ["role-deletion-or-fusion", "invalid-transition", "export-import-rebuild", "backend-migration", "concurrency-retry-compensation", "warrant-decay-revocation", "atlas-staleness-loss", "pursuit-continuity-settlement", "episode-replay-contraction", "cold-start-continuation", "session-round-trip-refinement", "session-complexity-breakpoint", "context-insufficiency-counterexample"]) {
   if (!kfd7EvidenceContains.some((entry) => entry?.contains?.properties?.category?.const === category)) {
     fail(`KFD-7 actionContract must require evidence category ${category}`);
+  }
+}
+const kfd7QualificationBasis = kfd7ActionContractSchema.$defs?.qualificationBasis?.properties;
+if (kfd7QualificationBasis?.sessionRoundTrip?.properties?.theoremId?.const !== "kfd-7-session-round-trip-preservation") {
+  fail("KFD-7 actionContract must bind the session round-trip theorem");
+}
+if (kfd7QualificationBasis?.sessionRoundTrip?.properties?.source?.const !== "docs/KFD-7-formal.md#session-round-trip-preservation-theorem") {
+  fail("KFD-7 actionContract must bind the canonical session theorem source");
+}
+if (kfd7QualificationBasis?.contextInsufficiency?.properties?.corollaryId?.const !== "kfd-7-context-insufficiency") {
+  fail("KFD-7 actionContract must bind the context-insufficiency corollary");
+}
+const kfd7QualificationEvidenceCategories = kfd7QualificationBasis?.evidenceCategories?.properties;
+for (const [field, category] of Object.entries({
+  roundTripRefinement: "session-round-trip-refinement",
+  complexityBreakpoint: "session-complexity-breakpoint",
+  contextCounterexample: "context-insufficiency-counterexample",
+})) {
+  if (kfd7QualificationEvidenceCategories?.[field]?.const !== category) {
+    fail(`KFD-7 qualification basis must bind ${field} to ${category}`);
+  }
+}
+for (const dimension of ["direction", "perspective-boundary", "effective-authority", "causal-process", "admitted-result"]) {
+  if (!kfd7QualificationBasis?.sessionRoundTrip?.properties?.semanticDimensions?.items?.enum?.includes(dimension)) {
+    fail(`KFD-7 session theorem missing semantic dimension ${dimension}`);
   }
 }
 if (kfd7ActionContractSchema.$defs?.profile?.properties?.qualificationStatus?.enum?.includes("qualified") !== true) {
@@ -1249,7 +1327,7 @@ if (kfd7ActionContractSchema.$defs?.profile?.properties?.qualificationStatus?.en
 if (kfd7ActionContractSchema.$defs?.activation?.properties?.decision?.enum?.includes("activate") !== true) {
   fail("KFD-7 actionContract must expose an explicit activation verdict");
 }
-for (const concept of ["actionProfile", "roleIndependence", "profileLifecycleVocabulary", "transitionContract", "prohibitedInference", "roleDeletionExperiment", "evidenceObligation", "activationDecision", "qualificationCut", "residualRisk", "extensionPoint"]) {
+for (const concept of ["actionProfile", "roleIndependence", "profileLifecycleVocabulary", "transitionContract", "prohibitedInference", "roleDeletionExperiment", "evidenceObligation", "activationDecision", "qualificationCut", "profileRefinementWitness", "residualRisk", "extensionPoint"]) {
   if (!kfd7?.concepts?.[concept]) fail(`KFD-7 standards metadata missing concept ${concept}`);
 }
 if (!kfd7?.interfaces?.actionContract) fail("KFD-7 standards metadata missing interface actionContract");
