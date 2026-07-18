@@ -11,6 +11,7 @@
     "roles",
     "transitions",
     "prohibitedInferences",
+    "qualificationBasis",
     "evidenceObligations",
     "nonClaims",
     "extensions",
@@ -21,7 +22,7 @@
       "const": "https://kfd.libkungfu.dev/schemas/kfd-7/action-contract.schema.json"
     },
     "schemaVersion": {
-      "const": 1
+      "const": 2
     },
     "contract": {
       "const": "kfd-7-action-contract"
@@ -173,9 +174,12 @@
         }
       ]
     },
+    "qualificationBasis": {
+      "$ref": "#/$defs/qualificationBasis"
+    },
     "evidenceObligations": {
       "type": "array",
-      "minItems": 10,
+      "minItems": 13,
       "items": {
         "$ref": "#/$defs/evidenceObligation"
       },
@@ -309,6 +313,45 @@
               "category"
             ]
           }
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "category": {
+                "const": "session-round-trip-refinement"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          }
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "category": {
+                "const": "session-complexity-breakpoint"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          }
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "category": {
+                "const": "context-insufficiency-counterexample"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          }
         }
       ]
     },
@@ -396,7 +439,60 @@
               "required": [
                 "status"
               ]
-            }
+            },
+            "allOf": [
+              {
+                "contains": {
+                  "type": "object",
+                  "properties": {
+                    "category": {
+                      "const": "session-round-trip-refinement"
+                    },
+                    "status": {
+                      "const": "passed"
+                    }
+                  },
+                  "required": [
+                    "category",
+                    "status"
+                  ]
+                }
+              },
+              {
+                "contains": {
+                  "type": "object",
+                  "properties": {
+                    "category": {
+                      "const": "session-complexity-breakpoint"
+                    },
+                    "status": {
+                      "const": "passed"
+                    }
+                  },
+                  "required": [
+                    "category",
+                    "status"
+                  ]
+                }
+              },
+              {
+                "contains": {
+                  "type": "object",
+                  "properties": {
+                    "category": {
+                      "const": "context-insufficiency-counterexample"
+                    },
+                    "status": {
+                      "const": "passed"
+                    }
+                  },
+                  "required": [
+                    "category",
+                    "status"
+                  ]
+                }
+              }
+            ]
           }
         }
       }
@@ -607,6 +703,152 @@
       },
       "additionalProperties": false
     },
+    "qualificationBasis": {
+      "type": "object",
+      "required": [
+        "sessionRoundTrip",
+        "contextInsufficiency",
+        "evidenceCategories"
+      ],
+      "properties": {
+        "sessionRoundTrip": {
+          "type": "object",
+          "required": [
+            "theoremId",
+            "theoremVersion",
+            "source",
+            "applicability",
+            "semanticDimensions",
+            "implementationRefs"
+          ],
+          "properties": {
+            "theoremId": {
+              "const": "kfd-7-session-round-trip-preservation"
+            },
+            "theoremVersion": {
+              "const": 1
+            },
+            "source": {
+              "const": "docs/KFD-7-formal.md#session-round-trip-preservation-theorem"
+            },
+            "applicability": {
+              "const": "session-compressible-only"
+            },
+            "semanticDimensions": {
+              "type": "array",
+              "minItems": 5,
+              "maxItems": 5,
+              "uniqueItems": true,
+              "items": {
+                "enum": [
+                  "direction",
+                  "perspective-boundary",
+                  "effective-authority",
+                  "causal-process",
+                  "admitted-result"
+                ]
+              },
+              "allOf": [
+                {
+                  "contains": {
+                    "const": "direction"
+                  }
+                },
+                {
+                  "contains": {
+                    "const": "perspective-boundary"
+                  }
+                },
+                {
+                  "contains": {
+                    "const": "effective-authority"
+                  }
+                },
+                {
+                  "contains": {
+                    "const": "causal-process"
+                  }
+                },
+                {
+                  "contains": {
+                    "const": "admitted-result"
+                  }
+                }
+              ]
+            },
+            "implementationRefs": {
+              "type": "object",
+              "required": [
+                "expand",
+                "project",
+                "compressibilityPredicate"
+              ],
+              "properties": {
+                "expand": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "project": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "compressibilityPredicate": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "contextInsufficiency": {
+          "type": "object",
+          "required": [
+            "corollaryId",
+            "corollaryVersion",
+            "source",
+            "conclusion"
+          ],
+          "properties": {
+            "corollaryId": {
+              "const": "kfd-7-context-insufficiency"
+            },
+            "corollaryVersion": {
+              "const": 1
+            },
+            "source": {
+              "const": "docs/KFD-7-formal.md#context-insufficiency-corollary"
+            },
+            "conclusion": {
+              "const": "context-alone-is-not-sufficient"
+            }
+          },
+          "additionalProperties": false
+        },
+        "evidenceCategories": {
+          "type": "object",
+          "required": [
+            "roundTripRefinement",
+            "complexityBreakpoint",
+            "contextCounterexample"
+          ],
+          "properties": {
+            "roundTripRefinement": {
+              "const": "session-round-trip-refinement"
+            },
+            "complexityBreakpoint": {
+              "const": "session-complexity-breakpoint"
+            },
+            "contextCounterexample": {
+              "const": "context-insufficiency-counterexample"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
     "evidenceObligation": {
       "type": "object",
       "required": [
@@ -628,6 +870,9 @@
             "pursuit-continuity-settlement",
             "episode-replay-contraction",
             "cold-start-continuation",
+            "session-round-trip-refinement",
+            "session-complexity-breakpoint",
+            "context-insufficiency-counterexample",
             "profile-extension"
           ]
         },

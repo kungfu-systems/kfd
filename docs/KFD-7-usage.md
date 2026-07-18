@@ -22,7 +22,7 @@ authoritative text is `decisions/KFD-7.md`; its registry status is `draft`.
   candidate.
 - `standards.json#/standards/kfd-7`: identity, status, formal reference,
   concepts, and digests.
-- `schemas/kfd-7/action-contract.schema.json`: version 1 draft Profile
+- `schemas/kfd-7/action-contract.schema.json`: version 2 draft Profile
   declaration.
 - `verifier/fixtures/kfd-7/`: conforming draft and fail-visible negative
   declarations.
@@ -110,6 +110,32 @@ An adopter should test both directions: simple work round-trips through the
 action model without semantic loss or object ceremony, and complex work
 reveals the role whose independence has become decision-relevant.
 
+## Qualification by theorem reuse
+
+KFD-7 publishes one conditional theorem for all adopters:
+
+```text
+Project(Expand(session)) equivalent_D session
+```
+
+The equivalence is fixed to five observations: direction, perspective
+boundary, effective authority, causal process, and admitted result. An adopter
+does not need to rediscover or restate that generic claim. Its qualification
+record instead:
+
+1. cites the standard theorem and context-insufficiency corollary;
+2. identifies its concrete `Expand`, `Project`, and
+   `SessionCompressible` implementations;
+3. supplies refinement evidence for all five observations;
+4. supplies negative fixtures at declared complexity breakpoints;
+5. supplies same-payload fixtures whose valid action sets differ because
+   Pursuit, Warrant, or Atlas cut and freshness differ.
+
+This turns repeated open-ended model review into a bounded refinement check.
+It does not remove product testing: runtime correctness, interface usability,
+cross-domain transfer, and residual risk remain evidence at the adopting
+Profile's exact qualification cut.
+
 ## Independent verification
 
 The native and WebAssembly verifier projections package the same schema:
@@ -119,10 +145,12 @@ npx @kungfu-tech/kfd verify kfd-record \
   verifier/fixtures/kfd-7/valid-action-contract.json
 ```
 
-The verifier rejects missing roles, unknown closed-vocabulary values,
-incomplete transitions, and premature activation. It remains offline,
-non-qualifying, and non-self-certified. Passing proves only record structure;
-runtime and qualification evidence remain product and release responsibilities.
+The verifier rejects missing roles, missing standard theorem references,
+unknown closed-vocabulary values, incomplete transitions, missing
+round-trip/context evidence categories, and premature activation. It remains
+offline, non-qualifying, and non-self-certified. Passing proves only record
+structure; runtime and qualification evidence remain product and release
+responsibilities.
 
 ## Draft evidence boundary
 
