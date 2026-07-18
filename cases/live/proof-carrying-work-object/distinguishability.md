@@ -111,11 +111,42 @@ It does not establish:
 This distinction prevents circular reasoning. The test starts from externally
 meaningful decisions, not from an assumption that the four names must exist.
 
+## Conservative reduction does not erase distinction
+
+Conditional distinguishability does not require every interaction to display
+four separate objects. Several information dimensions may be coextensive in a
+bounded history without becoming universally derivable from one another.
+
+For example, a simple agent session may contain one local goal, one current
+context, one stable permission grant, one execution attempt, and only an input
+and result state. In that limit, a session-compatible view can project:
+
+```text
+goal              <- Pursuit
+context           <- Atlas
+tool permissions  <- Warrant
+run or transcript <- Episode
+input and result  <- Fact cuts
+```
+
+This is valid compression if the projection preserves the decisions required
+for the bounded task and its assumptions remain inspectable. It is not evidence
+that the dimensions are identical. The stronger hypothesis is a conservative
+extension: preserve the low-cost session experience where the dimensions move
+together, then expose the independent roles only when work crosses goals,
+perspectives, authority states, Episodes, or material Fact branches.
+
+This gives the candidate a two-sided burden. It must show both that separation
+changes real decisions in complex histories and that ordinary simple work does
+not pay permanent ceremony for distinctions that can be safely projected.
+
 ## Evidence ladder
 
 | Stage | Required evidence | Current state |
 |---|---|---|
 | Conditional separation | Valid witness pairs and explicit decision semantics | Draft argument present |
+| Conservative reduction | Simple session round-trip preserves bounded task semantics without manual object ceremony | Pending |
+| Complexity breakpoint | Crossing a low-complexity assumption makes one or more independent roles necessary and visible | Pending |
 | First-party reality | Preserved histories where deletion changes a real decision or audit | Pending |
 | Cross-domain transfer | Non-isomorphic domains reproduce the distinction | Pending |
 | Comparative value | Rival or fused models require more reconstruction, error, or authority risk | Pending |
@@ -130,6 +161,10 @@ The four-object hypothesis weakens if:
 - the proposed witness histories cannot coexist with the same retained state;
 - a fused or rival model preserves the same decisions with less lifecycle,
   reconstruction, and governance burden;
+- the proposed structure cannot recover the familiar session experience in its
+  low-complexity limit;
+- progressive disclosure cannot keep simple work simpler than the expanded
+  complex-work representation;
 - the dimensions cannot vary independently under real work;
 - empirical profiles repeatedly omit a dimension without hidden replacement.
 

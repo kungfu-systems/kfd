@@ -82,6 +82,40 @@ The order is explanatory, not a mandatory user-interface sequence. Low-
 consequence work may derive inspectable defaults. Simplification may reduce
 ceremony but must not fuse semantic responsibility.
 
+## Low-complexity session limit
+
+The candidate is more general than a session model only if it conservatively
+recovers the familiar session experience when the work is locally simple. A
+representative low-complexity limit has:
+
+- one active Pursuit with one local goal;
+- one Atlas that is adequately represented by the current bounded context;
+- one stable, non-delegated Warrant for the session's effective permissions;
+- one contiguous Episode covering the relevant execution attempt;
+- sparse Fact change, normally an admitted starting cut and a result cut.
+
+Under those declared conditions, a product may project the action structure as:
+
+```text
+Pursuit  -> goal
+Atlas    -> context
+Warrant  -> tool permissions
+Episode  -> session, run, and transcript
+Fact     -> input state and result
+```
+
+The user should not have to manage five explicit objects to complete such a
+task. A conforming product may synthesize inspectable defaults and expose one
+session-compatible surface, provided the projection preserves the goal,
+context boundary, effective permissions, observed execution, and result.
+
+This compression is conditional rather than ontological. It must expand when
+its assumptions fail: several Pursuits share a session, perspective or
+freshness matters, authority is delegated or revoked, work crosses several
+Episodes, or Fact state branches materially. The session remains a valid
+runtime and interaction object; it simply stops being sufficient as the sole
+model of real-world work.
+
 ## Why the candidate exists
 
 The
@@ -145,9 +179,14 @@ Promotion requires:
    defaulted;
 5. product evidence that the separation lowers reconstruction, authority, or
    consequence risk without imposing greater total lifecycle burden;
-6. evidence that equal state endpoints can contain materially different causal
+6. a conservative-reduction witness in which a simple task round-trips through
+   the action structure and back to a session-compatible view without semantic
+   loss or manual object ceremony;
+7. complexity-breakpoint evidence showing that the product expands the
+   relevant roles when the low-complexity assumptions fail;
+8. evidence that equal state endpoints can contain materially different causal
    experience;
-7. independent review of whether this is an organization-level action rule.
+9. independent review of whether this is an organization-level action rule.
 
 ## Falsifiers
 
@@ -159,6 +198,11 @@ The candidate weakens or fails if:
 - another representation preserves equivalent decisions at lower total cost;
 - progressive disclosure cannot prevent the model from burdening ordinary
   low-consequence work;
+- a simple session cannot be projected into and out of the action structure
+  while preserving goal, context, effective permissions, execution, and
+  result;
+- the product keeps all roles permanently explicit instead of expanding them
+  only when the session compression becomes insufficient;
 - the three proposed action Primitives do not transfer beyond their originating
   software-work context;
 - product evidence cannot distinguish ontology value from implementation
