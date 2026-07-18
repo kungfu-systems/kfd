@@ -218,8 +218,10 @@ Agents consuming this package should start from the same sources as humans:
    draft or experimental autonomous-discovery work; its version 4 interface
    requires plural generation experiments, bounded method comparison, and a
    conditional boundary hypothesis. Read `docs/KFD-7-formal.md` for the
-   current Fact/Episode and action-responsibility reference model; KFD-7 does
-   not yet publish a universal machine schema.
+   current Fact/Episode and action-responsibility reference model. Use
+   `schemas/kfd-7/action-contract.schema.json` for a draft, product-neutral
+   Profile declaration; schema validity is non-qualifying and does not activate
+   a concrete product Profile.
 
 KFD package semver is only the distribution version. KFD-owned machine
 interfaces carry their own `schemaVersion` and `contract` fields. Compatible
@@ -269,11 +271,12 @@ primitive discovery or method dominance has been achieved.
 
 KFD-7 is a numbered draft for real-world action. It keeps direction,
 perspective, authority, and occurrence independently addressable over Fact cuts
-and causal records. Its package surface currently consists of the authoritative
-decision, formal reference, usage boundary, standards metadata, and preserved
-candidate lineage. The absence of a universal KFD-7 schema is explicit:
-product dogfood must determine which machine boundary deserves to become
-welded.
+and causal records. Its package surface includes the authoritative decision,
+formal reference, usage boundary, standards metadata, preserved candidate
+lineage, and a version 1 action-contract Profile declaration. The schema fixes
+the responsibility, transition, evidence, non-claim, and activation declaration
+without fixing product storage or lifecycle vocabulary. Product dogfood and
+independent review still determine whether a Profile can be activated.
 
 ## Decision metadata
 

@@ -10,11 +10,11 @@
     "kind": "standard-metadata",
     "name": "KFD standards metadata and release propagation surfaces",
     "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-1/contract-world.schema.json",
-    "digest": "sha256:f9a606534694f982f10e1b6d06bdf029627eebf7049553dc3a387d4c5f6cb120"
+    "digest": "sha256:015f5cad8038657c3887516ff3bd7472bebeecfdef6b16ce5bf39501998ce60b"
   },
   "canonicalPolicy": {
     "path": "standards.json",
-    "sha256": "f9a606534694f982f10e1b6d06bdf029627eebf7049553dc3a387d4c5f6cb120"
+    "sha256": "015f5cad8038657c3887516ff3bd7472bebeecfdef6b16ce5bf39501998ce60b"
   },
   "registry": {
     "path": "registry.json",
@@ -24,9 +24,9 @@
     {
       "name": "kfd-verifier-specification",
       "sourcePath": "docs/verifier.md",
-      "sourceSha256": "50a1d83fa17635177a7abf6805f5a9209f871251579b5a7292fce0b7154097a8",
+      "sourceSha256": "3a7f4931ecb66fdf423b8012fe4f294fe34d44a48e9627c21a51f2921d1a4eca",
       "artifactPath": "docs/verifier.md",
-      "expectedSha256": "50a1d83fa17635177a7abf6805f5a9209f871251579b5a7292fce0b7154097a8",
+      "expectedSha256": "3a7f4931ecb66fdf423b8012fe4f294fe34d44a48e9627c21a51f2921d1a4eca",
       "byteForByte": true,
       "class": "cross-time",
       "classes": [
@@ -124,9 +124,9 @@
     {
       "name": "kfd-verifier-wasm",
       "sourcePath": "verifier/dist/kfd_verifier.wasm",
-      "sourceSha256": "52b2032c759ff2dcdf1bb1ec29c31f6d9e9b19e324a8b11981b82097ea12d62f",
+      "sourceSha256": "90938331fcefcd0296d25c34630ea2d2b1dfd4a9527a0b7bedff41179d7b175f",
       "artifactPath": "verifier/dist/kfd_verifier.wasm",
-      "expectedSha256": "52b2032c759ff2dcdf1bb1ec29c31f6d9e9b19e324a8b11981b82097ea12d62f",
+      "expectedSha256": "90938331fcefcd0296d25c34630ea2d2b1dfd4a9527a0b7bedff41179d7b175f",
       "byteForByte": true,
       "class": "cross-time",
       "classes": [
@@ -144,9 +144,9 @@
     {
       "name": "readme",
       "sourcePath": "README.md",
-      "sourceSha256": "09594e990f0a7337190dee62e48ee03bb4546971975e05240b75edafd32e0a43",
+      "sourceSha256": "5e3bd5ceb9f492cffe3561b855445a6914f9d445d98f55d5e9541ca6439e0671",
       "artifactPath": "README.md",
-      "expectedSha256": "09594e990f0a7337190dee62e48ee03bb4546971975e05240b75edafd32e0a43",
+      "expectedSha256": "5e3bd5ceb9f492cffe3561b855445a6914f9d445d98f55d5e9541ca6439e0671",
       "byteForByte": true,
       "class": "cross-time",
       "classes": [
@@ -292,7 +292,7 @@
       "classes": [
         "cross-time"
       ],
-      "description": "Public trace of how KFD-1 through KFD-6 bound the candidate generation and anti-self-certification boundary.",
+      "description": "Public trace of how KFD-1 through KFD-7 bound the candidate generation and anti-self-certification boundary.",
       "weldRationale": "The reflexive dogfood claim remains inspectable without being promoted into proof of the candidate.",
       "impactProjection": {
         "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
@@ -584,9 +584,9 @@
     {
       "name": "kfd-standards",
       "sourcePath": "standards.json",
-      "sourceSha256": "f9a606534694f982f10e1b6d06bdf029627eebf7049553dc3a387d4c5f6cb120",
+      "sourceSha256": "015f5cad8038657c3887516ff3bd7472bebeecfdef6b16ce5bf39501998ce60b",
       "artifactPath": "standards.json",
-      "expectedSha256": "f9a606534694f982f10e1b6d06bdf029627eebf7049553dc3a387d4c5f6cb120",
+      "expectedSha256": "015f5cad8038657c3887516ff3bd7472bebeecfdef6b16ce5bf39501998ce60b",
       "byteForByte": true,
       "class": "integration-time",
       "classes": [
@@ -844,9 +844,9 @@
     {
       "name": "kfd-site-bundle",
       "sourcePath": "site/kfd-site.json",
-      "sourceSha256": "de33f75fe6e6cca7cbad919d1c43732c366c31704a51fed4903a102501aec4d6",
+      "sourceSha256": "a93b45d06e8cf6ed4f404e63cc544176dbc49a12f187319dd0ace5c9b72e0405",
       "artifactPath": "site/kfd-site.json",
-      "expectedSha256": "de33f75fe6e6cca7cbad919d1c43732c366c31704a51fed4903a102501aec4d6",
+      "expectedSha256": "a93b45d06e8cf6ed4f404e63cc544176dbc49a12f187319dd0ace5c9b72e0405",
       "byteForByte": true,
       "class": "cross-time",
       "classes": [
@@ -864,9 +864,9 @@
     {
       "name": "kfd-doc-map",
       "sourcePath": "docs/MAP.md",
-      "sourceSha256": "14af94b5a7e08ffbd84e7beca3fa60d9bbf38198847cd39db20e66e4ebd01b1c",
+      "sourceSha256": "eccbf046b168a34b694405c194291d73a16aaff1c087edf8c0fd87221b8014f4",
       "artifactPath": "docs/MAP.md",
-      "expectedSha256": "14af94b5a7e08ffbd84e7beca3fa60d9bbf38198847cd39db20e66e4ebd01b1c",
+      "expectedSha256": "eccbf046b168a34b694405c194291d73a16aaff1c087edf8c0fd87221b8014f4",
       "byteForByte": true,
       "class": "cross-time",
       "classes": [
@@ -884,9 +884,9 @@
     {
       "name": "release-impact-ledger",
       "sourcePath": "release-impact.json",
-      "sourceSha256": "ff77c3fd8a256f11ba6dae8268b450d4f655368769a873b4a3080ee18a5ef412",
+      "sourceSha256": "b0e0507c986751ee901f8da5bd0a71905129f83ca2feedc27c243d4c117b251f",
       "artifactPath": "release-impact.json",
-      "expectedSha256": "ff77c3fd8a256f11ba6dae8268b450d4f655368769a873b4a3080ee18a5ef412",
+      "expectedSha256": "b0e0507c986751ee901f8da5bd0a71905129f83ca2feedc27c243d4c117b251f",
       "byteForByte": true,
       "class": "cross-time",
       "classes": [
@@ -904,9 +904,9 @@
     {
       "name": "kfd-check-gate",
       "sourcePath": "scripts/check.mjs",
-      "sourceSha256": "981ad38e942970d02440d186306db3f493121b16415986b3f836458b02eb9bb5",
+      "sourceSha256": "59666b383ac3c56e09044a29b97e1bee0ea04cf2992c0bd0a1b23fd9c5a8c204",
       "artifactPath": "scripts/check.mjs",
-      "expectedSha256": "981ad38e942970d02440d186306db3f493121b16415986b3f836458b02eb9bb5",
+      "expectedSha256": "59666b383ac3c56e09044a29b97e1bee0ea04cf2992c0bd0a1b23fd9c5a8c204",
       "byteForByte": true,
       "class": "integration-time",
       "classes": [
@@ -1066,9 +1066,9 @@
     {
       "name": "kfd-2-public-release-trust-claim",
       "sourcePath": ".buildchain/kfd-2/public-release-trust.claim.json",
-      "sourceSha256": "703f2cd6a8568392d84a54b38da08ee4a744ad86ff91bbd9221c8d8f79b0cff5",
+      "sourceSha256": "d6009a19347e0aed4a98db6777dabb1733a3bacd1b6c6716f0b15d7c7af7861f",
       "artifactPath": ".buildchain/kfd-2/public-release-trust.claim.json",
-      "expectedSha256": "703f2cd6a8568392d84a54b38da08ee4a744ad86ff91bbd9221c8d8f79b0cff5",
+      "expectedSha256": "d6009a19347e0aed4a98db6777dabb1733a3bacd1b6c6716f0b15d7c7af7861f",
       "byteForByte": true,
       "class": "integration-time",
       "classes": [
@@ -1126,9 +1126,9 @@
     {
       "name": "kfd-2-foundation-trust-claims",
       "sourcePath": ".buildchain/kfd-2/kfd-foundation.trust-claims.json",
-      "sourceSha256": "ca0f57f08df1fa5d387566494a7239431a73eb12e7d3f33daf318bd1500f06f1",
+      "sourceSha256": "cb8e3aaffb15fab6c6438ef54203a83883c0bcb7ed84be11f3c408ac5e2bf1a8",
       "artifactPath": ".buildchain/kfd-2/kfd-foundation.trust-claims.json",
-      "expectedSha256": "ca0f57f08df1fa5d387566494a7239431a73eb12e7d3f33daf318bd1500f06f1",
+      "expectedSha256": "cb8e3aaffb15fab6c6438ef54203a83883c0bcb7ed84be11f3c408ac5e2bf1a8",
       "byteForByte": true,
       "class": "integration-time",
       "classes": [
@@ -1146,9 +1146,9 @@
     {
       "name": "kfd-2-foundation-trust-assessment",
       "sourcePath": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json",
-      "sourceSha256": "696c045d21e087961479212010ecb5804a0d53af5a1c91fd450624ef49c7e8b9",
+      "sourceSha256": "38210287b0328283d50d337408fe2051fdef7b2eb422bbd1e07fb69f8c07e4f1",
       "artifactPath": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json",
-      "expectedSha256": "696c045d21e087961479212010ecb5804a0d53af5a1c91fd450624ef49c7e8b9",
+      "expectedSha256": "38210287b0328283d50d337408fe2051fdef7b2eb422bbd1e07fb69f8c07e4f1",
       "byteForByte": true,
       "class": "integration-time",
       "classes": [
@@ -1404,6 +1404,27 @@
       }
     },
     {
+      "name": "kfd-7-action-contract-schema",
+      "sourcePath": "schemas/kfd-7/action-contract.schema.json",
+      "sourceSha256": "1998e9f54e5c081d736524e3f1a1507a3c78a235667897e741a8321342534bf8",
+      "artifactPath": "schemas/kfd-7/action-contract.schema.json",
+      "expectedSha256": "1998e9f54e5c081d736524e3f1a1507a3c78a235667897e741a8321342534bf8",
+      "byteForByte": true,
+      "class": "integration-time",
+      "classes": [
+        "integration-time",
+        "cross-time"
+      ],
+      "description": "Published version 1 KFD-7 action-contract Profile schema.",
+      "weldRationale": "Human, agent, product, verifier, and release consumers bind to the same role, transition, evidence, non-claim, and activation declaration.",
+      "impactProjection": {
+        "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+        "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+        "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+        "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+      }
+    },
+    {
       "name": "kfd-candidate-registry-schema",
       "sourcePath": "schemas/kfd-candidate-registry.schema.json",
       "sourceSha256": "71658c33346a302d704b55db3e116f80f3c42bab4a59d2a2bb6b3daa0a5f8e03",
@@ -1568,9 +1589,9 @@
     {
       "name": "kfd-7-document",
       "sourcePath": "decisions/KFD-7.md",
-      "sourceSha256": "ded7a5460c6879e312e2fc29503c12a12d5b67869d274e6aa095db39ccc53bf1",
+      "sourceSha256": "741047661fda21679f1cff58a67dbf23ba872c74017c0a9d7c1dfe6f5d87f385",
       "artifactPath": "decisions/KFD-7.md",
-      "expectedSha256": "ded7a5460c6879e312e2fc29503c12a12d5b67869d274e6aa095db39ccc53bf1",
+      "expectedSha256": "741047661fda21679f1cff58a67dbf23ba872c74017c0a9d7c1dfe6f5d87f385",
       "byteForByte": true,
       "class": "cross-time",
       "classes": [
@@ -1588,16 +1609,16 @@
     {
       "name": "kfd-7-usage-doc",
       "sourcePath": "docs/KFD-7-usage.md",
-      "sourceSha256": "bc49249aacd45ba89ca4ce48a1992493663a7dc638eb13555ebf05a3a2d7b7d0",
+      "sourceSha256": "587ce2d864bdc640ffbc63114a9a6130ea72c4e8522f8d2cbe09876bf33c0acd",
       "artifactPath": "docs/KFD-7-usage.md",
-      "expectedSha256": "bc49249aacd45ba89ca4ce48a1992493663a7dc638eb13555ebf05a3a2d7b7d0",
+      "expectedSha256": "587ce2d864bdc640ffbc63114a9a6130ea72c4e8522f8d2cbe09876bf33c0acd",
       "byteForByte": true,
       "class": "cross-time",
       "classes": [
         "cross-time"
       ],
       "description": "Published KFD-7 draft usage documentation surface at docs/KFD-7-usage.md.",
-      "weldRationale": "Humans and agents can inspect package surfaces, progressive-disclosure guidance, adoption obligations, and the explicit absence of a universal KFD-7 schema.",
+      "weldRationale": "Humans and agents can inspect package surfaces, progressive-disclosure guidance, draft Profile declarations, adoption obligations, and the explicit non-qualifying activation boundary.",
       "impactProjection": {
         "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
         "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
@@ -1608,9 +1629,9 @@
     {
       "name": "kfd-7-formal-doc",
       "sourcePath": "docs/KFD-7-formal.md",
-      "sourceSha256": "991e67497b68d655461ae0981eb9ef8f1ea294bebaea5447d83a2220f0d15f47",
+      "sourceSha256": "d74d9907614d0dc09498b0dba2cd2f572ff7d5dc315628063d67e768d4ae1fad",
       "artifactPath": "docs/KFD-7-formal.md",
-      "expectedSha256": "991e67497b68d655461ae0981eb9ef8f1ea294bebaea5447d83a2220f0d15f47",
+      "expectedSha256": "d74d9907614d0dc09498b0dba2cd2f572ff7d5dc315628063d67e768d4ae1fad",
       "byteForByte": true,
       "class": "cross-time",
       "classes": [

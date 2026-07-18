@@ -253,6 +253,55 @@ declare current Fact cut
 - Demonstrate cross-domain transfer and progressive disclosure before
   activation.
 
+## Profile declaration and evidence closure
+
+The draft machine contract records a Profile declaration rather than one
+physical state machine:
+
+```text
+Profile = (
+  implementation coordinate,
+  qualification status,
+  five responsibility declarations,
+  Profile-owned lifecycle vocabulary,
+  transitions,
+  prohibited inferences,
+  evidence obligations,
+  non-claims and extensions,
+  activation verdict
+)
+```
+
+Each transition declaration binds:
+
+```text
+subject role + prior Profile state + operation + preconditions
+  -> effect + receipt + evidence + denial reasons + residual risks
+```
+
+For Profile claim `C` at evidence cut `K`:
+
+```text
+Qualified(C, K) :=
+  schema conformance
+  and positive and negative transition evidence
+  and role deletion or fusion evidence
+  and export, rebuild, and migration evidence
+  and concurrency, retry, or compensation evidence
+  and Warrant decay and revocation evidence
+  and Atlas staleness and loss evidence
+  and Pursuit continuity and settlement evidence
+  and Episode replay or declared contraction evidence
+  and cold-start continuation evidence
+  and retained residual risk
+  and independent review
+```
+
+`not-applicable` requires a bounded reason. An `activate` verdict requires a
+qualified Profile, an exact evidence cut, independent review, retained product
+witnesses, and no planned or failed obligation. Qualification remains relative
+to that Profile and cut; it does not establish universal minimality.
+
 ## Invalid states
 
 - Intention or assignment is treated as authorization.
@@ -273,13 +322,15 @@ declare current Fact cut
 
 | Formal statement | Decision source | Schema or check | Verification |
 |---|---|---|---|
-| Fact-cut and causal-record separation | Substrate boundary | KFD-1 formal reference; no KFD-7 schema yet | Manual or mixed |
-| Atlas/Pursuit/Warrant separation | Action responsibilities | No KFD-7 schema yet | Product and semantic review |
+| Fact-cut and causal-record separation | Substrate boundary | KFD-1 formal reference and KFD-7 Profile role declarations | Structural plus product evidence |
+| Atlas/Pursuit/Warrant separation | Action responsibilities | `schemas/kfd-7/action-contract.schema.json` required role closure | Structural plus product and semantic review |
 | `I3-I8` conditional independence | Gate and Activation | Counterfactual product fixtures | Not yet implemented |
 | `I13-I14` conservative session limit | Conservative session limit | Session round-trip and complexity-breakpoint fixtures | Not yet implemented |
 | `I9-I10` path composition and admission | Action closure | Domain Episode/Fact profiles | Mixed |
+| transition and denial declaration | Reference Profile contract | `transitions[]` | Independent schema verification |
+| evidence and non-claim closure | Activation | `evidenceObligations[]`, `nonClaims[]`, `activation` | Independent schema verification; runtime proof remains external |
 | Decision/formal/package identity | Verification | `registry.json`, `standards.json`, `scripts/check.mjs` | Machine |
-| KFD-7 activation | Activation | No current activation witness | Not yet proved |
+| KFD-7 activation | Activation | qualified Profile, exact evidence cut, independent review, product witnesses | Not yet proved |
 
 ## Confidence and non-claims
 
