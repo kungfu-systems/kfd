@@ -242,6 +242,23 @@ const buildCandidatePages = (candidateRegistry) => (candidateRegistry.candidates
   markdown: stripFrontmatter(readFileSync(entry.path, "utf8")),
 }));
 
+const buildCandidateFormalPages = (candidateRegistry) => (candidateRegistry.candidates ?? [])
+  .filter((entry) => entry.formalReference)
+  .map((entry) => ({
+    id: `${entry.id}-formal`,
+    candidateId: entry.id,
+    parentPath: entry.path,
+    parentUrl: `/drafts/${entry.id}/`,
+    sourcePath: entry.formalReference.path,
+    url: `/drafts/${entry.id}/formal/`,
+    relationship: "formal-candidate-child-of-candidate",
+    normative: false,
+    formalCandidateVersion: entry.formalReference.version,
+    formalCandidateStatus: entry.formalReference.status,
+    authorityPath: entry.formalReference.authorityPath,
+    markdown: stripFrontmatter(readFileSync(entry.formalReference.path, "utf8")),
+  }));
+
 const section = ({ id, sourceHeading, title, markdown, role, priority, presentation, firstScreen = false, sourcePath = README_PATH }) => ({
   id,
   sourcePath,
@@ -280,6 +297,7 @@ export const buildSiteBundle = ({
   const entries = registry.entries || [];
   const liveCasePages = buildLiveCasePages(liveCaseRegistry);
   const candidatePages = buildCandidatePages(candidateRegistry);
+  const candidateFormalPages = buildCandidateFormalPages(candidateRegistry);
   const candidatePageDeclarations = candidatePages.map((entry) => ({
     id: entry.id,
     title: entry.title,
@@ -422,6 +440,7 @@ export const buildSiteBundle = ({
       liveCasePattern: "/cases/live/{id}",
       candidates: "/drafts",
       candidatePattern: "/drafts/{id}",
+      candidateFormalPattern: "/drafts/{id}/formal",
       decisionPattern: "/{number}",
       decisionUsagePattern: "/{number}/usage",
       decisionFormalPattern: "/{number}/formal",
@@ -542,6 +561,13 @@ export const buildSiteBundle = ({
       relationship: "candidate-before-promotion",
       normative: false,
       pages: candidatePageDeclarations,
+      formalPages: {
+        source: "drafts/registry.json + drafts/formal/*.md",
+        stableUrlPattern: "/drafts/{id}/formal/",
+        relationship: "formal-candidate-child-of-candidate",
+        normative: false,
+        pages: candidateFormalPages,
+      },
     },
     decisionPages: {
       source: REGISTRY_PATH,
@@ -601,6 +627,7 @@ export const buildSiteBundle = ({
         "historical cases page from docs/primitive-discovery-cases.md",
         "live Primitive case registry and case bodies from cases/",
         "pre-number KFD candidate registry, index, and bodies from drafts/",
+        "non-normative formal candidate pages from drafts/formal/",
         "foundation triad commitments",
         "foundation model layers and chain",
         "product proof path text",

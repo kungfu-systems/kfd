@@ -18,6 +18,8 @@ last_reviewed: 2026-07-18
 - Current slot hint: 10
 - Slot binding: non-binding
 
+[Formal candidate](formal/warrant-bounded-authority.md)
+
 ## One sentence
 
 Permission to act must remain explicit, bounded, derivable, and independently
@@ -65,6 +67,10 @@ permission from pressure, hierarchy, task assignment, or successful execution.
 The candidate should be tested against approval records, consent, mandates,
 capability tokens, role-based access control, delegated plans, standing
 authority, and provider permission prompts.
+
+The non-normative formal candidate defines Warrant versions, validity,
+permission cones, attenuation, transitions, session projection, and proof
+obligations without replacing domain authorization systems.
 
 ## Invalid compressions
 
