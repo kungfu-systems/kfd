@@ -36,6 +36,8 @@ const candidateRegistry = JSON.parse(readFileSync(candidateRegistryPath, "utf8")
 const candidateRegistrySchema = JSON.parse(readFileSync(candidateRegistrySchemaPath, "utf8"));
 const releaseImpact = JSON.parse(readFileSync("release-impact.json", "utf8"));
 const packageJson = JSON.parse(readFileSync("package.json", "utf8"));
+const kfd7ActivationEvidencePath = "evidence/kfd-7/activation-record.json";
+const kfd7ActivationEvidence = JSON.parse(readFileSync(kfd7ActivationEvidencePath, "utf8"));
 const siteBundle = JSON.parse(readFileSync("site/kfd-site.json", "utf8"));
 const expectedSiteBundle = generatedSiteBundle();
 const kfd1WitnessPath = ".buildchain/kfd-1/contract-world.witness.json";
@@ -87,6 +89,9 @@ if (packageJson.exports?.["./verifier/bundle.schema.json"] !== "./schemas/kfd-ve
 }
 if (packageJson.exports?.["./verifier/report.schema.json"] !== "./schemas/kfd-verification-report.schema.json") {
   fail("package.json must export the verifier report schema");
+}
+if (packageJson.exports?.["./evidence/kfd-7/activation-record.json"] !== "./evidence/kfd-7/activation-record.json") {
+  fail("package.json must export the KFD-7 activation evidence record");
 }
 for (const verifierPath of [
   "bin/kfd.mjs",
@@ -1257,6 +1262,47 @@ for (const concept of ["autonomousDiscovery", "causalExperience", "episodeCorpus
 if (!kfd6?.interfaces?.autonomousDiscoveryLoop) fail("KFD-6 standards metadata missing interface autonomousDiscoveryLoop");
 const kfd7 = standardsMetadata.standards?.["kfd-7"];
 if (kfd7?.status !== "draft") fail("KFD-7 must remain draft until activation evidence is committed");
+if (kfd7ActivationEvidence.contract !== "kfd-7-activation-evidence" || kfd7ActivationEvidence.standard !== "kfd-7") {
+  fail("KFD-7 activation evidence must declare the canonical contract and standard");
+}
+if (kfd7ActivationEvidence.status !== "qualified") {
+  fail("KFD-7 activation evidence must remain qualified until independent KFD-level review");
+}
+if (kfd7ActivationEvidence.qualification?.result !== "passed") {
+  fail("KFD-7 activation evidence qualification must pass");
+}
+if (kfd7ActivationEvidence.qualification?.profileCount !== 2) {
+  fail("KFD-7 activation evidence must bind two product Profiles");
+}
+if (kfd7ActivationEvidence.qualification?.openRequiredEvidenceCategories !== 0) {
+  fail("KFD-7 activation evidence must have no open required evidence categories");
+}
+if (kfd7ActivationEvidence.activation?.decision !== "pending") {
+  fail("KFD-7 activation verdict must remain pending until independent KFD-level review");
+}
+if (kfd7?.surfaceRegister?.factSource !== kfd7ActivationEvidencePath) {
+  fail("KFD-7 surface register must bind the activation evidence fact source");
+}
+for (const [surfaceId, sourcePath] of [
+  ["kfd-7-activation-evidence", kfd7ActivationEvidencePath],
+  ["kfd-7-activation-guide", "docs/KFD-7-activation.md"],
+]) {
+  const surface = kfd7?.surfaceRegister?.surfaces?.find((entry) => entry.id === surfaceId);
+  if (surface?.sourcePath !== sourcePath) fail(`KFD-7 surface register missing ${surfaceId}`);
+  if (!existsSync(sourcePath)) fail(`KFD-7 activation surface missing ${sourcePath}`);
+}
+for (const product of ["buildchain", "kungfu"]) {
+  const profile = kfd7ActivationEvidence.evidenceCut?.[product];
+  for (const field of ["profile", "implementation", "qualification", "activation", "merge", "qualificationReview", "activationReview", "actionContract", "runtimeEvidence"]) {
+    if (profile?.[field] === undefined) fail(`KFD-7 activation evidence ${product} missing ${field}`);
+  }
+  if (!Array.isArray(profile?.runtimeEvidence) || profile.runtimeEvidence.length === 0) {
+    fail(`KFD-7 activation evidence ${product} must retain runtime evidence`);
+  }
+}
+if (JSON.stringify(kfd7ActivationEvidence).includes("PENDING_")) {
+  fail("KFD-7 activation evidence must not contain pending source coordinates");
+}
 if (kfd7?.schemaIds?.actionContract !== "https://kfd.libkungfu.dev/schemas/kfd-7/action-contract.schema.json") {
   fail("KFD-7 standards metadata must expose the canonical actionContract schema URI");
 }

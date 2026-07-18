@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd-7-activation-evidence",
+  "standard": "kfd-7",
+  "status": "qualified",
+  "evidenceCut": {
+    "kfdPackage": "npm:@kungfu-tech/kfd@1.0.0-alpha.35",
+    "buildchain": {
+      "profile": "buildchain-release-transaction-profile@0.1.0",
+      "implementation": "git:https://github.com/kungfu-systems/buildchain@1c830d6612782208896b709c7d5b982c85a873c7#packages/core/kfd7-buildchain-profile.js",
+      "qualification": "git:https://github.com/kungfu-systems/buildchain@bd1d62e0a0c6a07e2271b1fd1a7ec7bc09ec6712",
+      "activation": "git:https://github.com/kungfu-systems/buildchain@014ae623a34602ccaf7223a9b575066b30dcb9b6",
+      "merge": "git:https://github.com/kungfu-systems/buildchain@f5a591fc79b84ba1b5809f2523060bcc4fd4739e",
+      "qualificationReview": "https://github.com/kungfu-systems/buildchain/pull/1383#pullrequestreview-4728683864",
+      "activationReview": "https://github.com/kungfu-systems/buildchain/pull/1383#pullrequestreview-4728690266",
+      "actionContract": "https://github.com/kungfu-systems/buildchain/blob/f5a591fc79b84ba1b5809f2523060bcc4fd4739e/packages/core/kfd7-buildchain-action-contract.json",
+      "runtimeEvidence": [
+        "https://github.com/kungfu-systems/buildchain/blob/f5a591fc79b84ba1b5809f2523060bcc4fd4739e/tests/kfd7-buildchain-profile.test.mjs",
+        "https://github.com/kungfu-systems/buildchain/tree/f5a591fc79b84ba1b5809f2523060bcc4fd4739e/packages/core/kfd7-evidence"
+      ]
+    },
+    "kungfu": {
+      "profile": "kungfu-kfd-7-action-profile@0.1.0",
+      "implementation": "git:https://github.com/kungfu-systems/kungfu@91a7a2b6f406e996b0b1d69421af260d69be3878#framework/core/src/python/kungfu/agent/work_profile.py",
+      "qualification": "git:https://github.com/kungfu-systems/kungfu@8f6eff198751af109ddbeead8db4390d35303880",
+      "activation": "git:https://github.com/kungfu-systems/kungfu@8347329092c5d32e45d349b71eda9fbd30aff205",
+      "merge": "git:https://github.com/kungfu-systems/kungfu@218e253573bf38ffde745c5b192c1d18e319f43e",
+      "qualificationReview": "https://github.com/kungfu-systems/kungfu/pull/1091#pullrequestreview-4728705815",
+      "activationReview": "https://github.com/kungfu-systems/kungfu/pull/1096#pullrequestreview-4728790299",
+      "actionContract": "https://github.com/kungfu-systems/kungfu/blob/218e253573bf38ffde745c5b192c1d18e319f43e/framework/agent-work/kungfu-kfd-7-action-contract.json",
+      "runtimeEvidence": [
+        "https://github.com/kungfu-systems/kungfu/blob/218e253573bf38ffde745c5b192c1d18e319f43e/framework/core/tests/python/test_agent_work_state_contract.py",
+        "https://github.com/kungfu-systems/kungfu/tree/218e253573bf38ffde745c5b192c1d18e319f43e/framework/agent-work/evidence/kfd-7"
+      ],
+      "ci": {
+        "sourceAcceptance": "https://github.com/kungfu-systems/kungfu/actions/runs/29649895687",
+        "affectedNative": "https://github.com/kungfu-systems/kungfu/actions/runs/29649895515",
+        "crossPlatform": "https://github.com/kungfu-systems/kungfu/actions/runs/29649895533",
+        "mergeGroup": "https://github.com/kungfu-systems/kungfu/actions/runs/29650646497"
+      }
+    }
+  },
+  "qualification": {
+    "result": "passed",
+    "profileCount": 2,
+    "nonIsomorphicDomains": [
+      "release transaction and publication authority",
+      "durable agent work state and causal continuation"
+    ],
+    "theorem": "kfd-7-session-round-trip-preservation@1",
+    "corollary": "kfd-7-context-insufficiency@1",
+    "requiredEvidenceCategories": 13,
+    "openRequiredEvidenceCategories": 0,
+    "independentProductReviews": 4,
+    "residualRisk": []
+  },
+  "activation": {
+    "decision": "pending",
+    "independentReview": "pending:kfd-level-qualification-review",
+    "activatedAt": null
+  },
+  "nonClaims": [
+    "Two qualified first-party Profiles do not prove one universal storage shape, user interface, lifecycle vocabulary, or globally minimal ontology.",
+    "KFD-7 does not turn a product action-contract verdict into legal authority or proof of real-world success.",
+    "Future Profiles must qualify their own mappings, breakpoints, evidence, non-claims, and residual risks."
+  ]
+}

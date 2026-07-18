@@ -1923,6 +1923,52 @@
           "compatibilityRule": "Compatible Profile-owned lifecycle additions may keep schemaVersion 2; semantic or required-field changes to responsibility, theorem applicability, transition, evidence, non-claim, or activation meaning require a new interface version or contract."
         }
       },
+      "surfaceRegister": {
+        "factSource": "evidence/kfd-7/activation-record.json",
+        "surfaceClasses": [
+          "cross-time"
+        ],
+        "compatibilityImpactClasses": [
+          "breaking",
+          "additive",
+          "none",
+          "unclassifiable"
+        ],
+        "surfaces": [
+          {
+            "id": "kfd-7-activation-evidence",
+            "class": "cross-time",
+            "classes": [
+              "cross-time"
+            ],
+            "description": "Commit-addressed cross-product qualification and activation evidence for KFD-7.",
+            "sourcePath": "evidence/kfd-7/activation-record.json",
+            "weldRationale": "Consumers can distinguish structural schema validity from retained Profile qualification, product availability, independent review, and the KFD-level activation verdict.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to the evidence contract or activation meaning require an explicit compatibility action before a dependent gate may pass.",
+              "additive": "Additional product witnesses or compatible evidence fields must preserve prior coordinates and claim boundaries.",
+              "none": "Changes outside this registered evidence surface do not change its KFD-7 activation cut.",
+              "unclassifiable": "If evidence impact cannot be classified, activation must fail closed until the surface register is repaired."
+            }
+          },
+          {
+            "id": "kfd-7-activation-guide",
+            "class": "cross-time",
+            "classes": [
+              "cross-time"
+            ],
+            "description": "Human-readable qualification cut, evidence boundary, and non-claims for KFD-7 activation.",
+            "sourcePath": "docs/KFD-7-activation.md",
+            "weldRationale": "Humans and agents receive the same product coordinates, decision boundary, and non-claims as the machine evidence record.",
+            "impactProjection": {
+              "breaking": "A conflicting or weaker activation boundary requires correction before a dependent gate may pass.",
+              "additive": "Compatible clarification may extend the guide without changing the retained machine verdict.",
+              "none": "Editorial changes that preserve the machine record and claim boundary do not change activation semantics.",
+              "unclassifiable": "If the guide and machine evidence cannot be reconciled, activation must fail closed."
+            }
+          }
+        ]
+      },
       "concepts": {
         "factCut": "declared fact cut",
         "causalRecord": "bounded causal record",
