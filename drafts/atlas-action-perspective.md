@@ -18,6 +18,8 @@ last_reviewed: 2026-07-18
 - Current slot hint: 8
 - Slot binding: non-binding
 
+[Formal candidate](formal/atlas-action-perspective.md)
+
 ## One sentence
 
 Every consequential action must bind to an addressable perspective and fact
@@ -68,6 +70,10 @@ The candidate should be tested against context windows, retrieval results,
 database snapshots, reports, world models, and informal shared understanding.
 It is load-bearing only if Atlas preserves decisions those alternatives
 repeatedly force participants to reconstruct.
+
+The non-normative formal candidate defines an Atlas version, observation
+projection, decision equivalence, transitions, session projection, and proof
+obligations without fixing product storage or lifecycle vocabulary.
 
 ## Invalid compressions
 
