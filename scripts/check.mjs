@@ -259,6 +259,18 @@ for (const [index, candidate] of (candidateRegistry.candidates ?? []).entries())
   }
   if (candidate.path !== `drafts/${candidate.id}.md`) fail(`${label}.path must be drafts/${candidate.id}.md`);
   if (!existsSync(candidate.path)) fail(`${label}.path points to missing ${candidate.path}`);
+  if (candidate.formalReference) {
+    const formal = candidate.formalReference;
+    const expectedPath = `drafts/formal/${candidate.id}.md`;
+    const expectedUrl = `https://kfd.libkungfu.dev/drafts/${candidate.id}/formal`;
+    if (formal.path !== expectedPath) fail(`${label}.formalReference.path must be ${expectedPath}`);
+    if (formal.url !== expectedUrl) fail(`${label}.formalReference.url must be ${expectedUrl}`);
+    if (formal.authorityPath !== candidate.path) fail(`${label}.formalReference.authorityPath must match candidate.path`);
+    if (formal.normative !== false) fail(`${label}.formalReference must remain non-normative`);
+    if (!Number.isInteger(formal.version) || formal.version < 1) fail(`${label}.formalReference.version must be positive`);
+    if (formal.status !== "experimental") fail(`${label}.formalReference.status must be experimental`);
+    if (!existsSync(formal.path)) fail(`${label}.formalReference.path points to missing ${formal.path}`);
+  }
   if (!candidate.oneSentence?.trim()) fail(`${label}.oneSentence must remain explicit`);
   if (!candidate.claimBoundary?.trim()) fail(`${label}.claimBoundary must remain explicit`);
   if (!Array.isArray(candidate.sourceCases) || candidate.sourceCases.length === 0) fail(`${label}.sourceCases must not be empty`);
@@ -312,6 +324,9 @@ if (siteBundle.routes?.liveCasePattern !== "/cases/live/{id}") {
 if (siteBundle.routes?.candidates !== "/drafts") fail("site bundle routes.candidates must be /drafts");
 if (siteBundle.routes?.candidatePattern !== "/drafts/{id}") {
   fail("site bundle routes.candidatePattern must be /drafts/{id}");
+}
+if (siteBundle.routes?.candidateFormalPattern !== "/drafts/{id}/formal") {
+  fail("site bundle routes.candidateFormalPattern must be /drafts/{id}/formal");
 }
 if (!siteBundle.homepage?.futurePicture?.pastToFuture || !siteBundle.homepage?.futurePicture?.kungfuPath) {
   fail("site bundle homepage.futurePicture must expose the civilizational shift and Kungfu path");
@@ -525,6 +540,44 @@ for (const candidate of candidateRegistry.candidates ?? []) {
 }
 for (const candidateId of candidateRenderPages.keys()) {
   if (!candidateIds.has(candidateId)) fail(`site bundle candidatePages has unknown candidate ${candidateId}`);
+}
+const candidateFormalSection = siteBundle.candidatePages?.formalPages;
+if (candidateFormalSection?.stableUrlPattern !== "/drafts/{id}/formal/") {
+  fail("site bundle candidate formal stableUrlPattern must be /drafts/{id}/formal/");
+}
+if (candidateFormalSection?.relationship !== "formal-candidate-child-of-candidate") {
+  fail("site bundle candidate formal relationship must be formal-candidate-child-of-candidate");
+}
+if (candidateFormalSection?.normative !== false) {
+  fail("site bundle candidate formal pages must remain non-normative");
+}
+const candidateFormalRenderPages = new Map(
+  (candidateFormalSection?.pages ?? []).map((entry) => [entry.candidateId, entry]),
+);
+for (const candidate of candidateRegistry.candidates ?? []) {
+  const page = candidateFormalRenderPages.get(candidate.id);
+  if (!candidate.formalReference) {
+    if (page) fail(`site bundle candidate formal pages includes undeclared ${candidate.id}`);
+    continue;
+  }
+  if (
+    !page ||
+    page.id !== `${candidate.id}-formal` ||
+    page.parentPath !== candidate.path ||
+    page.parentUrl !== `/drafts/${candidate.id}/` ||
+    page.sourcePath !== candidate.formalReference.path ||
+    page.url !== `/drafts/${candidate.id}/formal/` ||
+    page.formalCandidateVersion !== candidate.formalReference.version ||
+    page.formalCandidateStatus !== candidate.formalReference.status ||
+    page.authorityPath !== candidate.path ||
+    page.normative !== false ||
+    !page.markdown
+  ) {
+    fail(`site bundle candidate formal page ${candidate.id} must match the candidate registry`);
+  }
+}
+for (const candidateId of candidateFormalRenderPages.keys()) {
+  if (!candidateIds.has(candidateId)) fail(`site bundle candidate formal pages has unknown candidate ${candidateId}`);
 }
 if (!existsSync("docs/foundation-model.md")) fail("missing docs/foundation-model.md");
 else if (!readFileSync("docs/foundation-model.md", "utf8").startsWith("# KFD Foundation Model")) {

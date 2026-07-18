@@ -65,6 +65,13 @@ const candidateSurfaces = [
     sourcePath: entry.path,
     sha256: sha256File(entry.path),
   })),
+  ...candidateRegistry.candidates
+    .filter((entry) => entry.formalReference)
+    .map((entry) => ({
+      id: `candidate:${entry.id}:formal`,
+      sourcePath: entry.formalReference.path,
+      sha256: sha256File(entry.formalReference.path),
+    })),
 ];
 const schemaSurfaces = [
   "schemas/kfd-standards.schema.json",
@@ -312,6 +319,9 @@ const artifact = {
       ...formalDocs.map((entry) => pointer(entry.sourcePath)),
       ...liveCaseSurfaces.map((entry) => pointer(entry.sourcePath)),
       ...candidateRegistry.candidates.map((entry) => pointer(entry.path)),
+      ...candidateRegistry.candidates
+        .filter((entry) => entry.formalReference)
+        .map((entry) => pointer(entry.formalReference.path)),
     ],
   },
   closure: {
