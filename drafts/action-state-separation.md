@@ -1,5 +1,5 @@
 ---
-status: draft
+status: promoted
 period: 2026-07-18
 theme: cross-domain-action-primitives
 doc_type: kfd-candidate
@@ -164,13 +164,15 @@ The candidate weakens or fails if:
 - product evidence cannot distinguish ontology value from implementation
   preference.
 
-## Numbering boundary
+## Promotion lineage and activation boundary
 
-The slot hint `7` records the current ordering hypothesis only. This document
-is not `KFD-7`, does not reserve that number, and does not allocate the slot
-hints of its elaboration candidates.
+This candidate was explicitly promoted to numbered draft
+[KFD-7](../decisions/KFD-7.md). The promotion allocates KFD-7 and publishes a
+reference contract while preserving this candidate coordinate as its genesis
+record.
 
-Promotion requires an explicit maintainer decision that creates
-`decisions/KFD-N.md`, updates the numbered `registry.json`, and records
-candidate lineage. This candidate and its elaborations may be revised,
-reordered, split, merged, withdrawn, or rejected before promotion.
+Promotion does not activate a universal product Profile, prove cross-domain
+necessity, turn Fact or Episode into domain Primitives, or allocate the
+non-binding slot hints of the Atlas, Pursuit, and Warrant elaboration
+candidates. KFD-7 remains draft until its retained product-evidence and
+independent-review activation gate closes.

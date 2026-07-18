@@ -78,6 +78,10 @@ const SCHEMAS: &[(&str, &str)] = &[
         "schemas/kfd-6/autonomous-discovery-loop.schema.json",
         include_str!("../../../../schemas/kfd-6/autonomous-discovery-loop.schema.json"),
     ),
+    (
+        "schemas/kfd-7/action-contract.schema.json",
+        include_str!("../../../../schemas/kfd-7/action-contract.schema.json"),
+    ),
 ];
 
 fn schema_documents() -> BTreeMap<String, Value> {
@@ -118,6 +122,7 @@ pub fn schema_for_record(record: &Value) -> Option<(String, Value)> {
         "kfd-4-perspective-replay" => "schemas/kfd-4/perspective-replay.schema.json",
         "kfd-5-primitive-discovery" => "schemas/kfd-5/primitive-discovery.schema.json",
         "kfd-6-autonomous-discovery-loop" => "schemas/kfd-6/autonomous-discovery-loop.schema.json",
+        "kfd-7-action-contract" => "schemas/kfd-7/action-contract.schema.json",
         _ => return None,
     };
     documents.get(path).cloned().map(|schema| {

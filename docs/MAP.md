@@ -30,6 +30,9 @@
 | What schema records a KFD-5 primitive candidate? | [`../schemas/kfd-5/primitive-discovery.schema.json`](../schemas/kfd-5/primitive-discovery.schema.json) |
 | How should an autonomous discovery loop remain grounded in causal experience? | [KFD-6](../decisions/KFD-6.md) |
 | What schema records a KFD-6 autonomous discovery experiment? | [`../schemas/kfd-6/autonomous-discovery-loop.schema.json`](../schemas/kfd-6/autonomous-discovery-loop.schema.json) |
+| How must consequential action separate direction, perspective, authority, and occurrence? | [KFD-7](../decisions/KFD-7.md) |
+| What is the KFD-7 formal reference? | [`KFD-7-formal.md`](KFD-7-formal.md) |
+| How does a product declare a provisional KFD-7 Profile? | [`KFD-7-usage.md`](KFD-7-usage.md) and [`../schemas/kfd-7/action-contract.schema.json`](../schemas/kfd-7/action-contract.schema.json) |
 | What are the package implementation notes for KFD-1? | [`KFD-1-usage.md`](KFD-1-usage.md) |
 | What is the formal reference for KFD-1? | [`KFD-1-formal.md`](KFD-1-formal.md) |
 | What schema should papers, specifications, or sites use for canonical/latest/immutable publication URL semantics? | [`../schemas/kfd-1/publication-url-semantics.schema.json`](../schemas/kfd-1/publication-url-semantics.schema.json) and [`KFD-1-usage.md`](KFD-1-usage.md#publication-url-semantics) |
@@ -43,8 +46,9 @@
 | What is the formal reference for KFD-5? | [`KFD-5-formal.md`](KFD-5-formal.md) |
 | What are the package implementation notes for KFD-6? | [`KFD-6-usage.md`](KFD-6-usage.md) |
 | What is the formal reference for KFD-6? | [`KFD-6-formal.md`](KFD-6-formal.md) |
+| What are the package implementation notes for KFD-7? | [`KFD-7-usage.md`](KFD-7-usage.md) |
 | How should an agent quickly understand this package? | [`../README.md`](../README.md#agent-quickstart), then [`foundation-model.md`](foundation-model.md), [`formal-model.md`](formal-model.md), and [`primitive-discovery-cases.md`](primitive-discovery-cases.md) |
-| What is the concrete self-proof path for KFD-1 through KFD-6? | [`../README.md`](../README.md#product-proof-path), the KFD formal and usage pages, and the package witnesses under [`../.buildchain/`](../.buildchain/) |
+| What is the concrete self-proof path for KFD-1 through KFD-7? | [`../README.md`](../README.md#product-proof-path), the KFD formal and usage pages, and the package witnesses under [`../.buildchain/`](../.buildchain/) |
 | How do I independently verify KFD records, release passports, Xinfa Pack/Atlas objects, or qualified Git Episodes? | [`verifier.md`](verifier.md) |
 | Where are the verifier semantic differences and public-specification gaps recorded? | [`verifier-inventory.md`](verifier-inventory.md) |
 | Where is the public KFD fact source? | [`../README.md`](../README.md#decision-metadata) and [`../site/kfd-site.json`](../site/kfd-site.json) decision metadata |

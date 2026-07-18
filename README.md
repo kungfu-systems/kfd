@@ -82,6 +82,7 @@ explainable, auditable, and proportionate.
 | [KFD-4](decisions/KFD-4.md) | principle | Views must remain bound to declared perspectives. | active |
 | [KFD-5](decisions/KFD-5.md) | procedure | Primitive discovery must separate genesis from qualification. | active |
 | [KFD-6](decisions/KFD-6.md) | procedure | Autonomous discovery must remain grounded in causal experience. | draft |
+| [KFD-7](decisions/KFD-7.md) | principle | Consequential action must keep direction, perspective, authority, and occurrence independently addressable. | draft |
 
 ## Current candidates
 
@@ -89,8 +90,8 @@ KFD Candidates preserve potentially load-bearing rules before a number is
 allocated. They are explicitly non-normative and may be revised, reordered,
 split, merged, withdrawn, rejected, or promoted.
 
-- [Cross-domain action primitives](drafts/action-state-separation.md), slot hint
-  `7`.
+- [Cross-domain action primitives](drafts/action-state-separation.md), promoted
+  to numbered draft `KFD-7`.
 - [Atlas action perspective](drafts/atlas-action-perspective.md), slot hint `8`.
 - [Pursuit intent continuity](drafts/pursuit-intent-continuity.md), slot hint
   `9`.
@@ -218,6 +219,10 @@ Agents consuming this package should start from the same sources as humans:
    draft or experimental autonomous-discovery work; its version 4 interface
    requires plural generation experiments, bounded method comparison, and a
    conditional boundary hypothesis.
+16. Use `schemas/kfd-7/action-contract.schema.json` to publish a versioned,
+    provisional action Profile whose Fact, Episode, Pursuit, Atlas, and Warrant
+    responsibilities, transitions, evidence obligations, non-claims, and
+    activation state remain independently inspectable.
 
 KFD package semver is only the distribution version. KFD-owned machine
 interfaces carry their own `schemaVersion` and `contract` fields. Compatible

@@ -9,7 +9,7 @@
   "versionImpact": {
     "final": "major",
     "source": "kfd-candidate-governance",
-    "rationale": "This pre-stable line includes KFD-1 through KFD-6, the formal reference layer, live Primitive cases, and a machine-readable pre-number KFD Candidate registry. KFD-1 defines the bounded Foundation Revision window and the first-stable Foundation Freeze while preserving every published coordinate. The cross-domain action umbrella and its Atlas, Pursuit, and Warrant elaborations carry non-binding slot hints without allocating KFD-7 through KFD-10. Major remains the honest cumulative pre-stable decision and machine-surface impact while the fixed outer package line remains v1.0."
+    "rationale": "This pre-stable line includes KFD-1 through numbered draft KFD-7, the formal reference layer, live Primitive cases, and a machine-readable KFD Candidate registry. KFD-1 defines the bounded Foundation Revision window and the first-stable Foundation Freeze while preserving every published coordinate. The cross-domain action umbrella is promoted to KFD-7 while its Atlas, Pursuit, and Warrant elaborations retain non-binding slot hints without allocating KFD-8 through KFD-10. Major remains the honest cumulative pre-stable decision and machine-surface impact while the fixed outer package line remains v1.0."
   },
   "surfaceImpacts": [
     {
@@ -34,7 +34,7 @@
       "id": "kfd-content",
       "impact": "major",
       "class": "breaking",
-      "rationale": "The pre-stable line includes substantive refinement of KFD-1 through KFD-6 and now makes Candidate, Foundation Revision, and Foundation Freeze semantics explicit. KFD-4 states the bounded hypothesis that perspective transformation is the smallest new general operator and lowest-marginal-cost default probe after KFD-1 through KFD-3 are installed, without claiming universal method dominance. Before the first stable release, fully evidenced correction may change the latest numbered structure only with breaking impact, preserved coordinates, old-to-new lineage, migration, and review. The first stable release freezes number-to-meaning mappings; later substantive change uses supersession. Consumers must bind prerelease citations to package version or commit."
+      "rationale": "The pre-stable line includes substantive refinement of KFD-1 through numbered draft KFD-7 and makes Candidate, Foundation Revision, activation, and Foundation Freeze semantics explicit. KFD-7 allocates a draft action-responsibility decision while withholding stable Profile activation until retained evidence and independent review close its gate. Before the first stable release, fully evidenced correction may change the latest numbered structure only with breaking impact, preserved coordinates, old-to-new lineage, migration, and review. The first stable release freezes number-to-meaning mappings; later substantive change uses supersession. Consumers must bind prerelease citations to package version or commit."
     },
     {
       "id": "kfd-registry-schema",
@@ -46,13 +46,19 @@
       "id": "kfd-candidate-registry",
       "impact": "minor",
       "class": "additive",
-      "rationale": "KFD additively publishes a version 1 pre-number candidate registry and schema. Candidate IDs are stable, slot hints are explicitly non-binding, only promotion allocates a number, and the cross-domain action umbrella plus its Atlas, Pursuit, and Warrant elaborations do not create KFD-7 through KFD-10 or normative authority."
+      "rationale": "KFD additively publishes a version 1 Candidate registry and schema. Candidate IDs remain stable, slot hints are explicitly non-binding, and only promotion allocates a number. The cross-domain action umbrella now records promoted status and lineage to numbered draft KFD-7; Atlas, Pursuit, and Warrant elaborations do not allocate KFD-8 through KFD-10 or active authority."
     },
     {
       "id": "kfd-action-primitive-candidate-system",
       "impact": "major",
       "class": "breaking",
       "rationale": "Before stable publication, KFD refines the initial action-state candidate into one cross-domain action-Primitive umbrella and three independently qualifiable Atlas, Pursuit, and Warrant candidates. The original candidate ID and path remain stable; the new candidate identities and non-binding slot hints remain provisional, and implementation design is intentionally outside the KFD package."
+    },
+    {
+      "id": "kfd-7-reference-contract",
+      "impact": "major",
+      "class": "breaking",
+      "rationale": "KFD explicitly promotes the cross-domain action umbrella to numbered draft KFD-7 and publishes a version 1 action-contract Profile. Direction, perspective, authority, and occurrence remain independently addressable; lifecycle vocabulary stays Profile-owned; schema conformance remains non-qualifying; stable activation requires retained product evidence, independent review, and a separate verdict."
     },
     {
       "id": "kfd-standards-metadata",
@@ -163,5 +169,5 @@
       "rationale": "KFD-1 now publishes a machine-readable schema for canonical reader URLs, latest aliases, immutable version artifact URLs, artifact digests, source coordinates, lineage, site consumption, and archive policies that prevent same-version digest drift or destructive deletion of immutable publication prefixes."
     }
   ],
-  "summary": "KFD v1.0 preserves six authoritative decisions and its live Primitive case system while adding a pre-number Candidate lifecycle without allocating KFD-7 through KFD-10. The action-system hypothesis is expressed as a cross-domain action-Primitive umbrella plus independently qualifiable Atlas, Pursuit, and Warrant candidates over the Fact and Episode substrate. KFD retains principles and generation mechanisms while product implementation design remains with the implementing repository. The pre-stable Foundation Revision and first-stable Foundation Freeze are explicit; candidate identity, slot non-binding, promotion boundaries, package exports, site projection, and KFD-1/KFD-3 evidence are machine-auditable while all prior published coordinates remain immutable."
+  "summary": "KFD v1.0 preserves its first six decisions and promotes the cross-domain action umbrella to numbered draft KFD-7 with a machine-verifiable reference Profile. The draft keeps direction, perspective, authority, and occurrence independently addressable while Atlas, Pursuit, and Warrant elaborations remain separately qualifiable candidates. Product implementation stays with adopters; stable activation remains gated by retained runtime evidence, migration and deletion experiments, independent review, and release qualification. Candidate lineage, schema, formal and usage pages, verifier parity, site projection, and KFD-1 evidence remain machine-auditable while prior published coordinates stay immutable."
 }

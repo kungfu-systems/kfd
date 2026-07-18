@@ -1202,6 +1202,55 @@ for (const concept of ["autonomousDiscovery", "causalExperience", "episodeCorpus
   if (!kfd6?.concepts?.[concept]) fail(`KFD-6 standards metadata missing concept ${concept}`);
 }
 if (!kfd6?.interfaces?.autonomousDiscoveryLoop) fail("KFD-6 standards metadata missing interface autonomousDiscoveryLoop");
+
+const kfd7 = standardsMetadata.standards?.["kfd-7"];
+if (kfd7?.status !== "draft") fail("KFD-7 must remain draft until cross-product qualification and independent review are retained");
+if (kfd7?.schemaIds?.actionContract !== "https://kfd.libkungfu.dev/schemas/kfd-7/action-contract.schema.json") {
+  fail("KFD-7 standards metadata must expose the canonical actionContract schema URI");
+}
+if (kfd7?.schemaPaths?.actionContract !== "schemas/kfd-7/action-contract.schema.json") {
+  fail("KFD-7 standards metadata must expose the actionContract schema path");
+}
+const kfd7ActionContractSchema = JSON.parse(readFileSync("schemas/kfd-7/action-contract.schema.json", "utf8"));
+if (kfd7ActionContractSchema.properties?.contract?.const !== "kfd-7-action-contract") {
+  fail("KFD-7 actionContract schema must describe the kfd-7-action-contract contract");
+}
+if (kfd7ActionContractSchema.properties?.standard?.const !== "kfd-7") {
+  fail("KFD-7 actionContract schema must declare standard kfd-7");
+}
+if (kfd7?.interfaces?.actionContract?.schemaVersion !== 1 || kfd7ActionContractSchema.properties?.schemaVersion?.const !== 1) {
+  fail("KFD-7 actionContract interface must use schemaVersion 1");
+}
+for (const field of ["profile", "roles", "transitions", "prohibitedInferences", "evidenceObligations", "nonClaims", "extensions", "activation"]) {
+  if (!kfd7ActionContractSchema.required?.includes(field)) fail(`KFD-7 actionContract must require ${field}`);
+}
+const kfd7RoleContains = kfd7ActionContractSchema.properties?.roles?.allOf ?? [];
+for (const role of ["fact", "episode", "pursuit", "atlas", "warrant"]) {
+  if (!kfd7RoleContains.some((entry) => entry?.contains?.properties?.role?.const === role)) {
+    fail(`KFD-7 actionContract must independently require the ${role} role`);
+  }
+}
+for (const prohibitedInference of ["authority-from-pursuit", "complete-reality-from-atlas", "occurrence-from-warrant", "authorization-from-episode", "completion-from-episode", "occurrence-from-fact", "child-authority-from-parent", "causal-equivalence-from-equal-endpoints"]) {
+  if (!kfd7ActionContractSchema.properties?.prohibitedInferences?.items?.enum?.includes(prohibitedInference)) {
+    fail(`KFD-7 actionContract missing prohibited inference ${prohibitedInference}`);
+  }
+}
+const kfd7EvidenceContains = kfd7ActionContractSchema.properties?.evidenceObligations?.allOf ?? [];
+for (const category of ["role-deletion-or-fusion", "invalid-transition", "export-import-rebuild", "backend-migration", "concurrency-retry-compensation", "warrant-decay-revocation", "atlas-staleness-loss", "pursuit-continuity-settlement", "episode-replay-contraction", "cold-start-continuation"]) {
+  if (!kfd7EvidenceContains.some((entry) => entry?.contains?.properties?.category?.const === category)) {
+    fail(`KFD-7 actionContract must require evidence category ${category}`);
+  }
+}
+if (kfd7ActionContractSchema.$defs?.profile?.properties?.qualificationStatus?.enum?.includes("qualified") !== true) {
+  fail("KFD-7 actionContract must expose an explicit qualified Profile state");
+}
+if (kfd7ActionContractSchema.$defs?.activation?.properties?.decision?.enum?.includes("activate") !== true) {
+  fail("KFD-7 actionContract must expose an explicit activation verdict");
+}
+for (const concept of ["consequentialAction", "factRole", "episodeRole", "pursuitRole", "atlasRole", "warrantRole", "actionProfile", "roleIndependence", "profileLifecycleVocabulary", "transitionContract", "prohibitedInference", "roleDeletionExperiment", "evidenceObligation", "activationDecision", "qualificationCut", "residualRisk", "extensionPoint"]) {
+  if (!kfd7?.concepts?.[concept]) fail(`KFD-7 standards metadata missing concept ${concept}`);
+}
+if (!kfd7?.interfaces?.actionContract) fail("KFD-7 standards metadata missing interface actionContract");
 for (const [id, successors] of superseded) {
   for (const successor of successors) {
     if (!registry.entries.some((e) => e.id === successor)) fail(`${id} cites missing successor ${successor}`);
@@ -1271,8 +1320,10 @@ if (!kfd1Witness) {
       "kfd-4-usage-doc",
       "kfd-5-usage-doc",
       "kfd-6-usage-doc",
+      "kfd-7-usage-doc",
       "kfd-5-primitive-discovery-schema",
       "kfd-6-autonomous-discovery-loop-schema",
+      "kfd-7-action-contract-schema",
       "kfd-2-foundation-trust-claims",
       "kfd-2-foundation-trust-assessment",
       "release-impact-ledger",

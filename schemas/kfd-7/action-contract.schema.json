@@ -1,0 +1,778 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-7/action-contract.schema.json",
+  "title": "KFD-7 action contract profile",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "contract",
+    "standard",
+    "profile",
+    "roles",
+    "transitions",
+    "prohibitedInferences",
+    "evidenceObligations",
+    "nonClaims",
+    "extensions",
+    "activation"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "https://kfd.libkungfu.dev/schemas/kfd-7/action-contract.schema.json"
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "contract": {
+      "const": "kfd-7-action-contract"
+    },
+    "standard": {
+      "const": "kfd-7"
+    },
+    "profile": {
+      "$ref": "#/$defs/profile"
+    },
+    "roles": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": {
+        "$ref": "#/$defs/roleDeclaration"
+      },
+      "allOf": [
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "const": "fact"
+              }
+            },
+            "required": [
+              "role"
+            ]
+          }
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "const": "episode"
+              }
+            },
+            "required": [
+              "role"
+            ]
+          }
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "const": "pursuit"
+              }
+            },
+            "required": [
+              "role"
+            ]
+          }
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "const": "atlas"
+              }
+            },
+            "required": [
+              "role"
+            ]
+          }
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "const": "warrant"
+              }
+            },
+            "required": [
+              "role"
+            ]
+          }
+        }
+      ]
+    },
+    "transitions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/transition"
+      }
+    },
+    "prohibitedInferences": {
+      "type": "array",
+      "minItems": 8,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "authority-from-pursuit",
+          "complete-reality-from-atlas",
+          "occurrence-from-warrant",
+          "authorization-from-episode",
+          "completion-from-episode",
+          "occurrence-from-fact",
+          "child-authority-from-parent",
+          "causal-equivalence-from-equal-endpoints"
+        ]
+      },
+      "allOf": [
+        {
+          "contains": {
+            "const": "authority-from-pursuit"
+          }
+        },
+        {
+          "contains": {
+            "const": "complete-reality-from-atlas"
+          }
+        },
+        {
+          "contains": {
+            "const": "occurrence-from-warrant"
+          }
+        },
+        {
+          "contains": {
+            "const": "authorization-from-episode"
+          }
+        },
+        {
+          "contains": {
+            "const": "completion-from-episode"
+          }
+        },
+        {
+          "contains": {
+            "const": "occurrence-from-fact"
+          }
+        },
+        {
+          "contains": {
+            "const": "child-authority-from-parent"
+          }
+        },
+        {
+          "contains": {
+            "const": "causal-equivalence-from-equal-endpoints"
+          }
+        }
+      ]
+    },
+    "evidenceObligations": {
+      "type": "array",
+      "minItems": 10,
+      "items": {
+        "$ref": "#/$defs/evidenceObligation"
+      },
+      "allOf": [
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "category": {
+                "const": "role-deletion-or-fusion"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          }
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "category": {
+                "const": "invalid-transition"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          }
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "category": {
+                "const": "export-import-rebuild"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          }
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "category": {
+                "const": "backend-migration"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          }
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "category": {
+                "const": "concurrency-retry-compensation"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          }
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "category": {
+                "const": "warrant-decay-revocation"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          }
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "category": {
+                "const": "atlas-staleness-loss"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          }
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "category": {
+                "const": "pursuit-continuity-settlement"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          }
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "category": {
+                "const": "episode-replay-contraction"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          }
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "category": {
+                "const": "cold-start-continuation"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          }
+        }
+      ]
+    },
+    "nonClaims": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "extensions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/extension"
+      }
+    },
+    "activation": {
+      "$ref": "#/$defs/activation"
+    }
+  },
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "type": "object",
+        "properties": {
+          "activation": {
+            "type": "object",
+            "properties": {
+              "decision": {
+                "const": "activate"
+              }
+            },
+            "required": [
+              "decision"
+            ]
+          }
+        },
+        "required": [
+          "activation"
+        ]
+      },
+      "then": {
+        "type": "object",
+        "properties": {
+          "profile": {
+            "type": "object",
+            "properties": {
+              "qualificationStatus": {
+                "const": "qualified"
+              }
+            },
+            "required": [
+              "qualificationStatus"
+            ]
+          },
+          "activation": {
+            "type": "object",
+            "required": [
+              "evidenceCut",
+              "independentReview",
+              "productWitnesses"
+            ],
+            "properties": {
+              "productWitnesses": {
+                "type": "array",
+                "minItems": 1
+              }
+            }
+          },
+          "evidenceObligations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "enum": [
+                    "passed",
+                    "not-applicable"
+                  ]
+                }
+              },
+              "required": [
+                "status"
+              ]
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "profile": {
+      "type": "object",
+      "required": [
+        "id",
+        "version",
+        "product",
+        "implementation",
+        "qualificationStatus"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$"
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "product": {
+          "type": "string",
+          "minLength": 1
+        },
+        "implementation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "qualificationStatus": {
+          "enum": [
+            "provisional",
+            "qualifying",
+            "qualified",
+            "rejected"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "roleDeclaration": {
+      "type": "object",
+      "required": [
+        "role",
+        "identity",
+        "sourceAuthority",
+        "responsibility",
+        "lifecycleVocabulary",
+        "requiredEvidence",
+        "nonClaims"
+      ],
+      "properties": {
+        "role": {
+          "enum": [
+            "fact",
+            "episode",
+            "pursuit",
+            "atlas",
+            "warrant"
+          ]
+        },
+        "profileTerm": {
+          "type": "string",
+          "minLength": 1
+        },
+        "identity": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceAuthority": {
+          "type": "string",
+          "minLength": 1
+        },
+        "responsibility": {
+          "type": "string",
+          "minLength": 1
+        },
+        "lifecycleVocabulary": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "requiredEvidence": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "nonClaims": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "transition": {
+      "type": "object",
+      "required": [
+        "id",
+        "subjectRole",
+        "operation",
+        "from",
+        "to",
+        "preconditions",
+        "effect",
+        "receipt",
+        "evidence",
+        "denialReasons",
+        "residualRisks"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "subjectRole": {
+          "enum": [
+            "fact",
+            "episode",
+            "pursuit",
+            "atlas",
+            "warrant"
+          ]
+        },
+        "operation": {
+          "enum": [
+            "create",
+            "advance",
+            "revise",
+            "supersede",
+            "seal",
+            "settle",
+            "complete",
+            "abandon",
+            "terminate",
+            "derive",
+            "attenuate",
+            "expire",
+            "revoke",
+            "refuse",
+            "reconcile",
+            "reject",
+            "profile-extension"
+          ]
+        },
+        "from": {
+          "type": "string",
+          "minLength": 1
+        },
+        "to": {
+          "type": "string",
+          "minLength": 1
+        },
+        "preconditions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "effect": {
+          "type": "string",
+          "minLength": 1
+        },
+        "receipt": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "denialReasons": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "residualRisks": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "evidenceObligation": {
+      "type": "object",
+      "required": [
+        "category",
+        "status",
+        "artifactRefs",
+        "residualRisk"
+      ],
+      "properties": {
+        "category": {
+          "enum": [
+            "role-deletion-or-fusion",
+            "invalid-transition",
+            "export-import-rebuild",
+            "backend-migration",
+            "concurrency-retry-compensation",
+            "warrant-decay-revocation",
+            "atlas-staleness-loss",
+            "pursuit-continuity-settlement",
+            "episode-replay-contraction",
+            "cold-start-continuation",
+            "profile-extension"
+          ]
+        },
+        "status": {
+          "enum": [
+            "planned",
+            "passed",
+            "failed",
+            "not-applicable"
+          ]
+        },
+        "artifactRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "residualRisk": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "const": "passed"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "artifactRefs": {
+                "type": "array",
+                "minItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "const": "not-applicable"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "type": "object",
+            "required": [
+              "reason"
+            ]
+          }
+        }
+      ]
+    },
+    "extension": {
+      "type": "object",
+      "required": [
+        "id",
+        "owner",
+        "version",
+        "mapping",
+        "compatibilityRule"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$"
+        },
+        "owner": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "mapping": {
+          "type": "string",
+          "minLength": 1
+        },
+        "compatibilityRule": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "activation": {
+      "type": "object",
+      "required": [
+        "decision",
+        "evidenceCut",
+        "independentReview",
+        "productWitnesses",
+        "residualRisk"
+      ],
+      "properties": {
+        "decision": {
+          "enum": [
+            "pending",
+            "activate",
+            "revise",
+            "reject"
+          ]
+        },
+        "evidenceCut": {
+          "type": "string",
+          "minLength": 1
+        },
+        "independentReview": {
+          "type": "string",
+          "minLength": 1
+        },
+        "productWitnesses": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "residualRisk": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

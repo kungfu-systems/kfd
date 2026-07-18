@@ -1,0 +1,218 @@
+{
+  "$schema": "https://kfd.libkungfu.dev/schemas/kfd-7/action-contract.schema.json",
+  "schemaVersion": 1,
+  "contract": "kfd-7-action-contract",
+  "standard": "kfd-7",
+  "profile": {
+    "id": "example-action-profile",
+    "version": "0.1.0",
+    "product": "example",
+    "implementation": "git+https://example.invalid/action@0123456",
+    "qualificationStatus": "provisional"
+  },
+  "roles": [
+    {
+      "role": "fact",
+      "identity": "profile fact ref and cut",
+      "sourceAuthority": "declared profile fact source",
+      "responsibility": "state what holds under a declared authority and cut",
+      "lifecycleVocabulary": [
+        "asserted",
+        "superseded",
+        "degraded"
+      ],
+      "requiredEvidence": [
+        "source coordinate",
+        "cut coordinate"
+      ],
+      "nonClaims": [
+        "does not imply occurrence or authority"
+      ]
+    },
+    {
+      "role": "episode",
+      "identity": "profile episode ref",
+      "sourceAuthority": "profile causal record authority",
+      "responsibility": "preserve bounded causal occurrence",
+      "lifecycleVocabulary": [
+        "open",
+        "sealed",
+        "reconciled"
+      ],
+      "requiredEvidence": [
+        "causal parents",
+        "seal receipt"
+      ],
+      "nonClaims": [
+        "does not imply authorization, success, or completion"
+      ]
+    },
+    {
+      "role": "pursuit",
+      "identity": "profile pursuit ref",
+      "sourceAuthority": "declared intent authority",
+      "responsibility": "preserve intended-change continuity across actions",
+      "lifecycleVocabulary": [
+        "active",
+        "paused",
+        "settled",
+        "abandoned"
+      ],
+      "requiredEvidence": [
+        "acceptance boundary",
+        "settlement evidence"
+      ],
+      "nonClaims": [
+        "does not grant authority"
+      ]
+    },
+    {
+      "role": "atlas",
+      "identity": "profile atlas root",
+      "sourceAuthority": "declared accepted sources and compiler policy",
+      "responsibility": "bind perspective, fact cut, scope, omissions, and loss",
+      "lifecycleVocabulary": [
+        "current",
+        "stale",
+        "conflicted",
+        "superseded"
+      ],
+      "requiredEvidence": [
+        "accepted sources",
+        "cut and loss declaration"
+      ],
+      "nonClaims": [
+        "does not claim complete reality or grant permission"
+      ]
+    },
+    {
+      "role": "warrant",
+      "identity": "profile warrant ref",
+      "sourceAuthority": "declared issuer and derivation policy",
+      "responsibility": "bind bounded authority for a declared transition",
+      "lifecycleVocabulary": [
+        "issued",
+        "attenuated",
+        "expired",
+        "revoked"
+      ],
+      "requiredEvidence": [
+        "issuer",
+        "scope and preconditions"
+      ],
+      "nonClaims": [
+        "does not prove occurrence or transfer residual responsibility"
+      ]
+    }
+  ],
+  "transitions": [
+    {
+      "id": "seal-episode",
+      "subjectRole": "episode",
+      "operation": "seal",
+      "from": "open",
+      "to": "sealed",
+      "preconditions": [
+        "causal parents and admitted actions are closed"
+      ],
+      "effect": "publish an immutable bounded occurrence",
+      "receipt": "profile episode seal receipt",
+      "evidence": [
+        "retained episode bundle"
+      ],
+      "denialReasons": [
+        "episode-open",
+        "causal-gap"
+      ],
+      "residualRisks": [
+        "raw evidence may require a retained full bundle"
+      ]
+    }
+  ],
+  "prohibitedInferences": [
+    "authority-from-pursuit",
+    "complete-reality-from-atlas",
+    "occurrence-from-warrant",
+    "authorization-from-episode",
+    "completion-from-episode",
+    "occurrence-from-fact",
+    "child-authority-from-parent",
+    "causal-equivalence-from-equal-endpoints"
+  ],
+  "evidenceObligations": [
+    {
+      "category": "role-deletion-or-fusion",
+      "status": "planned",
+      "artifactRefs": [],
+      "residualRisk": "role necessity is not yet qualified"
+    },
+    {
+      "category": "invalid-transition",
+      "status": "passed",
+      "artifactRefs": [
+        "verifier/fixtures/kfd-7/invalid-missing-warrant.json"
+      ],
+      "residualRisk": "product runtime denial paths remain untested"
+    },
+    {
+      "category": "export-import-rebuild",
+      "status": "planned",
+      "artifactRefs": [],
+      "residualRisk": "no retained rebuild evidence"
+    },
+    {
+      "category": "backend-migration",
+      "status": "planned",
+      "artifactRefs": [],
+      "residualRisk": "no backend migration evidence"
+    },
+    {
+      "category": "concurrency-retry-compensation",
+      "status": "planned",
+      "artifactRefs": [],
+      "residualRisk": "concurrent transitions remain unqualified"
+    },
+    {
+      "category": "warrant-decay-revocation",
+      "status": "planned",
+      "artifactRefs": [],
+      "residualRisk": "revocation behavior remains unqualified"
+    },
+    {
+      "category": "atlas-staleness-loss",
+      "status": "planned",
+      "artifactRefs": [],
+      "residualRisk": "stale and lossy Atlas behavior remains unqualified"
+    },
+    {
+      "category": "pursuit-continuity-settlement",
+      "status": "planned",
+      "artifactRefs": [],
+      "residualRisk": "cross-participant Pursuit continuity and settlement remain unqualified"
+    },
+    {
+      "category": "episode-replay-contraction",
+      "status": "planned",
+      "artifactRefs": [],
+      "residualRisk": "Episode replay and declared evidence contraction remain unqualified"
+    },
+    {
+      "category": "cold-start-continuation",
+      "status": "planned",
+      "artifactRefs": [],
+      "residualRisk": "cold-start continuation remains unqualified"
+    }
+  ],
+  "nonClaims": [
+    "This declaration does not qualify or activate the example Profile.",
+    "The lifecycle terms are Profile vocabulary rather than universal KFD enums."
+  ],
+  "extensions": [],
+  "activation": {
+    "decision": "pending",
+    "evidenceCut": "unqualified-example-cut",
+    "independentReview": "not-yet-performed",
+    "productWitnesses": [],
+    "residualRisk": "The record is a schema fixture, not product evidence."
+  }
+}

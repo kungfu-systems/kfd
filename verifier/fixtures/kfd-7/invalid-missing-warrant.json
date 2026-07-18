@@ -1,0 +1,147 @@
+{
+  "$schema": "https://kfd.libkungfu.dev/schemas/kfd-7/action-contract.schema.json",
+  "schemaVersion": 1,
+  "contract": "kfd-7-action-contract",
+  "standard": "kfd-7",
+  "profile": {
+    "id": "missing-warrant-profile",
+    "version": "0.1.0",
+    "product": "example",
+    "implementation": "git+https://example.invalid/action@bad",
+    "qualificationStatus": "provisional"
+  },
+  "roles": [
+    {
+      "role": "fact",
+      "identity": "fact ref",
+      "sourceAuthority": "fact authority",
+      "responsibility": "bounded assertion",
+      "lifecycleVocabulary": ["asserted"],
+      "requiredEvidence": ["source cut"],
+      "nonClaims": ["does not imply occurrence"]
+    },
+    {
+      "role": "episode",
+      "identity": "episode ref",
+      "sourceAuthority": "episode authority",
+      "responsibility": "bounded occurrence",
+      "lifecycleVocabulary": ["sealed"],
+      "requiredEvidence": ["seal receipt"],
+      "nonClaims": ["does not imply authority"]
+    },
+    {
+      "role": "pursuit",
+      "identity": "pursuit ref",
+      "sourceAuthority": "intent authority",
+      "responsibility": "intended-change continuity",
+      "lifecycleVocabulary": ["active"],
+      "requiredEvidence": ["acceptance boundary"],
+      "nonClaims": ["does not grant authority"]
+    },
+    {
+      "role": "atlas",
+      "identity": "atlas root",
+      "sourceAuthority": "perspective authority",
+      "responsibility": "perspective and fact cut",
+      "lifecycleVocabulary": ["current"],
+      "requiredEvidence": ["source inventory"],
+      "nonClaims": ["does not claim complete reality"]
+    }
+  ],
+  "transitions": [
+    {
+      "id": "seal-episode",
+      "subjectRole": "episode",
+      "operation": "seal",
+      "from": "open",
+      "to": "sealed",
+      "preconditions": ["causal closure"],
+      "effect": "publish occurrence",
+      "receipt": "seal receipt",
+      "evidence": ["episode bundle"],
+      "denialReasons": ["causal-gap"],
+      "residualRisks": []
+    }
+  ],
+  "prohibitedInferences": [
+    "authority-from-pursuit",
+    "complete-reality-from-atlas",
+    "occurrence-from-warrant",
+    "authorization-from-episode",
+    "completion-from-episode",
+    "occurrence-from-fact",
+    "child-authority-from-parent",
+    "causal-equivalence-from-equal-endpoints"
+  ],
+  "evidenceObligations": [
+    {
+      "category": "role-deletion-or-fusion",
+      "status": "planned",
+      "artifactRefs": [],
+      "residualRisk": "unqualified"
+    },
+    {
+      "category": "invalid-transition",
+      "status": "planned",
+      "artifactRefs": [],
+      "residualRisk": "unqualified"
+    },
+    {
+      "category": "export-import-rebuild",
+      "status": "planned",
+      "artifactRefs": [],
+      "residualRisk": "unqualified"
+    },
+    {
+      "category": "backend-migration",
+      "status": "planned",
+      "artifactRefs": [],
+      "residualRisk": "unqualified"
+    },
+    {
+      "category": "concurrency-retry-compensation",
+      "status": "planned",
+      "artifactRefs": [],
+      "residualRisk": "unqualified"
+    },
+    {
+      "category": "warrant-decay-revocation",
+      "status": "planned",
+      "artifactRefs": [],
+      "residualRisk": "unqualified"
+    },
+    {
+      "category": "atlas-staleness-loss",
+      "status": "planned",
+      "artifactRefs": [],
+      "residualRisk": "unqualified"
+    },
+    {
+      "category": "pursuit-continuity-settlement",
+      "status": "planned",
+      "artifactRefs": [],
+      "residualRisk": "unqualified"
+    },
+    {
+      "category": "episode-replay-contraction",
+      "status": "planned",
+      "artifactRefs": [],
+      "residualRisk": "unqualified"
+    },
+    {
+      "category": "cold-start-continuation",
+      "status": "planned",
+      "artifactRefs": [],
+      "residualRisk": "unqualified"
+    }
+  ],
+  "nonClaims": ["invalid fixture intentionally omits Warrant"],
+  "extensions": [],
+  "activation": {
+    "decision": "pending",
+    "evidenceCut": "unqualified",
+    "independentReview": "not-performed",
+    "productWitnesses": [],
+    "residualRisk": "Warrant responsibility is absent"
+  }
+}

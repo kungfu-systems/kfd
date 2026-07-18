@@ -352,11 +352,15 @@ so.
 | Declared perspective | KFD-4 | How can a situated view become durable, transferable, and comparable without being flattened? | Views remain bound to declared perspectives. Timelines preserve perspective; replay transfers it; contrast exposes hidden object mismatch. |
 | Primitive discovery | KFD-5 | How does a candidate object become load-bearing rather than remain a private intuition or method artifact? | Genesis remains perspective-declared and method-plural; qualification binds the candidate to facts, alternatives, falsifiers, and real work. |
 | Autonomous discovery | KFD-6 | Can an agent move beyond a fixed ontology without replacing reality with generated narrative or canonizing one generator? | Autonomous discovery remains grounded in causal experience, compares generation methods under bounded conditions, and never certifies itself. |
+| Consequential action | KFD-7 | How can intended change, situated facts, bounded authority, and realized occurrence remain reviewable without becoming one mutable task record? | Direction, perspective, authority, and occurrence remain independently addressable; Profiles own implementation detail and must retain fail-visible transition and qualification evidence. |
 
 The continuity is generative rather than merely classificatory. KFD-4 declares
 the observation horizon and allows perspective transformation to move it.
 KFD-5 keeps candidate generation open to multiple methods and makes every
 candidate testable. KFD-6 attempts to autonomize both generation and comparison.
+KFD-7 applies that reality-correctable discipline to consequential action while
+remaining draft until product evidence qualifies its reference roles and
+Profile contract.
 
 Observer-bound timeline and replay are the first concrete KFD-4 profiles, just
 as release versioning is one concrete KFD-1 profile. Episode and Atlas are

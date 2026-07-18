@@ -1,7 +1,7 @@
 # KFD Formal Model
 
 This document defines the shared notation and authority boundary for the
-non-normative formal references published with KFD-1 through KFD-6.
+non-normative formal references published with KFD-1 through KFD-7.
 
 - Status: experimental
 - Normative: no
@@ -89,7 +89,7 @@ declared rather than inferred from file type or product vocabulary.
 
 ## Cross-KFD composition
 
-The six references compose as follows:
+The seven references compose as follows:
 
 ```text
 KFD-1 maintains a non-drifting fact base.
@@ -98,6 +98,7 @@ KFD-3 makes trusted value available for cooperation.
 KFD-4 preserves and transforms declared perspectives.
 KFD-5 separates candidate genesis from qualification.
 KFD-6 repeats bounded discovery over causal experience without self-certification.
+KFD-7 keeps consequential action roles independently addressable and evidence-bound.
 ```
 
 This composition does not make every later KFD a theorem of the earlier ones.

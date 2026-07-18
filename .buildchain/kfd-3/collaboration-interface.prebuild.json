@@ -1295,17 +1295,17 @@
     {
       "id": "doc:readme",
       "sourcePath": "README.md",
-      "sha256": "ce3f91871b5054460f75ed15403806554ed049c1b150ec1d4075009b0e007b2f"
+      "sha256": "9fa22d56156a0cac278cf9d030168de011fd1d071bed8ac2dff7d2ba9a683d6c"
     },
     {
       "id": "doc:foundation-model",
       "sourcePath": "docs/foundation-model.md",
-      "sha256": "4dcb79c45a0370e78a2304a059e6fb754b3796280b6cd2d7a3d107d1b0b7962b"
+      "sha256": "a84d07369e898d3d963c56827007d6746308dc55fdf2390db080ace7690468a5"
     },
     {
       "id": "doc:formal-model",
       "sourcePath": "docs/formal-model.md",
-      "sha256": "d78c78baf8adf3272b22198f8f2dac3148f987ec915ce040b84b98c3a1ef144e"
+      "sha256": "b4c1191a6410c45b0a6fab0cc1dfe9360eaff2b1774caeae956b64e7f526cc8c"
     },
     {
       "id": "doc:primitive-discovery-cases",
@@ -1320,7 +1320,7 @@
     {
       "id": "doc:docs-map",
       "sourcePath": "docs/MAP.md",
-      "sha256": "1171828848bebd1565d5b662802ff40d91b470da06ed4bfaf08b457d7caa14f2"
+      "sha256": "2924a8070a61d432ae852d8cea47e297adc9085ad098827377696841803d3e88"
     },
     {
       "id": "doc:kfd-1-usage",
@@ -1400,17 +1400,17 @@
     {
       "id": "candidate:index",
       "sourcePath": "drafts/README.md",
-      "sha256": "fe23b50c2b19155ff37fffa3c23427c346f322509f8faff5ba3509e16e513bd1"
+      "sha256": "e21fdf269d5557e600f829eeb21fe718c67b7edcdf4e59a2bdb018503207eee3"
     },
     {
       "id": "candidate:registry",
       "sourcePath": "drafts/registry.json",
-      "sha256": "7a61812c1227e392b3b23503dc2d9f04e506f7c2647d6d9001faac91e10385ef"
+      "sha256": "88c42c0925aba9661b0ea169a4df434235b214c25b98de1957978a00d2fb035e"
     },
     {
       "id": "candidate:action-state-separation",
       "sourcePath": "drafts/action-state-separation.md",
-      "sha256": "66685bcddf3422888e47c381f44f9f61ead302eb7042ccf25a3b417de553e02c"
+      "sha256": "c400d81243be9404dfca525e7fb5ecda219b4b4d67a80b08b5fd1918e1c90776"
     },
     {
       "id": "candidate:atlas-action-perspective",
@@ -1458,6 +1458,11 @@
       "sha256": "ab4accd65a7d94bfccb85c987b26bf7b7220f1e5bd1f6b648ffdc5cfc4df9022"
     },
     {
+      "id": "doc:kfd-7-formal",
+      "sourcePath": "docs/KFD-7-formal.md",
+      "sha256": "4f5ab1c249b38f79fcf6a9fe59c84c691bcd686590265690a90eb054e7affb15"
+    },
+    {
       "id": "decision:kfd-1",
       "sourcePath": "decisions/KFD-1.md",
       "sha256": "d9e433f98eaf80f3fcf75986d073446bd73fbd385b9c6ba96fc3186e0da62a09"
@@ -1486,6 +1491,11 @@
       "id": "decision:kfd-6",
       "sourcePath": "decisions/KFD-6.md",
       "sha256": "1e40e0848fc7bd51abeb5ea8b70efd3b444acbdafaed097bf029e9ed6394292f"
+    },
+    {
+      "id": "decision:kfd-7",
+      "sourcePath": "decisions/KFD-7.md",
+      "sha256": "d7c2471e86d56605bb27a9983a8f306f022b63e3f536c43d26d86cdd2d1fab1d"
     }
   ],
   "schemas": [
@@ -1574,12 +1584,12 @@
     {
       "id": "metadata:registry",
       "sourcePath": "registry.json",
-      "sha256": "b0210d74da6af49a433a257e50e7a63761c3b2ad00c63262d161add571644447"
+      "sha256": "48a04105d7b0ec18631d82b0e34627b7840189d987aab41b582eb362903018a8"
     },
     {
       "id": "metadata:standards",
       "sourcePath": "standards.json",
-      "sha256": "9a62e08bf01f6dc9072a2eb546f1da7e2e8d3b88862b381beb56700cbe7bbe93"
+      "sha256": "e5cfdfd65ff5526524f44dbe70ba022feac792483f83b670e811aaba35cb1c67"
     },
     {
       "id": "metadata:live-case-registry",
@@ -1589,12 +1599,12 @@
     {
       "id": "metadata:candidate-registry",
       "sourcePath": "drafts/registry.json",
-      "sha256": "7a61812c1227e392b3b23503dc2d9f04e506f7c2647d6d9001faac91e10385ef"
+      "sha256": "88c42c0925aba9661b0ea169a4df434235b214c25b98de1957978a00d2fb035e"
     },
     {
       "id": "metadata:release-impact",
       "sourcePath": "release-impact.json",
-      "sha256": "60974ec5c31bdfa0e56b9170d6aa2da197197414cc4c63369250d1473ec2116e"
+      "sha256": "ce4918c986cf4edd5e04e18e5744046a9258aafca808aabd214203ca601a58be"
     },
     {
       "id": "metadata:release-anchor",
@@ -1614,17 +1624,17 @@
     {
       "id": "metadata:kfd-2-public-release-trust-claim",
       "sourcePath": ".buildchain/kfd-2/public-release-trust.claim.json",
-      "sha256": "fadbe005dc00f4a14271acbfa64b1b8ae3e31a58f2f9970d2a30e46749c8d6d3"
+      "sha256": "42e57528d160f65258ae9fe7c7f3b0ec9d43cab9c0239eddda9d7d1898915445"
     },
     {
       "id": "metadata:kfd-2-foundation-trust-claims",
       "sourcePath": ".buildchain/kfd-2/kfd-foundation.trust-claims.json",
-      "sha256": "9e0da29f6f123d9f6c9feacf0eda590318c41d304c67780a7a74859acd595a42"
+      "sha256": "b15e9ff6cf29fe80a277793731d866219c54d8257df5ed70df413810e904411f"
     },
     {
       "id": "metadata:kfd-2-foundation-trust-assessment",
       "sourcePath": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json",
-      "sha256": "6f8a38456f74c6adbd1955382c0d1849339f369a3961aa0b845c9f0d63729a9c"
+      "sha256": "08a5ce0b1bb449ebfca1a3984b9ea15ebaa6256b4e21d19e8a557fc415f284a6"
     }
   ],
   "packageExports": [
@@ -1643,7 +1653,7 @@
     {
       "id": "site:kfd-site-bundle",
       "sourcePath": "site/kfd-site.json",
-      "sha256": "f1668b6fe6243807c0874d3a29b8bc72d83ab4d1e11248bafaee230cdb1a1b0d"
+      "sha256": "7778fa6bc7c4cc03576e6d6160cf21e53d5d4fb8f0769c12129b8b16a6c8928b"
     },
     {
       "id": "site:release-propagation",
