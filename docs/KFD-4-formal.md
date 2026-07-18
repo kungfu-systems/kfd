@@ -211,6 +211,6 @@ genesis methods. The current schemas are timeline and replay profiles, not a
 universal perspective ontology. Other profiles may be added if they preserve
 observer, evidence, transformation, loss, causality, and responsibility.
 
-Numbered draft KFD-7 uses this frame model to distinguish perspective,
+Active KFD-7 uses this frame model to distinguish perspective,
 direction, authority, and realized causal experience. KFD-4 does not by itself
 prove KFD-7's proposed names, minimality, activation, or universal transfer.

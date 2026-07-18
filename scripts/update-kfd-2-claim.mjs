@@ -62,16 +62,6 @@ const draftAutonomyResidualRisk = {
   reason: "KFD-6 publishes a draft experiment contract, but no current package fact proves a conforming autonomous primitive-discovery implementation.",
   owner: "KFD maintainers and experimental adopters",
 };
-const draftActionModelResidualRisk = {
-  id: "action-model-activation-not-yet-proved",
-  definedBy: "https://kfd.libkungfu.dev/schemas/kfd-2/trust-taxonomy.schema.json#/$defs/residualRisk",
-  riskType: "external-fact-risk",
-  trustImpact: "downgrade-warning",
-  machineProvability: "partially-machine-verifiable",
-  agentAction: "verify-external-facts",
-  reason: "KFD-7 is a numbered draft with published reference semantics, but no current package fact proves cross-domain minimality, product usability, or activation.",
-  owner: "KFD maintainers and experimental adopters",
-};
 const writeJson = (filePath, value) => {
   mkdirSync(path.dirname(filePath), { recursive: true });
   writeFileSync(filePath, `${JSON.stringify(value, null, 2)}\n`);
@@ -311,31 +301,34 @@ const trustClaims = {
     {
       id: "kfd-7-action-responsibility-trust",
       statement:
-        "KFD-7 is trustable as a numbered draft action-responsibility principle because KFD publishes its decision, formal reference, usage boundary, standards metadata, promotion lineage, conditional session theorem, context-insufficiency corollary, and verification gate; KFD does not claim that a concrete Profile refinement, cross-domain minimality, product usability, or activation is already proved.",
+        "KFD-7 is trustable as an active action-responsibility principle because KFD publishes its decision, formal reference, usage boundary, standards metadata, promotion lineage, conditional session theorem, context-insufficiency corollary, and a commit-addressed activation record for two independently reviewed product Profiles; activation does not imply universal minimality or qualify future Profiles by inheritance.",
       subject: {
         kind: "action-responsibility",
         id: "kfd-7-action-responsibility",
         standard: "kfd-7",
-        description: "KFD-7 draft separation of direction, perspective, authority, and realized occurrence over Fact cuts and causal records.",
+        description: "KFD-7 active separation of direction, perspective, authority, and realized occurrence over Fact cuts and causal records.",
       },
       facts: [
         artifactPointer("file", "decisions/KFD-7.md"),
         artifactPointer("file", "docs/KFD-7-formal.md"),
         artifactPointer("file", "docs/KFD-7-usage.md"),
+        artifactPointer("file", "docs/KFD-7-activation.md"),
+        artifactPointer("file", "evidence/kfd-7/activation-record.json"),
         artifactPointer("file", "standards.json"),
         artifactPointer("file", "drafts/action-state-separation.md"),
       ],
       evidence: [
-        evidence("file", "registry.json", "The numbered registry allocates KFD-7 with draft status."),
+        evidence("file", "registry.json", "The numbered registry declares KFD-7 active."),
         evidence("file", "drafts/registry.json", "The candidate registry preserves the promoted source lineage and keeps KFD-8 through KFD-10 non-binding."),
-        evidence("file", "scripts/check.mjs", "The package check gate validates KFD-7 identity, formal binding, theorem and corollary references, Profile evidence categories, draft status, trust projection, and participant-facing closure."),
+        evidence("file", "evidence/kfd-7/activation-record.json", "The activation record binds two exact product availability cuts, product and KFD-level reviews, runtime evidence, zero open required obligations, and explicit non-claims."),
+        evidence("file", "scripts/check.mjs", "The package check gate validates KFD-7 identity, formal binding, theorem and corollary references, Profile evidence categories, active status, activation review, trust projection, and participant-facing closure."),
       ],
-      verification: { command: "node scripts/check.mjs", expectedResult: "warning" },
+      verification: { command: "node scripts/check.mjs", expectedResult: "pass" },
       auditBoundary: {
-        scope: "KFD-7 numbered draft text, formal and usage references, standards metadata, promotion lineage, qualification-basis structure, and package checks; excludes concrete Profile refinement, cross-domain minimality, adopter runtime correctness, product usability, and activation",
+        scope: "KFD-7 active text, formal and usage references, standards metadata, promotion lineage, two exact first-party Profile cuts, activation review, and package checks; excludes universal minimality, provider-wide correctness, and future adopter qualification",
         enumerability: "closed-world",
       },
-      residualRisk: [draftActionModelResidualRisk],
+      residualRisk: [],
       responsibility,
       status: "declared",
     },
@@ -422,12 +415,12 @@ const assessment = {
       id: "assess-kfd-7-action-responsibility-trust",
       claimId: "kfd-7-action-responsibility-trust",
       subject: trustClaims.claims[5].subject,
-      result: "warning",
+      result: "pass",
       facts: trustClaims.claims[5].facts.map((entry) => evidenceResult(entry.kind, entry.path, `Fact ${entry.path} is present and hashable.`)),
       evidence: trustClaims.claims[5].evidence.map((entry) => evidenceResult(entry.type, entry.pointer.path, entry.description)),
       auditBoundary: trustClaims.claims[5].auditBoundary,
       responsibility,
-      residualRisk: [draftActionModelResidualRisk],
+      residualRisk: [],
     },
   ],
   unboundClaims: [],
@@ -447,14 +440,6 @@ const assessment = {
       reason: "KFD-6 is a draft experiment contract and does not yet have adopter evidence for a conforming autonomous primitive-discovery loop.",
       agentAction: "verify-external-facts",
       source: "kfd-6-autonomous-discovery-loop-trust",
-    },
-    {
-      id: "kfd-7-action-model-activation-not-yet-proved",
-      riskType: "external-fact-risk",
-      trustImpact: "downgrade-warning",
-      reason: "KFD-7 is a numbered draft whose package identity, conditional session theorem, context-insufficiency corollary, and qualification structure are proved, while concrete Profile refinement, cross-domain minimality, product usability, and activation remain external evidence obligations.",
-      agentAction: "verify-external-facts",
-      source: "kfd-7-action-responsibility-trust",
     },
   ],
   responsibility,
