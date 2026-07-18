@@ -1267,9 +1267,51 @@
             "id": "action-state-separation-candidate",
             "class": "cross-time",
             "classes": ["cross-time"],
-            "description": "Published pre-number candidate for independently addressable intent, perspective, authority, and consequence state.",
+            "description": "Published pre-number candidate for cross-domain action primitives over a Fact and Episode substrate.",
             "sourcePath": "drafts/action-state-separation.md",
-            "weldRationale": "The current candidate meaning, evidence requirements, falsifiers, and explicit non-allocation of KFD-7 remain inspectable across releases.",
+            "weldRationale": "The proposed category, separation rule, generative ladder, falsifiers, and explicit non-allocation of KFD-7 remain inspectable across releases.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "atlas-action-perspective-candidate",
+            "class": "cross-time",
+            "classes": ["cross-time"],
+            "description": "Published pre-number candidate for binding consequential action to an addressable perspective and Fact cut.",
+            "sourcePath": "drafts/atlas-action-perspective.md",
+            "weldRationale": "The proposed Atlas role, deletion witnesses, alternatives, falsifiers, and explicit non-allocation of KFD-8 remain inspectable across releases.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "pursuit-intent-continuity-candidate",
+            "class": "cross-time",
+            "classes": ["cross-time"],
+            "description": "Published pre-number candidate for intent continuity independent of the actions that advance it.",
+            "sourcePath": "drafts/pursuit-intent-continuity.md",
+            "weldRationale": "The proposed Pursuit role, continuity and settlement obligations, falsifiers, and explicit non-allocation of KFD-9 remain inspectable across releases.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "warrant-bounded-authority-candidate",
+            "class": "cross-time",
+            "classes": ["cross-time"],
+            "description": "Published pre-number candidate for explicit, bounded, derivable, and independently revocable authority.",
+            "sourcePath": "drafts/warrant-bounded-authority.md",
+            "weldRationale": "The proposed Warrant role, derivation and revocation obligations, falsifiers, and explicit non-allocation of KFD-10 remain inspectable across releases.",
             "impactProjection": {
               "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
               "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",

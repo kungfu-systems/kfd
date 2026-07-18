@@ -1,17 +1,17 @@
 ---
 status: draft
-period: 2026-07-17
-theme: independent-action-state
+period: 2026-07-18
+theme: cross-domain-action-primitives
 doc_type: kfd-candidate
 source_level: maintainer-consensus
 confidence: medium
 sensitivity: public
 evidence_grade: C
 review_state: self-reviewed
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-18
 ---
 
-# KFD Candidate: Independent Action State
+# KFD Candidate: Cross-Domain Action Primitives
 
 - Candidate status: incubating
 - Kind candidate: principle
@@ -20,98 +20,157 @@ last_reviewed: 2026-07-17
 
 ## One sentence
 
-Real-world work must preserve intent, perspective, authority, and consequence
-as independently addressable facts.
+Real-world action must begin from independently addressable, fact-bound
+direction, perspective, and authority, and return as independently replayable
+causal experience.
 
 ## Candidate rule
 
-A system that coordinates consequential work must not silently collapse:
+KFD-1 through KFD-3 establish a fact-grounded world. KFD-4 through KFD-6 make
+perspective transformation, Primitive discovery, and autonomous correction
+possible over causal experience. This candidate asks how an intelligent
+participant acts inside that world.
 
-- the intended reality change that persists across actions;
-- the declared perspective and fact cut used to judge the situation;
-- the authority that permits a bounded continuation;
-- the action and consequence that actually occurred.
-
-The current working objects are:
+The current substrate hypothesis is:
 
 ```text
-intent continuity    -> Pursuit
-perspective and cut  -> Atlas
-authority boundary   -> Warrant
-causal experience    -> Episode
+Fact     -> what holds under a declared authority and cut
+Episode  -> what happened through a bounded encounter with reality
 ```
 
-These names and storage boundaries are not part of the candidate rule. An
-equivalent implementation may combine physical storage if every dimension
-remains independently addressable, revisable, auditable, and incapable of
-silently implying another dimension's state.
+Fact and Episode are not proposed here as ordinary domain Primitives. They are
+the minimum operational substrate on which action Primitives can be discovered,
+qualified, and used.
+
+Consequential action requires three independently addressable semantic roles:
+
+```text
+direction             -> Pursuit
+perspective and cut   -> Atlas
+authority boundary    -> Warrant
+realized experience   -> Episode
+```
+
+Pursuit, Atlas, and Warrant are the first cross-domain action-Primitive
+candidates. They direct, observe, and permit action. Episode preserves what
+actually occurred. None may silently imply another.
+
+This candidate establishes the category, separation rule, and action loop. It
+does not fully define the three candidate Primitives. Their current
+non-binding elaboration hypotheses are:
+
+- [Atlas action perspective](atlas-action-perspective.md), slot hint `8`;
+- [Pursuit intent continuity](pursuit-intent-continuity.md), slot hint `9`;
+- [Warrant bounded authority](warrant-bounded-authority.md), slot hint `10`.
+
+## Action loop
+
+The proposed closure is:
+
+```text
+Fact cut
+  -> Atlas declares what can be seen
+  -> Pursuit declares what continues
+  -> Warrant declares what is permitted
+  -> action encounters reality
+  -> Episode preserves what happened
+  -> claims, review, correction, and admission
+  -> successor Fact cut
+```
+
+The order is explanatory, not a mandatory user-interface sequence. Low-
+consequence work may derive inspectable defaults. Simplification may reduce
+ceremony but must not fuse semantic responsibility.
 
 ## Why the candidate exists
 
-The Pursuit and Warrant live case exposed four decisions that can diverge:
-
-```text
-what change continues
-what view of reality supports judgment
-what continuation is permitted
-what action and consequence occurred
-```
-
 The
 [conditional distinguishability argument](../cases/live/proof-carrying-work-object/distinguishability.md)
-provides analytic deletion witnesses for those dimensions. It establishes a
-conditional information-separation result, not universal necessity.
+shows that direction, perspective, authority, and occurrence can change action
+or audit conclusions independently. It is a conditional information-separation
+result, not proof that the current names or object set are universally final.
 
-A Pursuit may decompose into child Pursuits. The primary decomposition can be
-rendered as a tree, while typed dependency, successor, and contribution
-relations form a wider graph. Parent context may be referenced, but authority
-does not automatically flow to descendants and child completion does not
-settle the parent.
+Treating all four as one mutable task record creates recurrent invalid
+inferences:
+
+- an active intention appears to authorize action;
+- available context appears to be complete reality;
+- permission or planning appears to prove occurrence;
+- occurrence appears to prove success or completion.
+
+The candidate preserves these differences so that higher-domain Primitives can
+reuse a stable action basis instead of rebuilding direction, observation, and
+authority for every field.
+
+## Generative role
+
+This candidate does not close Primitive discovery. It creates a recursive
+ladder:
+
+```text
+Fact and Episode substrate
+  -> discover cross-domain action Primitives
+  -> action Primitives structure richer Episodes
+  -> richer Episodes expose domain boundary pressure
+  -> KFD-4 through KFD-6 discover higher-domain Primitives
+```
+
+A future domain Primitive may declare its relevant Facts, Atlases, Pursuits,
+Warrants, and Episode history. It need not display every role in every
+interaction, but a consequential decision must not fabricate a missing role
+from another one.
 
 ## Invalid compressions
 
 The candidate rejects systems that infer:
 
-- authorization from an active goal;
-- reality completeness from available context;
-- occurrence from a plan or authorization;
-- success or completion from occurrence;
-- descendant authority from a parent Warrant without an explicit derivation;
-- durable intent identity from a provider session or mutable task body.
+- authority from intention, context, capability, or occurrence;
+- reality completeness from available perspective;
+- occurrence from a plan, permission, or expected transition;
+- completion from execution or technical success;
+- causal experience from before-and-after state alone;
+- child authority from parent context without explicit derivation;
+- durable direction from a provider session or mutable task body.
 
 ## Qualification gate
 
 Promotion requires:
 
-1. observed histories where deleting each dimension changes a real action or
-   audit conclusion;
+1. deletion witnesses showing that direction, perspective, authority, and
+   occurrence independently change real action or audit conclusions;
 2. transfer across non-isomorphic work domains;
-3. comparison with task, session, case, log, approval, capability, and fused
-   alternatives;
-4. counterexamples where one or more dimensions are legitimately absent;
-5. a product witness that demonstrates lower reconstruction or authority risk
-   without imposing greater lifecycle burden;
-6. independent review of whether the rule belongs at organization level.
+3. comparison with task, case, workflow, session, goal, approval, capability,
+   and fused alternatives;
+4. counterexamples where one or more roles are legitimately absent or safely
+   defaulted;
+5. product evidence that the separation lowers reconstruction, authority, or
+   consequence risk without imposing greater total lifecycle burden;
+6. evidence that equal state endpoints can contain materially different causal
+   experience;
+7. independent review of whether this is an organization-level action rule.
 
 ## Falsifiers
 
 The candidate weakens or fails if:
 
-- one dimension is consistently derivable from the others without loss;
-- deleting a dimension does not change safe action or audit;
-- valid work cannot vary the dimensions independently;
-- a rival representation preserves equivalent decisions at lower cost;
-- the proposed rule forces irrelevant state into ordinary low-consequence
-  interactions;
+- one role is consistently derivable from the others without loss;
+- deleting a role does not change safe action, trust, or audit;
+- valid work cannot vary the roles independently;
+- another representation preserves equivalent decisions at lower total cost;
+- progressive disclosure cannot prevent the model from burdening ordinary
+  low-consequence work;
+- the three proposed action Primitives do not transfer beyond their originating
+  software-work context;
 - product evidence cannot distinguish ontology value from implementation
   preference.
 
 ## Numbering boundary
 
 The slot hint `7` records the current ordering hypothesis only. This document
-is not `KFD-7`, does not reserve that number, and may later be promoted under a
-different number, merged into another candidate, withdrawn, or rejected.
+is not `KFD-7`, does not reserve that number, and does not allocate the slot
+hints of its elaboration candidates.
 
 Promotion requires an explicit maintainer decision that creates
-`decisions/KFD-N.md`, updates the numbered `registry.json`, and records the
-candidate lineage. Until then this document is non-normative.
+`decisions/KFD-N.md`, updates the numbered `registry.json`, and records
+candidate lineage. This candidate and its elaborations may be revised,
+reordered, split, merged, withdrawn, or rejected before promotion.
