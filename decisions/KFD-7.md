@@ -1,0 +1,187 @@
+# KFD-7: Real-world action must keep its responsibilities distinct
+
+- Status: draft
+- Number: 7
+- Kind: principle
+- Applies to: every kungfu-systems product, repository, agent workflow, and participant-facing interface that represents consequential real-world action
+
+## One sentence
+
+Real-world action must keep direction, perspective, authority, and occurrence
+independently addressable.
+
+Action begins from fact-bound direction, perspective, and authority, encounters
+reality, and returns as independently replayable causal experience.
+
+## Status and gate
+
+KFD-7 is a numbered draft promoted from the
+[cross-domain action-Primitive candidate](../drafts/action-state-separation.md).
+Its number and authority are allocated; its activation evidence remains open.
+
+The current model has enough theoretical closure to become an organization
+decision: state and occurrence are not interchangeable, and direction,
+perspective, and authority can change safe action independently. Activation
+still requires product evidence that this separation transfers across domains
+and lowers total reconstruction, authority, and consequence risk without
+forcing unnecessary ceremony on ordinary work.
+
+## Substrate boundary
+
+KFD-7 distinguishes two complementary operational substrates:
+
+```text
+Fact cut       what holds at a declared authority and evidence boundary
+Causal record  what occurred between declared boundaries
+```
+
+A causal record may be carried by an Episode. It preserves action,
+consequence, cost, failure, retry, authority use, and causal order rather than
+only before-and-after state. Equal endpoints do not imply equal experience.
+
+Fact cuts and causal records remain independently addressable. A causal record
+does not silently admit its endpoint as current fact, and a state transition
+does not erase the path that produced it.
+
+## Action responsibilities
+
+Consequential action requires three independently addressable responsibilities:
+
+```text
+direction             Pursuit
+perspective and cut   Atlas
+authority boundary    Warrant
+realized occurrence   Episode or another bounded causal record
+```
+
+The names Atlas, Pursuit, Warrant, and Episode identify the first
+kungfu-systems action profiles. The principle is the separation of semantic
+responsibility:
+
+- direction states which continuing change and consequences matter;
+- perspective states from where, from which accepted facts, and at which cut
+  action is judged;
+- authority states which transition may be performed, by whom, and under which
+  constraints;
+- occurrence preserves what actually happened.
+
+None may be silently derived from another. Intention does not grant authority.
+Available perspective is not complete reality. Permission or planning does not
+prove occurrence. Occurrence does not prove progress, completion, or
+authorization.
+
+## Action closure
+
+The normative closure is:
+
+```text
+declared Fact cut
+  -> independently addressable direction, perspective, and authority
+  -> bounded action encounters reality
+  -> independently replayable causal record
+  -> claims, review, correction, and explicit admission
+  -> successor Fact cut
+```
+
+The order is semantic, not a mandatory interface sequence. Low-consequence
+work may use inspectable defaults and progressive disclosure. Simplification
+may reduce ceremony but must not fuse responsibility or fabricate a missing
+role from another one.
+
+## Conservative session limit
+
+KFD-7 is a conservative extension of ordinary agent sessions. When work has
+one local direction, one adequate bounded context, one stable authority grant,
+one contiguous execution, and sparse Fact change, an implementation must be
+able to project:
+
+```text
+Pursuit  -> goal
+Atlas    -> context
+Warrant  -> tool permissions
+Episode  -> session, run, or transcript
+Fact     -> input state and result
+```
+
+The participant need not manage five explicit objects in this limit. The
+session-compatible surface is conforming when it preserves the relevant
+direction, perspective boundary, effective authority, realized occurrence,
+and admitted result, and keeps its defaults inspectable.
+
+This compression is conditional. The independent responsibilities must become
+addressable when work crosses directions, perspectives or freshness cuts,
+authority states, causal Episodes, or material Fact branches. A session
+therefore remains a valid local interaction and runtime object; it is not the
+sole model of consequential real-world work.
+
+## Gate
+
+KFD-7 applies when an action has durable, cross-participant, cross-tool,
+authority-bearing, safety-relevant, or materially costly consequences. A
+purely local reversible operation may rely on defaults when the defaults and
+their consequence boundary remain inspectable.
+
+A conforming claim:
+
+- binds action to a declared fact cut and perspective;
+- preserves continuing direction independently of one execution;
+- identifies applicable authority and its constraints;
+- records realized occurrence independently of planned or expected state;
+- preserves causal boundaries and composition across successor cuts;
+- keeps missing, defaulted, derived, expired, revoked, or degraded
+  responsibilities visible;
+- does not infer completion, success, permission, or reality completeness from
+  the wrong object.
+
+## Activation
+
+KFD-7 remains draft until real product evidence:
+
+- demonstrates counterfactual independence by holding two action
+  responsibilities fixed while varying the third;
+- transfers the model across non-isomorphic work domains;
+- distinguishes equal-endpoint but causally different Episodes;
+- represents concurrency, compensation, failure, and retry without hidden
+  reconstruction;
+- demonstrates a low-complexity session round trip without semantic loss or
+  manual object ceremony;
+- shows that complexity breakpoints expose the required independent roles;
+- compares task, goal, workflow, session, approval, capability, and fused
+  alternatives;
+- demonstrates lower total lifecycle cost or materially safer action.
+
+Failure is evidence for revision, simplification, or rejection of the proposed
+profiles. It is not permission to infer one responsibility from another.
+
+## Relation to KFD-1 through KFD-6
+
+KFD-1 keeps fact cuts and causal records from drifting. KFD-2 makes claims about
+them assessable. KFD-3 lets participants exchange trusted value without hidden
+pressure. KFD-4 supplies declared reference frames and inspectable
+transformations. KFD-5 separates the genesis of action Primitives from their
+qualification. KFD-6 asks whether causal experience can sustain autonomous
+discovery. KFD-7 turns those foundations back toward action:
+
+```text
+non-drifting facts
+  -> bounded trust
+  -> transparent cooperation
+  -> declared perspective
+  -> qualified Primitives
+  -> grounded discovery
+  -> fact-bound real-world action
+```
+
+## Verification
+
+The non-normative reference semantics are published in
+`docs/KFD-7-formal.md`. Current package verification proves document,
+metadata, route, digest, and evidence closure. It does not prove cross-domain
+minimality, product usability, or activation.
+
+## Adopters
+
+Experimental adopters cite KFD-7 when they expose the action model and keep its
+status `draft`. They own the evidence for role independence, fact-cut
+admission, causal fidelity, authority correctness, progressive disclosure, and
+domain transfer.

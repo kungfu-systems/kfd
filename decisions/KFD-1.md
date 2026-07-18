@@ -21,6 +21,26 @@ and correct. A declared source is not reality itself; it is the reference that
 lets reality contradict a model without the evidence changing with the
 explanation.
 
+## State and occurrence boundaries
+
+A contract world may expose two complementary kinds of load-bearing reference
+surface:
+
+- a **fact cut** states what holds at a declared authority and evidence
+  boundary;
+- a **causal record** states what occurred between declared boundaries.
+
+Neither substitutes for the other. Equal before-and-after state does not prove
+that nothing happened: an action may consume time, incur cost, exercise
+authority, produce failed attempts, or create and reverse side effects while
+returning to the same state. A causal record likewise does not silently admit
+its final interpretation as the current fact cut.
+
+When either kind becomes load-bearing, its source identity, cut identity,
+boundary links, causal ordering, and declared transformations are welded
+surfaces. They must be registered and may change only through an explicit
+compatibility boundary.
+
 ## Welded-surface register
 
 Every product maintains a **welded-surface register**. Register a surface when

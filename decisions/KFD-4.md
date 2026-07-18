@@ -30,6 +30,25 @@ transformable. A transformation changes observer, role, consequence,
 proximity, accepted evidence, or action boundary to test what the current view
 hides.
 
+## Reference-frame rule
+
+KFD-4 replaces the fiction of absolute context with reality-preserving frames
+of action. A frame declares the observer position, accepted fact cut,
+projection boundary, consequence position, and known gaps from which a view is
+formed.
+
+Changing frames may change coordinates, relevance, presentation or priority
+ordering, natural object boundaries, and available action. It must not silently
+change the identities, source roots, evidence cuts, known causal relations,
+receipts, or declared authority boundaries on which comparison depends. A
+valid transformation makes both the variation and the preserved invariants
+inspectable.
+
+This is not relativism. Views may differ while their claims remain unequally
+supported, and known causal facts still constrain every frame. The purpose of
+a declared frame is to make disagreement and transformation auditable, not to
+make every interpretation true.
+
 Perspective transformation is one discovery method, not a ranking theorem.
 Direct judgment, anomaly, repeated reconstruction, causal-variable discovery,
 structural compression, and hybrid methods may also generate primitive
