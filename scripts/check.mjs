@@ -1210,7 +1210,7 @@ if (kfd7?.schemaIds?.actionContract !== "https://kfd.libkungfu.dev/schemas/kfd-7
 if (kfd7?.schemaPaths?.actionContract !== "schemas/kfd-7/action-contract.schema.json") {
   fail("KFD-7 standards metadata must expose the actionContract schema path");
 }
-for (const concept of ["factCut", "causalRecord", "episode", "atlas", "pursuit", "warrant", "direction", "perspective", "authorityBoundary", "occurrence", "actionGeometry", "observationProjection", "targetRelation", "admissibleTransition", "realizedPath", "validActionSet", "conditionalIrreducibility", "counterfactualIndependence", "explicitAdmission", "progressiveDisclosure", "conservativeSessionLimit", "complexityBreakpoint"]) {
+for (const concept of ["factCut", "causalRecord", "episode", "atlas", "pursuit", "warrant", "direction", "perspective", "authorityBoundary", "occurrence", "actionGeometry", "observationProjection", "targetRelation", "admissibleTransition", "realizedPath", "validActionSet", "conditionalIrreducibility", "counterfactualIndependence", "explicitAdmission", "progressiveDisclosure", "conservativeSessionLimit", "complexityBreakpoint", "decisionObservationalEquivalence", "sessionRoundTripTheorem", "contextInsufficiency"]) {
   if (!kfd7?.concepts?.[concept]) fail(`KFD-7 standards metadata missing concept ${concept}`);
 }
 const kfd7ActionContractSchema = JSON.parse(readFileSync("schemas/kfd-7/action-contract.schema.json", "utf8"));
@@ -1220,10 +1220,10 @@ if (kfd7ActionContractSchema.properties?.contract?.const !== "kfd-7-action-contr
 if (kfd7ActionContractSchema.properties?.standard?.const !== "kfd-7") {
   fail("KFD-7 actionContract schema must declare standard kfd-7");
 }
-if (kfd7?.interfaces?.actionContract?.schemaVersion !== 1 || kfd7ActionContractSchema.properties?.schemaVersion?.const !== 1) {
-  fail("KFD-7 actionContract interface must use schemaVersion 1");
+if (kfd7?.interfaces?.actionContract?.schemaVersion !== 2 || kfd7ActionContractSchema.properties?.schemaVersion?.const !== 2) {
+  fail("KFD-7 actionContract interface must use schemaVersion 2");
 }
-for (const field of ["profile", "roles", "transitions", "prohibitedInferences", "evidenceObligations", "nonClaims", "extensions", "activation"]) {
+for (const field of ["profile", "roles", "transitions", "prohibitedInferences", "qualificationBasis", "evidenceObligations", "nonClaims", "extensions", "activation"]) {
   if (!kfd7ActionContractSchema.required?.includes(field)) fail(`KFD-7 actionContract must require ${field}`);
 }
 const kfd7RoleContains = kfd7ActionContractSchema.properties?.roles?.allOf ?? [];
@@ -1238,9 +1238,34 @@ for (const prohibitedInference of ["authority-from-pursuit", "complete-reality-f
   }
 }
 const kfd7EvidenceContains = kfd7ActionContractSchema.properties?.evidenceObligations?.allOf ?? [];
-for (const category of ["role-deletion-or-fusion", "invalid-transition", "export-import-rebuild", "backend-migration", "concurrency-retry-compensation", "warrant-decay-revocation", "atlas-staleness-loss", "pursuit-continuity-settlement", "episode-replay-contraction", "cold-start-continuation"]) {
+for (const category of ["role-deletion-or-fusion", "invalid-transition", "export-import-rebuild", "backend-migration", "concurrency-retry-compensation", "warrant-decay-revocation", "atlas-staleness-loss", "pursuit-continuity-settlement", "episode-replay-contraction", "cold-start-continuation", "session-round-trip-refinement", "session-complexity-breakpoint", "context-insufficiency-counterexample"]) {
   if (!kfd7EvidenceContains.some((entry) => entry?.contains?.properties?.category?.const === category)) {
     fail(`KFD-7 actionContract must require evidence category ${category}`);
+  }
+}
+const kfd7QualificationBasis = kfd7ActionContractSchema.$defs?.qualificationBasis?.properties;
+if (kfd7QualificationBasis?.sessionRoundTrip?.properties?.theoremId?.const !== "kfd-7-session-round-trip-preservation") {
+  fail("KFD-7 actionContract must bind the session round-trip theorem");
+}
+if (kfd7QualificationBasis?.sessionRoundTrip?.properties?.source?.const !== "docs/KFD-7-formal.md#session-round-trip-preservation-theorem") {
+  fail("KFD-7 actionContract must bind the canonical session theorem source");
+}
+if (kfd7QualificationBasis?.contextInsufficiency?.properties?.corollaryId?.const !== "kfd-7-context-insufficiency") {
+  fail("KFD-7 actionContract must bind the context-insufficiency corollary");
+}
+const kfd7QualificationEvidenceCategories = kfd7QualificationBasis?.evidenceCategories?.properties;
+for (const [field, category] of Object.entries({
+  roundTripRefinement: "session-round-trip-refinement",
+  complexityBreakpoint: "session-complexity-breakpoint",
+  contextCounterexample: "context-insufficiency-counterexample",
+})) {
+  if (kfd7QualificationEvidenceCategories?.[field]?.const !== category) {
+    fail(`KFD-7 qualification basis must bind ${field} to ${category}`);
+  }
+}
+for (const dimension of ["direction", "perspective-boundary", "effective-authority", "causal-process", "admitted-result"]) {
+  if (!kfd7QualificationBasis?.sessionRoundTrip?.properties?.semanticDimensions?.items?.enum?.includes(dimension)) {
+    fail(`KFD-7 session theorem missing semantic dimension ${dimension}`);
   }
 }
 if (kfd7ActionContractSchema.$defs?.profile?.properties?.qualificationStatus?.enum?.includes("qualified") !== true) {
@@ -1249,7 +1274,7 @@ if (kfd7ActionContractSchema.$defs?.profile?.properties?.qualificationStatus?.en
 if (kfd7ActionContractSchema.$defs?.activation?.properties?.decision?.enum?.includes("activate") !== true) {
   fail("KFD-7 actionContract must expose an explicit activation verdict");
 }
-for (const concept of ["actionProfile", "roleIndependence", "profileLifecycleVocabulary", "transitionContract", "prohibitedInference", "roleDeletionExperiment", "evidenceObligation", "activationDecision", "qualificationCut", "residualRisk", "extensionPoint"]) {
+for (const concept of ["actionProfile", "roleIndependence", "profileLifecycleVocabulary", "transitionContract", "prohibitedInference", "roleDeletionExperiment", "evidenceObligation", "activationDecision", "qualificationCut", "profileRefinementWitness", "residualRisk", "extensionPoint"]) {
   if (!kfd7?.concepts?.[concept]) fail(`KFD-7 standards metadata missing concept ${concept}`);
 }
 if (!kfd7?.interfaces?.actionContract) fail("KFD-7 standards metadata missing interface actionContract");

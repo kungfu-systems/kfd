@@ -108,11 +108,23 @@ session-compatible surface is conforming when it preserves the relevant
 direction, perspective boundary, effective authority, realized occurrence,
 and admitted result, and keeps its defaults inspectable.
 
+The formal reference defines this as a conditional round-trip theorem:
+expanding a session-compressible session into the five responsibilities and
+projecting it back must preserve those five decision observations. A product
+does not re-prove the abstract theorem; it proves that its concrete expansion,
+projection, and compressibility boundary refine it.
+
 This compression is conditional. The independent responsibilities must become
 addressable when work crosses directions, perspectives or freshness cuts,
 authority states, causal Episodes, or material Fact branches. A session
 therefore remains a valid local interaction and runtime object; it is not the
 sole model of consequential real-world work.
+
+Context is likewise not sufficient by itself. The same visible context can
+support different valid action sets when the Pursuit, Warrant, or Atlas cut and
+freshness differ. One physical session record may still conform, but only when
+it preserves those responsibilities rather than treating context as their
+substitute.
 
 ## Gate
 
@@ -135,7 +147,7 @@ A conforming claim:
 
 ## Reference Profile contract
 
-KFD publishes `schemas/kfd-7/action-contract.schema.json` as a version 1 draft
+KFD publishes `schemas/kfd-7/action-contract.schema.json` as a version 2 draft
 Profile declaration. It does not prescribe a universal product object model.
 It gives products and release systems one machine-readable place to declare:
 
@@ -144,7 +156,9 @@ It gives products and release systems one machine-readable place to declare:
 - supported transitions with preconditions, effects, receipts, evidence,
   denial reasons, and residual risks;
 - prohibited cross-role inferences and retained evidence obligations;
-- extension ownership, non-claims, qualification state, and activation verdict.
+- extension ownership, non-claims, qualification state, and activation verdict;
+- the standard session round-trip and context-insufficiency references, plus
+  the evidence categories used to qualify a concrete implementation.
 
 All five responsibility declarations remain required even when a product uses
 one physical record or a low-complexity session projection. The declaration
@@ -165,6 +179,8 @@ KFD-7 remains draft until real product evidence:
 - demonstrates a low-complexity session round trip without semantic loss or
   manual object ceremony;
 - shows that complexity breakpoints expose the required independent roles;
+- proves that the implementation refines the standard round-trip theorem and
+  retains same-payload counterexamples where valid action differs;
 - compares task, goal, workflow, session, approval, capability, and fused
   alternatives;
 - demonstrates lower total lifecycle cost or materially safer action.

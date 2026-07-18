@@ -311,7 +311,7 @@ const trustClaims = {
     {
       id: "kfd-7-action-responsibility-trust",
       statement:
-        "KFD-7 is trustable as a numbered draft action-responsibility principle because KFD publishes its decision, formal reference, usage boundary, standards metadata, promotion lineage, and verification gate; KFD does not claim that cross-domain minimality, product usability, or activation is already proved.",
+        "KFD-7 is trustable as a numbered draft action-responsibility principle because KFD publishes its decision, formal reference, usage boundary, standards metadata, promotion lineage, conditional session theorem, context-insufficiency corollary, and verification gate; KFD does not claim that a concrete Profile refinement, cross-domain minimality, product usability, or activation is already proved.",
       subject: {
         kind: "action-responsibility",
         id: "kfd-7-action-responsibility",
@@ -328,11 +328,11 @@ const trustClaims = {
       evidence: [
         evidence("file", "registry.json", "The numbered registry allocates KFD-7 with draft status."),
         evidence("file", "drafts/registry.json", "The candidate registry preserves the promoted source lineage and keeps KFD-8 through KFD-10 non-binding."),
-        evidence("file", "scripts/check.mjs", "The package check gate validates KFD-7 identity, formal binding, concepts, draft status, trust projection, and participant-facing closure."),
+        evidence("file", "scripts/check.mjs", "The package check gate validates KFD-7 identity, formal binding, theorem and corollary references, Profile evidence categories, draft status, trust projection, and participant-facing closure."),
       ],
       verification: { command: "node scripts/check.mjs", expectedResult: "warning" },
       auditBoundary: {
-        scope: "KFD-7 numbered draft text, formal and usage references, standards metadata, promotion lineage, and package checks; excludes cross-domain minimality, adopter implementation correctness, product usability, and activation",
+        scope: "KFD-7 numbered draft text, formal and usage references, standards metadata, promotion lineage, qualification-basis structure, and package checks; excludes concrete Profile refinement, cross-domain minimality, adopter runtime correctness, product usability, and activation",
         enumerability: "closed-world",
       },
       residualRisk: [draftActionModelResidualRisk],
@@ -452,7 +452,7 @@ const assessment = {
       id: "kfd-7-action-model-activation-not-yet-proved",
       riskType: "external-fact-risk",
       trustImpact: "downgrade-warning",
-      reason: "KFD-7 is a numbered draft whose package identity and reference model are proved, while cross-domain minimality, product usability, and activation remain external evidence obligations.",
+      reason: "KFD-7 is a numbered draft whose package identity, conditional session theorem, context-insufficiency corollary, and qualification structure are proved, while concrete Profile refinement, cross-domain minimality, product usability, and activation remain external evidence obligations.",
       agentAction: "verify-external-facts",
       source: "kfd-7-action-responsibility-trust",
     },

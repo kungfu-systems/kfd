@@ -7,7 +7,7 @@
 
 - Status: experimental
 - Normative: no
-- Formal model version: 1
+- Formal model version: 2
 - Authority: `decisions/KFD-7.md`
 - Decision status: draft
 
@@ -127,15 +127,20 @@ I10 Sealed(E) does not silently imply Admitted(After(E), C)
 I11 SimplifiedInterface(u) may hide ceremony but not fuse responsibility
 I12 Missing or derived responsibility remains inspectable when consequence is
     material
-I13 SessionCompressible(h) -> RoundTrip(Sigma(h)) preserves the bounded
-    decision semantics of h
+I13 For every session-compressible session s,
+    Project(Expand(s)) is decision-observationally equivalent to s
 I14 not SessionCompressible(h) -> the independently relevant roles become
     addressable
+I15 Context payload alone is not a sufficient statistic for valid action
+    whenever two states with the same payload have different valid action sets
 ```
 
 ## Conservative session projection
 
-Let a bounded history `h` be session-compressible when:
+Let `S_c` be the set of ordinary sessions inside the declared low-complexity
+boundary, and let `K_c` be the set of five-responsibility histories that remain
+compressible to one session. A bounded history `h` is session-compressible
+when:
 
 ```text
 SessionCompressible(h) =
@@ -146,10 +151,13 @@ SessionCompressible(h) =
   and SparseFactChange(h)
 ```
 
-Define a session projection:
+Define two typed transformations:
 
 ```text
-Sigma(h) = (
+Expand:  S_c -> K_c
+Project: K_c -> S_c
+
+Project(h) = (
   goal        := Pursuit(h),
   context     := Atlas(h),
   permissions := Warrant(h),
@@ -159,17 +167,53 @@ Sigma(h) = (
 )
 ```
 
-For the decisions inside the declared bounded history, expansion followed by
-projection must be conservative:
+`Expand` recovers the five independently addressable responsibilities from the
+session fields and their inspectable defaults. `Project` presents a
+session-compatible view.
+
+### Session round-trip preservation theorem
+
+Define decision-observational equivalence componentwise:
 
 ```text
-SessionCompressible(h)
-  -> Equivalent_D(Sigma(Expand(Sigma(h))), Sigma(h))
+s1 equivalent_D s2 iff
+  Direction(s1)               = Direction(s2)
+  and PerspectiveBoundary(s1) = PerspectiveBoundary(s2)
+  and EffectiveAuthority(s1)  = EffectiveAuthority(s2)
+  and CausalProcess(s1)        = CausalProcess(s2)
+  and AdmittedResult(s1)       = AdmittedResult(s2)
 ```
 
-`Equivalent_D` means that the goal, context boundary, effective permissions,
-realized execution, and result needed for those decisions are preserved. It
-does not mean the underlying responsibilities become identical.
+Then the conservative round trip is:
+
+```text
+for all s in S_c:
+  Project(Expand(s)) equivalent_D s
+```
+
+The theorem follows from five component obligations: the implementation's
+`Expand` and `Project` pair preserves direction, perspective boundary,
+effective authority, causal process, and admitted result. It does not assert
+byte identity or make the underlying responsibilities identical.
+
+Proof sketch: each component obligation establishes one conjunct in the
+definition of `equivalent_D`; conjunction introduction establishes the
+round-trip result for every `s` in `S_c`. The proof is conditional on the
+declared domain and the implementation refinement. It is not evidence that an
+arbitrary product satisfies either.
+
+The reverse direction is intentionally narrower:
+
+```text
+for all h in CanonicalSessionImage(Expand):
+  Expand(Project(h)) equivalent_K h
+```
+
+It does not hold for arbitrary five-responsibility histories. Several
+directions, perspectives, authority states, Episodes, or material Fact
+branches contain information that one session cannot preserve.
+`equivalent_K` here means preservation of the five canonical responsibilities
+inside the image of `Expand`; it is not a claim of general causal identity.
 
 Compression must stop when any assumption becomes decision-relevant:
 
@@ -186,6 +230,44 @@ At that breakpoint, an implementation exposes the affected independent roles
 instead of silently retaining a lossy session projection. This makes KFD-7 a
 conservative extension of ordinary session work rather than a requirement for
 permanent five-object ceremony.
+
+## Context insufficiency corollary
+
+Let `ContextPayload(h)` denote the visible token, document, or message payload
+presented as an agent's context, excluding independently addressable Atlas
+provenance, cut, and freshness metadata. Context alone is sufficient for action
+only if equal payload always yields the same valid action set:
+
+```text
+ContextSufficient iff
+  for all h1, h2:
+    ContextPayload(h1) = ContextPayload(h2)
+      -> U_valid(h1) = U_valid(h2)
+```
+
+KFD-7 supplies direct counterexamples. Hold context fixed and vary only one
+independent responsibility:
+
+```text
+same payload + different Pursuit -> different Advances_P predicates
+same payload + different Warrant -> different Authorized_W predicates
+same payload + different Atlas cut or freshness -> different Supported_A predicates
+```
+
+Therefore:
+
+```text
+exists h1, h2:
+  ContextPayload(h1) = ContextPayload(h2)
+  and U_valid(h1) != U_valid(h2)
+
+=> context alone is not a sufficient statistic for valid action
+```
+
+This is a limitation of treating session context as the sole ontology, not of
+using one physical session record. One record may conform when it explicitly
+preserves the five semantic responsibilities, keeps their sources and defaults
+inspectable, and expands them at complexity breakpoints.
 
 ## Conditional irreducibility
 
@@ -246,7 +328,12 @@ declare current Fact cut
 - Preserve causal ordering, failures, retries, cost, and consequences.
 - Distinguish occurrence from success, progress, completion, and admission.
 - Round-trip low-complexity work through the session projection without losing
-  bounded decision semantics or requiring manual object management.
+  the five bounded decision observations or requiring manual object
+  management.
+- Bind the implementation's `Expand`, `Project`, and
+  `SessionCompressible` definitions to the standard round-trip theorem.
+- Provide same-payload counterexamples showing that context alone cannot
+  determine direction, authority, or perspective freshness.
 - Expose the independently relevant roles when a session-compressibility
   assumption fails.
 - Test counterfactual independence and fused alternatives.
@@ -284,6 +371,11 @@ For Profile claim `C` at evidence cut `K`:
 ```text
 Qualified(C, K) :=
   schema conformance
+  and reference to the KFD-7 round-trip theorem and context-insufficiency
+      corollary
+  and implementation refinement evidence for Expand and Project
+  and session complexity-breakpoint evidence
+  and same-payload, different-valid-action-set counterexamples
   and positive and negative transition evidence
   and role deletion or fusion evidence
   and export, rebuild, and migration evidence
@@ -301,6 +393,13 @@ Qualified(C, K) :=
 qualified Profile, an exact evidence cut, independent review, retained product
 witnesses, and no planned or failed obligation. Qualification remains relative
 to that Profile and cut; it does not establish universal minimality.
+
+This separation avoids re-proving the generic model for every product. KFD
+states the conditional theorem once. A Profile proves that its concrete
+session fields, defaults, and runtime transitions refine the theorem's five
+observations, then retains breakpoint and context-insufficiency witnesses.
+Empirical usability, runtime correctness, and cross-domain transfer remain
+product evidence.
 
 ## Invalid states
 
@@ -325,7 +424,8 @@ to that Profile and cut; it does not establish universal minimality.
 | Fact-cut and causal-record separation | Substrate boundary | KFD-1 formal reference and KFD-7 Profile role declarations | Structural plus product evidence |
 | Atlas/Pursuit/Warrant separation | Action responsibilities | `schemas/kfd-7/action-contract.schema.json` required role closure | Structural plus product and semantic review |
 | `I3-I8` conditional independence | Gate and Activation | Counterfactual product fixtures | Not yet implemented |
-| `I13-I14` conservative session limit | Conservative session limit | Session round-trip and complexity-breakpoint fixtures | Not yet implemented |
+| `I13-I14` conservative session limit | Conservative session limit | theorem reference, Profile refinement, session round-trip, and complexity-breakpoint evidence | Structural gate implemented; product proof remains external |
+| `I15` context insufficiency | Context insufficiency corollary | same-payload, different-valid-action-set counterexamples | Structural gate implemented; product proof remains external |
 | `I9-I10` path composition and admission | Action closure | Domain Episode/Fact profiles | Mixed |
 | transition and denial declaration | Reference Profile contract | `transitions[]` | Independent schema verification |
 | evidence and non-claim closure | Activation | `evidenceObligations[]`, `nonClaims[]`, `activation` | Independent schema verification; runtime proof remains external |

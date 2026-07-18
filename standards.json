@@ -1249,9 +1249,9 @@
             "id": "kfd-7-action-contract-schema",
             "class": "integration-time",
             "classes": ["integration-time", "cross-time"],
-            "description": "Published version 1 KFD-7 action-contract Profile schema.",
+            "description": "Published version 2 KFD-7 action-contract Profile schema.",
             "sourcePath": "schemas/kfd-7/action-contract.schema.json",
-            "weldRationale": "Human, agent, product, verifier, and release consumers bind to the same role, transition, evidence, non-claim, and activation declaration.",
+            "weldRationale": "Human, agent, product, verifier, and release consumers bind to the same role, transition, theorem reference, qualification evidence, non-claim, and activation declaration.",
             "impactProjection": {
               "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
               "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
@@ -1884,27 +1884,27 @@
       "title": "Real-world action must keep its responsibilities distinct",
       "kind": "principle",
       "status": "draft",
-      "revision": 1,
+      "revision": 2,
       "metadataSchemaVersion": "2",
       "document": {
         "path": "decisions/KFD-7.md",
         "url": "https://kfd.libkungfu.dev/7",
-        "sha256": "741047661fda21679f1cff58a67dbf23ba872c74017c0a9d7c1dfe6f5d87f385"
+        "sha256": "5cdde3f7dffabbee5da1edbea462a7c0b5d0c4650bec9cbd602bbad6aad2869f"
       },
       "formalModel": {
         "path": "docs/KFD-7-formal.md",
         "url": "https://kfd.libkungfu.dev/7/formal",
-        "version": 1,
+        "version": 2,
         "status": "experimental",
         "normative": false,
         "authorityPath": "decisions/KFD-7.md",
-        "sha256": "d74d9907614d0dc09498b0dba2cd2f572ff7d5dc315628063d67e768d4ae1fad"
+        "sha256": "a588862b9f64a33d111c343ee1cc2c84a2e789049b345b549bf3dba3d95203ea"
       },
       "compatibility": {
         "packageLine": "v1.0",
         "registrySchemaVersion": 1,
         "metadataSchemaVersion": "2",
-        "rule": "Before the first stable release, maintainer-authorized semantic refinement must declare breaking decision-surface impact. Compatible draft Profile additions may keep action-contract schemaVersion 1; changes to responsibility, transition validity, prohibited inference, evidence closure, activation meaning, or required fields require a new interface version or explicit Foundation Revision. After stable, substantive decision change mints a new KFD."
+        "rule": "Before the first stable release, maintainer-authorized semantic refinement must declare breaking decision-surface impact. Compatible draft Profile additions may keep action-contract schemaVersion 2; changes to responsibility, theorem applicability, transition validity, prohibited inference, evidence closure, activation meaning, or required fields require a new interface version or explicit Foundation Revision. After stable, substantive decision change mints a new KFD."
       },
       "schemaIds": {
         "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json",
@@ -1917,10 +1917,10 @@
       "interfaces": {
         "actionContract": {
           "contract": "kfd-7-action-contract",
-          "schemaVersion": 1,
+          "schemaVersion": 2,
           "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-7/action-contract.schema.json",
           "schemaPath": "schemas/kfd-7/action-contract.schema.json",
-          "compatibilityRule": "Compatible Profile-owned lifecycle additions may keep schemaVersion 1; semantic or required-field changes to responsibility, transition, evidence, non-claim, or activation meaning require a new interface version or contract."
+          "compatibilityRule": "Compatible Profile-owned lifecycle additions may keep schemaVersion 2; semantic or required-field changes to responsibility, theorem applicability, transition, evidence, non-claim, or activation meaning require a new interface version or contract."
         }
       },
       "concepts": {
@@ -1946,6 +1946,9 @@
         "progressiveDisclosure": "low-friction interface that preserves inspectable responsibility",
         "conservativeSessionLimit": "lossless session-compatible projection for bounded low-complexity work",
         "complexityBreakpoint": "condition that makes an independent action responsibility decision-relevant and addressable",
+        "decisionObservationalEquivalence": "componentwise preservation of direction, perspective boundary, effective authority, causal process, and admitted result",
+        "sessionRoundTripTheorem": "conditional preservation theorem for session expansion and projection",
+        "contextInsufficiency": "same-payload counterexample showing that context alone cannot determine the valid action set",
         "actionProfile": "versioned product-owned action Profile",
         "roleIndependence": "independently addressable semantic responsibility",
         "profileLifecycleVocabulary": "Profile-owned lifecycle vocabulary",
@@ -1955,6 +1958,7 @@
         "evidenceObligation": "retained Profile evidence obligation",
         "activationDecision": "activate, revise, reject, or pending verdict",
         "qualificationCut": "exact evidence cut and independent review binding",
+        "profileRefinementWitness": "evidence that a concrete Profile refines the standard session theorem",
         "residualRisk": "declared remaining risk",
         "extensionPoint": "versioned Profile-owned extension"
       }

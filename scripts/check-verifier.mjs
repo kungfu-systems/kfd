@@ -125,6 +125,35 @@ assert.deepEqual(buildchainSelfCheck.issues, []);
 
 const temporary = fs.mkdtempSync(path.join(os.tmpdir(), "kfd-verifier-"));
 try {
+  const missingQualificationBasisPath = path.join(temporary, "missing-qualification-basis.json");
+  const missingQualificationBasis = JSON.parse(
+    fs.readFileSync(path.join(root, "verifier/fixtures/kfd-7/valid-action-contract.json"), "utf8"),
+  );
+  delete missingQualificationBasis.qualificationBasis;
+  fs.writeFileSync(missingQualificationBasisPath, `${JSON.stringify(missingQualificationBasis)}\n`);
+  const nativeMissingQualificationBasis = run(
+    "cargo",
+    [...nativeArgs, "verify", "kfd-record", missingQualificationBasisPath, "--json"],
+    1,
+  );
+  const wasmMissingQualificationBasis = run(
+    "node",
+    ["bin/kfd.mjs", "verify", "kfd-record", missingQualificationBasisPath, "--json"],
+    1,
+  );
+  assert.equal(
+    wasmMissingQualificationBasis,
+    nativeMissingQualificationBasis,
+    "missing qualification basis rejection must match byte for byte",
+  );
+  assert.equal(
+    JSON.parse(nativeMissingQualificationBasis).issues.some(
+      (issue) => issue.code === "schema-required" && issue.path === "/qualificationBasis",
+    ),
+    true,
+    "KFD-7 Profiles must cite the standard qualification basis",
+  );
+
   const activationWithPlannedEvidencePath = path.join(temporary, "activation-with-planned-evidence.json");
   const activationWithPlannedEvidence = JSON.parse(
     fs.readFileSync(path.join(root, "verifier/fixtures/kfd-7/valid-action-contract.json"), "utf8"),
@@ -155,6 +184,56 @@ try {
     ),
     true,
     "activation must reject planned evidence obligations",
+  );
+
+  const activationWithoutSessionProofPath = path.join(temporary, "activation-without-session-proof.json");
+  const activationWithoutSessionProof = JSON.parse(
+    fs.readFileSync(path.join(root, "verifier/fixtures/kfd-7/valid-action-contract.json"), "utf8"),
+  );
+  activationWithoutSessionProof.profile.qualificationStatus = "qualified";
+  activationWithoutSessionProof.activation.decision = "activate";
+  activationWithoutSessionProof.activation.independentReview = "review:retained";
+  activationWithoutSessionProof.activation.productWitnesses = ["witness:retained"];
+  for (const obligation of activationWithoutSessionProof.evidenceObligations) {
+    obligation.status = "passed";
+    obligation.artifactRefs = [`witness:${obligation.category}`];
+  }
+  for (const obligation of activationWithoutSessionProof.evidenceObligations) {
+    if ([
+      "session-round-trip-refinement",
+      "session-complexity-breakpoint",
+      "context-insufficiency-counterexample",
+    ].includes(obligation.category)) {
+      obligation.status = "not-applicable";
+      obligation.artifactRefs = [];
+      obligation.reason = "invalid activation fixture";
+    }
+  }
+  fs.writeFileSync(
+    activationWithoutSessionProofPath,
+    `${JSON.stringify(activationWithoutSessionProof)}\n`,
+  );
+  const nativeActivationWithoutSessionProof = run(
+    "cargo",
+    [...nativeArgs, "verify", "kfd-record", activationWithoutSessionProofPath, "--json"],
+    1,
+  );
+  const wasmActivationWithoutSessionProof = run(
+    "node",
+    ["bin/kfd.mjs", "verify", "kfd-record", activationWithoutSessionProofPath, "--json"],
+    1,
+  );
+  assert.equal(
+    wasmActivationWithoutSessionProof,
+    nativeActivationWithoutSessionProof,
+    "activation without session proof rejection must match byte for byte",
+  );
+  assert.equal(
+    JSON.parse(nativeActivationWithoutSessionProof).issues.some(
+      (issue) => issue.code === "schema-contains" && issue.path === "/evidenceObligations",
+    ),
+    true,
+    "activation must require passed round-trip, breakpoint, and context-insufficiency evidence",
   );
 
   fs.cpSync(
@@ -255,4 +334,4 @@ assert.doesNotMatch(
   fs.readFileSync(path.join(root, "bin", "kfd.mjs"), "utf8"),
   /\b(fetch|https?\.request)\s*\(/u,
 );
-console.log(`check-verifier: ${cases.length} native/WASM parity fixtures and ${7 + rejectedKfd7Records.length} adversarial rejections ok`);
+console.log(`check-verifier: ${cases.length} native/WASM parity fixtures and ${9 + rejectedKfd7Records.length} adversarial rejections ok`);
