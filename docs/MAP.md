@@ -18,6 +18,7 @@
 | Why can a simple session round-trip through KFD-7 without losing decision semantics? | [`KFD-7-formal.md`](KFD-7-formal.md#session-round-trip-preservation-theorem) |
 | Why is session context alone insufficient for consequential action? | [`KFD-7-formal.md`](KFD-7-formal.md#context-insufficiency-corollary) |
 | How does a product reuse the KFD-7 theorem in its qualification gate? | [`KFD-7-usage.md`](KFD-7-usage.md#qualification-by-theorem-reuse) |
+| What retained product evidence qualifies the KFD-7 activation cut? | [`KFD-7-activation.md`](KFD-7-activation.md) and [`../evidence/kfd-7/activation-record.json`](../evidence/kfd-7/activation-record.json) |
 | How do fact cuts differ from causal records even when their endpoints are equal? | [`KFD-1-formal.md`](KFD-1-formal.md#domain-objects) |
 | How does KFD-4 replace absolute context with declared reference frames and preserved invariants? | [`KFD-4-formal.md`](KFD-4-formal.md#domain-objects) |
 | Why might consequential action require an independently addressable perspective and fact cut? | [`../drafts/atlas-action-perspective.md`](../drafts/atlas-action-perspective.md) |
@@ -37,7 +38,7 @@
 | How should an autonomous discovery loop remain grounded in causal experience? | [KFD-6](../decisions/KFD-6.md) |
 | What schema records a KFD-6 autonomous discovery experiment? | [`../schemas/kfd-6/autonomous-discovery-loop.schema.json`](../schemas/kfd-6/autonomous-discovery-loop.schema.json) |
 | How must real-world action keep direction, perspective, authority, and occurrence distinct? | [KFD-7](../decisions/KFD-7.md) |
-| What schema declares a draft KFD-7 product Profile and activation evidence boundary? | [`../schemas/kfd-7/action-contract.schema.json`](../schemas/kfd-7/action-contract.schema.json) |
+| What schema declares a KFD-7 product Profile and activation evidence boundary? | [`../schemas/kfd-7/action-contract.schema.json`](../schemas/kfd-7/action-contract.schema.json) |
 | What are the package implementation notes for KFD-1? | [`KFD-1-usage.md`](KFD-1-usage.md) |
 | What is the formal reference for KFD-1? | [`KFD-1-formal.md`](KFD-1-formal.md) |
 | What schema should papers, specifications, or sites use for canonical/latest/immutable publication URL semantics? | [`../schemas/kfd-1/publication-url-semantics.schema.json`](../schemas/kfd-1/publication-url-semantics.schema.json) and [`KFD-1-usage.md`](KFD-1-usage.md#publication-url-semantics) |

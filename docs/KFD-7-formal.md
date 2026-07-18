@@ -423,21 +423,22 @@ product evidence.
 |---|---|---|---|
 | Fact-cut and causal-record separation | Substrate boundary | KFD-1 formal reference and KFD-7 Profile role declarations | Structural plus product evidence |
 | Atlas/Pursuit/Warrant separation | Action responsibilities | `schemas/kfd-7/action-contract.schema.json` required role closure | Structural plus product and semantic review |
-| `I3-I8` conditional independence | Gate and Activation | Counterfactual product fixtures | Not yet implemented |
-| `I13-I14` conservative session limit | Conservative session limit | theorem reference, Profile refinement, session round-trip, and complexity-breakpoint evidence | Structural gate implemented; product proof remains external |
-| `I15` context insufficiency | Context insufficiency corollary | same-payload, different-valid-action-set counterexamples | Structural gate implemented; product proof remains external |
+| `I3-I8` conditional independence | Gate and Activation | Counterfactual product fixtures | Retained in the Buildchain and Kungfu Profile cuts |
+| `I13-I14` conservative session limit | Conservative session limit | theorem reference, Profile refinement, session round-trip, and complexity-breakpoint evidence | Retained in both qualified Profiles |
+| `I15` context insufficiency | Context insufficiency corollary | same-payload, different-valid-action-set counterexamples | Retained in both qualified Profiles |
 | `I9-I10` path composition and admission | Action closure | Domain Episode/Fact profiles | Mixed |
 | transition and denial declaration | Reference Profile contract | `transitions[]` | Independent schema verification |
-| evidence and non-claim closure | Activation | `evidenceObligations[]`, `nonClaims[]`, `activation` | Independent schema verification; runtime proof remains external |
+| evidence and non-claim closure | Activation | `evidenceObligations[]`, `nonClaims[]`, `activation` | Independent schema and product verification |
 | Decision/formal/package identity | Verification | `registry.json`, `standards.json`, `scripts/check.mjs` | Machine |
-| KFD-7 activation | Activation | qualified Profile, exact evidence cut, independent review, product witnesses | Not yet proved |
+| KFD-7 activation | Activation | qualified Profile, exact evidence cut, independent review, product witnesses | Activated at `evidence/kfd-7/activation-record.json` |
 
 ## Confidence and non-claims
 
 The state/path distinction has high confidence as a model of admitted facts and
 causal experience. The minimality and cross-domain transfer of Atlas, Pursuit,
-and Warrant have medium-high architectural confidence and remain subject to
-the activation gate.
+and Warrant have high first-party engineering confidence across the two
+qualified Profiles. Universal minimality and future Profile fitness remain
+open rather than inherited from activation.
 
 KFD-7 does not claim literal physical spacetime, three Euclidean dimensions, a
 global clock, a total causal order, one storage engine, one serialization, one

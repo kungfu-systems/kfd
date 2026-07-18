@@ -1,6 +1,6 @@
 {
   "name": "@kungfu-tech/kfd",
-  "version": "1.0.0-alpha.35",
+  "version": "1.0.0-alpha.36",
   "description": "Kung Fu Decisions (KFD): the kungfu-systems organization-wide decision registry, as a consumable artifact",
   "license": "Apache-2.0",
   "bin": {
@@ -25,6 +25,7 @@
     ".buildchain/kfd-2",
     ".buildchain/kfd-3",
     "docs",
+    "evidence",
     "bin",
     "verifier/Cargo.toml",
     "verifier/Cargo.lock",
@@ -63,7 +64,8 @@
     "./schemas/*.json": "./schemas/*.json",
     "./schemas/*/*.json": "./schemas/*/*.json",
     "./decisions/*.md": "./decisions/*.md",
-    "./docs/*": "./docs/*"
+    "./docs/*": "./docs/*",
+    "./evidence/kfd-7/activation-record.json": "./evidence/kfd-7/activation-record.json"
   },
   "scripts": {
     "check": "node scripts/check.mjs && npm run check:verifier",

@@ -1395,9 +1395,9 @@
             "classes": [
               "cross-time"
             ],
-            "description": "Published numbered draft KFD-7 decision at decisions/KFD-7.md.",
+            "description": "Published active KFD-7 decision at decisions/KFD-7.md.",
             "sourcePath": "decisions/KFD-7.md",
-            "weldRationale": "Consumers can audit KFD-7 identity, draft status, action-responsibility separation, activation gate, and relationship to KFD-1 through KFD-6.",
+            "weldRationale": "Consumers can audit KFD-7 identity, active status, action-responsibility separation, activation evidence, and relationship to KFD-1 through KFD-6.",
             "impactProjection": {
               "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
               "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
@@ -1411,7 +1411,7 @@
             "classes": [
               "cross-time"
             ],
-            "description": "Published KFD-7 draft usage documentation surface at docs/KFD-7-usage.md.",
+            "description": "Published KFD-7 usage and adoption documentation surface at docs/KFD-7-usage.md.",
             "sourcePath": "docs/KFD-7-usage.md",
             "weldRationale": "Humans and agents can inspect package surfaces, progressive-disclosure guidance, draft Profile declarations, adoption obligations, and the explicit non-qualifying activation boundary.",
             "impactProjection": {
@@ -1427,7 +1427,7 @@
             "classes": [
               "cross-time"
             ],
-            "description": "Published KFD-7 draft formal reference at docs/KFD-7-formal.md.",
+            "description": "Published KFD-7 formal reference at docs/KFD-7-formal.md.",
             "sourcePath": "docs/KFD-7-formal.md",
             "weldRationale": "Consumers can audit and cite the versioned non-normative Fact/Episode and action-responsibility reference model for KFD-7.",
             "impactProjection": {
@@ -1643,7 +1643,7 @@
         "status": "experimental",
         "normative": false,
         "authorityPath": "decisions/KFD-4.md",
-        "sha256": "4bee9aa85e2c2f9c35abe3ec1eb0663e8e242fa9dc4a36a7f55caeac78ce9012"
+        "sha256": "30b23a7eb48471272a2d2eede75c79ce3cfbb4fa61e6c16e06b1935a082d1d34"
       },
       "compatibility": {
         "packageLine": "v1.0",
@@ -1883,13 +1883,13 @@
       "label": "KFD-7",
       "title": "Real-world action must keep its responsibilities distinct",
       "kind": "principle",
-      "status": "draft",
-      "revision": 2,
+      "status": "active",
+      "revision": 3,
       "metadataSchemaVersion": "2",
       "document": {
         "path": "decisions/KFD-7.md",
         "url": "https://kfd.libkungfu.dev/7",
-        "sha256": "5cdde3f7dffabbee5da1edbea462a7c0b5d0c4650bec9cbd602bbad6aad2869f"
+        "sha256": "e64176dbfe45221956074f7de06f093da5d1697b90e58fbe6b8b9d6384055075"
       },
       "formalModel": {
         "path": "docs/KFD-7-formal.md",
@@ -1898,7 +1898,7 @@
         "status": "experimental",
         "normative": false,
         "authorityPath": "decisions/KFD-7.md",
-        "sha256": "a588862b9f64a33d111c343ee1cc2c84a2e789049b345b549bf3dba3d95203ea"
+        "sha256": "5f123e8f561767db2b40f15c9f3bbebb0d54f3f3644e725c12cd6be613db3e46"
       },
       "compatibility": {
         "packageLine": "v1.0",
@@ -1922,6 +1922,52 @@
           "schemaPath": "schemas/kfd-7/action-contract.schema.json",
           "compatibilityRule": "Compatible Profile-owned lifecycle additions may keep schemaVersion 2; semantic or required-field changes to responsibility, theorem applicability, transition, evidence, non-claim, or activation meaning require a new interface version or contract."
         }
+      },
+      "surfaceRegister": {
+        "factSource": "evidence/kfd-7/activation-record.json",
+        "surfaceClasses": [
+          "cross-time"
+        ],
+        "compatibilityImpactClasses": [
+          "breaking",
+          "additive",
+          "none",
+          "unclassifiable"
+        ],
+        "surfaces": [
+          {
+            "id": "kfd-7-activation-evidence",
+            "class": "cross-time",
+            "classes": [
+              "cross-time"
+            ],
+            "description": "Commit-addressed cross-product qualification and activation evidence for KFD-7.",
+            "sourcePath": "evidence/kfd-7/activation-record.json",
+            "weldRationale": "Consumers can distinguish structural schema validity from retained Profile qualification, product availability, independent review, and the KFD-level activation verdict.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to the evidence contract or activation meaning require an explicit compatibility action before a dependent gate may pass.",
+              "additive": "Additional product witnesses or compatible evidence fields must preserve prior coordinates and claim boundaries.",
+              "none": "Changes outside this registered evidence surface do not change its KFD-7 activation cut.",
+              "unclassifiable": "If evidence impact cannot be classified, activation must fail closed until the surface register is repaired."
+            }
+          },
+          {
+            "id": "kfd-7-activation-guide",
+            "class": "cross-time",
+            "classes": [
+              "cross-time"
+            ],
+            "description": "Human-readable qualification cut, evidence boundary, and non-claims for KFD-7 activation.",
+            "sourcePath": "docs/KFD-7-activation.md",
+            "weldRationale": "Humans and agents receive the same product coordinates, decision boundary, and non-claims as the machine evidence record.",
+            "impactProjection": {
+              "breaking": "A conflicting or weaker activation boundary requires correction before a dependent gate may pass.",
+              "additive": "Compatible clarification may extend the guide without changing the retained machine verdict.",
+              "none": "Editorial changes that preserve the machine record and claim boundary do not change activation semantics.",
+              "unclassifiable": "If the guide and machine evidence cannot be reconciled, activation must fail closed."
+            }
+          }
+        ]
       },
       "concepts": {
         "factCut": "declared fact cut",

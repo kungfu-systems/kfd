@@ -1,6 +1,6 @@
 # KFD-7: Real-world action must keep its responsibilities distinct
 
-- Status: draft
+- Status: active
 - Number: 7
 - Kind: principle
 - Applies to: every kungfu-systems product, repository, agent workflow, and participant-facing interface that represents consequential real-world action
@@ -15,16 +15,19 @@ reality, and returns as independently replayable causal experience.
 
 ## Status and gate
 
-KFD-7 is a numbered draft promoted from the
+KFD-7 is an active numbered decision promoted from the
 [cross-domain action-Primitive candidate](../drafts/action-state-separation.md).
-Its number and authority are allocated; its activation evidence remains open.
+Its activation binds the exact cross-product evidence cut in
+[`evidence/kfd-7/activation-record.json`](../evidence/kfd-7/activation-record.json)
+and the independent KFD-level review recorded there.
 
 The current model has enough theoretical closure to become an organization
 decision: state and occurrence are not interchangeable, and direction,
-perspective, and authority can change safe action independently. Activation
-still requires product evidence that this separation transfers across domains
-and lowers total reconstruction, authority, and consequence risk without
-forcing unnecessary ceremony on ordinary work.
+perspective, and authority can change safe action independently. The retained
+Buildchain and Kungfu Profiles show that this separation transfers between
+release transactions and durable agent work while preserving a low-complexity
+session projection. Future Profiles still qualify their own mapping, runtime
+behavior, product fitness, and residual risks.
 
 ## Substrate boundary
 
@@ -168,7 +171,7 @@ not prove role necessity, runtime behavior, product fitness, or activation.
 
 ## Activation
 
-KFD-7 remains draft until real product evidence:
+KFD-7 activation is grounded in retained product evidence that:
 
 - demonstrates counterfactual independence by holding two action
   responsibilities fixed while varying the third;
@@ -185,10 +188,10 @@ KFD-7 remains draft until real product evidence:
   alternatives;
 - demonstrates lower total lifecycle cost or materially safer action.
 
-An `activate` verdict additionally binds an exact evidence cut, independent
-review, at least one retained product witness, and no planned or failed
-evidence obligation. Missing evidence remains visible; it is never projected
-as pass.
+The `activate` verdict binds two qualified product Profiles, exact
+implementation and availability cuts, independent product and KFD-level
+reviews, retained runtime witnesses, and no planned or failed evidence
+obligation. Missing evidence remains visible; it is never projected as pass.
 
 Failure is evidence for revision, simplification, or rejection of the proposed
 profiles. It is not permission to infer one responsibility from another.
@@ -215,16 +218,15 @@ non-drifting facts
 ## Verification
 
 The non-normative reference semantics are published in
-`docs/KFD-7-formal.md`. The draft Profile contract is published at
+`docs/KFD-7-formal.md`. The Profile contract is published at
 `schemas/kfd-7/action-contract.schema.json` and is implemented independently by
 the native and WebAssembly verifier projections. Current package verification
 proves document, metadata, route, digest, declaration, and negative-fixture
-closure. It does not prove cross-domain minimality, runtime behavior, product
-usability, or activation.
+closure. The activation evidence additionally binds product-owned runtime and
+release qualification without claiming universal minimality.
 
 ## Adopters
 
-Experimental adopters cite KFD-7 when they expose the action model and keep its
-status `draft`. They own the evidence for role independence, fact-cut
-admission, causal fidelity, authority correctness, progressive disclosure, and
-domain transfer.
+Adopters cite KFD-7 when they expose the action model. They own the evidence
+for role independence, fact-cut admission, causal fidelity, authority
+correctness, progressive disclosure, and domain transfer.
