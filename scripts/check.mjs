@@ -1585,6 +1585,9 @@ if (!kfd3Interface) {
       candidateRegistrySchemaPath,
       "drafts/README.md",
       "drafts/action-state-separation.md",
+      "drafts/atlas-action-perspective.md",
+      "drafts/pursuit-intent-continuity.md",
+      "drafts/warrant-bounded-authority.md",
       "CONTRIBUTING.md",
     ]) {
       if (!candidateEvidence?.facts?.some((fact) => fact.path === requiredPath)) {
