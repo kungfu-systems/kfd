@@ -1,0 +1,64 @@
+name: KFD adopter Profile
+description: Share an adoption scope, implementation result, or interoperability need.
+title: "[KFD adopter] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Adopter Profiles help KFD test portability beyond its founding implementation. Adoption does not imply certification, endorsement, or maintainer authority.
+  - type: input
+    id: adopter
+    attributes:
+      label: Adopter
+      description: Name the project, product, company, organization, or research group. A public repository or product link is useful when available.
+    validations:
+      required: true
+  - type: input
+    id: contact
+    attributes:
+      label: Public contact or repository
+      description: Provide a public issue tracker, repository, or contact path for follow-up.
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Adoption scope
+      description: List the KFD decisions, Profiles, interfaces, repositories, runtimes, or organizational boundaries being adopted.
+    validations:
+      required: true
+  - type: textarea
+    id: mapping
+    attributes:
+      label: Implementation mapping
+      description: Explain how KFD concepts map to the adopter's own objects, states, evidence, and authority.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Qualification evidence
+      description: Link implementations, tests, receipts, schemas, reports, or other evidence. Clearly identify unavailable evidence.
+    validations:
+      required: true
+  - type: textarea
+    id: gaps
+    attributes:
+      label: Gaps, extensions, and non-claims
+      description: Identify unsupported requirements, local extensions, open questions, and claims the adopter is not making.
+    validations:
+      required: true
+  - type: textarea
+    id: interests
+    attributes:
+      label: Material interests
+      description: Disclose relevant organizational, financial, product, or implementation interests. Write "none known" when none apply.
+    validations:
+      required: true
+  - type: checkboxes
+    id: acknowledgements
+    attributes:
+      label: Acknowledgements
+      options:
+        - label: I understand that this Profile remains adopter-owned evidence and does not constitute KFD certification or endorsement.
+          required: true

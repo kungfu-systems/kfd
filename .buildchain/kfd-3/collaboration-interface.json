@@ -51,6 +51,21 @@
       "description": "A human or agent maintaining KFD decisions, metadata, package surfaces, and release evidence."
     },
     {
+      "id": "external-contributor",
+      "kind": "extension-author",
+      "description": "A participant proposing, challenging, implementing, or supplying evidence for KFD work without requiring kungfu-systems affiliation."
+    },
+    {
+      "id": "adopter",
+      "kind": "other",
+      "description": "A project, product, organization, or research group declaring an independent KFD adoption scope and owning its implementation evidence."
+    },
+    {
+      "id": "independent-reviewer",
+      "kind": "other",
+      "description": "A participant reviewing KFD claims, qualification evidence, compatibility impact, or governance without authoring the reviewed change."
+    },
+    {
       "id": "package-consumer",
       "kind": "api-consumer",
       "description": "A downstream repository consuming the @kungfu-tech/kfd package."
@@ -108,6 +123,18 @@
       "surface": "docs/MAP.md",
       "participants": ["human-reader", "agent-reader", "maintainer"],
       "purpose": "Route readers and agents to the right KFD document or machine surface."
+    },
+    {
+      "id": "contributing",
+      "surface": "CONTRIBUTING.md",
+      "participants": ["human-reader", "agent-reader", "external-contributor", "adopter", "independent-reviewer", "maintainer"],
+      "purpose": "Propose, challenge, implement, qualify, review, or revise KFD work through the public evidence process."
+    },
+    {
+      "id": "governance",
+      "surface": "GOVERNANCE.md",
+      "participants": ["human-reader", "agent-reader", "external-contributor", "adopter", "independent-reviewer", "maintainer"],
+      "purpose": "Understand open participation, canonical stewardship, decision authority, conflicts, and maintainer succession."
     },
     {
       "id": "official-status-and-trademarks",
@@ -227,6 +254,54 @@
       "participants": ["human-reader", "agent-reader", "maintainer"],
       "value": "Document map for routing questions to KFD decisions and machine surfaces.",
       "discoverability": { "fromMinimalEntrypoint": true, "path": "docs/MAP.md" },
+      "maturity": "stable"
+    },
+    {
+      "id": "contributing",
+      "kind": "markdown-doc",
+      "participants": ["human-reader", "agent-reader", "external-contributor", "adopter", "independent-reviewer", "maintainer"],
+      "value": "Public proposal, counterevidence, implementation, qualification, review, and revision process.",
+      "discoverability": { "fromMinimalEntrypoint": true, "path": "CONTRIBUTING.md" },
+      "maturity": "stable"
+    },
+    {
+      "id": "governance",
+      "kind": "markdown-doc",
+      "participants": ["human-reader", "agent-reader", "external-contributor", "adopter", "independent-reviewer", "maintainer"],
+      "value": "Open-standard roles, canonical stewardship, public decision criteria, conflicts, founding adoption, and maintainer succession.",
+      "discoverability": { "fromMinimalEntrypoint": true, "path": "GOVERNANCE.md" },
+      "maturity": "stable"
+    },
+    {
+      "id": "kfd-proposal-form",
+      "kind": "github-issue-form",
+      "participants": ["human-reader", "agent-reader", "external-contributor", "adopter", "maintainer"],
+      "value": "Structured public entry for a KFD Candidate, amendment, qualification, supersession, governance revision, or interoperability proposal.",
+      "discoverability": { "fromMinimalEntrypoint": false, "path": ".github/ISSUE_TEMPLATE/kfd-proposal.yml" },
+      "maturity": "stable"
+    },
+    {
+      "id": "kfd-counterevidence-form",
+      "kind": "github-issue-form",
+      "participants": ["human-reader", "agent-reader", "external-contributor", "independent-reviewer", "maintainer"],
+      "value": "Structured public entry for counterexamples, falsifiers, supporting evidence, compatibility failures, and independent implementation results.",
+      "discoverability": { "fromMinimalEntrypoint": false, "path": ".github/ISSUE_TEMPLATE/kfd-counterevidence.yml" },
+      "maturity": "stable"
+    },
+    {
+      "id": "kfd-adopter-profile-form",
+      "kind": "github-issue-form",
+      "participants": ["human-reader", "agent-reader", "adopter", "external-contributor", "maintainer"],
+      "value": "Structured public entry for an independent adopter scope, implementation mapping, qualification evidence, gaps, extensions, and non-claims.",
+      "discoverability": { "fromMinimalEntrypoint": false, "path": ".github/ISSUE_TEMPLATE/adopter-profile.yml" },
+      "maturity": "stable"
+    },
+    {
+      "id": "kfd-pull-request-template",
+      "kind": "github-pull-request-template",
+      "participants": ["external-contributor", "adopter", "independent-reviewer", "maintainer"],
+      "value": "Review checklist for claim boundaries, evidence, interests, independent review, compatibility, immutability, and release impact.",
+      "discoverability": { "fromMinimalEntrypoint": false, "path": ".github/pull_request_template.md" },
       "maturity": "stable"
     },
     {
@@ -361,10 +436,12 @@
   "valueEvidence": [
     {
       "id": "kfd-foundation-model",
-      "claim": "KFD helps humans and agents understand the foundation model and inspect precise non-normative formal references before adopting or extending kungfu-systems decisions.",
-      "participants": ["human-reader", "agent-reader", "maintainer"],
+      "claim": "KFD helps humans and agents understand the foundation model and inspect precise non-normative formal references before adopting or extending KFD decisions.",
+      "participants": ["human-reader", "agent-reader", "external-contributor", "adopter", "independent-reviewer", "maintainer"],
       "facts": [
         { "path": "README.md" },
+        { "path": "CONTRIBUTING.md" },
+        { "path": "GOVERNANCE.md" },
         { "path": "docs/foundation-model.md" },
         { "path": "docs/formal-model.md" },
         { "path": "docs/KFD-1-formal.md" },
@@ -491,9 +568,11 @@
     },
     {
       "id": "kfd-extension-path",
-      "claim": "KFD gives humans and agents a visible extension path when the declared interface or taxonomy is insufficient.",
-      "participants": ["agent-reader", "human-reader", "maintainer", "release-system", "package-consumer"],
+      "claim": "KFD gives humans and agents a visible public path to propose, challenge, implement, adopt, or review the standard when a decision, interface, or taxonomy is insufficient.",
+      "participants": ["agent-reader", "human-reader", "external-contributor", "adopter", "independent-reviewer", "maintainer", "release-system", "package-consumer"],
       "facts": [
+        { "path": "CONTRIBUTING.md" },
+        { "path": "GOVERNANCE.md" },
         { "path": "docs/KFD-3-usage.md" },
         { "path": ".buildchain/kfd-3/collaboration-interface.json" },
         { "path": "schemas/kfd-2/trust-taxonomy.schema.json" }
@@ -514,6 +593,13 @@
       "constraint": "Before stable, fully evidenced foundation correction preserves published coordinates and lineage; after Foundation Freeze, substantive semantic changes supersede older KFD numbers instead of changing them in place.",
       "reason": "Decision history and the current number-to-meaning mapping must remain inspectable by humans and agents.",
       "review": "CONTRIBUTING.md and node scripts/check.mjs"
+    },
+    {
+      "id": "open-participation-and-canonical-stewardship",
+      "surface": "CONTRIBUTING.md and GOVERNANCE.md",
+      "constraint": "Any participant may propose, challenge, implement, adopt, or review KFD work; only accountable maintainers may change official numbering, status, and releases through public evidence and review.",
+      "reason": "KFD must remain externally corrigible without making canonical authority ambiguous.",
+      "review": "GOVERNANCE.md and public GitHub history"
     },
     {
       "id": "kfd-site-boundary",
@@ -557,9 +643,25 @@
       "id": "maintain-through-pr",
       "participants": ["maintainer"],
       "choice": "Change KFD through PR review, node scripts/check.mjs, and Buildchain release gates."
+    },
+    {
+      "id": "contribute-or-challenge",
+      "participants": ["external-contributor", "adopter", "independent-reviewer"],
+      "choice": "Use GitHub issues and pull requests to propose, challenge, implement, qualify, or review KFD work under CONTRIBUTING.md and GOVERNANCE.md."
     }
   ],
   "extensionRequests": [
+    {
+      "id": "kfd-standard-proposal",
+      "participants": ["external-contributor", "adopter", "independent-reviewer", "human-reader", "agent-reader"],
+      "trigger": "A participant has a proposed KFD Candidate, amendment, counterexample, adopter Profile, implementation result, or governance improvement.",
+      "requestPath": {
+        "kind": "github-issue",
+        "target": "https://github.com/kungfu-systems/kfd/issues/new?template=kfd-proposal.yml",
+        "template": "Choose the proposal, counterevidence, or adopter Profile issue form and declare the claim boundary, evidence, counterevidence, applicability, interests, and requested outcome."
+      },
+      "expectedOutcome": "Maintainers publicly qualify, revise, route, reject, or advance the contribution against KFD evidence and governance requirements."
+    },
     {
       "id": "kfd-2-trust-taxonomy-extension",
       "participants": ["agent-reader", "maintainer", "release-system", "package-consumer"],
@@ -575,6 +677,6 @@
   "closure": {
     "classificationMode": "closed-world",
     "unclassifiedEntrypointsPolicy": "fail",
-    "reachableSurfaceSource": "This file plus package.json#exports, docs/foundation-model.md, docs/formal-model.md, docs/KFD-*-formal.md, docs/MAP.md, cases/registry.json, drafts/registry.json, registry.json, standards.json, and Buildchain witness files."
+    "reachableSurfaceSource": "This file plus package.json#exports, CONTRIBUTING.md, GOVERNANCE.md, .github/ISSUE_TEMPLATE/*.yml, .github/pull_request_template.md, docs/foundation-model.md, docs/formal-model.md, docs/KFD-*-formal.md, docs/MAP.md, cases/registry.json, drafts/registry.json, registry.json, standards.json, and Buildchain witness files."
   }
 }

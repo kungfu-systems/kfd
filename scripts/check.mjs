@@ -78,11 +78,48 @@ for (const markdownPath of markdownPaths) {
 }
 
 const expectedEvidenceUpdate = "node scripts/update-site-bundle.mjs && node scripts/update-kfd-2-claim.mjs && node scripts/update-kfd-1-witness.mjs && node scripts/update-kfd-3-witness.mjs";
+const expectedPackageDescription = "KFD: an open, evidence-governed engineering standard for fact-bound human-agent systems";
 if (packageJson.scripts?.["update:evidence"] !== expectedEvidenceUpdate) {
   fail("package.json update:evidence must preserve the site -> KFD-2 -> KFD-1 -> KFD-3 dependency order");
 }
+if (packageJson.description !== expectedPackageDescription) {
+  fail("package.json description must preserve KFD's open-standard positioning");
+}
 if (packageJson.bin?.kfd !== "./bin/kfd.mjs") {
   fail("package.json must publish the kfd verifier bin");
+}
+for (const governancePath of ["CONTRIBUTING.md", "GOVERNANCE.md"]) {
+  if (!existsSync(governancePath)) fail(`missing open-governance surface ${governancePath}`);
+  if (!packageJson.files?.includes(governancePath)) fail(`package.json files must publish ${governancePath}`);
+  if (packageJson.exports?.[`./${governancePath}`] !== `./${governancePath}`) {
+    fail(`package.json exports must publish ${governancePath}`);
+  }
+}
+const readmeText = readFileSync("README.md", "utf8");
+const contributingText = readFileSync("CONTRIBUTING.md", "utf8");
+const governanceText = readFileSync("GOVERNANCE.md", "utf8");
+const normalizeWhitespace = (value) => value.replace(/\s+/g, " ").trim();
+if (!normalizeWhitespace(readmeText).includes("Kungfu is its founding implementation, not its adoption boundary.")) {
+  fail("README must distinguish KFD's founding implementation from its adoption boundary");
+}
+if (!normalizeWhitespace(contributingText).includes("Anyone may propose, challenge, implement, test, review, or provide evidence against a KFD.")) {
+  fail("CONTRIBUTING must preserve the open proposal and counterevidence path");
+}
+if (!governanceText.includes("open participation") || !governanceText.includes("canonical stewardship")) {
+  fail("GOVERNANCE must separate open participation from canonical stewardship");
+}
+for (const issueTemplatePath of [
+  ".github/ISSUE_TEMPLATE/kfd-proposal.yml",
+  ".github/ISSUE_TEMPLATE/kfd-counterevidence.yml",
+  ".github/ISSUE_TEMPLATE/adopter-profile.yml",
+]) {
+  if (!existsSync(issueTemplatePath)) fail(`missing open-governance issue template ${issueTemplatePath}`);
+}
+const pullRequestTemplate = readFileSync(".github/pull_request_template.md", "utf8");
+for (const requiredHeading of ["## Claim and evidence", "## Interests and review", "## Compatibility and registry agreement"]) {
+  if (!pullRequestTemplate.includes(requiredHeading)) {
+    fail(`pull request template must preserve open-governance review field ${requiredHeading}`);
+  }
 }
 if (packageJson.exports?.["./verifier/bundle.schema.json"] !== "./schemas/kfd-verification-bundle.schema.json") {
   fail("package.json must export the verifier bundle schema");
@@ -766,6 +803,14 @@ for (const e of registry.entries) {
     if (!doc.startsWith(`# ${e.id}:`)) fail(`${e.path} heading does not open with "# ${e.id}:"`);
     if (!doc.includes(`Status: ${e.status}`)) fail(`${e.path} status line does not say ${e.status}`);
     if (!doc.includes(`Kind: ${e.kind}`)) fail(`${e.path} kind line does not say ${e.kind}`);
+    const applicability = doc.match(/^- Applies to:\s*(.+)$/m)?.[1];
+    if (!applicability) fail(`${e.path} must declare adopter-facing applicability`);
+    if (applicability?.includes("every kungfu-systems")) {
+      fail(`${e.path} must not limit the portable standard to kungfu-systems`);
+    }
+    if (e.id !== "KFD-1" && !applicability?.startsWith("any adopting ")) {
+      fail(`${e.path} applicability must start with "any adopting"`);
+    }
     if (e.status === "superseded") {
       for (const successor of superseded.get(e.id) ?? []) {
         if (!doc.includes(successor)) fail(`${e.path} does not cite successor ${successor}`);
@@ -1743,6 +1788,16 @@ if (!kfd3Interface) {
   if (!kfd3Interface.surfaces.some((entry) => entry.id === "official-status-and-trademarks" && entry.discoverability?.path === "TRADEMARKS.md")) {
     fail("KFD-3 collaboration interface must expose TRADEMARKS.md as a participant-facing surface");
   }
+  for (const [surfaceId, surfacePath] of [
+    ["kfd-proposal-form", ".github/ISSUE_TEMPLATE/kfd-proposal.yml"],
+    ["kfd-counterevidence-form", ".github/ISSUE_TEMPLATE/kfd-counterevidence.yml"],
+    ["kfd-adopter-profile-form", ".github/ISSUE_TEMPLATE/adopter-profile.yml"],
+    ["kfd-pull-request-template", ".github/pull_request_template.md"],
+  ]) {
+    if (!kfd3Interface.surfaces.some((entry) => entry.id === surfaceId && entry.discoverability?.path === surfacePath)) {
+      fail(`KFD-3 collaboration interface must classify ${surfacePath} as ${surfaceId}`);
+    }
+  }
   if (!Array.isArray(kfd3Interface.valueEvidence) || kfd3Interface.valueEvidence.length === 0) {
     fail("KFD-3 collaboration interface valueEvidence[] is required");
   } else {
@@ -1808,6 +1863,9 @@ if (!kfd3Interface) {
     }
   }
   if (!Array.isArray(kfd3Interface.extensionRequests) || kfd3Interface.extensionRequests.length === 0) fail("KFD-3 collaboration interface extensionRequests[] is required");
+  if (!kfd3Interface.extensionRequests.some((entry) => entry.id === "kfd-standard-proposal" && entry.requestPath?.kind === "github-issue" && String(entry.requestPath?.target || "").includes("template=kfd-proposal.yml"))) {
+    fail("KFD-3 collaboration interface must declare the public KFD proposal path");
+  }
   if (!kfd3Interface.extensionRequests.some((entry) => entry.id === "kfd-2-trust-taxonomy-extension" && entry.requestPath?.kind === "github-issue" && String(entry.requestPath?.target || "").startsWith("https://github.com/kungfu-systems/kfd/issues/new"))) {
     fail("KFD-3 collaboration interface must declare the KFD-2 trust taxonomy GitHub issue extension path");
   }
@@ -1878,7 +1936,7 @@ if (kfd3PrebuildWitness && kfd3ArtifactWitness) {
 }
 
 const impactLevels = new Set(["patch", "minor", "major"]);
-const requiredSurfaces = new Set(["kfd-content", "kfd-registry-schema", "kfd-candidate-registry", "kfd-standards-metadata", "kfd-package-structure", "kfd-independent-verifier", "kfd-verifier-contracts", "kfd-2-public-release-trust-claim", "kfd-3-trusted-value-evidence", "kfd-site-decision-usage-pages"]);
+const requiredSurfaces = new Set(["kfd-content", "kfd-open-standard-governance", "kfd-registry-schema", "kfd-candidate-registry", "kfd-standards-metadata", "kfd-package-structure", "kfd-independent-verifier", "kfd-verifier-contracts", "kfd-2-public-release-trust-claim", "kfd-3-trusted-value-evidence", "kfd-site-decision-usage-pages"]);
 
 if (releaseImpact.schemaVersion !== 1) fail(`unsupported release-impact schemaVersion ${releaseImpact.schemaVersion}`);
 if (releaseImpact.contract !== "kungfu-buildchain-impact") fail(`unexpected release-impact contract ${releaseImpact.contract}`);

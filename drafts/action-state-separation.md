@@ -177,7 +177,7 @@ The candidate rejects systems that infer:
 
 Promotion allocated KFD-7 after the responsibility split, substrate boundary,
 conditional distinguishability argument, source lineage, and explicit
-maintainer judgment became sufficiently coherent for a numbered organization
+maintainer judgment became sufficiently coherent for a numbered standard
 decision. Numbering does not certify activation.
 
 The remaining activation gate is owned by `decisions/KFD-7.md` and requires:

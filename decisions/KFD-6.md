@@ -3,7 +3,7 @@
 - Status: draft
 - Number: 6
 - Kind: procedure
-- Applies to: every kungfu-systems autonomous or agent-operated system that proposes primitives, models, policies, or contracts from episode, event, trace, or experience corpora
+- Applies to: any adopting autonomous or agent-operated system that proposes Primitives, models, policies, or contracts from Episode, event, trace, or experience corpora
 
 ## One sentence
 

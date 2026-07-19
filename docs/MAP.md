@@ -3,6 +3,9 @@
 | Your question | Document |
 |---|---|
 | What future does KFD describe, and what decisions exist? | [`../README.md`](../README.md) |
+| Is KFD an internal kungfu-systems rulebook or an open engineering standard? | [`../README.md`](../README.md#what-kfd-is) and [`../GOVERNANCE.md`](../GOVERNANCE.md) |
+| Who may propose, challenge, implement, adopt, or review a KFD? | [`../CONTRIBUTING.md`](../CONTRIBUTING.md) |
+| Who controls official KFD numbering, status, and releases? | [`../GOVERNANCE.md`](../GOVERNANCE.md#canonical-authority) |
 | What is the KFD-1/2/3 foundation triad? | [`../README.md`](../README.md#foundation-triad) |
 | What worldview structure does the foundation triad express? | [`foundation-model.md`](foundation-model.md) |
 | What is the shared formal notation and authority boundary? | [`formal-model.md`](formal-model.md) |

@@ -97,7 +97,7 @@ Promotion requires:
    success do not synthesize authority;
 6. a product witness that reduces repeated authority investigation without
    encouraging over-broad standing permission;
-7. independent review of whether Warrant belongs at organization level.
+7. independent review of whether Warrant belongs at standard level.
 
 ## Falsifiers
 

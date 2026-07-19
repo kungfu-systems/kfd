@@ -13,9 +13,16 @@ demanding. KFD asks how humans and agents can make that process inspectable.
 Kungfu opens the path from agents that answer questions to a civilization that
 can discover when it has named reality incorrectly.
 
+KFD is an open, evidence-governed engineering standard under development for
+fact-bound human-agent systems. It defines portable principles, procedures,
+schemas, and verification contracts for facts, trust, cooperation,
+perspective, Primitive discovery, and consequential real-world action. Kungfu
+is its founding implementation, not its adoption boundary.
+
 ## Foundation triad
 
-The first three KFDs form the public foundation for kungfu-systems:
+The first three KFDs form the public foundation for KFD adopters and the
+binding foundation for kungfu-systems:
 
 ```text
 KFD-1: facts must not drift.
@@ -39,10 +46,15 @@ No principle is load-bearing until it has an inspectable product witness.
 
 ## What KFD is
 
-KFD is the organization-wide decision registry of kungfu-systems: the small
-set of standing, cross-repository norms that products and their consumers weld
-to. Each numbered decision has a kind, a status, and a single authoritative
-text in this repository.
+KFD is the canonical open decision registry for a small set of portable
+engineering norms that products, organizations, humans, and agents can adopt.
+Each numbered decision has a kind, a status, and a single authoritative text
+in this repository.
+
+Kungfu-systems founded KFD, stewards the official namespace and release
+surfaces, and adopts active KFDs across the scopes declared by its products.
+Other adopters remain independent: they declare their own adoption scope,
+Profile mapping, evidence, qualification, and residual risk.
 
 A **KFD Candidate** is a non-normative, pre-number draft under `drafts/`. It may
 carry a non-binding slot hint, but only explicit promotion allocates a KFD
@@ -51,8 +63,9 @@ number. A **numbered draft** already appears under `decisions/` and
 open.
 
 KFDs can be **principles** or **procedures**. Principles state what must remain
-true across kungfu-systems; procedures state how a class of work enforces or
-protects a principle. During the pre-stable line, maintainer-authorized
+true within a declared adoption scope; procedures state how a class of work
+enforces or protects a principle. During the pre-stable line,
+maintainer-authorized
 Foundation Revision remains possible under the evidence, lineage, and review
 requirements in `CONTRIBUTING.md`, while every published prerelease coordinate
 stays immutable. The first stable release freezes number-to-meaning mappings.
@@ -61,6 +74,26 @@ supersedes the old number. The numbered decisions remain authoritative; the
 [foundation model](docs/foundation-model.md) explains how they fit together.
 
 Stable rendered site: `https://kfd.libkungfu.dev`.
+
+## Open evolution
+
+KFD is developed in public. Any person, agent, project, company, or research
+group may:
+
+- propose a KFD Candidate or a narrower amendment;
+- submit counterexamples, disconfirming evidence, or compatibility concerns;
+- contribute an adopter Profile, independent implementation, or verifier;
+- improve schemas, formal references, terminology, and usage guidance;
+- review a proposal or challenge the qualification of an existing decision.
+
+Open contribution does not make every proposal normative and does not turn KFD
+into governance by popularity. Official KFD maintainers steward the canonical
+namespace and must make acceptance, revision, activation, rejection, and
+supersession decisions against public evidence, declared gates, conflicts, and
+review records.
+
+[Read the contribution process](CONTRIBUTING.md) ·
+[Read the governance model](GOVERNANCE.md)
 
 ## Adoption boundary
 

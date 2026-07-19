@@ -14,7 +14,7 @@
 
 This page makes the Atlas candidate precise enough to compare with context,
 snapshot, retrieval, report, and world-model alternatives. It does not allocate
-KFD-8 or turn one product representation into an organization rule.
+KFD-8 or turn one product representation into a standard rule.
 
 ## Object model
 
@@ -162,4 +162,4 @@ authority.
 This model does not prove that Atlas is universally necessary, require one
 serialization or storage engine, define a God's-eye state, make every context
 an Atlas, or allocate a KFD number. Product schemas and lifecycle vocabulary
-remain adopter-owned until promotion establishes a narrower organization rule.
+remain adopter-owned until promotion establishes a narrower standard rule.

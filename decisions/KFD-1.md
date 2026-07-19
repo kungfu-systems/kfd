@@ -3,7 +3,7 @@
 - Status: active
 - Number: 1
 - Kind: procedure
-- Applies to: every kungfu-systems repository (including this one)
+- Applies to: the KFD project itself and any adopting repository, package, service, or system that exposes a load-bearing contract world
 
 ## One sentence
 
