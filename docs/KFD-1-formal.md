@@ -9,6 +9,7 @@
 - Normative: no
 - Formal model version: 3
 - Authority: `decisions/KFD-1.md`
+- Decision status: active
 
 ## Imported vocabulary
 
