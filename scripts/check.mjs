@@ -687,6 +687,14 @@ for (const e of registry.entries) {
       fail(`${expectedPath} must declare formal model version ${formalModel?.version}`);
     }
     if (!formalDoc.includes(`- Authority: \`${e.path}\``)) fail(`${expectedPath} must bind authority to ${e.path}`);
+    const decisionStatusLines = formalDoc
+      .split("\n")
+      .filter((line) => line.startsWith("- Decision status: "));
+    if (decisionStatusLines.length !== 1) {
+      fail(`${expectedPath} must declare exactly one decision status`);
+    } else if (decisionStatusLines[0] !== `- Decision status: ${e.status}`) {
+      fail(`${expectedPath} decision status must match registry status ${e.status}`);
+    }
   }
 }
 for (const decisionId of formalPagesByDecision.keys()) {
