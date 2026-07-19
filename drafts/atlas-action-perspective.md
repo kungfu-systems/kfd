@@ -100,7 +100,7 @@ Promotion requires:
 5. counterexamples where a separate Atlas adds no value;
 6. a dual-first product witness in which humans and agents resolve the same
    Atlas authority and degradation state;
-7. independent review of whether Atlas belongs at organization level.
+7. independent review of whether Atlas belongs at standard level.
 
 ## Falsifiers
 

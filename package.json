@@ -1,13 +1,15 @@
 {
   "name": "@kungfu-tech/kfd",
   "version": "1.0.0-alpha.36",
-  "description": "Kung Fu Decisions (KFD): the kungfu-systems organization-wide decision registry, as a consumable artifact",
+  "description": "KFD: an open, evidence-governed engineering standard for fact-bound human-agent systems",
   "license": "Apache-2.0",
   "bin": {
     "kfd": "./bin/kfd.mjs"
   },
   "files": [
     "README.md",
+    "CONTRIBUTING.md",
+    "GOVERNANCE.md",
     "TRADEMARKS.md",
     "cases",
     "decisions",
@@ -38,6 +40,8 @@
   "exports": {
     "./package.json": "./package.json",
     "./README.md": "./README.md",
+    "./CONTRIBUTING.md": "./CONTRIBUTING.md",
+    "./GOVERNANCE.md": "./GOVERNANCE.md",
     "./TRADEMARKS.md": "./TRADEMARKS.md",
     "./cases/registry.json": "./cases/registry.json",
     "./cases/*": "./cases/*",

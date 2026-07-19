@@ -3,7 +3,7 @@
 - Status: active
 - Number: 3
 - Kind: principle
-- Applies to: every kungfu-systems product, repository, release surface, extension surface, hosted surface, and agent-facing interface that asks humans or agents to understand, decide, comply, cooperate, or delegate work
+- Applies to: any adopting product, repository, release surface, extension surface, hosted surface, or participant-facing interface that asks humans or agents to understand, decide, comply, cooperate, or delegate work
 
 ## One sentence
 
@@ -15,8 +15,8 @@ constraints inspectable enough for intelligent participants to decide.
 
 ## Decision
 
-Kungfu-systems treats humans and agents as reasoning participants, not captive
-tools. Products should make shared work more legible so participants can
+An adopting system treats humans and agents as reasoning participants, not
+captive tools. Products should make shared work more legible so participants can
 coordinate through facts, choice, and explainable constraints rather than
 unilateral pressure.
 

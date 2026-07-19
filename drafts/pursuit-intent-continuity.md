@@ -98,7 +98,7 @@ Promotion requires:
    completion, and settlement;
 6. a product witness that lowers continuity reconstruction without forcing
    unnecessary ceremony;
-7. independent review of whether Pursuit belongs at organization level.
+7. independent review of whether Pursuit belongs at standard level.
 
 ## Falsifiers
 

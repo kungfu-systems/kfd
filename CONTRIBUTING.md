@@ -1,8 +1,68 @@
 # Contributing
 
-KFD entries are maintainer decisions: they record norms the organization has
-already committed to, so they land by pull request from a maintainer rather
-than by open proposal rounds.
+KFD is an open, evidence-governed engineering standard under development.
+Anyone may propose, challenge, implement, test, review, or provide evidence
+against a KFD. The canonical namespace remains stewarded: open participation
+does not make every suggestion normative or replace accountable maintainer
+judgment with popularity.
+
+All public contribution paths use GitHub issues and pull requests. Security
+vulnerabilities are the exception and follow `SECURITY.md`.
+
+## Ways to contribute
+
+Useful contributions include:
+
+- a new KFD Candidate or a narrower amendment to an existing candidate;
+- a counterexample, falsifier, compatibility concern, or contradictory case;
+- an adopter Profile from a new product, organization, or runtime domain;
+- an independent implementation, verifier, schema, or interoperability test;
+- improvements to decision text, formal references, terminology, or usage;
+- qualification, activation, supersession, or rejection review;
+- evidence that an active KFD should be clarified, narrowed, or superseded.
+
+Use an issue when the claim boundary, alternatives, or evidence are still being
+formed. Use a pull request when the proposed text, machine surfaces, impact,
+and verification path are concrete enough to review.
+
+GitHub provides structured entry points for a
+[KFD proposal](https://github.com/kungfu-systems/kfd/issues/new?template=kfd-proposal.yml),
+[counterexample or evidence](https://github.com/kungfu-systems/kfd/issues/new?template=kfd-counterevidence.yml),
+and an
+[adopter Profile](https://github.com/kungfu-systems/kfd/issues/new?template=adopter-profile.yml).
+Blank issues remain available when none of those forms fits.
+
+External proposals are not required to use Kungfu products or terminology.
+They must preserve KFD identity, evidence, authority, and compatibility
+boundaries where those boundaries are relevant to the proposal.
+
+## Proposal lifecycle
+
+The public lifecycle is:
+
+```text
+discussion or issue
+  -> proposal
+  -> KFD Candidate
+  -> qualification evidence
+  -> explicit promotion
+  -> numbered draft
+  -> independent review and activation evidence
+  -> active KFD
+  -> explicit supersession when necessary
+```
+
+A proposal may be accepted, revised, split, merged, kept provisional, rejected,
+or closed with `no new KFD is justified`. Material outcomes should preserve a
+public rationale and the evidence or missing evidence that determined them.
+
+Maintainers own the official numbering, status, release, and namespace
+decisions. They do not own the underlying reality: adopter evidence,
+counterexamples, and independent review remain first-class inputs and must not
+be discarded merely because they originated outside kungfu-systems.
+
+See `GOVERNANCE.md` for roles, decision authority, conflicts, and maintainer
+succession.
 
 ## Candidates and numbered drafts
 
@@ -21,6 +81,11 @@ updates `registry.json`, and records lineage from the candidate. A slot hint
 must never be cited as a KFD number or treated as a promise that the candidate
 will receive that number.
 
+A contributor may propose a candidate by issue or pull request. A maintainer is
+required to allocate a number or change official status, but maintainer
+authorship is not required for candidate genesis, evidence, implementation, or
+review.
+
 ## Ground rules
 
 - Every published package, tag, and commit is immutable. Before the first
@@ -37,6 +102,9 @@ will receive that number.
 - Every KFD declares a `kind`: `principle` for standing cross-repository
   truths, or `procedure` for a decision process that enforces or protects a
   principle.
+- Every normative decision states its adopter-facing applicability. A separate
+  founding-adoption statement may bind kungfu-systems more broadly, but it
+  cannot narrow the portable standard to one organization.
 - Every change must keep `registry.json` and `decisions/` in agreement:
   `node scripts/check.mjs` must pass (it is the Buildchain verify gate).
 - Versioning of this package follows KFD-1 itself: the outer package line is
@@ -71,6 +139,11 @@ Foundation Revision must:
 The revision fails closed if its evidence, lineage, or migration mapping is
 incomplete.
 
+External contributors may initiate and supply evidence for a Foundation
+Revision. Explicit maintainer authorization is required because the procedure
+changes the canonical pre-stable foundation, not because the proposal must
+originate inside kungfu-systems.
+
 This procedure does not suspend KFD-1. Before stable, the declared contract is
 that published coordinates are immutable while the latest foundation remains
 revisable only through this procedure. Rewriting history or bypassing the
@@ -81,6 +154,20 @@ confirms the final numbers, order, kinds, statuses, relationships, product
 witnesses, and prerelease lineage. After that freeze, a number and its meaning
 cannot be changed in place; later substantive change requires explicit
 supersession by a new KFD.
+
+## Review and decision record
+
+- A contributor must disclose material organizational, financial, product, or
+  implementation interests relevant to a proposal.
+- The author of a substantive proposal cannot be its only reviewer.
+- Activation and Foundation Revision require an independent reviewer who did
+  not author the change.
+- Maintainers may reject a proposal, but should state the claim boundary,
+  missing evidence, conflict, duplication, or other reason publicly.
+- Adoption by a company, project, or product supplies evidence; it does not
+  automatically grant official status or maintainer authority.
+- Repeated high-quality contribution and review may qualify a participant for
+  maintainership under `GOVERNANCE.md`.
 
 ## Commit conventions
 

@@ -3,7 +3,7 @@
 - Status: active
 - Number: 7
 - Kind: principle
-- Applies to: every kungfu-systems product, repository, agent workflow, and participant-facing interface that represents consequential real-world action
+- Applies to: any adopting product, repository, agent workflow, or participant-facing interface that represents consequential real-world action
 
 ## One sentence
 
@@ -21,7 +21,7 @@ Its activation binds the exact cross-product evidence cut in
 [`evidence/kfd-7/activation-record.json`](../evidence/kfd-7/activation-record.json)
 and the independent KFD-level review recorded there.
 
-The current model has enough theoretical closure to become an organization
+The current model has enough theoretical closure to become an active standard
 decision: state and occurrence are not interchangeable, and direction,
 perspective, and authority can change safe action independently. The retained
 Buildchain and Kungfu Profiles show that this separation transfers between

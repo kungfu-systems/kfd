@@ -1,0 +1,67 @@
+name: KFD counterexample or evidence
+description: Challenge, narrow, validate, or supply evidence for KFD work.
+title: "[KFD evidence] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Counterexamples and disconfirming evidence are first-class KFD contributions. A contribution may concern an active decision, numbered draft, pre-number Candidate, implementation, verifier, or governance process.
+  - type: input
+    id: subject
+    attributes:
+      label: KFD subject
+      description: Name the decision, candidate, schema, implementation, claim, or governance rule.
+      placeholder: KFD-3, candidate:example, or a repository path
+    validations:
+      required: true
+  - type: dropdown
+    id: evidence-kind
+    attributes:
+      label: Evidence kind
+      options:
+        - Counterexample or falsifier
+        - Supporting evidence
+        - Compatibility or migration failure
+        - Independent implementation result
+        - Interoperability result
+        - Terminology or claim-boundary problem
+        - Governance or process failure
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context and reproducible facts
+      description: Describe the environment, sequence, inputs, outputs, and links needed to inspect or reproduce the case.
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact on the current claim
+      description: Explain whether the evidence validates, narrows, contradicts, or leaves the claim unresolved.
+    validations:
+      required: true
+  - type: textarea
+    id: expected-response
+    attributes:
+      label: Requested response
+      description: Suggest clarification, more evidence, implementation repair, schema change, continued incubation, rejection, or supersession.
+    validations:
+      required: true
+  - type: textarea
+    id: interests
+    attributes:
+      label: Material interests
+      description: Disclose relevant organizational, financial, product, or implementation interests. Write "none known" when none apply.
+    validations:
+      required: true
+  - type: checkboxes
+    id: acknowledgements
+    attributes:
+      label: Acknowledgements
+      options:
+        - label: I have separated observed facts from my interpretation and requested outcome.
+          required: true
+        - label: This report does not disclose a private security vulnerability.
+          required: true
