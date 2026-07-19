@@ -20,12 +20,12 @@
       "title": "Facts must not drift",
       "kind": "procedure",
       "status": "active",
-      "revision": 5,
+      "revision": 6,
       "metadataSchemaVersion": "2",
       "document": {
         "path": "decisions/KFD-1.md",
         "url": "https://kfd.libkungfu.dev/1",
-        "sha256": "5b91d4693a70d13d8fb11756b4281205ff911bc5386472f7c0af8477e2b095a1"
+        "sha256": "f504d02736a50006786103c31843ab759e54d160056f756780aeb9b7da1a914a"
       },
       "formalModel": {
         "path": "docs/KFD-1-formal.md",
@@ -34,7 +34,7 @@
         "status": "experimental",
         "normative": false,
         "authorityPath": "decisions/KFD-1.md",
-        "sha256": "6cac3e9a0b63bf004f12373c243e976fe4441831cdd3019142e6850bef72e3ab"
+        "sha256": "5ec81c119cd43317949c5128ddadacc46fc8121ec3b19568e82b050598750a12"
       },
       "compatibility": {
         "packageLine": "v1.0",
@@ -862,10 +862,7 @@
           {
             "id": "release-propagation-graph",
             "class": "integration-time",
-            "classes": [
-              "integration-time",
-              "cross-time"
-            ],
+            "classes": ["integration-time", "cross-time"],
             "description": "Published KFD package surface at buildchain.release-propagation.json.",
             "sourcePath": "buildchain.release-propagation.json",
             "weldRationale": "Consumers can integrate with this surface and later audit or replay it as a released fact.",
@@ -1248,7 +1245,10 @@
           {
             "id": "kfd-7-action-contract-schema",
             "class": "integration-time",
-            "classes": ["integration-time", "cross-time"],
+            "classes": [
+              "integration-time",
+              "cross-time"
+            ],
             "description": "Published version 2 KFD-7 action-contract Profile schema.",
             "sourcePath": "schemas/kfd-7/action-contract.schema.json",
             "weldRationale": "Human, agent, product, verifier, and release consumers bind to the same role, transition, theorem reference, qualification evidence, non-claim, and activation declaration.",
@@ -1436,6 +1436,38 @@
               "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
               "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
             }
+          },
+          {
+            "id": "kfd-contributing",
+            "class": "cross-time",
+            "classes": [
+              "cross-time"
+            ],
+            "description": "Published open contribution process at CONTRIBUTING.md.",
+            "sourcePath": "CONTRIBUTING.md",
+            "weldRationale": "Contributors and adopters can audit how proposals, counterevidence, review, and canonical decisions enter KFD.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-governance",
+            "class": "cross-time",
+            "classes": [
+              "cross-time"
+            ],
+            "description": "Published open-standard governance model at GOVERNANCE.md.",
+            "sourcePath": "GOVERNANCE.md",
+            "weldRationale": "Participants can audit the boundary between open participation and accountable canonical stewardship.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
           }
         ]
       }
@@ -1448,12 +1480,12 @@
       "title": "Trust must start from facts",
       "kind": "principle",
       "status": "active",
-      "revision": 2,
+      "revision": 3,
       "metadataSchemaVersion": "2",
       "document": {
         "path": "decisions/KFD-2.md",
         "url": "https://kfd.libkungfu.dev/2",
-        "sha256": "d4f0b56f3f09d4aaa2053c9b382f58f8f6dc726acdba333d33dd2f71d84fba2c"
+        "sha256": "52d41735eaaee0d33ff167d774a196b5d6bc12bdd142ea3b23f844ebee684361"
       },
       "formalModel": {
         "path": "docs/KFD-2-formal.md",
@@ -1462,7 +1494,7 @@
         "status": "experimental",
         "normative": false,
         "authorityPath": "decisions/KFD-2.md",
-        "sha256": "8684c9ffac6069dc03a0aa751f1146e57b779907d8ec78f11007ee8b2dea0916"
+        "sha256": "e50299fcf0d7becb671688324319f6b1c6a4b7bcf27f9196da5fb1189099dec4"
       },
       "compatibility": {
         "packageLine": "v1.0",
@@ -1554,12 +1586,12 @@
       "title": "Cooperation must start from trusted value",
       "kind": "principle",
       "status": "active",
-      "revision": 3,
+      "revision": 4,
       "metadataSchemaVersion": "2",
       "document": {
         "path": "decisions/KFD-3.md",
         "url": "https://kfd.libkungfu.dev/3",
-        "sha256": "b3723cec308ae8516ed211c211a45f669533c8712d538ef8dcbc60630214c29a"
+        "sha256": "4b7ddc7cef597d265db9a5f35ba8f1ef61a7a7f67afc0901d1be46799c3da770"
       },
       "formalModel": {
         "path": "docs/KFD-3-formal.md",
@@ -1568,7 +1600,7 @@
         "status": "experimental",
         "normative": false,
         "authorityPath": "decisions/KFD-3.md",
-        "sha256": "ab97acc5e0c9acdc5ac7e20b36f597b0ea981e21c7cbad2ca39e5bb9d1f69cce"
+        "sha256": "f45089858084d4cd953941e63b67382073f2808d042269343f44c8656f0100a4"
       },
       "compatibility": {
         "packageLine": "v1.0",
@@ -1629,12 +1661,12 @@
       "title": "Views must remain bound to declared perspectives",
       "kind": "principle",
       "status": "active",
-      "revision": 9,
+      "revision": 10,
       "metadataSchemaVersion": "2",
       "document": {
         "path": "decisions/KFD-4.md",
         "url": "https://kfd.libkungfu.dev/4",
-        "sha256": "c624a7a606d4e3a66c40dd88baf1532c7aef9d238c3fb04ade583b5e22b4aba7"
+        "sha256": "911f8d16ddb7a42ed582b9fff6ef5a5090597d5adbdd5159bebe68caeaaae4ef"
       },
       "formalModel": {
         "path": "docs/KFD-4-formal.md",
@@ -1643,7 +1675,7 @@
         "status": "experimental",
         "normative": false,
         "authorityPath": "decisions/KFD-4.md",
-        "sha256": "30b23a7eb48471272a2d2eede75c79ce3cfbb4fa61e6c16e06b1935a082d1d34"
+        "sha256": "31a71f977cc163430b9a29754c7153b861cf23c8935eb9d52dd9f26be010b11b"
       },
       "compatibility": {
         "packageLine": "v1.0",
@@ -1706,12 +1738,12 @@
       "title": "Primitive discovery must separate genesis from qualification",
       "kind": "procedure",
       "status": "active",
-      "revision": 6,
+      "revision": 7,
       "metadataSchemaVersion": "2",
       "document": {
         "path": "decisions/KFD-5.md",
         "url": "https://kfd.libkungfu.dev/5",
-        "sha256": "597e3f22f2e6b830f532f7a426900b112a19b80de43ace8ab42bf78157aced5b"
+        "sha256": "47e3c8f6633e84b798719f76ca4ed19ddf93eeb54b321b98db552e111a697a3e"
       },
       "formalModel": {
         "path": "docs/KFD-5-formal.md",
@@ -1720,7 +1752,7 @@
         "status": "experimental",
         "normative": false,
         "authorityPath": "decisions/KFD-5.md",
-        "sha256": "c4ea4effd0e547e46c66496115f8b11434abe5f80096dad3e90c73ce8056cd3f"
+        "sha256": "d6f1033b3bf5f7afe91fc800bbbc265e486e9e28f0b8e3d8013522beee6ecc3f"
       },
       "compatibility": {
         "packageLine": "v1.0",
@@ -1804,12 +1836,12 @@
       "title": "Autonomous discovery must remain grounded in causal experience",
       "kind": "procedure",
       "status": "draft",
-      "revision": 7,
+      "revision": 8,
       "metadataSchemaVersion": "2",
       "document": {
         "path": "decisions/KFD-6.md",
         "url": "https://kfd.libkungfu.dev/6",
-        "sha256": "1e40e0848fc7bd51abeb5ea8b70efd3b444acbdafaed097bf029e9ed6394292f"
+        "sha256": "4ff5097840aa6b153dd4c130cf88a22d07b0cd18ad56f846abd789cdc9e23dd9"
       },
       "formalModel": {
         "path": "docs/KFD-6-formal.md",
@@ -1884,12 +1916,12 @@
       "title": "Real-world action must keep its responsibilities distinct",
       "kind": "principle",
       "status": "active",
-      "revision": 3,
+      "revision": 4,
       "metadataSchemaVersion": "2",
       "document": {
         "path": "decisions/KFD-7.md",
         "url": "https://kfd.libkungfu.dev/7",
-        "sha256": "e64176dbfe45221956074f7de06f093da5d1697b90e58fbe6b8b9d6384055075"
+        "sha256": "6c574127c43469d2bd434497f47d65b6a13d3a466873e7bd6b9711c78b8d8e17"
       },
       "formalModel": {
         "path": "docs/KFD-7-formal.md",
@@ -1898,7 +1930,7 @@
         "status": "experimental",
         "normative": false,
         "authorityPath": "decisions/KFD-7.md",
-        "sha256": "5f123e8f561767db2b40f15c9f3bbebb0d54f3f3644e725c12cd6be613db3e46"
+        "sha256": "62647e81fee867a29ed0edefb8b8e98e1c09bf2304fdc155c6ca57b8dec21602"
       },
       "compatibility": {
         "packageLine": "v1.0",

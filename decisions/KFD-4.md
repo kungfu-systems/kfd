@@ -3,7 +3,7 @@
 - Status: active
 - Number: 4
 - Kind: principle
-- Applies to: every kungfu-systems product, repository, release surface, extension surface, hosted surface, and participant-facing interface that presents a perspective-bearing view or uses one to guide action
+- Applies to: any adopting product, repository, release surface, extension surface, hosted surface, or participant-facing interface that presents a perspective-bearing view or uses one to guide action
 
 ## One sentence
 

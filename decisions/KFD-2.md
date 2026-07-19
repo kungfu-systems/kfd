@@ -3,7 +3,7 @@
 - Status: active
 - Number: 2
 - Kind: principle
-- Applies to: every kungfu-systems product, repository, release surface, extension surface, and hosted surface that represents work, evidence, control, provenance, or trust
+- Applies to: any adopting product, repository, release surface, extension surface, or hosted surface that represents work, evidence, control, provenance, or trust
 
 ## One sentence
 
@@ -68,7 +68,7 @@ perspectives, runtime facts, documentation, and other surfaces.
 
 KFD-2 does not require perfect capture, a journal engine, a runtime ledger, or
 the rejection of cloud services. It does not declare every opaque system
-wrong. It requires kungfu-systems products to make important reliance claims
+wrong. It requires adopting systems to make important reliance claims
 inspectable and to expose what remains unproved.
 
 ## Relation to other KFDs

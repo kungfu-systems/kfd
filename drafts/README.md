@@ -13,8 +13,9 @@ last_reviewed: 2026-07-18
 
 # KFD Candidates
 
-KFD Candidates preserve potentially load-bearing organization rules before a
-KFD number is allocated. They are pre-number drafts, not numbered decisions.
+KFD Candidates preserve potentially load-bearing portable engineering rules
+before a KFD number is allocated. They are pre-number drafts, not numbered
+decisions.
 
 The machine source is [`registry.json`](registry.json). A candidate may carry
 a non-binding `slotHint` to preserve the current ordering hypothesis. The hint
@@ -34,6 +35,11 @@ Candidates may be revised, reordered, merged, split, withdrawn, rejected, or
 promoted while their published coordinates remain immutable. Their current
 status and claim boundary must remain machine-readable.
 
+Any participant may propose a candidate, counterexample, adopter Profile, or
+qualification evidence through the public process in
+[`CONTRIBUTING.md`](../CONTRIBUTING.md). Maintainers remain responsible for
+official numbering and status decisions.
+
 Current candidates:
 
 - [Atlas action perspective](atlas-action-perspective.md), slot hint `8`;
@@ -49,5 +55,6 @@ The three remaining candidates elaborate independently qualifiable
 cross-domain action Primitives. None of their slot hints allocates or reserves
 a KFD number.
 
-See [Contributing](../CONTRIBUTING.md) for candidate promotion, pre-stable
-Foundation Revision, and Foundation Freeze rules.
+See [Contributing](../CONTRIBUTING.md) and
+[Governance](../GOVERNANCE.md) for open proposal, candidate promotion,
+pre-stable Foundation Revision, stewardship, and Foundation Freeze rules.

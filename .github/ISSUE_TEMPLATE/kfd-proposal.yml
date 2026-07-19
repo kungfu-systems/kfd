@@ -1,0 +1,86 @@
+name: KFD proposal
+description: Propose a new KFD Candidate or a substantive amendment.
+title: "[KFD proposal] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        KFD is an open, evidence-governed engineering standard. Proposals may come from any person, agent, project, company, or research group. Read CONTRIBUTING.md and GOVERNANCE.md before submitting.
+  - type: dropdown
+    id: proposal-kind
+    attributes:
+      label: Proposal kind
+      options:
+        - New KFD Candidate
+        - Amendment or clarification
+        - Qualification or activation
+        - Supersession
+        - Governance or process revision
+        - Schema, verifier, or interoperability change
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem and claim boundary
+      description: State the concrete problem, who encounters it, and what this proposal does not claim.
+    validations:
+      required: true
+  - type: textarea
+    id: proposed-decision
+    attributes:
+      label: Proposed decision
+      description: State the smallest portable rule, procedure, or interface that would address the problem.
+    validations:
+      required: true
+  - type: textarea
+    id: applicability
+    attributes:
+      label: Applicability and adopter scope
+      description: Identify the products, repositories, runtimes, organizations, or domains where this proposal should apply.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives and prior art
+      description: Compare plausible alternatives, including doing nothing or keeping this outside KFD.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence and implementation witnesses
+      description: Link cases, data, implementations, schemas, tests, or other inspectable evidence.
+    validations:
+      required: true
+  - type: textarea
+    id: counterevidence
+    attributes:
+      label: Counterevidence, falsifiers, and unresolved risks
+      description: State what could disprove, narrow, or block the proposal.
+    validations:
+      required: true
+  - type: textarea
+    id: compatibility
+    attributes:
+      label: Compatibility and migration impact
+      description: Explain affected contracts, adopters, versions, and any migration or supersession path.
+    validations:
+      required: true
+  - type: textarea
+    id: interests
+    attributes:
+      label: Material interests
+      description: Disclose relevant organizational, financial, product, or implementation interests. Write "none known" when none apply.
+    validations:
+      required: true
+  - type: checkboxes
+    id: acknowledgements
+    attributes:
+      label: Acknowledgements
+      options:
+        - label: I understand that a public proposal is not an official KFD until the canonical repository records the required review and status change.
+          required: true
+        - label: I will preserve private security information for the security advisory path instead of posting it here.
+          required: true

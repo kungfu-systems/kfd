@@ -3,7 +3,7 @@
 - Status: active
 - Number: 5
 - Kind: procedure
-- Applies to: every kungfu-systems product, repository, agent workflow, and governance surface that proposes or promotes a new load-bearing primitive
+- Applies to: any adopting product, repository, agent workflow, or governance surface that proposes or promotes a new load-bearing Primitive
 
 ## One sentence
 

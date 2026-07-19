@@ -10,9 +10,9 @@
   "sourceRegistry": {
     "id": "kfd-collaboration-interface",
     "path": ".buildchain/kfd-3/collaboration-interface.json",
-    "sha256": "604f20a3e975d00a33275b29bf05776116d3c8a83a3f135911a90d8e6055517d"
+    "sha256": "2f910a974c8e498bde42f133171b17dd1009ffb557ef11664a4a158acdad4bde"
   },
-  "collaborationInterfaceDigest": "sha256:604f20a3e975d00a33275b29bf05776116d3c8a83a3f135911a90d8e6055517d",
+  "collaborationInterfaceDigest": "sha256:2f910a974c8e498bde42f133171b17dd1009ffb557ef11664a4a158acdad4bde",
   "collaborationInterface": {
     "schemaVersion": 1,
     "contract": "kfd-3-collaboration-interface",
@@ -64,6 +64,21 @@
         "id": "maintainer",
         "kind": "maintainer",
         "description": "A human or agent maintaining KFD decisions, metadata, package surfaces, and release evidence."
+      },
+      {
+        "id": "external-contributor",
+        "kind": "extension-author",
+        "description": "A participant proposing, challenging, implementing, or supplying evidence for KFD work without requiring kungfu-systems affiliation."
+      },
+      {
+        "id": "adopter",
+        "kind": "other",
+        "description": "A project, product, organization, or research group declaring an independent KFD adoption scope and owning its implementation evidence."
+      },
+      {
+        "id": "independent-reviewer",
+        "kind": "other",
+        "description": "A participant reviewing KFD claims, qualification evidence, compatibility impact, or governance without authoring the reviewed change."
       },
       {
         "id": "package-consumer",
@@ -153,6 +168,32 @@
           "maintainer"
         ],
         "purpose": "Route readers and agents to the right KFD document or machine surface."
+      },
+      {
+        "id": "contributing",
+        "surface": "CONTRIBUTING.md",
+        "participants": [
+          "human-reader",
+          "agent-reader",
+          "external-contributor",
+          "adopter",
+          "independent-reviewer",
+          "maintainer"
+        ],
+        "purpose": "Propose, challenge, implement, qualify, review, or revise KFD work through the public evidence process."
+      },
+      {
+        "id": "governance",
+        "surface": "GOVERNANCE.md",
+        "participants": [
+          "human-reader",
+          "agent-reader",
+          "external-contributor",
+          "adopter",
+          "independent-reviewer",
+          "maintainer"
+        ],
+        "purpose": "Understand open participation, canonical stewardship, decision authority, conflicts, and maintainer succession."
       },
       {
         "id": "official-status-and-trademarks",
@@ -363,6 +404,109 @@
         "discoverability": {
           "fromMinimalEntrypoint": true,
           "path": "docs/MAP.md"
+        },
+        "maturity": "stable"
+      },
+      {
+        "id": "contributing",
+        "kind": "markdown-doc",
+        "participants": [
+          "human-reader",
+          "agent-reader",
+          "external-contributor",
+          "adopter",
+          "independent-reviewer",
+          "maintainer"
+        ],
+        "value": "Public proposal, counterevidence, implementation, qualification, review, and revision process.",
+        "discoverability": {
+          "fromMinimalEntrypoint": true,
+          "path": "CONTRIBUTING.md"
+        },
+        "maturity": "stable"
+      },
+      {
+        "id": "governance",
+        "kind": "markdown-doc",
+        "participants": [
+          "human-reader",
+          "agent-reader",
+          "external-contributor",
+          "adopter",
+          "independent-reviewer",
+          "maintainer"
+        ],
+        "value": "Open-standard roles, canonical stewardship, public decision criteria, conflicts, founding adoption, and maintainer succession.",
+        "discoverability": {
+          "fromMinimalEntrypoint": true,
+          "path": "GOVERNANCE.md"
+        },
+        "maturity": "stable"
+      },
+      {
+        "id": "kfd-proposal-form",
+        "kind": "github-issue-form",
+        "participants": [
+          "human-reader",
+          "agent-reader",
+          "external-contributor",
+          "adopter",
+          "maintainer"
+        ],
+        "value": "Structured public entry for a KFD Candidate, amendment, qualification, supersession, governance revision, or interoperability proposal.",
+        "discoverability": {
+          "fromMinimalEntrypoint": false,
+          "path": ".github/ISSUE_TEMPLATE/kfd-proposal.yml"
+        },
+        "maturity": "stable"
+      },
+      {
+        "id": "kfd-counterevidence-form",
+        "kind": "github-issue-form",
+        "participants": [
+          "human-reader",
+          "agent-reader",
+          "external-contributor",
+          "independent-reviewer",
+          "maintainer"
+        ],
+        "value": "Structured public entry for counterexamples, falsifiers, supporting evidence, compatibility failures, and independent implementation results.",
+        "discoverability": {
+          "fromMinimalEntrypoint": false,
+          "path": ".github/ISSUE_TEMPLATE/kfd-counterevidence.yml"
+        },
+        "maturity": "stable"
+      },
+      {
+        "id": "kfd-adopter-profile-form",
+        "kind": "github-issue-form",
+        "participants": [
+          "human-reader",
+          "agent-reader",
+          "adopter",
+          "external-contributor",
+          "maintainer"
+        ],
+        "value": "Structured public entry for an independent adopter scope, implementation mapping, qualification evidence, gaps, extensions, and non-claims.",
+        "discoverability": {
+          "fromMinimalEntrypoint": false,
+          "path": ".github/ISSUE_TEMPLATE/adopter-profile.yml"
+        },
+        "maturity": "stable"
+      },
+      {
+        "id": "kfd-pull-request-template",
+        "kind": "github-pull-request-template",
+        "participants": [
+          "external-contributor",
+          "adopter",
+          "independent-reviewer",
+          "maintainer"
+        ],
+        "value": "Review checklist for claim boundaries, evidence, interests, independent review, compatibility, immutability, and release impact.",
+        "discoverability": {
+          "fromMinimalEntrypoint": false,
+          "path": ".github/pull_request_template.md"
         },
         "maturity": "stable"
       },
@@ -609,15 +753,24 @@
     "valueEvidence": [
       {
         "id": "kfd-foundation-model",
-        "claim": "KFD helps humans and agents understand the foundation model and inspect precise non-normative formal references before adopting or extending kungfu-systems decisions.",
+        "claim": "KFD helps humans and agents understand the foundation model and inspect precise non-normative formal references before adopting or extending KFD decisions.",
         "participants": [
           "human-reader",
           "agent-reader",
+          "external-contributor",
+          "adopter",
+          "independent-reviewer",
           "maintainer"
         ],
         "facts": [
           {
             "path": "README.md"
+          },
+          {
+            "path": "CONTRIBUTING.md"
+          },
+          {
+            "path": "GOVERNANCE.md"
           },
           {
             "path": "docs/foundation-model.md"
@@ -864,15 +1017,24 @@
       },
       {
         "id": "kfd-extension-path",
-        "claim": "KFD gives humans and agents a visible extension path when the declared interface or taxonomy is insufficient.",
+        "claim": "KFD gives humans and agents a visible public path to propose, challenge, implement, adopt, or review the standard when a decision, interface, or taxonomy is insufficient.",
         "participants": [
           "agent-reader",
           "human-reader",
+          "external-contributor",
+          "adopter",
+          "independent-reviewer",
           "maintainer",
           "release-system",
           "package-consumer"
         ],
         "facts": [
+          {
+            "path": "CONTRIBUTING.md"
+          },
+          {
+            "path": "GOVERNANCE.md"
+          },
           {
             "path": "docs/KFD-3-usage.md"
           },
@@ -903,6 +1065,13 @@
         "constraint": "Before stable, fully evidenced foundation correction preserves published coordinates and lineage; after Foundation Freeze, substantive semantic changes supersede older KFD numbers instead of changing them in place.",
         "reason": "Decision history and the current number-to-meaning mapping must remain inspectable by humans and agents.",
         "review": "CONTRIBUTING.md and node scripts/check.mjs"
+      },
+      {
+        "id": "open-participation-and-canonical-stewardship",
+        "surface": "CONTRIBUTING.md and GOVERNANCE.md",
+        "constraint": "Any participant may propose, challenge, implement, adopt, or review KFD work; only accountable maintainers may change official numbering, status, and releases through public evidence and review.",
+        "reason": "KFD must remain externally corrigible without making canonical authority ambiguous.",
+        "review": "GOVERNANCE.md and public GitHub history"
       },
       {
         "id": "kfd-site-boundary",
@@ -956,9 +1125,35 @@
           "maintainer"
         ],
         "choice": "Change KFD through PR review, node scripts/check.mjs, and Buildchain release gates."
+      },
+      {
+        "id": "contribute-or-challenge",
+        "participants": [
+          "external-contributor",
+          "adopter",
+          "independent-reviewer"
+        ],
+        "choice": "Use GitHub issues and pull requests to propose, challenge, implement, qualify, or review KFD work under CONTRIBUTING.md and GOVERNANCE.md."
       }
     ],
     "extensionRequests": [
+      {
+        "id": "kfd-standard-proposal",
+        "participants": [
+          "external-contributor",
+          "adopter",
+          "independent-reviewer",
+          "human-reader",
+          "agent-reader"
+        ],
+        "trigger": "A participant has a proposed KFD Candidate, amendment, counterexample, adopter Profile, implementation result, or governance improvement.",
+        "requestPath": {
+          "kind": "github-issue",
+          "target": "https://github.com/kungfu-systems/kfd/issues/new?template=kfd-proposal.yml",
+          "template": "Choose the proposal, counterevidence, or adopter Profile issue form and declare the claim boundary, evidence, counterevidence, applicability, interests, and requested outcome."
+        },
+        "expectedOutcome": "Maintainers publicly qualify, revise, route, reject, or advance the contribution against KFD evidence and governance requirements."
+      },
       {
         "id": "kfd-2-trust-taxonomy-extension",
         "participants": [
@@ -979,13 +1174,16 @@
     "closure": {
       "classificationMode": "closed-world",
       "unclassifiedEntrypointsPolicy": "fail",
-      "reachableSurfaceSource": "This file plus package.json#exports, docs/foundation-model.md, docs/formal-model.md, docs/KFD-*-formal.md, docs/MAP.md, cases/registry.json, drafts/registry.json, registry.json, standards.json, and Buildchain witness files."
+      "reachableSurfaceSource": "This file plus package.json#exports, CONTRIBUTING.md, GOVERNANCE.md, .github/ISSUE_TEMPLATE/*.yml, .github/pull_request_template.md, docs/foundation-model.md, docs/formal-model.md, docs/KFD-*-formal.md, docs/MAP.md, cases/registry.json, drafts/registry.json, registry.json, standards.json, and Buildchain witness files."
     }
   },
   "participantProfiles": [
     "human-reader",
     "agent-reader",
     "maintainer",
+    "external-contributor",
+    "adopter",
+    "independent-reviewer",
     "package-consumer",
     "site-consumer",
     "release-system"
@@ -1078,6 +1276,72 @@
       "participantFacing": true,
       "public": true,
       "sourcePath": "docs/MAP.md"
+    },
+    {
+      "id": "contributing",
+      "name": "contributing",
+      "kind": "markdown-doc",
+      "participantProfile": "human-reader,agent-reader,external-contributor,adopter,independent-reviewer,maintainer",
+      "availability": "stable",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": "CONTRIBUTING.md"
+    },
+    {
+      "id": "governance",
+      "name": "governance",
+      "kind": "markdown-doc",
+      "participantProfile": "human-reader,agent-reader,external-contributor,adopter,independent-reviewer,maintainer",
+      "availability": "stable",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": "GOVERNANCE.md"
+    },
+    {
+      "id": "kfd-proposal-form",
+      "name": "kfd-proposal-form",
+      "kind": "github-issue-form",
+      "participantProfile": "human-reader,agent-reader,external-contributor,adopter,maintainer",
+      "availability": "stable",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": ".github/ISSUE_TEMPLATE/kfd-proposal.yml"
+    },
+    {
+      "id": "kfd-counterevidence-form",
+      "name": "kfd-counterevidence-form",
+      "kind": "github-issue-form",
+      "participantProfile": "human-reader,agent-reader,external-contributor,independent-reviewer,maintainer",
+      "availability": "stable",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": ".github/ISSUE_TEMPLATE/kfd-counterevidence.yml"
+    },
+    {
+      "id": "kfd-adopter-profile-form",
+      "name": "kfd-adopter-profile-form",
+      "kind": "github-issue-form",
+      "participantProfile": "human-reader,agent-reader,adopter,external-contributor,maintainer",
+      "availability": "stable",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": ".github/ISSUE_TEMPLATE/adopter-profile.yml"
+    },
+    {
+      "id": "kfd-pull-request-template",
+      "name": "kfd-pull-request-template",
+      "kind": "github-pull-request-template",
+      "participantProfile": "external-contributor,adopter,independent-reviewer,maintainer",
+      "availability": "stable",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": ".github/pull_request_template.md"
     },
     {
       "id": "official-status-and-trademarks",
@@ -1304,7 +1568,37 @@
     {
       "id": "doc:readme",
       "sourcePath": "README.md",
-      "sha256": "6eac6810a63a1b757e75bf96faeb1f3a35a95ff47fe0e2b1adfe903f613a5769"
+      "sha256": "746393bd2fcb3cc4f4b33129522ea8d27813d2c4ad3e122429b3a7d8e1eb22ed"
+    },
+    {
+      "id": "doc:contributing",
+      "sourcePath": "CONTRIBUTING.md",
+      "sha256": "3fc894f7632023b06382cf7c71b11b30c6ccb0b2e2e8a3c57cc61230afe817da"
+    },
+    {
+      "id": "doc:governance",
+      "sourcePath": "GOVERNANCE.md",
+      "sha256": "1aabccd955e15b1c0ab8c9692b4b0f043523aeb56fae20163d70d6f4ef7b8183"
+    },
+    {
+      "id": "doc:kfd-proposal-form",
+      "sourcePath": ".github/ISSUE_TEMPLATE/kfd-proposal.yml",
+      "sha256": "e7a8dd46b7fc108437ba3baeda0f21fa99a727d619ace4c9cf6757f22bb4d0f0"
+    },
+    {
+      "id": "doc:kfd-counterevidence-form",
+      "sourcePath": ".github/ISSUE_TEMPLATE/kfd-counterevidence.yml",
+      "sha256": "1f030bf57cd3407ddc8a18fcfc5b5c71db86ef0e58a4ecdaddaa034344819ca0"
+    },
+    {
+      "id": "doc:kfd-adopter-profile-form",
+      "sourcePath": ".github/ISSUE_TEMPLATE/adopter-profile.yml",
+      "sha256": "37322244e2e39c51414c74ed6c8dcf9e1ab658874af0c90bf381c1128978786b"
+    },
+    {
+      "id": "doc:kfd-pull-request-template",
+      "sourcePath": ".github/pull_request_template.md",
+      "sha256": "92c80931c10d1599fc97d169ff1a24ec143d789137dc6fa4b113b8144ce3ada2"
     },
     {
       "id": "doc:foundation-model",
@@ -1329,7 +1623,7 @@
     {
       "id": "doc:docs-map",
       "sourcePath": "docs/MAP.md",
-      "sha256": "216af07355d6763fc2c0718cba993b783e0145ac49ec6c8476354ffb5a4dda84"
+      "sha256": "afcd7d0920da3f246f711298ce4c18b53838b7ad0451b9f98f9326f513a68108"
     },
     {
       "id": "doc:kfd-1-usage",
@@ -1419,37 +1713,37 @@
     {
       "id": "candidate:index",
       "sourcePath": "drafts/README.md",
-      "sha256": "366473e17b985fe72bdda0d474ce81ca1ec0627b2b39d55d6b2fed9f0e560613"
+      "sha256": "87d317e8198941720fc58f435cc575216e1bfcf3ad59723411cac4a75fffb3ea"
     },
     {
       "id": "candidate:registry",
       "sourcePath": "drafts/registry.json",
-      "sha256": "d89552c500750ea3c7d7b75eccc12acdebabe14c4c3efb71f5fe315734b00bc4"
+      "sha256": "1edb3a27b449507dd8b039d25a131c73a9f40509659f9547b11a51003e682cdc"
     },
     {
       "id": "candidate:action-state-separation",
       "sourcePath": "drafts/action-state-separation.md",
-      "sha256": "ec11a002c0b89124add3ed68b1b2e0d083461f1fc8f2c9572ecd5404afd0193a"
+      "sha256": "5adb834ceb65a12f3e4e18e51919744eb03edbaf4bd12e7f224a5b1037c9100c"
     },
     {
       "id": "candidate:atlas-action-perspective",
       "sourcePath": "drafts/atlas-action-perspective.md",
-      "sha256": "4d31878b2f1606227bb1e66009245db8e7e7709e0b892002d9c5112655ae7041"
+      "sha256": "8ba25b31dcc420eb85a5665345be7c05f8954c52f43f6bb53723e5dccfa497fc"
     },
     {
       "id": "candidate:pursuit-intent-continuity",
       "sourcePath": "drafts/pursuit-intent-continuity.md",
-      "sha256": "018a74b7b5924c944169e8095fa91ecf7a1ffdb88f22befab792c3d35591fd72"
+      "sha256": "058a552ee7eb5fa906b0bfd3269894426f45d95b0b44c83806b32d5b02b59110"
     },
     {
       "id": "candidate:warrant-bounded-authority",
       "sourcePath": "drafts/warrant-bounded-authority.md",
-      "sha256": "d8e0e26bb825eb89f777cfe2170da431839d94bb0a878affc82e5b278f12b85e"
+      "sha256": "d6c5fdedd78184b22b7c3f2a12c29e60bee7329007007b554cf661476bc3717c"
     },
     {
       "id": "candidate:atlas-action-perspective:formal",
       "sourcePath": "drafts/formal/atlas-action-perspective.md",
-      "sha256": "7e83964a9c3ee9189d757d5c2b4095a6e01709bc52934a2f8090320fcf1024a8"
+      "sha256": "0e3edab58dbb5e12d0e61cbbd3720037a8e31e45c5161913f19fa77d66b072e7"
     },
     {
       "id": "candidate:pursuit-intent-continuity:formal",
@@ -1464,27 +1758,27 @@
     {
       "id": "doc:kfd-1-formal",
       "sourcePath": "docs/KFD-1-formal.md",
-      "sha256": "6cac3e9a0b63bf004f12373c243e976fe4441831cdd3019142e6850bef72e3ab"
+      "sha256": "5ec81c119cd43317949c5128ddadacc46fc8121ec3b19568e82b050598750a12"
     },
     {
       "id": "doc:kfd-2-formal",
       "sourcePath": "docs/KFD-2-formal.md",
-      "sha256": "8684c9ffac6069dc03a0aa751f1146e57b779907d8ec78f11007ee8b2dea0916"
+      "sha256": "e50299fcf0d7becb671688324319f6b1c6a4b7bcf27f9196da5fb1189099dec4"
     },
     {
       "id": "doc:kfd-3-formal",
       "sourcePath": "docs/KFD-3-formal.md",
-      "sha256": "ab97acc5e0c9acdc5ac7e20b36f597b0ea981e21c7cbad2ca39e5bb9d1f69cce"
+      "sha256": "f45089858084d4cd953941e63b67382073f2808d042269343f44c8656f0100a4"
     },
     {
       "id": "doc:kfd-4-formal",
       "sourcePath": "docs/KFD-4-formal.md",
-      "sha256": "30b23a7eb48471272a2d2eede75c79ce3cfbb4fa61e6c16e06b1935a082d1d34"
+      "sha256": "31a71f977cc163430b9a29754c7153b861cf23c8935eb9d52dd9f26be010b11b"
     },
     {
       "id": "doc:kfd-5-formal",
       "sourcePath": "docs/KFD-5-formal.md",
-      "sha256": "c4ea4effd0e547e46c66496115f8b11434abe5f80096dad3e90c73ce8056cd3f"
+      "sha256": "d6f1033b3bf5f7afe91fc800bbbc265e486e9e28f0b8e3d8013522beee6ecc3f"
     },
     {
       "id": "doc:kfd-6-formal",
@@ -1494,42 +1788,42 @@
     {
       "id": "doc:kfd-7-formal",
       "sourcePath": "docs/KFD-7-formal.md",
-      "sha256": "5f123e8f561767db2b40f15c9f3bbebb0d54f3f3644e725c12cd6be613db3e46"
+      "sha256": "62647e81fee867a29ed0edefb8b8e98e1c09bf2304fdc155c6ca57b8dec21602"
     },
     {
       "id": "decision:kfd-1",
       "sourcePath": "decisions/KFD-1.md",
-      "sha256": "5b91d4693a70d13d8fb11756b4281205ff911bc5386472f7c0af8477e2b095a1"
+      "sha256": "f504d02736a50006786103c31843ab759e54d160056f756780aeb9b7da1a914a"
     },
     {
       "id": "decision:kfd-2",
       "sourcePath": "decisions/KFD-2.md",
-      "sha256": "d4f0b56f3f09d4aaa2053c9b382f58f8f6dc726acdba333d33dd2f71d84fba2c"
+      "sha256": "52d41735eaaee0d33ff167d774a196b5d6bc12bdd142ea3b23f844ebee684361"
     },
     {
       "id": "decision:kfd-3",
       "sourcePath": "decisions/KFD-3.md",
-      "sha256": "b3723cec308ae8516ed211c211a45f669533c8712d538ef8dcbc60630214c29a"
+      "sha256": "4b7ddc7cef597d265db9a5f35ba8f1ef61a7a7f67afc0901d1be46799c3da770"
     },
     {
       "id": "decision:kfd-4",
       "sourcePath": "decisions/KFD-4.md",
-      "sha256": "c624a7a606d4e3a66c40dd88baf1532c7aef9d238c3fb04ade583b5e22b4aba7"
+      "sha256": "911f8d16ddb7a42ed582b9fff6ef5a5090597d5adbdd5159bebe68caeaaae4ef"
     },
     {
       "id": "decision:kfd-5",
       "sourcePath": "decisions/KFD-5.md",
-      "sha256": "597e3f22f2e6b830f532f7a426900b112a19b80de43ace8ab42bf78157aced5b"
+      "sha256": "47e3c8f6633e84b798719f76ca4ed19ddf93eeb54b321b98db552e111a697a3e"
     },
     {
       "id": "decision:kfd-6",
       "sourcePath": "decisions/KFD-6.md",
-      "sha256": "1e40e0848fc7bd51abeb5ea8b70efd3b444acbdafaed097bf029e9ed6394292f"
+      "sha256": "4ff5097840aa6b153dd4c130cf88a22d07b0cd18ad56f846abd789cdc9e23dd9"
     },
     {
       "id": "decision:kfd-7",
       "sourcePath": "decisions/KFD-7.md",
-      "sha256": "e64176dbfe45221956074f7de06f093da5d1697b90e58fbe6b8b9d6384055075"
+      "sha256": "6c574127c43469d2bd434497f47d65b6a13d3a466873e7bd6b9711c78b8d8e17"
     }
   ],
   "schemas": [
@@ -1623,7 +1917,7 @@
     {
       "id": "metadata:standards",
       "sourcePath": "standards.json",
-      "sha256": "d1ce12f124a3bb7e88b5cdae985f1a31ac5ce0003f15cf36263a8c461d5cdf54"
+      "sha256": "d95dc1834f11a6e8f8139288d1d9a69c3d9454e589a25e1bd87593f0d4ad9a98"
     },
     {
       "id": "metadata:live-case-registry",
@@ -1633,17 +1927,17 @@
     {
       "id": "metadata:candidate-registry",
       "sourcePath": "drafts/registry.json",
-      "sha256": "d89552c500750ea3c7d7b75eccc12acdebabe14c4c3efb71f5fe315734b00bc4"
+      "sha256": "1edb3a27b449507dd8b039d25a131c73a9f40509659f9547b11a51003e682cdc"
     },
     {
       "id": "metadata:release-impact",
       "sourcePath": "release-impact.json",
-      "sha256": "4b04dd5a508c51e8f48338ab72a3af1349bf053b6d06e73036fc2377b55f100d"
+      "sha256": "5661b0593f55b65326b696ac7a7c1a4a0b602374b84571a18b22605e71bf8bf3"
     },
     {
       "id": "metadata:release-anchor",
       "sourcePath": "kfd.release.json",
-      "sha256": "f1d99df4441cfff09e1983f2b9731e5a1640b95586974050dd2397046e7b3e13"
+      "sha256": "9fb4901ddd0211ddd4b7b9faf94a673f2286c6c1b519f8fdd2f487e8145a0cc5"
     },
     {
       "id": "metadata:kfd-7-activation-evidence",
@@ -1653,7 +1947,7 @@
     {
       "id": "metadata:buildchain-alpha-contract-lock",
       "sourcePath": "buildchain.alpha-contract-lock.json",
-      "sha256": "64c00c15bb13b2d6b38ea865cbd18ab1058d79f10ce271a0d134841066f89f87"
+      "sha256": "4df0e299d8713f4570f6bf97c6a147f0bae5ea9ffdccd96807eccd12a4a49904"
     },
     {
       "id": "metadata:buildchain-contract-lock",
@@ -1663,36 +1957,36 @@
     {
       "id": "metadata:kfd-2-public-release-trust-claim",
       "sourcePath": ".buildchain/kfd-2/public-release-trust.claim.json",
-      "sha256": "63ac4c70d8b861d261a640fdcbf33f9fa4e3dabeb3f2824455c8408748a73482"
+      "sha256": "2b49e1f01f4badb91673dd938918c5e110e829b79dec3bc70f8f3a96f29fdfdc"
     },
     {
       "id": "metadata:kfd-2-foundation-trust-claims",
       "sourcePath": ".buildchain/kfd-2/kfd-foundation.trust-claims.json",
-      "sha256": "5516c688d259440596ba3c7ff93c3c5a49f4e6541ff07896a4f44600509fc98b"
+      "sha256": "60865a712d9466a20ba19d52d7f9005b1b093c499bc0e3bf6e53364636767bc3"
     },
     {
       "id": "metadata:kfd-2-foundation-trust-assessment",
       "sourcePath": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json",
-      "sha256": "00f14d266459a36ace42e8e27799196129fd05573a4b49a75e0a46057a4d1c6b"
+      "sha256": "ad90f7898b6a41f4b5e75e1985c933f42f478b1802a89a9a554c52ce575e983b"
     }
   ],
   "packageExports": [
     {
       "id": "export:package-json",
       "sourcePath": "package.json#exports",
-      "sha256": "43fa663a30a92936623c471bc66f52b61ffbe202ce87bd54be0199d280cbc487"
+      "sha256": "69f6eb909c38b1b4a5ddfa56c10013c161a01b845fede09b362dbeaf47dc0d45"
     },
     {
       "id": "export:npm-files",
       "sourcePath": "package.json#files",
-      "sha256": "43fa663a30a92936623c471bc66f52b61ffbe202ce87bd54be0199d280cbc487"
+      "sha256": "69f6eb909c38b1b4a5ddfa56c10013c161a01b845fede09b362dbeaf47dc0d45"
     }
   ],
   "siteConsumptionContracts": [
     {
       "id": "site:kfd-site-bundle",
       "sourcePath": "site/kfd-site.json",
-      "sha256": "cec97ca670abf8604ba5b89568d7c9e8c99a8dd52e384ee1e3a42796b372f2ed"
+      "sha256": "8d1d99e8b1d5e10693b53debd6c616167a8913d7e7861cd6ceb0954207b2c146"
     },
     {
       "id": "site:release-propagation",
