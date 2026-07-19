@@ -9,6 +9,49 @@ not a numbered decision and does not create an additional normative rule. When
 an explanation and a decision differ, the text in `decisions/KFD-N.md` remains
 authoritative.
 
+## Continuity under uncertainty
+
+KFD uses **continuity** as a bounded engineering concept, not a metaphysical
+identity test. Continuity does not mean preserving a fixed state. It means that
+a system's successor state remains inspectably connected to the facts,
+boundaries, perspective, direction, authority, responsibility, realized
+action, and admitted corrections through which the change became its own.
+
+Two different uncertainty conditions matter:
+
+1. When the current ontology is adequate, the system needs an **action and
+   feedback loop**. KFD-1 through KFD-4 and KFD-7 preserve the path from a
+   declared Fact cut through bounded trust, participant cooperation where
+   applicable, declared perspective, direction, and authority, realized
+   action, review, correction, and a successor Fact cut.
+2. When the current ontology is inadequate, the system also needs a
+   **discovery loop**. KFD-5 and KFD-6 preserve candidate genesis,
+   qualification, causal grounding, and return to action without allowing a
+   generated model to certify itself.
+
+```text
+declared Fact cut
+  -> bounded trust
+  -> cooperation where multiple reasoning participants are involved
+  -> declared perspective, direction, and authority
+  -> action and causal record
+  -> review, correction, and admission
+  -> successor Fact cut
+
+when the current ontology fails:
+causal experience
+  -> candidate genesis
+  -> fact-bound qualification
+  -> revised ontology
+  -> return to the action and feedback loop
+```
+
+The action loop is the ordinary operating path. Primitive discovery is the
+hard-case extension used when reality invalidates the objects through which
+that path was described. Neither loop is sufficient alone: action without
+correctable ontology can preserve the wrong world, while discovery without
+return to accountable action remains an untested narrative.
+
 ## Better answers are not always enough
 
 Most progress improves an answer inside a world we already know how to
@@ -144,7 +187,7 @@ The first three KFDs are intentionally ordered:
 |---|---|---|---|
 | Fact-source ontology | KFD-1 | What can count as a fact? | Facts must not drift: a load-bearing contract world comes from one declared fact source. |
 | Participant-to-object trust | KFD-2 | When can a user or agent trust a claim, product, artifact, or control surface? | Trust starts from inspectable facts and responsibility state. |
-| Participant-to-participant cooperation | KFD-3 | How should peer intelligent participants cooperate? | Cooperation starts from trusted value: value becomes trustable through transparent facts, stable choice, and explainable constraints. |
+| Participant-to-participant cooperation | KFD-3 | How should peer intelligent participants cooperate where a scope involves multiple reasoning participants? | Cooperation starts from trusted value: value becomes trustable through transparent facts, stable choice, and explainable constraints. |
 
 In short:
 
@@ -155,8 +198,11 @@ reality pressure -> non-drifting facts -> inspectable trust
 
 KFD-1 makes fact sources operational: a fact-bearing contract world must be
 declared, inspectable, and unable to drift invisibly. KFD-2 defines how trust
-can stand on those facts. KFD-3 defines how humans and agents can cooperate
-once facts, responsibility, and value are visible.
+can stand on those facts. Where a scope involves multiple reasoning
+participants, KFD-3 defines how humans and agents can cooperate once facts,
+responsibility, and value are visible. A non-cooperative scope may declare
+KFD-3 not applicable with a bounded rationale; it may not silently erase
+participant-facing dependencies.
 
 KFD-4 is the first complete operating application of that foundation:
 
@@ -212,22 +258,27 @@ or reconstruction dominates, replay creates many false candidates, or a
 domain-specific anomaly, causal, or compression method is cheaper. KFD-5
 qualifies the result; KFD-6 must compare the methods over causal experience.
 
-## From capability to discovery
+## From action to discovery and back
 
-KFD does not reject stronger models. It rejects the assumption that model
-improvement is sufficient for every next step.
+KFD does not reject stronger models. It rejects both the assumption that model
+improvement is sufficient for every next step and the assumption that
+discovery is complete before a system can act responsibly.
 
 ```text
 capability loop: model -> prediction -> evaluation -> stronger model
 
-discovery loop:  reality -> facts -> model -> action -> consequence
-                         -> correction or primitive reconstruction
+action loop:     facts -> trust -> bounded action -> consequence
+                      -> review -> successor facts
+
+discovery loop:  causal experience -> candidate genesis -> qualification
+                                   -> revised ontology -> action loop
 ```
 
-The loops are complementary, not interchangeable. Stronger models remain
-necessary construction material, but capability alone does not decide whether
-the current object set is adequate. Discovery does not always begin with
-repeated failure inside the current model. Repeated observation through a
+The loops are complementary, not interchangeable. The action loop carries
+ordinary work whenever the current ontology remains adequate. Stronger models
+remain necessary construction material, but capability alone does not decide
+whether the current object set is adequate. Discovery does not always begin
+with repeated failure inside the current model. Repeated observation through a
 database-shaped ontology may tend toward a better database-shaped answer, but
 anomaly, reconstruction pressure, causal-variable discovery, structural
 compression, direct judgment, and perspective transformation can all generate
@@ -251,7 +302,8 @@ auditable method, not an exclusive generator. KFD-5 separates
 perspective-declared, method-plural genesis from fact-bound qualification.
 KFD-6 asks whether an agent can eventually compare and internalize those
 functions from causal experience without replacing reality or certifying
-itself.
+itself. A qualified ontology change returns to KFD-7 action; it does not become
+a detached research endpoint.
 
 ## Engineering witnesses
 

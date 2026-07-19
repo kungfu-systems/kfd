@@ -115,9 +115,9 @@ states and Episodes as morphism-like causal paths. Atlas, Pursuit, and Warrant
 are the first action profiles for observation, direction, and admissible
 action.
 
-This numbered draft is intentionally falsifiable. It does not prove that the
-proposed roles are universally minimal or claim a literal physical geometry.
-Its source-candidate lineage remains at
+This active decision remains intentionally falsifiable. Activation does not
+prove that the proposed roles are universally minimal or establish a literal
+physical geometry. Its source-candidate lineage remains at
 [`drafts/action-state-separation.md`](../drafts/action-state-separation.md).
 
 ## Formal reference contract

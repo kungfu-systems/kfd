@@ -8,7 +8,7 @@ confidence: medium
 sensitivity: public
 evidence_grade: C
 review_state: self-reviewed
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-19
 ---
 
 # Conditional Distinguishability Argument
@@ -144,13 +144,20 @@ permanent ceremony for distinctions that can be safely projected.
 
 | Stage | Required evidence | Current state |
 |---|---|---|
-| Conditional separation | Valid witness pairs and explicit decision semantics | Draft argument present |
-| Conservative reduction | Simple session round-trip preserves bounded task semantics without manual object ceremony | Pending |
-| Complexity breakpoint | Crossing a low-complexity assumption makes one or more independent roles necessary and visible | Pending |
-| First-party reality | Preserved histories where deletion changes a real decision or audit | Pending |
-| Cross-domain transfer | Non-isomorphic domains reproduce the distinction | Pending |
-| Comparative value | Rival or fused models require more reconstruction, error, or authority risk | Pending |
+| Conditional separation | Valid witness pairs and explicit decision semantics | KFD-7 activation evidence passes at the action-role level; candidate-specific Pursuit/Warrant qualification remains open |
+| Conservative reduction | Simple session round-trip preserves bounded task semantics without manual object ceremony | Passed for KFD-7's two activated product Profiles; not yet established as Pursuit/Warrant Primitive evidence |
+| Complexity breakpoint | Crossing a low-complexity assumption makes one or more independent roles necessary and visible | Passed for KFD-7's two activated product Profiles; broader candidate transfer remains open |
+| First-party reality | Preserved histories where deletion changes a real decision or audit | Exact KFD-7 runtime evidence retained; Pursuit/Warrant KFD-5 deletion evidence remains pending |
+| Cross-domain transfer | Non-isomorphic domains reproduce the distinction | Passed across the activated Buildchain and Kungfu Profiles for KFD-7; not yet broad enough to qualify either candidate |
+| Comparative value | Rival or fused models require more reconstruction, error, or authority risk | KFD-7 activation supports the role-separation claim; candidate-specific comparative evidence remains pending |
 | Minimality or universality | Alternatives fail while the same dimensions remain necessary at broad scale | Not claimed |
+
+The passed states above refer only to the exact KFD-7 activation cut documented
+in [`docs/KFD-7-activation.md`](../../../docs/KFD-7-activation.md) and
+[`evidence/kfd-7/activation-record.json`](../../../evidence/kfd-7/activation-record.json).
+They activate an action-responsibility principle; they do not qualify Pursuit
+or Warrant as universal, minimal, or independently load-bearing Primitives.
+Those candidate claims remain governed by their own KFD-5 cuts and evidence.
 
 ## Falsifiers
 
