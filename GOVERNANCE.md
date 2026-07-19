@@ -3,9 +3,11 @@
 ## Purpose
 
 KFD is an open, evidence-governed engineering standard under development for
-fact-bound human-agent systems. Kungfu-systems is the founding steward and
-Kungfu is the founding implementation, but neither defines the limit of KFD
-adoption, evidence, criticism, or future contribution.
+reliable action and continuity under uncertainty. Fact-bound human-agent
+systems are its founding pressure field, not its applicability limit.
+Kungfu-systems is the founding steward and Kungfu is the founding
+implementation, but neither defines the limit of KFD adoption, evidence,
+criticism, or future contribution.
 
 This governance model separates two responsibilities:
 

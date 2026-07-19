@@ -60,7 +60,11 @@ const introLead = (intro) => {
 const parseFuturePicture = (intro) => {
   const blocks = paragraphBlocks(intro);
   return {
-    heading: "Future picture",
+    heading: "Core question",
+    question: blocks[0] || "",
+    engineeringAnswer: blocks[1] || "",
+    claimBoundary: blocks[2] || "",
+    // Compatibility aliases for schemaVersion 2 renderers.
     pastToFuture: blocks[0] || "",
     kungfuPath: blocks[1] || "",
   };
@@ -313,7 +317,7 @@ export const buildSiteBundle = ({
     section({
       id: "future-picture",
       sourceHeading: "KFD — Kung Fu Decisions",
-      title: "Future picture",
+      title: "Core question",
       markdown: readme.intro,
       role: "first-screen",
       priority: 5,
@@ -329,6 +333,15 @@ export const buildSiteBundle = ({
       priority: 10,
       presentation: "triad-cards",
       firstScreen: true,
+    }),
+    section({
+      id: "why-this-question-matters",
+      sourceHeading: "Why this question matters",
+      title: "Why this question matters",
+      markdown: readme.sections["Why this question matters"],
+      role: "primary",
+      priority: 15,
+      presentation: "historical-context",
     }),
     section({
       id: "foundation-model",
@@ -466,6 +479,9 @@ export const buildSiteBundle = ({
         firstScreen: {
           include: [
             "title",
+            "future-picture.question",
+            "future-picture.engineeringAnswer",
+            "future-picture.claimBoundary",
             "future-picture.pastToFuture",
             "future-picture.kungfuPath",
             "foundation-triad",
@@ -473,9 +489,9 @@ export const buildSiteBundle = ({
             "foundation-triad.links",
           ],
           maxPrimarySections: 2,
-          note: "The first viewport should show the civilizational shift, the Kungfu path, the foundation triad, and the product-witness rule before registry, renderer, or implementation detail.",
+          note: "The first viewport should ask the system-continuity question, state KFD's engineering answer and claim boundary, and expose the foundation triad before registry, renderer, or implementation detail.",
         },
-        primary: ["future-picture", "foundation-triad", "what-kfd-is", "adoption-boundary", "current-candidates", "product-proof-path"],
+        primary: ["future-picture", "foundation-triad", "why-this-question-matters", "what-kfd-is", "adoption-boundary", "current-candidates", "product-proof-path"],
         detail: {
           route: "/foundation",
           source: FOUNDATION_PATH,

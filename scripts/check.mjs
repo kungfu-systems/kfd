@@ -78,7 +78,7 @@ for (const markdownPath of markdownPaths) {
 }
 
 const expectedEvidenceUpdate = "node scripts/update-site-bundle.mjs && node scripts/update-kfd-2-claim.mjs && node scripts/update-kfd-1-witness.mjs && node scripts/update-kfd-3-witness.mjs";
-const expectedPackageDescription = "KFD: an open, evidence-governed engineering standard for fact-bound human-agent systems";
+const expectedPackageDescription = "KFD: an open, evidence-governed engineering standard for reliable action and continuity under uncertainty";
 if (packageJson.scripts?.["update:evidence"] !== expectedEvidenceUpdate) {
   fail("package.json update:evidence must preserve the site -> KFD-2 -> KFD-1 -> KFD-3 dependency order");
 }
@@ -98,15 +98,60 @@ for (const governancePath of ["CONTRIBUTING.md", "GOVERNANCE.md"]) {
 const readmeText = readFileSync("README.md", "utf8");
 const contributingText = readFileSync("CONTRIBUTING.md", "utf8");
 const governanceText = readFileSync("GOVERNANCE.md", "utf8");
+const foundationModelText = readFileSync("docs/foundation-model.md", "utf8");
+const formalModelText = readFileSync("docs/formal-model.md", "utf8");
+const candidateIndexText = readFileSync("drafts/README.md", "utf8");
+const liveCaseText = readFileSync("cases/live/proof-carrying-work-object/README.md", "utf8");
+const distinguishabilityText = readFileSync("cases/live/proof-carrying-work-object/distinguishability.md", "utf8");
 const normalizeWhitespace = (value) => value.replace(/\s+/g, " ").trim();
 if (!normalizeWhitespace(readmeText).includes("Kungfu is its founding implementation, not its adoption boundary.")) {
   fail("README must distinguish KFD's founding implementation from its adoption boundary");
+}
+if (!normalizeWhitespace(readmeText).includes("How can a bounded, goal-directed system act and change in an unpredictable world without losing continuity with itself?")) {
+  fail("README must preserve KFD's system-continuity core question");
+}
+if (!normalizeWhitespace(readmeText).includes("KFD does not claim to be the final answer or a complete theory of complex systems.")) {
+  fail("README must preserve the core question's falsifiable claim boundary");
+}
+if (!normalizeWhitespace(readmeText).includes("KFD is an open engineering standard") ||
+    !normalizeWhitespace(readmeText).includes("This repository is KFD's canonical open decision registry.")) {
+  fail("README must distinguish the KFD standard from its canonical repository");
+}
+if (!normalizeWhitespace(readmeText).includes("Primitive discovery is one frontier through which KFD tests that harder problem.")) {
+  fail("README must present Primitive discovery as a hard-case frontier, not the whole continuity path");
 }
 if (!normalizeWhitespace(contributingText).includes("Anyone may propose, challenge, implement, test, review, or provide evidence against a KFD.")) {
   fail("CONTRIBUTING must preserve the open proposal and counterevidence path");
 }
 if (!governanceText.includes("open participation") || !governanceText.includes("canonical stewardship")) {
   fail("GOVERNANCE must separate open participation from canonical stewardship");
+}
+if (!normalizeWhitespace(governanceText).includes("reliable action and continuity under uncertainty") ||
+    !normalizeWhitespace(governanceText).includes("Fact-bound human-agent systems are its founding pressure field, not its applicability limit.")) {
+  fail("GOVERNANCE must preserve KFD's general scope and founding pressure-field boundary");
+}
+if (!foundationModelText.includes("## Continuity under uncertainty") ||
+    !foundationModelText.includes("## From action to discovery and back") ||
+    !foundationModelText.includes("The action loop is the ordinary operating path.")) {
+  fail("foundation model must connect ordinary action, continuity, and hard-case discovery");
+}
+if (!normalizeWhitespace(foundationModelText).includes("A non-cooperative scope may declare KFD-3 not applicable with a bounded rationale")) {
+  fail("foundation model must preserve KFD-3's participant-facing applicability boundary");
+}
+for (const [path, text] of [
+  ["README.md", readmeText],
+  ["docs/formal-model.md", formalModelText],
+  ["drafts/README.md", candidateIndexText],
+  ["drafts/registry.json", JSON.stringify(candidateRegistry)],
+  ["standards.json", JSON.stringify(standardsMetadata)],
+]) {
+  if (text.includes("numbered draft KFD-7") || text.includes("This numbered draft")) {
+    fail(`${path} must not describe active KFD-7 as a numbered draft`);
+  }
+}
+if (!normalizeWhitespace(liveCaseText).includes("does not complete the KFD-5 qualification of Pursuit or Warrant") ||
+    !normalizeWhitespace(distinguishabilityText).includes("The passed states above refer only to the exact KFD-7 activation cut")) {
+  fail("live case must distinguish active KFD-7 evidence from open Pursuit/Warrant qualification");
 }
 for (const issueTemplatePath of [
   ".github/ISSUE_TEMPLATE/kfd-proposal.yml",
@@ -370,14 +415,29 @@ if (siteBundle.routes?.candidatePattern !== "/drafts/{id}") {
 if (siteBundle.routes?.candidateFormalPattern !== "/drafts/{id}/formal") {
   fail("site bundle routes.candidateFormalPattern must be /drafts/{id}/formal");
 }
-if (!siteBundle.homepage?.futurePicture?.pastToFuture || !siteBundle.homepage?.futurePicture?.kungfuPath) {
-  fail("site bundle homepage.futurePicture must expose the civilizational shift and Kungfu path");
+if (
+  !siteBundle.homepage?.futurePicture?.question ||
+  !siteBundle.homepage?.futurePicture?.engineeringAnswer ||
+  !siteBundle.homepage?.futurePicture?.claimBoundary
+) {
+  fail("site bundle homepage.futurePicture must expose the core question, engineering answer, and claim boundary");
 }
-if (!siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes("future-picture.pastToFuture")) {
-  fail("site bundle homepage displayPlan firstScreen must include future-picture.pastToFuture");
+if (
+  siteBundle.homepage.futurePicture.pastToFuture !== siteBundle.homepage.futurePicture.question ||
+  siteBundle.homepage.futurePicture.kungfuPath !== siteBundle.homepage.futurePicture.engineeringAnswer
+) {
+  fail("site bundle homepage.futurePicture compatibility aliases must preserve the new core-question fields");
 }
-if (!siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes("future-picture.kungfuPath")) {
-  fail("site bundle homepage displayPlan firstScreen must include future-picture.kungfuPath");
+for (const requiredField of [
+  "future-picture.question",
+  "future-picture.engineeringAnswer",
+  "future-picture.claimBoundary",
+  "future-picture.pastToFuture",
+  "future-picture.kungfuPath",
+]) {
+  if (!siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes(requiredField)) {
+    fail(`site bundle homepage displayPlan firstScreen must include ${requiredField}`);
+  }
 }
 if (!siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes("foundation-triad")) {
   fail("site bundle homepage displayPlan firstScreen must include foundation-triad");
@@ -400,6 +460,7 @@ if (!siteBundle.homepage?.foundationTriad?.links?.some((entry) => entry.url === 
 const requiredHomepageSections = {
   "future-picture": "README.md",
   "foundation-triad": "README.md",
+  "why-this-question-matters": "README.md",
   "what-kfd-is": "README.md",
   "adoption-boundary": "README.md",
   "current-candidates": "README.md",

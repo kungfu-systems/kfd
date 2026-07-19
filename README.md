@@ -1,23 +1,21 @@
 # KFD — Kung Fu Decisions
 
-Most progress gives us better answers inside a world we already know how to
-describe. Some progress changes what that world contains. A spreadsheet cell
-made dependencies and recalculation directly manipulable. A Git commit made
-distributed history something software could preserve, compare, and exchange.
-Once such a primitive exists, it feels obvious; before it exists, whole fields
-may work around its absence.
+KFD's deepest question may not be **"How does an agent execute a task?"** It
+may be: **How can a bounded, goal-directed system act and change in an
+unpredictable world without losing continuity with itself?**
 
-We know how to use primitives after they exist. We do not yet have a generally
-adopted, reliable process for discovering the ones reality is already
-demanding. KFD asks how humans and agents can make that process inspectable.
-Kungfu opens the path from agents that answer questions to a civilization that
-can discover when it has named reality incorrectly.
+KFD is an open, evidence-governed engineering standard for preserving facts,
+boundaries, perspective, and responsibility when the path is not known in
+advance. It develops a small set of portable principles, procedures, schemas,
+and verification contracts through which humans, agents, organizations, and
+software systems can act, learn, and change without silent drift.
 
-KFD is an open, evidence-governed engineering standard under development for
-fact-bound human-agent systems. It defines portable principles, procedures,
-schemas, and verification contracts for facts, trust, cooperation,
-perspective, Primitive discovery, and consequential real-world action. Kungfu
-is its founding implementation, not its adoption boundary.
+KFD does not claim to be the final answer or a complete theory of complex
+systems. It publishes a small, testable foundation for adoption,
+implementation, challenge, counterevidence, and revision. The breadth covered
+by its current decisions is evidence that a general action structure may
+exist, not proof that KFD has finished discovering it. Kungfu is its founding
+implementation, not its adoption boundary.
 
 ## Foundation triad
 
@@ -30,9 +28,11 @@ KFD-2: trust must start from facts.
 KFD-3: cooperation must start from trusted value.
 ```
 
-Together they define the load-bearing path for Kungfu products: make facts
-non-drifting, make trust inspectable from those facts, and let humans and
-agents cooperate through trusted value rather than hidden pressure.
+Together they define a load-bearing path for systems acting under uncertainty:
+keep facts non-drifting, make trust inspectable from those facts, and let
+participants cooperate through trusted value rather than hidden pressure where
+multiple reasoning participants are involved. Kungfu carries this foundation
+as its founding implementation.
 
 No principle is load-bearing until it has an inspectable product witness.
 
@@ -44,12 +44,56 @@ No principle is load-bearing until it has an inspectable product witness.
 [Explore current decisions](#current-decisions) ·
 [Inspect the product proof path](#product-proof-path)
 
+## Why this question matters
+
+Continuity under uncertainty is not the preservation of a fixed state. A
+system remains itself only if it can change its model, direction, and behavior
+without silently losing the facts, boundaries, and responsibilities that make
+those changes its own. The problem recurs at different scales in people,
+organizations, software systems, and civilizations, even though KFD does not
+claim that one implementation can describe them all.
+
+When the system's current model is adequate, uncertainty still requires an
+inspectable action loop: declare a fact cut, establish bounded trust, cooperate
+where participants are involved, declare perspective, direction, and
+authority, record what occurred, and admit successor facts through review and
+correction. KFD-1 through KFD-4 and KFD-7 make those responsibilities
+independently addressable without pretending that every outcome was known in
+advance.
+
+The harder case begins when the current model cannot name what reality is
+demanding. The system must revise not only its answer, but the objects and
+relations through which an answer can be formed. At that boundary, continuity
+depends on whether a candidate new structure can emerge, remain connected to
+causal experience, and become qualified without generated narrative replacing
+fact.
+
+Primitive discovery is one frontier through which KFD tests that harder
+problem. A Primitive is not important because it is a clever abstraction. It
+is important when naming it lets a system perceive, act, verify, and continue
+in ways its previous object world could not support.
+
+Most progress gives us better answers inside a world we already know how to
+describe. Some progress changes what that world contains. A spreadsheet cell
+made dependencies and recalculation directly manipulable. A Git commit made
+distributed history something software could preserve, compare, and exchange.
+Once such a Primitive exists, it feels obvious; before it exists, whole fields
+may work around its absence.
+
+We know how to use Primitives after they exist. We do not yet have a generally
+adopted, reliable process for discovering the ones reality is already
+demanding. KFD asks how a system can make that discovery inspectable while
+preserving facts, boundaries, and responsibility. Kungfu opens a concrete path
+from agents that answer inside a human-named world to humans and agents that
+can discover when that world was named incorrectly.
+
 ## What KFD is
 
-KFD is the canonical open decision registry for a small set of portable
-engineering norms that products, organizations, humans, and agents can adopt.
-Each numbered decision has a kind, a status, and a single authoritative text
-in this repository.
+KFD is an open engineering standard for a small, testable foundation for
+reliable action and continuity under uncertainty. Its portable norms can be
+adopted by products, organizations, humans, agents, and other bounded systems.
+This repository is KFD's canonical open decision registry. Each numbered
+decision has a kind, a status, and a single authoritative text here.
 
 Kungfu-systems founded KFD, stewards the official namespace and release
 surfaces, and adopts active KFDs across the scopes declared by its products.
@@ -130,8 +174,8 @@ split, merged, withdrawn, rejected, or promoted.
   `10`.
 
 The [cross-domain action candidate](drafts/action-state-separation.md) is
-preserved as the lineage promoted into numbered draft KFD-7. The machine source
-is [`drafts/registry.json`](drafts/registry.json). Remaining slot hints are
+preserved as the lineage promoted into active KFD-7. The machine source is
+[`drafts/registry.json`](drafts/registry.json). Remaining slot hints are
 ordering hypotheses, not allocated KFD numbers, reservations, or promises.
 
 ## Product proof path
@@ -397,9 +441,14 @@ an implementation note to paraphrase in the site repository.
 The first screen should be derived from this README:
 
 - Page identity: the top-level heading.
-- Future picture: the opening two paragraphs must first make primitive discovery
-  concrete, then preserve the shift from machines answering inside a human-named
-  world to humans and agents discovering when that world was named incorrectly.
+- Core question: the opening paragraph must ask how a bounded, goal-directed
+  system can act and change in an unpredictable world without losing continuity
+  with itself. KFD must not be reduced to an Agent task-execution protocol.
+- Engineering answer: the second paragraph must identify facts, boundaries,
+  perspective, and responsibility as the inspectable basis for action when the
+  path is not known in advance.
+- Claim boundary: the third paragraph must state that KFD is a small, testable
+  foundation rather than a final answer or complete theory of complex systems.
 - Foundation signal: the `Foundation triad` section, especially the three
   one-line commitments and the product-witness rule immediately below them.
 - Depth choice: the foundation link must route to the non-numbered explanatory

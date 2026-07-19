@@ -49,7 +49,7 @@ Current candidates:
 Promoted lineage:
 
 - [Cross-domain action primitives](action-state-separation.md) was explicitly
-  promoted into numbered draft [KFD-7](../decisions/KFD-7.md).
+  promoted into active [KFD-7](../decisions/KFD-7.md).
 
 The three remaining candidates elaborate independently qualifiable
 cross-domain action Primitives. None of their slot hints allocates or reserves
