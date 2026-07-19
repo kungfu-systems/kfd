@@ -8,7 +8,7 @@ confidence: medium
 sensitivity: public
 evidence_grade: C
 review_state: self-reviewed
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-19
 ---
 
 # Pursuit and Warrant
@@ -73,6 +73,13 @@ The machine registry preserves one stable discovery-case identity and exposes
 separate current KFD-5 cuts for both candidate tracks. Later assessments create
 new numbered cuts for the affected track; they do not rewrite the genesis or
 the other candidate.
+
+KFD-7 has separately reached active status with exact Buildchain and Kungfu
+Profile evidence for action-role independence, session round-trip,
+complexity-breakpoint behavior, and cross-domain transfer. That evidence
+supports the active action principle but does not complete the KFD-5
+qualification of Pursuit or Warrant. Their candidate-specific deletion,
+minimum-closure, fuse, and comparative-value evidence remains pending.
 
 ## Why this is a reflexive KFD case
 

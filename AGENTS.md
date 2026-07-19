@@ -1,10 +1,11 @@
 # Agent Guide
 
 This repository is the canonical registry for KFD, an open, evidence-governed
-engineering standard under development for fact-bound human-agent systems. It
-contains numbered standard decisions, a machine-readable
-`registry.json`, non-normative pre-number candidates under `drafts/`, and a
-conformance check that keeps these surfaces in agreement.
+engineering standard under development for reliable action and continuity
+under uncertainty. Human-agent systems are its founding pressure field, not
+its conceptual limit. It contains numbered standard decisions, a
+machine-readable `registry.json`, non-normative pre-number candidates under
+`drafts/`, and a conformance check that keeps these surfaces in agreement.
 Each decision has a `kind`: a `principle` states what must remain true within a
 declared adoption scope, while a `procedure` states how a class of work
 enforces or protects a principle. Kungfu-systems is the founding steward and

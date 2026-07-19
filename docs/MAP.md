@@ -1,8 +1,11 @@
 # Documentation Map
 
+## Start here
+
 | Your question | Document |
 |---|---|
-| What future does KFD describe, and what decisions exist? | [`../README.md`](../README.md) |
+| What deepest problem does KFD address, and what decisions exist? | [`../README.md`](../README.md) |
+| How can a bounded, goal-directed system remain continuous while acting and changing under uncertainty? | [`../README.md`](../README.md), then [`foundation-model.md`](foundation-model.md) |
 | Is KFD an internal kungfu-systems rulebook or an open engineering standard? | [`../README.md`](../README.md#what-kfd-is) and [`../GOVERNANCE.md`](../GOVERNANCE.md) |
 | Who may propose, challenge, implement, adopt, or review a KFD? | [`../CONTRIBUTING.md`](../CONTRIBUTING.md) |
 | Who controls official KFD numbering, status, and releases? | [`../GOVERNANCE.md`](../GOVERNANCE.md#canonical-authority) |
@@ -16,6 +19,11 @@
 | How can I test the KFD primitive-discovery lens against Git, VisiCalc, the log, and an ordinary trace view? | [`primitive-discovery-cases.md`](primitive-discovery-cases.md) |
 | Where are provisional Primitive candidates tracked as live KFD dogfood? | [`../cases/registry.json`](../cases/registry.json) |
 | Where are pre-number KFD Candidates tracked? | [`../drafts/registry.json`](../drafts/registry.json) |
+
+## Decisions, candidates, and profiles
+
+| Your question | Document |
+|---|---|
 | How was the action-system candidate promoted into KFD-7? | [KFD-7](../decisions/KFD-7.md) and its [source-candidate lineage](../drafts/action-state-separation.md) |
 | What is the formal and geometric model behind KFD-7? | [`KFD-7-formal.md`](KFD-7-formal.md) |
 | Why can a simple session round-trip through KFD-7 without losing decision semantics? | [`KFD-7-formal.md`](KFD-7-formal.md#session-round-trip-preservation-theorem) |
@@ -42,6 +50,11 @@
 | What schema records a KFD-6 autonomous discovery experiment? | [`../schemas/kfd-6/autonomous-discovery-loop.schema.json`](../schemas/kfd-6/autonomous-discovery-loop.schema.json) |
 | How must real-world action keep direction, perspective, authority, and occurrence distinct? | [KFD-7](../decisions/KFD-7.md) |
 | What schema declares a KFD-7 product Profile and activation evidence boundary? | [`../schemas/kfd-7/action-contract.schema.json`](../schemas/kfd-7/action-contract.schema.json) |
+
+## Decision references and implementation
+
+| Your question | Document |
+|---|---|
 | What are the package implementation notes for KFD-1? | [`KFD-1-usage.md`](KFD-1-usage.md) |
 | What is the formal reference for KFD-1? | [`KFD-1-formal.md`](KFD-1-formal.md) |
 | What schema should papers, specifications, or sites use for canonical/latest/immutable publication URL semantics? | [`../schemas/kfd-1/publication-url-semantics.schema.json`](../schemas/kfd-1/publication-url-semantics.schema.json) and [`KFD-1-usage.md`](KFD-1-usage.md#publication-url-semantics) |
@@ -57,6 +70,11 @@
 | What is the formal reference for KFD-6? | [`KFD-6-formal.md`](KFD-6-formal.md) |
 | What are the package implementation notes for KFD-7? | [`KFD-7-usage.md`](KFD-7-usage.md) |
 | What is the formal reference for KFD-7? | [`KFD-7-formal.md`](KFD-7-formal.md) |
+
+## Adoption, verification, and release
+
+| Your question | Document |
+|---|---|
 | How should an agent quickly understand this package? | [`../README.md`](../README.md#agent-quickstart), then [`foundation-model.md`](foundation-model.md), [`formal-model.md`](formal-model.md), and [`primitive-discovery-cases.md`](primitive-discovery-cases.md) |
 | What is the concrete self-proof path for KFD-1 through KFD-7? | [`../README.md`](../README.md#product-proof-path), the KFD formal and usage pages, and the package witnesses under [`../.buildchain/`](../.buildchain/) |
 | How do I independently verify KFD records, release passports, Xinfa Pack/Atlas objects, or qualified Git Episodes? | [`verifier.md`](verifier.md) |
