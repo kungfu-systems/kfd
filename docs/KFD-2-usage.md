@@ -4,8 +4,9 @@
 [Formal reference](KFD-2-formal.md) ·
 [Documentation map](MAP.md)
 
-KFD-2 says that trust must start from inspectable facts and responsibility
-state. A product must not ask users or agents to trust load-bearing claims only
+KFD-2 says that trust must start from inspectable facts and named assurance
+responsibilities. A product must not ask users or agents to trust load-bearing
+claims only
 because they appear in prose, changelogs, repository history, generated UI, or
 maintainer reputation.
 
@@ -41,8 +42,8 @@ release claims -> evidence audit -> release trust passport -> release passport
 Release trust passports are one projection of KFD-2, not the whole KFD-2 model.
 Each claim should declare the statement being made, the subject of the claim,
 the facts it binds to, machine-readable evidence, the audit boundary, residual
-risk, and responsibility state. A trust assessment or release trust passport
-then records whether each claim is bound to evidence, which evidence was
+risk, and assurance responsibility. A trust assessment or release trust
+passport then records whether each claim is bound to evidence, which evidence was
 checked, what the result was, and who owns the decision.
 
 ## Generic Trust Claims

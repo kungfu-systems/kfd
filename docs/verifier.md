@@ -107,9 +107,10 @@ JSON-Schema subset is the subset used by the published KFD schemas:
 - `patternProperties`.
 
 An unsupported schema keyword fails closed instead of being ignored.
-The packaged KFD-7 action-contract schema is discoverable by either canonical
-`$schema` URI or `contract: kfd-7-action-contract`. Its draft Profile fixture
-passes structurally, while missing-role and premature-activation fixtures are
+The packaged KFD-7 Domain Profile Declaration schema is discoverable by either
+its canonical `$schema` URI or `contract: kfd-7-domain-profile`. Its example
+Domain Profile fixture passes structurally, while missing-coordinate and
+premature-activation fixtures are
 required to fail identically in native and WebAssembly verification.
 
 ### Buildchain release passport

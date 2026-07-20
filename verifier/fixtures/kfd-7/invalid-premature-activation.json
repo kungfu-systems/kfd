@@ -1,16 +1,8 @@
 {
-  "$schema": "https://kfd.libkungfu.dev/schemas/kfd-7/action-contract.schema.json",
-  "schemaVersion": 2,
-  "contract": "kfd-7-action-contract",
+  "$schema": "https://kfd.libkungfu.dev/schemas/kfd-7/domain-profile.schema.json",
+  "schemaVersion": 1,
+  "contract": "kfd-7-domain-profile",
   "standard": "kfd-7",
-  "profile": {
-    "id": "invalid-activation-profile",
-    "version": "0.1.0",
-    "product": "example",
-    "implementation": "git+https://example.invalid/action@bad",
-    "qualificationStatus": "provisional"
-  },
-  "roles": [],
   "transitions": [],
   "prohibitedInferences": [],
   "qualificationBasis": {
@@ -55,5 +47,14 @@
     "independentReview": "missing",
     "productWitnesses": [],
     "residualRisk": "activation is unsupported"
-  }
+  },
+  "domainProfile": {
+    "id": "invalid-activation-profile",
+    "version": "0.1.0",
+    "product": "example",
+    "implementation": "git+https://example.invalid/action@bad",
+    "qualificationStatus": "provisional"
+  },
+  "ontologyBindings": [],
+  "actionCoordinates": []
 }

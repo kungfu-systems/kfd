@@ -13,7 +13,7 @@
 
 ## Imported vocabulary
 
-`Participant`, `ValueClaim`, `TrustAssessment`, `ChoicePath`, `Constraint`,
+`Participant`, `ParticipantValueClaim`, `TrustAssessment`, `ChoicePath`, `Constraint`,
 `ExtensionPath`, `CooperationEvent`.
 
 ## Domain objects
@@ -21,7 +21,7 @@
 For participant `p` and offered work `o`:
 
 ```text
-Value(o, p)        participant-relevant value claim
+Value(o, p)        Participant Value Claim relevant to p
 Trust(o, p)        KFD-2 assessment visible to p
 Choice(o, p)       safe available modes, including decline where applicable
 Constraint(o, p)   restriction, purpose, authority, review, and revocation

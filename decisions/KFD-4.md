@@ -147,7 +147,7 @@ produced by perspective or another declared method.
 The `@kungfu-tech/kfd` package publishes observer-timeline and
 perspective-replay profiles under `schemas/kfd-4/`. Package wiring, the Kungfu
 perspective-infrastructure case, and adopter responsibilities are documented in
-`docs/KFD-4-usage.md` and `docs/foundation-model.md`. Historical and product
+`docs/KFD-4-usage.md` and `docs/foundation.md`. Historical and product
 cases remain explanatory, not normative.
 
 ## Adopters

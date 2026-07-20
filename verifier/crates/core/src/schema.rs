@@ -39,6 +39,10 @@ const SCHEMAS: &[(&str, &str)] = &[
         include_str!("../../../../schemas/kfd-standards.schema.json"),
     ),
     (
+        "schemas/kfd-terminology.schema.json",
+        include_str!("../../../../schemas/kfd-terminology.schema.json"),
+    ),
+    (
         "schemas/kfd-live-case-registry.schema.json",
         include_str!("../../../../schemas/kfd-live-case-registry.schema.json"),
     ),
@@ -99,8 +103,8 @@ const SCHEMAS: &[(&str, &str)] = &[
         include_str!("../../../../schemas/kfd-6/autonomous-discovery-loop.schema.json"),
     ),
     (
-        "schemas/kfd-7/action-contract.schema.json",
-        include_str!("../../../../schemas/kfd-7/action-contract.schema.json"),
+        "schemas/kfd-7/domain-profile.schema.json",
+        include_str!("../../../../schemas/kfd-7/domain-profile.schema.json"),
     ),
 ];
 
@@ -137,6 +141,7 @@ pub fn schema_for_record(record: &Value) -> Option<(String, Value)> {
         }
         "kfd.agent-runtime-report/v1" => "schemas/kfd-agent-runtime/report.schema.json",
         "kfd-standards-metadata" => "schemas/kfd-standards.schema.json",
+        "kfd-terminology" => "schemas/kfd-terminology.schema.json",
         "kfd-live-case-registry" => "schemas/kfd-live-case-registry.schema.json",
         "kfd-1-contract-world" => "schemas/kfd-1/contract-world.schema.json",
         "kfd-1-witness" => "schemas/kfd-1/witness.schema.json",
@@ -151,7 +156,7 @@ pub fn schema_for_record(record: &Value) -> Option<(String, Value)> {
         "kfd-4-perspective-replay" => "schemas/kfd-4/perspective-replay.schema.json",
         "kfd-5-primitive-discovery" => "schemas/kfd-5/primitive-discovery.schema.json",
         "kfd-6-autonomous-discovery-loop" => "schemas/kfd-6/autonomous-discovery-loop.schema.json",
-        "kfd-7-action-contract" => "schemas/kfd-7/action-contract.schema.json",
+        "kfd-7-domain-profile" => "schemas/kfd-7/domain-profile.schema.json",
         _ => return None,
     };
     documents.get(path).cloned().map(|schema| {

@@ -38,7 +38,7 @@ required evidence contains no `planned` or `failed` obligation.
 
 The retained cuts demonstrate, within the declared Profiles:
 
-- counterfactual role independence and prohibited cross-role inference;
+- counterfactual component independence and prohibited cross-component inference;
 - simple-session expansion and projection across all five decision
   observations;
 - fail-visible complexity breakpoints and same-payload valid-action

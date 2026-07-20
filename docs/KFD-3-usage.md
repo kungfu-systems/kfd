@@ -52,9 +52,11 @@ a participant-facing or callable backdoor API outside the declared interface.
 
 ## Value Evidence
 
-KFD-3 does not treat value as a marketing claim. A collaboration interface
-should state the value a participant is being asked to trust, then point to the
-facts and evidence that make that value inspectable.
+KFD-3 does not treat value as a marketing claim. A **Participant Value Claim**
+is a bounded statement of value to a participant with inspectable facts,
+assurance responsibility, constraints, choice, and residual risk. A
+collaboration interface should state the value a participant is being asked to
+trust, then point to the facts and evidence that make that value inspectable.
 
 Each `valueEvidence` entry should identify:
 

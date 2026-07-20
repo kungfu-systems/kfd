@@ -27,7 +27,7 @@ cut.
 
 ## Candidate rule
 
-An Atlas is the cross-domain action Primitive that makes a situated view of
+An Atlas is the cross-domain action coordinate that makes a situated view of
 reality independently addressable. It binds:
 
 - the participant or observer position;
@@ -48,7 +48,7 @@ fact-cut identity into real work.
 ## Relation to the action system
 
 Within the
-[cross-domain action Primitive candidate](action-state-separation.md), Atlas
+[cross-domain action coordinate candidate](action-state-separation.md), Atlas
 answers:
 
 ```text
