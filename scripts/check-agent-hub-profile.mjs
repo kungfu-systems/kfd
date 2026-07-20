@@ -172,6 +172,13 @@ if (
 ) {
   fail("valid admission must bind the exact manifest coordinate");
 }
+const repositoryCommit = exchange.profile?.repositoryCommit ?? "";
+if (
+  !/^(?:[a-f0-9]{40}|[a-f0-9]{64})$/.test(repositoryCommit) ||
+  /^([a-f0-9])\1+$/.test(repositoryCommit)
+) {
+  fail("valid admission must bind a non-placeholder repository commit");
+}
 for (const [label, endpoint] of [
   ["source", exchange.source],
   ["target", exchange.target],
