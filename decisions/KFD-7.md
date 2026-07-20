@@ -24,10 +24,10 @@ and the independent KFD-level review recorded there.
 The current model has enough theoretical closure to become an active standard
 decision: state and occurrence are not interchangeable, and direction,
 perspective, and authority can change safe action independently. The retained
-Buildchain and Kungfu Profiles show that this separation transfers between
-release transactions and durable agent work while preserving a low-complexity
-session projection. Future Profiles still qualify their own mapping, runtime
-behavior, product fitness, and residual risks.
+Buildchain and Kungfu Domain Profiles show that this separation transfers
+between release transactions and durable agent work while preserving a
+low-complexity session projection. Future Domain Profiles still qualify their
+own mapping, runtime behavior, product fitness, and residual risks.
 
 ## Substrate boundary
 
@@ -57,8 +57,8 @@ authority boundary    Warrant
 realized occurrence   Episode or another bounded causal record
 ```
 
-The names Atlas, Pursuit, Warrant, and Episode identify the first
-kungfu-systems action profiles. The principle is the separation of semantic
+The names Atlas, Pursuit, Warrant, and Episode identify the reference action
+Primitives used by this decision. The principle is the separation of semantic
 responsibility:
 
 - direction states which continuing change and consequences matter;
@@ -72,6 +72,38 @@ None may be silently derived from another. Intention does not grant authority.
 Available perspective is not complete reality. Permission or planning does not
 prove occurrence. Occurrence does not prove progress, completion, or
 authorization.
+
+## Action Geometry and Domain Profiles
+
+KFD-7 calls the cross-domain responsibility structure the **Action Geometry**:
+
+```text
+Fact cuts and causal records
+  -> independently addressable direction, perspective, authority, and occurrence
+  -> cross-role invariants and conservative session projection
+```
+
+Action Geometry defines coordinates and constraints. It does not define one
+business domain's fields, workflow labels, success policy, presentation, or
+storage layout. Atlas, Pursuit, Warrant, Fact, and Episode are action
+responsibilities or reference Primitives in this geometry; they are not
+themselves Profiles.
+
+A **Domain Profile** is a versioned adopter declaration that explains how one
+domain inhabits the Action Geometry. It maps domain objects and fields to the
+five responsibilities and owns domain lifecycle vocabulary, validation,
+defaults, success policy, presentation, and qualification evidence. A Domain
+Profile may refine or progressively disclose the geometry, but it must not
+fuse responsibilities, redefine their meaning, or establish a second Fact or
+causal authority.
+
+This distinction is normative terminology, not a requirement for two physical
+stores or two user-facing configuration steps:
+
+```text
+Action Geometry  defines the cross-domain coordinates
+Domain Profile   defines how a domain inhabits them
+```
 
 ## Action closure
 
@@ -148,14 +180,15 @@ A conforming claim:
 - does not infer completion, success, permission, or reality completeness from
   the wrong object.
 
-## Reference Profile contract
+## Domain Profile adoption contract
 
 KFD publishes `schemas/kfd-7/action-contract.schema.json` as a version 2 draft
-Profile declaration. It does not prescribe a universal product object model.
-It gives products and release systems one machine-readable place to declare:
+Domain Profile declaration against the Action Geometry. It does not prescribe
+a universal product object model. It gives products and release systems one
+machine-readable place to declare:
 
 - the Fact, Episode, Pursuit, Atlas, and Warrant responsibility mappings;
-- Profile-owned lifecycle vocabulary and implementation coordinates;
+- Domain Profile-owned lifecycle vocabulary and implementation coordinates;
 - supported transitions with preconditions, effects, receipts, evidence,
   denial reasons, and residual risks;
 - prohibited cross-role inferences and retained evidence obligations;
@@ -188,13 +221,14 @@ KFD-7 activation is grounded in retained product evidence that:
   alternatives;
 - demonstrates lower total lifecycle cost or materially safer action.
 
-The `activate` verdict binds two qualified product Profiles, exact
+The `activate` verdict binds two qualified Domain Profiles, exact
 implementation and availability cuts, independent product and KFD-level
 reviews, retained runtime witnesses, and no planned or failed evidence
 obligation. Missing evidence remains visible; it is never projected as pass.
 
 Failure is evidence for revision, simplification, or rejection of the proposed
-profiles. It is not permission to infer one responsibility from another.
+Domain Profiles. It is not permission to infer one responsibility from
+another.
 
 ## Relation to KFD-1 through KFD-6
 
@@ -218,7 +252,7 @@ non-drifting facts
 ## Verification
 
 The non-normative reference semantics are published in
-`docs/KFD-7-formal.md`. The Profile contract is published at
+`docs/KFD-7-formal.md`. The Domain Profile contract is published at
 `schemas/kfd-7/action-contract.schema.json` and is implemented independently by
 the native and WebAssembly verifier projections. Current package verification
 proves document, metadata, route, digest, declaration, and negative-fixture
@@ -227,6 +261,7 @@ release qualification without claiming universal minimality.
 
 ## Adopters
 
-Adopters cite KFD-7 when they expose the action model. They own the evidence
-for role independence, fact-cut admission, causal fidelity, authority
-correctness, progressive disclosure, and domain transfer.
+Adopters cite KFD-7 when they expose the Action Geometry through a Domain
+Profile. They own the evidence for role independence, fact-cut admission,
+causal fidelity, authority correctness, progressive disclosure, and domain
+transfer.

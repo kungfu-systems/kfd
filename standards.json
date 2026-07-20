@@ -1249,7 +1249,7 @@
               "integration-time",
               "cross-time"
             ],
-            "description": "Published version 2 KFD-7 action-contract Profile schema.",
+            "description": "Published version 2 KFD-7 Action Geometry Domain Profile contract schema.",
             "sourcePath": "schemas/kfd-7/action-contract.schema.json",
             "weldRationale": "Human, agent, product, verifier, and release consumers bind to the same role, transition, theorem reference, qualification evidence, non-claim, and activation declaration.",
             "impactProjection": {
@@ -1586,7 +1586,7 @@
       "title": "Cooperation must start from trusted value",
       "kind": "principle",
       "status": "active",
-      "revision": 4,
+      "revision": 5,
       "metadataSchemaVersion": "2",
       "document": {
         "path": "decisions/KFD-3.md",
@@ -1921,7 +1921,7 @@
       "document": {
         "path": "decisions/KFD-7.md",
         "url": "https://kfd.libkungfu.dev/7",
-        "sha256": "6c574127c43469d2bd434497f47d65b6a13d3a466873e7bd6b9711c78b8d8e17"
+        "sha256": "02c61f0981cd38d64ecde140b6f11a75e0457a979fe6251acadc23dc36405a4c"
       },
       "formalModel": {
         "path": "docs/KFD-7-formal.md",
@@ -1930,13 +1930,13 @@
         "status": "experimental",
         "normative": false,
         "authorityPath": "decisions/KFD-7.md",
-        "sha256": "62647e81fee867a29ed0edefb8b8e98e1c09bf2304fdc155c6ca57b8dec21602"
+        "sha256": "88f67946f55e93449edcfeacd2e23248fbb481718386dd5e62793757474aafa3"
       },
       "compatibility": {
         "packageLine": "v1.0",
         "registrySchemaVersion": 1,
         "metadataSchemaVersion": "2",
-        "rule": "Before the first stable release, maintainer-authorized semantic refinement must declare breaking decision-surface impact. Compatible draft Profile additions may keep action-contract schemaVersion 2; changes to responsibility, theorem applicability, transition validity, prohibited inference, evidence closure, activation meaning, or required fields require a new interface version or explicit Foundation Revision. After stable, substantive decision change mints a new KFD."
+        "rule": "Before the first stable release, maintainer-authorized semantic refinement must declare breaking decision-surface impact. Compatible draft Domain Profile additions may keep action-contract schemaVersion 2; changes to Action Geometry responsibility, theorem applicability, transition validity, prohibited inference, evidence closure, activation meaning, or required fields require a new interface version or explicit Foundation Revision. After stable, substantive decision change mints a new KFD."
       },
       "schemaIds": {
         "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json",
@@ -1952,7 +1952,7 @@
           "schemaVersion": 2,
           "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-7/action-contract.schema.json",
           "schemaPath": "schemas/kfd-7/action-contract.schema.json",
-          "compatibilityRule": "Compatible Profile-owned lifecycle additions may keep schemaVersion 2; semantic or required-field changes to responsibility, theorem applicability, transition, evidence, non-claim, or activation meaning require a new interface version or contract."
+          "compatibilityRule": "Compatible Domain Profile-owned lifecycle additions may keep schemaVersion 2; semantic or required-field changes to Action Geometry responsibility, theorem applicability, transition, evidence, non-claim, or activation meaning require a new interface version or contract."
         }
       },
       "surfaceRegister": {
@@ -1975,7 +1975,7 @@
             ],
             "description": "Commit-addressed cross-product qualification and activation evidence for KFD-7.",
             "sourcePath": "evidence/kfd-7/activation-record.json",
-            "weldRationale": "Consumers can distinguish structural schema validity from retained Profile qualification, product availability, independent review, and the KFD-level activation verdict.",
+            "weldRationale": "Consumers can distinguish structural schema validity from retained Domain Profile qualification, product availability, independent review, and the KFD-level activation verdict.",
             "impactProjection": {
               "breaking": "Incompatible changes to the evidence contract or activation meaning require an explicit compatibility action before a dependent gate may pass.",
               "additive": "Additional product witnesses or compatible evidence fields must preserve prior coordinates and claim boundaries.",
@@ -2012,7 +2012,7 @@
         "perspective": "declared observation and judgment frame",
         "authorityBoundary": "independently derivable and revocable action boundary",
         "occurrence": "realized action and consequence",
-        "actionGeometry": "non-physical geometry of action responsibilities",
+        "actionGeometry": "cross-domain coordinates and constraints for independently addressable action responsibilities",
         "observationProjection": "perspective-bound projection over admitted facts",
         "targetRelation": "directional relation over reachable fact cuts",
         "admissibleTransition": "authority-permitted candidate transition",
@@ -2027,18 +2027,20 @@
         "decisionObservationalEquivalence": "componentwise preservation of direction, perspective boundary, effective authority, causal process, and admitted result",
         "sessionRoundTripTheorem": "conditional preservation theorem for session expansion and projection",
         "contextInsufficiency": "same-payload counterexample showing that context alone cannot determine the valid action set",
-        "actionProfile": "versioned product-owned action Profile",
+        "actionProfile": "legacy metadata term for a Domain Profile declaration; not an Action Primitive",
+        "domainProfile": "versioned adopter declaration of how one domain inhabits the Action Geometry",
         "roleIndependence": "independently addressable semantic responsibility",
-        "profileLifecycleVocabulary": "Profile-owned lifecycle vocabulary",
+        "profileLifecycleVocabulary": "legacy metadata term for Domain Profile-owned lifecycle vocabulary",
+        "domainProfileLifecycleVocabulary": "Domain Profile-owned lifecycle vocabulary",
         "transitionContract": "precondition-effect-receipt-denial-evidence transition contract",
         "prohibitedInference": "fail-visible prohibited cross-role inference",
         "roleDeletionExperiment": "role deletion or fusion experiment",
-        "evidenceObligation": "retained Profile evidence obligation",
+        "evidenceObligation": "retained Domain Profile evidence obligation",
         "activationDecision": "activate, revise, reject, or pending verdict",
         "qualificationCut": "exact evidence cut and independent review binding",
-        "profileRefinementWitness": "evidence that a concrete Profile refines the standard session theorem",
+        "profileRefinementWitness": "evidence that a concrete Domain Profile refines the standard session theorem",
         "residualRisk": "declared remaining risk",
-        "extensionPoint": "versioned Profile-owned extension"
+        "extensionPoint": "versioned Domain Profile-owned extension"
       }
     }
   }
