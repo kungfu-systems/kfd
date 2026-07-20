@@ -7,8 +7,8 @@
 
 ## One sentence
 
-Real-world action must keep direction, perspective, authority, and occurrence
-independently addressable.
+Real-world action must preserve admitted state and realized occurrence while
+keeping direction, perspective, and authority independently addressable.
 
 Action begins from fact-bound direction, perspective, and authority, encounters
 reality, and returns as independently replayable causal experience.
@@ -29,22 +29,25 @@ between release transactions and durable agent work while preserving a
 low-complexity session projection. Future Domain Profiles still qualify their
 own mapping, runtime behavior, product fitness, and residual risks.
 
-## Substrate boundary
+## Fact-Episode Ontology
 
-KFD-7 distinguishes two complementary operational substrates:
+KFD-7 distinguishes two complementary categories in the **Fact-Episode
+Ontology**:
 
 ```text
-Fact cut       what holds at a declared authority and evidence boundary
-Causal record  what occurred between declared boundaries
+Fact cut  admitted state at a declared authority and evidence boundary
+Episode   realized causal occurrence between declared boundaries
 ```
 
-A causal record may be carried by an Episode. It preserves action,
-consequence, cost, failure, retry, authority use, and causal order rather than
-only before-and-after state. Equal endpoints do not imply equal experience.
+Facts define admitted state. Episodes preserve realized causal occurrence.
+Together they form the ontology over which Action Geometry operates. This is
+an ontology of KFD's contract world, not a claim to enumerate all of reality.
 
-Fact cuts and causal records remain independently addressable. A causal record
-does not silently admit its endpoint as current fact, and a state transition
-does not erase the path that produced it.
+An Episode preserves action, consequence, cost, failure, retry, authority use,
+and causal order rather than only before-and-after state. Equal endpoints do
+not imply equal experience. Fact cuts and Episodes remain independently
+addressable. An Episode does not silently admit its endpoint as current fact,
+and a state transition does not erase the path that produced it.
 
 ## Action responsibilities
 
@@ -54,23 +57,21 @@ Consequential action requires three independently addressable responsibilities:
 direction             Pursuit
 perspective and cut   Atlas
 authority boundary    Warrant
-realized occurrence   Episode or another bounded causal record
 ```
 
-The names Atlas, Pursuit, Warrant, and Episode identify the reference action
-Primitives used by this decision. The principle is the separation of semantic
-responsibility:
+The names Pursuit, Atlas, and Warrant identify the reference action Primitives
+used by this decision. The principle is the separation of semantic
+responsibility over the Fact-Episode Ontology:
 
 - direction states which continuing change and consequences matter;
 - perspective states from where, from which accepted facts, and at which cut
   action is judged;
 - authority states which transition may be performed, by whom, and under which
-  constraints;
-- occurrence preserves what actually happened.
+  constraints.
 
 None may be silently derived from another. Intention does not grant authority.
 Available perspective is not complete reality. Permission or planning does not
-prove occurrence. Occurrence does not prove progress, completion, or
+prove an Episode occurred. An Episode does not prove progress, completion, or
 authorization.
 
 ## Action Geometry and Domain Profiles
@@ -79,25 +80,26 @@ KFD-7 calls the cross-domain responsibility structure the **Action Geometry**,
 the cross-domain responsibility model for real-world action:
 
 ```text
-Fact cuts and causal records
-  -> independently addressable direction, perspective, authority, and occurrence
+Fact-Episode Ontology
+  -> independently addressable direction, perspective, and authority
   -> cross-role invariants and conservative session projection
 ```
 
 The subtitle "cross-domain responsibility model" explains Action Geometry in
 plain language; it does not name another layer or interface. Action Geometry
-defines coordinates and constraints. It does not define one business domain's
-fields, workflow labels, success policy, presentation, or storage layout.
-Atlas, Pursuit, Warrant, Fact, and Episode are action responsibilities or
-reference Primitives in this geometry; they are not themselves Profiles.
+defines three coordinates and their constraints over the Fact-Episode
+Ontology. It does not define one business domain's fields, workflow labels,
+success policy, presentation, or storage layout. Pursuit, Atlas, and Warrant
+are reference action Primitives in this geometry. Fact and Episode are its
+ontology bindings. None is itself a Profile.
 
 A **Domain Profile** is a versioned adopter declaration that explains how one
 domain inhabits the Action Geometry. It maps domain objects and fields to the
-five responsibilities and owns domain lifecycle vocabulary, validation,
-defaults, success policy, presentation, and qualification evidence. A Domain
-Profile may refine or progressively disclose the geometry, but it must not
-semantically fuse responsibilities, redefine their meaning, or establish a
-second Fact or causal authority.
+two ontology bindings and three action-Primitive mappings, and owns domain
+lifecycle vocabulary, validation, defaults, success policy, presentation, and
+qualification evidence. A Domain Profile may refine or progressively disclose
+the geometry, but it must not semantically fuse the mappings, redefine their
+meaning, or establish a second Fact or Episode authority.
 
 This distinction is normative terminology, not a requirement for separate
 physical stores, records, APIs, processes, or user-facing configuration steps:
@@ -122,6 +124,7 @@ language:
 
 | Term | Status and meaning |
 | --- | --- |
+| **Fact-Episode Ontology** | Canonical contract-world distinction between admitted state and realized causal occurrence. |
 | **Action Geometry** | Canonical cross-domain responsibility model for real-world action. |
 | **Domain Profile** | Canonical versioned declaration of how one domain inhabits Action Geometry. |
 | **Action Geometry Contract** | Canonical machine artifact that identifies the geometry and its invariants. |
@@ -139,6 +142,24 @@ mapping, and differential evidence; it must not reinterpret the version 2
 bytes or roots. No removal version is declared. Compatibility names are
 deprecated for new authoring now and remain readable until an explicit,
 qualified successor policy says otherwise.
+
+### Foundation Revision 6 migration
+
+Before the first stable release, revision 6 corrects an earlier flattening of
+Fact, Episode, Pursuit, Atlas, and Warrant into one five-responsibility list.
+The current structure is:
+
+```text
+Fact + Episode               two ontology bindings
+Pursuit + Atlas + Warrant    three action-Primitive mappings
+```
+
+This is a breaking decision-surface correction under the pre-stable Foundation
+Revision rule. It preserves every published package, document, schema, contract
+id, and version 2 field coordinate. Existing `roles[]` readers continue to see
+the same five values; new readers interpret `fact` and `episode` as ontology
+bindings and `pursuit`, `atlas`, and `warrant` as action-Primitive mappings.
+No prior bytes, roots, activation cut, or product evidence are rewritten.
 
 ## Action closure
 
@@ -179,10 +200,10 @@ direction, perspective boundary, effective authority, realized occurrence,
 and admitted result, and keeps its defaults inspectable.
 
 The formal reference defines this as a conditional round-trip theorem:
-expanding a session-compressible session into the five responsibilities and
-projecting it back must preserve those five decision observations. A product
-does not re-prove the abstract theorem; it proves that its concrete expansion,
-projection, and compressibility boundary refine it.
+expanding a session-compressible session into two ontology bindings and three
+action-Primitive mappings, then projecting it back, must preserve five decision
+observations. A product does not re-prove the abstract theorem; it proves that
+its concrete expansion, projection, and compressibility boundary refine it.
 
 This compression is conditional. The independent responsibilities must become
 addressable when work crosses directions, perspectives or freshness cuts,
@@ -222,7 +243,8 @@ Domain Profile declaration against the Action Geometry. It does not prescribe
 a universal product object model. It gives products and release systems one
 machine-readable place to declare:
 
-- the Fact, Episode, Pursuit, Atlas, and Warrant responsibility mappings;
+- the Fact and Episode ontology bindings;
+- the Pursuit, Atlas, and Warrant action-Primitive mappings;
 - Domain Profile-owned lifecycle vocabulary and implementation coordinates;
 - supported transitions with preconditions, effects, receipts, evidence,
   denial reasons, and residual risks;
@@ -231,10 +253,10 @@ machine-readable place to declare:
 - the standard session round-trip and context-insufficiency references, plus
   the evidence categories used to qualify a concrete implementation.
 
-All five responsibility declarations remain required even when a product uses
-one physical record or a low-complexity session projection. The declaration
-explains the mapping or inspectable default; it does not require five stores,
-objects, types, APIs, forms, commands, or interface components. Structural
+All five mapping declarations remain required even when a product uses one
+physical record or a low-complexity session projection. The declaration
+explains the binding, mapping, or inspectable default; it does not require five
+stores, objects, types, APIs, forms, commands, or interface components. Structural
 verification checks declaration closure, exact mappings, prohibited
 inferences, and evidence references. Product qualification checks semantic
 distinguishability through traceability, counterfactual variation, invalidation
@@ -273,7 +295,7 @@ another.
 
 ## Relation to KFD-1 through KFD-6
 
-KFD-1 keeps fact cuts and causal records from drifting. KFD-2 makes claims about
+KFD-1 keeps Fact cuts and Episodes from drifting. KFD-2 makes claims about
 them assessable. KFD-3 lets participants exchange trusted value without hidden
 pressure. KFD-4 supplies declared reference frames and inspectable
 transformations. KFD-5 separates the genesis of action Primitives from their

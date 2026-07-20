@@ -407,7 +407,7 @@ so.
 | Declared perspective | KFD-4 | How can a situated view become durable, transferable, and comparable without being flattened? | Views remain bound to declared perspectives. Timelines preserve perspective; replay transfers it; contrast exposes hidden object mismatch. |
 | Primitive discovery | KFD-5 | How does a candidate object become load-bearing rather than remain a private intuition or method artifact? | Genesis remains perspective-declared and method-plural; qualification binds the candidate to facts, alternatives, falsifiers, and real work. |
 | Autonomous discovery | KFD-6 | Can an agent move beyond a fixed ontology without replacing reality with generated narrative or canonizing one generator? | Autonomous discovery remains grounded in causal experience, compares generation methods under bounded conditions, and never certifies itself. |
-| Fact-bound action | KFD-7 | How can an intelligent participant act without confusing what it wants, sees, may do, and actually did? | Direction, perspective, authority, and occurrence remain independently addressable over Fact cuts and causal experience. |
+| Fact-bound action | KFD-7 | How can an intelligent participant act without confusing what it wants, sees, may do, and actually did? | The Fact-Episode Ontology preserves admitted state and realized occurrence; Action Geometry keeps direction, perspective, and authority independently addressable over it. |
 
 The continuity is generative rather than merely classificatory. KFD-4 declares
 the observation horizon and allows perspective transformation to move it.

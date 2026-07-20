@@ -4,9 +4,11 @@
 [Formal reference](KFD-7-formal.md) ·
 [Documentation map](MAP.md)
 
-KFD-7 defines an active cross-domain action model that keeps direction,
-perspective, authority, and occurrence independently addressable. The
-authoritative text is `decisions/KFD-7.md`; its registry status is `active`.
+KFD-7 defines an active Fact-Episode Ontology and a cross-domain action model.
+Facts preserve admitted state, Episodes preserve realized causal occurrence,
+and Action Geometry keeps direction, perspective, and authority independently
+addressable. The authoritative text is `decisions/KFD-7.md`; its registry
+status is `active`.
 
 ## Package surface
 
@@ -41,24 +43,25 @@ boundary. It does not choose a product store, API, CLI, GUI, Git coordinate,
 database key, or universal lifecycle vocabulary. Product dogfood still decides
 whether any concrete Domain Profile deserves stable activation.
 
-## Action Geometry and Domain Profiles
+## Fact-Episode Ontology, Action Geometry, and Domain Profiles
 
-**Action Geometry** is the cross-domain responsibility model for real-world
-action: Fact cuts, causal records, five independently addressable
-responsibilities, cross-role invariants, and the conservative session
-projection. "Cross-domain responsibility model" is its explanatory subtitle,
-not a second formal term. Atlas, Pursuit, Warrant, Fact, and Episode are
-responsibilities or reference action Primitives in this geometry; they are not
-Profiles.
+The **Fact-Episode Ontology** distinguishes admitted state from realized causal
+occurrence. **Action Geometry** is the cross-domain responsibility model over
+that ontology: Pursuit, Atlas, and Warrant remain independently addressable
+under cross-role invariants and a conservative session projection.
+"Cross-domain responsibility model" is its explanatory subtitle, not a second
+formal term. Pursuit, Atlas, and Warrant are reference action Primitives; Fact
+and Episode are ontology bindings. None is a Profile.
 
 A Domain Profile declares its product and implementation coordinate,
-qualification state, five responsibility mappings, domain field schemas and
-lifecycle terms, supported transitions, prohibited inferences, evidence
-obligations, non-claims, extensions, and activation verdict. The complete
-draft example is `verifier/fixtures/kfd-7/valid-action-contract.json`.
+qualification state, two ontology bindings, three action-Primitive mappings,
+domain field schemas and lifecycle terms, supported transitions, prohibited
+inferences, evidence obligations, non-claims, extensions, and activation
+verdict. The complete draft example is
+`verifier/fixtures/kfd-7/valid-action-contract.json`.
 
-Products may map several responsibilities to one physical record, type, API,
-service, or familiar session surface. They still declare all five mappings so
+Products may map several bindings and responsibilities to one physical record,
+type, API, service, or familiar session surface. They still declare all five so
 an independent reader can see which default, projection, source authority,
 cut, and version carries each decision. This requirement preserves semantic
 distinguishability and traceability without requiring five user-facing or
@@ -68,6 +71,7 @@ The canonical terms are:
 
 | Use | Term |
 | --- | --- |
+| Contract-world state and occurrence | **Fact-Episode Ontology** |
 | Cross-domain model | **Action Geometry** |
 | Adopter specialization | **Domain Profile** |
 | Geometry machine artifact | **Action Geometry Contract** |
@@ -78,6 +82,9 @@ The canonical terms are:
 `actionContract` are retained only where published compatibility coordinates
 must remain exact. New prose and successor interfaces use the canonical terms.
 Existing readers remain supported; no removal version is declared.
+In this retained version 2 interface, `roles[]` is a compatibility field:
+`fact` and `episode` are ontology bindings, while `pursuit`, `atlas`, and
+`warrant` are action-Primitive mappings.
 
 Each supported transition declares its subject role, operation, Domain Profile
 state terms, preconditions, effect, receipt, evidence, denial reasons, and
@@ -177,8 +184,9 @@ npx @kungfu-tech/kfd verify kfd-record \
   verifier/fixtures/kfd-7/valid-action-contract.json
 ```
 
-The verifier rejects missing responsibility mappings, missing standard theorem
-references, unknown closed-vocabulary values, incomplete transitions, missing
+The verifier rejects missing ontology bindings or action-Primitive mappings,
+missing standard theorem references, unknown closed-vocabulary values,
+incomplete transitions, missing
 round-trip/context evidence categories, and premature activation. It remains
 offline, non-qualifying, and non-self-certified. It checks semantic mapping
 closure and retained evidence references; it does not count physical records,

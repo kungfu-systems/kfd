@@ -49,7 +49,8 @@
 | How should an autonomous discovery loop remain grounded in causal experience? | [KFD-6](../decisions/KFD-6.md) |
 | What schema records a KFD-6 autonomous discovery experiment? | [`../schemas/kfd-6/autonomous-discovery-loop.schema.json`](../schemas/kfd-6/autonomous-discovery-loop.schema.json) |
 | How must real-world action keep direction, perspective, authority, and occurrence distinct? | [KFD-7](../decisions/KFD-7.md) |
-| What is the difference between KFD-7 Action Geometry and a Domain Profile? | [KFD-7](../decisions/KFD-7.md#action-geometry-and-domain-profiles) and [`KFD-7-usage.md`](KFD-7-usage.md#action-geometry-and-domain-profiles) |
+| What is the difference between the Fact-Episode Ontology, Action Geometry, and a Domain Profile? | [KFD-7](../decisions/KFD-7.md#action-geometry-and-domain-profiles) and [`KFD-7-usage.md`](KFD-7-usage.md#fact-episode-ontology-action-geometry-and-domain-profiles) |
+| Why are Fact and Episode ontology bindings rather than Action Geometry Primitives? | [KFD-7](../decisions/KFD-7.md#fact-episode-ontology) and [`KFD-7-formal.md`](KFD-7-formal.md#fact-episode-ontology) |
 | What schema declares a KFD-7 Domain Profile and activation evidence boundary? | [`../schemas/kfd-7/action-contract.schema.json`](../schemas/kfd-7/action-contract.schema.json) |
 
 ## Decision references and implementation

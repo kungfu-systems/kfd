@@ -1916,27 +1916,27 @@
       "title": "Real-world action must keep its responsibilities distinct",
       "kind": "principle",
       "status": "active",
-      "revision": 5,
+      "revision": 6,
       "metadataSchemaVersion": "2",
       "document": {
         "path": "decisions/KFD-7.md",
         "url": "https://kfd.libkungfu.dev/7",
-        "sha256": "2225853fa9552a70f1331540832f4bef6a897011cd18001993a59038d9fa436a"
+        "sha256": "69b20baf2dd715b3d609b3bd1dbabac2591580c0528b28611ba164addac5a939"
       },
       "formalModel": {
         "path": "docs/KFD-7-formal.md",
         "url": "https://kfd.libkungfu.dev/7/formal",
-        "version": 2,
+        "version": 3,
         "status": "experimental",
         "normative": false,
         "authorityPath": "decisions/KFD-7.md",
-        "sha256": "06cd8b58c01a66cd7d00cdae402d0a6cfc15a29802034beee6afde59e2c86176"
+        "sha256": "12f4fe9110539129a9564d698964c06afb17318abaf5b0067dfe9a0d414b916f"
       },
       "compatibility": {
         "packageLine": "v1.0",
         "registrySchemaVersion": 1,
         "metadataSchemaVersion": "2",
-        "rule": "Before the first stable release, maintainer-authorized semantic refinement must declare breaking decision-surface impact. Compatible draft Domain Profile additions may keep the retained actionContract schemaVersion 2 identity. Action Profile and unqualified Action Contract are compatibility-only terms; new authoring uses Action Geometry, Domain Profile, Action Geometry Contract, and Domain Profile Declaration. Changes to Action Geometry responsibility, theorem applicability, transition validity, prohibited inference, evidence closure, activation meaning, or required fields require a new interface version or explicit Foundation Revision. After stable, substantive decision change mints a new KFD."
+        "rule": "Foundation Revision 6 preserves published coordinates while correcting the model from five peer responsibilities to two Fact-Episode ontology bindings plus three Action Geometry Primitive mappings. The retained actionContract schemaVersion 2 roles[] field remains readable with the same five values and no prior root is reinterpreted. Compatible draft Domain Profile additions may keep that interface identity. Action Profile and unqualified Action Contract are compatibility-only terms; new authoring uses Fact-Episode Ontology, Action Geometry, Domain Profile, Action Geometry Contract, and Domain Profile Declaration. Changes to ontology or geometry responsibility, theorem applicability, transition validity, prohibited inference, evidence closure, activation meaning, or required fields require a new interface version or explicit Foundation Revision. After stable, substantive decision change mints a new KFD."
       },
       "schemaIds": {
         "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json",
@@ -1952,7 +1952,7 @@
           "schemaVersion": 2,
           "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-7/action-contract.schema.json",
           "schemaPath": "schemas/kfd-7/action-contract.schema.json",
-          "compatibilityRule": "This retained actionContract identity declares a Domain Profile against Action Geometry and does not identify the future Action Geometry Contract. Compatible Domain Profile-owned lifecycle additions may keep schemaVersion 2. New authoring uses the canonical Domain Profile Declaration term. Semantic or required-field changes to Action Geometry responsibility, theorem applicability, transition, evidence, non-claim, or activation meaning require a new interface version or contract."
+          "compatibilityRule": "This retained actionContract identity declares two Fact-Episode ontology bindings and three Action Geometry Primitive mappings for a Domain Profile; its roles[] field and five closed values remain compatibility coordinates and do not identify the future Action Geometry Contract. Compatible Domain Profile-owned lifecycle additions may keep schemaVersion 2. New authoring uses the canonical Domain Profile Declaration term. Semantic or required-field changes to ontology or geometry responsibility, theorem applicability, transition, evidence, non-claim, or activation meaning require a new interface version or contract."
         }
       },
       "surfaceRegister": {
@@ -2012,7 +2012,10 @@
         "perspective": "declared observation and judgment frame",
         "authorityBoundary": "independently derivable and revocable action boundary",
         "occurrence": "realized action and consequence",
-        "actionGeometry": "canonical cross-domain responsibility model for real-world action",
+        "factEpisodeOntology": "canonical contract-world distinction between admitted state and realized causal occurrence",
+        "ontologyBinding": "Domain Profile declaration that binds a domain representation to Fact or Episode semantics",
+        "actionPrimitiveMapping": "Domain Profile declaration that maps a domain representation to Pursuit, Atlas, or Warrant",
+        "actionGeometry": "canonical three-coordinate cross-domain responsibility model over the Fact-Episode Ontology",
         "actionGeometryContract": "canonical machine artifact that identifies Action Geometry and its invariants",
         "observationProjection": "perspective-bound projection over admitted facts",
         "targetRelation": "directional relation over reachable fact cuts",
