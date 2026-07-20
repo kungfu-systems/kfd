@@ -5,10 +5,10 @@
 [Documentation map](MAP.md)
 
 KFD-7 defines an active Fact-Episode Ontology and a cross-domain action model.
-Facts preserve admitted state, Episodes preserve realized causal occurrence,
-and Action Responsibility Geometry keeps direction, perspective, and authority independently
-addressable. The authoritative text is `decisions/KFD-7.md`; its registry
-status is `active`.
+Facts preserve admitted state, Episodes preserve replayable causal occurrence,
+and Action Responsibility Geometry keeps perspective, direction, and authority
+independently addressable. The authoritative text is `decisions/KFD-7.md`; its
+registry status is `active`.
 
 ## Package surface
 
@@ -45,11 +45,27 @@ concrete Domain Profile deserves stable activation.
 
 The **Fact-Episode Ontology** distinguishes admitted state from realized causal
 occurrence. **Action Responsibility Geometry** is the cross-domain responsibility model over
-that ontology: Pursuit, Atlas, and Warrant remain independently addressable
+that ontology: Atlas, Pursuit, and Warrant remain independently addressable
 under cross-component invariants and a conservative session projection.
 "Cross-domain responsibility model" is its explanatory subtitle, not a second
-formal term. Pursuit, Atlas, and Warrant are reference action coordinates; Fact
+formal term. Atlas, Pursuit, and Warrant are reference action coordinates; Fact
 and Episode are ontology bindings. None is a Profile.
+
+The core terms use one canonical `2 + 3` reading:
+
+| Structure | Term | Canonical explanatory subtitle |
+| --- | --- | --- |
+| Fact-Episode Ontology | **Fact** | Admitted state at a declared evidence boundary |
+| Fact-Episode Ontology | **Episode** | Replayable causal record between Fact cuts |
+| Action Responsibility Geometry | **Atlas** | Declared perspective over admitted facts |
+| Action Responsibility Geometry | **Pursuit** | Continuing direction and progress relation |
+| Action Responsibility Geometry | **Warrant** | Bounded authority for admissible transitions |
+
+These subtitles explain the canonical terms; they do not create aliases. A
+Fact is not absolute truth. A Fact Cut is the independently addressable formal
+carrier of admitted Fact state, not a third ontology binding. An Episode is
+not proof of success, progress, completion, or authorization. Atlas is not
+complete reality, Pursuit is not authority, and Warrant is not occurrence.
 
 A Domain Profile declares its product and implementation coordinate,
 qualification state, two ontology bindings, three action-coordinate mappings,
@@ -78,7 +94,7 @@ The declaration expresses the semantic split directly:
 
 ```text
 ontologyBindings[]    fact, episode
-actionCoordinates[]   pursuit, atlas, warrant
+actionCoordinates[]   atlas, pursuit, warrant
 ```
 
 There is no combined role array or alternate pre-stable interface.

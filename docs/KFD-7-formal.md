@@ -7,21 +7,24 @@
 
 - Status: experimental
 - Normative: no
-- Formal model version: 4
+- Formal model version: 5
 - Authority: `decisions/KFD-7.md`
 - Decision status: active
 
 ## Imported vocabulary
 
-`FactCut`, `CausalOccurrence`, `CausalRecord`, `Episode`,
+`Fact`, `FactCut`, `CausalOccurrence`, `CausalRecord`, `Episode`,
 `CausalExperience`, `Atlas`, `Pursuit`, `Warrant`, `ActionSpace`,
 `ObservationProjection`, `TargetRelation`,
 `AdmissibleTransition`, `RealizedPath`.
 
 ## Fact-Episode Ontology
 
-Let `F` be a state space admitted by declared fact sources. A fact cut is an
-independently addressable state:
+Let `F` be a state space admitted by declared fact sources. `Fact` denotes
+admitted state at a declared evidence boundary. It does not denote absolute
+truth or every observation. A `FactCut` is an independently addressable
+instance of that state at a declared source, authority, evidence, and time or
+version boundary:
 
 ```text
 f_c in F
@@ -71,6 +74,16 @@ compose(E1, E2) only when After(E1) = Before(E2)
 This is a contract-world ontology, not a claim that every domain is literally
 a mathematical category or that KFD enumerates all of reality.
 
+The canonical explanatory subtitles are:
+
+```text
+Fact      Admitted state at a declared evidence boundary
+Episode   Replayable causal record between Fact cuts
+```
+
+`FactCut` (Fact Cut) is the formal carrier of `Fact`, not a third ontology
+binding.
+
 One or more Episodes may be projected as Causal Experience for learning,
 comparison, or discovery:
 
@@ -87,7 +100,15 @@ Action Responsibility Geometry is the cross-domain responsibility model for real
 action. The subtitle is explanatory; `Action Responsibility Geometry` remains
 the canonical formal term.
 
-The three action coordinates constrain different structures over `F`:
+The three action coordinates and their canonical explanatory subtitles are:
+
+```text
+Atlas     Declared perspective over admitted facts
+Pursuit   Continuing direction and progress relation
+Warrant   Bounded authority for admissible transitions
+```
+
+They constrain different structures over `F`:
 
 ```text
 Atlas:    pi_A: F -> O_A

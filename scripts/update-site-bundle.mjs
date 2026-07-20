@@ -4,6 +4,7 @@ import { pathToFileURL } from "node:url";
 const README_PATH = "README.md";
 const FOUNDATION_PATH = "docs/foundation.md";
 const TERMINOLOGY_PATH = "docs/terminology.md";
+const TERMINOLOGY_CONTRACT_PATH = "terminology.json";
 const FORMAL_PATH = "docs/formal-model.md";
 const CASES_PATH = "docs/primitive-discovery-cases.md";
 const REGISTRY_PATH = "registry.json";
@@ -286,6 +287,7 @@ export const buildSiteBundle = ({
   registry,
   standards,
   liveCaseRegistry,
+  terminology,
 }) => {
   const readme = parseReadme(readmeText);
   const foundationDocument = parseReadme(foundationText);
@@ -443,6 +445,7 @@ export const buildSiteBundle = ({
       standards: STANDARDS_PATH,
       liveCaseRegistry: LIVE_CASE_REGISTRY_PATH,
       candidateRegistry: CANDIDATE_REGISTRY_PATH,
+      terminology: TERMINOLOGY_CONTRACT_PATH,
       decisionsDir: "decisions",
       candidatesDir: "drafts",
     },
@@ -560,6 +563,7 @@ export const buildSiteBundle = ({
       relationship: "canonical-vocabulary-for-all-kfd-surfaces",
       normative: false,
       authorityNote: "Numbered decisions remain normative; this contract governs naming and type distinctions across their projections.",
+      contract: terminology,
       markdown: normalizeLines(readFileSync(TERMINOLOGY_PATH, "utf8")),
     },
     liveCases: {
@@ -662,6 +666,7 @@ export const buildSiteBundle = ({
         "agent quickstart text",
         "decision metadata",
         "decision metadata fact source",
+        "canonical terminology contract and explanatory subtitles from terminology.json",
         "license and official-status boundary",
         "decision markdown bodies",
         "decision usage page mapping",
@@ -693,6 +698,7 @@ export const readInputs = () => ({
   registry: JSON.parse(readFileSync(REGISTRY_PATH, "utf8")),
   standards: JSON.parse(readFileSync(STANDARDS_PATH, "utf8")),
   liveCaseRegistry: JSON.parse(readFileSync(LIVE_CASE_REGISTRY_PATH, "utf8")),
+  terminology: JSON.parse(readFileSync(TERMINOLOGY_CONTRACT_PATH, "utf8")),
 });
 
 export const generatedSiteBundle = () => buildSiteBundle(readInputs());

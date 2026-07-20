@@ -211,7 +211,7 @@ if (terminology.contract !== "kfd-terminology" ||
 }
 const requiredCanonicalTerms = [
   "KFD Foundation", "KFD Primitive", "KFD Primitive Candidate",
-  "Fact-Episode Ontology", "Causal Occurrence", "Causal Record", "Episode",
+  "Fact-Episode Ontology", "Fact", "Fact Cut", "Causal Occurrence", "Causal Record", "Episode",
   "Causal Experience", "Action Responsibility Geometry", "Action Coordinate",
   "Pursuit", "Atlas", "Warrant", "Domain Profile",
   "Domain Profile Declaration", "Assurance Responsibility",
@@ -229,6 +229,107 @@ for (const [index, term] of (terminology.terms ?? []).entries()) {
 for (const term of requiredCanonicalTerms) {
   if (!terminologyNames.has(term)) fail(`terminology contract missing canonical term ${term}`);
   if (!terminologyText.includes(`**${term}**`)) fail(`terminology authority missing canonical term ${term}`);
+}
+const expectedCoreTerms = {
+  fact: {
+    canonical: "Fact",
+    layer: "kfd-7-ontology-binding",
+    subtitle: "Admitted state at a declared evidence boundary",
+    compactSubtitle: "Admitted state",
+    question: "What is admitted?",
+  },
+  episode: {
+    canonical: "Episode",
+    layer: "kfd-7-ontology-binding",
+    subtitle: "Replayable causal record between Fact cuts",
+    compactSubtitle: "Replayable causal record",
+    question: "What happened?",
+  },
+  atlas: {
+    canonical: "Atlas",
+    layer: "reference-coordinate",
+    subtitle: "Declared perspective over admitted facts",
+    compactSubtitle: "Declared perspective",
+    question: "From where is it judged?",
+  },
+  pursuit: {
+    canonical: "Pursuit",
+    layer: "reference-coordinate",
+    subtitle: "Continuing direction and progress relation",
+    compactSubtitle: "Continuing direction",
+    question: "What change is sought?",
+  },
+  warrant: {
+    canonical: "Warrant",
+    layer: "reference-coordinate",
+    subtitle: "Bounded authority for admissible transitions",
+    compactSubtitle: "Bounded authority",
+    question: "What action is allowed?",
+  },
+};
+const terminologyById = new Map((terminology.terms ?? []).map((term) => [term.id, term]));
+for (const [id, expected] of Object.entries(expectedCoreTerms)) {
+  const actual = terminologyById.get(id);
+  if (!actual) {
+    fail(`terminology contract missing core term ${id}`);
+    continue;
+  }
+  for (const [field, value] of Object.entries(expected)) {
+    if (actual[field] !== value) fail(`terminology term ${id}.${field} must be ${value}`);
+  }
+  if (!actual.definition?.trim()) fail(`terminology term ${id} must include a definition`);
+  if (!Array.isArray(actual.notThis) || actual.notThis.length === 0) {
+    fail(`terminology term ${id} must include anti-misreading boundaries`);
+  }
+  for (const value of [actual.subtitle, actual.question]) {
+    if (!terminologyText.includes(value)) {
+      fail(`terminology authority must expose ${id} wording: ${value}`);
+    }
+  }
+  if (!terminologyText.includes(actual.compactSubtitle)) {
+    fail(`terminology authority must expose ${id} compact subtitle: ${actual.compactSubtitle}`);
+  }
+  for (const boundary of actual.notThis) {
+    if (!terminologyText.includes(boundary)) {
+      fail(`terminology authority must expose ${id} anti-misreading boundary: ${boundary}`);
+    }
+  }
+}
+const expectedTerminologyStructures = [
+  { termId: "fact-episode-ontology", members: ["fact", "episode"] },
+  { termId: "action-responsibility-geometry", members: ["atlas", "pursuit", "warrant"] },
+];
+if (JSON.stringify(terminology.structures) !== JSON.stringify(expectedTerminologyStructures)) {
+  fail("terminology contract must preserve the canonical 2 + 3 structure");
+}
+for (const structure of terminology.structures ?? []) {
+  if (!terminologyById.has(structure.termId)) {
+    fail(`terminology structure references unknown term ${structure.termId}`);
+  }
+  for (const member of structure.members ?? []) {
+    if (!terminologyById.has(member)) {
+      fail(`terminology structure ${structure.termId} references unknown member ${member}`);
+    }
+  }
+}
+const factCut = terminologyById.get("fact-cut");
+if (!factCut?.definition?.includes("independently addressable instance of admitted Fact state")) {
+  fail("terminology contract must distinguish Fact from its Fact Cut formal carrier");
+}
+for (const [path, text] of [
+  ["decisions/KFD-7.md", readFileSync("decisions/KFD-7.md", "utf8")],
+  ["docs/KFD-7-formal.md", readFileSync("docs/KFD-7-formal.md", "utf8")],
+  ["docs/KFD-7-usage.md", readFileSync("docs/KFD-7-usage.md", "utf8")],
+]) {
+  for (const expected of Object.values(expectedCoreTerms)) {
+    if (!normalizeWhitespace(text).includes(expected.subtitle)) {
+      fail(`${path} must expose canonical explanatory subtitle: ${expected.subtitle}`);
+    }
+  }
+  if (!normalizeWhitespace(text).includes("Fact Cut") ||
+      !normalizeWhitespace(text).includes("not a third ontology binding")) {
+    fail(`${path} must distinguish Fact from the Fact Cut formal carrier`);
+  }
 }
 for (const verifierPath of [
   "bin/kfd.mjs",
@@ -554,6 +655,10 @@ if (
   !siteBundle.terminologyPage?.markdown
 ) {
   fail("site bundle terminologyPage must expose canonical vocabulary at /terminology");
+}
+if (siteBundle.source?.terminology !== "terminology.json" ||
+    JSON.stringify(siteBundle.terminologyPage?.contract) !== JSON.stringify(terminology)) {
+  fail("site bundle terminologyPage must project terminology.json without reinterpretation");
 }
 if (
   siteBundle.formalPage?.id !== "formal-model" ||
@@ -1602,6 +1707,10 @@ if (!Array.isArray(boundary.ownedByKfd) || !boundary.ownedByKfd.includes("homepa
 }
 if (!Array.isArray(boundary.ownedByKfd) || !boundary.ownedByKfd.includes("historical cases page from docs/primitive-discovery-cases.md")) {
   fail("site bundle renderingBoundary.ownedByKfd must include the historical cases page");
+}
+if (!Array.isArray(boundary.ownedByKfd) ||
+    !boundary.ownedByKfd.includes("canonical terminology contract and explanatory subtitles from terminology.json")) {
+  fail("site bundle renderingBoundary.ownedByKfd must assign canonical terminology to KFD");
 }
 if (!Array.isArray(boundary.ownedBySite) || !boundary.ownedBySite.includes("CSS")) {
   fail("site bundle renderingBoundary.ownedBySite must include CSS");
