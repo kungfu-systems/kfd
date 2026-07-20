@@ -1,0 +1,21 @@
+{
+  "expectedFailureCode": "authority-amplification",
+  "record": {
+    "warrant": {
+      "parentRoot": "sha256:c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1c1",
+      "attenuation": {
+        "parentScopeDigest": "sha256:c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2",
+        "scopeRelation": "broader",
+        "checkedDimensions": [
+          "subject",
+          "actions",
+          "consequence",
+          "time",
+          "disclosure",
+          "delegation-depth",
+          "forbidden-actions"
+        ]
+      }
+    }
+  }
+}

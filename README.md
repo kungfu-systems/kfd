@@ -178,6 +178,20 @@ preserved as the lineage promoted into active KFD-7. The machine source is
 [`drafts/registry.json`](drafts/registry.json). Remaining slot hints are
 ordering hypotheses, not allocated KFD numbers, reservations, or promises.
 
+## Experimental protocol profiles
+
+KFD also publishes an
+[Agent Hub alpha profile](protocols/agent-hub/README.md) for exchanging and
+continuing responsibility objects between independently owned Agent Hubs. It
+applies KFD-1, KFD-2, KFD-3, and KFD-7 through a transport-neutral manifest,
+capability contract, exchange envelope, reference state machine, gap matrix,
+and implementer guide.
+
+The profile is not a numbered KFD, stable certification, proof of a conforming
+implementation, vendor adoption, plural-Hub interoperability, or an industry
+standard. Implementations cite its exact alpha version, manifest digest, and
+repository commit.
+
 ## Product proof path
 
 KFDs are not a detached manifesto, but they are not a demand that readers adopt

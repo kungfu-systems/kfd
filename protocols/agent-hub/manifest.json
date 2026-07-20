@@ -1,0 +1,101 @@
+{
+  "$schema": "https://kfd.libkungfu.dev/schemas/kfd-agent-hub/manifest.schema.json",
+  "schemaVersion": 1,
+  "contract": "kfd-agent-hub-profile-manifest",
+  "profile": {
+    "id": "kfd-agent-hub",
+    "version": "0.1.0-alpha.1",
+    "status": "alpha",
+    "authorityPath": "protocols/agent-hub/README.md"
+  },
+  "imports": ["KFD-1", "KFD-2", "KFD-3", "KFD-7"],
+  "topologies": [
+    "local-peer",
+    "single-vendor-cloud",
+    "multi-organization-federation",
+    "offline-device"
+  ],
+  "operations": [
+    "capability-advertisement",
+    "responsibility-proposal",
+    "fact-admission",
+    "supersession",
+    "completion-assessment",
+    "warrant-revocation"
+  ],
+  "failureCodes": [
+    "profile-version-unsupported",
+    "profile-root-mismatch",
+    "required-feature-unsupported",
+    "identity-unresolved",
+    "authority-unresolved",
+    "authority-expired",
+    "authority-revoked",
+    "authority-amplification",
+    "fact-cut-unavailable",
+    "causal-gap",
+    "payload-digest-mismatch",
+    "idempotency-conflict",
+    "conflict-visible",
+    "disclosure-insufficient",
+    "required-field-withheld",
+    "completion-unproved",
+    "local-policy-rejected"
+  ],
+  "surfaces": [
+    {
+      "id": "profile-authority",
+      "path": "protocols/agent-hub/README.md",
+      "role": "authority",
+      "sha256": "2a3ac987d280a5baaacde7ddfb01cdce22a094b09709d1ff4d9a2329060b1140"
+    },
+    {
+      "id": "gap-matrix",
+      "path": "protocols/agent-hub/gap-matrix.md",
+      "role": "analysis",
+      "sha256": "3991fceab6c597ed557a7a070ceaa9fa74a2bade65c42e4486bd07b4369c6738"
+    },
+    {
+      "id": "state-machine-guide",
+      "path": "protocols/agent-hub/state-machine.md",
+      "role": "reference",
+      "sha256": "430426ca7618362900e2014e9c977e43ba70c0ed9fb32f691d191f32f1d8bb0c"
+    },
+    {
+      "id": "implementer-guide",
+      "path": "protocols/agent-hub/implementer-guide.md",
+      "role": "guide",
+      "sha256": "95fbb4afbebc9105443dc1254bfac7aad166d61169feaad957780848f2f66b18"
+    },
+    {
+      "id": "reference-state-machine",
+      "path": "protocols/agent-hub/reference-state-machine.json",
+      "role": "normative",
+      "sha256": "0e047020103511fb272d8bc7441a3304c254f160e28952197ef8a32093d1bebf"
+    },
+    {
+      "id": "capabilities-schema",
+      "path": "schemas/kfd-agent-hub/capabilities.schema.json",
+      "role": "normative",
+      "sha256": "d4098d20740cce67156ee1c456dab9fd8454f6e3fb0613810fe1d010f64981cc"
+    },
+    {
+      "id": "exchange-schema",
+      "path": "schemas/kfd-agent-hub/exchange.schema.json",
+      "role": "normative",
+      "sha256": "a43bed367a05fe6ac3d796ec8642dbe2905b92c66438448c35b79d7965bc1a3f"
+    },
+    {
+      "id": "manifest-schema",
+      "path": "schemas/kfd-agent-hub/manifest.schema.json",
+      "role": "normative",
+      "sha256": "79b9c1090ad275f9e3e06dd2170fcacbb7e4ff41873ea705355a6d23e956369f"
+    }
+  ],
+  "governance": {
+    "proposal": "https://github.com/kungfu-systems/kfd/issues/new?template=kfd-proposal.yml",
+    "counterevidence": "https://github.com/kungfu-systems/kfd/issues/new?template=kfd-counterevidence.yml",
+    "pullRequests": "https://github.com/kungfu-systems/kfd/pulls"
+  },
+  "claimBoundary": "This alpha profile defines a topology-neutral responsibility exchange contract. It is not a numbered KFD, stable certification, evidence of a conforming implementation, external vendor adoption, plural-Hub interoperability, or an industry standard."
+}

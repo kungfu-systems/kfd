@@ -1,0 +1,77 @@
+{
+  "$schema": "https://kfd.libkungfu.dev/schemas/kfd-agent-hub/capabilities.schema.json",
+  "schemaVersion": 1,
+  "contract": "kfd-agent-hub-capabilities",
+  "identity": {
+    "hubId": "example.vendor/hub-a",
+    "nodeId": "example.vendor/node-a",
+    "actorId": "example.vendor/service-agent",
+    "workspaceId": "example.vendor/workspace-1",
+    "organizationId": "example.vendor"
+  },
+  "profileVersions": ["0.1.0-alpha.1"],
+  "requiredFeatures": [
+    "explicit-receiver-verdict",
+    "warrant-attenuation",
+    "visible-conflict"
+  ],
+  "optionalFeatures": ["inline-payload"],
+  "operations": [
+    "capability-advertisement",
+    "responsibility-proposal",
+    "fact-admission",
+    "supersession",
+    "completion-assessment",
+    "warrant-revocation"
+  ],
+  "topologies": [
+    "local-peer",
+    "single-vendor-cloud",
+    "multi-organization-federation",
+    "offline-device"
+  ],
+  "disclosureModes": [
+    "full",
+    "partial",
+    "redacted",
+    "reference-only",
+    "intentionally-withheld"
+  ],
+  "failureCodes": [
+    "profile-version-unsupported",
+    "profile-root-mismatch",
+    "required-feature-unsupported",
+    "identity-unresolved",
+    "authority-unresolved",
+    "authority-expired",
+    "authority-revoked",
+    "authority-amplification",
+    "fact-cut-unavailable",
+    "causal-gap",
+    "payload-digest-mismatch",
+    "idempotency-conflict",
+    "conflict-visible",
+    "disclosure-insufficient",
+    "required-field-withheld",
+    "completion-unproved",
+    "local-policy-rejected"
+  ],
+  "bindings": [
+    {
+      "id": "local-file-bundle",
+      "mediaTypes": ["application/json"],
+      "authentication": "issuer-scoped signature or local policy mapping",
+      "transportReceipts": true,
+      "duplicateDelivery": "at-least-once"
+    }
+  ],
+  "limits": {
+    "maxInlineBytes": 65536,
+    "maxEnvelopeBytes": 1048576
+  },
+  "authorityRoots": [
+    "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+  ],
+  "issuedAt": "2026-07-20T00:00:00Z",
+  "expiresAt": "2026-08-20T00:00:00Z"
+}
