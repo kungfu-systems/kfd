@@ -47,18 +47,24 @@
         "contractWorld": "https://kfd.libkungfu.dev/schemas/kfd-1/contract-world.schema.json",
         "witness": "https://kfd.libkungfu.dev/schemas/kfd-1/witness.schema.json",
         "publicationUrlSemantics": "https://kfd.libkungfu.dev/schemas/kfd-1/publication-url-semantics.schema.json",
-        "candidateRegistry": "https://kfd.libkungfu.dev/schemas/kfd-candidate-registry.schema.json",
-        "verificationBundle": "https://kfd.libkungfu.dev/schemas/kfd-verification-bundle.schema.json",
-        "verificationReport": "https://kfd.libkungfu.dev/schemas/kfd-verification-report.schema.json"
+    "candidateRegistry": "https://kfd.libkungfu.dev/schemas/kfd-candidate-registry.schema.json",
+    "verificationBundle": "https://kfd.libkungfu.dev/schemas/kfd-verification-bundle.schema.json",
+    "verificationReport": "https://kfd.libkungfu.dev/schemas/kfd-verification-report.schema.json",
+    "agentHubManifest": "https://kfd.libkungfu.dev/schemas/kfd-agent-hub/manifest.schema.json",
+    "agentHubCapabilities": "https://kfd.libkungfu.dev/schemas/kfd-agent-hub/capabilities.schema.json",
+    "agentHubExchange": "https://kfd.libkungfu.dev/schemas/kfd-agent-hub/exchange.schema.json"
       },
       "schemaPaths": {
         "metadata": "schemas/kfd-standards.schema.json",
         "contractWorld": "schemas/kfd-1/contract-world.schema.json",
         "witness": "schemas/kfd-1/witness.schema.json",
         "publicationUrlSemantics": "schemas/kfd-1/publication-url-semantics.schema.json",
-        "candidateRegistry": "schemas/kfd-candidate-registry.schema.json",
-        "verificationBundle": "schemas/kfd-verification-bundle.schema.json",
-        "verificationReport": "schemas/kfd-verification-report.schema.json"
+    "candidateRegistry": "schemas/kfd-candidate-registry.schema.json",
+    "verificationBundle": "schemas/kfd-verification-bundle.schema.json",
+    "verificationReport": "schemas/kfd-verification-report.schema.json",
+    "agentHubManifest": "schemas/kfd-agent-hub/manifest.schema.json",
+    "agentHubCapabilities": "schemas/kfd-agent-hub/capabilities.schema.json",
+    "agentHubExchange": "schemas/kfd-agent-hub/exchange.schema.json"
       },
       "interfaces": {
         "contractWorld": {
@@ -101,7 +107,28 @@
           "schemaVersion": 1,
           "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-verification-report.schema.json",
           "schemaPath": "schemas/kfd-verification-report.schema.json",
-          "compatibilityRule": "Compatible additions may keep schemaVersion 1; validity, qualification, check, issue, or responsibility meaning changes require a new interface version or contract."
+      "compatibilityRule": "Compatible additions may keep schemaVersion 1; validity, qualification, check, issue, or responsibility meaning changes require a new interface version or contract."
+    },
+    "agentHubManifest": {
+      "contract": "kfd-agent-hub-profile-manifest",
+      "schemaVersion": 1,
+      "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-agent-hub/manifest.schema.json",
+      "schemaPath": "schemas/kfd-agent-hub/manifest.schema.json",
+      "compatibilityRule": "The alpha profile is selected only by exact version and manifest digest; changed required semantics, authority, operations, failure meaning, or rooted surfaces require a new incompatible profile version."
+    },
+    "agentHubCapabilities": {
+      "contract": "kfd-agent-hub-capabilities",
+      "schemaVersion": 1,
+      "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-agent-hub/capabilities.schema.json",
+      "schemaPath": "schemas/kfd-agent-hub/capabilities.schema.json",
+      "compatibilityRule": "Compatible optional features may be added only when unselected by default and safely preservable; new required features or changed negotiation meaning require a new interface version or contract."
+    },
+    "agentHubExchange": {
+      "contract": "kfd-agent-hub-exchange",
+      "schemaVersion": 1,
+      "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-agent-hub/exchange.schema.json",
+      "schemaPath": "schemas/kfd-agent-hub/exchange.schema.json",
+      "compatibilityRule": "Changes to identity, authority, causal roots, disclosure, idempotency, receiver verdict, admission, conflict, or completion meaning require a new incompatible profile or interface version."
         }
       },
       "concepts": {
@@ -124,7 +151,12 @@
         "foundationRevision": "fully evidenced pre-stable correction of the latest numbered foundation",
         "foundationFreeze": "first-stable lock of KFD number-to-meaning mappings",
         "independentVerifier": "independent verifier",
-        "verificationProfile": "verification profile"
+    "verificationProfile": "verification profile",
+    "agentHubProfile": "transport-neutral responsibility exchange profile for independently owned Agent Hubs",
+    "receiverVerdict": "receiver-owned semantic assessment distinct from transport delivery",
+    "warrantAttenuation": "provable narrower-or-equal delegated authority",
+    "selectiveDisclosure": "typed partial or redacted replication with retained uncertainty",
+    "conflictVisibility": "retention of competing roots without last-write-wins erasure"
       },
       "surfaceRegister": {
         "factSource": "standards.json#/standards/kfd-1/surfaceRegister",
@@ -138,9 +170,92 @@
           "none",
           "unclassifiable"
         ],
-        "surfaces": [
-          {
-            "id": "kfd-verifier-specification",
+      "surfaces": [
+        {
+          "id": "kfd-agent-hub-profile-authority",
+          "class": "cross-time",
+          "classes": [
+            "cross-time"
+          ],
+          "description": "Published alpha authority for the topology-neutral KFD Agent Hub responsibility exchange profile.",
+          "sourcePath": "protocols/agent-hub/README.md",
+          "weldRationale": "Implementers bind protocol meaning, invariants, failure vocabulary, version rules, and non-claims to one public authority path.",
+          "impactProjection": {
+            "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+            "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+            "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+            "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+          }
+        },
+        {
+          "id": "kfd-agent-hub-profile-manifest",
+          "class": "integration-time",
+          "classes": [
+            "integration-time",
+            "cross-time"
+          ],
+          "description": "Digest-bound manifest for the exact Agent Hub alpha profile surface set.",
+          "sourcePath": "protocols/agent-hub/manifest.json",
+          "weldRationale": "Peers and retained exchanges identify one immutable profile version and rooted contract world rather than relying on mutable documentation aliases.",
+          "impactProjection": {
+            "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+            "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+            "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+            "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+          }
+        },
+        {
+          "id": "kfd-agent-hub-capabilities-schema",
+          "class": "integration-time",
+          "classes": [
+            "integration-time"
+          ],
+          "description": "Published JSON schema for Agent Hub identity, exact profile negotiation, operations, topologies, disclosure modes, failure codes, bindings, and limits.",
+          "sourcePath": "schemas/kfd-agent-hub/capabilities.schema.json",
+          "weldRationale": "Independently owned Hubs can fail closed on unsupported required semantics before exchanging responsibility objects.",
+          "impactProjection": {
+            "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+            "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+            "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+            "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+          }
+        },
+        {
+          "id": "kfd-agent-hub-exchange-schema",
+          "class": "integration-time",
+          "classes": [
+            "integration-time",
+            "cross-time"
+          ],
+          "description": "Published JSON schema for rooted Agent Hub responsibility exchanges and receiver-owned semantic verdicts.",
+          "sourcePath": "schemas/kfd-agent-hub/exchange.schema.json",
+          "weldRationale": "Implementers and retained records depend on stable distinctions among delivery, authority, causality, admission, conflict, disclosure, and completion.",
+          "impactProjection": {
+            "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+            "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+            "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+            "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+          }
+        },
+        {
+          "id": "kfd-agent-hub-reference-state-machine",
+          "class": "cross-time",
+          "classes": [
+            "integration-time",
+            "cross-time"
+          ],
+          "description": "Machine-readable transition and invariant table separating transport progress from receiver semantic judgment.",
+          "sourcePath": "protocols/agent-hub/reference-state-machine.json",
+          "weldRationale": "Implementers can compare retry, assessment, admission, rejection, conflict, unavailable, and withholding behavior without importing one transport or product lifecycle.",
+          "impactProjection": {
+            "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+            "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+            "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+            "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+          }
+        },
+        {
+          "id": "kfd-verifier-specification",
             "class": "cross-time",
             "classes": [
               "cross-time"

@@ -1,0 +1,16 @@
+{
+  "expectedFailureCode": "conflict-visible",
+  "record": {
+    "causal": {
+      "knowledgeState": "conflicted",
+      "conflictRoots": [
+        "sha256:e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1",
+        "sha256:e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2"
+      ]
+    },
+    "receiverVerdict": {
+      "status": "admitted",
+      "conflictRoots": []
+    }
+  }
+}

@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-agent-hub/manifest.schema.json",
+  "title": "KFD Agent Hub profile manifest",
+  "type": "object",
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "contract",
+    "profile",
+    "imports",
+    "topologies",
+    "operations",
+    "failureCodes",
+    "surfaces",
+    "governance",
+    "claimBoundary"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "https://kfd.libkungfu.dev/schemas/kfd-agent-hub/manifest.schema.json"
+    },
+    "schemaVersion": { "const": 1 },
+    "contract": { "const": "kfd-agent-hub-profile-manifest" },
+    "profile": {
+      "type": "object",
+      "required": ["id", "version", "status", "authorityPath"],
+      "properties": {
+        "id": { "const": "kfd-agent-hub" },
+        "version": { "const": "0.1.0-alpha.1" },
+        "status": { "const": "alpha" },
+        "authorityPath": { "const": "protocols/agent-hub/README.md" }
+      },
+      "additionalProperties": false
+    },
+    "imports": {
+      "type": "array",
+      "minItems": 4,
+      "uniqueItems": true,
+      "items": { "enum": ["KFD-1", "KFD-2", "KFD-3", "KFD-7"] }
+    },
+    "topologies": {
+      "type": "array",
+      "minItems": 4,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "local-peer",
+          "single-vendor-cloud",
+          "multi-organization-federation",
+          "offline-device"
+        ]
+      }
+    },
+    "operations": {
+      "type": "array",
+      "minItems": 6,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "capability-advertisement",
+          "responsibility-proposal",
+          "fact-admission",
+          "supersession",
+          "completion-assessment",
+          "warrant-revocation"
+        ]
+      }
+    },
+    "failureCodes": {
+      "type": "array",
+      "minItems": 17,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/failureCode" }
+    },
+    "surfaces": {
+      "type": "array",
+      "minItems": 8,
+      "items": {
+        "type": "object",
+        "required": ["id", "path", "role", "sha256"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "role": {
+            "enum": ["authority", "normative", "reference", "guide", "analysis", "fixture"]
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "governance": {
+      "type": "object",
+      "required": ["proposal", "counterevidence", "pullRequests"],
+      "properties": {
+        "proposal": { "type": "string", "format": "uri" },
+        "counterevidence": { "type": "string", "format": "uri" },
+        "pullRequests": { "type": "string", "format": "uri" }
+      },
+      "additionalProperties": false
+    },
+    "claimBoundary": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "failureCode": {
+      "enum": [
+        "profile-version-unsupported",
+        "profile-root-mismatch",
+        "required-feature-unsupported",
+        "identity-unresolved",
+        "authority-unresolved",
+        "authority-expired",
+        "authority-revoked",
+        "authority-amplification",
+        "fact-cut-unavailable",
+        "causal-gap",
+        "payload-digest-mismatch",
+        "idempotency-conflict",
+        "conflict-visible",
+        "disclosure-insufficient",
+        "required-field-withheld",
+        "completion-unproved",
+        "local-policy-rejected"
+      ]
+    }
+  }
+}

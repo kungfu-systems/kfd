@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd-agent-hub-reference-state-machine",
+  "profile": {
+    "id": "kfd-agent-hub",
+    "version": "0.1.0-alpha.1"
+  },
+  "dimensions": {
+    "transport": ["created", "offered", "delivered"],
+    "semantic": ["unassessed", "assessing", "decided"],
+    "verdict": [
+      "pending",
+      "admitted",
+      "rejected",
+      "conflicted",
+      "unavailable",
+      "intentionally-withheld"
+    ]
+  },
+  "initial": {
+    "transport": "created",
+    "semantic": "unassessed",
+    "verdict": "pending"
+  },
+  "transitions": [
+    {
+      "event": "seal-offer",
+      "from": { "transport": "created", "semantic": "unassessed" },
+      "to": { "transport": "offered", "semantic": "unassessed" },
+      "requires": [
+        "profile-root-valid",
+        "payload-digest-valid",
+        "subject-roots-closed",
+        "warrant-declared"
+      ],
+      "receipt": "exchange-root"
+    },
+    {
+      "event": "transport-deliver",
+      "from": { "transport": "offered", "semantic": "unassessed" },
+      "to": { "transport": "delivered", "semantic": "unassessed" },
+      "requires": ["binding-integrity"],
+      "receipt": "transport-receipt"
+    },
+    {
+      "event": "begin-assessment",
+      "from": { "transport": "delivered", "semantic": "unassessed" },
+      "to": { "transport": "delivered", "semantic": "assessing" },
+      "requires": [
+        "exact-profile-negotiated",
+        "identity-mapped",
+        "causal-inventory-checked"
+      ],
+      "receipt": "assessment-cut"
+    },
+    {
+      "event": "admit",
+      "from": { "transport": "delivered", "semantic": "assessing" },
+      "to": {
+        "transport": "delivered",
+        "semantic": "decided",
+        "verdict": "admitted"
+      },
+      "requires": [
+        "decision-authority-valid",
+        "warrant-valid",
+        "facts-assessed",
+        "disclosure-sufficient",
+        "conflicts-resolved-or-absent",
+        "local-policy-admits"
+      ],
+      "receipt": "receiver-verdict-root"
+    },
+    {
+      "event": "reject",
+      "from": { "transport": "delivered", "semantic": "assessing" },
+      "to": {
+        "transport": "delivered",
+        "semantic": "decided",
+        "verdict": "rejected"
+      },
+      "requires": ["decision-authority-valid", "failure-code-present"],
+      "receipt": "receiver-verdict-root"
+    },
+    {
+      "event": "retain-conflict",
+      "from": { "transport": "delivered", "semantic": "assessing" },
+      "to": {
+        "transport": "delivered",
+        "semantic": "decided",
+        "verdict": "conflicted"
+      },
+      "requires": [
+        "decision-authority-valid",
+        "at-least-two-conflict-roots",
+        "conflict-visible"
+      ],
+      "receipt": "receiver-verdict-root"
+    },
+    {
+      "event": "mark-unavailable",
+      "from": { "transport": "delivered", "semantic": "assessing" },
+      "to": {
+        "transport": "delivered",
+        "semantic": "decided",
+        "verdict": "unavailable"
+      },
+      "requires": ["decision-authority-valid", "missing-material-declared"],
+      "receipt": "receiver-verdict-root"
+    },
+    {
+      "event": "mark-withheld",
+      "from": { "transport": "delivered", "semantic": "assessing" },
+      "to": {
+        "transport": "delivered",
+        "semantic": "decided",
+        "verdict": "intentionally-withheld"
+      },
+      "requires": ["decision-authority-valid", "withholding-basis-declared"],
+      "receipt": "receiver-verdict-root"
+    }
+  ],
+  "invariants": [
+    "transport-receipt-does-not-imply-admission",
+    "episode-does-not-imply-completion",
+    "delegation-does-not-amplify-authority",
+    "same-idempotency-key-requires-same-exchange-root",
+    "conflict-roots-remain-visible",
+    "withheld-is-not-unavailable",
+    "producer-does-not-self-admit-remote-facts"
+  ]
+}

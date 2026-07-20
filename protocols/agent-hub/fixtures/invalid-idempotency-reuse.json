@@ -1,0 +1,13 @@
+{
+  "expectedFailureCode": "idempotency-conflict",
+  "first": {
+    "sourceHubId": "example.vendor/hub-a",
+    "idempotencyKey": "example.vendor/hub-a/exchange-example-1",
+    "exchangeRoot": "sha256:f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1"
+  },
+  "retry": {
+    "sourceHubId": "example.vendor/hub-a",
+    "idempotencyKey": "example.vendor/hub-a/exchange-example-1",
+    "exchangeRoot": "sha256:f2f2f2f2f2f2f2f2f2f2f2f2f2f2f2f2f2f2f2f2f2f2f2f2f2f2f2f2f2f2f2f2"
+  }
+}
