@@ -27,7 +27,7 @@ that advances it.
 
 ## Candidate rule
 
-A Pursuit is the cross-domain action Primitive that preserves the continuity of
+A Pursuit is the cross-domain action coordinate that preserves the continuity of
 an intended real-world change across Episodes, participants, tools, plans, and
 revisions.
 
@@ -46,7 +46,7 @@ identity.
 ## Relation to the action system
 
 Within the
-[cross-domain action Primitive candidate](action-state-separation.md), Pursuit
+[cross-domain action coordinate candidate](action-state-separation.md), Pursuit
 answers:
 
 ```text

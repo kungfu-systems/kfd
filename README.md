@@ -36,8 +36,9 @@ as its founding implementation.
 
 No principle is load-bearing until it has an inspectable product witness.
 
-[Read the foundation model](docs/foundation-model.md) ·
+[Read the KFD Foundation](docs/foundation.md) ·
 [Inspect the formal model](docs/formal-model.md) ·
+[Use the terminology contract](docs/terminology.md) ·
 [See primitives in history](docs/primitive-discovery-cases.md) ·
 [Inspect live Primitive cases](cases/registry.json) ·
 [Inspect KFD candidates](drafts/registry.json) ·
@@ -115,7 +116,7 @@ requirements in `CONTRIBUTING.md`, while every published prerelease coordinate
 stays immutable. The first stable release freezes number-to-meaning mappings.
 After that freeze, substantive change mints a new KFD that explicitly
 supersedes the old number. The numbered decisions remain authoritative; the
-[foundation model](docs/foundation-model.md) explains how they fit together.
+[KFD Foundation](docs/foundation.md) explains how they fit together.
 
 Stable rendered site: `https://kfd.libkungfu.dev`.
 
@@ -225,7 +226,7 @@ not numbered decisions, accepted Primitive claims, or product capability
 announcements.
 
 The complete explanatory path is published at
-[`docs/foundation-model.md`](docs/foundation-model.md) and projected to the
+[`docs/foundation.md`](docs/foundation.md) and projected to the
 stable site route `/foundation`. It explains the decisions without replacing
 their numbered authoritative texts. The non-normative formal layer begins at
 [`docs/formal-model.md`](docs/formal-model.md), with one versioned formal
@@ -285,7 +286,7 @@ boundary and public-spec gaps.
 Agents consuming this package should start from the same sources as humans:
 
 1. Read this README for the future picture, foundation triad, and package map.
-2. Read `docs/foundation-model.md` for the complete non-numbered explanation.
+2. Read `docs/foundation.md` for the complete non-numbered explanation.
 3. Read `docs/formal-model.md` for the authority boundary, shared notation, and
    the `Decision -> Formal -> Schema -> Usage -> Witness` traceability chain.
 4. Read `docs/KFD-N-formal.md` when precise domain objects, invariants,
@@ -326,9 +327,9 @@ Agents consuming this package should start from the same sources as humans:
    requires plural generation experiments, bounded method comparison, and a
    conditional boundary hypothesis. Read `docs/KFD-7-formal.md` for the
    current Fact/Episode and action-responsibility reference model. Use
-   `schemas/kfd-7/action-contract.schema.json` for a draft, product-neutral
-   Profile declaration; schema validity is non-qualifying and does not activate
-   a concrete product Profile.
+   `schemas/kfd-7/domain-profile.schema.json` for a product-neutral Domain
+   Profile Declaration; schema validity is non-qualifying and does not activate
+   a concrete Domain Profile.
 
 KFD package semver is only the distribution version. KFD-owned machine
 interfaces carry their own `schemaVersion` and `contract` fields. Compatible
@@ -341,7 +342,7 @@ release-claims, and release-trust-passport schemas under `schemas/kfd-2/`.
 The generic schemas let humans, agents, Buildchain, and other systems assess
 whether claims about KFD-1, KFD-3, KFD-4, future KFDs, or product surfaces are
 bound to source facts, evidence, hashes, audit boundaries, residual risk, and
-responsibility state. The release schemas are a release-specific projection of
+assurance responsibility. The release schemas are a release-specific projection of
 that model. See [`docs/KFD-2-usage.md`](docs/KFD-2-usage.md).
 
 KFD-3 also publishes a general collaboration-interface schema and witness
@@ -376,14 +377,14 @@ evaluation, bounded autonomy, and separation between discovery and promotion.
 Its package presence is an experimental interface, not a claim that autonomous
 primitive discovery or method dominance has been achieved.
 
-KFD-7 is an active decision for real-world action. It keeps direction,
-perspective, authority, and occurrence independently addressable over Fact cuts
-and causal records. Its package surface includes the authoritative decision,
-formal reference, usage boundary, standards metadata, preserved candidate
-lineage, and a version 2 action-contract Profile declaration. The schema fixes
-the responsibility, transition, theorem-reference, qualification-evidence,
-non-claim, and activation declaration without fixing product storage or
-lifecycle vocabulary. The retained
+KFD-7 is an active decision for real-world action. It keeps admitted state,
+realized occurrence, direction, perspective, and authority independently
+addressable. Its package surface includes the authoritative decision, formal
+reference, usage boundary, standards metadata, candidate lineage, and the
+version 1 Domain Profile Declaration. The schema separates ontology bindings
+from action coordinates and fixes transition, theorem-reference,
+qualification-evidence, non-claim, and activation declarations without fixing
+product storage or lifecycle vocabulary. The
 [activation evidence](docs/KFD-7-activation.md) binds independently reviewed
 Buildchain and Kungfu Profiles while preserving product-owned qualification and
 the decision's explicit non-claims.
@@ -496,7 +497,7 @@ typography, and visual assets, but it should not maintain separate wording that
 can drift from this package.
 
 `site/kfd-site.json` is generated from this README and
-`docs/foundation-model.md` and `docs/primitive-discovery-cases.md` by
+`docs/foundation.md` and `docs/primitive-discovery-cases.md` by
 `scripts/update-site-bundle.mjs`. The README owns the concise homepage; the
 foundation document owns the complete explanation; the cases document owns
 the non-normative historical anchors. The generated bundle exposes ordered

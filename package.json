@@ -18,6 +18,7 @@
     "drafts",
     "registry.json",
     "standards.json",
+    "terminology.json",
     "kfd.release.json",
     "schemas",
     "site",
@@ -73,7 +74,8 @@
     "./schemas/*/*.json": "./schemas/*/*.json",
     "./decisions/*.md": "./decisions/*.md",
     "./docs/*": "./docs/*",
-    "./evidence/kfd-7/activation-record.json": "./evidence/kfd-7/activation-record.json"
+    "./evidence/kfd-7/activation-record.json": "./evidence/kfd-7/activation-record.json",
+    "./terminology.json": "./terminology.json"
   },
   "scripts": {
     "check": "node scripts/check.mjs && npm run check:agent-hub && npm run check:agent-runtime && npm run check:verifier",

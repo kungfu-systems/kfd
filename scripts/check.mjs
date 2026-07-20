@@ -98,7 +98,10 @@ for (const governancePath of ["CONTRIBUTING.md", "GOVERNANCE.md"]) {
 const readmeText = readFileSync("README.md", "utf8");
 const contributingText = readFileSync("CONTRIBUTING.md", "utf8");
 const governanceText = readFileSync("GOVERNANCE.md", "utf8");
-const foundationModelText = readFileSync("docs/foundation-model.md", "utf8");
+const foundationText = readFileSync("docs/foundation.md", "utf8");
+const terminologyText = readFileSync("docs/terminology.md", "utf8");
+const terminology = JSON.parse(readFileSync("terminology.json", "utf8"));
+const terminologySchema = JSON.parse(readFileSync("schemas/kfd-terminology.schema.json", "utf8"));
 const formalModelText = readFileSync("docs/formal-model.md", "utf8");
 const candidateIndexText = readFileSync("drafts/README.md", "utf8");
 const liveCaseText = readFileSync("cases/live/proof-carrying-work-object/README.md", "utf8");
@@ -130,13 +133,13 @@ if (!normalizeWhitespace(governanceText).includes("reliable action and continuit
     !normalizeWhitespace(governanceText).includes("Fact-bound human-agent systems are its founding pressure field, not its applicability limit.")) {
   fail("GOVERNANCE must preserve KFD's general scope and founding pressure-field boundary");
 }
-if (!foundationModelText.includes("## Continuity under uncertainty") ||
-    !foundationModelText.includes("## From action to discovery and back") ||
-    !foundationModelText.includes("The action loop is the ordinary operating path.")) {
-  fail("foundation model must connect ordinary action, continuity, and hard-case discovery");
+if (!foundationText.includes("## Continuity under uncertainty") ||
+    !foundationText.includes("## From action to discovery and back") ||
+    !foundationText.includes("The action loop is the ordinary operating path.")) {
+  fail("KFD Foundation must connect ordinary action, continuity, and hard-case discovery");
 }
-if (!normalizeWhitespace(foundationModelText).includes("A non-cooperative scope may declare KFD-3 not applicable with a bounded rationale")) {
-  fail("foundation model must preserve KFD-3's participant-facing applicability boundary");
+if (!normalizeWhitespace(foundationText).includes("A non-cooperative scope may declare KFD-3 not applicable with a bounded rationale")) {
+  fail("KFD Foundation must preserve KFD-3's participant-facing applicability boundary");
 }
 for (const [path, text] of [
   ["README.md", readmeText],
@@ -147,6 +150,23 @@ for (const [path, text] of [
 ]) {
   if (text.includes("numbered draft KFD-7") || text.includes("This numbered draft")) {
     fail(`${path} must not describe active KFD-7 as a numbered draft`);
+  }
+}
+for (const [path, text] of [
+  ["README.md", readmeText],
+  ["decisions/KFD-7.md", readFileSync("decisions/KFD-7.md", "utf8")],
+  ["docs/KFD-7-formal.md", readFileSync("docs/KFD-7-formal.md", "utf8")],
+  ["docs/KFD-7-usage.md", readFileSync("docs/KFD-7-usage.md", "utf8")],
+  ["docs/formal-model.md", formalModelText],
+  ["standards.json", JSON.stringify(standardsMetadata)],
+  ["registry.json", JSON.stringify(registry)],
+]) {
+  for (const prohibited of [
+    "Action Geometry", "Action Profile", "Action Contract", "actionContract",
+    "action-contract", "kfd-7-action-contract", "ResponsibilityState",
+    "Foundation Model", "foundation-model",
+  ]) {
+    if (text.includes(prohibited)) fail(`${path} contains prohibited terminology ${prohibited}`);
   }
 }
 if (!normalizeWhitespace(liveCaseText).includes("does not complete the KFD-5 qualification of Pursuit or Warrant") ||
@@ -172,8 +192,43 @@ if (packageJson.exports?.["./verifier/bundle.schema.json"] !== "./schemas/kfd-ve
 if (packageJson.exports?.["./verifier/report.schema.json"] !== "./schemas/kfd-verification-report.schema.json") {
   fail("package.json must export the verifier report schema");
 }
-if (packageJson.exports?.["./evidence/kfd-7/activation-record.json"] !== "./evidence/kfd-7/activation-record.json") {
-  fail("package.json must export the KFD-7 activation evidence record");
+if (packageJson.exports?.["./terminology.json"] !== "./terminology.json") {
+  fail("package.json must export the terminology contract");
+}
+if (!packageJson.files?.includes("terminology.json")) {
+  fail("package.json files must publish the terminology contract");
+}
+if (terminologySchema.$id !== "https://kfd.libkungfu.dev/schemas/kfd-terminology.schema.json" ||
+    terminologySchema.properties?.contract?.const !== "kfd-terminology" ||
+    terminologySchema.properties?.schemaVersion?.const !== 1) {
+  fail("terminology schema identity must be canonical");
+}
+requireFields(terminology, terminologySchema.required, "terminology contract");
+if (terminology.contract !== "kfd-terminology" ||
+    terminology.schemaVersion !== 1 ||
+    terminology.authority !== "docs/terminology.md") {
+  fail("terminology contract must bind its canonical authority and version");
+}
+const requiredCanonicalTerms = [
+  "KFD Foundation", "KFD Primitive", "KFD Primitive Candidate",
+  "Fact-Episode Ontology", "Causal Occurrence", "Causal Record", "Episode",
+  "Causal Experience", "Action Responsibility Geometry", "Action Coordinate",
+  "Pursuit", "Atlas", "Warrant", "Domain Profile",
+  "Domain Profile Declaration", "Assurance Responsibility",
+  "Participant Value Claim",
+];
+const terminologyIds = new Set();
+const terminologyNames = new Set();
+for (const [index, term] of (terminology.terms ?? []).entries()) {
+  requireFields(term, terminologySchema.$defs?.term?.required, `terminology terms[${index}]`);
+  if (terminologyIds.has(term.id)) fail(`terminology term id ${term.id} must be unique`);
+  if (terminologyNames.has(term.canonical)) fail(`terminology canonical name ${term.canonical} must be unique`);
+  terminologyIds.add(term.id);
+  terminologyNames.add(term.canonical);
+}
+for (const term of requiredCanonicalTerms) {
+  if (!terminologyNames.has(term)) fail(`terminology contract missing canonical term ${term}`);
+  if (!terminologyText.includes(`**${term}**`)) fail(`terminology authority missing canonical term ${term}`);
 }
 for (const verifierPath of [
   "bin/kfd.mjs",
@@ -380,8 +435,8 @@ if (JSON.stringify(siteBundle) !== JSON.stringify(expectedSiteBundle)) {
   fail("site/kfd-site.json must match the generated README.md homepage bundle; run npm run update:site-bundle");
 }
 if (siteBundle.source?.homepageTextSource !== "README.md") fail("site bundle homepageTextSource must be README.md");
-if (siteBundle.source?.foundationTextSource !== "docs/foundation-model.md") {
-  fail("site bundle foundationTextSource must be docs/foundation-model.md");
+if (siteBundle.source?.foundationTextSource !== "docs/foundation.md") {
+  fail("site bundle foundationTextSource must be docs/foundation.md");
 }
 if (siteBundle.source?.formalTextSource !== "docs/formal-model.md") {
   fail("site bundle formalTextSource must be docs/formal-model.md");
@@ -467,9 +522,9 @@ const requiredHomepageSections = {
   "product-proof-path": "README.md",
   "agent-quickstart": "README.md",
   "decision-metadata": "README.md",
-  "foundation-model": "docs/foundation-model.md",
-  "load-bearing-product-witness": "docs/foundation-model.md",
-  "practice-guidelines": "docs/foundation-model.md",
+  "foundation-structure": "docs/foundation.md",
+  "load-bearing-product-witness": "docs/foundation.md",
+  "practice-guidelines": "docs/foundation.md",
 };
 for (const [requiredSection, sourcePath] of Object.entries(requiredHomepageSections)) {
   if (!siteBundle.homepage.sections.some((entry) => entry.id === requiredSection && entry.sourcePath === sourcePath && entry.markdown)) {
@@ -478,18 +533,27 @@ for (const [requiredSection, sourcePath] of Object.entries(requiredHomepageSecti
 }
 if (
   siteBundle.homepage?.displayPlan?.detail?.route !== "/foundation" ||
-  siteBundle.homepage?.displayPlan?.detail?.source !== "docs/foundation-model.md"
+  siteBundle.homepage?.displayPlan?.detail?.source !== "docs/foundation.md"
 ) {
-  fail("site bundle homepage displayPlan.detail must route foundation detail to docs/foundation-model.md");
+  fail("site bundle homepage displayPlan.detail must route foundation detail to docs/foundation.md");
 }
 if (
-  siteBundle.foundationPage?.id !== "foundation-model" ||
-  siteBundle.foundationPage?.sourcePath !== "docs/foundation-model.md" ||
+  siteBundle.foundationPage?.id !== "foundation" ||
+  siteBundle.foundationPage?.sourcePath !== "docs/foundation.md" ||
   siteBundle.foundationPage?.url !== "/foundation" ||
   siteBundle.foundationPage?.normative !== false ||
   !siteBundle.foundationPage?.markdown
 ) {
-  fail("site bundle foundationPage must expose the non-normative /foundation explanation from docs/foundation-model.md");
+  fail("site bundle foundationPage must expose the non-normative /foundation explanation from docs/foundation.md");
+}
+if (
+  siteBundle.terminologyPage?.id !== "terminology" ||
+  siteBundle.terminologyPage?.sourcePath !== "docs/terminology.md" ||
+  siteBundle.terminologyPage?.url !== "/terminology" ||
+  siteBundle.terminologyPage?.normative !== false ||
+  !siteBundle.terminologyPage?.markdown
+) {
+  fail("site bundle terminologyPage must expose canonical vocabulary at /terminology");
 }
 if (
   siteBundle.formalPage?.id !== "formal-model" ||
@@ -682,9 +746,9 @@ for (const candidate of candidateRegistry.candidates ?? []) {
 for (const candidateId of candidateFormalRenderPages.keys()) {
   if (!candidateIds.has(candidateId)) fail(`site bundle candidate formal pages has unknown candidate ${candidateId}`);
 }
-if (!existsSync("docs/foundation-model.md")) fail("missing docs/foundation-model.md");
-else if (!readFileSync("docs/foundation-model.md", "utf8").startsWith("# KFD Foundation Model")) {
-  fail("docs/foundation-model.md must start with the KFD Foundation Model H1");
+if (!existsSync("docs/foundation.md")) fail("missing docs/foundation.md");
+else if (!readFileSync("docs/foundation.md", "utf8").startsWith("# KFD Foundation")) {
+  fail("docs/foundation.md must start with the KFD Foundation H1");
 }
 if (!existsSync("docs/formal-model.md")) fail("missing docs/formal-model.md");
 else if (!readFileSync("docs/formal-model.md", "utf8").startsWith("# KFD Formal Model")) {
@@ -1315,7 +1379,7 @@ for (const concept of ["primitiveDiscovery", "perspectiveDeclaration", "methodPl
 }
 if (!kfd5?.interfaces?.primitiveDiscovery) fail("KFD-5 standards metadata missing interface primitiveDiscovery");
 if (kfd5?.interfaces?.liveCaseRegistry?.schemaVersion !== 2) {
-  fail("KFD-5 standards metadata liveCaseRegistry interface must use schemaVersion 2");
+  fail("KFD-5 standards metadata liveCaseRegistry interface must use schemaVersion 1");
 }
 
 const kfd6 = standardsMetadata.standards?.["kfd-6"];
@@ -1413,7 +1477,7 @@ for (const [surfaceId, sourcePath] of [
 }
 for (const product of ["buildchain", "kungfu"]) {
   const profile = kfd7ActivationEvidence.evidenceCut?.[product];
-  for (const field of ["profile", "implementation", "qualification", "activation", "merge", "qualificationReview", "activationReview", "actionContract", "runtimeEvidence"]) {
+  for (const field of ["profile", "implementation", "qualification", "activation", "merge", "qualificationReview", "activationReview", "productProfileEvidence", "runtimeEvidence"]) {
     if (profile?.[field] === undefined) fail(`KFD-7 activation evidence ${product} missing ${field}`);
   }
   if (!Array.isArray(profile?.runtimeEvidence) || profile.runtimeEvidence.length === 0) {
@@ -1423,57 +1487,63 @@ for (const product of ["buildchain", "kungfu"]) {
 if (JSON.stringify(kfd7ActivationEvidence).includes("PENDING_")) {
   fail("KFD-7 activation evidence must not contain pending source coordinates");
 }
-if (kfd7?.schemaIds?.actionContract !== "https://kfd.libkungfu.dev/schemas/kfd-7/action-contract.schema.json") {
-  fail("KFD-7 standards metadata must expose the canonical actionContract schema URI");
+if (kfd7?.schemaIds?.domainProfileDeclaration !== "https://kfd.libkungfu.dev/schemas/kfd-7/domain-profile.schema.json") {
+  fail("KFD-7 standards metadata must expose the canonical domainProfileDeclaration schema URI");
 }
-if (kfd7?.schemaPaths?.actionContract !== "schemas/kfd-7/action-contract.schema.json") {
-  fail("KFD-7 standards metadata must expose the actionContract schema path");
+if (kfd7?.schemaPaths?.domainProfileDeclaration !== "schemas/kfd-7/domain-profile.schema.json") {
+  fail("KFD-7 standards metadata must expose the domainProfileDeclaration schema path");
 }
-for (const concept of ["factCut", "causalRecord", "episode", "atlas", "pursuit", "warrant", "direction", "perspective", "authorityBoundary", "occurrence", "factEpisodeOntology", "ontologyBinding", "actionPrimitiveMapping", "actionGeometry", "actionGeometryContract", "domainProfile", "domainProfileDeclaration", "roleIndependence", "semanticRoleDistinguishability", "observationProjection", "targetRelation", "admissibleTransition", "realizedPath", "validActionSet", "conditionalIrreducibility", "counterfactualIndependence", "explicitAdmission", "progressiveDisclosure", "conservativeSessionLimit", "complexityBreakpoint", "decisionObservationalEquivalence", "sessionRoundTripTheorem", "contextInsufficiency"]) {
+for (const concept of ["factCut", "causalOccurrence", "causalRecord", "episode", "causalExperience", "atlas", "pursuit", "warrant", "direction", "perspective", "authorityBoundary", "occurrence", "factEpisodeOntology", "ontologyBinding", "actionCoordinateMapping", "actionResponsibilityGeometry", "actionCoordinate", "semanticIndependence", "semanticComponentDistinguishability", "domainProfile", "domainProfileDeclaration", "domainLifecycleVocabulary", "observationProjection", "targetRelation", "admissibleTransition", "realizedPath", "validActionSet", "conditionalIrreducibility", "counterfactualIndependence", "explicitAdmission", "progressiveDisclosure", "conservativeSessionLimit", "complexityBreakpoint", "decisionObservationalEquivalence", "sessionRoundTripTheorem", "contextInsufficiency"]) {
   if (!kfd7?.concepts?.[concept]) fail(`KFD-7 standards metadata missing concept ${concept}`);
 }
-const kfd7ActionContractSchema = JSON.parse(readFileSync("schemas/kfd-7/action-contract.schema.json", "utf8"));
-if (kfd7ActionContractSchema.properties?.contract?.const !== "kfd-7-action-contract") {
-  fail("KFD-7 actionContract schema must describe the kfd-7-action-contract contract");
+const kfd7DomainProfileSchema = JSON.parse(readFileSync("schemas/kfd-7/domain-profile.schema.json", "utf8"));
+if (kfd7DomainProfileSchema.properties?.contract?.const !== "kfd-7-domain-profile") {
+  fail("KFD-7 domainProfileDeclaration schema must describe the kfd-7-domain-profile contract");
 }
-if (kfd7ActionContractSchema.properties?.standard?.const !== "kfd-7") {
-  fail("KFD-7 actionContract schema must declare standard kfd-7");
+if (kfd7DomainProfileSchema.properties?.standard?.const !== "kfd-7") {
+  fail("KFD-7 domainProfileDeclaration schema must declare standard kfd-7");
 }
-if (kfd7?.interfaces?.actionContract?.schemaVersion !== 2 || kfd7ActionContractSchema.properties?.schemaVersion?.const !== 2) {
-  fail("KFD-7 actionContract interface must use schemaVersion 2");
+if (kfd7?.interfaces?.domainProfileDeclaration?.schemaVersion !== 1 || kfd7DomainProfileSchema.properties?.schemaVersion?.const !== 1) {
+  fail("KFD-7 domainProfileDeclaration interface must use schemaVersion 1");
 }
-if (!kfd7ActionContractSchema.description?.includes("fact and episode are ontology bindings")) {
-  fail("KFD-7 actionContract must project the two ontology bindings and three action-Primitive mappings");
+if (!kfd7DomainProfileSchema.description?.includes("binds representations to the KFD-7 Fact-Episode Ontology")) {
+  fail("KFD-7 domainProfileDeclaration must project the two ontology bindings and three action-coordinate mappings");
 }
-for (const field of ["profile", "roles", "transitions", "prohibitedInferences", "qualificationBasis", "evidenceObligations", "nonClaims", "extensions", "activation"]) {
-  if (!kfd7ActionContractSchema.required?.includes(field)) fail(`KFD-7 actionContract must require ${field}`);
+for (const field of ["domainProfile", "ontologyBindings", "actionCoordinates", "transitions", "prohibitedInferences", "qualificationBasis", "evidenceObligations", "nonClaims", "extensions", "activation"]) {
+  if (!kfd7DomainProfileSchema.required?.includes(field)) fail(`KFD-7 domainProfileDeclaration must require ${field}`);
 }
-const kfd7RoleContains = kfd7ActionContractSchema.properties?.roles?.allOf ?? [];
-for (const role of ["fact", "episode", "pursuit", "atlas", "warrant"]) {
-  if (!kfd7RoleContains.some((entry) => entry?.contains?.properties?.role?.const === role)) {
-    fail(`KFD-7 actionContract must independently require the ${role} role`);
+const kfd7OntologyContains = kfd7DomainProfileSchema.properties?.ontologyBindings?.allOf ?? [];
+for (const binding of ["fact", "episode"]) {
+  if (!kfd7OntologyContains.some((entry) => entry?.contains?.properties?.binding?.const === binding)) {
+    fail(`KFD-7 domainProfileDeclaration must independently require the ${binding} ontology binding`);
+  }
+}
+const kfd7CoordinateContains = kfd7DomainProfileSchema.properties?.actionCoordinates?.allOf ?? [];
+for (const coordinate of ["pursuit", "atlas", "warrant"]) {
+  if (!kfd7CoordinateContains.some((entry) => entry?.contains?.properties?.coordinate?.const === coordinate)) {
+    fail(`KFD-7 domainProfileDeclaration must independently require the ${coordinate} action coordinate`);
   }
 }
 for (const prohibitedInference of ["authority-from-pursuit", "complete-reality-from-atlas", "occurrence-from-warrant", "authorization-from-episode", "completion-from-episode", "occurrence-from-fact", "child-authority-from-parent", "causal-equivalence-from-equal-endpoints"]) {
-  if (!kfd7ActionContractSchema.properties?.prohibitedInferences?.items?.enum?.includes(prohibitedInference)) {
-    fail(`KFD-7 actionContract missing prohibited inference ${prohibitedInference}`);
+  if (!kfd7DomainProfileSchema.properties?.prohibitedInferences?.items?.enum?.includes(prohibitedInference)) {
+    fail(`KFD-7 domainProfileDeclaration missing prohibited inference ${prohibitedInference}`);
   }
 }
-const kfd7EvidenceContains = kfd7ActionContractSchema.properties?.evidenceObligations?.allOf ?? [];
-for (const category of ["role-deletion-or-fusion", "invalid-transition", "export-import-rebuild", "backend-migration", "concurrency-retry-compensation", "warrant-decay-revocation", "atlas-staleness-loss", "pursuit-continuity-settlement", "episode-replay-contraction", "cold-start-continuation", "session-round-trip-refinement", "session-complexity-breakpoint", "context-insufficiency-counterexample"]) {
+const kfd7EvidenceContains = kfd7DomainProfileSchema.properties?.evidenceObligations?.allOf ?? [];
+for (const category of ["semantic-component-deletion-or-fusion", "invalid-transition", "export-import-rebuild", "backend-migration", "concurrency-retry-compensation", "warrant-decay-revocation", "atlas-staleness-loss", "pursuit-continuity-settlement", "episode-replay-contraction", "cold-start-continuation", "session-round-trip-refinement", "session-complexity-breakpoint", "context-insufficiency-counterexample"]) {
   if (!kfd7EvidenceContains.some((entry) => entry?.contains?.properties?.category?.const === category)) {
-    fail(`KFD-7 actionContract must require evidence category ${category}`);
+    fail(`KFD-7 domainProfileDeclaration must require evidence category ${category}`);
   }
 }
-const kfd7QualificationBasis = kfd7ActionContractSchema.$defs?.qualificationBasis?.properties;
+const kfd7QualificationBasis = kfd7DomainProfileSchema.$defs?.qualificationBasis?.properties;
 if (kfd7QualificationBasis?.sessionRoundTrip?.properties?.theoremId?.const !== "kfd-7-session-round-trip-preservation") {
-  fail("KFD-7 actionContract must bind the session round-trip theorem");
+  fail("KFD-7 domainProfileDeclaration must bind the session round-trip theorem");
 }
 if (kfd7QualificationBasis?.sessionRoundTrip?.properties?.source?.const !== "docs/KFD-7-formal.md#session-round-trip-preservation-theorem") {
-  fail("KFD-7 actionContract must bind the canonical session theorem source");
+  fail("KFD-7 domainProfileDeclaration must bind the canonical session theorem source");
 }
 if (kfd7QualificationBasis?.contextInsufficiency?.properties?.corollaryId?.const !== "kfd-7-context-insufficiency") {
-  fail("KFD-7 actionContract must bind the context-insufficiency corollary");
+  fail("KFD-7 domainProfileDeclaration must bind the context-insufficiency corollary");
 }
 const kfd7QualificationEvidenceCategories = kfd7QualificationBasis?.evidenceCategories?.properties;
 for (const [field, category] of Object.entries({
@@ -1490,16 +1560,16 @@ for (const dimension of ["direction", "perspective-boundary", "effective-authori
     fail(`KFD-7 session theorem missing semantic dimension ${dimension}`);
   }
 }
-if (kfd7ActionContractSchema.$defs?.profile?.properties?.qualificationStatus?.enum?.includes("qualified") !== true) {
-  fail("KFD-7 actionContract must expose an explicit qualified Profile state");
+if (kfd7DomainProfileSchema.$defs?.domainProfile?.properties?.qualificationStatus?.enum?.includes("qualified") !== true) {
+  fail("KFD-7 domainProfileDeclaration must expose an explicit qualified Domain Profile state");
 }
-if (kfd7ActionContractSchema.$defs?.activation?.properties?.decision?.enum?.includes("activate") !== true) {
-  fail("KFD-7 actionContract must expose an explicit activation verdict");
+if (kfd7DomainProfileSchema.$defs?.activation?.properties?.decision?.enum?.includes("activate") !== true) {
+  fail("KFD-7 domainProfileDeclaration must expose an explicit activation verdict");
 }
-for (const concept of ["actionProfile", "actionContract", "profileLifecycleVocabulary", "transitionContract", "prohibitedInference", "roleDeletionExperiment", "evidenceObligation", "activationDecision", "qualificationCut", "profileRefinementWitness", "residualRisk", "extensionPoint"]) {
-  if (!kfd7?.concepts?.[concept]) fail(`KFD-7 standards metadata missing compatibility concept ${concept}`);
+for (const concept of ["domainProfileDeclaration", "domainLifecycleVocabulary", "transitionContract", "prohibitedInference", "evidenceObligation", "activationDecision", "qualificationCut", "profileRefinementWitness", "residualRisk", "extensionPoint"]) {
+  if (!kfd7?.concepts?.[concept]) fail(`KFD-7 standards metadata missing concept ${concept}`);
 }
-if (!kfd7?.interfaces?.actionContract) fail("KFD-7 standards metadata missing interface actionContract");
+if (!kfd7?.interfaces?.domainProfileDeclaration) fail("KFD-7 standards metadata missing interface domainProfileDeclaration");
 for (const [id, successors] of superseded) {
   for (const successor of successors) {
     if (!registry.entries.some((e) => e.id === successor)) fail(`${id} cites missing successor ${successor}`);
@@ -1512,12 +1582,12 @@ for (const id of ["KFD-1", "KFD-2", "KFD-3"]) {
 for (const id of siteCommitments.keys()) {
   if (!["KFD-1", "KFD-2", "KFD-3"].includes(id)) fail(`site bundle foundationTriad must not include practice guideline ${id}`);
 }
-const siteLayers = new Map((siteBundle.homepage?.foundationModel?.layers ?? []).map((item) => [item.decision, item]));
+const siteLayers = new Map((siteBundle.homepage?.foundation?.layers ?? []).map((item) => [item.decision, item]));
 for (const id of ["KFD-1", "KFD-2", "KFD-3"]) {
-  if (!siteLayers.has(id)) fail(`site bundle foundationModel missing ${id}`);
+  if (!siteLayers.has(id)) fail(`site bundle foundation missing ${id}`);
 }
 for (const id of siteLayers.keys()) {
-  if (!["KFD-1", "KFD-2", "KFD-3"].includes(id)) fail(`site bundle foundationModel must not include practice guideline ${id}`);
+  if (!["KFD-1", "KFD-2", "KFD-3"].includes(id)) fail(`site bundle foundation must not include practice guideline ${id}`);
 }
 const practiceGuidelines = new Map((siteBundle.homepage?.practiceGuidelines?.guidelines ?? []).map((item) => [item.decision, item]));
 for (const e of registry.entries.filter((entry) => !["KFD-1", "KFD-2", "KFD-3"].includes(entry.id))) {
@@ -1572,7 +1642,7 @@ if (!kfd1Witness) {
       "kfd-7-usage-doc",
       "kfd-5-primitive-discovery-schema",
       "kfd-6-autonomous-discovery-loop-schema",
-      "kfd-7-action-contract-schema",
+      "kfd-7-domain-profile-schema",
       "kfd-2-foundation-trust-claims",
       "kfd-2-foundation-trust-assessment",
       "release-impact-ledger",
@@ -1818,8 +1888,12 @@ if (!kfd3Interface) {
   }
   if (!Array.isArray(kfd3Interface.participants) || kfd3Interface.participants.length === 0) fail("KFD-3 collaboration interface participants[] is required");
   if (!Array.isArray(kfd3Interface.minimalEntrypoints) || kfd3Interface.minimalEntrypoints.length === 0) fail("KFD-3 collaboration interface minimalEntrypoints[] is required");
-  if (!kfd3Interface.minimalEntrypoints.some((entry) => entry.id === "foundation-model" && entry.surface === "docs/foundation-model.md")) {
-    fail("KFD-3 collaboration interface must expose docs/foundation-model.md as a minimal entrypoint");
+  if (!kfd3Interface.minimalEntrypoints.some((entry) => entry.id === "foundation" && entry.surface === "docs/foundation.md")) {
+    fail("KFD-3 collaboration interface must expose docs/foundation.md as a minimal entrypoint");
+  }
+  if (!kfd3Interface.minimalEntrypoints.some((entry) => entry.id === "terminology" && entry.surface === "docs/terminology.md") ||
+      !kfd3Interface.minimalEntrypoints.some((entry) => entry.id === "terminology-contract" && entry.surface === "terminology.json")) {
+    fail("KFD-3 collaboration interface must expose both human and machine terminology entrypoints");
   }
   if (!kfd3Interface.minimalEntrypoints.some((entry) => entry.id === "formal-model" && entry.surface === "docs/formal-model.md")) {
     fail("KFD-3 collaboration interface must expose docs/formal-model.md as a minimal entrypoint");
@@ -1834,8 +1908,12 @@ if (!kfd3Interface) {
     fail("KFD-3 collaboration interface must expose TRADEMARKS.md as an official-status-and-trademarks entrypoint");
   }
   if (!Array.isArray(kfd3Interface.surfaces) || kfd3Interface.surfaces.length === 0) fail("KFD-3 collaboration interface surfaces[] is required");
-  if (!kfd3Interface.surfaces.some((entry) => entry.id === "foundation-model" && entry.discoverability?.path === "docs/foundation-model.md")) {
-    fail("KFD-3 collaboration interface must classify docs/foundation-model.md as a participant-facing surface");
+  if (!kfd3Interface.surfaces.some((entry) => entry.id === "foundation" && entry.discoverability?.path === "docs/foundation.md")) {
+    fail("KFD-3 collaboration interface must classify docs/foundation.md as a participant-facing surface");
+  }
+  if (!kfd3Interface.surfaces.some((entry) => entry.id === "terminology" && entry.discoverability?.path === "docs/terminology.md") ||
+      !kfd3Interface.surfaces.some((entry) => entry.id === "terminology-contract" && entry.discoverability?.path === "terminology.json")) {
+    fail("KFD-3 collaboration interface must classify terminology for human and machine participants");
   }
   if (!kfd3Interface.surfaces.some((entry) => entry.id === "formal-model" && entry.discoverability?.path === "docs/formal-model.md")) {
     fail("KFD-3 collaboration interface must classify docs/formal-model.md as a participant-facing surface");
@@ -1887,10 +1965,10 @@ if (!kfd3Interface) {
     if (!kfd3Interface.valueEvidence.some((entry) => entry.trustAssessment?.path === kfd2TrustAssessmentPath)) {
       fail("KFD-3 collaboration interface valueEvidence must link to the KFD-2 generic trust assessment");
     }
-    if (!kfd3Interface.valueEvidence.some((entry) => entry.id === "kfd-foundation-model" && entry.facts?.some((fact) => fact.path === "docs/foundation-model.md"))) {
-      fail("KFD-3 foundation value evidence must bind docs/foundation-model.md");
+    if (!kfd3Interface.valueEvidence.some((entry) => entry.id === "kfd-foundation" && entry.facts?.some((fact) => fact.path === "docs/foundation.md"))) {
+      fail("KFD-3 foundation value evidence must bind docs/foundation.md");
     }
-    const foundationEvidence = kfd3Interface.valueEvidence.find((entry) => entry.id === "kfd-foundation-model");
+    const foundationEvidence = kfd3Interface.valueEvidence.find((entry) => entry.id === "kfd-foundation");
     for (const requiredPath of ["decisions/KFD-7.md", "docs/KFD-7-formal.md", "docs/KFD-7-usage.md"]) {
       if (!foundationEvidence?.facts?.some((fact) => fact.path === requiredPath)) {
         fail(`KFD-3 foundation value evidence must bind ${requiredPath}`);

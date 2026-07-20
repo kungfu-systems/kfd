@@ -75,6 +75,7 @@ const candidateSurfaces = [
 ];
 const schemaSurfaces = [
   "schemas/kfd-standards.schema.json",
+  "schemas/kfd-terminology.schema.json",
   "schemas/kfd-live-case-registry.schema.json",
   "schemas/kfd-candidate-registry.schema.json",
   "schemas/kfd-1/contract-world.schema.json",
@@ -90,6 +91,7 @@ const schemaSurfaces = [
   "schemas/kfd-4/perspective-replay.schema.json",
   "schemas/kfd-5/primitive-discovery.schema.json",
   "schemas/kfd-6/autonomous-discovery-loop.schema.json",
+  "schemas/kfd-7/domain-profile.schema.json",
 ].map((filePath) => ({
   id: `schema:${filePath.replace(/^schemas\//, "").replace(/\.schema\.json$/, "").replace(/\//g, ":")}`,
   sourcePath: filePath,
@@ -105,7 +107,8 @@ const groupedSurfaces = {
     { id: "doc:kfd-counterevidence-form", sourcePath: ".github/ISSUE_TEMPLATE/kfd-counterevidence.yml", sha256: sha256File(".github/ISSUE_TEMPLATE/kfd-counterevidence.yml") },
     { id: "doc:kfd-adopter-profile-form", sourcePath: ".github/ISSUE_TEMPLATE/adopter-profile.yml", sha256: sha256File(".github/ISSUE_TEMPLATE/adopter-profile.yml") },
     { id: "doc:kfd-pull-request-template", sourcePath: ".github/pull_request_template.md", sha256: sha256File(".github/pull_request_template.md") },
-    { id: "doc:foundation-model", sourcePath: "docs/foundation-model.md", sha256: sha256File("docs/foundation-model.md") },
+    { id: "doc:foundation", sourcePath: "docs/foundation.md", sha256: sha256File("docs/foundation.md") },
+    { id: "doc:terminology", sourcePath: "docs/terminology.md", sha256: sha256File("docs/terminology.md") },
     { id: "doc:formal-model", sourcePath: "docs/formal-model.md", sha256: sha256File("docs/formal-model.md") },
     { id: "doc:primitive-discovery-cases", sourcePath: "docs/primitive-discovery-cases.md", sha256: sha256File("docs/primitive-discovery-cases.md") },
     { id: "doc:trademarks", sourcePath: "TRADEMARKS.md", sha256: sha256File("TRADEMARKS.md") },
@@ -127,6 +130,7 @@ const groupedSurfaces = {
   standardsMetadata: [
     { id: "metadata:registry", sourcePath: "registry.json", sha256: sha256File("registry.json") },
     { id: "metadata:standards", sourcePath: "standards.json", sha256: sha256File("standards.json") },
+    { id: "metadata:terminology", sourcePath: "terminology.json", sha256: sha256File("terminology.json") },
     { id: "metadata:live-case-registry", sourcePath: "cases/registry.json", sha256: sha256File("cases/registry.json") },
     { id: "metadata:candidate-registry", sourcePath: "drafts/registry.json", sha256: sha256File("drafts/registry.json") },
     { id: "metadata:release-impact", sourcePath: "release-impact.json", sha256: sha256File("release-impact.json") },
@@ -272,7 +276,9 @@ const artifact = {
     minimalEntrypoints: collaborationInterface.minimalEntrypoints.map((entry) => pointer(entry.surface, entry.purpose)),
     discoverability: [
       pointer("README.md", "Human and agent entrypoint"),
-      pointer("docs/foundation-model.md", "Complete non-numbered foundation explanation"),
+      pointer("docs/foundation.md", "Complete non-numbered foundation explanation"),
+      pointer("docs/terminology.md", "Canonical terminology and layer boundaries"),
+      pointer("terminology.json", "Machine-readable terminology contract"),
       pointer("docs/formal-model.md", "Shared formal notation and authority boundary"),
       pointer("docs/primitive-discovery-cases.md", "Source-bound historical anchors for primitive discovery"),
       pointer("cases/registry.json", "Machine-readable provisional Primitive case registry"),
@@ -300,7 +306,7 @@ const artifact = {
     ],
     choicePaths: [
       pointer("README.md", "Human reading path"),
-      pointer("docs/foundation-model.md", "Human and agent foundation reading path"),
+      pointer("docs/foundation.md", "Human and agent foundation reading path"),
       pointer("docs/formal-model.md", "Human and agent formal reference entrypoint"),
       pointer("docs/primitive-discovery-cases.md", "Human and agent historical case path"),
       pointer("cases/registry.json", "Human and agent provisional live case path"),
@@ -319,7 +325,7 @@ const artifact = {
       pointer("CONTRIBUTING.md"),
       pointer("GOVERNANCE.md"),
       pointer("docs/MAP.md"),
-      pointer("docs/foundation-model.md"),
+      pointer("docs/foundation.md"),
       pointer("docs/formal-model.md"),
       pointer("docs/primitive-discovery-cases.md"),
       pointer("cases/registry.json"),

@@ -13,7 +13,7 @@
 
 ## Imported vocabulary
 
-`Claim`, `FactBinding`, `Evidence`, `AuditBoundary`, `ResponsibilityState`,
+`Claim`, `FactBinding`, `Evidence`, `AuditBoundary`, `AssuranceResponsibility`,
 `ResidualRisk`, `TrustAssessment`.
 
 ## Domain objects

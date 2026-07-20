@@ -7,14 +7,15 @@
 
 - Status: experimental
 - Normative: no
-- Formal model version: 3
+- Formal model version: 4
 - Authority: `decisions/KFD-7.md`
 - Decision status: active
 
 ## Imported vocabulary
 
-`FactCut`, `CausalRecord`, `Episode`, `Atlas`, `Pursuit`, `Warrant`,
-`ActionSpace`, `ObservationProjection`, `TargetRelation`,
+`FactCut`, `CausalOccurrence`, `CausalRecord`, `Episode`,
+`CausalExperience`, `Atlas`, `Pursuit`, `Warrant`, `ActionSpace`,
+`ObservationProjection`, `TargetRelation`,
 `AdmissibleTransition`, `RealizedPath`.
 
 ## Fact-Episode Ontology
@@ -26,30 +27,40 @@ independently addressable state:
 f_c in F
 ```
 
-A causal record connects declared cuts:
+A Causal Occurrence `O` is the bounded event sequence or partial order that
+actually occurs between declared cuts. A Causal Record `R` is an
+evidence-bearing representation of that occurrence:
 
 ```text
-E: f_c0 -> f_c1
+O: f_c0 -> f_c1
+R = Record(O, evidence, omissions, loss)
+```
+
+An Episode `E` is the independently addressable and replayable KFD object that
+binds the record to its declared boundaries and perspective:
+
+```text
+E = Episode(id, R, f_c0, f_c1, perspective, declared loss)
 Before(E) = f_c0
 After(E)  = f_c1
 ```
 
-For sequential work:
+For sequential work, `R` may preserve:
 
 ```text
 f_c0 --(u1, r1)--> f_c1 --(u2, r2)--> ... --(un, rn)--> f_cn
 ```
 
 Concurrent work may require a causal DAG or partial order rather than one
-universal clock. `E` is not the endpoint difference:
+universal clock. An Episode is not the endpoint difference:
 
 ```text
 Before(E) = After(E) does not imply Empty(E)
 ```
 
 Facts define admitted state. Episodes preserve realized causal occurrence.
-Together they form the ontology over which Action Geometry operates. The
-object-and-path interpretation is:
+Together they form the ontology over which Action Responsibility Geometry
+operates. The object-and-path interpretation is:
 
 ```text
 Fact cuts  -> object-like admitted states
@@ -60,13 +71,23 @@ compose(E1, E2) only when After(E1) = Before(E2)
 This is a contract-world ontology, not a claim that every domain is literally
 a mathematical category or that KFD enumerates all of reality.
 
-## Action Geometry
+One or more Episodes may be projected as Causal Experience for learning,
+comparison, or discovery:
 
-Action Geometry is the cross-domain responsibility model for real-world
-action. The subtitle is explanatory; `Action Geometry` remains the canonical
-formal term.
+```text
+Experience = Project({E_1, ..., E_n}, declared selection and loss)
+```
 
-The three action Primitives constrain different structures over `F`:
+The projection is directional. The occurrence is not its record, the record is
+not yet an Episode, and Causal Experience is not reality itself.
+
+## Action Responsibility Geometry
+
+Action Responsibility Geometry is the cross-domain responsibility model for real-world
+action. The subtitle is explanatory; `Action Responsibility Geometry` remains
+the canonical formal term.
+
+The three action coordinates constrain different structures over `F`:
 
 ```text
 Atlas:    pi_A: F -> O_A
@@ -77,12 +98,13 @@ Warrant:  admissible transition set C_W(f) from fact cut f
 `pi_A` is the observation projection: it determines which facts and relations
 are visible from an addressable perspective. `G_P` or `V_P` supplies
 direction: which consequences count as progress. `C_W(f)` is the permission
-cone: which next transitions are authorized. A realized Episode preserves the
-path `gamma_E` that actually happened through the ontology; it is not a fourth
-Action Geometry coordinate.
+cone: which next transitions are authorized. A realized Episode preserves a
+record of the path `gamma_E` that actually happened through the ontology; it
+is not a fourth
+Action Responsibility Geometry coordinate.
 
 The term `cone` means a local set of admissible directions. It does not require
-a differentiable manifold. Each responsibility may itself be internally
+a differentiable manifold. Each coordinate may itself be internally
 high-dimensional.
 
 ## Relations and predicates
@@ -93,7 +115,7 @@ For candidate action `u`:
 Supported_A(f, u)    action u is supported by Atlas A at cut f
 Advances_P(f, u)     action u can advance Pursuit P
 Authorized_W(f, u)   action u is permitted by Warrant W
-Realizes(E, u)       causal record E preserves the realized action
+Realizes(E, u)       Episode E preserves a Causal Record of realized action u
 Admits(f', C)        successor cut f' becomes visible in contract world C
 ```
 
@@ -163,7 +185,7 @@ responsibility remains fixed. It does not require separate serialized bodies.
 
 Let `S_c` be the set of ordinary sessions inside the declared low-complexity
 boundary, and let `K_c` be the set of histories with two ontology bindings and
-three action-Primitive mappings that remain compressible to one session. A
+three action-coordinate mappings that remain compressible to one session. A
 bounded history `h` is session-compressible when:
 
 ```text
@@ -192,7 +214,7 @@ Project(h) = (
 ```
 
 `Expand` recovers the Fact and Episode bindings plus the three independently
-addressable Action Geometry mappings from the session fields and their
+addressable Action Responsibility Geometry mappings from the session fields and their
 inspectable defaults. `Project` presents a session-compatible view.
 
 ### Session round-trip preservation theorem
@@ -367,15 +389,15 @@ declare current Fact cut
 - Demonstrate cross-domain transfer and progressive disclosure before
   activation.
 
-## Action Geometry and Domain Profile closure
+## Action Responsibility Geometry and Domain Profile closure
 
-Let the Action Geometry be the cross-domain structure:
+Let the Action Responsibility Geometry be the cross-domain structure:
 
 ```text
-ActionGeometry = (
+ActionResponsibilityGeometry = (
   reference to the Fact-Episode Ontology,
   Pursuit, Atlas, and Warrant coordinates,
-  cross-role invariants,
+  cross-component invariants,
   conservative session projection
 )
 ```
@@ -387,7 +409,7 @@ DomainProfile = (
   implementation coordinate,
   qualification status,
   two ontology-binding declarations,
-  three action-Primitive mapping declarations,
+  three action-coordinate mapping declarations,
   domain-owned field schemas and lifecycle vocabulary,
   transitions,
   prohibited inferences,
@@ -397,16 +419,16 @@ DomainProfile = (
 )
 ```
 
-The draft machine contract records a `DomainProfile` declaration rather than
-one physical state machine. A conforming Domain Profile binds Fact and Episode,
-maps every action Primitive to the Action Geometry, and may refine domain
-vocabulary and policy, but it cannot redefine either ontology or geometry
-boundaries.
+The machine interface records a `DomainProfile` declaration rather than one
+physical state machine. A conforming Domain Profile binds Fact and Episode,
+maps every action coordinate to the Action Responsibility Geometry, and may
+refine domain vocabulary and policy, but it cannot redefine either ontology
+or geometry boundary.
 
 Each transition declaration binds:
 
 ```text
-subject role + prior Domain Profile state + operation + preconditions
+subject component + prior Domain Profile state + operation + preconditions
   -> effect + receipt + evidence + denial reasons + residual risks
 ```
 
@@ -421,7 +443,7 @@ Qualified(C, K) :=
   and session complexity-breakpoint evidence
   and same-payload, different-valid-action-set counterexamples
   and positive and negative transition evidence
-  and role deletion or fusion evidence
+  and semantic-component deletion or fusion evidence
   and export, rebuild, and migration evidence
   and concurrency, retry, or compensation evidence
   and Warrant decay and revocation evidence
@@ -440,7 +462,7 @@ relative to that Domain Profile and cut; it does not establish universal
 minimality.
 
 This separation avoids re-proving the generic model for every product. KFD
-states the Action Geometry and conditional theorem once. A Domain Profile
+states the Action Responsibility Geometry and conditional theorem once. A Domain Profile
 proves that its concrete session fields, defaults, and runtime transitions
 refine the theorem's five observations, then retains breakpoint and
 context-insufficiency witnesses. Empirical usability, runtime correctness, and
@@ -467,11 +489,11 @@ cross-domain transfer remain product evidence.
 | Formal statement | Decision source | Schema or check | Verification |
 |---|---|---|---|
 | Fact-cut and Episode separation | Fact-Episode Ontology | KFD-1 formal reference and KFD-7 Domain Profile ontology-binding declarations | Structural plus product evidence |
-| Atlas/Pursuit/Warrant separation | Action responsibilities | `schemas/kfd-7/action-contract.schema.json` required role closure | Structural plus product and semantic review |
+| Atlas/Pursuit/Warrant separation | Action coordinates | `schemas/kfd-7/domain-profile.schema.json` required coordinate closure | Structural plus product and semantic review |
 | `I3-I8` conditional independence | Gate and Activation | Counterfactual product fixtures | Retained in the Buildchain and Kungfu Domain Profile cuts |
 | `I13-I14` conservative session limit | Conservative session limit | theorem reference, Domain Profile refinement, session round-trip, and complexity-breakpoint evidence | Retained in both qualified Domain Profiles |
 | `I15` context insufficiency | Context insufficiency corollary | same-payload, different-valid-action-set counterexamples | Retained in both qualified Domain Profiles |
-| `I16` semantic independence under physical co-location | Action Geometry and Domain Profile closure | responsibility mappings, traceability, counterfactual and fail-visible negative evidence | Mixed; never inferred from component count |
+| `I16` semantic independence under physical co-location | Action Responsibility Geometry and Domain Profile closure | responsibility mappings, traceability, counterfactual and fail-visible negative evidence | Mixed; never inferred from component count |
 | `I9-I10` path composition and admission | Action closure | Domain Profile Episode/Fact mappings | Mixed |
 | transition and denial declaration | Domain Profile adoption contract | `transitions[]` | Independent schema verification |
 | evidence and non-claim closure | Activation | `evidenceObligations[]`, `nonClaims[]`, `activation` | Independent schema and product verification |

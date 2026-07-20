@@ -8,7 +8,7 @@ non-normative formal references published with KFD-1 through KFD-7.
 - Formal model version: 1
 - Authority: `decisions/KFD-N.md`
 
-[Foundation explanation](foundation-model.md) ·
+[Foundation explanation](foundation.md) ·
 [Documentation map](MAP.md)
 
 ## Purpose
@@ -79,11 +79,14 @@ The formal references reuse these object classes:
 | `FactCut` | An independently addressable state admitted at a declared authority and evidence boundary. |
 | `Claim` | A bounded statement about a subject. |
 | `EvidenceCut` | The declared boundary of evidence available to a claim or decision. |
-| `ResponsibilityState` | The named owners of source facts, verification, and decision authority. |
+| `AssuranceResponsibility` | The named assignments of source-fact, verification, and decision authority. |
 | `Participant` | A human, agent, operator, system, or other reasoning party in cooperation. |
 | `Perspective` | A declared position from which facts become relevant and consequences are borne. |
-| `PrimitiveCandidate` | A proposed object with independent identity, boundary, authority, lifecycle, and operations. |
-| `CausalExperience` | A bounded causal path or partial order between fact cuts, preserving action, consequence, and evidence rather than only endpoint difference. |
+| `KFDPrimitiveCandidate` | A proposed load-bearing object with independent identity, boundary, authority, lifecycle, and operations. |
+| `CausalOccurrence` | A bounded event sequence or partial order that actually occurs between declared fact cuts. |
+| `CausalRecord` | An evidence-bearing representation of a causal occurrence, including declared omissions and loss. |
+| `Episode` | An independently addressable, replayable KFD object that binds a causal record to declared cuts, perspective, and loss. |
+| `CausalExperience` | One or more Episodes used as evidence or learning material without being mistaken for reality itself. |
 
 The same concrete artifact may play more than one role. Role identity must be
 declared rather than inferred from file type or product vocabulary.
@@ -99,7 +102,7 @@ KFD-3 makes trusted value available for cooperation.
 KFD-4 preserves and transforms declared perspectives.
 KFD-5 separates candidate genesis from qualification.
 KFD-6 repeats bounded discovery over causal experience without self-certification.
-KFD-7 distinguishes the Fact-Episode Ontology from Action Geometry: Facts
+KFD-7 distinguishes the Fact-Episode Ontology from Action Responsibility Geometry: Facts
 preserve admitted state, Episodes preserve realized causal occurrence, and
 Pursuit, Atlas, and Warrant keep direction, perspective, and authority
 independently addressable in real-world action.
@@ -113,10 +116,11 @@ uses.
 ## Action extension
 
 KFD-7 extends the shared model by treating Fact cuts as object-like admitted
-states and Episodes as morphism-like causal paths. Together they form the
-Fact-Episode Ontology. Atlas, Pursuit, and Warrant are the reference Action
-Geometry Primitives for observation, direction, and admissible action. They
-are not Domain Profiles.
+states and Episodes as morphism-like, evidence-bearing causal paths. Together
+they form the Fact-Episode Ontology. Atlas, Pursuit, and Warrant are the
+reference action coordinates in the Action Responsibility Geometry for
+perspective, direction, and admissible action. They are not Domain Profiles,
+and KFD-7 does not by itself promote their separate candidate specifications.
 
 This active decision remains intentionally falsifiable. Activation does not
 prove that the proposed roles are universally minimal or establish a literal

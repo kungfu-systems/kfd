@@ -20,7 +20,7 @@ semantics.
 
 | Suite surface | Authority | Partition | Allowed claim |
 |---|---|---|---|
-| Direction, perspective, authority, occurrence remain distinct | KFD-7 decision, formal model, usage, action-contract schema | Core | The adapter preserved the tested KFD-7 separations |
+| Direction, perspective, authority, occurrence remain distinct | KFD-7 decision, formal model, usage, Domain Profile Declaration schema | Core | The adapter preserved the tested KFD-7 separations |
 | Episode lifecycle is not Pursuit completion | KFD-7 plus the Fact-Episode ontology boundary | Core | Tested occurrence and completion were not fused |
 | Fact production is not receiver admission | KFD-7 and Agent Hub alpha admission boundary | Core | Tested producer and receiver verdict responsibilities were not fused |
 | Pursuit identity/version/fork/settle | provisional Pursuit candidate and live-case cuts | Experimental | The adapter matched this alpha experiment |

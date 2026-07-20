@@ -13,7 +13,7 @@ last_reviewed: 2026-07-17
 
 # Primitive Discovery in History
 
-This document gives readers external anchors for the KFD foundation model. It
+This document gives readers external anchors for the KFD Foundation. It
 is explanatory, not normative. The numbered texts in `decisions/KFD-N.md`
 remain authoritative.
 
