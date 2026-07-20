@@ -16,13 +16,13 @@
       "id": "kfd-independent-verifier",
       "impact": "minor",
       "class": "additive",
-      "rationale": "KFD additively publishes an independently extractable Rust verifier core, native CLI, raw WebAssembly projection, and npm bin for KFD records, Buildchain release passports, Xinfa Context Packs, Xinfa Atlases, and qualified Git Workspace Episode shadows. The verifier uses only packaged public schemas and specifications, performs no network access, and remains explicitly non-qualifying and non-self-certified."
+      "rationale": "KFD additively publishes an independently extractable Rust verifier core, native CLI, raw WebAssembly projection, and npm bin for KFD records, Buildchain release passports, Xinfa Context Packs, Xinfa Atlases, qualified Git Workspace Episode shadows, and rooted Agent runtime conformance reports. The verifier uses only packaged public schemas and specifications, performs no network access, and remains explicitly non-qualifying and non-self-certified."
     },
     {
       "id": "kfd-verifier-contracts",
       "impact": "minor",
       "class": "additive",
-      "rationale": "KFD additively publishes version 1 verification-bundle and verification-report schemas, registers both interfaces in standards.json, and welds the executable, schema, and responsibility-boundary surfaces under KFD-1."
+      "rationale": "KFD additively publishes version 1 verification-bundle and verification-report schemas plus the Agent runtime manifest, adapter-request, adapter-response, suite, and report contracts; standards.json welds their executable, schema, fixed-root, and responsibility-boundary surfaces under KFD-1."
     },
     {
       "id": "kfd-verifier-xinfa-route-resolution",
@@ -70,19 +70,25 @@
       "id": "kfd-standards-metadata",
       "impact": "major",
       "class": "breaking",
-      "rationale": "The version 2 standards metadata registers active KFD-7 revision 6, binds its decision and formal digests, publishes canonical Fact-Episode Ontology, Action Geometry, and Domain Profile terminology plus explicit compatibility terms, exposes the retained version 2 Domain Profile declaration, and registers the activation record and guide as cross-time surfaces. It now additively registers the Agent Hub alpha manifest, capabilities, exchange, receiver-verdict, attenuation, selective-disclosure, and conflict-visibility surfaces without changing metadata schemaVersion 2. The contract fixes ontology-binding, action-Primitive mapping, transition, theorem-reference, qualification-evidence, non-claim, and activation declaration while leaving product storage and lifecycle vocabulary product-owned."
+      "rationale": "The version 2 standards metadata registers active KFD-7 revision 6, binds its decision and formal digests, publishes canonical Fact-Episode Ontology, Action Geometry, and Domain Profile terminology plus explicit compatibility terms, exposes the retained version 2 Domain Profile declaration, and registers the activation record and guide as cross-time surfaces. It now additively registers the Agent Hub alpha surfaces and the Agent runtime profile, manifest, adapter, fixed suite, report, runner, and verifier surfaces without changing metadata schemaVersion 2. The contract fixes ontology-binding, action-Primitive mapping, transition, theorem-reference, qualification-evidence, non-claim, and activation declaration while leaving product storage and lifecycle vocabulary product-owned."
     },
     {
       "id": "kfd-package-structure",
       "impact": "minor",
       "class": "additive",
-      "rationale": "The package additively publishes CONTRIBUTING.md and GOVERNANCE.md as offline governance surfaces, formal child pages for the Atlas, Pursuit, and Warrant candidates, the KFD-7 activation guide and machine evidence record, and the versioned protocols/ namespace for transport-neutral profiles while preserving the KFD-7 decision, promoted source-candidate lineage, and all existing package paths."
+      "rationale": "The package additively publishes CONTRIBUTING.md and GOVERNANCE.md as offline governance surfaces, formal child pages for the Atlas, Pursuit, and Warrant candidates, the KFD-7 activation guide and machine evidence record, the versioned protocols/ namespace for transport-neutral protocols, and the profiles/ namespace for executable conformance profiles while preserving the KFD-7 decision, promoted source-candidate lineage, and all existing package paths."
     },
     {
       "id": "kfd-agent-hub-alpha-profile",
       "impact": "minor",
       "class": "additive",
       "rationale": "KFD additively publishes the non-numbered kfd-agent-hub 0.1.0-alpha.1 profile with a digest-bound manifest, topology-neutral capability and responsibility-exchange schemas, an explicit receiver-verdict state machine, negative cases, a single-runtime versus cross-Hub gap matrix, and a public implementer/review path. Existing numbered decisions, registry entries, KFD-7 Domain Profile declarations, package paths, and adopter-owned product semantics remain unchanged."
+    },
+    {
+      "id": "kfd-agent-runtime-conformance-alpha",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD additively publishes the non-numbered kfd-agent-runtime 0.1.0-alpha.1 black-box profile, fixed rooted KFD Runtime 100 registry, 35 Core and 65 Experimental result partitions, JSONL adapter contract, artifact-bound report, offline native/WASM verifier profile, deterministic runner, and two structurally different non-product reference adapters. Passing remains non-qualifying and non-self-certified; provisional Pursuit, Atlas, Warrant, fuller ActionBinding, and recovery semantics are not promoted by tests."
     },
     {
       "id": "kfd-buildchain-contract-lock",
@@ -154,7 +160,7 @@
       "id": "kfd-1-surface-register",
       "impact": "minor",
       "class": "additive",
-      "rationale": "standards.json registers the KFD-7 decision, formal reference, usage page, activation guide, machine evidence record, promoted source-candidate lineage, and the Agent Hub alpha authority, manifest, capability/exchange schemas, and reference state machine as integration-time and cross-time surfaces. The KFD-1 witness binds these surfaces and preserves the separate KFD-8 through KFD-10 candidate boundaries."
+      "rationale": "standards.json registers the KFD-7 decision, formal reference, usage page, activation guide, machine evidence record, promoted source-candidate lineage, the Agent Hub alpha surfaces, and the Agent runtime authority, manifest, fixed vectors, adapter/report schemas, runner, and verifier as integration-time and cross-time surfaces. The KFD-1 witness binds these surfaces and preserves the separate KFD-8 through KFD-10 candidate boundaries."
     },
     {
       "id": "kfd-formal-reference-layer",

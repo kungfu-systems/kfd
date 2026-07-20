@@ -192,6 +192,20 @@ implementation, vendor adoption, plural-Hub interoperability, or an industry
 standard. Implementations cite its exact alpha version, manifest digest, and
 repository commit.
 
+The experimental
+[Agent Runtime conformance profile](profiles/agent-runtime/README.md) consumes
+that exact Hub root and exposes a topology-neutral black-box adapter, the fixed
+KFD Runtime 100 vector registry, a rooted execution report, and offline native /
+WASM verification. Its 35 Core vectors test the KFD-7 responsibility-separation
+subset; 65 Experimental vectors exercise provisional work-object and recovery
+semantics without promoting them into normative KFD authority.
+
+The suite ships two structurally different reference adapters to prove the
+protocol is executable, not to claim independent product adoption. A passing
+report stays non-qualifying and non-self-certified and binds only the exact
+adapter artifact, profile manifest, suite root, platform, transcript, and
+results.
+
 ## Product proof path
 
 KFDs are not a detached manifesto, but they are not a demand that readers adopt
@@ -254,6 +268,8 @@ npx @kungfu-tech/kfd verify passport .buildchain/release-passport
 npx @kungfu-tech/kfd verify pack path/to/context-pack
 npx @kungfu-tech/kfd verify atlas path/to/atlas
 npx @kungfu-tech/kfd verify episode path/to/sealed/episode
+npx @kungfu-tech/kfd test agent-runtime --adapter path/to/adapter --output report.json
+npx @kungfu-tech/kfd verify agent-runtime-report report.json
 ```
 
 Each command emits `kfd.verification-report/v1`, remains non-qualifying and
