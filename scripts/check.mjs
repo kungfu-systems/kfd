@@ -1429,7 +1429,7 @@ if (kfd7?.schemaIds?.actionContract !== "https://kfd.libkungfu.dev/schemas/kfd-7
 if (kfd7?.schemaPaths?.actionContract !== "schemas/kfd-7/action-contract.schema.json") {
   fail("KFD-7 standards metadata must expose the actionContract schema path");
 }
-for (const concept of ["factCut", "causalRecord", "episode", "atlas", "pursuit", "warrant", "direction", "perspective", "authorityBoundary", "occurrence", "actionGeometry", "actionGeometryContract", "domainProfile", "domainProfileDeclaration", "roleIndependence", "semanticRoleDistinguishability", "observationProjection", "targetRelation", "admissibleTransition", "realizedPath", "validActionSet", "conditionalIrreducibility", "counterfactualIndependence", "explicitAdmission", "progressiveDisclosure", "conservativeSessionLimit", "complexityBreakpoint", "decisionObservationalEquivalence", "sessionRoundTripTheorem", "contextInsufficiency"]) {
+for (const concept of ["factCut", "causalRecord", "episode", "atlas", "pursuit", "warrant", "direction", "perspective", "authorityBoundary", "occurrence", "factEpisodeOntology", "ontologyBinding", "actionPrimitiveMapping", "actionGeometry", "actionGeometryContract", "domainProfile", "domainProfileDeclaration", "roleIndependence", "semanticRoleDistinguishability", "observationProjection", "targetRelation", "admissibleTransition", "realizedPath", "validActionSet", "conditionalIrreducibility", "counterfactualIndependence", "explicitAdmission", "progressiveDisclosure", "conservativeSessionLimit", "complexityBreakpoint", "decisionObservationalEquivalence", "sessionRoundTripTheorem", "contextInsufficiency"]) {
   if (!kfd7?.concepts?.[concept]) fail(`KFD-7 standards metadata missing concept ${concept}`);
 }
 const kfd7ActionContractSchema = JSON.parse(readFileSync("schemas/kfd-7/action-contract.schema.json", "utf8"));
@@ -1441,6 +1441,9 @@ if (kfd7ActionContractSchema.properties?.standard?.const !== "kfd-7") {
 }
 if (kfd7?.interfaces?.actionContract?.schemaVersion !== 2 || kfd7ActionContractSchema.properties?.schemaVersion?.const !== 2) {
   fail("KFD-7 actionContract interface must use schemaVersion 2");
+}
+if (!kfd7ActionContractSchema.description?.includes("fact and episode are ontology bindings")) {
+  fail("KFD-7 actionContract must project the two ontology bindings and three action-Primitive mappings");
 }
 for (const field of ["profile", "roles", "transitions", "prohibitedInferences", "qualificationBasis", "evidenceObligations", "nonClaims", "extensions", "activation"]) {
   if (!kfd7ActionContractSchema.required?.includes(field)) fail(`KFD-7 actionContract must require ${field}`);

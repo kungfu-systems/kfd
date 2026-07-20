@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://kfd.libkungfu.dev/schemas/kfd-7/action-contract.schema.json",
   "title": "KFD-7 Domain Profile declaration (legacy actionContract interface)",
-  "description": "Retained version 2 compatibility interface for declaring how one Domain Profile maps to KFD-7 Action Geometry. The legacy path and contract id do not identify the future Action Geometry Contract.",
+  "description": "Retained version 2 compatibility interface for declaring how one Domain Profile binds the KFD-7 Fact-Episode Ontology and maps to Action Geometry. Foundation Revision 6 preserves the five roles[] values as a compatibility field: fact and episode are ontology bindings; pursuit, atlas, and warrant are action-Primitive mappings. The legacy path and contract id do not identify the future Action Geometry Contract.",
   "type": "object",
   "required": [
     "schemaVersion",
@@ -36,7 +36,7 @@
       "$ref": "#/$defs/profile"
     },
     "roles": {
-      "description": "Exactly five semantic responsibility mapping declarations. They may share physical records, types, APIs, processes, or interface components.",
+      "description": "Exactly five compatibility mapping declarations: two ontology bindings (fact and episode) plus three action-Primitive mappings (pursuit, atlas, and warrant). They may share physical records, types, APIs, processes, or interface components.",
       "type": "array",
       "minItems": 5,
       "maxItems": 5,
@@ -541,6 +541,7 @@
       "additionalProperties": false
     },
     "roleDeclaration": {
+      "description": "A retained version 2 mapping declaration. The role property names a Fact-Episode ontology binding or an Action Geometry Primitive mapping according to its closed value.",
       "type": "object",
       "required": [
         "role",

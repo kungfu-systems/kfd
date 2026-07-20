@@ -99,8 +99,10 @@ KFD-3 makes trusted value available for cooperation.
 KFD-4 preserves and transforms declared perspectives.
 KFD-5 separates candidate genesis from qualification.
 KFD-6 repeats bounded discovery over causal experience without self-certification.
-KFD-7 keeps direction, perspective, authority, and occurrence independently
-      addressable in real-world action.
+KFD-7 distinguishes the Fact-Episode Ontology from Action Geometry: Facts
+preserve admitted state, Episodes preserve realized causal occurrence, and
+Pursuit, Atlas, and Warrant keep direction, perspective, and authority
+independently addressable in real-world action.
 ```
 
 This composition does not make every later KFD a theorem of the earlier ones.
@@ -110,10 +112,11 @@ uses.
 
 ## Action extension
 
-KFD-7 extends the shared model by treating fact cuts as object-like admitted
-states and Episodes as morphism-like causal paths. Atlas, Pursuit, and Warrant
-are reference action responsibilities or Primitives for observation,
-direction, and admissible action. They are not Domain Profiles.
+KFD-7 extends the shared model by treating Fact cuts as object-like admitted
+states and Episodes as morphism-like causal paths. Together they form the
+Fact-Episode Ontology. Atlas, Pursuit, and Warrant are the reference Action
+Geometry Primitives for observation, direction, and admissible action. They
+are not Domain Profiles.
 
 This active decision remains intentionally falsifiable. Activation does not
 prove that the proposed roles are universally minimal or establish a literal
