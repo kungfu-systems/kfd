@@ -9,8 +9,10 @@ const packageRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "
 
 function usage() {
   return `usage:
-  kfd verify <kfd-record|passport|pack|atlas|episode|bundle> <path> [--schema <path>] [--json]
-  kfd bundle <kfd-record|passport|pack|atlas|episode> <path> --output <bundle.json>`;
+  kfd test agent-runtime --adapter <path> --output <report.json>
+    [--adapter-arg <arg>] [--adapter-source-commit <sha>] [--timeout-ms <ms>]
+  kfd verify <kfd-record|passport|pack|atlas|episode|agent-runtime-report|bundle> <path> [--schema <path>] [--json]
+  kfd bundle <kfd-record|passport|pack|atlas|episode|agent-runtime-report> <path> --output <bundle.json>`;
 }
 
 function regularText(filePath) {
@@ -94,6 +96,13 @@ async function verifyWasm(bundleText) {
 }
 
 async function main(args) {
+  if (args[0] === "test" && args[1] === "agent-runtime") {
+    const { runAgentRuntimeTest } = await import(
+      "../scripts/agent-runtime-runner.mjs"
+    );
+    process.exitCode = await runAgentRuntimeTest(args.slice(2));
+    return;
+  }
   if (args.length < 3) throw new Error("missing command, kind, or path");
   const [command, kind, input] = args;
   let schema;

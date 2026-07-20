@@ -15,6 +15,26 @@ const SCHEMAS: &[(&str, &str)] = &[
         include_str!("../../../../schemas/kfd-verification-report.schema.json"),
     ),
     (
+        "schemas/kfd-agent-runtime/manifest.schema.json",
+        include_str!("../../../../schemas/kfd-agent-runtime/manifest.schema.json"),
+    ),
+    (
+        "schemas/kfd-agent-runtime/adapter-request.schema.json",
+        include_str!("../../../../schemas/kfd-agent-runtime/adapter-request.schema.json"),
+    ),
+    (
+        "schemas/kfd-agent-runtime/adapter-response.schema.json",
+        include_str!("../../../../schemas/kfd-agent-runtime/adapter-response.schema.json"),
+    ),
+    (
+        "schemas/kfd-agent-runtime/suite.schema.json",
+        include_str!("../../../../schemas/kfd-agent-runtime/suite.schema.json"),
+    ),
+    (
+        "schemas/kfd-agent-runtime/report.schema.json",
+        include_str!("../../../../schemas/kfd-agent-runtime/report.schema.json"),
+    ),
+    (
         "schemas/kfd-standards.schema.json",
         include_str!("../../../../schemas/kfd-standards.schema.json"),
     ),
@@ -107,6 +127,15 @@ pub fn schema_for_record(record: &Value) -> Option<(String, Value)> {
     let path = match contract {
         "kfd.verification-bundle/v1" => "schemas/kfd-verification-bundle.schema.json",
         "kfd.verification-report/v1" => "schemas/kfd-verification-report.schema.json",
+        "kfd.agent-runtime-suite-manifest/v1" => "schemas/kfd-agent-runtime/manifest.schema.json",
+        "kfd.agent-runtime-vector-registry/v1" => "schemas/kfd-agent-runtime/suite.schema.json",
+        "kfd.agent-runtime-adapter-request/v1" => {
+            "schemas/kfd-agent-runtime/adapter-request.schema.json"
+        }
+        "kfd.agent-runtime-adapter-response/v1" => {
+            "schemas/kfd-agent-runtime/adapter-response.schema.json"
+        }
+        "kfd.agent-runtime-report/v1" => "schemas/kfd-agent-runtime/report.schema.json",
         "kfd-standards-metadata" => "schemas/kfd-standards.schema.json",
         "kfd-live-case-registry" => "schemas/kfd-live-case-registry.schema.json",
         "kfd-1-contract-world" => "schemas/kfd-1/contract-world.schema.json",

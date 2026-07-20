@@ -1,0 +1,3078 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.agent-runtime-report/v1",
+  "profile": {
+    "id": "kfd-agent-runtime",
+    "version": "0.1.0-alpha.1",
+    "manifestDigest": "sha256:bf732978edafd4ec5d3b82c60a074ee8de5a49c17dc505baf90651e085e5c653",
+    "agentHubManifestDigest": "sha256:649ec7531d4c879846b8207a94e21844d573f0c07a422b9fa3f921bfa65d05a3"
+  },
+  "suite": {
+    "id": "kfd-runtime-100",
+    "version": "0.1.0-alpha.1",
+    "vectorCount": 100,
+    "vectorRoot": "sha256:1e996b8c43b0b3e38630ccd58acf8a714cbc24b339d3794318347faab9057e5f"
+  },
+  "adapter": {
+    "id": "kfd-reference-state-machine",
+    "version": "0.1.0",
+    "topology": "single-process-state-machine",
+    "artifactDigest": "sha256:1f9c601ffec5a9214230ec7ab10684534d734aeed4f4ee06756e38db684e02c3",
+    "handshake": {
+      "schemaVersion": 1,
+      "contract": "kfd.agent-runtime-adapter-response/v1",
+      "requestId": "handshake",
+      "adapter": {
+        "id": "kfd-reference-state-machine",
+        "version": "0.1.0",
+        "topology": "single-process-state-machine"
+      },
+      "status": "accepted",
+      "code": "adapter-ready",
+      "observations": {
+        "profile": "kfd-agent-runtime@0.1.0-alpha.1",
+        "protocol": "jsonl-stdio/v1",
+        "topology": "single-process-state-machine"
+      }
+    },
+    "handshakeRoot": "sha256:bd0682f97a4b00207e5719dc3129380ba0511d3d3aacb0a15e6856ef9ee3a834"
+  },
+  "platform": {
+    "os": "darwin",
+    "arch": "arm64",
+    "runtime": "node-24.16.0"
+  },
+  "execution": {
+    "startedAt": "2026-07-20T11:58:21.263Z",
+    "finishedAt": "2026-07-20T11:58:21.304Z",
+    "offline": true,
+    "requestCount": 101,
+    "transcriptRoot": "sha256:160edd20701af0203c74dbfedb0b37427dcf307206638d4116b05c1221ea2678",
+    "resultRoot": "sha256:6e170b54046db67e579ca98ffbdd79d631c5292f17e57e453ee772004ca9434a"
+  },
+  "partitions": {
+    "core": {
+      "total": 35,
+      "passed": 35,
+      "failed": 0,
+      "status": "pass"
+    },
+    "experimental": {
+      "total": 65,
+      "passed": 65,
+      "failed": 0,
+      "status": "pass"
+    }
+  },
+  "valid": true,
+  "qualifying": false,
+  "selfCertified": false,
+  "results": [
+    {
+      "id": "pursuit-001-create-version-one",
+      "partition": "experimental",
+      "category": "pursuit",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "pursuit-created"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "pursuit-created"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "pursuit-001-create-version-one",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "pursuit-created",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:7f685c0797415e56e2bb09ae93f711c1c72723c20f2f8eb50efcc5a64d71958c"
+    },
+    {
+      "id": "pursuit-002-reject-create-overwrite",
+      "partition": "experimental",
+      "category": "pursuit",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "pursuit-already-exists"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "pursuit-already-exists"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "pursuit-002-reject-create-overwrite",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "pursuit-already-exists",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:108a09d585d7ffd18b946d0e0c0dd487a6f0ac3b5193564ab3e0d00c26a070b2"
+    },
+    {
+      "id": "pursuit-003-revise-next-version",
+      "partition": "experimental",
+      "category": "pursuit",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "pursuit-revised"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "pursuit-revised"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "pursuit-003-revise-next-version",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "pursuit-revised",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:6f64ebd36e94d77527838e698bfa44023e099d8c4ef4c6619cc19a7669186fcf"
+    },
+    {
+      "id": "pursuit-004-reject-stale-revision",
+      "partition": "experimental",
+      "category": "pursuit",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "pursuit-stale-version"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "pursuit-stale-version"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "pursuit-004-reject-stale-revision",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "pursuit-stale-version",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:fceb176e6e95e651037635b6621e2febba07b40c3a7014e56689f42283bde3dd"
+    },
+    {
+      "id": "pursuit-005-reject-version-skip",
+      "partition": "experimental",
+      "category": "pursuit",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "pursuit-version-gap"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "pursuit-version-gap"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "pursuit-005-reject-version-skip",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "pursuit-version-gap",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:79fea09cb12c3f1d5ddea17629f2ca975bdfb9b5148d0a2b40c2aa5f4661c1a4"
+    },
+    {
+      "id": "pursuit-006-fork-from-exact-version",
+      "partition": "experimental",
+      "category": "pursuit",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "pursuit-forked"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "pursuit-forked"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "pursuit-006-fork-from-exact-version",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "pursuit-forked",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:2917e525fc98d875fce4beeaf1a69b76455e9c78225d3efb2927227c353f143f"
+    },
+    {
+      "id": "pursuit-007-reject-fork-without-lineage",
+      "partition": "experimental",
+      "category": "pursuit",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "pursuit-stale-version"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "pursuit-stale-version"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "pursuit-007-reject-fork-without-lineage",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "pursuit-stale-version",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:6d663d5ca6618a2b025bc852fb61aa017d57eec7b8a537a4cb384ccd9fcecbc8"
+    },
+    {
+      "id": "pursuit-008-reject-fork-identity-reuse",
+      "partition": "experimental",
+      "category": "pursuit",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "pursuit-identity-reuse"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "pursuit-identity-reuse"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "pursuit-008-reject-fork-identity-reuse",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "pursuit-identity-reuse",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:4cea2fec9adeaf5e318205e47af9fcc63fa505aa85be1301677a3e6553c6fc86"
+    },
+    {
+      "id": "pursuit-009-settle-with-admitted-verdict",
+      "partition": "experimental",
+      "category": "pursuit",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "pursuit-settled"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "pursuit-settled"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "pursuit-009-settle-with-admitted-verdict",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "pursuit-settled",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:7f82cbfb0c860b689dc06cd81ee3a294a185e65e253cbc4be6ee079cc3a4e91a"
+    },
+    {
+      "id": "pursuit-010-reject-call-success-as-settlement",
+      "partition": "experimental",
+      "category": "pursuit",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "completion-verdict-not-admitted"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "completion-verdict-not-admitted"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "pursuit-010-reject-call-success-as-settlement",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "completion-verdict-not-admitted",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:2321b7a48d6f7f6e9b962d1d3ff9a280ca4731d4959630ab89cce63d0d144fe5"
+    },
+    {
+      "id": "pursuit-011-reject-sealed-episode-as-settlement",
+      "partition": "experimental",
+      "category": "pursuit",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "completion-verdict-not-admitted"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "completion-verdict-not-admitted"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "pursuit-011-reject-sealed-episode-as-settlement",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "completion-verdict-not-admitted",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:1121a0dd5822a7d01eb20f4a447f7e97d8ebdf5441ec6d939c1f85d3caad415f"
+    },
+    {
+      "id": "pursuit-012-reject-fact-admission-as-settlement",
+      "partition": "experimental",
+      "category": "pursuit",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "completion-verdict-not-admitted"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "completion-verdict-not-admitted"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "pursuit-012-reject-fact-admission-as-settlement",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "completion-verdict-not-admitted",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:b77bad54b5e738965b6463a9c3b0114db45bb5cd258cc9cdd5a24b72acadd1da"
+    },
+    {
+      "id": "pursuit-013-reject-stale-settlement",
+      "partition": "experimental",
+      "category": "pursuit",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "pursuit-stale-version"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "pursuit-stale-version"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "pursuit-013-reject-stale-settlement",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "pursuit-stale-version",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:972fcb045f398e34e469a619c25e3eceba1ed8af035c8eff02d6160644f0a250"
+    },
+    {
+      "id": "pursuit-014-reject-revise-settled",
+      "partition": "experimental",
+      "category": "pursuit",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "pursuit-not-active"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "pursuit-not-active"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "pursuit-014-reject-revise-settled",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "pursuit-not-active",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:7502257b59f4e45bb2fd674393e66403c47d140de0ee63d1882cbbec97eb4897"
+    },
+    {
+      "id": "pursuit-015-reject-settle-without-verdict",
+      "partition": "experimental",
+      "category": "pursuit",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "completion-verdict-missing"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "completion-verdict-missing"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "pursuit-015-reject-settle-without-verdict",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "completion-verdict-missing",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:1e8caae8ea9017bd85564d2e3ff6ef92b6942a381ea35b28b4c8017b224393c5"
+    },
+    {
+      "id": "atlas-001-cut-rooted-sources",
+      "partition": "experimental",
+      "category": "atlas",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "atlas-cut-created"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "atlas-cut-created"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "atlas-001-cut-rooted-sources",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "atlas-cut-created",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:f87cd36a1f6ba6a48ec52424474a616e5d891d80baed799c35fcf7e16a471a3c"
+    },
+    {
+      "id": "atlas-002-reject-cut-without-sources",
+      "partition": "experimental",
+      "category": "atlas",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "atlas-source-roots-missing"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "atlas-source-roots-missing"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "atlas-002-reject-cut-without-sources",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "atlas-source-roots-missing",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:7203b3f446878d4be399726e83ebbed9db025232cf5c9aea7bf9f000bbf2eefa"
+    },
+    {
+      "id": "atlas-003-derive-from-exact-cut",
+      "partition": "experimental",
+      "category": "atlas",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "atlas-derived"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "atlas-derived"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "atlas-003-derive-from-exact-cut",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "atlas-derived",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:4d37bb744e811ab5b68d1972e42c5e3a10ee89166f8340009641e2abb1fcccc4"
+    },
+    {
+      "id": "atlas-004-reject-derive-from-other-cut",
+      "partition": "experimental",
+      "category": "atlas",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "atlas-cut-mismatch"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "atlas-cut-mismatch"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "atlas-004-reject-derive-from-other-cut",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "atlas-cut-mismatch",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:d77f5a230a26026d25c7a55975ccce9602fe76c39057fcfab47b6aef39e46fbd"
+    },
+    {
+      "id": "atlas-005-reject-unrooted-derivation",
+      "partition": "experimental",
+      "category": "atlas",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "atlas-derived-root-missing"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "atlas-derived-root-missing"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "atlas-005-reject-unrooted-derivation",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "atlas-derived-root-missing",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:af64fb4dc8324c75664a00ca1d6de2dabdfac2ebc40bedf90754a9b8fe0181e3"
+    },
+    {
+      "id": "atlas-006-refresh-from-current-source",
+      "partition": "experimental",
+      "category": "atlas",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "atlas-refreshed"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "atlas-refreshed"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "atlas-006-refresh-from-current-source",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "atlas-refreshed",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:6a8aa67a0e444bcfc9871f0059c3debf539e9b0e7e5bf64b7211bf5d874588ac"
+    },
+    {
+      "id": "atlas-007-reject-refresh-stale-base",
+      "partition": "experimental",
+      "category": "atlas",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "atlas-cut-mismatch"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "atlas-cut-mismatch"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "atlas-007-reject-refresh-stale-base",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "atlas-cut-mismatch",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:24364cedaad69ec0afab056c6ebf26e977a2d5e7f0f7bae23642ec289c19f398"
+    },
+    {
+      "id": "atlas-008-reject-refresh-source-drift",
+      "partition": "experimental",
+      "category": "atlas",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "atlas-source-root-mismatch"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "atlas-source-root-mismatch"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "atlas-008-reject-refresh-source-drift",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "atlas-source-root-mismatch",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:a89d24f92383ec0d9f11d1a95e41dacd45b30432bf8a3e0325cca2ef2b89f80e"
+    },
+    {
+      "id": "atlas-009-mark-stale-with-reason",
+      "partition": "experimental",
+      "category": "atlas",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "atlas-marked-stale"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "atlas-marked-stale"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "atlas-009-mark-stale-with-reason",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "atlas-marked-stale",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:5a474273ad748adcbb21e812c4ca2d33ef27f6f84ba66361670ecb02c6eded87"
+    },
+    {
+      "id": "atlas-010-reject-stale-without-reason",
+      "partition": "experimental",
+      "category": "atlas",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "atlas-stale-reason-missing"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "atlas-stale-reason-missing"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "atlas-010-reject-stale-without-reason",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "atlas-stale-reason-missing",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:088ef46373bee66de6960324b90e990d53458cad79ffeca01f0638f02cb3e82f"
+    },
+    {
+      "id": "atlas-011-reject-derive-stale-cut",
+      "partition": "experimental",
+      "category": "atlas",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "atlas-cut-stale"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "atlas-cut-stale"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "atlas-011-reject-derive-stale-cut",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "atlas-cut-stale",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:dd659dc1ae665e8f17811b1159194936dbda4b11a6b6971df325e7fdbb30b148"
+    },
+    {
+      "id": "atlas-012-reject-refresh-unrooted-next-cut",
+      "partition": "experimental",
+      "category": "atlas",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "atlas-next-cut-missing"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "atlas-next-cut-missing"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "atlas-012-reject-refresh-unrooted-next-cut",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "atlas-next-cut-missing",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:f9ae406f2dfb70373b8eacf46e07243b840e42ad65a2d8340a1e1a3599884561"
+    },
+    {
+      "id": "atlas-013-cut-single-root",
+      "partition": "experimental",
+      "category": "atlas",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "atlas-cut-created"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "atlas-cut-created"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "atlas-013-cut-single-root",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "atlas-cut-created",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:e46a3d473bc764d08ea2c8190d536e83287f30b32d151be149227c6234e84d73"
+    },
+    {
+      "id": "atlas-014-reject-cut-duplicate-roots",
+      "partition": "experimental",
+      "category": "atlas",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "atlas-source-root-duplicate"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "atlas-source-root-duplicate"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "atlas-014-reject-cut-duplicate-roots",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "atlas-source-root-duplicate",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:6acd18554cf84321384929f553f8844f47cac4dde5ece84e046550e30026bc3f"
+    },
+    {
+      "id": "atlas-015-reject-mark-stale-twice",
+      "partition": "experimental",
+      "category": "atlas",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "atlas-already-stale"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "atlas-already-stale"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "atlas-015-reject-mark-stale-twice",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "atlas-already-stale",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:c8fe9402fb4d6ca1b0ea9faf6bfd950e378b5b0be06e52463c0d6903bda25ac1"
+    },
+    {
+      "id": "warrant-001-issue-bounded-authority",
+      "partition": "experimental",
+      "category": "warrant",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "warrant-issued"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "warrant-issued"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "warrant-001-issue-bounded-authority",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "warrant-issued",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:cd63536c4c7de170311b70418041812e63a6a5e88c83f01c9281fac3863ca5a9"
+    },
+    {
+      "id": "warrant-002-reject-unrooted-issue",
+      "partition": "experimental",
+      "category": "warrant",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "warrant-authority-root-missing"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "warrant-authority-root-missing"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "warrant-002-reject-unrooted-issue",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "warrant-authority-root-missing",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:defab8b974cdbf5a207c7c2b0ac684bc3e58b4335d686ad405ebffb7eb7fd743"
+    },
+    {
+      "id": "warrant-003-attenuate-action-subset",
+      "partition": "experimental",
+      "category": "warrant",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "warrant-attenuated"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "warrant-attenuated"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "warrant-003-attenuate-action-subset",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "warrant-attenuated",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:ef2b13aaf57ae913bdc4bed60f0becfa64508bee63174f5d1a4d1f95329c487d"
+    },
+    {
+      "id": "warrant-004-reject-action-amplification",
+      "partition": "experimental",
+      "category": "warrant",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "warrant-authority-amplification"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "warrant-authority-amplification"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "warrant-004-reject-action-amplification",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "warrant-authority-amplification",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:486f3c07931a68bbe0b2276871e1c59e1fbbea1c28380707291c68cc7eccaa15"
+    },
+    {
+      "id": "warrant-005-attenuate-expiry",
+      "partition": "experimental",
+      "category": "warrant",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "warrant-attenuated"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "warrant-attenuated"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "warrant-005-attenuate-expiry",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "warrant-attenuated",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:aaf953919c40028cca6dcab401ce1a92cdc4a0c8a6e4c17b670f7368ec1caca0"
+    },
+    {
+      "id": "warrant-006-reject-expiry-extension",
+      "partition": "experimental",
+      "category": "warrant",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "warrant-expiry-amplification"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "warrant-expiry-amplification"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "warrant-006-reject-expiry-extension",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "warrant-expiry-amplification",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:a69f775e2c6390e392b9577808427b5ec17eafa51351d191d0cd49d9d2fa98c4"
+    },
+    {
+      "id": "warrant-007-delegate-bounded-subset",
+      "partition": "experimental",
+      "category": "warrant",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "warrant-delegated"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "warrant-delegated"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "warrant-007-delegate-bounded-subset",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "warrant-delegated",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:79fa7137d38bd4e332abc0d34109b2bc8df82d3e84a2b6e7343805528b5e7123"
+    },
+    {
+      "id": "warrant-008-reject-delegate-action-amplification",
+      "partition": "experimental",
+      "category": "warrant",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "warrant-authority-amplification"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "warrant-authority-amplification"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "warrant-008-reject-delegate-action-amplification",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "warrant-authority-amplification",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:e7de503c044dd9ee1b7c18017b12909c805bf46b7c0cd7502b459c739cb8ad6a"
+    },
+    {
+      "id": "warrant-009-reject-delegate-scope-amplification",
+      "partition": "experimental",
+      "category": "warrant",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "warrant-scope-amplification"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "warrant-scope-amplification"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "warrant-009-reject-delegate-scope-amplification",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "warrant-scope-amplification",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:b34983d3efbe810172376f191471c84fa0db1c4f30ed3aff706c4fe7abe9021e"
+    },
+    {
+      "id": "warrant-010-reject-delegate-expiry-extension",
+      "partition": "experimental",
+      "category": "warrant",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "warrant-expiry-amplification"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "warrant-expiry-amplification"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "warrant-010-reject-delegate-expiry-extension",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "warrant-expiry-amplification",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:268419d1ba24434624666781016921afc39f498f52549700e9e6b72a58dae55b"
+    },
+    {
+      "id": "warrant-011-revoke-by-rooted-authority",
+      "partition": "experimental",
+      "category": "warrant",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "warrant-revoked"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "warrant-revoked"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "warrant-011-revoke-by-rooted-authority",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "warrant-revoked",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:c55d4b266a0ad67be3570ef27e3b24455dc771b3f893c9bb286493af7bf7744c"
+    },
+    {
+      "id": "warrant-012-reject-revoke-other-authority",
+      "partition": "experimental",
+      "category": "warrant",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "warrant-revoker-unauthorized"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "warrant-revoker-unauthorized"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "warrant-012-reject-revoke-other-authority",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "warrant-revoker-unauthorized",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:3a38788eba4910086ff8738d16e92fc3bd6c8441cb435d1c8ca67d02966c8f7b"
+    },
+    {
+      "id": "warrant-013-use-allowed-action",
+      "partition": "experimental",
+      "category": "warrant",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "warrant-authorized"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "warrant-authorized"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "warrant-013-use-allowed-action",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "warrant-authorized",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:1a85b46bbc458f9714b222280d89bc5542af038ce181a56bbe5f7ea028ddfbd0"
+    },
+    {
+      "id": "warrant-014-reject-forbidden-action",
+      "partition": "experimental",
+      "category": "warrant",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "warrant-action-forbidden"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "warrant-action-forbidden"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "warrant-014-reject-forbidden-action",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "warrant-action-forbidden",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:f7a9595b752d94b7abd156c262ec74513c33909b6de0a3c3c3d2be85323221f3"
+    },
+    {
+      "id": "warrant-015-reject-scope-mismatch",
+      "partition": "experimental",
+      "category": "warrant",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "warrant-scope-mismatch"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "warrant-scope-mismatch"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "warrant-015-reject-scope-mismatch",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "warrant-scope-mismatch",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:4fb8a74d5522d19f17cd51c9b86e04fbfa715868853d66e7199bcf33e004436c"
+    },
+    {
+      "id": "warrant-016-reject-expired-use",
+      "partition": "experimental",
+      "category": "warrant",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "warrant-expired"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "warrant-expired"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "warrant-016-reject-expired-use",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "warrant-expired",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:d5e8d1f1dcf0df69925b67f648d1f48fccf530f465593d71702af9bc7431572b"
+    },
+    {
+      "id": "warrant-017-reject-revoked-use",
+      "partition": "experimental",
+      "category": "warrant",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "warrant-revoked"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "warrant-revoked"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "warrant-017-reject-revoked-use",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "warrant-revoked",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:22f5ca1c95285c595330bb720780671f1ce54ef75e8ed0b65c38fc34ba60eed4"
+    },
+    {
+      "id": "warrant-018-reject-attenuate-revoked",
+      "partition": "experimental",
+      "category": "warrant",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "warrant-not-active"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "warrant-not-active"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "warrant-018-reject-attenuate-revoked",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "warrant-not-active",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:10b73cb5029bf0864b9e6db710fca11b2967de990af99da00f75b041356e2dbc"
+    },
+    {
+      "id": "warrant-019-reject-empty-delegation",
+      "partition": "experimental",
+      "category": "warrant",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "warrant-actions-missing"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "warrant-actions-missing"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "warrant-019-reject-empty-delegation",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "warrant-actions-missing",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:dd77450838065f268c4245514a23691f0ef238be9344ecbbc2bcabd49b233c39"
+    },
+    {
+      "id": "warrant-020-reject-unrooted-parent",
+      "partition": "experimental",
+      "category": "warrant",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "warrant-authority-root-missing"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "warrant-authority-root-missing"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "warrant-020-reject-unrooted-parent",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "warrant-authority-root-missing",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:185ab73bfc57f3c210e7e2102f0f7553308de149fb86f89e94a85fe15a4ba90c"
+    },
+    {
+      "id": "action-001-bind-exact-roots",
+      "partition": "core",
+      "category": "action",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "action-bound"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "action-bound"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "action-001-bind-exact-roots",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "action-bound",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:c300ff3a5e122185f60f1d329c59f78724934b5fae8251f490d6b8013e7d8648"
+    },
+    {
+      "id": "action-002-reject-missing-pursuit",
+      "partition": "core",
+      "category": "action",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "action-pursuit-root-missing"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "action-pursuit-root-missing"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "action-002-reject-missing-pursuit",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "action-pursuit-root-missing",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:8abffd088a17f6e9d7163e9e03a6f3ba7c0f4ff8971a33b5b7a292e28e533f92"
+    },
+    {
+      "id": "action-003-reject-missing-atlas",
+      "partition": "core",
+      "category": "action",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "action-atlas-root-missing"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "action-atlas-root-missing"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "action-003-reject-missing-atlas",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "action-atlas-root-missing",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:ae456b1f3ec288188d6b43072e884bb5d20c066e72c2dae50fcc5e5f07592da4"
+    },
+    {
+      "id": "action-004-reject-missing-warrant",
+      "partition": "core",
+      "category": "action",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "action-warrant-root-missing"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "action-warrant-root-missing"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "action-004-reject-missing-warrant",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "action-warrant-root-missing",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:eec6baf29f5009ad6cfe51a5b7cc9b85df6acdf68af389faa777b57dfc056c2c"
+    },
+    {
+      "id": "action-005-reject-missing-action-root",
+      "partition": "core",
+      "category": "action",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "action-root-missing"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "action-root-missing"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "action-005-reject-missing-action-root",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "action-root-missing",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:abae5e143406d2a352e5aa24e8417e78b60cf41db18e33773d6b4dcbe0098e5d"
+    },
+    {
+      "id": "action-006-reject-unsatisfied-precondition",
+      "partition": "core",
+      "category": "action",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "action-precondition-failed"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "action-precondition-failed"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "action-006-reject-unsatisfied-precondition",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "action-precondition-failed",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:ffaab5d2b7903c2e148580a3497dcef5baa1eadcf82e1f506476b92526aeab19"
+    },
+    {
+      "id": "action-007-reject-revoked-warrant",
+      "partition": "core",
+      "category": "action",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "action-warrant-inactive"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "action-warrant-inactive"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "action-007-reject-revoked-warrant",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "action-warrant-inactive",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:add764267a33639b2eabd2b62e3c24192f810be973ae3a5329091db9169c34fb"
+    },
+    {
+      "id": "action-008-delivery-not-admission",
+      "partition": "core",
+      "category": "action",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "delivery-kept-separate"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "delivery-kept-separate"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "action-008-delivery-not-admission",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "delivery-kept-separate",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:f630fd3af1b803dee46ecdf92c3f8e26ebd238e479056e5edd0adf7aa0deb887"
+    },
+    {
+      "id": "action-009-reject-delivery-as-admission",
+      "partition": "core",
+      "category": "action",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "delivery-is-not-admission"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "delivery-is-not-admission"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "action-009-reject-delivery-as-admission",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "delivery-is-not-admission",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:f1034bd40c7255f18816a6b8ee9a2cd16ef608fe60c4bbe39e60a8a0fc8f1d67"
+    },
+    {
+      "id": "action-010-episode-not-completion",
+      "partition": "core",
+      "category": "action",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "occurrence-kept-separate"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "occurrence-kept-separate"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "action-010-episode-not-completion",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "occurrence-kept-separate",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:80545338356b719480013d71981eb4d05256178224bacf525f7e29aa7c7816c7"
+    },
+    {
+      "id": "action-011-reject-seal-as-completion",
+      "partition": "core",
+      "category": "action",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "episode-is-not-completion"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "episode-is-not-completion"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "action-011-reject-seal-as-completion",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "episode-is-not-completion",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:238ef64c5662297e5d7f15267ddb83dd3db222ea12d37c06a763939b43da372a"
+    },
+    {
+      "id": "action-012-fact-not-call-success",
+      "partition": "core",
+      "category": "action",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "call-kept-separate"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "call-kept-separate"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "action-012-fact-not-call-success",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "call-kept-separate",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:13668604a6e1adcbe4df68835c7be323994a0cd5f7839c88d8ea4a8ccdd3f26d"
+    },
+    {
+      "id": "action-013-reject-call-as-fact",
+      "partition": "core",
+      "category": "action",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "call-is-not-admission"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "call-is-not-admission"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "action-013-reject-call-as-fact",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "call-is-not-admission",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:e91cfbefafa2d6ba47c8080eabb80a3f4a1c2e475ee8b91e24b61384b224f4ed"
+    },
+    {
+      "id": "action-014-receiver-admits-fact",
+      "partition": "core",
+      "category": "action",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "receiver-verdict-retained"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "receiver-verdict-retained"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "action-014-receiver-admits-fact",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "receiver-verdict-retained",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:4361fd8b4c8003a8ee18173e3f0d16df2ffb310889ec825db8b4662a57368a4b"
+    },
+    {
+      "id": "action-015-reject-producer-self-admission",
+      "partition": "core",
+      "category": "action",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "producer-cannot-self-admit"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "producer-cannot-self-admit"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "action-015-reject-producer-self-admission",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "producer-cannot-self-admit",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:152f35dd8a046e1dd54c75ee24187c53415963c4fed3ca7f49393bb53c06cf90"
+    },
+    {
+      "id": "episode-fact-001-open-new-episode",
+      "partition": "core",
+      "category": "episode-fact",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "episode-opened"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "episode-opened"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "episode-fact-001-open-new-episode",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "episode-opened",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:e6744adfc730ade4ead26afc03be87ce04ac3d394df1de474e98f2cfc2c35dd4"
+    },
+    {
+      "id": "episode-fact-002-reject-open-existing",
+      "partition": "core",
+      "category": "episode-fact",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "episode-already-exists"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "episode-already-exists"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "episode-fact-002-reject-open-existing",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "episode-already-exists",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:e58c4046c0daf4c90a7519f32597afc218d47a80896f6ecba01d2d7f44daa716"
+    },
+    {
+      "id": "episode-fact-003-append-next-claim",
+      "partition": "core",
+      "category": "episode-fact",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "episode-appended"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "episode-appended"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "episode-fact-003-append-next-claim",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "episode-appended",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:2d02ec66accf079d46862581b209517f301e35b11023005000f2f28f139ac701"
+    },
+    {
+      "id": "episode-fact-004-reject-append-gap",
+      "partition": "core",
+      "category": "episode-fact",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "episode-index-gap"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "episode-index-gap"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "episode-fact-004-reject-append-gap",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "episode-index-gap",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:3f3be0dfaa79305c4c5b5cb025f322c83377275812e306afffb4311b3b210056"
+    },
+    {
+      "id": "episode-fact-005-reject-unrooted-append",
+      "partition": "core",
+      "category": "episode-fact",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "episode-claim-root-missing"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "episode-claim-root-missing"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "episode-fact-005-reject-unrooted-append",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "episode-claim-root-missing",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:3d5754274f91d15586014f0bfb33307be1fda2da611e99928630bb4b32258ed2"
+    },
+    {
+      "id": "episode-fact-006-commit-open-episode",
+      "partition": "core",
+      "category": "episode-fact",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "episode-committed"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "episode-committed"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "episode-fact-006-commit-open-episode",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "episode-committed",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:fbc97ff38cebd8cb3d9c61b113e7ae2498917def9368495e78e4913b95a81333"
+    },
+    {
+      "id": "episode-fact-007-reject-commit-without-root",
+      "partition": "core",
+      "category": "episode-fact",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "episode-content-root-missing"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "episode-content-root-missing"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "episode-fact-007-reject-commit-without-root",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "episode-content-root-missing",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:102b8f5464a3851cd750b4be781ac217647e3082510dfdca992967eda62f325d"
+    },
+    {
+      "id": "episode-fact-008-interrupt-open-episode",
+      "partition": "core",
+      "category": "episode-fact",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "episode-interrupted"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "episode-interrupted"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "episode-fact-008-interrupt-open-episode",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "episode-interrupted",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:c360f5832ac5ec34777eedd91a4e3722c6739f273fbfb39e4a0760b9996f991c"
+    },
+    {
+      "id": "episode-fact-009-seal-committed-episode",
+      "partition": "core",
+      "category": "episode-fact",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "episode-sealed"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "episode-sealed"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "episode-fact-009-seal-committed-episode",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "episode-sealed",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:461b1440af472fd7b795bd5b4f77a8f4790f2f50ffd260370bf704b36af0ba55"
+    },
+    {
+      "id": "episode-fact-010-reject-seal-open-episode",
+      "partition": "core",
+      "category": "episode-fact",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "episode-not-committed"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "episode-not-committed"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "episode-fact-010-reject-seal-open-episode",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "episode-not-committed",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:d3d468273db66eea9ad7317719b649c94f3a2b3ec408aa1000b22230e998496f"
+    },
+    {
+      "id": "episode-fact-011-replay-sealed-episode",
+      "partition": "core",
+      "category": "episode-fact",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "episode-replayed"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "episode-replayed"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "episode-fact-011-replay-sealed-episode",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "episode-replayed",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:47f76a2f13a6cab6eec8c63abd173556055bb3b019beb48e4f70420597560892"
+    },
+    {
+      "id": "episode-fact-012-reject-replay-root-drift",
+      "partition": "core",
+      "category": "episode-fact",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "episode-root-mismatch"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "episode-root-mismatch"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "episode-fact-012-reject-replay-root-drift",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "episode-root-mismatch",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:79ee9b5304e871c27e3cfc970fdbabc7b37fb53f5833f7bb04996cfb433ffe7e"
+    },
+    {
+      "id": "episode-fact-013-propose-new-fact",
+      "partition": "core",
+      "category": "episode-fact",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "fact-proposed"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "fact-proposed"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "episode-fact-013-propose-new-fact",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "fact-proposed",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:e8f2ceaefc42bed78f22ab57e6ce4d6a8100801d950ddad3c7063c4f5398b19c"
+    },
+    {
+      "id": "episode-fact-014-admit-by-receiver",
+      "partition": "core",
+      "category": "episode-fact",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "fact-admitted"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "fact-admitted"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "episode-fact-014-admit-by-receiver",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "fact-admitted",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:255070e61ce5f00ac3269fece21088ddf0b83275af64f2d5cca8cbdfb2cba030"
+    },
+    {
+      "id": "episode-fact-015-reject-self-admission",
+      "partition": "core",
+      "category": "episode-fact",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "fact-admitter-unauthorized"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "fact-admitter-unauthorized"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "episode-fact-015-reject-self-admission",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "fact-admitter-unauthorized",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:4473a9df31567a64c72a292253f68105fab3fab6763d35729d5c41e21e209143"
+    },
+    {
+      "id": "episode-fact-016-reject-with-explicit-reason",
+      "partition": "core",
+      "category": "episode-fact",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "fact-rejected"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "fact-rejected"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "episode-fact-016-reject-with-explicit-reason",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "fact-rejected",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:4543c370024de9193776dc476b81e802f8edf57bb8af1071bc8172844dd8de43"
+    },
+    {
+      "id": "episode-fact-017-retain-conflict-roots",
+      "partition": "core",
+      "category": "episode-fact",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "fact-conflicted"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "fact-conflicted"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "episode-fact-017-retain-conflict-roots",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "fact-conflicted",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:13b7c8bb18eeacb663e6dd8ce8f93850113bd41c859c9e507a8fd58638e58a5e"
+    },
+    {
+      "id": "episode-fact-018-reject-hidden-conflict",
+      "partition": "core",
+      "category": "episode-fact",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "fact-conflict-roots-incomplete"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "fact-conflict-roots-incomplete"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "episode-fact-018-reject-hidden-conflict",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "fact-conflict-roots-incomplete",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:5949c2a95117eab0c9f9d8efb0777040587d1997320ba5dcd29baf740235ba41"
+    },
+    {
+      "id": "episode-fact-019-supersede-admitted-fact",
+      "partition": "core",
+      "category": "episode-fact",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "fact-superseded"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "fact-superseded"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "episode-fact-019-supersede-admitted-fact",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "fact-superseded",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:39801ec1f3e48c96640e0c5761a487afc6ffad0b58afbd04d12f6ca9446d2553"
+    },
+    {
+      "id": "episode-fact-020-reject-supersede-proposed",
+      "partition": "core",
+      "category": "episode-fact",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "fact-not-admitted"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "fact-not-admitted"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "episode-fact-020-reject-supersede-proposed",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "fact-not-admitted",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:07e313466ba05c30ff95561ae4ac877e4ccda15ab7cd383a3dedfa06371ea19f"
+    },
+    {
+      "id": "recovery-001-crash-after-durable-ack",
+      "partition": "experimental",
+      "category": "recovery",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "runtime-crash-bounded"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "runtime-crash-bounded"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "recovery-001-crash-after-durable-ack",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "runtime-crash-bounded",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:a17b1871fe06010a6695bcdb05f2a53086f7bd6e4ea5f0bb922e78bd0bbb4b20"
+    },
+    {
+      "id": "recovery-002-reject-ack-before-durability",
+      "partition": "experimental",
+      "category": "recovery",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "runtime-ack-ahead-of-durability"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "runtime-ack-ahead-of-durability"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "recovery-002-reject-ack-before-durability",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "runtime-ack-ahead-of-durability",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:ca63594ac2e1665a903f3fcc0ad6e5ef5524049419589e4e49bf145c12ceb442"
+    },
+    {
+      "id": "recovery-003-reopen-matching-provider-root",
+      "partition": "experimental",
+      "category": "recovery",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "runtime-reopened"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "runtime-reopened"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "recovery-003-reopen-matching-provider-root",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "runtime-reopened",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:9fa7c682ba5ca6645c295898f7dd22c71b2c8530286e6de675a349e922cb9b8c"
+    },
+    {
+      "id": "recovery-004-reject-reopen-provider-drift",
+      "partition": "experimental",
+      "category": "recovery",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "runtime-provider-root-mismatch"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "runtime-provider-root-mismatch"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "recovery-004-reject-reopen-provider-drift",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "runtime-provider-root-mismatch",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:c05169babda6653a75db4a5407187b0ac11cf8cd7e2e956d9052ba66d1860bf2"
+    },
+    {
+      "id": "recovery-005-fsck-matching-root",
+      "partition": "experimental",
+      "category": "recovery",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "runtime-fsck-clean"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "runtime-fsck-clean"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "recovery-005-fsck-matching-root",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "runtime-fsck-clean",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:539d331433d36f84b39624f70dfb5e383102eb447d77ce078d3bb98121e2bc57"
+    },
+    {
+      "id": "recovery-006-reject-fsck-root-drift",
+      "partition": "experimental",
+      "category": "recovery",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "runtime-root-mismatch"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "runtime-root-mismatch"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "recovery-006-reject-fsck-root-drift",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "runtime-root-mismatch",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:56301d41d91d80bf37191014f2feb4846a25797523a031c4b9b8a9f7dce6366e"
+    },
+    {
+      "id": "recovery-007-export-rooted-bundle",
+      "partition": "experimental",
+      "category": "recovery",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "runtime-exported"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "runtime-exported"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "recovery-007-export-rooted-bundle",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "runtime-exported",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:86c0a53693759952551645d3a774d84a5291541f3a7251788e198918aed24c6d"
+    },
+    {
+      "id": "recovery-008-reject-unrooted-export",
+      "partition": "experimental",
+      "category": "recovery",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "runtime-export-root-missing"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "runtime-export-root-missing"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "recovery-008-reject-unrooted-export",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "runtime-export-root-missing",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:f65e5424b14268cf1411a19822d42e5bc182acc2db2276c947338fc7909357b6"
+    },
+    {
+      "id": "recovery-009-import-matching-bundle",
+      "partition": "experimental",
+      "category": "recovery",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "runtime-imported"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "runtime-imported"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "recovery-009-import-matching-bundle",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "runtime-imported",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:e125dc3e45c6a91b232f95bd0210827b866651b60f8e79ee88d043eb546e6429"
+    },
+    {
+      "id": "recovery-010-reject-import-root-drift",
+      "partition": "experimental",
+      "category": "recovery",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "runtime-import-root-mismatch"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "runtime-import-root-mismatch"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "recovery-010-reject-import-root-drift",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "runtime-import-root-mismatch",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:e960982c5c206150e31582e3577bb2b1457cfe73abfc1171673e17eb927c823e"
+    },
+    {
+      "id": "recovery-011-replay-contiguous-range",
+      "partition": "experimental",
+      "category": "recovery",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "runtime-replayed"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "runtime-replayed"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "recovery-011-replay-contiguous-range",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "runtime-replayed",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:0ee0df6a3972656d1386df781d4e49a11d0e0f0a74792fec90ef8a3ab5c6c277"
+    },
+    {
+      "id": "recovery-012-reject-replay-gap",
+      "partition": "experimental",
+      "category": "recovery",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "runtime-replay-gap"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "runtime-replay-gap"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "recovery-012-reject-replay-gap",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "runtime-replay-gap",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:4976ad87775e1b6e561e4df48d6b24043a17de26eaacdcd99b7fb1c450d0791c"
+    },
+    {
+      "id": "recovery-013-retry-same-idempotency-root",
+      "partition": "experimental",
+      "category": "recovery",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "runtime-retry-idempotent"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "runtime-retry-idempotent"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "recovery-013-retry-same-idempotency-root",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "runtime-retry-idempotent",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:e1680c4eedf987f567ea18fb09a1ddf1194d06e006d2dfda23cf7cf2bf653eab"
+    },
+    {
+      "id": "recovery-014-reject-idempotency-root-reuse",
+      "partition": "experimental",
+      "category": "recovery",
+      "status": "pass",
+      "expected": {
+        "status": "rejected",
+        "code": "runtime-idempotency-reuse"
+      },
+      "actual": {
+        "status": "rejected",
+        "code": "runtime-idempotency-reuse"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "recovery-014-reject-idempotency-root-reuse",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "rejected",
+        "code": "runtime-idempotency-reuse",
+        "observations": {
+          "failClosed": true
+        }
+      },
+      "responseRoot": "sha256:802532961ab8d4fdfd39e86c8d4d33ec16021e203e437bd7dde6f19e26282719"
+    },
+    {
+      "id": "recovery-015-retain-reconnect-conflict",
+      "partition": "experimental",
+      "category": "recovery",
+      "status": "pass",
+      "expected": {
+        "status": "accepted",
+        "code": "runtime-conflict-retained"
+      },
+      "actual": {
+        "status": "accepted",
+        "code": "runtime-conflict-retained"
+      },
+      "response": {
+        "schemaVersion": 1,
+        "contract": "kfd.agent-runtime-adapter-response/v1",
+        "requestId": "recovery-015-retain-reconnect-conflict",
+        "adapter": {
+          "id": "kfd-reference-state-machine",
+          "version": "0.1.0",
+          "topology": "single-process-state-machine"
+        },
+        "status": "accepted",
+        "code": "runtime-conflict-retained",
+        "observations": {
+          "semanticBoundary": "preserved"
+        }
+      },
+      "responseRoot": "sha256:9a8bf1545e8b8816cdddb691e16bb19714f4c7da27caa037383dad2f30d1b2a8"
+    }
+  ],
+  "residualRisk": [
+    "Fixed vectors are finite and do not prove mathematical completeness.",
+    "A passing report is evidence for the named adapter artifact only.",
+    "Experimental results do not create a normative KFD claim.",
+    "Offline verification detects report drift but does not attest process execution."
+  ]
+}

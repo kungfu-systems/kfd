@@ -31,6 +31,7 @@ kfd verify passport <file-or-directory> [--json]
 kfd verify pack <file-or-directory> [--json]
 kfd verify atlas <file-or-directory> [--json]
 kfd verify episode <directory> [--json]
+kfd verify agent-runtime-report <report.json> [--json]
 kfd bundle <kind> <file-or-directory> --output <bundle.json>
 kfd verify bundle <bundle.json> [--json]
 ```
@@ -164,6 +165,27 @@ The v1 profile verifies the public qualified-shadow representation:
   duplicate indexes, and segment schema;
 - the explicit authority boundary: the semantic root is preserved but not
   recomputed by this profile.
+
+### KFD Agent runtime report
+
+The `kfd.agent-runtime-report/v1` profile verifies the packaged
+`kfd-agent-runtime@0.1.0-alpha.1` manifest and fixed KFD Runtime 100 registry:
+
+- exact profile manifest, Agent Hub dependency, suite version and vector roots;
+- one result for each of the 100 fixed IDs, with no duplicate, missing, unknown
+  or reclassified result;
+- fixed expected status/code, adapter actual status/code, retained response,
+  response root and adapter identity agreement;
+- handshake, transcript and aggregate result roots;
+- independent 35 Core / 65 Experimental partition summaries;
+- adapter artifact/source coordinates, offline execution and fixed
+  non-qualifying/non-self-certified scope.
+
+Unknown roots, expectation drift, result mutation, partition widening,
+incomplete results, placeholder source commits, or stronger claim flags fail
+closed. Verification does not attest that the recorded process execution
+occurred; it proves the retained report is closed under the packaged profile
+and roots.
 
 ## Independence and extraction
 

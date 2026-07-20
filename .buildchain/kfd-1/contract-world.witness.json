@@ -10,17 +10,181 @@
     "kind": "standard-metadata",
     "name": "KFD standards metadata and release propagation surfaces",
     "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-1/contract-world.schema.json",
-    "digest": "sha256:15cd39a5e00efca67617c592af9eefcd06790b691fffd591bac502dd073f5462"
+    "digest": "sha256:dd711b8445d0db00fd69c9f3db5f38806cee1953e101c22d563d3f8bbc62c04b"
   },
   "canonicalPolicy": {
     "path": "standards.json",
-    "sha256": "15cd39a5e00efca67617c592af9eefcd06790b691fffd591bac502dd073f5462"
+    "sha256": "dd711b8445d0db00fd69c9f3db5f38806cee1953e101c22d563d3f8bbc62c04b"
   },
   "registry": {
     "path": "registry.json",
     "sha256": "7cb1b4459c6fdf1fa981cb8298312565a5f9ef8931391a532174036544b2ec05"
   },
   "surfaces": [
+    {
+      "name": "kfd-agent-runtime-profile-authority",
+      "sourcePath": "profiles/agent-runtime/README.md",
+      "sourceSha256": "01f64ff0cd3c19a7d5526c7fc47222b78df367dd06afb8bc0aa5e61264af39bc",
+      "artifactPath": "profiles/agent-runtime/README.md",
+      "expectedSha256": "01f64ff0cd3c19a7d5526c7fc47222b78df367dd06afb8bc0aa5e61264af39bc",
+      "byteForByte": true,
+      "class": "cross-time",
+      "classes": [
+        "cross-time"
+      ],
+      "description": "Published authority for the experimental implementation-independent KFD Agent runtime conformance profile.",
+      "weldRationale": "Implementers bind Core and Experimental authority, fixed-suite meaning, adapter responsibility, report claims, non-claims, and evolution to one public profile path.",
+      "impactProjection": {
+        "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+        "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+        "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+        "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+      }
+    },
+    {
+      "name": "kfd-agent-runtime-profile-manifest",
+      "sourcePath": "profiles/agent-runtime/manifest.json",
+      "sourceSha256": "bf732978edafd4ec5d3b82c60a074ee8de5a49c17dc505baf90651e085e5c653",
+      "artifactPath": "profiles/agent-runtime/manifest.json",
+      "expectedSha256": "bf732978edafd4ec5d3b82c60a074ee8de5a49c17dc505baf90651e085e5c653",
+      "byteForByte": true,
+      "class": "integration-time",
+      "classes": [
+        "integration-time",
+        "cross-time"
+      ],
+      "description": "Digest-bound manifest for the exact Agent runtime profile, suite, partitions, Agent Hub dependency, contracts, and rooted surfaces.",
+      "weldRationale": "Runners, reports, and verifiers select one immutable profile contract instead of mutable documentation aliases.",
+      "impactProjection": {
+        "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+        "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+        "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+        "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+      }
+    },
+    {
+      "name": "kfd-runtime-100-vector-registry",
+      "sourcePath": "profiles/agent-runtime/vectors/runtime-100.json",
+      "sourceSha256": "1e996b8c43b0b3e38630ccd58acf8a714cbc24b339d3794318347faab9057e5f",
+      "artifactPath": "profiles/agent-runtime/vectors/runtime-100.json",
+      "expectedSha256": "1e996b8c43b0b3e38630ccd58acf8a714cbc24b339d3794318347faab9057e5f",
+      "byteForByte": true,
+      "class": "cross-time",
+      "classes": [
+        "integration-time",
+        "cross-time"
+      ],
+      "description": "Fixed rooted registry of 100 positive and negative Agent runtime conformance vectors.",
+      "weldRationale": "Adapters and retained reports bind the exact test IDs, requests, expected outcomes, claims, categories, and Core or Experimental partitions.",
+      "impactProjection": {
+        "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+        "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+        "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+        "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+      }
+    },
+    {
+      "name": "kfd-agent-runtime-adapter-request-schema",
+      "sourcePath": "schemas/kfd-agent-runtime/adapter-request.schema.json",
+      "sourceSha256": "d7b1b2c19a83a9bca86bd1c67b1b8abdee7df878856bff8f4e14f125df78bec9",
+      "artifactPath": "schemas/kfd-agent-runtime/adapter-request.schema.json",
+      "expectedSha256": "d7b1b2c19a83a9bca86bd1c67b1b8abdee7df878856bff8f4e14f125df78bec9",
+      "byteForByte": true,
+      "class": "integration-time",
+      "classes": [
+        "integration-time"
+      ],
+      "description": "Published JSON schema for topology-neutral Agent runtime JSONL requests.",
+      "weldRationale": "Product-owned adapters receive one fail-closed black-box request boundary without making language, process topology, storage, or vendor layout normative.",
+      "impactProjection": {
+        "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+        "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+        "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+        "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+      }
+    },
+    {
+      "name": "kfd-agent-runtime-adapter-response-schema",
+      "sourcePath": "schemas/kfd-agent-runtime/adapter-response.schema.json",
+      "sourceSha256": "72b6ecf9492c694734c07afe70d9d3598be2279ac45e00034fecd242ad7a1ea3",
+      "artifactPath": "schemas/kfd-agent-runtime/adapter-response.schema.json",
+      "expectedSha256": "72b6ecf9492c694734c07afe70d9d3598be2279ac45e00034fecd242ad7a1ea3",
+      "byteForByte": true,
+      "class": "integration-time",
+      "classes": [
+        "integration-time"
+      ],
+      "description": "Published JSON schema for topology-neutral Agent runtime JSONL responses.",
+      "weldRationale": "Runners compare stable adapter identity, status, code, and observations without adopting vendor-internal error or storage vocabulary.",
+      "impactProjection": {
+        "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+        "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+        "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+        "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+      }
+    },
+    {
+      "name": "kfd-agent-runtime-report-schema",
+      "sourcePath": "schemas/kfd-agent-runtime/report.schema.json",
+      "sourceSha256": "66294c496c8ed49a21c7057152dc9b60a95d4d3d3758e1dc1f4346c29b76775c",
+      "artifactPath": "schemas/kfd-agent-runtime/report.schema.json",
+      "expectedSha256": "66294c496c8ed49a21c7057152dc9b60a95d4d3d3758e1dc1f4346c29b76775c",
+      "byteForByte": true,
+      "class": "integration-time",
+      "classes": [
+        "integration-time",
+        "cross-time"
+      ],
+      "description": "Published JSON schema for rooted Agent runtime suite execution reports.",
+      "weldRationale": "Humans, agents, CI, and release systems receive exact profile, suite, artifact, platform, transcript, partition, result, and residual-risk bindings.",
+      "impactProjection": {
+        "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+        "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+        "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+        "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+      }
+    },
+    {
+      "name": "kfd-agent-runtime-runner",
+      "sourcePath": "scripts/agent-runtime-runner.mjs",
+      "sourceSha256": "bb16f967d638afd055f358f4ea5c91c93f20a4ae9cb75de9b26331932a4a7abf",
+      "artifactPath": "scripts/agent-runtime-runner.mjs",
+      "expectedSha256": "bb16f967d638afd055f358f4ea5c91c93f20a4ae9cb75de9b26331932a4a7abf",
+      "byteForByte": true,
+      "class": "integration-time",
+      "classes": [
+        "integration-time"
+      ],
+      "description": "Packaged offline runner for the kfd test agent-runtime black-box command.",
+      "weldRationale": "Every adapter receives the same exact handshake and 100 vector requests, while output creation, timeout, artifact hashing, transcript rooting, and failure behavior remain auditable.",
+      "impactProjection": {
+        "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+        "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+        "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+        "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+      }
+    },
+    {
+      "name": "kfd-agent-runtime-report-verifier",
+      "sourcePath": "verifier/crates/core/src/profiles/agent_runtime_report.rs",
+      "sourceSha256": "dcd161d66d2d52846ada30bc6becfea91c0a944c5b6d0217b11182f994ddbd2f",
+      "artifactPath": "verifier/crates/core/src/profiles/agent_runtime_report.rs",
+      "expectedSha256": "dcd161d66d2d52846ada30bc6becfea91c0a944c5b6d0217b11182f994ddbd2f",
+      "byteForByte": true,
+      "class": "integration-time",
+      "classes": [
+        "integration-time",
+        "cross-time"
+      ],
+      "description": "Independent Rust verifier profile for Agent runtime reports and fixed suite roots.",
+      "weldRationale": "Native and WebAssembly consumers fail closed on profile, vector, result, transcript, adapter, partition, and claim-scope drift without invoking product code or the network.",
+      "impactProjection": {
+        "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+        "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+        "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+        "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+      }
+    },
     {
       "name": "kfd-agent-hub-profile-authority",
       "sourcePath": "protocols/agent-hub/README.md",
@@ -127,9 +291,9 @@
     {
       "name": "kfd-verifier-specification",
       "sourcePath": "docs/verifier.md",
-      "sourceSha256": "3a7f4931ecb66fdf423b8012fe4f294fe34d44a48e9627c21a51f2921d1a4eca",
+      "sourceSha256": "b18863246f76115a7693a039309fa1ca1add7bf5959fc62c24faa47adebead52",
       "artifactPath": "docs/verifier.md",
-      "expectedSha256": "3a7f4931ecb66fdf423b8012fe4f294fe34d44a48e9627c21a51f2921d1a4eca",
+      "expectedSha256": "b18863246f76115a7693a039309fa1ca1add7bf5959fc62c24faa47adebead52",
       "byteForByte": true,
       "class": "cross-time",
       "classes": [
@@ -147,9 +311,9 @@
     {
       "name": "kfd-verification-bundle-schema",
       "sourcePath": "schemas/kfd-verification-bundle.schema.json",
-      "sourceSha256": "9065456656acae4b49e63cea3ab9399aacba49afaac00783b0f28201aebf969f",
+      "sourceSha256": "da21468ed5340c648c161cb0fffcee69cf8ddffd5db99ca354a1c0ad81508ece",
       "artifactPath": "schemas/kfd-verification-bundle.schema.json",
-      "expectedSha256": "9065456656acae4b49e63cea3ab9399aacba49afaac00783b0f28201aebf969f",
+      "expectedSha256": "da21468ed5340c648c161cb0fffcee69cf8ddffd5db99ca354a1c0ad81508ece",
       "byteForByte": true,
       "class": "integration-time",
       "classes": [
@@ -187,9 +351,9 @@
     {
       "name": "kfd-verifier-rust-core",
       "sourcePath": "verifier/crates/core/src/lib.rs",
-      "sourceSha256": "f195ebec02979930295bd087ac5f10c30a92240d95ecd43a36ff902fc476b14c",
+      "sourceSha256": "f32f2683b68645ba8c7e83093411224775f6bf811ae05345f4a0f726e7c3d569",
       "artifactPath": "verifier/crates/core/src/lib.rs",
-      "expectedSha256": "f195ebec02979930295bd087ac5f10c30a92240d95ecd43a36ff902fc476b14c",
+      "expectedSha256": "f32f2683b68645ba8c7e83093411224775f6bf811ae05345f4a0f726e7c3d569",
       "byteForByte": true,
       "class": "integration-time",
       "classes": [
@@ -207,9 +371,9 @@
     {
       "name": "kfd-verifier-npm-bin",
       "sourcePath": "bin/kfd.mjs",
-      "sourceSha256": "2007f22b167c8a79dc0b0e69bf831c27d4545dce3dc9de6df6300c8d218297c9",
+      "sourceSha256": "2f94f55438e2f7ad7f2edbd6607d4654e5112f5a5d9f6e78e71f2611a0610108",
       "artifactPath": "bin/kfd.mjs",
-      "expectedSha256": "2007f22b167c8a79dc0b0e69bf831c27d4545dce3dc9de6df6300c8d218297c9",
+      "expectedSha256": "2f94f55438e2f7ad7f2edbd6607d4654e5112f5a5d9f6e78e71f2611a0610108",
       "byteForByte": true,
       "class": "integration-time",
       "classes": [
@@ -227,9 +391,9 @@
     {
       "name": "kfd-verifier-wasm",
       "sourcePath": "verifier/dist/kfd_verifier.wasm",
-      "sourceSha256": "6cc57465544ce9b6efb54f1de1af83349a70d975729b60b83c1b34f960be3324",
+      "sourceSha256": "7a884ebbb5553ca6e12c7c6dd31fb6f26bc440bfa3859e5d3dceff244f39063c",
       "artifactPath": "verifier/dist/kfd_verifier.wasm",
-      "expectedSha256": "6cc57465544ce9b6efb54f1de1af83349a70d975729b60b83c1b34f960be3324",
+      "expectedSha256": "7a884ebbb5553ca6e12c7c6dd31fb6f26bc440bfa3859e5d3dceff244f39063c",
       "byteForByte": true,
       "class": "cross-time",
       "classes": [
@@ -247,9 +411,9 @@
     {
       "name": "readme",
       "sourcePath": "README.md",
-      "sourceSha256": "2b84676faf5261aed6ffec6285fc293b0907c616ae3a3f523c97d8e5bce860cb",
+      "sourceSha256": "21e1c309860a49e32986652f8a301e4be616500671bd66183c3107dad381684e",
       "artifactPath": "README.md",
-      "expectedSha256": "2b84676faf5261aed6ffec6285fc293b0907c616ae3a3f523c97d8e5bce860cb",
+      "expectedSha256": "21e1c309860a49e32986652f8a301e4be616500671bd66183c3107dad381684e",
       "byteForByte": true,
       "class": "cross-time",
       "classes": [
@@ -687,9 +851,9 @@
     {
       "name": "kfd-standards",
       "sourcePath": "standards.json",
-      "sourceSha256": "15cd39a5e00efca67617c592af9eefcd06790b691fffd591bac502dd073f5462",
+      "sourceSha256": "dd711b8445d0db00fd69c9f3db5f38806cee1953e101c22d563d3f8bbc62c04b",
       "artifactPath": "standards.json",
-      "expectedSha256": "15cd39a5e00efca67617c592af9eefcd06790b691fffd591bac502dd073f5462",
+      "expectedSha256": "dd711b8445d0db00fd69c9f3db5f38806cee1953e101c22d563d3f8bbc62c04b",
       "byteForByte": true,
       "class": "integration-time",
       "classes": [
@@ -967,9 +1131,9 @@
     {
       "name": "kfd-doc-map",
       "sourcePath": "docs/MAP.md",
-      "sourceSha256": "3ec10311dfe092dc5857d64bf3e7a71ae67be3bb6e8120d9ea630e397017854f",
+      "sourceSha256": "0cc547b60a69fafb840bd00ba053411a93149d6f1789fd70736e0720ebdcf517",
       "artifactPath": "docs/MAP.md",
-      "expectedSha256": "3ec10311dfe092dc5857d64bf3e7a71ae67be3bb6e8120d9ea630e397017854f",
+      "expectedSha256": "0cc547b60a69fafb840bd00ba053411a93149d6f1789fd70736e0720ebdcf517",
       "byteForByte": true,
       "class": "cross-time",
       "classes": [
@@ -987,9 +1151,9 @@
     {
       "name": "release-impact-ledger",
       "sourcePath": "release-impact.json",
-      "sourceSha256": "07619e26eb2125938c05d5414f7a879f41bf93231bac0edcca1d6edb96c47b8b",
+      "sourceSha256": "336d5610021cd096a286919a3c51d53bbf23e0bfd618e338e1cd6820ae665f61",
       "artifactPath": "release-impact.json",
-      "expectedSha256": "07619e26eb2125938c05d5414f7a879f41bf93231bac0edcca1d6edb96c47b8b",
+      "expectedSha256": "336d5610021cd096a286919a3c51d53bbf23e0bfd618e338e1cd6820ae665f61",
       "byteForByte": true,
       "class": "cross-time",
       "classes": [
@@ -1128,9 +1292,9 @@
     {
       "name": "kfd-package-manifest",
       "sourcePath": "package.json",
-      "sourceSha256": "4f0cff1e9d333731da5fe9537bbbb57abfdcb3f9a6c1cdb56f207e47f2ac8efa",
+      "sourceSha256": "0752f9f3759063fc49dcaf774f1e374128820279b8c70656de2316c573b3e899",
       "artifactPath": "package.json",
-      "expectedSha256": "4f0cff1e9d333731da5fe9537bbbb57abfdcb3f9a6c1cdb56f207e47f2ac8efa",
+      "expectedSha256": "0752f9f3759063fc49dcaf774f1e374128820279b8c70656de2316c573b3e899",
       "byteForByte": true,
       "class": "integration-time",
       "classes": [
@@ -1169,9 +1333,9 @@
     {
       "name": "kfd-2-public-release-trust-claim",
       "sourcePath": ".buildchain/kfd-2/public-release-trust.claim.json",
-      "sourceSha256": "0a789325425e0abd3b68590a02f83f81cb829095c607ac45a998b153780143da",
+      "sourceSha256": "423989ecfaf1f4653d834e60f6d991f42f44faec925e481dcb423f8cc345f63e",
       "artifactPath": ".buildchain/kfd-2/public-release-trust.claim.json",
-      "expectedSha256": "0a789325425e0abd3b68590a02f83f81cb829095c607ac45a998b153780143da",
+      "expectedSha256": "423989ecfaf1f4653d834e60f6d991f42f44faec925e481dcb423f8cc345f63e",
       "byteForByte": true,
       "class": "integration-time",
       "classes": [
@@ -1229,9 +1393,9 @@
     {
       "name": "kfd-2-foundation-trust-claims",
       "sourcePath": ".buildchain/kfd-2/kfd-foundation.trust-claims.json",
-      "sourceSha256": "36bcf4d2d231166b456e5193d5f950d80ffae64524d709a6a491ca7abf9568b0",
+      "sourceSha256": "92149b84ca76b848c32fd06a3b7e98b0b17ff6c8f8e051c5f7a6dc56a2c37d2a",
       "artifactPath": ".buildchain/kfd-2/kfd-foundation.trust-claims.json",
-      "expectedSha256": "36bcf4d2d231166b456e5193d5f950d80ffae64524d709a6a491ca7abf9568b0",
+      "expectedSha256": "92149b84ca76b848c32fd06a3b7e98b0b17ff6c8f8e051c5f7a6dc56a2c37d2a",
       "byteForByte": true,
       "class": "integration-time",
       "classes": [
@@ -1249,9 +1413,9 @@
     {
       "name": "kfd-2-foundation-trust-assessment",
       "sourcePath": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json",
-      "sourceSha256": "79fc8d22e28220c97460ffc058e6503fdeaf3a989624206a269b0590b3293522",
+      "sourceSha256": "ccb07d06c9c45ebab67d4e629bef96fbc7700967dd2225acee299deb948857bf",
       "artifactPath": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json",
-      "expectedSha256": "79fc8d22e28220c97460ffc058e6503fdeaf3a989624206a269b0590b3293522",
+      "expectedSha256": "ccb07d06c9c45ebab67d4e629bef96fbc7700967dd2225acee299deb948857bf",
       "byteForByte": true,
       "class": "integration-time",
       "classes": [
