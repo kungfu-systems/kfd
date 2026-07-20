@@ -1,0 +1,126 @@
+{
+  "$schema": "https://kfd.libkungfu.dev/schemas/kfd-agent-hub/exchange.schema.json",
+  "schemaVersion": 1,
+  "contract": "kfd-agent-hub-exchange",
+  "profile": {
+    "id": "kfd-agent-hub",
+    "version": "0.1.0-alpha.1",
+    "manifestDigest": "sha256:649ec7531d4c879846b8207a94e21844d573f0c07a422b9fa3f921bfa65d05a3",
+    "repositoryCommit": "3bd810255410ff9eb13d925a2d2f4e4e99481cc0",
+    "sourceCapabilityRoot": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+    "targetCapabilityRoot": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+    "negotiatedFeatures": [
+      "explicit-receiver-verdict",
+      "visible-conflict",
+      "warrant-attenuation"
+    ]
+  },
+  "exchange": {
+    "id": "exchange-example-1",
+    "operation": "fact-admission",
+    "idempotencyKey": "example.vendor/hub-a/exchange-example-1",
+    "createdAt": "2026-07-20T00:00:00Z",
+    "predecessorExchangeRoots": [
+      "sha256:5555555555555555555555555555555555555555555555555555555555555555"
+    ]
+  },
+  "source": {
+    "hubId": "example.vendor/hub-a",
+    "nodeId": "example.vendor/node-a",
+    "actorId": "example.vendor/service-agent",
+    "workspaceId": "example.vendor/workspace-1",
+    "organizationId": "example.vendor",
+    "authorityRoots": [
+      "sha256:6666666666666666666666666666666666666666666666666666666666666666"
+    ]
+  },
+  "target": {
+    "hubId": "example.other/hub-b",
+    "nodeId": "example.other/node-b",
+    "actorId": "example.other/admission-service",
+    "workspaceId": "example.other/workspace-9",
+    "organizationId": "example.other",
+    "authorityRoots": [
+      "sha256:7777777777777777777777777777777777777777777777777777777777777777"
+    ]
+  },
+  "subjects": {
+    "pursuitRoot": "sha256:8888888888888888888888888888888888888888888888888888888888888888",
+    "atlasRoot": "sha256:9999999999999999999999999999999999999999999999999999999999999999",
+    "warrantRoot": "sha256:abababababababababababababababababababababababababababababababab",
+    "actionBindingRoot": "sha256:acacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacac",
+    "episodeRoots": [
+      "sha256:adadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadad"
+    ],
+    "factRoots": [
+      "sha256:aeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeae"
+    ],
+    "completionClaimRoots": []
+  },
+  "causal": {
+    "baseFactCutRoots": [
+      "sha256:afafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafaf"
+    ],
+    "resultFactCutRoots": [
+      "sha256:b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0"
+    ],
+    "episodeRoots": [
+      "sha256:adadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadad"
+    ],
+    "predecessorRoots": [
+      "sha256:5555555555555555555555555555555555555555555555555555555555555555"
+    ],
+    "knowledgeState": "verified",
+    "conflictRoots": []
+  },
+  "warrant": {
+    "root": "sha256:abababababababababababababababababababababababababababababababab",
+    "issuer": "example.vendor/authority",
+    "holder": "example.vendor/service-agent",
+    "subjectRoot": "sha256:8888888888888888888888888888888888888888888888888888888888888888",
+    "scopeDigest": "sha256:b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+    "allowedActions": ["submit-fact-candidate"],
+    "forbiddenActions": ["declare-remote-completion"],
+    "validFrom": "2026-07-19T00:00:00Z",
+    "expiresAt": "2026-07-21T00:00:00Z",
+    "status": "valid",
+    "revocationRoots": [],
+    "delegationDepth": 0
+  },
+  "disclosure": {
+    "mode": "partial",
+    "omittedPaths": ["/payload/inline/privateNotes"],
+    "commitmentRoots": [
+      "sha256:b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2"
+    ],
+    "retentionHints": ["retain verdict and roots for 30 days"],
+    "residualRisk": ["private notes were not available to the receiver"]
+  },
+  "payload": {
+    "mediaType": "application/json",
+    "digest": "sha256:b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3",
+    "bytes": 128,
+    "inline": {
+      "claim": "candidate successor fact cut"
+    }
+  },
+  "transport": {
+    "bindingId": "local-file-bundle",
+    "state": "delivered",
+    "receiptDigest": "sha256:b4b4b4b4b4b4b4b4b4b4b4b4b4b4b4b4b4b4b4b4b4b4b4b4b4b4b4b4b4b4b4b4",
+    "deliveredAt": "2026-07-20T00:00:01Z"
+  },
+  "receiverVerdict": {
+    "status": "admitted",
+    "decidedAt": "2026-07-20T00:00:02Z",
+    "decisionAuthorityRoots": [
+      "sha256:b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5"
+    ],
+    "acceptedRoots": [
+      "sha256:b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0"
+    ],
+    "reasonCodes": ["admission-accepted"],
+    "residualRisk": ["admission covers only the disclosed cut"],
+    "conflictRoots": []
+  }
+}

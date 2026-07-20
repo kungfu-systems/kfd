@@ -36,11 +36,15 @@ const cases = [
   ],
   [
     "kfd-record",
+    "terminology.json",
+  ],
+  [
+    "kfd-record",
     ".buildchain/kfd-3/collaboration-interface.artifact.json",
   ],
   [
     "kfd-record",
-    "verifier/fixtures/kfd-7/valid-action-contract.json",
+    "verifier/fixtures/kfd-7/valid-domain-profile.json",
   ],
   [
     "passport",
@@ -85,10 +89,10 @@ for (const fixture of rejectedKfd7Records) {
   assert.equal(report.selfCertified, false, `${fixture} rejection must not self-certify`);
   const issueKeys = new Set(report.issues.map((issue) => `${issue.code}:${issue.path}`));
   if (fixture.endsWith("invalid-missing-warrant.json")) {
-    assert.equal(issueKeys.has("schema-contains:/roles"), true, "missing Warrant must fail the required-role closure");
+    assert.equal(issueKeys.has("schema-contains:/actionCoordinates"), true, "missing Warrant must fail the required-coordinate closure");
   }
   if (fixture.endsWith("invalid-premature-activation.json")) {
-    assert.equal(issueKeys.has("schema-const:/profile/qualificationStatus"), true, "activation must require a qualified Profile");
+    assert.equal(issueKeys.has("schema-const:/domainProfile/qualificationStatus"), true, "activation must require a qualified Domain Profile");
     assert.equal(issueKeys.has("schema-min-items:/activation/productWitnesses"), true, "activation must retain product witnesses");
   }
 }
@@ -127,7 +131,7 @@ const temporary = fs.mkdtempSync(path.join(os.tmpdir(), "kfd-verifier-"));
 try {
   const missingQualificationBasisPath = path.join(temporary, "missing-qualification-basis.json");
   const missingQualificationBasis = JSON.parse(
-    fs.readFileSync(path.join(root, "verifier/fixtures/kfd-7/valid-action-contract.json"), "utf8"),
+    fs.readFileSync(path.join(root, "verifier/fixtures/kfd-7/valid-domain-profile.json"), "utf8"),
   );
   delete missingQualificationBasis.qualificationBasis;
   fs.writeFileSync(missingQualificationBasisPath, `${JSON.stringify(missingQualificationBasis)}\n`);
@@ -156,9 +160,9 @@ try {
 
   const activationWithPlannedEvidencePath = path.join(temporary, "activation-with-planned-evidence.json");
   const activationWithPlannedEvidence = JSON.parse(
-    fs.readFileSync(path.join(root, "verifier/fixtures/kfd-7/valid-action-contract.json"), "utf8"),
+    fs.readFileSync(path.join(root, "verifier/fixtures/kfd-7/valid-domain-profile.json"), "utf8"),
   );
-  activationWithPlannedEvidence.profile.qualificationStatus = "qualified";
+  activationWithPlannedEvidence.domainProfile.qualificationStatus = "qualified";
   activationWithPlannedEvidence.activation.decision = "activate";
   activationWithPlannedEvidence.activation.independentReview = "review:retained";
   activationWithPlannedEvidence.activation.productWitnesses = ["witness:retained"];
@@ -188,9 +192,9 @@ try {
 
   const activationWithoutSessionProofPath = path.join(temporary, "activation-without-session-proof.json");
   const activationWithoutSessionProof = JSON.parse(
-    fs.readFileSync(path.join(root, "verifier/fixtures/kfd-7/valid-action-contract.json"), "utf8"),
+    fs.readFileSync(path.join(root, "verifier/fixtures/kfd-7/valid-domain-profile.json"), "utf8"),
   );
-  activationWithoutSessionProof.profile.qualificationStatus = "qualified";
+  activationWithoutSessionProof.domainProfile.qualificationStatus = "qualified";
   activationWithoutSessionProof.activation.decision = "activate";
   activationWithoutSessionProof.activation.independentReview = "review:retained";
   activationWithoutSessionProof.activation.productWitnesses = ["witness:retained"];

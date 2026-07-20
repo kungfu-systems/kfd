@@ -1,0 +1,2502 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.agent-runtime-vector-registry/v1",
+  "profile": {
+    "id": "kfd-agent-runtime",
+    "version": "0.1.0-alpha.1"
+  },
+  "suite": {
+    "id": "kfd-runtime-100",
+    "version": "0.1.0-alpha.1",
+    "fixedVectorCount": 100
+  },
+  "vectors": [
+    {
+      "id": "pursuit-001-create-version-one",
+      "partition": "experimental",
+      "category": "pursuit",
+      "polarity": "positive",
+      "request": {
+        "operation": "pursuit.create",
+        "input": {
+          "state": null,
+          "target": {
+            "id": "pursuit:new",
+            "version": 1
+          }
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "pursuit-created"
+      },
+      "claim": "Pursuit identity begins at an explicit version."
+    },
+    {
+      "id": "pursuit-002-reject-create-overwrite",
+      "partition": "experimental",
+      "category": "pursuit",
+      "polarity": "negative",
+      "request": {
+        "operation": "pursuit.create",
+        "input": {
+          "state": {
+            "id": "pursuit:alpha",
+            "version": 2,
+            "status": "active"
+          },
+          "target": {
+            "id": "pursuit:alpha",
+            "version": 1
+          }
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "pursuit-already-exists"
+      },
+      "claim": "Creation cannot overwrite an existing Pursuit."
+    },
+    {
+      "id": "pursuit-003-revise-next-version",
+      "partition": "experimental",
+      "category": "pursuit",
+      "polarity": "positive",
+      "request": {
+        "operation": "pursuit.revise",
+        "input": {
+          "state": {
+            "id": "pursuit:alpha",
+            "version": 2,
+            "status": "active"
+          },
+          "baseVersion": 2,
+          "targetVersion": 3
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "pursuit-revised"
+      },
+      "claim": "Revision binds the exact predecessor version."
+    },
+    {
+      "id": "pursuit-004-reject-stale-revision",
+      "partition": "experimental",
+      "category": "pursuit",
+      "polarity": "negative",
+      "request": {
+        "operation": "pursuit.revise",
+        "input": {
+          "state": {
+            "id": "pursuit:alpha",
+            "version": 2,
+            "status": "active"
+          },
+          "baseVersion": 1,
+          "targetVersion": 3
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "pursuit-stale-version"
+      },
+      "claim": "A stale revision fails closed."
+    },
+    {
+      "id": "pursuit-005-reject-version-skip",
+      "partition": "experimental",
+      "category": "pursuit",
+      "polarity": "negative",
+      "request": {
+        "operation": "pursuit.revise",
+        "input": {
+          "state": {
+            "id": "pursuit:alpha",
+            "version": 2,
+            "status": "active"
+          },
+          "baseVersion": 2,
+          "targetVersion": 4
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "pursuit-version-gap"
+      },
+      "claim": "Revision cannot silently skip versions."
+    },
+    {
+      "id": "pursuit-006-fork-from-exact-version",
+      "partition": "experimental",
+      "category": "pursuit",
+      "polarity": "positive",
+      "request": {
+        "operation": "pursuit.fork",
+        "input": {
+          "state": {
+            "id": "pursuit:alpha",
+            "version": 2,
+            "status": "active"
+          },
+          "baseVersion": 2,
+          "fork": {
+            "id": "pursuit:fork-a",
+            "version": 1
+          }
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "pursuit-forked"
+      },
+      "claim": "Fork lineage names the exact source version."
+    },
+    {
+      "id": "pursuit-007-reject-fork-without-lineage",
+      "partition": "experimental",
+      "category": "pursuit",
+      "polarity": "negative",
+      "request": {
+        "operation": "pursuit.fork",
+        "input": {
+          "state": {
+            "id": "pursuit:alpha",
+            "version": 2,
+            "status": "active"
+          },
+          "baseVersion": 1,
+          "fork": {
+            "id": "pursuit:fork-b",
+            "version": 1
+          }
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "pursuit-stale-version"
+      },
+      "claim": "A fork cannot claim an unbound lineage."
+    },
+    {
+      "id": "pursuit-008-reject-fork-identity-reuse",
+      "partition": "experimental",
+      "category": "pursuit",
+      "polarity": "negative",
+      "request": {
+        "operation": "pursuit.fork",
+        "input": {
+          "state": {
+            "id": "pursuit:alpha",
+            "version": 2,
+            "status": "active"
+          },
+          "baseVersion": 2,
+          "fork": {
+            "id": "pursuit:alpha",
+            "version": 1
+          }
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "pursuit-identity-reuse"
+      },
+      "claim": "A fork has an independently addressable identity."
+    },
+    {
+      "id": "pursuit-009-settle-with-admitted-verdict",
+      "partition": "experimental",
+      "category": "pursuit",
+      "polarity": "positive",
+      "request": {
+        "operation": "pursuit.settle",
+        "input": {
+          "state": {
+            "id": "pursuit:alpha",
+            "version": 2,
+            "status": "active"
+          },
+          "baseVersion": 2,
+          "completionVerdict": "admitted"
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "pursuit-settled"
+      },
+      "claim": "Settlement requires an explicit completion verdict."
+    },
+    {
+      "id": "pursuit-010-reject-call-success-as-settlement",
+      "partition": "experimental",
+      "category": "pursuit",
+      "polarity": "negative",
+      "request": {
+        "operation": "pursuit.settle",
+        "input": {
+          "state": {
+            "id": "pursuit:alpha",
+            "version": 2,
+            "status": "active"
+          },
+          "baseVersion": 2,
+          "completionVerdict": "call-succeeded"
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "completion-verdict-not-admitted"
+      },
+      "claim": "Call success is not Pursuit completion."
+    },
+    {
+      "id": "pursuit-011-reject-sealed-episode-as-settlement",
+      "partition": "experimental",
+      "category": "pursuit",
+      "polarity": "negative",
+      "request": {
+        "operation": "pursuit.settle",
+        "input": {
+          "state": {
+            "id": "pursuit:alpha",
+            "version": 2,
+            "status": "active"
+          },
+          "baseVersion": 2,
+          "completionVerdict": "episode-sealed"
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "completion-verdict-not-admitted"
+      },
+      "claim": "A sealed Episode is not Pursuit completion."
+    },
+    {
+      "id": "pursuit-012-reject-fact-admission-as-settlement",
+      "partition": "experimental",
+      "category": "pursuit",
+      "polarity": "negative",
+      "request": {
+        "operation": "pursuit.settle",
+        "input": {
+          "state": {
+            "id": "pursuit:alpha",
+            "version": 2,
+            "status": "active"
+          },
+          "baseVersion": 2,
+          "completionVerdict": "fact-admitted"
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "completion-verdict-not-admitted"
+      },
+      "claim": "Fact admission alone is not Pursuit completion."
+    },
+    {
+      "id": "pursuit-013-reject-stale-settlement",
+      "partition": "experimental",
+      "category": "pursuit",
+      "polarity": "negative",
+      "request": {
+        "operation": "pursuit.settle",
+        "input": {
+          "state": {
+            "id": "pursuit:alpha",
+            "version": 2,
+            "status": "active"
+          },
+          "baseVersion": 1,
+          "completionVerdict": "admitted"
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "pursuit-stale-version"
+      },
+      "claim": "Settlement binds the current Pursuit version."
+    },
+    {
+      "id": "pursuit-014-reject-revise-settled",
+      "partition": "experimental",
+      "category": "pursuit",
+      "polarity": "negative",
+      "request": {
+        "operation": "pursuit.revise",
+        "input": {
+          "state": {
+            "id": "pursuit:alpha",
+            "version": 2,
+            "status": "settled"
+          },
+          "baseVersion": 2,
+          "targetVersion": 3
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "pursuit-not-active"
+      },
+      "claim": "A settled Pursuit cannot be revised in place."
+    },
+    {
+      "id": "pursuit-015-reject-settle-without-verdict",
+      "partition": "experimental",
+      "category": "pursuit",
+      "polarity": "negative",
+      "request": {
+        "operation": "pursuit.settle",
+        "input": {
+          "state": {
+            "id": "pursuit:alpha",
+            "version": 2,
+            "status": "active"
+          },
+          "baseVersion": 2,
+          "completionVerdict": ""
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "completion-verdict-missing"
+      },
+      "claim": "Settlement never infers a verdict."
+    },
+    {
+      "id": "atlas-001-cut-rooted-sources",
+      "partition": "experimental",
+      "category": "atlas",
+      "polarity": "positive",
+      "request": {
+        "operation": "atlas.cut",
+        "input": {
+          "state": null,
+          "sourceRoots": [
+            "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          ]
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "atlas-cut-created"
+      },
+      "claim": "An Atlas Cut binds explicit source roots."
+    },
+    {
+      "id": "atlas-002-reject-cut-without-sources",
+      "partition": "experimental",
+      "category": "atlas",
+      "polarity": "negative",
+      "request": {
+        "operation": "atlas.cut",
+        "input": {
+          "state": null,
+          "sourceRoots": []
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "atlas-source-roots-missing"
+      },
+      "claim": "A Cut cannot be inferred from ambient context."
+    },
+    {
+      "id": "atlas-003-derive-from-exact-cut",
+      "partition": "experimental",
+      "category": "atlas",
+      "polarity": "positive",
+      "request": {
+        "operation": "atlas.derive",
+        "input": {
+          "state": {
+            "cutRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "status": "fresh",
+            "sourceRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "baseCutRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "derivedRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "atlas-derived"
+      },
+      "claim": "A derivation binds its exact source Cut."
+    },
+    {
+      "id": "atlas-004-reject-derive-from-other-cut",
+      "partition": "experimental",
+      "category": "atlas",
+      "polarity": "negative",
+      "request": {
+        "operation": "atlas.derive",
+        "input": {
+          "state": {
+            "cutRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "status": "fresh",
+            "sourceRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "baseCutRoot": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "derivedRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "atlas-cut-mismatch"
+      },
+      "claim": "Derivation cannot silently change its causal Cut."
+    },
+    {
+      "id": "atlas-005-reject-unrooted-derivation",
+      "partition": "experimental",
+      "category": "atlas",
+      "polarity": "negative",
+      "request": {
+        "operation": "atlas.derive",
+        "input": {
+          "state": {
+            "cutRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "status": "fresh",
+            "sourceRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "baseCutRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "derivedRoot": ""
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "atlas-derived-root-missing"
+      },
+      "claim": "Derived views remain rooted."
+    },
+    {
+      "id": "atlas-006-refresh-from-current-source",
+      "partition": "experimental",
+      "category": "atlas",
+      "polarity": "positive",
+      "request": {
+        "operation": "atlas.refresh",
+        "input": {
+          "state": {
+            "cutRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "status": "fresh",
+            "sourceRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "baseCutRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "sourceRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "nextCutRoot": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "atlas-refreshed"
+      },
+      "claim": "Refresh names both old Cut and source root."
+    },
+    {
+      "id": "atlas-007-reject-refresh-stale-base",
+      "partition": "experimental",
+      "category": "atlas",
+      "polarity": "negative",
+      "request": {
+        "operation": "atlas.refresh",
+        "input": {
+          "state": {
+            "cutRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "status": "fresh",
+            "sourceRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "baseCutRoot": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+          "sourceRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "nextCutRoot": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "atlas-cut-mismatch"
+      },
+      "claim": "Refresh fails on stale Cut identity."
+    },
+    {
+      "id": "atlas-008-reject-refresh-source-drift",
+      "partition": "experimental",
+      "category": "atlas",
+      "polarity": "negative",
+      "request": {
+        "operation": "atlas.refresh",
+        "input": {
+          "state": {
+            "cutRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "status": "fresh",
+            "sourceRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "baseCutRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "sourceRoot": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+          "nextCutRoot": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "atlas-source-root-mismatch"
+      },
+      "claim": "Source drift is explicit, not overwritten."
+    },
+    {
+      "id": "atlas-009-mark-stale-with-reason",
+      "partition": "experimental",
+      "category": "atlas",
+      "polarity": "positive",
+      "request": {
+        "operation": "atlas.mark-stale",
+        "input": {
+          "state": {
+            "cutRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "status": "fresh",
+            "sourceRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "reason": "source-advanced"
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "atlas-marked-stale"
+      },
+      "claim": "Staleness is a typed state transition."
+    },
+    {
+      "id": "atlas-010-reject-stale-without-reason",
+      "partition": "experimental",
+      "category": "atlas",
+      "polarity": "negative",
+      "request": {
+        "operation": "atlas.mark-stale",
+        "input": {
+          "state": {
+            "cutRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "status": "fresh",
+            "sourceRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "reason": ""
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "atlas-stale-reason-missing"
+      },
+      "claim": "Staleness cannot be a silent flag."
+    },
+    {
+      "id": "atlas-011-reject-derive-stale-cut",
+      "partition": "experimental",
+      "category": "atlas",
+      "polarity": "negative",
+      "request": {
+        "operation": "atlas.derive",
+        "input": {
+          "state": {
+            "cutRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "status": "stale",
+            "sourceRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "baseCutRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "derivedRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "atlas-cut-stale"
+      },
+      "claim": "A stale Cut cannot be presented as current context."
+    },
+    {
+      "id": "atlas-012-reject-refresh-unrooted-next-cut",
+      "partition": "experimental",
+      "category": "atlas",
+      "polarity": "negative",
+      "request": {
+        "operation": "atlas.refresh",
+        "input": {
+          "state": {
+            "cutRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "status": "fresh",
+            "sourceRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "baseCutRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "sourceRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "nextCutRoot": ""
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "atlas-next-cut-missing"
+      },
+      "claim": "Refresh output remains content-addressed."
+    },
+    {
+      "id": "atlas-013-cut-single-root",
+      "partition": "experimental",
+      "category": "atlas",
+      "polarity": "positive",
+      "request": {
+        "operation": "atlas.cut",
+        "input": {
+          "state": null,
+          "sourceRoots": [
+            "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          ]
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "atlas-cut-created"
+      },
+      "claim": "A minimal Cut can contain one explicit source."
+    },
+    {
+      "id": "atlas-014-reject-cut-duplicate-roots",
+      "partition": "experimental",
+      "category": "atlas",
+      "polarity": "negative",
+      "request": {
+        "operation": "atlas.cut",
+        "input": {
+          "state": null,
+          "sourceRoots": [
+            "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          ]
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "atlas-source-root-duplicate"
+      },
+      "claim": "A Cut inventory is set-like and deterministic."
+    },
+    {
+      "id": "atlas-015-reject-mark-stale-twice",
+      "partition": "experimental",
+      "category": "atlas",
+      "polarity": "negative",
+      "request": {
+        "operation": "atlas.mark-stale",
+        "input": {
+          "state": {
+            "cutRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "status": "stale",
+            "sourceRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "reason": "source-advanced"
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "atlas-already-stale"
+      },
+      "claim": "Repeated stale transitions do not invent new history."
+    },
+    {
+      "id": "warrant-001-issue-bounded-authority",
+      "partition": "experimental",
+      "category": "warrant",
+      "polarity": "positive",
+      "request": {
+        "operation": "warrant.issue",
+        "input": {
+          "state": null,
+          "grant": {
+            "id": "warrant:alpha",
+            "status": "active",
+            "allowedActions": [
+              "append",
+              "read"
+            ],
+            "scope": "workspace:alpha",
+            "expiresAt": 200,
+            "authorityRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "warrant-issued"
+      },
+      "claim": "A Warrant is explicit, bounded, and rooted."
+    },
+    {
+      "id": "warrant-002-reject-unrooted-issue",
+      "partition": "experimental",
+      "category": "warrant",
+      "polarity": "negative",
+      "request": {
+        "operation": "warrant.issue",
+        "input": {
+          "state": null,
+          "grant": {
+            "id": "warrant:alpha",
+            "status": "active",
+            "allowedActions": [
+              "append",
+              "read"
+            ],
+            "scope": "workspace:alpha",
+            "expiresAt": 200,
+            "authorityRoot": ""
+          }
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "warrant-authority-root-missing"
+      },
+      "claim": "Authority cannot be ambient."
+    },
+    {
+      "id": "warrant-003-attenuate-action-subset",
+      "partition": "experimental",
+      "category": "warrant",
+      "polarity": "positive",
+      "request": {
+        "operation": "warrant.attenuate",
+        "input": {
+          "state": {
+            "id": "warrant:alpha",
+            "status": "active",
+            "allowedActions": [
+              "append",
+              "read"
+            ],
+            "scope": "workspace:alpha",
+            "expiresAt": 200,
+            "authorityRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "grant": {
+            "allowedActions": [
+              "read"
+            ],
+            "scope": "workspace:alpha",
+            "expiresAt": 180
+          }
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "warrant-attenuated"
+      },
+      "claim": "Attenuation may reduce allowed actions."
+    },
+    {
+      "id": "warrant-004-reject-action-amplification",
+      "partition": "experimental",
+      "category": "warrant",
+      "polarity": "negative",
+      "request": {
+        "operation": "warrant.attenuate",
+        "input": {
+          "state": {
+            "id": "warrant:alpha",
+            "status": "active",
+            "allowedActions": [
+              "append",
+              "read"
+            ],
+            "scope": "workspace:alpha",
+            "expiresAt": 200,
+            "authorityRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "grant": {
+            "allowedActions": [
+              "read",
+              "write"
+            ],
+            "scope": "workspace:alpha",
+            "expiresAt": 180
+          }
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "warrant-authority-amplification"
+      },
+      "claim": "Attenuation never adds authority."
+    },
+    {
+      "id": "warrant-005-attenuate-expiry",
+      "partition": "experimental",
+      "category": "warrant",
+      "polarity": "positive",
+      "request": {
+        "operation": "warrant.attenuate",
+        "input": {
+          "state": {
+            "id": "warrant:alpha",
+            "status": "active",
+            "allowedActions": [
+              "append",
+              "read"
+            ],
+            "scope": "workspace:alpha",
+            "expiresAt": 200,
+            "authorityRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "grant": {
+            "allowedActions": [
+              "append",
+              "read"
+            ],
+            "scope": "workspace:alpha",
+            "expiresAt": 150
+          }
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "warrant-attenuated"
+      },
+      "claim": "Attenuation may shorten time."
+    },
+    {
+      "id": "warrant-006-reject-expiry-extension",
+      "partition": "experimental",
+      "category": "warrant",
+      "polarity": "negative",
+      "request": {
+        "operation": "warrant.attenuate",
+        "input": {
+          "state": {
+            "id": "warrant:alpha",
+            "status": "active",
+            "allowedActions": [
+              "append",
+              "read"
+            ],
+            "scope": "workspace:alpha",
+            "expiresAt": 200,
+            "authorityRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "grant": {
+            "allowedActions": [
+              "append",
+              "read"
+            ],
+            "scope": "workspace:alpha",
+            "expiresAt": 250
+          }
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "warrant-expiry-amplification"
+      },
+      "claim": "Attenuation never extends expiry."
+    },
+    {
+      "id": "warrant-007-delegate-bounded-subset",
+      "partition": "experimental",
+      "category": "warrant",
+      "polarity": "positive",
+      "request": {
+        "operation": "warrant.delegate",
+        "input": {
+          "state": {
+            "id": "warrant:alpha",
+            "status": "active",
+            "allowedActions": [
+              "append",
+              "read"
+            ],
+            "scope": "workspace:alpha",
+            "expiresAt": 200,
+            "authorityRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "grant": {
+            "allowedActions": [
+              "read"
+            ],
+            "scope": "workspace:alpha",
+            "expiresAt": 150
+          }
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "warrant-delegated"
+      },
+      "claim": "Delegation carries an attenuated authority subset."
+    },
+    {
+      "id": "warrant-008-reject-delegate-action-amplification",
+      "partition": "experimental",
+      "category": "warrant",
+      "polarity": "negative",
+      "request": {
+        "operation": "warrant.delegate",
+        "input": {
+          "state": {
+            "id": "warrant:alpha",
+            "status": "active",
+            "allowedActions": [
+              "append",
+              "read"
+            ],
+            "scope": "workspace:alpha",
+            "expiresAt": 200,
+            "authorityRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "grant": {
+            "allowedActions": [
+              "delete"
+            ],
+            "scope": "workspace:alpha",
+            "expiresAt": 150
+          }
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "warrant-authority-amplification"
+      },
+      "claim": "Cross-Hub delegation cannot add actions."
+    },
+    {
+      "id": "warrant-009-reject-delegate-scope-amplification",
+      "partition": "experimental",
+      "category": "warrant",
+      "polarity": "negative",
+      "request": {
+        "operation": "warrant.delegate",
+        "input": {
+          "state": {
+            "id": "warrant:alpha",
+            "status": "active",
+            "allowedActions": [
+              "append",
+              "read"
+            ],
+            "scope": "workspace:alpha",
+            "expiresAt": 200,
+            "authorityRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "grant": {
+            "allowedActions": [
+              "read"
+            ],
+            "scope": "organization:*",
+            "expiresAt": 150
+          }
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "warrant-scope-amplification"
+      },
+      "claim": "Delegation cannot silently widen scope."
+    },
+    {
+      "id": "warrant-010-reject-delegate-expiry-extension",
+      "partition": "experimental",
+      "category": "warrant",
+      "polarity": "negative",
+      "request": {
+        "operation": "warrant.delegate",
+        "input": {
+          "state": {
+            "id": "warrant:alpha",
+            "status": "active",
+            "allowedActions": [
+              "append",
+              "read"
+            ],
+            "scope": "workspace:alpha",
+            "expiresAt": 200,
+            "authorityRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "grant": {
+            "allowedActions": [
+              "read"
+            ],
+            "scope": "workspace:alpha",
+            "expiresAt": 250
+          }
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "warrant-expiry-amplification"
+      },
+      "claim": "Delegation cannot extend time."
+    },
+    {
+      "id": "warrant-011-revoke-by-rooted-authority",
+      "partition": "experimental",
+      "category": "warrant",
+      "polarity": "positive",
+      "request": {
+        "operation": "warrant.revoke",
+        "input": {
+          "state": {
+            "id": "warrant:alpha",
+            "status": "active",
+            "allowedActions": [
+              "append",
+              "read"
+            ],
+            "scope": "workspace:alpha",
+            "expiresAt": 200,
+            "authorityRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "authorityRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "warrant-revoked"
+      },
+      "claim": "Revocation binds the issuing authority root."
+    },
+    {
+      "id": "warrant-012-reject-revoke-other-authority",
+      "partition": "experimental",
+      "category": "warrant",
+      "polarity": "negative",
+      "request": {
+        "operation": "warrant.revoke",
+        "input": {
+          "state": {
+            "id": "warrant:alpha",
+            "status": "active",
+            "allowedActions": [
+              "append",
+              "read"
+            ],
+            "scope": "workspace:alpha",
+            "expiresAt": 200,
+            "authorityRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "authorityRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "warrant-revoker-unauthorized"
+      },
+      "claim": "An unrelated authority cannot revoke a Warrant."
+    },
+    {
+      "id": "warrant-013-use-allowed-action",
+      "partition": "experimental",
+      "category": "warrant",
+      "polarity": "positive",
+      "request": {
+        "operation": "warrant.use",
+        "input": {
+          "state": {
+            "id": "warrant:alpha",
+            "status": "active",
+            "allowedActions": [
+              "append",
+              "read"
+            ],
+            "scope": "workspace:alpha",
+            "expiresAt": 200,
+            "authorityRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "action": "append",
+          "scope": "workspace:alpha",
+          "now": 100
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "warrant-authorized"
+      },
+      "claim": "Use is checked against action, scope, time, and revocation."
+    },
+    {
+      "id": "warrant-014-reject-forbidden-action",
+      "partition": "experimental",
+      "category": "warrant",
+      "polarity": "negative",
+      "request": {
+        "operation": "warrant.use",
+        "input": {
+          "state": {
+            "id": "warrant:alpha",
+            "status": "active",
+            "allowedActions": [
+              "append",
+              "read"
+            ],
+            "scope": "workspace:alpha",
+            "expiresAt": 200,
+            "authorityRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "action": "delete",
+          "scope": "workspace:alpha",
+          "now": 100
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "warrant-action-forbidden"
+      },
+      "claim": "A Warrant does not authorize undeclared actions."
+    },
+    {
+      "id": "warrant-015-reject-scope-mismatch",
+      "partition": "experimental",
+      "category": "warrant",
+      "polarity": "negative",
+      "request": {
+        "operation": "warrant.use",
+        "input": {
+          "state": {
+            "id": "warrant:alpha",
+            "status": "active",
+            "allowedActions": [
+              "append",
+              "read"
+            ],
+            "scope": "workspace:alpha",
+            "expiresAt": 200,
+            "authorityRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "action": "read",
+          "scope": "workspace:beta",
+          "now": 100
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "warrant-scope-mismatch"
+      },
+      "claim": "Authority remains scoped."
+    },
+    {
+      "id": "warrant-016-reject-expired-use",
+      "partition": "experimental",
+      "category": "warrant",
+      "polarity": "negative",
+      "request": {
+        "operation": "warrant.use",
+        "input": {
+          "state": {
+            "id": "warrant:alpha",
+            "status": "active",
+            "allowedActions": [
+              "append",
+              "read"
+            ],
+            "scope": "workspace:alpha",
+            "expiresAt": 200,
+            "authorityRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "action": "read",
+          "scope": "workspace:alpha",
+          "now": 201
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "warrant-expired"
+      },
+      "claim": "Expired authority fails closed."
+    },
+    {
+      "id": "warrant-017-reject-revoked-use",
+      "partition": "experimental",
+      "category": "warrant",
+      "polarity": "negative",
+      "request": {
+        "operation": "warrant.use",
+        "input": {
+          "state": {
+            "id": "warrant:alpha",
+            "status": "revoked",
+            "allowedActions": [
+              "append",
+              "read"
+            ],
+            "scope": "workspace:alpha",
+            "expiresAt": 200,
+            "authorityRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "action": "read",
+          "scope": "workspace:alpha",
+          "now": 100
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "warrant-revoked"
+      },
+      "claim": "Revoked authority cannot be reused."
+    },
+    {
+      "id": "warrant-018-reject-attenuate-revoked",
+      "partition": "experimental",
+      "category": "warrant",
+      "polarity": "negative",
+      "request": {
+        "operation": "warrant.attenuate",
+        "input": {
+          "state": {
+            "id": "warrant:alpha",
+            "status": "revoked",
+            "allowedActions": [
+              "append",
+              "read"
+            ],
+            "scope": "workspace:alpha",
+            "expiresAt": 200,
+            "authorityRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "grant": {
+            "allowedActions": [
+              "read"
+            ],
+            "scope": "workspace:alpha",
+            "expiresAt": 150
+          }
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "warrant-not-active"
+      },
+      "claim": "Revocation terminates the derivation chain."
+    },
+    {
+      "id": "warrant-019-reject-empty-delegation",
+      "partition": "experimental",
+      "category": "warrant",
+      "polarity": "negative",
+      "request": {
+        "operation": "warrant.delegate",
+        "input": {
+          "state": {
+            "id": "warrant:alpha",
+            "status": "active",
+            "allowedActions": [
+              "append",
+              "read"
+            ],
+            "scope": "workspace:alpha",
+            "expiresAt": 200,
+            "authorityRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "grant": {
+            "allowedActions": [],
+            "scope": "workspace:alpha",
+            "expiresAt": 150
+          }
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "warrant-actions-missing"
+      },
+      "claim": "Delegation declares a usable bounded action set."
+    },
+    {
+      "id": "warrant-020-reject-unrooted-parent",
+      "partition": "experimental",
+      "category": "warrant",
+      "polarity": "negative",
+      "request": {
+        "operation": "warrant.attenuate",
+        "input": {
+          "state": {
+            "id": "warrant:alpha",
+            "status": "active",
+            "allowedActions": [
+              "append",
+              "read"
+            ],
+            "scope": "workspace:alpha",
+            "expiresAt": 200,
+            "authorityRoot": ""
+          },
+          "grant": {
+            "allowedActions": [
+              "read"
+            ],
+            "scope": "workspace:alpha",
+            "expiresAt": 150
+          }
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "warrant-authority-root-missing"
+      },
+      "claim": "Derived authority retains its root lineage."
+    },
+    {
+      "id": "action-001-bind-exact-roots",
+      "partition": "core",
+      "category": "action",
+      "polarity": "positive",
+      "request": {
+        "operation": "action.bind",
+        "input": {
+          "binding": {
+            "pursuitRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "atlasRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "warrantRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "actionRoot": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "preconditionsSatisfied": true,
+            "warrantActive": true
+          }
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "action-bound"
+      },
+      "claim": "Consequential action binds direction, perspective, authority, and occurrence."
+    },
+    {
+      "id": "action-002-reject-missing-pursuit",
+      "partition": "core",
+      "category": "action",
+      "polarity": "negative",
+      "request": {
+        "operation": "action.bind",
+        "input": {
+          "binding": {
+            "pursuitRoot": "",
+            "atlasRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "warrantRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "actionRoot": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "preconditionsSatisfied": true,
+            "warrantActive": true
+          }
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "action-pursuit-root-missing"
+      },
+      "claim": "Action does not infer direction from occurrence."
+    },
+    {
+      "id": "action-003-reject-missing-atlas",
+      "partition": "core",
+      "category": "action",
+      "polarity": "negative",
+      "request": {
+        "operation": "action.bind",
+        "input": {
+          "binding": {
+            "pursuitRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "atlasRoot": "",
+            "warrantRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "actionRoot": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "preconditionsSatisfied": true,
+            "warrantActive": true
+          }
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "action-atlas-root-missing"
+      },
+      "claim": "Action does not infer perspective from ambient context."
+    },
+    {
+      "id": "action-004-reject-missing-warrant",
+      "partition": "core",
+      "category": "action",
+      "polarity": "negative",
+      "request": {
+        "operation": "action.bind",
+        "input": {
+          "binding": {
+            "pursuitRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "atlasRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "warrantRoot": "",
+            "actionRoot": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "preconditionsSatisfied": true,
+            "warrantActive": true
+          }
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "action-warrant-root-missing"
+      },
+      "claim": "Action does not infer authority from capability."
+    },
+    {
+      "id": "action-005-reject-missing-action-root",
+      "partition": "core",
+      "category": "action",
+      "polarity": "negative",
+      "request": {
+        "operation": "action.bind",
+        "input": {
+          "binding": {
+            "pursuitRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "atlasRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "warrantRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "actionRoot": "",
+            "preconditionsSatisfied": true,
+            "warrantActive": true
+          }
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "action-root-missing"
+      },
+      "claim": "Occurrence remains independently addressable."
+    },
+    {
+      "id": "action-006-reject-unsatisfied-precondition",
+      "partition": "core",
+      "category": "action",
+      "polarity": "negative",
+      "request": {
+        "operation": "action.bind",
+        "input": {
+          "binding": {
+            "pursuitRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "atlasRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "warrantRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "actionRoot": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "preconditionsSatisfied": false,
+            "warrantActive": true
+          }
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "action-precondition-failed"
+      },
+      "claim": "A bound action still checks exact preconditions."
+    },
+    {
+      "id": "action-007-reject-revoked-warrant",
+      "partition": "core",
+      "category": "action",
+      "polarity": "negative",
+      "request": {
+        "operation": "action.bind",
+        "input": {
+          "binding": {
+            "pursuitRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "atlasRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "warrantRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "actionRoot": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "preconditionsSatisfied": true,
+            "warrantActive": false
+          }
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "action-warrant-inactive"
+      },
+      "claim": "A revoked Warrant cannot authorize action."
+    },
+    {
+      "id": "action-008-delivery-not-admission",
+      "partition": "core",
+      "category": "action",
+      "polarity": "positive",
+      "request": {
+        "operation": "action.assess",
+        "input": {
+          "transportDelivered": true,
+          "receiverVerdict": "pending"
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "delivery-kept-separate"
+      },
+      "claim": "Delivery is not admission."
+    },
+    {
+      "id": "action-009-reject-delivery-as-admission",
+      "partition": "core",
+      "category": "action",
+      "polarity": "negative",
+      "request": {
+        "operation": "action.assess",
+        "input": {
+          "transportDelivered": true,
+          "receiverVerdict": "inferred-from-delivery"
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "delivery-is-not-admission"
+      },
+      "claim": "A transport receipt cannot manufacture a semantic verdict."
+    },
+    {
+      "id": "action-010-episode-not-completion",
+      "partition": "core",
+      "category": "action",
+      "polarity": "positive",
+      "request": {
+        "operation": "action.assess",
+        "input": {
+          "episodeSealed": true,
+          "completionVerdict": "pending"
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "occurrence-kept-separate"
+      },
+      "claim": "Occurrence is not completion."
+    },
+    {
+      "id": "action-011-reject-seal-as-completion",
+      "partition": "core",
+      "category": "action",
+      "polarity": "negative",
+      "request": {
+        "operation": "action.assess",
+        "input": {
+          "episodeSealed": true,
+          "completionVerdict": "inferred-from-seal"
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "episode-is-not-completion"
+      },
+      "claim": "A sealed Episode cannot settle a Pursuit by inference."
+    },
+    {
+      "id": "action-012-fact-not-call-success",
+      "partition": "core",
+      "category": "action",
+      "polarity": "positive",
+      "request": {
+        "operation": "action.assess",
+        "input": {
+          "callSucceeded": true,
+          "factVerdict": "pending"
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "call-kept-separate"
+      },
+      "claim": "Call success is not Fact admission."
+    },
+    {
+      "id": "action-013-reject-call-as-fact",
+      "partition": "core",
+      "category": "action",
+      "polarity": "negative",
+      "request": {
+        "operation": "action.assess",
+        "input": {
+          "callSucceeded": true,
+          "factVerdict": "inferred-from-call"
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "call-is-not-admission"
+      },
+      "claim": "Execution success cannot self-admit a Fact."
+    },
+    {
+      "id": "action-014-receiver-admits-fact",
+      "partition": "core",
+      "category": "action",
+      "polarity": "positive",
+      "request": {
+        "operation": "action.assess",
+        "input": {
+          "factVerdict": "admitted",
+          "verdictAuthority": "receiver"
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "receiver-verdict-retained"
+      },
+      "claim": "Admission is local to the receiving authority."
+    },
+    {
+      "id": "action-015-reject-producer-self-admission",
+      "partition": "core",
+      "category": "action",
+      "polarity": "negative",
+      "request": {
+        "operation": "action.assess",
+        "input": {
+          "factVerdict": "admitted",
+          "verdictAuthority": "producer"
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "producer-cannot-self-admit"
+      },
+      "claim": "A producer cannot self-admit a remote Fact."
+    },
+    {
+      "id": "episode-fact-001-open-new-episode",
+      "partition": "core",
+      "category": "episode-fact",
+      "polarity": "positive",
+      "request": {
+        "operation": "episode.open",
+        "input": {
+          "state": null,
+          "episodeId": "episode:alpha"
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "episode-opened"
+      },
+      "claim": "Episode identity begins before occurrence."
+    },
+    {
+      "id": "episode-fact-002-reject-open-existing",
+      "partition": "core",
+      "category": "episode-fact",
+      "polarity": "negative",
+      "request": {
+        "operation": "episode.open",
+        "input": {
+          "state": {
+            "id": "episode:alpha",
+            "status": "open",
+            "nextIndex": 2
+          },
+          "episodeId": "episode:alpha"
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "episode-already-exists"
+      },
+      "claim": "Open cannot overwrite an Episode."
+    },
+    {
+      "id": "episode-fact-003-append-next-claim",
+      "partition": "core",
+      "category": "episode-fact",
+      "polarity": "positive",
+      "request": {
+        "operation": "episode.append",
+        "input": {
+          "state": {
+            "id": "episode:alpha",
+            "status": "open",
+            "nextIndex": 2
+          },
+          "index": 2,
+          "claimRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "episode-appended"
+      },
+      "claim": "Append order is explicit."
+    },
+    {
+      "id": "episode-fact-004-reject-append-gap",
+      "partition": "core",
+      "category": "episode-fact",
+      "polarity": "negative",
+      "request": {
+        "operation": "episode.append",
+        "input": {
+          "state": {
+            "id": "episode:alpha",
+            "status": "open",
+            "nextIndex": 2
+          },
+          "index": 3,
+          "claimRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "episode-index-gap"
+      },
+      "claim": "Episode order cannot skip silently."
+    },
+    {
+      "id": "episode-fact-005-reject-unrooted-append",
+      "partition": "core",
+      "category": "episode-fact",
+      "polarity": "negative",
+      "request": {
+        "operation": "episode.append",
+        "input": {
+          "state": {
+            "id": "episode:alpha",
+            "status": "open",
+            "nextIndex": 2
+          },
+          "index": 2,
+          "claimRoot": ""
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "episode-claim-root-missing"
+      },
+      "claim": "Episode claims remain rooted."
+    },
+    {
+      "id": "episode-fact-006-commit-open-episode",
+      "partition": "core",
+      "category": "episode-fact",
+      "polarity": "positive",
+      "request": {
+        "operation": "episode.commit",
+        "input": {
+          "state": {
+            "id": "episode:alpha",
+            "status": "open",
+            "nextIndex": 2
+          },
+          "contentRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "episode-committed"
+      },
+      "claim": "Commit establishes a durability frontier."
+    },
+    {
+      "id": "episode-fact-007-reject-commit-without-root",
+      "partition": "core",
+      "category": "episode-fact",
+      "polarity": "negative",
+      "request": {
+        "operation": "episode.commit",
+        "input": {
+          "state": {
+            "id": "episode:alpha",
+            "status": "open",
+            "nextIndex": 2
+          },
+          "contentRoot": ""
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "episode-content-root-missing"
+      },
+      "claim": "Commit cannot acknowledge unrooted content."
+    },
+    {
+      "id": "episode-fact-008-interrupt-open-episode",
+      "partition": "core",
+      "category": "episode-fact",
+      "polarity": "positive",
+      "request": {
+        "operation": "episode.interrupt",
+        "input": {
+          "state": {
+            "id": "episode:alpha",
+            "status": "open",
+            "nextIndex": 2
+          },
+          "reason": "process-crash"
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "episode-interrupted"
+      },
+      "claim": "Interruption is a typed lifecycle state."
+    },
+    {
+      "id": "episode-fact-009-seal-committed-episode",
+      "partition": "core",
+      "category": "episode-fact",
+      "polarity": "positive",
+      "request": {
+        "operation": "episode.seal",
+        "input": {
+          "state": {
+            "id": "episode:alpha",
+            "status": "committed",
+            "nextIndex": 2
+          },
+          "semanticRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "episode-sealed"
+      },
+      "claim": "Seal closes occurrence without inventing completion."
+    },
+    {
+      "id": "episode-fact-010-reject-seal-open-episode",
+      "partition": "core",
+      "category": "episode-fact",
+      "polarity": "negative",
+      "request": {
+        "operation": "episode.seal",
+        "input": {
+          "state": {
+            "id": "episode:alpha",
+            "status": "open",
+            "nextIndex": 2
+          },
+          "semanticRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "episode-not-committed"
+      },
+      "claim": "Seal requires the commit frontier."
+    },
+    {
+      "id": "episode-fact-011-replay-sealed-episode",
+      "partition": "core",
+      "category": "episode-fact",
+      "polarity": "positive",
+      "request": {
+        "operation": "episode.replay",
+        "input": {
+          "state": {
+            "id": "episode:alpha",
+            "status": "sealed",
+            "nextIndex": 2
+          },
+          "semanticRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "observedRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "episode-replayed"
+      },
+      "claim": "Replay checks the sealed semantic root."
+    },
+    {
+      "id": "episode-fact-012-reject-replay-root-drift",
+      "partition": "core",
+      "category": "episode-fact",
+      "polarity": "negative",
+      "request": {
+        "operation": "episode.replay",
+        "input": {
+          "state": {
+            "id": "episode:alpha",
+            "status": "sealed",
+            "nextIndex": 2
+          },
+          "semanticRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "observedRoot": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "episode-root-mismatch"
+      },
+      "claim": "Replay exposes semantic drift."
+    },
+    {
+      "id": "episode-fact-013-propose-new-fact",
+      "partition": "core",
+      "category": "episode-fact",
+      "polarity": "positive",
+      "request": {
+        "operation": "fact.propose",
+        "input": {
+          "state": null,
+          "factRoot": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "fact-proposed"
+      },
+      "claim": "Fact production is distinct from admission."
+    },
+    {
+      "id": "episode-fact-014-admit-by-receiver",
+      "partition": "core",
+      "category": "episode-fact",
+      "polarity": "positive",
+      "request": {
+        "operation": "fact.admit",
+        "input": {
+          "state": {
+            "id": "fact:alpha",
+            "status": "proposed",
+            "authority": "receiver"
+          },
+          "verdictAuthority": "receiver",
+          "evidenceRoot": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "fact-admitted"
+      },
+      "claim": "The receiving authority owns admission."
+    },
+    {
+      "id": "episode-fact-015-reject-self-admission",
+      "partition": "core",
+      "category": "episode-fact",
+      "polarity": "negative",
+      "request": {
+        "operation": "fact.admit",
+        "input": {
+          "state": {
+            "id": "fact:alpha",
+            "status": "proposed",
+            "authority": "receiver"
+          },
+          "verdictAuthority": "producer",
+          "evidenceRoot": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "fact-admitter-unauthorized"
+      },
+      "claim": "A producer cannot self-admit a remote Fact."
+    },
+    {
+      "id": "episode-fact-016-reject-with-explicit-reason",
+      "partition": "core",
+      "category": "episode-fact",
+      "polarity": "positive",
+      "request": {
+        "operation": "fact.reject",
+        "input": {
+          "state": {
+            "id": "fact:alpha",
+            "status": "proposed",
+            "authority": "receiver"
+          },
+          "verdictAuthority": "receiver",
+          "reason": "scope-mismatch"
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "fact-rejected"
+      },
+      "claim": "Rejection is an explicit receiver verdict."
+    },
+    {
+      "id": "episode-fact-017-retain-conflict-roots",
+      "partition": "core",
+      "category": "episode-fact",
+      "polarity": "positive",
+      "request": {
+        "operation": "fact.conflict",
+        "input": {
+          "state": {
+            "id": "fact:alpha",
+            "status": "proposed",
+            "authority": "receiver"
+          },
+          "roots": [
+            "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          ]
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "fact-conflicted"
+      },
+      "claim": "Conflict roots remain visible."
+    },
+    {
+      "id": "episode-fact-018-reject-hidden-conflict",
+      "partition": "core",
+      "category": "episode-fact",
+      "polarity": "negative",
+      "request": {
+        "operation": "fact.conflict",
+        "input": {
+          "state": {
+            "id": "fact:alpha",
+            "status": "proposed",
+            "authority": "receiver"
+          },
+          "roots": [
+            "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          ]
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "fact-conflict-roots-incomplete"
+      },
+      "claim": "Conflict cannot collapse to last-write-wins."
+    },
+    {
+      "id": "episode-fact-019-supersede-admitted-fact",
+      "partition": "core",
+      "category": "episode-fact",
+      "polarity": "positive",
+      "request": {
+        "operation": "fact.supersede",
+        "input": {
+          "state": {
+            "id": "fact:alpha",
+            "status": "admitted",
+            "authority": "receiver"
+          },
+          "successorRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "fact-superseded"
+      },
+      "claim": "Supersession preserves predecessor identity."
+    },
+    {
+      "id": "episode-fact-020-reject-supersede-proposed",
+      "partition": "core",
+      "category": "episode-fact",
+      "polarity": "negative",
+      "request": {
+        "operation": "fact.supersede",
+        "input": {
+          "state": {
+            "id": "fact:alpha",
+            "status": "proposed",
+            "authority": "receiver"
+          },
+          "successorRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "fact-not-admitted"
+      },
+      "claim": "A proposal cannot silently rewrite its own verdict."
+    },
+    {
+      "id": "recovery-001-crash-after-durable-ack",
+      "partition": "experimental",
+      "category": "recovery",
+      "polarity": "positive",
+      "request": {
+        "operation": "runtime.crash",
+        "input": {
+          "state": {
+            "durableSeq": 4,
+            "acknowledgedSeq": 4,
+            "expectedRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "observedRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "providerRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "bundleRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          }
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "runtime-crash-bounded"
+      },
+      "claim": "Acknowledgement stays behind the durability frontier."
+    },
+    {
+      "id": "recovery-002-reject-ack-before-durability",
+      "partition": "experimental",
+      "category": "recovery",
+      "polarity": "negative",
+      "request": {
+        "operation": "runtime.crash",
+        "input": {
+          "state": {
+            "durableSeq": 4,
+            "acknowledgedSeq": 5,
+            "expectedRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "observedRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "providerRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "bundleRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          }
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "runtime-ack-ahead-of-durability"
+      },
+      "claim": "Crash evidence exposes acknowledgements that outran durability."
+    },
+    {
+      "id": "recovery-003-reopen-matching-provider-root",
+      "partition": "experimental",
+      "category": "recovery",
+      "polarity": "positive",
+      "request": {
+        "operation": "runtime.reopen",
+        "input": {
+          "state": {
+            "durableSeq": 4,
+            "acknowledgedSeq": 4,
+            "expectedRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "observedRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "providerRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "bundleRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          "observedProviderRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "runtime-reopened"
+      },
+      "claim": "Reopen binds the persisted provider root."
+    },
+    {
+      "id": "recovery-004-reject-reopen-provider-drift",
+      "partition": "experimental",
+      "category": "recovery",
+      "polarity": "negative",
+      "request": {
+        "operation": "runtime.reopen",
+        "input": {
+          "state": {
+            "durableSeq": 4,
+            "acknowledgedSeq": 4,
+            "expectedRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "observedRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "providerRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "bundleRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          "observedProviderRoot": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "runtime-provider-root-mismatch"
+      },
+      "claim": "Reopen fails closed on provider drift."
+    },
+    {
+      "id": "recovery-005-fsck-matching-root",
+      "partition": "experimental",
+      "category": "recovery",
+      "polarity": "positive",
+      "request": {
+        "operation": "runtime.fsck",
+        "input": {
+          "state": {
+            "durableSeq": 4,
+            "acknowledgedSeq": 4,
+            "expectedRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "observedRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "providerRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "bundleRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          }
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "runtime-fsck-clean"
+      },
+      "claim": "Fsck compares expected and observed roots."
+    },
+    {
+      "id": "recovery-006-reject-fsck-root-drift",
+      "partition": "experimental",
+      "category": "recovery",
+      "polarity": "negative",
+      "request": {
+        "operation": "runtime.fsck",
+        "input": {
+          "state": {
+            "durableSeq": 4,
+            "acknowledgedSeq": 4,
+            "expectedRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "observedRoot": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "providerRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "bundleRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          }
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "runtime-root-mismatch"
+      },
+      "claim": "Fsck exposes corruption rather than repairing silently."
+    },
+    {
+      "id": "recovery-007-export-rooted-bundle",
+      "partition": "experimental",
+      "category": "recovery",
+      "polarity": "positive",
+      "request": {
+        "operation": "runtime.export",
+        "input": {
+          "state": {
+            "durableSeq": 4,
+            "acknowledgedSeq": 4,
+            "expectedRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "observedRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "providerRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "bundleRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          "disclosure": "selective",
+          "exportedRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "runtime-exported"
+      },
+      "claim": "Export binds a portable rooted bundle."
+    },
+    {
+      "id": "recovery-008-reject-unrooted-export",
+      "partition": "experimental",
+      "category": "recovery",
+      "polarity": "negative",
+      "request": {
+        "operation": "runtime.export",
+        "input": {
+          "state": {
+            "durableSeq": 4,
+            "acknowledgedSeq": 4,
+            "expectedRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "observedRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "providerRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "bundleRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          "disclosure": "selective",
+          "exportedRoot": ""
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "runtime-export-root-missing"
+      },
+      "claim": "Export never relies on an ambient directory."
+    },
+    {
+      "id": "recovery-009-import-matching-bundle",
+      "partition": "experimental",
+      "category": "recovery",
+      "polarity": "positive",
+      "request": {
+        "operation": "runtime.import",
+        "input": {
+          "state": {
+            "durableSeq": 4,
+            "acknowledgedSeq": 4,
+            "expectedRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "observedRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "providerRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "bundleRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          "declaredRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "observedRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "runtime-imported"
+      },
+      "claim": "Import verifies the declared bundle root."
+    },
+    {
+      "id": "recovery-010-reject-import-root-drift",
+      "partition": "experimental",
+      "category": "recovery",
+      "polarity": "negative",
+      "request": {
+        "operation": "runtime.import",
+        "input": {
+          "state": {
+            "durableSeq": 4,
+            "acknowledgedSeq": 4,
+            "expectedRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "observedRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "providerRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "bundleRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          "declaredRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "observedRoot": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "runtime-import-root-mismatch"
+      },
+      "claim": "Import fails closed on bundle drift."
+    },
+    {
+      "id": "recovery-011-replay-contiguous-range",
+      "partition": "experimental",
+      "category": "recovery",
+      "polarity": "positive",
+      "request": {
+        "operation": "runtime.replay",
+        "input": {
+          "state": {
+            "durableSeq": 4,
+            "acknowledgedSeq": 4,
+            "expectedRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "observedRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "providerRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "bundleRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          "indexes": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ]
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "runtime-replayed"
+      },
+      "claim": "Replay order is contiguous and deterministic."
+    },
+    {
+      "id": "recovery-012-reject-replay-gap",
+      "partition": "experimental",
+      "category": "recovery",
+      "polarity": "negative",
+      "request": {
+        "operation": "runtime.replay",
+        "input": {
+          "state": {
+            "durableSeq": 4,
+            "acknowledgedSeq": 4,
+            "expectedRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "observedRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "providerRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "bundleRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          "indexes": [
+            0,
+            1,
+            3,
+            4
+          ]
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "runtime-replay-gap"
+      },
+      "claim": "Replay cannot hide missing history."
+    },
+    {
+      "id": "recovery-013-retry-same-idempotency-root",
+      "partition": "experimental",
+      "category": "recovery",
+      "polarity": "positive",
+      "request": {
+        "operation": "runtime.retry",
+        "input": {
+          "state": {
+            "durableSeq": 4,
+            "acknowledgedSeq": 4,
+            "expectedRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "observedRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "providerRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "bundleRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          "previous": {
+            "key": "retry:a",
+            "exchangeRoot": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+          },
+          "next": {
+            "key": "retry:a",
+            "exchangeRoot": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+          }
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "runtime-retry-idempotent"
+      },
+      "claim": "Retry with the same key preserves the exchange root."
+    },
+    {
+      "id": "recovery-014-reject-idempotency-root-reuse",
+      "partition": "experimental",
+      "category": "recovery",
+      "polarity": "negative",
+      "request": {
+        "operation": "runtime.retry",
+        "input": {
+          "state": {
+            "durableSeq": 4,
+            "acknowledgedSeq": 4,
+            "expectedRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "observedRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "providerRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "bundleRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          "previous": {
+            "key": "retry:a",
+            "exchangeRoot": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+          },
+          "next": {
+            "key": "retry:a",
+            "exchangeRoot": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+          }
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "runtime-idempotency-reuse"
+      },
+      "claim": "An idempotency key cannot name different exchanges."
+    },
+    {
+      "id": "recovery-015-retain-reconnect-conflict",
+      "partition": "experimental",
+      "category": "recovery",
+      "polarity": "positive",
+      "request": {
+        "operation": "runtime.reconnect",
+        "input": {
+          "state": {
+            "durableSeq": 4,
+            "acknowledgedSeq": 4,
+            "expectedRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "observedRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "providerRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "bundleRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          "localRoot": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "remoteRoot": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+          "conflictRoots": [
+            "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+          ]
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "runtime-conflict-retained"
+      },
+      "claim": "Reconnect retains conflicting roots instead of last-write-wins."
+    }
+  ]
+}

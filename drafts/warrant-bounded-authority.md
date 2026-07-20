@@ -27,7 +27,7 @@ revocable.
 
 ## Candidate rule
 
-A Warrant is the cross-domain action Primitive that makes authority for a
+A Warrant is the cross-domain action coordinate that makes authority for a
 proposed action or continuation independently addressable.
 
 It preserves enough boundary to determine:
@@ -46,7 +46,7 @@ decision without becoming the authority itself.
 ## Relation to the action system
 
 Within the
-[cross-domain action Primitive candidate](action-state-separation.md), Warrant
+[cross-domain action coordinate candidate](action-state-separation.md), Warrant
 answers:
 
 ```text

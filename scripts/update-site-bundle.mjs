@@ -2,7 +2,9 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 
 const README_PATH = "README.md";
-const FOUNDATION_PATH = "docs/foundation-model.md";
+const FOUNDATION_PATH = "docs/foundation.md";
+const TERMINOLOGY_PATH = "docs/terminology.md";
+const TERMINOLOGY_CONTRACT_PATH = "terminology.json";
 const FORMAL_PATH = "docs/formal-model.md";
 const CASES_PATH = "docs/primitive-discovery-cases.md";
 const REGISTRY_PATH = "registry.json";
@@ -113,13 +115,13 @@ const parseMarkdownTable = (markdown) => {
     }));
 };
 
-const parseFoundationModel = (markdown) => {
+const parseFoundation = (markdown) => {
   const chainMatch = markdown.match(/```text\n([\s\S]*?)\n```/);
-  if (!chainMatch) throw new Error("Foundation model must include the chain text code block");
+  if (!chainMatch) throw new Error("KFD Foundation must include the chain text code block");
   const beforeChain = markdown.slice(0, chainMatch.index).trim();
   const afterChain = markdown.slice((chainMatch.index ?? 0) + chainMatch[0].length).trim();
   return {
-    heading: "Foundation model",
+    heading: "Foundation structure",
     intro: paragraphBlocks(beforeChain)[0] || "",
     layers: parseMarkdownTable(beforeChain),
     chain: chainMatch[1].trim(),
@@ -285,6 +287,7 @@ export const buildSiteBundle = ({
   registry,
   standards,
   liveCaseRegistry,
+  terminology,
 }) => {
   const readme = parseReadme(readmeText);
   const foundationDocument = parseReadme(foundationText);
@@ -294,7 +297,7 @@ export const buildSiteBundle = ({
   const { lead } = introLead(readme.intro);
   const { decisionKinds } = introLead(readme.sections["What KFD is"] || "");
   const foundationTriad = parseFoundationTriad(readme.sections["Foundation triad"] || "");
-  const foundationModel = parseFoundationModel(foundationDocument.sections["Foundation model"] || "");
+  const foundation = parseFoundation(foundationDocument.sections["Foundation structure"] || "");
   const productWitness = parseProductWitness(foundationDocument.sections["Load-bearing product witness"] || "");
   const practiceGuidelines = parsePracticeGuidelines(foundationDocument.sections["Practice guidelines"] || "");
   const productProofPath = parseProductProofPath(readme.sections["Product proof path"] || "");
@@ -344,10 +347,10 @@ export const buildSiteBundle = ({
       presentation: "historical-context",
     }),
     section({
-      id: "foundation-model",
-      sourceHeading: "Foundation model",
-      title: "Foundation model",
-      markdown: foundationDocument.sections["Foundation model"],
+      id: "foundation-structure",
+      sourceHeading: "Foundation structure",
+      title: "Foundation structure",
+      markdown: foundationDocument.sections["Foundation structure"],
       role: "detail",
       priority: 70,
       presentation: "layered-model",
@@ -442,6 +445,7 @@ export const buildSiteBundle = ({
       standards: STANDARDS_PATH,
       liveCaseRegistry: LIVE_CASE_REGISTRY_PATH,
       candidateRegistry: CANDIDATE_REGISTRY_PATH,
+      terminology: TERMINOLOGY_CONTRACT_PATH,
       decisionsDir: "decisions",
       candidatesDir: "drafts",
     },
@@ -449,6 +453,7 @@ export const buildSiteBundle = ({
       home: "/",
       foundation: "/foundation",
       formal: "/formal",
+      terminology: "/terminology",
       cases: "/cases",
       liveCasePattern: "/cases/live/{id}",
       candidates: "/drafts",
@@ -466,7 +471,7 @@ export const buildSiteBundle = ({
       decisionKinds,
       futurePicture,
       foundationTriad,
-      foundationModel,
+      foundation,
       productWitness,
       practiceGuidelines,
       productProofPath,
@@ -495,7 +500,7 @@ export const buildSiteBundle = ({
         detail: {
           route: "/foundation",
           source: FOUNDATION_PATH,
-          sections: ["foundation-model", "load-bearing-product-witness", "practice-guidelines"],
+          sections: ["foundation-structure", "load-bearing-product-witness", "practice-guidelines"],
         },
         readingPath: ["/", "/foundation", "/formal", "/cases", "/drafts", "/{number}"],
         support: ["agent-quickstart", "decision-metadata"],
@@ -520,7 +525,7 @@ export const buildSiteBundle = ({
       },
     },
     foundationPage: {
-      id: "foundation-model",
+      id: "foundation",
       title: foundationDocument.title,
       sourcePath: FOUNDATION_PATH,
       url: "/foundation",
@@ -545,10 +550,21 @@ export const buildSiteBundle = ({
       title: casesDocument.title,
       sourcePath: CASES_PATH,
       url: "/cases",
-      relationship: "historical-companion-to-foundation-model",
+      relationship: "historical-companion-to-kfd-foundation",
       normative: false,
       authorityNote: "Historical facts are source-bound; KFD replay is explanatory. Numbered KFD decisions remain authoritative.",
       markdown: stripFrontmatter(casesText),
+    },
+    terminologyPage: {
+      id: "terminology",
+      title: "KFD Terminology Contract",
+      sourcePath: TERMINOLOGY_PATH,
+      url: "/terminology",
+      relationship: "canonical-vocabulary-for-all-kfd-surfaces",
+      normative: false,
+      authorityNote: "Numbered decisions remain normative; this contract governs naming and type distinctions across their projections.",
+      contract: terminology,
+      markdown: normalizeLines(readFileSync(TERMINOLOGY_PATH, "utf8")),
     },
     liveCases: {
       source: LIVE_CASE_REGISTRY_PATH,
@@ -638,18 +654,19 @@ export const buildSiteBundle = ({
       ownedByKfd: [
         "homepage title and text",
         "homepage section projection from README.md",
-        "foundation explanation page from docs/foundation-model.md",
+        "foundation explanation page from docs/foundation.md",
         "formal reference overview from docs/formal-model.md",
         "historical cases page from docs/primitive-discovery-cases.md",
         "live Primitive case registry and case bodies from cases/",
         "pre-number KFD candidate registry, index, and bodies from drafts/",
         "non-normative formal candidate pages from drafts/formal/",
         "foundation triad commitments",
-        "foundation model layers and chain",
+        "foundation structure layers and chain",
         "product proof path text",
         "agent quickstart text",
         "decision metadata",
         "decision metadata fact source",
+        "canonical terminology contract and explanatory subtitles from terminology.json",
         "license and official-status boundary",
         "decision markdown bodies",
         "decision usage page mapping",
@@ -681,6 +698,7 @@ export const readInputs = () => ({
   registry: JSON.parse(readFileSync(REGISTRY_PATH, "utf8")),
   standards: JSON.parse(readFileSync(STANDARDS_PATH, "utf8")),
   liveCaseRegistry: JSON.parse(readFileSync(LIVE_CASE_REGISTRY_PATH, "utf8")),
+  terminology: JSON.parse(readFileSync(TERMINOLOGY_CONTRACT_PATH, "utf8")),
 });
 
 export const generatedSiteBundle = () => buildSiteBundle(readInputs());

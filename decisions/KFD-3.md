@@ -48,7 +48,9 @@ Participants should be able to discover what the product can do, why it is
 useful, what it observed or changed, and what boundary applies without relying
 on oral context, private maintainer memory, or web-only documentation.
 
-Important value claims bind to KFD-2 facts, evidence, and residual-risk state.
+KFD calls such a bounded statement a **Participant Value Claim**. Important
+Participant Value Claims bind to KFD-2 facts, evidence, assurance
+responsibility, and residual-risk state.
 Human-readable and machine-readable surfaces should expose the same
 participant-relevant information.
 

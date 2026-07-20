@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-agent-runtime/suite.schema.json",
+  "title": "KFD Runtime 100 vector registry",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "contract",
+    "profile",
+    "suite",
+    "vectors"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "contract": {
+      "const": "kfd.agent-runtime-vector-registry/v1"
+    },
+    "profile": {
+      "type": "object",
+      "required": [
+        "id",
+        "version"
+      ],
+      "properties": {
+        "id": {
+          "const": "kfd-agent-runtime"
+        },
+        "version": {
+          "const": "0.1.0-alpha.1"
+        }
+      },
+      "additionalProperties": false
+    },
+    "suite": {
+      "type": "object",
+      "required": [
+        "id",
+        "version",
+        "fixedVectorCount"
+      ],
+      "properties": {
+        "id": {
+          "const": "kfd-runtime-100"
+        },
+        "version": {
+          "const": "0.1.0-alpha.1"
+        },
+        "fixedVectorCount": {
+          "const": 100
+        }
+      },
+      "additionalProperties": false
+    },
+    "vectors": {
+      "type": "array",
+      "minItems": 100,
+      "maxItems": 100,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "partition",
+          "category",
+          "polarity",
+          "request",
+          "expect",
+          "claim"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^(pursuit|atlas|warrant|action|episode-fact|recovery)-[0-9]{3}-[a-z0-9-]+$"
+          },
+          "partition": {
+            "enum": [
+              "core",
+              "experimental"
+            ]
+          },
+          "category": {
+            "enum": [
+              "pursuit",
+              "atlas",
+              "warrant",
+              "action",
+              "episode-fact",
+              "recovery"
+            ]
+          },
+          "polarity": {
+            "enum": [
+              "positive",
+              "negative"
+            ]
+          },
+          "request": {
+            "type": "object",
+            "required": [
+              "operation",
+              "input"
+            ],
+            "properties": {
+              "operation": {
+                "type": "string",
+                "minLength": 1
+              },
+              "input": {
+                "type": "object"
+              }
+            },
+            "additionalProperties": false
+          },
+          "expect": {
+            "type": "object",
+            "required": [
+              "status",
+              "code"
+            ],
+            "properties": {
+              "status": {
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ]
+              },
+              "code": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false
+          },
+          "claim": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

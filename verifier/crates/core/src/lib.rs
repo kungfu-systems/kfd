@@ -126,6 +126,7 @@ pub fn verify_bundle(bundle: &VerificationBundle) -> VerificationReport {
         "pack" => profiles::pack::verify(bundle),
         "atlas" => profiles::atlas::verify(bundle),
         "episode" => profiles::episode::verify(bundle),
+        "agent-runtime-report" => profiles::agent_runtime_report::verify(bundle),
         other => invalid_bundle_report(format!("unsupported verification kind: {other}")),
     }
 }

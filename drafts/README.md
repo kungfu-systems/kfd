@@ -52,7 +52,7 @@ Promoted lineage:
   promoted into active [KFD-7](../decisions/KFD-7.md).
 
 The three remaining candidates elaborate independently qualifiable
-cross-domain action Primitives. None of their slot hints allocates or reserves
+cross-domain action coordinates. None of their slot hints allocates or reserves
 a KFD number.
 
 See [Contributing](../CONTRIBUTING.md) and

@@ -89,10 +89,22 @@
       "purpose": "Start from the KFD worldview and current decision set."
     },
     {
-      "id": "foundation-model",
-      "surface": "docs/foundation-model.md",
+      "id": "foundation",
+      "surface": "docs/foundation.md",
       "participants": ["human-reader", "agent-reader", "site-consumer"],
       "purpose": "Read or render the complete non-numbered explanation behind the concise KFD homepage."
+    },
+    {
+      "id": "terminology",
+      "surface": "docs/terminology.md",
+      "participants": ["human-reader", "agent-reader", "site-consumer", "package-consumer"],
+      "purpose": "Resolve canonical KFD terms and their layer boundaries from one human-readable authority."
+    },
+    {
+      "id": "terminology-contract",
+      "surface": "terminology.json",
+      "participants": ["agent-reader", "site-consumer", "package-consumer", "release-system"],
+      "purpose": "Consume and verify the machine-readable projection of canonical KFD terminology."
     },
     {
       "id": "formal-model",
@@ -201,11 +213,27 @@
       "maturity": "stable"
     },
     {
-      "id": "foundation-model",
+      "id": "foundation",
       "kind": "markdown-doc",
       "participants": ["human-reader", "agent-reader", "site-consumer"],
       "value": "Complete non-numbered explanation of the KFD worldview and its path from capability to discovery.",
-      "discoverability": { "fromMinimalEntrypoint": true, "path": "docs/foundation-model.md" },
+      "discoverability": { "fromMinimalEntrypoint": true, "path": "docs/foundation.md" },
+      "maturity": "stable"
+    },
+    {
+      "id": "terminology",
+      "kind": "markdown-doc",
+      "participants": ["human-reader", "agent-reader", "site-consumer", "package-consumer"],
+      "value": "Canonical KFD vocabulary, explanatory subtitles, 2 + 3 structure, and explicit anti-misreading boundaries among ontology, evidence, action, trust, and cooperation layers.",
+      "discoverability": { "fromMinimalEntrypoint": true, "path": "docs/terminology.md" },
+      "maturity": "stable"
+    },
+    {
+      "id": "terminology-contract",
+      "kind": "json-api",
+      "participants": ["agent-reader", "site-consumer", "package-consumer", "release-system"],
+      "value": "Machine-readable canonical terms, explanatory subtitles, structure membership, and anti-misreading boundaries that prevent vocabulary drift across KFD surfaces.",
+      "discoverability": { "fromMinimalEntrypoint": true, "path": "terminology.json" },
       "maturity": "stable"
     },
     {
@@ -435,14 +463,14 @@
   ],
   "valueEvidence": [
     {
-      "id": "kfd-foundation-model",
-      "claim": "KFD helps humans and agents understand the foundation model and inspect precise non-normative formal references before adopting or extending KFD decisions.",
+      "id": "kfd-foundation",
+      "claim": "KFD helps humans and agents understand the KFD Foundation and inspect precise non-normative formal references before adopting or extending KFD decisions.",
       "participants": ["human-reader", "agent-reader", "external-contributor", "adopter", "independent-reviewer", "maintainer"],
       "facts": [
         { "path": "README.md" },
         { "path": "CONTRIBUTING.md" },
         { "path": "GOVERNANCE.md" },
-        { "path": "docs/foundation-model.md" },
+        { "path": "docs/foundation.md" },
         { "path": "docs/formal-model.md" },
         { "path": "docs/KFD-1-formal.md" },
         { "path": "docs/KFD-2-formal.md" },
@@ -627,7 +655,7 @@
     {
       "id": "read-human-docs",
       "participants": ["human-reader"],
-      "choice": "Read README.md, docs/foundation-model.md, docs/formal-model.md, docs/MAP.md, decisions/*.md, docs/KFD-N-formal.md, pre-number candidates through drafts/registry.json, and provisional cases through cases/registry.json directly."
+      "choice": "Read README.md, docs/foundation.md, docs/formal-model.md, docs/MAP.md, decisions/*.md, docs/KFD-N-formal.md, pre-number candidates through drafts/registry.json, and provisional cases through cases/registry.json directly."
     },
     {
       "id": "consume-machine-metadata",
@@ -677,6 +705,6 @@
   "closure": {
     "classificationMode": "closed-world",
     "unclassifiedEntrypointsPolicy": "fail",
-    "reachableSurfaceSource": "This file plus package.json#exports, CONTRIBUTING.md, GOVERNANCE.md, .github/ISSUE_TEMPLATE/*.yml, .github/pull_request_template.md, docs/foundation-model.md, docs/formal-model.md, docs/KFD-*-formal.md, docs/MAP.md, cases/registry.json, drafts/registry.json, registry.json, standards.json, and Buildchain witness files."
+    "reachableSurfaceSource": "This file plus package.json#exports, CONTRIBUTING.md, GOVERNANCE.md, .github/ISSUE_TEMPLATE/*.yml, .github/pull_request_template.md, docs/foundation.md, docs/formal-model.md, docs/KFD-*-formal.md, docs/MAP.md, cases/registry.json, drafts/registry.json, registry.json, standards.json, and Buildchain witness files."
   }
 }

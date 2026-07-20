@@ -4,9 +4,11 @@
 [Formal reference](KFD-7-formal.md) ·
 [Documentation map](MAP.md)
 
-KFD-7 defines an active cross-domain action model that keeps direction,
-perspective, authority, and occurrence independently addressable. The
-authoritative text is `decisions/KFD-7.md`; its registry status is `active`.
+KFD-7 defines an active Fact-Episode Ontology and a cross-domain action model.
+Facts preserve admitted state, Episodes preserve replayable causal occurrence,
+and Action Responsibility Geometry keeps perspective, direction, and authority
+independently addressable. The authoritative text is `decisions/KFD-7.md`; its
+registry status is `active`.
 
 ## Package surface
 
@@ -15,7 +17,8 @@ authoritative text is `decisions/KFD-7.md`; its registry status is `active`.
   review boundary, and non-claims.
 - `evidence/kfd-7/activation-record.json`: the machine activation verdict and
   commit-addressed product witnesses.
-- `docs/KFD-7-formal.md`: the non-normative Fact/Episode and action-geometry
+- `docs/KFD-7-formal.md`: the non-normative Fact/Episode and action
+  responsibility geometry
   reference.
 - `drafts/action-state-separation.md`: preserved source-candidate lineage.
 - `drafts/atlas-action-perspective.md`: non-binding Atlas elaboration
@@ -26,39 +29,77 @@ authoritative text is `decisions/KFD-7.md`; its registry status is `active`.
   candidate.
 - `standards.json#/standards/kfd-7`: identity, status, formal reference,
   concepts, and digests.
-- `schemas/kfd-7/action-contract.schema.json`: version 2 draft Domain Profile
-  declaration against the Action Geometry.
+- `schemas/kfd-7/domain-profile.schema.json`: version 1 Domain Profile
+  Declaration against the Action Responsibility Geometry.
 - `verifier/fixtures/kfd-7/`: conforming draft and fail-visible negative
   declarations.
 - `scripts/check.mjs`: registry, document, metadata, route, and evidence
   closure.
 
-The action-contract schema fixes only the reference declaration and activation
-boundary. It does not choose a product store, API, CLI, GUI, Git coordinate,
-database key, or universal lifecycle vocabulary. Product dogfood still decides
-whether any concrete Domain Profile deserves stable activation.
+The schema fixes the Domain Profile declaration and activation boundary. It
+does not choose a product store, API, CLI, GUI, Git coordinate, database key,
+or universal lifecycle vocabulary. Product dogfood still decides whether any
+concrete Domain Profile deserves stable activation.
 
-## Action Geometry and Domain Profiles
+## Fact-Episode Ontology, Action Responsibility Geometry, and Domain Profiles
 
-Action Geometry is the cross-domain structure of Fact cuts, causal records,
-five independently addressable responsibilities, cross-role invariants, and
-the conservative session projection. Atlas, Pursuit, Warrant, Fact, and
-Episode are responsibilities or reference action Primitives in this geometry;
-they are not Profiles.
+The **Fact-Episode Ontology** distinguishes admitted state from realized causal
+occurrence. **Action Responsibility Geometry** is the cross-domain responsibility model over
+that ontology: Atlas, Pursuit, and Warrant remain independently addressable
+under cross-component invariants and a conservative session projection.
+"Cross-domain responsibility model" is its explanatory subtitle, not a second
+formal term. Atlas, Pursuit, and Warrant are reference action coordinates; Fact
+and Episode are ontology bindings. None is a Profile.
+
+The core terms use one canonical `2 + 3` reading:
+
+| Structure | Term | Canonical explanatory subtitle |
+| --- | --- | --- |
+| Fact-Episode Ontology | **Fact** | Admitted state at a declared evidence boundary |
+| Fact-Episode Ontology | **Episode** | Replayable causal record between Fact cuts |
+| Action Responsibility Geometry | **Atlas** | Declared perspective over admitted facts |
+| Action Responsibility Geometry | **Pursuit** | Continuing direction and progress relation |
+| Action Responsibility Geometry | **Warrant** | Bounded authority for admissible transitions |
+
+These subtitles explain the canonical terms; they do not create aliases. A
+Fact is not absolute truth. A Fact Cut is the independently addressable formal
+carrier of admitted Fact state, not a third ontology binding. An Episode is
+not proof of success, progress, completion, or authorization. Atlas is not
+complete reality, Pursuit is not authority, and Warrant is not occurrence.
 
 A Domain Profile declares its product and implementation coordinate,
-qualification state, five responsibility mappings, domain field schemas and
-lifecycle terms, supported transitions, prohibited inferences, evidence
-obligations, non-claims, extensions, and activation verdict. The complete
-draft example is `verifier/fixtures/kfd-7/valid-action-contract.json`.
+qualification state, two ontology bindings, three action-coordinate mappings,
+domain field schemas and lifecycle terms, supported transitions, prohibited
+inferences, evidence obligations, non-claims, extensions, and activation
+verdict. The complete draft example is
+`verifier/fixtures/kfd-7/valid-domain-profile.json`.
 
-Products may map several responsibilities to one physical record or familiar
-session surface. They still declare all five mappings so an independent reader
-can see which default, projection, or source authority carries each decision.
-This requirement preserves inspectability without requiring five user-facing
-objects.
+Products may map several bindings and responsibilities to one physical record,
+type, API, service, or familiar session surface. They still declare all five so
+an independent reader can see which default, projection, source authority,
+cut, and version carries each decision. This requirement preserves semantic
+distinguishability and traceability without requiring five user-facing or
+physical objects.
 
-Each supported transition declares its subject role, operation, Domain Profile
+The canonical terms are:
+
+| Use | Term |
+| --- | --- |
+| Contract-world state and occurrence | **Fact-Episode Ontology** |
+| Cross-domain model | **Action Responsibility Geometry** |
+| Adopter specialization | **Domain Profile** |
+| Adopter machine artifact | **Domain Profile Declaration** |
+
+The declaration expresses the semantic split directly:
+
+```text
+ontologyBindings[]    fact, episode
+actionCoordinates[]   atlas, pursuit, warrant
+```
+
+There is no combined role array or alternate pre-stable interface.
+
+Each supported transition declares its subject component, operation, Domain Profile
 state terms, preconditions, effect, receipt, evidence, denial reasons, and
 residual risk. Unknown mappings and transitions fail closed. Domain Profile
 state strings do not become universal KFD enums merely because one adopter
@@ -119,7 +160,7 @@ experience while making complex work representable without hidden state.
 
 An adopter should test both directions: simple work round-trips through the
 action model without semantic loss or object ceremony, and complex work
-reveals the role whose independence has become decision-relevant.
+reveals the component whose independence has become decision-relevant.
 
 ## Qualification by theorem reuse
 
@@ -153,15 +194,19 @@ The native and WebAssembly verifier projections package the same schema:
 
 ```bash
 npx @kungfu-tech/kfd verify kfd-record \
-  verifier/fixtures/kfd-7/valid-action-contract.json
+  verifier/fixtures/kfd-7/valid-domain-profile.json
 ```
 
-The verifier rejects missing roles, missing standard theorem references,
-unknown closed-vocabulary values, incomplete transitions, missing
+The verifier rejects missing ontology bindings or action-coordinate mappings,
+missing standard theorem references, unknown closed-vocabulary values,
+incomplete transitions, missing
 round-trip/context evidence categories, and premature activation. It remains
-offline, non-qualifying, and non-self-certified. Passing proves only record
-structure; runtime and qualification evidence remain product and release
-responsibilities.
+offline, non-qualifying, and non-self-certified. It checks semantic mapping
+closure and retained evidence references; it does not count physical records,
+classes, tables, APIs, processes, or interface components. Passing proves only
+record structure. Counterfactual distinguishability, independent
+invalidation, runtime behavior, and qualification evidence remain product and
+release responsibilities.
 
 ## Activation evidence boundary
 

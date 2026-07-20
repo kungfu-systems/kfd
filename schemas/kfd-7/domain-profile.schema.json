@@ -1,14 +1,16 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://kfd.libkungfu.dev/schemas/kfd-7/action-contract.schema.json",
-  "title": "KFD-7 Action Geometry Domain Profile contract",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-7/domain-profile.schema.json",
+  "title": "KFD-7 Domain Profile Declaration",
+  "description": "Declares how one adopting domain binds representations to the KFD-7 Fact-Episode Ontology and maps direction, perspective, and authority into the Action Responsibility Geometry. Structural validity does not qualify or activate a Domain Profile.",
   "type": "object",
   "required": [
     "schemaVersion",
     "contract",
     "standard",
-    "profile",
-    "roles",
+    "domainProfile",
+    "ontologyBindings",
+    "actionCoordinates",
     "transitions",
     "prohibitedInferences",
     "qualificationBasis",
@@ -19,94 +21,16 @@
   ],
   "properties": {
     "$schema": {
-      "const": "https://kfd.libkungfu.dev/schemas/kfd-7/action-contract.schema.json"
+      "const": "https://kfd.libkungfu.dev/schemas/kfd-7/domain-profile.schema.json"
     },
     "schemaVersion": {
-      "const": 2
+      "const": 1
     },
     "contract": {
-      "const": "kfd-7-action-contract"
+      "const": "kfd-7-domain-profile"
     },
     "standard": {
       "const": "kfd-7"
-    },
-    "profile": {
-      "$ref": "#/$defs/profile"
-    },
-    "roles": {
-      "type": "array",
-      "minItems": 5,
-      "maxItems": 5,
-      "items": {
-        "$ref": "#/$defs/roleDeclaration"
-      },
-      "allOf": [
-        {
-          "contains": {
-            "type": "object",
-            "properties": {
-              "role": {
-                "const": "fact"
-              }
-            },
-            "required": [
-              "role"
-            ]
-          }
-        },
-        {
-          "contains": {
-            "type": "object",
-            "properties": {
-              "role": {
-                "const": "episode"
-              }
-            },
-            "required": [
-              "role"
-            ]
-          }
-        },
-        {
-          "contains": {
-            "type": "object",
-            "properties": {
-              "role": {
-                "const": "pursuit"
-              }
-            },
-            "required": [
-              "role"
-            ]
-          }
-        },
-        {
-          "contains": {
-            "type": "object",
-            "properties": {
-              "role": {
-                "const": "atlas"
-              }
-            },
-            "required": [
-              "role"
-            ]
-          }
-        },
-        {
-          "contains": {
-            "type": "object",
-            "properties": {
-              "role": {
-                "const": "warrant"
-              }
-            },
-            "required": [
-              "role"
-            ]
-          }
-        }
-      ]
     },
     "transitions": {
       "type": "array",
@@ -178,6 +102,7 @@
       "$ref": "#/$defs/qualificationBasis"
     },
     "evidenceObligations": {
+      "description": "Evidence obligations concern semantic distinguishability, traceability, runtime behavior, and qualification; physical component count is not evidence.",
       "type": "array",
       "minItems": 13,
       "items": {
@@ -189,7 +114,7 @@
             "type": "object",
             "properties": {
               "category": {
-                "const": "role-deletion-or-fusion"
+                "const": "semantic-component-deletion-or-fusion"
               }
             },
             "required": [
@@ -372,6 +297,97 @@
     },
     "activation": {
       "$ref": "#/$defs/activation"
+    },
+    "domainProfile": {
+      "description": "Identity, implementation coordinate, and qualification state of the adopting Domain Profile.",
+      "$ref": "#/$defs/domainProfile"
+    },
+    "ontologyBindings": {
+      "description": "Exactly two semantic bindings: admitted Fact state and replayable Episode occurrence. Physical storage may be shared, but the bindings remain independently traceable.",
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "$ref": "#/$defs/ontologyBinding"
+      },
+      "allOf": [
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "binding": {
+                "const": "fact"
+              }
+            },
+            "required": [
+              "binding"
+            ]
+          }
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "binding": {
+                "const": "episode"
+              }
+            },
+            "required": [
+              "binding"
+            ]
+          }
+        }
+      ]
+    },
+    "actionCoordinates": {
+      "description": "Exactly three independently addressable action coordinates: direction (Pursuit), perspective (Atlas), and bounded authority (Warrant).",
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "$ref": "#/$defs/actionCoordinate"
+      },
+      "allOf": [
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "coordinate": {
+                "const": "pursuit"
+              }
+            },
+            "required": [
+              "coordinate"
+            ]
+          }
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "coordinate": {
+                "const": "atlas"
+              }
+            },
+            "required": [
+              "coordinate"
+            ]
+          }
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "coordinate": {
+                "const": "warrant"
+              }
+            },
+            "required": [
+              "coordinate"
+            ]
+          }
+        }
+      ]
     }
   },
   "additionalProperties": false,
@@ -399,17 +415,6 @@
       "then": {
         "type": "object",
         "properties": {
-          "profile": {
-            "type": "object",
-            "properties": {
-              "qualificationStatus": {
-                "const": "qualified"
-              }
-            },
-            "required": [
-              "qualificationStatus"
-            ]
-          },
           "activation": {
             "type": "object",
             "required": [
@@ -493,121 +498,28 @@
                 }
               }
             ]
+          },
+          "domainProfile": {
+            "type": "object",
+            "properties": {
+              "qualificationStatus": {
+                "const": "qualified"
+              }
+            },
+            "required": [
+              "qualificationStatus"
+            ]
           }
         }
       }
     }
   ],
   "$defs": {
-    "profile": {
-      "type": "object",
-      "required": [
-        "id",
-        "version",
-        "product",
-        "implementation",
-        "qualificationStatus"
-      ],
-      "properties": {
-        "id": {
-          "type": "string",
-          "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$"
-        },
-        "version": {
-          "type": "string",
-          "minLength": 1
-        },
-        "product": {
-          "type": "string",
-          "minLength": 1
-        },
-        "implementation": {
-          "type": "string",
-          "minLength": 1
-        },
-        "qualificationStatus": {
-          "enum": [
-            "provisional",
-            "qualifying",
-            "qualified",
-            "rejected"
-          ]
-        }
-      },
-      "additionalProperties": false
-    },
-    "roleDeclaration": {
-      "type": "object",
-      "required": [
-        "role",
-        "identity",
-        "sourceAuthority",
-        "responsibility",
-        "lifecycleVocabulary",
-        "requiredEvidence",
-        "nonClaims"
-      ],
-      "properties": {
-        "role": {
-          "enum": [
-            "fact",
-            "episode",
-            "pursuit",
-            "atlas",
-            "warrant"
-          ]
-        },
-        "profileTerm": {
-          "type": "string",
-          "minLength": 1
-        },
-        "identity": {
-          "type": "string",
-          "minLength": 1
-        },
-        "sourceAuthority": {
-          "type": "string",
-          "minLength": 1
-        },
-        "responsibility": {
-          "type": "string",
-          "minLength": 1
-        },
-        "lifecycleVocabulary": {
-          "type": "array",
-          "minItems": 1,
-          "uniqueItems": true,
-          "items": {
-            "type": "string",
-            "minLength": 1
-          }
-        },
-        "requiredEvidence": {
-          "type": "array",
-          "minItems": 1,
-          "uniqueItems": true,
-          "items": {
-            "type": "string",
-            "minLength": 1
-          }
-        },
-        "nonClaims": {
-          "type": "array",
-          "minItems": 1,
-          "uniqueItems": true,
-          "items": {
-            "type": "string",
-            "minLength": 1
-          }
-        }
-      },
-      "additionalProperties": false
-    },
     "transition": {
       "type": "object",
       "required": [
         "id",
-        "subjectRole",
+        "subject",
         "operation",
         "from",
         "to",
@@ -622,15 +534,6 @@
         "id": {
           "type": "string",
           "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-        },
-        "subjectRole": {
-          "enum": [
-            "fact",
-            "episode",
-            "pursuit",
-            "atlas",
-            "warrant"
-          ]
         },
         "operation": {
           "enum": [
@@ -699,6 +602,15 @@
             "type": "string",
             "minLength": 1
           }
+        },
+        "subject": {
+          "enum": [
+            "fact",
+            "episode",
+            "pursuit",
+            "atlas",
+            "warrant"
+          ]
         }
       },
       "additionalProperties": false
@@ -860,7 +772,7 @@
       "properties": {
         "category": {
           "enum": [
-            "role-deletion-or-fusion",
+            "semantic-component-deletion-or-fusion",
             "invalid-transition",
             "export-import-rebuild",
             "backend-migration",
@@ -1015,6 +927,174 @@
         "residualRisk": {
           "type": "string",
           "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "domainProfile": {
+      "type": "object",
+      "required": [
+        "id",
+        "version",
+        "product",
+        "implementation",
+        "qualificationStatus"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$"
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "product": {
+          "type": "string",
+          "minLength": 1
+        },
+        "implementation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "qualificationStatus": {
+          "enum": [
+            "provisional",
+            "qualifying",
+            "qualified",
+            "rejected"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "ontologyBinding": {
+      "description": "Maps one domain representation to admitted Fact state or replayable Episode occurrence.",
+      "type": "object",
+      "required": [
+        "binding",
+        "identity",
+        "sourceAuthority",
+        "semantics",
+        "lifecycleVocabulary",
+        "requiredEvidence",
+        "nonClaims"
+      ],
+      "properties": {
+        "identity": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceAuthority": {
+          "type": "string",
+          "minLength": 1
+        },
+        "lifecycleVocabulary": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "requiredEvidence": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "nonClaims": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "domainTerm": {
+          "type": "string",
+          "minLength": 1
+        },
+        "semantics": {
+          "type": "string",
+          "minLength": 1
+        },
+        "binding": {
+          "enum": [
+            "fact",
+            "episode"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "actionCoordinate": {
+      "description": "Maps one domain representation to a direction, perspective, or bounded-authority coordinate.",
+      "type": "object",
+      "required": [
+        "coordinate",
+        "identity",
+        "sourceAuthority",
+        "semantics",
+        "lifecycleVocabulary",
+        "requiredEvidence",
+        "nonClaims"
+      ],
+      "properties": {
+        "identity": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceAuthority": {
+          "type": "string",
+          "minLength": 1
+        },
+        "lifecycleVocabulary": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "requiredEvidence": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "nonClaims": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "domainTerm": {
+          "type": "string",
+          "minLength": 1
+        },
+        "semantics": {
+          "type": "string",
+          "minLength": 1
+        },
+        "coordinate": {
+          "enum": [
+            "pursuit",
+            "atlas",
+            "warrant"
+          ]
         }
       },
       "additionalProperties": false

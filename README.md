@@ -36,8 +36,9 @@ as its founding implementation.
 
 No principle is load-bearing until it has an inspectable product witness.
 
-[Read the foundation model](docs/foundation-model.md) ·
+[Read the KFD Foundation](docs/foundation.md) ·
 [Inspect the formal model](docs/formal-model.md) ·
+[Use the terminology contract](docs/terminology.md) ·
 [See primitives in history](docs/primitive-discovery-cases.md) ·
 [Inspect live Primitive cases](cases/registry.json) ·
 [Inspect KFD candidates](drafts/registry.json) ·
@@ -115,7 +116,7 @@ requirements in `CONTRIBUTING.md`, while every published prerelease coordinate
 stays immutable. The first stable release freezes number-to-meaning mappings.
 After that freeze, substantive change mints a new KFD that explicitly
 supersedes the old number. The numbered decisions remain authoritative; the
-[foundation model](docs/foundation-model.md) explains how they fit together.
+[KFD Foundation](docs/foundation.md) explains how they fit together.
 
 Stable rendered site: `https://kfd.libkungfu.dev`.
 
@@ -159,7 +160,7 @@ explainable, auditable, and proportionate.
 | [KFD-4](decisions/KFD-4.md) | principle | Views must remain bound to declared perspectives. | active |
 | [KFD-5](decisions/KFD-5.md) | procedure | Primitive discovery must separate genesis from qualification. | active |
 | [KFD-6](decisions/KFD-6.md) | procedure | Autonomous discovery must remain grounded in causal experience. | draft |
-| [KFD-7](decisions/KFD-7.md) | principle | Real-world action must keep direction, perspective, authority, and occurrence independently addressable. | active |
+| [KFD-7](decisions/KFD-7.md) | principle | Real-world action must keep state, occurrence, and action coordinates distinct. | active |
 
 ## Current candidates
 
@@ -177,6 +178,34 @@ The [cross-domain action candidate](drafts/action-state-separation.md) is
 preserved as the lineage promoted into active KFD-7. The machine source is
 [`drafts/registry.json`](drafts/registry.json). Remaining slot hints are
 ordering hypotheses, not allocated KFD numbers, reservations, or promises.
+
+## Experimental protocol profiles
+
+KFD also publishes an
+[Agent Hub alpha profile](protocols/agent-hub/README.md) for exchanging and
+continuing responsibility objects between independently owned Agent Hubs. It
+applies KFD-1, KFD-2, KFD-3, and KFD-7 through a transport-neutral manifest,
+capability contract, exchange envelope, reference state machine, gap matrix,
+and implementer guide.
+
+The profile is not a numbered KFD, stable certification, proof of a conforming
+implementation, vendor adoption, plural-Hub interoperability, or an industry
+standard. Implementations cite its exact alpha version, manifest digest, and
+repository commit.
+
+The experimental
+[Agent Runtime conformance profile](profiles/agent-runtime/README.md) consumes
+that exact Hub root and exposes a topology-neutral black-box adapter, the fixed
+KFD Runtime 100 vector registry, a rooted execution report, and offline native /
+WASM verification. Its 35 Core vectors test the KFD-7 responsibility-separation
+subset; 65 Experimental vectors exercise provisional work-object and recovery
+semantics without promoting them into normative KFD authority.
+
+The suite ships two structurally different reference adapters to prove the
+protocol is executable, not to claim independent product adoption. A passing
+report stays non-qualifying and non-self-certified and binds only the exact
+adapter artifact, profile manifest, suite root, platform, transcript, and
+results.
 
 ## Product proof path
 
@@ -197,7 +226,7 @@ not numbered decisions, accepted Primitive claims, or product capability
 announcements.
 
 The complete explanatory path is published at
-[`docs/foundation-model.md`](docs/foundation-model.md) and projected to the
+[`docs/foundation.md`](docs/foundation.md) and projected to the
 stable site route `/foundation`. It explains the decisions without replacing
 their numbered authoritative texts. The non-normative formal layer begins at
 [`docs/formal-model.md`](docs/formal-model.md), with one versioned formal
@@ -240,6 +269,8 @@ npx @kungfu-tech/kfd verify passport .buildchain/release-passport
 npx @kungfu-tech/kfd verify pack path/to/context-pack
 npx @kungfu-tech/kfd verify atlas path/to/atlas
 npx @kungfu-tech/kfd verify episode path/to/sealed/episode
+npx @kungfu-tech/kfd test agent-runtime --adapter path/to/adapter --output report.json
+npx @kungfu-tech/kfd verify agent-runtime-report report.json
 ```
 
 Each command emits `kfd.verification-report/v1`, remains non-qualifying and
@@ -255,36 +286,39 @@ boundary and public-spec gaps.
 Agents consuming this package should start from the same sources as humans:
 
 1. Read this README for the future picture, foundation triad, and package map.
-2. Read `docs/foundation-model.md` for the complete non-numbered explanation.
-3. Read `docs/formal-model.md` for the authority boundary, shared notation, and
+2. Read `docs/foundation.md` for the complete non-numbered explanation.
+3. Read `docs/terminology.md` or `terminology.json` before interpreting
+   overloaded core terms. The contract fixes their canonical subtitles,
+   `2 + 3` structure, and anti-misreading boundaries for humans and agents.
+4. Read `docs/formal-model.md` for the authority boundary, shared notation, and
    the `Decision -> Formal -> Schema -> Usage -> Witness` traceability chain.
-4. Read `docs/KFD-N-formal.md` when precise domain objects, invariants,
+5. Read `docs/KFD-N-formal.md` when precise domain objects, invariants,
    transitions, invalid states, and proof obligations are needed for a
    particular decision.
-5. Read `docs/primitive-discovery-cases.md` to test the KFD lens against familiar
+6. Read `docs/primitive-discovery-cases.md` to test the KFD lens against familiar
    historical cases and an ordinary cross-machine trace vignette.
-6. Read `cases/registry.json` to discover provisional live Primitive cases,
+7. Read `cases/registry.json` to discover provisional live Primitive cases,
    their current immutable KFD-5 cuts, claim boundaries, and review paths.
-7. Read `drafts/registry.json` to discover non-normative KFD Candidates,
+8. Read `drafts/registry.json` to discover non-normative KFD Candidates,
    non-binding slot hints, promotion gates, and claim boundaries.
-8. Read `standards.json` for canonical KFD numbers, formal reference versions
+9. Read `standards.json` for canonical KFD numbers, formal reference versions
    and hashes, schema IDs, concept names, and interface contracts.
-9. Use `site/kfd-site.json` decision metadata or the KFD-3 collaboration
+10. Use `site/kfd-site.json` decision metadata or the KFD-3 collaboration
    interface fact-source metadata to identify the public KFD fact source.
-10. Use `schemas/kfd-2/trust-taxonomy.schema.json` for KFD-2 residual-risk and
+11. Use `schemas/kfd-2/trust-taxonomy.schema.json` for KFD-2 residual-risk and
    trust-downgrade values. Unknown taxonomy values are invalid.
-11. Use `schemas/kfd-2/trust-claims.schema.json` and
+12. Use `schemas/kfd-2/trust-claims.schema.json` and
    `schemas/kfd-2/trust-assessment.schema.json` when a claim needs generic
    KFD-2 assessment instead of a release-specific passport.
-12. Use `schemas/kfd-3/collaboration-interface.schema.json` and
+13. Use `schemas/kfd-3/collaboration-interface.schema.json` and
    `schemas/kfd-3/witness.schema.json` to inspect collaboration interfaces.
-13. Use `schemas/kfd-1/publication-url-semantics.schema.json` when a package,
+14. Use `schemas/kfd-1/publication-url-semantics.schema.json` when a package,
    paper, specification, or site bundle must distinguish stable reader URLs,
    latest aliases, and immutable versioned artifacts.
-14. If a needed KFD-2 taxonomy value is missing, open a KFD GitHub issue rather
+15. If a needed KFD-2 taxonomy value is missing, open a KFD GitHub issue rather
    than inventing a local value:
    `https://github.com/kungfu-systems/kfd/issues/new?title=KFD-2%20trust%20taxonomy%20extension%20request`.
-15. Use `schemas/kfd-4/observer-perspective.schema.json` to bind timelines to
+16. Use `schemas/kfd-4/observer-perspective.schema.json` to bind timelines to
    their observers and `schemas/kfd-4/perspective-replay.schema.json` to record
    perspective-preserving or contrastive replay. Use
    `schemas/kfd-5/primitive-discovery.schema.json` version 3 to record
@@ -296,9 +330,9 @@ Agents consuming this package should start from the same sources as humans:
    requires plural generation experiments, bounded method comparison, and a
    conditional boundary hypothesis. Read `docs/KFD-7-formal.md` for the
    current Fact/Episode and action-responsibility reference model. Use
-   `schemas/kfd-7/action-contract.schema.json` for a draft, product-neutral
-   Profile declaration; schema validity is non-qualifying and does not activate
-   a concrete product Profile.
+   `schemas/kfd-7/domain-profile.schema.json` for a product-neutral Domain
+   Profile Declaration; schema validity is non-qualifying and does not activate
+   a concrete Domain Profile.
 
 KFD package semver is only the distribution version. KFD-owned machine
 interfaces carry their own `schemaVersion` and `contract` fields. Compatible
@@ -311,7 +345,7 @@ release-claims, and release-trust-passport schemas under `schemas/kfd-2/`.
 The generic schemas let humans, agents, Buildchain, and other systems assess
 whether claims about KFD-1, KFD-3, KFD-4, future KFDs, or product surfaces are
 bound to source facts, evidence, hashes, audit boundaries, residual risk, and
-responsibility state. The release schemas are a release-specific projection of
+assurance responsibility. The release schemas are a release-specific projection of
 that model. See [`docs/KFD-2-usage.md`](docs/KFD-2-usage.md).
 
 KFD-3 also publishes a general collaboration-interface schema and witness
@@ -346,17 +380,22 @@ evaluation, bounded autonomy, and separation between discovery and promotion.
 Its package presence is an experimental interface, not a claim that autonomous
 primitive discovery or method dominance has been achieved.
 
-KFD-7 is an active decision for real-world action. It keeps direction,
-perspective, authority, and occurrence independently addressable over Fact cuts
-and causal records. Its package surface includes the authoritative decision,
-formal reference, usage boundary, standards metadata, preserved candidate
-lineage, and a version 2 action-contract Profile declaration. The schema fixes
-the responsibility, transition, theorem-reference, qualification-evidence,
-non-claim, and activation declaration without fixing product storage or
-lifecycle vocabulary. The retained
+KFD-7 is an active decision for real-world action. It keeps admitted state,
+realized occurrence, direction, perspective, and authority independently
+addressable. Its package surface includes the authoritative decision, formal
+reference, usage boundary, standards metadata, candidate lineage, and the
+version 1 Domain Profile Declaration. The schema separates ontology bindings
+from action coordinates and fixes transition, theorem-reference,
+qualification-evidence, non-claim, and activation declarations without fixing
+product storage or lifecycle vocabulary. The
 [activation evidence](docs/KFD-7-activation.md) binds independently reviewed
 Buildchain and Kungfu Profiles while preserving product-owned qualification and
 the decision's explicit non-claims.
+
+The five names are not five peers. Fact and Episode form the Fact-Episode
+Ontology; Atlas, Pursuit, and Warrant form the Action Responsibility Geometry.
+Their canonical explanatory subtitles and anti-misreading boundaries come
+from `terminology.json`, not from renderer or product-local wording.
 
 ## Decision metadata
 
@@ -466,7 +505,7 @@ typography, and visual assets, but it should not maintain separate wording that
 can drift from this package.
 
 `site/kfd-site.json` is generated from this README and
-`docs/foundation-model.md` and `docs/primitive-discovery-cases.md` by
+`docs/foundation.md` and `docs/primitive-discovery-cases.md` by
 `scripts/update-site-bundle.mjs`. The README owns the concise homepage; the
 foundation document owns the complete explanation; the cases document owns
 the non-normative historical anchors. The generated bundle exposes ordered

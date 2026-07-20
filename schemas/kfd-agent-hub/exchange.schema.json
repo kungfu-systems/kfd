@@ -1,0 +1,523 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-agent-hub/exchange.schema.json",
+  "title": "KFD Agent Hub responsibility exchange",
+  "type": "object",
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "contract",
+    "profile",
+    "exchange",
+    "source",
+    "target",
+    "subjects",
+    "causal",
+    "warrant",
+    "disclosure",
+    "payload",
+    "transport",
+    "receiverVerdict"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "https://kfd.libkungfu.dev/schemas/kfd-agent-hub/exchange.schema.json"
+    },
+    "schemaVersion": { "const": 1 },
+    "contract": { "const": "kfd-agent-hub-exchange" },
+    "profile": {
+      "type": "object",
+      "required": [
+        "id",
+        "version",
+        "manifestDigest",
+        "repositoryCommit",
+        "sourceCapabilityRoot",
+        "targetCapabilityRoot"
+      ],
+      "properties": {
+        "id": { "const": "kfd-agent-hub" },
+        "version": { "const": "0.1.0-alpha.1" },
+        "manifestDigest": { "$ref": "#/$defs/root" },
+        "repositoryCommit": {
+          "type": "string",
+          "pattern": "^(?:[a-f0-9]{40}|[a-f0-9]{64})$"
+        },
+        "sourceCapabilityRoot": { "$ref": "#/$defs/root" },
+        "targetCapabilityRoot": { "$ref": "#/$defs/root" },
+        "negotiatedFeatures": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/slug" },
+          "default": []
+        }
+      },
+      "additionalProperties": false
+    },
+    "exchange": {
+      "type": "object",
+      "required": [
+        "id",
+        "operation",
+        "idempotencyKey",
+        "createdAt",
+        "predecessorExchangeRoots"
+      ],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "operation": { "$ref": "#/$defs/operation" },
+        "idempotencyKey": { "type": "string", "minLength": 1 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "predecessorExchangeRoots": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/root" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "source": { "$ref": "#/$defs/endpoint" },
+    "target": { "$ref": "#/$defs/endpoint" },
+    "subjects": {
+      "type": "object",
+      "required": [
+        "pursuitRoot",
+        "atlasRoot",
+        "warrantRoot",
+        "actionBindingRoot",
+        "episodeRoots",
+        "factRoots",
+        "completionClaimRoots"
+      ],
+      "properties": {
+        "pursuitRoot": { "$ref": "#/$defs/root" },
+        "atlasRoot": { "$ref": "#/$defs/root" },
+        "warrantRoot": { "$ref": "#/$defs/root" },
+        "actionBindingRoot": { "$ref": "#/$defs/root" },
+        "episodeRoots": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/root" }
+        },
+        "factRoots": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/root" }
+        },
+        "completionClaimRoots": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/root" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "causal": {
+      "type": "object",
+      "required": [
+        "baseFactCutRoots",
+        "resultFactCutRoots",
+        "episodeRoots",
+        "predecessorRoots",
+        "knowledgeState"
+      ],
+      "properties": {
+        "baseFactCutRoots": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/root" }
+        },
+        "resultFactCutRoots": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/root" }
+        },
+        "episodeRoots": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/root" }
+        },
+        "predecessorRoots": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/root" }
+        },
+        "knowledgeState": {
+          "enum": [
+            "verified",
+            "degraded",
+            "conflicted",
+            "unavailable",
+            "intentionally-withheld"
+          ]
+        },
+        "conflictRoots": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/root" },
+          "default": []
+        }
+      },
+      "additionalProperties": false
+    },
+    "warrant": {
+      "type": "object",
+      "required": [
+        "root",
+        "issuer",
+        "holder",
+        "subjectRoot",
+        "scopeDigest",
+        "allowedActions",
+        "forbiddenActions",
+        "validFrom",
+        "expiresAt",
+        "status",
+        "revocationRoots",
+        "delegationDepth"
+      ],
+      "properties": {
+        "root": { "$ref": "#/$defs/root" },
+        "issuer": { "type": "string", "minLength": 1 },
+        "holder": { "type": "string", "minLength": 1 },
+        "subjectRoot": { "$ref": "#/$defs/root" },
+        "scopeDigest": { "$ref": "#/$defs/root" },
+        "allowedActions": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/slug" }
+        },
+        "forbiddenActions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/slug" }
+        },
+        "validFrom": { "type": "string", "format": "date-time" },
+        "expiresAt": { "type": "string", "format": "date-time" },
+        "status": {
+          "enum": ["valid", "expired", "revoked", "unresolved", "conflicted"]
+        },
+        "revocationRoots": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/root" }
+        },
+        "delegationDepth": { "type": "integer", "minimum": 0 },
+        "parentRoot": { "$ref": "#/$defs/root" },
+        "attenuation": {
+          "type": "object",
+          "required": [
+            "parentScopeDigest",
+            "scopeRelation",
+            "checkedDimensions"
+          ],
+          "properties": {
+            "parentScopeDigest": { "$ref": "#/$defs/root" },
+            "scopeRelation": { "const": "narrower-or-equal" },
+            "checkedDimensions": {
+              "type": "array",
+              "uniqueItems": true,
+              "minItems": 7,
+              "items": {
+                "enum": [
+                  "subject",
+                  "actions",
+                  "consequence",
+                  "time",
+                  "disclosure",
+                  "delegation-depth",
+                  "forbidden-actions"
+                ]
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "allOf": [
+        {
+          "if": { "required": ["parentRoot"] },
+          "then": { "required": ["attenuation"] }
+        }
+      ],
+      "additionalProperties": false
+    },
+    "disclosure": {
+      "type": "object",
+      "required": [
+        "mode",
+        "omittedPaths",
+        "commitmentRoots",
+        "retentionHints",
+        "residualRisk"
+      ],
+      "properties": {
+        "mode": { "$ref": "#/$defs/disclosureMode" },
+        "omittedPaths": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^(?:/(?:[^~/]|~0|~1)*)*$"
+          }
+        },
+        "commitmentRoots": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/root" }
+        },
+        "retentionHints": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "residualRisk": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        }
+      },
+      "additionalProperties": false
+    },
+    "payload": {
+      "type": "object",
+      "required": ["mediaType", "digest", "bytes"],
+      "properties": {
+        "mediaType": { "type": "string", "minLength": 1 },
+        "digest": { "$ref": "#/$defs/root" },
+        "bytes": { "type": "integer", "minimum": 0 },
+        "inline": {}
+      },
+      "additionalProperties": false
+    },
+    "transport": {
+      "type": "object",
+      "required": ["bindingId", "state"],
+      "properties": {
+        "bindingId": { "$ref": "#/$defs/slug" },
+        "state": { "enum": ["created", "offered", "delivered"] },
+        "receiptDigest": { "$ref": "#/$defs/root" },
+        "deliveredAt": { "type": "string", "format": "date-time" }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "state": { "const": "delivered" } },
+            "required": ["state"]
+          },
+          "then": { "required": ["receiptDigest", "deliveredAt"] }
+        }
+      ],
+      "additionalProperties": false
+    },
+    "receiverVerdict": {
+      "type": "object",
+      "required": [
+        "status",
+        "decisionAuthorityRoots",
+        "acceptedRoots",
+        "reasonCodes",
+        "residualRisk",
+        "conflictRoots"
+      ],
+      "properties": {
+        "status": { "$ref": "#/$defs/verdict" },
+        "decidedAt": { "type": "string", "format": "date-time" },
+        "decisionAuthorityRoots": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/root" }
+        },
+        "acceptedRoots": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/root" }
+        },
+        "reasonCodes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/reasonCode" }
+        },
+        "residualRisk": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "conflictRoots": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/root" }
+        },
+        "completionAssessment": {
+          "type": "object",
+          "required": [
+            "pursuitRoot",
+            "acceptanceRoot",
+            "state",
+            "evidenceRoots",
+            "knownGaps"
+          ],
+          "properties": {
+            "pursuitRoot": { "$ref": "#/$defs/root" },
+            "acceptanceRoot": { "$ref": "#/$defs/root" },
+            "state": {
+              "enum": [
+                "unassessed",
+                "incomplete",
+                "complete",
+                "rejected",
+                "conflicted"
+              ]
+            },
+            "evidenceRoots": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": { "$ref": "#/$defs/root" }
+            },
+            "knownGaps": {
+              "type": "array",
+              "items": { "type": "string", "minLength": 1 }
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "admitted",
+                  "rejected",
+                  "conflicted",
+                  "unavailable",
+                  "intentionally-withheld"
+                ]
+              }
+            },
+            "required": ["status"]
+          },
+          "then": {
+            "required": ["decidedAt"],
+            "properties": {
+              "decisionAuthorityRoots": { "minItems": 1 },
+              "reasonCodes": { "minItems": 1 }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "status": { "const": "conflicted" } },
+            "required": ["status"]
+          },
+          "then": {
+            "properties": { "conflictRoots": { "minItems": 2 } }
+          }
+        }
+      ],
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "root": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "endpoint": {
+      "type": "object",
+      "required": ["hubId", "nodeId", "actorId", "authorityRoots"],
+      "properties": {
+        "hubId": { "type": "string", "minLength": 1 },
+        "nodeId": { "type": "string", "minLength": 1 },
+        "actorId": { "type": "string", "minLength": 1 },
+        "workspaceId": { "type": "string", "minLength": 1 },
+        "organizationId": { "type": "string", "minLength": 1 },
+        "authorityRoots": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/root" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "operation": {
+      "enum": [
+        "capability-advertisement",
+        "responsibility-proposal",
+        "fact-admission",
+        "supersession",
+        "completion-assessment",
+        "warrant-revocation"
+      ]
+    },
+    "disclosureMode": {
+      "enum": [
+        "full",
+        "partial",
+        "redacted",
+        "reference-only",
+        "intentionally-withheld"
+      ]
+    },
+    "verdict": {
+      "enum": [
+        "pending",
+        "admitted",
+        "rejected",
+        "conflicted",
+        "unavailable",
+        "intentionally-withheld"
+      ]
+    },
+    "failureCode": {
+      "enum": [
+        "profile-version-unsupported",
+        "profile-root-mismatch",
+        "required-feature-unsupported",
+        "identity-unresolved",
+        "authority-unresolved",
+        "authority-expired",
+        "authority-revoked",
+        "authority-amplification",
+        "fact-cut-unavailable",
+        "causal-gap",
+        "payload-digest-mismatch",
+        "idempotency-conflict",
+        "conflict-visible",
+        "disclosure-insufficient",
+        "required-field-withheld",
+        "completion-unproved",
+        "local-policy-rejected"
+      ]
+    },
+    "reasonCode": {
+      "enum": [
+        "admission-accepted",
+        "profile-version-unsupported",
+        "profile-root-mismatch",
+        "required-feature-unsupported",
+        "identity-unresolved",
+        "authority-unresolved",
+        "authority-expired",
+        "authority-revoked",
+        "authority-amplification",
+        "fact-cut-unavailable",
+        "causal-gap",
+        "payload-digest-mismatch",
+        "idempotency-conflict",
+        "conflict-visible",
+        "disclosure-insufficient",
+        "required-field-withheld",
+        "completion-unproved",
+        "local-policy-rejected"
+      ]
+    }
+  }
+}

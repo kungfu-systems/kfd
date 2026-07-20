@@ -7,47 +7,63 @@
 
 - Status: experimental
 - Normative: no
-- Formal model version: 2
+- Formal model version: 5
 - Authority: `decisions/KFD-7.md`
 - Decision status: active
 
 ## Imported vocabulary
 
-`FactCut`, `CausalRecord`, `Episode`, `Atlas`, `Pursuit`, `Warrant`,
-`ActionSpace`, `ObservationProjection`, `TargetRelation`,
+`Fact`, `FactCut`, `CausalOccurrence`, `CausalRecord`, `Episode`,
+`CausalExperience`, `Atlas`, `Pursuit`, `Warrant`, `ActionSpace`,
+`ObservationProjection`, `TargetRelation`,
 `AdmissibleTransition`, `RealizedPath`.
 
-## Domain objects
+## Fact-Episode Ontology
 
-Let `F` be a state space admitted by declared fact sources. A fact cut is an
-independently addressable state:
+Let `F` be a state space admitted by declared fact sources. `Fact` denotes
+admitted state at a declared evidence boundary. It does not denote absolute
+truth or every observation. A `FactCut` is an independently addressable
+instance of that state at a declared source, authority, evidence, and time or
+version boundary:
 
 ```text
 f_c in F
 ```
 
-A causal record connects declared cuts:
+A Causal Occurrence `O` is the bounded event sequence or partial order that
+actually occurs between declared cuts. A Causal Record `R` is an
+evidence-bearing representation of that occurrence:
 
 ```text
-E: f_c0 -> f_c1
+O: f_c0 -> f_c1
+R = Record(O, evidence, omissions, loss)
+```
+
+An Episode `E` is the independently addressable and replayable KFD object that
+binds the record to its declared boundaries and perspective:
+
+```text
+E = Episode(id, R, f_c0, f_c1, perspective, declared loss)
 Before(E) = f_c0
 After(E)  = f_c1
 ```
 
-For sequential work:
+For sequential work, `R` may preserve:
 
 ```text
 f_c0 --(u1, r1)--> f_c1 --(u2, r2)--> ... --(un, rn)--> f_cn
 ```
 
 Concurrent work may require a causal DAG or partial order rather than one
-universal clock. `E` is not the endpoint difference:
+universal clock. An Episode is not the endpoint difference:
 
 ```text
 Before(E) = After(E) does not imply Empty(E)
 ```
 
-The object-and-path interpretation is:
+Facts define admitted state. Episodes preserve realized causal occurrence.
+Together they form the ontology over which Action Responsibility Geometry
+operates. The object-and-path interpretation is:
 
 ```text
 Fact cuts  -> object-like admitted states
@@ -55,28 +71,61 @@ Episodes   -> morphism-like realized causal transitions
 compose(E1, E2) only when After(E1) = Before(E2)
 ```
 
-This is a responsibility model, not a claim that every domain is literally a
-mathematical category.
+This is a contract-world ontology, not a claim that every domain is literally
+a mathematical category or that KFD enumerates all of reality.
 
-## Action geometry
+The canonical explanatory subtitles are:
 
-The three action responsibilities constrain different structures over `F`:
+```text
+Fact      Admitted state at a declared evidence boundary
+Episode   Replayable causal record between Fact cuts
+```
+
+`FactCut` (Fact Cut) is the formal carrier of `Fact`, not a third ontology
+binding.
+
+One or more Episodes may be projected as Causal Experience for learning,
+comparison, or discovery:
+
+```text
+Experience = Project({E_1, ..., E_n}, declared selection and loss)
+```
+
+The projection is directional. The occurrence is not its record, the record is
+not yet an Episode, and Causal Experience is not reality itself.
+
+## Action Responsibility Geometry
+
+Action Responsibility Geometry is the cross-domain responsibility model for real-world
+action. The subtitle is explanatory; `Action Responsibility Geometry` remains
+the canonical formal term.
+
+The three action coordinates and their canonical explanatory subtitles are:
+
+```text
+Atlas     Declared perspective over admitted facts
+Pursuit   Continuing direction and progress relation
+Warrant   Bounded authority for admissible transitions
+```
+
+They constrain different structures over `F`:
 
 ```text
 Atlas:    pi_A: F -> O_A
 Pursuit:  target set G_P within F, or ordering/value V_P over reachable states
 Warrant:  admissible transition set C_W(f) from fact cut f
-Episode:  realized causal path gamma_E through F
 ```
 
 `pi_A` is the observation projection: it determines which facts and relations
 are visible from an addressable perspective. `G_P` or `V_P` supplies
 direction: which consequences count as progress. `C_W(f)` is the permission
-cone: which next transitions are authorized. `gamma_E` preserves what actually
-happened.
+cone: which next transitions are authorized. A realized Episode preserves a
+record of the path `gamma_E` that actually happened through the ontology; it
+is not a fourth
+Action Responsibility Geometry coordinate.
 
 The term `cone` means a local set of admissible directions. It does not require
-a differentiable manifold. Each responsibility may itself be internally
+a differentiable manifold. Each coordinate may itself be internally
 high-dimensional.
 
 ## Relations and predicates
@@ -87,7 +136,7 @@ For candidate action `u`:
 Supported_A(f, u)    action u is supported by Atlas A at cut f
 Advances_P(f, u)     action u can advance Pursuit P
 Authorized_W(f, u)   action u is permitted by Warrant W
-Realizes(E, u)       causal record E preserves the realized action
+Realizes(E, u)       Episode E preserves a Causal Record of realized action u
 Admits(f', C)        successor cut f' becomes visible in contract world C
 ```
 
@@ -133,14 +182,32 @@ I14 not SessionCompressible(h) -> the independently relevant roles become
     addressable
 I15 Context payload alone is not a sufficient statistic for valid action
     whenever two states with the same payload have different valid action sets
+I16 Semantic independence is invariant under physical co-location: one record,
+    type, API, process, or interface may carry several responsibilities when
+    each mapping remains traceable and counterfactually distinguishable
 ```
+
+Define semantic distinguishability without imposing physical multiplicity:
+
+```text
+Distinguishable(r_i, r_j, h) iff
+  TraceableSource(r_i, h)
+  and TraceableSource(r_j, h)
+  and ExistsCounterfactualVariation(r_i, r_j, h)
+  and ProhibitedCrossInferenceFailsVisible(r_i, r_j, h)
+```
+
+`ExistsCounterfactualVariation` means that within the adopter's declared
+scope, changing, invalidating, expiring, revoking, or making stale one
+responsibility can change a valid-action or audit conclusion while the other
+responsibility remains fixed. It does not require separate serialized bodies.
 
 ## Conservative session projection
 
 Let `S_c` be the set of ordinary sessions inside the declared low-complexity
-boundary, and let `K_c` be the set of five-responsibility histories that remain
-compressible to one session. A bounded history `h` is session-compressible
-when:
+boundary, and let `K_c` be the set of histories with two ontology bindings and
+three action-coordinate mappings that remain compressible to one session. A
+bounded history `h` is session-compressible when:
 
 ```text
 SessionCompressible(h) =
@@ -167,9 +234,9 @@ Project(h) = (
 )
 ```
 
-`Expand` recovers the five independently addressable responsibilities from the
-session fields and their inspectable defaults. `Project` presents a
-session-compatible view.
+`Expand` recovers the Fact and Episode bindings plus the three independently
+addressable Action Responsibility Geometry mappings from the session fields and their
+inspectable defaults. `Project` presents a session-compatible view.
 
 ### Session round-trip preservation theorem
 
@@ -209,11 +276,12 @@ for all h in CanonicalSessionImage(Expand):
   Expand(Project(h)) equivalent_K h
 ```
 
-It does not hold for arbitrary five-responsibility histories. Several
+It does not hold for arbitrary action histories. Several
 directions, perspectives, authority states, Episodes, or material Fact
 branches contain information that one session cannot preserve.
-`equivalent_K` here means preservation of the five canonical responsibilities
-inside the image of `Expand`; it is not a claim of general causal identity.
+`equivalent_K` here means preservation of the two ontology bindings and three
+action mappings inside the image of `Expand`; it is not a claim of general
+causal identity.
 
 Compression must stop when any assumption becomes decision-relevant:
 
@@ -266,8 +334,8 @@ exists h1, h2:
 
 This is a limitation of treating session context as the sole ontology, not of
 using one physical session record. One record may conform when it explicitly
-preserves the five semantic responsibilities, keeps their sources and defaults
-inspectable, and expands them at complexity breakpoints.
+preserves the two ontology bindings and three action mappings, keeps their
+sources and defaults inspectable, and expands them at complexity breakpoints.
 
 ## Conditional irreducibility
 
@@ -337,18 +405,20 @@ declare current Fact cut
 - Expose the independently relevant roles when a session-compressibility
   assumption fails.
 - Test counterfactual independence and fused alternatives.
+- Show semantic role mappings and their source/cut/version traceability without
+  treating physical component count as evidence.
 - Demonstrate cross-domain transfer and progressive disclosure before
   activation.
 
-## Action Geometry and Domain Profile closure
+## Action Responsibility Geometry and Domain Profile closure
 
-Let the Action Geometry be the cross-domain structure:
+Let the Action Responsibility Geometry be the cross-domain structure:
 
 ```text
-ActionGeometry = (
-  Fact-cut and causal-record substrates,
-  five independently addressable responsibilities,
-  cross-role invariants,
+ActionResponsibilityGeometry = (
+  reference to the Fact-Episode Ontology,
+  Pursuit, Atlas, and Warrant coordinates,
+  cross-component invariants,
   conservative session projection
 )
 ```
@@ -359,7 +429,8 @@ Let a Domain Profile be one adopter's versioned refinement:
 DomainProfile = (
   implementation coordinate,
   qualification status,
-  five responsibility declarations,
+  two ontology-binding declarations,
+  three action-coordinate mapping declarations,
   domain-owned field schemas and lifecycle vocabulary,
   transitions,
   prohibited inferences,
@@ -369,15 +440,16 @@ DomainProfile = (
 )
 ```
 
-The draft machine contract records a `DomainProfile` declaration rather than
-one physical state machine. A conforming Domain Profile maps every
-responsibility to the Action Geometry and may refine domain vocabulary and
-policy, but it cannot redefine the geometry's responsibility boundaries.
+The machine interface records a `DomainProfile` declaration rather than one
+physical state machine. A conforming Domain Profile binds Fact and Episode,
+maps every action coordinate to the Action Responsibility Geometry, and may
+refine domain vocabulary and policy, but it cannot redefine either ontology
+or geometry boundary.
 
 Each transition declaration binds:
 
 ```text
-subject role + prior Domain Profile state + operation + preconditions
+subject component + prior Domain Profile state + operation + preconditions
   -> effect + receipt + evidence + denial reasons + residual risks
 ```
 
@@ -392,7 +464,7 @@ Qualified(C, K) :=
   and session complexity-breakpoint evidence
   and same-payload, different-valid-action-set counterexamples
   and positive and negative transition evidence
-  and role deletion or fusion evidence
+  and semantic-component deletion or fusion evidence
   and export, rebuild, and migration evidence
   and concurrency, retry, or compensation evidence
   and Warrant decay and revocation evidence
@@ -411,7 +483,7 @@ relative to that Domain Profile and cut; it does not establish universal
 minimality.
 
 This separation avoids re-proving the generic model for every product. KFD
-states the Action Geometry and conditional theorem once. A Domain Profile
+states the Action Responsibility Geometry and conditional theorem once. A Domain Profile
 proves that its concrete session fields, defaults, and runtime transitions
 refine the theorem's five observations, then retains breakpoint and
 context-insufficiency witnesses. Empirical usability, runtime correctness, and
@@ -437,11 +509,12 @@ cross-domain transfer remain product evidence.
 
 | Formal statement | Decision source | Schema or check | Verification |
 |---|---|---|---|
-| Fact-cut and causal-record separation | Substrate boundary | KFD-1 formal reference and KFD-7 Domain Profile role declarations | Structural plus product evidence |
-| Atlas/Pursuit/Warrant separation | Action responsibilities | `schemas/kfd-7/action-contract.schema.json` required role closure | Structural plus product and semantic review |
+| Fact-cut and Episode separation | Fact-Episode Ontology | KFD-1 formal reference and KFD-7 Domain Profile ontology-binding declarations | Structural plus product evidence |
+| Atlas/Pursuit/Warrant separation | Action coordinates | `schemas/kfd-7/domain-profile.schema.json` required coordinate closure | Structural plus product and semantic review |
 | `I3-I8` conditional independence | Gate and Activation | Counterfactual product fixtures | Retained in the Buildchain and Kungfu Domain Profile cuts |
 | `I13-I14` conservative session limit | Conservative session limit | theorem reference, Domain Profile refinement, session round-trip, and complexity-breakpoint evidence | Retained in both qualified Domain Profiles |
 | `I15` context insufficiency | Context insufficiency corollary | same-payload, different-valid-action-set counterexamples | Retained in both qualified Domain Profiles |
+| `I16` semantic independence under physical co-location | Action Responsibility Geometry and Domain Profile closure | responsibility mappings, traceability, counterfactual and fail-visible negative evidence | Mixed; never inferred from component count |
 | `I9-I10` path composition and admission | Action closure | Domain Profile Episode/Fact mappings | Mixed |
 | transition and denial declaration | Domain Profile adoption contract | `transitions[]` | Independent schema verification |
 | evidence and non-claim closure | Activation | `evidenceObligations[]`, `nonClaims[]`, `activation` | Independent schema and product verification |

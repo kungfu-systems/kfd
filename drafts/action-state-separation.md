@@ -24,7 +24,7 @@ This candidate was promoted on 2026-07-18 to
 [KFD-7](../decisions/KFD-7.md). The numbered decision is now the authoritative
 rule. The independent
 [KFD-7 formal reference](../docs/KFD-7-formal.md) owns the current
-non-normative action geometry.
+non-normative action responsibility geometry.
 
 This document remains as source-candidate lineage. Its original slot hint was
 non-binding until the explicit promotion allocated KFD-7. The Atlas, Pursuit,
@@ -52,7 +52,7 @@ Episode  -> what happened through a bounded encounter with reality
 ```
 
 Fact and Episode are not proposed here as ordinary domain Primitives. They are
-the minimum operational substrate on which action Primitives can be discovered,
+the minimum operational substrate on which action coordinates can be discovered,
 qualified, and used.
 
 Consequential action requires three independently addressable semantic roles:
@@ -150,8 +150,8 @@ ladder:
 
 ```text
 Fact and Episode substrate
-  -> discover cross-domain action Primitives
-  -> action Primitives structure richer Episodes
+  -> discover cross-domain action coordinates
+  -> action coordinates structure richer Episodes
   -> richer Episodes expose domain boundary pressure
   -> KFD-4 through KFD-6 discover higher-domain Primitives
 ```
@@ -218,7 +218,7 @@ The candidate weakens or fails if:
   preserving its bounded decision semantics;
 - the product keeps all roles permanently explicit or fails to expand them
   when the session compression becomes insufficient;
-- the three proposed action Primitives do not transfer beyond their originating
+- the three proposed action coordinates do not transfer beyond their originating
   software-work context;
 - the state/path model cannot represent concurrency, compensation, or equal-
   endpoint causal differences without hidden reconstruction;

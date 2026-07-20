@@ -5,20 +5,23 @@
 | Your question | Document |
 |---|---|
 | What deepest problem does KFD address, and what decisions exist? | [`../README.md`](../README.md) |
-| How can a bounded, goal-directed system remain continuous while acting and changing under uncertainty? | [`../README.md`](../README.md), then [`foundation-model.md`](foundation-model.md) |
+| How can a bounded, goal-directed system remain continuous while acting and changing under uncertainty? | [`../README.md`](../README.md), then [`foundation.md`](foundation.md) |
 | Is KFD an internal kungfu-systems rulebook or an open engineering standard? | [`../README.md`](../README.md#what-kfd-is) and [`../GOVERNANCE.md`](../GOVERNANCE.md) |
 | Who may propose, challenge, implement, adopt, or review a KFD? | [`../CONTRIBUTING.md`](../CONTRIBUTING.md) |
 | Who controls official KFD numbering, status, and releases? | [`../GOVERNANCE.md`](../GOVERNANCE.md#canonical-authority) |
 | What is the KFD-1/2/3 foundation triad? | [`../README.md`](../README.md#foundation-triad) |
-| What worldview structure does the foundation triad express? | [`foundation-model.md`](foundation-model.md) |
+| What worldview structure does the foundation triad express? | [`foundation.md`](foundation.md) |
 | What is the shared formal notation and authority boundary? | [`formal-model.md`](formal-model.md) |
+| What do Fact, Episode, Atlas, Pursuit, and Warrant mean, and why are they a 2 + 3 structure rather than five peers? | [`terminology.md`](terminology.md#the-core-2--3-structure) |
 | How do Decision, Formal, Schema, Usage, and Witness relate? | [`formal-model.md`](formal-model.md#purpose) |
-| Why does the foundation begin with a procedure rather than a principle? | [`foundation-model.md`](foundation-model.md#why-the-foundation-begins-with-procedure) |
-| How do capability loops, discovery loops, and product witnesses fit together? | [`foundation-model.md`](foundation-model.md) |
-| What is a primitive, why is primitive discovery difficult, and how does KFD address the missing process? | [`foundation-model.md`](foundation-model.md) |
+| Why does the foundation begin with a procedure rather than a principle? | [`foundation.md`](foundation.md#why-the-foundation-begins-with-procedure) |
+| How do capability loops, discovery loops, and product witnesses fit together? | [`foundation.md`](foundation.md) |
+| What is a primitive, why is primitive discovery difficult, and how does KFD address the missing process? | [`foundation.md`](foundation.md) |
 | How can I test the KFD primitive-discovery lens against Git, VisiCalc, the log, and an ordinary trace view? | [`primitive-discovery-cases.md`](primitive-discovery-cases.md) |
 | Where are provisional Primitive candidates tracked as live KFD dogfood? | [`../cases/registry.json`](../cases/registry.json) |
 | Where are pre-number KFD Candidates tracked? | [`../drafts/registry.json`](../drafts/registry.json) |
+| How can independently owned Agent Hubs exchange responsibility without sharing one vendor runtime or cloud? | [`../protocols/agent-hub/README.md`](../protocols/agent-hub/README.md) |
+| How can an Agent runtime produce an implementation-independent KFD Runtime 100 report? | [`../profiles/agent-runtime/README.md`](../profiles/agent-runtime/README.md) and its [`implementer guide`](../profiles/agent-runtime/implementer-guide.md) |
 
 ## Decisions, candidates, and Domain Profiles
 
@@ -41,7 +44,7 @@
 | What four-object agent work state connects Pursuit, Atlas, Warrant, and Episode? | [`../cases/live/proof-carrying-work-object/ontology-split.md`](../cases/live/proof-carrying-work-object/ontology-split.md) |
 | Are Pursuit, Atlas, Warrant, and Episode conditionally distinguishable, and what remains unproved? | [`../cases/live/proof-carrying-work-object/distinguishability.md`](../cases/live/proof-carrying-work-object/distinguishability.md) |
 | What are the current immutable KFD-5 cuts for Pursuit and Warrant? | [`../cases/live/proof-carrying-work-object/cuts/0002-pursuit.json`](../cases/live/proof-carrying-work-object/cuts/0002-pursuit.json) and [`../cases/live/proof-carrying-work-object/cuts/0002-warrant.json`](../cases/live/proof-carrying-work-object/cuts/0002-warrant.json) |
-| What practice guidelines are derived from the foundation triad? | [`foundation-model.md`](foundation-model.md#practice-guidelines) |
+| What practice guidelines are derived from the foundation triad? | [`foundation.md`](foundation.md#practice-guidelines) |
 | How should a product show timeline order from a declared perspective? | [KFD-4](../decisions/KFD-4.md) |
 | What schema should products use for KFD-4 observer-relative timeline views? | [`../schemas/kfd-4/observer-perspective.schema.json`](../schemas/kfd-4/observer-perspective.schema.json) |
 | How should humans and agents discover a load-bearing primitive? | [KFD-5](../decisions/KFD-5.md) |
@@ -49,8 +52,9 @@
 | How should an autonomous discovery loop remain grounded in causal experience? | [KFD-6](../decisions/KFD-6.md) |
 | What schema records a KFD-6 autonomous discovery experiment? | [`../schemas/kfd-6/autonomous-discovery-loop.schema.json`](../schemas/kfd-6/autonomous-discovery-loop.schema.json) |
 | How must real-world action keep direction, perspective, authority, and occurrence distinct? | [KFD-7](../decisions/KFD-7.md) |
-| What is the difference between KFD-7 Action Geometry and a Domain Profile? | [KFD-7](../decisions/KFD-7.md#action-geometry-and-domain-profiles) and [`KFD-7-usage.md`](KFD-7-usage.md#action-geometry-and-domain-profiles) |
-| What schema declares a KFD-7 Domain Profile and activation evidence boundary? | [`../schemas/kfd-7/action-contract.schema.json`](../schemas/kfd-7/action-contract.schema.json) |
+| What is the difference between the Fact-Episode Ontology, Action Responsibility Geometry, and a Domain Profile? | [KFD-7](../decisions/KFD-7.md#action-responsibility-geometry-and-domain-profiles) and [`KFD-7-usage.md`](KFD-7-usage.md#fact-episode-ontology-action-responsibility-geometry-and-domain-profiles) |
+| Why are Fact and Episode ontology bindings rather than action coordinates? | [KFD-7](../decisions/KFD-7.md#fact-episode-ontology) and [`KFD-7-formal.md`](KFD-7-formal.md#fact-episode-ontology) |
+| What schema declares a KFD-7 Domain Profile and activation evidence boundary? | [`../schemas/kfd-7/domain-profile.schema.json`](../schemas/kfd-7/domain-profile.schema.json) |
 
 ## Decision references and implementation
 
@@ -76,7 +80,9 @@
 
 | Your question | Document |
 |---|---|
-| How should an agent quickly understand this package? | [`../README.md`](../README.md#agent-quickstart), then [`foundation-model.md`](foundation-model.md), [`formal-model.md`](formal-model.md), and [`primitive-discovery-cases.md`](primitive-discovery-cases.md) |
+| How should an agent quickly understand this package? | [`../README.md`](../README.md#agent-quickstart), then [`foundation.md`](foundation.md), [`formal-model.md`](formal-model.md), and [`primitive-discovery-cases.md`](primitive-discovery-cases.md) |
+| What is the experimental transport-neutral Agent Hub interoperability profile? | [`../protocols/agent-hub/README.md`](../protocols/agent-hub/README.md), then its [`implementer guide`](../protocols/agent-hub/implementer-guide.md) and [`state machine`](../protocols/agent-hub/state-machine.md) |
+| What is the experimental black-box Agent runtime conformance profile and fixed KFD Runtime 100 suite? | [`../profiles/agent-runtime/README.md`](../profiles/agent-runtime/README.md), its [`normative inventory`](../profiles/agent-runtime/normative-inventory.md), and [`implementer guide`](../profiles/agent-runtime/implementer-guide.md) |
 | What is the concrete self-proof path for KFD-1 through KFD-7? | [`../README.md`](../README.md#product-proof-path), the KFD formal and usage pages, and the package witnesses under [`../.buildchain/`](../.buildchain/) |
 | How do I independently verify KFD records, release passports, Xinfa Pack/Atlas objects, or qualified Git Episodes? | [`verifier.md`](verifier.md) |
 | Where are the verifier semantic differences and public-specification gaps recorded? | [`verifier-inventory.md`](verifier-inventory.md) |

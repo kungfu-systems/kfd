@@ -10,21 +10,21 @@
 Trust must start from facts.
 
 A product must not ask users or agents to trust an important claim before the
-relevant facts and responsibility state are inspectable.
+relevant facts and assurance responsibility are inspectable.
 
 ## Decision
 
 KFD-2 is the generic trust principle for product, artifact, runtime, contract,
 collaboration, and release claims. Capability, accuracy, calibration, scale,
 reputation, and persuasive explanation may support a claim; none can replace
-its fact boundary, residual risk, or responsibility state.
+its fact boundary, residual risk, or assurance responsibility.
 
 The default path is:
 
 ```text
 captured work
   -> inspectable facts
-  -> responsibility state
+  -> assurance responsibility
   -> proof-backed decision
   -> reviewable and exportable record
 ```
@@ -41,7 +41,7 @@ that naturally leaves enough evidence for later review.
 - UI, CLI, API, and agent surfaces lead participants to the fact source before
   asking them to rely on summaries or invisible state.
 - Control actions such as continue, stop, retry, approve, hand off, archive,
-  publish, or revoke derive from responsibility state plus proof.
+  publish, or revoke derive from assurance responsibility plus proof.
 - Extensions, skills, adapters, and plugins do not bypass the fact source or
   silently mutate canonical records.
 - Release and provenance evidence make artifact trust reviewable rather than

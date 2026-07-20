@@ -1,114 +1,11 @@
 {
-  "$schema": "https://kfd.libkungfu.dev/schemas/kfd-7/action-contract.schema.json",
-  "schemaVersion": 2,
-  "contract": "kfd-7-action-contract",
+  "$schema": "https://kfd.libkungfu.dev/schemas/kfd-7/domain-profile.schema.json",
+  "schemaVersion": 1,
+  "contract": "kfd-7-domain-profile",
   "standard": "kfd-7",
-  "profile": {
-    "id": "example-action-profile",
-    "version": "0.1.0",
-    "product": "example",
-    "implementation": "git+https://example.invalid/action@0123456",
-    "qualificationStatus": "provisional"
-  },
-  "roles": [
-    {
-      "role": "fact",
-      "identity": "profile fact ref and cut",
-      "sourceAuthority": "declared profile fact source",
-      "responsibility": "state what holds under a declared authority and cut",
-      "lifecycleVocabulary": [
-        "asserted",
-        "superseded",
-        "degraded"
-      ],
-      "requiredEvidence": [
-        "source coordinate",
-        "cut coordinate"
-      ],
-      "nonClaims": [
-        "does not imply occurrence or authority"
-      ]
-    },
-    {
-      "role": "episode",
-      "identity": "profile episode ref",
-      "sourceAuthority": "profile causal record authority",
-      "responsibility": "preserve bounded causal occurrence",
-      "lifecycleVocabulary": [
-        "open",
-        "sealed",
-        "reconciled"
-      ],
-      "requiredEvidence": [
-        "causal parents",
-        "seal receipt"
-      ],
-      "nonClaims": [
-        "does not imply authorization, success, or completion"
-      ]
-    },
-    {
-      "role": "pursuit",
-      "identity": "profile pursuit ref",
-      "sourceAuthority": "declared intent authority",
-      "responsibility": "preserve intended-change continuity across actions",
-      "lifecycleVocabulary": [
-        "active",
-        "paused",
-        "settled",
-        "abandoned"
-      ],
-      "requiredEvidence": [
-        "acceptance boundary",
-        "settlement evidence"
-      ],
-      "nonClaims": [
-        "does not grant authority"
-      ]
-    },
-    {
-      "role": "atlas",
-      "identity": "profile atlas root",
-      "sourceAuthority": "declared accepted sources and compiler policy",
-      "responsibility": "bind perspective, fact cut, scope, omissions, and loss",
-      "lifecycleVocabulary": [
-        "current",
-        "stale",
-        "conflicted",
-        "superseded"
-      ],
-      "requiredEvidence": [
-        "accepted sources",
-        "cut and loss declaration"
-      ],
-      "nonClaims": [
-        "does not claim complete reality or grant permission"
-      ]
-    },
-    {
-      "role": "warrant",
-      "identity": "profile warrant ref",
-      "sourceAuthority": "declared issuer and derivation policy",
-      "responsibility": "bind bounded authority for a declared transition",
-      "lifecycleVocabulary": [
-        "issued",
-        "attenuated",
-        "expired",
-        "revoked"
-      ],
-      "requiredEvidence": [
-        "issuer",
-        "scope and preconditions"
-      ],
-      "nonClaims": [
-        "does not prove occurrence or transfer residual responsibility"
-      ]
-    }
-  ],
   "transitions": [
     {
       "id": "seal-episode",
-      "subjectRole": "episode",
       "operation": "seal",
       "from": "open",
       "to": "sealed",
@@ -126,7 +23,8 @@
       ],
       "residualRisks": [
         "raw evidence may require a retained full bundle"
-      ]
+      ],
+      "subject": "episode"
     }
   ],
   "prohibitedInferences": [
@@ -172,7 +70,7 @@
   },
   "evidenceObligations": [
     {
-      "category": "role-deletion-or-fusion",
+      "category": "semantic-component-deletion-or-fusion",
       "status": "planned",
       "artifactRefs": [],
       "residualRisk": "role necessity is not yet qualified"
@@ -263,5 +161,109 @@
     "independentReview": "not-yet-performed",
     "productWitnesses": [],
     "residualRisk": "The record is a schema fixture, not product evidence."
-  }
+  },
+  "domainProfile": {
+    "id": "example-action-profile",
+    "version": "0.1.0",
+    "product": "example",
+    "implementation": "git+https://example.invalid/action@0123456",
+    "qualificationStatus": "provisional"
+  },
+  "ontologyBindings": [
+    {
+      "binding": "fact",
+      "identity": "profile fact ref and cut",
+      "sourceAuthority": "declared profile fact source",
+      "lifecycleVocabulary": [
+        "asserted",
+        "superseded",
+        "degraded"
+      ],
+      "requiredEvidence": [
+        "source coordinate",
+        "cut coordinate"
+      ],
+      "nonClaims": [
+        "does not imply occurrence or authority"
+      ],
+      "semantics": "state what holds under a declared authority and cut"
+    },
+    {
+      "binding": "episode",
+      "identity": "profile episode ref",
+      "sourceAuthority": "profile causal record authority",
+      "lifecycleVocabulary": [
+        "open",
+        "sealed",
+        "reconciled"
+      ],
+      "requiredEvidence": [
+        "causal parents",
+        "seal receipt"
+      ],
+      "nonClaims": [
+        "does not imply authorization, success, or completion"
+      ],
+      "semantics": "preserve bounded causal occurrence"
+    }
+  ],
+  "actionCoordinates": [
+    {
+      "coordinate": "pursuit",
+      "identity": "profile pursuit ref",
+      "sourceAuthority": "declared intent authority",
+      "lifecycleVocabulary": [
+        "active",
+        "paused",
+        "settled",
+        "abandoned"
+      ],
+      "requiredEvidence": [
+        "acceptance boundary",
+        "settlement evidence"
+      ],
+      "nonClaims": [
+        "does not grant authority"
+      ],
+      "semantics": "preserve intended-change continuity across actions"
+    },
+    {
+      "coordinate": "atlas",
+      "identity": "profile atlas root",
+      "sourceAuthority": "declared accepted sources and compiler policy",
+      "lifecycleVocabulary": [
+        "current",
+        "stale",
+        "conflicted",
+        "superseded"
+      ],
+      "requiredEvidence": [
+        "accepted sources",
+        "cut and loss declaration"
+      ],
+      "nonClaims": [
+        "does not claim complete reality or grant permission"
+      ],
+      "semantics": "bind perspective, fact cut, scope, omissions, and loss"
+    },
+    {
+      "coordinate": "warrant",
+      "identity": "profile warrant ref",
+      "sourceAuthority": "declared issuer and derivation policy",
+      "lifecycleVocabulary": [
+        "issued",
+        "attenuated",
+        "expired",
+        "revoked"
+      ],
+      "requiredEvidence": [
+        "issuer",
+        "scope and preconditions"
+      ],
+      "nonClaims": [
+        "does not prove occurrence or transfer residual responsibility"
+      ],
+      "semantics": "bind bounded authority for a declared transition"
+    }
+  ]
 }

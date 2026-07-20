@@ -1,0 +1,134 @@
+{
+  "$schema": "https://kfd.libkungfu.dev/schemas/kfd-agent-runtime/manifest.schema.json",
+  "schemaVersion": 1,
+  "contract": "kfd.agent-runtime-suite-manifest/v1",
+  "profile": {
+    "id": "kfd-agent-runtime",
+    "version": "0.1.0-alpha.1",
+    "status": "experimental",
+    "authority": "profiles/agent-runtime/README.md"
+  },
+  "suite": {
+    "id": "kfd-runtime-100",
+    "version": "0.1.0-alpha.1",
+    "fixedVectorCount": 100,
+    "vectorRoot": "sha256:1e996b8c43b0b3e38630ccd58acf8a714cbc24b339d3794318347faab9057e5f"
+  },
+  "partitions": {
+    "core": {
+      "authority": "KFD-7",
+      "vectorCount": 35,
+      "claim": "tested responsibility-separation subset"
+    },
+    "experimental": {
+      "authority": "provisional candidates and alpha profiles",
+      "vectorCount": 65,
+      "claim": "non-normative alpha experiment"
+    }
+  },
+  "dependencies": {
+    "agentHubProfile": "kfd-agent-hub@0.1.0-alpha.1",
+    "agentHubManifestDigest": "sha256:649ec7531d4c879846b8207a94e21844d573f0c07a422b9fa3f921bfa65d05a3"
+  },
+  "adapter": {
+    "contract": "kfd.agent-runtime-adapter-request/v1",
+    "responseContract": "kfd.agent-runtime-adapter-response/v1",
+    "binding": "jsonl-stdio/v1",
+    "requestSchema": "schemas/kfd-agent-runtime/adapter-request.schema.json",
+    "responseSchema": "schemas/kfd-agent-runtime/adapter-response.schema.json"
+  },
+  "report": {
+    "contract": "kfd.agent-runtime-report/v1",
+    "schema": "schemas/kfd-agent-runtime/report.schema.json",
+    "qualifying": false,
+    "selfCertified": false,
+    "offlineVerification": true
+  },
+  "surfaces": [
+    {
+      "path": "profiles/agent-runtime/README.md",
+      "role": "authority",
+      "digest": "sha256:01f64ff0cd3c19a7d5526c7fc47222b78df367dd06afb8bc0aa5e61264af39bc"
+    },
+    {
+      "path": "profiles/agent-runtime/normative-inventory.md",
+      "role": "authority",
+      "digest": "sha256:9bc0d606b83ab84feaffd1651d0507d224df74082cbb1554bcacc01b87ff3333"
+    },
+    {
+      "path": "profiles/agent-runtime/implementer-guide.md",
+      "role": "reference",
+      "digest": "sha256:c214edc39f3ad8d314d076a3979d1e05981941f1c1b5fc4f0623b4c59c3e4be4"
+    },
+    {
+      "path": "profiles/agent-runtime/vectors/runtime-100.json",
+      "role": "vectors",
+      "digest": "sha256:1e996b8c43b0b3e38630ccd58acf8a714cbc24b339d3794318347faab9057e5f"
+    },
+    {
+      "path": "schemas/kfd-agent-runtime/manifest.schema.json",
+      "role": "schema",
+      "digest": "sha256:9a79cf0827aaa487ea1701481213a3961ea75215f89baf22f0b6b3d648144dbd"
+    },
+    {
+      "path": "schemas/kfd-agent-runtime/adapter-request.schema.json",
+      "role": "schema",
+      "digest": "sha256:d7b1b2c19a83a9bca86bd1c67b1b8abdee7df878856bff8f4e14f125df78bec9"
+    },
+    {
+      "path": "schemas/kfd-agent-runtime/adapter-response.schema.json",
+      "role": "schema",
+      "digest": "sha256:72b6ecf9492c694734c07afe70d9d3598be2279ac45e00034fecd242ad7a1ea3"
+    },
+    {
+      "path": "schemas/kfd-agent-runtime/suite.schema.json",
+      "role": "schema",
+      "digest": "sha256:cc6890d2967ace58f6f7c143834e82b81548d0aca6fee0ad2c018e236c816242"
+    },
+    {
+      "path": "schemas/kfd-agent-runtime/report.schema.json",
+      "role": "schema",
+      "digest": "sha256:66294c496c8ed49a21c7057152dc9b60a95d4d3d3758e1dc1f4346c29b76775c"
+    },
+    {
+      "path": "scripts/generate-agent-runtime-vectors.mjs",
+      "role": "runner",
+      "digest": "sha256:a9835a0946de2d2ba6bec51e7188bdec57645d76a19c065abeef85457f92bd09"
+    },
+    {
+      "path": "scripts/agent-runtime-runner.mjs",
+      "role": "runner",
+      "digest": "sha256:bb16f967d638afd055f358f4ea5c91c93f20a4ae9cb75de9b26331932a4a7abf"
+    },
+    {
+      "path": "scripts/check-agent-runtime-profile.mjs",
+      "role": "verifier",
+      "digest": "sha256:8be2a161e943e507e7fd581579fd132437886a0df953861c9eddaa933142ecd3"
+    },
+    {
+      "path": "verifier/crates/core/src/profiles/agent_runtime_report.rs",
+      "role": "verifier",
+      "digest": "sha256:dcd161d66d2d52846ada30bc6becfea91c0a944c5b6d0217b11182f994ddbd2f"
+    },
+    {
+      "path": "bin/kfd.mjs",
+      "role": "runner",
+      "digest": "sha256:2f94f55438e2f7ad7f2edbd6607d4654e5112f5a5d9f6e78e71f2611a0610108"
+    },
+    {
+      "path": "profiles/agent-runtime/adapters/protocol.mjs",
+      "role": "reference",
+      "digest": "sha256:7866ddba0d263de74f8fabce7b02e927e17d8783aaa57c8e317ba789d9b8596e"
+    },
+    {
+      "path": "profiles/agent-runtime/adapters/state-machine-adapter.mjs",
+      "role": "reference",
+      "digest": "sha256:1f9c601ffec5a9214230ec7ab10684534d734aeed4f4ee06756e38db684e02c3"
+    },
+    {
+      "path": "profiles/agent-runtime/adapters/rule-table-adapter.mjs",
+      "role": "reference",
+      "digest": "sha256:46a0101ab0b88759feca881ac2506de7bab5636d4905a0e7ca694139dc2f5023"
+    }
+  ]
+}
