@@ -1916,12 +1916,12 @@
       "title": "Real-world action must keep its responsibilities distinct",
       "kind": "principle",
       "status": "active",
-      "revision": 4,
+      "revision": 5,
       "metadataSchemaVersion": "2",
       "document": {
         "path": "decisions/KFD-7.md",
         "url": "https://kfd.libkungfu.dev/7",
-        "sha256": "02c61f0981cd38d64ecde140b6f11a75e0457a979fe6251acadc23dc36405a4c"
+        "sha256": "2225853fa9552a70f1331540832f4bef6a897011cd18001993a59038d9fa436a"
       },
       "formalModel": {
         "path": "docs/KFD-7-formal.md",
@@ -1930,13 +1930,13 @@
         "status": "experimental",
         "normative": false,
         "authorityPath": "decisions/KFD-7.md",
-        "sha256": "88f67946f55e93449edcfeacd2e23248fbb481718386dd5e62793757474aafa3"
+        "sha256": "06cd8b58c01a66cd7d00cdae402d0a6cfc15a29802034beee6afde59e2c86176"
       },
       "compatibility": {
         "packageLine": "v1.0",
         "registrySchemaVersion": 1,
         "metadataSchemaVersion": "2",
-        "rule": "Before the first stable release, maintainer-authorized semantic refinement must declare breaking decision-surface impact. Compatible draft Domain Profile additions may keep action-contract schemaVersion 2; changes to Action Geometry responsibility, theorem applicability, transition validity, prohibited inference, evidence closure, activation meaning, or required fields require a new interface version or explicit Foundation Revision. After stable, substantive decision change mints a new KFD."
+        "rule": "Before the first stable release, maintainer-authorized semantic refinement must declare breaking decision-surface impact. Compatible draft Domain Profile additions may keep the retained actionContract schemaVersion 2 identity. Action Profile and unqualified Action Contract are compatibility-only terms; new authoring uses Action Geometry, Domain Profile, Action Geometry Contract, and Domain Profile Declaration. Changes to Action Geometry responsibility, theorem applicability, transition validity, prohibited inference, evidence closure, activation meaning, or required fields require a new interface version or explicit Foundation Revision. After stable, substantive decision change mints a new KFD."
       },
       "schemaIds": {
         "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json",
@@ -1952,7 +1952,7 @@
           "schemaVersion": 2,
           "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-7/action-contract.schema.json",
           "schemaPath": "schemas/kfd-7/action-contract.schema.json",
-          "compatibilityRule": "Compatible Domain Profile-owned lifecycle additions may keep schemaVersion 2; semantic or required-field changes to Action Geometry responsibility, theorem applicability, transition, evidence, non-claim, or activation meaning require a new interface version or contract."
+          "compatibilityRule": "This retained actionContract identity declares a Domain Profile against Action Geometry and does not identify the future Action Geometry Contract. Compatible Domain Profile-owned lifecycle additions may keep schemaVersion 2. New authoring uses the canonical Domain Profile Declaration term. Semantic or required-field changes to Action Geometry responsibility, theorem applicability, transition, evidence, non-claim, or activation meaning require a new interface version or contract."
         }
       },
       "surfaceRegister": {
@@ -2012,7 +2012,8 @@
         "perspective": "declared observation and judgment frame",
         "authorityBoundary": "independently derivable and revocable action boundary",
         "occurrence": "realized action and consequence",
-        "actionGeometry": "cross-domain coordinates and constraints for independently addressable action responsibilities",
+        "actionGeometry": "canonical cross-domain responsibility model for real-world action",
+        "actionGeometryContract": "canonical machine artifact that identifies Action Geometry and its invariants",
         "observationProjection": "perspective-bound projection over admitted facts",
         "targetRelation": "directional relation over reachable fact cuts",
         "admissibleTransition": "authority-permitted candidate transition",
@@ -2027,14 +2028,17 @@
         "decisionObservationalEquivalence": "componentwise preservation of direction, perspective boundary, effective authority, causal process, and admitted result",
         "sessionRoundTripTheorem": "conditional preservation theorem for session expansion and projection",
         "contextInsufficiency": "same-payload counterexample showing that context alone cannot determine the valid action set",
-        "actionProfile": "legacy metadata term for a Domain Profile declaration; not an Action Primitive",
+        "actionProfile": "compatibility-only metadata term for a Domain Profile declaration; deprecated for new authoring and not an Action Primitive",
+        "actionContract": "compatibility-only version 2 interface identity for a Domain Profile declaration; not the future Action Geometry Contract",
         "domainProfile": "versioned adopter declaration of how one domain inhabits the Action Geometry",
-        "roleIndependence": "independently addressable semantic responsibility",
+        "domainProfileDeclaration": "canonical machine artifact that maps one adopter to Action Geometry",
+        "roleIndependence": "semantic distinguishability and traceability independent of physical component count",
+        "semanticRoleDistinguishability": "counterfactual and fail-visible separation of responsibility mappings even when physically co-located",
         "profileLifecycleVocabulary": "legacy metadata term for Domain Profile-owned lifecycle vocabulary",
         "domainProfileLifecycleVocabulary": "Domain Profile-owned lifecycle vocabulary",
         "transitionContract": "precondition-effect-receipt-denial-evidence transition contract",
         "prohibitedInference": "fail-visible prohibited cross-role inference",
-        "roleDeletionExperiment": "role deletion or fusion experiment",
+        "roleDeletionExperiment": "compatibility evidence category for semantic role deletion or fusion; not a physical-layout test",
         "evidenceObligation": "retained Domain Profile evidence obligation",
         "activationDecision": "activate, revise, reject, or pending verdict",
         "qualificationCut": "exact evidence cut and independent review binding",
