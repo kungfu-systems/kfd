@@ -26,8 +26,8 @@ authoritative text is `decisions/KFD-7.md`; its registry status is `active`.
   candidate.
 - `standards.json#/standards/kfd-7`: identity, status, formal reference,
   concepts, and digests.
-- `schemas/kfd-7/action-contract.schema.json`: version 2 draft Profile
-  declaration.
+- `schemas/kfd-7/action-contract.schema.json`: version 2 draft Domain Profile
+  declaration against the Action Geometry.
 - `verifier/fixtures/kfd-7/`: conforming draft and fail-visible negative
   declarations.
 - `scripts/check.mjs`: registry, document, metadata, route, and evidence
@@ -36,15 +36,21 @@ authoritative text is `decisions/KFD-7.md`; its registry status is `active`.
 The action-contract schema fixes only the reference declaration and activation
 boundary. It does not choose a product store, API, CLI, GUI, Git coordinate,
 database key, or universal lifecycle vocabulary. Product dogfood still decides
-whether any concrete Profile deserves stable activation.
+whether any concrete Domain Profile deserves stable activation.
 
-## Draft Profile declaration
+## Action Geometry and Domain Profiles
 
-A Profile declares its product and implementation coordinate, qualification
-state, five responsibility mappings, Profile-owned lifecycle terms, supported
-transitions, prohibited inferences, evidence obligations, non-claims,
-extensions, and activation verdict. The complete draft example is
-`verifier/fixtures/kfd-7/valid-action-contract.json`.
+Action Geometry is the cross-domain structure of Fact cuts, causal records,
+five independently addressable responsibilities, cross-role invariants, and
+the conservative session projection. Atlas, Pursuit, Warrant, Fact, and
+Episode are responsibilities or reference action Primitives in this geometry;
+they are not Profiles.
+
+A Domain Profile declares its product and implementation coordinate,
+qualification state, five responsibility mappings, domain field schemas and
+lifecycle terms, supported transitions, prohibited inferences, evidence
+obligations, non-claims, extensions, and activation verdict. The complete
+draft example is `verifier/fixtures/kfd-7/valid-action-contract.json`.
 
 Products may map several responsibilities to one physical record or familiar
 session surface. They still declare all five mappings so an independent reader
@@ -52,15 +58,16 @@ can see which default, projection, or source authority carries each decision.
 This requirement preserves inspectability without requiring five user-facing
 objects.
 
-Each supported transition declares its subject role, operation, Profile state
-terms, preconditions, effect, receipt, evidence, denial reasons, and residual
-risk. Unknown mappings and transitions fail closed. Profile state strings do
-not become universal KFD enums merely because one adopter uses them.
+Each supported transition declares its subject role, operation, Domain Profile
+state terms, preconditions, effect, receipt, evidence, denial reasons, and
+residual risk. Unknown mappings and transitions fail closed. Domain Profile
+state strings do not become universal KFD enums merely because one adopter
+uses them.
 
 The evidence statuses are `planned`, `passed`, `failed`, and
 `not-applicable`. `passed` binds retained artifacts; `not-applicable` requires
-a bounded reason. Activation requires a qualified Profile, no planned or
-failed obligations, an exact evidence cut, independent review, and retained
+a bounded reason. Activation requires a qualified Domain Profile, no planned
+or failed obligations, an exact evidence cut, independent review, and retained
 product witnesses.
 
 ## Adoption profile
@@ -76,9 +83,9 @@ An adopter should expose:
    settlement;
 7. degraded, defaulted, expired, revoked, or missing responsibility.
 
-The concrete store, API, CLI, GUI, and vocabulary remain product-owned.
-Implementations may use Atlas, Pursuit, Warrant, and Episode directly or map
-domain-native objects to the same responsibilities.
+The concrete store, API, CLI, GUI, and vocabulary remain product-owned through
+the Domain Profile. Implementations may use Atlas, Pursuit, Warrant, and
+Episode directly or map domain-native objects to the same responsibilities.
 
 ## Progressive disclosure
 
@@ -138,7 +145,7 @@ record instead:
 This turns repeated open-ended model review into a bounded refinement check.
 It does not remove product testing: runtime correctness, interface usability,
 cross-domain transfer, and residual risk remain evidence at the adopting
-Profile's exact qualification cut.
+Domain Profile's exact qualification cut.
 
 ## Independent verification
 
@@ -160,6 +167,6 @@ responsibilities.
 
 The package proves that KFD-7 is numbered, active, routed, digest-bound,
 formally described, machine-declarable, and backed by two independently
-reviewed product Profiles at exact availability cuts. The activation record
+reviewed Domain Profiles at exact availability cuts. The activation record
 does not prove universal minimality, require one physical product shape, or
 qualify a future adopter's implementation.
