@@ -26,25 +26,30 @@ authoritative text is `decisions/KFD-7.md`; its registry status is `active`.
   candidate.
 - `standards.json#/standards/kfd-7`: identity, status, formal reference,
   concepts, and digests.
-- `schemas/kfd-7/action-contract.schema.json`: version 2 draft Domain Profile
+- `schemas/kfd-7/action-contract.schema.json`: retained version 2
+  `actionContract` compatibility interface for a draft Domain Profile
   declaration against the Action Geometry.
 - `verifier/fixtures/kfd-7/`: conforming draft and fail-visible negative
   declarations.
 - `scripts/check.mjs`: registry, document, metadata, route, and evidence
   closure.
 
-The action-contract schema fixes only the reference declaration and activation
+The `action-contract` path and `actionContract` metadata key are published
+compatibility identities, not the preferred human name for either semantic
+layer. The schema fixes only the Domain Profile declaration and activation
 boundary. It does not choose a product store, API, CLI, GUI, Git coordinate,
 database key, or universal lifecycle vocabulary. Product dogfood still decides
 whether any concrete Domain Profile deserves stable activation.
 
 ## Action Geometry and Domain Profiles
 
-Action Geometry is the cross-domain structure of Fact cuts, causal records,
-five independently addressable responsibilities, cross-role invariants, and
-the conservative session projection. Atlas, Pursuit, Warrant, Fact, and
-Episode are responsibilities or reference action Primitives in this geometry;
-they are not Profiles.
+**Action Geometry** is the cross-domain responsibility model for real-world
+action: Fact cuts, causal records, five independently addressable
+responsibilities, cross-role invariants, and the conservative session
+projection. "Cross-domain responsibility model" is its explanatory subtitle,
+not a second formal term. Atlas, Pursuit, Warrant, Fact, and Episode are
+responsibilities or reference action Primitives in this geometry; they are not
+Profiles.
 
 A Domain Profile declares its product and implementation coordinate,
 qualification state, five responsibility mappings, domain field schemas and
@@ -52,11 +57,27 @@ lifecycle terms, supported transitions, prohibited inferences, evidence
 obligations, non-claims, extensions, and activation verdict. The complete
 draft example is `verifier/fixtures/kfd-7/valid-action-contract.json`.
 
-Products may map several responsibilities to one physical record or familiar
-session surface. They still declare all five mappings so an independent reader
-can see which default, projection, or source authority carries each decision.
-This requirement preserves inspectability without requiring five user-facing
-objects.
+Products may map several responsibilities to one physical record, type, API,
+service, or familiar session surface. They still declare all five mappings so
+an independent reader can see which default, projection, source authority,
+cut, and version carries each decision. This requirement preserves semantic
+distinguishability and traceability without requiring five user-facing or
+physical objects.
+
+The canonical terms are:
+
+| Use | Term |
+| --- | --- |
+| Cross-domain model | **Action Geometry** |
+| Adopter specialization | **Domain Profile** |
+| Geometry machine artifact | **Action Geometry Contract** |
+| Adopter machine artifact | **Domain Profile Declaration** |
+
+`Action Profile`, unqualified `Action Contract`,
+`schemas/kfd-7/action-contract.schema.json`, `kfd-7-action-contract`, and
+`actionContract` are retained only where published compatibility coordinates
+must remain exact. New prose and successor interfaces use the canonical terms.
+Existing readers remain supported; no removal version is declared.
 
 Each supported transition declares its subject role, operation, Domain Profile
 state terms, preconditions, effect, receipt, evidence, denial reasons, and
@@ -156,12 +177,15 @@ npx @kungfu-tech/kfd verify kfd-record \
   verifier/fixtures/kfd-7/valid-action-contract.json
 ```
 
-The verifier rejects missing roles, missing standard theorem references,
-unknown closed-vocabulary values, incomplete transitions, missing
+The verifier rejects missing responsibility mappings, missing standard theorem
+references, unknown closed-vocabulary values, incomplete transitions, missing
 round-trip/context evidence categories, and premature activation. It remains
-offline, non-qualifying, and non-self-certified. Passing proves only record
-structure; runtime and qualification evidence remain product and release
-responsibilities.
+offline, non-qualifying, and non-self-certified. It checks semantic mapping
+closure and retained evidence references; it does not count physical records,
+classes, tables, APIs, processes, or interface components. Passing proves only
+record structure. Counterfactual distinguishability, independent
+invalidation, runtime behavior, and qualification evidence remain product and
+release responsibilities.
 
 ## Activation evidence boundary
 

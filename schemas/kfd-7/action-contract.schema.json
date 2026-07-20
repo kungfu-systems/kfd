@@ -1,7 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://kfd.libkungfu.dev/schemas/kfd-7/action-contract.schema.json",
-  "title": "KFD-7 Action Geometry Domain Profile contract",
+  "title": "KFD-7 Domain Profile declaration (legacy actionContract interface)",
+  "description": "Retained version 2 compatibility interface for declaring how one Domain Profile maps to KFD-7 Action Geometry. The legacy path and contract id do not identify the future Action Geometry Contract.",
   "type": "object",
   "required": [
     "schemaVersion",
@@ -31,9 +32,11 @@
       "const": "kfd-7"
     },
     "profile": {
+      "description": "Canonical Domain Profile identity. The property name is retained for version 2 compatibility.",
       "$ref": "#/$defs/profile"
     },
     "roles": {
+      "description": "Exactly five semantic responsibility mapping declarations. They may share physical records, types, APIs, processes, or interface components.",
       "type": "array",
       "minItems": 5,
       "maxItems": 5,
@@ -178,6 +181,7 @@
       "$ref": "#/$defs/qualificationBasis"
     },
     "evidenceObligations": {
+      "description": "Evidence obligations concern semantic distinguishability, traceability, runtime behavior, and qualification; physical component count is not evidence.",
       "type": "array",
       "minItems": 13,
       "items": {

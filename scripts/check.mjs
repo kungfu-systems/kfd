@@ -1429,7 +1429,7 @@ if (kfd7?.schemaIds?.actionContract !== "https://kfd.libkungfu.dev/schemas/kfd-7
 if (kfd7?.schemaPaths?.actionContract !== "schemas/kfd-7/action-contract.schema.json") {
   fail("KFD-7 standards metadata must expose the actionContract schema path");
 }
-for (const concept of ["factCut", "causalRecord", "episode", "atlas", "pursuit", "warrant", "direction", "perspective", "authorityBoundary", "occurrence", "actionGeometry", "observationProjection", "targetRelation", "admissibleTransition", "realizedPath", "validActionSet", "conditionalIrreducibility", "counterfactualIndependence", "explicitAdmission", "progressiveDisclosure", "conservativeSessionLimit", "complexityBreakpoint", "decisionObservationalEquivalence", "sessionRoundTripTheorem", "contextInsufficiency"]) {
+for (const concept of ["factCut", "causalRecord", "episode", "atlas", "pursuit", "warrant", "direction", "perspective", "authorityBoundary", "occurrence", "actionGeometry", "actionGeometryContract", "domainProfile", "domainProfileDeclaration", "roleIndependence", "semanticRoleDistinguishability", "observationProjection", "targetRelation", "admissibleTransition", "realizedPath", "validActionSet", "conditionalIrreducibility", "counterfactualIndependence", "explicitAdmission", "progressiveDisclosure", "conservativeSessionLimit", "complexityBreakpoint", "decisionObservationalEquivalence", "sessionRoundTripTheorem", "contextInsufficiency"]) {
   if (!kfd7?.concepts?.[concept]) fail(`KFD-7 standards metadata missing concept ${concept}`);
 }
 const kfd7ActionContractSchema = JSON.parse(readFileSync("schemas/kfd-7/action-contract.schema.json", "utf8"));
@@ -1493,8 +1493,8 @@ if (kfd7ActionContractSchema.$defs?.profile?.properties?.qualificationStatus?.en
 if (kfd7ActionContractSchema.$defs?.activation?.properties?.decision?.enum?.includes("activate") !== true) {
   fail("KFD-7 actionContract must expose an explicit activation verdict");
 }
-for (const concept of ["actionProfile", "roleIndependence", "profileLifecycleVocabulary", "transitionContract", "prohibitedInference", "roleDeletionExperiment", "evidenceObligation", "activationDecision", "qualificationCut", "profileRefinementWitness", "residualRisk", "extensionPoint"]) {
-  if (!kfd7?.concepts?.[concept]) fail(`KFD-7 standards metadata missing concept ${concept}`);
+for (const concept of ["actionProfile", "actionContract", "profileLifecycleVocabulary", "transitionContract", "prohibitedInference", "roleDeletionExperiment", "evidenceObligation", "activationDecision", "qualificationCut", "profileRefinementWitness", "residualRisk", "extensionPoint"]) {
+  if (!kfd7?.concepts?.[concept]) fail(`KFD-7 standards metadata missing compatibility concept ${concept}`);
 }
 if (!kfd7?.interfaces?.actionContract) fail("KFD-7 standards metadata missing interface actionContract");
 for (const [id, successors] of superseded) {

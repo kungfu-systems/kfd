@@ -58,7 +58,11 @@ compose(E1, E2) only when After(E1) = Before(E2)
 This is a responsibility model, not a claim that every domain is literally a
 mathematical category.
 
-## Action geometry
+## Action Geometry
+
+Action Geometry is the cross-domain responsibility model for real-world
+action. The subtitle is explanatory; `Action Geometry` remains the canonical
+formal term.
 
 The three action responsibilities constrain different structures over `F`:
 
@@ -133,7 +137,25 @@ I14 not SessionCompressible(h) -> the independently relevant roles become
     addressable
 I15 Context payload alone is not a sufficient statistic for valid action
     whenever two states with the same payload have different valid action sets
+I16 Semantic independence is invariant under physical co-location: one record,
+    type, API, process, or interface may carry several responsibilities when
+    each mapping remains traceable and counterfactually distinguishable
 ```
+
+Define semantic distinguishability without imposing physical multiplicity:
+
+```text
+Distinguishable(r_i, r_j, h) iff
+  TraceableSource(r_i, h)
+  and TraceableSource(r_j, h)
+  and ExistsCounterfactualVariation(r_i, r_j, h)
+  and ProhibitedCrossInferenceFailsVisible(r_i, r_j, h)
+```
+
+`ExistsCounterfactualVariation` means that within the adopter's declared
+scope, changing, invalidating, expiring, revoking, or making stale one
+responsibility can change a valid-action or audit conclusion while the other
+responsibility remains fixed. It does not require separate serialized bodies.
 
 ## Conservative session projection
 
@@ -337,6 +359,8 @@ declare current Fact cut
 - Expose the independently relevant roles when a session-compressibility
   assumption fails.
 - Test counterfactual independence and fused alternatives.
+- Show semantic role mappings and their source/cut/version traceability without
+  treating physical component count as evidence.
 - Demonstrate cross-domain transfer and progressive disclosure before
   activation.
 
@@ -442,6 +466,7 @@ cross-domain transfer remain product evidence.
 | `I3-I8` conditional independence | Gate and Activation | Counterfactual product fixtures | Retained in the Buildchain and Kungfu Domain Profile cuts |
 | `I13-I14` conservative session limit | Conservative session limit | theorem reference, Domain Profile refinement, session round-trip, and complexity-breakpoint evidence | Retained in both qualified Domain Profiles |
 | `I15` context insufficiency | Context insufficiency corollary | same-payload, different-valid-action-set counterexamples | Retained in both qualified Domain Profiles |
+| `I16` semantic independence under physical co-location | Action Geometry and Domain Profile closure | responsibility mappings, traceability, counterfactual and fail-visible negative evidence | Mixed; never inferred from component count |
 | `I9-I10` path composition and admission | Action closure | Domain Profile Episode/Fact mappings | Mixed |
 | transition and denial declaration | Domain Profile adoption contract | `transitions[]` | Independent schema verification |
 | evidence and non-claim closure | Activation | `evidenceObligations[]`, `nonClaims[]`, `activation` | Independent schema and product verification |

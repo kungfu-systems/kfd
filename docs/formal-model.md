@@ -112,8 +112,8 @@ uses.
 
 KFD-7 extends the shared model by treating fact cuts as object-like admitted
 states and Episodes as morphism-like causal paths. Atlas, Pursuit, and Warrant
-are the first action profiles for observation, direction, and admissible
-action.
+are reference action responsibilities or Primitives for observation,
+direction, and admissible action. They are not Domain Profiles.
 
 This active decision remains intentionally falsifiable. Activation does not
 prove that the proposed roles are universally minimal or establish a literal

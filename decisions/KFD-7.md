@@ -75,7 +75,8 @@ authorization.
 
 ## Action Geometry and Domain Profiles
 
-KFD-7 calls the cross-domain responsibility structure the **Action Geometry**:
+KFD-7 calls the cross-domain responsibility structure the **Action Geometry**,
+the cross-domain responsibility model for real-world action:
 
 ```text
 Fact cuts and causal records
@@ -83,27 +84,61 @@ Fact cuts and causal records
   -> cross-role invariants and conservative session projection
 ```
 
-Action Geometry defines coordinates and constraints. It does not define one
-business domain's fields, workflow labels, success policy, presentation, or
-storage layout. Atlas, Pursuit, Warrant, Fact, and Episode are action
-responsibilities or reference Primitives in this geometry; they are not
-themselves Profiles.
+The subtitle "cross-domain responsibility model" explains Action Geometry in
+plain language; it does not name another layer or interface. Action Geometry
+defines coordinates and constraints. It does not define one business domain's
+fields, workflow labels, success policy, presentation, or storage layout.
+Atlas, Pursuit, Warrant, Fact, and Episode are action responsibilities or
+reference Primitives in this geometry; they are not themselves Profiles.
 
 A **Domain Profile** is a versioned adopter declaration that explains how one
 domain inhabits the Action Geometry. It maps domain objects and fields to the
 five responsibilities and owns domain lifecycle vocabulary, validation,
 defaults, success policy, presentation, and qualification evidence. A Domain
 Profile may refine or progressively disclose the geometry, but it must not
-fuse responsibilities, redefine their meaning, or establish a second Fact or
-causal authority.
+semantically fuse responsibilities, redefine their meaning, or establish a
+second Fact or causal authority.
 
-This distinction is normative terminology, not a requirement for two physical
-stores or two user-facing configuration steps:
+This distinction is normative terminology, not a requirement for separate
+physical stores, records, APIs, processes, or user-facing configuration steps:
 
 ```text
 Action Geometry  defines the cross-domain coordinates
 Domain Profile   defines how a domain inhabits them
 ```
+
+Several responsibilities may share one physical record or interface. They
+remain independently addressable when their source, cut or version, applicable
+authority, and derivation remain inspectable; when one can change, expire,
+revoke, or become stale without silently changing another; and when prohibited
+cross-role inferences fail visibly. "Must not fuse" refers to this semantic
+distinguishability and traceability, not to a required count of data
+structures, endpoints, screens, or services.
+
+### Terminology authority and compatibility
+
+New decisions, adoption guides, and product documentation use one canonical
+language:
+
+| Term | Status and meaning |
+| --- | --- |
+| **Action Geometry** | Canonical cross-domain responsibility model for real-world action. |
+| **Domain Profile** | Canonical versioned declaration of how one domain inhabits Action Geometry. |
+| **Action Geometry Contract** | Canonical machine artifact that identifies the geometry and its invariants. |
+| **Domain Profile Declaration** | Canonical machine artifact that maps one adopter to the geometry. |
+| **Action Profile** | Compatibility-only term for previously published combined Profile metadata; it is not used for new authoring. |
+| **Action Contract** | Compatibility-only when it appears in an existing schema path, contract id, or retained product identifier; new prose must use the qualified canonical artifact name. |
+
+The published `schemas/kfd-7/action-contract.schema.json`,
+`kfd-7-action-contract`, and `actionContract` metadata key retain their version
+2 identity. They currently describe a Domain Profile declaration against
+Action Geometry; they do not identify the future Action Geometry Contract.
+Their compatibility readers and published coordinates remain valid. A future
+canonical schema path or contract id requires a successor interface, explicit
+mapping, and differential evidence; it must not reinterpret the version 2
+bytes or roots. No removal version is declared. Compatibility names are
+deprecated for new authoring now and remain readable until an explicit,
+qualified successor policy says otherwise.
 
 ## Action closure
 
@@ -199,8 +234,14 @@ machine-readable place to declare:
 All five responsibility declarations remain required even when a product uses
 one physical record or a low-complexity session projection. The declaration
 explains the mapping or inspectable default; it does not require five stores,
-forms, or commands. Schema conformance proves declaration closure only. It does
-not prove role necessity, runtime behavior, product fitness, or activation.
+objects, types, APIs, forms, commands, or interface components. Structural
+verification checks declaration closure, exact mappings, prohibited
+inferences, and evidence references. Product qualification checks semantic
+distinguishability through traceability, counterfactual variation, invalidation
+or revocation, and fail-visible negative evidence. Neither gate may infer
+conformance or failure from physical component count. Schema conformance alone
+does not prove role necessity, runtime behavior, product fitness, or
+activation.
 
 ## Activation
 
