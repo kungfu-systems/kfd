@@ -340,17 +340,27 @@ declare current Fact cut
 - Demonstrate cross-domain transfer and progressive disclosure before
   activation.
 
-## Profile declaration and evidence closure
+## Action Geometry and Domain Profile closure
 
-The draft machine contract records a Profile declaration rather than one
-physical state machine:
+Let the Action Geometry be the cross-domain structure:
 
 ```text
-Profile = (
+ActionGeometry = (
+  Fact-cut and causal-record substrates,
+  five independently addressable responsibilities,
+  cross-role invariants,
+  conservative session projection
+)
+```
+
+Let a Domain Profile be one adopter's versioned refinement:
+
+```text
+DomainProfile = (
   implementation coordinate,
   qualification status,
   five responsibility declarations,
-  Profile-owned lifecycle vocabulary,
+  domain-owned field schemas and lifecycle vocabulary,
   transitions,
   prohibited inferences,
   evidence obligations,
@@ -359,14 +369,19 @@ Profile = (
 )
 ```
 
+The draft machine contract records a `DomainProfile` declaration rather than
+one physical state machine. A conforming Domain Profile maps every
+responsibility to the Action Geometry and may refine domain vocabulary and
+policy, but it cannot redefine the geometry's responsibility boundaries.
+
 Each transition declaration binds:
 
 ```text
-subject role + prior Profile state + operation + preconditions
+subject role + prior Domain Profile state + operation + preconditions
   -> effect + receipt + evidence + denial reasons + residual risks
 ```
 
-For Profile claim `C` at evidence cut `K`:
+For Domain Profile claim `C` at evidence cut `K`:
 
 ```text
 Qualified(C, K) :=
@@ -390,16 +405,17 @@ Qualified(C, K) :=
 ```
 
 `not-applicable` requires a bounded reason. An `activate` verdict requires a
-qualified Profile, an exact evidence cut, independent review, retained product
-witnesses, and no planned or failed obligation. Qualification remains relative
-to that Profile and cut; it does not establish universal minimality.
+qualified Domain Profile, an exact evidence cut, independent review, retained
+product witnesses, and no planned or failed obligation. Qualification remains
+relative to that Domain Profile and cut; it does not establish universal
+minimality.
 
 This separation avoids re-proving the generic model for every product. KFD
-states the conditional theorem once. A Profile proves that its concrete
-session fields, defaults, and runtime transitions refine the theorem's five
-observations, then retains breakpoint and context-insufficiency witnesses.
-Empirical usability, runtime correctness, and cross-domain transfer remain
-product evidence.
+states the Action Geometry and conditional theorem once. A Domain Profile
+proves that its concrete session fields, defaults, and runtime transitions
+refine the theorem's five observations, then retains breakpoint and
+context-insufficiency witnesses. Empirical usability, runtime correctness, and
+cross-domain transfer remain product evidence.
 
 ## Invalid states
 
@@ -421,24 +437,24 @@ product evidence.
 
 | Formal statement | Decision source | Schema or check | Verification |
 |---|---|---|---|
-| Fact-cut and causal-record separation | Substrate boundary | KFD-1 formal reference and KFD-7 Profile role declarations | Structural plus product evidence |
+| Fact-cut and causal-record separation | Substrate boundary | KFD-1 formal reference and KFD-7 Domain Profile role declarations | Structural plus product evidence |
 | Atlas/Pursuit/Warrant separation | Action responsibilities | `schemas/kfd-7/action-contract.schema.json` required role closure | Structural plus product and semantic review |
-| `I3-I8` conditional independence | Gate and Activation | Counterfactual product fixtures | Retained in the Buildchain and Kungfu Profile cuts |
-| `I13-I14` conservative session limit | Conservative session limit | theorem reference, Profile refinement, session round-trip, and complexity-breakpoint evidence | Retained in both qualified Profiles |
-| `I15` context insufficiency | Context insufficiency corollary | same-payload, different-valid-action-set counterexamples | Retained in both qualified Profiles |
-| `I9-I10` path composition and admission | Action closure | Domain Episode/Fact profiles | Mixed |
-| transition and denial declaration | Reference Profile contract | `transitions[]` | Independent schema verification |
+| `I3-I8` conditional independence | Gate and Activation | Counterfactual product fixtures | Retained in the Buildchain and Kungfu Domain Profile cuts |
+| `I13-I14` conservative session limit | Conservative session limit | theorem reference, Domain Profile refinement, session round-trip, and complexity-breakpoint evidence | Retained in both qualified Domain Profiles |
+| `I15` context insufficiency | Context insufficiency corollary | same-payload, different-valid-action-set counterexamples | Retained in both qualified Domain Profiles |
+| `I9-I10` path composition and admission | Action closure | Domain Profile Episode/Fact mappings | Mixed |
+| transition and denial declaration | Domain Profile adoption contract | `transitions[]` | Independent schema verification |
 | evidence and non-claim closure | Activation | `evidenceObligations[]`, `nonClaims[]`, `activation` | Independent schema and product verification |
 | Decision/formal/package identity | Verification | `registry.json`, `standards.json`, `scripts/check.mjs` | Machine |
-| KFD-7 activation | Activation | qualified Profile, exact evidence cut, independent review, product witnesses | Activated at `evidence/kfd-7/activation-record.json` |
+| KFD-7 activation | Activation | qualified Domain Profile, exact evidence cut, independent review, product witnesses | Activated at `evidence/kfd-7/activation-record.json` |
 
 ## Confidence and non-claims
 
 The state/path distinction has high confidence as a model of admitted facts and
 causal experience. The minimality and cross-domain transfer of Atlas, Pursuit,
 and Warrant have high first-party engineering confidence across the two
-qualified Profiles. Universal minimality and future Profile fitness remain
-open rather than inherited from activation.
+qualified Domain Profiles. Universal minimality and future Domain Profile
+fitness remain open rather than inherited from activation.
 
 KFD-7 does not claim literal physical spacetime, three Euclidean dimensions, a
 global clock, a total causal order, one storage engine, one serialization, one
