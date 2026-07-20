@@ -20,6 +20,51 @@ active KFD surfaces.
    the same canonical vocabulary.
 5. A candidate name does not imply that its object has been promoted to an
    active KFD Primitive.
+6. A canonical explanatory subtitle clarifies one term. It is not an alias,
+   a second formal type, or permission to rename the term on machine surfaces.
+
+## The core 2 + 3 structure
+
+The five core KFD-7 names are not five peers. They form two ontology bindings
+and three action coordinates:
+
+```text
+Fact + Episode
+  -> Fact-Episode Ontology
+
+Atlas + Pursuit + Warrant
+  -> Action Responsibility Geometry
+```
+
+The canonical explanatory subtitles and questions are:
+
+| Term | Canonical explanatory subtitle | Compact subtitle | Question |
+| --- | --- | --- | --- |
+| **Fact** | Admitted state at a declared evidence boundary | Admitted state | What is admitted? |
+| **Episode** | Replayable causal record between Fact cuts | Replayable causal record | What happened? |
+| **Atlas** | Declared perspective over admitted facts | Declared perspective | From where is it judged? |
+| **Pursuit** | Continuing direction and progress relation | Continuing direction | What change is sought? |
+| **Warrant** | Bounded authority for admissible transitions | Bounded authority | What action is allowed? |
+
+`Fact` names admitted state, not absolute truth. `Fact Cut` names an
+independently addressable instance of that state at a declared source,
+authority, evidence, and time or version boundary. The formal model uses
+`FactCut` as the carrier so two cuts can differ even when they contain similar
+claims.
+
+The subtitles above are the full first-use forms. Compact interfaces may use
+the machine-declared `compactSubtitle` values, but must keep the canonical term
+visible or discoverable.
+
+The same contract closes common false equivalences:
+
+| Term | It is not |
+| --- | --- |
+| **Fact** | absolute truth; every observation; a Causal Record |
+| **Episode** | a session by definition; a transcript by definition; an intended or authorized action; proof of success, progress, completion, or authorization |
+| **Atlas** | complete reality; generic context without source, cut, freshness, omissions, and loss; a Pursuit or Warrant |
+| **Pursuit** | a one-shot task; a plan; authority to act |
+| **Warrant** | authentication; a capability alone; intention or assignment; proof that an action occurred |
 
 ## Canonical vocabulary
 
@@ -30,14 +75,16 @@ active KFD surfaces.
 | **KFD Primitive** | standard | A qualified load-bearing object with independent identity, boundary, authority, lifecycle, and operations. |
 | **KFD Primitive Candidate** | discovery | A proposed KFD Primitive that has not completed qualification and promotion. |
 | **Fact-Episode Ontology** | KFD-7 ontology | The contract-world model whose object-like elements are admitted Fact cuts and whose path-like elements are Episodes. It is not a complete ontology of reality. |
+| **Fact** | KFD-7 ontology binding | State admitted into a contract world under declared source, authority, evidence, and cut boundaries. It is not absolute truth or every observation. |
+| **Fact Cut** | KFD-7 formal carrier | An independently addressable instance of admitted Fact state at a declared boundary. It is not a second ontology binding. |
 | **Causal Occurrence** | reality boundary | A bounded event sequence or partial order that actually occurs. |
 | **Causal Record** | evidence | An evidence-bearing representation of a Causal Occurrence, including declared omissions and loss. |
-| **Episode** | KFD object | An independently addressable, replayable object that binds a Causal Record to declared cuts, perspective, and loss. It is not merely a session, run, transcript, or reinforcement-learning trajectory. |
+| **Episode** | KFD-7 ontology binding | An independently addressable, replayable object that binds a Causal Record to declared cuts, perspective, and loss. It is not merely a session, run, transcript, or reinforcement-learning trajectory. |
 | **Causal Experience** | evidence corpus | One or more Episodes used as evidence or learning material. It is not reality itself. |
 | **Action Responsibility Geometry** | KFD-7 action model | The cross-domain responsibility model whose coordinates are direction, perspective, and bounded authority. Geometry does not imply Euclidean space, physical motion, a metric, or a differentiable manifold. |
 | **Action Coordinate** | KFD-7 role | One independently addressable coordinate in the Action Responsibility Geometry. |
-| **Pursuit** | reference coordinate | The direction coordinate: continuing intended change and its progress relation. KFD-7 standardizes this role, not a complete Pursuit object specification. |
 | **Atlas** | reference coordinate | The perspective coordinate: accepted facts, observation boundary, cut, omissions, and loss. KFD-7 standardizes this role, not a complete Atlas object specification. |
+| **Pursuit** | reference coordinate | The direction coordinate: continuing intended change and its progress relation. KFD-7 standardizes this role, not a complete Pursuit object specification. |
 | **Warrant** | reference coordinate | The bounded-authority coordinate: which transition may be performed, by whom, and under which constraints. KFD-7 standardizes this role, not legal authority or a complete Warrant object specification. |
 | **Domain Profile** | adopter model | A versioned declaration of how one domain binds its representations to the Fact-Episode Ontology and Action Responsibility Geometry. |
 | **Domain Profile Declaration** | machine artifact | A document conforming to `schemas/kfd-7/domain-profile.schema.json`. |
@@ -62,9 +109,11 @@ domain representation
   -> ontology bindings + action coordinates
 ```
 
-The relationships are directional. A record is not the occurrence itself; an
+The relationships are directional. A Fact is not reality itself; a Fact Cut
+is not a second ontology binding; a record is not the occurrence itself; an
 Episode is not every possible record; a corpus of Episodes is not a complete
-account of reality.
+account of reality. Atlas, Pursuit, and Warrant constrain action at a cut.
+Episode preserves what occurred between cuts.
 
 ## Usage discipline
 

@@ -224,7 +224,7 @@
       "id": "terminology",
       "kind": "markdown-doc",
       "participants": ["human-reader", "agent-reader", "site-consumer", "package-consumer"],
-      "value": "Canonical KFD vocabulary and explicit boundaries among ontology, evidence, action, trust, and cooperation layers.",
+      "value": "Canonical KFD vocabulary, explanatory subtitles, 2 + 3 structure, and explicit anti-misreading boundaries among ontology, evidence, action, trust, and cooperation layers.",
       "discoverability": { "fromMinimalEntrypoint": true, "path": "docs/terminology.md" },
       "maturity": "stable"
     },
@@ -232,7 +232,7 @@
       "id": "terminology-contract",
       "kind": "json-api",
       "participants": ["agent-reader", "site-consumer", "package-consumer", "release-system"],
-      "value": "Machine-readable canonical terms that prevent vocabulary drift across KFD surfaces.",
+      "value": "Machine-readable canonical terms, explanatory subtitles, structure membership, and anti-misreading boundaries that prevent vocabulary drift across KFD surfaces.",
       "discoverability": { "fromMinimalEntrypoint": true, "path": "terminology.json" },
       "maturity": "stable"
     },

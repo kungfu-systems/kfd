@@ -11,6 +11,7 @@
     "standards": "standards.json",
     "liveCaseRegistry": "cases/registry.json",
     "candidateRegistry": "drafts/registry.json",
+    "terminology": "terminology.json",
     "decisionsDir": "decisions",
     "candidatesDir": "drafts"
   },
@@ -314,7 +315,7 @@
         "homepagePriority": 40,
         "defaultPresentation": "ordered-steps",
         "includeInFirstScreen": false,
-        "markdown": "Agents consuming this package should start from the same sources as humans:\n\n1. Read this README for the future picture, foundation triad, and package map.\n2. Read `docs/foundation.md` for the complete non-numbered explanation.\n3. Read `docs/formal-model.md` for the authority boundary, shared notation, and\n   the `Decision -> Formal -> Schema -> Usage -> Witness` traceability chain.\n4. Read `docs/KFD-N-formal.md` when precise domain objects, invariants,\n   transitions, invalid states, and proof obligations are needed for a\n   particular decision.\n5. Read `docs/primitive-discovery-cases.md` to test the KFD lens against familiar\n   historical cases and an ordinary cross-machine trace vignette.\n6. Read `cases/registry.json` to discover provisional live Primitive cases,\n   their current immutable KFD-5 cuts, claim boundaries, and review paths.\n7. Read `drafts/registry.json` to discover non-normative KFD Candidates,\n   non-binding slot hints, promotion gates, and claim boundaries.\n8. Read `standards.json` for canonical KFD numbers, formal reference versions\n   and hashes, schema IDs, concept names, and interface contracts.\n9. Use `site/kfd-site.json` decision metadata or the KFD-3 collaboration\n   interface fact-source metadata to identify the public KFD fact source.\n10. Use `schemas/kfd-2/trust-taxonomy.schema.json` for KFD-2 residual-risk and\n   trust-downgrade values. Unknown taxonomy values are invalid.\n11. Use `schemas/kfd-2/trust-claims.schema.json` and\n   `schemas/kfd-2/trust-assessment.schema.json` when a claim needs generic\n   KFD-2 assessment instead of a release-specific passport.\n12. Use `schemas/kfd-3/collaboration-interface.schema.json` and\n   `schemas/kfd-3/witness.schema.json` to inspect collaboration interfaces.\n13. Use `schemas/kfd-1/publication-url-semantics.schema.json` when a package,\n   paper, specification, or site bundle must distinguish stable reader URLs,\n   latest aliases, and immutable versioned artifacts.\n14. If a needed KFD-2 taxonomy value is missing, open a KFD GitHub issue rather\n   than inventing a local value:\n   `https://github.com/kungfu-systems/kfd/issues/new?title=KFD-2%20trust%20taxonomy%20extension%20request`.\n15. Use `schemas/kfd-4/observer-perspective.schema.json` to bind timelines to\n   their observers and `schemas/kfd-4/perspective-replay.schema.json` to record\n   perspective-preserving or contrastive replay. Use\n   `schemas/kfd-5/primitive-discovery.schema.json` version 3 to record\n   perspective-declared, method-plural genesis and fact-bound qualification,\n   including the optional boundary-pressure diagnostic when implicit\n   coordination is under new pressure. Use\n   `schemas/kfd-6/autonomous-discovery-loop.schema.json` only for explicitly\n   draft or experimental autonomous-discovery work; its version 4 interface\n   requires plural generation experiments, bounded method comparison, and a\n   conditional boundary hypothesis. Read `docs/KFD-7-formal.md` for the\n   current Fact/Episode and action-responsibility reference model. Use\n   `schemas/kfd-7/domain-profile.schema.json` for a product-neutral Domain\n   Profile Declaration; schema validity is non-qualifying and does not activate\n   a concrete Domain Profile.\n\nKFD package semver is only the distribution version. KFD-owned machine\ninterfaces carry their own `schemaVersion` and `contract` fields. Compatible\nadditions may keep the same interface version; semantic changes, required-field\nchanges, verification meaning changes, or responsibility-boundary changes must\nuse a new interface version or contract.\n\nKFD-2 publishes trust-taxonomy, trust-claims, trust-assessment,\nrelease-claims, and release-trust-passport schemas under `schemas/kfd-2/`.\nThe generic schemas let humans, agents, Buildchain, and other systems assess\nwhether claims about KFD-1, KFD-3, KFD-4, future KFDs, or product surfaces are\nbound to source facts, evidence, hashes, audit boundaries, residual risk, and\nassurance responsibility. The release schemas are a release-specific projection of\nthat model. See [`docs/KFD-2-usage.md`](docs/KFD-2-usage.md).\n\nKFD-3 also publishes a general collaboration-interface schema and witness\nschema under `schemas/kfd-3/`. These schemas are for participant-facing product\ninterfaces, not only agent APIs. A product such as Kungfu may implement an\nagent-first profile, but that profile remains a product-specific realization of\nKFD-3. The KFD-owned boundary is the standard vocabulary, schema IDs, and\nclosed-world evidence shape. See\n[`docs/KFD-3-usage.md`](docs/KFD-3-usage.md).\n\nKFD-4 says that views remain bound to declared perspectives and that a\nperspective transformation must stay inspectable when it is used to reveal a\ndifferent object or guide action. Its two schemas under `schemas/kfd-4/` define\nthe first concrete path: observer-bound timelines make a perspective durable;\nperspective-preserving and contrastive replay make perspectives transferable\nand comparable without flattening their fact boundaries. They are not a\nuniversal schema for every perspective.\n\nKFD-5 publishes a version 3 primitive-discovery record schema under\n`schemas/kfd-5/`. It requires every genesis to declare its observation\nperspective and current ontology while allowing perspective, anomaly,\nreconstruction, causal-variable, compression, and hybrid methods. It then\nbinds facts, alternatives, contract boundaries, falsifiers, dogfood evidence,\nand outcome. Validation proves record closure, not that the candidate is a\nreal primitive or that one method is superior.\n\nKFD-6 publishes a draft autonomous-discovery-loop schema under\n`schemas/kfd-6/`. Its version 4 experiment interface requires causal-experience\nboundaries, plural generation methods, fixed-ontology and no-new-primitive\nbaselines, shared-budget method comparison, held-out and independent\nevaluation, bounded autonomy, and separation between discovery and promotion.\nIts package presence is an experimental interface, not a claim that autonomous\nprimitive discovery or method dominance has been achieved.\n\nKFD-7 is an active decision for real-world action. It keeps admitted state,\nrealized occurrence, direction, perspective, and authority independently\naddressable. Its package surface includes the authoritative decision, formal\nreference, usage boundary, standards metadata, candidate lineage, and the\nversion 1 Domain Profile Declaration. The schema separates ontology bindings\nfrom action coordinates and fixes transition, theorem-reference,\nqualification-evidence, non-claim, and activation declarations without fixing\nproduct storage or lifecycle vocabulary. The\n[activation evidence](docs/KFD-7-activation.md) binds independently reviewed\nBuildchain and Kungfu Profiles while preserving product-owned qualification and\nthe decision's explicit non-claims."
+        "markdown": "Agents consuming this package should start from the same sources as humans:\n\n1. Read this README for the future picture, foundation triad, and package map.\n2. Read `docs/foundation.md` for the complete non-numbered explanation.\n3. Read `docs/terminology.md` or `terminology.json` before interpreting\n   overloaded core terms. The contract fixes their canonical subtitles,\n   `2 + 3` structure, and anti-misreading boundaries for humans and agents.\n4. Read `docs/formal-model.md` for the authority boundary, shared notation, and\n   the `Decision -> Formal -> Schema -> Usage -> Witness` traceability chain.\n5. Read `docs/KFD-N-formal.md` when precise domain objects, invariants,\n   transitions, invalid states, and proof obligations are needed for a\n   particular decision.\n6. Read `docs/primitive-discovery-cases.md` to test the KFD lens against familiar\n   historical cases and an ordinary cross-machine trace vignette.\n7. Read `cases/registry.json` to discover provisional live Primitive cases,\n   their current immutable KFD-5 cuts, claim boundaries, and review paths.\n8. Read `drafts/registry.json` to discover non-normative KFD Candidates,\n   non-binding slot hints, promotion gates, and claim boundaries.\n9. Read `standards.json` for canonical KFD numbers, formal reference versions\n   and hashes, schema IDs, concept names, and interface contracts.\n10. Use `site/kfd-site.json` decision metadata or the KFD-3 collaboration\n   interface fact-source metadata to identify the public KFD fact source.\n11. Use `schemas/kfd-2/trust-taxonomy.schema.json` for KFD-2 residual-risk and\n   trust-downgrade values. Unknown taxonomy values are invalid.\n12. Use `schemas/kfd-2/trust-claims.schema.json` and\n   `schemas/kfd-2/trust-assessment.schema.json` when a claim needs generic\n   KFD-2 assessment instead of a release-specific passport.\n13. Use `schemas/kfd-3/collaboration-interface.schema.json` and\n   `schemas/kfd-3/witness.schema.json` to inspect collaboration interfaces.\n14. Use `schemas/kfd-1/publication-url-semantics.schema.json` when a package,\n   paper, specification, or site bundle must distinguish stable reader URLs,\n   latest aliases, and immutable versioned artifacts.\n15. If a needed KFD-2 taxonomy value is missing, open a KFD GitHub issue rather\n   than inventing a local value:\n   `https://github.com/kungfu-systems/kfd/issues/new?title=KFD-2%20trust%20taxonomy%20extension%20request`.\n16. Use `schemas/kfd-4/observer-perspective.schema.json` to bind timelines to\n   their observers and `schemas/kfd-4/perspective-replay.schema.json` to record\n   perspective-preserving or contrastive replay. Use\n   `schemas/kfd-5/primitive-discovery.schema.json` version 3 to record\n   perspective-declared, method-plural genesis and fact-bound qualification,\n   including the optional boundary-pressure diagnostic when implicit\n   coordination is under new pressure. Use\n   `schemas/kfd-6/autonomous-discovery-loop.schema.json` only for explicitly\n   draft or experimental autonomous-discovery work; its version 4 interface\n   requires plural generation experiments, bounded method comparison, and a\n   conditional boundary hypothesis. Read `docs/KFD-7-formal.md` for the\n   current Fact/Episode and action-responsibility reference model. Use\n   `schemas/kfd-7/domain-profile.schema.json` for a product-neutral Domain\n   Profile Declaration; schema validity is non-qualifying and does not activate\n   a concrete Domain Profile.\n\nKFD package semver is only the distribution version. KFD-owned machine\ninterfaces carry their own `schemaVersion` and `contract` fields. Compatible\nadditions may keep the same interface version; semantic changes, required-field\nchanges, verification meaning changes, or responsibility-boundary changes must\nuse a new interface version or contract.\n\nKFD-2 publishes trust-taxonomy, trust-claims, trust-assessment,\nrelease-claims, and release-trust-passport schemas under `schemas/kfd-2/`.\nThe generic schemas let humans, agents, Buildchain, and other systems assess\nwhether claims about KFD-1, KFD-3, KFD-4, future KFDs, or product surfaces are\nbound to source facts, evidence, hashes, audit boundaries, residual risk, and\nassurance responsibility. The release schemas are a release-specific projection of\nthat model. See [`docs/KFD-2-usage.md`](docs/KFD-2-usage.md).\n\nKFD-3 also publishes a general collaboration-interface schema and witness\nschema under `schemas/kfd-3/`. These schemas are for participant-facing product\ninterfaces, not only agent APIs. A product such as Kungfu may implement an\nagent-first profile, but that profile remains a product-specific realization of\nKFD-3. The KFD-owned boundary is the standard vocabulary, schema IDs, and\nclosed-world evidence shape. See\n[`docs/KFD-3-usage.md`](docs/KFD-3-usage.md).\n\nKFD-4 says that views remain bound to declared perspectives and that a\nperspective transformation must stay inspectable when it is used to reveal a\ndifferent object or guide action. Its two schemas under `schemas/kfd-4/` define\nthe first concrete path: observer-bound timelines make a perspective durable;\nperspective-preserving and contrastive replay make perspectives transferable\nand comparable without flattening their fact boundaries. They are not a\nuniversal schema for every perspective.\n\nKFD-5 publishes a version 3 primitive-discovery record schema under\n`schemas/kfd-5/`. It requires every genesis to declare its observation\nperspective and current ontology while allowing perspective, anomaly,\nreconstruction, causal-variable, compression, and hybrid methods. It then\nbinds facts, alternatives, contract boundaries, falsifiers, dogfood evidence,\nand outcome. Validation proves record closure, not that the candidate is a\nreal primitive or that one method is superior.\n\nKFD-6 publishes a draft autonomous-discovery-loop schema under\n`schemas/kfd-6/`. Its version 4 experiment interface requires causal-experience\nboundaries, plural generation methods, fixed-ontology and no-new-primitive\nbaselines, shared-budget method comparison, held-out and independent\nevaluation, bounded autonomy, and separation between discovery and promotion.\nIts package presence is an experimental interface, not a claim that autonomous\nprimitive discovery or method dominance has been achieved.\n\nKFD-7 is an active decision for real-world action. It keeps admitted state,\nrealized occurrence, direction, perspective, and authority independently\naddressable. Its package surface includes the authoritative decision, formal\nreference, usage boundary, standards metadata, candidate lineage, and the\nversion 1 Domain Profile Declaration. The schema separates ontology bindings\nfrom action coordinates and fixes transition, theorem-reference,\nqualification-evidence, non-claim, and activation declarations without fixing\nproduct storage or lifecycle vocabulary. The\n[activation evidence](docs/KFD-7-activation.md) binds independently reviewed\nBuildchain and Kungfu Profiles while preserving product-owned qualification and\nthe decision's explicit non-claims.\n\nThe five names are not five peers. Fact and Episode form the Fact-Episode\nOntology; Atlas, Pursuit, and Warrant form the Action Responsibility Geometry.\nTheir canonical explanatory subtitles and anti-misreading boundaries come\nfrom `terminology.json`, not from renderer or product-local wording."
       },
       {
         "id": "decision-metadata",
@@ -441,7 +442,177 @@
     "relationship": "canonical-vocabulary-for-all-kfd-surfaces",
     "normative": false,
     "authorityNote": "Numbered decisions remain normative; this contract governs naming and type distinctions across their projections.",
-    "markdown": "# KFD Terminology Contract\n\nThis document defines the public vocabulary used across KFD decisions,\nformal references, schemas, packages, and rendered sites. It is not a numbered\ndecision. It prevents one concept from acquiring several names and prevents\none name from silently carrying several formal types.\n\nThe machine projection is [`../terminology.json`](../terminology.json).\n`scripts/check.mjs` verifies the projection and rejects ambiguous vocabulary on\nactive KFD surfaces.\n\n## Naming rules\n\n1. A canonical term has one definition and one formal layer.\n2. A generic word remains lowercase. Capitalization identifies a KFD term or\n   named object.\n3. The first use of a coined or overloaded term includes its plain-language\n   meaning.\n4. A schema, contract ID, metadata key, fixture, document, and site route use\n   the same canonical vocabulary.\n5. A candidate name does not imply that its object has been promoted to an\n   active KFD Primitive.\n\n## Canonical vocabulary\n\n| Term | Layer | Meaning and first use |\n| --- | --- | --- |\n| **KFD Foundation** | explanatory | The non-numbered explanation of how the decisions compose. |\n| **primitive** | generic | Any basic object in an external field. |\n| **KFD Primitive** | standard | A qualified load-bearing object with independent identity, boundary, authority, lifecycle, and operations. |\n| **KFD Primitive Candidate** | discovery | A proposed KFD Primitive that has not completed qualification and promotion. |\n| **Fact-Episode Ontology** | KFD-7 ontology | The contract-world model whose object-like elements are admitted Fact cuts and whose path-like elements are Episodes. It is not a complete ontology of reality. |\n| **Causal Occurrence** | reality boundary | A bounded event sequence or partial order that actually occurs. |\n| **Causal Record** | evidence | An evidence-bearing representation of a Causal Occurrence, including declared omissions and loss. |\n| **Episode** | KFD object | An independently addressable, replayable object that binds a Causal Record to declared cuts, perspective, and loss. It is not merely a session, run, transcript, or reinforcement-learning trajectory. |\n| **Causal Experience** | evidence corpus | One or more Episodes used as evidence or learning material. It is not reality itself. |\n| **Action Responsibility Geometry** | KFD-7 action model | The cross-domain responsibility model whose coordinates are direction, perspective, and bounded authority. Geometry does not imply Euclidean space, physical motion, a metric, or a differentiable manifold. |\n| **Action Coordinate** | KFD-7 role | One independently addressable coordinate in the Action Responsibility Geometry. |\n| **Pursuit** | reference coordinate | The direction coordinate: continuing intended change and its progress relation. KFD-7 standardizes this role, not a complete Pursuit object specification. |\n| **Atlas** | reference coordinate | The perspective coordinate: accepted facts, observation boundary, cut, omissions, and loss. KFD-7 standardizes this role, not a complete Atlas object specification. |\n| **Warrant** | reference coordinate | The bounded-authority coordinate: which transition may be performed, by whom, and under which constraints. KFD-7 standardizes this role, not legal authority or a complete Warrant object specification. |\n| **Domain Profile** | adopter model | A versioned declaration of how one domain binds its representations to the Fact-Episode Ontology and Action Responsibility Geometry. |\n| **Domain Profile Declaration** | machine artifact | A document conforming to `schemas/kfd-7/domain-profile.schema.json`. |\n| **Assurance Responsibility** | trust model | The named assignment of source-fact, verification, and decision authority. It is distinct from a KFD-7 Action Coordinate. |\n| **Participant Value Claim** | cooperation model | A bounded statement of value to a participant, with inspectable fact, trust, constraint, choice, and residual-risk boundaries. |\n\n## Type relationships\n\n```text\nCausal Occurrence --represented by--> Causal Record\nCausal Record     --bound into-------> Episode\nEpisode[]         --used as----------> Causal Experience\n\nFact cut + Episode\n  -> Fact-Episode Ontology\n\nPursuit + Atlas + Warrant\n  -> Action Responsibility Geometry\n\ndomain representation\n  -> Domain Profile Declaration\n  -> ontology bindings + action coordinates\n```\n\nThe relationships are directional. A record is not the occurrence itself; an\nEpisode is not every possible record; a corpus of Episodes is not a complete\naccount of reality.\n\n## Usage discipline\n\nPublic prose may use a shorter name after the first qualified use within the\nsame document. Machine surfaces do not shorten canonical IDs or field names.\nWhen an external field already uses the same word differently, KFD text states\nthe KFD meaning before making comparisons.\n\nTerminology changes are contract changes. Before stable, they replace the\ncurrent vocabulary atomically across all active surfaces. After stable, they\nfollow the KFD-1 compatibility boundary declared by the affected interface."
+    "contract": {
+      "$schema": "https://kfd.libkungfu.dev/schemas/kfd-terminology.schema.json",
+      "schemaVersion": 1,
+      "contract": "kfd-terminology",
+      "authority": "docs/terminology.md",
+      "structures": [
+        {
+          "termId": "fact-episode-ontology",
+          "members": [
+            "fact",
+            "episode"
+          ]
+        },
+        {
+          "termId": "action-responsibility-geometry",
+          "members": [
+            "atlas",
+            "pursuit",
+            "warrant"
+          ]
+        }
+      ],
+      "terms": [
+        {
+          "id": "kfd-foundation",
+          "canonical": "KFD Foundation",
+          "layer": "explanatory"
+        },
+        {
+          "id": "kfd-primitive",
+          "canonical": "KFD Primitive",
+          "layer": "standard"
+        },
+        {
+          "id": "kfd-primitive-candidate",
+          "canonical": "KFD Primitive Candidate",
+          "layer": "discovery"
+        },
+        {
+          "id": "fact-episode-ontology",
+          "canonical": "Fact-Episode Ontology",
+          "layer": "kfd-7-ontology",
+          "subtitle": "Contract-world state and occurrence model"
+        },
+        {
+          "id": "fact",
+          "canonical": "Fact",
+          "layer": "kfd-7-ontology-binding",
+          "subtitle": "Admitted state at a declared evidence boundary",
+          "compactSubtitle": "Admitted state",
+          "question": "What is admitted?",
+          "definition": "State admitted into a contract world under a declared source, authority, evidence, and cut boundary. Its independently addressable formal carrier is a Fact Cut.",
+          "notThis": [
+            "absolute truth",
+            "every observation",
+            "a Causal Record"
+          ]
+        },
+        {
+          "id": "fact-cut",
+          "canonical": "Fact Cut",
+          "layer": "kfd-7-formal-carrier",
+          "definition": "An independently addressable instance of admitted Fact state at a declared source, authority, evidence, and time or version boundary."
+        },
+        {
+          "id": "causal-occurrence",
+          "canonical": "Causal Occurrence",
+          "layer": "reality-boundary"
+        },
+        {
+          "id": "causal-record",
+          "canonical": "Causal Record",
+          "layer": "evidence"
+        },
+        {
+          "id": "episode",
+          "canonical": "Episode",
+          "layer": "kfd-7-ontology-binding",
+          "subtitle": "Replayable causal record between Fact cuts",
+          "compactSubtitle": "Replayable causal record",
+          "question": "What happened?",
+          "definition": "An independently addressable and replayable object that binds a Causal Record to declared Fact cuts, perspective, omissions, and loss.",
+          "notThis": [
+            "a session by definition",
+            "a transcript by definition",
+            "an intended or authorized action",
+            "proof of success, progress, completion, or authorization"
+          ]
+        },
+        {
+          "id": "causal-experience",
+          "canonical": "Causal Experience",
+          "layer": "evidence-corpus"
+        },
+        {
+          "id": "action-responsibility-geometry",
+          "canonical": "Action Responsibility Geometry",
+          "layer": "kfd-7-action-model",
+          "subtitle": "Cross-domain responsibility model"
+        },
+        {
+          "id": "action-coordinate",
+          "canonical": "Action Coordinate",
+          "layer": "kfd-7-role"
+        },
+        {
+          "id": "atlas",
+          "canonical": "Atlas",
+          "layer": "reference-coordinate",
+          "subtitle": "Declared perspective over admitted facts",
+          "compactSubtitle": "Declared perspective",
+          "question": "From where is it judged?",
+          "definition": "The independently addressable perspective coordinate that binds accepted facts, observation boundary, cut, freshness, omissions, and loss.",
+          "notThis": [
+            "complete reality",
+            "generic context without source, cut, freshness, omissions, and loss",
+            "a Pursuit or Warrant"
+          ]
+        },
+        {
+          "id": "pursuit",
+          "canonical": "Pursuit",
+          "layer": "reference-coordinate",
+          "subtitle": "Continuing direction and progress relation",
+          "compactSubtitle": "Continuing direction",
+          "question": "What change is sought?",
+          "definition": "The independently addressable direction coordinate that identifies the continuing change being sought and the relation by which progress is judged.",
+          "notThis": [
+            "a one-shot task",
+            "a plan",
+            "authority to act"
+          ]
+        },
+        {
+          "id": "warrant",
+          "canonical": "Warrant",
+          "layer": "reference-coordinate",
+          "subtitle": "Bounded authority for admissible transitions",
+          "compactSubtitle": "Bounded authority",
+          "question": "What action is allowed?",
+          "definition": "The independently addressable authority coordinate that identifies which transition may be performed, by whom, under which constraints, and until when.",
+          "notThis": [
+            "authentication",
+            "a capability alone",
+            "intention or assignment",
+            "proof that an action occurred"
+          ]
+        },
+        {
+          "id": "domain-profile",
+          "canonical": "Domain Profile",
+          "layer": "adopter-model"
+        },
+        {
+          "id": "domain-profile-declaration",
+          "canonical": "Domain Profile Declaration",
+          "layer": "machine-artifact"
+        },
+        {
+          "id": "assurance-responsibility",
+          "canonical": "Assurance Responsibility",
+          "layer": "trust-model"
+        },
+        {
+          "id": "participant-value-claim",
+          "canonical": "Participant Value Claim",
+          "layer": "cooperation-model"
+        }
+      ]
+    },
+    "markdown": "# KFD Terminology Contract\n\nThis document defines the public vocabulary used across KFD decisions,\nformal references, schemas, packages, and rendered sites. It is not a numbered\ndecision. It prevents one concept from acquiring several names and prevents\none name from silently carrying several formal types.\n\nThe machine projection is [`../terminology.json`](../terminology.json).\n`scripts/check.mjs` verifies the projection and rejects ambiguous vocabulary on\nactive KFD surfaces.\n\n## Naming rules\n\n1. A canonical term has one definition and one formal layer.\n2. A generic word remains lowercase. Capitalization identifies a KFD term or\n   named object.\n3. The first use of a coined or overloaded term includes its plain-language\n   meaning.\n4. A schema, contract ID, metadata key, fixture, document, and site route use\n   the same canonical vocabulary.\n5. A candidate name does not imply that its object has been promoted to an\n   active KFD Primitive.\n6. A canonical explanatory subtitle clarifies one term. It is not an alias,\n   a second formal type, or permission to rename the term on machine surfaces.\n\n## The core 2 + 3 structure\n\nThe five core KFD-7 names are not five peers. They form two ontology bindings\nand three action coordinates:\n\n```text\nFact + Episode\n  -> Fact-Episode Ontology\n\nAtlas + Pursuit + Warrant\n  -> Action Responsibility Geometry\n```\n\nThe canonical explanatory subtitles and questions are:\n\n| Term | Canonical explanatory subtitle | Compact subtitle | Question |\n| --- | --- | --- | --- |\n| **Fact** | Admitted state at a declared evidence boundary | Admitted state | What is admitted? |\n| **Episode** | Replayable causal record between Fact cuts | Replayable causal record | What happened? |\n| **Atlas** | Declared perspective over admitted facts | Declared perspective | From where is it judged? |\n| **Pursuit** | Continuing direction and progress relation | Continuing direction | What change is sought? |\n| **Warrant** | Bounded authority for admissible transitions | Bounded authority | What action is allowed? |\n\n`Fact` names admitted state, not absolute truth. `Fact Cut` names an\nindependently addressable instance of that state at a declared source,\nauthority, evidence, and time or version boundary. The formal model uses\n`FactCut` as the carrier so two cuts can differ even when they contain similar\nclaims.\n\nThe subtitles above are the full first-use forms. Compact interfaces may use\nthe machine-declared `compactSubtitle` values, but must keep the canonical term\nvisible or discoverable.\n\nThe same contract closes common false equivalences:\n\n| Term | It is not |\n| --- | --- |\n| **Fact** | absolute truth; every observation; a Causal Record |\n| **Episode** | a session by definition; a transcript by definition; an intended or authorized action; proof of success, progress, completion, or authorization |\n| **Atlas** | complete reality; generic context without source, cut, freshness, omissions, and loss; a Pursuit or Warrant |\n| **Pursuit** | a one-shot task; a plan; authority to act |\n| **Warrant** | authentication; a capability alone; intention or assignment; proof that an action occurred |\n\n## Canonical vocabulary\n\n| Term | Layer | Meaning and first use |\n| --- | --- | --- |\n| **KFD Foundation** | explanatory | The non-numbered explanation of how the decisions compose. |\n| **primitive** | generic | Any basic object in an external field. |\n| **KFD Primitive** | standard | A qualified load-bearing object with independent identity, boundary, authority, lifecycle, and operations. |\n| **KFD Primitive Candidate** | discovery | A proposed KFD Primitive that has not completed qualification and promotion. |\n| **Fact-Episode Ontology** | KFD-7 ontology | The contract-world model whose object-like elements are admitted Fact cuts and whose path-like elements are Episodes. It is not a complete ontology of reality. |\n| **Fact** | KFD-7 ontology binding | State admitted into a contract world under declared source, authority, evidence, and cut boundaries. It is not absolute truth or every observation. |\n| **Fact Cut** | KFD-7 formal carrier | An independently addressable instance of admitted Fact state at a declared boundary. It is not a second ontology binding. |\n| **Causal Occurrence** | reality boundary | A bounded event sequence or partial order that actually occurs. |\n| **Causal Record** | evidence | An evidence-bearing representation of a Causal Occurrence, including declared omissions and loss. |\n| **Episode** | KFD-7 ontology binding | An independently addressable, replayable object that binds a Causal Record to declared cuts, perspective, and loss. It is not merely a session, run, transcript, or reinforcement-learning trajectory. |\n| **Causal Experience** | evidence corpus | One or more Episodes used as evidence or learning material. It is not reality itself. |\n| **Action Responsibility Geometry** | KFD-7 action model | The cross-domain responsibility model whose coordinates are direction, perspective, and bounded authority. Geometry does not imply Euclidean space, physical motion, a metric, or a differentiable manifold. |\n| **Action Coordinate** | KFD-7 role | One independently addressable coordinate in the Action Responsibility Geometry. |\n| **Atlas** | reference coordinate | The perspective coordinate: accepted facts, observation boundary, cut, omissions, and loss. KFD-7 standardizes this role, not a complete Atlas object specification. |\n| **Pursuit** | reference coordinate | The direction coordinate: continuing intended change and its progress relation. KFD-7 standardizes this role, not a complete Pursuit object specification. |\n| **Warrant** | reference coordinate | The bounded-authority coordinate: which transition may be performed, by whom, and under which constraints. KFD-7 standardizes this role, not legal authority or a complete Warrant object specification. |\n| **Domain Profile** | adopter model | A versioned declaration of how one domain binds its representations to the Fact-Episode Ontology and Action Responsibility Geometry. |\n| **Domain Profile Declaration** | machine artifact | A document conforming to `schemas/kfd-7/domain-profile.schema.json`. |\n| **Assurance Responsibility** | trust model | The named assignment of source-fact, verification, and decision authority. It is distinct from a KFD-7 Action Coordinate. |\n| **Participant Value Claim** | cooperation model | A bounded statement of value to a participant, with inspectable fact, trust, constraint, choice, and residual-risk boundaries. |\n\n## Type relationships\n\n```text\nCausal Occurrence --represented by--> Causal Record\nCausal Record     --bound into-------> Episode\nEpisode[]         --used as----------> Causal Experience\n\nFact cut + Episode\n  -> Fact-Episode Ontology\n\nPursuit + Atlas + Warrant\n  -> Action Responsibility Geometry\n\ndomain representation\n  -> Domain Profile Declaration\n  -> ontology bindings + action coordinates\n```\n\nThe relationships are directional. A Fact is not reality itself; a Fact Cut\nis not a second ontology binding; a record is not the occurrence itself; an\nEpisode is not every possible record; a corpus of Episodes is not a complete\naccount of reality. Atlas, Pursuit, and Warrant constrain action at a cut.\nEpisode preserves what occurred between cuts.\n\n## Usage discipline\n\nPublic prose may use a shorter name after the first qualified use within the\nsame document. Machine surfaces do not shorten canonical IDs or field names.\nWhen an external field already uses the same word differently, KFD text states\nthe KFD meaning before making comparisons.\n\nTerminology changes are contract changes. Before stable, they replace the\ncurrent vocabulary atomically across all active surfaces. After stable, they\nfollow the KFD-1 compatibility boundary declared by the affected interface."
   },
   "liveCases": {
     "source": "cases/registry.json",
@@ -1562,10 +1733,10 @@
           "sourceExists": true,
           "relationship": "formal-reference-child-of-decision",
           "normative": false,
-          "formalModelVersion": 4,
+          "formalModelVersion": 5,
           "formalModelStatus": "experimental",
           "authorityPath": "decisions/KFD-7.md",
-          "sha256": "328fcf6bf2511af87d79e8af7d603da09a9619a21b008e5f199b234e1180a396",
+          "sha256": "fe3196177a56640d205337bd1148e0a8764ecbbf91bc23d2c6d8a232c926f7d4",
           "title": "KFD-7 formal reference"
         }
       ]
@@ -1616,6 +1787,7 @@
       "agent quickstart text",
       "decision metadata",
       "decision metadata fact source",
+      "canonical terminology contract and explanatory subtitles from terminology.json",
       "license and official-status boundary",
       "decision markdown bodies",
       "decision usage page mapping",

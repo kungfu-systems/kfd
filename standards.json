@@ -2265,21 +2265,21 @@
       "title": "Real-world action must keep state, occurrence, and action coordinates distinct",
       "kind": "principle",
       "status": "active",
-      "revision": 7,
+      "revision": 8,
       "metadataSchemaVersion": "2",
       "document": {
         "path": "decisions/KFD-7.md",
         "url": "https://kfd.libkungfu.dev/7",
-        "sha256": "b2c34f7e3f5526a85e839ee12d825d01d4490fbb0c89bb5c336935d728da17e5"
+        "sha256": "a493e22e527dcd74fa8e3afc73e33e08f7d09e20e596689f2b550c071ac8efc0"
       },
       "formalModel": {
         "path": "docs/KFD-7-formal.md",
         "url": "https://kfd.libkungfu.dev/7/formal",
-        "version": 4,
+        "version": 5,
         "status": "experimental",
         "normative": false,
         "authorityPath": "decisions/KFD-7.md",
-        "sha256": "328fcf6bf2511af87d79e8af7d603da09a9619a21b008e5f199b234e1180a396"
+        "sha256": "fe3196177a56640d205337bd1148e0a8764ecbbf91bc23d2c6d8a232c926f7d4"
       },
       "compatibility": {
         "packageLine": "v1.0",
@@ -2351,12 +2351,13 @@
         ]
       },
       "concepts": {
-        "factCut": "declared fact cut",
+        "fact": "admitted state at a declared evidence boundary",
+        "factCut": "independently addressable formal carrier of admitted Fact state at a declared source, authority, evidence, and time or version boundary",
         "causalRecord": "evidence-bearing representation of a Causal Occurrence with declared omissions and loss",
-        "episode": "independently addressable replayable object binding a Causal Record to declared cuts, perspective, and loss",
-        "atlas": "addressable action perspective and accepted fact cut",
-        "pursuit": "continuing action direction",
-        "warrant": "bounded authority for admissible transition",
+        "episode": "replayable causal record between Fact cuts",
+        "atlas": "declared perspective over admitted facts",
+        "pursuit": "continuing direction and progress relation",
+        "warrant": "bounded authority for admissible transitions",
         "direction": "intended consequence and progress relation",
         "perspective": "declared observation and judgment frame",
         "authorityBoundary": "independently derivable and revocable action boundary",

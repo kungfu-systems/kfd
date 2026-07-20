@@ -12,6 +12,7 @@
 | What is the KFD-1/2/3 foundation triad? | [`../README.md`](../README.md#foundation-triad) |
 | What worldview structure does the foundation triad express? | [`foundation.md`](foundation.md) |
 | What is the shared formal notation and authority boundary? | [`formal-model.md`](formal-model.md) |
+| What do Fact, Episode, Atlas, Pursuit, and Warrant mean, and why are they a 2 + 3 structure rather than five peers? | [`terminology.md`](terminology.md#the-core-2--3-structure) |
 | How do Decision, Formal, Schema, Usage, and Witness relate? | [`formal-model.md`](formal-model.md#purpose) |
 | Why does the foundation begin with a procedure rather than a principle? | [`foundation.md`](foundation.md#why-the-foundation-begins-with-procedure) |
 | How do capability loops, discovery loops, and product witnesses fit together? | [`foundation.md`](foundation.md) |
@@ -51,7 +52,7 @@
 | How should an autonomous discovery loop remain grounded in causal experience? | [KFD-6](../decisions/KFD-6.md) |
 | What schema records a KFD-6 autonomous discovery experiment? | [`../schemas/kfd-6/autonomous-discovery-loop.schema.json`](../schemas/kfd-6/autonomous-discovery-loop.schema.json) |
 | How must real-world action keep direction, perspective, authority, and occurrence distinct? | [KFD-7](../decisions/KFD-7.md) |
-| What is the difference between the Fact-Episode Ontology, Action Responsibility Geometry, and a Domain Profile? | [KFD-7](../decisions/KFD-7.md#action-geometry-and-domain-profiles) and [`KFD-7-usage.md`](KFD-7-usage.md#fact-episode-ontology-action-geometry-and-domain-profiles) |
+| What is the difference between the Fact-Episode Ontology, Action Responsibility Geometry, and a Domain Profile? | [KFD-7](../decisions/KFD-7.md#action-responsibility-geometry-and-domain-profiles) and [`KFD-7-usage.md`](KFD-7-usage.md#fact-episode-ontology-action-responsibility-geometry-and-domain-profiles) |
 | Why are Fact and Episode ontology bindings rather than action coordinates? | [KFD-7](../decisions/KFD-7.md#fact-episode-ontology) and [`KFD-7-formal.md`](KFD-7-formal.md#fact-episode-ontology) |
 | What schema declares a KFD-7 Domain Profile and activation evidence boundary? | [`../schemas/kfd-7/domain-profile.schema.json`](../schemas/kfd-7/domain-profile.schema.json) |
 

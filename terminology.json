@@ -3,6 +3,23 @@
   "schemaVersion": 1,
   "contract": "kfd-terminology",
   "authority": "docs/terminology.md",
+  "structures": [
+    {
+      "termId": "fact-episode-ontology",
+      "members": [
+        "fact",
+        "episode"
+      ]
+    },
+    {
+      "termId": "action-responsibility-geometry",
+      "members": [
+        "atlas",
+        "pursuit",
+        "warrant"
+      ]
+    }
+  ],
   "terms": [
     {
       "id": "kfd-foundation",
@@ -22,7 +39,28 @@
     {
       "id": "fact-episode-ontology",
       "canonical": "Fact-Episode Ontology",
-      "layer": "kfd-7-ontology"
+      "layer": "kfd-7-ontology",
+      "subtitle": "Contract-world state and occurrence model"
+    },
+    {
+      "id": "fact",
+      "canonical": "Fact",
+      "layer": "kfd-7-ontology-binding",
+      "subtitle": "Admitted state at a declared evidence boundary",
+      "compactSubtitle": "Admitted state",
+      "question": "What is admitted?",
+      "definition": "State admitted into a contract world under a declared source, authority, evidence, and cut boundary. Its independently addressable formal carrier is a Fact Cut.",
+      "notThis": [
+        "absolute truth",
+        "every observation",
+        "a Causal Record"
+      ]
+    },
+    {
+      "id": "fact-cut",
+      "canonical": "Fact Cut",
+      "layer": "kfd-7-formal-carrier",
+      "definition": "An independently addressable instance of admitted Fact state at a declared source, authority, evidence, and time or version boundary."
     },
     {
       "id": "causal-occurrence",
@@ -37,7 +75,17 @@
     {
       "id": "episode",
       "canonical": "Episode",
-      "layer": "kfd-object"
+      "layer": "kfd-7-ontology-binding",
+      "subtitle": "Replayable causal record between Fact cuts",
+      "compactSubtitle": "Replayable causal record",
+      "question": "What happened?",
+      "definition": "An independently addressable and replayable object that binds a Causal Record to declared Fact cuts, perspective, omissions, and loss.",
+      "notThis": [
+        "a session by definition",
+        "a transcript by definition",
+        "an intended or authorized action",
+        "proof of success, progress, completion, or authorization"
+      ]
     },
     {
       "id": "causal-experience",
@@ -47,7 +95,8 @@
     {
       "id": "action-responsibility-geometry",
       "canonical": "Action Responsibility Geometry",
-      "layer": "kfd-7-action-model"
+      "layer": "kfd-7-action-model",
+      "subtitle": "Cross-domain responsibility model"
     },
     {
       "id": "action-coordinate",
@@ -55,19 +104,47 @@
       "layer": "kfd-7-role"
     },
     {
-      "id": "pursuit",
-      "canonical": "Pursuit",
-      "layer": "reference-coordinate"
-    },
-    {
       "id": "atlas",
       "canonical": "Atlas",
-      "layer": "reference-coordinate"
+      "layer": "reference-coordinate",
+      "subtitle": "Declared perspective over admitted facts",
+      "compactSubtitle": "Declared perspective",
+      "question": "From where is it judged?",
+      "definition": "The independently addressable perspective coordinate that binds accepted facts, observation boundary, cut, freshness, omissions, and loss.",
+      "notThis": [
+        "complete reality",
+        "generic context without source, cut, freshness, omissions, and loss",
+        "a Pursuit or Warrant"
+      ]
+    },
+    {
+      "id": "pursuit",
+      "canonical": "Pursuit",
+      "layer": "reference-coordinate",
+      "subtitle": "Continuing direction and progress relation",
+      "compactSubtitle": "Continuing direction",
+      "question": "What change is sought?",
+      "definition": "The independently addressable direction coordinate that identifies the continuing change being sought and the relation by which progress is judged.",
+      "notThis": [
+        "a one-shot task",
+        "a plan",
+        "authority to act"
+      ]
     },
     {
       "id": "warrant",
       "canonical": "Warrant",
-      "layer": "reference-coordinate"
+      "layer": "reference-coordinate",
+      "subtitle": "Bounded authority for admissible transitions",
+      "compactSubtitle": "Bounded authority",
+      "question": "What action is allowed?",
+      "definition": "The independently addressable authority coordinate that identifies which transition may be performed, by whom, under which constraints, and until when.",
+      "notThis": [
+        "authentication",
+        "a capability alone",
+        "intention or assignment",
+        "proof that an action occurred"
+      ]
     },
     {
       "id": "domain-profile",

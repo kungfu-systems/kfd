@@ -160,7 +160,7 @@ explainable, auditable, and proportionate.
 | [KFD-4](decisions/KFD-4.md) | principle | Views must remain bound to declared perspectives. | active |
 | [KFD-5](decisions/KFD-5.md) | procedure | Primitive discovery must separate genesis from qualification. | active |
 | [KFD-6](decisions/KFD-6.md) | procedure | Autonomous discovery must remain grounded in causal experience. | draft |
-| [KFD-7](decisions/KFD-7.md) | principle | Real-world action must keep direction, perspective, authority, and occurrence independently addressable. | active |
+| [KFD-7](decisions/KFD-7.md) | principle | Real-world action must keep state, occurrence, and action coordinates distinct. | active |
 
 ## Current candidates
 
@@ -287,35 +287,38 @@ Agents consuming this package should start from the same sources as humans:
 
 1. Read this README for the future picture, foundation triad, and package map.
 2. Read `docs/foundation.md` for the complete non-numbered explanation.
-3. Read `docs/formal-model.md` for the authority boundary, shared notation, and
+3. Read `docs/terminology.md` or `terminology.json` before interpreting
+   overloaded core terms. The contract fixes their canonical subtitles,
+   `2 + 3` structure, and anti-misreading boundaries for humans and agents.
+4. Read `docs/formal-model.md` for the authority boundary, shared notation, and
    the `Decision -> Formal -> Schema -> Usage -> Witness` traceability chain.
-4. Read `docs/KFD-N-formal.md` when precise domain objects, invariants,
+5. Read `docs/KFD-N-formal.md` when precise domain objects, invariants,
    transitions, invalid states, and proof obligations are needed for a
    particular decision.
-5. Read `docs/primitive-discovery-cases.md` to test the KFD lens against familiar
+6. Read `docs/primitive-discovery-cases.md` to test the KFD lens against familiar
    historical cases and an ordinary cross-machine trace vignette.
-6. Read `cases/registry.json` to discover provisional live Primitive cases,
+7. Read `cases/registry.json` to discover provisional live Primitive cases,
    their current immutable KFD-5 cuts, claim boundaries, and review paths.
-7. Read `drafts/registry.json` to discover non-normative KFD Candidates,
+8. Read `drafts/registry.json` to discover non-normative KFD Candidates,
    non-binding slot hints, promotion gates, and claim boundaries.
-8. Read `standards.json` for canonical KFD numbers, formal reference versions
+9. Read `standards.json` for canonical KFD numbers, formal reference versions
    and hashes, schema IDs, concept names, and interface contracts.
-9. Use `site/kfd-site.json` decision metadata or the KFD-3 collaboration
+10. Use `site/kfd-site.json` decision metadata or the KFD-3 collaboration
    interface fact-source metadata to identify the public KFD fact source.
-10. Use `schemas/kfd-2/trust-taxonomy.schema.json` for KFD-2 residual-risk and
+11. Use `schemas/kfd-2/trust-taxonomy.schema.json` for KFD-2 residual-risk and
    trust-downgrade values. Unknown taxonomy values are invalid.
-11. Use `schemas/kfd-2/trust-claims.schema.json` and
+12. Use `schemas/kfd-2/trust-claims.schema.json` and
    `schemas/kfd-2/trust-assessment.schema.json` when a claim needs generic
    KFD-2 assessment instead of a release-specific passport.
-12. Use `schemas/kfd-3/collaboration-interface.schema.json` and
+13. Use `schemas/kfd-3/collaboration-interface.schema.json` and
    `schemas/kfd-3/witness.schema.json` to inspect collaboration interfaces.
-13. Use `schemas/kfd-1/publication-url-semantics.schema.json` when a package,
+14. Use `schemas/kfd-1/publication-url-semantics.schema.json` when a package,
    paper, specification, or site bundle must distinguish stable reader URLs,
    latest aliases, and immutable versioned artifacts.
-14. If a needed KFD-2 taxonomy value is missing, open a KFD GitHub issue rather
+15. If a needed KFD-2 taxonomy value is missing, open a KFD GitHub issue rather
    than inventing a local value:
    `https://github.com/kungfu-systems/kfd/issues/new?title=KFD-2%20trust%20taxonomy%20extension%20request`.
-15. Use `schemas/kfd-4/observer-perspective.schema.json` to bind timelines to
+16. Use `schemas/kfd-4/observer-perspective.schema.json` to bind timelines to
    their observers and `schemas/kfd-4/perspective-replay.schema.json` to record
    perspective-preserving or contrastive replay. Use
    `schemas/kfd-5/primitive-discovery.schema.json` version 3 to record
@@ -388,6 +391,11 @@ product storage or lifecycle vocabulary. The
 [activation evidence](docs/KFD-7-activation.md) binds independently reviewed
 Buildchain and Kungfu Profiles while preserving product-owned qualification and
 the decision's explicit non-claims.
+
+The five names are not five peers. Fact and Episode form the Fact-Episode
+Ontology; Atlas, Pursuit, and Warrant form the Action Responsibility Geometry.
+Their canonical explanatory subtitles and anti-misreading boundaries come
+from `terminology.json`, not from renderer or product-local wording.
 
 ## Decision metadata
 

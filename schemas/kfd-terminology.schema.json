@@ -8,6 +8,7 @@
     "schemaVersion",
     "contract",
     "authority",
+    "structures",
     "terms"
   ],
   "properties": {
@@ -22,6 +23,13 @@
     },
     "authority": {
       "const": "docs/terminology.md"
+    },
+    "structures": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/structure"
+      }
     },
     "terms": {
       "type": "array",
@@ -52,6 +60,54 @@
         "layer": {
           "type": "string",
           "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "subtitle": {
+          "type": "string",
+          "minLength": 1
+        },
+        "compactSubtitle": {
+          "type": "string",
+          "minLength": 1
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1
+        },
+        "definition": {
+          "type": "string",
+          "minLength": 1
+        },
+        "notThis": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "structure": {
+      "type": "object",
+      "required": [
+        "termId",
+        "members"
+      ],
+      "properties": {
+        "termId": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "members": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          }
         }
       },
       "additionalProperties": false

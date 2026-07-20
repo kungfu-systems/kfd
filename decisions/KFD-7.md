@@ -35,13 +35,20 @@ KFD-7 distinguishes two complementary categories in the **Fact-Episode
 Ontology**:
 
 ```text
-Fact cut  admitted state at a declared authority and evidence boundary
-Episode   realized causal occurrence between declared boundaries
+Fact      Admitted state at a declared evidence boundary
+Episode   Replayable causal record between Fact cuts
 ```
 
-Facts define admitted state. Episodes preserve realized causal occurrence.
-Together they form the ontology over which Action Responsibility Geometry operates. This is
-an ontology of KFD's contract world, not a claim to enumerate all of reality.
+These are canonical explanatory subtitles, not aliases or additional formal
+types. A **Fact Cut** is the independently addressable formal carrier of Fact:
+an instance of admitted state at a declared source, authority, evidence, and
+time or version boundary. A Fact is therefore not absolute truth, and a Fact
+Cut is not a third ontology binding.
+
+Facts define admitted state. Episodes preserve replayable evidence of realized
+causal occurrence. Together they form the ontology over which Action
+Responsibility Geometry operates. This is an ontology of KFD's contract world,
+not a claim to enumerate all of reality.
 
 An Episode preserves action, consequence, cost, failure, retry, authority use,
 and causal order rather than only before-and-after state. Equal endpoints do
@@ -54,20 +61,20 @@ and a state transition does not erase the path that produced it.
 Consequential action requires three independently addressable coordinates:
 
 ```text
-direction             Pursuit
-perspective and cut   Atlas
-authority boundary    Warrant
+Atlas     Declared perspective over admitted facts
+Pursuit   Continuing direction and progress relation
+Warrant   Bounded authority for admissible transitions
 ```
 
-The names Pursuit, Atlas, and Warrant identify the reference action coordinates
+The names Atlas, Pursuit, and Warrant identify the reference action coordinates
 used by this decision. KFD-7 standardizes their coordinate roles and
 independence, not their complete object specifications. Separate candidate
 decisions may later qualify one of these names as a KFD Primitive. Their
 semantics over the Fact-Episode Ontology are:
 
-- direction states which continuing change and consequences matter;
 - perspective states from where, from which accepted facts, and at which cut
   action is judged;
+- direction states which continuing change and consequences matter;
 - authority states which transition may be performed, by whom, and under which
   constraints.
 
@@ -91,7 +98,7 @@ The subtitle "cross-domain responsibility model" explains Action Responsibility 
 plain language; it does not name another layer or interface. Action Responsibility Geometry
 defines three coordinates and their constraints over the Fact-Episode
 Ontology. It does not define one business domain's fields, workflow labels,
-success policy, presentation, or storage layout. Pursuit, Atlas, and Warrant
+success policy, presentation, or storage layout. Atlas, Pursuit, and Warrant
 are reference action coordinates in this geometry. Fact and Episode are its
 ontology bindings. None is itself a Profile.
 
@@ -126,7 +133,12 @@ language:
 
 | Term | Status and meaning |
 | --- | --- |
-| **Fact-Episode Ontology** | Canonical contract-world distinction between admitted state and realized causal occurrence. |
+| **Fact** | Canonical ontology binding for admitted state; its independently addressable formal carrier is a Fact Cut. |
+| **Episode** | Canonical ontology binding for a replayable causal record between Fact cuts. |
+| **Atlas** | Canonical perspective coordinate over admitted facts. |
+| **Pursuit** | Canonical direction coordinate and progress relation. |
+| **Warrant** | Canonical bounded-authority coordinate for admissible transitions. |
+| **Fact-Episode Ontology** | Canonical contract-world distinction between admitted state and replayable causal occurrence. |
 | **Action Responsibility Geometry** | Canonical cross-domain responsibility model for real-world action. |
 | **Domain Profile** | Canonical versioned declaration of how one domain inhabits Action Responsibility Geometry. |
 | **Domain Profile Declaration** | Canonical machine artifact that maps one adopter to the geometry. |
@@ -138,7 +150,7 @@ directly:
 
 ```text
 ontologyBindings[]    Fact + Episode
-actionCoordinates[]   Pursuit + Atlas + Warrant
+actionCoordinates[]   Atlas + Pursuit + Warrant
 ```
 
 The repository-wide [terminology contract](../docs/terminology.md) is the
