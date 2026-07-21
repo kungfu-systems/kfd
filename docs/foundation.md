@@ -411,8 +411,9 @@ so.
 | Perspective coordinate | KFD-8 | What situated fact view supports this action? | Atlas binds observer, source, Fact cut, scope, freshness, omission, conflict, and declared loss. |
 | Direction coordinate | KFD-9 | What intended change continues after this action ends? | Pursuit preserves direction, progress meaning, lineage, and settlement independently of any one Episode. |
 | Authority coordinate | KFD-10 | What transition is permitted, by whom, and under which constraints? | Warrant keeps authority explicit, bounded, derivable, attenuable, expirable, and revocable. |
-| Software work profile | KFD-11 | How can software work move from durable intent through execution, claim, judgment, and continuation without collapsing responsibility? | Initiative and Assignment keep continuing work context and bounded responsibility distinct from occurrence, claim, assessment, decision, and continuation. |
-| Software project settlement | KFD-12 | What has the project officially become after accepted work? | Project Cut publishes a verifiable binding among independent source, Atlas, Episode, and policy authorities without becoming another fact engine. |
+| Consequential settlement | KFD-11 | How can trust judgments lead to authorized change without collapsing evidence, judgment, authority, and admitted state? | Claim, Assessment, Decision, and Admission remain independently inspectable; only successful Admission publishes the corresponding successor Fact cut. |
+| Software work profile | KFD-12 | How can software work move from durable intent through execution, claim, judgment, and continuation without collapsing responsibility? | Initiative and Assignment keep continuing work context and bounded responsibility distinct from occurrence, Claim, Assessment, Decision, Admission, and continuation. |
+| Software project settlement | KFD-13 | What has the project officially become after accepted work? | Project Cut publishes a verifiable binding among independent source, Atlas, Episode, and policy authorities without becoming another fact engine. |
 
 The continuity is generative rather than merely classificatory. KFD-4 declares
 the observation horizon and allows perspective transformation to move it.
@@ -423,10 +424,12 @@ still cannot synthesize intent, perspective, permission, or occurrence from
 one another.
 
 KFD-8 through KFD-10 specify the three cross-domain action coordinates without
-choosing a business workflow. KFD-11 and KFD-12 then provide the first numbered
-domain application: durable software work and project-level settlement. That
-application is evidence and a reusable profile, not a command that other
-domains adopt Initiative, Assignment, Project Cut, or the same lifecycle.
+choosing a business workflow. KFD-11 then separates Claim, Assessment,
+authorized Decision, and Admission at the trust-to-action boundary. KFD-12 and
+KFD-13 provide the first numbered domain application: durable software work
+and project-level settlement. That application is evidence and a reusable
+profile, not a command that other domains adopt Initiative, Assignment,
+Project Cut, or the same lifecycle.
 Other domains may inhabit the geometry with different vocabulary, fields,
 transitions, and macro commitments.
 

@@ -1,102 +1,121 @@
-# KFD-12: Project settlement must bind authorities without absorbing them
+# KFD-12: Software work must keep Initiative and Assignment distinct
 
 - Status: draft
 - Number: 12
-- Kind: procedure
-- Applies to: any adopting software-development Domain Profile that publishes a project-level settlement or release boundary across independently authoritative systems
+- Kind: principle
+- Applies to: any adopting software-development Domain Profile that organizes durable human and agent work across execution, review, and continuation
 
 ## One sentence
 
-Project settlement must publish a verifiable binding without absorbing the
-authorities it binds.
+Software work must keep Initiative, Assignment, occurrence, Claim, Assessment,
+Decision, Admission, and continuation independently inspectable.
 
 ## Scope
 
-KFD-12 defines a **software-project settlement application** above KFD-11. It
-does not define a universal object for every domain. Other domains may publish
-different macro commitments, use different authority systems, or have no
-Project Cut at all. Adoption of KFD-7 through KFD-10 does not require adoption
-of KFD-11 or KFD-12.
+KFD-12 is the first numbered **software-development application** of the
+Fact-Episode Ontology and Action Responsibility Geometry. It is not a universal
+workflow for every domain. Finance, healthcare, research, household work, or
+other domains may define different Domain Profiles, vocabulary, lifecycle,
+evidence, and settlement rules while preserving the KFD responsibilities they
+claim to adopt.
 
-## Project Cut
+## Responsibility lifecycle
 
-A **Project Cut** states what a software project officially becomes after a
-bounded set of accepted actions. It binds, without replacing:
-
-- one or more predecessor Project Cuts;
-- an accepted source projection;
-- the Atlas used to interpret the project state;
-- the admitted Episode increment and its declared boundary;
-- policies, protocols, and qualification rules used for interpretation;
-- known omissions, conflicts, unknowns, and residual risk;
-- a verifiable root and a non-self-certifying receipt.
-
-The source repository, Atlas authority, and Episode authority remain
-independent. A Project Cut is not another fact engine, a large merged state
-object, or proof that every Pursuit is complete.
-
-## Procedure
+The software work model separates:
 
 ```text
-select declared predecessor and authority roots
-  -> verify each root under its own authority
-  -> declare included projections, policies, omissions, and unknowns
-  -> compute a deterministic Project Cut root
-  -> publish the cut at an outer project coordinate
-  -> issue an independently checkable receipt
-  -> permit later cuts to cite, supersede, or reject it without rewriting it
+Initiative
+  -> Assignment
+  -> Episode of realized work
+  -> completion or progress claim
+  -> purpose-bound assessment
+  -> authorized decision
+  -> independently recorded admission result
+  -> continuation, settlement, or successor responsibility
 ```
 
-The binding must avoid self-reference. For example, a Project Cut intended for
-publication inside a Git commit cannot require that same containing commit ID
-as an input to its own root. The commit may serve as the outer publication
-coordinate after the cut is computed.
+These are decision roles, not a mandated count of files, records, APIs,
+commands, screens, or services.
+
+| Role | Responsibility |
+| --- | --- |
+| Initiative | Preserves an independently addressable context for continuing coordinated work: coordination purpose, scope, participants, relevant Pursuits, Assignment relations, lineage, and settlement policy. |
+| Assignment | Preserves an independently addressable bounded responsibility proposed to, accepted by, or held by a participant: holder, accepted responsibility, Initiative and Pursuit roots, exact Atlas and Warrant roots, acceptance boundary, evidence obligations, settlement policy, and typed lineage. |
+| Episode | Preserves what actually occurred. |
+| Claim | States progress, completion, artifact, or consequence without self-certifying it. |
+| Assessment | Evaluates a claim for a declared purpose under KFD-2 trust semantics. |
+| Decision | Accepts, rejects, requests evidence, pauses, reopens, or otherwise disposes of responsibility under a Warrant. |
+| Admission | Records whether the Decision's requested effect entered the owning state authority and identifies the successor Fact cut only on success. |
+| Continuation | Creates or updates the next bounded responsibility while preserving lineage. |
+
+Occurrence does not imply a valid claim. A claim does not imply a passing
+Assessment. Assessment does not grant authority. Decision does not imply
+Admission, and neither erases the Episode or evidence boundary on which it
+relied.
+
+## Software profile vocabulary
+
+KFD-12 names the first two software-domain roles **Initiative** and
+**Assignment**:
+
+```text
+Initiative -> continuing coordinated work context
+Assignment -> bounded responsibility proposed to, accepted by, or held by a participant
+```
+
+An Initiative carries a coordination-purpose summary but does not become the
+authority for intended-change semantics. It may reference one or more Pursuits,
+but it is not identical to Pursuit, a repository, or a project. An Assignment
+may be proposed, accepted, refused, revised, continued, or settled, but it is
+not identical to a task, objective, Warrant, Episode, or claim. Its accepted
+responsibility and settlement conditions must not silently redefine its
+Pursuits. These names are canonical within this software Domain Profile; they
+do not bind other domains.
 
 ## Gate
 
-A conforming procedure:
+A conforming software Domain Profile:
 
-- names every bound authority and exact root or cut;
-- verifies those inputs without reinterpreting their semantics;
-- preserves source, Atlas, Episode, policy, omission, and risk boundaries;
-- distinguishes structural validity from work completion and release fitness;
-- computes the same root for the same canonical input under the declared
-  protocol;
-- rejects missing, conflicting, stale, unverifiable, or circular bindings
-  visibly;
-- supports independent export, verification, and successor lineage;
-- declares that Project Cut is software-domain vocabulary, not a mandatory
-  cross-domain primitive.
-
-## Founding implementation boundary
-
-The founding Kungfu implementation binds Git source, Xinfa Atlas, and Kungfu
-Episode coordinates. Those products are evidence for the procedure, not
-normative dependencies. Another software Domain Profile may bind different
-source, perspective, and causal-record authorities if it preserves the same
-settlement responsibility.
+- declares its mapping to Fact, Episode, Atlas, Pursuit, and Warrant;
+- gives every Initiative and Assignment stable identity, explicit state, and
+  inspectable lineage;
+- keeps Assignment acceptance distinct from proposal, authority, occurrence,
+  claim, and settlement;
+- makes every accepted claim traceable to occurrence and admitted evidence;
+- distinguishes assessment purpose from authorization to decide;
+- records Admission separately from Decision and publishes a successor Fact
+  cut only when Admission succeeds;
+- preserves parent, child, dependency, revision, and continuation lineage;
+- keeps denial, missing evidence, residual risk, and unresolved responsibility
+  visible;
+- provides a low-friction projection for simple work without fabricating or
+  fusing decision roles;
+- states explicitly that its workflow is domain-owned rather than universal.
 
 ## Relationship
 
-KFD-11 organizes software work through claim, assessment, decision, and
-continuation. KFD-12 publishes a project-level commitment after those
-decisions. It preserves the Fact-Episode Ontology and the Atlas, Pursuit, and
-Warrant responsibilities rather than flattening them into one state authority.
+KFD-7 defines Domain Profiles. KFD-8 through KFD-10 define the three action
+coordinates used here. KFD-11 defines the cross-domain path from Claim through
+Assessment and authorized Decision to Admission. KFD-12 translates those
+responsibilities into one software-development work model; it does not modify
+their cross-domain semantics.
 
-The founding discovery changed perspective again: from the coordinator who
-maintains Initiative and Assignment state to the successor Agent that must
-continue from one exact project boundary. From that acting view, the work
-model was informative but not a single answer to what the project had
-officially become. KFD-4 exposed Project Cut; KFD-5 then qualified the
-settlement responsibility independently of its founding implementation. The
+The founding discovery changed perspective from the developer refining Fact,
+Episode, Pursuit, Atlas, and Warrant to the participant trying to get real
+software work done. From that participant view, more control over the lower
+objects did not answer which continuing work context mattered or which bounded
+responsibility had been accepted. KFD-4 exposed Initiative and Assignment;
+KFD-5 then qualified their distinct responsibilities. The
 [live qualification case](../cases/live/software-work-perspective-settlement/README.md)
-preserves both the maintainer-reported Agent-origin genesis and the separately
-verifiable public implementation evidence. Project Cut is accepted at this
-software-settlement layer, not as a fourth fact engine or a peer action
-coordinate, and that acceptance does not activate this draft KFD.
+preserves that genesis and decision boundary. Acceptance of these two
+software-domain Primitives does not activate this draft KFD.
+
+This decision previously occupied the pre-stable KFD-11 coordinate. The
+[Foundation Revision](../docs/foundation-revision-2026-07-21-decision-admission.md)
+maps that immutable prerelease lineage to KFD-12.
 
 ## Non-claims
 
-KFD-12 does not require Git, Xinfa, Kungfu, one JSON shape, one release process,
-or one user interface. A valid Project Cut does not by itself prove that work
-is complete, correct, safe, valuable, or ready for release.
+KFD-12 does not require every task to expose seven user-visible objects, require
+other domains to use Initiative or Assignment, prescribe Git, define one
+software methodology, or claim that other domains should copy this lifecycle.

@@ -24,7 +24,9 @@ the KFD-5 qualification of three software-domain Primitive candidates:
   what a software project officially became at a settled boundary.
 
 The three current cuts are accepted within the software-development Domain
-Profile described by KFD-11 and KFD-12. Acceptance does not establish
+Profile described by KFD-12 and KFD-13. Their immutable prerelease cuts retain
+the earlier KFD-11 and KFD-12 coordinates; the current mapping is recorded by
+the 2026-07-21 Foundation Revision. Acceptance does not establish
 cross-domain universality, historical novelty, one required storage shape, or
 activation of either numbered draft.
 

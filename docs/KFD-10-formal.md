@@ -15,9 +15,10 @@
 At Fact cut `f`, a Warrant version is:
 
 ```text
-W^v = (id, root, issuer, holder, action_scope, resource_scope, target_roots,
-       preconditions, consequence_ceiling, validity_window, delegation_chain,
-       revocation_channel, residual_responsibility)
+W^v = (id, root, grantor, holder, action_scope, subject_scope, resource_scope,
+       target_roots, preconditions, validity_conditions, limits,
+       delegation_policy, derivation_chain, revocation_channel,
+       residual_responsibility)
 ```
 
 For candidate action `u` at cut or time `t`:
@@ -36,8 +37,8 @@ Valid_W(f, u, t) = AuthenticGrant(W^v)
 ```text
 Derives(W_child, W_parent) ->
   Scope_child subseteq Scope_parent
-  and Time_child subseteq Time_parent
-  and Consequence_child <= Consequence_parent
+  and Validity_child implies Validity_parent
+  and Limits_child attenuate Limits_parent
 ```
 
 ```text

@@ -1,108 +1,124 @@
-# KFD-11: Software work must keep Initiative and Assignment distinct
+# KFD-11: Consequential settlement must separate claim, assessment, decision, and admission
 
 - Status: draft
 - Number: 11
-- Kind: principle
-- Applies to: any adopting software-development Domain Profile that organizes durable human and agent work across execution, review, and continuation
+- Kind: procedure
+- Applies to: any adopting product, repository, agent workflow, or participant-facing interface that changes admitted state or responsibility through a consequential settlement
 
 ## One sentence
 
-Software work must keep Initiative, Assignment, occurrence, claim, assessment,
-decision, and continuation independently inspectable.
+Claims may be assessed; only authorized decisions may change admitted state or
+responsibility.
 
-## Scope
+## Problem
 
-KFD-11 is the first numbered **software-development application** of the
-Fact-Episode Ontology and Action Responsibility Geometry. It is not a universal
-workflow for every domain. Finance, healthcare, research, household work, or
-other domains may define different Domain Profiles, vocabulary, lifecycle,
-evidence, and settlement rules while preserving the KFD responsibilities they
-claim to adopt.
+Evidence does not state its own meaning. A statement does not judge itself. A
+trust assessment does not grant authority. An authorized decision does not
+prove that its requested transition was admitted.
 
-## Responsibility lifecycle
+Systems that collapse these responsibilities make one of four unsafe
+substitutions:
 
-The software work model separates:
+- occurrence or evidence is treated as a claim;
+- a claim is treated as already assessed;
+- an assessment is treated as authority to act; or
+- a decision is treated as a successful state transition.
 
-```text
-Initiative
-  -> Assignment
-  -> Episode of realized work
-  -> completion or progress claim
-  -> purpose-bound assessment
-  -> authorized decision
-  -> continuation, settlement, or successor responsibility
-```
+KFD-11 requires a consequential settlement to keep those boundaries
+inspectable.
 
-These are decision roles, not a mandated count of files, records, APIs,
-commands, screens, or services.
-
-| Role | Responsibility |
-| --- | --- |
-| Initiative | Preserves an independently addressable context for continuing coordinated work: declared intent, scope, participants, relevant Pursuits, Assignment relations, lineage, and settlement state. |
-| Assignment | Preserves an independently addressable bounded responsibility proposed to, accepted by, or held by a participant: actor, objective, exact Atlas and Warrant roots, acceptance boundary, expected evidence, and parent Initiative or Assignment. |
-| Episode | Preserves what actually occurred. |
-| Claim | States progress, completion, artifact, or consequence without self-certifying it. |
-| Assessment | Evaluates a claim for a declared purpose under KFD-2 trust semantics. |
-| Decision | Accepts, rejects, requests evidence, pauses, reopens, or otherwise disposes of responsibility under a Warrant. |
-| Continuation | Creates or updates the next bounded responsibility while preserving lineage. |
-
-Occurrence does not imply a valid claim. A claim does not imply a passing
-assessment. Assessment does not grant authority. A decision does not erase the
-Episode or the evidence boundary on which it relied.
-
-## Software profile vocabulary
-
-KFD-11 names the first two software-domain roles **Initiative** and
-**Assignment**:
+## Responsibilities
 
 ```text
-Initiative -> continuing coordinated work context
-Assignment -> bounded responsibility proposed to, accepted by, or held by a participant
+Claim       an exact, bounded proposition made by a declared participant
+Assessment  a purpose-bound trust judgment over a Claim and checked evidence
+Decision    an authorized disposition of assessed claims under a Warrant
+Admission   the independently recorded result of applying requested effects
 ```
 
-An Initiative contains declared intent but is not merely an intention. It may
-reference one or more Pursuits, but it is not identical to Pursuit, a repository,
-or a project. An Assignment may be proposed, accepted, refused, revised,
-continued, or settled, but it is not identical to a task, Warrant, Episode, or
-claim. These names are canonical within this software Domain Profile; they do
-not bind other domains.
+Claim and Assessment use the generic trust model defined by KFD-2. Decision
+binds that model to the bounded authority defined by KFD-10. Admission binds
+the result back to the Fact-Episode Ontology without making a decision
+self-executing.
+
+The responsibilities are independently addressable. One Claim may receive
+several Assessments for different purposes. One Assessment may support
+different Decisions under different Warrants or policies. One Decision may be
+partially admitted, rejected, become stale, or fail without rewriting its
+Claim, Assessment, or authority basis.
+
+## Procedure
+
+```text
+exact Claim declared against a Fact cut
+  -> evidence checked under one stated assessment purpose and boundary
+  -> residual risk and assurance responsibility exposed
+  -> Decision issued under an exact Warrant and policy
+  -> requested effects presented to the owning admission authority
+  -> admission result and receipt recorded
+  -> successor Fact cut published only when admission succeeds
+```
+
+The order is semantic, not a demand for separate screens, network calls, or
+physical records. A low-consequence interface may present one compact action
+when the Claim, Assessment, Decision, Warrant, and admission result remain
+recoverable and independently inspectable.
 
 ## Gate
 
-A conforming software Domain Profile:
+A conforming settlement:
 
-- declares its mapping to Fact, Episode, Atlas, Pursuit, and Warrant;
-- gives every Initiative and Assignment stable identity, explicit state, and
-  inspectable lineage;
-- keeps Assignment acceptance distinct from proposal, authority, occurrence,
-  claim, and settlement;
-- makes every accepted claim traceable to occurrence and admitted evidence;
-- distinguishes assessment purpose from authorization to decide;
-- preserves parent, child, dependency, revision, and continuation lineage;
-- keeps denial, missing evidence, residual risk, and unresolved responsibility
-  visible;
-- provides a low-friction projection for simple work without fabricating or
-  fusing decision roles;
-- states explicitly that its workflow is domain-owned rather than universal.
+- identifies the exact subject and proposition being claimed;
+- binds the Claim and Assessment to declared Fact and evidence cuts;
+- states the Assessment purpose, checked boundary, result, and residual risk;
+- keeps Assessment separate from authority to decide;
+- binds every consequential Decision to a valid Warrant and decision policy;
+- preserves partial acceptance, conditions, refusal, deferral, and requests
+  for further evidence without rewriting the original Claim;
+- distinguishes a valid Decision from successful Admission;
+- records stale basis, conflict, denial, or write failure without fabricating a
+  successor Fact cut;
+- preserves Decision, Admission, receipt, and successor lineage for review and
+  retry; and
+- prevents an Episode, process exit, persuasive explanation, or passing
+  Assessment from silently settling responsibility.
+
+## Foundation Revision lineage
+
+KFD-2 already defines generic Claim and Assessment semantics. The prior
+pre-stable KFD-11 software-work draft also exposed Decision and Continuation,
+but placed the cross-domain trust-to-action boundary inside its first software
+application. That ordering left no portable procedure between Warrant and
+domain settlement.
+
+The pre-stable Foundation Revision recorded in
+[`docs/foundation-revision-2026-07-21-decision-admission.md`](../docs/foundation-revision-2026-07-21-decision-admission.md)
+extracts this procedure into KFD-11, renumbers the prior software-work KFD-11
+to KFD-12, and renumbers the prior Project Cut KFD-12 to KFD-13. Published
+prerelease coordinates remain immutable and are mapped rather than rewritten.
 
 ## Relationship
 
-KFD-7 defines Domain Profiles. KFD-8 through KFD-10 define the three action
-coordinates used here. KFD-11 translates them into one software-development
-work model; it does not modify their cross-domain semantics.
+KFD-1 protects the contracts and records used by the procedure. KFD-2 defines
+fact-bound Claim and Assessment. KFD-7 separates admitted state from realized
+occurrence. KFD-8 and KFD-9 supply perspective and continuing direction when
+they are relevant. KFD-10 supplies bounded authority. Later Domain Profiles
+may define their own claims, dispositions, admission authorities, lifecycle,
+and user surfaces without collapsing these responsibilities.
 
-The founding discovery changed perspective from the developer refining Fact,
-Episode, Pursuit, Atlas, and Warrant to the participant trying to get real
-software work done. From that participant view, more control over the lower
-objects did not answer which continuing work context mattered or which bounded
-responsibility had been accepted. KFD-4 exposed Initiative and Assignment;
-KFD-5 then qualified their distinct responsibilities. The
-[live qualification case](../cases/live/software-work-perspective-settlement/README.md)
-preserves that genesis and decision boundary. Acceptance of these two
-software-domain Primitives does not activate this draft KFD.
+KFD-12 applies this procedure to software Initiative and Assignment. KFD-13
+applies it to software-project settlement through Project Cut.
+
+## Status boundary
+
+KFD-11 is a numbered draft. Its responsibility separation is explicit, but
+cross-domain qualification, independent implementations, operational cost,
+and activation evidence remain open.
 
 ## Non-claims
 
-KFD-11 does not require every task to expose seven user-visible objects, require
-other domains to use Initiative or Assignment, prescribe Git, define one
-software methodology, or claim that other domains should copy this lifecycle.
+KFD-11 does not require one universal approval workflow, one verdict taxonomy,
+one database transaction, one human approver, or one physical object per
+responsibility. It does not make a passing Assessment true for every purpose,
+make a valid Decision self-executing, or require every reversible local action
+to expose the full procedure.

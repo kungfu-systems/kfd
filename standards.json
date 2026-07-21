@@ -1577,6 +1577,71 @@
             }
           },
           {
+            "id": "kfd-11-decision-admission-schema",
+            "class": "integration-time",
+            "classes": [
+              "integration-time",
+              "cross-time"
+            ],
+            "description": "Version 1 reference envelope binding Claim and Assessment roots through a Warrant-bound Decision to an independently recorded Admission result.",
+            "sourcePath": "schemas/kfd-11/decision-admission.schema.json",
+            "weldRationale": "Consumers can distinguish trust judgment, decision authority, requested effects, and admitted successor state without copying upstream artifact payloads.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-field-responsibility-matrix",
+            "class": "cross-time",
+            "classes": [
+              "cross-time"
+            ],
+            "description": "Human and agent field-ownership guide separating kernel envelopes, cross-domain semantic cores, Domain Profiles, and participant projections.",
+            "sourcePath": "docs/field-responsibility-matrix.md",
+            "weldRationale": "Adopters can extend domain fields without silently redefining KFD responsibilities or elevating provider metadata into universal semantics.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-decision-admission-foundation-revision",
+            "class": "cross-time",
+            "classes": [
+              "cross-time"
+            ],
+            "description": "Human-readable pre-stable Foundation Revision rationale, alternatives, migration, authorization, review, and impact boundary.",
+            "sourcePath": "docs/foundation-revision-2026-07-21-decision-admission.md",
+            "weldRationale": "Readers can audit why the numbered dependency order changed without rewriting immutable prerelease coordinates.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-decision-admission-foundation-revision-map",
+            "class": "cross-time",
+            "classes": [
+              "cross-time"
+            ],
+            "description": "Machine-readable old-to-new coordinate map for the 2026-07-21 pre-stable Foundation Revision.",
+            "sourcePath": "docs/foundation-revision-2026-07-21-decision-admission.json",
+            "weldRationale": "Agents can distinguish current numbered authority from immutable prerelease lineage and verify that authorization, breaking impact, preservation, and independent review remain explicit.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
             "id": "kfd-candidate-registry",
             "class": "cross-time",
             "classes": [
@@ -1616,7 +1681,7 @@
             ],
             "description": "Preserved source-candidate lineage for the cross-domain action principle promoted into active KFD-7.",
             "sourcePath": "drafts/action-state-separation.md",
-            "weldRationale": "The candidate genesis, separation argument, falsifiers, promotion event, and continuing KFD-8 through KFD-10 non-allocation remain inspectable across releases.",
+            "weldRationale": "The candidate genesis, separation argument, falsifiers, promotion event, and later KFD-8 through KFD-10 allocation remain inspectable across releases.",
             "impactProjection": {
               "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
               "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
@@ -1632,7 +1697,7 @@
             ],
             "description": "Published pre-number candidate for binding consequential action to an addressable perspective and Fact cut.",
             "sourcePath": "drafts/atlas-action-perspective.md",
-            "weldRationale": "The proposed Atlas role, deletion witnesses, alternatives, falsifiers, and explicit non-allocation of KFD-8 remain inspectable across releases.",
+            "weldRationale": "The proposed Atlas role, deletion witnesses, alternatives, falsifiers, and later KFD-8 allocation remain inspectable across releases.",
             "impactProjection": {
               "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
               "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
@@ -1648,7 +1713,7 @@
             ],
             "description": "Published pre-number candidate for intent continuity independent of the actions that advance it.",
             "sourcePath": "drafts/pursuit-intent-continuity.md",
-            "weldRationale": "The proposed Pursuit role, continuity and settlement obligations, falsifiers, and explicit non-allocation of KFD-9 remain inspectable across releases.",
+            "weldRationale": "The proposed Pursuit role, continuity and settlement obligations, falsifiers, and later KFD-9 allocation remain inspectable across releases.",
             "impactProjection": {
               "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
               "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
@@ -1664,7 +1729,7 @@
             ],
             "description": "Published pre-number candidate for explicit, bounded, derivable, and independently revocable authority.",
             "sourcePath": "drafts/warrant-bounded-authority.md",
-            "weldRationale": "The proposed Warrant role, derivation and revocation obligations, falsifiers, and explicit non-allocation of KFD-10 remain inspectable across releases.",
+            "weldRationale": "The proposed Warrant role, derivation and revocation obligations, falsifiers, and later KFD-10 allocation remain inspectable across releases.",
             "impactProjection": {
               "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
               "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
@@ -2406,12 +2471,12 @@
       "title": "Perspective must remain bound to admitted facts and declared loss",
       "kind": "principle",
       "status": "draft",
-      "revision": 1,
+      "revision": 2,
       "metadataSchemaVersion": "2",
       "document": {
         "path": "decisions/KFD-8.md",
         "url": "https://kfd.libkungfu.dev/8",
-        "sha256": "c99e1a9390972d11405ad127ed8b25e461fb2d2a4589ca1be8c1a6c0a03c7067"
+        "sha256": "d95115a984c1fd458b8ab3ff06be114c1538871d9f1e3552301b66ed885dbc12"
       },
       "formalModel": {
         "path": "docs/KFD-8-formal.md",
@@ -2420,7 +2485,7 @@
         "status": "experimental",
         "normative": false,
         "authorityPath": "decisions/KFD-8.md",
-        "sha256": "f97e9e756b60fcbf5136516fc365d043ae177bf932a1c4aae0f37abdcb89ab68"
+        "sha256": "1506124d2ab8a274692dcdbf0649acfbe97b807bc333dc512c092baf9ba4ff45"
       },
       "compatibility": {
         "packageLine": "v1.0",
@@ -2435,7 +2500,7 @@
         "metadata": "schemas/kfd-standards.schema.json"
       },
       "concepts": {
-        "atlas": "independently addressable perspective coordinate bound to admitted facts, source, cut, scope, freshness, omissions, conflict, and declared loss"
+        "atlas": "independently addressable perspective coordinate bound to a perspective holder, declared vantage or decision purpose, admitted Fact cut, typed source authority, freshness conditions, omissions, conflicts, unknowns, and declared transformation loss"
       }
     },
     "kfd-9": {
@@ -2446,12 +2511,12 @@
       "title": "Continuing direction must outlive the actions that advance it",
       "kind": "principle",
       "status": "draft",
-      "revision": 1,
+      "revision": 2,
       "metadataSchemaVersion": "2",
       "document": {
         "path": "decisions/KFD-9.md",
         "url": "https://kfd.libkungfu.dev/9",
-        "sha256": "0658bc0759b9ecd82b874b17a085891f66fdb1721da27a11fa83e450865a323b"
+        "sha256": "5e9f760c17c86e66ba0be3815622dcde7bdcb9c1c31fe4ad7d5c6ff64f4e4988"
       },
       "formalModel": {
         "path": "docs/KFD-9-formal.md",
@@ -2460,7 +2525,7 @@
         "status": "experimental",
         "normative": false,
         "authorityPath": "decisions/KFD-9.md",
-        "sha256": "0511cbd12f6052403987c03f301c4df1be3d2738452869092117a9ecf26f4265"
+        "sha256": "1a4405bdd3cacfa02d2021afcb61a42190f965e01ecd3b113360528a46b99105"
       },
       "compatibility": {
         "packageLine": "v1.0",
@@ -2475,7 +2540,7 @@
         "metadata": "schemas/kfd-standards.schema.json"
       },
       "concepts": {
-        "pursuit": "independently addressable continuing direction, progress relation, lineage, and settlement coordinate"
+        "pursuit": "independently addressable intended change or maintained condition with continuing direction, progress relation, typed relations, lineage, and settlement semantics; Domain Profiles own terminal success conditions"
       }
     },
     "kfd-10": {
@@ -2486,12 +2551,12 @@
       "title": "Authority must remain explicit, bounded, and revocable",
       "kind": "principle",
       "status": "draft",
-      "revision": 1,
+      "revision": 2,
       "metadataSchemaVersion": "2",
       "document": {
         "path": "decisions/KFD-10.md",
         "url": "https://kfd.libkungfu.dev/10",
-        "sha256": "0fd1b9cf6c5d3f121b811c0b66a46e1cac4ab8ff72b68c9eb85db6d32cf1e7ee"
+        "sha256": "a2e1cf278c708eb597bfdc83817c6440d9a8b7a8291d67c447a73548427c89c4"
       },
       "formalModel": {
         "path": "docs/KFD-10-formal.md",
@@ -2500,7 +2565,7 @@
         "status": "experimental",
         "normative": false,
         "authorityPath": "decisions/KFD-10.md",
-        "sha256": "0653147f95e90b145fc6a92c18531103caadeeaaa013a360c225b37f63b74790"
+        "sha256": "05f40b86049c146fd5fa9e6e5bb25166d86664ec641ece09a0ce4ede61b57be9"
       },
       "compatibility": {
         "packageLine": "v1.0",
@@ -2515,7 +2580,7 @@
         "metadata": "schemas/kfd-standards.schema.json"
       },
       "concepts": {
-        "warrant": "independently addressable bounded authority with derivation, attenuation, expiry, and revocation"
+        "warrant": "independently addressable bounded authority with grantor, holder, authentic derivation, validity conditions, typed limits, attenuation, residual responsibility, and revocation"
       }
     },
     "kfd-11": {
@@ -2523,24 +2588,78 @@
       "id": "KFD-11",
       "number": 11,
       "label": "KFD-11",
-      "title": "Software work must keep Initiative and Assignment distinct",
-      "kind": "principle",
+      "title": "Consequential settlement must separate claim, assessment, decision, and admission",
+      "kind": "procedure",
       "status": "draft",
-      "revision": 3,
+      "revision": 1,
       "metadataSchemaVersion": "2",
       "document": {
         "path": "decisions/KFD-11.md",
         "url": "https://kfd.libkungfu.dev/11",
-        "sha256": "f3c88afcad1d1226b9f8d255d34782e6c2ee17cd6a3d71d82ff7ebb57c6678cd"
+        "sha256": "a604cef1169958ed864848d8863db0235d0c3a000e64260e39203306f4a915c0"
       },
       "formalModel": {
         "path": "docs/KFD-11-formal.md",
         "url": "https://kfd.libkungfu.dev/11/formal",
-        "version": 2,
+        "version": 1,
         "status": "experimental",
         "normative": false,
         "authorityPath": "decisions/KFD-11.md",
-        "sha256": "f7e25977d32fb18de4ff9cb61f3290f1ecf414bc0db69ccd3f7cb390128d5531"
+        "sha256": "c8013779cafd5c7ac9310b367178036016cf2e9272d90cf085f2d60f368f5717"
+      },
+      "compatibility": {
+        "packageLine": "v1.0",
+        "registrySchemaVersion": 1,
+        "metadataSchemaVersion": "2",
+        "rule": "Before stable, the consequential-settlement procedure may be refined with explicit lineage; after stable, semantic, required-field, verification-meaning, or responsibility-boundary change requires a new interface version or an explicit KFD-1 compatibility action."
+      },
+      "interfaces": {
+        "decisionAdmission": {
+          "contract": "kfd-11-decision-admission",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-11/decision-admission.schema.json",
+          "schemaPath": "schemas/kfd-11/decision-admission.schema.json",
+          "compatibilityRule": "Compatible additions may retain version 1; semantic, required-field, verification-meaning, Decision-authority, or Admission-result changes require a new interface version or contract."
+        }
+      },
+      "schemaIds": {
+        "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json",
+        "decisionAdmission": "https://kfd.libkungfu.dev/schemas/kfd-11/decision-admission.schema.json"
+      },
+      "schemaPaths": {
+        "metadata": "schemas/kfd-standards.schema.json",
+        "decisionAdmission": "schemas/kfd-11/decision-admission.schema.json"
+      },
+      "concepts": {
+        "claim": "exact bounded proposition made by a declared participant against inspectable Fact and evidence cuts",
+        "assessment": "purpose-bound revisable trust judgment over an exact Claim and checked evidence boundary",
+        "decision": "authorized disposition of assessed Claims under an exact Warrant and policy",
+        "admission": "independently recorded result of presenting a requested transition to the owning state authority"
+      }
+    },
+    "kfd-12": {
+      "key": "kfd-12",
+      "id": "KFD-12",
+      "number": 12,
+      "label": "KFD-12",
+      "title": "Software work must keep Initiative and Assignment distinct",
+      "kind": "principle",
+      "status": "draft",
+      "revision": 4,
+      "metadataSchemaVersion": "2",
+      "document": {
+        "path": "decisions/KFD-12.md",
+        "url": "https://kfd.libkungfu.dev/12",
+        "sha256": "40dba0190012e94873df5884d989d93b12dfa5123323067dc3b694d6a81277f7"
+      },
+      "formalModel": {
+        "path": "docs/KFD-12-formal.md",
+        "url": "https://kfd.libkungfu.dev/12/formal",
+        "version": 3,
+        "status": "experimental",
+        "normative": false,
+        "authorityPath": "decisions/KFD-12.md",
+        "sha256": "a3581d3892dcb138fa13726a955446d9d21e6f7bc50b7904afaa8cc4ced7e81f"
       },
       "compatibility": {
         "packageLine": "v1.0",
@@ -2555,34 +2674,34 @@
         "metadata": "schemas/kfd-standards.schema.json"
       },
       "concepts": {
-        "softwareWorkResponsibilityLifecycle": "software-domain separation of Initiative, Assignment, occurrence, claim, assessment, decision, and continuation",
-        "initiative": "independently addressable context for continuing coordinated software work",
-        "assignment": "independently addressable bounded responsibility proposed to, accepted by, or held by a participant"
+        "softwareWorkResponsibilityLifecycle": "software-domain separation of Initiative, Assignment, occurrence, Claim, Assessment, Decision, Admission, and continuation",
+        "initiative": "independently addressable context for continuing coordinated software work without redefining Pursuit direction",
+        "assignment": "independently addressable accepted responsibility that binds Pursuit, Atlas, Warrant, evidence, settlement, and lineage"
       }
     },
-    "kfd-12": {
-      "key": "kfd-12",
-      "id": "KFD-12",
-      "number": 12,
-      "label": "KFD-12",
+    "kfd-13": {
+      "key": "kfd-13",
+      "id": "KFD-13",
+      "number": 13,
+      "label": "KFD-13",
       "title": "Project settlement must bind authorities without absorbing them",
       "kind": "procedure",
       "status": "draft",
-      "revision": 2,
+      "revision": 3,
       "metadataSchemaVersion": "2",
       "document": {
-        "path": "decisions/KFD-12.md",
-        "url": "https://kfd.libkungfu.dev/12",
-        "sha256": "3a3a082749f9196dcc1aa7ad9742c01b6f880eed8059c2013a626002d1dbdc1a"
+        "path": "decisions/KFD-13.md",
+        "url": "https://kfd.libkungfu.dev/13",
+        "sha256": "1657256093dd4a7f10e593a36cd45a22309286e64c140fcca8b825cb94030ddc"
       },
       "formalModel": {
-        "path": "docs/KFD-12-formal.md",
-        "url": "https://kfd.libkungfu.dev/12/formal",
+        "path": "docs/KFD-13-formal.md",
+        "url": "https://kfd.libkungfu.dev/13/formal",
         "version": 1,
         "status": "experimental",
         "normative": false,
-        "authorityPath": "decisions/KFD-12.md",
-        "sha256": "3258b4f01ffc5dade15ca3fe9d809027020269f94017064bb748b6f33a9a0c33"
+        "authorityPath": "decisions/KFD-13.md",
+        "sha256": "47a709538e3876bddb6af508fc9bc6e29ecd69cac5b5cc73af6f251b9ef729b4"
       },
       "compatibility": {
         "packageLine": "v1.0",

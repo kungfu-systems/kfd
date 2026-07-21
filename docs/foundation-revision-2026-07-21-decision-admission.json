@@ -1,0 +1,51 @@
+{
+  "schema": "kfd.foundation-revision/v1",
+  "id": "decision-admission-layer-2026-07-21",
+  "status": "review-coordinate-declared",
+  "preStable": true,
+  "impact": {
+    "level": "major",
+    "class": "breaking"
+  },
+  "authorization": {
+    "status": "authorized",
+    "authority": "kfd-maintainer",
+    "record": "docs/foundation-revision-2026-07-21-decision-admission.md"
+  },
+  "independentReview": {
+    "status": "review-coordinate-declared",
+    "coordinate": "https://github.com/kungfu-systems/kfd/pull/230"
+  },
+  "mappings": [
+    {
+      "from": null,
+      "to": "KFD-11",
+      "relation": "allocated-by-foundation-revision",
+      "meaning": "Consequential settlement must separate claim, assessment, decision, and admission"
+    },
+    {
+      "from": "KFD-11@pre-2026-07-21",
+      "to": "KFD-12",
+      "relation": "renumbered",
+      "meaning": "Software work must keep Initiative and Assignment distinct"
+    },
+    {
+      "from": "KFD-12@pre-2026-07-21",
+      "to": "KFD-13",
+      "relation": "renumbered",
+      "meaning": "Project settlement must bind authorities without absorbing them"
+    }
+  ],
+  "preservedCoordinates": {
+    "commits": true,
+    "tags": true,
+    "packages": true,
+    "digests": true,
+    "immutableRenderedArtifacts": true
+  },
+  "nonClaims": [
+    "The revision does not activate KFD-11, KFD-12, or KFD-13.",
+    "The revision does not reinterpret immutable prerelease coordinates.",
+    "The revision does not establish universal cross-domain qualification."
+  ]
+}

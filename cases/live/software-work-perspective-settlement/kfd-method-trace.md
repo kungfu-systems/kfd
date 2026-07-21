@@ -78,11 +78,11 @@ dogfood evidence, decision, and residual risks.
 Acceptance is bounded:
 
 - Initiative and Assignment are accepted as software-work organization
-  Primitives under KFD-11;
+  Primitives under KFD-12;
 - Project Cut is accepted as a software-project settlement Primitive under
-  KFD-12;
+  KFD-13;
 - none is promoted as a universal cross-domain ontology requirement;
-- KFD-11 and KFD-12 remain numbered drafts until their separate activation
+- KFD-12 and KFD-13 remain numbered drafts until their separate activation
   gates close.
 
 ## Anti-self-certification

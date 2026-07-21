@@ -62,6 +62,16 @@ const draftAutonomyResidualRisk = {
   reason: "KFD-6 publishes a draft experiment contract, but no current package fact proves a conforming autonomous primitive-discovery implementation.",
   owner: "KFD maintainers and experimental adopters",
 };
+const draftDecisionAdmissionResidualRisk = {
+  id: "decision-admission-cross-domain-qualification-open",
+  definedBy: "https://kfd.libkungfu.dev/schemas/kfd-2/trust-taxonomy.schema.json#/$defs/residualRisk",
+  riskType: "external-fact-risk",
+  trustImpact: "downgrade-warning",
+  machineProvability: "partially-machine-verifiable",
+  agentAction: "verify-external-facts",
+  reason: "KFD-11 publishes an inspectable draft procedure and structural schema, but no current package fact proves cross-domain qualification, independent implementations, or acceptable operating cost.",
+  owner: "KFD maintainers and adopting Domain Profiles",
+};
 const writeJson = (filePath, value) => {
   mkdirSync(path.dirname(filePath), { recursive: true });
   writeFileSync(filePath, `${JSON.stringify(value, null, 2)}\n`);
@@ -145,7 +155,7 @@ const trustClaims = {
   standard: "kfd-2",
   projection: {
     kind: "generic",
-    description: "KFD self-dogfood claims for assessing KFD-1 and KFD-3 through KFD-7 from the generic KFD-2 trust model.",
+    description: "KFD self-dogfood claims for assessing KFD-1, KFD-3 through KFD-7, and KFD-11 from the generic KFD-2 trust model.",
   },
   claims: [
     {
@@ -332,6 +342,38 @@ const trustClaims = {
       responsibility,
       status: "declared",
     },
+    {
+      id: "kfd-11-decision-admission-trust",
+      statement:
+        "KFD-11 is trustable as a published draft consequential-settlement procedure and version 1 structural interface because its decision, formal reference, schema, Foundation Revision lineage, field boundary, standards metadata, and package gate are inspectable; cross-domain qualification and activation remain open.",
+      subject: {
+        kind: "decision-admission",
+        id: "kfd-11-decision-admission",
+        standard: "kfd-11",
+        description: "KFD-11 draft separation of Claim, Assessment, authorized Decision, and independently recorded Admission.",
+      },
+      facts: [
+        artifactPointer("file", "decisions/KFD-11.md"),
+        artifactPointer("file", "docs/KFD-11-formal.md"),
+        artifactPointer("file", "docs/foundation-revision-2026-07-21-decision-admission.json"),
+        artifactPointer("file", "standards.json"),
+        artifactPointer("schema", "schemas/kfd-11/decision-admission.schema.json"),
+      ],
+      evidence: [
+        evidence("schema", "schemas/kfd-11/decision-admission.schema.json", "KFD-11 publishes a closed version 1 reference envelope for exact artifact bindings, authority-bound Decision, and independently reported Admission."),
+        evidence("file", "docs/field-responsibility-matrix.md", "The field matrix separates cross-domain core fields from Domain Profile and participant projection fields."),
+        evidence("file", "docs/foundation-revision-2026-07-21-decision-admission.json", "The Foundation Revision preserves old coordinates and declares authorization, breaking impact, mapping, and independent review."),
+        evidence("file", "scripts/check.mjs", "The package gate checks KFD-11 interface identity, required separation fields, field-matrix coverage, and Foundation Revision closure."),
+      ],
+      verification: { command: "node scripts/check.mjs", expectedResult: "warning" },
+      auditBoundary: {
+        scope: "KFD-11 draft text, formal and usage references, structural schema, Foundation Revision, field matrix, standards metadata, and package checks; excludes cross-domain qualification, independent implementations, runtime correctness, and activation",
+        enumerability: "closed-world",
+      },
+      residualRisk: [draftDecisionAdmissionResidualRisk],
+      responsibility,
+      status: "declared",
+    },
   ],
   schemaEvolution: {
     compatibilityRule:
@@ -422,6 +464,17 @@ const assessment = {
       responsibility,
       residualRisk: [],
     },
+    {
+      id: "assess-kfd-11-decision-admission-trust",
+      claimId: "kfd-11-decision-admission-trust",
+      subject: trustClaims.claims[6].subject,
+      result: "warning",
+      facts: trustClaims.claims[6].facts.map((entry) => evidenceResult(entry.kind, entry.path, `Fact ${entry.path} is present and hashable.`)),
+      evidence: trustClaims.claims[6].evidence.map((entry) => evidenceResult(entry.type, entry.pointer.path, entry.description)),
+      auditBoundary: trustClaims.claims[6].auditBoundary,
+      responsibility,
+      residualRisk: [draftDecisionAdmissionResidualRisk],
+    },
   ],
   unboundClaims: [],
   downgradeReasons: [
@@ -440,6 +493,14 @@ const assessment = {
       reason: "KFD-6 is a draft experiment contract and does not yet have adopter evidence for a conforming autonomous primitive-discovery loop.",
       agentAction: "verify-external-facts",
       source: "kfd-6-autonomous-discovery-loop-trust",
+    },
+    {
+      id: "kfd-11-decision-admission-not-yet-qualified",
+      riskType: "external-fact-risk",
+      trustImpact: "downgrade-warning",
+      reason: "KFD-11 is a structurally closed draft interface without current cross-domain qualification or independent implementation evidence.",
+      agentAction: "verify-external-facts",
+      source: "kfd-11-decision-admission-trust",
     },
   ],
   responsibility,

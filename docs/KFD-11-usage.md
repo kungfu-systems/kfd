@@ -2,63 +2,74 @@
 
 [Authoritative decision](../decisions/KFD-11.md) ·
 [Formal reference](KFD-11-formal.md) ·
-[Discovery and qualification](../cases/live/software-work-perspective-settlement/README.md) ·
 [Documentation map](MAP.md)
 
-KFD-11 is a numbered draft for a software-development Domain Profile. It is an
-application of KFD-7 through KFD-10, not a cross-domain mandate.
+- Status: draft guidance
+- Normative: no
 
-## Domain boundary
+## Adoption shape
 
-KFD-11 names its software-domain work context `Initiative` and its bounded
-responsibility `Assignment`. An Initiative turns declared intent into durable,
-coordinated work by preserving scope, participants, Pursuits, Assignment
-relations, lineage, and settlement state. An Assignment proposes or binds one
-responsible participant to a bounded objective under an exact Atlas, Warrant,
-acceptance boundary, and evidence expectation.
+An adopter should reuse KFD-2 Claim and TrustAssessment artifacts where they
+fit, bind every consequential Decision to an exact Warrant or equivalent
+KFD-10 mapping, and let the owning Fact authority report Admission separately.
 
-Intent is content of an Initiative, not a substitute for its identity. An
-Initiative is not identical to a Pursuit, project, or repository. An Assignment
-is not identical to a task, Warrant, Episode, or claim. Products may project a
-simple session onto these roles without exposing every role as a separate UI
-object.
+The minimum machine path is:
 
-Another domain may use different objects, omit this exact lifecycle, or define
-a different settlement sequence. It conforms only to the KFDs it explicitly
-adopts and qualifies.
+```text
+KFD-2 Claim root
+  -> KFD-2 Assessment root and purpose
+  -> Decision record with Warrant and requested effects
+  -> Admission result with basis cut, successor cut, and receipt when admitted
+```
 
-## Discovery lineage
+The package publishes
+[`schemas/kfd-11/decision-admission.schema.json`](../schemas/kfd-11/decision-admission.schema.json)
+as a version 1 reference envelope. It binds artifacts by schema and root rather
+than copying their payloads. Schema validity proves structural closure only;
+it does not prove the Claim, Assessment, Warrant, Decision, or Admission valid.
 
-The founding move was not to derive more controls from Pursuit, Atlas, and
-Warrant. It was to adopt the real participant's view and ask what object helps
-software work continue. That KFD-4 transformation exposed a continuing work
-context and a bounded accepted responsibility. KFD-5 deletion, fuse,
-alternative, falsifier, and dogfood tests then accepted Initiative and
-Assignment as distinct software-domain Primitives. The acceptance is narrower
-than activation of KFD-11 and does not claim these names for other domains.
+## Product surface
 
-## Implementation sequence
+Human and agent surfaces should answer, in this order:
 
-1. Admit the relevant Fact cut and resolve an Atlas.
-2. Create or continue an Initiative and bind its relevant Pursuits.
-3. Propose an Assignment with one actor, bounded objective, exact Warrant,
-   acceptance boundary, expected evidence, and parent lineage.
-4. Record whether that participant accepts, refuses, or requests revision.
-5. Record realized work as one or more Episodes.
-6. Publish a claim without treating it as self-certified.
-7. Assess that claim for a declared purpose.
-8. Apply an authorized decision.
-9. Settle the Assignment or create explicit continuation responsibility while
-   preserving the Initiative.
+1. What exact proposition is being relied on?
+2. For what purpose and against which evidence was it assessed?
+3. Who is authorized to decide, under which Warrant and conditions?
+4. What effect was requested?
+5. Was it actually admitted, and what successor coordinate and receipt prove
+   that result?
 
-One physical record or command may carry several roles when source, cut,
-authority, state, and derivation remain independently inspectable.
+One compact confirmation surface may answer all five. Progressive disclosure
+may hide routine detail, but every default and derivation remains inspectable.
 
 ## Qualification
 
-Test negative cases where an Assignment is treated as accepted merely because
-it was proposed, occurrence lacks a claim, a claim lacks evidence, an
-assessment passes for one purpose but not another, a decision lacks authority,
-or continuation is required after technical success. Also test that a simple
-session remains low-friction and that complex work exposes the responsibility
-whose independence has become material.
+Qualification should include:
+
+- same Claim, different assessment purposes and results;
+- same Assessment, different Warrants or decision policies;
+- partial acceptance and conditional acceptance;
+- valid Decision followed by stale, conflicting, denied, or failed Admission;
+- idempotent retry that preserves Decision identity;
+- a negative case where process success or Episode sealing cannot settle work;
+- export and independent verification of the complete chain; and
+- a simple-session projection that does not force four visible objects when
+  the full boundary remains recoverable.
+
+## Domain Profile boundary
+
+Domain Profiles own proposition kinds, assessment methods, disposition codes,
+approval policy, admission authority, lifecycle, effects, UI vocabulary, and
+evidence obligations. They may not redefine Assessment as authority, Decision
+as occurrence, or requested effect as admitted state.
+
+Use the [Field Responsibility Matrix](field-responsibility-matrix.md) to decide
+whether a proposed field belongs to the shared procedure, a Domain Profile, or
+a participant-facing projection.
+
+## Foundation Revision
+
+The old prerelease `/11` software-work coordinate and `/12` Project Cut
+coordinate remain valid at their exact package and commit versions. The latest
+pre-stable foundation maps them to `/12` and `/13`; see the
+[Foundation Revision record](foundation-revision-2026-07-21-decision-admission.md).

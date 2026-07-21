@@ -15,8 +15,9 @@
 At Fact cut `f`, an Atlas version is:
 
 ```text
-A^v = (id, root, observer, scope, accepted_sources, fact_cut,
-       projection, freshness, omissions, conflicts, declared_loss)
+A^v = (id, root, perspective_holder, vantage, decision_scope,
+       source_bindings, fact_cut, projection_policy, freshness_conditions,
+       omissions, conflicts, unknowns, declared_loss, lineage)
 ```
 
 Its observation projection is `pi_A^v: F_f -> O_A`. For candidate action `u`:

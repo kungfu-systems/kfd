@@ -15,8 +15,8 @@
 At Fact cut `f`, a Pursuit version is:
 
 ```text
-P^v = (id, root, direction, progress_relation, success_conditions,
-       typed_relations, dependencies, settlement_policy, lineage)
+P^v = (id, root, direction, progress_relation, settlement_semantics,
+       typed_relations, dependencies, lineage)
 ```
 
 For action `u` and later Episode `E`:
@@ -54,6 +54,11 @@ Declare -> Revise | Decompose | Fork | Pause | Settle | Abandon | Supersede
 ```
 
 Concrete enums and success meaning remain Domain Profile-owned.
+
+Terminal `success_conditions` are therefore a Domain Profile field rather than
+a universal Pursuit field. Maintenance, prevention, care, and open-ended
+practice may preserve progress and settlement semantics without one terminal
+success state.
 
 ## Falsifiers
 

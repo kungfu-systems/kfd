@@ -4,7 +4,7 @@
   "standard": "kfd-2",
   "projection": {
     "kind": "generic",
-    "description": "KFD self-dogfood claims for assessing KFD-1 and KFD-3 through KFD-7 from the generic KFD-2 trust model."
+    "description": "KFD self-dogfood claims for assessing KFD-1, KFD-3 through KFD-7, and KFD-11 from the generic KFD-2 trust model."
   },
   "claims": [
     {
@@ -20,7 +20,7 @@
         {
           "kind": "file",
           "path": "standards.json",
-          "sha256": "09e92161e07223de27dc12844d416c5b5fe3ef1f3848f18fc1f2b857aa2f2c7a"
+          "sha256": "6bb74f3e0ad5c2244739090f0978a486fc866348c93ee0561444d21c45036559"
         },
         {
           "kind": "schema",
@@ -44,7 +44,7 @@
           "pointer": {
             "kind": "file",
             "path": "scripts/check.mjs",
-            "sha256": "a77c2d785b8c4f6c72bcd6e981a8854216130cfbaedbffe110e9af959bc2131f"
+            "sha256": "24e9217cf03418e9d00c877ffc40056862fd774bba2a4779f52e9bb0a1442a62"
           },
           "machineProvability": "machine-verifiable",
           "description": "The package check gate validates the KFD-1 schema, surface register, witness, and hashes."
@@ -109,7 +109,7 @@
           "pointer": {
             "kind": "file",
             "path": "scripts/check.mjs",
-            "sha256": "a77c2d785b8c4f6c72bcd6e981a8854216130cfbaedbffe110e9af959bc2131f"
+            "sha256": "24e9217cf03418e9d00c877ffc40056862fd774bba2a4779f52e9bb0a1442a62"
           },
           "machineProvability": "machine-verifiable",
           "description": "The package check gate validates KFD-3 interface closure and witness parity."
@@ -161,7 +161,7 @@
         {
           "kind": "file",
           "path": "standards.json",
-          "sha256": "09e92161e07223de27dc12844d416c5b5fe3ef1f3848f18fc1f2b857aa2f2c7a"
+          "sha256": "6bb74f3e0ad5c2244739090f0978a486fc866348c93ee0561444d21c45036559"
         },
         {
           "kind": "schema",
@@ -200,7 +200,7 @@
           "pointer": {
             "kind": "file",
             "path": "standards.json",
-            "sha256": "09e92161e07223de27dc12844d416c5b5fe3ef1f3848f18fc1f2b857aa2f2c7a"
+            "sha256": "6bb74f3e0ad5c2244739090f0978a486fc866348c93ee0561444d21c45036559"
           },
           "machineProvability": "machine-verifiable",
           "description": "Standards metadata exposes the KFD-4 schema ID, path, interface version, and concept names."
@@ -210,7 +210,7 @@
           "pointer": {
             "kind": "file",
             "path": "scripts/check.mjs",
-            "sha256": "a77c2d785b8c4f6c72bcd6e981a8854216130cfbaedbffe110e9af959bc2131f"
+            "sha256": "24e9217cf03418e9d00c877ffc40056862fd774bba2a4779f52e9bb0a1442a62"
           },
           "machineProvability": "machine-verifiable",
           "description": "The package check gate validates the KFD-4 timeline and replay schemas plus standards metadata; it does not assess adopter-specific capture or replay fidelity."
@@ -251,7 +251,7 @@
         {
           "kind": "file",
           "path": "standards.json",
-          "sha256": "09e92161e07223de27dc12844d416c5b5fe3ef1f3848f18fc1f2b857aa2f2c7a"
+          "sha256": "6bb74f3e0ad5c2244739090f0978a486fc866348c93ee0561444d21c45036559"
         },
         {
           "kind": "schema",
@@ -275,7 +275,7 @@
           "pointer": {
             "kind": "file",
             "path": "scripts/check.mjs",
-            "sha256": "a77c2d785b8c4f6c72bcd6e981a8854216130cfbaedbffe110e9af959bc2131f"
+            "sha256": "24e9217cf03418e9d00c877ffc40056862fd774bba2a4779f52e9bb0a1442a62"
           },
           "machineProvability": "machine-verifiable",
           "description": "The package check gate validates the KFD-5 interface and metadata; it does not certify adopter candidates."
@@ -316,7 +316,7 @@
         {
           "kind": "file",
           "path": "standards.json",
-          "sha256": "09e92161e07223de27dc12844d416c5b5fe3ef1f3848f18fc1f2b857aa2f2c7a"
+          "sha256": "6bb74f3e0ad5c2244739090f0978a486fc866348c93ee0561444d21c45036559"
         },
         {
           "kind": "schema",
@@ -340,7 +340,7 @@
           "pointer": {
             "kind": "file",
             "path": "scripts/check.mjs",
-            "sha256": "a77c2d785b8c4f6c72bcd6e981a8854216130cfbaedbffe110e9af959bc2131f"
+            "sha256": "24e9217cf03418e9d00c877ffc40056862fd774bba2a4779f52e9bb0a1442a62"
           },
           "machineProvability": "machine-verifiable",
           "description": "The package check gate validates draft status, required generation experiments, bounded method comparison, conditional boundary hypothesis, and anti-self-certification constants."
@@ -412,7 +412,7 @@
         {
           "kind": "file",
           "path": "standards.json",
-          "sha256": "09e92161e07223de27dc12844d416c5b5fe3ef1f3848f18fc1f2b857aa2f2c7a"
+          "sha256": "6bb74f3e0ad5c2244739090f0978a486fc866348c93ee0561444d21c45036559"
         },
         {
           "kind": "file",
@@ -426,7 +426,7 @@
           "pointer": {
             "kind": "file",
             "path": "registry.json",
-            "sha256": "a6410a6765717a1cb65985d98dbde084e6bcc216afa840df89441104f487d474"
+            "sha256": "3563a977b66228b8ffc7e36647fdcaf7cdfc8c44432c4f11b0443deee2b72808"
           },
           "machineProvability": "machine-verifiable",
           "description": "The numbered registry declares KFD-7 active."
@@ -436,7 +436,7 @@
           "pointer": {
             "kind": "file",
             "path": "drafts/registry.json",
-            "sha256": "ea14f926261b93e4fa5990fa75fd399f034f9ad71117d7473808974e776faf0c"
+            "sha256": "b065780c1e5b95d36690996897d793433ed4eda2643bf80be417bc92744f8052"
           },
           "machineProvability": "machine-verifiable",
           "description": "The candidate registry preserves the promoted source lineage and keeps KFD-8 through KFD-10 non-binding."
@@ -456,7 +456,7 @@
           "pointer": {
             "kind": "file",
             "path": "scripts/check.mjs",
-            "sha256": "a77c2d785b8c4f6c72bcd6e981a8854216130cfbaedbffe110e9af959bc2131f"
+            "sha256": "24e9217cf03418e9d00c877ffc40056862fd774bba2a4779f52e9bb0a1442a62"
           },
           "machineProvability": "machine-verifiable",
           "description": "The package check gate validates KFD-7 identity, formal binding, theorem and corollary references, Profile evidence categories, active status, activation review, trust projection, and participant-facing closure."
@@ -471,6 +471,112 @@
         "enumerability": "closed-world"
       },
       "residualRisk": [],
+      "responsibility": {
+        "owner": "KFD maintainers",
+        "sourceOwner": "KFD maintainers",
+        "verificationOwner": "KFD package self-verification",
+        "decisionOwner": "KFD maintainers"
+      },
+      "status": "declared"
+    },
+    {
+      "id": "kfd-11-decision-admission-trust",
+      "statement": "KFD-11 is trustable as a published draft consequential-settlement procedure and version 1 structural interface because its decision, formal reference, schema, Foundation Revision lineage, field boundary, standards metadata, and package gate are inspectable; cross-domain qualification and activation remain open.",
+      "subject": {
+        "kind": "decision-admission",
+        "id": "kfd-11-decision-admission",
+        "standard": "kfd-11",
+        "description": "KFD-11 draft separation of Claim, Assessment, authorized Decision, and independently recorded Admission."
+      },
+      "facts": [
+        {
+          "kind": "file",
+          "path": "decisions/KFD-11.md",
+          "sha256": "a604cef1169958ed864848d8863db0235d0c3a000e64260e39203306f4a915c0"
+        },
+        {
+          "kind": "file",
+          "path": "docs/KFD-11-formal.md",
+          "sha256": "c8013779cafd5c7ac9310b367178036016cf2e9272d90cf085f2d60f368f5717"
+        },
+        {
+          "kind": "file",
+          "path": "docs/foundation-revision-2026-07-21-decision-admission.json",
+          "sha256": "990c246bb4e3d181c2582028122688d648cfef76981dd7c79e1746dd6fd42137"
+        },
+        {
+          "kind": "file",
+          "path": "standards.json",
+          "sha256": "6bb74f3e0ad5c2244739090f0978a486fc866348c93ee0561444d21c45036559"
+        },
+        {
+          "kind": "schema",
+          "path": "schemas/kfd-11/decision-admission.schema.json",
+          "sha256": "0681cef6ee92e5e5128d8c6cb7adda971d9515e7619cbefb24c1dd666d88d1f3"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "schema",
+          "pointer": {
+            "kind": "schema",
+            "path": "schemas/kfd-11/decision-admission.schema.json",
+            "sha256": "0681cef6ee92e5e5128d8c6cb7adda971d9515e7619cbefb24c1dd666d88d1f3"
+          },
+          "machineProvability": "machine-verifiable",
+          "description": "KFD-11 publishes a closed version 1 reference envelope for exact artifact bindings, authority-bound Decision, and independently reported Admission."
+        },
+        {
+          "type": "file",
+          "pointer": {
+            "kind": "file",
+            "path": "docs/field-responsibility-matrix.md",
+            "sha256": "dff80feccd38257a663be933369a18b3c053cd5d0b76c1f6150bcf33fdd60ae7"
+          },
+          "machineProvability": "machine-verifiable",
+          "description": "The field matrix separates cross-domain core fields from Domain Profile and participant projection fields."
+        },
+        {
+          "type": "file",
+          "pointer": {
+            "kind": "file",
+            "path": "docs/foundation-revision-2026-07-21-decision-admission.json",
+            "sha256": "990c246bb4e3d181c2582028122688d648cfef76981dd7c79e1746dd6fd42137"
+          },
+          "machineProvability": "machine-verifiable",
+          "description": "The Foundation Revision preserves old coordinates and declares authorization, breaking impact, mapping, and independent review."
+        },
+        {
+          "type": "file",
+          "pointer": {
+            "kind": "file",
+            "path": "scripts/check.mjs",
+            "sha256": "24e9217cf03418e9d00c877ffc40056862fd774bba2a4779f52e9bb0a1442a62"
+          },
+          "machineProvability": "machine-verifiable",
+          "description": "The package gate checks KFD-11 interface identity, required separation fields, field-matrix coverage, and Foundation Revision closure."
+        }
+      ],
+      "verification": {
+        "command": "node scripts/check.mjs",
+        "expectedResult": "warning"
+      },
+      "auditBoundary": {
+        "scope": "KFD-11 draft text, formal and usage references, structural schema, Foundation Revision, field matrix, standards metadata, and package checks; excludes cross-domain qualification, independent implementations, runtime correctness, and activation",
+        "enumerability": "closed-world"
+      },
+      "residualRisk": [
+        {
+          "id": "decision-admission-cross-domain-qualification-open",
+          "definedBy": "https://kfd.libkungfu.dev/schemas/kfd-2/trust-taxonomy.schema.json#/$defs/residualRisk",
+          "riskType": "external-fact-risk",
+          "trustImpact": "downgrade-warning",
+          "machineProvability": "partially-machine-verifiable",
+          "agentAction": "verify-external-facts",
+          "reason": "KFD-11 publishes an inspectable draft procedure and structural schema, but no current package fact proves cross-domain qualification, independent implementations, or acceptable operating cost.",
+          "owner": "KFD maintainers and adopting Domain Profiles"
+        }
+      ],
       "responsibility": {
         "owner": "KFD maintainers",
         "sourceOwner": "KFD maintainers",
