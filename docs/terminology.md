@@ -88,9 +88,9 @@ The same contract closes common false equivalences:
 | **Warrant** | KFD-10 authority coordinate | The independently addressable bounded-authority coordinate: which transition may be performed, by whom, under which constraints, and until when. It is not legal authority by definition. |
 | **Domain Profile** | adopter model | A versioned declaration of how one domain binds its representations to the Fact-Episode Ontology and Action Responsibility Geometry. |
 | **Domain Profile Declaration** | machine artifact | A document conforming to `schemas/kfd-7/domain-profile.schema.json`. |
-| **Software Work Responsibility Lifecycle** | KFD-11 domain application | The software-development sequence that keeps long-horizon intent, bounded delegation, Episode, claim, assessment, decision, and continuation independently inspectable. It is not a universal cross-domain workflow. |
-| **Mission** | founding software-profile label | A provisional founding label for long-horizon intent context, primarily projected from Pursuit. It is not a canonical cross-domain KFD coordinate. |
-| **Go** | founding software-profile label | A provisional founding label for bounded delegated responsibility. It composes objective, actor, Atlas, Warrant, acceptance boundary, and expected evidence; it is not a one-to-one alias for a KFD coordinate. |
+| **Software Work Responsibility Lifecycle** | KFD-11 domain application | The software-development sequence that keeps Initiative, Assignment, Episode, claim, assessment, decision, and continuation independently inspectable. It is not a universal cross-domain workflow. |
+| **Initiative** | KFD-11 software-domain work context | An independently addressable context that turns declared intent into continuing coordinated work by preserving scope, participants, relevant Pursuits, Assignment relations, lineage, and settlement state. It is not merely an intention, Pursuit, project, or repository. |
+| **Assignment** | KFD-11 software-domain bounded responsibility | An independently addressable responsibility proposed to, accepted by, or held by a participant, binding actor, objective, Atlas, Warrant, acceptance boundary, expected evidence, and parent lineage. It is not merely a task, Warrant, Episode, or claim. |
 | **Project Cut** | KFD-12 software-project settlement | A verifiable project-level binding among independently authoritative source, Atlas, Episode, policy, omission, and risk coordinates. It is not another fact engine or a mandatory object in other domains. |
 | **Assurance Responsibility** | trust model | The named assignment of source-fact, verification, and decision authority. It is distinct from a KFD-7 Action Coordinate. |
 | **Participant Value Claim** | cooperation model | A bounded statement of value to a participant, with inspectable fact, trust, constraint, choice, and residual-risk boundaries. |
@@ -113,6 +113,8 @@ domain representation
   -> ontology bindings + action coordinates
 
 software-development Domain Profile
+  -> Initiative + Assignment + Episode
+  -> Claim + Assessment + Decision + Continuation
   -> Software Work Responsibility Lifecycle
   -> optional Project Cut settlement
 ```

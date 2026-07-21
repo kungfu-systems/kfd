@@ -164,7 +164,7 @@ explainable, auditable, and proportionate.
 | [KFD-8](decisions/KFD-8.md) | principle | Perspective must remain bound to admitted facts and declared loss. | draft |
 | [KFD-9](decisions/KFD-9.md) | principle | Continuing direction must outlive the actions that advance it. | draft |
 | [KFD-10](decisions/KFD-10.md) | principle | Authority must remain explicit, bounded, and revocable. | draft |
-| [KFD-11](decisions/KFD-11.md) | principle | Software work must keep responsibility transitions distinct. | draft |
+| [KFD-11](decisions/KFD-11.md) | principle | Software work must keep Initiative and Assignment distinct. | draft |
 | [KFD-12](decisions/KFD-12.md) | procedure | Project settlement must bind authorities without absorbing them. | draft |
 
 ## Candidate lineage
@@ -409,9 +409,9 @@ from `terminology.json`, not from renderer or product-local wording.
 
 KFD-8, KFD-9, and KFD-10 allocate the three action coordinates as numbered
 drafts. KFD-11 and KFD-12 then show one software-development application:
-durable work responsibility and Project Cut settlement. Their Mission, Go,
-and Project Cut vocabulary does not bind other domains, which may define
-different Domain Profiles and settlement objects.
+Initiative and Assignment organize durable work responsibility, while Project
+Cut records project settlement. This vocabulary does not bind other domains,
+which may define different Domain Profiles and settlement objects.
 
 ## Decision metadata
 
