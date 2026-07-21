@@ -162,14 +162,34 @@
       "layer": "kfd-11-domain-application"
     },
     {
-      "id": "mission",
-      "canonical": "Mission",
-      "layer": "founding-software-profile-label"
+      "id": "initiative",
+      "canonical": "Initiative",
+      "layer": "kfd-11-software-domain-work-context",
+      "subtitle": "Continuing coordinated work context",
+      "compactSubtitle": "Coordinated work context",
+      "question": "What continuing work are these responsibilities advancing?",
+      "definition": "An independently addressable software-domain context that turns declared intent into continuing coordinated work by preserving scope, participants, relevant Pursuits, Assignment relations, lineage, and settlement state.",
+      "notThis": [
+        "an intention statement alone",
+        "a Pursuit",
+        "a project or repository by definition",
+        "one execution session"
+      ]
     },
     {
-      "id": "go",
-      "canonical": "Go",
-      "layer": "founding-software-profile-label"
+      "id": "assignment",
+      "canonical": "Assignment",
+      "layer": "kfd-11-software-domain-bounded-responsibility",
+      "subtitle": "Responsibility proposed to, accepted by, or held by a participant",
+      "compactSubtitle": "Bounded responsibility",
+      "question": "Who is responsible for this bounded work under which evidence boundary?",
+      "definition": "An independently addressable software-domain responsibility proposed to, accepted by, or held by a participant that binds actor, objective, Atlas, Warrant, acceptance boundary, expected evidence, and parent lineage.",
+      "notThis": [
+        "a task description alone",
+        "a Warrant",
+        "an Episode",
+        "a completion claim"
+      ]
     },
     {
       "id": "project-cut",

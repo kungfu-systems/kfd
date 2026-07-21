@@ -1,4 +1,4 @@
-# KFD-11: Software work must keep responsibility transitions distinct
+# KFD-11: Software work must keep Initiative and Assignment distinct
 
 - Status: draft
 - Number: 11
@@ -7,8 +7,8 @@
 
 ## One sentence
 
-Software work must keep long-horizon intent, bounded delegation, occurrence,
-claim, assessment, decision, and continuation independently inspectable.
+Software work must keep Initiative, Assignment, occurrence, claim, assessment,
+decision, and continuation independently inspectable.
 
 ## Scope
 
@@ -24,8 +24,8 @@ claim to adopt.
 The software work model separates:
 
 ```text
-long-horizon intent context
-  -> bounded delegated responsibility
+Initiative
+  -> Assignment
   -> Episode of realized work
   -> completion or progress claim
   -> purpose-bound assessment
@@ -38,8 +38,8 @@ commands, screens, or services.
 
 | Role | Responsibility |
 | --- | --- |
-| Long-horizon intent context | Preserves the continuing project direction and its relevant Pursuits. |
-| Bounded delegated responsibility | Binds an actor, objective, Atlas, Warrant, acceptance boundary, and expected evidence for a bounded attempt. |
+| Initiative | Preserves an independently addressable context for continuing coordinated work: declared intent, scope, participants, relevant Pursuits, Assignment relations, lineage, and settlement state. |
+| Assignment | Preserves an independently addressable bounded responsibility proposed to, accepted by, or held by a participant: actor, objective, exact Atlas and Warrant roots, acceptance boundary, expected evidence, and parent Initiative or Assignment. |
 | Episode | Preserves what actually occurred. |
 | Claim | States progress, completion, artifact, or consequence without self-certifying it. |
 | Assessment | Evaluates a claim for a declared purpose under KFD-2 trust semantics. |
@@ -50,27 +50,32 @@ Occurrence does not imply a valid claim. A claim does not imply a passing
 assessment. Assessment does not grant authority. A decision does not erase the
 Episode or the evidence boundary on which it relied.
 
-## Founding implementation vocabulary
+## Software profile vocabulary
 
-The founding Atlas/Kungfu implementation currently projects the first two
-roles as **Mission** and **Go**:
+KFD-11 names the first two software-domain roles **Initiative** and
+**Assignment**:
 
 ```text
-Mission  -> primarily a long-horizon Pursuit context
-Go       -> a bounded delegated responsibility combining objective, actor,
-            Atlas, Warrant, acceptance boundary, and evidence expectation
+Initiative -> continuing coordinated work context
+Assignment -> bounded responsibility proposed to, accepted by, or held by a participant
 ```
 
-These names are provisional software-profile vocabulary, preserved to make the
-originating implementation auditable. They are not canonical cross-domain KFD
-terms, are not one-to-one aliases for Pursuit or Warrant, and may be renamed or
-refined before KFD-11 becomes active.
+An Initiative contains declared intent but is not merely an intention. It may
+reference one or more Pursuits, but it is not identical to Pursuit, a repository,
+or a project. An Assignment may be proposed, accepted, refused, revised,
+continued, or settled, but it is not identical to a task, Warrant, Episode, or
+claim. These names are canonical within this software Domain Profile; they do
+not bind other domains.
 
 ## Gate
 
 A conforming software Domain Profile:
 
 - declares its mapping to Fact, Episode, Atlas, Pursuit, and Warrant;
+- gives every Initiative and Assignment stable identity, explicit state, and
+  inspectable lineage;
+- keeps Assignment acceptance distinct from proposal, authority, occurrence,
+  claim, and settlement;
 - makes every accepted claim traceable to occurrence and admitted evidence;
 - distinguishes assessment purpose from authorization to decide;
 - preserves parent, child, dependency, revision, and continuation lineage;
@@ -89,5 +94,5 @@ work model; it does not modify their cross-domain semantics.
 ## Non-claims
 
 KFD-11 does not require every task to expose seven user-visible objects, require
-the names Mission or Go, prescribe Git, define one software methodology, or
-claim that other domains should copy this lifecycle.
+other domains to use Initiative or Assignment, prescribe Git, define one
+software methodology, or claim that other domains should copy this lifecycle.

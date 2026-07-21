@@ -109,7 +109,8 @@ independently addressable in real-world action.
 KFD-8 specifies Atlas as the perspective coordinate.
 KFD-9 specifies Pursuit as the continuing-direction coordinate.
 KFD-10 specifies Warrant as the bounded-authority coordinate.
-KFD-11 applies those coordinates to one software-work responsibility lifecycle.
+KFD-11 applies those coordinates to an Initiative-Assignment software-work
+responsibility lifecycle.
 KFD-12 applies them to one software-project settlement procedure.
 ```
 

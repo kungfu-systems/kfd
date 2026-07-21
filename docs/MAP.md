@@ -38,7 +38,7 @@
 | How must an Atlas bind perspective to admitted facts, source, cut, and declared loss? | [KFD-8](../decisions/KFD-8.md) and its [source-candidate lineage](../drafts/atlas-action-perspective.md) |
 | How must a Pursuit preserve continuing direction beyond the actions that advance it? | [KFD-9](../decisions/KFD-9.md) and its [source-candidate lineage](../drafts/pursuit-intent-continuity.md) |
 | How must a Warrant preserve bounded, derivable, and revocable authority? | [KFD-10](../decisions/KFD-10.md) and its [source-candidate lineage](../drafts/warrant-bounded-authority.md) |
-| How does one software-development Domain Profile organize Mission, Go, Episode, Claim, Assessment, Decision, and Continuation without making those names universal? | [KFD-11](../decisions/KFD-11.md) and [`KFD-11-usage.md`](KFD-11-usage.md) |
+| How does one software-development Domain Profile organize Initiative, Assignment, Episode, Claim, Assessment, Decision, and Continuation without making those names universal? | [KFD-11](../decisions/KFD-11.md) and [`KFD-11-usage.md`](KFD-11-usage.md) |
 | How can a software Project Cut bind source, Atlas, Episode, and policy authorities without becoming another fact engine? | [KFD-12](../decisions/KFD-12.md) and [`KFD-12-usage.md`](KFD-12-usage.md) |
 | Must other domains adopt the KFD-11 software lifecycle or KFD-12 Project Cut? | [KFD-11 scope](../decisions/KFD-11.md#scope) and [KFD-12 scope](../decisions/KFD-12.md#scope) |
 | How does a candidate become a numbered draft? | [`../CONTRIBUTING.md`](../CONTRIBUTING.md#candidates-and-numbered-drafts) |
