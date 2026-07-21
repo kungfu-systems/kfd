@@ -12,10 +12,10 @@
 
 ## Purpose
 
-This page makes the Warrant candidate precise enough to compare with approval,
-consent, mandate, access control, capability token, delegated plan, and
-provider permission alternatives. It does not allocate KFD-10 or replace a
-domain's legal or authorization system.
+This page preserves the pre-promotion Warrant formal candidate. KFD-10 now owns
+the authoritative draft rule and `docs/KFD-10-formal.md` owns its current
+non-normative formal reference. Neither replaces a domain's legal or
+authorization system.
 
 ## Object model
 
@@ -177,7 +177,8 @@ invalid Warrant valid.
 
 ## Non-claims
 
-This model does not provide legal advice, replace domain authorization systems,
-prove universal necessity, require one token format, make every local action
-ask for permission, or allocate a KFD number. Conflict policy, consumption,
-multi-party approval, and concrete lifecycle vocabulary remain Profile-owned.
+This historical model does not provide legal advice, replace domain
+authorization systems, prove universal necessity, require one token format,
+or make every local action ask for permission. KFD-10 allocates the number and
+canonical term; conflict policy, consumption, multi-party approval, and
+concrete lifecycle vocabulary remain Domain Profile-owned.

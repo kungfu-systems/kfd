@@ -1,24 +1,31 @@
 ---
-status: draft
+status: promoted
 period: 2026-07-18
 theme: atlas-action-perspective
 doc_type: kfd-candidate
 source_level: maintainer-consensus
-confidence: medium
+confidence: high
 sensitivity: public
 evidence_grade: C
 review_state: self-reviewed
-last_reviewed: 2026-07-18
+last_reviewed: 2026-07-21
 ---
 
 # KFD Candidate: Atlas Action Perspective
 
-- Candidate status: incubating
+- Candidate status: promoted to KFD-8
 - Kind candidate: principle
-- Current slot hint: 8
+- Allocated decision: 8
 - Slot binding: non-binding
 
 [Formal candidate](formal/atlas-action-perspective.md)
+
+## Promotion
+
+This candidate was promoted on 2026-07-21 to
+[KFD-8](../decisions/KFD-8.md). The numbered draft is now the authoritative
+rule and its [formal reference](../docs/KFD-8-formal.md) owns the current
+non-normative model. This page remains source-candidate lineage.
 
 ## One sentence
 
@@ -117,9 +124,6 @@ The candidate weakens or fails if:
 
 ## Numbering boundary
 
-The slot hint `8` is non-binding. This document is not `KFD-8`, does not
-reserve that number, and may be revised, reordered, merged, withdrawn, or
-rejected.
-
-Only explicit promotion into `decisions/KFD-N.md` and numbered `registry.json`
-allocates a KFD number.
+The former slot hint was non-binding until explicit promotion. KFD-8 is now
+allocated by `decisions/KFD-8.md` and `registry.json`; this lineage document
+does not replace or extend that numbered authority.

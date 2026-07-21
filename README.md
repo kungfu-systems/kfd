@@ -161,23 +161,30 @@ explainable, auditable, and proportionate.
 | [KFD-5](decisions/KFD-5.md) | procedure | Primitive discovery must separate genesis from qualification. | active |
 | [KFD-6](decisions/KFD-6.md) | procedure | Autonomous discovery must remain grounded in causal experience. | draft |
 | [KFD-7](decisions/KFD-7.md) | principle | Real-world action must keep state, occurrence, and action coordinates distinct. | active |
+| [KFD-8](decisions/KFD-8.md) | principle | Perspective must remain bound to admitted facts and declared loss. | draft |
+| [KFD-9](decisions/KFD-9.md) | principle | Continuing direction must outlive the actions that advance it. | draft |
+| [KFD-10](decisions/KFD-10.md) | principle | Authority must remain explicit, bounded, and revocable. | draft |
+| [KFD-11](decisions/KFD-11.md) | principle | Software work must keep responsibility transitions distinct. | draft |
+| [KFD-12](decisions/KFD-12.md) | procedure | Project settlement must bind authorities without absorbing them. | draft |
 
-## Current candidates
+## Candidate lineage
 
-KFD Candidates preserve potentially load-bearing rules before a number is
-allocated. They are explicitly non-normative and may be revised, reordered,
-split, merged, withdrawn, rejected, or promoted.
+KFD Candidates preserve potentially load-bearing rules before and after
+numbering so readers can audit genesis, qualification, promotion, and later
+revision. They remain non-normative source lineage after promotion.
 
-- [Atlas action perspective](drafts/atlas-action-perspective.md), slot hint `8`.
-- [Pursuit intent continuity](drafts/pursuit-intent-continuity.md), slot hint
-  `9`.
-- [Warrant bounded authority](drafts/warrant-bounded-authority.md), slot hint
-  `10`.
+- [Cross-domain action primitives](drafts/action-state-separation.md) was
+  promoted into active KFD-7.
+- [Atlas action perspective](drafts/atlas-action-perspective.md) was promoted
+  into numbered draft KFD-8.
+- [Pursuit intent continuity](drafts/pursuit-intent-continuity.md) was promoted
+  into numbered draft KFD-9.
+- [Warrant bounded authority](drafts/warrant-bounded-authority.md) was promoted
+  into numbered draft KFD-10.
 
-The [cross-domain action candidate](drafts/action-state-separation.md) is
-preserved as the lineage promoted into active KFD-7. The machine source is
-[`drafts/registry.json`](drafts/registry.json). Remaining slot hints are
-ordering hypotheses, not allocated KFD numbers, reservations, or promises.
+The machine source is [`drafts/registry.json`](drafts/registry.json). A
+candidate's lineage does not replace the numbered decision that received its
+slot.
 
 ## Experimental protocol profiles
 
@@ -212,7 +219,7 @@ results.
 KFDs are not a detached manifesto, but they are not a demand that readers adopt
 a Kungfu product before understanding the decisions. The product-witness rule
 starts with this package itself: `standards.json`, `schemas/`, `docs/`,
-`site/kfd-site.json`, and `scripts/check.mjs` show how KFD-1 through KFD-7 are
+`site/kfd-site.json`, and `scripts/check.mjs` show how KFD-1 through KFD-12 are
 expressed as consumable interfaces for both humans and agents. These surfaces
 do not prove every adopter or product correct; they make the KFD package's own
 claims inspectable and falsifiable.
@@ -299,8 +306,8 @@ Agents consuming this package should start from the same sources as humans:
    historical cases and an ordinary cross-machine trace vignette.
 7. Read `cases/registry.json` to discover provisional live Primitive cases,
    their current immutable KFD-5 cuts, claim boundaries, and review paths.
-8. Read `drafts/registry.json` to discover non-normative KFD Candidates,
-   non-binding slot hints, promotion gates, and claim boundaries.
+8. Read `drafts/registry.json` to discover non-normative KFD Candidate
+   lineage, promotion gates, status, and claim boundaries.
 9. Read `standards.json` for canonical KFD numbers, formal reference versions
    and hashes, schema IDs, concept names, and interface contracts.
 10. Use `site/kfd-site.json` decision metadata or the KFD-3 collaboration
@@ -332,7 +339,10 @@ Agents consuming this package should start from the same sources as humans:
    current Fact/Episode and action-responsibility reference model. Use
    `schemas/kfd-7/domain-profile.schema.json` for a product-neutral Domain
    Profile Declaration; schema validity is non-qualifying and does not activate
-   a concrete Domain Profile.
+   a concrete Domain Profile. Read KFD-8 through KFD-10 for the separately
+   allocated Atlas, Pursuit, and Warrant draft responsibilities. Read KFD-11
+   and KFD-12 as a software-development Domain Profile and project-settlement
+   application, not as a required workflow for other domains.
 
 KFD package semver is only the distribution version. KFD-owned machine
 interfaces carry their own `schemaVersion` and `contract` fields. Compatible
@@ -396,6 +406,12 @@ The five names are not five peers. Fact and Episode form the Fact-Episode
 Ontology; Atlas, Pursuit, and Warrant form the Action Responsibility Geometry.
 Their canonical explanatory subtitles and anti-misreading boundaries come
 from `terminology.json`, not from renderer or product-local wording.
+
+KFD-8, KFD-9, and KFD-10 allocate the three action coordinates as numbered
+drafts. KFD-11 and KFD-12 then show one software-development application:
+durable work responsibility and Project Cut settlement. Their Mission, Go,
+and Project Cut vocabulary does not bind other domains, which may define
+different Domain Profiles and settlement objects.
 
 ## Decision metadata
 

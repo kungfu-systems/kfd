@@ -1,7 +1,7 @@
 # KFD Formal Model
 
 This document defines the shared notation and authority boundary for the
-non-normative formal references published with KFD-1 through KFD-7.
+non-normative formal references published with KFD-1 through KFD-12.
 
 - Status: experimental
 - Normative: no
@@ -93,7 +93,7 @@ declared rather than inferred from file type or product vocabulary.
 
 ## Cross-KFD composition
 
-The seven references compose as follows:
+The twelve references compose as follows:
 
 ```text
 KFD-1 maintains a non-drifting fact base.
@@ -106,6 +106,11 @@ KFD-7 distinguishes the Fact-Episode Ontology from Action Responsibility Geometr
 preserve admitted state, Episodes preserve realized causal occurrence, and
 Pursuit, Atlas, and Warrant keep direction, perspective, and authority
 independently addressable in real-world action.
+KFD-8 specifies Atlas as the perspective coordinate.
+KFD-9 specifies Pursuit as the continuing-direction coordinate.
+KFD-10 specifies Warrant as the bounded-authority coordinate.
+KFD-11 applies those coordinates to one software-work responsibility lifecycle.
+KFD-12 applies them to one software-project settlement procedure.
 ```
 
 This composition does not make every later KFD a theorem of the earlier ones.
@@ -119,8 +124,10 @@ KFD-7 extends the shared model by treating Fact cuts as object-like admitted
 states and Episodes as morphism-like, evidence-bearing causal paths. Together
 they form the Fact-Episode Ontology. Atlas, Pursuit, and Warrant are the
 reference action coordinates in the Action Responsibility Geometry for
-perspective, direction, and admissible action. They are not Domain Profiles,
-and KFD-7 does not by itself promote their separate candidate specifications.
+perspective, direction, and admissible action. They are not Domain Profiles.
+KFD-8 through KFD-10 separately allocate their draft responsibilities; KFD-11
+and KFD-12 remain software-domain applications rather than universal additions
+to the geometry.
 
 This active decision remains intentionally falsifiable. Activation does not
 prove that the proposed roles are universally minimal or establish a literal

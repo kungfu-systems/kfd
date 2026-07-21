@@ -8,7 +8,7 @@ confidence: high
 sensitivity: public
 evidence_grade: B
 review_state: self-reviewed
-last_reviewed: 2026-07-18
+last_reviewed: 2026-07-21
 ---
 
 # KFD Candidates
@@ -40,20 +40,19 @@ qualification evidence through the public process in
 [`CONTRIBUTING.md`](../CONTRIBUTING.md). Maintainers remain responsible for
 official numbering and status decisions.
 
-Current candidates:
-
-- [Atlas action perspective](atlas-action-perspective.md), slot hint `8`;
-- [Pursuit intent continuity](pursuit-intent-continuity.md), slot hint `9`;
-- [Warrant bounded authority](warrant-bounded-authority.md), slot hint `10`.
-
 Promoted lineage:
 
 - [Cross-domain action primitives](action-state-separation.md) was explicitly
   promoted into active [KFD-7](../decisions/KFD-7.md).
+- [Atlas action perspective](atlas-action-perspective.md) was explicitly
+  promoted into numbered draft [KFD-8](../decisions/KFD-8.md).
+- [Pursuit intent continuity](pursuit-intent-continuity.md) was explicitly
+  promoted into numbered draft [KFD-9](../decisions/KFD-9.md).
+- [Warrant bounded authority](warrant-bounded-authority.md) was explicitly
+  promoted into numbered draft [KFD-10](../decisions/KFD-10.md).
 
-The three remaining candidates elaborate independently qualifiable
-cross-domain action coordinates. None of their slot hints allocates or reserves
-a KFD number.
+There are no incubating candidates in the current registry cut. The promoted
+pages remain public lineage and do not replace their numbered decisions.
 
 See [Contributing](../CONTRIBUTING.md) and
 [Governance](../GOVERNANCE.md) for open proposal, candidate promotion,

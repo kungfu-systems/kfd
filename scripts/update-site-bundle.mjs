@@ -386,9 +386,9 @@ export const buildSiteBundle = ({
     }),
     section({
       id: "current-candidates",
-      sourceHeading: "Current candidates",
-      title: "Current candidates",
-      markdown: readme.sections["Current candidates"],
+      sourceHeading: "Candidate lineage",
+      title: "Candidate lineage",
+      markdown: readme.sections["Candidate lineage"],
       role: "primary",
       priority: 27,
       presentation: "candidate-summary",

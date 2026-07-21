@@ -83,11 +83,15 @@ The same contract closes common false equivalences:
 | **Causal Experience** | evidence corpus | One or more Episodes used as evidence or learning material. It is not reality itself. |
 | **Action Responsibility Geometry** | KFD-7 action model | The cross-domain responsibility model whose coordinates are direction, perspective, and bounded authority. Geometry does not imply Euclidean space, physical motion, a metric, or a differentiable manifold. |
 | **Action Coordinate** | KFD-7 role | One independently addressable coordinate in the Action Responsibility Geometry. |
-| **Atlas** | reference coordinate | The perspective coordinate: accepted facts, observation boundary, cut, omissions, and loss. KFD-7 standardizes this role, not a complete Atlas object specification. |
-| **Pursuit** | reference coordinate | The direction coordinate: continuing intended change and its progress relation. KFD-7 standardizes this role, not a complete Pursuit object specification. |
-| **Warrant** | reference coordinate | The bounded-authority coordinate: which transition may be performed, by whom, and under which constraints. KFD-7 standardizes this role, not legal authority or a complete Warrant object specification. |
+| **Atlas** | KFD-8 perspective coordinate | The independently addressable perspective coordinate: accepted facts, observation boundary, cut, freshness, omissions, conflict, and loss. |
+| **Pursuit** | KFD-9 direction coordinate | The independently addressable direction coordinate: continuing intended change, progress relation, lineage, and settlement. |
+| **Warrant** | KFD-10 authority coordinate | The independently addressable bounded-authority coordinate: which transition may be performed, by whom, under which constraints, and until when. It is not legal authority by definition. |
 | **Domain Profile** | adopter model | A versioned declaration of how one domain binds its representations to the Fact-Episode Ontology and Action Responsibility Geometry. |
 | **Domain Profile Declaration** | machine artifact | A document conforming to `schemas/kfd-7/domain-profile.schema.json`. |
+| **Software Work Responsibility Lifecycle** | KFD-11 domain application | The software-development sequence that keeps long-horizon intent, bounded delegation, Episode, claim, assessment, decision, and continuation independently inspectable. It is not a universal cross-domain workflow. |
+| **Mission** | founding software-profile label | A provisional founding label for long-horizon intent context, primarily projected from Pursuit. It is not a canonical cross-domain KFD coordinate. |
+| **Go** | founding software-profile label | A provisional founding label for bounded delegated responsibility. It composes objective, actor, Atlas, Warrant, acceptance boundary, and expected evidence; it is not a one-to-one alias for a KFD coordinate. |
+| **Project Cut** | KFD-12 software-project settlement | A verifiable project-level binding among independently authoritative source, Atlas, Episode, policy, omission, and risk coordinates. It is not another fact engine or a mandatory object in other domains. |
 | **Assurance Responsibility** | trust model | The named assignment of source-fact, verification, and decision authority. It is distinct from a KFD-7 Action Coordinate. |
 | **Participant Value Claim** | cooperation model | A bounded statement of value to a participant, with inspectable fact, trust, constraint, choice, and residual-risk boundaries. |
 
@@ -107,6 +111,10 @@ Pursuit + Atlas + Warrant
 domain representation
   -> Domain Profile Declaration
   -> ontology bindings + action coordinates
+
+software-development Domain Profile
+  -> Software Work Responsibility Lifecycle
+  -> optional Project Cut settlement
 ```
 
 The relationships are directional. A Fact is not reality itself; a Fact Cut

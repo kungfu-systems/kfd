@@ -68,8 +68,8 @@ Warrant   Bounded authority for admissible transitions
 
 The names Atlas, Pursuit, and Warrant identify the reference action coordinates
 used by this decision. KFD-7 standardizes their coordinate roles and
-independence, not their complete object specifications. Separate candidate
-decisions may later qualify one of these names as a KFD Primitive. Their
+independence. Their complete draft responsibilities are allocated separately
+by [KFD-8](KFD-8.md), [KFD-9](KFD-9.md), and [KFD-10](KFD-10.md). Their
 semantics over the Fact-Episode Ontology are:
 
 - perspective states from where, from which accepted facts, and at which cut
