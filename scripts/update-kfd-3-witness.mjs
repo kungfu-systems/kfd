@@ -47,6 +47,11 @@ const usageDocs = registry.entries.map((entry) => ({
 const liveCaseSurfaces = liveCaseRegistry.cases.flatMap((entry) => [
   { id: `case:${entry.id}:entry`, sourcePath: entry.humanEntry, sha256: sha256File(entry.humanEntry) },
   { id: `case:${entry.id}:genesis`, sourcePath: entry.genesis, sha256: sha256File(entry.genesis) },
+  ...(entry.developmentLineage ? [{
+    id: `case:${entry.id}:development-lineage`,
+    sourcePath: entry.developmentLineage,
+    sha256: sha256File(entry.developmentLineage),
+  }] : []),
   { id: `case:${entry.id}:method-trace`, sourcePath: entry.methodTrace, sha256: sha256File(entry.methodTrace) },
   { id: `case:${entry.id}:propagation-hypothesis`, sourcePath: entry.propagationHypothesis, sha256: sha256File(entry.propagationHypothesis) },
   { id: `case:${entry.id}:review-index`, sourcePath: entry.reviewIndex, sha256: sha256File(entry.reviewIndex) },

@@ -411,6 +411,7 @@ for (const [index, liveCase] of (liveCaseRegistry.cases ?? []).entries()) {
   const expectedCasePaths = {
     humanEntry: `${caseRoot}/README.md`,
     genesis: `${caseRoot}/genesis.md`,
+    developmentLineage: `${caseRoot}/development-lineage.md`,
     methodTrace: `${caseRoot}/kfd-method-trace.md`,
     propagationHypothesis: `${caseRoot}/propagation-hypothesis.md`,
     reviewIndex: `${caseRoot}/reviews/README.md`,
@@ -420,6 +421,14 @@ for (const [index, liveCase] of (liveCaseRegistry.cases ?? []).entries()) {
   for (const field of ["humanEntry", "genesis", "methodTrace", "propagationHypothesis", "reviewIndex", "ontologySplit", "distinguishabilityArgument"]) {
     if (liveCase[field] !== expectedCasePaths[field]) fail(`${label}.${field} must stay inside ${caseRoot}`);
     if (!existsSync(liveCase[field])) fail(`${label}.${field} points to missing ${liveCase[field]}`);
+  }
+  if (liveCase.developmentLineage !== undefined) {
+    if (liveCase.developmentLineage !== expectedCasePaths.developmentLineage) {
+      fail(`${label}.developmentLineage must stay inside ${caseRoot}`);
+    }
+    if (!existsSync(liveCase.developmentLineage)) {
+      fail(`${label}.developmentLineage points to missing ${liveCase.developmentLineage}`);
+    }
   }
   if (!Array.isArray(liveCase.candidateTracks) || liveCase.candidateTracks.length === 0) {
     fail(`${label}.candidateTracks must include at least one candidate`);
@@ -722,6 +731,15 @@ for (const liveCase of liveCaseRegistry.cases ?? []) {
     if (projected[field]?.path !== liveCase[field] || !projected[field]?.markdown) {
       fail(`site bundle live case ${liveCase.id} must project ${field}`);
     }
+  }
+  if (
+    liveCase.developmentLineage !== undefined
+    && (
+      projected.developmentLineage?.path !== liveCase.developmentLineage
+      || !projected.developmentLineage?.markdown
+    )
+  ) {
+    fail(`site bundle live case ${liveCase.id} must project developmentLineage`);
   }
   const projectedTracks = new Map((projected.candidateTracks ?? []).map((entry) => [entry.id, entry]));
   for (const track of liveCase.candidateTracks ?? []) {

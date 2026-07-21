@@ -109,14 +109,18 @@ and user surfaces without collapsing these responsibilities.
 KFD-12 applies this procedure to software Initiative and Assignment. KFD-13
 applies it to software-project settlement through Project Cut.
 
-The founding discovery was Agent-generated rather than a maintainer-supplied
-model later checked by an agent. The maintainer asked whether Claim,
-Assessment, and Decision should receive KFD treatment. The agent changed from
-the numbered-noun view to the state-admission authority's view, introduced the
-missing Admission responsibility, and compressed the four roles into this
+The founding model was Agent-generated rather than a maintainer-supplied model
+later checked by an agent. Agents first generated Claim and purpose-bound
+Assessment while designing KFD-2 execution, then composed Claim, Assessment,
+and Decision with Mission/Go during product implementation. Project Cut,
+independent review, and recoverable Action Loop settlement later exposed the
+independent state-admission boundary. When the maintainer subsequently asked
+whether Claim, Assessment, and Decision should receive KFD treatment, the agent
+recognized these distributed development results as one cross-domain
 procedure. The maintainer then authorized the Foundation Revision. The
 [live qualification case](../cases/live/decision-admission-settlement/README.md)
-keeps that KFD-4 genesis, KFD-5 qualification, and evidence boundary separate.
+keeps the dated development lineage, KFD-4 recognition, KFD-5 qualification,
+and evidence boundary separate.
 
 ## Status boundary
 
