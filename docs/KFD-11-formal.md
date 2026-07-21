@@ -2,86 +2,114 @@
 
 [Authoritative decision](../decisions/KFD-11.md) ·
 [Usage](KFD-11-usage.md) ·
-[KFD-7 formal reference](KFD-7-formal.md)
+[KFD-2 formal reference](KFD-2-formal.md) ·
+[KFD-10 formal reference](KFD-10-formal.md)
 
 - Status: experimental
 - Normative: no
-- Formal model version: 2
+- Formal model version: 1
 - Authority: `decisions/KFD-11.md`
 - Decision status: draft
 
-## Roles
+## Objects
 
-For a software work history `H`:
+At Fact cut `f`, define:
 
 ```text
-I = Initiative
-X = Assignment
-E = Episode
-C = claim
-A = purpose-bound assessment
-D = authorized decision
-N = continuation or settlement
+C = (claim_id, claimant, subject, proposition, basis_cut,
+     evidence_refs, audit_boundary, declared_limits)
+
+A = (assessment_id, claim_root, purpose, evidence_cut, trust_policy,
+     assessor, result, residual_risk, responsibility)
+
+D = (decision_id, assessment_roots, decision_maker, warrant_root,
+     disposition, accepted_scope, conditions, requested_effects,
+     reason, residual_risk)
+
+M = (admission_id, decision_root, basis_cut, requested_effects,
+     outcome, successor_cut, receipt)
 ```
 
-Representative bindings are:
+`C` and `A` refine KFD-2 Claim and TrustAssessment. `D` introduces the
+authority-bound disposition. `M` records the owning admission authority's
+result; it does not repeat the Decision.
+
+## Predicates
 
 ```text
-I = (initiative_id, root, declared_intent, scope, pursuit_roots, participants,
-     assignment_relations, lineage, settlement_state)
-X = (assignment_id, root, actor, objective, atlas_root, warrant_root,
-     acceptance_boundary, expected_evidence, parent_refs, state)
-E -> realized causal occurrence
-C -> assertion about progress, completion, artifact, or consequence
-A -> Assess(C, purpose, evidence_cut, trust_policy)
-D -> Decide(A, Warrant)
-N -> settle | pause | reopen | request-evidence | successor(X)
+ExactClaim(C)        subject, proposition, basis, and boundary are exact
+PurposeBound(A, p)   A is valid only for declared purpose p
+Supports(A, D)       D cites A without inheriting broader trust
+Authorized(D, W, f)  W is valid for D's requested effects at cut f
+Admitted(M)          requested effects entered a successor Fact cut
+```
+
+```text
+ValidDecision(D, f) =
+  all cited Assessments are exact and purpose-compatible
+  and Authorized(D, Warrant(D), f)
+  and disposition, accepted scope, conditions, and effects are explicit
+```
+
+```text
+SuccessfulAdmission(M, D, f) =
+  ValidDecision(D, f)
+  and M binds D and f
+  and M.outcome = admitted
+  and M.successor_cut exists
+  and M.receipt independently verifies
+```
+
+Therefore:
+
+```text
+ValidDecision(D, f) does not imply SuccessfulAdmission(M, D, f)
+SuccessfulAdmission(M, D, f) does not widen Claim(C) or Warrant(D)
 ```
 
 ## Invariants
 
 ```text
-S1 Occurred(E) does not imply Valid(C).
-S2 Asserted(C) does not imply Passed(A).
-S3 Passed(A, purpose_1) does not imply Passed(A, purpose_2).
-S4 Assessment does not imply authority to decide.
-S5 Decision does not erase claim, evidence, assessment purpose, or Episode.
-S6 Continuation preserves parent and decision lineage.
-S7 Domain labels do not redefine KFD coordinate semantics.
-S8 Proposed(X) does not imply Accepted(X).
-S9 Accepted(X) does not imply Authorized(X), Occurred(E), Valid(C), or Settled(X).
-S10 Identity(I) outlives any one X or E.
-S11 A material change to declared_intent(I) requires a revision, fork, or
-    successor relation rather than silent reinterpretation.
+D1 Occurred(E) does not imply Claimed(C).
+D2 Claimed(C) does not imply Passed(A).
+D3 Passed(A, purpose_1) does not imply Passed(A, purpose_2).
+D4 Assessment does not grant authority to decide.
+D5 Decision authority is bounded by an exact Warrant and basis cut.
+D6 A Decision may accept only a declared subset of one Claim.
+D7 A valid Decision does not imply successful Admission.
+D8 Failed, stale, conflicted, or denied Admission does not create a successor cut.
+D9 Admission does not rewrite Claim, Assessment, Decision, Warrant, or Episode.
+D10 Retry preserves the original Decision identity and records a new Admission result.
 ```
 
-## Software profile bindings
+## State relation
 
 ```text
-Initiative -> continuing coordinated work context
-Assignment -> bounded responsibility proposed to, accepted by, or held by a participant
+claim declared
+  -> assessment issued | reassessment issued
+  -> decision accepted | conditional | rejected | deferred | evidence-requested
+  -> admission not-attempted | admitted | rejected | stale | conflicted | failed
 ```
 
-Neither binding is a cross-domain alias. `Initiative != Pursuit`: the former
-organizes coordinated work around one or more continuing directions.
-`Assignment != Warrant != Episode`: responsibility, authority, and occurrence
-remain independently inspectable. A self-assigned Assignment remains valid
-only when holder, acceptance, and Warrant are explicit.
+The labels above are semantic classes. Domain Profiles own their concrete
+disposition vocabulary, state machines, admission technology, and effects.
 
-## Applicability predicate
+## Deletion tests
 
-```text
-Applies_11(profile) =
-  SoftwareDevelopment(profile)
-  and DeclaresAdoption(profile, KFD-11)
-```
+- Without Claim, Assessment must reconstruct the proposition from evidence.
+- Without Assessment, Decision must silently combine evidence interpretation
+  with authority.
+- Without Decision, a trust result must directly cause a real-world effect.
+- Without Admission, a requested effect is indistinguishable from an accepted
+  successor state.
 
-No inference from KFD-7, KFD-8, KFD-9, or KFD-10 alone makes KFD-11 mandatory
-for another domain.
+Each deletion removes information that can vary independently while the other
+objects remain fixed.
 
 ## Falsifiers
 
-The draft weakens if the role separation does not change software work
-decisions, if simpler existing workflow objects preserve equivalent trust and
-continuity at lower total cost, or if its model cannot retain a low-friction
-session projection.
+The draft weakens if ordinary cross-domain settlement does not need these
+separations, if a simpler existing object preserves equivalent decisions at
+lower total cost, if Decision and Admission cannot vary independently in real
+systems, or if the procedure adds ceremony without reducing unsafe inference
+or repeated investigation.

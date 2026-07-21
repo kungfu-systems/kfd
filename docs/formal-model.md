@@ -1,7 +1,7 @@
 # KFD Formal Model
 
 This document defines the shared notation and authority boundary for the
-non-normative formal references published with KFD-1 through KFD-12.
+non-normative formal references published with KFD-1 through KFD-13.
 
 - Status: experimental
 - Normative: no
@@ -109,9 +109,11 @@ independently addressable in real-world action.
 KFD-8 specifies Atlas as the perspective coordinate.
 KFD-9 specifies Pursuit as the continuing-direction coordinate.
 KFD-10 specifies Warrant as the bounded-authority coordinate.
-KFD-11 applies those coordinates to an Initiative-Assignment software-work
-responsibility lifecycle.
-KFD-12 applies them to one software-project settlement procedure.
+KFD-11 separates Claim, purpose-bound Assessment, Warrant-bound Decision, and
+independently recorded Admission.
+KFD-12 applies those boundaries and action coordinates to an
+Initiative-Assignment software-work responsibility lifecycle.
+KFD-13 applies them to one software-project settlement procedure.
 ```
 
 This composition does not make every later KFD a theorem of the earlier ones.
@@ -126,9 +128,10 @@ states and Episodes as morphism-like, evidence-bearing causal paths. Together
 they form the Fact-Episode Ontology. Atlas, Pursuit, and Warrant are the
 reference action coordinates in the Action Responsibility Geometry for
 perspective, direction, and admissible action. They are not Domain Profiles.
-KFD-8 through KFD-10 separately allocate their draft responsibilities; KFD-11
-and KFD-12 remain software-domain applications rather than universal additions
-to the geometry.
+KFD-8 through KFD-10 separately allocate their draft responsibilities. KFD-11
+adds a cross-domain settlement procedure rather than another action coordinate.
+KFD-12 and KFD-13 remain software-domain applications rather than universal
+additions to the geometry.
 
 This active decision remains intentionally falsifiable. Activation does not
 prove that the proposed roles are universally minimal or establish a literal

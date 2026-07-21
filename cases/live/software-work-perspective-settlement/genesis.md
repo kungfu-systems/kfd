@@ -65,10 +65,12 @@ Assignment
 ```
 
 The earlier Mission/Go product vocabulary supplied first-party pressure and
-implementation evidence. KFD-11 later assigned the canonical software-profile
-names Initiative and Assignment. The candidate claim is not that the labels
-created the responsibilities, but that the responsibilities remain useful and
-independently addressable after the lower coordinates are held fixed.
+implementation evidence. The pre-stable KFD-11 later assigned the canonical
+software-profile vocabulary; the 2026-07-21 Foundation Revision maps it to
+current KFD-12 without rewriting this genesis. It names Initiative and
+Assignment. The candidate claim is not that the labels created the
+responsibilities, but that the responsibilities remain useful and independently
+addressable after the lower coordinates are held fixed.
 
 ## Transformation two: from work coordinator to successor agent
 

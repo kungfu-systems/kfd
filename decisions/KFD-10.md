@@ -17,7 +17,8 @@ admissible action or continuation. It preserves enough boundary to determine:
 
 - issuer, holder, and any delegation chain;
 - action, subject, resource, target state, and consequence scope;
-- preconditions, validity window, and exact roots or cuts on which it depends;
+- preconditions, validity conditions, typed limits, and exact roots or cuts on
+  which it depends;
 - attenuation, renewal, expiry, revocation, refusal, or consumption state;
 - retained and transferred responsibility for residual risk.
 

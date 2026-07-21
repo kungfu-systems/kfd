@@ -35,6 +35,8 @@ const candidateRegistrySchemaPath = "schemas/kfd-candidate-registry.schema.json"
 const candidateRegistry = JSON.parse(readFileSync(candidateRegistryPath, "utf8"));
 const candidateRegistrySchema = JSON.parse(readFileSync(candidateRegistrySchemaPath, "utf8"));
 const releaseImpact = JSON.parse(readFileSync("release-impact.json", "utf8"));
+const foundationRevisionPath = "docs/foundation-revision-2026-07-21-decision-admission.json";
+const foundationRevision = JSON.parse(readFileSync(foundationRevisionPath, "utf8"));
 const packageJson = JSON.parse(readFileSync("package.json", "utf8"));
 const kfd7ActivationEvidencePath = "evidence/kfd-7/activation-record.json";
 const kfd7ActivationEvidence = JSON.parse(readFileSync(kfd7ActivationEvidencePath, "utf8"));
@@ -214,7 +216,8 @@ const requiredCanonicalTerms = [
   "Fact-Episode Ontology", "Fact", "Fact Cut", "Causal Occurrence", "Causal Record", "Episode",
   "Causal Experience", "Action Responsibility Geometry", "Action Coordinate",
   "Pursuit", "Atlas", "Warrant", "Domain Profile",
-  "Domain Profile Declaration", "Assurance Responsibility",
+  "Domain Profile Declaration", "Claim", "Assessment", "Decision", "Admission",
+  "Initiative", "Assignment", "Project Cut", "Assurance Responsibility",
   "Participant Value Claim",
 ];
 const terminologyIds = new Set();
@@ -1675,6 +1678,59 @@ for (const concept of ["domainProfileDeclaration", "domainLifecycleVocabulary", 
   if (!kfd7?.concepts?.[concept]) fail(`KFD-7 standards metadata missing concept ${concept}`);
 }
 if (!kfd7?.interfaces?.domainProfileDeclaration) fail("KFD-7 standards metadata missing interface domainProfileDeclaration");
+const kfd11 = standardsMetadata.standards?.["kfd-11"];
+const kfd11DecisionAdmissionSchemaPath = "schemas/kfd-11/decision-admission.schema.json";
+const kfd11DecisionAdmissionSchema = JSON.parse(readFileSync(kfd11DecisionAdmissionSchemaPath, "utf8"));
+if (kfd11?.interfaces?.decisionAdmission?.schemaVersion !== 1 ||
+    kfd11DecisionAdmissionSchema.properties?.schemaVersion?.const !== 1) {
+  fail("KFD-11 Decision Admission interface and schema must remain version 1");
+}
+if (kfd11?.interfaces?.decisionAdmission?.contract !== "kfd-11-decision-admission" ||
+    kfd11DecisionAdmissionSchema.properties?.contract?.const !== "kfd-11-decision-admission") {
+  fail("KFD-11 Decision Admission contract identity must remain canonical");
+}
+if (kfd11?.schemaPaths?.decisionAdmission !== kfd11DecisionAdmissionSchemaPath ||
+    kfd11?.schemaIds?.decisionAdmission !== kfd11DecisionAdmissionSchema.$id) {
+  fail("KFD-11 standards metadata must bind the canonical Decision Admission schema");
+}
+for (const field of ["claim", "assessments", "decision", "admission", "nonClaims"]) {
+  if (!kfd11DecisionAdmissionSchema.required?.includes(field)) {
+    fail(`KFD-11 Decision Admission schema missing required field ${field}`);
+  }
+}
+if (foundationRevision.schema !== "kfd.foundation-revision/v1" ||
+    foundationRevision.id !== "decision-admission-layer-2026-07-21" ||
+    foundationRevision.impact?.level !== "major" ||
+    foundationRevision.impact?.class !== "breaking") {
+  fail("Decision Admission Foundation Revision identity and impact must remain explicit");
+}
+if (foundationRevision.authorization?.status !== "authorized" ||
+    foundationRevision.independentReview?.status !== "review-coordinate-declared" ||
+    !/^https:\/\/github\.com\/kungfu-systems\/kfd\/pull\/[0-9]+$/.test(foundationRevision.independentReview?.coordinate ?? "")) {
+  fail("Decision Admission Foundation Revision must bind maintainer authorization and an independent-review PR coordinate");
+}
+const expectedFoundationMappings = [
+  [null, "KFD-11", "allocated-by-foundation-revision"],
+  ["KFD-11@pre-2026-07-21", "KFD-12", "renumbered"],
+  ["KFD-12@pre-2026-07-21", "KFD-13", "renumbered"],
+];
+for (const [from, to, relation] of expectedFoundationMappings) {
+  if (!foundationRevision.mappings?.some((mapping) =>
+    mapping.from === from && mapping.to === to && mapping.relation === relation)) {
+    fail(`Decision Admission Foundation Revision missing mapping ${from ?? "unallocated"} -> ${to}`);
+  }
+}
+for (const coordinate of ["commits", "tags", "packages", "digests", "immutableRenderedArtifacts"]) {
+  if (foundationRevision.preservedCoordinates?.[coordinate] !== true) {
+    fail(`Decision Admission Foundation Revision must preserve ${coordinate}`);
+  }
+}
+const fieldResponsibilityMatrix = readFileSync("docs/field-responsibility-matrix.md", "utf8");
+for (const responsibility of ["Fact", "Episode", "Atlas", "Pursuit", "Warrant", "Claim", "Assessment", "Decision", "Admission", "Initiative", "Assignment", "Project Cut"]) {
+  if (!fieldResponsibilityMatrix.includes(`## ${responsibility}`)) {
+    fail(`Field Responsibility Matrix missing responsibility ${responsibility}`);
+  }
+}
 for (const [id, successors] of superseded) {
   for (const successor of successors) {
     if (!registry.entries.some((e) => e.id === successor)) fail(`${id} cites missing successor ${successor}`);
@@ -1862,7 +1918,7 @@ if (!kfd2TrustClaims) {
   if (kfd2TrustClaims.standard !== "kfd-2") fail("KFD-2 generic trust claims standard must be kfd-2");
   if (kfd2TrustClaims.projection?.kind !== "generic") fail("KFD-2 generic trust claims projection.kind must be generic");
   const claimsById = new Map((kfd2TrustClaims.claims ?? []).map((claim) => [claim.id, claim]));
-  for (const requiredClaim of ["kfd-1-contract-world-trust", "kfd-3-collaboration-interface-trust", "kfd-4-observer-perspective-trust", "kfd-5-primitive-discovery-trust", "kfd-6-autonomous-discovery-loop-trust", "kfd-7-action-responsibility-trust"]) {
+  for (const requiredClaim of ["kfd-1-contract-world-trust", "kfd-3-collaboration-interface-trust", "kfd-4-observer-perspective-trust", "kfd-5-primitive-discovery-trust", "kfd-6-autonomous-discovery-loop-trust", "kfd-7-action-responsibility-trust", "kfd-11-decision-admission-trust"]) {
     if (!claimsById.has(requiredClaim)) fail(`KFD-2 generic trust claims missing ${requiredClaim}`);
   }
   const expectedSubjectKinds = new Map([
@@ -1872,6 +1928,7 @@ if (!kfd2TrustClaims) {
     ["kfd-5-primitive-discovery-trust", "primitive-discovery"],
     ["kfd-6-autonomous-discovery-loop-trust", "autonomous-discovery-loop"],
     ["kfd-7-action-responsibility-trust", "action-responsibility"],
+    ["kfd-11-decision-admission-trust", "decision-admission"],
   ]);
   for (const [claimId, expectedKind] of expectedSubjectKinds.entries()) {
     const claim = claimsById.get(claimId);
@@ -1907,7 +1964,7 @@ if (!kfd2TrustAssessment) {
   }
   if (kfd2TrustAssessment.result !== "warning") fail("KFD-2 generic trust assessment result must be warning because KFD-3 declares semantic residual risk");
   const assessmentsByClaim = new Map((kfd2TrustAssessment.assessments ?? []).map((entry) => [entry.claimId, entry]));
-  for (const requiredClaim of ["kfd-1-contract-world-trust", "kfd-3-collaboration-interface-trust", "kfd-4-observer-perspective-trust", "kfd-5-primitive-discovery-trust", "kfd-6-autonomous-discovery-loop-trust", "kfd-7-action-responsibility-trust"]) {
+  for (const requiredClaim of ["kfd-1-contract-world-trust", "kfd-3-collaboration-interface-trust", "kfd-4-observer-perspective-trust", "kfd-5-primitive-discovery-trust", "kfd-6-autonomous-discovery-loop-trust", "kfd-7-action-responsibility-trust", "kfd-11-decision-admission-trust"]) {
     if (!assessmentsByClaim.has(requiredClaim)) fail(`KFD-2 generic trust assessment missing claim ${requiredClaim}`);
   }
   if (assessmentsByClaim.get("kfd-3-collaboration-interface-trust")?.result !== "warning") {
@@ -1918,6 +1975,9 @@ if (!kfd2TrustAssessment) {
   }
   if (assessmentsByClaim.get("kfd-7-action-responsibility-trust")?.result !== "pass") {
     fail("KFD-2 generic trust assessment must pass activated KFD-7 evidence closure");
+  }
+  if (assessmentsByClaim.get("kfd-11-decision-admission-trust")?.result !== "warning") {
+    fail("KFD-2 generic trust assessment must downgrade draft KFD-11 pending cross-domain qualification");
   }
   for (const [index, reason] of (kfd2TrustAssessment.downgradeReasons ?? []).entries()) {
     if (!kfd2TrustTaxonomySchema.$defs?.riskType?.enum?.includes(reason.riskType)) fail(`KFD-2 generic trust assessment downgradeReasons[${index}].riskType must be a KFD-2 value`);

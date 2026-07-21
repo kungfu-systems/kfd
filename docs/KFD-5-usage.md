@@ -95,7 +95,7 @@ records a complete two-stage example. KFD-4 first changes from lower-object
 developer views to the real software participant, exposing Initiative and
 Assignment; it then changes from the work coordinator to the successor Agent,
 exposing Project Cut. Separate KFD-5 cuts accept those three responsibilities
-within their bounded software-domain layers while leaving KFD-11 and KFD-12
+within their bounded software-domain layers while leaving KFD-12 and KFD-13
 draft activation, cross-domain universality, and historical novelty unclaimed.
 
 The package also publishes a live case registry at `cases/registry.json`. One

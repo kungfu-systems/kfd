@@ -159,16 +159,56 @@
     {
       "id": "software-work-responsibility-lifecycle",
       "canonical": "Software Work Responsibility Lifecycle",
-      "layer": "kfd-11-domain-application"
+      "layer": "kfd-12-domain-application"
+    },
+    {
+      "id": "claim",
+      "canonical": "Claim",
+      "layer": "kfd-11-consequential-settlement",
+      "subtitle": "Exact proposition offered for reliance",
+      "compactSubtitle": "Bounded proposition",
+      "question": "What exact proposition is a participant asking others to rely on?",
+      "definition": "An independently addressable proposition made by a declared participant against exact Fact and evidence cuts, with an inspectable audit boundary and declared limitations.",
+      "notThis": ["evidence by itself", "an Episode by itself", "an Assessment", "a Decision"]
+    },
+    {
+      "id": "assessment",
+      "canonical": "Assessment",
+      "layer": "kfd-11-consequential-settlement",
+      "subtitle": "Purpose-bound trust judgment",
+      "compactSubtitle": "Trust judgment",
+      "question": "For what purpose and within what evidence boundary may this Claim be trusted?",
+      "definition": "A purpose-bound, revisable trust judgment over an exact Claim and checked evidence cut that exposes result, gaps, residual risk, and assurance responsibility.",
+      "notThis": ["universal truth", "authority to decide", "a Decision", "successful Admission"]
+    },
+    {
+      "id": "decision",
+      "canonical": "Decision",
+      "layer": "kfd-11-consequential-settlement",
+      "subtitle": "Authorized disposition with requested effects",
+      "compactSubtitle": "Authorized disposition",
+      "question": "Who decided what disposition under which authority?",
+      "definition": "An independently addressable disposition of assessed Claims, issued by a declared decision maker under an exact Warrant and policy, with explicit conditions, requested effects, reasons, and residual risk.",
+      "notThis": ["an Assessment", "occurrence", "successful Admission", "a successor Fact cut"]
+    },
+    {
+      "id": "admission",
+      "canonical": "Admission",
+      "layer": "kfd-11-consequential-settlement",
+      "subtitle": "Recorded result of applying an authorized transition",
+      "compactSubtitle": "Transition result",
+      "question": "Did the authorized requested effect enter the owning state authority?",
+      "definition": "The independently recorded result of presenting a Decision's requested transition to the owning admission authority, including a successor Fact cut only when admission succeeds.",
+      "notThis": ["a Decision", "process success", "a passing Assessment", "a fabricated successor state"]
     },
     {
       "id": "initiative",
       "canonical": "Initiative",
-      "layer": "kfd-11-software-domain-work-context",
+      "layer": "kfd-12-software-domain-work-context",
       "subtitle": "Continuing coordinated work context",
       "compactSubtitle": "Coordinated work context",
       "question": "What continuing work are these responsibilities advancing?",
-      "definition": "An independently addressable software-domain context that turns declared intent into continuing coordinated work by preserving scope, participants, relevant Pursuits, Assignment relations, lineage, and settlement state.",
+      "definition": "An independently addressable software-domain context for continuing coordinated work that preserves coordination purpose, scope, participants, relevant Pursuits, Assignment relations, lineage, and settlement state without redefining Pursuit direction.",
       "notThis": [
         "an intention statement alone",
         "a Pursuit",
@@ -179,11 +219,11 @@
     {
       "id": "assignment",
       "canonical": "Assignment",
-      "layer": "kfd-11-software-domain-bounded-responsibility",
+      "layer": "kfd-12-software-domain-bounded-responsibility",
       "subtitle": "Responsibility proposed to, accepted by, or held by a participant",
       "compactSubtitle": "Bounded responsibility",
       "question": "Who is responsible for this bounded work under which evidence boundary?",
-      "definition": "An independently addressable software-domain responsibility proposed to, accepted by, or held by a participant that binds actor, objective, Atlas, Warrant, acceptance boundary, expected evidence, and parent lineage.",
+      "definition": "An independently addressable software-domain responsibility proposed to, accepted by, or held by a participant that binds accepted responsibility, Initiative, Pursuit, Atlas, Warrant, evidence obligations, settlement policy, and lineage without duplicating Pursuit direction.",
       "notThis": [
         "a task description alone",
         "a Warrant",
@@ -194,7 +234,7 @@
     {
       "id": "project-cut",
       "canonical": "Project Cut",
-      "layer": "kfd-12-software-project-settlement"
+      "layer": "kfd-13-software-project-settlement"
     },
     {
       "id": "assurance-responsibility",

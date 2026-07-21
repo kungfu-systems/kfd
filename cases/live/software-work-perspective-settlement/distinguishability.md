@@ -114,6 +114,6 @@ The accepted outcomes must be narrowed or reversed if:
 ## Outcome boundary
 
 All three tracks are accepted only as software-domain Primitives. This outcome
-does not activate KFD-11 or KFD-12, freeze their pre-stable fields, prove broad
-minimality, or require other domains to adopt the same objects. Those are
-separate decisions with separate evidence obligations.
+does not activate current KFD-12 or KFD-13, freeze their pre-stable fields,
+prove broad minimality, or require other domains to adopt the same objects.
+Those are separate decisions with separate evidence obligations.

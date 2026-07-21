@@ -16,9 +16,11 @@ A **Pursuit** is the independently addressable direction coordinate for an
 intended real-world change. It preserves:
 
 - durable identity across Episodes, sessions, participants, tools, and plans;
-- the change sought and the relation by which consequence counts as progress;
+- the intended change or maintained condition and the relation by which
+  consequence counts as progress;
 - decomposition, dependency, contribution, revision, and successor relations;
-- success, completion, settlement, pause, abandonment, and unresolved state;
+- settlement semantics covering completion, continuation, pause, abandonment,
+  and unresolved state without requiring one universal terminal success;
 - the distinction between prospective relevance and realized consequence.
 
 A Pursuit is not a session, one-shot task, mutable prose body, plan, command,

@@ -38,9 +38,12 @@
 | How must an Atlas bind perspective to admitted facts, source, cut, and declared loss? | [KFD-8](../decisions/KFD-8.md) and its [source-candidate lineage](../drafts/atlas-action-perspective.md) |
 | How must a Pursuit preserve continuing direction beyond the actions that advance it? | [KFD-9](../decisions/KFD-9.md) and its [source-candidate lineage](../drafts/pursuit-intent-continuity.md) |
 | How must a Warrant preserve bounded, derivable, and revocable authority? | [KFD-10](../decisions/KFD-10.md) and its [source-candidate lineage](../drafts/warrant-bounded-authority.md) |
-| How does one software-development Domain Profile organize Initiative, Assignment, Episode, Claim, Assessment, Decision, and Continuation without making those names universal? | [KFD-11](../decisions/KFD-11.md) and [`KFD-11-usage.md`](KFD-11-usage.md) |
-| How can a software Project Cut bind source, Atlas, Episode, and policy authorities without becoming another fact engine? | [KFD-12](../decisions/KFD-12.md) and [`KFD-12-usage.md`](KFD-12-usage.md) |
-| Must other domains adopt the KFD-11 software lifecycle or KFD-12 Project Cut? | [KFD-11 scope](../decisions/KFD-11.md#scope) and [KFD-12 scope](../decisions/KFD-12.md#scope) |
+| How must Claim, Assessment, authorized Decision, and Admission remain distinct? | [KFD-11](../decisions/KFD-11.md), [`KFD-11-usage.md`](KFD-11-usage.md), and its [source-candidate lineage](../drafts/claim-assessment-decision-admission.md) |
+| Which fields belong to the cross-domain core, a Domain Profile, or participant projection? | [`field-responsibility-matrix.md`](field-responsibility-matrix.md) |
+| How does one software-development Domain Profile organize Initiative, Assignment, Episode, Claim, Assessment, Decision, Admission, and Continuation without making those names universal? | [KFD-12](../decisions/KFD-12.md) and [`KFD-12-usage.md`](KFD-12-usage.md) |
+| How can a software Project Cut bind source, Atlas, Episode, and policy authorities without becoming another fact engine? | [KFD-13](../decisions/KFD-13.md) and [`KFD-13-usage.md`](KFD-13-usage.md) |
+| Must other domains adopt the KFD-12 software lifecycle or KFD-13 Project Cut? | [KFD-12 scope](../decisions/KFD-12.md#scope) and [KFD-13 scope](../decisions/KFD-13.md#scope) |
+| Why were the pre-stable KFD-11 and KFD-12 coordinates revised? | [`foundation-revision-2026-07-21-decision-admission.md`](foundation-revision-2026-07-21-decision-admission.md) and its [machine map](foundation-revision-2026-07-21-decision-admission.json) |
 | How does a candidate become a numbered draft? | [`../CONTRIBUTING.md`](../CONTRIBUTING.md#candidates-and-numbered-drafts) |
 | When may the pre-stable foundation be revised, and what freezes at stable? | [`../CONTRIBUTING.md`](../CONTRIBUTING.md#pre-stable-foundation-revision) |
 | How did the first live case split a fused work-object hypothesis into Pursuit and Warrant candidate tracks? | [`../cases/live/proof-carrying-work-object/README.md`](../cases/live/proof-carrying-work-object/README.md) |
@@ -90,6 +93,8 @@
 | What is the formal reference for KFD-11? | [`KFD-11-formal.md`](KFD-11-formal.md) |
 | What are the package implementation notes for KFD-12? | [`KFD-12-usage.md`](KFD-12-usage.md) |
 | What is the formal reference for KFD-12? | [`KFD-12-formal.md`](KFD-12-formal.md) |
+| What are the package implementation notes for KFD-13? | [`KFD-13-usage.md`](KFD-13-usage.md) |
+| What is the formal reference for KFD-13? | [`KFD-13-formal.md`](KFD-13-formal.md) |
 
 ## Adoption, verification, and release
 
@@ -98,7 +103,7 @@
 | How should an agent quickly understand this package? | [`../README.md`](../README.md#agent-quickstart), then [`foundation.md`](foundation.md), [`formal-model.md`](formal-model.md), and [`primitive-discovery-cases.md`](primitive-discovery-cases.md) |
 | What is the experimental transport-neutral Agent Hub interoperability profile? | [`../protocols/agent-hub/README.md`](../protocols/agent-hub/README.md), then its [`implementer guide`](../protocols/agent-hub/implementer-guide.md) and [`state machine`](../protocols/agent-hub/state-machine.md) |
 | What is the experimental black-box Agent runtime conformance profile and fixed KFD Runtime 100 suite? | [`../profiles/agent-runtime/README.md`](../profiles/agent-runtime/README.md), its [`normative inventory`](../profiles/agent-runtime/normative-inventory.md), and [`implementer guide`](../profiles/agent-runtime/implementer-guide.md) |
-| What is the concrete self-proof path for KFD-1 through KFD-12? | [`../README.md`](../README.md#product-proof-path), the KFD formal and usage pages, and the package witnesses under [`../.buildchain/`](../.buildchain/) |
+| What is the concrete self-proof path for KFD-1 through KFD-13? | [`../README.md`](../README.md#product-proof-path), the KFD formal and usage pages, and the package witnesses under [`../.buildchain/`](../.buildchain/) |
 | How do I independently verify KFD records, release passports, Xinfa Pack/Atlas objects, or qualified Git Episodes? | [`verifier.md`](verifier.md) |
 | Where are the verifier semantic differences and public-specification gaps recorded? | [`verifier-inventory.md`](verifier-inventory.md) |
 | Where is the public KFD fact source? | [`../README.md`](../README.md#decision-metadata) and [`../site/kfd-site.json`](../site/kfd-site.json) decision metadata |

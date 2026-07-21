@@ -2,83 +2,94 @@
 
 [Authoritative decision](../decisions/KFD-12.md) ·
 [Usage](KFD-12-usage.md) ·
-[KFD-11 formal reference](KFD-11-formal.md)
+[KFD-7 formal reference](KFD-7-formal.md)
 
 - Status: experimental
 - Normative: no
-- Formal model version: 1
+- Formal model version: 3
 - Authority: `decisions/KFD-12.md`
 - Decision status: draft
 
-## Object
+## Roles
 
-For software project domain `S`, a Project Cut is:
+For a software work history `H`:
 
 ```text
-PC^v = (
-  protocol_version,
-  predecessor_roots,
-  source_projection_root,
-  atlas_root,
-  admitted_episode_delta_root,
-  policy_and_protocol_roots,
-  omissions,
-  conflicts,
-  unknowns,
-  residual_risk
-)
-
-project_cut_root = Hash(CanonicalEncode(PC^v))
+I = Initiative
+X = Assignment
+E = Episode
+C = claim
+A = purpose-bound assessment
+D = authorized decision
+M = independently recorded admission result
+N = continuation or settlement
 ```
 
-The root commits to bindings. It does not absorb the semantics or authority of
-the bound systems.
-
-## Validity
+Representative bindings are:
 
 ```text
-ValidProjectCut(PC) =
-  Canonical(PC)
-  and AllInputsNamed(PC)
-  and AllInputsVerifiedUnderOwnAuthority(PC)
-  and NoCircularRootDependency(PC)
-  and OmissionsConflictsUnknownsDeclared(PC)
-  and RecomputableRoot(PC)
-  and IndependentlyCheckableReceipt(PC)
-```
-
-```text
-ValidProjectCut does not imply WorkComplete
-ValidProjectCut does not imply ReleaseFit
-ValidProjectCut does not imply PursuitSettled
+I = (initiative_id, root, coordination_purpose, scope, pursuit_roots,
+     participants, assignment_relations, settlement_policy, lineage,
+     profile_state)
+X = (assignment_id, root, holder, accepted_responsibility, initiative_roots,
+     pursuit_roots, atlas_root, warrant_root, acceptance_boundary,
+     evidence_obligations, settlement_policy, typed_relations, profile_state)
+E -> realized causal occurrence
+C -> assertion about progress, completion, artifact, or consequence
+A -> Assess(C, purpose, evidence_cut, trust_policy)
+D -> Decide(A, Warrant)
+M -> Admit(D, basis_cut) | reject | stale | conflict | fail
+N -> settle | pause | reopen | request-evidence | successor(X, M)
 ```
 
 ## Invariants
 
 ```text
-C1 Source, Atlas, Episode, and policy authorities remain distinct.
-C2 Equal canonical inputs produce the same Project Cut root.
-C3 The containing publication coordinate is not an input to its own root.
-C4 Successor cuts preserve predecessor lineage.
-C5 Missing, stale, conflicting, or unverifiable bindings fail visibly.
-C6 A receipt reports verification; it does not self-certify semantic fitness.
-C7 Project Cut remains software-domain vocabulary unless separately qualified.
+S1 Occurred(E) does not imply Valid(C).
+S2 Asserted(C) does not imply Passed(A).
+S3 Passed(A, purpose_1) does not imply Passed(A, purpose_2).
+S4 Assessment does not imply authority to decide.
+S5 Decision does not imply Admission or erase Claim, evidence, assessment purpose, or Episode.
+S6 Admission publishes a successor Fact cut only on success.
+S7 Continuation preserves parent, Decision, and Admission lineage.
+S8 Domain labels do not redefine KFD coordinate semantics.
+S9 Proposed(X) does not imply Accepted(X).
+S10 Accepted(X) does not imply Authorized(X), Occurred(E), Valid(C), or Settled(X).
+S11 Identity(I) outlives any one X or E.
+S12 A material change to coordination_purpose(I), scope(I), or Pursuit bindings
+    requires a revision, fork, or successor relation rather than silent
+    reinterpretation.
+S13 accepted_responsibility(X) does not redefine direction or settlement
+    semantics of any bound Pursuit.
 ```
+
+## Software profile bindings
+
+```text
+Initiative -> continuing coordinated work context
+Assignment -> bounded responsibility proposed to, accepted by, or held by a participant
+```
+
+Neither binding is a cross-domain alias. `Initiative != Pursuit`: the former
+organizes coordinated work around one or more continuing directions.
+`Assignment != Warrant != Episode`: responsibility, authority, and occurrence
+remain independently inspectable. A self-assigned Assignment remains valid
+only when holder, acceptance, and Warrant are explicit.
 
 ## Applicability predicate
 
 ```text
 Applies_12(profile) =
   SoftwareDevelopment(profile)
-  and PublishesProjectSettlement(profile)
   and DeclaresAdoption(profile, KFD-12)
 ```
 
-KFD-12 is not implied by adopting KFD-7 through KFD-11.
+No inference from KFD-7 through KFD-11 alone makes KFD-12 mandatory for another
+domain.
 
 ## Falsifiers
 
-The draft weakens if a single existing authority can preserve equivalent
-project decisions without hidden reconstruction, if independent roots cannot
-be bound deterministically without semantic fusion, or if Project Cut adds no
-decision value over ordinary release or source coordinates.
+The draft weakens if the role separation does not change software work
+decisions, if simpler existing workflow objects preserve equivalent trust and
+continuity at lower total cost, or if its model cannot retain a low-friction
+session projection.

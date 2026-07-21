@@ -50,6 +50,9 @@ Promoted lineage:
   promoted into numbered draft [KFD-9](../decisions/KFD-9.md).
 - [Warrant bounded authority](warrant-bounded-authority.md) was explicitly
   promoted into numbered draft [KFD-10](../decisions/KFD-10.md).
+- [Claim, Assessment, Decision, and Admission](claim-assessment-decision-admission.md)
+  was allocated to numbered draft [KFD-11](../decisions/KFD-11.md) by the
+  [2026-07-21 pre-stable Foundation Revision](../docs/foundation-revision-2026-07-21-decision-admission.md).
 
 There are no incubating candidates in the current registry cut. The promoted
 pages remain public lineage and do not replace their numbered decisions.

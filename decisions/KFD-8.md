@@ -15,11 +15,12 @@ declared loss.
 An **Atlas** is the independently addressable perspective coordinate used to
 judge action. It binds at least:
 
-- the observer or participant position;
-- accepted fact sources and their authority;
+- the perspective holder and declared vantage or decision purpose;
+- typed fact-source bindings and their authority;
 - the exact Fact cut used for judgment;
 - scope, relevance, and projection boundaries;
-- freshness, known omissions, unresolved conflict, and declared loss.
+- freshness conditions, known omissions, unresolved conflict, unknowns, and
+  declared loss.
 
 An Atlas is not complete reality, generic context, a retrieval result, a
 database snapshot, or a world model by definition. Those may implement or

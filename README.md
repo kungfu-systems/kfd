@@ -164,8 +164,9 @@ explainable, auditable, and proportionate.
 | [KFD-8](decisions/KFD-8.md) | principle | Perspective must remain bound to admitted facts and declared loss. | draft |
 | [KFD-9](decisions/KFD-9.md) | principle | Continuing direction must outlive the actions that advance it. | draft |
 | [KFD-10](decisions/KFD-10.md) | principle | Authority must remain explicit, bounded, and revocable. | draft |
-| [KFD-11](decisions/KFD-11.md) | principle | Software work must keep Initiative and Assignment distinct. | draft |
-| [KFD-12](decisions/KFD-12.md) | procedure | Project settlement must bind authorities without absorbing them. | draft |
+| [KFD-11](decisions/KFD-11.md) | procedure | Claims may be assessed; only authorized decisions may change admitted state or responsibility. | draft |
+| [KFD-12](decisions/KFD-12.md) | principle | Software work must keep Initiative and Assignment distinct. | draft |
+| [KFD-13](decisions/KFD-13.md) | procedure | Project settlement must bind authorities without absorbing them. | draft |
 
 ## Candidate lineage
 
@@ -181,6 +182,9 @@ revision. They remain non-normative source lineage after promotion.
   into numbered draft KFD-9.
 - [Warrant bounded authority](drafts/warrant-bounded-authority.md) was promoted
   into numbered draft KFD-10.
+- [Claim, Assessment, Decision, and Admission](drafts/claim-assessment-decision-admission.md)
+  was allocated to numbered draft KFD-11 by the pre-stable
+  [Foundation Revision](docs/foundation-revision-2026-07-21-decision-admission.md).
 
 The machine source is [`drafts/registry.json`](drafts/registry.json). A
 candidate's lineage does not replace the numbered decision that received its
@@ -219,7 +223,7 @@ results.
 KFDs are not a detached manifesto, but they are not a demand that readers adopt
 a Kungfu product before understanding the decisions. The product-witness rule
 starts with this package itself: `standards.json`, `schemas/`, `docs/`,
-`site/kfd-site.json`, and `scripts/check.mjs` show how KFD-1 through KFD-12 are
+`site/kfd-site.json`, and `scripts/check.mjs` show how KFD-1 through KFD-13 are
 expressed as consumable interfaces for both humans and agents. These surfaces
 do not prove every adopter or product correct; they make the KFD package's own
 claims inspectable and falsifiable.
@@ -341,8 +345,11 @@ Agents consuming this package should start from the same sources as humans:
    Profile Declaration; schema validity is non-qualifying and does not activate
    a concrete Domain Profile. Read KFD-8 through KFD-10 for the separately
    allocated Atlas, Pursuit, and Warrant draft responsibilities. Read KFD-11
-   and KFD-12 as a software-development Domain Profile and project-settlement
-   application, not as a required workflow for other domains.
+   for the cross-domain Claim-Assessment-Decision-Admission procedure. Read
+   KFD-12 and KFD-13 as a software-development Domain Profile and
+   project-settlement application, not as a required workflow for other
+   domains. Use `docs/field-responsibility-matrix.md` to decide whether a field
+   belongs to a cross-domain core, Domain Profile, or participant projection.
 
 KFD package semver is only the distribution version. KFD-owned machine
 interfaces carry their own `schemaVersion` and `contract` fields. Compatible
@@ -408,10 +415,12 @@ Their canonical explanatory subtitles and anti-misreading boundaries come
 from `terminology.json`, not from renderer or product-local wording.
 
 KFD-8, KFD-9, and KFD-10 allocate the three action coordinates as numbered
-drafts. KFD-11 and KFD-12 then show one software-development application:
-Initiative and Assignment organize durable work responsibility, while Project
-Cut records project settlement. This vocabulary does not bind other domains,
-which may define different Domain Profiles and settlement objects.
+drafts. KFD-11 separates Claim, Assessment, authorized Decision, and Admission
+before a domain chooses its workflow. KFD-12 and KFD-13 then show one
+software-development application: Initiative and Assignment organize durable
+work responsibility, while Project Cut records project settlement. This
+vocabulary does not bind other domains, which may define different Domain
+Profiles and settlement objects.
 
 ## Decision metadata
 

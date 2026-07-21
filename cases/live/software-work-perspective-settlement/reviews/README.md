@@ -24,10 +24,10 @@ The initial review must independently check:
    authorship and implementation evidence;
 3. whether each accepted track has its own deletion, fuse, alternative,
    falsifier, dogfood, and residual-risk judgment;
-4. whether acceptance is limited to the KFD-11/12 software profile;
+4. whether acceptance is limited to the current KFD-12/13 software profile;
 5. whether Project Cut remains a higher-layer settlement Primitive rather than
    a fourth fact engine or action coordinate;
-6. whether KFD-11/12 draft status remains independent from the Primitive
+6. whether KFD-12/13 draft status remains independent from the Primitive
    outcomes.
 
 A later review is required when new evidence changes a track's scope, minimum
