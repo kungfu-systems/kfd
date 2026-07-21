@@ -1,0 +1,279 @@
+{
+  "schemaVersion": 3,
+  "contract": "kfd-5-primitive-discovery",
+  "standard": "kfd-5",
+  "candidate": {
+    "id": "initiative",
+    "title": "Initiative",
+    "problemStatement": "Lower-level direction, perspective, authority, and occurrence objects do not by themselves identify which Pursuits, participants, Assignments, decisions, and settlement state form one continuing coordinated software-work context.",
+    "scope": "Accepted as a software-development Domain Profile Primitive under KFD-11; cross-domain vocabulary, historical novelty, universal minimum fields, and KFD-11 activation are not claimed."
+  },
+  "genesis": {
+    "methods": [
+      "direct-situated-judgment",
+      "perspective-transformation",
+      "reconstruction-pressure",
+      "structural-compression"
+    ],
+    "observationPerspective": {
+      "id": "action-primitive-developer",
+      "bearer": "human and agent participants refining the software action substrate",
+      "role": "Primitive researcher and product developer",
+      "proximity": "inside the implementation and contract boundary",
+      "consequences": [
+        "bears API, storage, migration, verification, and responsibility-separation defects"
+      ],
+      "naturalObjects": [
+        "Fact",
+        "Episode",
+        "Pursuit",
+        "Atlas",
+        "Warrant",
+        "schema",
+        "state machine"
+      ]
+    },
+    "currentOntology": [
+      "Fact",
+      "Episode",
+      "Pursuit",
+      "Atlas",
+      "Warrant",
+      "task",
+      "session",
+      "project"
+    ],
+    "observation": "From the developer view, the natural continuation was finer control over action coordinates. Moving to the real user's consequence position exposed a different need: preserve one continuing body of coordinated work without making the user reconstruct it from coordinates and task records.",
+    "candidateObject": "An Initiative is an independently addressable context that turns declared intent into continuing coordinated software work by preserving scope, participants, relevant Pursuits, Assignment relations, lineage, and settlement state.",
+    "claimBoundary": "The cut accepts independent software-work responsibility, not a universal ontology, mandatory user-visible object, physical storage shape, or proof that Initiative is historically novel.",
+    "methodEvidence": [
+      {
+        "kind": "file",
+        "coordinate": "cases/live/software-work-perspective-settlement/genesis.md",
+        "observer": "KFD maintainers"
+      },
+      {
+        "kind": "file",
+        "coordinate": "decisions/KFD-11.md",
+        "observer": "KFD maintainers"
+      },
+      {
+        "kind": "git",
+        "coordinate": "https://github.com/kungfu-systems/kungfu/pull/585",
+        "observer": "Kungfu Mission Control implementers and reviewers"
+      }
+    ],
+    "transformedPerspective": {
+      "id": "real-software-work-user",
+      "bearer": "a person using agents to advance consequential software work",
+      "role": "work owner and continuing participant",
+      "proximity": "inside continuity, coordination, handoff, and settlement consequences",
+      "consequences": [
+        "bears repeated explanation, fragmented direction, responsibility drift, and unclear settlement"
+      ],
+      "naturalObjects": [
+        "continuing initiative",
+        "bounded assignment",
+        "participant",
+        "decision",
+        "settlement"
+      ]
+    },
+    "transformation": "The observer moved from implementing independent action coordinates to the person responsible for making one continuing body of real work understandable and governable.",
+    "newlyVisibleNeed": "A stable software-work context must coordinate multiple directions and bounded responsibilities without fusing their lower identities or requiring the user to operate the substrate directly.",
+    "methodNotes": "The founding Mission vocabulary supplied first-party pressure; KFD-11 later assigned Initiative as the canonical software-profile term."
+  },
+  "boundaryPressure": {
+    "contactSides": [
+      "independent action coordinates, tasks, sessions, and provider-local records",
+      "the person and agents continuing one coordinated body of software work"
+    ],
+    "implicitHandling": "Coordination is reconstructed from project prose, task grouping, chat memory, issue labels, branch names, and the maintainer's current understanding.",
+    "pressureChanges": [
+      {
+        "kind": "new-participant",
+        "description": "Multiple humans and agents join, leave, and resume the same coordinated work."
+      },
+      {
+        "kind": "scale",
+        "description": "One real initiative spans many Pursuits, Assignments, Episodes, repositories, and decisions."
+      },
+      {
+        "kind": "consequence",
+        "description": "Incorrect grouping changes priorities, handoff, settlement, and which work should continue together."
+      }
+    ],
+    "observedFailures": [
+      "Lower-level objects remain individually valid while the continuing coordination context must be reconstructed.",
+      "Completing one task or Pursuit is mistaken for settling the larger work.",
+      "A new participant cannot tell which responsibilities belong to one coordinated effort."
+    ],
+    "mediationClaim": "Initiative may preserve one continuing software-work context while referencing rather than absorbing Pursuit, Atlas, Warrant, Episode, and Assignment identities.",
+    "internalObjectAlternative": "A disciplined project, workflow aggregate, or typed relation graph may implement equivalent Initiative semantics without using this name."
+  },
+  "grounding": {
+    "pressure": [
+      "Real users need a stable work-level object rather than direct manipulation of action coordinates.",
+      "Long-running work spans several directions, participants, responsibilities, Episodes, and decisions.",
+      "Coordination and settlement state must survive sessions, agents, repositories, and mutable projections."
+    ],
+    "factSources": [
+      {
+        "kind": "file",
+        "coordinate": "decisions/KFD-11.md",
+        "observer": "KFD maintainers"
+      },
+      {
+        "kind": "git",
+        "coordinate": "https://github.com/kungfu-systems/kungfu/commit/bcbe4abe0918e65647e9df7c2309ef489b1e16d4",
+        "observer": "Kungfu Mission Control implementation"
+      },
+      {
+        "kind": "file",
+        "coordinate": "cases/live/software-work-perspective-settlement/distinguishability.md",
+        "observer": "KFD qualification"
+      }
+    ],
+    "evidenceBoundary": "Public KFD-11 and first-party Kungfu Mission Control implementation establish one software profile with stable work identity, lifecycle, queries, assessment, portability, and participant surfaces. No independent non-Kungfu implementation or universal domain transfer is included.",
+    "knownGaps": [
+      "No cross-domain universality claim",
+      "No independent adopter using the Initiative name",
+      "No proof that the current field set is globally minimal",
+      "KFD-11 activation remains separate"
+    ]
+  },
+  "participants": [
+    {
+      "id": "human-user-perspective-source",
+      "kind": "human",
+      "functions": [
+        "perspective-declaration",
+        "candidate-generation",
+        "decision"
+      ]
+    },
+    {
+      "id": "agent-reasoning-participant",
+      "kind": "agent",
+      "functions": [
+        "candidate-generation",
+        "scalable-reasoning"
+      ]
+    },
+    {
+      "id": "repository-review",
+      "kind": "collective",
+      "functions": [
+        "evidence-custody",
+        "verification"
+      ]
+    }
+  ],
+  "alternatives": [
+    {
+      "name": "One Pursuit",
+      "disposition": "rejected",
+      "reason": "A continuing direction does not by itself own the participant set, several Pursuits, Assignment relations, and work-level settlement state."
+    },
+    {
+      "name": "Project, workflow, or issue aggregate",
+      "disposition": "retained",
+      "reason": "These may be valid Domain Profile implementations when they preserve equivalent identity, lineage, responsibility, and settlement semantics."
+    },
+    {
+      "name": "More precise Atlas, Pursuit, and Warrant control",
+      "disposition": "retained",
+      "reason": "This remains necessary substrate work but does not remove the higher coordination responsibility unless equivalent grouping is added."
+    },
+    {
+      "name": "No new Primitive",
+      "disposition": "rejected",
+      "reason": "The deletion witness changes coordination and settlement decisions while lower object facts remain fixed."
+    }
+  ],
+  "contractModel": {
+    "identity": "A stable initiative_ref for one continuing coordinated body of software work.",
+    "boundary": "Declared intent, scope, participants, relevant Pursuit roots, Assignment relations, lineage, and settlement state; lower facts, authority, perspective, and occurrence remain references.",
+    "authority": "Initiative authority may declare and coordinate work but cannot manufacture facts, grant Warrant authority, prove occurrence, accept claims, or publish Project Cut settlement by itself.",
+    "lifecycle": "proposed -> active -> paused or revised -> settled, abandoned, superseded, or forked; exact state vocabulary remains Domain Profile-owned",
+    "operations": [
+      "create",
+      "inspect",
+      "clarify",
+      "relate-pursuit",
+      "relate-assignment",
+      "pause",
+      "resume",
+      "settle",
+      "supersede",
+      "fork"
+    ]
+  },
+  "tests": {
+    "minimumClosure": {
+      "result": "pass",
+      "evidence": [
+        {
+          "kind": "file",
+          "coordinate": "docs/KFD-11-formal.md"
+        },
+        {
+          "kind": "git",
+          "coordinate": "https://github.com/kungfu-systems/kungfu/pull/585"
+        }
+      ],
+      "notes": "Stable identity, declared intent and scope, relevant Pursuits, participants, Assignment relations, lineage, and settlement state are sufficient for the bounded software profile while lower authority remains external."
+    },
+    "deletion": {
+      "result": "pass",
+      "evidence": [
+        {
+          "kind": "file",
+          "coordinate": "cases/live/software-work-perspective-settlement/distinguishability.md"
+        }
+      ],
+      "notes": "Deleting Initiative while holding lower roots fixed changes which work and responsibilities must be coordinated and settled together."
+    },
+    "fuse": {
+      "result": "pass",
+      "evidence": [
+        {
+          "kind": "file",
+          "coordinate": "cases/live/software-work-perspective-settlement/ontology-split.md"
+        }
+      ],
+      "notes": "Fusing Initiative with Pursuit, repository, or project makes coordination scope and lower direction identity silently co-vary; equivalent typed relations remain allowed."
+    },
+    "falsifiers": [
+      "Initiative grouping is always derivable from lower roots with no reconstruction or changed decision.",
+      "Independent software workflows cannot map their project or work aggregate without forced semantics.",
+      "The minimum closure creates more coordination burden than it removes.",
+      "Progressive disclosure cannot preserve the simple-session experience."
+    ],
+    "dogfood": {
+      "result": "pass",
+      "evidence": [
+        {
+          "kind": "git",
+          "coordinate": "https://github.com/kungfu-systems/kungfu/commit/fac15d2660223b48196060107e40e99ff7c4f3e2"
+        },
+        {
+          "kind": "git",
+          "coordinate": "https://github.com/kungfu-systems/kungfu/commit/bcbe4abe0918e65647e9df7c2309ef489b1e16d4"
+        }
+      ],
+      "notes": "The founding Mission profile exercised stable identity, fact admission, progress assessment, Cost/State/Proof, portability, and human/agent surfaces. The evidence is first-party and software-scoped."
+    }
+  },
+  "decision": {
+    "outcome": "accepted",
+    "owner": "KFD maintainers under repository review",
+    "reason": "Within the KFD-11 software profile, Initiative preserves a coordination and settlement distinction that changes required decisions when lower action coordinates remain fixed, and the first-party implementation demonstrates executable lifecycle and continuation value.",
+    "residualRisks": [
+      "The object may map to an ordinary project or workflow aggregate in other products.",
+      "The founding evidence is correlated with one organization and product family.",
+      "The current minimum closure may narrow before KFD-11 activation.",
+      "Cross-domain use and historical novelty are unqualified."
+    ]
+  }
+}

@@ -2,6 +2,7 @@
 
 [Authoritative decision](../decisions/KFD-11.md) ·
 [Formal reference](KFD-11-formal.md) ·
+[Discovery and qualification](../cases/live/software-work-perspective-settlement/README.md) ·
 [Documentation map](MAP.md)
 
 KFD-11 is a numbered draft for a software-development Domain Profile. It is an
@@ -25,6 +26,16 @@ object.
 Another domain may use different objects, omit this exact lifecycle, or define
 a different settlement sequence. It conforms only to the KFDs it explicitly
 adopts and qualifies.
+
+## Discovery lineage
+
+The founding move was not to derive more controls from Pursuit, Atlas, and
+Warrant. It was to adopt the real participant's view and ask what object helps
+software work continue. That KFD-4 transformation exposed a continuing work
+context and a bounded accepted responsibility. KFD-5 deletion, fuse,
+alternative, falsifier, and dogfood tests then accepted Initiative and
+Assignment as distinct software-domain Primitives. The acceptance is narrower
+than activation of KFD-11 and does not claim these names for other domains.
 
 ## Implementation sequence
 

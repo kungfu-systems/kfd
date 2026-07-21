@@ -47,6 +47,8 @@
 | What four-object agent work state connects Pursuit, Atlas, Warrant, and Episode? | [`../cases/live/proof-carrying-work-object/ontology-split.md`](../cases/live/proof-carrying-work-object/ontology-split.md) |
 | Are Pursuit, Atlas, Warrant, and Episode conditionally distinguishable, and what remains unproved? | [`../cases/live/proof-carrying-work-object/distinguishability.md`](../cases/live/proof-carrying-work-object/distinguishability.md) |
 | What are the current immutable KFD-5 cuts for Pursuit and Warrant? | [`../cases/live/proof-carrying-work-object/cuts/0002-pursuit.json`](../cases/live/proof-carrying-work-object/cuts/0002-pursuit.json) and [`../cases/live/proof-carrying-work-object/cuts/0002-warrant.json`](../cases/live/proof-carrying-work-object/cuts/0002-warrant.json) |
+| How did perspective transformation expose Initiative, Assignment, and Project Cut, and how were they qualified? | [`../cases/live/software-work-perspective-settlement/README.md`](../cases/live/software-work-perspective-settlement/README.md) |
+| What separates the Agent-origin testimony for Project Cut from public implementation evidence? | [`../cases/live/software-work-perspective-settlement/genesis.md`](../cases/live/software-work-perspective-settlement/genesis.md#agent-origin-testimony-and-public-evidence) |
 | What practice guidelines are derived from the foundation triad? | [`foundation.md`](foundation.md#practice-guidelines) |
 | How should a product show timeline order from a declared perspective? | [KFD-4](../decisions/KFD-4.md) |
 | What schema should products use for KFD-4 observer-relative timeline views? | [`../schemas/kfd-4/observer-perspective.schema.json`](../schemas/kfd-4/observer-perspective.schema.json) |
