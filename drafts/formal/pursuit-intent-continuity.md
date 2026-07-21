@@ -12,9 +12,10 @@
 
 ## Purpose
 
-This page makes the Pursuit candidate precise enough to compare with goal,
-task, project, case, workflow, Mission, and session alternatives. It does not
-allocate KFD-9 or prescribe one universal work hierarchy.
+This page preserves the pre-promotion Pursuit formal candidate. KFD-9 now owns
+the authoritative draft rule and `docs/KFD-9-formal.md` owns its current
+non-normative formal reference. Neither prescribes one universal work
+hierarchy.
 
 ## Object model
 
@@ -178,7 +179,7 @@ consequence Atlas provide the evidence for review.
 
 ## Non-claims
 
-This model does not prove universal necessity, require the name Pursuit, require
-one hierarchy, make every task durable, define domain-specific value, or
-allocate a KFD number. Concrete lifecycle vocabulary and success policy remain
-Profile-owned.
+This historical model does not prove universal necessity, require one
+hierarchy, make every task durable, or define domain-specific value. KFD-9
+allocates the number and canonical term; concrete lifecycle vocabulary and
+success policy remain Domain Profile-owned.

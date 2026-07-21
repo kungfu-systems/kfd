@@ -2270,7 +2270,7 @@
       "document": {
         "path": "decisions/KFD-7.md",
         "url": "https://kfd.libkungfu.dev/7",
-        "sha256": "a493e22e527dcd74fa8e3afc73e33e08f7d09e20e596689f2b550c071ac8efc0"
+        "sha256": "df5be3a5f49cbeabc2cac684326fd0356a96645151786b49e8b938f823493456"
       },
       "formalModel": {
         "path": "docs/KFD-7-formal.md",
@@ -2396,6 +2396,208 @@
         "semanticIndependence": "semantic distinguishability and traceability independent of physical component count",
         "semanticComponentDistinguishability": "counterfactual and fail-visible separation of ontology bindings and action coordinates even when physically co-located",
         "domainLifecycleVocabulary": "Domain Profile-owned lifecycle vocabulary"
+      }
+    },
+    "kfd-8": {
+      "key": "kfd-8",
+      "id": "KFD-8",
+      "number": 8,
+      "label": "KFD-8",
+      "title": "Perspective must remain bound to admitted facts and declared loss",
+      "kind": "principle",
+      "status": "draft",
+      "revision": 1,
+      "metadataSchemaVersion": "2",
+      "document": {
+        "path": "decisions/KFD-8.md",
+        "url": "https://kfd.libkungfu.dev/8",
+        "sha256": "c99e1a9390972d11405ad127ed8b25e461fb2d2a4589ca1be8c1a6c0a03c7067"
+      },
+      "formalModel": {
+        "path": "docs/KFD-8-formal.md",
+        "url": "https://kfd.libkungfu.dev/8/formal",
+        "version": 1,
+        "status": "experimental",
+        "normative": false,
+        "authorityPath": "decisions/KFD-8.md",
+        "sha256": "f97e9e756b60fcbf5136516fc365d043ae177bf932a1c4aae0f37abdcb89ab68"
+      },
+      "compatibility": {
+        "packageLine": "v1.0",
+        "registrySchemaVersion": 1,
+        "metadataSchemaVersion": "2",
+        "rule": "Before stable, this numbered draft may be refined with explicit lineage and synchronized projections; after stable, substantive change requires an explicit KFD-1 compatibility action."
+      },
+      "schemaIds": {
+        "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json"
+      },
+      "schemaPaths": {
+        "metadata": "schemas/kfd-standards.schema.json"
+      },
+      "concepts": {
+        "atlas": "independently addressable perspective coordinate bound to admitted facts, source, cut, scope, freshness, omissions, conflict, and declared loss"
+      }
+    },
+    "kfd-9": {
+      "key": "kfd-9",
+      "id": "KFD-9",
+      "number": 9,
+      "label": "KFD-9",
+      "title": "Continuing direction must outlive the actions that advance it",
+      "kind": "principle",
+      "status": "draft",
+      "revision": 1,
+      "metadataSchemaVersion": "2",
+      "document": {
+        "path": "decisions/KFD-9.md",
+        "url": "https://kfd.libkungfu.dev/9",
+        "sha256": "0658bc0759b9ecd82b874b17a085891f66fdb1721da27a11fa83e450865a323b"
+      },
+      "formalModel": {
+        "path": "docs/KFD-9-formal.md",
+        "url": "https://kfd.libkungfu.dev/9/formal",
+        "version": 1,
+        "status": "experimental",
+        "normative": false,
+        "authorityPath": "decisions/KFD-9.md",
+        "sha256": "0511cbd12f6052403987c03f301c4df1be3d2738452869092117a9ecf26f4265"
+      },
+      "compatibility": {
+        "packageLine": "v1.0",
+        "registrySchemaVersion": 1,
+        "metadataSchemaVersion": "2",
+        "rule": "Before stable, this numbered draft may be refined with explicit lineage and synchronized projections; after stable, substantive change requires an explicit KFD-1 compatibility action."
+      },
+      "schemaIds": {
+        "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json"
+      },
+      "schemaPaths": {
+        "metadata": "schemas/kfd-standards.schema.json"
+      },
+      "concepts": {
+        "pursuit": "independently addressable continuing direction, progress relation, lineage, and settlement coordinate"
+      }
+    },
+    "kfd-10": {
+      "key": "kfd-10",
+      "id": "KFD-10",
+      "number": 10,
+      "label": "KFD-10",
+      "title": "Authority must remain explicit, bounded, and revocable",
+      "kind": "principle",
+      "status": "draft",
+      "revision": 1,
+      "metadataSchemaVersion": "2",
+      "document": {
+        "path": "decisions/KFD-10.md",
+        "url": "https://kfd.libkungfu.dev/10",
+        "sha256": "0fd1b9cf6c5d3f121b811c0b66a46e1cac4ab8ff72b68c9eb85db6d32cf1e7ee"
+      },
+      "formalModel": {
+        "path": "docs/KFD-10-formal.md",
+        "url": "https://kfd.libkungfu.dev/10/formal",
+        "version": 1,
+        "status": "experimental",
+        "normative": false,
+        "authorityPath": "decisions/KFD-10.md",
+        "sha256": "0653147f95e90b145fc6a92c18531103caadeeaaa013a360c225b37f63b74790"
+      },
+      "compatibility": {
+        "packageLine": "v1.0",
+        "registrySchemaVersion": 1,
+        "metadataSchemaVersion": "2",
+        "rule": "Before stable, this numbered draft may be refined with explicit lineage and synchronized projections; after stable, substantive change requires an explicit KFD-1 compatibility action."
+      },
+      "schemaIds": {
+        "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json"
+      },
+      "schemaPaths": {
+        "metadata": "schemas/kfd-standards.schema.json"
+      },
+      "concepts": {
+        "warrant": "independently addressable bounded authority with derivation, attenuation, expiry, and revocation"
+      }
+    },
+    "kfd-11": {
+      "key": "kfd-11",
+      "id": "KFD-11",
+      "number": 11,
+      "label": "KFD-11",
+      "title": "Software work must keep responsibility transitions distinct",
+      "kind": "principle",
+      "status": "draft",
+      "revision": 1,
+      "metadataSchemaVersion": "2",
+      "document": {
+        "path": "decisions/KFD-11.md",
+        "url": "https://kfd.libkungfu.dev/11",
+        "sha256": "86436d5315bb8a901678cf4442d60070f7d20ea02d53c4a65eca524591c22148"
+      },
+      "formalModel": {
+        "path": "docs/KFD-11-formal.md",
+        "url": "https://kfd.libkungfu.dev/11/formal",
+        "version": 1,
+        "status": "experimental",
+        "normative": false,
+        "authorityPath": "decisions/KFD-11.md",
+        "sha256": "8bb7bf33353a113816c975b61aef64f4a7d773f7908681c90d6c5b2e8abad9ce"
+      },
+      "compatibility": {
+        "packageLine": "v1.0",
+        "registrySchemaVersion": 1,
+        "metadataSchemaVersion": "2",
+        "rule": "Before stable, the software-domain lifecycle and provisional founding labels may be refined with explicit lineage; after stable, substantive change requires an explicit KFD-1 compatibility action."
+      },
+      "schemaIds": {
+        "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json"
+      },
+      "schemaPaths": {
+        "metadata": "schemas/kfd-standards.schema.json"
+      },
+      "concepts": {
+        "softwareWorkResponsibilityLifecycle": "software-domain separation of long-horizon intent, bounded delegation, occurrence, claim, assessment, decision, and continuation",
+        "mission": "provisional founding label for long-horizon intent context",
+        "go": "provisional founding label for bounded delegated responsibility"
+      }
+    },
+    "kfd-12": {
+      "key": "kfd-12",
+      "id": "KFD-12",
+      "number": 12,
+      "label": "KFD-12",
+      "title": "Project settlement must bind authorities without absorbing them",
+      "kind": "procedure",
+      "status": "draft",
+      "revision": 1,
+      "metadataSchemaVersion": "2",
+      "document": {
+        "path": "decisions/KFD-12.md",
+        "url": "https://kfd.libkungfu.dev/12",
+        "sha256": "8aa73dfc705197198537f20c7a519fbc2b59845444da066840229deb3131902a"
+      },
+      "formalModel": {
+        "path": "docs/KFD-12-formal.md",
+        "url": "https://kfd.libkungfu.dev/12/formal",
+        "version": 1,
+        "status": "experimental",
+        "normative": false,
+        "authorityPath": "decisions/KFD-12.md",
+        "sha256": "3258b4f01ffc5dade15ca3fe9d809027020269f94017064bb748b6f33a9a0c33"
+      },
+      "compatibility": {
+        "packageLine": "v1.0",
+        "registrySchemaVersion": 1,
+        "metadataSchemaVersion": "2",
+        "rule": "Before stable, the software-project settlement procedure may be refined with explicit lineage; after stable, substantive change requires an explicit KFD-1 compatibility action."
+      },
+      "schemaIds": {
+        "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json"
+      },
+      "schemaPaths": {
+        "metadata": "schemas/kfd-standards.schema.json"
+      },
+      "concepts": {
+        "projectCut": "software-project settlement binding that preserves independently authoritative source, Atlas, Episode, policy, omission, and risk coordinates"
       }
     }
   }

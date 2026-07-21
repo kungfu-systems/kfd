@@ -1,24 +1,31 @@
 ---
-status: draft
+status: promoted
 period: 2026-07-18
 theme: warrant-bounded-authority
 doc_type: kfd-candidate
 source_level: maintainer-consensus
-confidence: medium
+confidence: high
 sensitivity: public
 evidence_grade: C
 review_state: self-reviewed
-last_reviewed: 2026-07-18
+last_reviewed: 2026-07-21
 ---
 
 # KFD Candidate: Warrant Bounded Authority
 
-- Candidate status: incubating
+- Candidate status: promoted to KFD-10
 - Kind candidate: principle
-- Current slot hint: 10
+- Allocated decision: 10
 - Slot binding: non-binding
 
 [Formal candidate](formal/warrant-bounded-authority.md)
+
+## Promotion
+
+This candidate was promoted on 2026-07-21 to
+[KFD-10](../decisions/KFD-10.md). The numbered draft is now the authoritative
+rule and its [formal reference](../docs/KFD-10-formal.md) owns the current
+non-normative model. This page remains source-candidate lineage.
 
 ## One sentence
 
@@ -113,9 +120,6 @@ The candidate weakens or fails if:
 
 ## Numbering boundary
 
-The slot hint `10` is non-binding. This document is not `KFD-10`, does not
-reserve that number, and may be revised, reordered, merged, withdrawn, or
-rejected.
-
-Only explicit promotion into `decisions/KFD-N.md` and numbered `registry.json`
-allocates a KFD number.
+The former slot hint was non-binding until explicit promotion. KFD-10 is now
+allocated by `decisions/KFD-10.md` and `registry.json`; this lineage document
+does not replace or extend that numbered authority.
