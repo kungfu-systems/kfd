@@ -53,7 +53,7 @@
 | What are the current immutable KFD-5 cuts for Pursuit and Warrant? | [`../cases/live/proof-carrying-work-object/cuts/0002-pursuit.json`](../cases/live/proof-carrying-work-object/cuts/0002-pursuit.json) and [`../cases/live/proof-carrying-work-object/cuts/0002-warrant.json`](../cases/live/proof-carrying-work-object/cuts/0002-warrant.json) |
 | How did perspective transformation expose Initiative, Assignment, and Project Cut, and how were they qualified? | [`../cases/live/software-work-perspective-settlement/README.md`](../cases/live/software-work-perspective-settlement/README.md) |
 | What separates the Agent-origin testimony for Project Cut from public implementation evidence? | [`../cases/live/software-work-perspective-settlement/genesis.md`](../cases/live/software-work-perspective-settlement/genesis.md#agent-origin-testimony-and-public-evidence) |
-| What is the current KFD-5 outcome for the Consequential Settlement procedure? | [`../cases/live/decision-admission-settlement/cuts/0001-consequential-settlement.json`](../cases/live/decision-admission-settlement/cuts/0001-consequential-settlement.json) |
+| What is the current KFD-5 outcome for the Consequential Settlement procedure? | [`../cases/live/decision-admission-settlement/cuts/0002-consequential-settlement.json`](../cases/live/decision-admission-settlement/cuts/0002-consequential-settlement.json) |
 | What practice guidelines are derived from the foundation triad? | [`foundation.md`](foundation.md#practice-guidelines) |
 | How should a product show timeline order from a declared perspective? | [KFD-4](../decisions/KFD-4.md) |
 | What schema should products use for KFD-4 observer-relative timeline views? | [`../schemas/kfd-4/observer-perspective.schema.json`](../schemas/kfd-4/observer-perspective.schema.json) |
@@ -61,6 +61,7 @@
 | What schema records a KFD-5 primitive candidate? | [`../schemas/kfd-5/primitive-discovery.schema.json`](../schemas/kfd-5/primitive-discovery.schema.json) |
 | How should an autonomous discovery loop remain grounded in causal experience? | [KFD-6](../decisions/KFD-6.md) |
 | What schema records a KFD-6 autonomous discovery experiment? | [`../schemas/kfd-6/autonomous-discovery-loop.schema.json`](../schemas/kfd-6/autonomous-discovery-loop.schema.json) |
+| Is there early real-world evidence that part of KFD-6 is feasible without claiming activation? | [Consequential Settlement early feasibility mapping](../cases/live/decision-admission-settlement/development-lineage.md#6-kfd-6-early-feasibility-case), then [KFD-6](../decisions/KFD-6.md#early-feasibility-evidence) |
 | How must real-world action keep direction, perspective, authority, and occurrence distinct? | [KFD-7](../decisions/KFD-7.md) |
 | What is the difference between the Fact-Episode Ontology, Action Responsibility Geometry, and a Domain Profile? | [KFD-7](../decisions/KFD-7.md#action-responsibility-geometry-and-domain-profiles) and [`KFD-7-usage.md`](KFD-7-usage.md#fact-episode-ontology-action-responsibility-geometry-and-domain-profiles) |
 | Why are Fact and Episode ontology bindings rather than action coordinates? | [KFD-7](../decisions/KFD-7.md#fact-episode-ontology) and [`KFD-7-formal.md`](KFD-7-formal.md#fact-episode-ontology) |

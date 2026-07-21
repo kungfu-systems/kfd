@@ -90,6 +90,29 @@ Discovery and promotion authority remain separate. Humans may continue to own
 value, safety, legal, allocation, or irreversible decisions. Autonomous genesis
 does not grant authority to change those boundaries.
 
+## Early feasibility evidence
+
+The
+[Consequential Settlement live case](../cases/live/decision-admission-settlement/README.md)
+is an early retained **natural pre-enactment** of part of this procedure.
+During real Kungfu development, agents generated Claim, purpose-bound
+Assessment, and Decision before the maintainer became aware of those named
+objects. Later agents replayed the retained development lineage, connected it
+to Fact Admission, and compressed the result into the provisional KFD-11
+procedure. KFD-5 qualification, maintainer authorization, repository review,
+and merge remained separate from that genesis.
+
+This is evidence that an agent can generate and later recognize an ontology
+change from causal development pressure with less direct human translation
+than KFD-5's founding pattern assumed. It is not a conforming KFD-6 experiment
+or activation evidence. The loop was human-triggered and human-corrected; its
+experience cut was reconstructed afterward; it did not compare plural methods
+against fixed-ontology and no-new-Primitive baselines under a shared budget;
+and it lacks held-out transfer, systematic false-candidate rejection, and an
+autonomous trigger for ontology review. The
+[development lineage](../cases/live/decision-admission-settlement/development-lineage.md#6-kfd-6-early-feasibility-case)
+preserves the bounded mapping and missing obligations.
+
 ## Activation
 
 KFD-6 remains draft until a real implementation:

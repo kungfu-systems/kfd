@@ -50,6 +50,23 @@ fixed-ontology and no-new-primitive baselines, held-out evaluation, and
 promotion authority. The generator cannot be its sole verifier, and generated
 evidence cannot be the only evidence.
 
+## Early Case and Reproduction Boundary
+
+The
+[Consequential Settlement case](../cases/live/decision-admission-settlement/README.md)
+is an early feasibility case for KFD-6. It records Agent-generated ontology
+during real product work, later cross-lineage replay, provisional KFD-5
+qualification, and separated human/repository admission. Read its
+[development lineage](../cases/live/decision-admission-settlement/development-lineage.md#6-kfd-6-early-feasibility-case)
+for the exact mapping and missing gates.
+
+Do not encode that history as a passing version 4 autonomous-loop record. Its
+generation methods, evidence cut, budgets, and baselines were not declared
+before execution. A future adopter may use the immutable public history as a
+seed corpus or retrospective fixture, but must freeze a new experiment cut,
+declare plural methods and baselines, separate held-out evaluation, and retain
+negative results before making a KFD-6 claim.
+
 ## Activation Evidence
 
 KFD-6 remains draft until a real adopter compares multiple generation methods
