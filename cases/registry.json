@@ -101,6 +101,36 @@
         }
       ],
       "claimBoundary": "This case records two perspective transformations and three bounded KFD-5 acceptances. It does not establish cross-domain universality, historical novelty, one physical implementation, or activation of the current draft KFD-12 and KFD-13 decisions. Immutable cuts retain their prerelease coordinates and map forward through the 2026-07-21 Foundation Revision."
+    },
+    {
+      "id": "decision-admission-settlement",
+      "title": "Consequential Settlement",
+      "kind": "primitive-discovery-case",
+      "status": "active",
+      "standard": "kfd-5",
+      "humanEntry": "cases/live/decision-admission-settlement/README.md",
+      "genesis": "cases/live/decision-admission-settlement/genesis.md",
+      "methodTrace": "cases/live/decision-admission-settlement/kfd-method-trace.md",
+      "propagationHypothesis": "cases/live/decision-admission-settlement/propagation-hypothesis.md",
+      "reviewIndex": "cases/live/decision-admission-settlement/reviews/README.md",
+      "ontologySplit": "cases/live/decision-admission-settlement/ontology-split.md",
+      "distinguishabilityArgument": "cases/live/decision-admission-settlement/distinguishability.md",
+      "candidateTracks": [
+        {
+          "id": "consequential-settlement",
+          "title": "Consequential Settlement",
+          "status": "provisional",
+          "definition": "A cross-domain procedure that preserves Claim, purpose-bound Assessment, Warrant-bound Decision, and independently recorded Admission as distinct responsibilities before successor Fact publication.",
+          "currentCut": {
+            "path": "cases/live/decision-admission-settlement/cuts/0001-consequential-settlement.json",
+            "sha256": "18c9da16658c6c27721db8eaa487d491f510c46993ae24651e76ecca570c68fd",
+            "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-5/primitive-discovery.schema.json",
+            "schemaVersion": 3
+          },
+          "claimBoundary": "Provisional under draft KFD-11. The cut records Agent-origin candidate generation by maintainer testimony and public formalization evidence; it does not activate KFD-11, prove universal minimality or novelty, require four physical objects, or establish independent cross-domain adoption."
+        }
+      ],
+      "claimBoundary": "This case preserves the KFD-4 perspective transformation and provisional KFD-5 qualification of the Agent-generated Consequential Settlement procedure. Maintainer testimony and public Git evidence remain separate, and cross-domain activation is not claimed."
     }
   ]
 }

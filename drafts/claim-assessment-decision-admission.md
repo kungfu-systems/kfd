@@ -3,7 +3,7 @@
 - Status: promoted
 - Kind candidate: procedure
 - Promoted to: KFD-11
-- Source: KFD-2 trust semantics, KFD-10 authority allocation, and the software-work settlement pressure field
+- Source: Agent-generated perspective transformation from numbered nouns to the state-admission boundary, grounded in KFD-2 trust semantics, KFD-10 authority allocation, and the software-work settlement pressure field
 
 ## Candidate
 
@@ -27,3 +27,6 @@ replace KFD-2 Claim and Assessment schemas.
 
 The Foundation Revision and old-to-new number map are recorded in
 [`docs/foundation-revision-2026-07-21-decision-admission.md`](../docs/foundation-revision-2026-07-21-decision-admission.md).
+The separate
+[`decision-admission-settlement`](../cases/live/decision-admission-settlement/README.md)
+case records the KFD-4 genesis and provisional KFD-5 qualification.

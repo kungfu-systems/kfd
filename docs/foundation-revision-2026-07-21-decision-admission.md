@@ -54,12 +54,32 @@ The revision does not activate KFD-11, KFD-12, or KFD-13. Cross-domain
 qualification, independent implementations, product cost, and each draft's
 activation evidence remain open.
 
+## Genesis and method boundary
+
+The maintainer reports that the originating question was whether Claim,
+Assessment, and Decision should become KFDs. The maintainer did not propose
+Admission or the four-stage cross-domain procedure. The agent changed
+perspective from allocating numbers among visible nouns to protecting the
+authority boundary at which a requested effect becomes admitted state. It
+recognized that KFD-2 already owns Claim and Assessment, introduced Admission
+as independently variable from Decision, and compressed the result into one
+procedure.
+
+The maintainer's later authorization is a governance and qualification fact,
+not candidate-generation authorship. The public repository proves the
+formalization, schema, review, and merge, while the formalizing commit declares
+`Agent: Codex`; it cannot independently reconstruct the unretained private
+conversation. The
+[Consequential Settlement live case](../cases/live/decision-admission-settlement/README.md)
+preserves the KFD-4 and KFD-5 retrospective without overstating that evidence.
+
 ## Review and authorization
 
-The maintainer authorized the pre-stable correction in the originating design
-review. The pull request for this revision is the public review coordinate and
-must receive approval from a reviewer who did not author the change before it
-may merge. The final merge commit and PR review preserve completion evidence.
+After the Agent-generated candidate was presented, the maintainer authorized
+the pre-stable correction and requested the Field Responsibility Matrix. The
+pull request for this revision is the public review coordinate and received
+approval from a reviewer who did not author the change. The final merge commit
+and PR review preserve completion evidence.
 
 Review coordinate: [kungfu-systems/kfd#230](https://github.com/kungfu-systems/kfd/pull/230)
 
