@@ -8,14 +8,19 @@ KFD is an open, evidence-governed engineering standard for preserving facts,
 boundaries, perspective, and responsibility when the path is not known in
 advance. It develops a small set of portable principles, procedures, schemas,
 and verification contracts through which humans, agents, organizations, and
-software systems can act, learn, and change without silent drift.
+software systems can act, learn, and change without silent drift. It therefore
+treats a well-formed Episode as more than a trace: it is a durable historical
+asset that future humans and agents can replay when today's ontology no longer
+explains reality.
 
 KFD does not claim to be the final answer or a complete theory of complex
 systems. It publishes a small, testable foundation for adoption,
 implementation, challenge, counterevidence, and revision. The breadth covered
 by its current decisions is evidence that a general action structure may
 exist, not proof that KFD has finished discovering it. Kungfu is its founding
-implementation, not its adoption boundary.
+implementation, not its adoption boundary. Accumulating Episodes alone does
+not discover or prove a Primitive; KFD-5 and KFD-6 keep generation,
+qualification, and promotion separate.
 
 ## Foundation triad
 

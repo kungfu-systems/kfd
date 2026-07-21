@@ -60,6 +60,7 @@
 | How should humans and agents discover a load-bearing primitive? | [KFD-5](../decisions/KFD-5.md) |
 | What schema records a KFD-5 primitive candidate? | [`../schemas/kfd-5/primitive-discovery.schema.json`](../schemas/kfd-5/primitive-discovery.schema.json) |
 | How should an autonomous discovery loop remain grounded in causal experience? | [KFD-6](../decisions/KFD-6.md) |
+| Why should well-formed Episodes be treated as durable historical assets rather than disposable traces? | [KFD-6: Episodes as historical assets](../decisions/KFD-6.md#episodes-as-historical-assets) and [`KFD-6-usage.md`](KFD-6-usage.md#episode-asset-stewardship) |
 | What schema records a KFD-6 autonomous discovery experiment? | [`../schemas/kfd-6/autonomous-discovery-loop.schema.json`](../schemas/kfd-6/autonomous-discovery-loop.schema.json) |
 | Is there early real-world evidence that part of KFD-6 is feasible without claiming activation? | [Consequential Settlement early feasibility mapping](../cases/live/decision-admission-settlement/development-lineage.md#6-kfd-6-early-feasibility-case), then [KFD-6](../decisions/KFD-6.md#early-feasibility-evidence) |
 | How must real-world action keep direction, perspective, authority, and occurrence distinct? | [KFD-7](../decisions/KFD-7.md) |
