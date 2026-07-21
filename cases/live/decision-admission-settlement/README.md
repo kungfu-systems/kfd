@@ -40,6 +40,19 @@ The maintainer then authorized the pre-stable Foundation Revision and the
 Field Responsibility Matrix. That authorization is the qualification and
 governance decision; it is not rewritten as candidate generation.
 
+## Early KFD-6 evidence
+
+This development line is also an early retained natural pre-enactment of
+part of KFD-6. Agents generated ontology under real development pressure and
+later recognized it across retained causal evidence before separate human and
+repository admission. The case therefore supports KFD-6's feasibility, but it
+does not pass KFD-6: human prompts still triggered and corrected the replay,
+the evidence cut was retrospective, and no bounded multi-method comparison,
+baseline, held-out transfer, or systematic false-candidate rejection ran.
+
+The exact loop mapping and failed obligations are recorded in the
+[development lineage](development-lineage.md#6-kfd-6-early-feasibility-case).
+
 ## Current settlement
 
 | Candidate | KFD-5 outcome | Boundary |

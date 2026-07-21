@@ -64,6 +64,15 @@ a numbered draft and guide implementations, but KFD has not yet established
 independent cross-domain adoption, universal minimality, acceptable cost, or
 the activation gate.
 
+## KFD-6: preserve the partial autonomous loop without certifying it
+
+The lineage demonstrates real Agent ontology generation, causal development
+pressure, later replay, KFD-5 handoff, and separated promotion authority. It
+therefore supplies early feasibility evidence for KFD-6. It does not supply a
+predeclared experiment cut, plural method comparison, required baselines,
+held-out transfer, systematic false-candidate rejection, or an autonomous
+trigger. The case remains a natural pre-enactment, not a KFD-6 witness.
+
 ## Method boundary
 
 This case shows that agents can generate an intermediate ontology during real

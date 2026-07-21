@@ -136,6 +136,36 @@ cross-domain compression**. KFD PR
 KFD PR [#232](https://github.com/kungfu-systems/kfd/pull/232) opened this live
 qualification case.
 
+## 6. KFD-6 early feasibility case
+
+The complete lineage is a natural, human-assisted pre-enactment of part of the
+KFD-6 loop:
+
+```text
+O_n: Fact Admission + KFD-2 trust execution + Mission/Go semantics
+  -> Agent-generated Claim / Assessment / Decision
+  -> implementation, review, failure, and dogfood evidence
+  -> later Agent replay and compression with Admission
+  -> provisional KFD-5 qualification
+  -> separate maintainer authorization and repository admission
+  -> O_(n+1): draft KFD-11
+```
+
+This is stronger than a hypothetical example because the intermediate
+ontology and implementation coordinates predate the later KFD interpretation.
+It shows that agents can generate and later recognize a candidate ontology
+from causal development pressure without the maintainer first naming its
+objects.
+
+It is not a complete KFD-6 run. The maintainer initiated the original work and
+later demanded the deeper historical replay; the causal-experience cut was
+reconstructed rather than frozen before discovery; no plural methods shared a
+declared budget; fixed-ontology and no-new-Primitive baselines were absent;
+repository review was not held-out evaluation of the discovery method; and no
+autonomous trigger decided when ontology review should begin. These omissions
+remain experimental requirements rather than being repaired through
+retrospective narration.
+
 ## Responsibility attribution
 
 | Participant | Contribution |
