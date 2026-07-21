@@ -1705,9 +1705,15 @@ if (foundationRevision.schema !== "kfd.foundation-revision/v1" ||
   fail("Decision Admission Foundation Revision identity and impact must remain explicit");
 }
 if (foundationRevision.authorization?.status !== "authorized" ||
-    foundationRevision.independentReview?.status !== "review-coordinate-declared" ||
+    foundationRevision.independentReview?.status !== "approved" ||
     !/^https:\/\/github\.com\/kungfu-systems\/kfd\/pull\/[0-9]+$/.test(foundationRevision.independentReview?.coordinate ?? "")) {
   fail("Decision Admission Foundation Revision must bind maintainer authorization and an independent-review PR coordinate");
+}
+if (foundationRevision.independentReview?.reviewer !== "kungfu-origin" ||
+    foundationRevision.independentReview?.reviewedHead !== "8d9d6338afd62e01aac4c776313ba40e44f7700a" ||
+    foundationRevision.independentReview?.mergeCommit !== "903737e47e047c0d3aedce98fdf3751cbc9b7aab" ||
+    foundationRevision.status !== "independently-reviewed-and-merged") {
+  fail("Decision Admission Foundation Revision must preserve its independent approval and merge evidence");
 }
 const expectedFoundationMappings = [
   [null, "KFD-11", "allocated-by-foundation-revision"],

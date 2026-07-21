@@ -1,7 +1,7 @@
 # Foundation Revision: Decision Admission Layer
 
 - Date: 2026-07-21
-- Status: under independent review
+- Status: independently reviewed and merged
 - Scope: pre-stable KFD-11 through KFD-13 numbering and responsibility order
 - Machine map: `foundation-revision-2026-07-21-decision-admission.json`
 
@@ -62,6 +62,9 @@ must receive approval from a reviewer who did not author the change before it
 may merge. The final merge commit and PR review preserve completion evidence.
 
 Review coordinate: [kungfu-systems/kfd#230](https://github.com/kungfu-systems/kfd/pull/230)
+
+Review result: approved by `kungfu-origin` against head `8d9d633`; merged as
+`903737e` on 2026-07-21.
 
 ## Release impact
 
