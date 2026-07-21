@@ -54,6 +54,10 @@
           "type": "string",
           "pattern": "^cases/live/[a-z0-9-]+/genesis\\.md$"
         },
+        "developmentLineage": {
+          "type": "string",
+          "pattern": "^cases/live/[a-z0-9-]+/development-lineage\\.md$"
+        },
         "methodTrace": {
           "type": "string",
           "pattern": "^cases/live/[a-z0-9-]+/kfd-method-trace\\.md$"

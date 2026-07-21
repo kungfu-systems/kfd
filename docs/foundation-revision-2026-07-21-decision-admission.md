@@ -56,27 +56,39 @@ activation evidence remain open.
 
 ## Genesis and method boundary
 
-The maintainer reports that the originating question was whether Claim,
-Assessment, and Decision should become KFDs. The maintainer did not propose
-Admission or the four-stage cross-domain procedure. The agent changed
-perspective from allocating numbers among visible nouns to protecting the
-authority boundary at which a requested effect becomes admitted state. It
-recognized that KFD-2 already owns Claim and Assessment, introduced Admission
-as independently variable from Decision, and compressed the result into one
+The originating development predates this revision. On 2026-07-11, agents
+generated Claim and purpose-bound Assessment while connecting Fact admission,
+Episode history, and KFD-2 trust. Later the same day, an agent composed Claim,
+Assessment, and Decision into the Mission/Go lifecycle and implementation.
+Project Cut, independent review, and recoverable Action Loop settlement then
+made Decision and actual successor-state Admission independently observable.
+
+The maintainer reports that the later question was whether Claim, Assessment,
+and Decision should become KFDs, and that this was the first time they became
+aware those named objects already existed. The maintainer did not propose the
+three intermediate objects, Admission, or the four-stage cross-domain
+procedure. The agent replayed the distributed development line, recognized
+that KFD-2 already owns Claim and Assessment, connected Decision to the
+existing Fact Admission boundary, and compressed the result into one
 procedure.
 
-The maintainer's later authorization is a governance and qualification fact,
-not candidate-generation authorship. The public repository proves the
-formalization, schema, review, and merge, while the formalizing commit declares
-`Agent: Codex`; it cannot independently reconstruct the unretained private
-conversation. The
+The maintainer's authorization is a governance and qualification fact, not
+candidate-generation authorship. Public Kungfu PRs 542, 545, 585, 958, 969,
+980, and 1120 preserve the semantic and implementation sequence. A retained
+maintainer-held task transcript plus maintainer testimony support
+conversational attribution but are not distributed with KFD. The public KFD
+repository proves formalization, schema, review, and merge, while the
+formalizing commit declares `Agent: Codex`; it cannot independently reconstruct
+every private utterance. The
 [Consequential Settlement live case](../cases/live/decision-admission-settlement/README.md)
-preserves the KFD-4 and KFD-5 retrospective without overstating that evidence.
+preserves the full development lineage and KFD-4/KFD-5 retrospective without
+overstating that evidence.
 
 ## Review and authorization
 
-After the Agent-generated candidate was presented, the maintainer authorized
-the pre-stable correction and requested the Field Responsibility Matrix. The
+After the Agent-generated structure was recognized and presented as a KFD
+candidate, the maintainer authorized the pre-stable correction and requested
+the Field Responsibility Matrix. The
 pull request for this revision is the public review coordinate and received
 approval from a reviewer who did not author the change. The final merge commit
 and PR review preserve completion evidence.

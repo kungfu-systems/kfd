@@ -1,0 +1,353 @@
+{
+  "schemaVersion": 3,
+  "contract": "kfd-5-primitive-discovery",
+  "standard": "kfd-5",
+  "candidate": {
+    "id": "consequential-settlement",
+    "title": "Consequential Settlement",
+    "problemStatement": "A purpose-bound trust judgment, an authorized disposition, and the actual admission of its requested effect can vary independently, but the prior KFD structure left that cross-domain boundary implicit inside software work.",
+    "scope": "Provisional cross-domain procedure expressed by draft KFD-11; this cut does not activate KFD-11, require four physical records, prove universal minimality, or establish historical novelty."
+  },
+  "genesis": {
+    "methods": [
+      "direct-situated-judgment",
+      "perspective-transformation",
+      "perspective-replay",
+      "structural-compression"
+    ],
+    "observationPerspective": {
+      "id": "numbered-standard-editor",
+      "bearer": "a maintainer or agent deciding whether visible concepts deserve separate KFD numbers",
+      "role": "standard taxonomy and dependency editor",
+      "proximity": "inside the pre-stable KFD numbering and software-work model",
+      "consequences": [
+        "bears duplicated decisions, wrong dependency order, and hidden cross-domain responsibility"
+      ],
+      "naturalObjects": [
+        "Claim",
+        "Assessment",
+        "Decision",
+        "numbered KFD",
+        "software work lifecycle"
+      ]
+    },
+    "currentOntology": [
+      "KFD-2 Claim",
+      "KFD-2 Assessment",
+      "KFD-10 Warrant",
+      "software Decision",
+      "Continuation",
+      "Fact",
+      "Episode"
+    ],
+    "observation": "The maintainer asked whether Claim, Assessment, and Decision should become KFDs only after Agent-led Kungfu development had already generated and implemented those objects. The agent replayed the Fact Admission, claim-triggered Assessment, Mission Control, Project Cut review, and Action Loop settlement lines and recognized that they formed one cross-domain procedure.",
+    "candidateObject": "Consequential Settlement is the Claim to Assessment to Decision to Admission procedure that preserves proposition, purpose-bound trust, bounded authority, and actual successor-state admission as independently inspectable responsibilities.",
+    "claimBoundary": "A retained maintainer-held task transcript and maintainer testimony identify Agent generation of the intermediate ontology. Public Git preserves the dated semantic and implementation sequence but cannot independently verify every private utterance. The candidate remains provisional across domains.",
+    "methodEvidence": [
+      {
+        "kind": "file",
+        "coordinate": "cases/live/decision-admission-settlement/development-lineage.md",
+        "observer": "dated reconstruction separating maintainer pressure from Agent-generated objects"
+      },
+      {
+        "kind": "git",
+        "coordinate": "https://github.com/kungfu-systems/kungfu/pull/545",
+        "observer": "claim-triggered KFD-2 assessment architecture"
+      },
+      {
+        "kind": "git",
+        "coordinate": "https://github.com/kungfu-systems/kungfu/pull/585",
+        "observer": "Mission Control implementation of progress Assessment and Completion Claim"
+      },
+      {
+        "kind": "git",
+        "coordinate": "https://github.com/kungfu-systems/kungfu/pull/980",
+        "observer": "independent review and continuation Decision"
+      },
+      {
+        "kind": "git",
+        "coordinate": "https://github.com/kungfu-systems/kungfu/pull/1120",
+        "observer": "recoverable Action Loop successor-state settlement"
+      },
+      {
+        "kind": "git",
+        "coordinate": "https://github.com/kungfu-systems/kfd/pull/230",
+        "observer": "public formalization declaring Agent: Codex and independent review"
+      }
+    ],
+    "transformedPerspective": {
+      "id": "cross-development-lineage-replayer",
+      "bearer": "an agent replaying several independently developed trust, work, authority, and state-change views",
+      "role": "Primitive recognition across implementation boundaries",
+      "proximity": "inside the public development sequence and the later KFD allocation problem",
+      "consequences": [
+        "bears false origin attribution, duplicated standards, hidden responsibility fusion, and unsafe successor state"
+      ],
+      "naturalObjects": [
+        "Claim",
+        "purpose-bound Assessment",
+        "Warrant-bound Decision",
+        "Admission outcome",
+        "successor Fact cut"
+      ]
+    },
+    "transformation": "The observer moved from assigning KFD numbers to visible nouns to replaying the Agent-generated development lines that had separately made trust judgment, continuation authority, and admitted successor state operational.",
+    "newlyVisibleNeed": "Claim, Assessment, Decision, and Admission must remain distinct, while their portable unit is one four-responsibility settlement procedure rather than unrelated implementation features or three additional noun decisions.",
+    "replayBasis": {
+      "replayRecord": {
+        "kind": "file",
+        "coordinate": "cases/live/decision-admission-settlement/development-lineage.md",
+        "observer": "public reconstruction over dated repository coordinates and bounded private attribution evidence"
+      },
+      "sourceViewIds": [
+        "fact-admission-designer",
+        "claim-assessment-designer",
+        "mission-control-coordinator",
+        "successor-agent-reviewer",
+        "action-loop-settlement-authority"
+      ],
+      "sharedContext": "The replay binds public Kungfu PRs 542, 545, 585, 958, 969, 980, and 1120 to the later KFD allocation discussion without treating Git authorship as conversational authorship.",
+      "preservationClaim": "Each public coordinate preserves the semantics and implementation visible at that cut; the reconstruction does not rewrite earlier artifacts to use the final KFD-11 vocabulary.",
+      "degradedState": "The maintainer-held task transcript is not part of the public KFD package, so public readers can audit semantic chronology but not every private utterance."
+    },
+    "methodNotes": "The maintainer supplied reality pressure, desired outcomes, authorization, dogfood, and final value judgment. Agents supplied the Claim/Assessment/Decision intermediate model, its implementation, and the later cross-domain compression with Admission."
+  },
+  "boundaryPressure": {
+    "contactSides": [
+      "participants and assessors that produce propositions and purpose-bound trust judgments",
+      "decision and state authorities that authorize and admit consequential effects"
+    ],
+    "implicitHandling": "Approval, merge, transaction, publication, and state change are often treated as one success event, with failure and responsibility reconstructed from logs or participant memory.",
+    "pressureChanges": [
+      {
+        "kind": "new-participant",
+        "description": "Agents can produce, assess, decide, and apply work across boundaries without sharing transient context."
+      },
+      {
+        "kind": "authority",
+        "description": "Assessment authority, decision authority, and state admission authority may belong to different participants or systems."
+      },
+      {
+        "kind": "consequence",
+        "description": "Treating authorization as successful admission can fabricate successor state or hide partial and failed effects."
+      },
+      {
+        "kind": "heterogeneity",
+        "description": "Repositories, runtimes, databases, organizations, and regulated domains use different disposition and transaction mechanisms."
+      }
+    ],
+    "observedFailures": [
+      "A passing assessment is mistaken for permission to act.",
+      "An approval or decision is reported as completion before the owning authority admits the effect.",
+      "Stale basis, conflicts, denial, partial application, and retry state are hidden.",
+      "A successor Fact is inferred from process success or persuasive explanation."
+    ],
+    "mediationClaim": "A portable settlement procedure may let heterogeneous domains preserve trust, authority, and admission boundaries without sharing one transaction implementation.",
+    "internalObjectAlternative": "An existing approval, transaction, mandate, merge, or publication protocol may satisfy the candidate if it preserves equivalent Claim, Assessment, Decision, Admission, receipt, and successor-state semantics."
+  },
+  "grounding": {
+    "pressure": [
+      "KFD-2 already separates Claim from purpose-bound Assessment.",
+      "KFD-10 requires bounded authority for consequential Decision.",
+      "KFD-7 requires admitted Fact state to remain distinct from occurrence and requested effect.",
+      "Software work, release, and agent workflows can authorize an effect that later conflicts, fails, or is denied."
+    ],
+    "factSources": [
+      {
+        "kind": "git",
+        "coordinate": "https://github.com/kungfu-systems/kungfu/pull/542",
+        "observer": "Fact Admission architecture"
+      },
+      {
+        "kind": "git",
+        "coordinate": "https://github.com/kungfu-systems/kungfu/pull/545",
+        "observer": "claim-triggered Assessment architecture"
+      },
+      {
+        "kind": "git",
+        "coordinate": "https://github.com/kungfu-systems/kungfu/pull/585",
+        "observer": "Mission Control Claim and Assessment implementation"
+      },
+      {
+        "kind": "git",
+        "coordinate": "https://github.com/kungfu-systems/kungfu/pull/980",
+        "observer": "independent Decision and continuation implementation"
+      },
+      {
+        "kind": "git",
+        "coordinate": "https://github.com/kungfu-systems/kungfu/pull/1120",
+        "observer": "recoverable settlement and successor-state evidence"
+      },
+      {
+        "kind": "git",
+        "coordinate": "https://github.com/kungfu-systems/kfd/commit/ebb29ef63b19da967d9b0629449db85817b769a7",
+        "observer": "KFD-11 and Foundation Revision formalization"
+      },
+      {
+        "kind": "git",
+        "coordinate": "https://github.com/kungfu-systems/kfd/pull/230",
+        "observer": "independent responsibility review"
+      },
+      {
+        "kind": "file",
+        "coordinate": "cases/live/decision-admission-settlement/distinguishability.md",
+        "observer": "KFD-5 deletion and fuse analysis"
+      }
+    ],
+    "evidenceBoundary": "The repositories prove a dated Agent-developed semantic sequence, executable implementations, a closed draft contract, schema, checks, a formalizing commit that declares Agent: Codex, and independent review. A retained maintainer-held task transcript plus maintainer testimony support conversational attribution. Independent cross-domain implementations and product-cost evidence remain absent.",
+    "knownGaps": [
+      "No independent non-Kungfu cross-domain implementation",
+      "The retained genesis transcript is not independently available in the public package",
+      "No KFD-11 activation decision",
+      "No universal minimality or historical novelty proof",
+      "Operational and participant-friction cost remains incompletely measured"
+    ]
+  },
+  "participants": [
+    {
+      "id": "human-maintainer-pressure-authorization-and-judgment",
+      "kind": "human",
+      "functions": [
+        "perspective-declaration",
+        "evidence-custody",
+        "decision"
+      ]
+    },
+    {
+      "id": "agent-candidate-generator",
+      "kind": "agent",
+      "functions": [
+        "perspective-declaration",
+        "candidate-generation",
+        "scalable-reasoning"
+      ]
+    },
+    {
+      "id": "repository-independent-review",
+      "kind": "collective",
+      "functions": [
+        "evidence-custody",
+        "verification"
+      ]
+    }
+  ],
+  "alternatives": [
+    {
+      "name": "Separate KFDs for Claim, Assessment, and Decision",
+      "disposition": "rejected",
+      "reason": "KFD-2 already owns Claim and Assessment; the load-bearing distinction is the procedure from trust through authority to admission."
+    },
+    {
+      "name": "Keep the roles inside software work",
+      "disposition": "rejected",
+      "reason": "Decision and Admission remain distinct in other consequential domains and should precede their first software application."
+    },
+    {
+      "name": "Fuse Decision and Admission",
+      "disposition": "rejected",
+      "reason": "The same authorized Decision may be admitted, stale, conflicted, denied, partially applied, or fail without changing its authority basis."
+    },
+    {
+      "name": "Existing approval or transaction protocol",
+      "disposition": "retained",
+      "reason": "It may implement equivalent KFD-11 semantics when proposition, assessment purpose, authority, admission outcome, receipt, and successor state remain inspectable."
+    },
+    {
+      "name": "No new cross-domain procedure",
+      "disposition": "rejected",
+      "reason": "Deleting Admission makes distinct successor-state histories observationally equal at the Decision layer."
+    }
+  ],
+  "contractModel": {
+    "identity": "One settlement attempt identified by exact Claim, Assessment, Decision, Warrant, basis Fact cut, admission authority, and requested-effect roots.",
+    "boundary": "The procedure begins with an exact proposition and ends with a recorded Admission outcome; a successor Fact cut exists only after successful Admission.",
+    "authority": "KFD-2 owns trust judgment, Warrant bounds Decision authority, and the target Fact authority independently owns Admission and successor publication.",
+    "lifecycle": "claim declared -> assessment issued -> decision authorized -> admission requested -> admitted, denied, stale, conflicted, failed, partially applied, compensated, or retried with preserved lineage",
+    "operations": [
+      "claim",
+      "assess",
+      "decide",
+      "request-admission",
+      "admit",
+      "deny",
+      "record-failure",
+      "retry",
+      "compensate",
+      "publish-successor",
+      "inspect"
+    ]
+  },
+  "tests": {
+    "minimumClosure": {
+      "result": "pass",
+      "evidence": [
+        {
+          "kind": "git",
+          "coordinate": "https://github.com/kungfu-systems/kfd/pull/230"
+        },
+        {
+          "kind": "file",
+          "coordinate": "schemas/kfd-11/decision-admission.schema.json"
+        }
+      ],
+      "notes": "KFD-11 and its schema define exact Claim, purpose-bound Assessment, Warrant-bound Decision, Admission outcome, receipt, and successor lineage."
+    },
+    "deletion": {
+      "result": "pass",
+      "evidence": [
+        {
+          "kind": "file",
+          "coordinate": "cases/live/decision-admission-settlement/distinguishability.md"
+        }
+      ],
+      "notes": "Holding Claim, Assessment, Decision, and requested effect fixed while varying Admission changes whether a successor Fact exists."
+    },
+    "fuse": {
+      "result": "pass",
+      "evidence": [
+        {
+          "kind": "file",
+          "coordinate": "cases/live/decision-admission-settlement/ontology-split.md"
+        },
+        {
+          "kind": "git",
+          "coordinate": "https://github.com/kungfu-systems/kfd/pull/230"
+        }
+      ],
+      "notes": "Fusing Assessment with authority or Decision with Admission hides independently variable responsibility and failure state."
+    },
+    "falsifiers": [
+      "Relevant adopter domains cannot preserve one portable meaning for the four responsibilities.",
+      "Decision and Admission can always be fused without losing state, responsibility, failure, retry, or successor semantics.",
+      "An existing portable contract preserves every required distinction with lower total burden.",
+      "The procedure creates unacceptable participant friction that progressive disclosure cannot remove.",
+      "Independent implementations cannot interoperate on basis, outcome, receipt, and successor-state semantics."
+    ],
+    "dogfood": {
+      "result": "inconclusive",
+      "evidence": [
+        {
+          "kind": "git",
+          "coordinate": "https://github.com/kungfu-systems/kfd/pull/230"
+        },
+        {
+          "kind": "git",
+          "coordinate": "https://github.com/kungfu-systems/kfd/pull/231"
+        }
+      ],
+      "notes": "KFD's own reviewed Foundation Revision exercises claim, assessment, authorized decision, and merge admission, but correlated first-party evidence is insufficient for cross-domain acceptance."
+    }
+  },
+  "decision": {
+    "outcome": "provisional",
+    "owner": "KFD maintainers under repository review",
+    "reason": "The Agent-generated intermediate ontology and later cross-domain compression pass contract-level deletion and fuse tests, close a missing dependency between KFD-2, KFD-10, and KFD-7, and support a numbered draft; independent cross-domain qualification and activation remain open.",
+    "residualRisks": [
+      "The procedure may restate an existing transaction, authorization, provenance, or workflow standard under new vocabulary.",
+      "The founding evidence is first-party and software-heavy.",
+      "The retained private Agent-origin transcript is not independently available in the public package.",
+      "Four responsibilities may be misread as four mandatory physical objects or user steps.",
+      "KFD-11 activation and interoperability evidence remain absent."
+    ]
+  }
+}

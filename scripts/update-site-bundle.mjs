@@ -210,6 +210,12 @@ const buildLiveCasePages = (liveCaseRegistry) => (liveCaseRegistry.cases ?? []).
     path: entry.genesis,
     markdown: stripFrontmatter(readFileSync(entry.genesis, "utf8")),
   },
+  ...(entry.developmentLineage ? {
+    developmentLineage: {
+      path: entry.developmentLineage,
+      markdown: stripFrontmatter(readFileSync(entry.developmentLineage, "utf8")),
+    },
+  } : {}),
   methodTrace: {
     path: entry.methodTrace,
     markdown: stripFrontmatter(readFileSync(entry.methodTrace, "utf8")),

@@ -3,7 +3,7 @@ status: active
 period: 2026-07-21
 theme: decision-admission-genesis
 doc_type: genesis-record
-source_level: maintainer-consensus
+source_level: maintainer-testimony-and-repository-evidence
 confidence: high
 sensitivity: public
 evidence_grade: B
@@ -11,65 +11,81 @@ review_state: self-reviewed
 last_reviewed: 2026-07-21
 ---
 
-# Genesis: From Numbered Nouns to Consequential Settlement
+# Genesis: From Development Pressure to Consequential Settlement
 
-This record separates the reported conversational genesis from later public
-qualification. It must not be rewritten to make maintainer authorization look
-like maintainer candidate generation.
+This record separates the distributed development genesis from later KFD
+recognition and public qualification. It must not be rewritten to make
+maintainer pressure or authorization look like maintainer generation of the
+intermediate ontology.
 
-## State before the discovery
+## The discovery began before KFD-11
 
-The software-work model merged by KFD PR
-[#228](https://github.com/kungfu-systems/kfd/pull/228) already contained:
+On 2026-07-11, the maintainer asked how Kungfu should determine whether Agent
+work was trustworthy and later asked the agent to connect KFD, Fact Manager,
+ADR-0048, and Atlas Mission/Go into one product. Those prompts supplied the
+real problem and desired outcome. They did not specify Claim, Assessment, or
+Decision as product objects.
+
+The agent first generated a trust decomposition:
 
 ```text
-Initiative
-  -> Assignment
-  -> Episode
-  -> Claim
-  -> Assessment
-  -> Decision
-  -> Continuation
+Claim + purpose + pinned cut + policy -> Assessment -> TrustReport
 ```
 
-Claim and Assessment were already governed by KFD-2. Decision was visible in
-the software lifecycle and Warrant already supplied its authority boundary.
-Admission was not named as an independent responsibility.
+It then generated the Mission Control chain and identity graph:
 
-## The maintainer's question
+```text
+Mission -> Go -> Episode -> Fact query -> Assessment -> Decision
 
-The maintainer reports that the prompt was whether Claim, Assessment, and
-Decision needed to become KFDs. It did not propose Admission, a four-stage
-cross-domain procedure, or the conclusion that the three nouns should not
-become three separate decisions.
+mission -> go -> run -> episode -> claim -> query -> assessment -> decision
+```
 
-This report is maintainer testimony about an unretained conversation. The
-repository does not contain a verbatim transcript and therefore cannot
-independently prove conversational authorship.
+Kungfu PRs [#542](https://github.com/kungfu-systems/kungfu/pull/542),
+[#545](https://github.com/kungfu-systems/kungfu/pull/545), and
+[#585](https://github.com/kungfu-systems/kungfu/pull/585) preserve the public
+architecture and implementation sequence. Claim, Assessment, and Decision
+therefore predate the later KFD numbering question.
 
-## The Agent's transformation
+## The later maintainer question
 
-The agent stopped treating the visible nouns as a numbering problem and moved
-to the position of the authority that must decide whether a consequential
-effect actually enters admitted state.
+On 2026-07-21, the maintainer asked whether Claim, Assessment, and Decision
+needed to become KFDs. The maintainer reports that this was also the first time
+they became aware those named objects already existed. The question did not
+propose the three objects, Admission, a four-stage cross-domain procedure, or
+the conclusion that the visible nouns should not become three separate
+decisions.
 
-From that position:
+A maintainer-held local task transcript retains the earlier exchanges, but it
+is not distributed in the public repository. Public Git proves the subsequent
+semantic and implementation sequence, not every conversational utterance.
+
+## The Agent's retrospective transformation
+
+By then, Project Cut settlement, independent review, and Action Loop recovery
+had made the responsibilities operational. Admission also already existed in
+the Fact architecture as the difference between a recorded observation and
+admitted state. The agent stopped treating the visible nouns as a numbering
+problem and recognized that these separately generated lines shared one
+procedure.
+
+The compression was:
 
 - Claim and Assessment were not missing KFDs; KFD-2 already owned them.
 - Assessment could not authorize action; a Decision required Warrant.
 - A valid Decision still could become stale, conflict, be denied, or fail to
   change the owning Fact authority.
-- Therefore Decision and successful state change were not the same role.
+- Therefore existing Fact Admission had to remain distinct from Decision in a
+  cross-domain settlement model.
 
-The missing responsibility was named **Admission**. The candidate was then
-compressed into one procedure:
+The candidate was compressed into one procedure:
 
 ```text
 Claim -> Assessment -> Decision -> Admission
 ```
 
-This was Agent candidate generation, not Agent verification of a model already
-supplied by the maintainer.
+This was Agent Primitive recognition and structural compression over an
+Agent-generated development ontology, not Agent verification of a model
+already supplied by the maintainer.
 
 ## Later human and repository roles
 
@@ -83,7 +99,11 @@ responsibility split and approved the change. PR
 coordinates.
 
 These later actions qualify, authorize, review, and preserve the candidate.
-They do not transfer genesis from the agent to the maintainer or reviewer.
+They do not transfer generation of Claim, Assessment, Decision, or their
+composition from the agents to the maintainer or reviewer.
+
+The full dated evidence chain is preserved in the
+[development lineage](development-lineage.md).
 
 ## Counterfactual alternatives retained at genesis
 
