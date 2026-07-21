@@ -91,6 +91,16 @@ KFD-7 defines Domain Profiles. KFD-8 through KFD-10 define the three action
 coordinates used here. KFD-11 translates them into one software-development
 work model; it does not modify their cross-domain semantics.
 
+The founding discovery changed perspective from the developer refining Fact,
+Episode, Pursuit, Atlas, and Warrant to the participant trying to get real
+software work done. From that participant view, more control over the lower
+objects did not answer which continuing work context mattered or which bounded
+responsibility had been accepted. KFD-4 exposed Initiative and Assignment;
+KFD-5 then qualified their distinct responsibilities. The
+[live qualification case](../cases/live/software-work-perspective-settlement/README.md)
+preserves that genesis and decision boundary. Acceptance of these two
+software-domain Primitives does not activate this draft KFD.
+
 ## Non-claims
 
 KFD-11 does not require every task to expose seven user-visible objects, require

@@ -430,6 +430,18 @@ domains adopt Initiative, Assignment, Project Cut, or the same lifecycle.
 Other domains may inhabit the geometry with different vocabulary, fields,
 transitions, and macro commitments.
 
+The first software application also demonstrates the full KFD-4/KFD-5
+transition. Staying in the lower-object developer view suggests refining Fact,
+Episode, Pursuit, Atlas, and Warrant. Moving to the real participant's view
+instead exposes Initiative and Assignment as the objects needed to organize
+work. Staying in the coordinator view then suggests maintaining those objects
+more precisely; moving to the successor Agent's view exposes Project Cut as
+the project boundary needed for continuation. Perspective transformation
+generates these candidates, but does not certify them. Separate KFD-5 cuts
+qualify their distinct responsibilities, alternatives, falsifiers, evidence,
+and bounded acceptance. The [live case](../cases/live/software-work-perspective-settlement/README.md)
+preserves that separation.
+
 Observer-bound timeline and replay are the first concrete KFD-4 profiles, just
 as release versioning is one concrete KFD-1 profile. Episode and Atlas are
 KFD-5 cases: each became natural when the view moved from an implementation

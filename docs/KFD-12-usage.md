@@ -2,6 +2,7 @@
 
 [Authoritative decision](../decisions/KFD-12.md) ·
 [Formal reference](KFD-12-formal.md) ·
+[Discovery and qualification](../cases/live/software-work-perspective-settlement/README.md) ·
 [Documentation map](MAP.md)
 
 KFD-12 is a numbered draft for software-project settlement. Project Cut is the
@@ -14,6 +15,20 @@ The founding implementation binds Git source, Xinfa Atlas, and Kungfu Episode
 coordinates. A conforming software implementation may use different
 authorities. A non-software Domain Profile may define another macro commitment
 or adopt no equivalent at all.
+
+## Discovery lineage
+
+The founding move changed from the coordinator maintaining Initiative and
+Assignment state to the successor Agent that must act from one exact project
+boundary. From that view, Project Cut became the minimal answer to what the
+project had officially become and where continuation may begin. KFD-5 then
+qualified that settlement responsibility separately from the concrete Git,
+Xinfa, and Kungfu binding.
+
+The case records maintainer testimony that an Agent first proposed Project Cut.
+Public repository history verifies the later design, implementation,
+qualification, and review, but does not independently prove the private
+conversation or its authorship. The two evidence classes remain explicit.
 
 ## Implementation sequence
 

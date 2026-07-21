@@ -83,6 +83,18 @@ continuation. KFD-12 publishes a project-level commitment after those
 decisions. It preserves the Fact-Episode Ontology and the Atlas, Pursuit, and
 Warrant responsibilities rather than flattening them into one state authority.
 
+The founding discovery changed perspective again: from the coordinator who
+maintains Initiative and Assignment state to the successor Agent that must
+continue from one exact project boundary. From that acting view, the work
+model was informative but not a single answer to what the project had
+officially become. KFD-4 exposed Project Cut; KFD-5 then qualified the
+settlement responsibility independently of its founding implementation. The
+[live qualification case](../cases/live/software-work-perspective-settlement/README.md)
+preserves both the maintainer-reported Agent-origin genesis and the separately
+verifiable public implementation evidence. Project Cut is accepted at this
+software-settlement layer, not as a fourth fact engine or a peer action
+coordinate, and that acceptance does not activate this draft KFD.
+
 ## Non-claims
 
 KFD-12 does not require Git, Xinfa, Kungfu, one JSON shape, one release process,

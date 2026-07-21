@@ -1,0 +1,282 @@
+{
+  "schemaVersion": 3,
+  "contract": "kfd-5-primitive-discovery",
+  "standard": "kfd-5",
+  "candidate": {
+    "id": "assignment",
+    "title": "Assignment",
+    "problemStatement": "Objective, permission, context, and occurrence do not by themselves state whether a participant was proposed, accepted, refused, or remains responsible for bounded software work and its evidence boundary.",
+    "scope": "Accepted as a software-development Domain Profile Primitive under KFD-11; universal task ontology, one physical record, historical novelty, and KFD-11 activation are not claimed."
+  },
+  "genesis": {
+    "methods": [
+      "direct-situated-judgment",
+      "perspective-transformation",
+      "reconstruction-pressure",
+      "structural-compression"
+    ],
+    "observationPerspective": {
+      "id": "action-coordinate-developer",
+      "bearer": "human and agent participants implementing Pursuit, Atlas, Warrant, and Episode controls",
+      "role": "Primitive researcher and product developer",
+      "proximity": "inside action contract and execution mechanics",
+      "consequences": [
+        "bears invalid state transitions, missing roots, and execution ambiguity"
+      ],
+      "naturalObjects": [
+        "objective",
+        "Pursuit",
+        "Atlas",
+        "Warrant",
+        "Episode",
+        "task state"
+      ]
+    },
+    "currentOntology": [
+      "task",
+      "goal",
+      "Pursuit",
+      "Atlas",
+      "Warrant",
+      "Episode",
+      "claim"
+    ],
+    "observation": "Changing from the implementation view to the participant receiving work exposed that authority to act and action occurrence do not answer whether that participant accepted bounded responsibility or what evidence and handoff it owes.",
+    "candidateObject": "An Assignment is an independently addressable bounded responsibility proposed to, accepted by, or held by a participant, binding objective, Atlas, Warrant, acceptance boundary, expected evidence, lineage, and state.",
+    "claimBoundary": "The cut accepts a software-domain responsibility distinction, not a universal task object, mandatory delegation ceremony, physical table, or proof that every Assignment requires a different participant.",
+    "methodEvidence": [
+      {
+        "kind": "file",
+        "coordinate": "cases/live/software-work-perspective-settlement/genesis.md",
+        "observer": "KFD maintainers"
+      },
+      {
+        "kind": "file",
+        "coordinate": "decisions/KFD-11.md",
+        "observer": "KFD maintainers"
+      },
+      {
+        "kind": "git",
+        "coordinate": "https://github.com/kungfu-systems/kungfu/pull/585",
+        "observer": "Kungfu Mission Control implementers and reviewers"
+      }
+    ],
+    "transformedPerspective": {
+      "id": "responsibility-bearing-participant",
+      "bearer": "a human or agent proposed for bounded software work",
+      "role": "potential, current, or successor responsibility holder",
+      "proximity": "inside acceptance, execution, evidence, refusal, and handoff consequences",
+      "consequences": [
+        "bears unclear ownership, accidental commitment, unsupported completion, and failed handoff"
+      ],
+      "naturalObjects": [
+        "assignment proposal",
+        "acceptance or refusal",
+        "responsible participant",
+        "evidence expectation",
+        "claim and settlement"
+      ]
+    },
+    "transformation": "The observer moved from the system that can authorize and record action to the participant whose acceptance and continuing responsibility cannot be inferred from those mechanics.",
+    "newlyVisibleNeed": "A bounded responsibility must preserve proposal, acceptance, holder, evidence, lineage, claim, and settlement state independently from permission and occurrence.",
+    "methodNotes": "The founding Go vocabulary supplied first-party pressure; KFD-11 later assigned Assignment as the canonical software-profile term."
+  },
+  "boundaryPressure": {
+    "contactSides": [
+      "the coordinator or agent proposing bounded work",
+      "the participant expected to accept, refuse, perform, report, or hand off that work"
+    ],
+    "implicitHandling": "Responsibility is inferred from prompts, task status, assignee fields, permission grants, branch ownership, or the fact that an action happened.",
+    "pressureChanges": [
+      {
+        "kind": "new-participant",
+        "description": "Work increasingly crosses humans, agents, reviewers, and successor agents with different acceptance states."
+      },
+      {
+        "kind": "authority",
+        "description": "Permission, responsibility acceptance, claim, assessment, and decision must remain independently auditable."
+      },
+      {
+        "kind": "consequence",
+        "description": "Mistaking permission or occurrence for accepted responsibility changes who may be held accountable or expected to continue."
+      }
+    ],
+    "observedFailures": [
+      "A proposed task is treated as accepted merely because it exists.",
+      "A valid Warrant is mistaken for a commitment by its holder.",
+      "An Episode is mistaken for proof that the actor owned or completed the responsibility.",
+      "A completion claim is treated as settlement without independent assessment and decision."
+    ],
+    "mediationClaim": "Assignment may preserve bounded participant responsibility while referencing rather than absorbing objective, Atlas, Warrant, Episode, claim, assessment, and decision authority.",
+    "internalObjectAlternative": "A disciplined task, issue, ticket, or workflow item may implement equivalent Assignment semantics without using this name."
+  },
+  "grounding": {
+    "pressure": [
+      "Responsibility acceptance varies independently from permission and action occurrence.",
+      "Bounded work needs stable evidence expectations, lineage, and settlement state across sessions and participants.",
+      "Agent self-report must not self-certify completion or expand authority."
+    ],
+    "factSources": [
+      {
+        "kind": "file",
+        "coordinate": "decisions/KFD-11.md",
+        "observer": "KFD maintainers"
+      },
+      {
+        "kind": "git",
+        "coordinate": "https://github.com/kungfu-systems/kungfu/commit/9da49c368806f89d11402375479ebc84cbd724d2",
+        "observer": "Kungfu Mission Control implementation"
+      },
+      {
+        "kind": "file",
+        "coordinate": "cases/live/software-work-perspective-settlement/distinguishability.md",
+        "observer": "KFD qualification"
+      }
+    ],
+    "evidenceBoundary": "Public KFD-11 and first-party Kungfu Mission Control implementation establish one software profile with proposal, lifecycle, execution evidence, claims, assessment, decisions, portability, and participant surfaces. Independent product transfer remains absent.",
+    "knownGaps": [
+      "No universal task or delegation ontology claim",
+      "No independent adopter using the Assignment name",
+      "Self-assignment and ambient low-risk defaults need continuing product qualification",
+      "KFD-11 activation remains separate"
+    ]
+  },
+  "participants": [
+    {
+      "id": "human-user-perspective-source",
+      "kind": "human",
+      "functions": [
+        "perspective-declaration",
+        "candidate-generation",
+        "decision"
+      ]
+    },
+    {
+      "id": "agent-responsibility-participant",
+      "kind": "agent",
+      "functions": [
+        "perspective-declaration",
+        "candidate-generation",
+        "scalable-reasoning"
+      ]
+    },
+    {
+      "id": "repository-review",
+      "kind": "collective",
+      "functions": [
+        "evidence-custody",
+        "verification"
+      ]
+    }
+  ],
+  "alternatives": [
+    {
+      "name": "Task, issue, ticket, or workflow item",
+      "disposition": "retained",
+      "reason": "These may be valid Domain Profile implementations when they preserve proposal, acceptance, authority, evidence, claim, and settlement distinctions."
+    },
+    {
+      "name": "Warrant",
+      "disposition": "rejected",
+      "reason": "Permission to act does not imply that the holder accepted responsibility or owes the expected evidence and handoff."
+    },
+    {
+      "name": "Episode or run",
+      "disposition": "rejected",
+      "reason": "Occurrence does not establish prior responsibility, acceptance, valid claim, or settlement."
+    },
+    {
+      "name": "No new Primitive",
+      "disposition": "rejected",
+      "reason": "The deletion witness changes who must act, report, refuse, or hand off while objective, permission, and occurrence remain fixed."
+    }
+  ],
+  "contractModel": {
+    "identity": "A stable assignment_ref for one bounded software responsibility proposal and its accepted or refused lineage.",
+    "boundary": "Participant, objective, exact Atlas and Warrant roots, acceptance boundary, expected evidence, parent Initiative or Assignment, state, claim, assessment, decision, and continuation references.",
+    "authority": "Proposal does not imply acceptance; acceptance does not create Warrant authority, prove occurrence, validate a claim, or authorize settlement. Each remains independently decided.",
+    "lifecycle": "proposed -> accepted, refused, or revision-requested -> active, blocked, paused, or handed-off -> claimed -> assessed -> settled, reopened, or continued",
+    "operations": [
+      "propose",
+      "inspect",
+      "accept",
+      "refuse",
+      "request-revision",
+      "start",
+      "block",
+      "claim",
+      "assess",
+      "settle",
+      "reopen",
+      "handoff",
+      "continue"
+    ]
+  },
+  "tests": {
+    "minimumClosure": {
+      "result": "pass",
+      "evidence": [
+        {
+          "kind": "file",
+          "coordinate": "docs/KFD-11-formal.md"
+        },
+        {
+          "kind": "git",
+          "coordinate": "https://github.com/kungfu-systems/kungfu/pull/585"
+        }
+      ],
+      "notes": "Stable identity, participant, objective, Atlas, Warrant, acceptance, evidence, lineage, and state preserve the bounded software responsibility while other authorities remain external."
+    },
+    "deletion": {
+      "result": "pass",
+      "evidence": [
+        {
+          "kind": "file",
+          "coordinate": "cases/live/software-work-perspective-settlement/distinguishability.md"
+        }
+      ],
+      "notes": "Deleting Assignment acceptance while holding objective, permission, context, and occurrence fixed changes who is responsible to act or decline."
+    },
+    "fuse": {
+      "result": "pass",
+      "evidence": [
+        {
+          "kind": "file",
+          "coordinate": "cases/live/software-work-perspective-settlement/ontology-split.md"
+        }
+      ],
+      "notes": "Fusing Assignment with Warrant or Episode makes acceptance silently follow authority or occurrence; task systems remain valid when they preserve equivalent separation."
+    },
+    "falsifiers": [
+      "Responsibility acceptance never varies independently from an existing task, Warrant, or Episode in valid software work.",
+      "The explicit lifecycle creates more ceremony than reconstruction or authority risk it removes.",
+      "Self-assigned and delegated work require incompatible minimum contracts.",
+      "Independent software workflows cannot map equivalent responsibility semantics."
+    ],
+    "dogfood": {
+      "result": "pass",
+      "evidence": [
+        {
+          "kind": "git",
+          "coordinate": "https://github.com/kungfu-systems/kungfu/commit/9da49c368806f89d11402375479ebc84cbd724d2"
+        },
+        {
+          "kind": "git",
+          "coordinate": "https://github.com/kungfu-systems/kungfu/commit/bcbe4abe0918e65647e9df7c2309ef489b1e16d4"
+        }
+      ],
+      "notes": "The founding Go profile exercised bounded objective, actor, Episode evidence, completion claim, purpose-bound assessment, portability, and continuation. The evidence is first-party and software-scoped."
+    }
+  },
+  "decision": {
+    "outcome": "accepted",
+    "owner": "KFD maintainers under repository review",
+    "reason": "Within the KFD-11 software profile, Assignment preserves accepted bounded responsibility independently from objective, authority, occurrence, claim, and settlement, and the first-party implementation demonstrates an executable lifecycle.",
+    "residualRisks": [
+      "The object may map to an ordinary task or workflow item in other products.",
+      "The founding evidence is correlated with one organization and product family.",
+      "Poor defaults could turn explicit responsibility into ceremony or hidden coercion.",
+      "Cross-domain use and historical novelty are unqualified."
+    ]
+  }
+}
