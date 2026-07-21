@@ -38,6 +38,24 @@ present, but it is not a prerequisite for every genesis method. Replacing the
 version 3 perspective-only experiment contract requires version 4 rather than
 silently changing its meaning.
 
+## Episode Asset Stewardship
+
+Systems that expect future ontology discovery should treat qualified Episode
+corpora as durable historical assets rather than disposable telemetry. At
+minimum, stewardship should make the following inspectable:
+
+- stable Episode and evidence-cut identities;
+- integrity checking, corruption detection, and recovery boundaries;
+- portable export, exact or explicitly lossy import, and provider migration;
+- observer, perspective, consequence, omission, and degradation metadata;
+- retention, deletion, privacy, consent, and redaction policy;
+- the distinction between authoritative Episode records and derived indexes,
+  summaries, embeddings, or training projections.
+
+These capabilities preserve future replay options. They do not imply that
+every Episode must be retained, that a corpus is complete, or that storage
+volume predicts Primitive yield.
+
 ## Experimental Use Only
 
 The schema records a bounded experiment. It does not certify that the corpus is
