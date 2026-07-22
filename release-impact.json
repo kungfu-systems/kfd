@@ -97,6 +97,12 @@
       "rationale": "KFD additively publishes the non-numbered kfd-agent-hub 0.1.0-alpha.1 profile with a digest-bound manifest, topology-neutral capability and responsibility-exchange schemas, an explicit receiver-verdict state machine, negative cases, a single-runtime versus cross-Hub gap matrix, and a public implementer/review path. Existing numbered decisions, registry entries, KFD-7 Domain Profile declarations, package paths, and adopter-owned product semantics remain unchanged."
     },
     {
+      "id": "kfd-agent-hub-conformance-alpha",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD additively publishes the non-numbered kfd-agent-hub-conformance 0.1.0-alpha.1 adopter profile, fixed rooted Agent Hub 20 registry, dual-Hub JSONL adapter contract, capability- and artifact-bound report, independent offline JavaScript verifier, deterministic runner, and two structurally different non-product reference adapters. Passing remains non-qualifying and non-certifying; the profile does not promote provisional runtime semantics or prove production interoperability."
+    },
+    {
       "id": "kfd-agent-runtime-conformance-alpha",
       "impact": "minor",
       "class": "additive",

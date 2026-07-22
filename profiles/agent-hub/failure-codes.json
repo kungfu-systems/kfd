@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.agent-hub-conformance-failure-codes/v1",
+  "exitCodes": {
+    "0": "suite passed or report verified",
+    "1": "suite completed with a failing vector or report verification failed",
+    "2": "invocation, adapter process, envelope, or report input was invalid"
+  },
+  "profileCodes": [
+    "profile-version-unsupported",
+    "profile-root-mismatch",
+    "required-feature-unsupported",
+    "identity-unresolved",
+    "authority-unresolved",
+    "authority-expired",
+    "authority-revoked",
+    "authority-amplification",
+    "fact-cut-unavailable",
+    "causal-gap",
+    "payload-digest-mismatch",
+    "idempotency-conflict",
+    "conflict-visible",
+    "disclosure-insufficient",
+    "required-field-withheld",
+    "completion-unproved",
+    "local-policy-rejected"
+  ],
+  "positiveCodes": [
+    "adapter-ready",
+    "capability-negotiated",
+    "delivery-recorded",
+    "duplicate-preserved",
+    "admission-accepted",
+    "authority-attenuated",
+    "revocation-retained",
+    "partial-knowledge-retained",
+    "export-import-preserved"
+  ],
+  "verifierCodes": [
+    "json-invalid",
+    "report-contract-invalid",
+    "profile-manifest-digest-mismatch",
+    "protocol-manifest-digest-mismatch",
+    "suite-vector-root-mismatch",
+    "failure-inventory-root-mismatch",
+    "adapter-handshake-invalid",
+    "capability-document-invalid",
+    "capability-root-mismatch",
+    "suite-result-unknown",
+    "suite-result-duplicate",
+    "suite-expectation-drift",
+    "suite-outcome-mismatch",
+    "adapter-response-root-mismatch",
+    "suite-result-root-mismatch",
+    "suite-transcript-root-mismatch",
+    "suite-result-closure",
+    "adapter-artifact-digest-mismatch",
+    "scope-widening",
+    "report-validity-mismatch"
+  ]
+}
