@@ -50,6 +50,34 @@ No principle is load-bearing until it has an inspectable product witness.
 [Explore current decisions](#current-decisions) ·
 [Inspect the product proof path](#product-proof-path)
 
+## Where KFD sits in the Agent Supply Chain
+
+KFD owns the open cooperation and trust contracts in the Agent Supply Chain;
+it does not own product builds, runtime storage, vendor identity, or a central
+Hub. The relevant path is:
+
+```text
+KFD-3 discovery and cooperation
+  -> product-owned build evidence
+  -> KFD-2 purpose-bound assessment
+  -> adopter-owned runtime facts
+  -> receiver-owned admission between independent Hubs
+```
+
+KFD-3 makes a product's value, constraints, choices, commands, Exit, and
+records discoverable without turning discovery into forced adoption. KFD-2
+lets a receiver assess claims against exact facts and evidence while retaining
+residual risk and decision ownership. The experimental
+[Agent Hub profile](protocols/agent-hub/README.md) carries those responsibilities
+across independently owned implementations.
+
+What is proved now is the public decision, schema, profile, and verifier
+surface in this repository. The protocol enables independent Hubs to implement
+the same responsibility boundary; it does **not** prove two independent
+production Hubs, external vendor adoption, stable certification, or industry
+standard status. Implementers can start with the exact alpha profile and
+[open a protocol gap](https://github.com/kungfu-systems/kfd/issues/new).
+
 ## Why this question matters
 
 Continuity under uncertainty is not the preservation of a fixed state. A
