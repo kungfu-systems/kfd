@@ -209,6 +209,14 @@ implementation, vendor adoption, plural-Hub interoperability, or an industry
 standard. Implementations cite its exact alpha version, manifest digest, and
 repository commit.
 
+The packaged [Agent Hub conformance profile](profiles/agent-hub/README.md)
+turns that protocol into a fixed dual-Hub black-box workflow: Agent Hub 20,
+JSONL adapter request and response contracts, artifact- and capability-bound
+reports, an independent offline verifier, and two non-product reference
+adapters. Its machine outcomes bind `status`, `code`, and `verdict` together so
+a visible conflict cannot be mistaken for admission merely by inspecting a
+reason code.
+
 The experimental
 [Agent Runtime conformance profile](profiles/agent-runtime/README.md) consumes
 that exact Hub root and exposes a topology-neutral black-box adapter, the fixed
@@ -287,12 +295,17 @@ npx @kungfu-tech/kfd verify atlas path/to/atlas
 npx @kungfu-tech/kfd verify episode path/to/sealed/episode
 npx @kungfu-tech/kfd test agent-runtime --adapter path/to/adapter --output report.json
 npx @kungfu-tech/kfd verify agent-runtime-report report.json
+npx @kungfu-tech/kfd test agent-hub --adapter path/to/adapter --output agent-hub-report.json
+npx @kungfu-tech/kfd verify agent-hub-report agent-hub-report.json --adapter path/to/adapter --json
 ```
 
-Each command emits `kfd.verification-report/v1`, remains non-qualifying and
-non-self-certified, and performs no network access. Verification proves only
-the named profile checks; it does not prove source completeness, work quality,
-human approval, or release authorization. See
+The generic verifier and Agent runtime verifier emit
+`kfd.verification-report/v1`. The Agent Hub runner writes
+`kfd.agent-hub-report/v1`, and its independent verifier emits
+`kfd.agent-hub-report-verifier/v1`. All remain non-qualifying and perform no
+network access. Verification proves only the named profile checks; it does not
+prove source completeness, work quality, human approval, or release
+authorization. See
 [`docs/verifier.md`](docs/verifier.md) for the contracts and
 [`docs/verifier-inventory.md`](docs/verifier-inventory.md) for the extraction
 boundary and public-spec gaps.

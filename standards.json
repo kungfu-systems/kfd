@@ -53,6 +53,11 @@
         "agentHubManifest": "https://kfd.libkungfu.dev/schemas/kfd-agent-hub/manifest.schema.json",
         "agentHubCapabilities": "https://kfd.libkungfu.dev/schemas/kfd-agent-hub/capabilities.schema.json",
         "agentHubExchange": "https://kfd.libkungfu.dev/schemas/kfd-agent-hub/exchange.schema.json",
+        "agentHubConformanceManifest": "https://kfd.libkungfu.dev/schemas/kfd-agent-hub/conformance-manifest.schema.json",
+        "agentHubAdapterRequest": "https://kfd.libkungfu.dev/schemas/kfd-agent-hub/adapter-request.schema.json",
+        "agentHubAdapterResponse": "https://kfd.libkungfu.dev/schemas/kfd-agent-hub/adapter-response.schema.json",
+        "agentHubSuite": "https://kfd.libkungfu.dev/schemas/kfd-agent-hub/suite.schema.json",
+        "agentHubReport": "https://kfd.libkungfu.dev/schemas/kfd-agent-hub/report.schema.json",
         "agentRuntimeManifest": "https://kfd.libkungfu.dev/schemas/kfd-agent-runtime/manifest.schema.json",
         "agentRuntimeAdapterRequest": "https://kfd.libkungfu.dev/schemas/kfd-agent-runtime/adapter-request.schema.json",
         "agentRuntimeAdapterResponse": "https://kfd.libkungfu.dev/schemas/kfd-agent-runtime/adapter-response.schema.json",
@@ -70,6 +75,11 @@
         "agentHubManifest": "schemas/kfd-agent-hub/manifest.schema.json",
         "agentHubCapabilities": "schemas/kfd-agent-hub/capabilities.schema.json",
         "agentHubExchange": "schemas/kfd-agent-hub/exchange.schema.json",
+        "agentHubConformanceManifest": "schemas/kfd-agent-hub/conformance-manifest.schema.json",
+        "agentHubAdapterRequest": "schemas/kfd-agent-hub/adapter-request.schema.json",
+        "agentHubAdapterResponse": "schemas/kfd-agent-hub/adapter-response.schema.json",
+        "agentHubSuite": "schemas/kfd-agent-hub/suite.schema.json",
+        "agentHubReport": "schemas/kfd-agent-hub/report.schema.json",
         "agentRuntimeManifest": "schemas/kfd-agent-runtime/manifest.schema.json",
         "agentRuntimeAdapterRequest": "schemas/kfd-agent-runtime/adapter-request.schema.json",
         "agentRuntimeAdapterResponse": "schemas/kfd-agent-runtime/adapter-response.schema.json",
@@ -140,6 +150,41 @@
           "schemaPath": "schemas/kfd-agent-hub/exchange.schema.json",
           "compatibilityRule": "Changes to identity, authority, causal roots, disclosure, idempotency, receiver verdict, admission, conflict, or completion meaning require a new incompatible profile or interface version."
         },
+        "agentHubConformanceManifest": {
+          "contract": "kfd.agent-hub-conformance-manifest/v1",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-agent-hub/conformance-manifest.schema.json",
+          "schemaPath": "schemas/kfd-agent-hub/conformance-manifest.schema.json",
+          "compatibilityRule": "The experimental profile is selected by exact profile, protocol, suite, verifier, failure-inventory, runtime-dependency, and rooted-surface coordinates; changed meaning requires a successor profile."
+        },
+        "agentHubAdapterRequest": {
+          "contract": "kfd.agent-hub-adapter-request/v1",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-agent-hub/adapter-request.schema.json",
+          "schemaPath": "schemas/kfd-agent-hub/adapter-request.schema.json",
+          "compatibilityRule": "Changed request identity, operation, fixed input binding, or fail-closed behavior requires a new request contract."
+        },
+        "agentHubAdapterResponse": {
+          "contract": "kfd.agent-hub-adapter-response/v1",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-agent-hub/adapter-response.schema.json",
+          "schemaPath": "schemas/kfd-agent-hub/adapter-response.schema.json",
+          "compatibilityRule": "Changed dual-Hub identity, capability roots, status, code, verdict, or response binding requires a new response contract."
+        },
+        "agentHubSuite": {
+          "contract": "kfd.agent-hub-vector-registry/v1",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-agent-hub/suite.schema.json",
+          "schemaPath": "schemas/kfd-agent-hub/suite.schema.json",
+          "compatibilityRule": "Any vector identity, request, expectation, polarity, category, count, or canonical root change requires a successor suite version."
+        },
+        "agentHubReport": {
+          "contract": "kfd.agent-hub-report/v1",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-agent-hub/report.schema.json",
+          "schemaPath": "schemas/kfd-agent-hub/report.schema.json",
+          "compatibilityRule": "Changes to package cut, adapter and capability binding, suite roots, transcript and result closure, offline verification, or non-certification meaning require a new report contract."
+        },
         "agentRuntimeManifest": {
           "contract": "kfd.agent-runtime-suite-manifest/v1",
           "schemaVersion": 1,
@@ -202,6 +247,9 @@
         "warrantAttenuation": "provable narrower-or-equal delegated authority",
         "selectiveDisclosure": "typed partial or redacted replication with retained uncertainty",
         "conflictVisibility": "retention of competing roots without last-write-wins erasure",
+        "agentHubConformanceProfile": "fixed dual-Hub black-box conformance profile with independent offline verification",
+        "agentHubVectorRegistry": "fixed rooted positive and negative cross-Hub vector registry",
+        "agentHubConformanceReport": "package-, capability-, adapter-, suite-, and transcript-bound non-certifying report",
         "agentRuntimeProfile": "implementation-independent black-box Agent runtime conformance profile",
         "runtimeVectorRegistry": "fixed rooted positive and negative runtime vector registry",
         "runtimeAdapter": "topology-neutral product-owned black-box adapter",
@@ -221,6 +269,90 @@
           "unclassifiable"
         ],
         "surfaces": [
+          {
+            "id": "kfd-agent-hub-conformance-authority",
+            "class": "cross-time",
+            "classes": ["cross-time"],
+            "description": "Published authority for the experimental adopter-facing Agent Hub conformance profile.",
+            "sourcePath": "profiles/agent-hub/README.md",
+            "weldRationale": "Adopters bind the fixed suite, adapter boundary, report claims, non-claims, and offline verification workflow to one public path.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-agent-hub-conformance-manifest",
+            "class": "integration-time",
+            "classes": ["integration-time", "cross-time"],
+            "description": "Digest-bound manifest for the exact Agent Hub conformance profile and rooted public surfaces.",
+            "sourcePath": "profiles/agent-hub/manifest.json",
+            "weldRationale": "Runners, reports, and verifiers select one immutable profile closure rather than mutable package aliases.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-agent-hub-20-vector-registry",
+            "class": "cross-time",
+            "classes": ["integration-time", "cross-time"],
+            "description": "Fixed rooted registry of 20 cross-Hub positive and negative conformance vectors.",
+            "sourcePath": "profiles/agent-hub/vectors/hub-20.json",
+            "weldRationale": "Adapters and retained reports bind exact vector IDs, scenarios, expected three-field outcomes, categories, and claims.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-agent-hub-conformance-report-schema",
+            "class": "integration-time",
+            "classes": ["integration-time", "cross-time"],
+            "description": "Published JSON schema for package-, adapter-, capability-, suite-, and transcript-bound Agent Hub reports.",
+            "sourcePath": "schemas/kfd-agent-hub/report.schema.json",
+            "weldRationale": "Humans, agents, CI, and release systems receive exact roots, outcomes, residual risks, and non-certification boundaries.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-agent-hub-conformance-runner",
+            "class": "integration-time",
+            "classes": ["integration-time"],
+            "description": "Packaged offline runner for the kfd test agent-hub black-box command.",
+            "sourcePath": "scripts/agent-hub-runner.mjs",
+            "weldRationale": "Every adopter adapter receives the same handshake and 20 requests while caller working-directory, artifact hashing, transcript rooting, timeout, and output behavior remain auditable.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-agent-hub-conformance-report-verifier",
+            "class": "integration-time",
+            "classes": ["integration-time", "cross-time"],
+            "description": "Independent packaged offline verifier for Agent Hub reports and fixed public roots.",
+            "sourcePath": "scripts/agent-hub-report-verifier.mjs",
+            "weldRationale": "Consumers fail closed on package, profile, protocol, vector, inventory, capability, adapter, response, transcript, result, and claim-scope drift without invoking Hub code or the network.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
           {
             "id": "kfd-agent-runtime-profile-authority",
             "class": "cross-time",

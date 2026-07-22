@@ -1,0 +1,169 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-agent-hub/report.schema.json",
+  "title": "KFD Agent Hub conformance execution report",
+  "type": "object",
+  "required": ["schemaVersion", "contract", "sourceCut", "profile", "protocol", "suite", "verifier", "adapter", "capabilities", "platform", "execution", "coverage", "valid", "qualifying", "certification", "results", "residualRisk"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "contract": { "const": "kfd.agent-hub-report/v1" },
+    "sourceCut": {
+      "type": "object",
+      "required": ["repository", "package", "packageVersion", "packageManifestDigest", "releaseAnchorDigest"],
+      "properties": {
+        "repository": { "const": "kungfu-systems/kfd" },
+        "package": { "const": "@kungfu-tech/kfd" },
+        "packageVersion": { "type": "string", "pattern": "^1\\.0\\.0-alpha\\.[1-9][0-9]*$" },
+        "packageManifestDigest": { "$ref": "#/$defs/root" },
+        "releaseAnchorDigest": { "$ref": "#/$defs/root" }
+      },
+      "additionalProperties": false
+    },
+    "profile": {
+      "type": "object",
+      "required": ["id", "version", "manifestDigest"],
+      "properties": {
+        "id": { "const": "kfd-agent-hub-conformance" },
+        "version": { "const": "0.1.0-alpha.1" },
+        "manifestDigest": { "$ref": "#/$defs/root" }
+      },
+      "additionalProperties": false
+    },
+    "protocol": {
+      "type": "object",
+      "required": ["id", "version", "manifestDigest"],
+      "properties": {
+        "id": { "const": "kfd-agent-hub" },
+        "version": { "const": "0.1.0-alpha.1" },
+        "manifestDigest": { "$ref": "#/$defs/root" }
+      },
+      "additionalProperties": false
+    },
+    "suite": {
+      "type": "object",
+      "required": ["id", "version", "vectorCount", "vectorRoot", "inventoryRoot"],
+      "properties": {
+        "id": { "const": "kfd-agent-hub-20" },
+        "version": { "const": "0.1.0-alpha.1" },
+        "vectorCount": { "const": 20 },
+        "vectorRoot": { "$ref": "#/$defs/root" },
+        "inventoryRoot": { "$ref": "#/$defs/root" }
+      },
+      "additionalProperties": false
+    },
+    "verifier": {
+      "type": "object",
+      "required": ["contract", "artifactDigest", "failureInventoryRoot"],
+      "properties": {
+        "contract": { "const": "kfd.agent-hub-report-verifier/v1" },
+        "artifactDigest": { "$ref": "#/$defs/root" },
+        "failureInventoryRoot": { "$ref": "#/$defs/root" }
+      },
+      "additionalProperties": false
+    },
+    "adapter": {
+      "type": "object",
+      "required": ["id", "version", "topology", "artifactDigest", "handshake", "handshakeRoot"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 },
+        "topology": { "type": "string", "minLength": 1 },
+        "artifactDigest": { "$ref": "#/$defs/root" },
+        "sourceCommit": { "type": "string", "pattern": "^(?:[a-f0-9]{40}|[a-f0-9]{64})$" },
+        "handshake": { "type": "object" },
+        "handshakeRoot": { "$ref": "#/$defs/root" }
+      },
+      "additionalProperties": false
+    },
+    "capabilities": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["hubId", "root", "document"],
+        "properties": {
+          "hubId": { "type": "string", "minLength": 1 },
+          "root": { "$ref": "#/$defs/root" },
+          "document": { "type": "object" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "platform": {
+      "type": "object",
+      "required": ["os", "arch", "runtime"],
+      "properties": {
+        "os": { "type": "string", "minLength": 1 },
+        "arch": { "type": "string", "minLength": 1 },
+        "runtime": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "execution": {
+      "type": "object",
+      "required": ["startedAt", "finishedAt", "offline", "requestCount", "transcriptRoot", "resultRoot"],
+      "properties": {
+        "startedAt": { "type": "string", "minLength": 1 },
+        "finishedAt": { "type": "string", "minLength": 1 },
+        "offline": { "const": true },
+        "requestCount": { "const": 21 },
+        "transcriptRoot": { "$ref": "#/$defs/root" },
+        "resultRoot": { "$ref": "#/$defs/root" }
+      },
+      "additionalProperties": false
+    },
+    "coverage": {
+      "type": "object",
+      "required": ["total", "passed", "failed", "categories"],
+      "properties": {
+        "total": { "const": 20 },
+        "passed": { "type": "integer", "minimum": 0, "maximum": 20 },
+        "failed": { "type": "integer", "minimum": 0, "maximum": 20 },
+        "categories": { "type": "object" }
+      },
+      "additionalProperties": false
+    },
+    "valid": { "type": "boolean" },
+    "qualifying": { "const": false },
+    "certification": { "const": false },
+    "results": {
+      "type": "array",
+      "minItems": 20,
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "required": ["id", "category", "status", "expected", "actual", "response", "responseRoot"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "category": { "type": "string", "minLength": 1 },
+          "status": { "enum": ["pass", "fail"] },
+          "expected": { "$ref": "#/$defs/outcome" },
+          "actual": { "$ref": "#/$defs/outcome" },
+          "response": { "type": "object" },
+          "responseRoot": { "$ref": "#/$defs/root" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "residualRisk": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "root": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "outcome": {
+      "type": "object",
+      "required": ["status", "code", "verdict"],
+      "properties": {
+        "status": { "enum": ["accepted", "rejected", "conflicted", "missing", "error"] },
+        "code": { "type": "string", "minLength": 1 },
+        "verdict": { "enum": ["admitted", "rejected", "conflicted", "unavailable", "intentionally-withheld", "not-applicable"] }
+      },
+      "additionalProperties": false
+    }
+  }
+}
