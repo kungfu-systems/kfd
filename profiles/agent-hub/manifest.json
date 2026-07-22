@@ -1,0 +1,131 @@
+{
+  "$schema": "https://kfd.libkungfu.dev/schemas/kfd-agent-hub/conformance-manifest.schema.json",
+  "schemaVersion": 1,
+  "contract": "kfd.agent-hub-conformance-manifest/v1",
+  "profile": {
+    "id": "kfd-agent-hub-conformance",
+    "version": "0.1.0-alpha.1",
+    "status": "experimental",
+    "authority": "profiles/agent-hub/README.md"
+  },
+  "protocol": {
+    "id": "kfd-agent-hub",
+    "version": "0.1.0-alpha.1",
+    "manifest": "protocols/agent-hub/manifest.json",
+    "manifestDigest": "sha256:dab4e93d2a662092eb51e29171dfc8bd0c400daa99899f074e69608b45cc7a59"
+  },
+  "suite": {
+    "id": "kfd-agent-hub-20",
+    "version": "0.1.0-alpha.1",
+    "fixedVectorCount": 20,
+    "vectorRoot": "sha256:f1be3a10121fbd5389204b6e1ca70ea3920d9ba13ad20bb9f83fac078339c6b2"
+  },
+  "runtimeDependency": {
+    "id": "kfd-runtime-100",
+    "version": "0.1.0-alpha.1",
+    "manifest": "profiles/agent-runtime/manifest.json",
+    "manifestDigest": "sha256:ca8eaa8291883ee151aee249810ec8e5805427a74bc7b2d06e5a5a57f078b38d",
+    "coreVectorCount": 35,
+    "experimentalVectorCount": 65,
+    "qualifying": false,
+    "boundary": "Runtime 100 is a separate single-runtime evidence profile. Its 35 Core vectors test a KFD-7 responsibility-separation subset; its 65 Experimental vectors exercise provisional semantics and cannot qualify or promote those semantics. Agent Hub 20 tests cross-Hub exchange behavior and does not replace Runtime 100."
+  },
+  "adapter": {
+    "contract": "kfd.agent-hub-adapter-request/v1",
+    "responseContract": "kfd.agent-hub-adapter-response/v1",
+    "binding": "jsonl-stdio/v1",
+    "requestSchema": "schemas/kfd-agent-hub/adapter-request.schema.json",
+    "responseSchema": "schemas/kfd-agent-hub/adapter-response.schema.json",
+    "capabilitySchema": "schemas/kfd-agent-hub/capabilities.schema.json",
+    "minimumHubCount": 2
+  },
+  "report": {
+    "contract": "kfd.agent-hub-report/v1",
+    "schema": "schemas/kfd-agent-hub/report.schema.json",
+    "qualifying": false,
+    "certification": false,
+    "offlineVerification": true
+  },
+  "failureInventory": {
+    "path": "profiles/agent-hub/failure-codes.json",
+    "root": "sha256:616df582900189eea35a3ca701d100a1aa123b89f424fba4090cf656286a74be"
+  },
+  "surfaces": [
+    {
+      "path": "profiles/agent-hub/README.md",
+      "role": "authority",
+      "digest": "sha256:48ebeb3b9249676ab818e9eb0fb2aed6c551a504da7a8d64f326f4fac707c174"
+    },
+    {
+      "path": "profiles/agent-hub/implementer-guide.md",
+      "role": "guide",
+      "digest": "sha256:b941e6472bcdb415f90a932eebc5c02aae787792e0aed244a456ce9051d37318"
+    },
+    {
+      "path": "profiles/agent-hub/failure-codes.json",
+      "role": "reference",
+      "digest": "sha256:616df582900189eea35a3ca701d100a1aa123b89f424fba4090cf656286a74be"
+    },
+    {
+      "path": "profiles/agent-hub/vectors/hub-20.json",
+      "role": "vectors",
+      "digest": "sha256:f1be3a10121fbd5389204b6e1ca70ea3920d9ba13ad20bb9f83fac078339c6b2"
+    },
+    {
+      "path": "schemas/kfd-agent-hub/conformance-manifest.schema.json",
+      "role": "schema",
+      "digest": "sha256:8685eda72443e68e1311f5811dec721143e66f205726d665ae5aba4cc13fde31"
+    },
+    {
+      "path": "schemas/kfd-agent-hub/adapter-request.schema.json",
+      "role": "schema",
+      "digest": "sha256:8f761c39c1ee6ef53afd0f353ce9563d87ddda064062173cd7ea4ccfd4f53849"
+    },
+    {
+      "path": "schemas/kfd-agent-hub/adapter-response.schema.json",
+      "role": "schema",
+      "digest": "sha256:a92ea9703c01df580d903c34e22387b305d2270e8aaaf86975bba09436e92fe5"
+    },
+    {
+      "path": "schemas/kfd-agent-hub/suite.schema.json",
+      "role": "schema",
+      "digest": "sha256:8f1795255076e8245c2acd5d1f55b842bd05e0e78428a2b954e780051161313f"
+    },
+    {
+      "path": "schemas/kfd-agent-hub/report.schema.json",
+      "role": "schema",
+      "digest": "sha256:e58765390363a2fc27c38645beb85d3047eb539322e5e6d8372d3cccbfee8a38"
+    },
+    {
+      "path": "scripts/agent-hub-runner.mjs",
+      "role": "runner",
+      "digest": "sha256:4c3489230c603119e91fc270046fe32fe19993c99f6e580e017a23117dfcd8ce"
+    },
+    {
+      "path": "scripts/agent-hub-report-verifier.mjs",
+      "role": "verifier",
+      "digest": "sha256:252e9576123b464055cda1eef4294ba9e670330b5d294407bf1e542eec7d04cf"
+    },
+    {
+      "path": "scripts/generate-agent-hub-vectors.mjs",
+      "role": "reference",
+      "digest": "sha256:b2155f6c86397aa84fa978b97191999fab0a956e73c5835433b3511475c7cea4"
+    },
+    {
+      "path": "profiles/agent-hub/adapters/protocol.mjs",
+      "role": "reference",
+      "digest": "sha256:d0e6946a25bd9fea9d20a8a440f3e574fb74016f1345c789e42382734b1680b1"
+    },
+    {
+      "path": "profiles/agent-hub/adapters/state-machine-adapter.mjs",
+      "role": "reference",
+      "digest": "sha256:a079f6e64dbc83d5e183b6af221eb52e75b6594c97bfa369c1bcb807472ead34"
+    },
+    {
+      "path": "profiles/agent-hub/adapters/rule-table-adapter.mjs",
+      "role": "reference",
+      "digest": "sha256:cec4e04b6b7f9f4b94050c5d390005f495823a2162db1d24bc6ce7449d72c899"
+    }
+  ],
+  "claimBoundary": "A passing report is exact-scope evidence for the named adapter artifact, two declared Hub capability documents, fixed Agent Hub 20 suite, KFD package cut, platform, and retained residual risks. It is not KFD certification, a security assessment, production fitness, independent vendor adoption, or evidence that provisional semantics became normative."
+}

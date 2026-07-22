@@ -1644,7 +1644,7 @@
     {
       "id": "doc:readme",
       "sourcePath": "README.md",
-      "sha256": "506ff31efe32081dffed86cef1d0a1041ffa07af022e7d5b1b3928c4a1201783"
+      "sha256": "8cf8ced890e402310fcc9303d664c0def759856b1f0ca9dfa6ab118b78e1c309"
     },
     {
       "id": "doc:contributing",
@@ -1719,7 +1719,7 @@
     {
       "id": "doc:docs-map",
       "sourcePath": "docs/MAP.md",
-      "sha256": "63e984e5878cdc4eb7ea6af2cf49c117ba2c3a1d4907dbc505aaf13cdf22c4cd"
+      "sha256": "00b8d9b246fd920319169029fb512f7ec9f3b8803bf8dbb1154e7d9fc892616d"
     },
     {
       "id": "doc:kfd-1-usage",
@@ -2164,6 +2164,31 @@
       "sha256": "a43bed367a05fe6ac3d796ec8642dbe2905b92c66438448c35b79d7965bc1a3f"
     },
     {
+      "id": "schema:kfd-agent-hub:conformance-manifest",
+      "sourcePath": "schemas/kfd-agent-hub/conformance-manifest.schema.json",
+      "sha256": "8685eda72443e68e1311f5811dec721143e66f205726d665ae5aba4cc13fde31"
+    },
+    {
+      "id": "schema:kfd-agent-hub:adapter-request",
+      "sourcePath": "schemas/kfd-agent-hub/adapter-request.schema.json",
+      "sha256": "8f761c39c1ee6ef53afd0f353ce9563d87ddda064062173cd7ea4ccfd4f53849"
+    },
+    {
+      "id": "schema:kfd-agent-hub:adapter-response",
+      "sourcePath": "schemas/kfd-agent-hub/adapter-response.schema.json",
+      "sha256": "a92ea9703c01df580d903c34e22387b305d2270e8aaaf86975bba09436e92fe5"
+    },
+    {
+      "id": "schema:kfd-agent-hub:suite",
+      "sourcePath": "schemas/kfd-agent-hub/suite.schema.json",
+      "sha256": "8f1795255076e8245c2acd5d1f55b842bd05e0e78428a2b954e780051161313f"
+    },
+    {
+      "id": "schema:kfd-agent-hub:report",
+      "sourcePath": "schemas/kfd-agent-hub/report.schema.json",
+      "sha256": "e58765390363a2fc27c38645beb85d3047eb539322e5e6d8372d3cccbfee8a38"
+    },
+    {
       "id": "schema:kfd-agent-runtime:manifest",
       "sourcePath": "schemas/kfd-agent-runtime/manifest.schema.json",
       "sha256": "9a79cf0827aaa487ea1701481213a3961ea75215f89baf22f0b6b3d648144dbd"
@@ -2268,7 +2293,7 @@
     {
       "id": "metadata:standards",
       "sourcePath": "standards.json",
-      "sha256": "b9746060c1b32317a6e189dfd3e560ee0bad755de93738cb78a8799f1a278b95"
+      "sha256": "04c8163ffe9bc0c4830008a67c5560b21c279935544f3a1b9ad78e63292f49a9"
     },
     {
       "id": "metadata:terminology",
@@ -2288,7 +2313,7 @@
     {
       "id": "metadata:release-impact",
       "sourcePath": "release-impact.json",
-      "sha256": "c01b39ce33b6c3437431f8fe8522a841b3eeb6a8ed47edd8b028d8e1d42df4a8"
+      "sha256": "af22c316f8dd1456eff25ce9acc0b00299f0e206e844a08ee4df88676d683d0e"
     },
     {
       "id": "metadata:release-anchor",
@@ -2313,29 +2338,29 @@
     {
       "id": "metadata:kfd-2-public-release-trust-claim",
       "sourcePath": ".buildchain/kfd-2/public-release-trust.claim.json",
-      "sha256": "5edbe8e687e3da5d6c8f93b9a4632708b50a04d1e89069e430f8223bd4921606"
+      "sha256": "b5de204e4f3e4861275c16e8c8ef8faef0f44d84a7b8f81a8cd513e3f22cc0d3"
     },
     {
       "id": "metadata:kfd-2-foundation-trust-claims",
       "sourcePath": ".buildchain/kfd-2/kfd-foundation.trust-claims.json",
-      "sha256": "82c827eaf17f7e1dda5742b0766d744a6e5898f30757cc22b5f1a2b543691aed"
+      "sha256": "00d9ebe3e4b4bb3976bd20363613136c44c6e88114fdad4602069eeef6fafa3e"
     },
     {
       "id": "metadata:kfd-2-foundation-trust-assessment",
       "sourcePath": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json",
-      "sha256": "684db7fb08fbab0d83dedab14406124d3129d902e05ac743de41c78055107766"
+      "sha256": "84c1d1e7547fb9387c1c4195685459074517971c21c72e70d1e06f14eb3fab16"
     }
   ],
   "packageExports": [
     {
       "id": "export:package-json",
       "sourcePath": "package.json#exports",
-      "sha256": "197eeca218416be6648c2e6a4ca2e3e502cdbf48a1e06168d53e86c4f5eccfc2"
+      "sha256": "8ce953ac96bdbb2d77beafc2910247fbeeca88a88ddc08af0cefcd5893baf288"
     },
     {
       "id": "export:npm-files",
       "sourcePath": "package.json#files",
-      "sha256": "197eeca218416be6648c2e6a4ca2e3e502cdbf48a1e06168d53e86c4f5eccfc2"
+      "sha256": "8ce953ac96bdbb2d77beafc2910247fbeeca88a88ddc08af0cefcd5893baf288"
     }
   ],
   "siteConsumptionContracts": [

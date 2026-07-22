@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-agent-hub/adapter-response.schema.json",
+  "title": "KFD Agent Hub dual-Hub black-box adapter response",
+  "type": "object",
+  "required": ["schemaVersion", "contract", "requestId", "adapter", "status", "code", "verdict", "observations"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "contract": { "const": "kfd.agent-hub-adapter-response/v1" },
+    "requestId": { "type": "string", "minLength": 1 },
+    "adapter": {
+      "type": "object",
+      "required": ["id", "version", "topology"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 },
+        "topology": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "status": { "enum": ["accepted", "rejected", "conflicted", "error"] },
+    "code": { "type": "string", "minLength": 1 },
+    "verdict": { "enum": ["pending", "admitted", "rejected", "conflicted", "unavailable", "intentionally-withheld", "not-applicable"] },
+    "hubs": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["hubId", "capabilities", "capabilityRoot"],
+        "properties": {
+          "hubId": { "type": "string", "minLength": 1 },
+          "capabilities": { "type": "object" },
+          "capabilityRoot": { "$ref": "#/$defs/root" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "observations": { "type": "object" }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "root": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+  }
+}
