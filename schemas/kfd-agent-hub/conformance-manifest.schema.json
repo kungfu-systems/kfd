@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-agent-hub/conformance-manifest.schema.json",
+  "title": "KFD Agent Hub conformance manifest",
+  "type": "object",
+  "required": ["$schema", "schemaVersion", "contract", "profile", "protocol", "suite", "runtimeDependency", "adapter", "report", "failureInventory", "surfaces", "claimBoundary"],
+  "properties": {
+    "$schema": { "const": "https://kfd.libkungfu.dev/schemas/kfd-agent-hub/conformance-manifest.schema.json" },
+    "schemaVersion": { "const": 1 },
+    "contract": { "const": "kfd.agent-hub-conformance-manifest/v1" },
+    "profile": {
+      "type": "object",
+      "required": ["id", "version", "status", "authority"],
+      "properties": {
+        "id": { "const": "kfd-agent-hub-conformance" },
+        "version": { "const": "0.1.0-alpha.1" },
+        "status": { "const": "experimental" },
+        "authority": { "const": "profiles/agent-hub/README.md" }
+      },
+      "additionalProperties": false
+    },
+    "protocol": {
+      "type": "object",
+      "required": ["id", "version", "manifest", "manifestDigest"],
+      "properties": {
+        "id": { "const": "kfd-agent-hub" },
+        "version": { "const": "0.1.0-alpha.1" },
+        "manifest": { "const": "protocols/agent-hub/manifest.json" },
+        "manifestDigest": { "$ref": "#/$defs/root" }
+      },
+      "additionalProperties": false
+    },
+    "suite": {
+      "type": "object",
+      "required": ["id", "version", "fixedVectorCount", "vectorRoot"],
+      "properties": {
+        "id": { "const": "kfd-agent-hub-20" },
+        "version": { "const": "0.1.0-alpha.1" },
+        "fixedVectorCount": { "const": 20 },
+        "vectorRoot": { "$ref": "#/$defs/root" }
+      },
+      "additionalProperties": false
+    },
+    "runtimeDependency": {
+      "type": "object",
+      "required": ["id", "version", "manifest", "manifestDigest", "coreVectorCount", "experimentalVectorCount", "qualifying", "boundary"],
+      "properties": {
+        "id": { "const": "kfd-runtime-100" },
+        "version": { "const": "0.1.0-alpha.1" },
+        "manifest": { "const": "profiles/agent-runtime/manifest.json" },
+        "manifestDigest": { "$ref": "#/$defs/root" },
+        "coreVectorCount": { "const": 35 },
+        "experimentalVectorCount": { "const": 65 },
+        "qualifying": { "const": false },
+        "boundary": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "adapter": {
+      "type": "object",
+      "required": ["contract", "responseContract", "binding", "requestSchema", "responseSchema", "capabilitySchema", "minimumHubCount"],
+      "properties": {
+        "contract": { "const": "kfd.agent-hub-adapter-request/v1" },
+        "responseContract": { "const": "kfd.agent-hub-adapter-response/v1" },
+        "binding": { "const": "jsonl-stdio/v1" },
+        "requestSchema": { "const": "schemas/kfd-agent-hub/adapter-request.schema.json" },
+        "responseSchema": { "const": "schemas/kfd-agent-hub/adapter-response.schema.json" },
+        "capabilitySchema": { "const": "schemas/kfd-agent-hub/capabilities.schema.json" },
+        "minimumHubCount": { "const": 2 }
+      },
+      "additionalProperties": false
+    },
+    "report": {
+      "type": "object",
+      "required": ["contract", "schema", "qualifying", "certification", "offlineVerification"],
+      "properties": {
+        "contract": { "const": "kfd.agent-hub-report/v1" },
+        "schema": { "const": "schemas/kfd-agent-hub/report.schema.json" },
+        "qualifying": { "const": false },
+        "certification": { "const": false },
+        "offlineVerification": { "const": true }
+      },
+      "additionalProperties": false
+    },
+    "failureInventory": {
+      "type": "object",
+      "required": ["path", "root"],
+      "properties": {
+        "path": { "const": "profiles/agent-hub/failure-codes.json" },
+        "root": { "$ref": "#/$defs/root" }
+      },
+      "additionalProperties": false
+    },
+    "surfaces": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "role", "digest"],
+        "properties": {
+          "path": { "type": "string", "minLength": 1 },
+          "role": { "enum": ["authority", "guide", "schema", "vectors", "runner", "verifier", "reference"] },
+          "digest": { "$ref": "#/$defs/root" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "claimBoundary": { "type": "string", "minLength": 1 }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "root": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+  }
+}

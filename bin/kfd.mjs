@@ -11,6 +11,9 @@ function usage() {
   return `usage:
   kfd test agent-runtime --adapter <path> --output <report.json>
     [--adapter-arg <arg>] [--adapter-source-commit <sha>] [--timeout-ms <ms>]
+  kfd test agent-hub --adapter <path> --output <report.json>
+    [--adapter-arg <arg>] [--adapter-source-commit <sha>] [--timeout-ms <ms>]
+  kfd verify agent-hub-report <report.json> [--adapter <path>] [--json]
   kfd verify <kfd-record|passport|pack|atlas|episode|agent-runtime-report|bundle> <path> [--schema <path>] [--json]
   kfd bundle <kfd-record|passport|pack|atlas|episode|agent-runtime-report> <path> --output <bundle.json>`;
 }
@@ -101,6 +104,16 @@ async function main(args) {
       "../scripts/agent-runtime-runner.mjs"
     );
     process.exitCode = await runAgentRuntimeTest(args.slice(2));
+    return;
+  }
+  if (args[0] === "test" && args[1] === "agent-hub") {
+    const { runAgentHubTest } = await import("../scripts/agent-hub-runner.mjs");
+    process.exitCode = await runAgentHubTest(args.slice(2));
+    return;
+  }
+  if (args[0] === "verify" && args[1] === "agent-hub-report") {
+    const { runAgentHubReportVerifier } = await import("../scripts/agent-hub-report-verifier.mjs");
+    process.exitCode = runAgentHubReportVerifier(args.slice(2));
     return;
   }
   if (args.length < 3) throw new Error("missing command, kind, or path");

@@ -1,0 +1,416 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.agent-hub-vector-registry/v1",
+  "suite": {
+    "id": "kfd-agent-hub-20",
+    "version": "0.1.0-alpha.1",
+    "profile": "kfd-agent-hub@0.1.0-alpha.1",
+    "qualifying": false
+  },
+  "vectors": [
+    {
+      "id": "hub-001-negotiate-exact-profile",
+      "category": "negotiation",
+      "polarity": "positive",
+      "claim": "Two Hubs negotiate the exact alpha profile and required capability set.",
+      "request": {
+        "scenario": "negotiate-exact-profile",
+        "input": {
+          "profile": "0.1.0-alpha.1",
+          "profileRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "requiredFeatures": [
+            "transport-receipts"
+          ]
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "capability-negotiated",
+        "verdict": "admitted"
+      }
+    },
+    {
+      "id": "hub-002-reject-unknown-required-feature",
+      "category": "negotiation",
+      "polarity": "negative",
+      "claim": "An unknown required feature fails closed.",
+      "request": {
+        "scenario": "reject-unknown-required-feature",
+        "input": {
+          "requiredFeatures": [
+            "future-normative-feature"
+          ]
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "required-feature-unsupported",
+        "verdict": "rejected"
+      }
+    },
+    {
+      "id": "hub-003-reject-profile-root-drift",
+      "category": "negotiation",
+      "polarity": "negative",
+      "claim": "A peer cannot silently substitute another profile root.",
+      "request": {
+        "scenario": "reject-profile-root-drift",
+        "input": {
+          "localProfileRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "remoteProfileRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "profile-root-mismatch",
+        "verdict": "rejected"
+      }
+    },
+    {
+      "id": "hub-004-record-delivery-without-admission",
+      "category": "delivery",
+      "polarity": "positive",
+      "claim": "Transport delivery remains distinct from semantic admission.",
+      "request": {
+        "scenario": "record-delivery-without-admission",
+        "input": {
+          "delivered": true,
+          "admitted": false,
+          "receiptRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "delivery-recorded",
+        "verdict": "not-applicable"
+      }
+    },
+    {
+      "id": "hub-005-preserve-identical-duplicate",
+      "category": "delivery",
+      "polarity": "positive",
+      "claim": "At-least-once duplicate delivery preserves one semantic payload root.",
+      "request": {
+        "scenario": "preserve-identical-duplicate",
+        "input": {
+          "firstPayloadRoot": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "duplicatePayloadRoot": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "idempotencyKey": "delivery-5"
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "duplicate-preserved",
+        "verdict": "not-applicable"
+      }
+    },
+    {
+      "id": "hub-006-reject-idempotency-conflict",
+      "category": "delivery",
+      "polarity": "negative",
+      "claim": "An idempotency key cannot name two payload roots.",
+      "request": {
+        "scenario": "reject-idempotency-conflict",
+        "input": {
+          "firstPayloadRoot": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "duplicatePayloadRoot": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "idempotencyKey": "delivery-6"
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "idempotency-conflict",
+        "verdict": "rejected"
+      }
+    },
+    {
+      "id": "hub-007-admit-under-local-authority",
+      "category": "delivery",
+      "polarity": "positive",
+      "claim": "Receipt plus local decision authority can produce admission.",
+      "request": {
+        "scenario": "admit-under-local-authority",
+        "input": {
+          "delivered": true,
+          "decisionAuthorityRoots": [
+            "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          ],
+          "localPolicy": "allow"
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "admission-accepted",
+        "verdict": "admitted"
+      }
+    },
+    {
+      "id": "hub-008-retain-delayed-delivery",
+      "category": "delivery",
+      "polarity": "positive",
+      "claim": "A delayed transport record does not fabricate admission.",
+      "request": {
+        "scenario": "retain-delayed-delivery",
+        "input": {
+          "delivered": false,
+          "delayed": true
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "delivery-recorded",
+        "verdict": "not-applicable"
+      }
+    },
+    {
+      "id": "hub-009-attenuate-delegated-authority",
+      "category": "authority",
+      "polarity": "positive",
+      "claim": "Cross-Hub delegation may narrow action and time scope.",
+      "request": {
+        "scenario": "attenuate-delegated-authority",
+        "input": {
+          "parentActions": [
+            "read",
+            "append"
+          ],
+          "childActions": [
+            "read"
+          ],
+          "parentExpiresAt": 200,
+          "childExpiresAt": 150
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "authority-attenuated",
+        "verdict": "admitted"
+      }
+    },
+    {
+      "id": "hub-010-reject-authority-amplification",
+      "category": "authority",
+      "polarity": "negative",
+      "claim": "Cross-Hub delegation cannot add an action.",
+      "request": {
+        "scenario": "reject-authority-amplification",
+        "input": {
+          "parentActions": [
+            "read"
+          ],
+          "childActions": [
+            "read",
+            "delete"
+          ],
+          "parentExpiresAt": 200,
+          "childExpiresAt": 150
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "authority-amplification",
+        "verdict": "rejected"
+      }
+    },
+    {
+      "id": "hub-011-reject-revoked-warrant",
+      "category": "authority",
+      "polarity": "negative",
+      "claim": "Revocation remains effective after transport and reconnect.",
+      "request": {
+        "scenario": "reject-revoked-warrant",
+        "input": {
+          "warrantStatus": "revoked",
+          "requestedAction": "read"
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "authority-revoked",
+        "verdict": "rejected"
+      }
+    },
+    {
+      "id": "hub-012-surface-concurrent-conflict",
+      "category": "conflict",
+      "polarity": "negative",
+      "claim": "Concurrent non-dominating facts remain explicitly conflicted.",
+      "request": {
+        "scenario": "surface-concurrent-conflict",
+        "input": {
+          "leftClock": {
+            "alpha": 2
+          },
+          "rightClock": {
+            "beta": 2
+          },
+          "policy": "retain-conflict"
+        }
+      },
+      "expect": {
+        "status": "conflicted",
+        "code": "conflict-visible",
+        "verdict": "conflicted"
+      }
+    },
+    {
+      "id": "hub-013-reject-hidden-last-write-wins",
+      "category": "conflict",
+      "polarity": "negative",
+      "claim": "A last-write-wins collapse cannot hide unresolved concurrent facts.",
+      "request": {
+        "scenario": "reject-hidden-last-write-wins",
+        "input": {
+          "concurrent": true,
+          "policy": "last-write-wins",
+          "conflictRoots": [
+            "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          ]
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "conflict-visible",
+        "verdict": "rejected"
+      }
+    },
+    {
+      "id": "hub-014-retain-partial-knowledge",
+      "category": "knowledge",
+      "polarity": "positive",
+      "claim": "Partial knowledge is typed and remains distinguishable from absence.",
+      "request": {
+        "scenario": "retain-partial-knowledge",
+        "input": {
+          "disclosure": "partial",
+          "knownFields": [
+            "status"
+          ],
+          "omittedFields": [
+            "evidence"
+          ]
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "partial-knowledge-retained",
+        "verdict": "not-applicable"
+      }
+    },
+    {
+      "id": "hub-015-retain-intentionally-withheld",
+      "category": "knowledge",
+      "polarity": "positive",
+      "claim": "Intentionally withheld information is not reported as unavailable.",
+      "request": {
+        "scenario": "retain-intentionally-withheld",
+        "input": {
+          "disclosure": "intentionally-withheld",
+          "reason": "local-policy"
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "partial-knowledge-retained",
+        "verdict": "intentionally-withheld"
+      }
+    },
+    {
+      "id": "hub-016-retain-unavailable",
+      "category": "knowledge",
+      "polarity": "positive",
+      "claim": "Unavailable information remains distinct from withheld information.",
+      "request": {
+        "scenario": "retain-unavailable",
+        "input": {
+          "disclosure": "unavailable",
+          "reason": "offline-source"
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "partial-knowledge-retained",
+        "verdict": "unavailable"
+      }
+    },
+    {
+      "id": "hub-017-reject-call-success-as-completion",
+      "category": "completion",
+      "polarity": "negative",
+      "claim": "A successful call is not evidence that the Pursuit completed.",
+      "request": {
+        "scenario": "reject-call-success-as-completion",
+        "input": {
+          "callSucceeded": true,
+          "completionVerdict": "unproved"
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "completion-unproved",
+        "verdict": "rejected"
+      }
+    },
+    {
+      "id": "hub-018-surface-offline-reconnect-conflict",
+      "category": "recovery",
+      "polarity": "negative",
+      "claim": "Offline edits that diverge remain conflicted after reconnect.",
+      "request": {
+        "scenario": "surface-offline-reconnect-conflict",
+        "input": {
+          "offline": true,
+          "reconnect": true,
+          "divergentRoots": [
+            "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+          ]
+        }
+      },
+      "expect": {
+        "status": "conflicted",
+        "code": "conflict-visible",
+        "verdict": "conflicted"
+      }
+    },
+    {
+      "id": "hub-019-preserve-export-import-roots",
+      "category": "portability",
+      "polarity": "positive",
+      "claim": "Export and import preserve exact profile, payload, and capability roots.",
+      "request": {
+        "scenario": "preserve-export-import-roots",
+        "input": {
+          "exportedProfileRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "importedProfileRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "exportedPayloadRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "importedPayloadRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      },
+      "expect": {
+        "status": "accepted",
+        "code": "export-import-preserved",
+        "verdict": "admitted"
+      }
+    },
+    {
+      "id": "hub-020-reject-export-import-drift",
+      "category": "portability",
+      "polarity": "negative",
+      "claim": "Import fails closed when the profile root changes.",
+      "request": {
+        "scenario": "reject-export-import-drift",
+        "input": {
+          "exportedProfileRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "importedProfileRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+        }
+      },
+      "expect": {
+        "status": "rejected",
+        "code": "profile-root-mismatch",
+        "verdict": "rejected"
+      }
+    }
+  ]
+}

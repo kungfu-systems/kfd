@@ -49,6 +49,12 @@ jobs:
           github.event.workflow_run.event == 'push'
         )
       }}
+    permissions:
+      actions: write
+      checks: write
+      contents: write
+      id-token: write
+      issues: write
     uses: kungfu-systems/buildchain/.github/workflows/release-candidate-promote.yml@v2-alpha
     secrets:
       BUILDCHAIN_PROMOTION_TOKEN: ${{ secrets.KUNGFU_GITHUB_TOKEN }}

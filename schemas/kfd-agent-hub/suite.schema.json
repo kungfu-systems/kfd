@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-agent-hub/suite.schema.json",
+  "title": "KFD Agent Hub fixed conformance vector registry",
+  "type": "object",
+  "required": ["schemaVersion", "contract", "suite", "vectors"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "contract": { "const": "kfd.agent-hub-vector-registry/v1" },
+    "suite": {
+      "type": "object",
+      "required": ["id", "version", "profile", "qualifying"],
+      "properties": {
+        "id": { "const": "kfd-agent-hub-20" },
+        "version": { "const": "0.1.0-alpha.1" },
+        "profile": { "const": "kfd-agent-hub@0.1.0-alpha.1" },
+        "qualifying": { "const": false }
+      },
+      "additionalProperties": false
+    },
+    "vectors": {
+      "type": "array",
+      "minItems": 20,
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "required": ["id", "category", "polarity", "claim", "request", "expect"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^hub-[0-9]{3}-[a-z0-9-]+$" },
+          "category": { "enum": ["negotiation", "delivery", "authority", "conflict", "knowledge", "completion", "recovery", "portability"] },
+          "polarity": { "enum": ["positive", "negative"] },
+          "claim": { "type": "string", "minLength": 1 },
+          "request": {
+            "type": "object",
+            "required": ["scenario", "input"],
+            "properties": {
+              "scenario": { "type": "string", "minLength": 1 },
+              "input": { "type": "object" }
+            },
+            "additionalProperties": false
+          },
+          "expect": { "$ref": "#/$defs/outcome" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "outcome": {
+      "type": "object",
+      "required": ["status", "code", "verdict"],
+      "properties": {
+        "status": { "enum": ["accepted", "rejected", "conflicted"] },
+        "code": { "type": "string", "minLength": 1 },
+        "verdict": { "enum": ["admitted", "rejected", "conflicted", "unavailable", "intentionally-withheld", "not-applicable"] }
+      },
+      "additionalProperties": false
+    }
+  }
+}
