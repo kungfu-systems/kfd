@@ -12,9 +12,9 @@
 
 ## Purpose
 
-This page makes the Atlas candidate precise enough to compare with context,
-snapshot, retrieval, report, and world-model alternatives. It does not allocate
-KFD-8 or turn one product representation into a standard rule.
+This page preserves the pre-promotion Atlas formal candidate. KFD-8 now owns
+the authoritative draft rule and `docs/KFD-8-formal.md` owns its current
+non-normative formal reference.
 
 ## Object model
 
@@ -159,7 +159,7 @@ authority.
 
 ## Non-claims
 
-This model does not prove that Atlas is universally necessary, require one
-serialization or storage engine, define a God's-eye state, make every context
-an Atlas, or allocate a KFD number. Product schemas and lifecycle vocabulary
-remain adopter-owned until promotion establishes a narrower standard rule.
+This historical model does not prove that Atlas is universally necessary,
+require one serialization or storage engine, define a God's-eye state, or make
+every context an Atlas. KFD-8 allocates the number; product schemas and
+lifecycle vocabulary remain adopter-owned.

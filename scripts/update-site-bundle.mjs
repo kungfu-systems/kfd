@@ -210,6 +210,12 @@ const buildLiveCasePages = (liveCaseRegistry) => (liveCaseRegistry.cases ?? []).
     path: entry.genesis,
     markdown: stripFrontmatter(readFileSync(entry.genesis, "utf8")),
   },
+  ...(entry.developmentLineage ? {
+    developmentLineage: {
+      path: entry.developmentLineage,
+      markdown: stripFrontmatter(readFileSync(entry.developmentLineage, "utf8")),
+    },
+  } : {}),
   methodTrace: {
     path: entry.methodTrace,
     markdown: stripFrontmatter(readFileSync(entry.methodTrace, "utf8")),
@@ -386,9 +392,9 @@ export const buildSiteBundle = ({
     }),
     section({
       id: "current-candidates",
-      sourceHeading: "Current candidates",
-      title: "Current candidates",
-      markdown: readme.sections["Current candidates"],
+      sourceHeading: "Candidate lineage",
+      title: "Candidate lineage",
+      markdown: readme.sections["Candidate lineage"],
       role: "primary",
       priority: 27,
       presentation: "candidate-summary",

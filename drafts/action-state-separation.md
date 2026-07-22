@@ -28,8 +28,8 @@ non-normative action responsibility geometry.
 
 This document remains as source-candidate lineage. Its original slot hint was
 non-binding until the explicit promotion allocated KFD-7. The Atlas, Pursuit,
-and Warrant elaboration candidates remain non-binding and independently
-qualifiable.
+and Warrant elaboration candidates were later promoted as numbered drafts
+KFD-8, KFD-9, and KFD-10 and remain preserved as source lineage.
 
 ## One sentence
 
@@ -68,13 +68,12 @@ Pursuit, Atlas, and Warrant are the first cross-domain action-Primitive
 candidates. They direct, observe, and permit action. Episode preserves what
 actually occurred. None may silently imply another.
 
-This candidate establishes the category, separation rule, and action loop. It
-does not fully define the three candidate Primitives. Their current
-non-binding elaboration hypotheses are:
+This candidate established the category, separation rule, and action loop. It
+did not fully define the three coordinates. Their later numbered drafts are:
 
-- [Atlas action perspective](atlas-action-perspective.md), slot hint `8`;
-- [Pursuit intent continuity](pursuit-intent-continuity.md), slot hint `9`;
-- [Warrant bounded authority](warrant-bounded-authority.md), slot hint `10`.
+- [KFD-8 Atlas](../decisions/KFD-8.md), with its [candidate lineage](atlas-action-perspective.md);
+- [KFD-9 Pursuit](../decisions/KFD-9.md), with its [candidate lineage](pursuit-intent-continuity.md);
+- [KFD-10 Warrant](../decisions/KFD-10.md), with its [candidate lineage](warrant-bounded-authority.md).
 
 The promoted formal model, conditional non-derivability argument, valid-action
 intersection, object/path interpretation, and confidence boundary now live in
@@ -229,5 +228,5 @@ The candidate weakens or fails if:
 
 The original slot hint did not allocate or reserve a number. Explicit promotion
 created `decisions/KFD-7.md`, updated the numbered registry, and made KFD-7 the
-authority. This lineage document does not allocate the slot hints of its
-elaboration candidates.
+authority. This lineage document does not extend the later KFD-8, KFD-9, or
+KFD-10 numbered authority.

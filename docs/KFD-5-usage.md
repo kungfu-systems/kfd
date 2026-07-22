@@ -88,10 +88,18 @@ or proof of primitives.
 
 Kungfu Episode, Xinfa Atlas, and Buildchain Release Passport can be studied as
 KFD-5 cases. They are evidence for the procedure's development, not automatic
-proof of historical importance or universal applicability.
+proof of Primitive status, historical importance, or universal applicability.
 
-The package also publishes a provisional live case registry at
-`cases/registry.json`. Its first record preserves the fused
+The registered [software work perspective settlement case](../cases/live/software-work-perspective-settlement/README.md)
+records a complete two-stage example. KFD-4 first changes from lower-object
+developer views to the real software participant, exposing Initiative and
+Assignment; it then changes from the work coordinator to the successor Agent,
+exposing Project Cut. Separate KFD-5 cuts accept those three responsibilities
+within their bounded software-domain layers while leaving KFD-12 and KFD-13
+draft activation, cross-domain universality, and historical novelty unclaimed.
+
+The package also publishes a live case registry at `cases/registry.json`. One
+record preserves the fused
 `Proof-Carrying Work Object` genesis and the later ontology split into
 independently qualified `Pursuit` and `Warrant` candidate tracks. Each track
 binds its own status, claim boundary, and immutable version 3 candidate cut

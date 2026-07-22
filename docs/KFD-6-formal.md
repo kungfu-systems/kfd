@@ -96,6 +96,28 @@ experience cut fixed
 - Evaluate against held-out evidence and later consequences.
 - Keep autonomy bounded and revocable.
 
+## Early feasibility mapping
+
+The Consequential Settlement live case can be mapped retrospectively onto the
+loop without being accepted as a conforming experiment:
+
+| KFD-6 object | Early-case mapping | Status |
+|---|---|---|
+| `E_n` | maintainer-held task transcript plus public Kungfu PR, test, review, and dogfood history | reconstructed after action |
+| `O_n` | Fact Admission, KFD-2 trust execution, and Mission/Go work semantics | recoverable |
+| `G_n` | Agent generation of Claim/Assessment/Decision followed by cross-lineage replay and compression with Admission | real but not predeclared or method-plural |
+| `C_n` | no shared-budget comparison against fixed-ontology and no-new-Primitive baselines | absent |
+| `Q_n` | provisional KFD-5 Consequential Settlement cut | partial |
+| `H_n` | repository checks and independent PR review | present but not held-out evaluation of discovery |
+| `A_n` | maintainer authorization plus protected merge admission | separated from genesis |
+| `O_(n+1)` | draft KFD-11 Consequential Settlement procedure | admitted as draft, not activated |
+
+This mapping supports feasibility of Agent-generated ontology change under
+real pressure. It does not establish `I2` or `I3`, leaves discovery-specific
+`H_n` incomplete, and does not establish an autonomous trigger for beginning
+ontology review. It is a retrospective fixture for designing a future
+experiment, not a KFD-6 witness.
+
 ## Invalid states
 
 - A model-generated corpus is treated as the only reality evidence.

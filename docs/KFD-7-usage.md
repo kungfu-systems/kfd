@@ -21,12 +21,12 @@ registry status is `active`.
   responsibility geometry
   reference.
 - `drafts/action-state-separation.md`: preserved source-candidate lineage.
-- `drafts/atlas-action-perspective.md`: non-binding Atlas elaboration
-  candidate.
-- `drafts/pursuit-intent-continuity.md`: non-binding Pursuit elaboration
-  candidate.
-- `drafts/warrant-bounded-authority.md`: non-binding Warrant elaboration
-  candidate.
+- `decisions/KFD-8.md`: numbered draft Atlas responsibility, with
+  `drafts/atlas-action-perspective.md` retained as source lineage.
+- `decisions/KFD-9.md`: numbered draft Pursuit responsibility, with
+  `drafts/pursuit-intent-continuity.md` retained as source lineage.
+- `decisions/KFD-10.md`: numbered draft Warrant responsibility, with
+  `drafts/warrant-bounded-authority.md` retained as source lineage.
 - `standards.json#/standards/kfd-7`: identity, status, formal reference,
   concepts, and digests.
 - `schemas/kfd-7/domain-profile.schema.json`: version 1 Domain Profile

@@ -38,6 +38,24 @@ present, but it is not a prerequisite for every genesis method. Replacing the
 version 3 perspective-only experiment contract requires version 4 rather than
 silently changing its meaning.
 
+## Episode Asset Stewardship
+
+Systems that expect future ontology discovery should treat qualified Episode
+corpora as durable historical assets rather than disposable telemetry. At
+minimum, stewardship should make the following inspectable:
+
+- stable Episode and evidence-cut identities;
+- integrity checking, corruption detection, and recovery boundaries;
+- portable export, exact or explicitly lossy import, and provider migration;
+- observer, perspective, consequence, omission, and degradation metadata;
+- retention, deletion, privacy, consent, and redaction policy;
+- the distinction between authoritative Episode records and derived indexes,
+  summaries, embeddings, or training projections.
+
+These capabilities preserve future replay options. They do not imply that
+every Episode must be retained, that a corpus is complete, or that storage
+volume predicts Primitive yield.
+
 ## Experimental Use Only
 
 The schema records a bounded experiment. It does not certify that the corpus is
@@ -49,6 +67,23 @@ evidence, generation experiments, method comparison, autonomy boundary,
 fixed-ontology and no-new-primitive baselines, held-out evaluation, and
 promotion authority. The generator cannot be its sole verifier, and generated
 evidence cannot be the only evidence.
+
+## Early Case and Reproduction Boundary
+
+The
+[Consequential Settlement case](../cases/live/decision-admission-settlement/README.md)
+is an early feasibility case for KFD-6. It records Agent-generated ontology
+during real product work, later cross-lineage replay, provisional KFD-5
+qualification, and separated human/repository admission. Read its
+[development lineage](../cases/live/decision-admission-settlement/development-lineage.md#6-kfd-6-early-feasibility-case)
+for the exact mapping and missing gates.
+
+Do not encode that history as a passing version 4 autonomous-loop record. Its
+generation methods, evidence cut, budgets, and baselines were not declared
+before execution. A future adopter may use the immutable public history as a
+seed corpus or retrospective fixture, but must freeze a new experiment cut,
+declare plural methods and baselines, separate held-out evaluation, and retain
+negative results before making a KFD-6 claim.
 
 ## Activation Evidence
 

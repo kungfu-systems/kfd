@@ -35,22 +35,34 @@
 | What retained product evidence qualifies the KFD-7 activation cut? | [`KFD-7-activation.md`](KFD-7-activation.md) and [`../evidence/kfd-7/activation-record.json`](../evidence/kfd-7/activation-record.json) |
 | How do fact cuts differ from causal records even when their endpoints are equal? | [`KFD-1-formal.md`](KFD-1-formal.md#domain-objects) |
 | How does KFD-4 replace absolute context with declared reference frames and preserved invariants? | [`KFD-4-formal.md`](KFD-4-formal.md#domain-objects) |
-| Why might consequential action require an independently addressable perspective and fact cut? | [`../drafts/atlas-action-perspective.md`](../drafts/atlas-action-perspective.md) |
-| Why might intent continuity require an identity independent of the actions that advance it? | [`../drafts/pursuit-intent-continuity.md`](../drafts/pursuit-intent-continuity.md) |
-| Why might bounded authority require an explicit, derivable, and revocable Warrant? | [`../drafts/warrant-bounded-authority.md`](../drafts/warrant-bounded-authority.md) |
+| How must an Atlas bind perspective to admitted facts, source, cut, and declared loss? | [KFD-8](../decisions/KFD-8.md) and its [source-candidate lineage](../drafts/atlas-action-perspective.md) |
+| How must a Pursuit preserve continuing direction beyond the actions that advance it? | [KFD-9](../decisions/KFD-9.md) and its [source-candidate lineage](../drafts/pursuit-intent-continuity.md) |
+| How must a Warrant preserve bounded, derivable, and revocable authority? | [KFD-10](../decisions/KFD-10.md) and its [source-candidate lineage](../drafts/warrant-bounded-authority.md) |
+| How must Claim, Assessment, authorized Decision, and Admission remain distinct? | [KFD-11](../decisions/KFD-11.md), [`KFD-11-usage.md`](KFD-11-usage.md), and its [source-candidate lineage](../drafts/claim-assessment-decision-admission.md) |
+| How did agents generate Claim, Assessment, and Decision during Kungfu development, then recognize their settlement relation with Admission as KFD-11? | [`../cases/live/decision-admission-settlement/README.md`](../cases/live/decision-admission-settlement/README.md), then its [`development-lineage.md`](../cases/live/decision-admission-settlement/development-lineage.md), [`genesis.md`](../cases/live/decision-admission-settlement/genesis.md), and [`kfd-method-trace.md`](../cases/live/decision-admission-settlement/kfd-method-trace.md) |
+| Which fields belong to the cross-domain core, a Domain Profile, or participant projection? | [`field-responsibility-matrix.md`](field-responsibility-matrix.md) |
+| How does one software-development Domain Profile organize Initiative, Assignment, Episode, Claim, Assessment, Decision, Admission, and Continuation without making those names universal? | [KFD-12](../decisions/KFD-12.md) and [`KFD-12-usage.md`](KFD-12-usage.md) |
+| How can a software Project Cut bind source, Atlas, Episode, and policy authorities without becoming another fact engine? | [KFD-13](../decisions/KFD-13.md) and [`KFD-13-usage.md`](KFD-13-usage.md) |
+| Must other domains adopt the KFD-12 software lifecycle or KFD-13 Project Cut? | [KFD-12 scope](../decisions/KFD-12.md#scope) and [KFD-13 scope](../decisions/KFD-13.md#scope) |
+| Why were the pre-stable KFD-11 and KFD-12 coordinates revised? | [`foundation-revision-2026-07-21-decision-admission.md`](foundation-revision-2026-07-21-decision-admission.md) and its [machine map](foundation-revision-2026-07-21-decision-admission.json) |
 | How does a candidate become a numbered draft? | [`../CONTRIBUTING.md`](../CONTRIBUTING.md#candidates-and-numbered-drafts) |
 | When may the pre-stable foundation be revised, and what freezes at stable? | [`../CONTRIBUTING.md`](../CONTRIBUTING.md#pre-stable-foundation-revision) |
 | How did the first live case split a fused work-object hypothesis into Pursuit and Warrant candidate tracks? | [`../cases/live/proof-carrying-work-object/README.md`](../cases/live/proof-carrying-work-object/README.md) |
 | What four-object agent work state connects Pursuit, Atlas, Warrant, and Episode? | [`../cases/live/proof-carrying-work-object/ontology-split.md`](../cases/live/proof-carrying-work-object/ontology-split.md) |
 | Are Pursuit, Atlas, Warrant, and Episode conditionally distinguishable, and what remains unproved? | [`../cases/live/proof-carrying-work-object/distinguishability.md`](../cases/live/proof-carrying-work-object/distinguishability.md) |
 | What are the current immutable KFD-5 cuts for Pursuit and Warrant? | [`../cases/live/proof-carrying-work-object/cuts/0002-pursuit.json`](../cases/live/proof-carrying-work-object/cuts/0002-pursuit.json) and [`../cases/live/proof-carrying-work-object/cuts/0002-warrant.json`](../cases/live/proof-carrying-work-object/cuts/0002-warrant.json) |
+| How did perspective transformation expose Initiative, Assignment, and Project Cut, and how were they qualified? | [`../cases/live/software-work-perspective-settlement/README.md`](../cases/live/software-work-perspective-settlement/README.md) |
+| What separates the Agent-origin testimony for Project Cut from public implementation evidence? | [`../cases/live/software-work-perspective-settlement/genesis.md`](../cases/live/software-work-perspective-settlement/genesis.md#agent-origin-testimony-and-public-evidence) |
+| What is the current KFD-5 outcome for the Consequential Settlement procedure? | [`../cases/live/decision-admission-settlement/cuts/0002-consequential-settlement.json`](../cases/live/decision-admission-settlement/cuts/0002-consequential-settlement.json) |
 | What practice guidelines are derived from the foundation triad? | [`foundation.md`](foundation.md#practice-guidelines) |
 | How should a product show timeline order from a declared perspective? | [KFD-4](../decisions/KFD-4.md) |
 | What schema should products use for KFD-4 observer-relative timeline views? | [`../schemas/kfd-4/observer-perspective.schema.json`](../schemas/kfd-4/observer-perspective.schema.json) |
 | How should humans and agents discover a load-bearing primitive? | [KFD-5](../decisions/KFD-5.md) |
 | What schema records a KFD-5 primitive candidate? | [`../schemas/kfd-5/primitive-discovery.schema.json`](../schemas/kfd-5/primitive-discovery.schema.json) |
 | How should an autonomous discovery loop remain grounded in causal experience? | [KFD-6](../decisions/KFD-6.md) |
+| Why should well-formed Episodes be treated as durable historical assets rather than disposable traces? | [KFD-6: Episodes as historical assets](../decisions/KFD-6.md#episodes-as-historical-assets) and [`KFD-6-usage.md`](KFD-6-usage.md#episode-asset-stewardship) |
 | What schema records a KFD-6 autonomous discovery experiment? | [`../schemas/kfd-6/autonomous-discovery-loop.schema.json`](../schemas/kfd-6/autonomous-discovery-loop.schema.json) |
+| Is there early real-world evidence that part of KFD-6 is feasible without claiming activation? | [Consequential Settlement early feasibility mapping](../cases/live/decision-admission-settlement/development-lineage.md#6-kfd-6-early-feasibility-case), then [KFD-6](../decisions/KFD-6.md#early-feasibility-evidence) |
 | How must real-world action keep direction, perspective, authority, and occurrence distinct? | [KFD-7](../decisions/KFD-7.md) |
 | What is the difference between the Fact-Episode Ontology, Action Responsibility Geometry, and a Domain Profile? | [KFD-7](../decisions/KFD-7.md#action-responsibility-geometry-and-domain-profiles) and [`KFD-7-usage.md`](KFD-7-usage.md#fact-episode-ontology-action-responsibility-geometry-and-domain-profiles) |
 | Why are Fact and Episode ontology bindings rather than action coordinates? | [KFD-7](../decisions/KFD-7.md#fact-episode-ontology) and [`KFD-7-formal.md`](KFD-7-formal.md#fact-episode-ontology) |
@@ -75,6 +87,18 @@
 | What is the formal reference for KFD-6? | [`KFD-6-formal.md`](KFD-6-formal.md) |
 | What are the package implementation notes for KFD-7? | [`KFD-7-usage.md`](KFD-7-usage.md) |
 | What is the formal reference for KFD-7? | [`KFD-7-formal.md`](KFD-7-formal.md) |
+| What are the package implementation notes for KFD-8? | [`KFD-8-usage.md`](KFD-8-usage.md) |
+| What is the formal reference for KFD-8? | [`KFD-8-formal.md`](KFD-8-formal.md) |
+| What are the package implementation notes for KFD-9? | [`KFD-9-usage.md`](KFD-9-usage.md) |
+| What is the formal reference for KFD-9? | [`KFD-9-formal.md`](KFD-9-formal.md) |
+| What are the package implementation notes for KFD-10? | [`KFD-10-usage.md`](KFD-10-usage.md) |
+| What is the formal reference for KFD-10? | [`KFD-10-formal.md`](KFD-10-formal.md) |
+| What are the package implementation notes for KFD-11? | [`KFD-11-usage.md`](KFD-11-usage.md) |
+| What is the formal reference for KFD-11? | [`KFD-11-formal.md`](KFD-11-formal.md) |
+| What are the package implementation notes for KFD-12? | [`KFD-12-usage.md`](KFD-12-usage.md) |
+| What is the formal reference for KFD-12? | [`KFD-12-formal.md`](KFD-12-formal.md) |
+| What are the package implementation notes for KFD-13? | [`KFD-13-usage.md`](KFD-13-usage.md) |
+| What is the formal reference for KFD-13? | [`KFD-13-formal.md`](KFD-13-formal.md) |
 
 ## Adoption, verification, and release
 
@@ -83,7 +107,7 @@
 | How should an agent quickly understand this package? | [`../README.md`](../README.md#agent-quickstart), then [`foundation.md`](foundation.md), [`formal-model.md`](formal-model.md), and [`primitive-discovery-cases.md`](primitive-discovery-cases.md) |
 | What is the experimental transport-neutral Agent Hub interoperability profile? | [`../protocols/agent-hub/README.md`](../protocols/agent-hub/README.md), then its [`implementer guide`](../protocols/agent-hub/implementer-guide.md) and [`state machine`](../protocols/agent-hub/state-machine.md) |
 | What is the experimental black-box Agent runtime conformance profile and fixed KFD Runtime 100 suite? | [`../profiles/agent-runtime/README.md`](../profiles/agent-runtime/README.md), its [`normative inventory`](../profiles/agent-runtime/normative-inventory.md), and [`implementer guide`](../profiles/agent-runtime/implementer-guide.md) |
-| What is the concrete self-proof path for KFD-1 through KFD-7? | [`../README.md`](../README.md#product-proof-path), the KFD formal and usage pages, and the package witnesses under [`../.buildchain/`](../.buildchain/) |
+| What is the concrete self-proof path for KFD-1 through KFD-13? | [`../README.md`](../README.md#product-proof-path), the KFD formal and usage pages, and the package witnesses under [`../.buildchain/`](../.buildchain/) |
 | How do I independently verify KFD records, release passports, Xinfa Pack/Atlas objects, or qualified Git Episodes? | [`verifier.md`](verifier.md) |
 | Where are the verifier semantic differences and public-specification gaps recorded? | [`verifier-inventory.md`](verifier-inventory.md) |
 | Where is the public KFD fact source? | [`../README.md`](../README.md#decision-metadata) and [`../site/kfd-site.json`](../site/kfd-site.json) decision metadata |

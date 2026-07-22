@@ -36,6 +36,32 @@ corpus and immutable evidence cut, observer and capture boundary, accepted and
 excluded sources, gaps, degradation, bias, and consequences represented only
 by proxies.
 
+## Episodes as historical assets
+
+A well-formed Episode is more than a short-lived execution trace. By
+preserving declared perspective, action, dependency, consequence, cost,
+failure, retry, intervention, missing evidence, and adjacent Fact cuts, it
+becomes a durable historical asset. Its value is not limited to answering
+questions that the current ontology already knows how to ask. Future humans
+and agents may replay a corpus of Episodes from different participants and
+perspectives to expose recurring responsibility gaps, boundary pressure, or
+objects that the earlier ontology could not name.
+
+That potential value creates a stewardship obligation, not a command to retain
+everything forever. Adopters declare integrity roots, retention and deletion
+policy, privacy and consent boundaries, redaction or degradation, portable
+export and exact import limits, provider migration, and independent
+verification. An anonymous event pile, unverifiable blob, or corpus detached
+from observer and consequence boundaries is not equivalent to preserved causal
+experience.
+
+Long-lived Episode infrastructure can preserve the option of future discovery;
+it does not perform or certify discovery by itself. KFD-5 still qualifies each
+candidate, and this procedure still requires method comparison, baselines,
+held-out evaluation, and separated promotion authority. The
+[Consequential Settlement case](../cases/live/decision-admission-settlement/README.md)
+is early evidence that this option can become real.
+
 ## Experiment procedure
 
 KFD has no evidence that one genesis method dominates. Method choice therefore
@@ -89,6 +115,29 @@ the generator's.
 Discovery and promotion authority remain separate. Humans may continue to own
 value, safety, legal, allocation, or irreversible decisions. Autonomous genesis
 does not grant authority to change those boundaries.
+
+## Early feasibility evidence
+
+The
+[Consequential Settlement live case](../cases/live/decision-admission-settlement/README.md)
+is an early retained **natural pre-enactment** of part of this procedure.
+During real Kungfu development, agents generated Claim, purpose-bound
+Assessment, and Decision before the maintainer became aware of those named
+objects. Later agents replayed the retained development lineage, connected it
+to Fact Admission, and compressed the result into the provisional KFD-11
+procedure. KFD-5 qualification, maintainer authorization, repository review,
+and merge remained separate from that genesis.
+
+This is evidence that an agent can generate and later recognize an ontology
+change from causal development pressure with less direct human translation
+than KFD-5's founding pattern assumed. It is not a conforming KFD-6 experiment
+or activation evidence. The loop was human-triggered and human-corrected; its
+experience cut was reconstructed afterward; it did not compare plural methods
+against fixed-ontology and no-new-Primitive baselines under a shared budget;
+and it lacks held-out transfer, systematic false-candidate rejection, and an
+autonomous trigger for ontology review. The
+[development lineage](../cases/live/decision-admission-settlement/development-lineage.md#6-kfd-6-early-feasibility-case)
+preserves the bounded mapping and missing obligations.
 
 ## Activation
 

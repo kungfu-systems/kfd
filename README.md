@@ -8,14 +8,19 @@ KFD is an open, evidence-governed engineering standard for preserving facts,
 boundaries, perspective, and responsibility when the path is not known in
 advance. It develops a small set of portable principles, procedures, schemas,
 and verification contracts through which humans, agents, organizations, and
-software systems can act, learn, and change without silent drift.
+software systems can act, learn, and change without silent drift. It therefore
+treats a well-formed Episode as more than a trace: it is a durable historical
+asset that future humans and agents can replay when today's ontology no longer
+explains reality.
 
 KFD does not claim to be the final answer or a complete theory of complex
 systems. It publishes a small, testable foundation for adoption,
 implementation, challenge, counterevidence, and revision. The breadth covered
 by its current decisions is evidence that a general action structure may
 exist, not proof that KFD has finished discovering it. Kungfu is its founding
-implementation, not its adoption boundary.
+implementation, not its adoption boundary. Accumulating Episodes alone does
+not discover or prove a Primitive; KFD-5 and KFD-6 keep generation,
+qualification, and promotion separate.
 
 ## Foundation triad
 
@@ -44,6 +49,34 @@ No principle is load-bearing until it has an inspectable product witness.
 [Inspect KFD candidates](drafts/registry.json) ·
 [Explore current decisions](#current-decisions) ·
 [Inspect the product proof path](#product-proof-path)
+
+## Where KFD sits in the Agent Supply Chain
+
+KFD owns the open cooperation and trust contracts in the Agent Supply Chain;
+it does not own product builds, runtime storage, vendor identity, or a central
+Hub. The relevant path is:
+
+```text
+KFD-3 discovery and cooperation
+  -> product-owned build evidence
+  -> KFD-2 purpose-bound assessment
+  -> adopter-owned runtime facts
+  -> receiver-owned admission between independent Hubs
+```
+
+KFD-3 makes a product's value, constraints, choices, commands, Exit, and
+records discoverable without turning discovery into forced adoption. KFD-2
+lets a receiver assess claims against exact facts and evidence while retaining
+residual risk and decision ownership. The experimental
+[Agent Hub profile](protocols/agent-hub/README.md) carries those responsibilities
+across independently owned implementations.
+
+What is proved now is the public decision, schema, profile, and verifier
+surface in this repository. The protocol enables independent Hubs to implement
+the same responsibility boundary; it does **not** prove two independent
+production Hubs, external vendor adoption, stable certification, or industry
+standard status. Implementers can start with the exact alpha profile and
+[open a protocol gap](https://github.com/kungfu-systems/kfd/issues/new).
 
 ## Why this question matters
 
@@ -161,23 +194,34 @@ explainable, auditable, and proportionate.
 | [KFD-5](decisions/KFD-5.md) | procedure | Primitive discovery must separate genesis from qualification. | active |
 | [KFD-6](decisions/KFD-6.md) | procedure | Autonomous discovery must remain grounded in causal experience. | draft |
 | [KFD-7](decisions/KFD-7.md) | principle | Real-world action must keep state, occurrence, and action coordinates distinct. | active |
+| [KFD-8](decisions/KFD-8.md) | principle | Perspective must remain bound to admitted facts and declared loss. | draft |
+| [KFD-9](decisions/KFD-9.md) | principle | Continuing direction must outlive the actions that advance it. | draft |
+| [KFD-10](decisions/KFD-10.md) | principle | Authority must remain explicit, bounded, and revocable. | draft |
+| [KFD-11](decisions/KFD-11.md) | procedure | Claims may be assessed; only authorized decisions may change admitted state or responsibility. | draft |
+| [KFD-12](decisions/KFD-12.md) | principle | Software work must keep Initiative and Assignment distinct. | draft |
+| [KFD-13](decisions/KFD-13.md) | procedure | Project settlement must bind authorities without absorbing them. | draft |
 
-## Current candidates
+## Candidate lineage
 
-KFD Candidates preserve potentially load-bearing rules before a number is
-allocated. They are explicitly non-normative and may be revised, reordered,
-split, merged, withdrawn, rejected, or promoted.
+KFD Candidates preserve potentially load-bearing rules before and after
+numbering so readers can audit genesis, qualification, promotion, and later
+revision. They remain non-normative source lineage after promotion.
 
-- [Atlas action perspective](drafts/atlas-action-perspective.md), slot hint `8`.
-- [Pursuit intent continuity](drafts/pursuit-intent-continuity.md), slot hint
-  `9`.
-- [Warrant bounded authority](drafts/warrant-bounded-authority.md), slot hint
-  `10`.
+- [Cross-domain action primitives](drafts/action-state-separation.md) was
+  promoted into active KFD-7.
+- [Atlas action perspective](drafts/atlas-action-perspective.md) was promoted
+  into numbered draft KFD-8.
+- [Pursuit intent continuity](drafts/pursuit-intent-continuity.md) was promoted
+  into numbered draft KFD-9.
+- [Warrant bounded authority](drafts/warrant-bounded-authority.md) was promoted
+  into numbered draft KFD-10.
+- [Claim, Assessment, Decision, and Admission](drafts/claim-assessment-decision-admission.md)
+  was allocated to numbered draft KFD-11 by the pre-stable
+  [Foundation Revision](docs/foundation-revision-2026-07-21-decision-admission.md).
 
-The [cross-domain action candidate](drafts/action-state-separation.md) is
-preserved as the lineage promoted into active KFD-7. The machine source is
-[`drafts/registry.json`](drafts/registry.json). Remaining slot hints are
-ordering hypotheses, not allocated KFD numbers, reservations, or promises.
+The machine source is [`drafts/registry.json`](drafts/registry.json). A
+candidate's lineage does not replace the numbered decision that received its
+slot.
 
 ## Experimental protocol profiles
 
@@ -212,7 +256,7 @@ results.
 KFDs are not a detached manifesto, but they are not a demand that readers adopt
 a Kungfu product before understanding the decisions. The product-witness rule
 starts with this package itself: `standards.json`, `schemas/`, `docs/`,
-`site/kfd-site.json`, and `scripts/check.mjs` show how KFD-1 through KFD-7 are
+`site/kfd-site.json`, and `scripts/check.mjs` show how KFD-1 through KFD-13 are
 expressed as consumable interfaces for both humans and agents. These surfaces
 do not prove every adopter or product correct; they make the KFD package's own
 claims inspectable and falsifiable.
@@ -299,8 +343,8 @@ Agents consuming this package should start from the same sources as humans:
    historical cases and an ordinary cross-machine trace vignette.
 7. Read `cases/registry.json` to discover provisional live Primitive cases,
    their current immutable KFD-5 cuts, claim boundaries, and review paths.
-8. Read `drafts/registry.json` to discover non-normative KFD Candidates,
-   non-binding slot hints, promotion gates, and claim boundaries.
+8. Read `drafts/registry.json` to discover non-normative KFD Candidate
+   lineage, promotion gates, status, and claim boundaries.
 9. Read `standards.json` for canonical KFD numbers, formal reference versions
    and hashes, schema IDs, concept names, and interface contracts.
 10. Use `site/kfd-site.json` decision metadata or the KFD-3 collaboration
@@ -332,7 +376,13 @@ Agents consuming this package should start from the same sources as humans:
    current Fact/Episode and action-responsibility reference model. Use
    `schemas/kfd-7/domain-profile.schema.json` for a product-neutral Domain
    Profile Declaration; schema validity is non-qualifying and does not activate
-   a concrete Domain Profile.
+   a concrete Domain Profile. Read KFD-8 through KFD-10 for the separately
+   allocated Atlas, Pursuit, and Warrant draft responsibilities. Read KFD-11
+   for the cross-domain Claim-Assessment-Decision-Admission procedure. Read
+   KFD-12 and KFD-13 as a software-development Domain Profile and
+   project-settlement application, not as a required workflow for other
+   domains. Use `docs/field-responsibility-matrix.md` to decide whether a field
+   belongs to a cross-domain core, Domain Profile, or participant projection.
 
 KFD package semver is only the distribution version. KFD-owned machine
 interfaces carry their own `schemaVersion` and `contract` fields. Compatible
@@ -396,6 +446,14 @@ The five names are not five peers. Fact and Episode form the Fact-Episode
 Ontology; Atlas, Pursuit, and Warrant form the Action Responsibility Geometry.
 Their canonical explanatory subtitles and anti-misreading boundaries come
 from `terminology.json`, not from renderer or product-local wording.
+
+KFD-8, KFD-9, and KFD-10 allocate the three action coordinates as numbered
+drafts. KFD-11 separates Claim, Assessment, authorized Decision, and Admission
+before a domain chooses its workflow. KFD-12 and KFD-13 then show one
+software-development application: Initiative and Assignment organize durable
+work responsibility, while Project Cut records project settlement. This
+vocabulary does not bind other domains, which may define different Domain
+Profiles and settlement objects.
 
 ## Decision metadata
 

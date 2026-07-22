@@ -408,6 +408,12 @@ so.
 | Primitive discovery | KFD-5 | How does a candidate object become load-bearing rather than remain a private intuition or method artifact? | Genesis remains perspective-declared and method-plural; qualification binds the candidate to facts, alternatives, falsifiers, and real work. |
 | Autonomous discovery | KFD-6 | Can an agent move beyond a fixed ontology without replacing reality with generated narrative or canonizing one generator? | Autonomous discovery remains grounded in causal experience, compares generation methods under bounded conditions, and never certifies itself. |
 | Fact-bound action | KFD-7 | How can an intelligent participant act without confusing what it wants, sees, may do, and actually did? | The Fact-Episode Ontology preserves admitted state and realized occurrence; Action Responsibility Geometry keeps direction, perspective, and authority independently addressable over it. |
+| Perspective coordinate | KFD-8 | What situated fact view supports this action? | Atlas binds observer, source, Fact cut, scope, freshness, omission, conflict, and declared loss. |
+| Direction coordinate | KFD-9 | What intended change continues after this action ends? | Pursuit preserves direction, progress meaning, lineage, and settlement independently of any one Episode. |
+| Authority coordinate | KFD-10 | What transition is permitted, by whom, and under which constraints? | Warrant keeps authority explicit, bounded, derivable, attenuable, expirable, and revocable. |
+| Consequential settlement | KFD-11 | How can trust judgments lead to authorized change without collapsing evidence, judgment, authority, and admitted state? | Claim, Assessment, Decision, and Admission remain independently inspectable; only successful Admission publishes the corresponding successor Fact cut. |
+| Software work profile | KFD-12 | How can software work move from durable intent through execution, claim, judgment, and continuation without collapsing responsibility? | Initiative and Assignment keep continuing work context and bounded responsibility distinct from occurrence, Claim, Assessment, Decision, Admission, and continuation. |
+| Software project settlement | KFD-13 | What has the project officially become after accepted work? | Project Cut publishes a verifiable binding among independent source, Atlas, Episode, and policy authorities without becoming another fact engine. |
 
 The continuity is generative rather than merely classificatory. KFD-4 declares
 the observation horizon and allows perspective transformation to move it.
@@ -416,6 +422,28 @@ candidate testable. KFD-6 attempts to autonomize both generation and
 comparison. KFD-7 closes the first return to action: the resulting world model
 still cannot synthesize intent, perspective, permission, or occurrence from
 one another.
+
+KFD-8 through KFD-10 specify the three cross-domain action coordinates without
+choosing a business workflow. KFD-11 then separates Claim, Assessment,
+authorized Decision, and Admission at the trust-to-action boundary. KFD-12 and
+KFD-13 provide the first numbered domain application: durable software work
+and project-level settlement. That application is evidence and a reusable
+profile, not a command that other domains adopt Initiative, Assignment,
+Project Cut, or the same lifecycle.
+Other domains may inhabit the geometry with different vocabulary, fields,
+transitions, and macro commitments.
+
+The first software application also demonstrates the full KFD-4/KFD-5
+transition. Staying in the lower-object developer view suggests refining Fact,
+Episode, Pursuit, Atlas, and Warrant. Moving to the real participant's view
+instead exposes Initiative and Assignment as the objects needed to organize
+work. Staying in the coordinator view then suggests maintaining those objects
+more precisely; moving to the successor Agent's view exposes Project Cut as
+the project boundary needed for continuation. Perspective transformation
+generates these candidates, but does not certify them. Separate KFD-5 cuts
+qualify their distinct responsibilities, alternatives, falsifiers, evidence,
+and bounded acceptance. The [live case](../cases/live/software-work-perspective-settlement/README.md)
+preserves that separation.
 
 Observer-bound timeline and replay are the first concrete KFD-4 profiles, just
 as release versioning is one concrete KFD-1 profile. Episode and Atlas are

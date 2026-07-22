@@ -45,6 +45,93 @@
         }
       ],
       "claimBoundary": "This case preserves the fused Proof-Carrying Work Object genesis and tracks provisional Pursuit and Warrant candidates. It does not establish novelty, universality, product readiness, method superiority, or accepted Primitive status for either track."
+    },
+    {
+      "id": "software-work-perspective-settlement",
+      "title": "Initiative, Assignment, and Project Cut",
+      "kind": "primitive-discovery-case",
+      "status": "active",
+      "standard": "kfd-5",
+      "humanEntry": "cases/live/software-work-perspective-settlement/README.md",
+      "genesis": "cases/live/software-work-perspective-settlement/genesis.md",
+      "methodTrace": "cases/live/software-work-perspective-settlement/kfd-method-trace.md",
+      "propagationHypothesis": "cases/live/software-work-perspective-settlement/propagation-hypothesis.md",
+      "reviewIndex": "cases/live/software-work-perspective-settlement/reviews/README.md",
+      "ontologySplit": "cases/live/software-work-perspective-settlement/ontology-split.md",
+      "distinguishabilityArgument": "cases/live/software-work-perspective-settlement/distinguishability.md",
+      "candidateTracks": [
+        {
+          "id": "initiative",
+          "title": "Initiative",
+          "status": "accepted",
+          "definition": "An independently addressable context for continuing coordinated software work across participants, Pursuits, Assignments, decisions, lineage, and settlement.",
+          "currentCut": {
+            "path": "cases/live/software-work-perspective-settlement/cuts/0001-initiative.json",
+            "sha256": "411d2c765e287431b7025756d4309229732428faba3f127bd0d356d7cbd33ea6",
+            "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-5/primitive-discovery.schema.json",
+            "schemaVersion": 3
+          },
+          "claimBoundary": "Accepted only as a software-development Domain Profile Primitive under current KFD-12; the immutable cut retains its earlier KFD-11 coordinate. Cross-domain vocabulary, historical novelty, universal minimum fields, and KFD-12 activation are not claimed."
+        },
+        {
+          "id": "assignment",
+          "title": "Assignment",
+          "status": "accepted",
+          "definition": "An independently addressable bounded software-work responsibility proposed to, accepted by, or held by a participant under declared context, authority, evidence, and settlement conditions.",
+          "currentCut": {
+            "path": "cases/live/software-work-perspective-settlement/cuts/0001-assignment.json",
+            "sha256": "454ad9d2b2b04e48b09e4526b51375d2366058e405102d361326834db76fe2f9",
+            "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-5/primitive-discovery.schema.json",
+            "schemaVersion": 3
+          },
+          "claimBoundary": "Accepted only as a software-development Domain Profile Primitive under current KFD-12; the immutable cut retains its earlier KFD-11 coordinate. Universal task vocabulary, one actor model, historical novelty, and KFD-12 activation are not claimed."
+        },
+        {
+          "id": "project-cut",
+          "title": "Project Cut",
+          "status": "accepted",
+          "definition": "A software-project settlement object that publishes what a project officially became by binding independent source, Atlas, Episode, policy, and predecessor authorities without absorbing them.",
+          "currentCut": {
+            "path": "cases/live/software-work-perspective-settlement/cuts/0001-project-cut.json",
+            "sha256": "261c6e05308a4e197bc4727f2828cf621b8d496e0c8b5f33b01ae5646fa1c200",
+            "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-5/primitive-discovery.schema.json",
+            "schemaVersion": 3
+          },
+          "claimBoundary": "Accepted only as a software-project settlement Primitive under current KFD-13; the immutable cut retains its earlier KFD-12 coordinate. It is not a fourth fact engine, a peer action coordinate, a universal domain object, proof of historical novelty, or activation of KFD-13."
+        }
+      ],
+      "claimBoundary": "This case records two perspective transformations and three bounded KFD-5 acceptances. It does not establish cross-domain universality, historical novelty, one physical implementation, or activation of the current draft KFD-12 and KFD-13 decisions. Immutable cuts retain their prerelease coordinates and map forward through the 2026-07-21 Foundation Revision."
+    },
+    {
+      "id": "decision-admission-settlement",
+      "title": "Consequential Settlement",
+      "kind": "primitive-discovery-case",
+      "status": "active",
+      "standard": "kfd-5",
+      "humanEntry": "cases/live/decision-admission-settlement/README.md",
+      "genesis": "cases/live/decision-admission-settlement/genesis.md",
+      "developmentLineage": "cases/live/decision-admission-settlement/development-lineage.md",
+      "methodTrace": "cases/live/decision-admission-settlement/kfd-method-trace.md",
+      "propagationHypothesis": "cases/live/decision-admission-settlement/propagation-hypothesis.md",
+      "reviewIndex": "cases/live/decision-admission-settlement/reviews/README.md",
+      "ontologySplit": "cases/live/decision-admission-settlement/ontology-split.md",
+      "distinguishabilityArgument": "cases/live/decision-admission-settlement/distinguishability.md",
+      "candidateTracks": [
+        {
+          "id": "consequential-settlement",
+          "title": "Consequential Settlement",
+          "status": "provisional",
+          "definition": "A cross-domain procedure that preserves Claim, purpose-bound Assessment, Warrant-bound Decision, and independently recorded Admission as distinct responsibilities before successor Fact publication.",
+          "currentCut": {
+            "path": "cases/live/decision-admission-settlement/cuts/0002-consequential-settlement.json",
+            "sha256": "e851f041d4d3b27e635924f1a1f24678db0e04c5757af9e3dc505e39f112657e",
+            "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-5/primitive-discovery.schema.json",
+            "schemaVersion": 3
+          },
+          "claimBoundary": "Provisional under draft KFD-11. The successor cut records Agent generation of the intermediate ontology through retained private transcript evidence and a dated public implementation sequence; it does not activate KFD-11, prove universal minimality or novelty, require four physical objects, or establish independent cross-domain adoption."
+        }
+      ],
+      "claimBoundary": "This case preserves the distributed Agent-led development, KFD-4 perspective replay, and provisional KFD-5 qualification of the Consequential Settlement procedure. Private attribution evidence and public Git chronology remain separate, and cross-domain activation is not claimed."
     }
   ]
 }

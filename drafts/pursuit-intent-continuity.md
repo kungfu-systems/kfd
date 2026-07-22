@@ -1,24 +1,31 @@
 ---
-status: draft
+status: promoted
 period: 2026-07-18
 theme: pursuit-intent-continuity
 doc_type: kfd-candidate
 source_level: maintainer-consensus
-confidence: medium
+confidence: high
 sensitivity: public
 evidence_grade: C
 review_state: self-reviewed
-last_reviewed: 2026-07-18
+last_reviewed: 2026-07-21
 ---
 
 # KFD Candidate: Pursuit Intent Continuity
 
-- Candidate status: incubating
+- Candidate status: promoted to KFD-9
 - Kind candidate: principle
-- Current slot hint: 9
+- Allocated decision: 9
 - Slot binding: non-binding
 
 [Formal candidate](formal/pursuit-intent-continuity.md)
+
+## Promotion
+
+This candidate was promoted on 2026-07-21 to
+[KFD-9](../decisions/KFD-9.md). The numbered draft is now the authoritative
+rule and its [formal reference](../docs/KFD-9-formal.md) owns the current
+non-normative model. This page remains source-candidate lineage.
 
 ## One sentence
 
@@ -115,9 +122,6 @@ The candidate weakens or fails if:
 
 ## Numbering boundary
 
-The slot hint `9` is non-binding. This document is not `KFD-9`, does not
-reserve that number, and may be revised, reordered, merged, withdrawn, or
-rejected.
-
-Only explicit promotion into `decisions/KFD-N.md` and numbered `registry.json`
-allocates a KFD number.
+The former slot hint was non-binding until explicit promotion. KFD-9 is now
+allocated by `decisions/KFD-9.md` and `registry.json`; this lineage document
+does not replace or extend that numbered authority.

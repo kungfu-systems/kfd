@@ -42,6 +42,22 @@ profile id + profile version + SHA-256(manifest.json) + repository commit
 digest. A digest mismatch, unknown required feature, or unsupported profile
 version fails closed.
 
+### Agent Supply Chain boundary
+
+This profile is the portability boundary at the end of an open Agent Supply
+Chain: KFD-3 exposes how products cooperate, product-owned tooling binds claims
+to exact artifacts, KFD-2 supports purpose-bound assessment, and an adopter's
+runtime preserves durable work facts. The profile then lets another Hub
+discover capabilities and make its own admission decision without surrendering
+its product, identity, policy, models, accounts, storage, or customer
+relationship.
+
+That sequence is an architectural and protocol capability, not adoption
+evidence. The current public proof is the exact alpha profile, schemas,
+manifests, fixtures, and verifier results. It does not establish a second
+independent production Hub, external endorsement, stable interoperability, or
+lossless one-click migration.
+
 ## Problem and boundary
 
 An Agent Hub is a participant-owned control plane for execution, identity,

@@ -31,12 +31,12 @@
         "numbered-draft-authored",
         "maintainer-promotion"
       ],
-      "claimBoundary": "This candidate is preserved as the source lineage promoted into active KFD-7. KFD-7 does not turn Fact or Episode into ordinary domain-Primitives, require named physical stores, claim literal physical spacetime or Euclidean dimensionality, or establish universal necessity. Its Atlas, Pursuit, and Warrant elaboration candidates retain non-binding slot hints."
+      "claimBoundary": "This candidate is preserved as the source lineage promoted into active KFD-7. KFD-7 does not turn Fact or Episode into ordinary domain-Primitives, require named physical stores, claim literal physical spacetime or Euclidean dimensionality, or establish universal necessity. Its Atlas, Pursuit, and Warrant elaborations were later promoted into numbered drafts KFD-8, KFD-9, and KFD-10."
     },
     {
       "id": "atlas-action-perspective",
       "title": "Atlas action perspective",
-      "status": "incubating",
+      "status": "promoted",
       "kindCandidate": "principle",
       "slotHint": 8,
       "slotBinding": "non-binding",
@@ -63,12 +63,12 @@
         "perspective-replay-evidence",
         "dual-first-product-witness"
       ],
-      "claimBoundary": "This candidate does not allocate KFD-8, require the name Atlas, mandate one serialization or product surface, claim perspective completeness, or create a normative KFD decision."
+      "claimBoundary": "This candidate is preserved as source lineage promoted into numbered draft KFD-8. KFD-8 allocates Atlas as the canonical perspective coordinate but does not mandate one serialization or product surface, claim perspective completeness, establish active status, or prove universal necessity."
     },
     {
       "id": "pursuit-intent-continuity",
       "title": "Pursuit intent continuity",
-      "status": "incubating",
+      "status": "promoted",
       "kindCandidate": "principle",
       "slotHint": 9,
       "slotBinding": "non-binding",
@@ -95,12 +95,12 @@
         "settlement-distinguishability",
         "product-witness"
       ],
-      "claimBoundary": "This candidate does not allocate KFD-9, require the name Pursuit, mandate one decomposition shape or workflow, establish universal necessity, or create a normative KFD decision."
+      "claimBoundary": "This candidate is preserved as source lineage promoted into numbered draft KFD-9. KFD-9 allocates Pursuit as the canonical direction coordinate but does not mandate one decomposition shape or workflow, establish active status, or prove universal necessity."
     },
     {
       "id": "warrant-bounded-authority",
       "title": "Warrant bounded authority",
-      "status": "incubating",
+      "status": "promoted",
       "kindCandidate": "principle",
       "slotHint": 10,
       "slotBinding": "non-binding",
@@ -127,7 +127,31 @@
         "revocation-and-attenuation-evidence",
         "product-witness"
       ],
-      "claimBoundary": "This candidate does not allocate KFD-10, require the name Warrant, replace domain authorization systems, establish universal necessity, or create a normative KFD decision."
+      "claimBoundary": "This candidate is preserved as source lineage promoted into numbered draft KFD-10. KFD-10 allocates Warrant as the canonical authority coordinate but does not replace domain authorization systems, mandate one token or approval shape, establish active status, or prove universal necessity."
+    },
+    {
+      "id": "claim-assessment-decision-admission",
+      "title": "Claim, Assessment, Decision, and Admission",
+      "status": "promoted",
+      "kindCandidate": "procedure",
+      "slotHint": 11,
+      "slotBinding": "non-binding",
+      "oneSentence": "Claims may be assessed; only authorized decisions may change admitted state or responsibility.",
+      "path": "drafts/claim-assessment-decision-admission.md",
+      "sourceCases": [
+        {
+          "id": "software-work-perspective-settlement",
+          "path": "cases/live/software-work-perspective-settlement/README.md"
+        }
+      ],
+      "promotionGate": [
+        "kfd-2-claim-assessment-reuse",
+        "decision-authority-separation",
+        "decision-admission-separation",
+        "foundation-revision-lineage",
+        "maintainer-promotion"
+      ],
+      "claimBoundary": "This candidate is preserved as source lineage allocated to numbered draft KFD-11 by the 2026-07-21 pre-stable Foundation Revision. It does not replace KFD-2 Claim or Assessment semantics, activate KFD-11, require four physical records, or prove universal cross-domain minimality."
     }
   ]
 }
