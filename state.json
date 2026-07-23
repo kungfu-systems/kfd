@@ -16,14 +16,27 @@
   "state_ref": "buildchain/release-state/1-0-0-alpha-44",
   "state_path": "/home/runner/work/kfd/kfd/.buildchain/release-state/v1.0.0-alpha.44.json",
   "evidence_path": "/home/runner/work/kfd/kfd/.buildchain/release-evidence/v1.0.0-alpha.44/evidence.json",
-  "state": "publishing",
-  "previous_state": "prepared",
+  "state": "published",
+  "previous_state": "publishing",
   "actor": "kungfu-origin",
   "run_id": "30016100385",
   "superseded_by": "",
   "failure": "",
-  "artifacts": [],
-  "evidence": [],
+  "artifacts": [
+    {
+      "group": "node",
+      "kind": "npm",
+      "name": "@kungfu-tech/kfd",
+      "ref": "1.0.0-alpha.44",
+      "digest": "sha512-CXoN4ui3tvjRSyDwwwa96swJiiJ1B4eXZ2/R2AzJmin6hAJt8Qa/5R1lWKnSPk3YVnMhU9W8Fc1Fr+Ql7Nlvpw==",
+      "role": "",
+      "required": true
+    }
+  ],
+  "evidence": [
+    ".buildchain/release-evidence/v1.0.0-alpha.44/evidence.json",
+    ".buildchain/release-evidence/v1.0.0-alpha.44/dist-tag-evidence.json"
+  ],
   "created_at": "2026-07-23T14:34:46.006Z",
-  "updated_at": "2026-07-23T14:34:48.058Z"
+  "updated_at": "2026-07-23T14:34:59.547Z"
 }
