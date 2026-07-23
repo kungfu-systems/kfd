@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.agent-hub-scaffold/v1",
+  "language": "cpp",
+  "binding": "jsonl-stdio/v1",
+  "build": ["cmake", "-S", ".", "-B", "build", "&&", "cmake", "--build", "build"],
+  "run": ["build/kfd-agent-hub-cpp-starter"],
+  "smoke": ["node", "smoke.mjs"],
+  "claims": {
+    "executed": ["handshake and evaluate response-envelope smoke fixtures"],
+    "notExecuted": ["KFD Agent Hub 20 semantics", "production interoperability", "security assessment", "general-purpose JSON parsing"],
+    "qualifying": false,
+    "certification": false
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-activation/contracts-manifest.schema.json",
+  "title": "KFD-11 through KFD-13 Activation Contracts Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "schemaVersion", "contract", "status", "activationOrder", "interfaces", "nonClaims"],
+  "properties": {
+    "$schema": { "const": "https://kfd.libkungfu.dev/schemas/kfd-activation/contracts-manifest.schema.json" },
+    "schemaVersion": { "const": 1 },
+    "contract": { "const": "kfd-11-13-activation-contracts" },
+    "status": { "const": "draft-interfaces" },
+    "activationOrder": { "const": ["kfd-11", "kfd-12", "kfd-13"] },
+    "interfaces": {
+      "type": "object", "additionalProperties": false,
+      "required": ["kfd11AdopterWitness", "kfd12AdopterWitness", "kfd13AdopterWitness", "qualificationReport", "activationRecord"],
+      "properties": {
+        "kfd11AdopterWitness": { "$ref": "#/$defs/interface" },
+        "kfd12AdopterWitness": { "$ref": "#/$defs/interface" },
+        "kfd13AdopterWitness": { "$ref": "#/$defs/interface" },
+        "qualificationReport": { "$ref": "#/$defs/interface" },
+        "activationRecord": { "$ref": "#/$defs/interface" }
+      }
+    },
+    "nonClaims": { "type": "array", "minItems": 3, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+  },
+  "$defs": {
+    "interface": {
+      "type": "object", "additionalProperties": false,
+      "required": ["contract", "schemaVersion", "schemaId", "schemaPath"],
+      "properties": {
+        "contract": { "type": "string", "minLength": 1 },
+        "schemaVersion": { "const": 1 },
+        "schemaId": { "type": "string", "format": "uri" },
+        "schemaPath": { "type": "string", "pattern": "^schemas/[a-z0-9/-]+\\.schema\\.json$" }
+      }
+    }
+  }
+}

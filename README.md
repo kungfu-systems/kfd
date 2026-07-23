@@ -245,6 +245,12 @@ adapters. Its machine outcomes bind `status`, `code`, and `verdict` together so
 a visible conflict cannot be mistaken for admission merely by inspecting a
 reason code.
 
+A clean npm consumer can pin `@kungfu-tech/kfd@alpha`, run the zero-configuration
+`kfd demo agent-hub` path, inspect `kfd capabilities agent-hub --json`, or
+generate a fail-closed C++, Node.js, Python, or Rust adapter starter with
+`kfd scaffold agent-hub`. Starter smoke tests exercise only the JSONL envelope;
+only `kfd test agent-hub --adapter ...` executes Hub 20 against adopter bytes.
+
 The experimental
 [Agent Runtime conformance profile](profiles/agent-runtime/README.md) consumes
 that exact Hub root and exposes a topology-neutral black-box adapter, the fixed
@@ -323,8 +329,11 @@ npx @kungfu-tech/kfd verify atlas path/to/atlas
 npx @kungfu-tech/kfd verify episode path/to/sealed/episode
 npx @kungfu-tech/kfd test agent-runtime --adapter path/to/adapter --output report.json
 npx @kungfu-tech/kfd verify agent-runtime-report report.json
-npx @kungfu-tech/kfd test agent-hub --adapter path/to/adapter --output agent-hub-report.json
-npx @kungfu-tech/kfd verify agent-hub-report agent-hub-report.json --adapter path/to/adapter --json
+npx --yes --package @kungfu-tech/kfd@alpha kfd demo agent-hub --output agent-hub-demo-report.json
+npx --yes --package @kungfu-tech/kfd@alpha kfd capabilities agent-hub --json
+npx --yes --package @kungfu-tech/kfd@alpha kfd scaffold agent-hub --language python --output my-agent-hub-adapter
+npx --yes --package @kungfu-tech/kfd@alpha kfd test agent-hub --adapter path/to/adapter --output agent-hub-report.json
+npx --yes --package @kungfu-tech/kfd@alpha kfd verify agent-hub-report agent-hub-report.json --adapter path/to/adapter --json
 ```
 
 The generic verifier and Agent runtime verifier emit
@@ -339,6 +348,13 @@ authorization. See
 boundary and public-spec gaps.
 
 ## Agent Quickstart
+
+For KFD-11 through KFD-13 adoption or activation work, begin with
+[`activation-contracts.json`](activation-contracts.json). It is the stable
+machine discovery surface for the three adopter witnesses, the shared
+qualification report, and the fail-closed activation record. Schema validity
+proves structural conformance only; it never upgrades implementation,
+operational evidence, independent review, or activation readiness.
 
 Agents consuming this package should start from the same sources as humans:
 

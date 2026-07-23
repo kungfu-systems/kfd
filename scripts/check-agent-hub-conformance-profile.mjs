@@ -20,6 +20,9 @@ function run(command, args, expected = 0, cwd = root) {
 const manifest = json("profiles/agent-hub/manifest.json");
 const registry = json("profiles/agent-hub/vectors/hub-20.json");
 const failures = json("profiles/agent-hub/failure-codes.json");
+const cliCapabilities = json("profiles/agent-hub/cli-capabilities.json");
+const standards = json("standards.json");
+const packageJson = json("package.json");
 assert.equal(manifest.contract, "kfd.agent-hub-conformance-manifest/v1");
 assert.equal(manifest.profile.id, "kfd-agent-hub-conformance");
 assert.equal(manifest.profile.version, "0.1.0-alpha.1");
@@ -37,6 +40,29 @@ assert.equal(new Set(registry.vectors.map(({ id }) => id)).size, 20);
 assert.equal(failures.profileCodes.includes("conflict-visible"), true);
 assert.equal(failures.positiveCodes.includes("conflict-visible"), false);
 assert.equal(registry.vectors.every(({ polarity, expect }) => polarity === (expect.status === "accepted" ? "positive" : "negative")), true);
+assert.equal(cliCapabilities.contract, "kfd.agent-hub-cli-capabilities/v1");
+assert.deepEqual(cliCapabilities.scaffoldLanguages, ["cpp", "node", "python", "rust"]);
+assert.equal(cliCapabilities.reportVerification.backend, "host-node");
+assert.deepEqual(cliCapabilities.reportVerification.sharedRustWasmChecks, []);
+assert.match(cliCapabilities.reportVerification.parityBoundary, /No Agent Hub report check is duplicated/u);
+assert.match(cliCapabilities.claimBoundary, /non-qualifying, non-certifying/u);
+assert.equal(packageJson.exports["./agent-hub/*"], "./profiles/agent-hub/*");
+assert.equal(packageJson.exports["./agent-hub/scaffolds/*"], "./profiles/agent-hub/scaffolds/*");
+const registeredSurfacePaths = new Set(standards.standards["kfd-1"].surfaceRegister.surfaces.map(({ sourcePath }) => sourcePath));
+for (const surface of ["profiles/agent-hub/cli-capabilities.json", "scripts/agent-hub-scaffold.mjs"]) {
+  assert.equal(registeredSurfacePaths.has(surface), true, `KFD-1 surface register missing ${surface}`);
+}
+const rootedProfilePaths = new Set(manifest.surfaces.map(({ path: surface }) => surface));
+for (const surface of [
+  "profiles/agent-hub/cli-capabilities.json",
+  "scripts/agent-hub-scaffold.mjs",
+  "profiles/agent-hub/scaffolds/cpp/adapter.cpp",
+  "profiles/agent-hub/scaffolds/node/adapter.mjs",
+  "profiles/agent-hub/scaffolds/python/adapter.py",
+  "profiles/agent-hub/scaffolds/rust/src/main.rs",
+]) {
+  assert.equal(rootedProfilePaths.has(surface), true, `profile manifest missing ${surface}`);
+}
 for (const schema of ["conformance-manifest", "adapter-request", "adapter-response", "suite", "report"]) {
   assert.equal(json(`schemas/kfd-agent-hub/${schema}.schema.json`).$id, `https://kfd.libkungfu.dev/schemas/kfd-agent-hub/${schema}.schema.json`);
 }
@@ -57,6 +83,46 @@ try {
     assert.equal(bound.valid, true); assert.equal(bound.adapterArtifactChecked, true);
     reports.push(report);
   }
+  const demoReportPath = path.join(temporary, "demo.report.json");
+  const demo = JSON.parse(run("node", ["bin/kfd.mjs", "demo", "agent-hub", "--output", demoReportPath, "--json"]));
+  assert.equal(demo.valid, true);
+  assert.deepEqual(demo.suite, { id: "kfd-agent-hub-20", passed: 20, total: 20 });
+  assert.equal(demo.offlineVerification.valid, true);
+  assert.equal(demo.offlineVerification.adapterArtifactChecked, true);
+  assert.equal(demo.qualifying, false);
+  assert.equal(demo.certification, false);
+  assert.equal(JSON.parse(run("node", ["bin/kfd.mjs", "capabilities", "agent-hub", "--json"])).contract, cliCapabilities.contract);
+
+  for (const language of cliCapabilities.scaffoldLanguages) {
+    const output = path.join(temporary, `${language}-starter`);
+    const scaffold = JSON.parse(run("node", ["bin/kfd.mjs", "scaffold", "agent-hub", "--language", language, "--output", output, "--json"]));
+    assert.equal(scaffold.language, language);
+    assert.equal(scaffold.binding, "jsonl-stdio/v1");
+    assert.equal(scaffold.conformance, "starter-envelope-smoke-only");
+    assert.equal(scaffold.qualifying, false);
+    assert.equal(scaffold.certification, false);
+    assert.equal(scaffold.next.claims.qualifying, false);
+    assert.equal(scaffold.next.claims.certification, false);
+    assert.ok(scaffold.next.claims.notExecuted.includes("KFD Agent Hub 20 semantics"));
+    if (language === "node") run("node", [path.join(output, "smoke.mjs")]);
+    if (language === "python") run("python3", [path.join(output, "smoke.py")]);
+    if (language === "rust") run("cargo", ["test", "--quiet", "--manifest-path", path.join(output, "Cargo.toml")]);
+    if (language === "cpp") run("node", [path.join(output, "smoke.mjs")]);
+  }
+
+  const protectedOutput = path.join(temporary, "protected-output");
+  fs.mkdirSync(protectedOutput);
+  const sentinel = path.join(protectedOutput, "sentinel.txt");
+  fs.writeFileSync(sentinel, "adopter-owned\n");
+  run("node", ["bin/kfd.mjs", "scaffold", "agent-hub", "--language", "node", "--output", protectedOutput], 2);
+  assert.equal(fs.readFileSync(sentinel, "utf8"), "adopter-owned\n");
+  run("node", ["bin/kfd.mjs", "scaffold", "agent-hub", "--language", "go", "--output", path.join(temporary, "unsupported")], 2);
+  run("node", ["bin/kfd.mjs", "scaffold", "agent-hub", "--language", "node", "--output", path.join(temporary, "missing-parent", "starter")], 2);
+  const realParent = path.join(temporary, "real-parent");
+  const linkedParent = path.join(temporary, "linked-parent");
+  fs.mkdirSync(realParent);
+  fs.symlinkSync(realParent, linkedParent, "dir");
+  run("node", ["bin/kfd.mjs", "scaffold", "agent-hub", "--language", "node", "--output", path.join(linkedParent, "starter")], 2);
   assert.notEqual(reports[0].adapter.id, reports[1].adapter.id);
   assert.notEqual(reports[0].adapter.topology, reports[1].adapter.topology);
   assert.notEqual(reports[0].adapter.artifactDigest, reports[1].adapter.artifactDigest);
@@ -64,6 +130,7 @@ try {
   const mutations = [
     ["profile-root", (value) => { value.profile.manifestDigest = `sha256:${"1".repeat(64)}`; }],
     ["protocol-root", (value) => { value.protocol.manifestDigest = `sha256:${"2".repeat(64)}`; }],
+    ["unsupported-profile-version", (value) => { value.profile.version = "0.2.0"; }],
     ["suite-root", (value) => { value.suite.vectorRoot = `sha256:${"3".repeat(64)}`; }],
     ["expectation", (value) => { value.results[0].expected.code = "mutated"; }],
     ["response-root", (value) => { value.results[0].responseRoot = `sha256:${"4".repeat(64)}`; }],
@@ -83,13 +150,26 @@ try {
   const packDirectory = path.join(temporary, "pack"); fs.mkdirSync(packDirectory);
   const pack = JSON.parse(run("npm", ["pack", "--json", "--pack-destination", packDirectory]));
   assert.equal(pack.length, 1);
+  assert.equal(
+    pack[0].files.some(({ path: packedPath }) => /(?:^|\/)(?:target|node_modules|__pycache__|build)(?:\/|$)|\.pyc$/u.test(packedPath)),
+    false,
+    "npm pack must exclude scaffold build caches",
+  );
   const extract = path.join(temporary, "extract"); fs.mkdirSync(extract);
   run("tar", ["-xzf", path.join(packDirectory, pack[0].filename), "-C", extract]);
   const cleanRoot = path.join(extract, "package");
+  for (const surface of manifest.surfaces) assert.equal(fs.existsSync(path.join(cleanRoot, surface.path)), true, `npm pack missing ${surface.path}`);
   const cleanReport = path.join(temporary, "clean-install.report.json");
   run("node", ["bin/kfd.mjs", "test", "agent-hub", "--adapter", "profiles/agent-hub/adapters/state-machine-adapter.mjs", "--output", cleanReport], 0, cleanRoot);
   const cleanVerification = JSON.parse(run("node", ["bin/kfd.mjs", "verify", "agent-hub-report", cleanReport, "--adapter", "profiles/agent-hub/adapters/state-machine-adapter.mjs", "--json"], 0, cleanRoot));
   assert.equal(cleanVerification.valid, true); assert.equal(cleanVerification.adapterArtifactChecked, true);
+  const cleanDemoReport = path.join(temporary, "clean-demo.report.json");
+  const cleanDemo = JSON.parse(run("node", ["bin/kfd.mjs", "demo", "agent-hub", "--output", cleanDemoReport, "--json"], 0, cleanRoot));
+  assert.equal(cleanDemo.valid, true);
+  assert.equal(cleanDemo.offlineVerification.valid, true);
+  const cleanStarter = path.join(temporary, "clean-pack-node-starter");
+  run("node", ["bin/kfd.mjs", "scaffold", "agent-hub", "--language", "node", "--output", cleanStarter, "--json"], 0, cleanRoot);
+  run("node", [path.join(cleanStarter, "smoke.mjs")], 0, cleanRoot);
 
   const consumer = path.join(temporary, "consumer"); fs.mkdirSync(consumer);
   fs.writeFileSync(path.join(consumer, "consumer-config.json"), "{}\n");
@@ -105,4 +185,4 @@ try {
 const stateAdapter = fs.readFileSync(path.join(root, "profiles/agent-hub/adapters/state-machine-adapter.mjs"), "utf8");
 const ruleAdapter = fs.readFileSync(path.join(root, "profiles/agent-hub/adapters/rule-table-adapter.mjs"), "utf8");
 assert.doesNotMatch(stateAdapter, /rule-table-adapter/u); assert.doesNotMatch(ruleAdapter, /state-machine-adapter/u);
-console.log("Agent Hub conformance profile check passed: fixed Hub 20, 2 dual-Hub adapters, offline verifier, 10 adversarial mutations, clean npm pack");
+console.log("Agent Hub conformance profile check passed: fixed Hub 20, zero-config demo, 4 language starters, offline verifier, 11 adversarial mutations, path safety, clean npm pack");

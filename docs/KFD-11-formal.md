@@ -67,6 +67,27 @@ ValidDecision(D, f) does not imply SuccessfulAdmission(M, D, f)
 SuccessfulAdmission(M, D, f) does not widen Claim(C) or Warrant(D)
 ```
 
+## Machine witness predicate
+
+The version 1 adopter witness makes the following closure mechanically
+checkable:
+
+```text
+Witness_11 =
+  DecisionAdmissionEnvelope
+  and Exact(Warrant, basis Fact cut, effect scope)
+  and IndependentlyVerified(Warrant)
+  and SeparatelyRecorded(Admission)
+  and ReceiptClass = effect-admission
+  and Decision != Admission
+  and WriteReceipt != Admission
+  and RetryPreservesDecisionIdentity
+```
+
+The schema cannot prove that two opaque roots denote different real objects;
+the explicit separation assertions are therefore evidence obligations subject
+to independent qualification, not self-certification.
+
 ## Invariants
 
 ```text

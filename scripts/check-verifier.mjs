@@ -47,6 +47,30 @@ const cases = [
     "verifier/fixtures/kfd-7/valid-domain-profile.json",
   ],
   [
+    "kfd-record",
+    "activation-contracts.json",
+  ],
+  [
+    "kfd-record",
+    "verifier/fixtures/kfd-11/valid-adopter-witness.json",
+  ],
+  [
+    "kfd-record",
+    "verifier/fixtures/kfd-12/valid-adopter-witness.json",
+  ],
+  [
+    "kfd-record",
+    "verifier/fixtures/kfd-13/valid-adopter-witness.json",
+  ],
+  [
+    "kfd-record",
+    "verifier/fixtures/kfd-activation/valid-qualification-report.json",
+  ],
+  [
+    "kfd-record",
+    "verifier/fixtures/kfd-activation/valid-revise-activation-record.json",
+  ],
+  [
     "passport",
     "verifier/fixtures/passport",
   ],
@@ -75,11 +99,16 @@ for (const [kind, fixture] of cases) {
   assert.equal(report.selfCertified, false, `${kind} verifier must not self-certify`);
 }
 
-const rejectedKfd7Records = [
+const rejectedKfdRecords = [
   "verifier/fixtures/kfd-7/invalid-missing-warrant.json",
   "verifier/fixtures/kfd-7/invalid-premature-activation.json",
+  "verifier/fixtures/kfd-11/invalid-write-receipt-as-admission.json",
+  "verifier/fixtures/kfd-12/invalid-fused-proposal-acceptance.json",
+  "verifier/fixtures/kfd-13/invalid-absorbed-authority.json",
+  "verifier/fixtures/kfd-activation/invalid-missing-evidence.json",
+  "verifier/fixtures/kfd-activation/invalid-lower-level-escalation.json",
 ];
-for (const fixture of rejectedKfd7Records) {
+for (const fixture of rejectedKfdRecords) {
   const native = run("cargo", [...nativeArgs, "verify", "kfd-record", fixture, "--json"], 1);
   const wasm = run("node", ["bin/kfd.mjs", "verify", "kfd-record", fixture, "--json"], 1);
   assert.equal(wasm, native, `${fixture} native and WASM rejections differ`);
@@ -94,6 +123,21 @@ for (const fixture of rejectedKfd7Records) {
   if (fixture.endsWith("invalid-premature-activation.json")) {
     assert.equal(issueKeys.has("schema-const:/domainProfile/qualificationStatus"), true, "activation must require a qualified Domain Profile");
     assert.equal(issueKeys.has("schema-min-items:/activation/productWitnesses"), true, "activation must retain product witnesses");
+  }
+  if (fixture.endsWith("invalid-write-receipt-as-admission.json")) {
+    assert.equal(issueKeys.has("schema-const:/admissionIndependence/receiptClass"), true, "a lower-level write receipt must not masquerade as effect Admission");
+  }
+  if (fixture.endsWith("invalid-fused-proposal-acceptance.json")) {
+    assert.equal(issueKeys.has("schema-const:/responsibilitySeparation/proposalIsNotAcceptance"), true, "Assignment proposal and acceptance must remain distinct");
+  }
+  if (fixture.endsWith("invalid-absorbed-authority.json")) {
+    assert.equal(issueKeys.has("schema-const:/authorityBindings/0/absorbedByProjectCut"), true, "Project Cut must not absorb a bound authority");
+  }
+  if (fixture.endsWith("invalid-missing-evidence.json")) {
+    assert.equal(issueKeys.has("schema-min-items:/exactEvidenceRoots"), true, "activation without exact evidence must fail closed");
+  }
+  if (fixture.endsWith("invalid-lower-level-escalation.json")) {
+    assert.equal(issueKeys.has("schema-const:/gates/kfd12/operationalEvidence"), true, "structural conformance must not auto-escalate to activation pass");
   }
 }
 
@@ -338,4 +382,4 @@ assert.doesNotMatch(
   fs.readFileSync(path.join(root, "bin", "kfd.mjs"), "utf8"),
   /\b(fetch|https?\.request)\s*\(/u,
 );
-console.log(`check-verifier: ${cases.length} native/WASM parity fixtures and ${9 + rejectedKfd7Records.length} adversarial rejections ok`);
+console.log(`check-verifier: ${cases.length} native/WASM parity fixtures and ${9 + rejectedKfdRecords.length} adversarial rejections ok`);

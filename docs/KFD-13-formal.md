@@ -53,6 +53,23 @@ ValidProjectCut does not imply ReleaseFit
 ValidProjectCut does not imply PursuitSettled
 ```
 
+## Machine witness predicate
+
+```text
+Witness_13 =
+  RequiredAuthorities(source, Atlas, Episode, policy)
+  and VerifiedUnderOwnAuthority(each binding)
+  and OwnsSemantics(each authority)
+  and not AbsorbedByProjectCut(each authority)
+  and Canonical(ProjectCutBinding)
+  and ResidualRiskDeclared
+  and IndependentlyVerified(Export(ProjectCut))
+  and Preserved(PredecessorLineage)
+```
+
+The version 1 witness keeps canonical binding validity separate from work
+completion, release fitness, and activation.
+
 ## Invariants
 
 ```text

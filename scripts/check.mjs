@@ -38,6 +38,10 @@ const releaseImpact = JSON.parse(readFileSync("release-impact.json", "utf8"));
 const foundationRevisionPath = "docs/foundation-revision-2026-07-21-decision-admission.json";
 const foundationRevision = JSON.parse(readFileSync(foundationRevisionPath, "utf8"));
 const packageJson = JSON.parse(readFileSync("package.json", "utf8"));
+const activationContractsPath = "activation-contracts.json";
+const activationContractsSchemaPath = "schemas/kfd-activation/contracts-manifest.schema.json";
+const activationContracts = JSON.parse(readFileSync(activationContractsPath, "utf8"));
+const activationContractsSchema = JSON.parse(readFileSync(activationContractsSchemaPath, "utf8"));
 const kfd7ActivationEvidencePath = "evidence/kfd-7/activation-record.json";
 const kfd7ActivationEvidence = JSON.parse(readFileSync(kfd7ActivationEvidencePath, "utf8"));
 const siteBundle = JSON.parse(readFileSync("site/kfd-site.json", "utf8"));
@@ -89,6 +93,38 @@ if (packageJson.description !== expectedPackageDescription) {
 }
 if (packageJson.bin?.kfd !== "./bin/kfd.mjs") {
   fail("package.json must publish the kfd verifier bin");
+}
+if (!packageJson.files?.includes(activationContractsPath) || packageJson.exports?.[`./${activationContractsPath}`] !== `./${activationContractsPath}`) {
+  fail("package.json must publish the activation-contracts discovery manifest");
+}
+if (activationContracts.$schema !== activationContractsSchema.$id ||
+    activationContracts.contract !== "kfd-11-13-activation-contracts" ||
+    activationContracts.schemaVersion !== 1 ||
+    activationContracts.status !== "draft-interfaces") {
+  fail("activation-contracts.json must use the canonical version 1 draft-interface contract");
+}
+if (JSON.stringify(activationContracts.activationOrder) !== JSON.stringify(["kfd-11", "kfd-12", "kfd-13"])) {
+  fail("activation contracts must preserve the KFD-11 -> KFD-12 -> KFD-13 activation order");
+}
+const activationPackageAliases = {
+  kfd11AdopterWitness: "./kfd-11/adopter-witness.schema.json",
+  kfd12AdopterWitness: "./kfd-12/adopter-witness.schema.json",
+  kfd13AdopterWitness: "./kfd-13/adopter-witness.schema.json",
+  qualificationReport: "./activation/qualification-report.schema.json",
+  activationRecord: "./activation/activation-record.schema.json",
+};
+for (const [name, iface] of Object.entries(activationContracts.interfaces ?? {})) {
+  if (!existsSync(iface.schemaPath)) fail(`activation contract ${name} points to missing ${iface.schemaPath}`);
+  else {
+    const schema = JSON.parse(readFileSync(iface.schemaPath, "utf8"));
+    if (schema.$id !== iface.schemaId) fail(`activation contract ${name} schemaId does not match ${iface.schemaPath}`);
+    if (schema.properties?.contract?.const !== iface.contract) fail(`activation contract ${name} contract does not match ${iface.schemaPath}`);
+    if (schema.properties?.schemaVersion?.const !== iface.schemaVersion) fail(`activation contract ${name} schemaVersion does not match ${iface.schemaPath}`);
+  }
+  const alias = activationPackageAliases[name];
+  if (!alias || packageJson.exports?.[alias] !== `./${iface.schemaPath}`) {
+    fail(`package.json must expose the stable activation contract alias ${alias ?? name}`);
+  }
 }
 for (const governancePath of ["CONTRIBUTING.md", "GOVERNANCE.md"]) {
   if (!existsSync(governancePath)) fail(`missing open-governance surface ${governancePath}`);

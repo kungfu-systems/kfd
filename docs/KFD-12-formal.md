@@ -76,6 +76,23 @@ organizes coordinated work around one or more continuing directions.
 remain independently inspectable. A self-assigned Assignment remains valid
 only when holder, acceptance, and Warrant are explicit.
 
+## Machine witness predicate
+
+```text
+Witness_12 =
+  Separate(Initiative, Pursuit)
+  and Separate(Assignment, Warrant, Episode)
+  and Separate(Proposal, Acceptance)
+  and ExactBindings(Assignment, Initiative, Pursuit, Atlas, Warrant)
+  and Preserved(SettlementEvidence, ContinuationLineage)
+  and RoundTrip(SimpleSession,
+      Initiative, Assignment, Episode, Claim,
+      Assessment, Decision, Admission, Continuation)
+```
+
+The version 1 adopter witness records these obligations without prescribing a
+storage layout, API, command, or visible object count.
+
 ## Applicability predicate
 
 ```text

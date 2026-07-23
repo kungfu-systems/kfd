@@ -42,6 +42,19 @@ conversation or its authorship. The two evidence classes remain explicit.
 6. Issue a receipt that an independent verifier can recompute.
 7. Preserve immutable lineage across later cuts, supersession, or rejection.
 
+## Machine adoption path
+
+Publish a
+[`schemas/kfd-13/adopter-witness.schema.json`](../schemas/kfd-13/adopter-witness.schema.json)
+record. It requires independently verified source, Atlas, Episode, and policy
+bindings, explicit authority preservation, a canonical Project Cut root and
+non-self-certifying receipt, omissions/conflicts/unknowns/residual risk, an
+independent export verification, and successor lineage.
+
+The package-level [`activation-contracts.json`](../activation-contracts.json)
+manifest exposes this witness together with the shared qualification report
+and fail-closed activation record.
+
 ## Qualification
 
 Test deterministic rebuild, independent verification, missing or conflicting
@@ -51,6 +64,10 @@ work, and release fitness.
 
 Do not implement Project Cut as a merged authority. Its value is the verifiable
 relationship among authorities that retain their own semantics.
+
+Qualification must preserve failed evidence and residual risk. A structural
+or deterministic rebuild result does not by itself prove operational evidence,
+independent review, work completion, release fitness, or activation.
 
 The [Field Responsibility Matrix](field-responsibility-matrix.md) distinguishes
 the software-domain settlement body from provider names, filesystem paths,

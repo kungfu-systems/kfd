@@ -1,0 +1,44 @@
+{
+  "$schema": "https://kfd.libkungfu.dev/schemas/kfd-activation/contracts-manifest.schema.json",
+  "schemaVersion": 1,
+  "contract": "kfd-11-13-activation-contracts",
+  "status": "draft-interfaces",
+  "activationOrder": ["kfd-11", "kfd-12", "kfd-13"],
+  "interfaces": {
+    "kfd11AdopterWitness": {
+      "contract": "kfd-11-adopter-witness",
+      "schemaVersion": 1,
+      "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-11/adopter-witness.schema.json",
+      "schemaPath": "schemas/kfd-11/adopter-witness.schema.json"
+    },
+    "kfd12AdopterWitness": {
+      "contract": "kfd-12-adopter-witness",
+      "schemaVersion": 1,
+      "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-12/adopter-witness.schema.json",
+      "schemaPath": "schemas/kfd-12/adopter-witness.schema.json"
+    },
+    "kfd13AdopterWitness": {
+      "contract": "kfd-13-adopter-witness",
+      "schemaVersion": 1,
+      "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-13/adopter-witness.schema.json",
+      "schemaPath": "schemas/kfd-13/adopter-witness.schema.json"
+    },
+    "qualificationReport": {
+      "contract": "kfd-11-13-qualification-report",
+      "schemaVersion": 1,
+      "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-activation/qualification-report.schema.json",
+      "schemaPath": "schemas/kfd-activation/qualification-report.schema.json"
+    },
+    "activationRecord": {
+      "contract": "kfd-11-13-activation-record",
+      "schemaVersion": 1,
+      "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-activation/activation-record.schema.json",
+      "schemaPath": "schemas/kfd-activation/activation-record.schema.json"
+    }
+  },
+  "nonClaims": [
+    "Schema validity is structural conformance only.",
+    "A founding implementation or self-review is not activation evidence.",
+    "This manifest does not activate KFD-11, KFD-12, or KFD-13."
+  ]
+}

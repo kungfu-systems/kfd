@@ -5,27 +5,27 @@
   "sourceBindings": [
     {
       "path": "package.json",
-      "sha256": "db73d4b8733c6dc1bd7d48cfb50c926fdec775b13f91a01a6c074ddf7e8cdb67",
+      "sha256": "0aa24406aefcd5faa7b8e218e36a61cd1deaaacec42aa46671b2cbf0c8fef727",
       "id": "package-version-and-exports"
     },
     {
       "path": "kfd.release.json",
-      "sha256": "6b474acf29ccc31702fc3b3f96ce414a80e9901fd0fc490a14c39e600cdbe4e9",
+      "sha256": "04ec2f23514a7f9045ab17e1035535a267d757acd022f6ffdaf33e432e124823",
       "id": "anchored-release-version"
     },
     {
       "path": "registry.json",
-      "sha256": "3563a977b66228b8ffc7e36647fdcaf7cdfc8c44432c4f11b0443deee2b72808",
+      "sha256": "54d5e013c933cfcd6886f6b01d411d2f1888448e4b87f82cfa8d2245ab2f28a5",
       "id": "decision-registry"
     },
     {
       "path": "standards.json",
-      "sha256": "04c8163ffe9bc0c4830008a67c5560b21c279935544f3a1b9ad78e63292f49a9",
+      "sha256": "65899780779a8e933f1f3a298bfdf2311104ccde84b773a0828ee4c23dd19d5b",
       "id": "standards-metadata"
     },
     {
       "path": "release-impact.json",
-      "sha256": "af22c316f8dd1456eff25ce9acc0b00299f0e206e844a08ee4df88676d683d0e",
+      "sha256": "83aa852e55b185d021bfc8116100ef3789bb7f0c1b035a7ec740c6d0f139bcef",
       "id": "release-impact-ledger"
     },
     {
@@ -47,7 +47,7 @@
   "machineEvidence": [
     {
       "path": "scripts/check.mjs",
-      "sha256": "7d5abd63ccd10164a676becd59dacaed4d630d10bb8a4366efcd6b7effa5c858",
+      "sha256": "f201f32652a7040df7e05a6dc92c24e1b737f39d73b58864c016651d85f570f3",
       "id": "self-verification-command"
     },
     {
@@ -87,15 +87,15 @@
     }
   ],
   "hashes": {
-    "package-version-and-exports": "db73d4b8733c6dc1bd7d48cfb50c926fdec775b13f91a01a6c074ddf7e8cdb67",
-    "anchored-release-version": "6b474acf29ccc31702fc3b3f96ce414a80e9901fd0fc490a14c39e600cdbe4e9",
-    "decision-registry": "3563a977b66228b8ffc7e36647fdcaf7cdfc8c44432c4f11b0443deee2b72808",
-    "standards-metadata": "04c8163ffe9bc0c4830008a67c5560b21c279935544f3a1b9ad78e63292f49a9",
-    "release-impact-ledger": "af22c316f8dd1456eff25ce9acc0b00299f0e206e844a08ee4df88676d683d0e",
+    "package-version-and-exports": "0aa24406aefcd5faa7b8e218e36a61cd1deaaacec42aa46671b2cbf0c8fef727",
+    "anchored-release-version": "04ec2f23514a7f9045ab17e1035535a267d757acd022f6ffdaf33e432e124823",
+    "decision-registry": "54d5e013c933cfcd6886f6b01d411d2f1888448e4b87f82cfa8d2245ab2f28a5",
+    "standards-metadata": "65899780779a8e933f1f3a298bfdf2311104ccde84b773a0828ee4c23dd19d5b",
+    "release-impact-ledger": "83aa852e55b185d021bfc8116100ef3789bb7f0c1b035a7ec740c6d0f139bcef",
     "buildchain-release-contract": "44a4ff0a0aecabdb6abcbee40adec6b8d5a62f4bf76c9823cfe9cb2423ee7826",
     "buildchain-alpha-runtime-contract-lock": "92247daef05b6a8c61263115fedb88c90610d106068d47568f53558bdf729eb3",
     "buildchain-runtime-contract-lock": "19dd7c50cb86936d2ce009a92eb33b18b35919a481831d323089523ad44e8c4a",
-    "self-verification-command": "7d5abd63ccd10164a676becd59dacaed4d630d10bb8a4366efcd6b7effa5c858",
+    "self-verification-command": "f201f32652a7040df7e05a6dc92c24e1b737f39d73b58864c016651d85f570f3",
     "buildchain-build-workflow": "c847bf05f10dae380dce80f6f381d218e2a209952fb15cae58750a3b40385213",
     "buildchain-promotion-workflow": "ac46589b359c5047794cf321a184e05f88ebf72553692dbb9f6d246ff0438a72",
     "kfd-2-trust-taxonomy-schema": "a663d301a663cadb8567e3010361f5a630b76b6518ed7603dfd58cbd4e64a658",
@@ -107,15 +107,15 @@
   "artifacts": [
     {
       "name": "@kungfu-tech/kfd",
-      "version": "1.0.0-alpha.42",
+      "version": "1.0.0-alpha.43",
       "path": "package.json",
-      "sha256": "db73d4b8733c6dc1bd7d48cfb50c926fdec775b13f91a01a6c074ddf7e8cdb67"
+      "sha256": "0aa24406aefcd5faa7b8e218e36a61cd1deaaacec42aa46671b2cbf0c8fef727"
     },
     {
       "name": "kfd-release-anchor",
-      "version": "1.0.0-alpha.42",
+      "version": "1.0.0-alpha.43",
       "path": "kfd.release.json",
-      "sha256": "6b474acf29ccc31702fc3b3f96ce414a80e9901fd0fc490a14c39e600cdbe4e9"
+      "sha256": "04ec2f23514a7f9045ab17e1035535a267d757acd022f6ffdaf33e432e124823"
     }
   ],
   "verification": {

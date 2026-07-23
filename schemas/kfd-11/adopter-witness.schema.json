@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-11/adopter-witness.schema.json",
+  "title": "KFD-11 Adopter Witness",
+  "description": "Proves the structural boundary from an exact Claim through purpose-bound Assessment and exact Warrant to an independently recorded Admission. Structural validity is not activation evidence.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "schemaVersion", "contract", "standard", "adopter", "settlement", "warrantIdentity", "admissionIndependence", "retry", "nonClaims"],
+  "properties": {
+    "$schema": { "const": "https://kfd.libkungfu.dev/schemas/kfd-11/adopter-witness.schema.json" },
+    "schemaVersion": { "const": 1 },
+    "contract": { "const": "kfd-11-adopter-witness" },
+    "standard": { "const": "kfd-11" },
+    "adopter": { "$ref": "#/$defs/artifactBinding" },
+    "settlement": { "$ref": "https://kfd.libkungfu.dev/schemas/kfd-11/decision-admission.schema.json" },
+    "warrantIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["decisionWarrantRoot", "basisFactCutRoot", "effectScopeRoot", "exact", "independentlyVerified"],
+      "properties": {
+        "decisionWarrantRoot": { "$ref": "#/$defs/root" },
+        "basisFactCutRoot": { "$ref": "#/$defs/root" },
+        "effectScopeRoot": { "$ref": "#/$defs/root" },
+        "exact": { "const": true },
+        "independentlyVerified": { "const": true }
+      }
+    },
+    "admissionIndependence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["owningAuthorityRef", "separatelyRecorded", "receiptClass", "decisionIsNotAdmission", "writeReceiptIsNotAdmission"],
+      "properties": {
+        "owningAuthorityRef": { "$ref": "#/$defs/id" },
+        "separatelyRecorded": { "const": true },
+        "receiptClass": { "const": "effect-admission" },
+        "decisionIsNotAdmission": { "const": true },
+        "writeReceiptIsNotAdmission": { "const": true }
+      }
+    },
+    "retry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["originalDecisionRoot", "admissionAttemptRoots", "preservesDecisionIdentity", "failedEvidenceRoots"],
+      "properties": {
+        "originalDecisionRoot": { "$ref": "#/$defs/root" },
+        "admissionAttemptRoots": { "$ref": "#/$defs/nonEmptyRootSet" },
+        "preservesDecisionIdentity": { "const": true },
+        "failedEvidenceRoots": { "$ref": "#/$defs/rootSet" }
+      }
+    },
+    "nonClaims": { "$ref": "#/$defs/nonEmptyStringSet" }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,255}$" },
+    "root": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*:[A-Za-z0-9._~+/=-]+$" },
+    "artifactBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schemaId", "root"],
+      "properties": {
+        "schemaId": { "type": "string", "format": "uri" },
+        "root": { "$ref": "#/$defs/root" },
+        "coordinate": { "type": "string", "minLength": 1 }
+      }
+    },
+    "rootSet": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/root" } },
+    "nonEmptyRootSet": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/root" } },
+    "nonEmptyStringSet": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+  }
+}

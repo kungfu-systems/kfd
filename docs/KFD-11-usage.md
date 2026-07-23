@@ -28,6 +28,12 @@ as a version 1 reference envelope. It binds artifacts by schema and root rather
 than copying their payloads. Schema validity proves structural closure only;
 it does not prove the Claim, Assessment, Warrant, Decision, or Admission valid.
 
+Adopters preparing independent qualification should wrap that envelope with
+[`schemas/kfd-11/adopter-witness.schema.json`](../schemas/kfd-11/adopter-witness.schema.json).
+The wrapper requires an exact and independently verified Warrant boundary, a
+separately recorded effect Admission, explicit rejection of Decision or a
+lower-level write receipt as Admission, and retained failure/retry lineage.
+
 ## Product surface
 
 Human and agent surfaces should answer, in this order:
@@ -55,6 +61,13 @@ Qualification should include:
 - export and independent verification of the complete chain; and
 - a simple-session projection that does not force four visible objects when
   the full boundary remains recoverable.
+
+Record those results in the shared
+[`qualification-report.schema.json`](../schemas/kfd-activation/qualification-report.schema.json).
+Only a later independent
+[`activation-record.schema.json`](../schemas/kfd-activation/activation-record.schema.json)
+may issue `pass`, `revise`, or `reject` over exact retained evidence and
+residual risk. Missing evidence fails closed.
 
 ## Domain Profile boundary
 

@@ -2,16 +2,45 @@
 
 This experimental adopter profile packages a fixed dual-Hub black-box suite, JSONL adapter contract, execution report, and offline report verifier. It lets an npm consumer run and verify the profile without a KFD repository checkout.
 
-## Run the fixed suite
+## Five-minute packaged quickstart
+
+Pin the prerelease channel explicitly because npm `latest` remains the bootstrap package. One command runs the packaged state-machine reference adapter against Hub 20, writes a rooted report, re-hashes the adapter, and verifies the report offline:
+
+```sh
+npx --yes --package @kungfu-tech/kfd@alpha kfd demo agent-hub \
+  --output ./agent-hub-demo-report.json
+```
+
+Inspect the machine-readable command, language, exit-code, verifier-backend, claim, and recovery boundaries without a repository checkout:
+
+```sh
+npx --yes --package @kungfu-tech/kfd@alpha kfd capabilities agent-hub --json
+```
+
+The demo is an executable reference path, not adopter evidence. Its packaged adapter is non-product code and its passing report remains non-qualifying and non-certifying.
+
+## Scaffold an adopter adapter
+
+Generate exactly one new starter directory:
+
+```sh
+npx --yes --package @kungfu-tech/kfd@alpha kfd scaffold agent-hub \
+  --language python \
+  --output ./my-agent-hub-adapter
+```
+
+Languages are `cpp`, `node`, `python`, and `rust`. KFD refuses an existing output path and never overwrites adopter files. Each starter has deterministic fixtures and a local envelope smoke; the smoke explicitly does not execute Hub 20. Implement product-owned semantics, build when required, and then run the fixed suite.
+
+## Run the fixed suite against an adopter
 
 An adapter is an executable or JavaScript entry point that reads one JSON request per line from stdin and writes exactly one JSON response per line to stdout. It must answer one handshake plus the fixed 20 evaluation requests.
 
 ```sh
-npx --package @kungfu-tech/kfd kfd test agent-hub \
+npx --yes --package @kungfu-tech/kfd@alpha kfd test agent-hub \
   --adapter ./my-agent-hub-adapter.mjs \
   --output ./agent-hub-report.json
 
-npx --package @kungfu-tech/kfd kfd verify agent-hub-report \
+npx --yes --package @kungfu-tech/kfd@alpha kfd verify agent-hub-report \
   ./agent-hub-report.json \
   --adapter ./my-agent-hub-adapter.mjs \
   --json

@@ -44,6 +44,12 @@
 | Which fields belong to the cross-domain core, a Domain Profile, or participant projection? | [`field-responsibility-matrix.md`](field-responsibility-matrix.md) |
 | How does one software-development Domain Profile organize Initiative, Assignment, Episode, Claim, Assessment, Decision, Admission, and Continuation without making those names universal? | [KFD-12](../decisions/KFD-12.md) and [`KFD-12-usage.md`](KFD-12-usage.md) |
 | How can a software Project Cut bind source, Atlas, Episode, and policy authorities without becoming another fact engine? | [KFD-13](../decisions/KFD-13.md) and [`KFD-13-usage.md`](KFD-13-usage.md) |
+| Where do adopters and agents discover the KFD-11–13 witness, qualification, and activation interfaces? | [`../activation-contracts.json`](../activation-contracts.json) |
+| What schema proves KFD-11 exact Warrant and independent Admission boundaries? | [`../schemas/kfd-11/adopter-witness.schema.json`](../schemas/kfd-11/adopter-witness.schema.json) |
+| What schema proves KFD-12 Initiative/Assignment, proposal/acceptance, coordinate, and simple-session boundaries? | [`../schemas/kfd-12/adopter-witness.schema.json`](../schemas/kfd-12/adopter-witness.schema.json) |
+| What schema proves KFD-13 authority preservation, residual risk, export verification, and lineage? | [`../schemas/kfd-13/adopter-witness.schema.json`](../schemas/kfd-13/adopter-witness.schema.json) |
+| How are structural, implementation, operational, independent-review, and activation levels kept separate? | [`../schemas/kfd-activation/qualification-report.schema.json`](../schemas/kfd-activation/qualification-report.schema.json) |
+| What fail-closed record carries pass/revise/reject over exact evidence and residual risk? | [`../schemas/kfd-activation/activation-record.schema.json`](../schemas/kfd-activation/activation-record.schema.json) |
 | Must other domains adopt the KFD-12 software lifecycle or KFD-13 Project Cut? | [KFD-12 scope](../decisions/KFD-12.md#scope) and [KFD-13 scope](../decisions/KFD-13.md#scope) |
 | Why were the pre-stable KFD-11 and KFD-12 coordinates revised? | [`foundation-revision-2026-07-21-decision-admission.md`](foundation-revision-2026-07-21-decision-admission.md) and its [machine map](foundation-revision-2026-07-21-decision-admission.json) |
 | How does a candidate become a numbered draft? | [`../CONTRIBUTING.md`](../CONTRIBUTING.md#candidates-and-numbered-drafts) |

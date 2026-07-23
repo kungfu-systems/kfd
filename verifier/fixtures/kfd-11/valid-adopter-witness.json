@@ -1,0 +1,59 @@
+{
+  "$schema": "https://kfd.libkungfu.dev/schemas/kfd-11/adopter-witness.schema.json",
+  "schemaVersion": 1,
+  "contract": "kfd-11-adopter-witness",
+  "standard": "kfd-11",
+  "adopter": { "schemaId": "https://example.org/adopter.schema.json", "root": "sha256:adopter11" },
+  "settlement": {
+    "schemaVersion": 1,
+    "contract": "kfd-11-decision-admission",
+    "standard": "kfd-11",
+    "claim": { "schemaId": "https://example.org/claim.schema.json", "root": "sha256:claim11" },
+    "assessments": [{ "schemaId": "https://example.org/assessment.schema.json", "root": "sha256:assessment11" }],
+    "decision": {
+      "decisionId": "decision-11",
+      "decisionMakerRef": "reviewer-11",
+      "assessmentRoots": ["sha256:assessment11"],
+      "warrant": { "schemaId": "https://example.org/warrant.schema.json", "root": "sha256:warrant11" },
+      "purposeRoot": "sha256:purpose11",
+      "dispositionClass": "accept",
+      "disposition": "accept exact requested effects",
+      "acceptedScopeRoot": "sha256:scope11",
+      "conditionRoots": [],
+      "requestedEffectRoots": ["sha256:effect11"],
+      "reasonRoot": "sha256:reason11",
+      "residualRiskRoots": ["sha256:risk11"]
+    },
+    "admission": {
+      "admissionId": "admission-11",
+      "authorityRef": "fact-authority-11",
+      "basisFactCut": { "schemaId": "https://example.org/fact-cut.schema.json", "root": "sha256:fact11" },
+      "requestedTransition": { "schemaId": "https://example.org/effect.schema.json", "root": "sha256:effect11" },
+      "outcome": "admitted",
+      "successorFactCut": { "schemaId": "https://example.org/fact-cut.schema.json", "root": "sha256:fact12" },
+      "receipt": { "schemaId": "https://example.org/effect-admission-receipt.schema.json", "root": "sha256:admissionreceipt11" }
+    },
+    "nonClaims": ["A valid Decision is not a successful Admission."]
+  },
+  "warrantIdentity": {
+    "decisionWarrantRoot": "sha256:warrant11",
+    "basisFactCutRoot": "sha256:fact11",
+    "effectScopeRoot": "sha256:effect11",
+    "exact": true,
+    "independentlyVerified": true
+  },
+  "admissionIndependence": {
+    "owningAuthorityRef": "fact-authority-11",
+    "separatelyRecorded": true,
+    "receiptClass": "effect-admission",
+    "decisionIsNotAdmission": true,
+    "writeReceiptIsNotAdmission": true
+  },
+  "retry": {
+    "originalDecisionRoot": "sha256:decision11",
+    "admissionAttemptRoots": ["sha256:admissionattempt11"],
+    "preservesDecisionIdentity": true,
+    "failedEvidenceRoots": []
+  },
+  "nonClaims": ["Structural validity does not prove semantic qualification or activation."]
+}

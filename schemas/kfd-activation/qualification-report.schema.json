@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-activation/qualification-report.schema.json",
+  "title": "KFD-11 through KFD-13 Qualification Report",
+  "description": "Separates structural conformance, implementation conformance, operational evidence, independent review, and activation readiness. No lower level implies a higher level.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "schemaVersion", "contract", "subject", "activationOrder", "stages", "noAutomaticEscalation", "failedEvidenceRoots", "residualRiskRoots", "nonClaims"],
+  "properties": {
+    "$schema": { "const": "https://kfd.libkungfu.dev/schemas/kfd-activation/qualification-report.schema.json" },
+    "schemaVersion": { "const": 1 },
+    "contract": { "const": "kfd-11-13-qualification-report" },
+    "subject": { "$ref": "#/$defs/artifactBinding" },
+    "activationOrder": { "const": ["kfd-11", "kfd-12", "kfd-13"] },
+    "stages": {
+      "type": "object", "additionalProperties": false, "required": ["kfd11", "kfd12", "kfd13"],
+      "properties": {
+        "kfd11": { "$ref": "#/$defs/qualificationStage" },
+        "kfd12": { "$ref": "#/$defs/qualificationStage" },
+        "kfd13": { "$ref": "#/$defs/qualificationStage" }
+      }
+    },
+    "noAutomaticEscalation": { "const": true },
+    "failedEvidenceRoots": { "$ref": "#/$defs/rootSet" },
+    "residualRiskRoots": { "$ref": "#/$defs/nonEmptyRootSet" },
+    "nonClaims": { "$ref": "#/$defs/nonEmptyStringSet" }
+  },
+  "$defs": {
+    "root": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*:[A-Za-z0-9._~+/=-]+$" },
+    "artifactBinding": {
+      "type": "object", "additionalProperties": false, "required": ["schemaId", "root"],
+      "properties": { "schemaId": { "type": "string", "format": "uri" }, "root": { "$ref": "#/$defs/root" }, "coordinate": { "type": "string", "minLength": 1 } }
+    },
+    "level": {
+      "type": "object", "additionalProperties": false, "required": ["status", "evidenceRoots"],
+      "properties": {
+        "status": { "enum": ["not-evaluated", "passed", "failed", "not-applicable"] },
+        "evidenceRoots": { "$ref": "#/$defs/rootSet" },
+        "reasonRoot": { "$ref": "#/$defs/root" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "status": { "const": "passed" } }, "required": ["status"] },
+          "then": { "properties": { "evidenceRoots": { "$ref": "#/$defs/nonEmptyRootSet" } } }
+        }
+      ]
+    },
+    "qualificationStage": {
+      "type": "object", "additionalProperties": false,
+      "required": ["witness", "structuralConformance", "implementationConformance", "operationalEvidence", "independentReview", "activationReadiness"],
+      "properties": {
+        "witness": { "$ref": "#/$defs/artifactBinding" },
+        "structuralConformance": { "$ref": "#/$defs/level" },
+        "implementationConformance": { "$ref": "#/$defs/level" },
+        "operationalEvidence": { "$ref": "#/$defs/level" },
+        "independentReview": { "$ref": "#/$defs/level" },
+        "activationReadiness": { "enum": ["not-ready", "ready", "revise", "reject"] }
+      }
+    },
+    "rootSet": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/root" } },
+    "nonEmptyRootSet": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/root" } },
+    "nonEmptyStringSet": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+  }
+}

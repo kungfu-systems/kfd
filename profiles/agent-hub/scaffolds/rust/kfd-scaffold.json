@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.agent-hub-scaffold/v1",
+  "language": "rust",
+  "binding": "jsonl-stdio/v1",
+  "build": ["cargo", "build", "--release"],
+  "run": ["target/release/kfd-agent-hub-rust-starter"],
+  "smoke": ["cargo", "test"],
+  "claims": {
+    "executed": ["handshake and evaluate response-envelope smoke fixtures"],
+    "notExecuted": ["KFD Agent Hub 20 semantics", "production interoperability", "security assessment", "general-purpose JSON parsing"],
+    "qualifying": false,
+    "certification": false
+  }
+}

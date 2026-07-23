@@ -9,6 +9,10 @@ const packageRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "
 
 function usage() {
   return `usage:
+  kfd demo agent-hub --output <report.json>
+    [--reference-adapter <state-machine|rule-table>] [--timeout-ms <ms>] [--json]
+  kfd scaffold agent-hub --language <cpp|node|python|rust> --output <new-directory> [--json]
+  kfd capabilities agent-hub [--json]
   kfd test agent-runtime --adapter <path> --output <report.json>
     [--adapter-arg <arg>] [--adapter-source-commit <sha>] [--timeout-ms <ms>]
   kfd test agent-hub --adapter <path> --output <report.json>
@@ -99,6 +103,66 @@ async function verifyWasm(bundleText) {
 }
 
 async function main(args) {
+  if (args[0] === "demo" && args[1] === "agent-hub") {
+    let output;
+    let referenceAdapter = "state-machine";
+    let timeoutMs;
+    let json = false;
+    for (let index = 2; index < args.length; index += 1) {
+      if (args[index] === "--json") json = true;
+      else if (args[index] === "--output" && args[index + 1]) output = args[++index];
+      else if (args[index] === "--reference-adapter" && args[index + 1]) referenceAdapter = args[++index];
+      else if (args[index] === "--timeout-ms" && args[index + 1]) timeoutMs = args[++index];
+      else throw new Error(`unsupported or incomplete argument: ${args[index]}`);
+    }
+    if (!output) throw new Error("agent-hub demo requires --output");
+    const adapters = {
+      "state-machine": "state-machine-adapter.mjs",
+      "rule-table": "rule-table-adapter.mjs",
+    };
+    if (!adapters[referenceAdapter]) {
+      throw new Error("--reference-adapter must be state-machine or rule-table");
+    }
+    const adapter = path.join(packageRoot, "profiles", "agent-hub", "adapters", adapters[referenceAdapter]);
+    const runnerArgs = ["--adapter", adapter, "--output", output];
+    if (timeoutMs) runnerArgs.push("--timeout-ms", timeoutMs);
+    const { runAgentHubTest } = await import("../scripts/agent-hub-runner.mjs");
+    const runCode = await runAgentHubTest(runnerArgs, { quiet: true });
+    const { verifyAgentHubReport } = await import("../scripts/agent-hub-report-verifier.mjs");
+    const report = JSON.parse(regularText(path.resolve(output)));
+    const verification = verifyAgentHubReport(report, { adapterPath: adapter });
+    const result = {
+      schemaVersion: 1,
+      contract: "kfd.agent-hub-demo-result/v1",
+      valid: runCode === 0 && verification.valid,
+      suite: { id: report.suite.id, passed: report.coverage.passed, total: report.coverage.total },
+      report: path.resolve(output),
+      adapter: { id: report.adapter.id, packagedReference: referenceAdapter },
+      offlineVerification: {
+        valid: verification.valid,
+        adapterArtifactChecked: verification.adapterArtifactChecked,
+        reportDigest: verification.reportDigest,
+      },
+      qualifying: false,
+      certification: false,
+    };
+    if (json) console.log(JSON.stringify(result));
+    else console.log(`KFD Agent Hub demo: ${result.valid ? "pass" : "fail"} (${report.coverage.passed}/20); offline verification: ${verification.valid ? "pass" : "fail"} -> ${result.report}`);
+    process.exitCode = result.valid ? 0 : 1;
+    return;
+  }
+  if (args[0] === "scaffold" && args[1] === "agent-hub") {
+    const { runAgentHubScaffold } = await import("../scripts/agent-hub-scaffold.mjs");
+    process.exitCode = runAgentHubScaffold(args.slice(2));
+    return;
+  }
+  if (args[0] === "capabilities" && args[1] === "agent-hub") {
+    if (args.length > 3 || (args[2] && args[2] !== "--json")) {
+      throw new Error(`unsupported argument: ${args[2]}`);
+    }
+    console.log(regularText(path.join(packageRoot, "profiles", "agent-hub", "cli-capabilities.json")).trim());
+    return;
+  }
   if (args[0] === "test" && args[1] === "agent-runtime") {
     const { runAgentRuntimeTest } = await import(
       "../scripts/agent-runtime-runner.mjs"

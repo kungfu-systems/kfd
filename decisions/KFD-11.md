@@ -83,6 +83,20 @@ A conforming settlement:
 - prevents an Episode, process exit, persuasive explanation, or passing
   Assessment from silently settling responsibility.
 
+## Adopter witness and activation boundary
+
+A conforming adopter publishes a versioned witness that binds the exact Claim,
+purpose-bound Assessments, Decision, exact Warrant, independently recorded
+Admission, successor Fact cut on success, and retained failure and retry
+evidence. A Decision record or lower-level storage write receipt cannot stand
+in for effect Admission.
+
+The machine interface is
+[`schemas/kfd-11/adopter-witness.schema.json`](../schemas/kfd-11/adopter-witness.schema.json).
+Qualification and activation use the shared interfaces discovered through
+[`activation-contracts.json`](../activation-contracts.json). Structural schema
+validity does not qualify or activate this draft.
+
 ## Foundation Revision lineage
 
 KFD-2 already defines generic Claim and Assessment semantics. The prior

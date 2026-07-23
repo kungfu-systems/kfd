@@ -49,9 +49,13 @@ function options(args) {
 function adapterCommand(adapter, adapterArgs) {
   const absolute = path.resolve(adapter);
   const bytes = regular(absolute);
-  return [".js", ".mjs", ".cjs"].includes(path.extname(absolute))
-    ? { command: process.execPath, args: [absolute, ...adapterArgs], artifactDigest: sha256(bytes) }
-    : { command: absolute, args: adapterArgs, artifactDigest: sha256(bytes) };
+  if ([".js", ".mjs", ".cjs"].includes(path.extname(absolute))) {
+    return { command: process.execPath, args: [absolute, ...adapterArgs], artifactDigest: sha256(bytes) };
+  }
+  if (path.extname(absolute) === ".py") {
+    return { command: process.env.PYTHON || "python3", args: [absolute, ...adapterArgs], artifactDigest: sha256(bytes) };
+  }
+  return { command: absolute, args: adapterArgs, artifactDigest: sha256(bytes) };
 }
 
 function execute(command, requests, timeoutMs) {
@@ -77,7 +81,7 @@ function execute(command, requests, timeoutMs) {
   });
 }
 
-export async function runAgentHubTest(rawArgs) {
+export async function runAgentHubTest(rawArgs, { quiet = false } = {}) {
   const selected = options(rawArgs);
   const manifestBytes = regular(resolvePackage("profiles", "agent-hub", "manifest.json"));
   const vectorBytes = regular(resolvePackage("profiles", "agent-hub", "vectors", "hub-20.json"));
@@ -143,7 +147,7 @@ export async function runAgentHubTest(rawArgs) {
   const output = path.resolve(selected.output);
   if (!fs.existsSync(path.dirname(output))) throw new Error(`output parent does not exist: ${path.dirname(output)}`);
   fs.writeFileSync(output, `${JSON.stringify(report, null, 2)}\n`, { flag: "wx" });
-  console.log(`KFD Agent Hub 20: ${report.valid ? "pass" : "fail"} (${passed}/20) -> ${output}`);
+  if (!quiet) console.log(`KFD Agent Hub 20: ${report.valid ? "pass" : "fail"} (${passed}/20) -> ${output}`);
   return report.valid ? 0 : 1;
 }
 
