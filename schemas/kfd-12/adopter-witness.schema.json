@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-12/adopter-witness.schema.json",
+  "title": "KFD-12 Software Domain Profile Adopter Witness",
+  "description": "Declares a software Domain Profile's Initiative and Assignment responsibility split, proposal and acceptance boundary, exact action-coordinate bindings, settlement lifecycle, and recoverable simple-session projection.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "schemaVersion", "contract", "standard", "domainProfile", "initiative", "assignment", "responsibilitySeparation", "lifecycle", "simpleSessionProjection", "continuation", "nonClaims"],
+  "properties": {
+    "$schema": { "const": "https://kfd.libkungfu.dev/schemas/kfd-12/adopter-witness.schema.json" },
+    "schemaVersion": { "const": 1 },
+    "contract": { "const": "kfd-12-adopter-witness" },
+    "standard": { "const": "kfd-12" },
+    "domainProfile": { "$ref": "#/$defs/artifactBinding" },
+    "initiative": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["initiativeId", "root", "coordinationPurposeRoot", "scopeRoot", "pursuitRoots", "participantRoots", "settlementPolicyRoot", "lineageRoots"],
+      "properties": {
+        "initiativeId": { "$ref": "#/$defs/id" },
+        "root": { "$ref": "#/$defs/root" },
+        "coordinationPurposeRoot": { "$ref": "#/$defs/root" },
+        "scopeRoot": { "$ref": "#/$defs/root" },
+        "pursuitRoots": { "$ref": "#/$defs/nonEmptyRootSet" },
+        "participantRoots": { "$ref": "#/$defs/nonEmptyRootSet" },
+        "settlementPolicyRoot": { "$ref": "#/$defs/root" },
+        "lineageRoots": { "$ref": "#/$defs/rootSet" }
+      }
+    },
+    "assignment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["assignmentId", "root", "holderRef", "responsibilityRoot", "initiativeRoot", "pursuitRoots", "atlasRoot", "warrantRoot", "proposal", "acceptance", "evidenceObligationRoots", "settlementPolicyRoot", "relationRoots"],
+      "properties": {
+        "assignmentId": { "$ref": "#/$defs/id" },
+        "root": { "$ref": "#/$defs/root" },
+        "holderRef": { "$ref": "#/$defs/id" },
+        "responsibilityRoot": { "$ref": "#/$defs/root" },
+        "initiativeRoot": { "$ref": "#/$defs/root" },
+        "pursuitRoots": { "$ref": "#/$defs/nonEmptyRootSet" },
+        "atlasRoot": { "$ref": "#/$defs/root" },
+        "warrantRoot": { "$ref": "#/$defs/root" },
+        "proposal": { "$ref": "#/$defs/artifactBinding" },
+        "acceptance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["state", "record", "boundaryRoot", "acceptedByRef"],
+          "properties": {
+            "state": { "enum": ["accepted", "refused", "revision-requested"] },
+            "record": { "$ref": "#/$defs/artifactBinding" },
+            "boundaryRoot": { "$ref": "#/$defs/root" },
+            "acceptedByRef": { "$ref": "#/$defs/id" }
+          }
+        },
+        "evidenceObligationRoots": { "$ref": "#/$defs/nonEmptyRootSet" },
+        "settlementPolicyRoot": { "$ref": "#/$defs/root" },
+        "relationRoots": { "$ref": "#/$defs/rootSet" }
+      }
+    },
+    "responsibilitySeparation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["initiativeIsNotPursuit", "assignmentIsNotWarrant", "assignmentIsNotEpisode", "proposalIsNotAcceptance", "assessmentIsNotAuthority", "decisionIsNotAdmission"],
+      "properties": {
+        "initiativeIsNotPursuit": { "const": true },
+        "assignmentIsNotWarrant": { "const": true },
+        "assignmentIsNotEpisode": { "const": true },
+        "proposalIsNotAcceptance": { "const": true },
+        "assessmentIsNotAuthority": { "const": true },
+        "decisionIsNotAdmission": { "const": true }
+      }
+    },
+    "lifecycle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["episodeRoots", "claimRoots", "assessmentRoots", "decisionRoots", "admissionRoots", "failedEvidenceRoots"],
+      "properties": {
+        "episodeRoots": { "$ref": "#/$defs/rootSet" },
+        "claimRoots": { "$ref": "#/$defs/rootSet" },
+        "assessmentRoots": { "$ref": "#/$defs/rootSet" },
+        "decisionRoots": { "$ref": "#/$defs/rootSet" },
+        "admissionRoots": { "$ref": "#/$defs/rootSet" },
+        "failedEvidenceRoots": { "$ref": "#/$defs/rootSet" }
+      }
+    },
+    "simpleSessionProjection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["projectionRoot", "roundTripStatus", "recoverableRoles", "doesNotFuseRoles"],
+      "properties": {
+        "projectionRoot": { "$ref": "#/$defs/root" },
+        "roundTripStatus": { "const": "passed" },
+        "recoverableRoles": {
+          "type": "array",
+          "minItems": 8,
+          "uniqueItems": true,
+          "items": { "enum": ["initiative", "assignment", "episode", "claim", "assessment", "decision", "admission", "continuation"] },
+          "allOf": [
+            { "contains": { "const": "initiative" } }, { "contains": { "const": "assignment" } },
+            { "contains": { "const": "episode" } }, { "contains": { "const": "claim" } },
+            { "contains": { "const": "assessment" } }, { "contains": { "const": "decision" } },
+            { "contains": { "const": "admission" } }, { "contains": { "const": "continuation" } }
+          ]
+        },
+        "doesNotFuseRoles": { "const": true }
+      }
+    },
+    "continuation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "parentAssignmentRoot", "decisionRoot", "admissionRoot", "successorAssignmentRoots", "preservesLineage"],
+      "properties": {
+        "state": { "enum": ["settled", "paused", "reopened", "evidence-requested", "continued"] },
+        "parentAssignmentRoot": { "$ref": "#/$defs/root" },
+        "decisionRoot": { "$ref": "#/$defs/root" },
+        "admissionRoot": { "$ref": "#/$defs/root" },
+        "successorAssignmentRoots": { "$ref": "#/$defs/rootSet" },
+        "preservesLineage": { "const": true }
+      }
+    },
+    "nonClaims": { "$ref": "#/$defs/nonEmptyStringSet" }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,255}$" },
+    "root": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*:[A-Za-z0-9._~+/=-]+$" },
+    "artifactBinding": {
+      "type": "object", "additionalProperties": false, "required": ["schemaId", "root"],
+      "properties": { "schemaId": { "type": "string", "format": "uri" }, "root": { "$ref": "#/$defs/root" }, "coordinate": { "type": "string", "minLength": 1 } }
+    },
+    "rootSet": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/root" } },
+    "nonEmptyRootSet": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/root" } },
+    "nonEmptyStringSet": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+  }
+}

@@ -12,6 +12,7 @@
     "liveCaseRegistry": "cases/registry.json",
     "candidateRegistry": "drafts/registry.json",
     "terminology": "terminology.json",
+    "activationContracts": "activation-contracts.json",
     "decisionsDir": "decisions",
     "candidatesDir": "drafts"
   },
@@ -353,7 +354,7 @@
         "homepagePriority": 40,
         "defaultPresentation": "ordered-steps",
         "includeInFirstScreen": false,
-        "markdown": "Agents consuming this package should start from the same sources as humans:\n\n1. Read this README for the future picture, foundation triad, and package map.\n2. Read `docs/foundation.md` for the complete non-numbered explanation.\n3. Read `docs/terminology.md` or `terminology.json` before interpreting\n   overloaded core terms. The contract fixes their canonical subtitles,\n   `2 + 3` structure, and anti-misreading boundaries for humans and agents.\n4. Read `docs/formal-model.md` for the authority boundary, shared notation, and\n   the `Decision -> Formal -> Schema -> Usage -> Witness` traceability chain.\n5. Read `docs/KFD-N-formal.md` when precise domain objects, invariants,\n   transitions, invalid states, and proof obligations are needed for a\n   particular decision.\n6. Read `docs/primitive-discovery-cases.md` to test the KFD lens against familiar\n   historical cases and an ordinary cross-machine trace vignette.\n7. Read `cases/registry.json` to discover provisional live Primitive cases,\n   their current immutable KFD-5 cuts, claim boundaries, and review paths.\n8. Read `drafts/registry.json` to discover non-normative KFD Candidate\n   lineage, promotion gates, status, and claim boundaries.\n9. Read `standards.json` for canonical KFD numbers, formal reference versions\n   and hashes, schema IDs, concept names, and interface contracts.\n10. Use `site/kfd-site.json` decision metadata or the KFD-3 collaboration\n   interface fact-source metadata to identify the public KFD fact source.\n11. Use `schemas/kfd-2/trust-taxonomy.schema.json` for KFD-2 residual-risk and\n   trust-downgrade values. Unknown taxonomy values are invalid.\n12. Use `schemas/kfd-2/trust-claims.schema.json` and\n   `schemas/kfd-2/trust-assessment.schema.json` when a claim needs generic\n   KFD-2 assessment instead of a release-specific passport.\n13. Use `schemas/kfd-3/collaboration-interface.schema.json` and\n   `schemas/kfd-3/witness.schema.json` to inspect collaboration interfaces.\n14. Use `schemas/kfd-1/publication-url-semantics.schema.json` when a package,\n   paper, specification, or site bundle must distinguish stable reader URLs,\n   latest aliases, and immutable versioned artifacts.\n15. If a needed KFD-2 taxonomy value is missing, open a KFD GitHub issue rather\n   than inventing a local value:\n   `https://github.com/kungfu-systems/kfd/issues/new?title=KFD-2%20trust%20taxonomy%20extension%20request`.\n16. Use `schemas/kfd-4/observer-perspective.schema.json` to bind timelines to\n   their observers and `schemas/kfd-4/perspective-replay.schema.json` to record\n   perspective-preserving or contrastive replay. Use\n   `schemas/kfd-5/primitive-discovery.schema.json` version 3 to record\n   perspective-declared, method-plural genesis and fact-bound qualification,\n   including the optional boundary-pressure diagnostic when implicit\n   coordination is under new pressure. Use\n   `schemas/kfd-6/autonomous-discovery-loop.schema.json` only for explicitly\n   draft or experimental autonomous-discovery work; its version 4 interface\n   requires plural generation experiments, bounded method comparison, and a\n   conditional boundary hypothesis. Read `docs/KFD-7-formal.md` for the\n   current Fact/Episode and action-responsibility reference model. Use\n   `schemas/kfd-7/domain-profile.schema.json` for a product-neutral Domain\n   Profile Declaration; schema validity is non-qualifying and does not activate\n   a concrete Domain Profile. Read KFD-8 through KFD-10 for the separately\n   allocated Atlas, Pursuit, and Warrant draft responsibilities. Read KFD-11\n   for the cross-domain Claim-Assessment-Decision-Admission procedure. Read\n   KFD-12 and KFD-13 as a software-development Domain Profile and\n   project-settlement application, not as a required workflow for other\n   domains. Use `docs/field-responsibility-matrix.md` to decide whether a field\n   belongs to a cross-domain core, Domain Profile, or participant projection.\n\nKFD package semver is only the distribution version. KFD-owned machine\ninterfaces carry their own `schemaVersion` and `contract` fields. Compatible\nadditions may keep the same interface version; semantic changes, required-field\nchanges, verification meaning changes, or responsibility-boundary changes must\nuse a new interface version or contract.\n\nKFD-2 publishes trust-taxonomy, trust-claims, trust-assessment,\nrelease-claims, and release-trust-passport schemas under `schemas/kfd-2/`.\nThe generic schemas let humans, agents, Buildchain, and other systems assess\nwhether claims about KFD-1, KFD-3, KFD-4, future KFDs, or product surfaces are\nbound to source facts, evidence, hashes, audit boundaries, residual risk, and\nassurance responsibility. The release schemas are a release-specific projection of\nthat model. See [`docs/KFD-2-usage.md`](docs/KFD-2-usage.md).\n\nKFD-3 also publishes a general collaboration-interface schema and witness\nschema under `schemas/kfd-3/`. These schemas are for participant-facing product\ninterfaces, not only agent APIs. A product such as Kungfu may implement an\nagent-first profile, but that profile remains a product-specific realization of\nKFD-3. The KFD-owned boundary is the standard vocabulary, schema IDs, and\nclosed-world evidence shape. See\n[`docs/KFD-3-usage.md`](docs/KFD-3-usage.md).\n\nKFD-4 says that views remain bound to declared perspectives and that a\nperspective transformation must stay inspectable when it is used to reveal a\ndifferent object or guide action. Its two schemas under `schemas/kfd-4/` define\nthe first concrete path: observer-bound timelines make a perspective durable;\nperspective-preserving and contrastive replay make perspectives transferable\nand comparable without flattening their fact boundaries. They are not a\nuniversal schema for every perspective.\n\nKFD-5 publishes a version 3 primitive-discovery record schema under\n`schemas/kfd-5/`. It requires every genesis to declare its observation\nperspective and current ontology while allowing perspective, anomaly,\nreconstruction, causal-variable, compression, and hybrid methods. It then\nbinds facts, alternatives, contract boundaries, falsifiers, dogfood evidence,\nand outcome. Validation proves record closure, not that the candidate is a\nreal primitive or that one method is superior.\n\nKFD-6 publishes a draft autonomous-discovery-loop schema under\n`schemas/kfd-6/`. Its version 4 experiment interface requires causal-experience\nboundaries, plural generation methods, fixed-ontology and no-new-primitive\nbaselines, shared-budget method comparison, held-out and independent\nevaluation, bounded autonomy, and separation between discovery and promotion.\nIts package presence is an experimental interface, not a claim that autonomous\nprimitive discovery or method dominance has been achieved.\n\nKFD-7 is an active decision for real-world action. It keeps admitted state,\nrealized occurrence, direction, perspective, and authority independently\naddressable. Its package surface includes the authoritative decision, formal\nreference, usage boundary, standards metadata, candidate lineage, and the\nversion 1 Domain Profile Declaration. The schema separates ontology bindings\nfrom action coordinates and fixes transition, theorem-reference,\nqualification-evidence, non-claim, and activation declarations without fixing\nproduct storage or lifecycle vocabulary. The\n[activation evidence](docs/KFD-7-activation.md) binds independently reviewed\nBuildchain and Kungfu Profiles while preserving product-owned qualification and\nthe decision's explicit non-claims.\n\nThe five names are not five peers. Fact and Episode form the Fact-Episode\nOntology; Atlas, Pursuit, and Warrant form the Action Responsibility Geometry.\nTheir canonical explanatory subtitles and anti-misreading boundaries come\nfrom `terminology.json`, not from renderer or product-local wording.\n\nKFD-8, KFD-9, and KFD-10 allocate the three action coordinates as numbered\ndrafts. KFD-11 separates Claim, Assessment, authorized Decision, and Admission\nbefore a domain chooses its workflow. KFD-12 and KFD-13 then show one\nsoftware-development application: Initiative and Assignment organize durable\nwork responsibility, while Project Cut records project settlement. This\nvocabulary does not bind other domains, which may define different Domain\nProfiles and settlement objects."
+        "markdown": "For KFD-11 through KFD-13 adoption or activation work, begin with\n[`activation-contracts.json`](activation-contracts.json). It is the stable\nmachine discovery surface for the three adopter witnesses, the shared\nqualification report, and the fail-closed activation record. Schema validity\nproves structural conformance only; it never upgrades implementation,\noperational evidence, independent review, or activation readiness.\n\nAgents consuming this package should start from the same sources as humans:\n\n1. Read this README for the future picture, foundation triad, and package map.\n2. Read `docs/foundation.md` for the complete non-numbered explanation.\n3. Read `docs/terminology.md` or `terminology.json` before interpreting\n   overloaded core terms. The contract fixes their canonical subtitles,\n   `2 + 3` structure, and anti-misreading boundaries for humans and agents.\n4. Read `docs/formal-model.md` for the authority boundary, shared notation, and\n   the `Decision -> Formal -> Schema -> Usage -> Witness` traceability chain.\n5. Read `docs/KFD-N-formal.md` when precise domain objects, invariants,\n   transitions, invalid states, and proof obligations are needed for a\n   particular decision.\n6. Read `docs/primitive-discovery-cases.md` to test the KFD lens against familiar\n   historical cases and an ordinary cross-machine trace vignette.\n7. Read `cases/registry.json` to discover provisional live Primitive cases,\n   their current immutable KFD-5 cuts, claim boundaries, and review paths.\n8. Read `drafts/registry.json` to discover non-normative KFD Candidate\n   lineage, promotion gates, status, and claim boundaries.\n9. Read `standards.json` for canonical KFD numbers, formal reference versions\n   and hashes, schema IDs, concept names, and interface contracts.\n10. Use `site/kfd-site.json` decision metadata or the KFD-3 collaboration\n   interface fact-source metadata to identify the public KFD fact source.\n11. Use `schemas/kfd-2/trust-taxonomy.schema.json` for KFD-2 residual-risk and\n   trust-downgrade values. Unknown taxonomy values are invalid.\n12. Use `schemas/kfd-2/trust-claims.schema.json` and\n   `schemas/kfd-2/trust-assessment.schema.json` when a claim needs generic\n   KFD-2 assessment instead of a release-specific passport.\n13. Use `schemas/kfd-3/collaboration-interface.schema.json` and\n   `schemas/kfd-3/witness.schema.json` to inspect collaboration interfaces.\n14. Use `schemas/kfd-1/publication-url-semantics.schema.json` when a package,\n   paper, specification, or site bundle must distinguish stable reader URLs,\n   latest aliases, and immutable versioned artifacts.\n15. If a needed KFD-2 taxonomy value is missing, open a KFD GitHub issue rather\n   than inventing a local value:\n   `https://github.com/kungfu-systems/kfd/issues/new?title=KFD-2%20trust%20taxonomy%20extension%20request`.\n16. Use `schemas/kfd-4/observer-perspective.schema.json` to bind timelines to\n   their observers and `schemas/kfd-4/perspective-replay.schema.json` to record\n   perspective-preserving or contrastive replay. Use\n   `schemas/kfd-5/primitive-discovery.schema.json` version 3 to record\n   perspective-declared, method-plural genesis and fact-bound qualification,\n   including the optional boundary-pressure diagnostic when implicit\n   coordination is under new pressure. Use\n   `schemas/kfd-6/autonomous-discovery-loop.schema.json` only for explicitly\n   draft or experimental autonomous-discovery work; its version 4 interface\n   requires plural generation experiments, bounded method comparison, and a\n   conditional boundary hypothesis. Read `docs/KFD-7-formal.md` for the\n   current Fact/Episode and action-responsibility reference model. Use\n   `schemas/kfd-7/domain-profile.schema.json` for a product-neutral Domain\n   Profile Declaration; schema validity is non-qualifying and does not activate\n   a concrete Domain Profile. Read KFD-8 through KFD-10 for the separately\n   allocated Atlas, Pursuit, and Warrant draft responsibilities. Read KFD-11\n   for the cross-domain Claim-Assessment-Decision-Admission procedure. Read\n   KFD-12 and KFD-13 as a software-development Domain Profile and\n   project-settlement application, not as a required workflow for other\n   domains. Use `docs/field-responsibility-matrix.md` to decide whether a field\n   belongs to a cross-domain core, Domain Profile, or participant projection.\n\nKFD package semver is only the distribution version. KFD-owned machine\ninterfaces carry their own `schemaVersion` and `contract` fields. Compatible\nadditions may keep the same interface version; semantic changes, required-field\nchanges, verification meaning changes, or responsibility-boundary changes must\nuse a new interface version or contract.\n\nKFD-2 publishes trust-taxonomy, trust-claims, trust-assessment,\nrelease-claims, and release-trust-passport schemas under `schemas/kfd-2/`.\nThe generic schemas let humans, agents, Buildchain, and other systems assess\nwhether claims about KFD-1, KFD-3, KFD-4, future KFDs, or product surfaces are\nbound to source facts, evidence, hashes, audit boundaries, residual risk, and\nassurance responsibility. The release schemas are a release-specific projection of\nthat model. See [`docs/KFD-2-usage.md`](docs/KFD-2-usage.md).\n\nKFD-3 also publishes a general collaboration-interface schema and witness\nschema under `schemas/kfd-3/`. These schemas are for participant-facing product\ninterfaces, not only agent APIs. A product such as Kungfu may implement an\nagent-first profile, but that profile remains a product-specific realization of\nKFD-3. The KFD-owned boundary is the standard vocabulary, schema IDs, and\nclosed-world evidence shape. See\n[`docs/KFD-3-usage.md`](docs/KFD-3-usage.md).\n\nKFD-4 says that views remain bound to declared perspectives and that a\nperspective transformation must stay inspectable when it is used to reveal a\ndifferent object or guide action. Its two schemas under `schemas/kfd-4/` define\nthe first concrete path: observer-bound timelines make a perspective durable;\nperspective-preserving and contrastive replay make perspectives transferable\nand comparable without flattening their fact boundaries. They are not a\nuniversal schema for every perspective.\n\nKFD-5 publishes a version 3 primitive-discovery record schema under\n`schemas/kfd-5/`. It requires every genesis to declare its observation\nperspective and current ontology while allowing perspective, anomaly,\nreconstruction, causal-variable, compression, and hybrid methods. It then\nbinds facts, alternatives, contract boundaries, falsifiers, dogfood evidence,\nand outcome. Validation proves record closure, not that the candidate is a\nreal primitive or that one method is superior.\n\nKFD-6 publishes a draft autonomous-discovery-loop schema under\n`schemas/kfd-6/`. Its version 4 experiment interface requires causal-experience\nboundaries, plural generation methods, fixed-ontology and no-new-primitive\nbaselines, shared-budget method comparison, held-out and independent\nevaluation, bounded autonomy, and separation between discovery and promotion.\nIts package presence is an experimental interface, not a claim that autonomous\nprimitive discovery or method dominance has been achieved.\n\nKFD-7 is an active decision for real-world action. It keeps admitted state,\nrealized occurrence, direction, perspective, and authority independently\naddressable. Its package surface includes the authoritative decision, formal\nreference, usage boundary, standards metadata, candidate lineage, and the\nversion 1 Domain Profile Declaration. The schema separates ontology bindings\nfrom action coordinates and fixes transition, theorem-reference,\nqualification-evidence, non-claim, and activation declarations without fixing\nproduct storage or lifecycle vocabulary. The\n[activation evidence](docs/KFD-7-activation.md) binds independently reviewed\nBuildchain and Kungfu Profiles while preserving product-owned qualification and\nthe decision's explicit non-claims.\n\nThe five names are not five peers. Fact and Episode form the Fact-Episode\nOntology; Atlas, Pursuit, and Warrant form the Action Responsibility Geometry.\nTheir canonical explanatory subtitles and anti-misreading boundaries come\nfrom `terminology.json`, not from renderer or product-local wording.\n\nKFD-8, KFD-9, and KFD-10 allocate the three action coordinates as numbered\ndrafts. KFD-11 separates Claim, Assessment, authorized Decision, and Admission\nbefore a domain chooses its workflow. KFD-12 and KFD-13 then show one\nsoftware-development application: Initiative and Assignment organize durable\nwork responsibility, while Project Cut records project settlement. This\nvocabulary does not bind other domains, which may define different Domain\nProfiles and settlement objects."
       },
       {
         "id": "decision-metadata",
@@ -3431,7 +3432,7 @@
           "formalModelVersion": 1,
           "formalModelStatus": "experimental",
           "authorityPath": "decisions/KFD-11.md",
-          "sha256": "c8013779cafd5c7ac9310b367178036016cf2e9272d90cf085f2d60f368f5717",
+          "sha256": "fc8229061801b7b197fd4113cee1539d0f37743778fc311dfd19752fbde81e74",
           "title": "KFD-11 formal reference"
         },
         {
@@ -3449,7 +3450,7 @@
           "formalModelVersion": 3,
           "formalModelStatus": "experimental",
           "authorityPath": "decisions/KFD-12.md",
-          "sha256": "a3581d3892dcb138fa13726a955446d9d21e6f7bc50b7904afaa8cc4ced7e81f",
+          "sha256": "729255895449cb7efebd42258de68795478316b21979372c721dcf0d044f1e8f",
           "title": "KFD-12 formal reference"
         },
         {
@@ -3467,7 +3468,7 @@
           "formalModelVersion": 1,
           "formalModelStatus": "experimental",
           "authorityPath": "decisions/KFD-13.md",
-          "sha256": "47a709538e3876bddb6af508fc9bc6e29ecd69cac5b5cc73af6f251b9ef729b4",
+          "sha256": "0a40abf1b336480298ce0f0db76260822bfca5521169df5df973089a4b79b7a3",
           "title": "KFD-13 formal reference"
         }
       ]
@@ -3502,6 +3503,60 @@
       }
     }
   },
+  "activationContracts": {
+    "source": "activation-contracts.json",
+    "relationship": "draft-qualification-and-activation-interfaces",
+    "normative": false,
+    "authorityNote": "The numbered KFD-11 through KFD-13 decisions remain authoritative and remain draft until a later explicit activation decision.",
+    "contract": {
+      "$schema": "https://kfd.libkungfu.dev/schemas/kfd-activation/contracts-manifest.schema.json",
+      "schemaVersion": 1,
+      "contract": "kfd-11-13-activation-contracts",
+      "status": "draft-interfaces",
+      "activationOrder": [
+        "kfd-11",
+        "kfd-12",
+        "kfd-13"
+      ],
+      "interfaces": {
+        "kfd11AdopterWitness": {
+          "contract": "kfd-11-adopter-witness",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-11/adopter-witness.schema.json",
+          "schemaPath": "schemas/kfd-11/adopter-witness.schema.json"
+        },
+        "kfd12AdopterWitness": {
+          "contract": "kfd-12-adopter-witness",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-12/adopter-witness.schema.json",
+          "schemaPath": "schemas/kfd-12/adopter-witness.schema.json"
+        },
+        "kfd13AdopterWitness": {
+          "contract": "kfd-13-adopter-witness",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-13/adopter-witness.schema.json",
+          "schemaPath": "schemas/kfd-13/adopter-witness.schema.json"
+        },
+        "qualificationReport": {
+          "contract": "kfd-11-13-qualification-report",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-activation/qualification-report.schema.json",
+          "schemaPath": "schemas/kfd-activation/qualification-report.schema.json"
+        },
+        "activationRecord": {
+          "contract": "kfd-11-13-activation-record",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-activation/activation-record.schema.json",
+          "schemaPath": "schemas/kfd-activation/activation-record.schema.json"
+        }
+      },
+      "nonClaims": [
+        "Schema validity is structural conformance only.",
+        "A founding implementation or self-review is not activation evidence.",
+        "This manifest does not activate KFD-11, KFD-12, or KFD-13."
+      ]
+    }
+  },
   "renderingBoundary": {
     "ownedByKfd": [
       "homepage title and text",
@@ -3524,7 +3579,8 @@
       "decision usage page mapping",
       "decision usage markdown bodies",
       "decision formal reference mapping",
-      "decision formal reference markdown bodies"
+      "decision formal reference markdown bodies",
+      "KFD-11 through KFD-13 activation contract discovery manifest"
     ],
     "ownedBySite": [
       "HTML structure",

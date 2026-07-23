@@ -1,0 +1,33 @@
+{
+  "$schema": "https://kfd.libkungfu.dev/schemas/kfd-11/adopter-witness.schema.json",
+  "schemaVersion": 1,
+  "contract": "kfd-11-adopter-witness",
+  "standard": "kfd-11",
+  "adopter": { "schemaId": "https://example.org/adopter.schema.json", "root": "sha256:adopter11" },
+  "settlement": {
+    "schemaVersion": 1,
+    "contract": "kfd-11-decision-admission",
+    "standard": "kfd-11",
+    "claim": { "schemaId": "https://example.org/claim.schema.json", "root": "sha256:claim11" },
+    "assessments": [{ "schemaId": "https://example.org/assessment.schema.json", "root": "sha256:assessment11" }],
+    "decision": {
+      "decisionId": "decision-11", "decisionMakerRef": "reviewer-11", "assessmentRoots": ["sha256:assessment11"],
+      "warrant": { "schemaId": "https://example.org/warrant.schema.json", "root": "sha256:warrant11" },
+      "purposeRoot": "sha256:purpose11", "dispositionClass": "accept", "disposition": "accept", "acceptedScopeRoot": "sha256:scope11",
+      "conditionRoots": [], "requestedEffectRoots": ["sha256:effect11"], "reasonRoot": "sha256:reason11", "residualRiskRoots": []
+    },
+    "admission": {
+      "admissionId": "admission-11", "authorityRef": "fact-authority-11",
+      "basisFactCut": { "schemaId": "https://example.org/fact-cut.schema.json", "root": "sha256:fact11" },
+      "requestedTransition": { "schemaId": "https://example.org/effect.schema.json", "root": "sha256:effect11" },
+      "outcome": "admitted",
+      "successorFactCut": { "schemaId": "https://example.org/fact-cut.schema.json", "root": "sha256:fact12" },
+      "receipt": { "schemaId": "https://example.org/write-receipt.schema.json", "root": "sha256:writereceipt11" }
+    },
+    "nonClaims": ["Decision is not Admission."]
+  },
+  "warrantIdentity": { "decisionWarrantRoot": "sha256:warrant11", "basisFactCutRoot": "sha256:fact11", "effectScopeRoot": "sha256:effect11", "exact": true, "independentlyVerified": true },
+  "admissionIndependence": { "owningAuthorityRef": "fact-authority-11", "separatelyRecorded": true, "receiptClass": "write-receipt", "decisionIsNotAdmission": true, "writeReceiptIsNotAdmission": false },
+  "retry": { "originalDecisionRoot": "sha256:decision11", "admissionAttemptRoots": ["sha256:attempt11"], "preservesDecisionIdentity": true, "failedEvidenceRoots": [] },
+  "nonClaims": ["This invalid fixture must fail closed."]
+}

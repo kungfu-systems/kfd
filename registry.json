@@ -110,7 +110,11 @@
       "kind": "procedure",
       "status": "draft",
       "path": "decisions/KFD-11.md",
-      "url": "https://kfd.libkungfu.dev/11"
+      "url": "https://kfd.libkungfu.dev/11",
+      "activationInterfaces": {
+        "manifest": "activation-contracts.json",
+        "adopterWitness": "schemas/kfd-11/adopter-witness.schema.json"
+      }
     },
     {
       "number": 12,
@@ -120,7 +124,11 @@
       "kind": "principle",
       "status": "draft",
       "path": "decisions/KFD-12.md",
-      "url": "https://kfd.libkungfu.dev/12"
+      "url": "https://kfd.libkungfu.dev/12",
+      "activationInterfaces": {
+        "manifest": "activation-contracts.json",
+        "adopterWitness": "schemas/kfd-12/adopter-witness.schema.json"
+      }
     },
     {
       "number": 13,
@@ -130,7 +138,11 @@
       "kind": "procedure",
       "status": "draft",
       "path": "decisions/KFD-13.md",
-      "url": "https://kfd.libkungfu.dev/13"
+      "url": "https://kfd.libkungfu.dev/13",
+      "activationInterfaces": {
+        "manifest": "activation-contracts.json",
+        "adopterWitness": "schemas/kfd-13/adopter-witness.schema.json"
+      }
     }
   ]
 }

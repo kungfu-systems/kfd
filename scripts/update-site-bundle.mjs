@@ -11,6 +11,7 @@ const REGISTRY_PATH = "registry.json";
 const CANDIDATE_INDEX_PATH = "drafts/README.md";
 const CANDIDATE_REGISTRY_PATH = "drafts/registry.json";
 const STANDARDS_PATH = "standards.json";
+const ACTIVATION_CONTRACTS_PATH = "activation-contracts.json";
 const LIVE_CASE_REGISTRY_PATH = "cases/registry.json";
 const SITE_BUNDLE_PATH = "site/kfd-site.json";
 
@@ -294,6 +295,7 @@ export const buildSiteBundle = ({
   standards,
   liveCaseRegistry,
   terminology,
+  activationContracts,
 }) => {
   const readme = parseReadme(readmeText);
   const foundationDocument = parseReadme(foundationText);
@@ -452,6 +454,7 @@ export const buildSiteBundle = ({
       liveCaseRegistry: LIVE_CASE_REGISTRY_PATH,
       candidateRegistry: CANDIDATE_REGISTRY_PATH,
       terminology: TERMINOLOGY_CONTRACT_PATH,
+      activationContracts: ACTIVATION_CONTRACTS_PATH,
       decisionsDir: "decisions",
       candidatesDir: "drafts",
     },
@@ -656,6 +659,13 @@ export const buildSiteBundle = ({
         },
       },
     },
+    activationContracts: {
+      source: ACTIVATION_CONTRACTS_PATH,
+      relationship: "draft-qualification-and-activation-interfaces",
+      normative: false,
+      authorityNote: "The numbered KFD-11 through KFD-13 decisions remain authoritative and remain draft until a later explicit activation decision.",
+      contract: activationContracts,
+    },
     renderingBoundary: {
       ownedByKfd: [
         "homepage title and text",
@@ -679,6 +689,7 @@ export const buildSiteBundle = ({
         "decision usage markdown bodies",
         "decision formal reference mapping",
         "decision formal reference markdown bodies",
+        "KFD-11 through KFD-13 activation contract discovery manifest",
       ],
       ownedBySite: [
         "HTML structure",
@@ -705,6 +716,7 @@ export const readInputs = () => ({
   standards: JSON.parse(readFileSync(STANDARDS_PATH, "utf8")),
   liveCaseRegistry: JSON.parse(readFileSync(LIVE_CASE_REGISTRY_PATH, "utf8")),
   terminology: JSON.parse(readFileSync(TERMINOLOGY_CONTRACT_PATH, "utf8")),
+  activationContracts: JSON.parse(readFileSync(ACTIVATION_CONTRACTS_PATH, "utf8")),
 });
 
 export const generatedSiteBundle = () => buildSiteBundle(readInputs());

@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-13/adopter-witness.schema.json",
+  "title": "KFD-13 Project Cut Adopter Witness",
+  "description": "Binds independently authoritative source, Atlas, Episode, and policy roots into a canonical Project Cut without absorbing their authority.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "schemaVersion", "contract", "standard", "adopter", "protocolVersion", "predecessorRoots", "authorityBindings", "canonicalBinding", "projectCutRoot", "receipt", "boundary", "exportVerification", "lineage", "nonClaims"],
+  "properties": {
+    "$schema": { "const": "https://kfd.libkungfu.dev/schemas/kfd-13/adopter-witness.schema.json" },
+    "schemaVersion": { "const": 1 },
+    "contract": { "const": "kfd-13-adopter-witness" },
+    "standard": { "const": "kfd-13" },
+    "adopter": { "$ref": "#/$defs/artifactBinding" },
+    "protocolVersion": { "type": "string", "minLength": 1 },
+    "predecessorRoots": { "$ref": "#/$defs/rootSet" },
+    "authorityBindings": {
+      "type": "array", "minItems": 4, "uniqueItems": true, "items": { "$ref": "#/$defs/authorityBinding" },
+      "allOf": [
+        { "contains": { "type": "object", "properties": { "kind": { "const": "source" } }, "required": ["kind"] } },
+        { "contains": { "type": "object", "properties": { "kind": { "const": "atlas" } }, "required": ["kind"] } },
+        { "contains": { "type": "object", "properties": { "kind": { "const": "episode" } }, "required": ["kind"] } },
+        { "contains": { "type": "object", "properties": { "kind": { "const": "policy" } }, "required": ["kind"] } }
+      ]
+    },
+    "canonicalBinding": { "$ref": "#/$defs/artifactBinding" },
+    "projectCutRoot": { "$ref": "#/$defs/root" },
+    "receipt": {
+      "type": "object", "additionalProperties": false,
+      "required": ["record", "recomputedRoot", "nonSelfCertifying", "publicationCoordinateExcludedFromRoot"],
+      "properties": {
+        "record": { "$ref": "#/$defs/artifactBinding" },
+        "recomputedRoot": { "$ref": "#/$defs/root" },
+        "nonSelfCertifying": { "const": true },
+        "publicationCoordinateExcludedFromRoot": { "const": true }
+      }
+    },
+    "boundary": {
+      "type": "object", "additionalProperties": false,
+      "required": ["omissionRoots", "conflictRoots", "unknownRoots", "residualRiskRoots"],
+      "properties": {
+        "omissionRoots": { "$ref": "#/$defs/rootSet" },
+        "conflictRoots": { "$ref": "#/$defs/rootSet" },
+        "unknownRoots": { "$ref": "#/$defs/rootSet" },
+        "residualRiskRoots": { "$ref": "#/$defs/nonEmptyRootSet" }
+      }
+    },
+    "exportVerification": {
+      "type": "object", "additionalProperties": false,
+      "required": ["exportRoot", "verificationRoot", "independent", "sameCanonicalRoot"],
+      "properties": {
+        "exportRoot": { "$ref": "#/$defs/root" },
+        "verificationRoot": { "$ref": "#/$defs/root" },
+        "independent": { "const": true },
+        "sameCanonicalRoot": { "const": true }
+      }
+    },
+    "lineage": {
+      "type": "object", "additionalProperties": false,
+      "required": ["successorRoots", "preservesPredecessors", "rewritesPredecessors"],
+      "properties": {
+        "successorRoots": { "$ref": "#/$defs/rootSet" },
+        "preservesPredecessors": { "const": true },
+        "rewritesPredecessors": { "const": false }
+      }
+    },
+    "nonClaims": { "$ref": "#/$defs/nonEmptyStringSet" }
+  },
+  "$defs": {
+    "root": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*:[A-Za-z0-9._~+/=-]+$" },
+    "artifactBinding": {
+      "type": "object", "additionalProperties": false, "required": ["schemaId", "root"],
+      "properties": { "schemaId": { "type": "string", "format": "uri" }, "root": { "$ref": "#/$defs/root" }, "coordinate": { "type": "string", "minLength": 1 } }
+    },
+    "authorityBinding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["kind", "authorityRef", "root", "verificationRoot", "verifiedUnderOwnAuthority", "semanticsOwnedByAuthority", "absorbedByProjectCut"],
+      "properties": {
+        "kind": { "enum": ["source", "atlas", "episode", "policy", "protocol"] },
+        "authorityRef": { "type": "string", "minLength": 1 },
+        "root": { "$ref": "#/$defs/root" },
+        "verificationRoot": { "$ref": "#/$defs/root" },
+        "verifiedUnderOwnAuthority": { "const": true },
+        "semanticsOwnedByAuthority": { "const": true },
+        "absorbedByProjectCut": { "const": false }
+      }
+    },
+    "rootSet": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/root" } },
+    "nonEmptyRootSet": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/root" } },
+    "nonEmptyStringSet": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+  }
+}

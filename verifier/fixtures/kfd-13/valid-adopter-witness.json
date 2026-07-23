@@ -1,0 +1,25 @@
+{
+  "$schema": "https://kfd.libkungfu.dev/schemas/kfd-13/adopter-witness.schema.json",
+  "schemaVersion": 1,
+  "contract": "kfd-13-adopter-witness",
+  "standard": "kfd-13",
+  "adopter": { "schemaId": "https://example.org/project.schema.json", "root": "sha256:project13" },
+  "protocolVersion": "1",
+  "predecessorRoots": ["sha256:projectcut12"],
+  "authorityBindings": [
+    { "kind": "source", "authorityRef": "source-authority", "root": "sha256:source13", "verificationRoot": "sha256:sourcereview13", "verifiedUnderOwnAuthority": true, "semanticsOwnedByAuthority": true, "absorbedByProjectCut": false },
+    { "kind": "atlas", "authorityRef": "atlas-authority", "root": "sha256:atlas13", "verificationRoot": "sha256:atlasreview13", "verifiedUnderOwnAuthority": true, "semanticsOwnedByAuthority": true, "absorbedByProjectCut": false },
+    { "kind": "episode", "authorityRef": "episode-authority", "root": "sha256:episode13", "verificationRoot": "sha256:episodereview13", "verifiedUnderOwnAuthority": true, "semanticsOwnedByAuthority": true, "absorbedByProjectCut": false },
+    { "kind": "policy", "authorityRef": "policy-authority", "root": "sha256:policy13", "verificationRoot": "sha256:policyreview13", "verifiedUnderOwnAuthority": true, "semanticsOwnedByAuthority": true, "absorbedByProjectCut": false }
+  ],
+  "canonicalBinding": { "schemaId": "https://example.org/project-cut-binding.schema.json", "root": "sha256:binding13" },
+  "projectCutRoot": "sha256:projectcut13",
+  "receipt": {
+    "record": { "schemaId": "https://example.org/project-cut-receipt.schema.json", "root": "sha256:receipt13" },
+    "recomputedRoot": "sha256:projectcut13", "nonSelfCertifying": true, "publicationCoordinateExcludedFromRoot": true
+  },
+  "boundary": { "omissionRoots": [], "conflictRoots": [], "unknownRoots": [], "residualRiskRoots": ["sha256:risk13"] },
+  "exportVerification": { "exportRoot": "sha256:export13", "verificationRoot": "sha256:verification13", "independent": true, "sameCanonicalRoot": true },
+  "lineage": { "successorRoots": [], "preservesPredecessors": true, "rewritesPredecessors": false },
+  "nonClaims": ["A valid Project Cut does not prove work complete or release fit."]
+}

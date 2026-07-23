@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-activation/activation-record.schema.json",
+  "title": "KFD-11 through KFD-13 Activation Record",
+  "description": "Records an independent pass, revise, or reject verdict over exact retained evidence. Missing evidence fails closed; this record does not activate a numbered draft by itself.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "schemaVersion", "contract", "subject", "activationOrder", "qualificationReport", "gates", "decision", "exactEvidenceRoots", "failedEvidenceRoots", "residualRiskRoots", "independentDecision", "nonClaims"],
+  "properties": {
+    "$schema": { "const": "https://kfd.libkungfu.dev/schemas/kfd-activation/activation-record.schema.json" },
+    "schemaVersion": { "const": 1 },
+    "contract": { "const": "kfd-11-13-activation-record" },
+    "subject": { "$ref": "#/$defs/artifactBinding" },
+    "activationOrder": { "const": ["kfd-11", "kfd-12", "kfd-13"] },
+    "qualificationReport": { "$ref": "#/$defs/artifactBinding" },
+    "gates": {
+      "type": "object", "additionalProperties": false, "required": ["kfd11", "kfd12", "kfd13"],
+      "properties": { "kfd11": { "$ref": "#/$defs/gate" }, "kfd12": { "$ref": "#/$defs/gate" }, "kfd13": { "$ref": "#/$defs/gate" } }
+    },
+    "decision": { "enum": ["pass", "revise", "reject"] },
+    "exactEvidenceRoots": { "$ref": "#/$defs/nonEmptyRootSet" },
+    "failedEvidenceRoots": { "$ref": "#/$defs/rootSet" },
+    "residualRiskRoots": { "$ref": "#/$defs/nonEmptyRootSet" },
+    "independentDecision": {
+      "type": "object", "additionalProperties": false,
+      "required": ["decisionMakerRef", "warrantRoot", "decisionRoot", "independentFromAdopter", "evidenceRoots"],
+      "properties": {
+        "decisionMakerRef": { "type": "string", "minLength": 1 },
+        "warrantRoot": { "$ref": "#/$defs/root" },
+        "decisionRoot": { "$ref": "#/$defs/root" },
+        "independentFromAdopter": { "const": true },
+        "evidenceRoots": { "$ref": "#/$defs/nonEmptyRootSet" }
+      }
+    },
+    "nonClaims": { "$ref": "#/$defs/nonEmptyStringSet" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "decision": { "const": "pass" } }, "required": ["decision"] },
+      "then": {
+        "properties": {
+          "failedEvidenceRoots": { "maxItems": 0 },
+          "gates": {
+            "properties": {
+              "kfd11": { "$ref": "#/$defs/passedGate" },
+              "kfd12": { "$ref": "#/$defs/passedGate" },
+              "kfd13": { "$ref": "#/$defs/passedGate" }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "root": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*:[A-Za-z0-9._~+/=-]+$" },
+    "artifactBinding": {
+      "type": "object", "additionalProperties": false, "required": ["schemaId", "root"],
+      "properties": { "schemaId": { "type": "string", "format": "uri" }, "root": { "$ref": "#/$defs/root" }, "coordinate": { "type": "string", "minLength": 1 } }
+    },
+    "gate": {
+      "type": "object", "additionalProperties": false,
+      "required": ["structuralConformance", "implementationConformance", "operationalEvidence", "independentReview"],
+      "properties": {
+        "structuralConformance": { "enum": ["passed", "failed", "not-evaluated"] },
+        "implementationConformance": { "enum": ["passed", "failed", "not-evaluated"] },
+        "operationalEvidence": { "enum": ["passed", "failed", "not-evaluated"] },
+        "independentReview": { "enum": ["passed", "failed", "not-evaluated"] }
+      }
+    },
+    "passedGate": {
+      "type": "object", "additionalProperties": false,
+      "required": ["structuralConformance", "implementationConformance", "operationalEvidence", "independentReview"],
+      "properties": {
+        "structuralConformance": { "const": "passed" },
+        "implementationConformance": { "const": "passed" },
+        "operationalEvidence": { "const": "passed" },
+        "independentReview": { "const": "passed" }
+      }
+    },
+    "rootSet": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/root" } },
+    "nonEmptyRootSet": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/root" } },
+    "nonEmptyStringSet": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+  }
+}

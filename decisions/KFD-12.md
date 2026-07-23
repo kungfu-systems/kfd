@@ -92,6 +92,20 @@ A conforming software Domain Profile:
   fusing decision roles;
 - states explicitly that its workflow is domain-owned rather than universal.
 
+## Adopter witness and activation boundary
+
+A conforming software Domain Profile publishes a versioned witness that keeps
+Initiative and Assignment identity and responsibility separate, records
+Assignment proposal and acceptance independently, binds exact Pursuit, Atlas,
+and Warrant roots, preserves continuation lineage, and proves that its simple
+session projection round-trips without fusing roles.
+
+The machine interface is
+[`schemas/kfd-12/adopter-witness.schema.json`](../schemas/kfd-12/adopter-witness.schema.json).
+Qualification and activation use the shared interfaces discovered through
+[`activation-contracts.json`](../activation-contracts.json). Structural or
+single-implementation conformance does not activate this draft.
+
 ## Relationship
 
 KFD-7 defines Domain Profiles. KFD-8 through KFD-10 define the three action

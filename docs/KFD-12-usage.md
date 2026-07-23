@@ -56,6 +56,19 @@ than activation of KFD-11 and does not claim these names for other domains.
 One physical record or command may carry several roles when source, cut,
 authority, state, and derivation remain independently inspectable.
 
+## Machine adoption path
+
+Publish a
+[`schemas/kfd-12/adopter-witness.schema.json`](../schemas/kfd-12/adopter-witness.schema.json)
+record for the software Domain Profile. It binds Initiative and Assignment
+identity, proposal and acceptance, exact Pursuit/Atlas/Warrant coordinates,
+the Claim-to-Admission lifecycle, continuation lineage, and a passed
+simple-session round-trip that can recover all eight decision roles.
+
+The package-level [`activation-contracts.json`](../activation-contracts.json)
+manifest is the stable human and agent discovery surface for this witness and
+the shared qualification and activation schemas.
+
 ## Qualification
 
 Test negative cases where an Assignment is treated as accepted merely because
@@ -69,3 +82,7 @@ material.
 Use the [Field Responsibility Matrix](field-responsibility-matrix.md) to keep
 Pursuit direction separate from Initiative coordination purpose and Assignment
 acceptance or settlement fields.
+
+Qualification records structural, implementation, operational, independent
+review, and activation readiness separately. Passing the schema or one
+implementation level never upgrades a later level automatically.

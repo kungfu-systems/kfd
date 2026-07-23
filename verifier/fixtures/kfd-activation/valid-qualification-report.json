@@ -1,0 +1,37 @@
+{
+  "$schema": "https://kfd.libkungfu.dev/schemas/kfd-activation/qualification-report.schema.json",
+  "schemaVersion": 1,
+  "contract": "kfd-11-13-qualification-report",
+  "subject": { "schemaId": "https://example.org/adopter.schema.json", "root": "sha256:adopterqualification" },
+  "activationOrder": ["kfd-11", "kfd-12", "kfd-13"],
+  "stages": {
+    "kfd11": {
+      "witness": { "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-11/adopter-witness.schema.json", "root": "sha256:witness11" },
+      "structuralConformance": { "status": "passed", "evidenceRoots": ["sha256:structure11"] },
+      "implementationConformance": { "status": "passed", "evidenceRoots": ["sha256:implementation11"] },
+      "operationalEvidence": { "status": "not-evaluated", "evidenceRoots": [] },
+      "independentReview": { "status": "not-evaluated", "evidenceRoots": [] },
+      "activationReadiness": "not-ready"
+    },
+    "kfd12": {
+      "witness": { "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-12/adopter-witness.schema.json", "root": "sha256:witness12" },
+      "structuralConformance": { "status": "passed", "evidenceRoots": ["sha256:structure12"] },
+      "implementationConformance": { "status": "not-evaluated", "evidenceRoots": [] },
+      "operationalEvidence": { "status": "not-evaluated", "evidenceRoots": [] },
+      "independentReview": { "status": "not-evaluated", "evidenceRoots": [] },
+      "activationReadiness": "not-ready"
+    },
+    "kfd13": {
+      "witness": { "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-13/adopter-witness.schema.json", "root": "sha256:witness13" },
+      "structuralConformance": { "status": "passed", "evidenceRoots": ["sha256:structure13"] },
+      "implementationConformance": { "status": "not-evaluated", "evidenceRoots": [] },
+      "operationalEvidence": { "status": "not-evaluated", "evidenceRoots": [] },
+      "independentReview": { "status": "not-evaluated", "evidenceRoots": [] },
+      "activationReadiness": "not-ready"
+    }
+  },
+  "noAutomaticEscalation": true,
+  "failedEvidenceRoots": [],
+  "residualRiskRoots": ["sha256:crossdomainrisk"],
+  "nonClaims": ["Structural conformance does not imply implementation, operational, review, or activation conformance."]
+}
