@@ -218,10 +218,14 @@ revision. They remain non-normative source lineage after promotion.
 - [Claim, Assessment, Decision, and Admission](drafts/claim-assessment-decision-admission.md)
   was allocated to numbered draft KFD-11 by the pre-stable
   [Foundation Revision](docs/foundation-revision-2026-07-21-decision-admission.md).
+- [Federated Work Continuity](drafts/federated-work-continuity.md) is an
+  incubating, unnumbered candidate. It tests whether Work remains independently
+  identifiable across Assignments, workspaces, and cuts, while retaining
+  Initiative, derived-view, and no-new-Primitive alternatives.
 
 The machine source is [`drafts/registry.json`](drafts/registry.json). A
 candidate's lineage does not replace the numbered decision that received its
-slot.
+slot. An incubating candidate allocates no slot.
 
 ## Experimental protocol profiles
 

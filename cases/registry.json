@@ -132,6 +132,36 @@
         }
       ],
       "claimBoundary": "This case preserves the distributed Agent-led development, KFD-4 perspective replay, and provisional KFD-5 qualification of the Consequential Settlement procedure. Private attribution evidence and public Git chronology remain separate, and cross-domain activation is not claimed."
+    },
+    {
+      "id": "federated-work-continuity",
+      "title": "Federated Work Continuity",
+      "kind": "primitive-discovery-case",
+      "status": "active",
+      "standard": "kfd-5",
+      "humanEntry": "cases/live/federated-work-continuity/README.md",
+      "genesis": "cases/live/federated-work-continuity/genesis.md",
+      "methodTrace": "cases/live/federated-work-continuity/kfd-method-trace.md",
+      "propagationHypothesis": "cases/live/federated-work-continuity/propagation-hypothesis.md",
+      "reviewIndex": "cases/live/federated-work-continuity/reviews/README.md",
+      "ontologySplit": "cases/live/federated-work-continuity/ontology-split.md",
+      "distinguishabilityArgument": "cases/live/federated-work-continuity/distinguishability.md",
+      "candidateTracks": [
+        {
+          "id": "work",
+          "title": "Work",
+          "status": "provisional",
+          "definition": "A possible higher-layer, perspective-bound coordinated action whole that preserves component authority, cuts, typed relations, proof state, degradation, and the current action frontier across workspaces.",
+          "currentCut": {
+            "path": "cases/live/federated-work-continuity/cuts/0001-work.json",
+            "sha256": "31bfab3bcf969fb7c46279665c43223cc59ecc0b3c291f2449f303a0806cc9c2",
+            "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-5/primitive-discovery.schema.json",
+            "schemaVersion": 3
+          },
+          "claimBoundary": "Provisional only. The track does not decide whether Work is an independent entity, a derived view, Initiative or Portfolio semantics, or no new Primitive; implementation, dogfood, transfer, and independent review remain open."
+        }
+      ],
+      "claimBoundary": "This case preserves the Work hypothesis and its strongest Initiative and derived-view alternatives before federation implementation. It does not allocate a KFD number, qualify Work, claim cross-domain transfer, or create global fact authority."
     }
   ]
 }

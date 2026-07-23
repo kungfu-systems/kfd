@@ -1644,7 +1644,7 @@
     {
       "id": "doc:readme",
       "sourcePath": "README.md",
-      "sha256": "106a62633bcf29e2964c172fb91145f978f2e1047ae96f490a1e6422361fad3e"
+      "sha256": "a1915d5370fe78e52f2e04e356831a5aee7467e98e7c6176f815acde961dc6a0"
     },
     {
       "id": "doc:contributing",
@@ -1719,7 +1719,7 @@
     {
       "id": "doc:docs-map",
       "sourcePath": "docs/MAP.md",
-      "sha256": "e5972c9811d210a19e6fa5c72adf95afb090da17838ff00dd3f97c2081abb9a3"
+      "sha256": "700c6044d85762ec9e8c7e7c2ff08989ecf569dbbf239015c288223041ac062b"
     },
     {
       "id": "doc:kfd-1-usage",
@@ -1932,14 +1932,54 @@
       "sha256": "e851f041d4d3b27e635924f1a1f24678db0e04c5757af9e3dc505e39f112657e"
     },
     {
+      "id": "case:federated-work-continuity:entry",
+      "sourcePath": "cases/live/federated-work-continuity/README.md",
+      "sha256": "495952ac5032c59f63d0a7c442cf5c80aae8c190c6d846a0a523c0f39272863a"
+    },
+    {
+      "id": "case:federated-work-continuity:genesis",
+      "sourcePath": "cases/live/federated-work-continuity/genesis.md",
+      "sha256": "5a7e19c7bb65c724689cf81a3f68bf489b7691563f841ca331589c8587e7a65b"
+    },
+    {
+      "id": "case:federated-work-continuity:method-trace",
+      "sourcePath": "cases/live/federated-work-continuity/kfd-method-trace.md",
+      "sha256": "856c39a88ca54699b0fa0edbb9ff7374db02dd5606b3a7661d06f47e5302d2c9"
+    },
+    {
+      "id": "case:federated-work-continuity:propagation-hypothesis",
+      "sourcePath": "cases/live/federated-work-continuity/propagation-hypothesis.md",
+      "sha256": "c5df240dc3a9754c3e3ef3c208ec2a61e2b888173241c16894f19eddc9520bd2"
+    },
+    {
+      "id": "case:federated-work-continuity:review-index",
+      "sourcePath": "cases/live/federated-work-continuity/reviews/README.md",
+      "sha256": "a26c9bfad7287d92fcd542e3bf0639e2aac39ae97e6cde10010641ac9d3b2429"
+    },
+    {
+      "id": "case:federated-work-continuity:ontology-split",
+      "sourcePath": "cases/live/federated-work-continuity/ontology-split.md",
+      "sha256": "1598d6e7f77191d3ed6d89baf6e5edd2096ea443b8504695fd0c4c5d2cf03420"
+    },
+    {
+      "id": "case:federated-work-continuity:distinguishability-argument",
+      "sourcePath": "cases/live/federated-work-continuity/distinguishability.md",
+      "sha256": "91a9dd6ed7ee59005ff5f8343ccc1f7f715edfcdaf1ea3a83a3c16750431e130"
+    },
+    {
+      "id": "case:federated-work-continuity:candidate:work:current-cut",
+      "sourcePath": "cases/live/federated-work-continuity/cuts/0001-work.json",
+      "sha256": "31bfab3bcf969fb7c46279665c43223cc59ecc0b3c291f2449f303a0806cc9c2"
+    },
+    {
       "id": "candidate:index",
       "sourcePath": "drafts/README.md",
-      "sha256": "6fdca0aa5a2875377090fc7638e115a71e142a91ba4055c9058a5c8c07bd3be3"
+      "sha256": "b38ac52a3199fd599d2102c63cc41714b2660f49a8edf805bae6a352f1d76d28"
     },
     {
       "id": "candidate:registry",
       "sourcePath": "drafts/registry.json",
-      "sha256": "b065780c1e5b95d36690996897d793433ed4eda2643bf80be417bc92744f8052"
+      "sha256": "7e6eeaca3d3c84aacba04af72b447a9778c93b97883854c174d03f609d4ffea1"
     },
     {
       "id": "candidate:action-state-separation",
@@ -1967,6 +2007,11 @@
       "sha256": "ef7191c584c593908217607fbb27d53e3268922e77b84cd7d3e19c6b52d9b229"
     },
     {
+      "id": "candidate:federated-work-continuity",
+      "sourcePath": "drafts/federated-work-continuity.md",
+      "sha256": "34c18ee555ad217b525843dc5f7014ccff25cf88fa0920bf8a6471638231bdf9"
+    },
+    {
       "id": "candidate:atlas-action-perspective:formal",
       "sourcePath": "drafts/formal/atlas-action-perspective.md",
       "sha256": "f5b4b900c815cd85cb10a63661c65de70e32a1fca96cfe22963fccb0e4ba455f"
@@ -1980,6 +2025,11 @@
       "id": "candidate:warrant-bounded-authority:formal",
       "sourcePath": "drafts/formal/warrant-bounded-authority.md",
       "sha256": "38fb664392b296f0ee4eed66995abfe8e82cd0433ef4686170acfa1872c4305a"
+    },
+    {
+      "id": "candidate:federated-work-continuity:formal",
+      "sourcePath": "drafts/formal/federated-work-continuity.md",
+      "sha256": "49b24f8eae703ab434641f8cf92b15324f22e6435f05acfcef3126ae284b2b75"
     },
     {
       "id": "doc:kfd-1-formal",
@@ -2328,22 +2378,22 @@
     {
       "id": "metadata:live-case-registry",
       "sourcePath": "cases/registry.json",
-      "sha256": "fa8bf02390874e9887e9b7bace03336cb9f89c434f23c0ac5536fa3eec6985b7"
+      "sha256": "0443765d6ca1f947a98c7d1ce23ced5a37086dd317435186dc6af7d1c6d4fbf3"
     },
     {
       "id": "metadata:candidate-registry",
       "sourcePath": "drafts/registry.json",
-      "sha256": "b065780c1e5b95d36690996897d793433ed4eda2643bf80be417bc92744f8052"
+      "sha256": "7e6eeaca3d3c84aacba04af72b447a9778c93b97883854c174d03f609d4ffea1"
     },
     {
       "id": "metadata:release-impact",
       "sourcePath": "release-impact.json",
-      "sha256": "ebffd0affdbca3505e4d5603cb247197ca6d5d6daa11dc89ca6b0634924375e3"
+      "sha256": "ad4b7020e32bcee0d97abdfdf06f67ab2831f31c6b0b153ac703c65d34a6c570"
     },
     {
       "id": "metadata:release-anchor",
       "sourcePath": "kfd.release.json",
-      "sha256": "7db09c4b3620643fe4e638f7cd32ae9bcef2274c95aeca85e26ac52063a28705"
+      "sha256": "4a2dfe0eec038f3d1635839cab9c851ac5addce8ade9c2b15091dce903c95062"
     },
     {
       "id": "metadata:kfd-7-activation-evidence",
@@ -2363,36 +2413,36 @@
     {
       "id": "metadata:kfd-2-public-release-trust-claim",
       "sourcePath": ".buildchain/kfd-2/public-release-trust.claim.json",
-      "sha256": "a026a3981ebceb57255a3ffb94ad71c0e7773738d12c9b0c6d42e14cc937add6"
+      "sha256": "609d5eb52162eb355df3e2e8f8c52df901c4ad8aad2c57fba64960ec4b564cb0"
     },
     {
       "id": "metadata:kfd-2-foundation-trust-claims",
       "sourcePath": ".buildchain/kfd-2/kfd-foundation.trust-claims.json",
-      "sha256": "77bf5309b06ba173fa4b608ec5ccff12ae2ee074d42d3e0d8f5b5f5d04860dd6"
+      "sha256": "6de98349cf9a3418ef521a61d84d10797f195bb1b088dd36f7c22e0384e2941c"
     },
     {
       "id": "metadata:kfd-2-foundation-trust-assessment",
       "sourcePath": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json",
-      "sha256": "3936e0c87a3a3d02da25ddfb8758ef92ecb1052478d3eb120fa9322ee8d6506f"
+      "sha256": "64f9edd21ac961bd6ede3f22ea6a348646fa77c0e45decceaeca24524d16d2e5"
     }
   ],
   "packageExports": [
     {
       "id": "export:package-json",
       "sourcePath": "package.json#exports",
-      "sha256": "54ef4f820b0fd700a4580f4d7c3ae891c6d84b6053010040b0580eacf61a58df"
+      "sha256": "9938a1c824b45fbd16da3bd118f236f2b866a48b9699186fe8bb5f11ba06befe"
     },
     {
       "id": "export:npm-files",
       "sourcePath": "package.json#files",
-      "sha256": "54ef4f820b0fd700a4580f4d7c3ae891c6d84b6053010040b0580eacf61a58df"
+      "sha256": "9938a1c824b45fbd16da3bd118f236f2b866a48b9699186fe8bb5f11ba06befe"
     }
   ],
   "siteConsumptionContracts": [
     {
       "id": "site:kfd-site-bundle",
       "sourcePath": "site/kfd-site.json",
-      "sha256": "dc9e7d83ca3945d181946ca2a63cdeba90154b6fd36c8c290ba16a08d9502d02"
+      "sha256": "32af07be53dea687b0d652b14348ff24c58827dce47504e258ba814f49c67e8e"
     },
     {
       "id": "site:release-propagation",
