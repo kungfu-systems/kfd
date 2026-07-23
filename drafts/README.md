@@ -54,8 +54,16 @@ Promoted lineage:
   was allocated to numbered draft [KFD-11](../decisions/KFD-11.md) by the
   [2026-07-21 pre-stable Foundation Revision](../docs/foundation-revision-2026-07-21-decision-admission.md).
 
-There are no incubating candidates in the current registry cut. The promoted
-pages remain public lineage and do not replace their numbered decisions.
+Incubating now:
+
+- [Federated Work Continuity](federated-work-continuity.md) asks whether one
+  user-level body of work remains independently identifiable across the
+  Assignments, workspaces, and cuts through which it advances. Its strongest
+  alternatives remain Initiative, a perspective-bound derived view, and no new
+  Primitive.
+
+The promoted pages remain public lineage and do not replace their numbered
+decisions. Incubating pages are non-normative and allocate no number.
 
 See [Contributing](../CONTRIBUTING.md) and
 [Governance](../GOVERNANCE.md) for open proposal, candidate promotion,

@@ -152,6 +152,40 @@
         "maintainer-promotion"
       ],
       "claimBoundary": "This candidate is preserved as source lineage allocated to numbered draft KFD-11 by the 2026-07-21 pre-stable Foundation Revision. It does not replace KFD-2 Claim or Assessment semantics, activate KFD-11, require four physical records, or prove universal cross-domain minimality."
+    },
+    {
+      "id": "federated-work-continuity",
+      "title": "Federated Work Continuity",
+      "status": "incubating",
+      "kindCandidate": "principle",
+      "slotBinding": "non-binding",
+      "oneSentence": "Work must remain identifiable independently of the assignments, workspaces, and cuts through which it advances.",
+      "path": "drafts/federated-work-continuity.md",
+      "formalReference": {
+        "path": "drafts/formal/federated-work-continuity.md",
+        "url": "https://kfd.libkungfu.dev/drafts/federated-work-continuity/formal",
+        "version": 1,
+        "status": "experimental",
+        "normative": false,
+        "authorityPath": "drafts/federated-work-continuity.md"
+      },
+      "sourceCases": [
+        {
+          "id": "federated-work-continuity",
+          "path": "cases/live/federated-work-continuity/README.md"
+        }
+      ],
+      "promotionGate": [
+        "initiative-and-view-alternative-comparison",
+        "fixed-root-deletion-and-fuse-witnesses",
+        "multi-workspace-federation-dogfood",
+        "authority-and-component-cut-preservation",
+        "measured-reconstruction-cost",
+        "cross-domain-transfer",
+        "independent-review",
+        "maintainer-promotion"
+      ],
+      "claimBoundary": "This incubating candidate preserves a perspective-generated Work hypothesis before federation dogfood. It does not establish an independent Work entity, allocate a KFD number, supersede Initiative, prefer entity over derived-view semantics, prove cross-domain transfer, or qualify a product implementation."
     }
   ]
 }
