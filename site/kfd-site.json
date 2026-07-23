@@ -326,7 +326,7 @@
         "homepagePriority": 27,
         "defaultPresentation": "candidate-summary",
         "includeInFirstScreen": false,
-        "markdown": "KFD Candidates preserve potentially load-bearing rules before and after\nnumbering so readers can audit genesis, qualification, promotion, and later\nrevision. They remain non-normative source lineage after promotion.\n\n- [Cross-domain action primitives](drafts/action-state-separation.md) was\n  promoted into active KFD-7.\n- [Atlas action perspective](drafts/atlas-action-perspective.md) was promoted\n  into numbered draft KFD-8.\n- [Pursuit intent continuity](drafts/pursuit-intent-continuity.md) was promoted\n  into numbered draft KFD-9.\n- [Warrant bounded authority](drafts/warrant-bounded-authority.md) was promoted\n  into numbered draft KFD-10.\n- [Claim, Assessment, Decision, and Admission](drafts/claim-assessment-decision-admission.md)\n  was allocated to numbered draft KFD-11 by the pre-stable\n  [Foundation Revision](docs/foundation-revision-2026-07-21-decision-admission.md).\n\nThe machine source is [`drafts/registry.json`](drafts/registry.json). A\ncandidate's lineage does not replace the numbered decision that received its\nslot."
+        "markdown": "KFD Candidates preserve potentially load-bearing rules before and after\nnumbering so readers can audit genesis, qualification, promotion, and later\nrevision. They remain non-normative source lineage after promotion.\n\n- [Cross-domain action primitives](drafts/action-state-separation.md) was\n  promoted into active KFD-7.\n- [Atlas action perspective](drafts/atlas-action-perspective.md) was promoted\n  into numbered draft KFD-8.\n- [Pursuit intent continuity](drafts/pursuit-intent-continuity.md) was promoted\n  into numbered draft KFD-9.\n- [Warrant bounded authority](drafts/warrant-bounded-authority.md) was promoted\n  into numbered draft KFD-10.\n- [Claim, Assessment, Decision, and Admission](drafts/claim-assessment-decision-admission.md)\n  was allocated to numbered draft KFD-11 by the pre-stable\n  [Foundation Revision](docs/foundation-revision-2026-07-21-decision-admission.md).\n- [Federated Work Continuity](drafts/federated-work-continuity.md) is an\n  incubating, unnumbered candidate. It tests whether Work remains independently\n  identifiable across Assignments, workspaces, and cuts, while retaining\n  Initiative, derived-view, and no-new-Primitive alternatives.\n\nThe machine source is [`drafts/registry.json`](drafts/registry.json). A\ncandidate's lineage does not replace the numbered decision that received its\nslot. An incubating candidate allocates no slot."
       },
       {
         "id": "practice-guidelines",
@@ -2911,6 +2911,333 @@
             "claimBoundary": "Provisional under draft KFD-11. The successor cut records Agent generation of the intermediate ontology through retained private transcript evidence and a dated public implementation sequence; it does not activate KFD-11, prove universal minimality or novelty, require four physical objects, or establish independent cross-domain adoption."
           }
         ]
+      },
+      {
+        "id": "federated-work-continuity",
+        "title": "Federated Work Continuity",
+        "kind": "primitive-discovery-case",
+        "status": "active",
+        "standard": "kfd-5",
+        "url": "/cases/live/federated-work-continuity",
+        "relationship": "provisional-live-case",
+        "claimBoundary": "This case preserves the Work hypothesis and its strongest Initiative and derived-view alternatives before federation implementation. It does not allocate a KFD number, qualify Work, claim cross-domain transfer, or create global fact authority.",
+        "humanEntry": {
+          "path": "cases/live/federated-work-continuity/README.md",
+          "markdown": "# Federated Work Continuity\n\nThis live case tracks a provisional question exposed by multi-workspace agent\ncoordination:\n\n> Is Work an independently necessary higher-layer object, a perspective-bound\n> view over existing objects, or only ordinary product vocabulary?\n\nThe candidate appeared when the observer changed from the developer managing\nrepositories and Assignment records to the person responsible for one real\noutcome. From that position, execution location became secondary. The primary\nquestion became whether the whole body of work is advancing, where judgment is\npending, and what may happen next.\n\n## Current result\n\n```text\ncandidate: Work\nstatus: provisional\nminimum closure: inconclusive\ndeletion test: analytic hypothesis only\nfuse test: inconclusive\ndogfood: not run against a completed workspace federation\n```\n\nThe strongest counterevidence is already present in KFD: Initiative is an\naccepted software-domain Primitive for one continuing coordinated body of\nwork. Work must therefore demonstrate a decision-relevant responsibility that\ncannot be represented by one Initiative, several related Initiatives, or an\nordinary cut-bound query.\n\n## Candidate shape\n\nThe initial engineering hypothesis is:\n\n```text\nworkspace-qualified WorkRef\n  + typed Assignment Graph\n  + component cuts and proofs\n  + declared observer and traversal policy\n  + current action frontier\n  = perspective-bound Work view\n```\n\nThis shape preserves autonomous fact worlds. It does not create a central Work\ndatabase, global clock, or global atomic Cut.\n\n## Case surfaces\n\n- [Genesis](genesis.md)\n- [Ontology alternatives](ontology-split.md)\n- [Conditional distinguishability](distinguishability.md)\n- [KFD method trace](kfd-method-trace.md)\n- [Propagation boundary](propagation-hypothesis.md)\n- [Current KFD-5 cut](cuts/0001-work.json)\n- [Qualification reviews](reviews/README.md)\n- [Live case registry](../../registry.json)\n\n## Claim boundary\n\nThis case does not establish Work as a Primitive, allocate a KFD number,\nqualify a federated implementation, prove cross-domain transfer, or show that\nan independent Work entity is preferable to Initiative plus a derived graph\nview. Those are explicit open tests."
+        },
+        "genesis": {
+          "path": "cases/live/federated-work-continuity/genesis.md",
+          "markdown": "# Genesis: From Cards to the Work That Matters\n\n## Initial observer\n\nThe initial observer was implementing local-first agent work management. The\nnatural objects were repositories, workspaces, Initiative and Assignment\nrecords, parent-child cards, runtime Episodes, and Project Cuts.\n\nFrom that position, the problem appeared to be better routing and a richer\ncross-workspace Assignment graph.\n\n## Perspective transformation\n\nThe observer changed to the person who initiated a group of related cards. That\nperson did not primarily care which repository contained each card. The\nconsequence-bearing question was:\n\n```text\nWhat is the state of the one thing these cards are jointly advancing?\n```\n\nThe relation graph remained necessary, but became implementation structure\nbeneath a possible user-level object: Work.\n\n## Why genesis is not qualification\n\nKFD already contains a strong adjacent object. Initiative preserves one\ncontinuing coordinated software-work context across Pursuits, Assignments,\nparticipants, lineage, and settlement. The new observation may therefore be:\n\n- a newly visible higher-layer Primitive;\n- a useful federated projection over one or more Initiatives;\n- a product-level name for Initiative;\n- or no new object at all.\n\nThe live case freezes the question before implementation and dogfood can make\nthe outcome look inevitable.\n\n## Evidence boundary\n\nThe current evidence consists of situated maintainer judgment, existing public\nKFD Initiative/Assignment/Project Cut cuts, and public Kungfu workspace and\nWorkRef contracts. The proposed workspace federation has not yet supplied a\ncompleted implementation, operational measurements, independent review, or a\nnon-software transfer case."
+        },
+        "methodTrace": {
+          "path": "cases/live/federated-work-continuity/kfd-method-trace.md",
+          "markdown": "# KFD Method Trace\n\n## KFD-1: preserve the unresolved cut\n\nThe candidate, alternatives, current evidence, and missing qualification are\npublished before implementation can rewrite the story into a success\nnarrative.\n\n## KFD-2: keep confidence bounded\n\nThe current claim is only that Work deserves explicit investigation. It is not\nan accepted Primitive, a numbered KFD, or a qualified product capability.\n\n## KFD-3: preserve participant value\n\nThe product motivation is to let humans and agents manage the same work without\nforcing either to learn repository topology or hidden workflow rules. Exact\nauthority and lower objects remain available rather than being concealed by a\nsimple user view.\n\n## KFD-4: change the consequence-bearing observer\n\nThe developer saw repositories, workspaces, cards, and graph edges. The person\nresponsible for the outcome saw one body of work and asked for its state and\nnext action. That transformation generated the candidate.\n\n## KFD-5: retain no-new-Primitive\n\nThe same transformation may merely reveal Initiative or a derived query from a\nnew angle. KFD-5 therefore requires a shared evidence cut comparing an\nindependent Work object, a derived Work view, Initiative, and no new Primitive.\n\n## KFD-6 boundary\n\nNo autonomous discovery claim is made. Human situated judgment supplied the\nperspective change; agents helped reconstruct adjacent contracts and explicit\nfalsifiers. Future Episodes may support later replay and qualification."
+        },
+        "propagationHypothesis": {
+          "path": "cases/live/federated-work-continuity/propagation-hypothesis.md",
+          "markdown": "# Propagation Boundary\n\nIf Work qualifies, it may lower adoption friction by letting a participant\nstart from one understandable question while agents traverse the exact lower\ncontracts:\n\n```text\nshow this Work\n  -> inspect component authority and current frontier\n  -> act on one exact owning Assignment\n  -> admit evidence and settlement locally\n  -> refresh the federated view\n```\n\nThis could let products expose KFD-shaped responsibility without requiring a\nnew user to learn every lower Primitive first.\n\nThe hypothesis remains unverified. A simpler Initiative or Portfolio view may\nprovide the same value. Hidden routing, forced centralization, unexplained\naggregation, or completion inferred from child activity would contradict KFD-3\neven if the interface appeared convenient."
+        },
+        "reviewIndex": {
+          "path": "cases/live/federated-work-continuity/reviews/README.md",
+          "markdown": "# Federated Work Continuity Reviews\n\nNo independent qualification review has been completed.\n\nA review should evaluate:\n\n1. whether Work changes a real decision beyond Initiative and query semantics;\n2. whether entity and derived-view hypotheses receive equal treatment;\n3. whether deletion and fuse tests use fixed component roots;\n4. whether federation preserves owning authority and component cuts;\n5. whether reconstruction cost is measured rather than asserted;\n6. whether non-software transfer or counterevidence changes the boundary;\n7. whether the correct result is promotion, revision, subsumption, rejection,\n   or no new Primitive."
+        },
+        "ontologySplit": {
+          "path": "cases/live/federated-work-continuity/ontology-split.md",
+          "markdown": "# Ontology Alternatives\n\nThe current question is not whether users benefit from a Work view. It is which\nobject, if any, must own its semantics.\n\n## Existing layers\n\n```text\nFact and Episode\n  -> Pursuit, Atlas, Warrant\n  -> Initiative and Assignment\n  -> Claim, Assessment, Decision, Admission\n  -> Project Cut\n```\n\n## Candidate boundary\n\nWork would answer:\n\n```text\nWhich coordinated whole is this observer advancing across independently owned\nworkspaces, and what is its current action frontier?\n```\n\nIt would not answer the narrower questions already owned by the objects above.\n\n## Three live hypotheses\n\n| Hypothesis | Identity | Authority | Main risk |\n|---|---|---|---|\n| Independent Work | Stable Work identity and versions | Own declaration only; component authority remains external | Duplicates Initiative or becomes a global database |\n| Derived Work view | Root WorkRef plus observer, relation policy, and component cuts | No new semantic writer | Too unstable to deserve Primitive status |\n| No new Primitive | Initiative and Assignment Graph | Existing owners only | Leaves material reconstruction burden hidden |\n\n## Forbidden fusion\n\nEven if Work qualifies, it may not absorb:\n\n- Pursuit direction;\n- Atlas perspective and freshness;\n- Warrant authority;\n- Episode occurrence;\n- Assignment responsibility;\n- Assessment or Decision;\n- Project Cut settlement;\n- workspace-local Fact authority.\n\nThe candidate is valuable only if it coordinates these boundaries while\nkeeping them independently inspectable."
+        },
+        "distinguishabilityArgument": {
+          "path": "cases/live/federated-work-continuity/distinguishability.md",
+          "markdown": "# Conditional Distinguishability\n\n## Deletion experiment\n\nHold fixed every component workspace cut, Initiative, Assignment, typed edge,\nEpisode, Claim, Assessment, Decision, and Project Cut. Remove only the proposed\nWork identity or view.\n\nThe deletion matters only if a participant must materially reconstruct one or\nmore of:\n\n- which component objects jointly advance one declared whole;\n- which pending judgments block that whole;\n- which degraded or unavailable components change safe continuation;\n- which exact next actions remain available across authority boundaries.\n\nAn attractive dashboard is not enough. The deletion must change a bounded\ndecision or impose measurable reconstruction cost.\n\n## Initiative comparison\n\nThe primary falsifier is:\n\n```text\none Initiative + typed Assignment relations + ordinary query\n  == proposed Work semantics\n```\n\nIf this equivalence holds for consequential cases at lower total cost, Work is\nsubsumed or rejected. A Work view spanning several Initiatives does not by\nitself defeat the alternative; an Initiative-of-Initiatives or Portfolio query\nmay still be equivalent.\n\n## Fuse experiment\n\nPotential evidence for separation would require cases where:\n\n- one Initiative participates in more than one Work view without changing its\n  own identity;\n- one Work view spans several Initiatives whose lifecycles remain independent;\n- changing Work membership changes coordination or settlement scope while all\n  Initiative and Assignment roots remain fixed;\n- two observers derive different valid Work views from the same component\n  facts and preserve the difference rather than merging it.\n\nNo completed operational witness currently satisfies this test.\n\n## Current verdict\n\nThe candidate is analytically distinguishable enough to incubate, but not\nqualified. Minimum closure, fuse, deletion, implementation value, and\ncross-domain transfer remain inconclusive."
+        },
+        "candidateTracks": [
+          {
+            "id": "work",
+            "title": "Work",
+            "status": "provisional",
+            "definition": "A possible higher-layer, perspective-bound coordinated action whole that preserves component authority, cuts, typed relations, proof state, degradation, and the current action frontier across workspaces.",
+            "currentCut": {
+              "path": "cases/live/federated-work-continuity/cuts/0001-work.json",
+              "sha256": "31bfab3bcf969fb7c46279665c43223cc59ecc0b3c291f2449f303a0806cc9c2",
+              "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-5/primitive-discovery.schema.json",
+              "schemaVersion": 3,
+              "record": {
+                "schemaVersion": 3,
+                "contract": "kfd-5-primitive-discovery",
+                "standard": "kfd-5",
+                "candidate": {
+                  "id": "work",
+                  "title": "Work",
+                  "problemStatement": "People responsible for one real outcome must reconstruct its state and next action from repository-local Initiatives, Assignments, workspaces, and settlement cuts even when those component records remain individually valid.",
+                  "scope": "Incubating higher-layer candidate for perspective-bound coordination across independently authoritative workspaces; independent object identity, cross-domain transfer, product qualification, numbering, and universal necessity are not claimed."
+                },
+                "genesis": {
+                  "methods": [
+                    "direct-situated-judgment",
+                    "perspective-transformation",
+                    "reconstruction-pressure",
+                    "structural-compression"
+                  ],
+                  "observationPerspective": {
+                    "id": "workspace-federation-developer",
+                    "bearer": "human and agent participants designing multi-workspace agent coordination",
+                    "role": "product and protocol developer",
+                    "proximity": "inside repository, workspace, graph, authority, and settlement implementation",
+                    "consequences": [
+                      "bears routing, identity, graph, storage, migration, and qualification defects"
+                    ],
+                    "naturalObjects": [
+                      "workspace",
+                      "Initiative",
+                      "Assignment",
+                      "typed relation",
+                      "WorkRef",
+                      "Project Cut"
+                    ]
+                  },
+                  "currentOntology": [
+                    "Fact",
+                    "Episode",
+                    "Pursuit",
+                    "Atlas",
+                    "Warrant",
+                    "Initiative",
+                    "Assignment",
+                    "Project Cut",
+                    "workspace"
+                  ],
+                  "observation": "From the developer perspective, the natural response to cross-repository coordination was better workspace routing and a richer Assignment graph. From the person responsible for the outcome, those records were secondary to the state of the one body of work they jointly advance.",
+                  "candidateObject": "Work may be a higher-layer, perspective-bound coordinated action whole whose view preserves component authority, cuts, typed relations, proof state, degradation, and the current action frontier across workspaces.",
+                  "claimBoundary": "The cut opens qualification of Work and does not decide whether it is an independent object, a derived Work view, an Initiative or Portfolio projection, or no new Primitive.",
+                  "methodEvidence": [
+                    {
+                      "kind": "file",
+                      "coordinate": "cases/live/federated-work-continuity/genesis.md",
+                      "observer": "KFD maintainers"
+                    },
+                    {
+                      "kind": "file",
+                      "coordinate": "cases/live/software-work-perspective-settlement/cuts/0001-initiative.json",
+                      "observer": "KFD-5 Initiative qualification"
+                    },
+                    {
+                      "kind": "file",
+                      "coordinate": "drafts/federated-work-continuity.md",
+                      "observer": "KFD candidate authors"
+                    }
+                  ],
+                  "transformedPerspective": {
+                    "id": "real-work-owner",
+                    "bearer": "a person using agents to advance one real outcome",
+                    "role": "work initiator and consequence bearer",
+                    "proximity": "inside progress, judgment, blockage, and continuation consequences but outside repository topology",
+                    "consequences": [
+                      "bears context reconstruction, fragmented progress, missed judgment, and unclear next action"
+                    ],
+                    "naturalObjects": [
+                      "the work that matters",
+                      "current state",
+                      "blocking judgment",
+                      "next action"
+                    ]
+                  },
+                  "transformation": "The observer moved from the developer managing component records to the person responsible for the outcome those components jointly advance.",
+                  "newlyVisibleNeed": "The user needs one inspectable action whole without treating repositories, workspaces, or card decomposition as the primary object and without losing exact component authority.",
+                  "methodNotes": "Initiative is retained as the strongest internal-object alternative; federation implementation and dogfood are future evidence rather than assumed facts."
+                },
+                "boundaryPressure": {
+                  "contactSides": [
+                    "independently authoritative workspaces, Initiatives, Assignments, and settlement cuts",
+                    "the person or agent responsible for understanding and continuing one real outcome"
+                  ],
+                  "implicitHandling": "The whole is reconstructed from parent-child cards, repository names, dashboards, chat context, branch state, human memory, and manual status summaries.",
+                  "pressureChanges": [
+                    {
+                      "kind": "scale",
+                      "description": "One real outcome increasingly spans several repositories, workspaces, Assignments, agents, and settlements."
+                    },
+                    {
+                      "kind": "heterogeneity",
+                      "description": "Component fact worlds remain autonomous and may use different Domain Profiles, availability, and lifecycle states."
+                    },
+                    {
+                      "kind": "consequence",
+                      "description": "Missing review, unavailable evidence, or incorrect aggregation changes what may safely continue."
+                    }
+                  ],
+                  "observedFailures": [
+                    "A user must inspect repository-local cards to reconstruct one real work state.",
+                    "Parent-child trees cannot express all dependency, contribution, continuation, conflict, and evidence-sharing relations.",
+                    "A global summary may hide unavailable workspaces or pretend that several cuts form one atomic truth.",
+                    "Child activity or stage readiness may be mistaken for accepted completion of the whole."
+                  ],
+                  "mediationClaim": "A perspective-bound Work view may preserve one coherent action whole, component authority, and current frontier across independently owned fact worlds.",
+                  "internalObjectAlternative": "One Initiative, several related Initiatives, or a Portfolio query over a typed Assignment Graph may provide equivalent semantics without a new Primitive."
+                },
+                "grounding": {
+                  "pressure": [
+                    "Real work spans several repository and workspace execution boundaries.",
+                    "Users care about the outcome and next action more than execution location.",
+                    "Autonomous fact worlds must remain independently authoritative and partially available.",
+                    "Existing Initiative semantics may already absorb the proposed responsibility."
+                  ],
+                  "factSources": [
+                    {
+                      "kind": "file",
+                      "coordinate": "cases/live/software-work-perspective-settlement/README.md",
+                      "observer": "KFD maintainers"
+                    },
+                    {
+                      "kind": "file",
+                      "coordinate": "cases/live/software-work-perspective-settlement/cuts/0001-initiative.json",
+                      "observer": "KFD-5 Initiative qualification"
+                    },
+                    {
+                      "kind": "file",
+                      "coordinate": "cases/live/federated-work-continuity/distinguishability.md",
+                      "observer": "KFD candidate qualification"
+                    }
+                  ],
+                  "evidenceBoundary": "The cut records situated maintainer judgment and public KFD contracts before a completed federated implementation. It contains no operational benchmark, independent adopter, non-software transfer, or proof that Work changes decisions beyond Initiative and derived-query semantics.",
+                  "knownGaps": [
+                    "No completed workspace federation dogfood",
+                    "No independent Work identity or lifecycle witness",
+                    "No measured reconstruction-cost comparison",
+                    "No non-software transfer",
+                    "No independent qualification review",
+                    "No decision between entity, derived-view, Initiative, and no-new-Primitive outcomes"
+                  ]
+                },
+                "participants": [
+                  {
+                    "id": "human-perspective-source",
+                    "kind": "human",
+                    "functions": [
+                      "perspective-declaration",
+                      "candidate-generation",
+                      "decision"
+                    ]
+                  },
+                  {
+                    "id": "agent-reasoning-participant",
+                    "kind": "agent",
+                    "functions": [
+                      "candidate-generation",
+                      "scalable-reasoning"
+                    ]
+                  },
+                  {
+                    "id": "future-independent-review",
+                    "kind": "collective",
+                    "functions": [
+                      "evidence-custody",
+                      "verification"
+                    ]
+                  }
+                ],
+                "alternatives": [
+                  {
+                    "name": "Initiative",
+                    "disposition": "retained",
+                    "reason": "KFD already accepts Initiative as one continuing coordinated software-work context spanning Pursuits, Assignments, participants, lineage, and settlement."
+                  },
+                  {
+                    "name": "Perspective-bound Work view",
+                    "disposition": "retained",
+                    "reason": "A root WorkRef, traversal policy, and component cuts may provide the user-level whole without a new semantic writer."
+                  },
+                  {
+                    "name": "Portfolio or saved query",
+                    "disposition": "retained",
+                    "reason": "A typed, cut-bound query may answer the same questions if it preserves observer, authority, degradation, and action-frontier semantics."
+                  },
+                  {
+                    "name": "Independent Work object",
+                    "disposition": "unresolved",
+                    "reason": "It remains possible that stable identity across several Initiatives and settlements changes continuation decisions, but no operational witness exists."
+                  },
+                  {
+                    "name": "No new Primitive",
+                    "disposition": "unresolved",
+                    "reason": "The current evidence is compatible with Work being only product vocabulary over existing objects."
+                  }
+                ],
+                "contractModel": {
+                  "identity": "Unresolved between a stable Work identity and a root WorkRef plus observer, relation policy, and component cuts.",
+                  "boundary": "A declared coordinated whole, included workspace-qualified refs, typed edges, component cuts and proofs, unresolved or degraded components, action frontier, and declared loss.",
+                  "authority": "Work may declare or project coordination but cannot replace owning workspace facts, transfer Warrant, prove occurrence, assess claims, decide admission, or synthesize a global Cut.",
+                  "lifecycle": "Candidate lifecycle remains unspecified; possible views are derived at declared cuts, while an independent entity would require version, revision, split, merge, settlement, and supersession semantics.",
+                  "operations": [
+                    "locate",
+                    "inspect",
+                    "traverse",
+                    "compare",
+                    "derive-frontier",
+                    "degrade",
+                    "rebind-locator",
+                    "continue"
+                  ]
+                },
+                "tests": {
+                  "minimumClosure": {
+                    "result": "inconclusive",
+                    "evidence": [
+                      {
+                        "kind": "file",
+                        "coordinate": "drafts/formal/federated-work-continuity.md"
+                      }
+                    ],
+                    "notes": "The formal candidate closes a Work-view envelope but intentionally leaves independent entity identity and lifecycle unresolved."
+                  },
+                  "deletion": {
+                    "result": "inconclusive",
+                    "evidence": [
+                      {
+                        "kind": "file",
+                        "coordinate": "cases/live/federated-work-continuity/distinguishability.md"
+                      }
+                    ],
+                    "notes": "The analytic deletion argument identifies reconstruction burden but has not shown a bounded changed decision with fixed Initiative and Assignment roots."
+                  },
+                  "fuse": {
+                    "result": "inconclusive",
+                    "evidence": [
+                      {
+                        "kind": "file",
+                        "coordinate": "cases/live/federated-work-continuity/ontology-split.md"
+                      }
+                    ],
+                    "notes": "Possible separation from Initiative is stated but not demonstrated by an operational case where roots remain fixed and Work semantics vary independently."
+                  },
+                  "falsifiers": [
+                    "Initiative plus Assignment Graph preserves equivalent identity, continuation, and settlement decisions at lower total cost.",
+                    "Work membership is only a display query and has no stable decision consequence.",
+                    "A Work-level object requires duplicate authority or a false global cut.",
+                    "The view hides unavailable evidence, pending judgment, or independently variable lower responsibilities.",
+                    "The model fails to transfer beyond one multi-repository software environment."
+                  ],
+                  "dogfood": {
+                    "result": "not-run",
+                    "evidence": [],
+                    "notes": "The workspace federation and Assignment Graph implementation is future evidence and is not represented as complete in this cut."
+                  }
+                },
+                "decision": {
+                  "outcome": "provisional",
+                  "owner": "KFD maintainers subject to independent repository review",
+                  "reason": "The observer shift and reconstruction pressure justify preserving Work as an explicit candidate, while existing Initiative semantics and the derived-view alternative prevent promotion or acceptance without implementation and comparative evidence.",
+                  "residualRisks": [
+                    "The candidate may duplicate Initiative or Portfolio semantics.",
+                    "The attractive user-level name may be mistaken for ontological evidence.",
+                    "A central implementation could violate workspace authority boundaries.",
+                    "A derived view may vary too much by observer and policy to carry stable identity.",
+                    "The current evidence is first-party, software-oriented, and pre-implementation."
+                  ]
+                }
+              }
+            },
+            "claimBoundary": "Provisional only. The track does not decide whether Work is an independent entity, a derived view, Initiative or Portfolio semantics, or no new Primitive; implementation, dogfood, transfer, and independent review remain open."
+          }
+        ]
       }
     ]
   },
@@ -2928,7 +3255,7 @@
       "numberedDraftSource": "registry.json",
       "stableFreeze": "first-non-prerelease-release"
     },
-    "indexMarkdown": "# KFD Candidates\n\nKFD Candidates preserve potentially load-bearing portable engineering rules\nbefore a KFD number is allocated. They are pre-number drafts, not numbered\ndecisions.\n\nThe machine source is [`registry.json`](registry.json). A candidate may carry\na non-binding `slotHint` to preserve the current ordering hypothesis. The hint\ndoes not reserve, allocate, or promise that number. Only an explicit promotion\ncreates a numbered KFD under `decisions/` and `registry.json`.\n\n```text\ncandidate\n  -> qualification\n  -> explicit promotion\n  -> numbered draft\n  -> activation evidence\n  -> active KFD\n```\n\nCandidates may be revised, reordered, merged, split, withdrawn, rejected, or\npromoted while their published coordinates remain immutable. Their current\nstatus and claim boundary must remain machine-readable.\n\nAny participant may propose a candidate, counterexample, adopter Profile, or\nqualification evidence through the public process in\n[`CONTRIBUTING.md`](../CONTRIBUTING.md). Maintainers remain responsible for\nofficial numbering and status decisions.\n\nPromoted lineage:\n\n- [Cross-domain action primitives](action-state-separation.md) was explicitly\n  promoted into active [KFD-7](../decisions/KFD-7.md).\n- [Atlas action perspective](atlas-action-perspective.md) was explicitly\n  promoted into numbered draft [KFD-8](../decisions/KFD-8.md).\n- [Pursuit intent continuity](pursuit-intent-continuity.md) was explicitly\n  promoted into numbered draft [KFD-9](../decisions/KFD-9.md).\n- [Warrant bounded authority](warrant-bounded-authority.md) was explicitly\n  promoted into numbered draft [KFD-10](../decisions/KFD-10.md).\n- [Claim, Assessment, Decision, and Admission](claim-assessment-decision-admission.md)\n  was allocated to numbered draft [KFD-11](../decisions/KFD-11.md) by the\n  [2026-07-21 pre-stable Foundation Revision](../docs/foundation-revision-2026-07-21-decision-admission.md).\n\nThere are no incubating candidates in the current registry cut. The promoted\npages remain public lineage and do not replace their numbered decisions.\n\nSee [Contributing](../CONTRIBUTING.md) and\n[Governance](../GOVERNANCE.md) for open proposal, candidate promotion,\npre-stable Foundation Revision, stewardship, and Foundation Freeze rules.",
+    "indexMarkdown": "# KFD Candidates\n\nKFD Candidates preserve potentially load-bearing portable engineering rules\nbefore a KFD number is allocated. They are pre-number drafts, not numbered\ndecisions.\n\nThe machine source is [`registry.json`](registry.json). A candidate may carry\na non-binding `slotHint` to preserve the current ordering hypothesis. The hint\ndoes not reserve, allocate, or promise that number. Only an explicit promotion\ncreates a numbered KFD under `decisions/` and `registry.json`.\n\n```text\ncandidate\n  -> qualification\n  -> explicit promotion\n  -> numbered draft\n  -> activation evidence\n  -> active KFD\n```\n\nCandidates may be revised, reordered, merged, split, withdrawn, rejected, or\npromoted while their published coordinates remain immutable. Their current\nstatus and claim boundary must remain machine-readable.\n\nAny participant may propose a candidate, counterexample, adopter Profile, or\nqualification evidence through the public process in\n[`CONTRIBUTING.md`](../CONTRIBUTING.md). Maintainers remain responsible for\nofficial numbering and status decisions.\n\nPromoted lineage:\n\n- [Cross-domain action primitives](action-state-separation.md) was explicitly\n  promoted into active [KFD-7](../decisions/KFD-7.md).\n- [Atlas action perspective](atlas-action-perspective.md) was explicitly\n  promoted into numbered draft [KFD-8](../decisions/KFD-8.md).\n- [Pursuit intent continuity](pursuit-intent-continuity.md) was explicitly\n  promoted into numbered draft [KFD-9](../decisions/KFD-9.md).\n- [Warrant bounded authority](warrant-bounded-authority.md) was explicitly\n  promoted into numbered draft [KFD-10](../decisions/KFD-10.md).\n- [Claim, Assessment, Decision, and Admission](claim-assessment-decision-admission.md)\n  was allocated to numbered draft [KFD-11](../decisions/KFD-11.md) by the\n  [2026-07-21 pre-stable Foundation Revision](../docs/foundation-revision-2026-07-21-decision-admission.md).\n\nIncubating now:\n\n- [Federated Work Continuity](federated-work-continuity.md) asks whether one\n  user-level body of work remains independently identifiable across the\n  Assignments, workspaces, and cuts through which it advances. Its strongest\n  alternatives remain Initiative, a perspective-bound derived view, and no new\n  Primitive.\n\nThe promoted pages remain public lineage and do not replace their numbered\ndecisions. Incubating pages are non-normative and allocate no number.\n\nSee [Contributing](../CONTRIBUTING.md) and\n[Governance](../GOVERNANCE.md) for open proposal, candidate promotion,\npre-stable Foundation Revision, stewardship, and Foundation Freeze rules.",
     "candidates": [
       {
         "id": "action-state-separation",
@@ -3098,6 +3425,45 @@
         "relationship": "pre-number-non-normative-candidate",
         "normative": false,
         "markdown": "# Claim, Assessment, Decision, and Admission\n\n- Status: promoted\n- Kind candidate: procedure\n- Promoted to: KFD-11\n- Source: Agent-generated development ontology and later cross-lineage compression, grounded in Fact Admission, KFD-2 trust semantics, KFD-10 authority allocation, Mission/Go implementation, and Action Loop settlement\n\n## Candidate\n\nConsequential settlement must preserve the difference between an exact Claim,\na purpose-bound Assessment, an authorized Decision, and the independently\nrecorded result of Admission.\n\n## Development origin\n\nAgents first generated Claim and purpose-bound Assessment while designing trust\nexecution, then composed Claim, Assessment, and Decision with Mission/Go during\nKungfu development. Fact Admission, Project Cut review, and recoverable Action\nLoop settlement later exposed that a valid Decision still does not prove that\nthe owning authority admitted a successor state.\n\nReplaying those development lines exposed one portable boundary: evidence does\nnot state a proposition, assessment does not grant authority, a decision does\nnot apply itself, and an attempted effect does not prove successor state. The\nlater KFD allocation discussion recognized and compressed the existing model;\nit did not supply the intermediate objects.\n\n## Promotion boundary\n\nKFD-11 allocates the procedure as a numbered draft. Promotion does not activate\nthe decision, prove universal minimality, require four physical records, or\nreplace KFD-2 Claim and Assessment schemas.\n\nThe Foundation Revision and old-to-new number map are recorded in\n[`docs/foundation-revision-2026-07-21-decision-admission.md`](../docs/foundation-revision-2026-07-21-decision-admission.md).\nThe separate\n[`decision-admission-settlement`](../cases/live/decision-admission-settlement/README.md)\ncase records the dated development lineage, KFD-4 recognition, and provisional\nKFD-5 qualification."
+      },
+      {
+        "id": "federated-work-continuity",
+        "title": "Federated Work Continuity",
+        "status": "incubating",
+        "kindCandidate": "principle",
+        "slotBinding": "non-binding",
+        "oneSentence": "Work must remain identifiable independently of the assignments, workspaces, and cuts through which it advances.",
+        "path": "drafts/federated-work-continuity.md",
+        "formalReference": {
+          "path": "drafts/formal/federated-work-continuity.md",
+          "url": "https://kfd.libkungfu.dev/drafts/federated-work-continuity/formal",
+          "version": 1,
+          "status": "experimental",
+          "normative": false,
+          "authorityPath": "drafts/federated-work-continuity.md"
+        },
+        "sourceCases": [
+          {
+            "id": "federated-work-continuity",
+            "path": "cases/live/federated-work-continuity/README.md"
+          }
+        ],
+        "promotionGate": [
+          "initiative-and-view-alternative-comparison",
+          "fixed-root-deletion-and-fuse-witnesses",
+          "multi-workspace-federation-dogfood",
+          "authority-and-component-cut-preservation",
+          "measured-reconstruction-cost",
+          "cross-domain-transfer",
+          "independent-review",
+          "maintainer-promotion"
+        ],
+        "claimBoundary": "This incubating candidate preserves a perspective-generated Work hypothesis before federation dogfood. It does not establish an independent Work entity, allocate a KFD number, supersede Initiative, prefer entity over derived-view semantics, prove cross-domain transfer, or qualify a product implementation.",
+        "url": "/drafts/federated-work-continuity",
+        "sourcePath": "drafts/federated-work-continuity.md",
+        "relationship": "pre-number-non-normative-candidate",
+        "normative": false,
+        "markdown": "# KFD Candidate: Federated Work Continuity\n\n- Candidate status: incubating\n- Kind candidate: principle\n- Slot binding: non-binding\n- Number allocated: no\n\n[Formal candidate](formal/federated-work-continuity.md) ·\n[Live case](../cases/live/federated-work-continuity/README.md)\n\n## One sentence\n\nWork must remain identifiable independently of the assignments, workspaces,\nand cuts through which it advances.\n\n## Candidate rule\n\nFrom the position of a person responsible for a real outcome, the primary\nobject is often not one task, repository, session, or execution location. It is\nthe coherent body of work whose responsibilities may be decomposed across many\nparticipants and fact worlds.\n\nThis candidate uses **Work** for that possible higher-layer boundary. A Work\nview should make independently inspectable:\n\n- the declared whole being advanced from one stated perspective;\n- the typed Initiative and Assignment relations currently included;\n- the owning fact world of every authoritative object;\n- the component cuts, proof state, unresolved references, and degradation;\n- the current action frontier: what may proceed, what awaits judgment, and what\n  remains unsettled.\n\nWork does not create a global clock, merge autonomous fact authorities, or\ninfer completion from child progress. A federated view may bind many component\ncuts while preserving that no single atomic global cut exists.\n\n## Why this may be a Primitive\n\nTask systems usually expose the places where work is executed. Repository\nviews expose source boundaries. Initiative and Assignment views expose\ncontinuing coordination and bounded responsibility. A user coordinating work\nacross those boundaries still has to reconstruct a different question:\n\n```text\nWhat is the one thing I am advancing, where are its live responsibilities,\nwhat has been accepted, and what can happen next?\n```\n\nIf removing a Work-level identity or view forces that reconstruction while all\ncomponent facts remain valid, Work carries an independent burden. If an\nInitiative or an ordinary typed query answers the same question without loss,\nno new Primitive is justified.\n\n## Current competing hypotheses\n\nThe candidate deliberately keeps three outcomes open:\n\n1. **Independent Work object**: a stable identity survives decomposition,\n   workspace movement, several Initiatives, and successive settlements.\n2. **Perspective-bound Work view**: one root reference, relation policy, and\n   set of component cuts derive the useful whole without new fact authority.\n3. **No new Primitive**: Initiative plus Assignment Graph and existing query\n   contracts provide equivalent continuity at lower cost.\n\nThe current evidence does not select among them. Product terminology may use\nWork before ontology qualification, but it must not present a derived view as\nan independently authoritative entity.\n\n## Distinction from adjacent objects\n\n| Object | Responsibility not owned by Work |\n|---|---|\n| Pursuit | Continuing direction and consequence meaning |\n| Atlas | Perspective, admitted sources, cut, freshness, and declared loss |\n| Warrant | Bounded and revocable authority |\n| Episode | Realized causal occurrence |\n| Initiative | One continuing coordinated software-work context |\n| Assignment | One bounded accepted responsibility |\n| Project Cut | What one project officially became at a settled boundary |\n\nWork may bind and present these objects. It cannot absorb their authority or\nmake their independently variable states co-vary.\n\n## Engineering hypothesis\n\nA first implementation may use:\n\n```text\nworkspace-qualified WorkRef\n  + typed Assignment Graph\n  + component workspace cuts and proofs\n  + declared traversal policy and observer\n  + current action frontier\n  = perspective-bound Work view\n```\n\nPaths remain locators. Every semantic mutation routes to the owning fact world.\nUnavailable workspaces and unresolved references remain visible. The view is\nportable only to the extent that its component identities, cuts, relation\npolicy, and declared loss are portable.\n\n## Qualification gate\n\nPromotion requires at least:\n\n1. a completed federated implementation in which one real body of work spans\n   several independently authoritative workspaces;\n2. a deletion witness showing that removing Work changes continuation or\n   settlement decisions while Initiative and Assignment facts remain fixed;\n3. a fuse witness showing why Work cannot safely be identical to Initiative,\n   Assignment, Pursuit, repository, workspace, Portfolio, or Project Cut;\n4. comparison of stable-entity and derived-view implementations;\n5. path movement, unavailable workspace, stale cut, relation-cycle, and partial\n   handshake qualification without hidden global authority;\n6. evidence that the user-facing view lowers reconstruction cost while exact\n   authority and residual risk remain available to agents;\n7. at least one non-software or structurally non-isomorphic adopter comparison;\n8. independent review and an explicit KFD-5 promotion decision.\n\n## Falsifiers\n\nThe candidate weakens, is subsumed, or should be rejected if:\n\n- one Initiative plus typed Assignment relations answers every Work question\n  without changed decisions or material reconstruction;\n- Work membership is only an unstable query preference with no durable\n  identity, consequence, or continuation semantics;\n- a Work view requires centralizing or duplicating component authority;\n- progress aggregation hides pending review, settlement, unavailable evidence,\n  or conflicting cuts;\n- the model transfers poorly beyond one multi-repository software workflow;\n- users gain no measurable reduction in context reconstruction or decision\n  effort.\n\n## Numbering boundary\n\nThis candidate has no allocated KFD number and makes no slot reservation. Its\nlive case is provisional. Only an explicit, independently reviewed promotion\nafter KFD-5 qualification may create a numbered decision."
       }
     ]
   },
@@ -3157,6 +3523,15 @@
         "slotHint": 11,
         "claimBoundary": "This candidate is preserved as source lineage allocated to numbered draft KFD-11 by the 2026-07-21 pre-stable Foundation Revision. It does not replace KFD-2 Claim or Assessment semantics, activate KFD-11, require four physical records, or prove universal cross-domain minimality.",
         "markdown": "# Claim, Assessment, Decision, and Admission\n\n- Status: promoted\n- Kind candidate: procedure\n- Promoted to: KFD-11\n- Source: Agent-generated development ontology and later cross-lineage compression, grounded in Fact Admission, KFD-2 trust semantics, KFD-10 authority allocation, Mission/Go implementation, and Action Loop settlement\n\n## Candidate\n\nConsequential settlement must preserve the difference between an exact Claim,\na purpose-bound Assessment, an authorized Decision, and the independently\nrecorded result of Admission.\n\n## Development origin\n\nAgents first generated Claim and purpose-bound Assessment while designing trust\nexecution, then composed Claim, Assessment, and Decision with Mission/Go during\nKungfu development. Fact Admission, Project Cut review, and recoverable Action\nLoop settlement later exposed that a valid Decision still does not prove that\nthe owning authority admitted a successor state.\n\nReplaying those development lines exposed one portable boundary: evidence does\nnot state a proposition, assessment does not grant authority, a decision does\nnot apply itself, and an attempted effect does not prove successor state. The\nlater KFD allocation discussion recognized and compressed the existing model;\nit did not supply the intermediate objects.\n\n## Promotion boundary\n\nKFD-11 allocates the procedure as a numbered draft. Promotion does not activate\nthe decision, prove universal minimality, require four physical records, or\nreplace KFD-2 Claim and Assessment schemas.\n\nThe Foundation Revision and old-to-new number map are recorded in\n[`docs/foundation-revision-2026-07-21-decision-admission.md`](../docs/foundation-revision-2026-07-21-decision-admission.md).\nThe separate\n[`decision-admission-settlement`](../cases/live/decision-admission-settlement/README.md)\ncase records the dated development lineage, KFD-4 recognition, and provisional\nKFD-5 qualification."
+      },
+      {
+        "id": "federated-work-continuity",
+        "title": "Federated Work Continuity",
+        "status": "incubating",
+        "sourcePath": "drafts/federated-work-continuity.md",
+        "url": "/drafts/federated-work-continuity/",
+        "claimBoundary": "This incubating candidate preserves a perspective-generated Work hypothesis before federation dogfood. It does not establish an independent Work entity, allocate a KFD number, supersede Initiative, prefer entity over derived-view semantics, prove cross-domain transfer, or qualify a product implementation.",
+        "markdown": "# KFD Candidate: Federated Work Continuity\n\n- Candidate status: incubating\n- Kind candidate: principle\n- Slot binding: non-binding\n- Number allocated: no\n\n[Formal candidate](formal/federated-work-continuity.md) ·\n[Live case](../cases/live/federated-work-continuity/README.md)\n\n## One sentence\n\nWork must remain identifiable independently of the assignments, workspaces,\nand cuts through which it advances.\n\n## Candidate rule\n\nFrom the position of a person responsible for a real outcome, the primary\nobject is often not one task, repository, session, or execution location. It is\nthe coherent body of work whose responsibilities may be decomposed across many\nparticipants and fact worlds.\n\nThis candidate uses **Work** for that possible higher-layer boundary. A Work\nview should make independently inspectable:\n\n- the declared whole being advanced from one stated perspective;\n- the typed Initiative and Assignment relations currently included;\n- the owning fact world of every authoritative object;\n- the component cuts, proof state, unresolved references, and degradation;\n- the current action frontier: what may proceed, what awaits judgment, and what\n  remains unsettled.\n\nWork does not create a global clock, merge autonomous fact authorities, or\ninfer completion from child progress. A federated view may bind many component\ncuts while preserving that no single atomic global cut exists.\n\n## Why this may be a Primitive\n\nTask systems usually expose the places where work is executed. Repository\nviews expose source boundaries. Initiative and Assignment views expose\ncontinuing coordination and bounded responsibility. A user coordinating work\nacross those boundaries still has to reconstruct a different question:\n\n```text\nWhat is the one thing I am advancing, where are its live responsibilities,\nwhat has been accepted, and what can happen next?\n```\n\nIf removing a Work-level identity or view forces that reconstruction while all\ncomponent facts remain valid, Work carries an independent burden. If an\nInitiative or an ordinary typed query answers the same question without loss,\nno new Primitive is justified.\n\n## Current competing hypotheses\n\nThe candidate deliberately keeps three outcomes open:\n\n1. **Independent Work object**: a stable identity survives decomposition,\n   workspace movement, several Initiatives, and successive settlements.\n2. **Perspective-bound Work view**: one root reference, relation policy, and\n   set of component cuts derive the useful whole without new fact authority.\n3. **No new Primitive**: Initiative plus Assignment Graph and existing query\n   contracts provide equivalent continuity at lower cost.\n\nThe current evidence does not select among them. Product terminology may use\nWork before ontology qualification, but it must not present a derived view as\nan independently authoritative entity.\n\n## Distinction from adjacent objects\n\n| Object | Responsibility not owned by Work |\n|---|---|\n| Pursuit | Continuing direction and consequence meaning |\n| Atlas | Perspective, admitted sources, cut, freshness, and declared loss |\n| Warrant | Bounded and revocable authority |\n| Episode | Realized causal occurrence |\n| Initiative | One continuing coordinated software-work context |\n| Assignment | One bounded accepted responsibility |\n| Project Cut | What one project officially became at a settled boundary |\n\nWork may bind and present these objects. It cannot absorb their authority or\nmake their independently variable states co-vary.\n\n## Engineering hypothesis\n\nA first implementation may use:\n\n```text\nworkspace-qualified WorkRef\n  + typed Assignment Graph\n  + component workspace cuts and proofs\n  + declared traversal policy and observer\n  + current action frontier\n  = perspective-bound Work view\n```\n\nPaths remain locators. Every semantic mutation routes to the owning fact world.\nUnavailable workspaces and unresolved references remain visible. The view is\nportable only to the extent that its component identities, cuts, relation\npolicy, and declared loss are portable.\n\n## Qualification gate\n\nPromotion requires at least:\n\n1. a completed federated implementation in which one real body of work spans\n   several independently authoritative workspaces;\n2. a deletion witness showing that removing Work changes continuation or\n   settlement decisions while Initiative and Assignment facts remain fixed;\n3. a fuse witness showing why Work cannot safely be identical to Initiative,\n   Assignment, Pursuit, repository, workspace, Portfolio, or Project Cut;\n4. comparison of stable-entity and derived-view implementations;\n5. path movement, unavailable workspace, stale cut, relation-cycle, and partial\n   handshake qualification without hidden global authority;\n6. evidence that the user-facing view lowers reconstruction cost while exact\n   authority and residual risk remain available to agents;\n7. at least one non-software or structurally non-isomorphic adopter comparison;\n8. independent review and an explicit KFD-5 promotion decision.\n\n## Falsifiers\n\nThe candidate weakens, is subsumed, or should be rejected if:\n\n- one Initiative plus typed Assignment relations answers every Work question\n  without changed decisions or material reconstruction;\n- Work membership is only an unstable query preference with no durable\n  identity, consequence, or continuation semantics;\n- a Work view requires centralizing or duplicating component authority;\n- progress aggregation hides pending review, settlement, unavailable evidence,\n  or conflicting cuts;\n- the model transfers poorly beyond one multi-repository software workflow;\n- users gain no measurable reduction in context reconstruction or decision\n  effort.\n\n## Numbering boundary\n\nThis candidate has no allocated KFD number and makes no slot reservation. Its\nlive case is provisional. Only an explicit, independently reviewed promotion\nafter KFD-5 qualification may create a numbered decision."
       }
     ],
     "formalPages": {
@@ -3206,6 +3581,20 @@
           "formalCandidateStatus": "experimental",
           "authorityPath": "drafts/warrant-bounded-authority.md",
           "markdown": "# Warrant Bounded Authority Formal Candidate\n\n[Candidate](../warrant-bounded-authority.md) ·\n[KFD-7 formal reference](../../docs/KFD-7-formal.md) ·\n[Candidate registry](../registry.json)\n\n- Status: experimental\n- Normative: no\n- Formal candidate version: 1\n- Authority: `drafts/warrant-bounded-authority.md`\n- Slot binding: non-binding\n\n## Purpose\n\nThis page preserves the pre-promotion Warrant formal candidate. KFD-10 now owns\nthe authoritative draft rule and `docs/KFD-10-formal.md` owns its current\nnon-normative formal reference. Neither replaces a domain's legal or\nauthorization system.\n\n## Object model\n\nAt a declared Fact cut `f`, a Warrant version is:\n\n```text\nW^v = (\n  warrant_id,\n  version_root,\n  issuer,\n  holder,\n  action_scope,\n  subject_and_resource_scope,\n  target_roots,\n  preconditions,\n  consequence_ceiling,\n  validity_window,\n  delegation_chain,\n  revocation_channel,\n  residual_responsibility\n)\n```\n\n`warrant_id` preserves the authority object's identity. `version_root` binds\none exact grant or attenuation. `target_roots` prevents authority granted\nagainst one state from silently surviving a material state change.\n\nAuthentication establishes participant identity. Capability establishes\ntechnical possibility. Neither establishes authority.\n\n## Validity and permission cone\n\nFor candidate action `u` at time or logical cut `t`:\n\n```text\nValid_W(f, u, t) =\n  AuthenticGrant(W^v)\n  and not Revoked(W^v, t)\n  and WithinValidityWindow(W^v, t)\n  and TargetRootsMatch(W^v, f)\n  and PreconditionsHold(W^v, f)\n  and u in C_W^v(f)\n```\n\n`C_W^v(f)` is the bounded permission cone. Authorization is:\n\n```text\nAuthorized_W(f, u) = Valid_W(f, u, now)\n```\n\nThe Warrant does not claim that the action advances a Pursuit, is supported by\nan Atlas, occurred, or succeeded.\n\n## Delegation and attenuation\n\nA derived Warrant cannot amplify authority without a new independent source:\n\n```text\nDerives(W_child, W_parent) ->\n  C_W_child(f) subseteq C_W_parent(f)\n  and Time_child subseteq Time_parent\n  and Scope_child subseteq Scope_parent\n  and Consequence_child <= Consequence_parent\n```\n\nDelegation may preserve residual responsibility with the issuer, holder, or\nboth. Responsibility transfer must be explicit; it is not implied by technical\ndelegation.\n\n## Equivalence\n\nFor a bounded decision domain `D`:\n\n```text\nWarrantEquivalent_D(W1, W2) iff\n  for all f, u, t in D:\n    Valid_W1(f, u, t) = Valid_W2(f, u, t)\n  and their issuer, derivation, revocation, and residual-responsibility\n      consequences are interchangeable for D\n```\n\nEqual action scopes do not establish equivalence when issuer, target root,\nexpiry, revocation, or responsibility differs.\n\n## Transitions\n\n```text\nGrant(issuer, holder, scope, roots, constraints) -> W^1\nAttenuate(W^v, narrower_boundary)                -> W_child\nDelegate(W^v, new_holder, narrower_boundary)     -> W_child\nRenew(W^v, new_cut_or_window)                    -> successor Warrant version\nRevoke(W^v, reason)                              -> revocation receipt\nExpire(W^v, boundary)                            -> invalid after boundary\nConsume(W^v, action)                             -> optional Profile-owned use state\nRefuse(W^v, reason)                              -> no action authorization\n```\n\nConsumption is optional because some Warrants are single-use and others are\nstanding grants. Revocation, expiry, target mismatch, and attenuation remain\nsemantically distinct even when a Profile presents fewer lifecycle labels.\n\n## Invariants\n\n```text\nW1  Warrant identity is independent of authentication, capability, task, and session.\nW2  Warrant does not imply Atlas, Pursuit, Episode, success, or completion.\nW3  Revoked, expired, stale-target, or out-of-scope authority is not current authority.\nW4  Derived authority cannot amplify its parent without a new source.\nW5  Parent authority does not silently authorize a descendant action.\nW6  Delegation does not silently transfer residual responsibility.\nW7  Historical authority use remains inspectable after revocation or expiry.\n```\n\n## Session projection\n\nInside the KFD-7 low-complexity boundary:\n\n```text\nWarrant -> one stable, inspectable, low-risk permission boundary\n```\n\nCompression is valid only while the grant remains stable and adequate for the\nsession. It must stop when authority is delegated, attenuated, renewed,\nexpired, revoked, target-sensitive, externally consequential, or disputed.\n\n## Derived action binding\n\nA proposed action binds one exact Warrant root:\n\n```text\nActionBinding.warrant_root = root(W^v)\n```\n\nValidation occurs against the candidate action and current Fact cut. An\nEpisode may later record use of that binding but cannot retroactively make an\ninvalid Warrant valid.\n\n## Proof obligations\n\n- Preserve exact grant, issuer, holder, scope, target roots, and constraints.\n- Demonstrate expiry, revocation, target mismatch, delegation, and attenuation\n  as independently testable cases.\n- Prove non-amplification for derived authority.\n- Demonstrate actions that are possible but unauthorized and authorized but\n  never occur.\n- Compare total lifecycle cost with approval records, RBAC, capabilities,\n  consent, mandates, and provider prompts.\n- Show a session round trip and the breakpoint where the Warrant must become\n  explicit.\n\n## Invalid states\n\n- Authentication or capability is treated as permission.\n- Pursuit ownership or task assignment is treated as authority.\n- A child action inherits parent scope without checked derivation.\n- A revoked, expired, or stale-target grant remains actionable.\n- Successful consequence retroactively authorizes an action.\n- Delegation silently erases residual responsibility.\n\n## Non-claims\n\nThis historical model does not provide legal advice, replace domain\nauthorization systems, prove universal necessity, require one token format,\nor make every local action ask for permission. KFD-10 allocates the number and\ncanonical term; conflict policy, consumption, multi-party approval, and\nconcrete lifecycle vocabulary remain Domain Profile-owned."
+        },
+        {
+          "id": "federated-work-continuity-formal",
+          "candidateId": "federated-work-continuity",
+          "parentPath": "drafts/federated-work-continuity.md",
+          "parentUrl": "/drafts/federated-work-continuity/",
+          "sourcePath": "drafts/formal/federated-work-continuity.md",
+          "url": "/drafts/federated-work-continuity/formal/",
+          "relationship": "formal-candidate-child-of-candidate",
+          "normative": false,
+          "formalCandidateVersion": 1,
+          "formalCandidateStatus": "experimental",
+          "authorityPath": "drafts/federated-work-continuity.md",
+          "markdown": "# Federated Work Continuity Formal Candidate\n\n[Candidate](../federated-work-continuity.md) ·\n[Live case](../../cases/live/federated-work-continuity/README.md) ·\n[Candidate registry](../registry.json)\n\n- Status: experimental\n- Normative: no\n- Formal candidate version: 1\n- Authority: `drafts/federated-work-continuity.md`\n- Slot binding: non-binding\n\n## Purpose\n\nThis model separates the useful Work-level interface from the unresolved claim\nthat Work requires an independent authoritative entity. It supports\nqualification of both a stable-entity hypothesis and a derived-view\nhypothesis.\n\n## Component world\n\nLet `F_i@c_i` be the admitted Fact cut of workspace `i`. Each workspace owns\nits local objects and relations. A federated observation never rewrites them:\n\n```text\nC = {(workspace_i, cut_i, proof_i, availability_i)}\n```\n\nThere is no implied global cut `c*`. `C` is a declared set of component cuts.\n\n## Work view\n\nFor observer `o`, root reference `r`, traversal policy `q`, and component cuts\n`C`, define:\n\n```text\nWV(o, r, q, C) = (\n  root_ref,\n  included_refs,\n  typed_edges,\n  component_cuts,\n  proof_state,\n  unresolved_refs,\n  degraded_components,\n  action_frontier,\n  declared_loss\n)\n```\n\n`WV` is a perspective-bound projection. Equal visible nodes do not imply equal\nviews when observer, relation policy, cuts, availability, proof, or loss differ.\n\n## Competing identity models\n\n### H1: independent entity\n\n```text\nW^v = (work_id, version_root, declared_whole, membership_policy,\n       lineage, settlement_relation)\n```\n\n`work_id` survives decomposition and execution location. `version_root`\nidentifies one declaration. This hypothesis is valid only if changing or\ndeleting `W` changes a real continuation or settlement decision while all\ncomponent objects remain fixed.\n\n### H2: derived view\n\n```text\nWorkRef = (owning_workspace, object_kind, subject, version_root, cut_root)\nWV = derive(WorkRef, q, C)\n```\n\nNo separate Work authority exists. The stable root object and typed relations\nprovide identity; `WV` provides the user-level whole at a declared observation\ncut. This is preferred if it preserves equivalent decisions at lower cost.\n\n### H0: no new Primitive\n\nAn Initiative and its Assignment graph are sufficient. Work remains ordinary\nproduct vocabulary. Qualification must retain this outcome.\n\n## Invariants\n\n```text\nW1  Execution path, repository, branch, session, and worktree are locators, not Work identity.\nW2  A federated view preserves every component's owning authority and cut.\nW3  Membership or graph edges do not transfer Atlas, Warrant, completion, or trust.\nW4  Missing or stale components remain visible as degraded or unresolved.\nW5  Child progress does not imply Work completion or settlement.\nW6  Equal node payload does not erase observer, relation policy, cut, proof, or loss.\nW7  Read federation does not imply distributed write authority or an atomic global snapshot.\nW8  A new Work entity is invalid unless it changes decisions beyond Initiative and query semantics.\n```\n\n## Distinguishability test\n\nHold all component Fact roots, Initiative roots, Assignment roots, relations,\nand Project Cuts fixed. Vary only the proposed Work declaration or derivation\npolicy.\n\n```text\nDistinctWork(W1, W2) iff\n  ContinuationDecision(W1) != ContinuationDecision(W2)\n  or SettlementScope(W1) != SettlementScope(W2)\n  or RequiredReconstruction(W1) materially differs from RequiredReconstruction(W2)\n```\n\nIf no bounded case satisfies this relation, H1 fails. If H2 provides no value\nover a normal Initiative query, the new-Primitive claim fails.\n\n## Operations under test\n\n```text\nlocate(root_ref)\ntraverse(direction, relation_types, depth)\ninspect(component_cuts, proof, loss)\nderive_frontier(policy)\ncompare(view_1, view_2)\nrebind_locator(workspace_identity, new_path)\ndegrade(unavailable_or_stale_component)\ncontinue(exact_target_ref, owning_workspace)\n```\n\nThese are candidate operations, not a required API or proof of independent\nobject identity.\n\n## Proof obligations\n\n- Compare H0, H1, and H2 on the same evidence cut and user questions.\n- Prove path-independent identity and workspace-qualified references.\n- Preserve per-relation cycle policy and non-inheritance semantics.\n- Demonstrate partial federation without global-clock or dual-write claims.\n- Measure reconstruction and decision effort, not only query latency.\n- Test whether the model transfers outside multi-repository software work.\n\n## Non-claims\n\nThis model does not allocate a KFD number, establish Work as a Primitive,\nrequire one graph database, define a universal completion percentage, create a\nglobal fact world, or make every user manage explicit lower-layer objects."
         }
       ]
     }
