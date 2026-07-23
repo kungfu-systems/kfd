@@ -106,6 +106,34 @@ const SCHEMAS: &[(&str, &str)] = &[
         "schemas/kfd-7/domain-profile.schema.json",
         include_str!("../../../../schemas/kfd-7/domain-profile.schema.json"),
     ),
+    (
+        "schemas/kfd-11/decision-admission.schema.json",
+        include_str!("../../../../schemas/kfd-11/decision-admission.schema.json"),
+    ),
+    (
+        "schemas/kfd-11/adopter-witness.schema.json",
+        include_str!("../../../../schemas/kfd-11/adopter-witness.schema.json"),
+    ),
+    (
+        "schemas/kfd-12/adopter-witness.schema.json",
+        include_str!("../../../../schemas/kfd-12/adopter-witness.schema.json"),
+    ),
+    (
+        "schemas/kfd-13/adopter-witness.schema.json",
+        include_str!("../../../../schemas/kfd-13/adopter-witness.schema.json"),
+    ),
+    (
+        "schemas/kfd-activation/contracts-manifest.schema.json",
+        include_str!("../../../../schemas/kfd-activation/contracts-manifest.schema.json"),
+    ),
+    (
+        "schemas/kfd-activation/qualification-report.schema.json",
+        include_str!("../../../../schemas/kfd-activation/qualification-report.schema.json"),
+    ),
+    (
+        "schemas/kfd-activation/activation-record.schema.json",
+        include_str!("../../../../schemas/kfd-activation/activation-record.schema.json"),
+    ),
 ];
 
 fn schema_documents() -> BTreeMap<String, Value> {
@@ -157,6 +185,15 @@ pub fn schema_for_record(record: &Value) -> Option<(String, Value)> {
         "kfd-5-primitive-discovery" => "schemas/kfd-5/primitive-discovery.schema.json",
         "kfd-6-autonomous-discovery-loop" => "schemas/kfd-6/autonomous-discovery-loop.schema.json",
         "kfd-7-domain-profile" => "schemas/kfd-7/domain-profile.schema.json",
+        "kfd-11-decision-admission" => "schemas/kfd-11/decision-admission.schema.json",
+        "kfd-11-adopter-witness" => "schemas/kfd-11/adopter-witness.schema.json",
+        "kfd-12-adopter-witness" => "schemas/kfd-12/adopter-witness.schema.json",
+        "kfd-13-adopter-witness" => "schemas/kfd-13/adopter-witness.schema.json",
+        "kfd-11-13-activation-contracts" => "schemas/kfd-activation/contracts-manifest.schema.json",
+        "kfd-11-13-qualification-report" => {
+            "schemas/kfd-activation/qualification-report.schema.json"
+        }
+        "kfd-11-13-activation-record" => "schemas/kfd-activation/activation-record.schema.json",
         _ => return None,
     };
     documents.get(path).cloned().map(|schema| {

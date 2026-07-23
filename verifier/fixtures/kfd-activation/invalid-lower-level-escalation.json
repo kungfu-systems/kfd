@@ -1,0 +1,19 @@
+{
+  "$schema": "https://kfd.libkungfu.dev/schemas/kfd-activation/activation-record.schema.json",
+  "schemaVersion": 1,
+  "contract": "kfd-11-13-activation-record",
+  "subject": { "schemaId": "https://example.org/adopter.schema.json", "root": "sha256:adopteractivation" },
+  "activationOrder": ["kfd-11", "kfd-12", "kfd-13"],
+  "qualificationReport": { "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-activation/qualification-report.schema.json", "root": "sha256:qualificationreport" },
+  "gates": {
+    "kfd11": { "structuralConformance": "passed", "implementationConformance": "passed", "operationalEvidence": "not-evaluated", "independentReview": "not-evaluated" },
+    "kfd12": { "structuralConformance": "passed", "implementationConformance": "not-evaluated", "operationalEvidence": "not-evaluated", "independentReview": "not-evaluated" },
+    "kfd13": { "structuralConformance": "passed", "implementationConformance": "not-evaluated", "operationalEvidence": "not-evaluated", "independentReview": "not-evaluated" }
+  },
+  "decision": "pass",
+  "exactEvidenceRoots": ["sha256:structuralonly"],
+  "failedEvidenceRoots": [],
+  "residualRiskRoots": ["sha256:risk"],
+  "independentDecision": { "decisionMakerRef": "reviewer", "warrantRoot": "sha256:warrant", "decisionRoot": "sha256:decision", "independentFromAdopter": true, "evidenceRoots": ["sha256:structuralonly"] },
+  "nonClaims": ["This invalid fixture must fail closed."]
+}

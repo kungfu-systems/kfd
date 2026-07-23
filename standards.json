@@ -2723,12 +2723,12 @@
       "title": "Consequential settlement must separate claim, assessment, decision, and admission",
       "kind": "procedure",
       "status": "draft",
-      "revision": 1,
+      "revision": 2,
       "metadataSchemaVersion": "2",
       "document": {
         "path": "decisions/KFD-11.md",
         "url": "https://kfd.libkungfu.dev/11",
-      "sha256": "f6037c235543b81d51eab6f2e2908d4063296120384589785d7b305e9d093c10"
+      "sha256": "68b56c111da243609db8f609b48b73331e0e52c16ee549e6f631ad7ddc09fe6c"
       },
       "formalModel": {
         "path": "docs/KFD-11-formal.md",
@@ -2737,7 +2737,7 @@
         "status": "experimental",
         "normative": false,
         "authorityPath": "decisions/KFD-11.md",
-        "sha256": "c8013779cafd5c7ac9310b367178036016cf2e9272d90cf085f2d60f368f5717"
+        "sha256": "fc8229061801b7b197fd4113cee1539d0f37743778fc311dfd19752fbde81e74"
       },
       "compatibility": {
         "packageLine": "v1.0",
@@ -2752,15 +2752,42 @@
           "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-11/decision-admission.schema.json",
           "schemaPath": "schemas/kfd-11/decision-admission.schema.json",
           "compatibilityRule": "Compatible additions may retain version 1; semantic, required-field, verification-meaning, Decision-authority, or Admission-result changes require a new interface version or contract."
+        },
+        "adopterWitness": {
+          "contract": "kfd-11-adopter-witness",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-11/adopter-witness.schema.json",
+          "schemaPath": "schemas/kfd-11/adopter-witness.schema.json",
+          "compatibilityRule": "Changes to exact-Warrant, independent-Admission, retry, or failure-evidence semantics require a new interface version or contract."
+        },
+        "qualificationReport": {
+          "contract": "kfd-11-13-qualification-report",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-activation/qualification-report.schema.json",
+          "schemaPath": "schemas/kfd-activation/qualification-report.schema.json",
+          "compatibilityRule": "Qualification levels may not be fused or automatically escalated without a new interface version or contract."
+        },
+        "activationRecord": {
+          "contract": "kfd-11-13-activation-record",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-activation/activation-record.schema.json",
+          "schemaPath": "schemas/kfd-activation/activation-record.schema.json",
+          "compatibilityRule": "Changes to pass, revise, reject, exact evidence, residual risk, or independent-decision semantics require a new interface version or contract."
         }
       },
       "schemaIds": {
         "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json",
-        "decisionAdmission": "https://kfd.libkungfu.dev/schemas/kfd-11/decision-admission.schema.json"
+        "decisionAdmission": "https://kfd.libkungfu.dev/schemas/kfd-11/decision-admission.schema.json",
+        "adopterWitness": "https://kfd.libkungfu.dev/schemas/kfd-11/adopter-witness.schema.json",
+        "qualificationReport": "https://kfd.libkungfu.dev/schemas/kfd-activation/qualification-report.schema.json",
+        "activationRecord": "https://kfd.libkungfu.dev/schemas/kfd-activation/activation-record.schema.json"
       },
       "schemaPaths": {
         "metadata": "schemas/kfd-standards.schema.json",
-        "decisionAdmission": "schemas/kfd-11/decision-admission.schema.json"
+        "decisionAdmission": "schemas/kfd-11/decision-admission.schema.json",
+        "adopterWitness": "schemas/kfd-11/adopter-witness.schema.json",
+        "qualificationReport": "schemas/kfd-activation/qualification-report.schema.json",
+        "activationRecord": "schemas/kfd-activation/activation-record.schema.json"
       },
       "concepts": {
         "claim": "exact bounded proposition made by a declared participant against inspectable Fact and evidence cuts",
@@ -2777,12 +2804,12 @@
       "title": "Software work must keep Initiative and Assignment distinct",
       "kind": "principle",
       "status": "draft",
-      "revision": 4,
+      "revision": 5,
       "metadataSchemaVersion": "2",
       "document": {
         "path": "decisions/KFD-12.md",
         "url": "https://kfd.libkungfu.dev/12",
-        "sha256": "40dba0190012e94873df5884d989d93b12dfa5123323067dc3b694d6a81277f7"
+        "sha256": "4b89bfe3f0610a67239f3e0a1ab4bb4ce11443876b75e92fdfd0bdafe0b9bbe5"
       },
       "formalModel": {
         "path": "docs/KFD-12-formal.md",
@@ -2791,7 +2818,7 @@
         "status": "experimental",
         "normative": false,
         "authorityPath": "decisions/KFD-12.md",
-        "sha256": "a3581d3892dcb138fa13726a955446d9d21e6f7bc50b7904afaa8cc4ced7e81f"
+        "sha256": "729255895449cb7efebd42258de68795478316b21979372c721dcf0d044f1e8f"
       },
       "compatibility": {
         "packageLine": "v1.0",
@@ -2799,11 +2826,40 @@
         "metadataSchemaVersion": "2",
         "rule": "Before stable, the software-domain lifecycle may be refined with explicit lineage; after stable, substantive change to Initiative, Assignment, or their lifecycle requires an explicit KFD-1 compatibility action."
       },
+      "interfaces": {
+        "adopterWitness": {
+          "contract": "kfd-12-adopter-witness",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-12/adopter-witness.schema.json",
+          "schemaPath": "schemas/kfd-12/adopter-witness.schema.json",
+          "compatibilityRule": "Changes to Initiative or Assignment responsibility, proposal and acceptance, exact coordinate bindings, or session round-trip semantics require a new interface version or contract."
+        },
+        "qualificationReport": {
+          "contract": "kfd-11-13-qualification-report",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-activation/qualification-report.schema.json",
+          "schemaPath": "schemas/kfd-activation/qualification-report.schema.json",
+          "compatibilityRule": "Qualification levels may not be fused or automatically escalated without a new interface version or contract."
+        },
+        "activationRecord": {
+          "contract": "kfd-11-13-activation-record",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-activation/activation-record.schema.json",
+          "schemaPath": "schemas/kfd-activation/activation-record.schema.json",
+          "compatibilityRule": "Changes to pass, revise, reject, exact evidence, residual risk, or independent-decision semantics require a new interface version or contract."
+        }
+      },
       "schemaIds": {
-        "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json"
+        "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json",
+        "adopterWitness": "https://kfd.libkungfu.dev/schemas/kfd-12/adopter-witness.schema.json",
+        "qualificationReport": "https://kfd.libkungfu.dev/schemas/kfd-activation/qualification-report.schema.json",
+        "activationRecord": "https://kfd.libkungfu.dev/schemas/kfd-activation/activation-record.schema.json"
       },
       "schemaPaths": {
-        "metadata": "schemas/kfd-standards.schema.json"
+        "metadata": "schemas/kfd-standards.schema.json",
+        "adopterWitness": "schemas/kfd-12/adopter-witness.schema.json",
+        "qualificationReport": "schemas/kfd-activation/qualification-report.schema.json",
+        "activationRecord": "schemas/kfd-activation/activation-record.schema.json"
       },
       "concepts": {
         "softwareWorkResponsibilityLifecycle": "software-domain separation of Initiative, Assignment, occurrence, Claim, Assessment, Decision, Admission, and continuation",
@@ -2819,12 +2875,12 @@
       "title": "Project settlement must bind authorities without absorbing them",
       "kind": "procedure",
       "status": "draft",
-      "revision": 3,
+      "revision": 4,
       "metadataSchemaVersion": "2",
       "document": {
         "path": "decisions/KFD-13.md",
         "url": "https://kfd.libkungfu.dev/13",
-        "sha256": "1657256093dd4a7f10e593a36cd45a22309286e64c140fcca8b825cb94030ddc"
+        "sha256": "5557074f4f321686a6ad0ab05b60ebdfc9291ef7e25bca4b5a7756d096c8a12e"
       },
       "formalModel": {
         "path": "docs/KFD-13-formal.md",
@@ -2833,7 +2889,7 @@
         "status": "experimental",
         "normative": false,
         "authorityPath": "decisions/KFD-13.md",
-        "sha256": "47a709538e3876bddb6af508fc9bc6e29ecd69cac5b5cc73af6f251b9ef729b4"
+        "sha256": "0a40abf1b336480298ce0f0db76260822bfca5521169df5df973089a4b79b7a3"
       },
       "compatibility": {
         "packageLine": "v1.0",
@@ -2841,11 +2897,40 @@
         "metadataSchemaVersion": "2",
         "rule": "Before stable, the software-project settlement procedure may be refined with explicit lineage; after stable, substantive change requires an explicit KFD-1 compatibility action."
       },
+      "interfaces": {
+        "adopterWitness": {
+          "contract": "kfd-13-adopter-witness",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-13/adopter-witness.schema.json",
+          "schemaPath": "schemas/kfd-13/adopter-witness.schema.json",
+          "compatibilityRule": "Changes to authority preservation, canonical-root, residual-risk, export verification, or successor-lineage semantics require a new interface version or contract."
+        },
+        "qualificationReport": {
+          "contract": "kfd-11-13-qualification-report",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-activation/qualification-report.schema.json",
+          "schemaPath": "schemas/kfd-activation/qualification-report.schema.json",
+          "compatibilityRule": "Qualification levels may not be fused or automatically escalated without a new interface version or contract."
+        },
+        "activationRecord": {
+          "contract": "kfd-11-13-activation-record",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-activation/activation-record.schema.json",
+          "schemaPath": "schemas/kfd-activation/activation-record.schema.json",
+          "compatibilityRule": "Changes to pass, revise, reject, exact evidence, residual risk, or independent-decision semantics require a new interface version or contract."
+        }
+      },
       "schemaIds": {
-        "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json"
+        "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json",
+        "adopterWitness": "https://kfd.libkungfu.dev/schemas/kfd-13/adopter-witness.schema.json",
+        "qualificationReport": "https://kfd.libkungfu.dev/schemas/kfd-activation/qualification-report.schema.json",
+        "activationRecord": "https://kfd.libkungfu.dev/schemas/kfd-activation/activation-record.schema.json"
       },
       "schemaPaths": {
-        "metadata": "schemas/kfd-standards.schema.json"
+        "metadata": "schemas/kfd-standards.schema.json",
+        "adopterWitness": "schemas/kfd-13/adopter-witness.schema.json",
+        "qualificationReport": "schemas/kfd-activation/qualification-report.schema.json",
+        "activationRecord": "schemas/kfd-activation/activation-record.schema.json"
       },
       "concepts": {
         "projectCut": "software-project settlement binding that preserves independently authoritative source, Atlas, Episode, policy, omission, and risk coordinates"

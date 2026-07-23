@@ -340,6 +340,13 @@ boundary and public-spec gaps.
 
 ## Agent Quickstart
 
+For KFD-11 through KFD-13 adoption or activation work, begin with
+[`activation-contracts.json`](activation-contracts.json). It is the stable
+machine discovery surface for the three adopter witnesses, the shared
+qualification report, and the fail-closed activation record. Schema validity
+proves structural conformance only; it never upgrades implementation,
+operational evidence, independent review, or activation readiness.
+
 Agents consuming this package should start from the same sources as humans:
 
 1. Read this README for the future picture, foundation triad, and package map.

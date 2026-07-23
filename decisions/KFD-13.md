@@ -68,6 +68,21 @@ A conforming procedure:
 - declares that Project Cut is software-domain vocabulary, not a mandatory
   cross-domain primitive.
 
+## Adopter witness and activation boundary
+
+A conforming adopter publishes a versioned witness that names and verifies
+source, Atlas, Episode, policy, and protocol bindings under their own
+authorities; commits omissions, conflicts, unknowns, and residual risk; and
+supports deterministic export, independent verification, and successor
+lineage. Every bound authority retains its own semantics and must explicitly
+report that it was not absorbed by Project Cut.
+
+The machine interface is
+[`schemas/kfd-13/adopter-witness.schema.json`](../schemas/kfd-13/adopter-witness.schema.json).
+Qualification and activation use the shared interfaces discovered through
+[`activation-contracts.json`](../activation-contracts.json). A valid binding
+does not prove work completion, release fitness, or activation.
+
 ## Founding implementation boundary
 
 The founding Kungfu implementation binds Git source, Xinfa Atlas, and Kungfu

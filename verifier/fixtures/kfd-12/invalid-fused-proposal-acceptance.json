@@ -1,0 +1,20 @@
+{
+  "$schema": "https://kfd.libkungfu.dev/schemas/kfd-12/adopter-witness.schema.json",
+  "schemaVersion": 1,
+  "contract": "kfd-12-adopter-witness",
+  "standard": "kfd-12",
+  "domainProfile": { "schemaId": "https://example.org/software-profile.schema.json", "root": "sha256:profile12" },
+  "initiative": { "initiativeId": "initiative-12", "root": "sha256:initiative12", "coordinationPurposeRoot": "sha256:coordination12", "scopeRoot": "sha256:scope12", "pursuitRoots": ["sha256:pursuit12"], "participantRoots": ["sha256:participant12"], "settlementPolicyRoot": "sha256:policy12", "lineageRoots": [] },
+  "assignment": {
+    "assignmentId": "assignment-12", "root": "sha256:assignment12", "holderRef": "agent-12", "responsibilityRoot": "sha256:responsibility12", "initiativeRoot": "sha256:initiative12",
+    "pursuitRoots": ["sha256:pursuit12"], "atlasRoot": "sha256:atlas12", "warrantRoot": "sha256:warrant12",
+    "proposal": { "schemaId": "https://example.org/assignment.schema.json", "root": "sha256:fused12" },
+    "acceptance": { "state": "accepted", "record": { "schemaId": "https://example.org/assignment.schema.json", "root": "sha256:fused12" }, "boundaryRoot": "sha256:boundary12", "acceptedByRef": "agent-12" },
+    "evidenceObligationRoots": ["sha256:evidence12"], "settlementPolicyRoot": "sha256:policy12", "relationRoots": []
+  },
+  "responsibilitySeparation": { "initiativeIsNotPursuit": true, "assignmentIsNotWarrant": true, "assignmentIsNotEpisode": true, "proposalIsNotAcceptance": false, "assessmentIsNotAuthority": true, "decisionIsNotAdmission": true },
+  "lifecycle": { "episodeRoots": [], "claimRoots": [], "assessmentRoots": [], "decisionRoots": [], "admissionRoots": [], "failedEvidenceRoots": [] },
+  "simpleSessionProjection": { "projectionRoot": "sha256:session12", "roundTripStatus": "passed", "recoverableRoles": ["initiative", "assignment", "episode", "claim", "assessment", "decision", "admission", "continuation"], "doesNotFuseRoles": true },
+  "continuation": { "state": "paused", "parentAssignmentRoot": "sha256:assignment12", "decisionRoot": "sha256:decision12", "admissionRoot": "sha256:admission12", "successorAssignmentRoots": [], "preservesLineage": true },
+  "nonClaims": ["This invalid fixture must fail closed."]
+}
