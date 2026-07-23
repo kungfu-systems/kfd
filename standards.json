@@ -250,6 +250,7 @@
         "agentHubConformanceProfile": "fixed dual-Hub black-box conformance profile with independent offline verification",
         "agentHubVectorRegistry": "fixed rooted positive and negative cross-Hub vector registry",
         "agentHubConformanceReport": "package-, capability-, adapter-, suite-, and transcript-bound non-certifying report",
+        "agentHubExecutableOnboarding": "single-CLI demo, capability discovery, and fail-closed adapter scaffold path",
         "agentRuntimeProfile": "implementation-independent black-box Agent runtime conformance profile",
         "runtimeVectorRegistry": "fixed rooted positive and negative runtime vector registry",
         "runtimeAdapter": "topology-neutral product-owned black-box adapter",
@@ -346,6 +347,34 @@
             "description": "Independent packaged offline verifier for Agent Hub reports and fixed public roots.",
             "sourcePath": "scripts/agent-hub-report-verifier.mjs",
             "weldRationale": "Consumers fail closed on package, profile, protocol, vector, inventory, capability, adapter, response, transcript, result, and claim-scope drift without invoking Hub code or the network.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-agent-hub-cli-capabilities",
+            "class": "integration-time",
+            "classes": ["integration-time", "cross-time"],
+            "description": "Machine-readable Agent Hub executable-onboarding commands, languages, exit codes, verifier boundary, claim boundary, and recovery.",
+            "sourcePath": "profiles/agent-hub/cli-capabilities.json",
+            "weldRationale": "Humans, agents, package consumers, and CI discover the same single-kfd demo, scaffold, test, and verification surfaces without inferring behavior from prose or package layout.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-agent-hub-scaffold-generator",
+            "class": "integration-time",
+            "classes": ["integration-time"],
+            "description": "Packaged fail-closed generator for C++, Node.js, Python, and Rust Agent Hub adapter starters.",
+            "sourcePath": "scripts/agent-hub-scaffold.mjs",
+            "weldRationale": "Generation uses rooted packaged templates, rejects existing destinations and symlink parents, and preserves the distinction between envelope smoke evidence and Hub 20 behavior evidence.",
             "impactProjection": {
               "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
               "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",

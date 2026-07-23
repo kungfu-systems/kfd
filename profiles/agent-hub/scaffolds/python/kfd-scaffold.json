@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.agent-hub-scaffold/v1",
+  "language": "python",
+  "binding": "jsonl-stdio/v1",
+  "run": ["python3", "adapter.py"],
+  "smoke": ["python3", "smoke.py"],
+  "claims": {
+    "executed": ["handshake and evaluate response-envelope smoke fixtures"],
+    "notExecuted": ["KFD Agent Hub 20 semantics", "production interoperability", "security assessment"],
+    "qualifying": false,
+    "certification": false
+  }
+}

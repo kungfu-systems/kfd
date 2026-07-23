@@ -1,6 +1,6 @@
 {
   "name": "@kungfu-tech/kfd",
-  "version": "1.0.0-alpha.42",
+  "version": "1.0.0-alpha.43",
   "description": "KFD: an open, evidence-governed engineering standard for reliable action and continuity under uncertainty",
   "license": "Apache-2.0",
   "bin": {
@@ -48,6 +48,8 @@
     "./GOVERNANCE.md": "./GOVERNANCE.md",
     "./TRADEMARKS.md": "./TRADEMARKS.md",
     "./profiles/*": "./profiles/*",
+    "./agent-hub/*": "./profiles/agent-hub/*",
+    "./agent-hub/scaffolds/*": "./profiles/agent-hub/scaffolds/*",
     "./protocols/*": "./protocols/*",
     "./cases/registry.json": "./cases/registry.json",
     "./cases/*": "./cases/*",
