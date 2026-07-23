@@ -188,6 +188,29 @@ closed. Verification does not attest that the recorded process execution
 occurred; it proves the retained report is closed under the packaged profile
 and roots.
 
+### KFD Agent Hub report
+
+The `kfd.agent-hub-report/v1` host profile verifies the fixed Agent Hub 20
+report against the installed package:
+
+- exact package manifest, release anchor, profile, protocol, vector, failure
+  inventory, and verifier bytes;
+- unique rooted capability documents for at least two Hubs and their handshake
+  binding;
+- exactly one retained response and fixed three-field outcome for every vector;
+- response, result, and reconstructed transcript roots;
+- offline execution plus fixed non-qualifying and non-certifying scope;
+- optional exact adapter-byte binding with `--adapter`.
+
+The verifier fails closed on unsupported profile versions, unknown or missing
+results, duplicate IDs, expected-outcome drift, root mutation, capability
+mutation, adapter drift, or claim widening. It remains one host-side Node
+authority because it reads installed package and optional adapter bytes. No
+Agent Hub report checks are duplicated in the Rust/WASM bundle verifier. A
+future move requires a versioned self-contained bundle kind and byte-for-byte
+native/WASM parity for the complete check set; process spawning remains
+host-only.
+
 ## Independence and extraction
 
 `verifier/extraction-manifest.json` is an allowlist for a clean extraction.

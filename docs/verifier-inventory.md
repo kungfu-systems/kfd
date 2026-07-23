@@ -8,7 +8,7 @@ confidence: high
 sensitivity: public
 evidence_grade: B
 review_state: self-reviewed
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-23
 ---
 
 # Verifier semantic inventory and specification gaps
@@ -40,6 +40,7 @@ The first verifier release must pin exact source commits and SHA-256 digests in
 | Xinfa Atlas | `atlas_root` over the Atlas body plus linked component and Context Pack roots | Same semantic-root framing; exact bytes for views, Pack compatibility artifacts, and manifest | Declared scope, complete embedded Pack, exact Human/Agent views, manifest, receipt | None in v1 | Immutable compiled context primitive; views are projections, not separate authority |
 | Git Workspace Episode | Preserved journal-native `semanticRoot`; independently computed `providerRoot` | UTF-8-key-sorted canonical manifest; canonical JSONL with terminal LF | Qualification root, claims digest/count/order, known schemas, provider-root preimage, safe export capability | None in the portable shadow | Never recomputes or replaces the C++ typed-fold Episode root |
 | Native Episode fsck | Journal-native root over typed POD claims and append order | POD layout/version and typed fold, not JSON authority | Lifecycle, causal closure, frame/payload integrity, seal, content root | Product/runtime responsibility | Remains the Episode authority; outside the independent portable profile |
+| Agent Hub 20 report | Exact profile, protocol, vector, failure-inventory, adapter, capability, response, transcript, result, package, and release-anchor roots | Semantic roots use KFD canonical JSON; adapter and packaged files use exact SHA-256 bytes | Exactly 20 fixed vectors, three-field outcomes, unique dual-Hub capabilities, fixed non-certifying scope, optional adapter-byte recheck | None in the alpha profile | The single host-side Node verifier binds installed package and adapter bytes; no Agent Hub report check is duplicated in Rust/WASM |
 | Agent Runtime 100 report | Exact profile-manifest, Agent Hub manifest, vector-registry, adapter-artifact, transcript, response, and result roots | Semantic roots use KFD canonical JSON; adapter artifacts and packaged profile files use exact SHA-256 bytes | Exactly 100 fixed vectors, request/response identity, Core/Experimental partition closure, non-qualifying scope, and two topology-distinct reference adapters | None in the alpha profile | Proves the retained adapter run against this fixed suite; does not qualify a product, certify an organization, or standardize internal architecture |
 
 ## Specification gaps and disposition
@@ -55,6 +56,7 @@ The first verifier release must pin exact source commits and SHA-256 digests in
 | GAP-KFD-1 | KFD | KFD schemas use a documented JSON-Schema subset but there was no independent executable validator | The existing repository check mixes schema conformance with repository-specific generation checks | Ship the independent `kfd-record` profile and keep repository generation checks in `scripts/check.mjs` |
 | GAP-KFD-7-1 | KFD-7 | Closed on 2026-07-18: the package retains two qualified product Profile cuts, product reviews, release-gate evidence, and a separate KFD-level activation review | Structural validity still cannot qualify a future adopter by inheritance | Preserve `evidence/kfd-7/activation-record.json`; require every future Profile to bind its own evidence and review |
 | GAP-KFD-AR-1 | KFD Agent Runtime | Closed by `kfd-runtime-100@0.1.0-alpha.1`: the fixed vector registry, JSONL adapter contract, report schema, exact-root verifier, and two topology-distinct reference adapters are packaged together | A vendor cannot substitute an implementation-specific test set while claiming the same profile | Version any vector, expectation, partition, adapter contract, or verification-semantic change; keep the alpha report explicitly non-qualifying and non-self-certified |
+| GAP-KFD-AH-1 | KFD Agent Hub | Agent Hub report verification binds installed package and optional adapter bytes, while generic Rust/WASM verification consumes self-contained bundles | Moving only some checks would create two semantic authorities with a drifting partial parity set | Keep all Agent Hub report checks in one packaged host verifier; expose and test an empty shared-check set until a versioned self-contained bundle kind can move the complete check set with byte-for-byte native/WASM parity |
 | GAP-SIG-1 | Multiple | No stable common signature envelope exists across the four surfaces | Inventing one would move format ownership and overstate trust | Do not add signature verification until an owner publishes a stable signature contract |
 | GAP-WORK-1 | KFD live case | Pursuit, Warrant, and Envelope remain provisional names and cuts | Pre-minting verbs would weld candidate semantics prematurely | Defer these commands while the live case status is `provisional` |
 

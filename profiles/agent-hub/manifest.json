@@ -24,7 +24,7 @@
     "id": "kfd-runtime-100",
     "version": "0.1.0-alpha.1",
     "manifest": "profiles/agent-runtime/manifest.json",
-    "manifestDigest": "sha256:ca8eaa8291883ee151aee249810ec8e5805427a74bc7b2d06e5a5a57f078b38d",
+    "manifestDigest": "sha256:df99a4e448b95484ad6df06139e97e0a54b0f8561b0f1249c7601cf10e50ed8f",
     "coreVectorCount": 35,
     "experimentalVectorCount": 65,
     "qualifying": false,
@@ -54,12 +54,12 @@
     {
       "path": "profiles/agent-hub/README.md",
       "role": "authority",
-      "digest": "sha256:48ebeb3b9249676ab818e9eb0fb2aed6c551a504da7a8d64f326f4fac707c174"
+      "digest": "sha256:ee0c0e2352ab27713288828fa064a0904863237e7df601ac74fbe516168aeba6"
     },
     {
       "path": "profiles/agent-hub/implementer-guide.md",
       "role": "guide",
-      "digest": "sha256:b941e6472bcdb415f90a932eebc5c02aae787792e0aed244a456ce9051d37318"
+      "digest": "sha256:cb3bbf88d8bc6b74ea6ff7136c252547d88616466a98de2bce180185d78662f2"
     },
     {
       "path": "profiles/agent-hub/failure-codes.json",
@@ -99,7 +99,7 @@
     {
       "path": "scripts/agent-hub-runner.mjs",
       "role": "runner",
-      "digest": "sha256:4c3489230c603119e91fc270046fe32fe19993c99f6e580e017a23117dfcd8ce"
+      "digest": "sha256:eae1910cf2ef6e6035d82c812ad961e50afc21480b893f8e42a9e860ff9d0f51"
     },
     {
       "path": "scripts/agent-hub-report-verifier.mjs",
@@ -107,9 +107,19 @@
       "digest": "sha256:252e9576123b464055cda1eef4294ba9e670330b5d294407bf1e542eec7d04cf"
     },
     {
+      "path": "scripts/agent-hub-scaffold.mjs",
+      "role": "scaffold",
+      "digest": "sha256:ad6f84d20695adcb0b95f2b6763f903eed5f28f26eeb3f269e01c070a05d55af"
+    },
+    {
       "path": "scripts/generate-agent-hub-vectors.mjs",
       "role": "reference",
       "digest": "sha256:b2155f6c86397aa84fa978b97191999fab0a956e73c5835433b3511475c7cea4"
+    },
+    {
+      "path": "profiles/agent-hub/cli-capabilities.json",
+      "role": "capabilities",
+      "digest": "sha256:882ab985139e891512a4dce1844eebb0ec3315a6c0ac1f80344ce6b6327c52c3"
     },
     {
       "path": "profiles/agent-hub/adapters/protocol.mjs",
@@ -125,6 +135,121 @@
       "path": "profiles/agent-hub/adapters/rule-table-adapter.mjs",
       "role": "reference",
       "digest": "sha256:cec4e04b6b7f9f4b94050c5d390005f495823a2162db1d24bc6ce7449d72c899"
+    },
+    {
+      "path": "profiles/agent-hub/scaffolds/node/kfd-scaffold.json",
+      "role": "scaffold",
+      "digest": "sha256:c83094b12799d5ef6b26b60162c948632d062cbcf7eee25421d29ed6f6f84a6a"
+    },
+    {
+      "path": "profiles/agent-hub/scaffolds/node/README.md",
+      "role": "guide",
+      "digest": "sha256:bdb16386232b65c0fa76477e8aa9f00dca72c49537d1967dc5efe5923802de6c"
+    },
+    {
+      "path": "profiles/agent-hub/scaffolds/node/package.json",
+      "role": "scaffold",
+      "digest": "sha256:21416fc2c980f9cc2cd8199b29e209fc164d8b035ed7be4357936ecfd31c0996"
+    },
+    {
+      "path": "profiles/agent-hub/scaffolds/node/adapter.mjs",
+      "role": "scaffold",
+      "digest": "sha256:baa48af3531f0fb1741ce561f01845ebe2839f26eaaeb4b0f8fee6e3fd60a68b"
+    },
+    {
+      "path": "profiles/agent-hub/scaffolds/node/smoke.mjs",
+      "role": "test",
+      "digest": "sha256:268b792a7889ae2d721d35bf15fdbe727058bec30eb5bfffc94d0f43bb0f2e33"
+    },
+    {
+      "path": "profiles/agent-hub/scaffolds/node/fixtures/requests.jsonl",
+      "role": "fixture",
+      "digest": "sha256:a5fa40c086f5b849be8db846888768e0be949009b892fd3acfa30d66b926cb70"
+    },
+    {
+      "path": "profiles/agent-hub/scaffolds/python/kfd-scaffold.json",
+      "role": "scaffold",
+      "digest": "sha256:42cd6c2525081b02d3278c6997222bba7b3c43aba0c24e905841cc608a14b761"
+    },
+    {
+      "path": "profiles/agent-hub/scaffolds/python/README.md",
+      "role": "guide",
+      "digest": "sha256:251536b38ec74cc5ff5803b3e5d06451e08f29661d6ca4e1086bd1fcafa33599"
+    },
+    {
+      "path": "profiles/agent-hub/scaffolds/python/adapter.py",
+      "role": "scaffold",
+      "digest": "sha256:7ffab240c8a62724b59372c312778386bf25e593511cb1a7842fc13a26bdcebe"
+    },
+    {
+      "path": "profiles/agent-hub/scaffolds/python/smoke.py",
+      "role": "test",
+      "digest": "sha256:6394d5856c30d17cc55847561890ebe81f2ee31bff8c78108c64e2b41731a260"
+    },
+    {
+      "path": "profiles/agent-hub/scaffolds/python/fixtures/requests.jsonl",
+      "role": "fixture",
+      "digest": "sha256:a5fa40c086f5b849be8db846888768e0be949009b892fd3acfa30d66b926cb70"
+    },
+    {
+      "path": "profiles/agent-hub/scaffolds/rust/kfd-scaffold.json",
+      "role": "scaffold",
+      "digest": "sha256:085bbfa3d67f1b22858687ec7d9d2eed975d44d57f002ee85eeeaa0021b53cd7"
+    },
+    {
+      "path": "profiles/agent-hub/scaffolds/rust/README.md",
+      "role": "guide",
+      "digest": "sha256:2ea0c77ba7ab8fddd6892b7c102076e1c9bc51b4ef0ea2d3c86f33ac50083e3e"
+    },
+    {
+      "path": "profiles/agent-hub/scaffolds/rust/Cargo.toml",
+      "role": "scaffold",
+      "digest": "sha256:3d55185bb7b66c2af649d01ab2493c5abbd08cbfef28bac60a1e4fcf7eafd866"
+    },
+    {
+      "path": "profiles/agent-hub/scaffolds/rust/Cargo.lock",
+      "role": "scaffold",
+      "digest": "sha256:546dcda93b20e49afdf29ae3fd420de75ed5b702861e475bb39f69b8bedda047"
+    },
+    {
+      "path": "profiles/agent-hub/scaffolds/rust/src/main.rs",
+      "role": "scaffold",
+      "digest": "sha256:5ce12094bb163c9bccd7abd90b805c466721a0d8ca684a469365a5d22660ca84"
+    },
+    {
+      "path": "profiles/agent-hub/scaffolds/rust/fixtures/requests.jsonl",
+      "role": "fixture",
+      "digest": "sha256:a5fa40c086f5b849be8db846888768e0be949009b892fd3acfa30d66b926cb70"
+    },
+    {
+      "path": "profiles/agent-hub/scaffolds/cpp/kfd-scaffold.json",
+      "role": "scaffold",
+      "digest": "sha256:f2170e67b4e0a987aa38f224bbf37767a0a9e800c91ae0ca08a342e02d01f44b"
+    },
+    {
+      "path": "profiles/agent-hub/scaffolds/cpp/README.md",
+      "role": "guide",
+      "digest": "sha256:e432b156f1a170b8300259edf0bdd18a995a91a4335b212916544c01287bfac0"
+    },
+    {
+      "path": "profiles/agent-hub/scaffolds/cpp/CMakeLists.txt",
+      "role": "scaffold",
+      "digest": "sha256:ad325bcfa8dc6d6fd245d984e05b1c89124bfd86cb4f90db5735fb562a747df3"
+    },
+    {
+      "path": "profiles/agent-hub/scaffolds/cpp/adapter.cpp",
+      "role": "scaffold",
+      "digest": "sha256:91ccf4c6394791030c377e89fa4d86ad0b14a539d12b7018477147fe2cc17c7b"
+    },
+    {
+      "path": "profiles/agent-hub/scaffolds/cpp/smoke.mjs",
+      "role": "test",
+      "digest": "sha256:ab154f0725c1dd6fd422ebd3a17b4273cee115eaca2939aec0263155eb41c0f4"
+    },
+    {
+      "path": "profiles/agent-hub/scaffolds/cpp/fixtures/requests.jsonl",
+      "role": "fixture",
+      "digest": "sha256:a5fa40c086f5b849be8db846888768e0be949009b892fd3acfa30d66b926cb70"
     }
   ],
   "claimBoundary": "A passing report is exact-scope evidence for the named adapter artifact, two declared Hub capability documents, fixed Agent Hub 20 suite, KFD package cut, platform, and retained residual risks. It is not KFD certification, a security assessment, production fitness, independent vendor adoption, or evidence that provisional semantics became normative."
