@@ -13,6 +13,10 @@
     "candidateRegistry": "drafts/registry.json",
     "terminology": "terminology.json",
     "activationContracts": "activation-contracts.json",
+    "agentHubProfile": "profiles/agent-hub/README.md",
+    "agentHubGuide": "profiles/agent-hub/implementer-guide.md",
+    "agentHubCapabilities": "profiles/agent-hub/cli-capabilities.json",
+    "agentHubManifest": "profiles/agent-hub/manifest.json",
     "decisionsDir": "decisions",
     "candidatesDir": "drafts"
   },
@@ -26,6 +30,7 @@
     "candidates": "/drafts",
     "candidatePattern": "/drafts/{id}",
     "candidateFormalPattern": "/drafts/{id}/formal",
+    "agentHub": "/agent-hub",
     "decisionPattern": "/{number}",
     "decisionUsagePattern": "/{number}/usage",
     "decisionFormalPattern": "/{number}/formal",
@@ -758,6 +763,162 @@
       ]
     },
     "markdown": "# KFD Terminology Contract\n\nThis document defines the public vocabulary used across KFD decisions,\nformal references, schemas, packages, and rendered sites. It is not a numbered\ndecision. It prevents one concept from acquiring several names and prevents\none name from silently carrying several formal types.\n\nThe machine projection is [`../terminology.json`](../terminology.json).\n`scripts/check.mjs` verifies the projection and rejects ambiguous vocabulary on\nactive KFD surfaces.\n\n## Naming rules\n\n1. A canonical term has one definition and one formal layer.\n2. A generic word remains lowercase. Capitalization identifies a KFD term or\n   named object.\n3. The first use of a coined or overloaded term includes its plain-language\n   meaning.\n4. A schema, contract ID, metadata key, fixture, document, and site route use\n   the same canonical vocabulary.\n5. A candidate name does not imply that its object has been promoted to an\n   active KFD Primitive.\n6. A canonical explanatory subtitle clarifies one term. It is not an alias,\n   a second formal type, or permission to rename the term on machine surfaces.\n\n## The core 2 + 3 structure\n\nThe five core KFD-7 names are not five peers. They form two ontology bindings\nand three action coordinates:\n\n```text\nFact + Episode\n  -> Fact-Episode Ontology\n\nAtlas + Pursuit + Warrant\n  -> Action Responsibility Geometry\n```\n\nThe canonical explanatory subtitles and questions are:\n\n| Term | Canonical explanatory subtitle | Compact subtitle | Question |\n| --- | --- | --- | --- |\n| **Fact** | Admitted state at a declared evidence boundary | Admitted state | What is admitted? |\n| **Episode** | Replayable causal record between Fact cuts | Replayable causal record | What happened? |\n| **Atlas** | Declared perspective over admitted facts | Declared perspective | From where is it judged? |\n| **Pursuit** | Continuing direction and progress relation | Continuing direction | What change is sought? |\n| **Warrant** | Bounded authority for admissible transitions | Bounded authority | What action is allowed? |\n\n`Fact` names admitted state, not absolute truth. `Fact Cut` names an\nindependently addressable instance of that state at a declared source,\nauthority, evidence, and time or version boundary. The formal model uses\n`FactCut` as the carrier so two cuts can differ even when they contain similar\nclaims.\n\nThe subtitles above are the full first-use forms. Compact interfaces may use\nthe machine-declared `compactSubtitle` values, but must keep the canonical term\nvisible or discoverable.\n\nThe same contract closes common false equivalences:\n\n| Term | It is not |\n| --- | --- |\n| **Fact** | absolute truth; every observation; a Causal Record |\n| **Episode** | a session by definition; a transcript by definition; an intended or authorized action; proof of success, progress, completion, or authorization |\n| **Atlas** | complete reality; generic context without source, cut, freshness, omissions, and loss; a Pursuit or Warrant |\n| **Pursuit** | a one-shot task; a plan; authority to act |\n| **Warrant** | authentication; a capability alone; intention or assignment; proof that an action occurred |\n\n## Canonical vocabulary\n\n| Term | Layer | Meaning and first use |\n| --- | --- | --- |\n| **KFD Foundation** | explanatory | The non-numbered explanation of how the decisions compose. |\n| **primitive** | generic | Any basic object in an external field. |\n| **KFD Primitive** | standard | A qualified load-bearing object with independent identity, boundary, authority, lifecycle, and operations. |\n| **KFD Primitive Candidate** | discovery | A proposed KFD Primitive that has not completed qualification and promotion. |\n| **Fact-Episode Ontology** | KFD-7 ontology | The contract-world model whose object-like elements are admitted Fact cuts and whose path-like elements are Episodes. It is not a complete ontology of reality. |\n| **Fact** | KFD-7 ontology binding | State admitted into a contract world under declared source, authority, evidence, and cut boundaries. It is not absolute truth or every observation. |\n| **Fact Cut** | KFD-7 formal carrier | An independently addressable instance of admitted Fact state at a declared boundary. It is not a second ontology binding. |\n| **Causal Occurrence** | reality boundary | A bounded event sequence or partial order that actually occurs. |\n| **Causal Record** | evidence | An evidence-bearing representation of a Causal Occurrence, including declared omissions and loss. |\n| **Episode** | KFD-7 ontology binding | An independently addressable, replayable object that binds a Causal Record to declared cuts, perspective, and loss. It is not merely a session, run, transcript, or reinforcement-learning trajectory. |\n| **Causal Experience** | evidence corpus | One or more Episodes used as evidence or learning material. It is not reality itself. |\n| **Action Responsibility Geometry** | KFD-7 action model | The cross-domain responsibility model whose coordinates are direction, perspective, and bounded authority. Geometry does not imply Euclidean space, physical motion, a metric, or a differentiable manifold. |\n| **Action Coordinate** | KFD-7 role | One independently addressable coordinate in the Action Responsibility Geometry. |\n| **Atlas** | KFD-8 perspective coordinate | The independently addressable perspective coordinate: accepted facts, observation boundary, cut, freshness, omissions, conflict, and loss. |\n| **Pursuit** | KFD-9 direction coordinate | The independently addressable direction coordinate: continuing intended change, progress relation, lineage, and settlement. |\n| **Warrant** | KFD-10 authority coordinate | The independently addressable bounded-authority coordinate: which transition may be performed, by whom, under which constraints, and until when. It is not legal authority by definition. |\n| **Domain Profile** | adopter model | A versioned declaration of how one domain binds its representations to the Fact-Episode Ontology and Action Responsibility Geometry. |\n| **Domain Profile Declaration** | machine artifact | A document conforming to `schemas/kfd-7/domain-profile.schema.json`. |\n| **Claim** | KFD-11 consequential settlement | An exact, bounded proposition made by a declared participant against inspectable Fact and evidence cuts. Evidence and occurrence do not state their own Claim. |\n| **Assessment** | KFD-11 consequential settlement | A purpose-bound trust judgment over a Claim and checked evidence boundary. It is revisable and does not grant authority to decide. |\n| **Decision** | KFD-11 consequential settlement | An authorized disposition of assessed Claims under an exact Warrant and policy. It requests effects but does not prove they were admitted. |\n| **Admission** | KFD-11 consequential settlement | The independently recorded result of presenting a requested transition to the owning state authority. Only successful Admission may publish the corresponding successor Fact cut. |\n| **Software Work Responsibility Lifecycle** | KFD-12 domain application | The software-development sequence that keeps Initiative, Assignment, Episode, Claim, Assessment, Decision, Admission, and continuation independently inspectable. It is not a universal cross-domain workflow. |\n| **Initiative** | KFD-12 software-domain work context | An independently addressable context for continuing coordinated work that preserves coordination purpose, scope, participants, relevant Pursuits, Assignment relations, lineage, and settlement state without redefining Pursuit direction. |\n| **Assignment** | KFD-12 software-domain bounded responsibility | An independently addressable responsibility proposed to, accepted by, or held by a participant, binding accepted responsibility, Initiative, Pursuit, Atlas, Warrant, evidence obligations, settlement policy, and lineage. It does not duplicate Pursuit direction or authority. |\n| **Project Cut** | KFD-13 software-project settlement | A verifiable project-level binding among independently authoritative source, Atlas, Episode, policy, omission, and risk coordinates. It is not another fact engine or a mandatory object in other domains. |\n| **Assurance Responsibility** | trust model | The named assignment of source-fact, verification, and decision authority. It is distinct from a KFD-7 Action Coordinate. |\n| **Participant Value Claim** | cooperation model | A bounded statement of value to a participant, with inspectable fact, trust, constraint, choice, and residual-risk boundaries. |\n\n## Type relationships\n\n```text\nCausal Occurrence --represented by--> Causal Record\nCausal Record     --bound into-------> Episode\nEpisode[]         --used as----------> Causal Experience\n\nFact cut + Episode\n  -> Fact-Episode Ontology\n\nPursuit + Atlas + Warrant\n  -> Action Responsibility Geometry\n\ndomain representation\n  -> Domain Profile Declaration\n  -> ontology bindings + action coordinates\n\nsoftware-development Domain Profile\n  -> Initiative + Assignment + Episode\n  -> Claim + Assessment + Decision + Continuation\n  -> Software Work Responsibility Lifecycle\n  -> optional Project Cut settlement\n```\n\nThe relationships are directional. A Fact is not reality itself; a Fact Cut\nis not a second ontology binding; a record is not the occurrence itself; an\nEpisode is not every possible record; a corpus of Episodes is not a complete\naccount of reality. Atlas, Pursuit, and Warrant constrain action at a cut.\nEpisode preserves what occurred between cuts.\n\n## Usage discipline\n\nPublic prose may use a shorter name after the first qualified use within the\nsame document. Machine surfaces do not shorten canonical IDs or field names.\nWhen an external field already uses the same word differently, KFD text states\nthe KFD meaning before making comparisons.\n\nTerminology changes are contract changes. Before stable, they replace the\ncurrent vocabulary atomically across all active surfaces. After stable, they\nfollow the KFD-1 compatibility boundary declared by the affected interface."
+  },
+  "agentHubPage": {
+    "id": "agent-hub",
+    "title": "KFD Agent Hub Conformance Profile",
+    "url": "/agent-hub",
+    "relationship": "experimental-adopter-conformance-profile",
+    "normative": false,
+    "status": "experimental",
+    "authorityPath": "profiles/agent-hub/README.md",
+    "guidePath": "profiles/agent-hub/implementer-guide.md",
+    "capabilitiesPath": "profiles/agent-hub/cli-capabilities.json",
+    "manifestPath": "profiles/agent-hub/manifest.json",
+    "lead": "This experimental adopter profile packages a fixed dual-Hub black-box suite, JSONL adapter contract, execution report, and offline report verifier. It lets an npm consumer run and verify the profile without a KFD repository checkout.",
+    "profile": "kfd-agent-hub-conformance@0.1.0-alpha.1",
+    "protocol": "kfd-agent-hub",
+    "binding": "jsonl-stdio/v1",
+    "suite": {
+      "id": "kfd-agent-hub-20",
+      "version": "0.1.0-alpha.1",
+      "fixedVectorCount": 20
+    },
+    "commands": {
+      "demo": "kfd demo agent-hub --output <report.json> [--reference-adapter state-machine|rule-table] [--json]",
+      "scaffold": "kfd scaffold agent-hub --language <cpp|node|python|rust> --output <new-directory> [--json]",
+      "test": "kfd test agent-hub --adapter <path> --output <report.json>",
+      "verify": "kfd verify agent-hub-report <report.json> [--adapter <path>] [--json]"
+    },
+    "scaffoldLanguages": [
+      "cpp",
+      "node",
+      "python",
+      "rust"
+    ],
+    "exitCodes": {
+      "0": "suite passed, report verified, or scaffold completed",
+      "1": "execution completed but a conformance or verification check failed",
+      "2": "invalid invocation, unsafe path, malformed JSON, process failure, or envelope failure"
+    },
+    "reportVerification": {
+      "backend": "host-node",
+      "processSpawning": "host-only",
+      "sharedRustWasmChecks": [],
+      "parityBoundary": "No Agent Hub report check is duplicated in the Rust/WASM verifier. The single host verifier binds installed package bytes and optional adapter bytes; native/WASM verification-bundle profiles remain separate semantic authorities. Moving this profile requires a versioned bundle kind and byte-for-byte native/WASM parity before the host verifier can be retired."
+    },
+    "claimBoundary": "Demo success and generated starter smoke success are non-qualifying, non-certifying evidence. Only kfd test agent-hub executes Hub 20 against the named adapter artifact.",
+    "recovery": "Delete only the newly generated scaffold directory or report you created; kfd never overwrites an existing scaffold path.",
+    "sections": [
+      {
+        "id": "five-minute-packaged-quickstart",
+        "title": "Five-minute packaged quickstart",
+        "sourcePath": "profiles/agent-hub/README.md",
+        "sourceHeading": "Five-minute packaged quickstart",
+        "defaultPresentation": "command-quickstart",
+        "markdown": "Pin the prerelease channel explicitly because npm `latest` remains the bootstrap package. One command runs the packaged state-machine reference adapter against Hub 20, writes a rooted report, re-hashes the adapter, and verifies the report offline:\n\n```sh\nnpx --yes --package @kungfu-tech/kfd@alpha kfd demo agent-hub \\\n  --output ./agent-hub-demo-report.json\n```\n\nInspect the machine-readable command, language, exit-code, verifier-backend, claim, and recovery boundaries without a repository checkout:\n\n```sh\nnpx --yes --package @kungfu-tech/kfd@alpha kfd capabilities agent-hub --json\n```\n\nThe demo is an executable reference path, not adopter evidence. Its packaged adapter is non-product code and its passing report remains non-qualifying and non-certifying."
+      },
+      {
+        "id": "scaffold-an-adopter-adapter",
+        "title": "Scaffold an adopter adapter",
+        "sourcePath": "profiles/agent-hub/README.md",
+        "sourceHeading": "Scaffold an adopter adapter",
+        "defaultPresentation": "language-scaffolds",
+        "markdown": "Generate exactly one new starter directory:\n\n```sh\nnpx --yes --package @kungfu-tech/kfd@alpha kfd scaffold agent-hub \\\n  --language python \\\n  --output ./my-agent-hub-adapter\n```\n\nLanguages are `cpp`, `node`, `python`, and `rust`. KFD refuses an existing output path and never overwrites adopter files. Each starter has deterministic fixtures and a local envelope smoke; the smoke explicitly does not execute Hub 20. Implement product-owned semantics, build when required, and then run the fixed suite."
+      },
+      {
+        "id": "run-the-fixed-suite-against-an-adopter",
+        "title": "Run the fixed suite against an adopter",
+        "sourcePath": "profiles/agent-hub/README.md",
+        "sourceHeading": "Run the fixed suite against an adopter",
+        "defaultPresentation": "command-workflow",
+        "markdown": "An adapter is an executable or JavaScript entry point that reads one JSON request per line from stdin and writes exactly one JSON response per line to stdout. It must answer one handshake plus the fixed 20 evaluation requests.\n\n```sh\nnpx --yes --package @kungfu-tech/kfd@alpha kfd test agent-hub \\\n  --adapter ./my-agent-hub-adapter.mjs \\\n  --output ./agent-hub-report.json\n\nnpx --yes --package @kungfu-tech/kfd@alpha kfd verify agent-hub-report \\\n  ./agent-hub-report.json \\\n  --adapter ./my-agent-hub-adapter.mjs \\\n  --json\n```\n\nOmitting `--adapter` during verification still verifies the installed package cut, profile, protocol, suite, failure inventory, verifier, capability documents, responses, result closure, transcript root, and claim boundary. Supplying it additionally re-hashes the adapter bytes."
+      },
+      {
+        "id": "fixed-boundaries",
+        "title": "Fixed boundaries",
+        "sourcePath": "profiles/agent-hub/README.md",
+        "sourceHeading": "Fixed boundaries",
+        "defaultPresentation": "contract-boundary",
+        "markdown": "- Profile: `kfd-agent-hub-conformance@0.1.0-alpha.1`\n- Protocol: `kfd-agent-hub@0.1.0-alpha.1`\n- Suite: `kfd-agent-hub-20@0.1.0-alpha.1`, exactly 20 vectors\n- Report: `kfd.agent-hub-report/v1`\n- Offline verifier result: `kfd.agent-hub-report-verifier/v1`\n- Exit `0`: pass or valid report; exit `1`: completed but failed; exit `2`: invalid invocation, JSON, adapter process, or envelope\n\nThe suite distinguishes transport delivery from semantic admission, preserves visible conflict, rejects authority amplification and root drift, and retains unavailable and intentionally withheld knowledge as different states."
+      },
+      {
+        "id": "claim-boundary",
+        "title": "Claim boundary",
+        "sourcePath": "profiles/agent-hub/README.md",
+        "sourceHeading": "Claim boundary",
+        "defaultPresentation": "claim-boundary",
+        "markdown": "A passing report is exact-scope evidence for the named adapter artifact, two declared Hub capability documents, fixed suite, installed KFD package cut, platform, and retained residual risks. It is not KFD certification, a security assessment, production fitness, independent vendor adoption, or evidence that provisional semantics became normative.\n\n`KFD Runtime 100` remains a separate single-runtime evidence profile. Its 35 Core vectors cover a KFD-7 responsibility-separation subset; its 65 Experimental vectors are provisional and non-qualifying. Agent Hub 20 tests cross-Hub exchange behavior and does not replace Runtime 100.\n\nSee [implementer-guide.md](./implementer-guide.md) for the adapter and report workflow."
+      },
+      {
+        "id": "executable-onboarding-surfaces",
+        "title": "Executable onboarding surfaces",
+        "sourcePath": "profiles/agent-hub/implementer-guide.md",
+        "sourceHeading": "Executable onboarding surfaces",
+        "defaultPresentation": "capability-list",
+        "markdown": "- `kfd demo agent-hub --output <report.json>` runs one packaged reference adapter, executes Hub 20, and immediately performs bound offline verification.\n- `kfd scaffold agent-hub --language <cpp|node|python|rust> --output <new-directory>` copies a deterministic, fail-closed starter without overwriting an existing path.\n- `kfd capabilities agent-hub --json` exposes commands, contracts, exit codes, supported scaffold languages, verification backend, claim boundary, and recovery as packaged JSON.\n- `kfd test agent-hub --adapter ...` remains the adopter evidence path. Demo and scaffold smoke results do not substitute for it.\n\nThe C++ and Rust starters deliberately use fixture-scoped, dependency-free JSON field readers so clean-pack CI can compile them offline. Adopters must replace those readers with their production JSON boundary. Node.js and Python starters use their standard JSON libraries. All four starters return `scenario-not-implemented` until product-owned semantics are supplied."
+      },
+      {
+        "id": "adapter-binding",
+        "title": "Adapter binding",
+        "sourcePath": "profiles/agent-hub/implementer-guide.md",
+        "sourceHeading": "Adapter binding",
+        "defaultPresentation": "protocol-contract",
+        "markdown": "The binding is `jsonl-stdio/v1`. The runner starts one process with `KFD_AGENT_HUB_OFFLINE=1`, preserves the caller's working directory, sends 21 lines, closes stdin, and requires 21 JSON response lines with no stderr output. Package resources are resolved from the installed KFD package; adopter configuration may remain relative to the consumer project.\n\nThe first request has operation `handshake`. A successful response uses code `adapter-ready`, verdict `not-applicable`, and includes at least two Hubs. Every Hub entry contains a capability document and its canonical SHA-256 semantic root. Hub IDs must be unique.\n\nThe remaining requests use operation `evaluate`. An adapter must return the exact request ID plus `status`, `code`, `verdict`, and observations. Machine interpretation always uses the three-field outcome, not the code alone. In particular:\n\n- `conflicted / conflict-visible / conflicted` means the adapter correctly retained a visible conflict.\n- `rejected / conflict-visible / rejected` means the adapter correctly rejected a policy that would hide a visible conflict.\n\nBoth are negative-polarity vectors because neither claims semantic admission."
+      },
+      {
+        "id": "reports-and-roots",
+        "title": "Reports and roots",
+        "sourcePath": "profiles/agent-hub/implementer-guide.md",
+        "sourceHeading": "Reports and roots",
+        "defaultPresentation": "evidence-roots",
+        "markdown": "The runner binds:\n\n- the installed npm package manifest and release anchor;\n- the conformance and protocol manifests;\n- the fixed vector registry and failure inventory;\n- the verifier and adapter bytes;\n- two or more Hub capability documents;\n- every adapter response, the complete result inventory, and the reconstructed transcript.\n\nRoots use SHA-256. File roots hash the exact packaged bytes. Semantic roots hash canonical JSON followed by one newline; object keys are sorted recursively, array order is retained, and numbers are non-negative safe integers."
+      },
+      {
+        "id": "fail-closed-verification",
+        "title": "Fail-closed verification",
+        "sourcePath": "profiles/agent-hub/implementer-guide.md",
+        "sourceHeading": "Fail-closed verification",
+        "defaultPresentation": "verification-boundary",
+        "markdown": "The offline verifier independently recomputes public package roots and fixed-suite outcomes. Unknown, missing, duplicate, or mutated results fail. Claim widening (`qualifying: true` or `certification: true`) fails. A report may be valid only when all 20 fixed outcomes pass and the entire root closure agrees.\n\nUse `--adapter` during verification when the original adapter bytes are available. This turns the declared adapter digest into a recomputed check.\n\nAgent Hub report verification remains in the single packaged host-side JavaScript verifier. No Agent Hub report checks are duplicated in the Rust/WASM verifier, so there is no partial parity set that could drift. This boundary is machine-readable in `cli-capabilities.json` and checked by the profile test. Process spawning is also host-only. Moving report semantics into the shared core requires a new versioned verification-bundle kind and byte-for-byte native/WASM parity before this host authority can be retired."
+      },
+      {
+        "id": "starter-claim-and-recovery",
+        "title": "Starter claim and recovery",
+        "sourcePath": "profiles/agent-hub/implementer-guide.md",
+        "sourceHeading": "Starter claim and recovery",
+        "defaultPresentation": "recovery-boundary",
+        "markdown": "Every generated `kfd-scaffold.json` lists what its smoke executes and what remains untested. A starter must not be described as a conforming Hub until its compiled or interpreted adapter itself passes the retained Hub 20 runner. To recover from generation, remove only the newly generated directory; generation never mutates an existing destination. Reports are created with exclusive-write semantics and are safe to regenerate only at a new path or after the adopter intentionally removes its own prior report."
+      },
+      {
+        "id": "reference-adapters",
+        "title": "Reference adapters",
+        "sourcePath": "profiles/agent-hub/implementer-guide.md",
+        "sourceHeading": "Reference adapters",
+        "defaultPresentation": "reference-list",
+        "markdown": "The package includes two intentionally different examples:\n\n- `profiles/agent-hub/adapters/state-machine-adapter.mjs`\n- `profiles/agent-hub/adapters/rule-table-adapter.mjs`\n\nThey demonstrate the wire contract, not a production Hub implementation."
+      }
+    ],
+    "rendererContract": {
+      "primary": [
+        "five-minute-packaged-quickstart",
+        "scaffold-an-adopter-adapter",
+        "run-the-fixed-suite-against-an-adopter"
+      ],
+      "detail": [
+        "executable-onboarding-surfaces",
+        "adapter-binding",
+        "reports-and-roots",
+        "fail-closed-verification",
+        "starter-claim-and-recovery",
+        "reference-adapters"
+      ],
+      "boundary": [
+        "fixed-boundaries",
+        "claim-boundary"
+      ],
+      "note": "Render commands and machine-readable boundaries from this page object. Do not infer certification, production fitness, or language-runtime parity from scaffold availability."
+    }
   },
   "liveCases": {
     "source": "cases/registry.json",
@@ -3580,7 +3741,8 @@
       "decision usage markdown bodies",
       "decision formal reference mapping",
       "decision formal reference markdown bodies",
-      "KFD-11 through KFD-13 activation contract discovery manifest"
+      "KFD-11 through KFD-13 activation contract discovery manifest",
+      "Agent Hub executable onboarding page, command surface, protocol boundary, and recovery guidance"
     ],
     "ownedBySite": [
       "HTML structure",

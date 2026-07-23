@@ -602,6 +602,18 @@ if (siteBundle.source?.candidateRegistry !== candidateRegistryPath) {
 if (siteBundle.source?.registry !== "registry.json") fail("site bundle registry source must be registry.json");
 if (siteBundle.source?.standards !== "standards.json") fail("site bundle standards source must be standards.json");
 if (siteBundle.source?.decisionsDir !== "decisions") fail("site bundle decisionsDir must be decisions");
+if (siteBundle.source?.agentHubProfile !== "profiles/agent-hub/README.md") {
+  fail("site bundle agentHubProfile source must be profiles/agent-hub/README.md");
+}
+if (siteBundle.source?.agentHubGuide !== "profiles/agent-hub/implementer-guide.md") {
+  fail("site bundle agentHubGuide source must be profiles/agent-hub/implementer-guide.md");
+}
+if (siteBundle.source?.agentHubCapabilities !== "profiles/agent-hub/cli-capabilities.json") {
+  fail("site bundle agentHubCapabilities source must be profiles/agent-hub/cli-capabilities.json");
+}
+if (siteBundle.source?.agentHubManifest !== "profiles/agent-hub/manifest.json") {
+  fail("site bundle agentHubManifest source must be profiles/agent-hub/manifest.json");
+}
 if (siteBundle.homepage?.title !== "KFD — Kung Fu Decisions") fail("site bundle homepage title must match README H1 text");
 if (!Array.isArray(siteBundle.homepage?.sections) || siteBundle.homepage.sections.length === 0) {
   fail("site bundle homepage.sections must expose generated homepage and foundation sections");
@@ -618,6 +630,50 @@ if (siteBundle.routes?.candidatePattern !== "/drafts/{id}") {
 }
 if (siteBundle.routes?.candidateFormalPattern !== "/drafts/{id}/formal") {
   fail("site bundle routes.candidateFormalPattern must be /drafts/{id}/formal");
+}
+if (siteBundle.routes?.agentHub !== "/agent-hub") fail("site bundle routes.agentHub must be /agent-hub");
+const agentHubPage = siteBundle.agentHubPage;
+if (agentHubPage?.url !== siteBundle.routes.agentHub) fail("site bundle agentHubPage.url must match routes.agentHub");
+if (agentHubPage?.normative !== false || agentHubPage?.status !== "experimental") {
+  fail("site bundle Agent Hub page must remain experimental and non-normative");
+}
+if (agentHubPage?.binding !== "jsonl-stdio/v1") fail("site bundle Agent Hub page must expose jsonl-stdio/v1");
+if (agentHubPage?.suite?.fixedVectorCount !== 20) fail("site bundle Agent Hub page must expose the fixed Hub 20 count");
+if (JSON.stringify(agentHubPage?.scaffoldLanguages) !== JSON.stringify(["cpp", "node", "python", "rust"])) {
+  fail("site bundle Agent Hub page must expose the four declared scaffold languages in capability order");
+}
+for (const command of ["demo", "scaffold", "test", "verify"]) {
+  if (!agentHubPage?.commands?.[command]) fail(`site bundle Agent Hub page must expose the ${command} command`);
+}
+if (agentHubPage?.reportVerification?.backend !== "host-node" ||
+    agentHubPage?.reportVerification?.processSpawning !== "host-only") {
+  fail("site bundle Agent Hub page must preserve the host-only verification and process boundary");
+}
+if (!agentHubPage?.claimBoundary?.includes("non-certifying")) {
+  fail("site bundle Agent Hub page must preserve the non-certifying claim boundary");
+}
+if (!agentHubPage?.recovery?.includes("never overwrites")) {
+  fail("site bundle Agent Hub page must preserve fail-closed scaffold recovery");
+}
+const requiredAgentHubSections = new Set([
+  "five-minute-packaged-quickstart",
+  "scaffold-an-adopter-adapter",
+  "run-the-fixed-suite-against-an-adopter",
+  "fixed-boundaries",
+  "claim-boundary",
+  "executable-onboarding-surfaces",
+  "adapter-binding",
+  "reports-and-roots",
+  "fail-closed-verification",
+  "starter-claim-and-recovery",
+  "reference-adapters",
+]);
+for (const sectionEntry of agentHubPage?.sections ?? []) {
+  if (!sectionEntry.markdown?.trim()) fail(`site bundle Agent Hub section ${sectionEntry.id} must not be empty`);
+  requiredAgentHubSections.delete(sectionEntry.id);
+}
+if (requiredAgentHubSections.size > 0) {
+  fail(`site bundle Agent Hub page is missing sections: ${[...requiredAgentHubSections].join(", ")}`);
 }
 if (
   !siteBundle.homepage?.futurePicture?.question ||
