@@ -121,6 +121,12 @@
       "rationale": "The schemaVersion 2 site bundle exposes the homepage core question, engineering answer, claim boundary, KFD Foundation, terminology page, and explicit non-normative formal child pages at /drafts/{id}/formal/ for candidates that declare a formalReference. Renderers consume declared routes and do not infer semantics from package layout."
     },
     {
+      "id": "kfd-agent-hub-site-bundle",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "The schemaVersion 2 site bundle additively exposes a first-class /agent-hub route and renderer-ready page generated from the packaged Agent Hub profile, implementer guide, CLI capabilities, and manifest. It includes executable onboarding commands, the four scaffold languages, jsonl-stdio/v1, Hub 20, exit codes, rooted-report verification, recovery, and the experimental non-certifying host-only boundary without changing existing routes or profile authority."
+    },
+    {
       "id": "kfd-site-decision-usage-pages",
       "impact": "patch",
       "class": "compatible",

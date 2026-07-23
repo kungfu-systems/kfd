@@ -13,6 +13,10 @@ const CANDIDATE_REGISTRY_PATH = "drafts/registry.json";
 const STANDARDS_PATH = "standards.json";
 const ACTIVATION_CONTRACTS_PATH = "activation-contracts.json";
 const LIVE_CASE_REGISTRY_PATH = "cases/registry.json";
+const AGENT_HUB_PROFILE_PATH = "profiles/agent-hub/README.md";
+const AGENT_HUB_GUIDE_PATH = "profiles/agent-hub/implementer-guide.md";
+const AGENT_HUB_CAPABILITIES_PATH = "profiles/agent-hub/cli-capabilities.json";
+const AGENT_HUB_MANIFEST_PATH = "profiles/agent-hub/manifest.json";
 const SITE_BUNDLE_PATH = "site/kfd-site.json";
 
 const normalizeLines = (value) => String(value || "").replace(/\r\n/g, "\n").trim();
@@ -284,6 +288,143 @@ const section = ({ id, sourceHeading, title, markdown, role, priority, presentat
   markdown: normalizeLines(markdown),
 });
 
+const buildAgentHubPage = ({ profileText, guideText, capabilities, manifest }) => {
+  const profile = parseReadme(profileText);
+  const guide = parseReadme(guideText);
+  const pageSection = ({ id, title, sourcePath, markdown, presentation }) => ({
+    id,
+    title,
+    sourcePath,
+    sourceHeading: title,
+    defaultPresentation: presentation,
+    markdown: normalizeLines(markdown),
+  });
+
+  return {
+    id: "agent-hub",
+    title: profile.title,
+    url: "/agent-hub",
+    relationship: "experimental-adopter-conformance-profile",
+    normative: false,
+    status: manifest.profile.status,
+    authorityPath: AGENT_HUB_PROFILE_PATH,
+    guidePath: AGENT_HUB_GUIDE_PATH,
+    capabilitiesPath: AGENT_HUB_CAPABILITIES_PATH,
+    manifestPath: AGENT_HUB_MANIFEST_PATH,
+    lead: paragraphBlocks(profile.intro)[0] || "",
+    profile: capabilities.profile,
+    protocol: manifest.protocol.id,
+    binding: capabilities.binding,
+    suite: {
+      id: manifest.suite.id,
+      version: manifest.suite.version,
+      fixedVectorCount: manifest.suite.fixedVectorCount,
+    },
+    commands: capabilities.commands,
+    scaffoldLanguages: capabilities.scaffoldLanguages,
+    exitCodes: capabilities.exitCodes,
+    reportVerification: capabilities.reportVerification,
+    claimBoundary: capabilities.claimBoundary,
+    recovery: capabilities.recovery,
+    sections: [
+      pageSection({
+        id: "five-minute-packaged-quickstart",
+        title: "Five-minute packaged quickstart",
+        sourcePath: AGENT_HUB_PROFILE_PATH,
+        markdown: profile.sections["Five-minute packaged quickstart"],
+        presentation: "command-quickstart",
+      }),
+      pageSection({
+        id: "scaffold-an-adopter-adapter",
+        title: "Scaffold an adopter adapter",
+        sourcePath: AGENT_HUB_PROFILE_PATH,
+        markdown: profile.sections["Scaffold an adopter adapter"],
+        presentation: "language-scaffolds",
+      }),
+      pageSection({
+        id: "run-the-fixed-suite-against-an-adopter",
+        title: "Run the fixed suite against an adopter",
+        sourcePath: AGENT_HUB_PROFILE_PATH,
+        markdown: profile.sections["Run the fixed suite against an adopter"],
+        presentation: "command-workflow",
+      }),
+      pageSection({
+        id: "fixed-boundaries",
+        title: "Fixed boundaries",
+        sourcePath: AGENT_HUB_PROFILE_PATH,
+        markdown: profile.sections["Fixed boundaries"],
+        presentation: "contract-boundary",
+      }),
+      pageSection({
+        id: "claim-boundary",
+        title: "Claim boundary",
+        sourcePath: AGENT_HUB_PROFILE_PATH,
+        markdown: profile.sections["Claim boundary"],
+        presentation: "claim-boundary",
+      }),
+      pageSection({
+        id: "executable-onboarding-surfaces",
+        title: "Executable onboarding surfaces",
+        sourcePath: AGENT_HUB_GUIDE_PATH,
+        markdown: guide.sections["Executable onboarding surfaces"],
+        presentation: "capability-list",
+      }),
+      pageSection({
+        id: "adapter-binding",
+        title: "Adapter binding",
+        sourcePath: AGENT_HUB_GUIDE_PATH,
+        markdown: guide.sections["Adapter binding"],
+        presentation: "protocol-contract",
+      }),
+      pageSection({
+        id: "reports-and-roots",
+        title: "Reports and roots",
+        sourcePath: AGENT_HUB_GUIDE_PATH,
+        markdown: guide.sections["Reports and roots"],
+        presentation: "evidence-roots",
+      }),
+      pageSection({
+        id: "fail-closed-verification",
+        title: "Fail-closed verification",
+        sourcePath: AGENT_HUB_GUIDE_PATH,
+        markdown: guide.sections["Fail-closed verification"],
+        presentation: "verification-boundary",
+      }),
+      pageSection({
+        id: "starter-claim-and-recovery",
+        title: "Starter claim and recovery",
+        sourcePath: AGENT_HUB_GUIDE_PATH,
+        markdown: guide.sections["Starter claim and recovery"],
+        presentation: "recovery-boundary",
+      }),
+      pageSection({
+        id: "reference-adapters",
+        title: "Reference adapters",
+        sourcePath: AGENT_HUB_GUIDE_PATH,
+        markdown: guide.sections["Reference adapters"],
+        presentation: "reference-list",
+      }),
+    ],
+    rendererContract: {
+      primary: [
+        "five-minute-packaged-quickstart",
+        "scaffold-an-adopter-adapter",
+        "run-the-fixed-suite-against-an-adopter",
+      ],
+      detail: [
+        "executable-onboarding-surfaces",
+        "adapter-binding",
+        "reports-and-roots",
+        "fail-closed-verification",
+        "starter-claim-and-recovery",
+        "reference-adapters",
+      ],
+      boundary: ["fixed-boundaries", "claim-boundary"],
+      note: "Render commands and machine-readable boundaries from this page object. Do not infer certification, production fitness, or language-runtime parity from scaffold availability.",
+    },
+  };
+};
+
 export const buildSiteBundle = ({
   readmeText,
   foundationText,
@@ -296,6 +437,10 @@ export const buildSiteBundle = ({
   liveCaseRegistry,
   terminology,
   activationContracts,
+  agentHubProfileText,
+  agentHubGuideText,
+  agentHubCapabilities,
+  agentHubManifest,
 }) => {
   const readme = parseReadme(readmeText);
   const foundationDocument = parseReadme(foundationText);
@@ -323,6 +468,12 @@ export const buildSiteBundle = ({
     claimBoundary: entry.claimBoundary,
     markdown: entry.markdown,
   }));
+  const agentHubPage = buildAgentHubPage({
+    profileText: agentHubProfileText,
+    guideText: agentHubGuideText,
+    capabilities: agentHubCapabilities,
+    manifest: agentHubManifest,
+  });
 
   const homepageSections = [
     section({
@@ -455,6 +606,10 @@ export const buildSiteBundle = ({
       candidateRegistry: CANDIDATE_REGISTRY_PATH,
       terminology: TERMINOLOGY_CONTRACT_PATH,
       activationContracts: ACTIVATION_CONTRACTS_PATH,
+      agentHubProfile: AGENT_HUB_PROFILE_PATH,
+      agentHubGuide: AGENT_HUB_GUIDE_PATH,
+      agentHubCapabilities: AGENT_HUB_CAPABILITIES_PATH,
+      agentHubManifest: AGENT_HUB_MANIFEST_PATH,
       decisionsDir: "decisions",
       candidatesDir: "drafts",
     },
@@ -468,6 +623,7 @@ export const buildSiteBundle = ({
       candidates: "/drafts",
       candidatePattern: "/drafts/{id}",
       candidateFormalPattern: "/drafts/{id}/formal",
+      agentHub: "/agent-hub",
       decisionPattern: "/{number}",
       decisionUsagePattern: "/{number}/usage",
       decisionFormalPattern: "/{number}/formal",
@@ -575,6 +731,7 @@ export const buildSiteBundle = ({
       contract: terminology,
       markdown: normalizeLines(readFileSync(TERMINOLOGY_PATH, "utf8")),
     },
+    agentHubPage,
     liveCases: {
       source: LIVE_CASE_REGISTRY_PATH,
       stableUrlPattern: "/cases/live/{id}",
@@ -690,6 +847,7 @@ export const buildSiteBundle = ({
         "decision formal reference mapping",
         "decision formal reference markdown bodies",
         "KFD-11 through KFD-13 activation contract discovery manifest",
+        "Agent Hub executable onboarding page, command surface, protocol boundary, and recovery guidance",
       ],
       ownedBySite: [
         "HTML structure",
@@ -717,6 +875,10 @@ export const readInputs = () => ({
   liveCaseRegistry: JSON.parse(readFileSync(LIVE_CASE_REGISTRY_PATH, "utf8")),
   terminology: JSON.parse(readFileSync(TERMINOLOGY_CONTRACT_PATH, "utf8")),
   activationContracts: JSON.parse(readFileSync(ACTIVATION_CONTRACTS_PATH, "utf8")),
+  agentHubProfileText: readFileSync(AGENT_HUB_PROFILE_PATH, "utf8"),
+  agentHubGuideText: readFileSync(AGENT_HUB_GUIDE_PATH, "utf8"),
+  agentHubCapabilities: JSON.parse(readFileSync(AGENT_HUB_CAPABILITIES_PATH, "utf8")),
+  agentHubManifest: JSON.parse(readFileSync(AGENT_HUB_MANIFEST_PATH, "utf8")),
 });
 
 export const generatedSiteBundle = () => buildSiteBundle(readInputs());
