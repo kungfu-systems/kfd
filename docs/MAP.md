@@ -121,6 +121,7 @@
 | Where is the public KFD fact source? | [`../README.md`](../README.md#decision-metadata) and [`../site/kfd-site.json`](../site/kfd-site.json) decision metadata |
 | What does Apache-2.0 cover, and what remains official/trademark-bound? | [`../TRADEMARKS.md`](../TRADEMARKS.md) |
 | What should a site renderer consume to render `kfd.libkungfu.dev`? | [`../site/kfd-site.json`](../site/kfd-site.json) |
+| How should a site render the executable Agent Hub onboarding path? | [`../site/kfd-site.json`](../site/kfd-site.json) — `agentHubPage` owns `/agent-hub` and is generated from the packaged profile, implementer guide, capabilities, and manifest |
 | How should a site render provisional live cases? | [`../site/kfd-site.json`](../site/kfd-site.json) — `liveCases` maps the registry to `/cases/live/{id}` |
 | How should a site render pre-number candidates? | [`../site/kfd-site.json`](../site/kfd-site.json) — `candidatePages` owns `/drafts/` and `/drafts/{id}/`; `kfdCandidates` preserves candidate-domain metadata |
 | How should a site map decision pages to usage subpages? | [`../site/kfd-site.json`](../site/kfd-site.json) — `decisionPages.usagePages` maps `/N` to `/N/usage` |
