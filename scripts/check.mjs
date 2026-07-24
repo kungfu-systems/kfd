@@ -645,6 +645,13 @@ if (JSON.stringify(agentHubPage?.scaffoldLanguages) !== JSON.stringify(["cpp", "
 for (const command of ["demo", "scaffold", "test", "verify"]) {
   if (!agentHubPage?.commands?.[command]) fail(`site bundle Agent Hub page must expose the ${command} command`);
 }
+if (agentHubPage?.commands?.kungfuProduct !== "kungfu agent hub qualify --output-dir <new-directory> [--json]") {
+  fail("site bundle Agent Hub page must expose the direct Kungfu product qualification command");
+}
+if (agentHubPage?.firstPartyProductProjection?.run !== "kungfu agent hub qualify --output-dir <new-directory>" ||
+    agentHubPage?.firstPartyProductProjection?.verify !== "kungfu agent hub verify --qualification-dir <directory>") {
+  fail("site bundle Agent Hub page must expose the first-party Kungfu run and verify path");
+}
 if (agentHubPage?.reportVerification?.backend !== "host-node" ||
     agentHubPage?.reportVerification?.processSpawning !== "host-only") {
   fail("site bundle Agent Hub page must preserve the host-only verification and process boundary");
@@ -657,6 +664,7 @@ if (!agentHubPage?.recovery?.includes("never overwrites")) {
 }
 const requiredAgentHubSections = new Set([
   "five-minute-packaged-quickstart",
+  "verify-the-first-party-kungfu-product",
   "scaffold-an-adopter-adapter",
   "run-the-fixed-suite-against-an-adopter",
   "fixed-boundaries",

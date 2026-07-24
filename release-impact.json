@@ -106,7 +106,7 @@
       "id": "kfd-agent-hub-conformance-alpha",
       "impact": "minor",
       "class": "additive",
-      "rationale": "KFD additively publishes the non-numbered kfd-agent-hub-conformance 0.1.0-alpha.1 adopter profile, fixed rooted Agent Hub 20 registry, dual-Hub JSONL adapter contract, capability- and artifact-bound report, independent offline JavaScript verifier, deterministic runner, zero-configuration reference demo, machine-readable CLI capability boundary, and fail-closed C++, Node.js, Python, and Rust adapter starters. Passing remains non-qualifying and non-certifying; starter smoke tests exercise only the envelope and the profile does not promote provisional runtime semantics or prove production interoperability."
+      "rationale": "KFD additively publishes the non-numbered kfd-agent-hub-conformance 0.1.0-alpha.1 adopter profile, fixed rooted Agent Hub 20 registry, dual-Hub JSONL adapter contract, capability- and artifact-bound report, independent offline JavaScript verifier, deterministic runner, zero-configuration reference demo, machine-readable CLI capability boundary, and fail-closed C++, Node.js, Python, and Rust adapter starters. It also exposes the first-party Kungfu run and offline-recheck commands through the authority text and generated site bundle, while preserving KFD ownership of the suite and verifier and Kungfu ownership of product behavior and explanation. Passing remains non-qualifying and non-certifying; starter smoke tests exercise only the envelope and the profile does not promote provisional runtime semantics or prove production interoperability."
     },
     {
       "id": "kfd-agent-runtime-conformance-alpha",
@@ -130,7 +130,7 @@
       "id": "kfd-agent-hub-site-bundle",
       "impact": "minor",
       "class": "additive",
-      "rationale": "The schemaVersion 2 site bundle additively exposes a first-class /agent-hub route and renderer-ready page generated from the packaged Agent Hub profile, implementer guide, CLI capabilities, and manifest. It includes executable onboarding commands, the four scaffold languages, jsonl-stdio/v1, Hub 20, exit codes, rooted-report verification, recovery, and the experimental non-certifying host-only boundary without changing existing routes or profile authority."
+      "rationale": "The schemaVersion 2 site bundle additively exposes a first-class /agent-hub route and renderer-ready page generated from the packaged Agent Hub profile, implementer guide, CLI capabilities, and manifest. It includes executable onboarding commands, the direct Kungfu installed-product qualification and recheck path, the four scaffold languages, jsonl-stdio/v1, Hub 20, exit codes, rooted-report verification, recovery, and the experimental non-certifying host-only boundary without changing existing routes or profile authority."
     },
     {
       "id": "kfd-site-decision-usage-pages",

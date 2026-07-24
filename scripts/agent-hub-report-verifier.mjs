@@ -110,16 +110,24 @@ export function verifyAgentHubReport(report, { adapterPath } = {}) {
 export function runAgentHubReportVerifier(args) {
   let reportPath;
   let adapterPath;
+  let outputPath;
   for (let index = 0; index < args.length; index += 1) {
     if (args[index] === "--json") continue;
     if (args[index] === "--adapter" && args[index + 1]) adapterPath = args[++index];
+    else if (args[index] === "--output" && args[index + 1]) outputPath = args[++index];
     else if (!reportPath) reportPath = args[index];
     else throw new Error(`unsupported argument: ${args[index]}`);
   }
   if (!reportPath) throw new Error("agent-hub-report verification requires a report path");
   const report = JSON.parse(regular(path.resolve(reportPath)).toString("utf8"));
   const result = verifyAgentHubReport(report, { adapterPath });
-  console.log(JSON.stringify(result));
+  if (outputPath) {
+    const output = path.resolve(outputPath);
+    if (!fs.existsSync(path.dirname(output))) throw new Error(`output parent does not exist: ${path.dirname(output)}`);
+    fs.writeFileSync(output, `${JSON.stringify(result, null, 2)}\n`, { flag: "wx" });
+  } else {
+    console.log(JSON.stringify(result));
+  }
   return result.valid ? 0 : 1;
 }
 
