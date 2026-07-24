@@ -16,6 +16,12 @@ head is `dev/v1/v1.0` and whose base is `alpha/v1/v1.0`. A temporary promotion
 branch may satisfy GitHub freshness rules, but it is not a valid Buildchain
 release source for KFD alpha publishing.
 
+The `dev` merge immediately preceding an alpha promotion must be performed by
+the promotion PR author after independent approval. This keeps the resulting
+`dev` head distinct from the independent reviewer, so the alpha branch's
+required last-push approval can be satisfied without bypassing protection or
+changing the release source.
+
 The protected branch required status check must also name the status emitted by
 the current Verify workflow. As of the alpha.14 line, that required check is:
 
