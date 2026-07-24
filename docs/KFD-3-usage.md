@@ -89,6 +89,30 @@ Examples:
 
 This keeps KFD-3 general while making real product interfaces testable.
 
+## Executable first-party value evidence
+
+A collaboration interface should not stop at a schema when the product can
+provide an executable, bounded proof path. Kungfu's Agent Hub profile is the
+current first-party example:
+
+```sh
+kungfu agent hub qualify --output-dir ./kungfu-agent-hub-check
+kungfu agent hub verify --qualification-dir ./kungfu-agent-hub-check
+```
+
+The human projection answers four questions before asking the participant to
+interpret hashes: what was tested, what passed, what the result means, and what
+it does not mean. The `--json` projection exposes the same meaning, non-claims,
+evidence paths, roots, and next action to an agent.
+
+An agent should use this surface when asked whether the installed Kungfu can act
+as the tested local KFD Agent Hub, or when it needs to explain that capability
+to a human. It must not widen the result beyond the emitted boundary: the check
+does not establish KFD certification, security, production fitness,
+remote-network interoperability, external adoption, or unobserved-platform
+support. The KFD package owns the fixed suite and offline report verifier;
+Kungfu owns its product behavior, artifact binding, isolation, and explanation.
+
 ## Extension Requests
 
 KFD-3 treats extension requests as part of the collaboration interface. A

@@ -2,6 +2,12 @@
 
 ## Executable onboarding surfaces
 
+- `kungfu agent hub qualify --output-dir <new-directory>` runs the fixed suite
+  against the product-owned Kungfu Hub implementation and explains the exact
+  result to a human; `--json` exposes the same bounded result to an agent.
+- `kungfu agent hub verify --qualification-dir <directory>` independently
+  rechecks the retained KFD report, adapter bytes, product binding, and
+  qualification closure without rerunning the suite.
 - `kfd demo agent-hub --output <report.json>` runs one packaged reference adapter, executes Hub 20, and immediately performs bound offline verification.
 - `kfd scaffold agent-hub --language <cpp|node|python|rust> --output <new-directory>` copies a deterministic, fail-closed starter without overwriting an existing path.
 - `kfd capabilities agent-hub --json` exposes commands, contracts, exit codes, supported scaffold languages, verification backend, claim boundary, and recovery as packaged JSON.

@@ -19,6 +19,29 @@ npx --yes --package @kungfu-tech/kfd@alpha kfd capabilities agent-hub --json
 
 The demo is an executable reference path, not adopter evidence. Its packaged adapter is non-product code and its passing report remains non-qualifying and non-certifying.
 
+## Verify the first-party Kungfu product
+
+Kungfu ships this exact KFD package and exposes the fixed suite through its
+installed executable. A human or agent can run the product-owned semantics
+without a KFD repository checkout or a separate Node installation:
+
+```sh
+kungfu agent hub qualify --output-dir ./kungfu-agent-hub-check
+kungfu agent hub verify --qualification-dir ./kungfu-agent-hub-check
+```
+
+The default projection says what passed, which responsibilities were exercised,
+what the result means, what it does not mean, whether the real `~/.kungfu`
+state stayed unchanged, and where the rooted JSON evidence was written. Add
+`--json` for the stable machine projection.
+
+KFD remains the authority for the fixed Hub 20 suite and offline report
+verifier. Kungfu remains the authority for its product semantics, two isolated
+local Hub domains, installed-artifact binding, and explanatory projection. A
+pass is exact-scope first-party product evidence; it is not KFD certification,
+a security assessment, production fitness, remote-network interoperability, or
+external adoption.
+
 ## Scaffold an adopter adapter
 
 Generate exactly one new starter directory:
