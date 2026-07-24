@@ -325,6 +325,7 @@ const buildAgentHubPage = ({ profileText, guideText, capabilities, manifest }) =
     exitCodes: capabilities.exitCodes,
     reportVerification: capabilities.reportVerification,
     claimBoundary: capabilities.claimBoundary,
+    firstPartyProductProjection: capabilities.firstPartyProductProjection,
     recovery: capabilities.recovery,
     sections: [
       pageSection({
@@ -333,6 +334,13 @@ const buildAgentHubPage = ({ profileText, guideText, capabilities, manifest }) =
         sourcePath: AGENT_HUB_PROFILE_PATH,
         markdown: profile.sections["Five-minute packaged quickstart"],
         presentation: "command-quickstart",
+      }),
+      pageSection({
+        id: "verify-the-first-party-kungfu-product",
+        title: "Verify the first-party Kungfu product",
+        sourcePath: AGENT_HUB_PROFILE_PATH,
+        markdown: profile.sections["Verify the first-party Kungfu product"],
+        presentation: "product-qualification",
       }),
       pageSection({
         id: "scaffold-an-adopter-adapter",

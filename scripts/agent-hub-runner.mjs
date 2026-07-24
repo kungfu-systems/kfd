@@ -29,7 +29,7 @@ function regular(filePath) {
 }
 
 function options(args) {
-  const value = { adapterArgs: [], timeoutMs: 20_000 };
+  const value = { adapterArgs: [], timeoutMs: 20_000, quiet: false };
   for (let index = 0; index < args.length; index += 1) {
     const flag = args[index];
     const next = args[index + 1];
@@ -38,6 +38,7 @@ function options(args) {
     else if (flag === "--adapter-source-commit" && next) value.sourceCommit = next, index += 1;
     else if (flag === "--output" && next) value.output = next, index += 1;
     else if (flag === "--timeout-ms" && next) value.timeoutMs = Number(next), index += 1;
+    else if (flag === "--quiet") value.quiet = true;
     else throw new Error(`unsupported or incomplete argument: ${flag}`);
   }
   if (!value.adapter) throw new Error("agent-hub test requires --adapter");
@@ -83,6 +84,7 @@ function execute(command, requests, timeoutMs) {
 
 export async function runAgentHubTest(rawArgs, { quiet = false } = {}) {
   const selected = options(rawArgs);
+  quiet ||= selected.quiet;
   const manifestBytes = regular(resolvePackage("profiles", "agent-hub", "manifest.json"));
   const vectorBytes = regular(resolvePackage("profiles", "agent-hub", "vectors", "hub-20.json"));
   const protocolBytes = regular(resolvePackage("protocols", "agent-hub", "manifest.json"));

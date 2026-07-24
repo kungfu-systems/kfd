@@ -338,6 +338,8 @@ npx --yes --package @kungfu-tech/kfd@alpha kfd capabilities agent-hub --json
 npx --yes --package @kungfu-tech/kfd@alpha kfd scaffold agent-hub --language python --output my-agent-hub-adapter
 npx --yes --package @kungfu-tech/kfd@alpha kfd test agent-hub --adapter path/to/adapter --output agent-hub-report.json
 npx --yes --package @kungfu-tech/kfd@alpha kfd verify agent-hub-report agent-hub-report.json --adapter path/to/adapter --json
+kungfu agent hub qualify --output-dir ./kungfu-agent-hub-check
+kungfu agent hub verify --qualification-dir ./kungfu-agent-hub-check
 ```
 
 The generic verifier and Agent runtime verifier emit
@@ -350,6 +352,13 @@ authorization. See
 [`docs/verifier.md`](docs/verifier.md) for the contracts and
 [`docs/verifier-inventory.md`](docs/verifier-inventory.md) for the extraction
 boundary and public-spec gaps.
+
+The final two commands are the first-party Kungfu product projection. They use
+the KFD package bundled with Kungfu, exercise the product-owned Hub semantics in
+two isolated local authority homes, preserve rooted JSON evidence, and explain
+the result in human language by default. They do not turn a passing report into
+KFD certification, security assessment, production fitness, remote-network
+interoperability, or external adoption.
 
 ## Agent Quickstart
 
@@ -388,7 +397,11 @@ Agents consuming this package should start from the same sources as humans:
    `schemas/kfd-2/trust-assessment.schema.json` when a claim needs generic
    KFD-2 assessment instead of a release-specific passport.
 13. Use `schemas/kfd-3/collaboration-interface.schema.json` and
-   `schemas/kfd-3/witness.schema.json` to inspect collaboration interfaces.
+   `schemas/kfd-3/witness.schema.json` to inspect collaboration interfaces. If
+   the installed Kungfu capability is in question, run
+   `kungfu agent hub qualify --output-dir <new-directory> --json`; explain only
+   the bounded `meaning` and `nonClaims` fields, then retain or independently
+   recheck the evidence with `kungfu agent hub verify`.
 14. Use `schemas/kfd-1/publication-url-semantics.schema.json` when a package,
    paper, specification, or site bundle must distinguish stable reader URLs,
    latest aliases, and immutable versioned artifacts.
