@@ -102,7 +102,7 @@ jobs:
   propagate-site:
     name: Propagate KFD release to site-libkungfu-dev
     needs: upstream
-    uses: kungfu-systems/buildchain/.github/workflows/release-propagation.yml@v2
+    uses: kungfu-systems/buildchain/.github/workflows/release-propagation.yml@v3
     with:
       graph-json: ${{ needs.upstream.outputs.graph-json }}
       upstream-release-json: ${{ needs.upstream.outputs.upstream-release-json }}
