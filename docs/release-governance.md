@@ -20,7 +20,9 @@ The `dev` merge immediately preceding an alpha promotion must be performed by
 the promotion PR author after independent approval. This keeps the resulting
 `dev` head distinct from the independent reviewer, so the alpha branch's
 required last-push approval can be satisfied without bypassing protection or
-changing the release source.
+changing the release source. If a release-control repair lands after an
+attempted promotion, that repair becomes the immediately preceding `dev` merge
+and must follow the same actor separation before promotion is retried.
 
 The protected branch required status check must also name the status emitted by
 the current Verify workflow. As of the alpha.14 line, that required check is:
