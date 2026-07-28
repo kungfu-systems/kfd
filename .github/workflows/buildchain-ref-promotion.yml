@@ -65,7 +65,8 @@ jobs:
       pull-requests: write
     uses: kungfu-systems/buildchain/.github/workflows/release-candidate-promote.yml@v3-alpha
     secrets:
-      BUILDCHAIN_PROMOTION_TOKEN: ${{ secrets.KUNGFU_GITHUB_TOKEN }}
+      BUILDCHAIN_PROMOTION_TOKEN: ${{ secrets.BUILDCHAIN_PROMOTION_TOKEN }}
+      KUNGFU_GOVERNANCE_AUDITOR_APP_PRIVATE_KEY: ${{ secrets.KUNGFU_GOVERNANCE_AUDITOR_APP_PRIVATE_KEY }}
       buildchain-issue-app-id: ${{ secrets.BUILDCHAIN_ISSUE_APP_ID }}
       buildchain-issue-app-private-key: ${{ secrets.BUILDCHAIN_ISSUE_APP_PRIVATE_KEY }}
     with:
