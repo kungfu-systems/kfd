@@ -23,6 +23,8 @@ on:
         default: "true"
 
 permissions:
+  # Buildchain v3 validates the reusable graph against the caller envelope
+  # before any job starts, so these capabilities must remain explicit here.
   artifact-metadata: write
   attestations: write
   contents: write
