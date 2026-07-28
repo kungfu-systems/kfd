@@ -11,6 +11,9 @@
 | Who controls official KFD numbering, status, and releases? | [`../GOVERNANCE.md`](../GOVERNANCE.md#canonical-authority) |
 | What is the KFD-1/2/3 foundation triad? | [`../README.md`](../README.md#foundation-triad) |
 | What worldview structure does the foundation triad express? | [`foundation.md`](foundation.md) |
+| What is the KFD primitive system already carrying inside Kungfu under pre-release dogfood pressure? | [`load-bearing-dogfood.md`](load-bearing-dogfood.md) |
+| Which application families are qualified, implemented, partial, active frontiers, or provisional horizons? | [`load-bearing-dogfood.md`](load-bearing-dogfood.md#7-the-current-application-map) |
+| What confidence may responsibly be updated from founding-adopter load, and what remains unproved? | [`load-bearing-dogfood.md`](load-bearing-dogfood.md#9-the-bounded-confidence-update), then its [explicit non-claims](load-bearing-dogfood.md#10-what-this-does-not-prove) |
 | What is the shared formal notation and authority boundary? | [`formal-model.md`](formal-model.md) |
 | What do Fact, Episode, Atlas, Pursuit, and Warrant mean, and why are they a 2 + 3 structure rather than five peers? | [`terminology.md`](terminology.md#the-core-2--3-structure) |
 | How do Decision, Formal, Schema, Usage, and Witness relate? | [`formal-model.md`](formal-model.md#purpose) |
@@ -119,12 +122,14 @@
 | How can a human or Agent ask the installed Kungfu product to run, explain, retain, and independently recheck that exact Hub 20 evidence? | `kungfu agent hub qualify --output-dir <new-directory> [--json]`, then [`../profiles/agent-hub/README.md`](../profiles/agent-hub/README.md#verify-the-first-party-kungfu-product) for the ownership and claim boundary |
 | What is the experimental black-box Agent runtime conformance profile and fixed KFD Runtime 100 suite? | [`../profiles/agent-runtime/README.md`](../profiles/agent-runtime/README.md), its [`normative inventory`](../profiles/agent-runtime/normative-inventory.md), and [`implementer guide`](../profiles/agent-runtime/implementer-guide.md) |
 | What is the concrete self-proof path for KFD-1 through KFD-13? | [`../README.md`](../README.md#product-proof-path), the KFD formal and usage pages, and the package witnesses under [`../.buildchain/`](../.buildchain/) |
+| What dated evidence synthesis connects the founding product witnesses without creating new normative authority? | [`load-bearing-dogfood.md`](load-bearing-dogfood.md), rendered from `site/kfd-site.json` at `/under-load` |
 | How do I independently verify KFD records, release passports, Xinfa Pack/Atlas objects, or qualified Git Episodes? | [`verifier.md`](verifier.md) |
 | Where are the verifier semantic differences and public-specification gaps recorded? | [`verifier-inventory.md`](verifier-inventory.md) |
 | Where is the public KFD fact source? | [`../README.md`](../README.md#decision-metadata) and [`../site/kfd-site.json`](../site/kfd-site.json) decision metadata |
 | What does Apache-2.0 cover, and what remains official/trademark-bound? | [`../TRADEMARKS.md`](../TRADEMARKS.md) |
 | What should a site renderer consume to render `kfd.libkungfu.dev`? | [`../site/kfd-site.json`](../site/kfd-site.json) |
 | How should a site render the executable Agent Hub onboarding path? | [`../site/kfd-site.json`](../site/kfd-site.json) — `agentHubPage` owns `/agent-hub` and is generated from the packaged profile, implementer guide, capabilities, and manifest |
+| How should a site render the load-bearing dogfood baseline? | [`../site/kfd-site.json`](../site/kfd-site.json) — `loadBearingPage` owns `/under-load`, declares its non-normative authority boundary, and carries the complete Markdown body |
 | How should a site render provisional live cases? | [`../site/kfd-site.json`](../site/kfd-site.json) — `liveCases` maps the registry to `/cases/live/{id}` |
 | How should a site render pre-number candidates? | [`../site/kfd-site.json`](../site/kfd-site.json) — `candidatePages` owns `/drafts/` and `/drafts/{id}/`; `kfdCandidates` preserves candidate-domain metadata |
 | How should a site map decision pages to usage subpages? | [`../site/kfd-site.json`](../site/kfd-site.json) — `decisionPages.usagePages` maps `/N` to `/N/usage` |
