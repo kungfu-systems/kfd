@@ -3,6 +3,7 @@ import { pathToFileURL } from "node:url";
 
 const README_PATH = "README.md";
 const FOUNDATION_PATH = "docs/foundation.md";
+const LOAD_BEARING_PATH = "docs/load-bearing-dogfood.md";
 const TERMINOLOGY_PATH = "docs/terminology.md";
 const TERMINOLOGY_CONTRACT_PATH = "terminology.json";
 const FORMAL_PATH = "docs/formal-model.md";
@@ -92,6 +93,8 @@ const parseFoundationTriad = (markdown) => {
     sourceTarget: link[2],
     url: link[2] === FOUNDATION_PATH
       ? "/foundation"
+      : link[2] === LOAD_BEARING_PATH
+        ? "/under-load"
       : link[2] === FORMAL_PATH
         ? "/formal"
       : link[2] === CASES_PATH
@@ -436,6 +439,7 @@ const buildAgentHubPage = ({ profileText, guideText, capabilities, manifest }) =
 export const buildSiteBundle = ({
   readmeText,
   foundationText,
+  loadBearingText,
   formalText,
   casesText,
   candidateIndexText,
@@ -452,6 +456,7 @@ export const buildSiteBundle = ({
 }) => {
   const readme = parseReadme(readmeText);
   const foundationDocument = parseReadme(foundationText);
+  const loadBearingDocument = parseReadme(loadBearingText);
   const formalDocument = parseReadme(formalText);
   const casesDocument = parseReadme(casesText);
   const futurePicture = parseFuturePicture(readme.intro);
@@ -482,6 +487,23 @@ export const buildSiteBundle = ({
     capabilities: agentHubCapabilities,
     manifest: agentHubManifest,
   });
+  const loadBearingPage = {
+    id: "load-bearing-dogfood",
+    title: loadBearingDocument.title,
+    sourcePath: LOAD_BEARING_PATH,
+    url: "/under-load",
+    relationship: "pre-release-founding-adopter-evidence-baseline",
+    normative: false,
+    authorityNote: "This page is a dated evidence synthesis. Numbered KFD decisions and accepted live-case cuts remain authoritative.",
+    rendering: {
+      kind: "markdown-document",
+      tocDepth: 3,
+      navigationLabel: "Under load",
+      navigationGroup: "foundation",
+      navigationOrder: 30,
+    },
+    markdown: stripFrontmatter(loadBearingText),
+  };
 
   const homepageSections = [
     section({
@@ -606,6 +628,7 @@ export const buildSiteBundle = ({
       package: "@kungfu-tech/kfd",
       homepageTextSource: README_PATH,
       foundationTextSource: FOUNDATION_PATH,
+      loadBearingTextSource: LOAD_BEARING_PATH,
       formalTextSource: FORMAL_PATH,
       casesTextSource: CASES_PATH,
       registry: REGISTRY_PATH,
@@ -624,6 +647,7 @@ export const buildSiteBundle = ({
     routes: {
       home: "/",
       foundation: "/foundation",
+      underLoad: "/under-load",
       formal: "/formal",
       terminology: "/terminology",
       cases: "/cases",
@@ -675,7 +699,7 @@ export const buildSiteBundle = ({
           source: FOUNDATION_PATH,
           sections: ["foundation-structure", "load-bearing-product-witness", "practice-guidelines"],
         },
-        readingPath: ["/", "/foundation", "/formal", "/cases", "/drafts", "/{number}"],
+        readingPath: ["/", "/foundation", "/under-load", "/formal", "/cases", "/drafts", "/{number}"],
         support: ["agent-quickstart", "decision-metadata"],
         currentDecisions: {
           source: REGISTRY_PATH,
@@ -707,6 +731,8 @@ export const buildSiteBundle = ({
       authorityNote: "The numbered texts in decisions/KFD-N.md remain authoritative.",
       markdown: normalizeLines(foundationText),
     },
+    loadBearingPage,
+    standalonePages: [loadBearingPage],
     formalPage: {
       id: "formal-model",
       title: formalDocument.title,
@@ -836,6 +862,7 @@ export const buildSiteBundle = ({
         "homepage title and text",
         "homepage section projection from README.md",
         "foundation explanation page from docs/foundation.md",
+        "load-bearing dogfood evidence page from docs/load-bearing-dogfood.md",
         "formal reference overview from docs/formal-model.md",
         "historical cases page from docs/primitive-discovery-cases.md",
         "live Primitive case registry and case bodies from cases/",
@@ -874,6 +901,7 @@ export const buildSiteBundle = ({
 export const readInputs = () => ({
   readmeText: readFileSync(README_PATH, "utf8"),
   foundationText: readFileSync(FOUNDATION_PATH, "utf8"),
+  loadBearingText: readFileSync(LOAD_BEARING_PATH, "utf8"),
   formalText: readFileSync(FORMAL_PATH, "utf8"),
   casesText: readFileSync(CASES_PATH, "utf8"),
   candidateIndexText: readFileSync(CANDIDATE_INDEX_PATH, "utf8"),

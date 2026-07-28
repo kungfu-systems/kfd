@@ -17,7 +17,7 @@ permissions:
 
 jobs:
   kfd:
-    uses: kungfu-systems/buildchain/.github/workflows/build.yml@v2-alpha
+    uses: kungfu-systems/buildchain/.github/workflows/build.yml@v3-alpha
     secrets: inherit
     with:
       buildchain-alpha-contract-lock-path: buildchain.alpha-contract-lock.json
@@ -54,6 +54,7 @@ jobs:
         verifier/extraction-manifest.json
         verifier/fixtures
         verifier/specs
+        docs/load-bearing-dogfood.md
         buildchain.alpha-contract-lock.json
         buildchain.contract-lock.json
         buildchain.release-propagation.json

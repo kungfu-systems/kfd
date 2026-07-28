@@ -619,6 +619,7 @@ if (!Array.isArray(siteBundle.homepage?.sections) || siteBundle.homepage.section
   fail("site bundle homepage.sections must expose generated homepage and foundation sections");
 }
 if (siteBundle.routes?.foundation !== "/foundation") fail("site bundle routes.foundation must be /foundation");
+if (siteBundle.routes?.underLoad !== "/under-load") fail("site bundle routes.underLoad must be /under-load");
 if (siteBundle.routes?.formal !== "/formal") fail("site bundle routes.formal must be /formal");
 if (siteBundle.routes?.cases !== "/cases") fail("site bundle routes.cases must be /cases");
 if (siteBundle.routes?.liveCasePattern !== "/cases/live/{id}") {
@@ -719,6 +720,9 @@ if (!siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes("foundatio
 if (!siteBundle.homepage?.foundationTriad?.links?.some((entry) => entry.url === "/foundation")) {
   fail("site bundle homepage foundation triad must expose the /foundation depth choice");
 }
+if (!siteBundle.homepage?.foundationTriad?.links?.some((entry) => entry.url === "/under-load")) {
+  fail("site bundle homepage foundation triad must expose the /under-load dogfood evidence choice");
+}
 if (!siteBundle.homepage?.foundationTriad?.links?.some((entry) => entry.url === "/formal")) {
   fail("site bundle homepage foundation triad must expose the /formal depth choice");
 }
@@ -760,6 +764,28 @@ if (
   fail("site bundle foundationPage must expose the non-normative /foundation explanation from docs/foundation.md");
 }
 if (
+  siteBundle.source?.loadBearingTextSource !== "docs/load-bearing-dogfood.md" ||
+  siteBundle.loadBearingPage?.id !== "load-bearing-dogfood" ||
+  siteBundle.loadBearingPage?.sourcePath !== "docs/load-bearing-dogfood.md" ||
+  siteBundle.loadBearingPage?.url !== siteBundle.routes.underLoad ||
+  siteBundle.loadBearingPage?.relationship !== "pre-release-founding-adopter-evidence-baseline" ||
+  siteBundle.loadBearingPage?.normative !== false ||
+  siteBundle.loadBearingPage?.rendering?.kind !== "markdown-document" ||
+  !siteBundle.loadBearingPage?.markdown?.startsWith("# KFD Under Load")
+) {
+  fail("site bundle loadBearingPage must expose the renderer-ready non-normative /under-load evidence baseline");
+}
+if (
+  !Array.isArray(siteBundle.standalonePages) ||
+  !siteBundle.standalonePages.some((entry) =>
+    entry.id === siteBundle.loadBearingPage.id &&
+    entry.url === siteBundle.loadBearingPage.url &&
+    entry.rendering?.kind === "markdown-document"
+  )
+) {
+  fail("site bundle standalonePages must declare the load-bearing page for generic site discovery");
+}
+if (
   siteBundle.terminologyPage?.id !== "terminology" ||
   siteBundle.terminologyPage?.sourcePath !== "docs/terminology.md" ||
   siteBundle.terminologyPage?.url !== "/terminology" ||
@@ -796,6 +822,9 @@ if (!siteBundle.casesPage?.markdown?.startsWith("# Primitive Discovery in Histor
 }
 if (!siteBundle.homepage?.displayPlan?.readingPath?.includes("/cases")) {
   fail("site bundle homepage displayPlan readingPath must include /cases");
+}
+if (!siteBundle.homepage?.displayPlan?.readingPath?.includes("/under-load")) {
+  fail("site bundle homepage displayPlan readingPath must include /under-load");
 }
 if (!siteBundle.homepage?.displayPlan?.readingPath?.includes("/formal")) {
   fail("site bundle homepage displayPlan readingPath must include /formal");
@@ -1887,6 +1916,9 @@ if (!Array.isArray(boundary.ownedByKfd) || !boundary.ownedByKfd.includes("homepa
 }
 if (!Array.isArray(boundary.ownedByKfd) || !boundary.ownedByKfd.includes("historical cases page from docs/primitive-discovery-cases.md")) {
   fail("site bundle renderingBoundary.ownedByKfd must include the historical cases page");
+}
+if (!Array.isArray(boundary.ownedByKfd) || !boundary.ownedByKfd.includes("load-bearing dogfood evidence page from docs/load-bearing-dogfood.md")) {
+  fail("site bundle renderingBoundary.ownedByKfd must include the load-bearing dogfood page");
 }
 if (!Array.isArray(boundary.ownedByKfd) ||
     !boundary.ownedByKfd.includes("canonical terminology contract and explanatory subtitles from terminology.json")) {

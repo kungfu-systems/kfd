@@ -42,6 +42,7 @@ as its founding implementation.
 No principle is load-bearing until it has an inspectable product witness.
 
 [Read the KFD Foundation](docs/foundation.md) ·
+[See KFD under load](docs/load-bearing-dogfood.md) ·
 [Inspect the formal model](docs/formal-model.md) ·
 [Use the terminology contract](docs/terminology.md) ·
 [See primitives in history](docs/primitive-discovery-cases.md) ·
@@ -286,6 +287,13 @@ candidate genesis, points to immutable KFD-5 qualification cuts, and keeps
 supporting and contradicting evidence open. Live cases are dogfood records,
 not numbered decisions, accepted Primitive claims, or product capability
 announcements.
+
+The non-normative [KFD Under Load](docs/load-bearing-dogfood.md) baseline
+connects those individual witnesses into one dated founding-adopter evidence
+cut. It explains what the current primitive system is already carrying, how
+pressure changed the implementation, which confidence updates are warranted,
+and which generalization gates remain open. It does not replace the numbered
+decisions or promote incomplete work into qualification.
 
 The complete explanatory path is published at
 [`docs/foundation.md`](docs/foundation.md) and projected to the

@@ -127,6 +127,12 @@
       "rationale": "The schemaVersion 2 site bundle exposes the homepage core question, engineering answer, claim boundary, KFD Foundation, terminology page, and explicit non-normative formal child pages at /drafts/{id}/formal/ for candidates that declare a formalReference. Renderers consume declared routes and do not infer semantics from package layout."
     },
     {
+      "id": "kfd-load-bearing-dogfood-baseline",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD additively publishes a dated, non-normative founding-adopter evidence synthesis and a first-class /under-load site route. The renderer-ready loadBearingPage carries the complete Markdown body, source path, relationship, authority boundary, and reading-order declaration without changing numbered decisions, accepted live-case cuts, existing routes, or adopter qualification status."
+    },
+    {
       "id": "kfd-agent-hub-site-bundle",
       "impact": "minor",
       "class": "additive",

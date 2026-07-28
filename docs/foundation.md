@@ -9,6 +9,12 @@ not a numbered decision and does not create an additional normative rule. When
 an explanation and a decision differ, the text in `decisions/KFD-N.md` remains
 authoritative.
 
+The dated [KFD Under Load](load-bearing-dogfood.md) companion follows this
+worldview into the founding Kungfu implementation. It is an evidence synthesis:
+it connects repeated dogfood pressure, implementation witnesses, confidence
+updates, and open falsifiers without creating a new decision or treating one
+adopter as universal proof.
+
 ## Continuity under uncertainty
 
 KFD uses **continuity** as a bounded engineering concept, not a metaphysical
