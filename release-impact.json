@@ -118,7 +118,7 @@
       "id": "kfd-buildchain-contract-lock",
       "impact": "minor",
       "class": "release-governance",
-      "rationale": "KFD now uses Buildchain v2 floating workflow refs with a consumer-owned buildchain.contract-lock.json, so Buildchain runtime contract drift is checked before heavy build or promotion work while retaining floating-ref upgrade flow."
+      "rationale": "KFD now uses Buildchain v3 floating workflow refs with consumer-owned alpha and stable contract locks, so Buildchain runtime contract drift is checked before heavy build or promotion work while retaining the floating-ref upgrade flow."
     },
     {
       "id": "kfd-site-homepage-bundle",
@@ -182,9 +182,9 @@
     },
     {
       "id": "kfd-release-propagation",
-      "impact": "patch",
-      "class": "compatible",
-      "rationale": "The KFD to site-libkungfu-dev propagation graph now targets the downstream site's actual main branch and documents the exact KFD package surfaces consumed by kfd.libkungfu.dev, without changing the release propagation graph contract."
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD alpha and stable publication now pass a strict package-release propagation config into Buildchain v3. Only after npm integrity and gitHead, the Git tag target, the public release Passport bytes, and the exact downstream base SHA agree does publication capture a paused claim-only Work for site-libkungfu-dev. Publication has no downstream branch, pull-request, merge, or production authority; an Agent must claim the Work and carry its exact lock through review, protected merge, deployment, and online readback."
     },
     {
       "id": "kfd-1-compatibility-impact-core",
