@@ -1,0 +1,248 @@
+{
+  "schemaVersion": 3,
+  "contract": "kfd-5-primitive-discovery",
+  "standard": "kfd-5",
+  "candidate": {
+    "id": "cut-transition",
+    "title": "Cut Transition",
+    "problemStatement": "Two exact product-world identities do not by themselves establish whether movement is authorized, compatible, recoverable, or safe, and updater-local selection may silently become movement authority.",
+    "scope": "Provisional product-domain candidate for independently inspectable movement between exact Product Release Cuts; universal transition vocabulary, independent adoption, numbering, and separation from Warrant-bound Decision and Admission are not claimed."
+  },
+  "genesis": {
+    "methods": [
+      "direct-situated-judgment",
+      "perspective-transformation",
+      "reconstruction-pressure"
+    ],
+    "observationPerspective": {
+      "id": "updater-implementer",
+      "bearer": "human and agent participants implementing selection, installation, activation, and rollback",
+      "role": "updater implementer",
+      "proximity": "inside version comparison, manifest validation, artifact selection, and installer execution",
+      "consequences": [
+        "bears selection, compatibility, migration, and rollback defects"
+      ],
+      "naturalObjects": [
+        "upgrade available",
+        "version precedence",
+        "installer",
+        "rollback",
+        "channel"
+      ]
+    },
+    "currentOntology": [
+      "Product Release Cut",
+      "Warrant",
+      "Decision",
+      "Admission",
+      "compatibility policy",
+      "migration",
+      "rollback receipt"
+    ],
+    "observation": "Exact endpoint identities left movement unresolved: identical, verified-successor, ancestor, recovery, diverged, and unknown relations require different decisions that cannot be inferred from root text, timestamps, SemVer, or network recency.",
+    "candidateObject": "Cut Transition may be an independently addressable evidence-bearing relation that binds exact endpoints, compatibility, migration, rollback, trust, and movement authority without absorbing either endpoint or action execution.",
+    "claimBoundary": "The cut opens qualification and does not decide whether Cut Transition is a Primitive, a typed Warrant/Decision/Admission record, an upgrade manifest section, or no new Primitive.",
+    "methodEvidence": [
+      {
+        "kind": "git",
+        "coordinate": "https://github.com/kungfu-systems/kungfu/commit/a2967f22d0d23766eb887168e8fffc41251bad54",
+        "observer": "KFD maintainers"
+      },
+      {
+        "kind": "file",
+        "coordinate": "cases/live/product-release-cut-transition/genesis.md",
+        "observer": "KFD maintainers"
+      }
+    ],
+    "transformedPerspective": {
+      "id": "movement-consequence-bearer",
+      "bearer": "an operator or installed product deciding whether to move, remain, recover, or roll back",
+      "role": "movement consequence bearer",
+      "proximity": "inside service continuity and rollback consequences but outside updater-local selection rules",
+      "consequences": [
+        "bears unauthorized movement, incompatible activation, conflict, failed recovery, and unrecoverable rollback"
+      ],
+      "naturalObjects": [
+        "authorized transition",
+        "denied transition",
+        "recovery path",
+        "rollback path",
+        "conflict"
+      ]
+    },
+    "transformation": "The observer moved from choosing an artifact to bearing the consequences of movement between exact product worlds.",
+    "newlyVisibleNeed": "Movement may require its own inspectable identity and evidence even when both endpoint Cuts remain valid and unchanged.",
+    "methodNotes": "The strongest alternative is a Warrant-bound Decision followed by independent Admission; the implementation name does not defeat that alternative."
+  },
+  "boundaryPressure": {
+    "contactSides": [
+      "exact source and target product worlds",
+      "participants authorizing and bearing upgrade, recovery, and rollback consequences"
+    ],
+    "implicitHandling": "Movement is inferred from SemVer precedence, channel order, timestamps, updater rules, network recency, or the presence of a newer artifact.",
+    "pressureChanges": [
+      {
+        "kind": "authority",
+        "description": "Artifact availability and updater selection do not by themselves authorize product movement."
+      },
+      {
+        "kind": "consequence",
+        "description": "Movement may require migration, recovery, rollback, trust, and compatibility decisions."
+      }
+    ],
+    "observedFailures": [
+      "Unequal roots are incorrectly ordered by version, timestamp, directory order, or recency.",
+      "An equal-SemVer conflict is mistaken for an update.",
+      "Rollback depends on a mutable source cache instead of exact retained evidence.",
+      "Valid endpoint identities are mistaken for authorization to move between them."
+    ],
+    "mediationClaim": "A Cut Transition may keep exact endpoints and movement authority separately inspectable across update, recovery, and rollback.",
+    "internalObjectAlternative": "Warrant-bound Decision plus independent Admission and a typed upgrade manifest may provide equivalent movement semantics."
+  },
+  "grounding": {
+    "pressure": [
+      "Endpoint identity does not imply a safe or authorized relation.",
+      "Equal-SemVer worlds may be identical, successors, or conflicts.",
+      "Rollback and recovery require exact prior and target roots.",
+      "Updater execution must not create its own authority."
+    ],
+    "factSources": [
+      {
+        "kind": "git",
+        "coordinate": "https://github.com/kungfu-systems/kungfu/blob/a2967f22d0d23766eb887168e8fffc41251bad54/framework/upgrade/kungfu-product-release-cut.contract.json",
+        "observer": "Kungfu product implementation"
+      },
+      {
+        "kind": "file",
+        "coordinate": "cases/live/product-release-cut-transition/distinguishability.md",
+        "observer": "KFD candidate qualification"
+      }
+    ],
+    "evidenceBoundary": "The cut records one founding-adopter transition contract and public architecture at one exact Git cut. It contains no independent adopter, completed comparison with Warrant/Decision/Admission, cross-product transfer, or proof that a typed manifest relation is insufficient.",
+    "knownGaps": [
+      "No independent adopter",
+      "No fixed-endpoint deletion benchmark",
+      "No completed Warrant/Decision/Admission comparison",
+      "No cross-product transfer",
+      "No independent qualification review",
+      "No decision between Primitive, typed authority record, manifest relation, and no-new-Primitive outcomes"
+    ]
+  },
+  "participants": [
+    {
+      "id": "kungfu-implementation-source",
+      "kind": "collective",
+      "functions": [
+        "candidate-generation",
+        "evidence-custody"
+      ]
+    },
+    {
+      "id": "kfd-analysis-participant",
+      "kind": "agent",
+      "functions": [
+        "candidate-generation",
+        "scalable-reasoning"
+      ]
+    },
+    {
+      "id": "maintainer-decision-owner",
+      "kind": "human",
+      "functions": [
+        "perspective-declaration",
+        "decision"
+      ]
+    }
+  ],
+  "alternatives": [
+    {
+      "name": "Warrant-bound Decision plus Admission",
+      "disposition": "retained",
+      "reason": "Existing KFD authority and settlement responsibilities may already express movement without a new Primitive."
+    },
+    {
+      "name": "Typed upgrade manifest relation",
+      "disposition": "retained",
+      "reason": "A bounded relation inside an existing manifest may preserve exact endpoints, compatibility, migration, and rollback."
+    },
+    {
+      "name": "SemVer and channel precedence",
+      "disposition": "retained",
+      "reason": "Products with immutable version mapping and simple trust may not need a separate transition object."
+    },
+    {
+      "name": "No new Primitive",
+      "disposition": "unresolved",
+      "reason": "Cut Transition may remain Kungfu Profile vocabulary if deletion changes no decision beyond existing authority records."
+    }
+  ],
+  "contractModel": {
+    "identity": "One content-addressed root over exact source and target Cuts plus declared relation, compatibility, migration, rollback, trust, and evidence.",
+    "boundary": "Movement semantics between immutable endpoint Cuts; endpoint identity and installer occurrence remain separately owned.",
+    "authority": "May bind already granted movement authority; may not mint Warrant, make a Decision, admit an action, execute installation, or certify endpoints.",
+    "lifecycle": "Proposed, assessed, authorized or denied, executed or failed, observed, superseded, revoked, recovered, or rolled back without root mutation.",
+    "operations": [
+      "propose",
+      "verify-endpoints",
+      "assess-relation",
+      "bind-authority",
+      "observe-execution",
+      "recover",
+      "roll-back"
+    ]
+  },
+  "tests": {
+    "minimumClosure": {
+      "result": "inconclusive",
+      "evidence": [],
+      "notes": "The contract closes one updater implementation, but existing authority and manifest alternatives have not been compared under fixed endpoints."
+    },
+    "deletion": {
+      "result": "inconclusive",
+      "evidence": [
+        {
+          "kind": "file",
+          "coordinate": "cases/live/product-release-cut-transition/distinguishability.md"
+        }
+      ],
+      "notes": "Movement ambiguity is explicit; the incremental value beyond Warrant, Decision, Admission, and manifest relations remains unmeasured."
+    },
+    "fuse": {
+      "result": "inconclusive",
+      "evidence": [
+        {
+          "kind": "file",
+          "coordinate": "cases/live/product-release-cut-transition/ontology-split.md"
+        }
+      ],
+      "notes": "Fusion with existing authority objects and manifest relations remains unresolved."
+    },
+    "falsifiers": [
+      "Warrant-bound Decision plus independent Admission preserves every movement consequence at lower ontology cost.",
+      "A typed manifest relation provides identical verification, recovery, and rollback behavior.",
+      "Products with immutable version mapping never need a separately addressable transition.",
+      "Independent adopters do not reproduce the movement-authority problem."
+    ],
+    "dogfood": {
+      "result": "inconclusive",
+      "evidence": [
+        {
+          "kind": "git",
+          "coordinate": "https://github.com/kungfu-systems/kungfu/commit/a2967f22d0d23766eb887168e8fffc41251bad54"
+        }
+      ],
+      "notes": "A public implementation witness exists, but fixed-endpoint comparison and independent KFD-5 review have not run."
+    }
+  },
+  "decision": {
+    "outcome": "provisional",
+    "owner": "KFD maintainers",
+    "reason": "Movement is operationally distinct from endpoint identity in one implementation, but minimum closure against Warrant-bound Decision, Admission, manifest relation, SemVer, and no-new-Primitive alternatives remains unproved.",
+    "residualRisks": [
+      "The candidate may duplicate existing KFD authority and settlement objects.",
+      "Updater implementation details may be mistaken for universal transition semantics.",
+      "A transition record may launder unavailable or invalid endpoint evidence.",
+      "One implementation may overfit relation and rollback fields."
+    ]
+  }
+}

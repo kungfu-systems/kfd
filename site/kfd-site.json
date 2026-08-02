@@ -516,7 +516,7 @@
     "normative": false,
     "formalModelVersion": 1,
     "authorityNote": "The numbered texts in decisions/KFD-N.md remain authoritative.",
-    "markdown": "# KFD Formal Model\n\nThis document defines the shared notation and authority boundary for the\nnon-normative formal references published with KFD-1 through KFD-13.\n\n- Status: experimental\n- Normative: no\n- Formal model version: 1\n- Authority: `decisions/KFD-N.md`\n\n[Foundation explanation](foundation.md) ·\n[Documentation map](MAP.md)\n\n## Purpose\n\nThe formal layer makes KFD concepts precise enough to compare, implement, and\ntest without pretending that every semantic responsibility can be reduced to\nan algorithm. It defines domain objects, relations, invariants, state\ntransitions, invalid states, and proof obligations.\n\nThe numbered decision remains authoritative:\n\n```text\nDecision -> Formal -> Schema -> Usage -> Witness\n```\n\n- **Decision** states what must remain true.\n- **Formal** gives a precise, non-normative reference semantics.\n- **Schema** makes a bounded machine profile checkable.\n- **Usage** explains how a product or repository applies the profile.\n- **Witness** records evidence for a concrete claim.\n\nIf any later surface conflicts with its decision, the later surface is wrong.\nA valid schema may implement only part of a formal model. A valid witness may\nprove only the claim and audit boundary it declares.\n\n## Shared notation\n\nFor a KFD number `n`:\n\n```text\nD_n       authoritative decision\nF_n^v     formal reference at formal model version v\nS_n^i     machine schema profile at interface version i\nU_n       implementation guidance\nW_n       evidence witness\n```\n\n`Models(x, y)` means that `x` is a declared projection of `y`. It does not mean\nthat `x` exhausts the meaning of `y`.\n\n```text\nModels(F_n^v, D_n)\nModels(S_n^i, F_n^v)\nModels(U_n, D_n and selected F_n^v/S_n^i)\nModels(W_n, a bounded adopter claim)\n```\n\nThe required authority invariant is:\n\n```text\nnot Contradicts(F_n^v, D_n)\nnot Contradicts(S_n^i, D_n)\nnot Contradicts(U_n, D_n)\n```\n\nMachine validation can prove structural closure, registered identities,\ndigests, enumerated values, and some transition rules. It cannot by itself\nprove that natural-language meaning, captured reality, causal interpretation,\nparticipant value, or a Primitive claim is correct.\n\n## Shared objects\n\nThe formal references reuse these object classes:\n\n| Object | Meaning |\n|---|---|\n| `FactSource` | A declared reference from which a contract world obtains load-bearing facts. |\n| `FactCut` | An independently addressable state admitted at a declared authority and evidence boundary. |\n| `Claim` | A bounded statement about a subject. |\n| `EvidenceCut` | The declared boundary of evidence available to a claim or decision. |\n| `AssuranceResponsibility` | The named assignments of source-fact, verification, and decision authority. |\n| `Participant` | A human, agent, operator, system, or other reasoning party in cooperation. |\n| `Perspective` | A declared position from which facts become relevant and consequences are borne. |\n| `KFDPrimitiveCandidate` | A proposed load-bearing object with independent identity, boundary, authority, lifecycle, and operations. |\n| `CausalOccurrence` | A bounded event sequence or partial order that actually occurs between declared fact cuts. |\n| `CausalRecord` | An evidence-bearing representation of a causal occurrence, including declared omissions and loss. |\n| `Episode` | An independently addressable, replayable KFD object that binds a causal record to declared cuts, perspective, and loss. |\n| `CausalExperience` | One or more Episodes used as evidence or learning material without being mistaken for reality itself. |\n\nThe same concrete artifact may play more than one role. Role identity must be\ndeclared rather than inferred from file type or product vocabulary.\n\n## Cross-KFD composition\n\nThe twelve references compose as follows:\n\n```text\nKFD-1 maintains a non-drifting fact base.\nKFD-2 bounds trust claims to that fact base.\nKFD-3 makes trusted value available for cooperation.\nKFD-4 preserves and transforms declared perspectives.\nKFD-5 separates candidate genesis from qualification.\nKFD-6 repeats bounded discovery over causal experience without self-certification.\nKFD-7 distinguishes the Fact-Episode Ontology from Action Responsibility Geometry: Facts\npreserve admitted state, Episodes preserve realized causal occurrence, and\nPursuit, Atlas, and Warrant keep direction, perspective, and authority\nindependently addressable in real-world action.\nKFD-8 specifies Atlas as the perspective coordinate.\nKFD-9 specifies Pursuit as the continuing-direction coordinate.\nKFD-10 specifies Warrant as the bounded-authority coordinate.\nKFD-11 separates Claim, purpose-bound Assessment, Warrant-bound Decision, and\nindependently recorded Admission.\nKFD-12 applies those boundaries and action coordinates to an\nInitiative-Assignment software-work responsibility lifecycle.\nKFD-13 applies them to one software-project settlement procedure.\n```\n\nThis composition does not make every later KFD a theorem of the earlier ones.\nIt states dependency: a later procedure cannot claim KFD conformance while\nbypassing the earlier fact, trust, cooperation, or perspective boundaries it\nuses.\n\n## Action extension\n\nKFD-7 extends the shared model by treating Fact cuts as object-like admitted\nstates and Episodes as morphism-like, evidence-bearing causal paths. Together\nthey form the Fact-Episode Ontology. Atlas, Pursuit, and Warrant are the\nreference action coordinates in the Action Responsibility Geometry for\nperspective, direction, and admissible action. They are not Domain Profiles.\nKFD-8 through KFD-10 separately allocate their draft responsibilities. KFD-11\nadds a cross-domain settlement procedure rather than another action coordinate.\nKFD-12 and KFD-13 remain software-domain applications rather than universal\nadditions to the geometry.\n\nThis active decision remains intentionally falsifiable. Activation does not\nprove that the proposed roles are universally minimal or establish a literal\nphysical geometry. Its source-candidate lineage remains at\n[`drafts/action-state-separation.md`](../drafts/action-state-separation.md).\n\n## Formal reference contract\n\nEvery per-KFD formal page must expose:\n\n1. authority and status;\n2. imported vocabulary;\n3. domain objects;\n4. relations and predicates;\n5. invariants;\n6. state transitions where applicable;\n7. proof obligations;\n8. invalid states and counterexamples;\n9. machine mappings;\n10. non-claims and extension points.\n\nEach formal statement must remain traceable:\n\n| Formal statement | Decision source | Schema or check | Verification |\n|---|---|---|---|\n| A named invariant or transition | Exact decision section | Implementing profile, or `none` | Machine, manual, mixed, or not yet implemented |\n\nAn absent schema mapping is allowed and must be explicit. Inventing a machine\nproof where only semantic review exists is not allowed.\n\n## Versioning\n\n`formal model version` is independent of package semver and schema interface\nversions. Compatible clarification may retain the current formal version.\nA change that alters object identity, invariant meaning, transition validity,\nproof responsibility, or the relation to the authoritative decision requires a\nnew formal model version.\n\nBecause the formal layer is non-normative, changing it does not change a KFD by\nitself. If the required correction changes the decision's meaning, the decision\ngovernance rules in `CONTRIBUTING.md` apply.\n\n## Limits\n\nThis model is itself a KFD-4 view: it is a declared engineering projection of\nthe KFD decisions, not reality and not a complete formal ontology of\nintelligence or life. Its value is falsifiable precision. A definition that\ncannot survive product evidence, counterexamples, or later causal experience\nmust be corrected rather than defended as final reality."
+    "markdown": "# KFD Formal Model\n\nThis document defines the shared notation and authority boundary for the\nnon-normative formal references published with KFD-1 through KFD-13.\n\n- Status: experimental\n- Normative: no\n- Formal model version: 1\n- Authority: `decisions/KFD-N.md`\n\n[Foundation explanation](foundation.md) ·\n[Documentation map](MAP.md)\n\n## Purpose\n\nThe formal layer makes KFD concepts precise enough to compare, implement, and\ntest without pretending that every semantic responsibility can be reduced to\nan algorithm. It defines domain objects, relations, invariants, state\ntransitions, invalid states, and proof obligations.\n\nThe numbered decision remains authoritative:\n\n```text\nDecision -> Formal -> Schema -> Usage -> Witness\n```\n\n- **Decision** states what must remain true.\n- **Formal** gives a precise, non-normative reference semantics.\n- **Schema** makes a bounded machine profile checkable.\n- **Usage** explains how a product or repository applies the profile.\n- **Witness** records evidence for a concrete claim.\n\nIf any later surface conflicts with its decision, the later surface is wrong.\nA valid schema may implement only part of a formal model. A valid witness may\nprove only the claim and audit boundary it declares.\n\n## Shared notation\n\nFor a KFD number `n`:\n\n```text\nD_n       authoritative decision\nF_n^v     formal reference at formal model version v\nS_n^i     machine schema profile at interface version i\nU_n       implementation guidance\nW_n       evidence witness\n```\n\n`Models(x, y)` means that `x` is a declared projection of `y`. It does not mean\nthat `x` exhausts the meaning of `y`.\n\n```text\nModels(F_n^v, D_n)\nModels(S_n^i, F_n^v)\nModels(U_n, D_n and selected F_n^v/S_n^i)\nModels(W_n, a bounded adopter claim)\n```\n\nThe required authority invariant is:\n\n```text\nnot Contradicts(F_n^v, D_n)\nnot Contradicts(S_n^i, D_n)\nnot Contradicts(U_n, D_n)\n```\n\nMachine validation can prove structural closure, registered identities,\ndigests, enumerated values, and some transition rules. It cannot by itself\nprove that natural-language meaning, captured reality, causal interpretation,\nparticipant value, or a Primitive claim is correct.\n\n## Shared objects\n\nThe formal references reuse these object classes:\n\n| Object | Meaning |\n|---|---|\n| `FactSource` | A declared reference from which a contract world obtains load-bearing facts. |\n| `FactCut` | An independently addressable state admitted at a declared authority and evidence boundary. |\n| `Claim` | A bounded statement about a subject. |\n| `EvidenceCut` | The declared boundary of evidence available to a claim or decision. |\n| `AssuranceResponsibility` | The named assignments of source-fact, verification, and decision authority. |\n| `Participant` | A human, agent, operator, system, or other reasoning party in cooperation. |\n| `Perspective` | A declared position from which facts become relevant and consequences are borne. |\n| `KFDPrimitiveCandidate` | A proposed load-bearing object with independent identity, boundary, authority, lifecycle, and operations. |\n| `CausalOccurrence` | A bounded event sequence or partial order that actually occurs between declared fact cuts. |\n| `CausalRecord` | An evidence-bearing representation of a causal occurrence, including declared omissions and loss. |\n| `Episode` | An independently addressable, replayable KFD object that binds a causal record to declared cuts, perspective, and loss. |\n| `CausalExperience` | One or more Episodes used as evidence or learning material without being mistaken for reality itself. |\n\nThe same concrete artifact may play more than one role. Role identity must be\ndeclared rather than inferred from file type or product vocabulary.\n\n## Cross-KFD composition\n\nThe thirteen references compose as follows:\n\n```text\nKFD-1 maintains a non-drifting fact base.\nKFD-2 bounds trust claims to that fact base.\nKFD-3 makes trusted value available for cooperation.\nKFD-4 preserves and transforms declared perspectives.\nKFD-5 separates candidate genesis from qualification.\nKFD-6 repeats bounded discovery over causal experience without self-certification.\nKFD-7 distinguishes the Fact-Episode Ontology from Action Responsibility Geometry: Facts\npreserve admitted state, Episodes preserve realized causal occurrence, and\nPursuit, Atlas, and Warrant keep direction, perspective, and authority\nindependently addressable in real-world action.\nKFD-8 specifies Atlas as the perspective coordinate.\nKFD-9 specifies Pursuit as the continuing-direction coordinate.\nKFD-10 specifies Warrant as the bounded-authority coordinate.\nKFD-11 separates Claim, purpose-bound Assessment, Warrant-bound Decision, and\nindependently recorded Admission.\nKFD-12 applies those boundaries and action coordinates to an\nInitiative-Assignment software-work responsibility lifecycle.\nKFD-13 applies them to one software-project settlement procedure.\n```\n\nThis composition does not make every later KFD a theorem of the earlier ones.\nIt states dependency: a later procedure cannot claim KFD conformance while\nbypassing the earlier fact, trust, cooperation, or perspective boundaries it\nuses.\n\n## Action extension\n\nKFD-7 extends the shared model by treating Fact cuts as object-like admitted\nstates and Episodes as morphism-like, evidence-bearing causal paths. Together\nthey form the Fact-Episode Ontology. Atlas, Pursuit, and Warrant are the\nreference action coordinates in the Action Responsibility Geometry for\nperspective, direction, and admissible action. They are not Domain Profiles.\nKFD-8 through KFD-10 separately allocate their draft responsibilities. KFD-11\nadds a cross-domain settlement procedure rather than another action coordinate.\nKFD-12 and KFD-13 remain software-domain applications rather than universal\nadditions to the geometry.\n\nThis active decision remains intentionally falsifiable. Activation does not\nprove that the proposed roles are universally minimal or establish a literal\nphysical geometry. Its source-candidate lineage remains at\n[`drafts/action-state-separation.md`](../drafts/action-state-separation.md).\n\n## Formal reference contract\n\nEvery per-KFD formal page must expose:\n\n1. authority and status;\n2. imported vocabulary;\n3. domain objects;\n4. relations and predicates;\n5. invariants;\n6. state transitions where applicable;\n7. proof obligations;\n8. invalid states and counterexamples;\n9. machine mappings;\n10. non-claims and extension points.\n\nEach formal statement must remain traceable:\n\n| Formal statement | Decision source | Schema or check | Verification |\n|---|---|---|---|\n| A named invariant or transition | Exact decision section | Implementing profile, or `none` | Machine, manual, mixed, or not yet implemented |\n\nAn absent schema mapping is allowed and must be explicit. Inventing a machine\nproof where only semantic review exists is not allowed.\n\n## Versioning\n\n`formal model version` is independent of package semver and schema interface\nversions. Compatible clarification may retain the current formal version.\nA change that alters object identity, invariant meaning, transition validity,\nproof responsibility, or the relation to the authoritative decision requires a\nnew formal model version.\n\nBecause the formal layer is non-normative, changing it does not change a KFD by\nitself. If the required correction changes the decision's meaning, the decision\ngovernance rules in `CONTRIBUTING.md` apply.\n\n## Limits\n\nThis model is itself a KFD-4 view: it is a declared engineering projection of\nthe KFD decisions, not reality and not a complete formal ontology of\nintelligence or life. Its value is falsifiable precision. A definition that\ncannot survive product evidence, counterexamples, or later causal experience\nmust be corrected rather than defended as final reality."
   },
   "casesPage": {
     "id": "primitive-discovery-cases",
@@ -2979,18 +2979,18 @@
         "standard": "kfd-5",
         "url": "/cases/live/federated-work-continuity",
         "relationship": "provisional-live-case",
-        "claimBoundary": "This case preserves the Work hypothesis and its strongest Initiative and derived-view alternatives before federation implementation. It does not allocate a KFD number, qualify Work, claim cross-domain transfer, or create global fact authority.",
+        "claimBoundary": "This case preserves the Work hypothesis, its first cut, and a lineage-bound successor under current implementation pressure. It does not allocate a KFD number, qualify Work, claim cross-domain transfer, or create global fact authority.",
         "humanEntry": {
           "path": "cases/live/federated-work-continuity/README.md",
-          "markdown": "# Federated Work Continuity\n\nThis live case tracks a provisional question exposed by multi-workspace agent\ncoordination:\n\n> Is Work an independently necessary higher-layer object, a perspective-bound\n> view over existing objects, or only ordinary product vocabulary?\n\nThe candidate appeared when the observer changed from the developer managing\nrepositories and Assignment records to the person responsible for one real\noutcome. From that position, execution location became secondary. The primary\nquestion became whether the whole body of work is advancing, where judgment is\npending, and what may happen next.\n\n## Current result\n\n```text\ncandidate: Work\nstatus: provisional\nminimum closure: inconclusive\ndeletion test: analytic hypothesis only\nfuse test: inconclusive\ndogfood: not run against a completed workspace federation\n```\n\nThe strongest counterevidence is already present in KFD: Initiative is an\naccepted software-domain Primitive for one continuing coordinated body of\nwork. Work must therefore demonstrate a decision-relevant responsibility that\ncannot be represented by one Initiative, several related Initiatives, or an\nordinary cut-bound query.\n\n## Candidate shape\n\nThe initial engineering hypothesis is:\n\n```text\nworkspace-qualified WorkRef\n  + typed Assignment Graph\n  + component cuts and proofs\n  + declared observer and traversal policy\n  + current action frontier\n  = perspective-bound Work view\n```\n\nThis shape preserves autonomous fact worlds. It does not create a central Work\ndatabase, global clock, or global atomic Cut.\n\n## Case surfaces\n\n- [Genesis](genesis.md)\n- [Ontology alternatives](ontology-split.md)\n- [Conditional distinguishability](distinguishability.md)\n- [KFD method trace](kfd-method-trace.md)\n- [Propagation boundary](propagation-hypothesis.md)\n- [Current KFD-5 cut](cuts/0001-work.json)\n- [Qualification reviews](reviews/README.md)\n- [Live case registry](../../registry.json)\n\n## Claim boundary\n\nThis case does not establish Work as a Primitive, allocate a KFD number,\nqualify a federated implementation, prove cross-domain transfer, or show that\nan independent Work entity is preferable to Initiative plus a derived graph\nview. Those are explicit open tests."
+          "markdown": "# Federated Work Continuity\n\nThis live case tracks a provisional question exposed by multi-workspace agent\ncoordination:\n\n> Is Work an independently necessary higher-layer object, a perspective-bound\n> view over existing objects, or only ordinary product vocabulary?\n\nThe candidate appeared when the observer changed from the developer managing\nrepositories and Assignment records to the person responsible for one real\noutcome. From that position, execution location became secondary. The primary\nquestion became whether the whole body of work is advancing, where judgment is\npending, and what may happen next.\n\n## Current result\n\n```text\ncandidate: Work\nstatus: provisional\nminimum closure: inconclusive\ndeletion test: analytic hypothesis only\nfuse test: inconclusive\ndogfood: founding Work Control implementation exists; comparative KFD-5 dogfood remains inconclusive\n```\n\nSince the first cut, Kungfu has implemented Initiative, Assignment, WorkRef,\nPortfolio, independent review, continuation, and Project Cut settlement, and\nits derived Primitive Catalog exposes Work with experimental admission. That\nis new implementation pressure, not qualification. The strongest\ncounterevidence remains present in KFD: Initiative is an\naccepted software-domain Primitive for one continuing coordinated body of\nwork. Work must therefore demonstrate a decision-relevant responsibility that\ncannot be represented by one Initiative, several related Initiatives, or an\nordinary cut-bound query.\n\n## Candidate shape\n\nThe initial engineering hypothesis is:\n\n```text\nworkspace-qualified WorkRef\n  + typed Assignment Graph\n  + component cuts and proofs\n  + declared observer and traversal policy\n  + current action frontier\n  = perspective-bound Work view\n```\n\nThis shape preserves autonomous fact worlds. It does not create a central Work\ndatabase, global clock, or global atomic Cut.\n\n## Case surfaces\n\n- [Genesis](genesis.md)\n- [Ontology alternatives](ontology-split.md)\n- [Conditional distinguishability](distinguishability.md)\n- [KFD method trace](kfd-method-trace.md)\n- [Propagation boundary](propagation-hypothesis.md)\n- [Current KFD-5 successor cut](cuts/0002-work.json)\n- [Preserved first cut](cuts/0001-work.json)\n- [Qualification reviews](reviews/README.md)\n- [Live case registry](../../registry.json)\n\n## Claim boundary\n\nThis case does not establish Work as a Primitive, allocate a KFD number,\nqualify the founding implementation, prove cross-domain transfer, or show that\nan independent Work entity is preferable to Initiative plus a derived graph\nview. Those are explicit open tests."
         },
         "genesis": {
           "path": "cases/live/federated-work-continuity/genesis.md",
-          "markdown": "# Genesis: From Cards to the Work That Matters\n\n## Initial observer\n\nThe initial observer was implementing local-first agent work management. The\nnatural objects were repositories, workspaces, Initiative and Assignment\nrecords, parent-child cards, runtime Episodes, and Project Cuts.\n\nFrom that position, the problem appeared to be better routing and a richer\ncross-workspace Assignment graph.\n\n## Perspective transformation\n\nThe observer changed to the person who initiated a group of related cards. That\nperson did not primarily care which repository contained each card. The\nconsequence-bearing question was:\n\n```text\nWhat is the state of the one thing these cards are jointly advancing?\n```\n\nThe relation graph remained necessary, but became implementation structure\nbeneath a possible user-level object: Work.\n\n## Why genesis is not qualification\n\nKFD already contains a strong adjacent object. Initiative preserves one\ncontinuing coordinated software-work context across Pursuits, Assignments,\nparticipants, lineage, and settlement. The new observation may therefore be:\n\n- a newly visible higher-layer Primitive;\n- a useful federated projection over one or more Initiatives;\n- a product-level name for Initiative;\n- or no new object at all.\n\nThe live case freezes the question before implementation and dogfood can make\nthe outcome look inevitable.\n\n## Evidence boundary\n\nThe current evidence consists of situated maintainer judgment, existing public\nKFD Initiative/Assignment/Project Cut cuts, and public Kungfu workspace and\nWorkRef contracts. The proposed workspace federation has not yet supplied a\ncompleted implementation, operational measurements, independent review, or a\nnon-software transfer case."
+          "markdown": "# Genesis: From Cards to the Work That Matters\n\n## Initial observer\n\nThe initial observer was implementing local-first agent work management. The\nnatural objects were repositories, workspaces, Initiative and Assignment\nrecords, parent-child cards, runtime Episodes, and Project Cuts.\n\nFrom that position, the problem appeared to be better routing and a richer\ncross-workspace Assignment graph.\n\n## Perspective transformation\n\nThe observer changed to the person who initiated a group of related cards. That\nperson did not primarily care which repository contained each card. The\nconsequence-bearing question was:\n\n```text\nWhat is the state of the one thing these cards are jointly advancing?\n```\n\nThe relation graph remained necessary, but became implementation structure\nbeneath a possible user-level object: Work.\n\n## Why genesis is not qualification\n\nKFD already contains a strong adjacent object. Initiative preserves one\ncontinuing coordinated software-work context across Pursuits, Assignments,\nparticipants, lineage, and settlement. The new observation may therefore be:\n\n- a newly visible higher-layer Primitive;\n- a useful federated projection over one or more Initiatives;\n- a product-level name for Initiative;\n- or no new object at all.\n\nThe live case freezes the question before implementation and dogfood can make\nthe outcome look inevitable.\n\n## Successor evidence boundary\n\nThe first cut consisted of situated maintainer judgment, existing public KFD\nInitiative/Assignment/Project Cut cuts, and public Kungfu workspace and WorkRef\ncontracts. The 2026-08-03 successor adds Kungfu's current Work Control Profile\nand experimental Work catalog entry at exact commit\n`a2967f22d0d23766eb887168e8fffc41251bad54`. The implementation does not supply\na fixed-root comparison against Initiative, derived view, Portfolio, Profile\nvocabulary, and no-new-Primitive outcomes; it also supplies no independent\nreview or non-software transfer case."
         },
         "methodTrace": {
           "path": "cases/live/federated-work-continuity/kfd-method-trace.md",
-          "markdown": "# KFD Method Trace\n\n## KFD-1: preserve the unresolved cut\n\nThe candidate, alternatives, current evidence, and missing qualification are\npublished before implementation can rewrite the story into a success\nnarrative.\n\n## KFD-2: keep confidence bounded\n\nThe current claim is only that Work deserves explicit investigation. It is not\nan accepted Primitive, a numbered KFD, or a qualified product capability.\n\n## KFD-3: preserve participant value\n\nThe product motivation is to let humans and agents manage the same work without\nforcing either to learn repository topology or hidden workflow rules. Exact\nauthority and lower objects remain available rather than being concealed by a\nsimple user view.\n\n## KFD-4: change the consequence-bearing observer\n\nThe developer saw repositories, workspaces, cards, and graph edges. The person\nresponsible for the outcome saw one body of work and asked for its state and\nnext action. That transformation generated the candidate.\n\n## KFD-5: retain no-new-Primitive\n\nThe same transformation may merely reveal Initiative or a derived query from a\nnew angle. KFD-5 therefore requires a shared evidence cut comparing an\nindependent Work object, a derived Work view, Initiative, and no new Primitive.\n\n## KFD-6 boundary\n\nNo autonomous discovery claim is made. Human situated judgment supplied the\nperspective change; agents helped reconstruct adjacent contracts and explicit\nfalsifiers. Future Episodes may support later replay and qualification."
+          "markdown": "# KFD Method Trace\n\n## KFD-1: preserve the unresolved cut\n\nThe candidate, alternatives, current evidence, and missing qualification are\npublished before implementation can rewrite the story into a success\nnarrative.\n\n## KFD-2: keep confidence bounded\n\nThe current claim is only that Work deserves explicit investigation. It is not\nan accepted Primitive, a numbered KFD, or a qualified product capability.\n\n## KFD-3: preserve participant value\n\nThe product motivation is to let humans and agents manage the same work without\nforcing either to learn repository topology or hidden workflow rules. Exact\nauthority and lower objects remain available rather than being concealed by a\nsimple user view.\n\n## KFD-4: change the consequence-bearing observer\n\nThe developer saw repositories, workspaces, cards, and graph edges. The person\nresponsible for the outcome saw one body of work and asked for its state and\nnext action. That transformation generated the candidate.\n\n## KFD-5: retain no-new-Primitive\n\nThe same transformation may merely reveal Initiative or a derived query from a\nnew angle. KFD-5 therefore requires a shared evidence cut comparing an\nindependent Work object, a derived Work view, Initiative, and no new Primitive.\nThe 2026-08-03 successor adds Work Control and Primitive Catalog implementation\nevidence while preserving every alternative and the provisional result.\n\n## KFD-6 boundary\n\nNo autonomous discovery claim is made. Human situated judgment supplied the\nperspective change; agents helped reconstruct adjacent contracts and explicit\nfalsifiers. Future Episodes may support later replay and qualification."
         },
         "propagationHypothesis": {
           "path": "cases/live/federated-work-continuity/propagation-hypothesis.md",
@@ -3006,7 +3006,7 @@
         },
         "distinguishabilityArgument": {
           "path": "cases/live/federated-work-continuity/distinguishability.md",
-          "markdown": "# Conditional Distinguishability\n\n## Deletion experiment\n\nHold fixed every component workspace cut, Initiative, Assignment, typed edge,\nEpisode, Claim, Assessment, Decision, and Project Cut. Remove only the proposed\nWork identity or view.\n\nThe deletion matters only if a participant must materially reconstruct one or\nmore of:\n\n- which component objects jointly advance one declared whole;\n- which pending judgments block that whole;\n- which degraded or unavailable components change safe continuation;\n- which exact next actions remain available across authority boundaries.\n\nAn attractive dashboard is not enough. The deletion must change a bounded\ndecision or impose measurable reconstruction cost.\n\n## Initiative comparison\n\nThe primary falsifier is:\n\n```text\none Initiative + typed Assignment relations + ordinary query\n  == proposed Work semantics\n```\n\nIf this equivalence holds for consequential cases at lower total cost, Work is\nsubsumed or rejected. A Work view spanning several Initiatives does not by\nitself defeat the alternative; an Initiative-of-Initiatives or Portfolio query\nmay still be equivalent.\n\n## Fuse experiment\n\nPotential evidence for separation would require cases where:\n\n- one Initiative participates in more than one Work view without changing its\n  own identity;\n- one Work view spans several Initiatives whose lifecycles remain independent;\n- changing Work membership changes coordination or settlement scope while all\n  Initiative and Assignment roots remain fixed;\n- two observers derive different valid Work views from the same component\n  facts and preserve the difference rather than merging it.\n\nNo completed operational witness currently satisfies this test.\n\n## Current verdict\n\nThe candidate is analytically distinguishable enough to incubate, but not\nqualified. Minimum closure, fuse, deletion, implementation value, and\ncross-domain transfer remain inconclusive."
+          "markdown": "# Conditional Distinguishability\n\n## Deletion experiment\n\nHold fixed every component workspace cut, Initiative, Assignment, typed edge,\nEpisode, Claim, Assessment, Decision, and Project Cut. Remove only the proposed\nWork identity or view.\n\nThe deletion matters only if a participant must materially reconstruct one or\nmore of:\n\n- which component objects jointly advance one declared whole;\n- which pending judgments block that whole;\n- which degraded or unavailable components change safe continuation;\n- which exact next actions remain available across authority boundaries.\n\nAn attractive dashboard is not enough. The deletion must change a bounded\ndecision or impose measurable reconstruction cost.\n\n## Initiative comparison\n\nThe primary falsifier is:\n\n```text\none Initiative + typed Assignment relations + ordinary query\n  == proposed Work semantics\n```\n\nIf this equivalence holds for consequential cases at lower total cost, Work is\nsubsumed or rejected. A Work view spanning several Initiatives does not by\nitself defeat the alternative; an Initiative-of-Initiatives or Portfolio query\nmay still be equivalent.\n\n## Fuse experiment\n\nPotential evidence for separation would require cases where:\n\n- one Initiative participates in more than one Work view without changing its\n  own identity;\n- one Work view spans several Initiatives whose lifecycles remain independent;\n- changing Work membership changes coordination or settlement scope while all\n  Initiative and Assignment roots remain fixed;\n- two observers derive different valid Work views from the same component\n  facts and preserve the difference rather than merging it.\n\nKungfu's current Work Control and Portfolio implementation makes this test\nexecutable, but no retained fixed-root result currently satisfies it.\n\n## Current verdict\n\nThe candidate is analytically distinguishable enough to incubate and now has\nfounding implementation pressure, but it is not qualified. Minimum closure,\nfuse, deletion, independent implementation value, and cross-domain transfer\nremain inconclusive."
         },
         "candidateTracks": [
           {
@@ -3015,8 +3015,8 @@
             "status": "provisional",
             "definition": "A possible higher-layer, perspective-bound coordinated action whole that preserves component authority, cuts, typed relations, proof state, degradation, and the current action frontier across workspaces.",
             "currentCut": {
-              "path": "cases/live/federated-work-continuity/cuts/0001-work.json",
-              "sha256": "31bfab3bcf969fb7c46279665c43223cc59ecc0b3c291f2449f303a0806cc9c2",
+              "path": "cases/live/federated-work-continuity/cuts/0002-work.json",
+              "sha256": "ef73aa8b71af65db49ed5deb69606ac96c69c742d887271d8192aee537b4c8e2",
               "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-5/primitive-discovery.schema.json",
               "schemaVersion": 3,
               "record": {
@@ -3026,8 +3026,8 @@
                 "candidate": {
                   "id": "work",
                   "title": "Work",
-                  "problemStatement": "People responsible for one real outcome must reconstruct its state and next action from repository-local Initiatives, Assignments, workspaces, and settlement cuts even when those component records remain individually valid.",
-                  "scope": "Incubating higher-layer candidate for perspective-bound coordination across independently authoritative workspaces; independent object identity, cross-domain transfer, product qualification, numbering, and universal necessity are not claimed."
+                  "problemStatement": "People responsible for one real outcome must still reconstruct its state and safe next action across Initiatives, Assignments, WorkRefs, Portfolio observations, workspaces, and Project Cuts even though Kungfu now implements and catalogs Work Control vocabulary.",
+                  "scope": "Successor cut for a provisional higher-layer or perspective-bound Work candidate under current implementation pressure; independent identity, cross-domain transfer, product qualification, numbering, and universal necessity are not claimed."
                 },
                 "genesis": {
                   "methods": [
@@ -3037,19 +3037,19 @@
                     "structural-compression"
                   ],
                   "observationPerspective": {
-                    "id": "workspace-federation-developer",
-                    "bearer": "human and agent participants designing multi-workspace agent coordination",
-                    "role": "product and protocol developer",
-                    "proximity": "inside repository, workspace, graph, authority, and settlement implementation",
+                    "id": "work-control-implementer",
+                    "bearer": "human and agent participants implementing Initiative, Assignment, WorkRef, Portfolio, review, continuation, and Project Cut settlement",
+                    "role": "product and protocol implementer",
+                    "proximity": "inside Work Control identity, authority, lifecycle, query, federation, and settlement behavior",
                     "consequences": [
-                      "bears routing, identity, graph, storage, migration, and qualification defects"
+                      "bears routing, stale observation, hidden authority, premature completion, and continuation defects"
                     ],
                     "naturalObjects": [
-                      "workspace",
                       "Initiative",
                       "Assignment",
-                      "typed relation",
                       "WorkRef",
+                      "Portfolio",
+                      "workspace",
                       "Project Cut"
                     ]
                   },
@@ -3061,123 +3061,130 @@
                     "Warrant",
                     "Initiative",
                     "Assignment",
+                    "WorkRef",
+                    "Portfolio",
                     "Project Cut",
                     "workspace"
                   ],
-                  "observation": "From the developer perspective, the natural response to cross-repository coordination was better workspace routing and a richer Assignment graph. From the person responsible for the outcome, those records were secondary to the state of the one body of work they jointly advance.",
-                  "candidateObject": "Work may be a higher-layer, perspective-bound coordinated action whole whose view preserves component authority, cuts, typed relations, proof state, degradation, and the current action frontier across workspaces.",
-                  "claimBoundary": "The cut opens qualification of Work and does not decide whether it is an independent object, a derived Work view, an Initiative or Portfolio projection, or no new Primitive.",
+                  "observation": "Kungfu now implements Work Control and exposes an experimental Work entry in its derived Primitive Catalog, but the user-level coordinated whole can still be either an independent object, a derived view, Profile vocabulary, Initiative semantics, or no new Primitive.",
+                  "candidateObject": "Work may be a perspective-bound coordinated action whole whose identity or view preserves component authority, immutable cuts, typed relations, proof state, degradation, and current action frontier across independently owned workspaces.",
+                  "claimBoundary": "This successor records implementation pressure without changing the provisional decision or deciding between independent entity, derived view, Initiative or Portfolio semantics, product-profile vocabulary, and no new Primitive.",
                   "methodEvidence": [
+                    {
+                      "kind": "file",
+                      "coordinate": "cases/live/federated-work-continuity/cuts/0001-work.json",
+                      "observer": "prior immutable KFD-5 cut"
+                    },
+                    {
+                      "kind": "git",
+                      "coordinate": "https://github.com/kungfu-systems/kungfu/commit/a2967f22d0d23766eb887168e8fffc41251bad54",
+                      "observer": "Kungfu founding-adopter source cut"
+                    },
                     {
                       "kind": "file",
                       "coordinate": "cases/live/federated-work-continuity/genesis.md",
                       "observer": "KFD maintainers"
-                    },
-                    {
-                      "kind": "file",
-                      "coordinate": "cases/live/software-work-perspective-settlement/cuts/0001-initiative.json",
-                      "observer": "KFD-5 Initiative qualification"
-                    },
-                    {
-                      "kind": "file",
-                      "coordinate": "drafts/federated-work-continuity.md",
-                      "observer": "KFD candidate authors"
                     }
                   ],
                   "transformedPerspective": {
-                    "id": "real-work-owner",
-                    "bearer": "a person using agents to advance one real outcome",
+                    "id": "real-work-owner-after-work-control",
+                    "bearer": "a person or agent responsible for one real outcome that spans independently owned workspaces",
                     "role": "work initiator and consequence bearer",
-                    "proximity": "inside progress, judgment, blockage, and continuation consequences but outside repository topology",
+                    "proximity": "inside progress, pending judgment, degradation, settlement, and continuation consequences but outside repository topology",
                     "consequences": [
-                      "bears context reconstruction, fragmented progress, missed judgment, and unclear next action"
+                      "bears fragmented progress, missed judgment, unsafe continuation, and false completion"
                     ],
                     "naturalObjects": [
                       "the work that matters",
-                      "current state",
+                      "current trusted state",
                       "blocking judgment",
-                      "next action"
+                      "safe next action",
+                      "settled outcome"
                     ]
                   },
-                  "transformation": "The observer moved from the developer managing component records to the person responsible for the outcome those components jointly advance.",
-                  "newlyVisibleNeed": "The user needs one inspectable action whole without treating repositories, workspaces, or card decomposition as the primary object and without losing exact component authority.",
-                  "methodNotes": "Initiative is retained as the strongest internal-object alternative; federation implementation and dogfood are future evidence rather than assumed facts."
+                  "transformation": "The observer moved from the implemented component ontology to the participant who must understand and continue the coordinated whole without treating product vocabulary as qualification.",
+                  "newlyVisibleNeed": "The participant needs one inspectable action whole or reproducible view while exact Initiative, Assignment, WorkRef, Portfolio, workspace, and Project Cut authorities remain independently visible.",
+                  "methodNotes": "Implementation narrows some evidence gaps but strengthens the derived-view and Profile-vocabulary alternatives as much as the independent-Primitive hypothesis."
                 },
                 "boundaryPressure": {
                   "contactSides": [
-                    "independently authoritative workspaces, Initiatives, Assignments, and settlement cuts",
-                    "the person or agent responsible for understanding and continuing one real outcome"
+                    "independently authoritative Work Control objects, workspace observations, and settlement cuts",
+                    "the participant responsible for understanding and continuing one real outcome"
                   ],
-                  "implicitHandling": "The whole is reconstructed from parent-child cards, repository names, dashboards, chat context, branch state, human memory, and manual status summaries.",
+                  "implicitHandling": "The whole is reconstructed from Initiative grouping, Assignment relations, WorkRefs, Portfolio rows, repository context, Project Cuts, and human or agent summaries.",
                   "pressureChanges": [
                     {
                       "kind": "scale",
-                      "description": "One real outcome increasingly spans several repositories, workspaces, Assignments, agents, and settlements."
+                      "description": "One outcome can span several workspaces, Assignments, agents, reviews, and settlements."
                     },
                     {
                       "kind": "heterogeneity",
-                      "description": "Component fact worlds remain autonomous and may use different Domain Profiles, availability, and lifecycle states."
+                      "description": "Portfolio observations remain authority-distinct and may be stale, degraded, partial, or unavailable."
                     },
                     {
                       "kind": "consequence",
-                      "description": "Missing review, unavailable evidence, or incorrect aggregation changes what may safely continue."
+                      "description": "Premature completion or hidden missing evidence changes what may safely continue."
                     }
                   ],
                   "observedFailures": [
-                    "A user must inspect repository-local cards to reconstruct one real work state.",
-                    "Parent-child trees cannot express all dependency, contribution, continuation, conflict, and evidence-sharing relations.",
-                    "A global summary may hide unavailable workspaces or pretend that several cuts form one atomic truth.",
-                    "Child activity or stage readiness may be mistaken for accepted completion of the whole."
+                    "Stage-ready or source completion may be mistaken for independently accepted and settled completion.",
+                    "Presentation grouping may be mistaken for replica equivalence or shared authority.",
+                    "A user may still traverse component topology to reconstruct blocking judgment and next action.",
+                    "A product-level Work label may hide whether the semantics are entity, view, Initiative, or Portfolio."
                   ],
-                  "mediationClaim": "A perspective-bound Work view may preserve one coherent action whole, component authority, and current frontier across independently owned fact worlds.",
-                  "internalObjectAlternative": "One Initiative, several related Initiatives, or a Portfolio query over a typed Assignment Graph may provide equivalent semantics without a new Primitive."
+                  "mediationClaim": "A perspective-bound Work identity or view may preserve one coherent action whole and frontier without centralizing component authority.",
+                  "internalObjectAlternative": "Initiative plus typed Assignment relations, exact WorkRefs, Portfolio, and ordinary cut-bound queries may provide equivalent semantics."
                 },
                 "grounding": {
                   "pressure": [
-                    "Real work spans several repository and workspace execution boundaries.",
-                    "Users care about the outcome and next action more than execution location.",
-                    "Autonomous fact worlds must remain independently authoritative and partially available.",
-                    "Existing Initiative semantics may already absorb the proposed responsibility."
+                    "Work Control now provides concrete component identities and a read-only federated Portfolio.",
+                    "The Primitive Catalog declares Work experimental rather than admitted or shipped.",
+                    "Authority-distinct observations and Project Cut settlement must remain independently visible.",
+                    "Existing Initiative semantics remain the strongest accepted KFD alternative."
                   ],
                   "factSources": [
                     {
-                      "kind": "file",
-                      "coordinate": "cases/live/software-work-perspective-settlement/README.md",
-                      "observer": "KFD maintainers"
+                      "kind": "git",
+                      "coordinate": "https://github.com/kungfu-systems/kungfu/blob/a2967f22d0d23766eb887168e8fffc41251bad54/docs/profiles/work-control.md",
+                      "observer": "Kungfu Work Control Profile"
                     },
                     {
-                      "kind": "file",
-                      "coordinate": "cases/live/software-work-perspective-settlement/cuts/0001-initiative.json",
-                      "observer": "KFD-5 Initiative qualification"
+                      "kind": "git",
+                      "coordinate": "https://github.com/kungfu-systems/kungfu/blob/a2967f22d0d23766eb887168e8fffc41251bad54/framework/primitive/kungfu-primitive-catalog.contract.json",
+                      "observer": "Kungfu derived Primitive Catalog"
                     },
                     {
                       "kind": "file",
                       "coordinate": "cases/live/federated-work-continuity/distinguishability.md",
                       "observer": "KFD candidate qualification"
+                    },
+                    {
+                      "kind": "file",
+                      "coordinate": "cases/live/software-work-perspective-settlement/cuts/0001-initiative.json",
+                      "observer": "accepted software-domain Initiative qualification"
                     }
                   ],
-                  "evidenceBoundary": "The cut records situated maintainer judgment and public KFD contracts before a completed federated implementation. It contains no operational benchmark, independent adopter, non-software transfer, or proof that Work changes decisions beyond Initiative and derived-query semantics.",
+                  "evidenceBoundary": "This successor adds public Work Control and derived-catalog evidence at one exact Kungfu commit. It does not convert the product's Work vocabulary into KFD qualification, prove independent identity, measure deletion cost, complete a fixed-root fuse test, demonstrate cross-domain transfer, or supply independent review.",
                   "knownGaps": [
-                    "No completed workspace federation dogfood",
-                    "No independent Work identity or lifecycle witness",
-                    "No measured reconstruction-cost comparison",
+                    "No completed fixed-root comparison between independent Work, derived view, Initiative, Portfolio, and no-new-Primitive outcomes",
+                    "No measured reconstruction cost for a consequence-bearing user journey",
+                    "No independent Work lifecycle witness outside the founding product",
                     "No non-software transfer",
                     "No independent qualification review",
-                    "No decision between entity, derived-view, Initiative, and no-new-Primitive outcomes"
+                    "No retained decision showing that Work changes coordination or settlement while all component roots remain fixed"
                   ]
                 },
                 "participants": [
                   {
-                    "id": "human-perspective-source",
-                    "kind": "human",
+                    "id": "kungfu-work-control-source",
+                    "kind": "collective",
                     "functions": [
-                      "perspective-declaration",
                       "candidate-generation",
-                      "decision"
+                      "evidence-custody"
                     ]
                   },
                   {
-                    "id": "agent-reasoning-participant",
+                    "id": "kfd-analysis-participant",
                     "kind": "agent",
                     "functions": [
                       "candidate-generation",
@@ -3188,52 +3195,58 @@
                     "id": "future-independent-review",
                     "kind": "collective",
                     "functions": [
-                      "evidence-custody",
                       "verification"
+                    ]
+                  },
+                  {
+                    "id": "maintainer-decision-owner",
+                    "kind": "human",
+                    "functions": [
+                      "perspective-declaration",
+                      "decision"
                     ]
                   }
                 ],
                 "alternatives": [
                   {
-                    "name": "Initiative",
+                    "name": "Independent Work Primitive",
                     "disposition": "retained",
-                    "reason": "KFD already accepts Initiative as one continuing coordinated software-work context spanning Pursuits, Assignments, participants, lineage, and settlement."
+                    "reason": "A stable identity may be needed when membership, frontier, or settlement scope changes while component roots remain fixed."
                   },
                   {
-                    "name": "Perspective-bound Work view",
+                    "name": "Perspective-bound derived Work view",
                     "disposition": "retained",
-                    "reason": "A root WorkRef, traversal policy, and component cuts may provide the user-level whole without a new semantic writer."
+                    "reason": "Work may be a reproducible query over WorkRefs, observer, relation policy, component cuts, and availability without a new semantic writer."
                   },
                   {
-                    "name": "Portfolio or saved query",
+                    "name": "Initiative plus typed Assignment relations",
                     "disposition": "retained",
-                    "reason": "A typed, cut-bound query may answer the same questions if it preserves observer, authority, degradation, and action-frontier semantics."
+                    "reason": "KFD already accepts Initiative as a continuing coordinated software-work context."
                   },
                   {
-                    "name": "Independent Work object",
-                    "disposition": "unresolved",
-                    "reason": "It remains possible that stable identity across several Initiatives and settlements changes continuation decisions, but no operational witness exists."
+                    "name": "Portfolio or product-profile vocabulary",
+                    "disposition": "retained",
+                    "reason": "Kungfu may need a useful Work presentation without establishing a portable Primitive."
                   },
                   {
                     "name": "No new Primitive",
                     "disposition": "unresolved",
-                    "reason": "The current evidence is compatible with Work being only product vocabulary over existing objects."
+                    "reason": "Existing objects and ordinary queries may preserve every consequential decision at lower ontology cost."
                   }
                 ],
                 "contractModel": {
-                  "identity": "Unresolved between a stable Work identity and a root WorkRef plus observer, relation policy, and component cuts.",
-                  "boundary": "A declared coordinated whole, included workspace-qualified refs, typed edges, component cuts and proofs, unresolved or degraded components, action frontier, and declared loss.",
-                  "authority": "Work may declare or project coordination but cannot replace owning workspace facts, transfer Warrant, prove occurrence, assess claims, decide admission, or synthesize a global Cut.",
-                  "lifecycle": "Candidate lifecycle remains unspecified; possible views are derived at declared cuts, while an independent entity would require version, revision, split, merge, settlement, and supersession semantics.",
+                  "identity": "Unresolved between stable Work identity and a root WorkRef plus observer, relation policy, and component cuts.",
+                  "boundary": "One perspective-bound coordinated whole and current frontier across independently authoritative components.",
+                  "authority": "May declare membership or view policy only; may not rewrite Initiative, Assignment, WorkRef, Portfolio observation, Episode, review, Decision, Admission, Project Cut, or workspace facts.",
+                  "lifecycle": "Proposed, observed, active, blocked, degraded, under review, continued, settled, or superseded with component state preserved independently.",
                   "operations": [
-                    "locate",
-                    "inspect",
-                    "traverse",
-                    "compare",
-                    "derive-frontier",
-                    "degrade",
-                    "rebind-locator",
-                    "continue"
+                    "declare-or-derive",
+                    "inspect-components",
+                    "inspect-frontier",
+                    "inspect-degradation",
+                    "route-to-owning-assignment",
+                    "refresh-view",
+                    "settle-or-supersede"
                   ]
                 },
                 "tests": {
@@ -3241,11 +3254,11 @@
                     "result": "inconclusive",
                     "evidence": [
                       {
-                        "kind": "file",
-                        "coordinate": "drafts/formal/federated-work-continuity.md"
+                        "kind": "git",
+                        "coordinate": "https://github.com/kungfu-systems/kungfu/blob/a2967f22d0d23766eb887168e8fffc41251bad54/docs/profiles/work-control.md"
                       }
                     ],
-                    "notes": "The formal candidate closes a Work-view envelope but intentionally leaves independent entity identity and lifecycle unresolved."
+                    "notes": "Work Control closes a product Profile, but portable minimum fields and independent object necessity remain unproved."
                   },
                   "deletion": {
                     "result": "inconclusive",
@@ -3255,7 +3268,7 @@
                         "coordinate": "cases/live/federated-work-continuity/distinguishability.md"
                       }
                     ],
-                    "notes": "The analytic deletion argument identifies reconstruction burden but has not shown a bounded changed decision with fixed Initiative and Assignment roots."
+                    "notes": "Implementation creates a runnable experiment; decision change and reconstruction cost have not yet been measured under fixed component roots."
                   },
                   "fuse": {
                     "result": "inconclusive",
@@ -3263,38 +3276,609 @@
                       {
                         "kind": "file",
                         "coordinate": "cases/live/federated-work-continuity/ontology-split.md"
+                      },
+                      {
+                        "kind": "file",
+                        "coordinate": "cases/live/software-work-perspective-settlement/cuts/0001-initiative.json"
                       }
                     ],
-                    "notes": "Possible separation from Initiative is stated but not demonstrated by an operational case where roots remain fixed and Work semantics vary independently."
+                    "notes": "Initiative, derived-view, Portfolio, Profile-vocabulary, and no-new-Primitive alternatives remain live."
                   },
                   "falsifiers": [
-                    "Initiative plus Assignment Graph preserves equivalent identity, continuation, and settlement decisions at lower total cost.",
-                    "Work membership is only a display query and has no stable decision consequence.",
-                    "A Work-level object requires duplicate authority or a false global cut.",
-                    "The view hides unavailable evidence, pending judgment, or independently variable lower responsibilities.",
-                    "The model fails to transfer beyond one multi-repository software environment."
+                    "Initiative plus typed Assignment relations and an ordinary query preserves every Work decision at lower cost.",
+                    "Portfolio provides the same participant value without stable Work identity or new authority.",
+                    "Changing Work membership or view policy never changes coordination or settlement while component roots remain fixed.",
+                    "Independent adopters do not reproduce the reconstruction burden.",
+                    "The Work catalog entry remains only product vocabulary and supplies no retained qualification evidence."
                   ],
                   "dogfood": {
-                    "result": "not-run",
-                    "evidence": [],
-                    "notes": "The workspace federation and Assignment Graph implementation is future evidence and is not represented as complete in this cut."
+                    "result": "inconclusive",
+                    "evidence": [
+                      {
+                        "kind": "git",
+                        "coordinate": "https://github.com/kungfu-systems/kungfu/commit/a2967f22d0d23766eb887168e8fffc41251bad54"
+                      }
+                    ],
+                    "notes": "A current founding-product implementation and experimental catalog entry exist; comparative KFD-5 dogfood, negative outcomes, and independent review are still absent."
                   }
                 },
                 "decision": {
                   "outcome": "provisional",
-                  "owner": "KFD maintainers subject to independent repository review",
-                  "reason": "The observer shift and reconstruction pressure justify preserving Work as an explicit candidate, while existing Initiative semantics and the derived-view alternative prevent promotion or acceptance without implementation and comparative evidence.",
+                  "owner": "KFD maintainers",
+                  "reason": "Current Work Control and Primitive Catalog evidence make the pressure operational rather than purely analytic, but they do not decide whether Work is an independent Primitive, derived view, Initiative or Portfolio semantics, product vocabulary, or no new Primitive.",
                   "residualRisks": [
-                    "The candidate may duplicate Initiative or Portfolio semantics.",
-                    "The attractive user-level name may be mistaken for ontological evidence.",
-                    "A central implementation could violate workspace authority boundaries.",
-                    "A derived view may vary too much by observer and policy to carry stable identity.",
-                    "The current evidence is first-party, software-oriented, and pre-implementation."
+                    "Product vocabulary may be mistaken for KFD qualification.",
+                    "Independent Work may duplicate Initiative or centralize autonomous fact worlds.",
+                    "A derived view may hide observer policy, staleness, or unavailable components.",
+                    "One founding implementation may overfit the candidate boundary.",
+                    "Presentation grouping may be mistaken for shared authority or completion."
                   ]
                 }
               }
             },
-            "claimBoundary": "Provisional only. The track does not decide whether Work is an independent entity, a derived view, Initiative or Portfolio semantics, or no new Primitive; implementation, dogfood, transfer, and independent review remain open."
+            "claimBoundary": "Provisional only. The successor cut binds current founding-product Work Control and experimental Primitive Catalog evidence while leaving independent entity, derived view, Initiative, Portfolio, Profile vocabulary, and no-new-Primitive outcomes unresolved; comparative dogfood, transfer, and independent review remain open."
+          }
+        ]
+      },
+      {
+        "id": "product-release-cut-transition",
+        "title": "Product Release Cut and Cut Transition",
+        "kind": "primitive-discovery-case",
+        "status": "active",
+        "standard": "kfd-5",
+        "url": "/cases/live/product-release-cut-transition",
+        "relationship": "provisional-live-case",
+        "claimBoundary": "This case preserves two independently provisional tracks from one founding-adopter implementation cut. It does not accept either candidate, activate KFD-13, certify a product release, make Kungfu vocabulary universal, or prevent a no-new-Primitive decision.",
+        "humanEntry": {
+          "path": "cases/live/product-release-cut-transition/README.md",
+          "markdown": "# Product Release Cut and Cut Transition\n\nThis live case tracks two provisional objects exposed by Kungfu's release and\nupdater work:\n\n> Does exact product-world identity require a Product Release Cut, and does\n> authorized movement between two such worlds require a distinct Cut\n> Transition?\n\nThe implementation separates exact identity from movement. KFD-5 must still\ndetermine whether either responsibility is independently necessary or whether\nexisting Project Cut, Warrant, Decision, Admission, release-passport, manifest,\nand SemVer semantics already close the problem.\n\n## Current result\n\n```text\ncandidate: Product Release Cut\nstatus: provisional\nminimum closure: inconclusive\ndogfood: implementation witness exists; qualification not run\n\ncandidate: Cut Transition\nstatus: provisional\nminimum closure: inconclusive\ndogfood: implementation witness exists; qualification not run\n```\n\nThe source evidence is Kungfu commit\n[`a2967f22d0d23766eb887168e8fffc41251bad54`](https://github.com/kungfu-systems/kungfu/commit/a2967f22d0d23766eb887168e8fffc41251bad54),\nespecially `framework/upgrade/kungfu-product-release-cut.contract.json` and\n`docs/evolution/stages/10-product-release-cut-updater.md`.\n\n## Case surfaces\n\n- [Genesis](genesis.md)\n- [Ontology alternatives](ontology-split.md)\n- [Conditional distinguishability](distinguishability.md)\n- [KFD method trace](kfd-method-trace.md)\n- [Propagation boundary](propagation-hypothesis.md)\n- [Product Release Cut KFD-5 cut](cuts/0001-product-release-cut.json)\n- [Cut Transition KFD-5 cut](cuts/0001-cut-transition.json)\n- [Qualification reviews](reviews/README.md)\n- [Live case registry](../../registry.json)\n\n## Claim boundary\n\nThis case allocates no KFD number and accepts neither candidate. It does not\nactivate KFD-13, make Kungfu product terminology universal, prove historical\nnovelty, certify a release, or establish independent adoption. A\n`no-new-primitive` outcome remains first-class for both tracks."
+        },
+        "genesis": {
+          "path": "cases/live/product-release-cut-transition/genesis.md",
+          "markdown": "# Genesis: Exact Product Worlds and Authorized Movement\n\n## Initial observer\n\nThe initial observer was implementing release selection and upgrade behavior.\nThe natural objects were versions, manifests, platform artifacts, signatures,\nchannels, installers, and rollback records.\n\nThat ontology made SemVer appear to be product identity and made updater\nselection appear to authorize movement.\n\n## Pressure and perspective change\n\nEqual-SemVer successors, local dogfood artifacts, signed public supersession,\nrollback, conflict, and offline installation changed the consequence-bearing\nquestion:\n\n```text\nWhich exact qualified product world is this?\nWhat exact evidence authorizes movement to or from it?\n```\n\nKungfu's implementation answered with two roots: `releaseCutRoot` for one\nproduct world and `cutTransitionRoot` for movement between worlds.\n\n## Why implementation is not qualification\n\nThe split may reflect two durable responsibilities. It may also be a local\ncontract decomposition of existing KFD objects:\n\n- Product Release Cut may be a KFD-13 Project Cut specialization;\n- Cut Transition may be Warrant-bound Decision plus Admission;\n- release passports and manifests may already carry the evidence;\n- SemVer plus artifact digests may be sufficient in less demanding systems;\n- neither candidate may justify a new Primitive.\n\nThis case freezes those alternatives before successful release dogfood can\nturn one implementation into an inevitability narrative."
+        },
+        "methodTrace": {
+          "path": "cases/live/product-release-cut-transition/kfd-method-trace.md",
+          "markdown": "# KFD Method Trace\n\n## KFD-1: freeze the exact source and alternatives\n\nThe two candidates are bound to an exact Kungfu commit and immutable KFD-5\ncuts. Later release success cannot rewrite their genesis or erase a\n`no-new-primitive` result.\n\n## KFD-2: separate evidence from confidence\n\nAn executable contract is an implementation witness. It is not independent\nadoption, release certification, Primitive qualification, or proof that the\nsplit is minimal.\n\n## KFD-3: preserve participant value\n\nOperators, release owners, installed products, and independent verifiers need\nthe same exact identity and transition evidence without one participant's\ncache, version label, or network view becoming universal authority.\n\n## KFD-4: transform the observer\n\nThe release producer sees manifests and channels. The installed product and\noperator bear consequences of exact identity, conflict, upgrade, recovery,\nand rollback. That perspective change exposes the two candidate\nresponsibilities.\n\n## KFD-5: keep alternatives and negative outcomes live\n\nEach candidate retains Project Cut, generic Cut, Warrant/Decision/Admission,\nrelease passport, manifest, SemVer, and no-new-Primitive alternatives. Deletion\nand fuse tests must hold all other roots fixed.\n\n## KFD-6 boundary\n\nNo autonomous discovery claim is made. Humans and agents reconstructed the\nimplementation pressure and opened provisional tracks. There was no plural\nmethod experiment, fixed-ontology baseline, held-out promotion set, or transfer\nevaluation."
+        },
+        "propagationHypothesis": {
+          "path": "cases/live/product-release-cut-transition/propagation-hypothesis.md",
+          "markdown": "# Propagation Hypothesis\n\nIf the candidates qualify, a product could preserve one common identity and\nmovement boundary across build, publication, installation, activation,\nrecovery, and rollback:\n\n```text\nqualified product inputs\n  -> Product Release Cut\n  -> separately authorized Cut Transition\n  -> verified installation or rollback\n  -> retained successor identity and movement receipt\n```\n\nThis might transfer beyond Kungfu wherever a version label is insufficient to\nidentify exact deployed reality and movement has consequences distinct from\nidentity.\n\nThe hypothesis is unverified. A Project Cut Domain Profile plus existing\ndecision and admission semantics may provide the same value at lower ontology\ncost. A product with immutable version-to-artifact mapping may need neither\ncandidate. Propagation that hides local trust, compatibility, rollback, or\nparticipant authority would contradict KFD-3 even if deployment succeeded."
+        },
+        "reviewIndex": {
+          "path": "cases/live/product-release-cut-transition/reviews/README.md",
+          "markdown": "# Product Release Cut and Cut Transition Reviews\n\nNo independent qualification review has been completed.\n\nA review should evaluate:\n\n1. whether each candidate changes a consequential decision beyond its retained\n   alternatives;\n2. whether source settlement and installed product identity remain distinct;\n3. whether movement authority is already closed by Warrant, Decision, and\n   Admission;\n4. whether deletion and fuse tests hold all other roots fixed;\n5. whether negative equal-SemVer, conflict, local-trust, recovery, and rollback\n   cases are retained;\n6. whether public and local trust domains remain independently owned;\n7. whether the correct result is promotion, revision, subsumption, rejection,\n   or no new Primitive for each track independently."
+        },
+        "ontologySplit": {
+          "path": "cases/live/product-release-cut-transition/ontology-split.md",
+          "markdown": "# Ontology Alternatives\n\n## Proposed split\n\n| Responsibility | Candidate identity | Candidate authority |\n|---|---|---|\n| Exact qualified product world | Product Release Cut root | Declared product-profile composition only; source, artifact, signing, and qualification authorities remain external |\n| Authorized movement between two exact worlds | Cut Transition root | Declared relation, compatibility, migration, rollback, trust, and evidence binding only |\n\n## Retained alternatives\n\n| Alternative | Compression claim | Main test |\n|---|---|---|\n| Generic Cut | One fact-coordinate abstraction is sufficient | Can it preserve product qualification and platform slices without product-specific identity? |\n| KFD-13 Project Cut specialization | Release identity is one software-project settlement profile | Does it cover installed product worlds without confusing source settlement and runtime identity? |\n| Release passport or manifest | Existing evidence containers already identify the product | Can identity remain exact across equal-SemVer successors, local trust domains, and rollback? |\n| SemVer plus artifact digest | Version and bytes are sufficient | Can movement authority and compatibility remain inspectable without another object? |\n| Warrant + Decision + Admission | Existing authority objects already own movement | Does a transition add durable semantics beyond a bound decision and admitted action? |\n| No new Primitive | Both names remain Kungfu Profile vocabulary | Does deletion change any consequential decision outside the local contract? |\n\n## Forbidden fusion\n\nNeither candidate may absorb source facts, artifact bytes, signature authority,\nqualification evidence, Warrant, Decision, Admission, installer execution,\nparticipant policy, or rollback occurrence. Qualification requires useful\ncoordination while those owners remain independently inspectable."
+        },
+        "distinguishabilityArgument": {
+          "path": "cases/live/product-release-cut-transition/distinguishability.md",
+          "markdown": "# Conditional Distinguishability\n\n## Product Release Cut deletion test\n\nHold source, artifacts, platform manifests, signatures, qualification, SemVer,\nchannel, and trust domain fixed. Remove only Product Release Cut identity.\n\nDeletion matters only if a participant can no longer answer which exact\nqualified product world is current, distinguish equal-SemVer successors, or\nbind rollback to the exact prior world without reconstructing the same object\nad hoc. A convenient aggregate hash is not enough.\n\n## Cut Transition deletion test\n\nHold the two product worlds, Warrant, Decision, Admission, compatibility,\nmigration, rollback, and evidence fixed. Remove only Cut Transition.\n\nDeletion matters only if authorized movement, conflict, recovery, or rollback\nbecomes ambiguous or requires repeated reconstruction not already owned by the\nfixed authority objects.\n\n## Fuse tests\n\nProduct Release Cut is not separate if a generic Cut or Project Cut profile\npreserves identical decisions at lower ontology cost. Cut Transition is not\nseparate if Warrant-bound Decision plus Admission preserves identical movement\nand rollback consequences without hidden reconstruction.\n\nConversely, separation gains evidence if one exact product world participates\nin several valid transitions, one transition can be assessed independently of\neither endpoint's identity, and endpoint identity remains unchanged when\nmovement authorization is denied, replaced, or rolled back.\n\n## Required negative cases\n\n- same SemVer, identical Cut;\n- same SemVer, verified successor;\n- same SemVer, unsigned conflicting public Cut;\n- local dogfood Cut that is publication-ineligible;\n- diverged or unknown relation;\n- rollback to an exact prior Cut;\n- valid endpoint Cuts with an invalid or revoked transition;\n- valid transition evidence with a missing or mismatched endpoint.\n\n## Current verdict\n\nBoth candidates are analytically distinguishable enough to incubate but remain\nprovisional. Minimum closure, deletion, fuse, independent adoption, and\ncross-domain transfer are inconclusive."
+        },
+        "candidateTracks": [
+          {
+            "id": "product-release-cut",
+            "title": "Product Release Cut",
+            "status": "provisional",
+            "definition": "A possible product-domain Primitive or KFD-13 specialization that identifies one exact qualified product world while preserving source, artifact, signing, qualification, platform, and trust-domain authorities.",
+            "currentCut": {
+              "path": "cases/live/product-release-cut-transition/cuts/0001-product-release-cut.json",
+              "sha256": "ebc6513e3d1b3c5c2edb2b0c497d7ab3a9f6f844fb7608b909cf862b554f9d6b",
+              "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-5/primitive-discovery.schema.json",
+              "schemaVersion": 3,
+              "record": {
+                "schemaVersion": 3,
+                "contract": "kfd-5-primitive-discovery",
+                "standard": "kfd-5",
+                "candidate": {
+                  "id": "product-release-cut",
+                  "title": "Product Release Cut",
+                  "problemStatement": "Version labels, manifests, artifacts, signatures, qualification, and channels may each remain valid while participants still lack one exact identity for the qualified product world that is current, installable, or recoverable.",
+                  "scope": "Provisional product-domain candidate for exact qualified released-world identity; KFD-13 specialization, cross-product transfer, independent adoption, numbering, and universal necessity are not claimed."
+                },
+                "genesis": {
+                  "methods": [
+                    "direct-situated-judgment",
+                    "perspective-transformation",
+                    "structural-compression"
+                  ],
+                  "observationPerspective": {
+                    "id": "release-producer",
+                    "bearer": "human and agent participants producing release manifests, channels, artifacts, and evidence",
+                    "role": "release producer",
+                    "proximity": "inside source, build, signing, qualification, publication, and channel state",
+                    "consequences": [
+                      "bears release assembly, publication, compatibility, and provenance defects"
+                    ],
+                    "naturalObjects": [
+                      "SemVer",
+                      "manifest",
+                      "artifact",
+                      "signature",
+                      "qualification",
+                      "channel"
+                    ]
+                  },
+                  "currentOntology": [
+                    "Fact",
+                    "Cut",
+                    "Warrant",
+                    "Decision",
+                    "Admission",
+                    "Project Cut",
+                    "release passport",
+                    "manifest",
+                    "SemVer"
+                  ],
+                  "observation": "Equal-SemVer successors, local dogfood artifacts, public signing, offline installation, and rollback made version and manifest coordinates insufficient as one consequence-bearing product identity.",
+                  "candidateObject": "Product Release Cut may be an independently addressable root for one exact qualified product world while preserving source, artifact, signing, qualification, platform, and trust-domain authorities.",
+                  "claimBoundary": "The cut opens qualification and does not decide whether the candidate is an independent Primitive, a KFD-13 Project Cut specialization, a release passport or manifest projection, or no new Primitive.",
+                  "methodEvidence": [
+                    {
+                      "kind": "git",
+                      "coordinate": "https://github.com/kungfu-systems/kungfu/commit/a2967f22d0d23766eb887168e8fffc41251bad54",
+                      "observer": "KFD maintainers"
+                    },
+                    {
+                      "kind": "file",
+                      "coordinate": "cases/live/product-release-cut-transition/genesis.md",
+                      "observer": "KFD maintainers"
+                    }
+                  ],
+                  "transformedPerspective": {
+                    "id": "installed-product-operator",
+                    "bearer": "an installed product, operator, or verifier deciding what exact world is current or recoverable",
+                    "role": "consequence bearer",
+                    "proximity": "inside installation, activation, conflict, recovery, and rollback consequences but outside release assembly",
+                    "consequences": [
+                      "bears wrong-world activation, equal-version conflict, unverifiable recovery, and rollback ambiguity"
+                    ],
+                    "naturalObjects": [
+                      "exact current product world",
+                      "verified successor",
+                      "conflict",
+                      "recoverable prior world"
+                    ]
+                  },
+                  "transformation": "The observer moved from release assembly to the installed participant that must identify exact product reality independently of labels and producer-local state.",
+                  "newlyVisibleNeed": "One exact product-world identity may be needed across publication, installation, verification, and rollback without absorbing their authorities.",
+                  "methodNotes": "The existing implementation is evidence for qualification, not proof of minimum closure or independent Primitive identity."
+                },
+                "boundaryPressure": {
+                  "contactSides": [
+                    "release production, publication, and qualification authorities",
+                    "installed products and operators bearing activation, conflict, recovery, and rollback consequences"
+                  ],
+                  "implicitHandling": "Participants reconstruct product identity from SemVer, channel position, manifest paths, artifact digests, timestamps, and cache state.",
+                  "pressureChanges": [
+                    {
+                      "kind": "heterogeneity",
+                      "description": "Public and local trust domains can contain different publication-eligible product worlds."
+                    },
+                    {
+                      "kind": "consequence",
+                      "description": "An incorrect identity can activate, retain, or roll back the wrong product world."
+                    }
+                  ],
+                  "observedFailures": [
+                    "Equal SemVer does not prove identical product reality.",
+                    "A mutable source cache cannot remain installed identity or rollback authority.",
+                    "Separate platform artifacts can drift from the intended product-world composition.",
+                    "Local dogfood evidence may be mistaken for public release qualification."
+                  ],
+                  "mediationClaim": "A Product Release Cut may bind one exact product world while preserving every contributing authority and trust domain.",
+                  "internalObjectAlternative": "A KFD-13 Project Cut Domain Profile, release passport, manifest, or SemVer plus artifact digest may provide equivalent identity at lower ontology cost."
+                },
+                "grounding": {
+                  "pressure": [
+                    "Equal-SemVer worlds may be identical, valid successors, or conflicts.",
+                    "Public and local trust domains have different publication authority.",
+                    "Installed identity and rollback must survive source-cache loss.",
+                    "Platform slices must remain bound to one exact product composition."
+                  ],
+                  "factSources": [
+                    {
+                      "kind": "git",
+                      "coordinate": "https://github.com/kungfu-systems/kungfu/blob/a2967f22d0d23766eb887168e8fffc41251bad54/framework/upgrade/kungfu-product-release-cut.contract.json",
+                      "observer": "Kungfu product implementation"
+                    },
+                    {
+                      "kind": "file",
+                      "coordinate": "cases/live/product-release-cut-transition/distinguishability.md",
+                      "observer": "KFD candidate qualification"
+                    }
+                  ],
+                  "evidenceBoundary": "The cut records one founding-adopter executable contract and public architecture at one exact Git cut. It contains no independent adopter, completed comparative deletion test, cross-product transfer, or proof that Project Cut and release-passport alternatives are insufficient.",
+                  "knownGaps": [
+                    "No independent adopter",
+                    "No completed public and local campaign comparison",
+                    "No measured reconstruction-cost deletion test",
+                    "No cross-product transfer",
+                    "No independent qualification review",
+                    "No decision between Primitive, Project Cut specialization, manifest, and no-new-Primitive outcomes"
+                  ]
+                },
+                "participants": [
+                  {
+                    "id": "kungfu-implementation-source",
+                    "kind": "collective",
+                    "functions": [
+                      "candidate-generation",
+                      "evidence-custody"
+                    ]
+                  },
+                  {
+                    "id": "kfd-analysis-participant",
+                    "kind": "agent",
+                    "functions": [
+                      "candidate-generation",
+                      "scalable-reasoning"
+                    ]
+                  },
+                  {
+                    "id": "maintainer-decision-owner",
+                    "kind": "human",
+                    "functions": [
+                      "perspective-declaration",
+                      "decision"
+                    ]
+                  }
+                ],
+                "alternatives": [
+                  {
+                    "name": "KFD-13 Project Cut specialization",
+                    "disposition": "retained",
+                    "reason": "A product release may be one software-project settlement profile with installed-product fields rather than a new Primitive."
+                  },
+                  {
+                    "name": "Release passport or manifest",
+                    "disposition": "retained",
+                    "reason": "Existing evidence containers may already bind exact product identity if their roots and trust domains remain immutable."
+                  },
+                  {
+                    "name": "SemVer plus artifact digest",
+                    "disposition": "retained",
+                    "reason": "Systems with immutable version-to-artifact mapping may need no additional identity."
+                  },
+                  {
+                    "name": "No new Primitive",
+                    "disposition": "unresolved",
+                    "reason": "Product Release Cut may remain Kungfu Profile vocabulary if deletion changes no decision outside the implementation."
+                  }
+                ],
+                "contractModel": {
+                  "identity": "One content-addressed root over a declared Product Release Cut preimage.",
+                  "boundary": "Exact product composition and platform slices, excluding source, artifact, signing, qualification, and participant authorities.",
+                  "authority": "May identify one product world; may not authorize movement, certify inputs, publish, install, activate, or roll back it.",
+                  "lifecycle": "Proposed, assembled, qualified, published or local-only, installed, active, retained for recovery, or superseded without root mutation.",
+                  "operations": [
+                    "compose",
+                    "verify",
+                    "compare-identity",
+                    "inspect-platform-slice",
+                    "retain-for-recovery"
+                  ]
+                },
+                "tests": {
+                  "minimumClosure": {
+                    "result": "inconclusive",
+                    "evidence": [],
+                    "notes": "The contract closes one implementation but Project Cut and manifest alternatives have not been held fixed and compared."
+                  },
+                  "deletion": {
+                    "result": "inconclusive",
+                    "evidence": [
+                      {
+                        "kind": "file",
+                        "coordinate": "cases/live/product-release-cut-transition/distinguishability.md"
+                      }
+                    ],
+                    "notes": "Equal-version and recovery pressure is explicit; consequential reconstruction cost has not been measured."
+                  },
+                  "fuse": {
+                    "result": "inconclusive",
+                    "evidence": [
+                      {
+                        "kind": "file",
+                        "coordinate": "cases/live/product-release-cut-transition/ontology-split.md"
+                      }
+                    ],
+                    "notes": "Fusion with Project Cut, release passport, manifest, and SemVer remains unresolved."
+                  },
+                  "falsifiers": [
+                    "A Project Cut Domain Profile preserves every identity decision at lower ontology cost.",
+                    "Immutable SemVer-to-artifact mapping makes equal-version conflict and reconstruction impossible.",
+                    "The Release Cut root adds no decision-relevant information beyond an existing manifest or passport root.",
+                    "Independent adopters do not reproduce the identity problem."
+                  ],
+                  "dogfood": {
+                    "result": "inconclusive",
+                    "evidence": [
+                      {
+                        "kind": "git",
+                        "coordinate": "https://github.com/kungfu-systems/kungfu/commit/a2967f22d0d23766eb887168e8fffc41251bad54"
+                      }
+                    ],
+                    "notes": "A public implementation witness exists, but comparative KFD-5 qualification and independent review have not run."
+                  }
+                },
+                "decision": {
+                  "outcome": "provisional",
+                  "owner": "KFD maintainers",
+                  "reason": "Exact product-world identity is operationally explicit and analytically distinguishable, but minimum closure against Project Cut, passport, manifest, SemVer, and no-new-Primitive alternatives remains unproved.",
+                  "residualRisks": [
+                    "Product terminology may be mistaken for a universal Primitive.",
+                    "The candidate may duplicate KFD-13 Project Cut.",
+                    "One implementation may overfit the candidate boundary.",
+                    "A root aggregate may hide rather than preserve contributing authority."
+                  ]
+                }
+              }
+            },
+            "claimBoundary": "Provisional only. Project Cut specialization, release passport, manifest, SemVer plus artifact digest, and no-new-Primitive outcomes remain live; independent adoption, transfer, numbering, and release qualification are not claimed."
+          },
+          {
+            "id": "cut-transition",
+            "title": "Cut Transition",
+            "status": "provisional",
+            "definition": "A possible product-domain Primitive or typed authority relation that binds exact endpoint Cuts, compatibility, migration, rollback, trust, and evidence for movement without absorbing endpoint identity or action execution.",
+            "currentCut": {
+              "path": "cases/live/product-release-cut-transition/cuts/0001-cut-transition.json",
+              "sha256": "a2b658c8658c266cc9ec2614834efe2e5bc4425c7877c39fe0833d8a5afee4d7",
+              "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-5/primitive-discovery.schema.json",
+              "schemaVersion": 3,
+              "record": {
+                "schemaVersion": 3,
+                "contract": "kfd-5-primitive-discovery",
+                "standard": "kfd-5",
+                "candidate": {
+                  "id": "cut-transition",
+                  "title": "Cut Transition",
+                  "problemStatement": "Two exact product-world identities do not by themselves establish whether movement is authorized, compatible, recoverable, or safe, and updater-local selection may silently become movement authority.",
+                  "scope": "Provisional product-domain candidate for independently inspectable movement between exact Product Release Cuts; universal transition vocabulary, independent adoption, numbering, and separation from Warrant-bound Decision and Admission are not claimed."
+                },
+                "genesis": {
+                  "methods": [
+                    "direct-situated-judgment",
+                    "perspective-transformation",
+                    "reconstruction-pressure"
+                  ],
+                  "observationPerspective": {
+                    "id": "updater-implementer",
+                    "bearer": "human and agent participants implementing selection, installation, activation, and rollback",
+                    "role": "updater implementer",
+                    "proximity": "inside version comparison, manifest validation, artifact selection, and installer execution",
+                    "consequences": [
+                      "bears selection, compatibility, migration, and rollback defects"
+                    ],
+                    "naturalObjects": [
+                      "upgrade available",
+                      "version precedence",
+                      "installer",
+                      "rollback",
+                      "channel"
+                    ]
+                  },
+                  "currentOntology": [
+                    "Product Release Cut",
+                    "Warrant",
+                    "Decision",
+                    "Admission",
+                    "compatibility policy",
+                    "migration",
+                    "rollback receipt"
+                  ],
+                  "observation": "Exact endpoint identities left movement unresolved: identical, verified-successor, ancestor, recovery, diverged, and unknown relations require different decisions that cannot be inferred from root text, timestamps, SemVer, or network recency.",
+                  "candidateObject": "Cut Transition may be an independently addressable evidence-bearing relation that binds exact endpoints, compatibility, migration, rollback, trust, and movement authority without absorbing either endpoint or action execution.",
+                  "claimBoundary": "The cut opens qualification and does not decide whether Cut Transition is a Primitive, a typed Warrant/Decision/Admission record, an upgrade manifest section, or no new Primitive.",
+                  "methodEvidence": [
+                    {
+                      "kind": "git",
+                      "coordinate": "https://github.com/kungfu-systems/kungfu/commit/a2967f22d0d23766eb887168e8fffc41251bad54",
+                      "observer": "KFD maintainers"
+                    },
+                    {
+                      "kind": "file",
+                      "coordinate": "cases/live/product-release-cut-transition/genesis.md",
+                      "observer": "KFD maintainers"
+                    }
+                  ],
+                  "transformedPerspective": {
+                    "id": "movement-consequence-bearer",
+                    "bearer": "an operator or installed product deciding whether to move, remain, recover, or roll back",
+                    "role": "movement consequence bearer",
+                    "proximity": "inside service continuity and rollback consequences but outside updater-local selection rules",
+                    "consequences": [
+                      "bears unauthorized movement, incompatible activation, conflict, failed recovery, and unrecoverable rollback"
+                    ],
+                    "naturalObjects": [
+                      "authorized transition",
+                      "denied transition",
+                      "recovery path",
+                      "rollback path",
+                      "conflict"
+                    ]
+                  },
+                  "transformation": "The observer moved from choosing an artifact to bearing the consequences of movement between exact product worlds.",
+                  "newlyVisibleNeed": "Movement may require its own inspectable identity and evidence even when both endpoint Cuts remain valid and unchanged.",
+                  "methodNotes": "The strongest alternative is a Warrant-bound Decision followed by independent Admission; the implementation name does not defeat that alternative."
+                },
+                "boundaryPressure": {
+                  "contactSides": [
+                    "exact source and target product worlds",
+                    "participants authorizing and bearing upgrade, recovery, and rollback consequences"
+                  ],
+                  "implicitHandling": "Movement is inferred from SemVer precedence, channel order, timestamps, updater rules, network recency, or the presence of a newer artifact.",
+                  "pressureChanges": [
+                    {
+                      "kind": "authority",
+                      "description": "Artifact availability and updater selection do not by themselves authorize product movement."
+                    },
+                    {
+                      "kind": "consequence",
+                      "description": "Movement may require migration, recovery, rollback, trust, and compatibility decisions."
+                    }
+                  ],
+                  "observedFailures": [
+                    "Unequal roots are incorrectly ordered by version, timestamp, directory order, or recency.",
+                    "An equal-SemVer conflict is mistaken for an update.",
+                    "Rollback depends on a mutable source cache instead of exact retained evidence.",
+                    "Valid endpoint identities are mistaken for authorization to move between them."
+                  ],
+                  "mediationClaim": "A Cut Transition may keep exact endpoints and movement authority separately inspectable across update, recovery, and rollback.",
+                  "internalObjectAlternative": "Warrant-bound Decision plus independent Admission and a typed upgrade manifest may provide equivalent movement semantics."
+                },
+                "grounding": {
+                  "pressure": [
+                    "Endpoint identity does not imply a safe or authorized relation.",
+                    "Equal-SemVer worlds may be identical, successors, or conflicts.",
+                    "Rollback and recovery require exact prior and target roots.",
+                    "Updater execution must not create its own authority."
+                  ],
+                  "factSources": [
+                    {
+                      "kind": "git",
+                      "coordinate": "https://github.com/kungfu-systems/kungfu/blob/a2967f22d0d23766eb887168e8fffc41251bad54/framework/upgrade/kungfu-product-release-cut.contract.json",
+                      "observer": "Kungfu product implementation"
+                    },
+                    {
+                      "kind": "file",
+                      "coordinate": "cases/live/product-release-cut-transition/distinguishability.md",
+                      "observer": "KFD candidate qualification"
+                    }
+                  ],
+                  "evidenceBoundary": "The cut records one founding-adopter transition contract and public architecture at one exact Git cut. It contains no independent adopter, completed comparison with Warrant/Decision/Admission, cross-product transfer, or proof that a typed manifest relation is insufficient.",
+                  "knownGaps": [
+                    "No independent adopter",
+                    "No fixed-endpoint deletion benchmark",
+                    "No completed Warrant/Decision/Admission comparison",
+                    "No cross-product transfer",
+                    "No independent qualification review",
+                    "No decision between Primitive, typed authority record, manifest relation, and no-new-Primitive outcomes"
+                  ]
+                },
+                "participants": [
+                  {
+                    "id": "kungfu-implementation-source",
+                    "kind": "collective",
+                    "functions": [
+                      "candidate-generation",
+                      "evidence-custody"
+                    ]
+                  },
+                  {
+                    "id": "kfd-analysis-participant",
+                    "kind": "agent",
+                    "functions": [
+                      "candidate-generation",
+                      "scalable-reasoning"
+                    ]
+                  },
+                  {
+                    "id": "maintainer-decision-owner",
+                    "kind": "human",
+                    "functions": [
+                      "perspective-declaration",
+                      "decision"
+                    ]
+                  }
+                ],
+                "alternatives": [
+                  {
+                    "name": "Warrant-bound Decision plus Admission",
+                    "disposition": "retained",
+                    "reason": "Existing KFD authority and settlement responsibilities may already express movement without a new Primitive."
+                  },
+                  {
+                    "name": "Typed upgrade manifest relation",
+                    "disposition": "retained",
+                    "reason": "A bounded relation inside an existing manifest may preserve exact endpoints, compatibility, migration, and rollback."
+                  },
+                  {
+                    "name": "SemVer and channel precedence",
+                    "disposition": "retained",
+                    "reason": "Products with immutable version mapping and simple trust may not need a separate transition object."
+                  },
+                  {
+                    "name": "No new Primitive",
+                    "disposition": "unresolved",
+                    "reason": "Cut Transition may remain Kungfu Profile vocabulary if deletion changes no decision beyond existing authority records."
+                  }
+                ],
+                "contractModel": {
+                  "identity": "One content-addressed root over exact source and target Cuts plus declared relation, compatibility, migration, rollback, trust, and evidence.",
+                  "boundary": "Movement semantics between immutable endpoint Cuts; endpoint identity and installer occurrence remain separately owned.",
+                  "authority": "May bind already granted movement authority; may not mint Warrant, make a Decision, admit an action, execute installation, or certify endpoints.",
+                  "lifecycle": "Proposed, assessed, authorized or denied, executed or failed, observed, superseded, revoked, recovered, or rolled back without root mutation.",
+                  "operations": [
+                    "propose",
+                    "verify-endpoints",
+                    "assess-relation",
+                    "bind-authority",
+                    "observe-execution",
+                    "recover",
+                    "roll-back"
+                  ]
+                },
+                "tests": {
+                  "minimumClosure": {
+                    "result": "inconclusive",
+                    "evidence": [],
+                    "notes": "The contract closes one updater implementation, but existing authority and manifest alternatives have not been compared under fixed endpoints."
+                  },
+                  "deletion": {
+                    "result": "inconclusive",
+                    "evidence": [
+                      {
+                        "kind": "file",
+                        "coordinate": "cases/live/product-release-cut-transition/distinguishability.md"
+                      }
+                    ],
+                    "notes": "Movement ambiguity is explicit; the incremental value beyond Warrant, Decision, Admission, and manifest relations remains unmeasured."
+                  },
+                  "fuse": {
+                    "result": "inconclusive",
+                    "evidence": [
+                      {
+                        "kind": "file",
+                        "coordinate": "cases/live/product-release-cut-transition/ontology-split.md"
+                      }
+                    ],
+                    "notes": "Fusion with existing authority objects and manifest relations remains unresolved."
+                  },
+                  "falsifiers": [
+                    "Warrant-bound Decision plus independent Admission preserves every movement consequence at lower ontology cost.",
+                    "A typed manifest relation provides identical verification, recovery, and rollback behavior.",
+                    "Products with immutable version mapping never need a separately addressable transition.",
+                    "Independent adopters do not reproduce the movement-authority problem."
+                  ],
+                  "dogfood": {
+                    "result": "inconclusive",
+                    "evidence": [
+                      {
+                        "kind": "git",
+                        "coordinate": "https://github.com/kungfu-systems/kungfu/commit/a2967f22d0d23766eb887168e8fffc41251bad54"
+                      }
+                    ],
+                    "notes": "A public implementation witness exists, but fixed-endpoint comparison and independent KFD-5 review have not run."
+                  }
+                },
+                "decision": {
+                  "outcome": "provisional",
+                  "owner": "KFD maintainers",
+                  "reason": "Movement is operationally distinct from endpoint identity in one implementation, but minimum closure against Warrant-bound Decision, Admission, manifest relation, SemVer, and no-new-Primitive alternatives remains unproved.",
+                  "residualRisks": [
+                    "The candidate may duplicate existing KFD authority and settlement objects.",
+                    "Updater implementation details may be mistaken for universal transition semantics.",
+                    "A transition record may launder unavailable or invalid endpoint evidence.",
+                    "One implementation may overfit relation and rollback fields."
+                  ]
+                }
+              }
+            },
+            "claimBoundary": "Provisional only. Warrant-bound Decision plus Admission, typed upgrade-manifest relation, SemVer and channel precedence, and no-new-Primitive outcomes remain live; independent adoption, transfer, numbering, and movement authority are not claimed."
           }
         ]
       }

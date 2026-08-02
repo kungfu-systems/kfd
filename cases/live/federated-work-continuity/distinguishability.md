@@ -1,3 +1,16 @@
+---
+status: draft
+period: 2026-08-03
+theme: federated-work-continuity-distinguishability
+doc_type: analysis
+source_level: public-repository-evidence-and-maintainer-consensus
+confidence: medium
+sensitivity: public
+evidence_grade: B
+review_state: unreviewed
+last_reviewed: 2026-08-03
+---
+
 # Conditional Distinguishability
 
 ## Deletion experiment
@@ -43,10 +56,12 @@ Potential evidence for separation would require cases where:
 - two observers derive different valid Work views from the same component
   facts and preserve the difference rather than merging it.
 
-No completed operational witness currently satisfies this test.
+Kungfu's current Work Control and Portfolio implementation makes this test
+executable, but no retained fixed-root result currently satisfies it.
 
 ## Current verdict
 
-The candidate is analytically distinguishable enough to incubate, but not
-qualified. Minimum closure, fuse, deletion, implementation value, and
-cross-domain transfer remain inconclusive.
+The candidate is analytically distinguishable enough to incubate and now has
+founding implementation pressure, but it is not qualified. Minimum closure,
+fuse, deletion, independent implementation value, and cross-domain transfer
+remain inconclusive.
