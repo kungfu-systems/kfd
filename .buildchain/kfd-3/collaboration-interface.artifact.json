@@ -464,7 +464,7 @@
     {
       "id": "doc:formal-model",
       "sourcePath": "docs/formal-model.md",
-      "sha256": "54ca413604825b6482037fc4ea42b9efb0f9b02d9701c4ff017aeb5750395a5e"
+      "sha256": "faa42d42d2254ca451a38bbc17a169e662d38cbfd9e493b94c2621fd925bf9b9"
     },
     {
       "id": "doc:field-responsibility-matrix",
@@ -494,7 +494,7 @@
     {
       "id": "doc:docs-map",
       "sourcePath": "docs/MAP.md",
-      "sha256": "6f30dce4f7c69ce526ac8bfcf66dc6c84991b94ef2523add6c170f7f20a6ab6a"
+      "sha256": "f683594092fed2662374a890e804c03432c34f7e2eac02fd0cf0a9f6bfa11569"
     },
     {
       "id": "doc:kfd-1-usage",
@@ -709,17 +709,17 @@
     {
       "id": "case:federated-work-continuity:entry",
       "sourcePath": "cases/live/federated-work-continuity/README.md",
-      "sha256": "495952ac5032c59f63d0a7c442cf5c80aae8c190c6d846a0a523c0f39272863a"
+      "sha256": "722c9a49b95eaf8cf4efd4c9f771a6221222b5baa8db810f133197c9a6b8acc9"
     },
     {
       "id": "case:federated-work-continuity:genesis",
       "sourcePath": "cases/live/federated-work-continuity/genesis.md",
-      "sha256": "5a7e19c7bb65c724689cf81a3f68bf489b7691563f841ca331589c8587e7a65b"
+      "sha256": "e663103d0269b670a2e525986b074b92ca0dbff535cd8820ae27c53fe422a95e"
     },
     {
       "id": "case:federated-work-continuity:method-trace",
       "sourcePath": "cases/live/federated-work-continuity/kfd-method-trace.md",
-      "sha256": "856c39a88ca54699b0fa0edbb9ff7374db02dd5606b3a7661d06f47e5302d2c9"
+      "sha256": "957e5969371ed8361b39a39bdd0e8089ef805ef8d257d11f3b385ca686978fad"
     },
     {
       "id": "case:federated-work-continuity:propagation-hypothesis",
@@ -739,12 +739,57 @@
     {
       "id": "case:federated-work-continuity:distinguishability-argument",
       "sourcePath": "cases/live/federated-work-continuity/distinguishability.md",
-      "sha256": "91a9dd6ed7ee59005ff5f8343ccc1f7f715edfcdaf1ea3a83a3c16750431e130"
+      "sha256": "1819f4bd609ab86716a712047e9af076ee318ff18a79bee269129189f4f7f671"
     },
     {
       "id": "case:federated-work-continuity:candidate:work:current-cut",
-      "sourcePath": "cases/live/federated-work-continuity/cuts/0001-work.json",
-      "sha256": "31bfab3bcf969fb7c46279665c43223cc59ecc0b3c291f2449f303a0806cc9c2"
+      "sourcePath": "cases/live/federated-work-continuity/cuts/0002-work.json",
+      "sha256": "ef73aa8b71af65db49ed5deb69606ac96c69c742d887271d8192aee537b4c8e2"
+    },
+    {
+      "id": "case:product-release-cut-transition:entry",
+      "sourcePath": "cases/live/product-release-cut-transition/README.md",
+      "sha256": "d15939a45dcc584cad8a238bb1dab7e2d37533476c65daef858799c401ee548a"
+    },
+    {
+      "id": "case:product-release-cut-transition:genesis",
+      "sourcePath": "cases/live/product-release-cut-transition/genesis.md",
+      "sha256": "e19c08f010b819b5499637a201b51d127b5a87b912400f42a5e353a280ac6605"
+    },
+    {
+      "id": "case:product-release-cut-transition:method-trace",
+      "sourcePath": "cases/live/product-release-cut-transition/kfd-method-trace.md",
+      "sha256": "efdb8cc83487ea57b7c1ce621a34713c8368ed3a768bfe25bf8665808edd03bc"
+    },
+    {
+      "id": "case:product-release-cut-transition:propagation-hypothesis",
+      "sourcePath": "cases/live/product-release-cut-transition/propagation-hypothesis.md",
+      "sha256": "c4fa22a7569aab9ad618b1e65737cddda887112c943d208d7108efc1a00db25e"
+    },
+    {
+      "id": "case:product-release-cut-transition:review-index",
+      "sourcePath": "cases/live/product-release-cut-transition/reviews/README.md",
+      "sha256": "7c9df2e184d4ba58d9d499bcd8f4573301aff83991017d1fc71a4c14267e91bd"
+    },
+    {
+      "id": "case:product-release-cut-transition:ontology-split",
+      "sourcePath": "cases/live/product-release-cut-transition/ontology-split.md",
+      "sha256": "b3ae21da5f62824cdfd7bddd2e30f16e3a134cfc1f9b60580fbda7a6668435e2"
+    },
+    {
+      "id": "case:product-release-cut-transition:distinguishability-argument",
+      "sourcePath": "cases/live/product-release-cut-transition/distinguishability.md",
+      "sha256": "3bb3e87294ddb2220bbbfbbc97f55f88c9780c528ba05b882829073236e00da2"
+    },
+    {
+      "id": "case:product-release-cut-transition:candidate:product-release-cut:current-cut",
+      "sourcePath": "cases/live/product-release-cut-transition/cuts/0001-product-release-cut.json",
+      "sha256": "ebc6513e3d1b3c5c2edb2b0c497d7ab3a9f6f844fb7608b909cf862b554f9d6b"
+    },
+    {
+      "id": "case:product-release-cut-transition:candidate:cut-transition:current-cut",
+      "sourcePath": "cases/live/product-release-cut-transition/cuts/0001-cut-transition.json",
+      "sha256": "a2b658c8658c266cc9ec2614834efe2e5bc4425c7877c39fe0833d8a5afee4d7"
     },
     {
       "id": "candidate:index",
@@ -1153,7 +1198,7 @@
     {
       "id": "metadata:live-case-registry",
       "sourcePath": "cases/registry.json",
-      "sha256": "0443765d6ca1f947a98c7d1ce23ced5a37086dd317435186dc6af7d1c6d4fbf3"
+      "sha256": "eab3f9666c39022a03f552303ae4d684ff2df53699296192b0768f430d5d1d68"
     },
     {
       "id": "metadata:candidate-registry",
@@ -1217,7 +1262,7 @@
     {
       "id": "site:kfd-site-bundle",
       "sourcePath": "site/kfd-site.json",
-      "sha256": "e8d8b88193eab53ef23e7d0adddab241e13898d1b527a22791a4c732f30d6408"
+      "sha256": "285dd048b5f0924aa30c20b8a85e425f4c56014978002bc8e98077f1def1b168"
     },
     {
       "id": "site:release-propagation",
@@ -1249,7 +1294,7 @@
       },
       {
         "path": "docs/formal-model.md",
-        "sha256": "54ca413604825b6482037fc4ea42b9efb0f9b02d9701c4ff017aeb5750395a5e",
+        "sha256": "faa42d42d2254ca451a38bbc17a169e662d38cbfd9e493b94c2621fd925bf9b9",
         "description": "Inspect the shared notation, authority boundary, and traceability contract for non-normative KFD formal references."
       },
       {
@@ -1259,7 +1304,7 @@
       },
       {
         "path": "cases/registry.json",
-        "sha256": "0443765d6ca1f947a98c7d1ce23ced5a37086dd317435186dc6af7d1c6d4fbf3",
+        "sha256": "eab3f9666c39022a03f552303ae4d684ff2df53699296192b0768f430d5d1d68",
         "description": "Discover provisional Primitive candidates, immutable KFD-5 cuts, claim boundaries, and open review paths without treating a live case as a numbered decision."
       },
       {
@@ -1269,7 +1314,7 @@
       },
       {
         "path": "docs/MAP.md",
-        "sha256": "6f30dce4f7c69ce526ac8bfcf66dc6c84991b94ef2523add6c170f7f20a6ab6a",
+        "sha256": "f683594092fed2662374a890e804c03432c34f7e2eac02fd0cf0a9f6bfa11569",
         "description": "Route readers and agents to the right KFD document or machine surface."
       },
       {
@@ -1324,7 +1369,7 @@
       },
       {
         "path": "site/kfd-site.json",
-        "sha256": "e8d8b88193eab53ef23e7d0adddab241e13898d1b527a22791a4c732f30d6408",
+        "sha256": "285dd048b5f0924aa30c20b8a85e425f4c56014978002bc8e98077f1def1b168",
         "description": "Render KFD-owned homepage, foundation explanation, formal references, historical and live cases, and decision pages without duplicating extraction logic."
       }
     ],
@@ -1351,7 +1396,7 @@
       },
       {
         "path": "docs/formal-model.md",
-        "sha256": "54ca413604825b6482037fc4ea42b9efb0f9b02d9701c4ff017aeb5750395a5e",
+        "sha256": "faa42d42d2254ca451a38bbc17a169e662d38cbfd9e493b94c2621fd925bf9b9",
         "description": "Shared formal notation and authority boundary"
       },
       {
@@ -1361,7 +1406,7 @@
       },
       {
         "path": "cases/registry.json",
-        "sha256": "0443765d6ca1f947a98c7d1ce23ced5a37086dd317435186dc6af7d1c6d4fbf3",
+        "sha256": "eab3f9666c39022a03f552303ae4d684ff2df53699296192b0768f430d5d1d68",
         "description": "Machine-readable provisional Primitive case registry"
       },
       {
@@ -1386,7 +1431,7 @@
       },
       {
         "path": "docs/MAP.md",
-        "sha256": "6f30dce4f7c69ce526ac8bfcf66dc6c84991b94ef2523add6c170f7f20a6ab6a",
+        "sha256": "f683594092fed2662374a890e804c03432c34f7e2eac02fd0cf0a9f6bfa11569",
         "description": "Documentation routing entrypoint"
       },
       {
@@ -1426,7 +1471,7 @@
       },
       {
         "path": "site/kfd-site.json",
-        "sha256": "e8d8b88193eab53ef23e7d0adddab241e13898d1b527a22791a4c732f30d6408",
+        "sha256": "285dd048b5f0924aa30c20b8a85e425f4c56014978002bc8e98077f1def1b168",
         "description": "Site content projection"
       }
     ],
@@ -1453,7 +1498,7 @@
       },
       {
         "path": "docs/formal-model.md",
-        "sha256": "54ca413604825b6482037fc4ea42b9efb0f9b02d9701c4ff017aeb5750395a5e",
+        "sha256": "faa42d42d2254ca451a38bbc17a169e662d38cbfd9e493b94c2621fd925bf9b9",
         "description": "KFD-3 value evidence for kfd-foundation: KFD helps humans and agents understand the KFD Foundation and inspect precise non-normative formal references before adopting or extending KFD decisions."
       },
       {
@@ -1533,7 +1578,7 @@
       },
       {
         "path": "site/kfd-site.json",
-        "sha256": "e8d8b88193eab53ef23e7d0adddab241e13898d1b527a22791a4c732f30d6408",
+        "sha256": "285dd048b5f0924aa30c20b8a85e425f4c56014978002bc8e98077f1def1b168",
         "description": "KFD-3 value evidence for kfd-foundation: KFD helps humans and agents understand the KFD Foundation and inspect precise non-normative formal references before adopting or extending KFD decisions."
       },
       {
@@ -1568,7 +1613,7 @@
       },
       {
         "path": "cases/registry.json",
-        "sha256": "0443765d6ca1f947a98c7d1ce23ced5a37086dd317435186dc6af7d1c6d4fbf3",
+        "sha256": "eab3f9666c39022a03f552303ae4d684ff2df53699296192b0768f430d5d1d68",
         "description": "KFD-3 value evidence for kfd-live-case-dogfood: KFD gives humans and agents an inspectable path from provisional Primitive genesis through immutable KFD-5 cuts and open qualification without promoting the candidate by self-certification."
       },
       {
@@ -1710,7 +1755,7 @@
       },
       {
         "path": "site/kfd-site.json",
-        "sha256": "e8d8b88193eab53ef23e7d0adddab241e13898d1b527a22791a4c732f30d6408",
+        "sha256": "285dd048b5f0924aa30c20b8a85e425f4c56014978002bc8e98077f1def1b168",
         "description": "Site rendering boundary"
       }
     ],
@@ -1727,7 +1772,7 @@
       },
       {
         "path": "docs/formal-model.md",
-        "sha256": "54ca413604825b6482037fc4ea42b9efb0f9b02d9701c4ff017aeb5750395a5e",
+        "sha256": "faa42d42d2254ca451a38bbc17a169e662d38cbfd9e493b94c2621fd925bf9b9",
         "description": "Human and agent formal reference entrypoint"
       },
       {
@@ -1737,7 +1782,7 @@
       },
       {
         "path": "cases/registry.json",
-        "sha256": "0443765d6ca1f947a98c7d1ce23ced5a37086dd317435186dc6af7d1c6d4fbf3",
+        "sha256": "eab3f9666c39022a03f552303ae4d684ff2df53699296192b0768f430d5d1d68",
         "description": "Human and agent provisional live case path"
       },
       {
@@ -1802,7 +1847,7 @@
       },
       {
         "path": "docs/MAP.md",
-        "sha256": "6f30dce4f7c69ce526ac8bfcf66dc6c84991b94ef2523add6c170f7f20a6ab6a"
+        "sha256": "f683594092fed2662374a890e804c03432c34f7e2eac02fd0cf0a9f6bfa11569"
       },
       {
         "path": "docs/foundation.md",
@@ -1810,7 +1855,7 @@
       },
       {
         "path": "docs/formal-model.md",
-        "sha256": "54ca413604825b6482037fc4ea42b9efb0f9b02d9701c4ff017aeb5750395a5e"
+        "sha256": "faa42d42d2254ca451a38bbc17a169e662d38cbfd9e493b94c2621fd925bf9b9"
       },
       {
         "path": "docs/primitive-discovery-cases.md",
@@ -1818,7 +1863,7 @@
       },
       {
         "path": "cases/registry.json",
-        "sha256": "0443765d6ca1f947a98c7d1ce23ced5a37086dd317435186dc6af7d1c6d4fbf3"
+        "sha256": "eab3f9666c39022a03f552303ae4d684ff2df53699296192b0768f430d5d1d68"
       },
       {
         "path": "drafts/README.md",
@@ -2030,15 +2075,15 @@
       },
       {
         "path": "cases/live/federated-work-continuity/README.md",
-        "sha256": "495952ac5032c59f63d0a7c442cf5c80aae8c190c6d846a0a523c0f39272863a"
+        "sha256": "722c9a49b95eaf8cf4efd4c9f771a6221222b5baa8db810f133197c9a6b8acc9"
       },
       {
         "path": "cases/live/federated-work-continuity/genesis.md",
-        "sha256": "5a7e19c7bb65c724689cf81a3f68bf489b7691563f841ca331589c8587e7a65b"
+        "sha256": "e663103d0269b670a2e525986b074b92ca0dbff535cd8820ae27c53fe422a95e"
       },
       {
         "path": "cases/live/federated-work-continuity/kfd-method-trace.md",
-        "sha256": "856c39a88ca54699b0fa0edbb9ff7374db02dd5606b3a7661d06f47e5302d2c9"
+        "sha256": "957e5969371ed8361b39a39bdd0e8089ef805ef8d257d11f3b385ca686978fad"
       },
       {
         "path": "cases/live/federated-work-continuity/propagation-hypothesis.md",
@@ -2054,11 +2099,47 @@
       },
       {
         "path": "cases/live/federated-work-continuity/distinguishability.md",
-        "sha256": "91a9dd6ed7ee59005ff5f8343ccc1f7f715edfcdaf1ea3a83a3c16750431e130"
+        "sha256": "1819f4bd609ab86716a712047e9af076ee318ff18a79bee269129189f4f7f671"
       },
       {
-        "path": "cases/live/federated-work-continuity/cuts/0001-work.json",
-        "sha256": "31bfab3bcf969fb7c46279665c43223cc59ecc0b3c291f2449f303a0806cc9c2"
+        "path": "cases/live/federated-work-continuity/cuts/0002-work.json",
+        "sha256": "ef73aa8b71af65db49ed5deb69606ac96c69c742d887271d8192aee537b4c8e2"
+      },
+      {
+        "path": "cases/live/product-release-cut-transition/README.md",
+        "sha256": "d15939a45dcc584cad8a238bb1dab7e2d37533476c65daef858799c401ee548a"
+      },
+      {
+        "path": "cases/live/product-release-cut-transition/genesis.md",
+        "sha256": "e19c08f010b819b5499637a201b51d127b5a87b912400f42a5e353a280ac6605"
+      },
+      {
+        "path": "cases/live/product-release-cut-transition/kfd-method-trace.md",
+        "sha256": "efdb8cc83487ea57b7c1ce621a34713c8368ed3a768bfe25bf8665808edd03bc"
+      },
+      {
+        "path": "cases/live/product-release-cut-transition/propagation-hypothesis.md",
+        "sha256": "c4fa22a7569aab9ad618b1e65737cddda887112c943d208d7108efc1a00db25e"
+      },
+      {
+        "path": "cases/live/product-release-cut-transition/reviews/README.md",
+        "sha256": "7c9df2e184d4ba58d9d499bcd8f4573301aff83991017d1fc71a4c14267e91bd"
+      },
+      {
+        "path": "cases/live/product-release-cut-transition/ontology-split.md",
+        "sha256": "b3ae21da5f62824cdfd7bddd2e30f16e3a134cfc1f9b60580fbda7a6668435e2"
+      },
+      {
+        "path": "cases/live/product-release-cut-transition/distinguishability.md",
+        "sha256": "3bb3e87294ddb2220bbbfbbc97f55f88c9780c528ba05b882829073236e00da2"
+      },
+      {
+        "path": "cases/live/product-release-cut-transition/cuts/0001-product-release-cut.json",
+        "sha256": "ebc6513e3d1b3c5c2edb2b0c497d7ab3a9f6f844fb7608b909cf862b554f9d6b"
+      },
+      {
+        "path": "cases/live/product-release-cut-transition/cuts/0001-cut-transition.json",
+        "sha256": "a2b658c8658c266cc9ec2614834efe2e5bc4425c7877c39fe0833d8a5afee4d7"
       },
       {
         "path": "drafts/action-state-separation.md",

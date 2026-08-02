@@ -1,3 +1,16 @@
+---
+status: draft
+period: 2026-08-03
+theme: federated-work-continuity-method
+doc_type: analysis
+source_level: public-repository-evidence-and-maintainer-consensus
+confidence: medium
+sensitivity: public
+evidence_grade: B
+review_state: unreviewed
+last_reviewed: 2026-08-03
+---
+
 # KFD Method Trace
 
 ## KFD-1: preserve the unresolved cut
@@ -29,6 +42,8 @@ next action. That transformation generated the candidate.
 The same transformation may merely reveal Initiative or a derived query from a
 new angle. KFD-5 therefore requires a shared evidence cut comparing an
 independent Work object, a derived Work view, Initiative, and no new Primitive.
+The 2026-08-03 successor adds Work Control and Primitive Catalog implementation
+evidence while preserving every alternative and the provisional result.
 
 ## KFD-6 boundary
 

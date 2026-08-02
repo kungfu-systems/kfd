@@ -93,7 +93,7 @@ declared rather than inferred from file type or product vocabulary.
 
 ## Cross-KFD composition
 
-The twelve references compose as follows:
+The thirteen references compose as follows:
 
 ```text
 KFD-1 maintains a non-drifting fact base.

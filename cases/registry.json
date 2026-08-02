@@ -153,15 +153,58 @@
           "status": "provisional",
           "definition": "A possible higher-layer, perspective-bound coordinated action whole that preserves component authority, cuts, typed relations, proof state, degradation, and the current action frontier across workspaces.",
           "currentCut": {
-            "path": "cases/live/federated-work-continuity/cuts/0001-work.json",
-            "sha256": "31bfab3bcf969fb7c46279665c43223cc59ecc0b3c291f2449f303a0806cc9c2",
+            "path": "cases/live/federated-work-continuity/cuts/0002-work.json",
+            "sha256": "ef73aa8b71af65db49ed5deb69606ac96c69c742d887271d8192aee537b4c8e2",
             "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-5/primitive-discovery.schema.json",
             "schemaVersion": 3
           },
-          "claimBoundary": "Provisional only. The track does not decide whether Work is an independent entity, a derived view, Initiative or Portfolio semantics, or no new Primitive; implementation, dogfood, transfer, and independent review remain open."
+          "claimBoundary": "Provisional only. The successor cut binds current founding-product Work Control and experimental Primitive Catalog evidence while leaving independent entity, derived view, Initiative, Portfolio, Profile vocabulary, and no-new-Primitive outcomes unresolved; comparative dogfood, transfer, and independent review remain open."
         }
       ],
-      "claimBoundary": "This case preserves the Work hypothesis and its strongest Initiative and derived-view alternatives before federation implementation. It does not allocate a KFD number, qualify Work, claim cross-domain transfer, or create global fact authority."
+      "claimBoundary": "This case preserves the Work hypothesis, its first cut, and a lineage-bound successor under current implementation pressure. It does not allocate a KFD number, qualify Work, claim cross-domain transfer, or create global fact authority."
+    },
+    {
+      "id": "product-release-cut-transition",
+      "title": "Product Release Cut and Cut Transition",
+      "kind": "primitive-discovery-case",
+      "status": "active",
+      "standard": "kfd-5",
+      "humanEntry": "cases/live/product-release-cut-transition/README.md",
+      "genesis": "cases/live/product-release-cut-transition/genesis.md",
+      "methodTrace": "cases/live/product-release-cut-transition/kfd-method-trace.md",
+      "propagationHypothesis": "cases/live/product-release-cut-transition/propagation-hypothesis.md",
+      "reviewIndex": "cases/live/product-release-cut-transition/reviews/README.md",
+      "ontologySplit": "cases/live/product-release-cut-transition/ontology-split.md",
+      "distinguishabilityArgument": "cases/live/product-release-cut-transition/distinguishability.md",
+      "candidateTracks": [
+        {
+          "id": "product-release-cut",
+          "title": "Product Release Cut",
+          "status": "provisional",
+          "definition": "A possible product-domain Primitive or KFD-13 specialization that identifies one exact qualified product world while preserving source, artifact, signing, qualification, platform, and trust-domain authorities.",
+          "currentCut": {
+            "path": "cases/live/product-release-cut-transition/cuts/0001-product-release-cut.json",
+            "sha256": "ebc6513e3d1b3c5c2edb2b0c497d7ab3a9f6f844fb7608b909cf862b554f9d6b",
+            "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-5/primitive-discovery.schema.json",
+            "schemaVersion": 3
+          },
+          "claimBoundary": "Provisional only. Project Cut specialization, release passport, manifest, SemVer plus artifact digest, and no-new-Primitive outcomes remain live; independent adoption, transfer, numbering, and release qualification are not claimed."
+        },
+        {
+          "id": "cut-transition",
+          "title": "Cut Transition",
+          "status": "provisional",
+          "definition": "A possible product-domain Primitive or typed authority relation that binds exact endpoint Cuts, compatibility, migration, rollback, trust, and evidence for movement without absorbing endpoint identity or action execution.",
+          "currentCut": {
+            "path": "cases/live/product-release-cut-transition/cuts/0001-cut-transition.json",
+            "sha256": "a2b658c8658c266cc9ec2614834efe2e5bc4425c7877c39fe0833d8a5afee4d7",
+            "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-5/primitive-discovery.schema.json",
+            "schemaVersion": 3
+          },
+          "claimBoundary": "Provisional only. Warrant-bound Decision plus Admission, typed upgrade-manifest relation, SemVer and channel precedence, and no-new-Primitive outcomes remain live; independent adoption, transfer, numbering, and movement authority are not claimed."
+        }
+      ],
+      "claimBoundary": "This case preserves two independently provisional tracks from one founding-adopter implementation cut. It does not accept either candidate, activate KFD-13, certify a product release, make Kungfu vocabulary universal, or prevent a no-new-Primitive decision."
     }
   ]
 }
