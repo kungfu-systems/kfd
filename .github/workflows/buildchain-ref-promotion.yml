@@ -98,5 +98,6 @@ jobs:
       publication-product: KFD
       publication-target: npm:@kungfu-tech/kfd
       publication-package-name: "@kungfu-tech/kfd"
+      release-propagation-config-path: buildchain.release-propagation.json
       github-release: true
       dry-run: ${{ github.event_name == 'workflow_dispatch' && inputs['dry-run'] == 'true' }}

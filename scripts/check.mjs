@@ -85,11 +85,57 @@ for (const markdownPath of markdownPaths) {
 
 const expectedEvidenceUpdate = "node scripts/update-site-bundle.mjs && node scripts/update-kfd-2-claim.mjs && node scripts/update-kfd-1-witness.mjs && node scripts/update-kfd-3-witness.mjs";
 const expectedPackageDescription = "KFD: an open, evidence-governed engineering standard for reliable action and continuity under uncertainty";
+const releasePropagationConfig = JSON.parse(readFileSync("buildchain.release-propagation.json", "utf8"));
+const promotionWorkflowText = readFileSync(".github/workflows/buildchain-ref-promotion.yml", "utf8");
+const recoveryWorkflowText = readFileSync(".github/workflows/release-propagation.yml", "utf8");
 if (packageJson.scripts?.["update:evidence"] !== expectedEvidenceUpdate) {
   fail("package.json update:evidence must preserve the site -> KFD-2 -> KFD-1 -> KFD-3 dependency order");
 }
 if (packageJson.description !== expectedPackageDescription) {
   fail("package.json description must preserve KFD's open-standard positioning");
+}
+if (releasePropagationConfig.schemaVersion !== 1 ||
+    releasePropagationConfig.contract !== "kungfu-buildchain-package-release-propagation" ||
+    releasePropagationConfig.sourceNode !== "kfd" ||
+    JSON.stringify(releasePropagationConfig.targets) !== JSON.stringify(["site-libkungfu-dev"])) {
+  fail("KFD release propagation must use the strict package capture contract for exactly site-libkungfu-dev");
+}
+const releasePropagationGraph = releasePropagationConfig.graph;
+const releasePropagationSource = releasePropagationGraph?.nodes?.find((node) => node.id === "kfd");
+const releasePropagationTarget = releasePropagationGraph?.nodes?.find((node) => node.id === "site-libkungfu-dev");
+const releasePropagationEdge = releasePropagationGraph?.edges?.find((edge) => edge.id === "kfd-to-site-libkungfu-dev");
+const releasePropagationProfile = releasePropagationTarget?.executionProfile;
+if (releasePropagationGraph?.schemaVersion !== 1 ||
+    releasePropagationGraph?.contract !== "kungfu-buildchain-release-propagation-graph" ||
+    releasePropagationGraph?.nodes?.length !== 2 || releasePropagationGraph?.edges?.length !== 1 ||
+    releasePropagationSource?.repository !== "kungfu-systems/kfd" ||
+    releasePropagationSource?.package !== "@kungfu-tech/kfd" ||
+    releasePropagationTarget?.repository !== "kungfu-systems/site-libkungfu-dev" ||
+    releasePropagationTarget?.lockPath !== "buildchain.upstreams/kfd.release.json" ||
+    releasePropagationTarget?.baseRef !== "main" ||
+    releasePropagationEdge?.from !== "kfd" || releasePropagationEdge?.to !== "site-libkungfu-dev" ||
+    releasePropagationEdge?.channelPolicy !== "preserve" || "consumes" in (releasePropagationEdge ?? {})) {
+  fail("KFD release propagation graph must preserve the exact KFD to site lock boundary without legacy direct-PR fields");
+}
+if (releasePropagationProfile?.contract !== "kungfu-buildchain-github-web-surface-execution" ||
+    releasePropagationProfile?.workflow !== "buildchain-web-surface.yml" ||
+    releasePropagationProfile?.productionReleaseLabel !== "buildchain-release" ||
+    releasePropagationProfile?.productionReleaseHeadPrefix !== "release/" ||
+    releasePropagationProfile?.productionStatusUrl !== "https://libkungfu.dev/.well-known/kungfu-release-status.json" ||
+    JSON.stringify(releasePropagationProfile?.readbackUrls) !== JSON.stringify(["https://kfd.libkungfu.dev/manifest.json"]) ||
+    !releasePropagationProfile?.updateCommand || !releasePropagationProfile?.prepareCommand || !releasePropagationProfile?.verifyCommand) {
+  fail("KFD release propagation must carry the exact site execution and production-readback profile");
+}
+if (!promotionWorkflowText.includes("uses: kungfu-systems/buildchain/.github/workflows/release-candidate-promote.yml@v3-alpha") ||
+    !promotionWorkflowText.includes("release-propagation-config-path: buildchain.release-propagation.json")) {
+  fail("Buildchain promotion must capture KFD propagation Work through the v3 alpha contract");
+}
+if (/^\s*release\s*:/m.test(recoveryWorkflowText) ||
+    /gh pr (?:create|merge)|git push/.test(recoveryWorkflowText) ||
+    !recoveryWorkflowText.includes("kungfu-buildchain-package-release-propagation-capture-result") ||
+    !recoveryWorkflowText.includes("status.nextAction?.action !== \"claim\"") ||
+    !recoveryWorkflowText.includes("work.authority?.mode !== \"capture-only\"")) {
+  fail("release propagation recovery must be manual, capture-only, paused, and free of downstream write authority");
 }
 if (packageJson.bin?.kfd !== "./bin/kfd.mjs") {
   fail("package.json must publish the kfd verifier bin");
