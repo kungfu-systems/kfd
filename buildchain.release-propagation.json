@@ -1,32 +1,46 @@
 {
   "schemaVersion": 1,
-  "contract": "kungfu-buildchain-release-propagation-graph",
-  "nodes": [
-    {
-      "id": "kfd",
-      "repository": "kungfu-systems/kfd",
-      "package": "@kungfu-tech/kfd"
-    },
-    {
-      "id": "site-libkungfu-dev",
-      "repository": "kungfu-systems/site-libkungfu-dev",
-      "lockPath": "buildchain.upstreams/kfd.release.json",
-      "baseRef": "main"
-    }
-  ],
-  "edges": [
-    {
-      "id": "kfd-to-site-libkungfu-dev",
-      "from": "kfd",
-      "to": "site-libkungfu-dev",
-      "channelPolicy": "preserve",
-      "consumes": [
-        "@kungfu-tech/kfd",
-        "site/kfd-site.json",
-        "registry.json",
-        "standards.json",
-        "decisions/*.md"
-      ]
-    }
+  "contract": "kungfu-buildchain-package-release-propagation",
+  "sourceNode": "kfd",
+  "graph": {
+    "schemaVersion": 1,
+    "contract": "kungfu-buildchain-release-propagation-graph",
+    "nodes": [
+      {
+        "id": "kfd",
+        "repository": "kungfu-systems/kfd",
+        "package": "@kungfu-tech/kfd"
+      },
+      {
+        "id": "site-libkungfu-dev",
+        "repository": "kungfu-systems/site-libkungfu-dev",
+        "lockPath": "buildchain.upstreams/kfd.release.json",
+        "baseRef": "main",
+        "executionProfile": {
+          "contract": "kungfu-buildchain-github-web-surface-execution",
+          "workflow": "buildchain-web-surface.yml",
+          "productionReleaseLabel": "buildchain-release",
+          "productionReleaseHeadPrefix": "release/",
+          "productionStatusUrl": "https://libkungfu.dev/.well-known/kungfu-release-status.json",
+          "readbackUrls": [
+            "https://kfd.libkungfu.dev/manifest.json"
+          ],
+          "updateCommand": "node scripts/prepare-kfd-upstream.mjs && corepack pnpm install --lockfile-only --ignore-scripts --registry=https://registry.npmjs.org/ --config.minimumReleaseAge=0",
+          "prepareCommand": "corepack pnpm install --frozen-lockfile --ignore-scripts --registry=https://registry.npmjs.org/ --config.minimumReleaseAge=0 && pnpm --config.minimumReleaseAge=0 run build",
+          "verifyCommand": "pnpm --config.minimumReleaseAge=0 run check"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "kfd-to-site-libkungfu-dev",
+        "from": "kfd",
+        "to": "site-libkungfu-dev",
+        "channelPolicy": "preserve"
+      }
+    ]
+  },
+  "targets": [
+    "site-libkungfu-dev"
   ]
 }
