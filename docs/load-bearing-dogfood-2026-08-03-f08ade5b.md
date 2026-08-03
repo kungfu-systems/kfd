@@ -7,7 +7,7 @@ source_level: public-repository-evidence
 confidence: high
 sensitivity: public
 evidence_grade: B
-review_state: unreviewed
+review_state: independently-reviewed
 last_reviewed: 2026-08-03
 ---
 
@@ -18,6 +18,8 @@ This document is an immutable successor to the
 later Kungfu development invalidated that cut. It does not revise either prior
 document, change a numbered KFD, qualify a Primitive, activate KFD-6, or widen
 Kungfu's shipped-support declaration.
+
+Independent review: [KFD pull request 306, review 4841695660](https://github.com/kungfu-systems/kfd/pull/306#pullrequestreview-4841695660).
 
 ## Exact coordinates
 
