@@ -1,0 +1,248 @@
+{
+  "schemaVersion": 3,
+  "contract": "kfd-5-primitive-discovery",
+  "standard": "kfd-5",
+  "candidate": {
+    "id": "product-release-cut",
+    "title": "Product Release Cut",
+    "problemStatement": "Version labels, manifests, artifacts, signatures, qualification, and channels may each remain valid while participants still lack one exact identity for the qualified product world that is current, installable, or recoverable.",
+    "scope": "Provisional product-domain candidate for exact qualified released-world identity; KFD-13 specialization, cross-product transfer, independent adoption, numbering, and universal necessity are not claimed."
+  },
+  "genesis": {
+    "methods": [
+      "direct-situated-judgment",
+      "perspective-transformation",
+      "structural-compression"
+    ],
+    "observationPerspective": {
+      "id": "release-producer",
+      "bearer": "human and agent participants producing release manifests, channels, artifacts, and evidence",
+      "role": "release producer",
+      "proximity": "inside source, build, signing, qualification, publication, and channel state",
+      "consequences": [
+        "bears release assembly, publication, compatibility, and provenance defects"
+      ],
+      "naturalObjects": [
+        "SemVer",
+        "manifest",
+        "artifact",
+        "signature",
+        "qualification",
+        "channel"
+      ]
+    },
+    "currentOntology": [
+      "Fact",
+      "Cut",
+      "Warrant",
+      "Decision",
+      "Admission",
+      "Project Cut",
+      "release passport",
+      "manifest",
+      "SemVer"
+    ],
+    "observation": "Equal-SemVer successors, local dogfood artifacts, public signing, offline installation, and rollback made version and manifest coordinates insufficient as one consequence-bearing product identity.",
+    "candidateObject": "Product Release Cut may be an independently addressable root for one exact qualified product world while preserving source, artifact, signing, qualification, platform, and trust-domain authorities.",
+    "claimBoundary": "The cut opens qualification and does not decide whether the candidate is an independent Primitive, a KFD-13 Project Cut specialization, a release passport or manifest projection, or no new Primitive.",
+    "methodEvidence": [
+      {
+        "kind": "git",
+        "coordinate": "https://github.com/kungfu-systems/kungfu/commit/a2967f22d0d23766eb887168e8fffc41251bad54",
+        "observer": "KFD maintainers"
+      },
+      {
+        "kind": "file",
+        "coordinate": "cases/live/product-release-cut-transition/genesis.md",
+        "observer": "KFD maintainers"
+      }
+    ],
+    "transformedPerspective": {
+      "id": "installed-product-operator",
+      "bearer": "an installed product, operator, or verifier deciding what exact world is current or recoverable",
+      "role": "consequence bearer",
+      "proximity": "inside installation, activation, conflict, recovery, and rollback consequences but outside release assembly",
+      "consequences": [
+        "bears wrong-world activation, equal-version conflict, unverifiable recovery, and rollback ambiguity"
+      ],
+      "naturalObjects": [
+        "exact current product world",
+        "verified successor",
+        "conflict",
+        "recoverable prior world"
+      ]
+    },
+    "transformation": "The observer moved from release assembly to the installed participant that must identify exact product reality independently of labels and producer-local state.",
+    "newlyVisibleNeed": "One exact product-world identity may be needed across publication, installation, verification, and rollback without absorbing their authorities.",
+    "methodNotes": "The existing implementation is evidence for qualification, not proof of minimum closure or independent Primitive identity."
+  },
+  "boundaryPressure": {
+    "contactSides": [
+      "release production, publication, and qualification authorities",
+      "installed products and operators bearing activation, conflict, recovery, and rollback consequences"
+    ],
+    "implicitHandling": "Participants reconstruct product identity from SemVer, channel position, manifest paths, artifact digests, timestamps, and cache state.",
+    "pressureChanges": [
+      {
+        "kind": "heterogeneity",
+        "description": "Public and local trust domains can contain different publication-eligible product worlds."
+      },
+      {
+        "kind": "consequence",
+        "description": "An incorrect identity can activate, retain, or roll back the wrong product world."
+      }
+    ],
+    "observedFailures": [
+      "Equal SemVer does not prove identical product reality.",
+      "A mutable source cache cannot remain installed identity or rollback authority.",
+      "Separate platform artifacts can drift from the intended product-world composition.",
+      "Local dogfood evidence may be mistaken for public release qualification."
+    ],
+    "mediationClaim": "A Product Release Cut may bind one exact product world while preserving every contributing authority and trust domain.",
+    "internalObjectAlternative": "A KFD-13 Project Cut Domain Profile, release passport, manifest, or SemVer plus artifact digest may provide equivalent identity at lower ontology cost."
+  },
+  "grounding": {
+    "pressure": [
+      "Equal-SemVer worlds may be identical, valid successors, or conflicts.",
+      "Public and local trust domains have different publication authority.",
+      "Installed identity and rollback must survive source-cache loss.",
+      "Platform slices must remain bound to one exact product composition."
+    ],
+    "factSources": [
+      {
+        "kind": "git",
+        "coordinate": "https://github.com/kungfu-systems/kungfu/blob/a2967f22d0d23766eb887168e8fffc41251bad54/framework/upgrade/kungfu-product-release-cut.contract.json",
+        "observer": "Kungfu product implementation"
+      },
+      {
+        "kind": "file",
+        "coordinate": "cases/live/product-release-cut-transition/distinguishability.md",
+        "observer": "KFD candidate qualification"
+      }
+    ],
+    "evidenceBoundary": "The cut records one founding-adopter executable contract and public architecture at one exact Git cut. It contains no independent adopter, completed comparative deletion test, cross-product transfer, or proof that Project Cut and release-passport alternatives are insufficient.",
+    "knownGaps": [
+      "No independent adopter",
+      "No completed public and local campaign comparison",
+      "No measured reconstruction-cost deletion test",
+      "No cross-product transfer",
+      "No independent qualification review",
+      "No decision between Primitive, Project Cut specialization, manifest, and no-new-Primitive outcomes"
+    ]
+  },
+  "participants": [
+    {
+      "id": "kungfu-implementation-source",
+      "kind": "collective",
+      "functions": [
+        "candidate-generation",
+        "evidence-custody"
+      ]
+    },
+    {
+      "id": "kfd-analysis-participant",
+      "kind": "agent",
+      "functions": [
+        "candidate-generation",
+        "scalable-reasoning"
+      ]
+    },
+    {
+      "id": "maintainer-decision-owner",
+      "kind": "human",
+      "functions": [
+        "perspective-declaration",
+        "decision"
+      ]
+    }
+  ],
+  "alternatives": [
+    {
+      "name": "KFD-13 Project Cut specialization",
+      "disposition": "retained",
+      "reason": "A product release may be one software-project settlement profile with installed-product fields rather than a new Primitive."
+    },
+    {
+      "name": "Release passport or manifest",
+      "disposition": "retained",
+      "reason": "Existing evidence containers may already bind exact product identity if their roots and trust domains remain immutable."
+    },
+    {
+      "name": "SemVer plus artifact digest",
+      "disposition": "retained",
+      "reason": "Systems with immutable version-to-artifact mapping may need no additional identity."
+    },
+    {
+      "name": "No new Primitive",
+      "disposition": "unresolved",
+      "reason": "Product Release Cut may remain Kungfu Profile vocabulary if deletion changes no decision outside the implementation."
+    }
+  ],
+  "contractModel": {
+    "identity": "One content-addressed root over a declared Product Release Cut preimage.",
+    "boundary": "Exact product composition and platform slices, excluding source, artifact, signing, qualification, and participant authorities.",
+    "authority": "May identify one product world; may not authorize movement, certify inputs, publish, install, activate, or roll back it.",
+    "lifecycle": "Proposed, assembled, qualified, published or local-only, installed, active, retained for recovery, or superseded without root mutation.",
+    "operations": [
+      "compose",
+      "verify",
+      "compare-identity",
+      "inspect-platform-slice",
+      "retain-for-recovery"
+    ]
+  },
+  "tests": {
+    "minimumClosure": {
+      "result": "inconclusive",
+      "evidence": [],
+      "notes": "The contract closes one implementation but Project Cut and manifest alternatives have not been held fixed and compared."
+    },
+    "deletion": {
+      "result": "inconclusive",
+      "evidence": [
+        {
+          "kind": "file",
+          "coordinate": "cases/live/product-release-cut-transition/distinguishability.md"
+        }
+      ],
+      "notes": "Equal-version and recovery pressure is explicit; consequential reconstruction cost has not been measured."
+    },
+    "fuse": {
+      "result": "inconclusive",
+      "evidence": [
+        {
+          "kind": "file",
+          "coordinate": "cases/live/product-release-cut-transition/ontology-split.md"
+        }
+      ],
+      "notes": "Fusion with Project Cut, release passport, manifest, and SemVer remains unresolved."
+    },
+    "falsifiers": [
+      "A Project Cut Domain Profile preserves every identity decision at lower ontology cost.",
+      "Immutable SemVer-to-artifact mapping makes equal-version conflict and reconstruction impossible.",
+      "The Release Cut root adds no decision-relevant information beyond an existing manifest or passport root.",
+      "Independent adopters do not reproduce the identity problem."
+    ],
+    "dogfood": {
+      "result": "inconclusive",
+      "evidence": [
+        {
+          "kind": "git",
+          "coordinate": "https://github.com/kungfu-systems/kungfu/commit/a2967f22d0d23766eb887168e8fffc41251bad54"
+        }
+      ],
+      "notes": "A public implementation witness exists, but comparative KFD-5 qualification and independent review have not run."
+    }
+  },
+  "decision": {
+    "outcome": "provisional",
+    "owner": "KFD maintainers",
+    "reason": "Exact product-world identity is operationally explicit and analytically distinguishable, but minimum closure against Project Cut, passport, manifest, SemVer, and no-new-Primitive alternatives remains unproved.",
+    "residualRisks": [
+      "Product terminology may be mistaken for a universal Primitive.",
+      "The candidate may duplicate KFD-13 Project Cut.",
+      "One implementation may overfit the candidate boundary.",
+      "A root aggregate may hide rather than preserve contributing authority."
+    ]
+  }
+}

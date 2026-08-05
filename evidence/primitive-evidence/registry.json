@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.primitive-evidence-registry/v1",
+  "profile": "kfd-warrant-evidence@0.1.0-alpha.1",
+  "entries": [
+    {
+      "id": "buildchain-dev-delivery-warrant-2026-08-05",
+      "primitive": "Warrant",
+      "upstreamContract": "kungfu.buildchain.dev-delivery-warrant/v1",
+      "evidenceClass": "generic-candidate",
+      "pressureField": "fenced, expiring authority for one exact protected-delivery candidate",
+      "bundle": "profiles/warrant-evidence/fixtures/buildchain-dev-delivery-warrant.json",
+      "source": {
+        "repository": "https://github.com/kungfu-systems/buildchain",
+        "commit": "22338823464024efb0bb72231c29cca9f61d72bb",
+        "tree": "41e9c79122c20751f76fb1f0e355d316c4d096a0",
+        "path": "packages/core/dev-delivery-warrant.js",
+        "contentRoot": "sha256:dcb2f8899ce001fa6f4c42306891f0dd7146d3752a2e8f4da494ab7db3f4b054",
+        "public": true,
+        "retained": true
+      },
+      "supportingSources": [
+        {
+          "path": "docs/dev-delivery-warrant.md",
+          "contentRoot": "sha256:2eefc1b26290091d5d3a93b7f0c1c952f00aea74c652884393fba2af6b9663f5"
+        },
+        {
+          "path": "packages/core/dev-delivery-proof.js",
+          "contentRoot": "sha256:e5a498089f68bddff00d3f177f731890fbc8d99a4a014e683f6813307f96e4c6"
+        }
+      ],
+      "review": {
+        "state": "self-reviewed",
+        "reviewerClass": "same-steward"
+      },
+      "lineage": []
+    },
+    {
+      "id": "kungfu-kfx-recovery-warrant-2026-08-05",
+      "primitive": "Warrant",
+      "upstreamContract": "kungfu.kfx-recovery-warrant/v1",
+      "evidenceClass": "generic-candidate",
+      "pressureField": "bounded recovery authority for one exact package state",
+      "bundle": "profiles/warrant-evidence/fixtures/kungfu-kfx-recovery-warrant.json",
+      "source": {
+        "repository": "https://github.com/kungfu-systems/kungfu",
+        "commit": "1fa379e07dc7197714b233f6227800e79a6b871f",
+        "tree": "d27b35f218d0a7ee9af1be59f2925596897387ca",
+        "path": "framework/kfx/kungfu-kfx.contract.json",
+        "contentRoot": "sha256:f0e6cfddac711123a969d7d88c8995b95fcb397b99438674902372fb38ff8d0c",
+        "public": true,
+        "retained": true
+      },
+      "supportingSources": [
+        {
+          "path": "tests/fixtures/_kfx-authority.mjs",
+          "contentRoot": "sha256:887fb9bd821365d683a061913f5684845d92fa9384e220f1a685f0f9211f4cd4"
+        }
+      ],
+      "review": {
+        "state": "self-reviewed",
+        "reviewerClass": "same-steward"
+      },
+      "lineage": []
+    }
+  ],
+  "claimBoundary": "Registry inclusion proves only that KFD retained and hashed the named public source coordinates. It does not qualify KFD-10, certify either product, or convert a product-specific field into universal semantics."
+}

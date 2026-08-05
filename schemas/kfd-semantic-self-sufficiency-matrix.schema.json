@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-semantic-self-sufficiency-matrix.schema.json",
+  "title": "KFD-1 through KFD-13 semantic self-sufficiency matrix",
+  "type": "object",
+  "required": ["$schema", "schemaVersion", "contract", "entries", "claimBoundary"],
+  "properties": {
+    "$schema": { "const": "https://kfd.libkungfu.dev/schemas/kfd-semantic-self-sufficiency-matrix.schema.json" },
+    "schemaVersion": { "const": 1 },
+    "contract": { "const": "kfd.semantic-self-sufficiency-matrix/v1" },
+    "entries": {
+      "type": "array",
+      "minItems": 13,
+      "maxItems": 13,
+      "items": {
+        "type": "object",
+        "required": ["id", "lifecycleStatus", "normativeSources", "schemas", "fixtures", "failureTests", "verifiers", "coverage", "gaps"],
+        "properties": {
+          "id": { "pattern": "^KFD-(?:[1-9]|1[0-3])$" },
+          "lifecycleStatus": { "enum": ["active", "draft"] },
+          "normativeSources": { "$ref": "#/$defs/paths" },
+          "schemas": { "$ref": "#/$defs/paths" },
+          "fixtures": { "$ref": "#/$defs/paths" },
+          "failureTests": { "$ref": "#/$defs/paths" },
+          "verifiers": { "$ref": "#/$defs/paths" },
+          "coverage": { "enum": ["complete", "partial", "gap"] },
+          "gaps": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+        },
+        "additionalProperties": false
+      }
+    },
+    "claimBoundary": { "type": "string", "minLength": 1 }
+  },
+  "$defs": {
+    "paths": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$" }
+    }
+  },
+  "additionalProperties": false
+}

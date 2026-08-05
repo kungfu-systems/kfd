@@ -1,6 +1,6 @@
 {
   "name": "@kungfu-tech/kfd",
-  "version": "1.0.0-alpha.53",
+  "version": "1.0.0-alpha.54",
   "description": "KFD: an open, evidence-governed engineering standard for reliable action and continuity under uncertainty",
   "license": "Apache-2.0",
   "bin": {
@@ -71,6 +71,12 @@
     "./verifier/bundle.schema.json": "./schemas/kfd-verification-bundle.schema.json",
     "./verifier/report.schema.json": "./schemas/kfd-verification-report.schema.json",
     "./verifier/wasm": "./verifier/dist/kfd_verifier.wasm",
+    "./warrant-evidence/manifest.json": "./profiles/warrant-evidence/manifest.json",
+    "./warrant-evidence/registry.json": "./evidence/primitive-evidence/registry.json",
+    "./warrant-evidence/primitive-evidence-bundle.schema.json": "./schemas/kfd-evidence/primitive-evidence-bundle.schema.json",
+    "./warrant-evidence/kfd-10-conformance-witness.schema.json": "./schemas/kfd-10/conformance-witness.schema.json",
+    "./semantic-self-sufficiency/matrix.json": "./evidence/semantic-self-sufficiency/kfd-1-13.json",
+    "./semantic-self-sufficiency/matrix.schema.json": "./schemas/kfd-semantic-self-sufficiency-matrix.schema.json",
     "./scripts/*.mjs": "./scripts/*.mjs",
     "./buildchain/kfd-1/contract-world.witness.json": "./.buildchain/kfd-1/contract-world.witness.json",
     "./buildchain/kfd-2/public-release-trust.claim.json": "./.buildchain/kfd-2/public-release-trust.claim.json",
@@ -87,7 +93,8 @@
     "./terminology.json": "./terminology.json"
   },
   "scripts": {
-    "check": "node scripts/check.mjs && npm run check:agent-hub && npm run check:agent-hub-conformance && npm run check:agent-runtime && npm run check:verifier",
+    "check": "node scripts/check.mjs && npm run check:warrant-evidence && npm run check:agent-hub && npm run check:agent-hub-conformance && npm run check:agent-runtime && npm run check:verifier",
+    "check:warrant-evidence": "node scripts/check-warrant-evidence.mjs",
     "check:agent-hub": "node scripts/check-agent-hub-profile.mjs",
     "check:agent-hub-conformance": "node scripts/check-agent-hub-conformance-profile.mjs",
     "check:agent-runtime": "node scripts/check-agent-runtime-profile.mjs",

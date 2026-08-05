@@ -270,6 +270,13 @@ report stays non-qualifying and non-self-certified and binds only the exact
 adapter artifact, profile manifest, suite root, platform, transcript, and
 results.
 
+The experimental
+[Warrant Evidence profile](profiles/warrant-evidence/README.md) retains exact
+public implementation coordinates as Primitive Evidence Bundles and tests the
+KFD-10 numbered draft against 14 fixed positive and negative vectors. It keeps
+generic candidate claims separate from Buildchain- or KFX-specific behavior,
+runs from the KFD package alone, and cannot activate or self-certify KFD-10.
+
 ## Product proof path
 
 KFDs are not a detached manifesto, but they are not a demand that readers adopt
@@ -279,6 +286,13 @@ starts with this package itself: `standards.json`, `schemas/`, `docs/`,
 expressed as consumable interfaces for both humans and agents. These surfaces
 do not prove every adopter or product correct; they make the KFD package's own
 claims inspectable and falsifiable.
+
+The stable [`/verify`](https://kfd.libkungfu.dev/verify) path explains how to
+implement and verify KFD from one immutable package cut. It projects the
+KFD-1 through KFD-13 semantic self-sufficiency matrix, the package-only Warrant
+verifier and its 14 fixed vectors, the first-wave evidence outcomes, and the
+non-activation boundary. The same page declares stable machine paths so a
+reader does not have to trust the rendered explanation.
 
 KFD also publishes pre-number candidates under `drafts/` and provisional live
 cases under `cases/`. A candidate registry keeps ordering hypotheses from
@@ -341,6 +355,7 @@ npx @kungfu-tech/kfd verify atlas path/to/atlas
 npx @kungfu-tech/kfd verify episode path/to/sealed/episode
 npx @kungfu-tech/kfd test agent-runtime --adapter path/to/adapter --output report.json
 npx @kungfu-tech/kfd verify agent-runtime-report report.json
+npx @kungfu-tech/kfd verify warrant-evidence profiles/warrant-evidence/fixtures/buildchain-dev-delivery-warrant.json --json
 npx --yes --package @kungfu-tech/kfd@alpha kfd demo agent-hub --output agent-hub-demo-report.json
 npx --yes --package @kungfu-tech/kfd@alpha kfd capabilities agent-hub --json
 npx --yes --package @kungfu-tech/kfd@alpha kfd scaffold agent-hub --language python --output my-agent-hub-adapter
@@ -359,7 +374,9 @@ prove source completeness, work quality, human approval, or release
 authorization. See
 [`docs/verifier.md`](docs/verifier.md) for the contracts and
 [`docs/verifier-inventory.md`](docs/verifier-inventory.md) for the extraction
-boundary and public-spec gaps.
+boundary and public-spec gaps. The separate JavaScript Warrant verifier and its
+package-only boundary are documented in
+[`docs/independent-verifier.md`](docs/independent-verifier.md).
 
 The final two commands are the first-party Kungfu product projection. They use
 the KFD package bundled with Kungfu, exercise the product-owned Hub semantics in

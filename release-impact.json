@@ -115,6 +115,24 @@
       "rationale": "KFD additively publishes the non-numbered kfd-agent-runtime 0.1.0-alpha.1 black-box profile, fixed rooted KFD Runtime 100 registry, 35 Core and 65 Experimental result partitions, JSONL adapter contract, artifact-bound report, offline native/WASM verifier profile, deterministic runner, and two structurally different non-product reference adapters. Passing remains non-qualifying and non-self-certified; provisional Pursuit, Atlas, Warrant, fuller ActionBinding, and recovery semantics are not promoted by tests."
     },
     {
+      "id": "kfd-warrant-evidence-alpha-profile",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD additively publishes the non-numbered kfd-warrant-evidence 0.1.0-alpha.1 profile, Primitive Evidence Bundle and KFD-10 Warrant witness schemas, two exact public source bundles, 14 fixed positive and negative draft vectors, an offline package-only verifier, extraction manifest, and first-wave proved/partial/missing/invalidated report. Passing remains non-qualifying and non-self-certified; Buildchain and KFX fields remain profile-specific evidence, and KFD-10 remains draft."
+    },
+    {
+      "id": "kfd-semantic-self-sufficiency-matrix",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD additively publishes a KFD-1 through KFD-13 coverage matrix that names each normative source, machine contract, fixture and failing-case inventory, offline verifier, current coverage, and explicit gap. The matrix reconciles canonical repository paths without inventing aliases and is an auditable coverage cache rather than new decision authority."
+    },
+    {
+      "id": "kfd-independent-verification-site-page",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD additively publishes a stable non-normative /verify page contract that joins the immutable package identity rule, KFD-1 through KFD-13 semantic self-sufficiency matrix, package-only Warrant verifier, 14 fixed vectors, first-wave proved/partial/missing/invalidated outcomes, and stable machine evidence routes. The page preserves KFD-10 draft status and remains explicitly non-qualifying and non-self-certified; the downstream site owns presentation and exact release consumption, not protocol semantics or certification."
+    },
+    {
       "id": "kfd-buildchain-contract-lock",
       "impact": "minor",
       "class": "release-governance",

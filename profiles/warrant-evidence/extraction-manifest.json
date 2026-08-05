@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.warrant-evidence-extraction-manifest/v1",
+  "mode": "published-kfd-package",
+  "include": [
+    "LICENSE",
+    "package.json",
+    "bin/kfd.mjs",
+    "registry.json",
+    "decisions/KFD-10.md",
+    "profiles/warrant-evidence",
+    "schemas/kfd-10",
+    "schemas/kfd-evidence",
+    "evidence/primitive-evidence",
+    "scripts/warrant-evidence-verifier.mjs",
+    "scripts/check-warrant-evidence.mjs"
+  ],
+  "forbiddenDependencyKinds": [
+    "git-checkout",
+    "path-outside-package",
+    "product-code",
+    "monorepo-code",
+    "private-source",
+    "private-registry",
+    "network"
+  ],
+  "verification": "node scripts/check-warrant-evidence.mjs",
+  "runtimeVerification": "node bin/kfd.mjs verify warrant-evidence <bundle.json> --json",
+  "claimBoundary": "Extraction proves only offline mechanical self-sufficiency for the fixed experimental profile."
+}

@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.primitive-evidence-first-wave-report/v1",
+  "profile": "kfd-warrant-evidence@0.1.0-alpha.1",
+  "cut": "2026-08-05",
+  "sources": [
+    "buildchain-dev-delivery-warrant-2026-08-05",
+    "kungfu-kfx-recovery-warrant-2026-08-05"
+  ],
+  "outcomes": {
+    "proved": [
+      "exact target or source roots",
+      "bounded operations",
+      "expiry",
+      "fencing or stale-cut rejection"
+    ],
+    "partial": [
+      "portable consumption history",
+      "portable lifecycle settlement",
+      "generic scope independent of product fields"
+    ],
+    "missing": [
+      "issuer and holder on the same portable object",
+      "independent revocation in both sources",
+      "delegation and residual responsibility evidence",
+      "independent adopter implementation"
+    ],
+    "invalidated": [
+      "product success implies authorization",
+      "one implementation may activate KFD-10",
+      "Buildchain merge authority is universal Warrant semantics",
+      "KFX package recovery fields are universal Warrant semantics"
+    ]
+  },
+  "kfd10Status": "draft",
+  "qualifying": false,
+  "selfCertified": false,
+  "nextEvidence": [
+    "one independent adopter witness using only the packaged schema and vectors",
+    "portable revocation, consumption, and history fixtures",
+    "competing authorization model comparison at lower total cost"
+  ]
+}
