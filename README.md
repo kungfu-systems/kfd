@@ -287,6 +287,13 @@ expressed as consumable interfaces for both humans and agents. These surfaces
 do not prove every adopter or product correct; they make the KFD package's own
 claims inspectable and falsifiable.
 
+The stable [`/verify`](https://kfd.libkungfu.dev/verify) path explains how to
+implement and verify KFD from one immutable package cut. It projects the
+KFD-1 through KFD-13 semantic self-sufficiency matrix, the package-only Warrant
+verifier and its 14 fixed vectors, the first-wave evidence outcomes, and the
+non-activation boundary. The same page declares stable machine paths so a
+reader does not have to trust the rendered explanation.
+
 KFD also publishes pre-number candidates under `drafts/` and provisional live
 cases under `cases/`. A candidate registry keeps ordering hypotheses from
 silently becoming numbered authority. A live case freezes

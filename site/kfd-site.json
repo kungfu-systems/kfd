@@ -18,6 +18,11 @@
     "agentHubGuide": "profiles/agent-hub/implementer-guide.md",
     "agentHubCapabilities": "profiles/agent-hub/cli-capabilities.json",
     "agentHubManifest": "profiles/agent-hub/manifest.json",
+    "independentVerifier": "docs/independent-verifier.md",
+    "semanticSelfSufficiencyMatrix": "evidence/semantic-self-sufficiency/kfd-1-13.json",
+    "semanticSelfSufficiencySchema": "schemas/kfd-semantic-self-sufficiency-matrix.schema.json",
+    "warrantEvidenceManifest": "profiles/warrant-evidence/manifest.json",
+    "primitiveEvidenceFirstWaveReport": "evidence/primitive-evidence/first-wave-report.json",
     "decisionsDir": "decisions",
     "candidatesDir": "drafts"
   },
@@ -33,6 +38,7 @@
     "candidatePattern": "/drafts/{id}",
     "candidateFormalPattern": "/drafts/{id}/formal",
     "agentHub": "/agent-hub",
+    "independentVerification": "/verify",
     "decisionPattern": "/{number}",
     "decisionUsagePattern": "/{number}/usage",
     "decisionFormalPattern": "/{number}/formal",
@@ -240,7 +246,13 @@
     },
     "productProofPath": {
       "heading": "Product proof path",
-      "body": "KFDs are not a detached manifesto, but they are not a demand that readers adopt a Kungfu product before understanding the decisions. The product-witness rule starts with this package itself: `standards.json`, `schemas/`, `docs/`, `site/kfd-site.json`, and `scripts/check.mjs` show how KFD-1 through KFD-13 are expressed as consumable interfaces for both humans and agents. These surfaces do not prove every adopter or product correct; they make the KFD package's own claims inspectable and falsifiable."
+      "body": "KFDs are not a detached manifesto, but they are not a demand that readers adopt a Kungfu product before understanding the decisions. The product-witness rule starts with this package itself: `standards.json`, `schemas/`, `docs/`, `site/kfd-site.json`, and `scripts/check.mjs` show how KFD-1 through KFD-13 are expressed as consumable interfaces for both humans and agents. These surfaces do not prove every adopter or product correct; they make the KFD package's own claims inspectable and falsifiable.",
+      "independentVerification": {
+        "label": "Implement and verify KFD independently",
+        "sourcePath": "docs/independent-verifier.md",
+        "url": "/verify",
+        "note": "Start from an immutable package cut; inspect the coverage matrix, package-only verifier, fixed vectors, outcomes, and explicit gaps."
+      }
     },
     "currentDecisions": {
       "heading": "Current decisions",
@@ -355,7 +367,7 @@
         "homepagePriority": 30,
         "defaultPresentation": "proof-path",
         "includeInFirstScreen": false,
-        "markdown": "KFDs are not a detached manifesto, but they are not a demand that readers adopt\na Kungfu product before understanding the decisions. The product-witness rule\nstarts with this package itself: `standards.json`, `schemas/`, `docs/`,\n`site/kfd-site.json`, and `scripts/check.mjs` show how KFD-1 through KFD-13 are\nexpressed as consumable interfaces for both humans and agents. These surfaces\ndo not prove every adopter or product correct; they make the KFD package's own\nclaims inspectable and falsifiable.\n\nKFD also publishes pre-number candidates under `drafts/` and provisional live\ncases under `cases/`. A candidate registry keeps ordering hypotheses from\nsilently becoming numbered authority. A live case freezes\ncandidate genesis, points to immutable KFD-5 qualification cuts, and keeps\nsupporting and contradicting evidence open. Live cases are dogfood records,\nnot numbered decisions, accepted Primitive claims, or product capability\nannouncements.\n\nThe non-normative [KFD Under Load](docs/load-bearing-dogfood.md) baseline\nconnects those individual witnesses into one dated founding-adopter evidence\ncut. It explains what the current primitive system is already carrying, how\npressure changed the implementation, which confidence updates are warranted,\nand which generalization gates remain open. It does not replace the numbered\ndecisions or promote incomplete work into qualification.\n\nThe complete explanatory path is published at\n[`docs/foundation.md`](docs/foundation.md) and projected to the\nstable site route `/foundation`. It explains the decisions without replacing\ntheir numbered authoritative texts. The non-normative formal layer begins at\n[`docs/formal-model.md`](docs/formal-model.md), with one versioned formal\nreference under `docs/KFD-N-formal.md` and the stable route `/N/formal` for\neach decision. It makes objects, invariants, transitions, invalid states, and\nproof obligations explicit without claiming to replace the decisions or prove\nnatural-language meaning from package bytes.\n\nFor the broader witness set, use the main Kungfu product entrypoint\n(`https://kungfu.tech`) for product philosophy, and Buildchain\n(`https://buildchain.libkungfu.dev`) for release and provenance\naccountability. This registry states the commitments; the open products expose\nwhere those commitments are carried, where evidence can be inspected, and\nwhere remaining risk still belongs.\n\nRendered index: `https://kfd.libkungfu.dev` (stable machine path per entry,\ne.g. `https://kfd.libkungfu.dev/1`). This repository publishes\n`@kungfu-tech/kfd` — the decision texts plus a machine-readable\n`registry.json` — which the site consumes as its single fact source.\n\nMachine consumers that need KFD-owned standard identity should read\n`standards.json`. It is the versioned metadata surface for stable standard\nkeys, decision and formal-reference routes and SHA-256 digests, schema IDs,\nKFD-owned concept names, and machine-interface contract versions. In Node or\nTypeScript projects, import it as:\n\n```js\nimport standards from \"@kungfu-tech/kfd/standards.json\" with { type: \"json\" };\n```"
+        "markdown": "KFDs are not a detached manifesto, but they are not a demand that readers adopt\na Kungfu product before understanding the decisions. The product-witness rule\nstarts with this package itself: `standards.json`, `schemas/`, `docs/`,\n`site/kfd-site.json`, and `scripts/check.mjs` show how KFD-1 through KFD-13 are\nexpressed as consumable interfaces for both humans and agents. These surfaces\ndo not prove every adopter or product correct; they make the KFD package's own\nclaims inspectable and falsifiable.\n\nThe stable [`/verify`](https://kfd.libkungfu.dev/verify) path explains how to\nimplement and verify KFD from one immutable package cut. It projects the\nKFD-1 through KFD-13 semantic self-sufficiency matrix, the package-only Warrant\nverifier and its 14 fixed vectors, the first-wave evidence outcomes, and the\nnon-activation boundary. The same page declares stable machine paths so a\nreader does not have to trust the rendered explanation.\n\nKFD also publishes pre-number candidates under `drafts/` and provisional live\ncases under `cases/`. A candidate registry keeps ordering hypotheses from\nsilently becoming numbered authority. A live case freezes\ncandidate genesis, points to immutable KFD-5 qualification cuts, and keeps\nsupporting and contradicting evidence open. Live cases are dogfood records,\nnot numbered decisions, accepted Primitive claims, or product capability\nannouncements.\n\nThe non-normative [KFD Under Load](docs/load-bearing-dogfood.md) baseline\nconnects those individual witnesses into one dated founding-adopter evidence\ncut. It explains what the current primitive system is already carrying, how\npressure changed the implementation, which confidence updates are warranted,\nand which generalization gates remain open. It does not replace the numbered\ndecisions or promote incomplete work into qualification.\n\nThe complete explanatory path is published at\n[`docs/foundation.md`](docs/foundation.md) and projected to the\nstable site route `/foundation`. It explains the decisions without replacing\ntheir numbered authoritative texts. The non-normative formal layer begins at\n[`docs/formal-model.md`](docs/formal-model.md), with one versioned formal\nreference under `docs/KFD-N-formal.md` and the stable route `/N/formal` for\neach decision. It makes objects, invariants, transitions, invalid states, and\nproof obligations explicit without claiming to replace the decisions or prove\nnatural-language meaning from package bytes.\n\nFor the broader witness set, use the main Kungfu product entrypoint\n(`https://kungfu.tech`) for product philosophy, and Buildchain\n(`https://buildchain.libkungfu.dev`) for release and provenance\naccountability. This registry states the commitments; the open products expose\nwhere those commitments are carried, where evidence can be inspected, and\nwhere remaining risk still belongs.\n\nRendered index: `https://kfd.libkungfu.dev` (stable machine path per entry,\ne.g. `https://kfd.libkungfu.dev/1`). This repository publishes\n`@kungfu-tech/kfd` — the decision texts plus a machine-readable\n`registry.json` — which the site consumes as its single fact source.\n\nMachine consumers that need KFD-owned standard identity should read\n`standards.json`. It is the versioned metadata surface for stable standard\nkeys, decision and formal-reference routes and SHA-256 digests, schema IDs,\nKFD-owned concept names, and machine-interface contract versions. In Node or\nTypeScript projects, import it as:\n\n```js\nimport standards from \"@kungfu-tech/kfd/standards.json\" with { type: \"json\" };\n```"
       },
       {
         "id": "agent-quickstart",
@@ -417,6 +429,7 @@
       "readingPath": [
         "/",
         "/foundation",
+        "/verify",
         "/under-load",
         "/formal",
         "/cases",
@@ -488,6 +501,463 @@
     },
     "markdown": "# KFD Under Load\n\n## A pre-release dogfood evidence baseline\n\nKFD began with a small claim: facts must not drift, trust must start from\nfacts, and cooperation must start from trusted value. That claim is coherent\non paper. Coherence is necessary, but it is not enough.\n\nA foundation becomes more credible when the same responsibilities survive\nimplementation, failure, handoff, product recursion, and correction without\nrequiring a new authority each time pressure changes. This document records\nthe current founding-adopter evidence for that stronger question:\n\n> What is the KFD primitive system already carrying inside Kungfu before a\n> stable public product release, and what confidence may responsibly be\n> updated from that load?\n\nThis is a dated, non-normative evidence synthesis. It does not change any\nnumbered KFD, activate a draft decision, qualify a new Primitive, or turn one\nfounding implementation into universal proof. The authoritative rules remain\nthe texts under `decisions/`. The accepted software-domain Primitive cuts\nremain the cuts in the\n[Initiative, Assignment, and Project Cut live case](../cases/live/software-work-perspective-settlement/README.md).\n\nThe reasoning path is intentionally progressive:\n\n```text\ncoherent principles\n  -> inspectable objects\n  -> a closed action and correction loop\n  -> repeated load across different responsibilities\n  -> recursive self-hosting\n  -> pressure-produced correction\n  -> bounded confidence update\n  -> explicit next evidence gates\n```\n\nThe conclusion appears only after that path, because a list of features cannot\nby itself establish that an underlying structure is carrying them.\n\n## 1. What load-bearing means here\n\nFour thresholds must remain distinct:\n\n| Threshold | Question | What it establishes |\n|---|---|---|\n| Conceptual coherence | Do the objects and rules fit together without contradiction? | A design worth implementing |\n| Executability | Can one implementation perform the declared operations? | A functioning witness |\n| Load-bearing use | Does real work continue to depend on the objects through change, failure, review, and recovery? | Evidence that the structure carries responsibility |\n| General qualification | Do independent adopters and non-isomorphic domains reproduce the benefit and survive falsifiers? | Evidence beyond the founding pressure field |\n\nKungfu has crossed the first two thresholds on several paths and is carrying\nsubstantial internal product and engineering load on a smaller set. It has not\ncrossed the fourth threshold for KFD as a whole.\n\n\"Under load\" therefore does not mean internet-scale traffic, large external\nadoption, or stable certification. It means that consequential internal work\nwould become harder to continue, review, recover, or govern if these objects\nwere removed. The pressure is semantic and operational before it is\npopulation-scale: long-running work, multiple agents, source and evidence\ndrift, process loss, product packaging, protected delivery, and the need to\ncontinue without private conversational state.\n\n## 2. The foundation becomes a loop\n\nThe Foundation triad is often read as three standing principles:\n\n```text\nKFD-1: facts must not drift\nKFD-2: trust must start from facts\nKFD-3: cooperation must start from trusted value\n```\n\nUnder work pressure, the triad becomes a loop rather than a slogan:\n\n```text\ndeclared Fact cut\n  -> purpose-bound Claim and Assessment\n  -> authorized Decision and Admission\n  -> bounded Action under declared direction, perspective, and authority\n  -> Episode of what occurred and what followed\n  -> correction, continuation, or settlement\n  -> successor Fact cut\n```\n\nThe distinctions matter.\n\n- A **Fact** is admitted state at a declared cut; it is not every event that\n  crossed a process boundary.\n- An **Episode** is a bounded causal record; it is not a terminal transcript\n  or an automatic completion claim.\n- An **Assessment** evaluates a claim for a purpose; it does not authorize the\n  world to change.\n- A **Decision** may authorize Admission or continuation; technical success\n  does not manufacture that authority after the fact.\n- A **Pursuit**, **Atlas**, and **Warrant** keep direction, perspective, and\n  authority independently addressable; an action cannot safely infer one from\n  another.\n- An **Initiative** and **Assignment** organize continuing and bounded\n  responsibility in the software-development Domain Profile.\n- A **Project Cut** binds source, Atlas, Episode, policy, omission, and risk\n  authorities at a settlement boundary without absorbing them into a second\n  fact engine.\n\nThe first confidence gain comes from closure: the system can move from facts\nto action and back to facts while preserving who claimed what, which evidence\nwas assessed, who was authorized to decide, what actually occurred, and what\nmay safely continue.\n\n## 3. The first load layer: execution survives its surface\n\nAn agent session is the narrowest place where continuity can fail visibly.\nThe GUI may restart. A coordinator may restart. A process may exit. Output may\nbe truncated. Control may move between observers. None of those events proves\nthat work completed, and none should erase the identity of the work being\nattempted.\n\nKungfu's founding implementation separates a stable Work Console, a physical\nSession Attempt, a provider-neutral interaction boundary, and durable\nlifecycle facts. Raw terminal transport remains bounded and privacy-sensitive;\nwork progress and trust remain Profile, Episode, and assessment facts. The\n[native work console](https://github.com/kungfu-systems/kungfu/pull/790) and\n[durable session control](https://github.com/kungfu-systems/kungfu/pull/872)\npaths are public implementation witnesses for that separation.\n\nThis layer matters because it rejects an attractive compression:\n\n```text\nterminal activity = work state = completion\n```\n\nOnce those three are separated, a process can be restarted without rewriting\nthe work, a session can be resumed without claiming operating-system\ncontinuity, and a delivered instruction can remain distinct from a trusted\nconsequence.\n\n## 4. The second load layer: work survives its executor\n\nLong-running work creates a harder problem. A chat may end while the project\ncontinues. The next agent needs more than a summary: it needs the exact work\ndefinition, admitted source and context, realized Episodes, evidence roots,\nknown gaps, review result, and authorized next responsibility.\n\nThe software-development Profile now carries that path through Initiative,\nAssignment, Completion Claim, independent Assessment, Decision, continuation,\nand Project Cut. The Project Cut program published source, Xinfa Atlas,\nqualified Episode history, and settlement roots through public Kungfu changes,\nthen exercised a three-participant handoff and a clean-clone reconstruction.\nThe retained KFD live case records the bounded KFD-5 outcome; the public\nimplementation line includes the\n[native authority cutover](https://github.com/kungfu-systems/kungfu/pull/978),\n[independent review and continuation](https://github.com/kungfu-systems/kungfu/pull/980),\nand the later\n[qualification closure](https://github.com/kungfu-systems/kungfu/pull/1002).\n\nThe load-bearing test is not that three agents appeared in one transcript. It\nis that a successor could continue from retained public and portable roots\nwithout the originating runtime, cache, or private chat acting as hidden\nauthority. Missing, stale, forged, mismatched, and post-claim-drifted evidence\nhad to fail visibly rather than degrade into a plausible summary.\n\nThis changes the unit of continuity:\n\n```text\nbefore: preserve the conversation\nafter:  preserve the work, its causal history, its settlement, and its next responsibility\n```\n\n## 5. The third load layer: the product uses the same public path\n\nA system can appear general while its own privileged features bypass the\ncontracts it exposes to others. Recursive dogfood is stronger when the product\ncannot exempt itself.\n\nKungfu's Profile Suite made domain semantics an installed, content-addressed\nextension of a domain-neutral Core. Mission Control moved onto that public\nProfile path. An independently authored Week/Day/Action Profile was created\noutside the Kungfu source tree, qualified through installed interfaces, and\nused alongside Mission Control. The GUI Profile Manager consumes the same\nlifecycle, plan, decision, receipt, query, and assessment identities as CLI\nand Agent surfaces; it is itself delivered as a System KFX rather than as a\nsecond lifecycle authority. The public implementation sequence is retained in\n[Profile Suite contract](https://github.com/kungfu-systems/kungfu/pull/709),\n[generic composition manager](https://github.com/kungfu-systems/kungfu/pull/713),\n[Mission Control migration](https://github.com/kungfu-systems/kungfu/pull/714),\nand [independent Profile qualification](https://github.com/kungfu-systems/kungfu/pull/715).\n\nThe same recursion now reaches quality feedback. Dogfood friction is captured\nas an immutable Finding; a separately owned Issue is admitted only when\nresponsibility is known. Relevance, transition, starvation, and migration are\nhandled by the installed Dogfood Domain Profile, while the prior Atlas queue\nis retained as historical projection rather than a second writer. The\n[native feedback loop](https://github.com/kungfu-systems/kungfu/pull/1391)\nis the public implementation witness.\n\nThis layer increases confidence in composability. The Core does not need\nMission/Go, Week/Day, Profile Manager, or Dogfood Issue vocabulary in order to\npreserve their shared Fact, Episode, action, assessment, and lifecycle\nresponsibilities.\n\nIt does not yet prove that every extension boundary is closed. The\n[Core-native KFX architecture](https://github.com/kungfu-systems/kungfu/pull/903)\nis deliberately marked partial: authoritative package discovery, trust,\ntransactional lifecycle, activation, and multi-surface contribution still\nhave residual work. Recursive use is evidence for the direction, not a license\nto call the remaining KFX authority migration complete.\n\n## 6. The fourth load layer: delivery becomes part of the fact loop\n\nSource completion is not delivery completion. Protected pull requests,\nBuildchain runs, artifacts, merge queues, release passports, publication, and\nclean-clone continuation create another causal chain with different owners.\nGitHub executes and transports. Buildchain produces build and release\nevidence. Kungfu admits Fact and Episode. Work Control decides completion.\nGit publishes selected settlement artifacts. None should silently become a\nsecond authority for another layer.\n\nBuildchain is already a dense witness for KFD-1 through KFD-3: exact source,\ndependency, toolchain, artifact, passport, and publication roots make release\nclaims inspectable. The current Kungfu delivery program is extending that\nclosure from protected delivery events back into native runtime Episodes and\nportable Project Cuts.\n\nThat extension is an active pressure frontier, not a completed witness. Queue\nsingle-flight, exact proof reuse, post-merge ingestion, protected ledger\npublication, and clean-clone continuation must close before the delivery loop\ncan be called fully native.\n\nBeyond it is a still more demanding horizon: use sealed historical Episodes\nto improve Assignment boundaries, dependencies, budgets, delivery classes,\nand acceptance design. A verified history selector and Work Design Advisor may\neventually produce reproducible advice and permit policy replay. That work is\nprovisional. Advice must not create work authority, and a model must not\npromote its own policy from one success or its own evaluation.\n\nThe progression is therefore:\n\n```text\nrecord work faithfully\n  -> settle and continue it portably\n  -> connect delivery evidence to the same fact loop\n  -> compare historical outcomes\n  -> advise future work design\n  -> promote policy only after replay, retained evaluation, and review\n```\n\nKFD-6 remains draft precisely because the final steps are not yet proved.\n\n## 7. Current application map\n\nThe founding-adopter map currently identifies ten application families. These\nare application families, not ten KFDs and not ten independent external\ndomains. Most remain inside the broad software-and-agent engineering pressure\nfield.\n\nThe evidence-state labels in this table are local to this snapshot:\n\n- **qualified founding witness**: a bounded implementation and product path\n  has retained qualification evidence;\n- **implemented witness**: the public path exists, but the broader surrounding\n  program retains open qualification or scope;\n- **partial**: public architecture or slices exist while authority closure\n  remains open;\n- **active frontier**: current work is applying pressure, but the target loop\n  is not closed;\n- **provisional horizon**: a bounded design direction exists without an\n  implementation claim.\n\n| Application family | Primary responsibility | Evidence state at this cut | Representative public witness |\n|---|---|---|---|\n| Agent session and process continuity | Keep execution identity, control, transport, lifecycle, and work facts distinct | qualified founding witness | [Kungfu #872](https://github.com/kungfu-systems/kungfu/pull/872) |\n| Native long-cycle work control | Preserve continuing direction and bounded responsibility beyond one session | qualified founding witness | [Kungfu #790](https://github.com/kungfu-systems/kungfu/pull/790), [KFD-12](../decisions/KFD-12.md) |\n| Independent review, handoff, and settlement | Let a successor verify and continue exact work without private narration | qualified founding witness | [software-work live case](../cases/live/software-work-perspective-settlement/README.md), [Kungfu #1002](https://github.com/kungfu-systems/kungfu/pull/1002) |\n| Build, merge, and release feedback | Bind protected delivery evidence back into runtime and portable settlement | active frontier | [Buildchain](https://buildchain.libkungfu.dev), [KFD product proof path](../README.md#product-proof-path) |\n| Evidence-informed work design | Select comparable history and advise bounded future decomposition | provisional horizon | [KFD-6](../decisions/KFD-6.md) claim boundary |\n| KFX package, trust, and lifecycle authority | Extend the product without creating per-surface trust or lifecycle writers | partial | [Kungfu #903](https://github.com/kungfu-systems/kungfu/pull/903) |\n| Profile-defined domains and recursive management | Let new domain semantics reuse the public Fact, Action, Query, Assessment, and lifecycle path | qualified founding witness | [Kungfu #709–716](https://github.com/kungfu-systems/kungfu/pull/709) |\n| Native dogfood quality governance | Turn friction into immutable observation and separately owned responsibility | implemented witness | [Kungfu #1391](https://github.com/kungfu-systems/kungfu/pull/1391) |\n| Verified context and documentation control | Bind what is known, omitted, current, and safe to use to declared source and cut | implemented witness with open generalization | [Kungfu #910](https://github.com/kungfu-systems/kungfu/pull/910), [KFD-8](../decisions/KFD-8.md) |\n| CLI and multi-surface capability governance | Keep Human and Agent discovery on one declared action and capability authority | partial | [Kungfu #1137](https://github.com/kungfu-systems/kungfu/pull/1137), [#1145](https://github.com/kungfu-systems/kungfu/pull/1145) |\n\nThe table is intentionally heterogeneous. It spans process supervision,\ndistributed work state, software delivery, extension supply chains, domain\nmodeling, quality operations, knowledge projection, and interface governance.\nThat breadth is evidence of structural portability within the founding field.\nIt is not proof of cross-domain universality.\n\n## 8. Pressure has changed the structure\n\nRepeated use is weak evidence when failure only produces local workarounds.\nThe stronger signal is that pressure repeatedly forced explicit responsibility\nboundaries:\n\n| Pressure | Unsafe compression | Structural response |\n|---|---|---|\n| A GUI, coordinator, or process can disappear | process lifetime equals work lifetime | stable Work Console, Session Attempt, lifecycle facts, and recovery receipts |\n| A chat ends before the project does | conversation equals durable context | Assignment, sealed Episode, Project Cut, and successor continuation |\n| An executor reports success | self-report equals trusted completion | Completion Claim, independent Assessment, authorized Decision, and Admission |\n| Source or evidence changes after a claim | latest state silently validates old judgment | exact cuts, roots, freshness, mismatch rejection, and re-assessment |\n| Cache or runtime state is lost | local database equals historical authority | tracked settlement, clean-clone readback, lazy local continuation, and explicit evidence contraction |\n| Product semantics are hard-coded | first-party feature equals platform rule | Profile Suite, public lifecycle, and independent Week/Day qualification |\n| A manager needs privileged control | UI state equals lifecycle authority | Manager as a System KFX projection over Core-owned lifecycle facts |\n| Dogfood friction accumulates beside real work | side queue equals product truth | Finding, Issue, relevance, transition, starvation, and native migration |\n| Human help and Agent catalogs drift | each surface owns its own command world | one capability registry with Human and Agent projections |\n| Delivery reruns consume time without adding evidence | repeated execution equals stronger proof | exact proof predicates, single-flight admission, and evidence reuse gates |\n\nThe responses are not all complete, but they share a pattern: hidden coupling\nbecomes an explicit object, relation, cut, receipt, or authority boundary.\nThat is the kind of correction KFD claims a fact-bound system should make.\n\n## 9. The bounded confidence update\n\nAt this cut, the evidence supports four stronger beliefs.\n\n### 9.1 The primitive system is more than a coherent vocabulary\n\nFacts, Episodes, perspective, direction, authority, assessment, decision,\nresponsibility, and settlement are participating in real implementation and\nrecovery paths. Removing their distinctions would reintroduce reconstruction\nwork or hidden authority on paths that are now exercised.\n\n### 9.2 The objects compose recursively\n\nKungfu uses the same structures to build, extend, inspect, and correct Kungfu.\nMission Control uses the public Profile path. Profile Manager is a KFX rather\nthan an alternative manager authority. Dogfood findings use the installed\nproduct path rather than a private side database. This recursion increases\nconfidence that the public abstractions are not merely wrappers around a\nprivileged implementation.\n\n### 9.3 The structure transfers across substantially different engineering responsibilities\n\nProcess control, multi-agent handoff, package lifecycle, release evidence,\nquality feedback, and documentation do not have the same local vocabulary or\nfailure modes. Their reuse of the same Fact-Episode, trust, action, and\nsettlement boundaries is meaningful evidence of portability inside the\nsoftware-and-agent domain.\n\n### 9.4 Failure is increasingly visible and productive\n\nThe system has repeatedly converted drift, mismatch, loss, ambiguity, and\nreconstruction cost into contracts, negative fixtures, receipts, review gates,\nor narrower claims. This matters more than an uninterrupted success path.\nPressure is improving the model instead of being hidden behind narrative.\n\nTogether these points justify a stronger statement than \"the architecture is\npromising\":\n\n> Before stable product release, KFD's core primitive system is already a\n> load-bearing internal substrate for consequential Kungfu engineering and\n> product work.\n\nThe statement remains bounded by the founding adopter, the declared evidence\ncut, and the maturity labels above.\n\n## 10. What this baseline does not prove\n\nThis snapshot does not establish:\n\n- independent external product adoption;\n- two production organizations interoperating without shared implementation\n  authority;\n- cross-domain necessity outside software-and-agent engineering;\n- historical novelty or universal minimality of the object set;\n- adversarial security, legal sufficiency, or safety certification;\n- internet-scale or long-duration operational reliability;\n- complete Linux, Windows, macOS, and heterogeneous-provider qualification for\n  every path;\n- completion of the Core-native KFX authority migration;\n- completion of the native build-and-delivery feedback loop;\n- autonomous primitive discovery or KFD-6 activation;\n- stable KFD status or an industry standard.\n\nInternal recursive use can reveal deep defects, but a founding implementation\ncannot be its own only qualification authority. The next confidence increase\nmust come from retained counterevidence, independent implementations,\nnon-isomorphic adopters, and failures that the current object model cannot\nexplain cheaply.\n\n## 11. How future work should use this baseline\n\nFuture snapshots should not merely add successes. They should compare against\nthis cut and record:\n\n1. which partial or provisional path obtained a new public witness;\n2. which existing claim was narrowed, invalidated, or made stale;\n3. which failure required a new boundary and which was only an implementation\n   defect;\n4. whether a new adopter reused the structure without importing Kungfu's\n   vocabulary or hidden authority;\n5. whether the cost of explicit objects stayed below the reconstruction cost\n   they removed;\n6. whether historical Episodes improved future work design under held-out\n   comparison rather than model self-evaluation;\n7. whether a `no-new-primitive` result was preserved when the existing object\n   set was sufficient.\n\nThe next major evidence gates are therefore:\n\n```text\nclose the native delivery evidence feedback loop\n  -> qualify the remaining KFX authority migration\n  -> test history selection and work-design advice without auto-promotion\n  -> obtain independent adopter and interoperability evidence\n  -> test transfer outside the founding software-and-agent pressure field\n```\n\nThis document should become obsolete by explicit successor evidence, not by\nquietly changing the meaning of this cut. Until then, it is the pre-release\nbaseline for understanding what KFD is already carrying, why that increases\nconfidence, and where confidence must still stop."
   },
+  "independentVerificationPage": {
+    "id": "independent-verification",
+    "title": "Implement and verify KFD independently",
+    "sourcePath": "docs/independent-verifier.md",
+    "url": "/verify",
+    "relationship": "implementation-and-independent-verification-guide",
+    "normative": false,
+    "status": "experimental",
+    "authorityNote": "Numbered decisions remain authoritative. This page projects packaged implementation and verification evidence without activating drafts or certifying adopters.",
+    "releaseIdentity": {
+      "package": "@kungfu-tech/kfd",
+      "packageAnchor": "kfd.release.json",
+      "publicReleasePassport": "Buildchain release Passport for the exact immutable package",
+      "releaseEvidenceOwner": "Buildchain",
+      "consumingSiteManifest": "/manifest.json",
+      "rule": "Verify one immutable package version, integrity, source coordinate, and rendered-site consumption cut; never infer conformance from a mutable alias."
+    },
+    "commands": {
+      "verifyWarrantBundle": "node bin/kfd.mjs verify warrant-evidence profiles/warrant-evidence/fixtures/buildchain-dev-delivery-warrant.json --json",
+      "checkWarrantProfile": "node scripts/check-warrant-evidence.mjs"
+    },
+    "semanticSelfSufficiency": {
+      "contract": "kfd.semantic-self-sufficiency-matrix/v1",
+      "sourcePath": "evidence/semantic-self-sufficiency/kfd-1-13.json",
+      "schemaPath": "schemas/kfd-semantic-self-sufficiency-matrix.schema.json",
+      "entryCount": 13,
+      "lifecycleCounts": {
+        "active": 6,
+        "draft": 7
+      },
+      "coverageCounts": {
+        "complete": 4,
+        "partial": 8,
+        "gap": 1
+      },
+      "entries": [
+        {
+          "id": "KFD-1",
+          "lifecycleStatus": "active",
+          "coverage": "complete",
+          "normativeSources": [
+            "decisions/KFD-1.md"
+          ],
+          "schemas": [
+            "schemas/kfd-1/contract-world.schema.json",
+            "schemas/kfd-1/publication-url-semantics.schema.json",
+            "schemas/kfd-1/witness.schema.json"
+          ],
+          "fixtures": [
+            ".buildchain/kfd-1/contract-world.witness.json"
+          ],
+          "failureTests": [
+            "scripts/check.mjs"
+          ],
+          "verifiers": [
+            "scripts/check.mjs",
+            "verifier/crates/core/src/lib.rs"
+          ],
+          "gaps": [
+            "broader independent adopter corpus"
+          ]
+        },
+        {
+          "id": "KFD-2",
+          "lifecycleStatus": "active",
+          "coverage": "complete",
+          "normativeSources": [
+            "decisions/KFD-2.md"
+          ],
+          "schemas": [
+            "schemas/kfd-2/release-claims.schema.json",
+            "schemas/kfd-2/release-trust-passport.schema.json",
+            "schemas/kfd-2/trust-assessment.schema.json",
+            "schemas/kfd-2/trust-claims.schema.json",
+            "schemas/kfd-2/trust-taxonomy.schema.json"
+          ],
+          "fixtures": [
+            ".buildchain/kfd-2/public-release-trust.claim.json"
+          ],
+          "failureTests": [
+            "scripts/check.mjs"
+          ],
+          "verifiers": [
+            "scripts/check.mjs",
+            "verifier/crates/core/src/lib.rs"
+          ],
+          "gaps": [
+            "non-Kungfu adopter evidence"
+          ]
+        },
+        {
+          "id": "KFD-3",
+          "lifecycleStatus": "active",
+          "coverage": "complete",
+          "normativeSources": [
+            "decisions/KFD-3.md"
+          ],
+          "schemas": [
+            "schemas/kfd-3/collaboration-interface.schema.json",
+            "schemas/kfd-3/witness.schema.json"
+          ],
+          "fixtures": [
+            ".buildchain/kfd-3/collaboration-interface.prebuild.json",
+            ".buildchain/kfd-3/collaboration-interface.artifact.json"
+          ],
+          "failureTests": [
+            "scripts/check.mjs"
+          ],
+          "verifiers": [
+            "scripts/check.mjs"
+          ],
+          "gaps": [
+            "plural external value surfaces"
+          ]
+        },
+        {
+          "id": "KFD-4",
+          "lifecycleStatus": "active",
+          "coverage": "partial",
+          "normativeSources": [
+            "decisions/KFD-4.md"
+          ],
+          "schemas": [
+            "schemas/kfd-4/observer-perspective.schema.json",
+            "schemas/kfd-4/perspective-replay.schema.json"
+          ],
+          "fixtures": [],
+          "failureTests": [],
+          "verifiers": [
+            "verifier/crates/core/src/lib.rs"
+          ],
+          "gaps": [
+            "standalone fixed positive and negative perspective vector inventory"
+          ]
+        },
+        {
+          "id": "KFD-5",
+          "lifecycleStatus": "active",
+          "coverage": "partial",
+          "normativeSources": [
+            "decisions/KFD-5.md"
+          ],
+          "schemas": [
+            "schemas/kfd-5/primitive-discovery.schema.json"
+          ],
+          "fixtures": [
+            "cases/registry.json"
+          ],
+          "failureTests": [
+            "scripts/check.mjs"
+          ],
+          "verifiers": [
+            "scripts/check.mjs"
+          ],
+          "gaps": [
+            "independent primitive qualification corpus"
+          ]
+        },
+        {
+          "id": "KFD-6",
+          "lifecycleStatus": "draft",
+          "coverage": "partial",
+          "normativeSources": [
+            "decisions/KFD-6.md"
+          ],
+          "schemas": [
+            "schemas/kfd-6/autonomous-discovery-loop.schema.json"
+          ],
+          "fixtures": [],
+          "failureTests": [],
+          "verifiers": [],
+          "gaps": [
+            "fixed causal-experience vectors",
+            "offline verifier"
+          ]
+        },
+        {
+          "id": "KFD-7",
+          "lifecycleStatus": "active",
+          "coverage": "complete",
+          "normativeSources": [
+            "decisions/KFD-7.md"
+          ],
+          "schemas": [
+            "schemas/kfd-7/domain-profile.schema.json"
+          ],
+          "fixtures": [
+            "verifier/fixtures/kfd-7/valid-domain-profile.json",
+            "verifier/fixtures/kfd-7/invalid-missing-warrant.json",
+            "verifier/fixtures/kfd-7/invalid-premature-activation.json"
+          ],
+          "failureTests": [
+            "verifier/fixtures/kfd-7/invalid-missing-warrant.json",
+            "verifier/fixtures/kfd-7/invalid-premature-activation.json"
+          ],
+          "verifiers": [
+            "verifier/crates/core/src/lib.rs",
+            "scripts/check-verifier.mjs"
+          ],
+          "gaps": [
+            "more independent Domain Profiles"
+          ]
+        },
+        {
+          "id": "KFD-8",
+          "lifecycleStatus": "draft",
+          "coverage": "gap",
+          "normativeSources": [
+            "decisions/KFD-8.md"
+          ],
+          "schemas": [],
+          "fixtures": [],
+          "failureTests": [],
+          "verifiers": [],
+          "gaps": [
+            "versioned conformance witness",
+            "fixed falsifier vectors",
+            "offline verifier"
+          ]
+        },
+        {
+          "id": "KFD-9",
+          "lifecycleStatus": "draft",
+          "coverage": "partial",
+          "normativeSources": [
+            "decisions/KFD-9.md"
+          ],
+          "schemas": [],
+          "fixtures": [
+            "profiles/agent-runtime/vectors/runtime-100.json"
+          ],
+          "failureTests": [
+            "profiles/agent-runtime/vectors/runtime-100.json"
+          ],
+          "verifiers": [
+            "scripts/check-agent-runtime-profile.mjs"
+          ],
+          "gaps": [
+            "dedicated Pursuit witness",
+            "draft-specific conformance profile"
+          ]
+        },
+        {
+          "id": "KFD-10",
+          "lifecycleStatus": "draft",
+          "coverage": "partial",
+          "normativeSources": [
+            "decisions/KFD-10.md"
+          ],
+          "schemas": [
+            "schemas/kfd-10/conformance-witness.schema.json",
+            "schemas/kfd-evidence/primitive-evidence-bundle.schema.json"
+          ],
+          "fixtures": [
+            "profiles/warrant-evidence/fixtures/buildchain-dev-delivery-warrant.json",
+            "profiles/warrant-evidence/fixtures/kungfu-kfx-recovery-warrant.json",
+            "profiles/warrant-evidence/vectors/kfd-10.json"
+          ],
+          "failureTests": [
+            "profiles/warrant-evidence/fixtures/negative-cases.json",
+            "profiles/warrant-evidence/vectors/kfd-10.json"
+          ],
+          "verifiers": [
+            "scripts/warrant-evidence-verifier.mjs",
+            "scripts/check-warrant-evidence.mjs"
+          ],
+          "gaps": [
+            "independent adopter evidence",
+            "activation qualification gate",
+            "competing-model cost comparison"
+          ]
+        },
+        {
+          "id": "KFD-11",
+          "lifecycleStatus": "draft",
+          "coverage": "partial",
+          "normativeSources": [
+            "decisions/KFD-11.md"
+          ],
+          "schemas": [
+            "schemas/kfd-11/adopter-witness.schema.json",
+            "schemas/kfd-11/decision-admission.schema.json"
+          ],
+          "fixtures": [
+            "verifier/fixtures/kfd-11/valid-adopter-witness.json"
+          ],
+          "failureTests": [
+            "verifier/fixtures/kfd-11/invalid-write-receipt-as-admission.json"
+          ],
+          "verifiers": [
+            "scripts/check-verifier.mjs"
+          ],
+          "gaps": [
+            "qualified independent adopter witness set"
+          ]
+        },
+        {
+          "id": "KFD-12",
+          "lifecycleStatus": "draft",
+          "coverage": "partial",
+          "normativeSources": [
+            "decisions/KFD-12.md"
+          ],
+          "schemas": [
+            "schemas/kfd-12/adopter-witness.schema.json"
+          ],
+          "fixtures": [
+            "verifier/fixtures/kfd-12/valid-adopter-witness.json"
+          ],
+          "failureTests": [
+            "verifier/fixtures/kfd-12/invalid-fused-proposal-acceptance.json"
+          ],
+          "verifiers": [
+            "scripts/check-verifier.mjs"
+          ],
+          "gaps": [
+            "qualified independent implementation"
+          ]
+        },
+        {
+          "id": "KFD-13",
+          "lifecycleStatus": "draft",
+          "coverage": "partial",
+          "normativeSources": [
+            "decisions/KFD-13.md"
+          ],
+          "schemas": [
+            "schemas/kfd-13/adopter-witness.schema.json"
+          ],
+          "fixtures": [
+            "verifier/fixtures/kfd-13/valid-adopter-witness.json"
+          ],
+          "failureTests": [
+            "verifier/fixtures/kfd-13/invalid-absorbed-authority.json"
+          ],
+          "verifiers": [
+            "scripts/check-verifier.mjs"
+          ],
+          "gaps": [
+            "qualified independent settlement evidence"
+          ]
+        }
+      ],
+      "claimBoundary": "This matrix is an auditable repository-coverage cache. It does not change KFD lifecycle status, make a draft active, or turn a referenced adopter implementation into normative authority."
+    },
+    "warrantEvidence": {
+      "profile": "kfd-warrant-evidence@0.1.0-alpha.1",
+      "status": "experimental",
+      "manifestPath": "profiles/warrant-evidence/manifest.json",
+      "fixedVectorCount": 14,
+      "decision": "decisions/KFD-10.md",
+      "decisionStatus": "draft",
+      "extraction": {
+        "manifest": "profiles/warrant-evidence/extraction-manifest.json",
+        "mode": "published-kfd-package",
+        "offline": true
+      },
+      "runtimeDependencies": [],
+      "forbiddenDependencies": [
+        "Buildchain checkout or runtime",
+        "Kungfu or KFX checkout or runtime",
+        "Atlas workspace",
+        "private registry or source",
+        "network access"
+      ],
+      "report": {
+        "path": "evidence/primitive-evidence/first-wave-report.json",
+        "verdict": "partial",
+        "qualifying": false,
+        "selfCertified": false
+      },
+      "claimBoundary": "Passing the profile proves only the fixed KFD package cut and retained evidence inputs. It does not activate KFD-10, certify an adopter, authenticate an upstream repository, or prove production fitness."
+    },
+    "firstWaveEvidence": {
+      "sourcePath": "evidence/primitive-evidence/first-wave-report.json",
+      "cut": "2026-08-05",
+      "outcomes": {
+        "proved": [
+          "exact target or source roots",
+          "bounded operations",
+          "expiry",
+          "fencing or stale-cut rejection"
+        ],
+        "partial": [
+          "portable consumption history",
+          "portable lifecycle settlement",
+          "generic scope independent of product fields"
+        ],
+        "missing": [
+          "issuer and holder on the same portable object",
+          "independent revocation in both sources",
+          "delegation and residual responsibility evidence",
+          "independent adopter implementation"
+        ],
+        "invalidated": [
+          "product success implies authorization",
+          "one implementation may activate KFD-10",
+          "Buildchain merge authority is universal Warrant semantics",
+          "KFX package recovery fields are universal Warrant semantics"
+        ]
+      },
+      "kfd10Status": "draft",
+      "qualifying": false,
+      "selfCertified": false,
+      "nextEvidence": [
+        "one independent adopter witness using only the packaged schema and vectors",
+        "portable revocation, consumption, and history fixtures",
+        "competing authorization model comparison at lower total cost"
+      ]
+    },
+    "machineAssets": [
+      {
+        "sourcePath": "evidence/semantic-self-sufficiency/kfd-1-13.json",
+        "url": "/evidence/semantic-self-sufficiency/kfd-1-13.json",
+        "mediaType": "application/json",
+        "role": "implementation-map",
+        "digest": "sha256:95df77d76070a435eac092beef35db798ce5f39e3281e88b4231787bf0d8648f"
+      },
+      {
+        "sourcePath": "profiles/warrant-evidence/manifest.json",
+        "url": "/profiles/warrant-evidence/manifest.json",
+        "mediaType": "application/json",
+        "role": "verification-profile",
+        "digest": "sha256:7c5c3857018d5c7b1f81a42af4a17cccced4a074e4d72ef70781fd4a62e09755"
+      },
+      {
+        "sourcePath": "evidence/primitive-evidence/first-wave-report.json",
+        "url": "/evidence/primitive-evidence/first-wave-report.json",
+        "mediaType": "application/json",
+        "role": "evidence-report",
+        "digest": "sha256:b1f0eb6918f0bf61760a3cadf496c1edb17bab962dcd1a41e2f5875e4b4aa62e"
+      },
+      {
+        "sourcePath": "schemas/kfd-semantic-self-sufficiency-matrix.schema.json",
+        "url": "/schemas/kfd-semantic-self-sufficiency-matrix.schema.json",
+        "mediaType": "application/json",
+        "role": "schema",
+        "digest": "sha256:482fcd5dfdcd78860619f78faedb843357974ea2a21d6f1dc94aca0ac7bacd4f"
+      }
+    ],
+    "rendering": {
+      "kind": "markdown-document",
+      "tocDepth": 3,
+      "navigationLabel": "Verify KFD",
+      "navigationGroup": "foundation",
+      "navigationOrder": 25
+    },
+    "markdown": "# Implement and verify KFD independently\n\nKFD is published as an implementable protocol package, not only as rendered\nprose. A consumer can start from one immutable `@kungfu-tech/kfd` release and\ninspect the numbered decisions, schemas, fixtures, failing cases, fixed vectors,\nand offline verifiers without installing Kungfu, checking out Buildchain,\nopening an Atlas workspace, reaching a private registry, or using the network.\n\n## Start from a fixed package cut\n\nPin one immutable package version and retain its npm integrity and source\ncoordinate. The consuming site publishes those exact release coordinates in\nits `/manifest.json`; inside the package, `kfd.release.json` declares the\nanchored package cut, while the public Buildchain release Passport binds the\npublished artifact. Do not infer conformance from the mutable `latest` alias or\nfrom a rendered page alone.\n\nThe machine-readable\n[`KFD-1 through KFD-13 semantic self-sufficiency matrix`](../evidence/semantic-self-sufficiency/kfd-1-13.json)\nis the implementation map. For every numbered decision it names the normative\nsource, available schemas, fixtures, failure tests, offline verifiers, current\ncoverage, and explicit gaps. Empty fields and `partial` or `gap` coverage are\nwork still owed; they are not silently filled by Kungfu product behavior.\n\nAn independent implementation can therefore proceed decision by decision:\n\n1. read the numbered decision as authority;\n2. implement the declared schemas and invariants without importing product\n   internals;\n3. run the packaged positive, negative, and fixed-vector evidence where it\n   exists;\n4. preserve the matrix's stated gaps and lifecycle status in its own claim;\n5. publish an adopter witness without asking the KFD package to self-certify it.\n\n## Run the package-only verifier\n\nFor the experimental Warrant evidence profile:\n\n```sh\nnode bin/kfd.mjs verify warrant-evidence \\\n  profiles/warrant-evidence/fixtures/buildchain-dev-delivery-warrant.json --json\n\nnode scripts/check-warrant-evidence.mjs\n```\n\nThe first command verifies a Primitive Evidence Bundle against the packaged\nregistry. The second checks both retained bundles, all fixed KFD-10 vectors,\nmanifest digests, forbidden dependency boundaries, and a freshly packed npm\nartifact in a temporary clean-room directory.\n\nThe packaged\n[`Warrant Evidence manifest`](../profiles/warrant-evidence/manifest.json)\nfixes 14 positive and negative vectors, declares zero runtime dependencies, and\nforbids product checkouts, private sources, and network access. The\n[`first-wave report`](../evidence/primitive-evidence/first-wave-report.json)\nseparates proved, partial, missing, and invalidated outcomes so an implementer\ncan reproduce the current evidence without inheriting its conclusions.\n\n## What a pass proves\n\n- the named JSON contract and exact public source coordinate are structurally\n  valid and present in the packaged evidence registry;\n- generic and product-profile claims remain separately evidence-graded;\n- the bundle cannot set qualification, certification, or promotion authority;\n- the fixed experimental KFD-10 vectors produce their registered outcomes;\n- the package contains all required inputs and runs the verifier offline.\n\n## What a pass does not prove\n\nA pass does not activate KFD-10, certify a product, authenticate the upstream\nrepository, execute upstream code, establish legal authority, prove security\nor production fitness, or show independent adoption beyond the packaged\nclean-room harness.\n\nKFD-10 remains `draft`. The current Warrant report remains `partial`, with\n`qualifying: false` and `selfCertified: false`. The package demonstrates a\nbounded independent verification method; only separately accountable adopter\nevidence can demonstrate an independent implementation.\n\nThe Rust/WASM verifier remains authoritative for its registered kinds. The\nWarrant evidence verifier is a separate public JavaScript profile surface and\ndoes not silently widen the Rust/WASM inventory.",
+    "rendererContract": {
+      "showReleaseIdentity": true,
+      "showCommands": true,
+      "showCoverageSummary": true,
+      "showMachineAssets": true,
+      "showClaimBoundaries": true,
+      "note": "Render the declared facts and links without converting package verification into certification, draft activation, independent adoption, or production fitness."
+    }
+  },
   "standalonePages": [
     {
       "id": "load-bearing-dogfood",
@@ -505,6 +975,463 @@
         "navigationOrder": 30
       },
       "markdown": "# KFD Under Load\n\n## A pre-release dogfood evidence baseline\n\nKFD began with a small claim: facts must not drift, trust must start from\nfacts, and cooperation must start from trusted value. That claim is coherent\non paper. Coherence is necessary, but it is not enough.\n\nA foundation becomes more credible when the same responsibilities survive\nimplementation, failure, handoff, product recursion, and correction without\nrequiring a new authority each time pressure changes. This document records\nthe current founding-adopter evidence for that stronger question:\n\n> What is the KFD primitive system already carrying inside Kungfu before a\n> stable public product release, and what confidence may responsibly be\n> updated from that load?\n\nThis is a dated, non-normative evidence synthesis. It does not change any\nnumbered KFD, activate a draft decision, qualify a new Primitive, or turn one\nfounding implementation into universal proof. The authoritative rules remain\nthe texts under `decisions/`. The accepted software-domain Primitive cuts\nremain the cuts in the\n[Initiative, Assignment, and Project Cut live case](../cases/live/software-work-perspective-settlement/README.md).\n\nThe reasoning path is intentionally progressive:\n\n```text\ncoherent principles\n  -> inspectable objects\n  -> a closed action and correction loop\n  -> repeated load across different responsibilities\n  -> recursive self-hosting\n  -> pressure-produced correction\n  -> bounded confidence update\n  -> explicit next evidence gates\n```\n\nThe conclusion appears only after that path, because a list of features cannot\nby itself establish that an underlying structure is carrying them.\n\n## 1. What load-bearing means here\n\nFour thresholds must remain distinct:\n\n| Threshold | Question | What it establishes |\n|---|---|---|\n| Conceptual coherence | Do the objects and rules fit together without contradiction? | A design worth implementing |\n| Executability | Can one implementation perform the declared operations? | A functioning witness |\n| Load-bearing use | Does real work continue to depend on the objects through change, failure, review, and recovery? | Evidence that the structure carries responsibility |\n| General qualification | Do independent adopters and non-isomorphic domains reproduce the benefit and survive falsifiers? | Evidence beyond the founding pressure field |\n\nKungfu has crossed the first two thresholds on several paths and is carrying\nsubstantial internal product and engineering load on a smaller set. It has not\ncrossed the fourth threshold for KFD as a whole.\n\n\"Under load\" therefore does not mean internet-scale traffic, large external\nadoption, or stable certification. It means that consequential internal work\nwould become harder to continue, review, recover, or govern if these objects\nwere removed. The pressure is semantic and operational before it is\npopulation-scale: long-running work, multiple agents, source and evidence\ndrift, process loss, product packaging, protected delivery, and the need to\ncontinue without private conversational state.\n\n## 2. The foundation becomes a loop\n\nThe Foundation triad is often read as three standing principles:\n\n```text\nKFD-1: facts must not drift\nKFD-2: trust must start from facts\nKFD-3: cooperation must start from trusted value\n```\n\nUnder work pressure, the triad becomes a loop rather than a slogan:\n\n```text\ndeclared Fact cut\n  -> purpose-bound Claim and Assessment\n  -> authorized Decision and Admission\n  -> bounded Action under declared direction, perspective, and authority\n  -> Episode of what occurred and what followed\n  -> correction, continuation, or settlement\n  -> successor Fact cut\n```\n\nThe distinctions matter.\n\n- A **Fact** is admitted state at a declared cut; it is not every event that\n  crossed a process boundary.\n- An **Episode** is a bounded causal record; it is not a terminal transcript\n  or an automatic completion claim.\n- An **Assessment** evaluates a claim for a purpose; it does not authorize the\n  world to change.\n- A **Decision** may authorize Admission or continuation; technical success\n  does not manufacture that authority after the fact.\n- A **Pursuit**, **Atlas**, and **Warrant** keep direction, perspective, and\n  authority independently addressable; an action cannot safely infer one from\n  another.\n- An **Initiative** and **Assignment** organize continuing and bounded\n  responsibility in the software-development Domain Profile.\n- A **Project Cut** binds source, Atlas, Episode, policy, omission, and risk\n  authorities at a settlement boundary without absorbing them into a second\n  fact engine.\n\nThe first confidence gain comes from closure: the system can move from facts\nto action and back to facts while preserving who claimed what, which evidence\nwas assessed, who was authorized to decide, what actually occurred, and what\nmay safely continue.\n\n## 3. The first load layer: execution survives its surface\n\nAn agent session is the narrowest place where continuity can fail visibly.\nThe GUI may restart. A coordinator may restart. A process may exit. Output may\nbe truncated. Control may move between observers. None of those events proves\nthat work completed, and none should erase the identity of the work being\nattempted.\n\nKungfu's founding implementation separates a stable Work Console, a physical\nSession Attempt, a provider-neutral interaction boundary, and durable\nlifecycle facts. Raw terminal transport remains bounded and privacy-sensitive;\nwork progress and trust remain Profile, Episode, and assessment facts. The\n[native work console](https://github.com/kungfu-systems/kungfu/pull/790) and\n[durable session control](https://github.com/kungfu-systems/kungfu/pull/872)\npaths are public implementation witnesses for that separation.\n\nThis layer matters because it rejects an attractive compression:\n\n```text\nterminal activity = work state = completion\n```\n\nOnce those three are separated, a process can be restarted without rewriting\nthe work, a session can be resumed without claiming operating-system\ncontinuity, and a delivered instruction can remain distinct from a trusted\nconsequence.\n\n## 4. The second load layer: work survives its executor\n\nLong-running work creates a harder problem. A chat may end while the project\ncontinues. The next agent needs more than a summary: it needs the exact work\ndefinition, admitted source and context, realized Episodes, evidence roots,\nknown gaps, review result, and authorized next responsibility.\n\nThe software-development Profile now carries that path through Initiative,\nAssignment, Completion Claim, independent Assessment, Decision, continuation,\nand Project Cut. The Project Cut program published source, Xinfa Atlas,\nqualified Episode history, and settlement roots through public Kungfu changes,\nthen exercised a three-participant handoff and a clean-clone reconstruction.\nThe retained KFD live case records the bounded KFD-5 outcome; the public\nimplementation line includes the\n[native authority cutover](https://github.com/kungfu-systems/kungfu/pull/978),\n[independent review and continuation](https://github.com/kungfu-systems/kungfu/pull/980),\nand the later\n[qualification closure](https://github.com/kungfu-systems/kungfu/pull/1002).\n\nThe load-bearing test is not that three agents appeared in one transcript. It\nis that a successor could continue from retained public and portable roots\nwithout the originating runtime, cache, or private chat acting as hidden\nauthority. Missing, stale, forged, mismatched, and post-claim-drifted evidence\nhad to fail visibly rather than degrade into a plausible summary.\n\nThis changes the unit of continuity:\n\n```text\nbefore: preserve the conversation\nafter:  preserve the work, its causal history, its settlement, and its next responsibility\n```\n\n## 5. The third load layer: the product uses the same public path\n\nA system can appear general while its own privileged features bypass the\ncontracts it exposes to others. Recursive dogfood is stronger when the product\ncannot exempt itself.\n\nKungfu's Profile Suite made domain semantics an installed, content-addressed\nextension of a domain-neutral Core. Mission Control moved onto that public\nProfile path. An independently authored Week/Day/Action Profile was created\noutside the Kungfu source tree, qualified through installed interfaces, and\nused alongside Mission Control. The GUI Profile Manager consumes the same\nlifecycle, plan, decision, receipt, query, and assessment identities as CLI\nand Agent surfaces; it is itself delivered as a System KFX rather than as a\nsecond lifecycle authority. The public implementation sequence is retained in\n[Profile Suite contract](https://github.com/kungfu-systems/kungfu/pull/709),\n[generic composition manager](https://github.com/kungfu-systems/kungfu/pull/713),\n[Mission Control migration](https://github.com/kungfu-systems/kungfu/pull/714),\nand [independent Profile qualification](https://github.com/kungfu-systems/kungfu/pull/715).\n\nThe same recursion now reaches quality feedback. Dogfood friction is captured\nas an immutable Finding; a separately owned Issue is admitted only when\nresponsibility is known. Relevance, transition, starvation, and migration are\nhandled by the installed Dogfood Domain Profile, while the prior Atlas queue\nis retained as historical projection rather than a second writer. The\n[native feedback loop](https://github.com/kungfu-systems/kungfu/pull/1391)\nis the public implementation witness.\n\nThis layer increases confidence in composability. The Core does not need\nMission/Go, Week/Day, Profile Manager, or Dogfood Issue vocabulary in order to\npreserve their shared Fact, Episode, action, assessment, and lifecycle\nresponsibilities.\n\nIt does not yet prove that every extension boundary is closed. The\n[Core-native KFX architecture](https://github.com/kungfu-systems/kungfu/pull/903)\nis deliberately marked partial: authoritative package discovery, trust,\ntransactional lifecycle, activation, and multi-surface contribution still\nhave residual work. Recursive use is evidence for the direction, not a license\nto call the remaining KFX authority migration complete.\n\n## 6. The fourth load layer: delivery becomes part of the fact loop\n\nSource completion is not delivery completion. Protected pull requests,\nBuildchain runs, artifacts, merge queues, release passports, publication, and\nclean-clone continuation create another causal chain with different owners.\nGitHub executes and transports. Buildchain produces build and release\nevidence. Kungfu admits Fact and Episode. Work Control decides completion.\nGit publishes selected settlement artifacts. None should silently become a\nsecond authority for another layer.\n\nBuildchain is already a dense witness for KFD-1 through KFD-3: exact source,\ndependency, toolchain, artifact, passport, and publication roots make release\nclaims inspectable. The current Kungfu delivery program is extending that\nclosure from protected delivery events back into native runtime Episodes and\nportable Project Cuts.\n\nThat extension is an active pressure frontier, not a completed witness. Queue\nsingle-flight, exact proof reuse, post-merge ingestion, protected ledger\npublication, and clean-clone continuation must close before the delivery loop\ncan be called fully native.\n\nBeyond it is a still more demanding horizon: use sealed historical Episodes\nto improve Assignment boundaries, dependencies, budgets, delivery classes,\nand acceptance design. A verified history selector and Work Design Advisor may\neventually produce reproducible advice and permit policy replay. That work is\nprovisional. Advice must not create work authority, and a model must not\npromote its own policy from one success or its own evaluation.\n\nThe progression is therefore:\n\n```text\nrecord work faithfully\n  -> settle and continue it portably\n  -> connect delivery evidence to the same fact loop\n  -> compare historical outcomes\n  -> advise future work design\n  -> promote policy only after replay, retained evaluation, and review\n```\n\nKFD-6 remains draft precisely because the final steps are not yet proved.\n\n## 7. Current application map\n\nThe founding-adopter map currently identifies ten application families. These\nare application families, not ten KFDs and not ten independent external\ndomains. Most remain inside the broad software-and-agent engineering pressure\nfield.\n\nThe evidence-state labels in this table are local to this snapshot:\n\n- **qualified founding witness**: a bounded implementation and product path\n  has retained qualification evidence;\n- **implemented witness**: the public path exists, but the broader surrounding\n  program retains open qualification or scope;\n- **partial**: public architecture or slices exist while authority closure\n  remains open;\n- **active frontier**: current work is applying pressure, but the target loop\n  is not closed;\n- **provisional horizon**: a bounded design direction exists without an\n  implementation claim.\n\n| Application family | Primary responsibility | Evidence state at this cut | Representative public witness |\n|---|---|---|---|\n| Agent session and process continuity | Keep execution identity, control, transport, lifecycle, and work facts distinct | qualified founding witness | [Kungfu #872](https://github.com/kungfu-systems/kungfu/pull/872) |\n| Native long-cycle work control | Preserve continuing direction and bounded responsibility beyond one session | qualified founding witness | [Kungfu #790](https://github.com/kungfu-systems/kungfu/pull/790), [KFD-12](../decisions/KFD-12.md) |\n| Independent review, handoff, and settlement | Let a successor verify and continue exact work without private narration | qualified founding witness | [software-work live case](../cases/live/software-work-perspective-settlement/README.md), [Kungfu #1002](https://github.com/kungfu-systems/kungfu/pull/1002) |\n| Build, merge, and release feedback | Bind protected delivery evidence back into runtime and portable settlement | active frontier | [Buildchain](https://buildchain.libkungfu.dev), [KFD product proof path](../README.md#product-proof-path) |\n| Evidence-informed work design | Select comparable history and advise bounded future decomposition | provisional horizon | [KFD-6](../decisions/KFD-6.md) claim boundary |\n| KFX package, trust, and lifecycle authority | Extend the product without creating per-surface trust or lifecycle writers | partial | [Kungfu #903](https://github.com/kungfu-systems/kungfu/pull/903) |\n| Profile-defined domains and recursive management | Let new domain semantics reuse the public Fact, Action, Query, Assessment, and lifecycle path | qualified founding witness | [Kungfu #709–716](https://github.com/kungfu-systems/kungfu/pull/709) |\n| Native dogfood quality governance | Turn friction into immutable observation and separately owned responsibility | implemented witness | [Kungfu #1391](https://github.com/kungfu-systems/kungfu/pull/1391) |\n| Verified context and documentation control | Bind what is known, omitted, current, and safe to use to declared source and cut | implemented witness with open generalization | [Kungfu #910](https://github.com/kungfu-systems/kungfu/pull/910), [KFD-8](../decisions/KFD-8.md) |\n| CLI and multi-surface capability governance | Keep Human and Agent discovery on one declared action and capability authority | partial | [Kungfu #1137](https://github.com/kungfu-systems/kungfu/pull/1137), [#1145](https://github.com/kungfu-systems/kungfu/pull/1145) |\n\nThe table is intentionally heterogeneous. It spans process supervision,\ndistributed work state, software delivery, extension supply chains, domain\nmodeling, quality operations, knowledge projection, and interface governance.\nThat breadth is evidence of structural portability within the founding field.\nIt is not proof of cross-domain universality.\n\n## 8. Pressure has changed the structure\n\nRepeated use is weak evidence when failure only produces local workarounds.\nThe stronger signal is that pressure repeatedly forced explicit responsibility\nboundaries:\n\n| Pressure | Unsafe compression | Structural response |\n|---|---|---|\n| A GUI, coordinator, or process can disappear | process lifetime equals work lifetime | stable Work Console, Session Attempt, lifecycle facts, and recovery receipts |\n| A chat ends before the project does | conversation equals durable context | Assignment, sealed Episode, Project Cut, and successor continuation |\n| An executor reports success | self-report equals trusted completion | Completion Claim, independent Assessment, authorized Decision, and Admission |\n| Source or evidence changes after a claim | latest state silently validates old judgment | exact cuts, roots, freshness, mismatch rejection, and re-assessment |\n| Cache or runtime state is lost | local database equals historical authority | tracked settlement, clean-clone readback, lazy local continuation, and explicit evidence contraction |\n| Product semantics are hard-coded | first-party feature equals platform rule | Profile Suite, public lifecycle, and independent Week/Day qualification |\n| A manager needs privileged control | UI state equals lifecycle authority | Manager as a System KFX projection over Core-owned lifecycle facts |\n| Dogfood friction accumulates beside real work | side queue equals product truth | Finding, Issue, relevance, transition, starvation, and native migration |\n| Human help and Agent catalogs drift | each surface owns its own command world | one capability registry with Human and Agent projections |\n| Delivery reruns consume time without adding evidence | repeated execution equals stronger proof | exact proof predicates, single-flight admission, and evidence reuse gates |\n\nThe responses are not all complete, but they share a pattern: hidden coupling\nbecomes an explicit object, relation, cut, receipt, or authority boundary.\nThat is the kind of correction KFD claims a fact-bound system should make.\n\n## 9. The bounded confidence update\n\nAt this cut, the evidence supports four stronger beliefs.\n\n### 9.1 The primitive system is more than a coherent vocabulary\n\nFacts, Episodes, perspective, direction, authority, assessment, decision,\nresponsibility, and settlement are participating in real implementation and\nrecovery paths. Removing their distinctions would reintroduce reconstruction\nwork or hidden authority on paths that are now exercised.\n\n### 9.2 The objects compose recursively\n\nKungfu uses the same structures to build, extend, inspect, and correct Kungfu.\nMission Control uses the public Profile path. Profile Manager is a KFX rather\nthan an alternative manager authority. Dogfood findings use the installed\nproduct path rather than a private side database. This recursion increases\nconfidence that the public abstractions are not merely wrappers around a\nprivileged implementation.\n\n### 9.3 The structure transfers across substantially different engineering responsibilities\n\nProcess control, multi-agent handoff, package lifecycle, release evidence,\nquality feedback, and documentation do not have the same local vocabulary or\nfailure modes. Their reuse of the same Fact-Episode, trust, action, and\nsettlement boundaries is meaningful evidence of portability inside the\nsoftware-and-agent domain.\n\n### 9.4 Failure is increasingly visible and productive\n\nThe system has repeatedly converted drift, mismatch, loss, ambiguity, and\nreconstruction cost into contracts, negative fixtures, receipts, review gates,\nor narrower claims. This matters more than an uninterrupted success path.\nPressure is improving the model instead of being hidden behind narrative.\n\nTogether these points justify a stronger statement than \"the architecture is\npromising\":\n\n> Before stable product release, KFD's core primitive system is already a\n> load-bearing internal substrate for consequential Kungfu engineering and\n> product work.\n\nThe statement remains bounded by the founding adopter, the declared evidence\ncut, and the maturity labels above.\n\n## 10. What this baseline does not prove\n\nThis snapshot does not establish:\n\n- independent external product adoption;\n- two production organizations interoperating without shared implementation\n  authority;\n- cross-domain necessity outside software-and-agent engineering;\n- historical novelty or universal minimality of the object set;\n- adversarial security, legal sufficiency, or safety certification;\n- internet-scale or long-duration operational reliability;\n- complete Linux, Windows, macOS, and heterogeneous-provider qualification for\n  every path;\n- completion of the Core-native KFX authority migration;\n- completion of the native build-and-delivery feedback loop;\n- autonomous primitive discovery or KFD-6 activation;\n- stable KFD status or an industry standard.\n\nInternal recursive use can reveal deep defects, but a founding implementation\ncannot be its own only qualification authority. The next confidence increase\nmust come from retained counterevidence, independent implementations,\nnon-isomorphic adopters, and failures that the current object model cannot\nexplain cheaply.\n\n## 11. How future work should use this baseline\n\nFuture snapshots should not merely add successes. They should compare against\nthis cut and record:\n\n1. which partial or provisional path obtained a new public witness;\n2. which existing claim was narrowed, invalidated, or made stale;\n3. which failure required a new boundary and which was only an implementation\n   defect;\n4. whether a new adopter reused the structure without importing Kungfu's\n   vocabulary or hidden authority;\n5. whether the cost of explicit objects stayed below the reconstruction cost\n   they removed;\n6. whether historical Episodes improved future work design under held-out\n   comparison rather than model self-evaluation;\n7. whether a `no-new-primitive` result was preserved when the existing object\n   set was sufficient.\n\nThe next major evidence gates are therefore:\n\n```text\nclose the native delivery evidence feedback loop\n  -> qualify the remaining KFX authority migration\n  -> test history selection and work-design advice without auto-promotion\n  -> obtain independent adopter and interoperability evidence\n  -> test transfer outside the founding software-and-agent pressure field\n```\n\nThis document should become obsolete by explicit successor evidence, not by\nquietly changing the meaning of this cut. Until then, it is the pre-release\nbaseline for understanding what KFD is already carrying, why that increases\nconfidence, and where confidence must still stop."
+    },
+    {
+      "id": "independent-verification",
+      "title": "Implement and verify KFD independently",
+      "sourcePath": "docs/independent-verifier.md",
+      "url": "/verify",
+      "relationship": "implementation-and-independent-verification-guide",
+      "normative": false,
+      "status": "experimental",
+      "authorityNote": "Numbered decisions remain authoritative. This page projects packaged implementation and verification evidence without activating drafts or certifying adopters.",
+      "releaseIdentity": {
+        "package": "@kungfu-tech/kfd",
+        "packageAnchor": "kfd.release.json",
+        "publicReleasePassport": "Buildchain release Passport for the exact immutable package",
+        "releaseEvidenceOwner": "Buildchain",
+        "consumingSiteManifest": "/manifest.json",
+        "rule": "Verify one immutable package version, integrity, source coordinate, and rendered-site consumption cut; never infer conformance from a mutable alias."
+      },
+      "commands": {
+        "verifyWarrantBundle": "node bin/kfd.mjs verify warrant-evidence profiles/warrant-evidence/fixtures/buildchain-dev-delivery-warrant.json --json",
+        "checkWarrantProfile": "node scripts/check-warrant-evidence.mjs"
+      },
+      "semanticSelfSufficiency": {
+        "contract": "kfd.semantic-self-sufficiency-matrix/v1",
+        "sourcePath": "evidence/semantic-self-sufficiency/kfd-1-13.json",
+        "schemaPath": "schemas/kfd-semantic-self-sufficiency-matrix.schema.json",
+        "entryCount": 13,
+        "lifecycleCounts": {
+          "active": 6,
+          "draft": 7
+        },
+        "coverageCounts": {
+          "complete": 4,
+          "partial": 8,
+          "gap": 1
+        },
+        "entries": [
+          {
+            "id": "KFD-1",
+            "lifecycleStatus": "active",
+            "coverage": "complete",
+            "normativeSources": [
+              "decisions/KFD-1.md"
+            ],
+            "schemas": [
+              "schemas/kfd-1/contract-world.schema.json",
+              "schemas/kfd-1/publication-url-semantics.schema.json",
+              "schemas/kfd-1/witness.schema.json"
+            ],
+            "fixtures": [
+              ".buildchain/kfd-1/contract-world.witness.json"
+            ],
+            "failureTests": [
+              "scripts/check.mjs"
+            ],
+            "verifiers": [
+              "scripts/check.mjs",
+              "verifier/crates/core/src/lib.rs"
+            ],
+            "gaps": [
+              "broader independent adopter corpus"
+            ]
+          },
+          {
+            "id": "KFD-2",
+            "lifecycleStatus": "active",
+            "coverage": "complete",
+            "normativeSources": [
+              "decisions/KFD-2.md"
+            ],
+            "schemas": [
+              "schemas/kfd-2/release-claims.schema.json",
+              "schemas/kfd-2/release-trust-passport.schema.json",
+              "schemas/kfd-2/trust-assessment.schema.json",
+              "schemas/kfd-2/trust-claims.schema.json",
+              "schemas/kfd-2/trust-taxonomy.schema.json"
+            ],
+            "fixtures": [
+              ".buildchain/kfd-2/public-release-trust.claim.json"
+            ],
+            "failureTests": [
+              "scripts/check.mjs"
+            ],
+            "verifiers": [
+              "scripts/check.mjs",
+              "verifier/crates/core/src/lib.rs"
+            ],
+            "gaps": [
+              "non-Kungfu adopter evidence"
+            ]
+          },
+          {
+            "id": "KFD-3",
+            "lifecycleStatus": "active",
+            "coverage": "complete",
+            "normativeSources": [
+              "decisions/KFD-3.md"
+            ],
+            "schemas": [
+              "schemas/kfd-3/collaboration-interface.schema.json",
+              "schemas/kfd-3/witness.schema.json"
+            ],
+            "fixtures": [
+              ".buildchain/kfd-3/collaboration-interface.prebuild.json",
+              ".buildchain/kfd-3/collaboration-interface.artifact.json"
+            ],
+            "failureTests": [
+              "scripts/check.mjs"
+            ],
+            "verifiers": [
+              "scripts/check.mjs"
+            ],
+            "gaps": [
+              "plural external value surfaces"
+            ]
+          },
+          {
+            "id": "KFD-4",
+            "lifecycleStatus": "active",
+            "coverage": "partial",
+            "normativeSources": [
+              "decisions/KFD-4.md"
+            ],
+            "schemas": [
+              "schemas/kfd-4/observer-perspective.schema.json",
+              "schemas/kfd-4/perspective-replay.schema.json"
+            ],
+            "fixtures": [],
+            "failureTests": [],
+            "verifiers": [
+              "verifier/crates/core/src/lib.rs"
+            ],
+            "gaps": [
+              "standalone fixed positive and negative perspective vector inventory"
+            ]
+          },
+          {
+            "id": "KFD-5",
+            "lifecycleStatus": "active",
+            "coverage": "partial",
+            "normativeSources": [
+              "decisions/KFD-5.md"
+            ],
+            "schemas": [
+              "schemas/kfd-5/primitive-discovery.schema.json"
+            ],
+            "fixtures": [
+              "cases/registry.json"
+            ],
+            "failureTests": [
+              "scripts/check.mjs"
+            ],
+            "verifiers": [
+              "scripts/check.mjs"
+            ],
+            "gaps": [
+              "independent primitive qualification corpus"
+            ]
+          },
+          {
+            "id": "KFD-6",
+            "lifecycleStatus": "draft",
+            "coverage": "partial",
+            "normativeSources": [
+              "decisions/KFD-6.md"
+            ],
+            "schemas": [
+              "schemas/kfd-6/autonomous-discovery-loop.schema.json"
+            ],
+            "fixtures": [],
+            "failureTests": [],
+            "verifiers": [],
+            "gaps": [
+              "fixed causal-experience vectors",
+              "offline verifier"
+            ]
+          },
+          {
+            "id": "KFD-7",
+            "lifecycleStatus": "active",
+            "coverage": "complete",
+            "normativeSources": [
+              "decisions/KFD-7.md"
+            ],
+            "schemas": [
+              "schemas/kfd-7/domain-profile.schema.json"
+            ],
+            "fixtures": [
+              "verifier/fixtures/kfd-7/valid-domain-profile.json",
+              "verifier/fixtures/kfd-7/invalid-missing-warrant.json",
+              "verifier/fixtures/kfd-7/invalid-premature-activation.json"
+            ],
+            "failureTests": [
+              "verifier/fixtures/kfd-7/invalid-missing-warrant.json",
+              "verifier/fixtures/kfd-7/invalid-premature-activation.json"
+            ],
+            "verifiers": [
+              "verifier/crates/core/src/lib.rs",
+              "scripts/check-verifier.mjs"
+            ],
+            "gaps": [
+              "more independent Domain Profiles"
+            ]
+          },
+          {
+            "id": "KFD-8",
+            "lifecycleStatus": "draft",
+            "coverage": "gap",
+            "normativeSources": [
+              "decisions/KFD-8.md"
+            ],
+            "schemas": [],
+            "fixtures": [],
+            "failureTests": [],
+            "verifiers": [],
+            "gaps": [
+              "versioned conformance witness",
+              "fixed falsifier vectors",
+              "offline verifier"
+            ]
+          },
+          {
+            "id": "KFD-9",
+            "lifecycleStatus": "draft",
+            "coverage": "partial",
+            "normativeSources": [
+              "decisions/KFD-9.md"
+            ],
+            "schemas": [],
+            "fixtures": [
+              "profiles/agent-runtime/vectors/runtime-100.json"
+            ],
+            "failureTests": [
+              "profiles/agent-runtime/vectors/runtime-100.json"
+            ],
+            "verifiers": [
+              "scripts/check-agent-runtime-profile.mjs"
+            ],
+            "gaps": [
+              "dedicated Pursuit witness",
+              "draft-specific conformance profile"
+            ]
+          },
+          {
+            "id": "KFD-10",
+            "lifecycleStatus": "draft",
+            "coverage": "partial",
+            "normativeSources": [
+              "decisions/KFD-10.md"
+            ],
+            "schemas": [
+              "schemas/kfd-10/conformance-witness.schema.json",
+              "schemas/kfd-evidence/primitive-evidence-bundle.schema.json"
+            ],
+            "fixtures": [
+              "profiles/warrant-evidence/fixtures/buildchain-dev-delivery-warrant.json",
+              "profiles/warrant-evidence/fixtures/kungfu-kfx-recovery-warrant.json",
+              "profiles/warrant-evidence/vectors/kfd-10.json"
+            ],
+            "failureTests": [
+              "profiles/warrant-evidence/fixtures/negative-cases.json",
+              "profiles/warrant-evidence/vectors/kfd-10.json"
+            ],
+            "verifiers": [
+              "scripts/warrant-evidence-verifier.mjs",
+              "scripts/check-warrant-evidence.mjs"
+            ],
+            "gaps": [
+              "independent adopter evidence",
+              "activation qualification gate",
+              "competing-model cost comparison"
+            ]
+          },
+          {
+            "id": "KFD-11",
+            "lifecycleStatus": "draft",
+            "coverage": "partial",
+            "normativeSources": [
+              "decisions/KFD-11.md"
+            ],
+            "schemas": [
+              "schemas/kfd-11/adopter-witness.schema.json",
+              "schemas/kfd-11/decision-admission.schema.json"
+            ],
+            "fixtures": [
+              "verifier/fixtures/kfd-11/valid-adopter-witness.json"
+            ],
+            "failureTests": [
+              "verifier/fixtures/kfd-11/invalid-write-receipt-as-admission.json"
+            ],
+            "verifiers": [
+              "scripts/check-verifier.mjs"
+            ],
+            "gaps": [
+              "qualified independent adopter witness set"
+            ]
+          },
+          {
+            "id": "KFD-12",
+            "lifecycleStatus": "draft",
+            "coverage": "partial",
+            "normativeSources": [
+              "decisions/KFD-12.md"
+            ],
+            "schemas": [
+              "schemas/kfd-12/adopter-witness.schema.json"
+            ],
+            "fixtures": [
+              "verifier/fixtures/kfd-12/valid-adopter-witness.json"
+            ],
+            "failureTests": [
+              "verifier/fixtures/kfd-12/invalid-fused-proposal-acceptance.json"
+            ],
+            "verifiers": [
+              "scripts/check-verifier.mjs"
+            ],
+            "gaps": [
+              "qualified independent implementation"
+            ]
+          },
+          {
+            "id": "KFD-13",
+            "lifecycleStatus": "draft",
+            "coverage": "partial",
+            "normativeSources": [
+              "decisions/KFD-13.md"
+            ],
+            "schemas": [
+              "schemas/kfd-13/adopter-witness.schema.json"
+            ],
+            "fixtures": [
+              "verifier/fixtures/kfd-13/valid-adopter-witness.json"
+            ],
+            "failureTests": [
+              "verifier/fixtures/kfd-13/invalid-absorbed-authority.json"
+            ],
+            "verifiers": [
+              "scripts/check-verifier.mjs"
+            ],
+            "gaps": [
+              "qualified independent settlement evidence"
+            ]
+          }
+        ],
+        "claimBoundary": "This matrix is an auditable repository-coverage cache. It does not change KFD lifecycle status, make a draft active, or turn a referenced adopter implementation into normative authority."
+      },
+      "warrantEvidence": {
+        "profile": "kfd-warrant-evidence@0.1.0-alpha.1",
+        "status": "experimental",
+        "manifestPath": "profiles/warrant-evidence/manifest.json",
+        "fixedVectorCount": 14,
+        "decision": "decisions/KFD-10.md",
+        "decisionStatus": "draft",
+        "extraction": {
+          "manifest": "profiles/warrant-evidence/extraction-manifest.json",
+          "mode": "published-kfd-package",
+          "offline": true
+        },
+        "runtimeDependencies": [],
+        "forbiddenDependencies": [
+          "Buildchain checkout or runtime",
+          "Kungfu or KFX checkout or runtime",
+          "Atlas workspace",
+          "private registry or source",
+          "network access"
+        ],
+        "report": {
+          "path": "evidence/primitive-evidence/first-wave-report.json",
+          "verdict": "partial",
+          "qualifying": false,
+          "selfCertified": false
+        },
+        "claimBoundary": "Passing the profile proves only the fixed KFD package cut and retained evidence inputs. It does not activate KFD-10, certify an adopter, authenticate an upstream repository, or prove production fitness."
+      },
+      "firstWaveEvidence": {
+        "sourcePath": "evidence/primitive-evidence/first-wave-report.json",
+        "cut": "2026-08-05",
+        "outcomes": {
+          "proved": [
+            "exact target or source roots",
+            "bounded operations",
+            "expiry",
+            "fencing or stale-cut rejection"
+          ],
+          "partial": [
+            "portable consumption history",
+            "portable lifecycle settlement",
+            "generic scope independent of product fields"
+          ],
+          "missing": [
+            "issuer and holder on the same portable object",
+            "independent revocation in both sources",
+            "delegation and residual responsibility evidence",
+            "independent adopter implementation"
+          ],
+          "invalidated": [
+            "product success implies authorization",
+            "one implementation may activate KFD-10",
+            "Buildchain merge authority is universal Warrant semantics",
+            "KFX package recovery fields are universal Warrant semantics"
+          ]
+        },
+        "kfd10Status": "draft",
+        "qualifying": false,
+        "selfCertified": false,
+        "nextEvidence": [
+          "one independent adopter witness using only the packaged schema and vectors",
+          "portable revocation, consumption, and history fixtures",
+          "competing authorization model comparison at lower total cost"
+        ]
+      },
+      "machineAssets": [
+        {
+          "sourcePath": "evidence/semantic-self-sufficiency/kfd-1-13.json",
+          "url": "/evidence/semantic-self-sufficiency/kfd-1-13.json",
+          "mediaType": "application/json",
+          "role": "implementation-map",
+          "digest": "sha256:95df77d76070a435eac092beef35db798ce5f39e3281e88b4231787bf0d8648f"
+        },
+        {
+          "sourcePath": "profiles/warrant-evidence/manifest.json",
+          "url": "/profiles/warrant-evidence/manifest.json",
+          "mediaType": "application/json",
+          "role": "verification-profile",
+          "digest": "sha256:7c5c3857018d5c7b1f81a42af4a17cccced4a074e4d72ef70781fd4a62e09755"
+        },
+        {
+          "sourcePath": "evidence/primitive-evidence/first-wave-report.json",
+          "url": "/evidence/primitive-evidence/first-wave-report.json",
+          "mediaType": "application/json",
+          "role": "evidence-report",
+          "digest": "sha256:b1f0eb6918f0bf61760a3cadf496c1edb17bab962dcd1a41e2f5875e4b4aa62e"
+        },
+        {
+          "sourcePath": "schemas/kfd-semantic-self-sufficiency-matrix.schema.json",
+          "url": "/schemas/kfd-semantic-self-sufficiency-matrix.schema.json",
+          "mediaType": "application/json",
+          "role": "schema",
+          "digest": "sha256:482fcd5dfdcd78860619f78faedb843357974ea2a21d6f1dc94aca0ac7bacd4f"
+        }
+      ],
+      "rendering": {
+        "kind": "markdown-document",
+        "tocDepth": 3,
+        "navigationLabel": "Verify KFD",
+        "navigationGroup": "foundation",
+        "navigationOrder": 25
+      },
+      "markdown": "# Implement and verify KFD independently\n\nKFD is published as an implementable protocol package, not only as rendered\nprose. A consumer can start from one immutable `@kungfu-tech/kfd` release and\ninspect the numbered decisions, schemas, fixtures, failing cases, fixed vectors,\nand offline verifiers without installing Kungfu, checking out Buildchain,\nopening an Atlas workspace, reaching a private registry, or using the network.\n\n## Start from a fixed package cut\n\nPin one immutable package version and retain its npm integrity and source\ncoordinate. The consuming site publishes those exact release coordinates in\nits `/manifest.json`; inside the package, `kfd.release.json` declares the\nanchored package cut, while the public Buildchain release Passport binds the\npublished artifact. Do not infer conformance from the mutable `latest` alias or\nfrom a rendered page alone.\n\nThe machine-readable\n[`KFD-1 through KFD-13 semantic self-sufficiency matrix`](../evidence/semantic-self-sufficiency/kfd-1-13.json)\nis the implementation map. For every numbered decision it names the normative\nsource, available schemas, fixtures, failure tests, offline verifiers, current\ncoverage, and explicit gaps. Empty fields and `partial` or `gap` coverage are\nwork still owed; they are not silently filled by Kungfu product behavior.\n\nAn independent implementation can therefore proceed decision by decision:\n\n1. read the numbered decision as authority;\n2. implement the declared schemas and invariants without importing product\n   internals;\n3. run the packaged positive, negative, and fixed-vector evidence where it\n   exists;\n4. preserve the matrix's stated gaps and lifecycle status in its own claim;\n5. publish an adopter witness without asking the KFD package to self-certify it.\n\n## Run the package-only verifier\n\nFor the experimental Warrant evidence profile:\n\n```sh\nnode bin/kfd.mjs verify warrant-evidence \\\n  profiles/warrant-evidence/fixtures/buildchain-dev-delivery-warrant.json --json\n\nnode scripts/check-warrant-evidence.mjs\n```\n\nThe first command verifies a Primitive Evidence Bundle against the packaged\nregistry. The second checks both retained bundles, all fixed KFD-10 vectors,\nmanifest digests, forbidden dependency boundaries, and a freshly packed npm\nartifact in a temporary clean-room directory.\n\nThe packaged\n[`Warrant Evidence manifest`](../profiles/warrant-evidence/manifest.json)\nfixes 14 positive and negative vectors, declares zero runtime dependencies, and\nforbids product checkouts, private sources, and network access. The\n[`first-wave report`](../evidence/primitive-evidence/first-wave-report.json)\nseparates proved, partial, missing, and invalidated outcomes so an implementer\ncan reproduce the current evidence without inheriting its conclusions.\n\n## What a pass proves\n\n- the named JSON contract and exact public source coordinate are structurally\n  valid and present in the packaged evidence registry;\n- generic and product-profile claims remain separately evidence-graded;\n- the bundle cannot set qualification, certification, or promotion authority;\n- the fixed experimental KFD-10 vectors produce their registered outcomes;\n- the package contains all required inputs and runs the verifier offline.\n\n## What a pass does not prove\n\nA pass does not activate KFD-10, certify a product, authenticate the upstream\nrepository, execute upstream code, establish legal authority, prove security\nor production fitness, or show independent adoption beyond the packaged\nclean-room harness.\n\nKFD-10 remains `draft`. The current Warrant report remains `partial`, with\n`qualifying: false` and `selfCertified: false`. The package demonstrates a\nbounded independent verification method; only separately accountable adopter\nevidence can demonstrate an independent implementation.\n\nThe Rust/WASM verifier remains authoritative for its registered kinds. The\nWarrant evidence verifier is a separate public JavaScript profile surface and\ndoes not silently widen the Rust/WASM inventory.",
+      "rendererContract": {
+        "showReleaseIdentity": true,
+        "showCommands": true,
+        "showCoverageSummary": true,
+        "showMachineAssets": true,
+        "showClaimBoundaries": true,
+        "note": "Render the declared facts and links without converting package verification into certification, draft activation, independent adoption, or production fitness."
+      }
     }
   ],
   "formalPage": {
@@ -4775,7 +5702,9 @@
       "decision formal reference mapping",
       "decision formal reference markdown bodies",
       "KFD-11 through KFD-13 activation contract discovery manifest",
-      "Agent Hub executable onboarding page, command surface, protocol boundary, and recovery guidance"
+      "Agent Hub executable onboarding page, command surface, protocol boundary, and recovery guidance",
+      "independent implementation and verification page from docs/independent-verifier.md",
+      "semantic self-sufficiency matrix, Warrant profile, machine evidence routes, and claim boundaries"
     ],
     "ownedBySite": [
       "HTML structure",
