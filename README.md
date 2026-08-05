@@ -22,6 +22,35 @@ implementation, not its adoption boundary. Accumulating Episodes alone does
 not discover or prove a Primitive; KFD-5 and KFD-6 keep generation,
 qualification, and promotion separate.
 
+## Implement and verify KFD independently
+
+**Implement KFD without Kungfu — scaffold an adapter in Python, Rust, Node.js,
+or C++, then verify it offline.**
+
+Use the immutable `@kungfu-tech/kfd@1.0.0-alpha.55` package cut and follow the
+package-owned [Agent Hub workflow](profiles/agent-hub/README.md) or inspect the
+complete [independent verification boundary](docs/independent-verifier.md):
+
+```bash
+npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.55 kfd scaffold agent-hub --language python --output my-agent-hub-adapter
+npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.55 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json
+npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.55 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py --json
+```
+
+The scaffold is a deterministic, fail-closed starter: its smoke path checks
+only the JSONL envelope, and implementers must replace the missing product
+semantics before the fixed Hub 20 suite can pass.
+
+Package acquisition is separate from offline verification. Network or a local
+package cache may be needed to obtain the immutable package bytes; after the
+package, report, and optional adapter bytes are present, the report verifier
+performs no network access.
+
+These results do not certify an implementation or prove security, production
+fitness, complete semantic coverage, KFD-10 activation, or adoption by an
+independent organization. [Open the complete Agent Hub guide](/agent-hub/) ·
+[Inspect the verifier and coverage matrix](/verify/)
+
 ## Foundation triad
 
 The first three KFDs form the public foundation for KFD adopters and the
@@ -617,6 +646,10 @@ The first screen should be derived from this README:
   path is not known in advance.
 - Claim boundary: the third paragraph must state that KFD is a small, testable
   foundation rather than a final answer or complete theory of complex systems.
+- Independent implementation: the exact promise, four supported languages,
+  ordered scaffold/test/verify commands, offline boundary, non-certifying
+  boundary, and `/agent-hub/` plus `/verify/` links must appear before the
+  Foundation triad and before any installed Kungfu product projection.
 - Foundation signal: the `Foundation triad` section, especially the three
   one-line commitments and the product-witness rule immediately below them.
 - Depth choice: the foundation link must route to the non-numbered explanatory
