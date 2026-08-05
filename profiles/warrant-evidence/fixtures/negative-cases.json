@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.primitive-evidence-negative-fixtures/v1",
+  "base": "profiles/warrant-evidence/fixtures/buildchain-dev-delivery-warrant.json",
+  "patchSemantics": "Each patch key is a dot-separated object path. A null value deletes the final field; any other value replaces it.",
+  "cases": [
+    {
+      "id": "bundle-001-source-root-drift",
+      "patch": {
+        "source.contentRoot": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expected": {
+        "valid": false,
+        "code": "bundle-source-coordinate-invalid"
+      }
+    },
+    {
+      "id": "bundle-002-self-promotion",
+      "patch": {
+        "assessment.promotion.allowed": true,
+        "qualifying": true
+      },
+      "expected": {
+        "valid": false,
+        "code": "bundle-self-promotion"
+      }
+    }
+  ]
+}

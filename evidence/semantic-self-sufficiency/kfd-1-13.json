@@ -1,0 +1,151 @@
+{
+  "$schema": "https://kfd.libkungfu.dev/schemas/kfd-semantic-self-sufficiency-matrix.schema.json",
+  "schemaVersion": 1,
+  "contract": "kfd.semantic-self-sufficiency-matrix/v1",
+  "entries": [
+    {
+      "id": "KFD-1",
+      "lifecycleStatus": "active",
+      "normativeSources": ["decisions/KFD-1.md"],
+      "schemas": ["schemas/kfd-1/contract-world.schema.json", "schemas/kfd-1/publication-url-semantics.schema.json", "schemas/kfd-1/witness.schema.json"],
+      "fixtures": [".buildchain/kfd-1/contract-world.witness.json"],
+      "failureTests": ["scripts/check.mjs"],
+      "verifiers": ["scripts/check.mjs", "verifier/crates/core/src/lib.rs"],
+      "coverage": "complete",
+      "gaps": ["broader independent adopter corpus"]
+    },
+    {
+      "id": "KFD-2",
+      "lifecycleStatus": "active",
+      "normativeSources": ["decisions/KFD-2.md"],
+      "schemas": ["schemas/kfd-2/release-claims.schema.json", "schemas/kfd-2/release-trust-passport.schema.json", "schemas/kfd-2/trust-assessment.schema.json", "schemas/kfd-2/trust-claims.schema.json", "schemas/kfd-2/trust-taxonomy.schema.json"],
+      "fixtures": [".buildchain/kfd-2/public-release-trust.claim.json"],
+      "failureTests": ["scripts/check.mjs"],
+      "verifiers": ["scripts/check.mjs", "verifier/crates/core/src/lib.rs"],
+      "coverage": "complete",
+      "gaps": ["non-Kungfu adopter evidence"]
+    },
+    {
+      "id": "KFD-3",
+      "lifecycleStatus": "active",
+      "normativeSources": ["decisions/KFD-3.md"],
+      "schemas": ["schemas/kfd-3/collaboration-interface.schema.json", "schemas/kfd-3/witness.schema.json"],
+      "fixtures": [".buildchain/kfd-3/collaboration-interface.prebuild.json", ".buildchain/kfd-3/collaboration-interface.artifact.json"],
+      "failureTests": ["scripts/check.mjs"],
+      "verifiers": ["scripts/check.mjs"],
+      "coverage": "complete",
+      "gaps": ["plural external value surfaces"]
+    },
+    {
+      "id": "KFD-4",
+      "lifecycleStatus": "active",
+      "normativeSources": ["decisions/KFD-4.md"],
+      "schemas": ["schemas/kfd-4/observer-perspective.schema.json", "schemas/kfd-4/perspective-replay.schema.json"],
+      "fixtures": [],
+      "failureTests": [],
+      "verifiers": ["verifier/crates/core/src/lib.rs"],
+      "coverage": "partial",
+      "gaps": ["standalone fixed positive and negative perspective vector inventory"]
+    },
+    {
+      "id": "KFD-5",
+      "lifecycleStatus": "active",
+      "normativeSources": ["decisions/KFD-5.md"],
+      "schemas": ["schemas/kfd-5/primitive-discovery.schema.json"],
+      "fixtures": ["cases/registry.json"],
+      "failureTests": ["scripts/check.mjs"],
+      "verifiers": ["scripts/check.mjs"],
+      "coverage": "partial",
+      "gaps": ["independent primitive qualification corpus"]
+    },
+    {
+      "id": "KFD-6",
+      "lifecycleStatus": "draft",
+      "normativeSources": ["decisions/KFD-6.md"],
+      "schemas": ["schemas/kfd-6/autonomous-discovery-loop.schema.json"],
+      "fixtures": [],
+      "failureTests": [],
+      "verifiers": [],
+      "coverage": "partial",
+      "gaps": ["fixed causal-experience vectors", "offline verifier"]
+    },
+    {
+      "id": "KFD-7",
+      "lifecycleStatus": "active",
+      "normativeSources": ["decisions/KFD-7.md"],
+      "schemas": ["schemas/kfd-7/domain-profile.schema.json"],
+      "fixtures": ["verifier/fixtures/kfd-7/valid-domain-profile.json", "verifier/fixtures/kfd-7/invalid-missing-warrant.json", "verifier/fixtures/kfd-7/invalid-premature-activation.json"],
+      "failureTests": ["verifier/fixtures/kfd-7/invalid-missing-warrant.json", "verifier/fixtures/kfd-7/invalid-premature-activation.json"],
+      "verifiers": ["verifier/crates/core/src/lib.rs", "scripts/check-verifier.mjs"],
+      "coverage": "complete",
+      "gaps": ["more independent Domain Profiles"]
+    },
+    {
+      "id": "KFD-8",
+      "lifecycleStatus": "draft",
+      "normativeSources": ["decisions/KFD-8.md"],
+      "schemas": [],
+      "fixtures": [],
+      "failureTests": [],
+      "verifiers": [],
+      "coverage": "gap",
+      "gaps": ["versioned conformance witness", "fixed falsifier vectors", "offline verifier"]
+    },
+    {
+      "id": "KFD-9",
+      "lifecycleStatus": "draft",
+      "normativeSources": ["decisions/KFD-9.md"],
+      "schemas": [],
+      "fixtures": ["profiles/agent-runtime/vectors/runtime-100.json"],
+      "failureTests": ["profiles/agent-runtime/vectors/runtime-100.json"],
+      "verifiers": ["scripts/check-agent-runtime-profile.mjs"],
+      "coverage": "partial",
+      "gaps": ["dedicated Pursuit witness", "draft-specific conformance profile"]
+    },
+    {
+      "id": "KFD-10",
+      "lifecycleStatus": "draft",
+      "normativeSources": ["decisions/KFD-10.md"],
+      "schemas": ["schemas/kfd-10/conformance-witness.schema.json", "schemas/kfd-evidence/primitive-evidence-bundle.schema.json"],
+      "fixtures": ["profiles/warrant-evidence/fixtures/buildchain-dev-delivery-warrant.json", "profiles/warrant-evidence/fixtures/kungfu-kfx-recovery-warrant.json", "profiles/warrant-evidence/vectors/kfd-10.json"],
+      "failureTests": ["profiles/warrant-evidence/fixtures/negative-cases.json", "profiles/warrant-evidence/vectors/kfd-10.json"],
+      "verifiers": ["scripts/warrant-evidence-verifier.mjs", "scripts/check-warrant-evidence.mjs"],
+      "coverage": "partial",
+      "gaps": ["independent adopter evidence", "activation qualification gate", "competing-model cost comparison"]
+    },
+    {
+      "id": "KFD-11",
+      "lifecycleStatus": "draft",
+      "normativeSources": ["decisions/KFD-11.md"],
+      "schemas": ["schemas/kfd-11/adopter-witness.schema.json", "schemas/kfd-11/decision-admission.schema.json"],
+      "fixtures": ["verifier/fixtures/kfd-11/valid-adopter-witness.json"],
+      "failureTests": ["verifier/fixtures/kfd-11/invalid-write-receipt-as-admission.json"],
+      "verifiers": ["scripts/check-verifier.mjs"],
+      "coverage": "partial",
+      "gaps": ["qualified independent adopter witness set"]
+    },
+    {
+      "id": "KFD-12",
+      "lifecycleStatus": "draft",
+      "normativeSources": ["decisions/KFD-12.md"],
+      "schemas": ["schemas/kfd-12/adopter-witness.schema.json"],
+      "fixtures": ["verifier/fixtures/kfd-12/valid-adopter-witness.json"],
+      "failureTests": ["verifier/fixtures/kfd-12/invalid-fused-proposal-acceptance.json"],
+      "verifiers": ["scripts/check-verifier.mjs"],
+      "coverage": "partial",
+      "gaps": ["qualified independent implementation"]
+    },
+    {
+      "id": "KFD-13",
+      "lifecycleStatus": "draft",
+      "normativeSources": ["decisions/KFD-13.md"],
+      "schemas": ["schemas/kfd-13/adopter-witness.schema.json"],
+      "fixtures": ["verifier/fixtures/kfd-13/valid-adopter-witness.json"],
+      "failureTests": ["verifier/fixtures/kfd-13/invalid-absorbed-authority.json"],
+      "verifiers": ["scripts/check-verifier.mjs"],
+      "coverage": "partial",
+      "gaps": ["qualified independent settlement evidence"]
+    }
+  ],
+  "claimBoundary": "This matrix is an auditable repository-coverage cache. It does not change KFD lifecycle status, make a draft active, or turn a referenced adopter implementation into normative authority."
+}

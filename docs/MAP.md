@@ -27,6 +27,8 @@
 | How can independently owned Agent Hubs exchange responsibility without sharing one vendor runtime or cloud? | [`../protocols/agent-hub/README.md`](../protocols/agent-hub/README.md) |
 | How can an adopter execute and independently verify the fixed dual-Hub Agent Hub 20 suite? | [`../profiles/agent-hub/README.md`](../profiles/agent-hub/README.md) and its [`implementer guide`](../profiles/agent-hub/implementer-guide.md) |
 | How can an Agent runtime produce an implementation-independent KFD Runtime 100 report? | [`../profiles/agent-runtime/README.md`](../profiles/agent-runtime/README.md) and its [`implementer guide`](../profiles/agent-runtime/implementer-guide.md) |
+| How can retained product evidence feed Warrant discovery without promoting product fields into KFD semantics? | [`../profiles/warrant-evidence/README.md`](../profiles/warrant-evidence/README.md), its [`evidence registry`](../evidence/primitive-evidence/registry.json), and the [`first-wave report`](../evidence/primitive-evidence/first-wave-report.md) |
+| Which KFD-1 through KFD-13 decisions are self-sufficient, partial, or still missing public conformance surfaces? | [`semantic-self-sufficiency-matrix.md`](semantic-self-sufficiency-matrix.md) and its [machine matrix](../evidence/semantic-self-sufficiency/kfd-1-13.json) |
 
 ## Decisions, candidates, and Domain Profiles
 
@@ -125,6 +127,7 @@
 | What is the concrete self-proof path for KFD-1 through KFD-13? | [`../README.md`](../README.md#product-proof-path), the KFD formal and usage pages, and the package witnesses under [`../.buildchain/`](../.buildchain/) |
 | What dated evidence synthesis connects the founding product witnesses without creating new normative authority? | Current continuity cut: [`load-bearing-dogfood-2026-08-03-f08ade5b.md`](load-bearing-dogfood-2026-08-03-f08ade5b.md); preserved successor: [`load-bearing-dogfood-2026-08-03.md`](load-bearing-dogfood-2026-08-03.md); the 2026-07-28 [`load-bearing-dogfood.md`](load-bearing-dogfood.md) baseline remains rendered at `/under-load` |
 | How do I independently verify KFD records, release passports, Xinfa Pack/Atlas objects, or qualified Git Episodes? | [`verifier.md`](verifier.md) |
+| How do I verify Primitive Evidence Bundles and the experimental KFD-10 Warrant vectors from the KFD package alone? | [`independent-verifier.md`](independent-verifier.md) and [`../profiles/warrant-evidence/README.md`](../profiles/warrant-evidence/README.md) |
 | Where are the verifier semantic differences and public-specification gaps recorded? | [`verifier-inventory.md`](verifier-inventory.md) |
 | Where is the public KFD fact source? | [`../README.md`](../README.md#decision-metadata) and [`../site/kfd-site.json`](../site/kfd-site.json) decision metadata |
 | What does Apache-2.0 cover, and what remains official/trademark-bound? | [`../TRADEMARKS.md`](../TRADEMARKS.md) |

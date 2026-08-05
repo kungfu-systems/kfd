@@ -18,6 +18,8 @@ function usage() {
   kfd test agent-hub --adapter <path> --output <report.json>
     [--adapter-arg <arg>] [--adapter-source-commit <sha>] [--timeout-ms <ms>]
   kfd verify agent-hub-report <report.json> [--adapter <path>] [--json]
+  kfd verify warrant-evidence <bundle.json> [--json]
+  kfd verify kfd-10-witness <witness.json> [--json]
   kfd verify <kfd-record|passport|pack|atlas|episode|agent-runtime-report|bundle> <path> [--schema <path>] [--json]
   kfd bundle <kfd-record|passport|pack|atlas|episode|agent-runtime-report> <path> --output <bundle.json>`;
 }
@@ -178,6 +180,20 @@ async function main(args) {
   if (args[0] === "verify" && args[1] === "agent-hub-report") {
     const { runAgentHubReportVerifier } = await import("../scripts/agent-hub-report-verifier.mjs");
     process.exitCode = runAgentHubReportVerifier(args.slice(2));
+    return;
+  }
+  if (args[0] === "verify" && args[1] === "warrant-evidence") {
+    const { runPrimitiveEvidenceVerifier } = await import(
+      "../scripts/warrant-evidence-verifier.mjs"
+    );
+    process.exitCode = runPrimitiveEvidenceVerifier(args.slice(2));
+    return;
+  }
+  if (args[0] === "verify" && args[1] === "kfd-10-witness") {
+    const { runWarrantWitnessVerifier } = await import(
+      "../scripts/warrant-evidence-verifier.mjs"
+    );
+    process.exitCode = runWarrantWitnessVerifier(args.slice(2));
     return;
   }
   if (args.length < 3) throw new Error("missing command, kind, or path");

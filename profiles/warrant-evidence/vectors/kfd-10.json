@@ -1,0 +1,177 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.warrant-conformance-vectors/v1",
+  "profile": "kfd-10-warrant@0.1.0-alpha.1",
+  "baseWitness": {
+    "$schema": "https://kfd.libkungfu.dev/schemas/kfd-10/conformance-witness.schema.json",
+    "schemaVersion": 1,
+    "contract": "kfd.warrant-conformance-witness/v1",
+    "profile": "kfd-10-warrant@0.1.0-alpha.1",
+    "warrant": {
+      "id": "warrant:clean-room:001",
+      "root": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "issuer": "issuer:workspace-owner",
+      "holder": "holder:clean-room-agent",
+      "scope": {
+        "actions": ["apply-reviewed-change"],
+        "subjects": ["subject:repository"],
+        "resources": ["resource:feature-branch"],
+        "consequenceCeiling": 1
+      },
+      "targetRoots": [
+        "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      ],
+      "validity": {
+        "notBefore": "2026-08-05T00:00:00Z",
+        "expiresAt": "2026-08-06T00:00:00Z"
+      },
+      "lifecycle": {
+        "state": "active",
+        "revokedAt": null,
+        "consumedAt": null
+      },
+      "derivation": {
+        "parentRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "parentConsequenceCeiling": 2,
+        "attenuated": true,
+        "independentAuthorityRoot": null
+      },
+      "delegation": {
+        "delegated": false,
+        "from": null,
+        "residualResponsibility": ["issuer:workspace-owner"]
+      },
+      "authorization": {
+        "authorized": true,
+        "occurred": false,
+        "occurrenceUsedAsAuthority": false
+      },
+      "history": [
+        {
+          "event": "granted",
+          "at": "2026-08-05T00:00:00Z",
+          "root": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        }
+      ]
+    },
+    "observation": {
+      "at": "2026-08-05T12:00:00Z",
+      "action": "apply-reviewed-change",
+      "subject": "subject:repository",
+      "resource": "resource:feature-branch",
+      "targetRoots": [
+        "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      ]
+    },
+    "qualifying": false,
+    "selfCertified": false
+  },
+  "patchSemantics": "Each patch key is a dot-separated object path. A null value deletes the final field; any other value replaces it.",
+  "vectors": [
+    {
+      "id": "warrant-001-valid-bounded-authority",
+      "polarity": "positive",
+      "patch": {},
+      "expected": { "valid": true, "code": "warrant-valid" }
+    },
+    {
+      "id": "warrant-002-missing-issuer",
+      "polarity": "negative",
+      "patch": { "warrant.issuer": null },
+      "expected": { "valid": false, "code": "warrant-missing-issuer" }
+    },
+    {
+      "id": "warrant-003-missing-holder",
+      "polarity": "negative",
+      "patch": { "warrant.holder": null },
+      "expected": { "valid": false, "code": "warrant-missing-holder" }
+    },
+    {
+      "id": "warrant-004-out-of-scope-action",
+      "polarity": "negative",
+      "patch": { "observation.action": "push-protected-branch" },
+      "expected": { "valid": false, "code": "warrant-scope-mismatch" }
+    },
+    {
+      "id": "warrant-005-missing-exact-roots",
+      "polarity": "negative",
+      "patch": { "warrant.targetRoots": [] },
+      "expected": { "valid": false, "code": "warrant-target-roots-missing" }
+    },
+    {
+      "id": "warrant-006-expired",
+      "polarity": "negative",
+      "patch": { "warrant.validity.expiresAt": "2026-08-05T01:00:00Z" },
+      "expected": { "valid": false, "code": "warrant-expired" }
+    },
+    {
+      "id": "warrant-007-revoked",
+      "polarity": "negative",
+      "patch": {
+        "warrant.lifecycle.state": "revoked",
+        "warrant.lifecycle.revokedAt": "2026-08-05T06:00:00Z"
+      },
+      "expected": { "valid": false, "code": "warrant-revoked" }
+    },
+    {
+      "id": "warrant-008-consumed",
+      "polarity": "negative",
+      "patch": {
+        "warrant.lifecycle.state": "consumed",
+        "warrant.lifecycle.consumedAt": "2026-08-05T06:00:00Z"
+      },
+      "expected": { "valid": false, "code": "warrant-consumed" }
+    },
+    {
+      "id": "warrant-009-stale-target",
+      "polarity": "negative",
+      "patch": {
+        "observation.targetRoots": [
+          "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+        ]
+      },
+      "expected": { "valid": false, "code": "warrant-stale-target" }
+    },
+    {
+      "id": "warrant-010-authority-amplification",
+      "polarity": "negative",
+      "patch": {
+        "warrant.scope.consequenceCeiling": 3,
+        "warrant.derivation.attenuated": false
+      },
+      "expected": { "valid": false, "code": "warrant-authority-amplification" }
+    },
+    {
+      "id": "warrant-011-delegation-chain-missing",
+      "polarity": "negative",
+      "patch": {
+        "warrant.delegation.delegated": true,
+        "warrant.delegation.from": null
+      },
+      "expected": { "valid": false, "code": "warrant-delegation-chain-missing" }
+    },
+    {
+      "id": "warrant-012-residual-responsibility-missing",
+      "polarity": "negative",
+      "patch": { "warrant.delegation.residualResponsibility": [] },
+      "expected": { "valid": false, "code": "warrant-residual-responsibility-missing" }
+    },
+    {
+      "id": "warrant-013-occurrence-used-as-authority",
+      "polarity": "negative",
+      "patch": {
+        "warrant.authorization.authorized": false,
+        "warrant.authorization.occurred": true,
+        "warrant.authorization.occurrenceUsedAsAuthority": true
+      },
+      "expected": { "valid": false, "code": "warrant-authorization-occurrence-conflated" }
+    },
+    {
+      "id": "warrant-014-history-not-preserved",
+      "polarity": "negative",
+      "patch": { "warrant.history": [] },
+      "expected": { "valid": false, "code": "warrant-history-missing" }
+    }
+  ],
+  "claimBoundary": "The vectors test the experimental KFD-10 draft profile only. Passing them is not KFD-10 activation, certification, legal authority, security review, or proof of production fitness."
+}

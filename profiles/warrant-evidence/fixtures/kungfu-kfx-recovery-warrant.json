@@ -1,0 +1,100 @@
+{
+  "$schema": "https://kfd.libkungfu.dev/schemas/kfd-evidence/primitive-evidence-bundle.schema.json",
+  "schemaVersion": 1,
+  "contract": "kfd.primitive-evidence-bundle/v1",
+  "bundleId": "kungfu-kfx-recovery-warrant-2026-08-05",
+  "primitive": "Warrant",
+  "source": {
+    "repository": "https://github.com/kungfu-systems/kungfu",
+    "commit": "1fa379e07dc7197714b233f6227800e79a6b871f",
+    "tree": "d27b35f218d0a7ee9af1be59f2925596897387ca",
+    "path": "framework/kfx/kungfu-kfx.contract.json",
+    "contentRoot": "sha256:f0e6cfddac711123a969d7d88c8995b95fcb397b99438674902372fb38ff8d0c",
+    "public": true,
+    "retained": true
+  },
+  "pressureField": "A workspace owner or core system needs bounded recovery authority to disable or remove one exact KFX package state without ambient product or package cooperation authority.",
+  "mapping": {
+    "decision": "KFD-10",
+    "primitive": "Warrant",
+    "kfdClauses": [
+      "decisions/KFD-10.md#rule",
+      "decisions/KFD-10.md#independence",
+      "docs/KFD-10-formal.md#transitions"
+    ]
+  },
+  "evidenceClass": "generic-candidate",
+  "candidateInvariants": [
+    "issuer class and operation scope are explicit",
+    "authority binds exact package and state roots",
+    "expiry is checked before mutation"
+  ],
+  "reusableTestRoots": [
+    "sha256:f0e6cfddac711123a969d7d88c8995b95fcb397b99438674902372fb38ff8d0c"
+  ],
+  "failureOrCounterexample": "The source has no distinct holder, delegation, residual-responsibility or portable lifecycle history fields, so KFX recovery fields cannot stand in for universal Warrant semantics.",
+  "review": {
+    "state": "self-reviewed",
+    "reviewerClass": "same-steward",
+    "evidenceRoots": [
+      "sha256:f0e6cfddac711123a969d7d88c8995b95fcb397b99438674902372fb38ff8d0c"
+    ]
+  },
+  "lineage": {
+    "sourceEntryId": "kungfu-kfx-recovery-warrant-2026-08-05",
+    "predecessorBundleIds": []
+  },
+  "observation": {
+    "upstreamContract": "kungfu.kfx-recovery-warrant/v1",
+    "kind": "implementation-contract",
+    "summary": "KFX recovery requires a workspace-owner or core-system warrant for disable or remove, bound to package root, expected cut and revision, approval roots, expiry, and nonce."
+  },
+  "assessment": {
+    "verdict": "partial",
+    "genericClaims": [
+      {
+        "id": "issuer",
+        "status": "proved",
+        "basis": "The recovery contract restricts issuerClass to workspace-owner or core-system."
+      },
+      {
+        "id": "bounded-operation",
+        "status": "proved",
+        "basis": "Recovery authority is limited to disable or remove for an exact package root, cut root, and revision."
+      },
+      {
+        "id": "expiry",
+        "status": "proved",
+        "basis": "The retained fixture binds issuedAt and expiresAt around the authorization time."
+      },
+      {
+        "id": "holder",
+        "status": "missing",
+        "basis": "The retained recovery warrant does not name a distinct holder coordinate."
+      },
+      {
+        "id": "revocation-consumption-history",
+        "status": "missing",
+        "basis": "The observed warrant does not expose portable revocation, consumption, or historical event fields."
+      }
+    ],
+    "profileSpecificClaims": [
+      {
+        "id": "package-cooperation-not-required",
+        "status": "proved",
+        "basis": "The KFX recovery policy explicitly allows recovery without package cooperation."
+      },
+      {
+        "id": "kfx-package-semantics",
+        "status": "partial",
+        "basis": "Package disable/remove fields are KFX profile semantics and cannot be generalized as the universal Warrant action model."
+      }
+    ],
+    "promotion": {
+      "allowed": false,
+      "reason": "The KFX profile is one founding implementation source; it cannot self-promote KFD-10 or erase missing generic clauses."
+    }
+  },
+  "qualifying": false,
+  "selfCertified": false
+}
