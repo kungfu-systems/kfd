@@ -57,6 +57,73 @@
       "pastToFuture": "KFD's deepest question may not be **\"How does an agent execute a task?\"** It may be: **How can a bounded, goal-directed system act and change in an unpredictable world without losing continuity with itself?**",
       "kungfuPath": "KFD is an open, evidence-governed engineering standard for preserving facts, boundaries, perspective, and responsibility when the path is not known in advance. It develops a small set of portable principles, procedures, schemas, and verification contracts through which humans, agents, organizations, and software systems can act, learn, and change without silent drift. It therefore treats a well-formed Episode as more than a trace: it is a durable historical asset that future humans and agents can replay when today's ontology no longer explains reality."
     },
+    "independentImplementation": {
+      "label": "Implement and verify KFD independently",
+      "promise": "Implement KFD without Kungfu — scaffold an adapter in Python, Rust, Node.js, or C++, then verify it offline.",
+      "release": {
+        "package": "@kungfu-tech/kfd",
+        "version": "1.0.0-alpha.55",
+        "anchor": "kfd.release.json",
+        "immutable": true
+      },
+      "supportedLanguages": [
+        {
+          "id": "python",
+          "label": "Python",
+          "starter": "adapter.py"
+        },
+        {
+          "id": "rust",
+          "label": "Rust",
+          "starter": "target/release/kfd-agent-hub-rust-starter"
+        },
+        {
+          "id": "node",
+          "label": "Node.js",
+          "starter": "adapter.mjs"
+        },
+        {
+          "id": "cpp",
+          "label": "C++",
+          "starter": "build/kfd-agent-hub-cpp-starter"
+        }
+      ],
+      "steps": [
+        {
+          "id": "scaffold",
+          "label": "Scaffold",
+          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.55 kfd scaffold agent-hub --language python --output my-agent-hub-adapter",
+          "capability": "kfd scaffold agent-hub --language <cpp|node|python|rust> --output <new-directory> [--json]"
+        },
+        {
+          "id": "test",
+          "label": "Test Hub 20",
+          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.55 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json",
+          "capability": "kfd test agent-hub --adapter <path> --output <report.json>"
+        },
+        {
+          "id": "verify",
+          "label": "Verify offline",
+          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.55 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py --json",
+          "capability": "kfd verify agent-hub-report <report.json> [--adapter <path>] [--json]"
+        }
+      ],
+      "links": [
+        {
+          "id": "agent-hub",
+          "label": "Open the complete Agent Hub guide",
+          "url": "/agent-hub/"
+        },
+        {
+          "id": "verify",
+          "label": "Inspect the verifier and coverage matrix",
+          "url": "/verify/"
+        }
+      ],
+      "starterBoundary": "The scaffold is a deterministic, fail-closed starter: its smoke path checks only the JSONL envelope, and implementers must replace the missing product semantics before the fixed Hub 20 suite can pass.",
+      "offlineBoundary": "Package acquisition is separate from offline verification. Network or a local package cache may be needed to obtain the immutable package bytes; after the package, report, and optional adapter bytes are present, the report verifier performs no network access.",
+      "claimBoundary": "These results do not certify an implementation or prove security, production fitness, complete semantic coverage, KFD-10 activation, or adoption by an independent organization. [Open the complete Agent Hub guide](/agent-hub/) · [Inspect the verifier and coverage matrix](/verify/)"
+    },
     "foundationTriad": {
       "heading": "Foundation triad",
       "intro": "The first three KFDs form the public foundation for KFD adopters and the binding foundation for kungfu-systems:",
@@ -271,6 +338,17 @@
         "markdown": "KFD's deepest question may not be **\"How does an agent execute a task?\"** It\nmay be: **How can a bounded, goal-directed system act and change in an\nunpredictable world without losing continuity with itself?**\n\nKFD is an open, evidence-governed engineering standard for preserving facts,\nboundaries, perspective, and responsibility when the path is not known in\nadvance. It develops a small set of portable principles, procedures, schemas,\nand verification contracts through which humans, agents, organizations, and\nsoftware systems can act, learn, and change without silent drift. It therefore\ntreats a well-formed Episode as more than a trace: it is a durable historical\nasset that future humans and agents can replay when today's ontology no longer\nexplains reality.\n\nKFD does not claim to be the final answer or a complete theory of complex\nsystems. It publishes a small, testable foundation for adoption,\nimplementation, challenge, counterevidence, and revision. The breadth covered\nby its current decisions is evidence that a general action structure may\nexist, not proof that KFD has finished discovering it. Kungfu is its founding\nimplementation, not its adoption boundary. Accumulating Episodes alone does\nnot discover or prove a Primitive; KFD-5 and KFD-6 keep generation,\nqualification, and promotion separate."
       },
       {
+        "id": "independent-implementation",
+        "sourcePath": "README.md",
+        "sourceHeading": "Implement and verify KFD independently",
+        "title": "Implement and verify KFD independently",
+        "renderRole": "first-screen",
+        "homepagePriority": 8,
+        "defaultPresentation": "independent-implementation-steps",
+        "includeInFirstScreen": true,
+        "markdown": "**Implement KFD without Kungfu — scaffold an adapter in Python, Rust, Node.js,\nor C++, then verify it offline.**\n\nUse the immutable `@kungfu-tech/kfd@1.0.0-alpha.55` package cut and follow the\npackage-owned [Agent Hub workflow](profiles/agent-hub/README.md) or inspect the\ncomplete [independent verification boundary](docs/independent-verifier.md):\n\n```bash\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.55 kfd scaffold agent-hub --language python --output my-agent-hub-adapter\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.55 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.55 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py --json\n```\n\nThe scaffold is a deterministic, fail-closed starter: its smoke path checks\nonly the JSONL envelope, and implementers must replace the missing product\nsemantics before the fixed Hub 20 suite can pass.\n\nPackage acquisition is separate from offline verification. Network or a local\npackage cache may be needed to obtain the immutable package bytes; after the\npackage, report, and optional adapter bytes are present, the report verifier\nperforms no network access.\n\nThese results do not certify an implementation or prove security, production\nfitness, complete semantic coverage, KFD-10 activation, or adoption by an\nindependent organization. [Open the complete Agent Hub guide](/agent-hub/) ·\n[Inspect the verifier and coverage matrix](/verify/)"
+      },
+      {
         "id": "foundation-triad",
         "sourcePath": "README.md",
         "sourceHeading": "Foundation triad",
@@ -401,15 +479,22 @@
           "future-picture.claimBoundary",
           "future-picture.pastToFuture",
           "future-picture.kungfuPath",
+          "independent-implementation.promise",
+          "independent-implementation.supportedLanguages",
+          "independent-implementation.steps",
+          "independent-implementation.links",
+          "independent-implementation.offlineBoundary",
+          "independent-implementation.claimBoundary",
           "foundation-triad",
           "product-witness.principle",
           "foundation-triad.links"
         ],
-        "maxPrimarySections": 2,
-        "note": "The first viewport should ask the system-continuity question, state KFD's engineering answer and claim boundary, and expose the foundation triad before registry, renderer, or implementation detail."
+        "maxPrimarySections": 3,
+        "note": "The first viewport should ask the system-continuity question, make independent implementation and offline verification directly actionable, and begin the package-owned three-step path before installed-product, registry, or renderer detail."
       },
       "primary": [
         "future-picture",
+        "independent-implementation",
         "foundation-triad",
         "why-this-question-matters",
         "what-kfd-is",
@@ -469,7 +554,7 @@
       "homepagePriority": 90,
       "defaultPresentation": "developer-note",
       "includeInFirstScreen": false,
-      "markdown": "This README is also the homepage text source for `https://kfd.libkungfu.dev`.\nWhen `site-libkungfu-dev` consumes the `@kungfu-tech/kfd` npm package to render\nthe KFD site, it should treat this file as the canonical homepage copy, not as\nan implementation note to paraphrase in the site repository.\n\nThe first screen should be derived from this README:\n\n- Page identity: the top-level heading.\n- Core question: the opening paragraph must ask how a bounded, goal-directed\n  system can act and change in an unpredictable world without losing continuity\n  with itself. KFD must not be reduced to an Agent task-execution protocol.\n- Engineering answer: the second paragraph must identify facts, boundaries,\n  perspective, and responsibility as the inspectable basis for action when the\n  path is not known in advance.\n- Claim boundary: the third paragraph must state that KFD is a small, testable\n  foundation rather than a final answer or complete theory of complex systems.\n- Foundation signal: the `Foundation triad` section, especially the three\n  one-line commitments and the product-witness rule immediately below them.\n- Depth choice: the foundation link must route to the non-numbered explanatory\n  page at `/foundation`, and the historical cases link must route to `/cases`;\n  registry, renderer, and implementation detail stay outside the first screen.\n\nDecision cards, detail links, and machine paths should come from\n`registry.json`. The machine-readable site bundle lives at `site/kfd-site.json`\nand gives renderers stable fields for the homepage, the foundation explanation\npage, product proof path, decision routes, candidate routes, and rendering\nboundary. `candidatePages` owns the `/drafts/` index and stable\n`/drafts/{id}/` page declarations; renderers must not infer those routes from\nthe package directory layout. A site renderer may adapt layout, navigation,\ntypography, and visual assets, but it should not maintain separate wording that\ncan drift from this package.\n\n`site/kfd-site.json` is generated from this README and\n`docs/foundation.md` and `docs/primitive-discovery-cases.md` by\n`scripts/update-site-bundle.mjs`. The README owns the concise homepage; the\nfoundation document owns the complete explanation; the cases document owns\nthe non-normative historical anchors. The generated bundle exposes ordered\nhomepage sections, the `/foundation` and `/cases` pages, and a display plan that\nseparates first-screen, primary, detail, and support content. Site repositories\nshould consume that bundle instead of parsing the Markdown files. The renderer\ncontract remains machine metadata, not ordinary homepage content.",
+      "markdown": "This README is also the homepage text source for `https://kfd.libkungfu.dev`.\nWhen `site-libkungfu-dev` consumes the `@kungfu-tech/kfd` npm package to render\nthe KFD site, it should treat this file as the canonical homepage copy, not as\nan implementation note to paraphrase in the site repository.\n\nThe first screen should be derived from this README:\n\n- Page identity: the top-level heading.\n- Core question: the opening paragraph must ask how a bounded, goal-directed\n  system can act and change in an unpredictable world without losing continuity\n  with itself. KFD must not be reduced to an Agent task-execution protocol.\n- Engineering answer: the second paragraph must identify facts, boundaries,\n  perspective, and responsibility as the inspectable basis for action when the\n  path is not known in advance.\n- Claim boundary: the third paragraph must state that KFD is a small, testable\n  foundation rather than a final answer or complete theory of complex systems.\n- Independent implementation: the exact promise, four supported languages,\n  ordered scaffold/test/verify commands, offline boundary, non-certifying\n  boundary, and `/agent-hub/` plus `/verify/` links must appear before the\n  Foundation triad and before any installed Kungfu product projection.\n- Foundation signal: the `Foundation triad` section, especially the three\n  one-line commitments and the product-witness rule immediately below them.\n- Depth choice: the foundation link must route to the non-numbered explanatory\n  page at `/foundation`, and the historical cases link must route to `/cases`;\n  registry, renderer, and implementation detail stay outside the first screen.\n\nDecision cards, detail links, and machine paths should come from\n`registry.json`. The machine-readable site bundle lives at `site/kfd-site.json`\nand gives renderers stable fields for the homepage, the foundation explanation\npage, product proof path, decision routes, candidate routes, and rendering\nboundary. `candidatePages` owns the `/drafts/` index and stable\n`/drafts/{id}/` page declarations; renderers must not infer those routes from\nthe package directory layout. A site renderer may adapt layout, navigation,\ntypography, and visual assets, but it should not maintain separate wording that\ncan drift from this package.\n\n`site/kfd-site.json` is generated from this README and\n`docs/foundation.md` and `docs/primitive-discovery-cases.md` by\n`scripts/update-site-bundle.mjs`. The README owns the concise homepage; the\nfoundation document owns the complete explanation; the cases document owns\nthe non-normative historical anchors. The generated bundle exposes ordered\nhomepage sections, the `/foundation` and `/cases` pages, and a display plan that\nseparates first-screen, primary, detail, and support content. Site repositories\nshould consume that bundle instead of parsing the Markdown files. The renderer\ncontract remains machine metadata, not ordinary homepage content.",
       "renderAsHomepageContent": false,
       "note": "This is a machine/renderer contract for site implementers. It should not be rendered as ordinary homepage content."
     }
@@ -5681,6 +5766,7 @@
     "ownedByKfd": [
       "homepage title and text",
       "homepage section projection from README.md",
+      "first-screen independent implementation promise, languages, commands, links, and boundaries",
       "foundation explanation page from docs/foundation.md",
       "load-bearing dogfood evidence page from docs/load-bearing-dogfood.md",
       "formal reference overview from docs/formal-model.md",

@@ -24,6 +24,7 @@ const SEMANTIC_MATRIX_PATH = "evidence/semantic-self-sufficiency/kfd-1-13.json";
 const SEMANTIC_MATRIX_SCHEMA_PATH = "schemas/kfd-semantic-self-sufficiency-matrix.schema.json";
 const WARRANT_MANIFEST_PATH = "profiles/warrant-evidence/manifest.json";
 const FIRST_WAVE_REPORT_PATH = "evidence/primitive-evidence/first-wave-report.json";
+const KFD_RELEASE_PATH = "kfd.release.json";
 const SITE_BUNDLE_PATH = "site/kfd-site.json";
 
 const normalizeLines = (value) => String(value || "").replace(/\r\n/g, "\n").trim();
@@ -113,6 +114,58 @@ const parseFoundationTriad = (markdown) => {
     commitments,
     summary: paragraphBlocks(after)[0] || "",
     links,
+  };
+};
+
+const parseIndependentImplementation = (markdown, capabilities, releaseAnchor) => {
+  const promise = markdown.match(/\*\*(Implement KFD without Kungfu —[\s\S]*?verify it offline\.)\*\*/)?.[1]
+    .replace(/\n/g, " ");
+  if (!promise) throw new Error("independent implementation section must expose the exact bold promise");
+  const commandBlock = markdown.match(/```bash\n([\s\S]*?)\n```/);
+  if (!commandBlock) throw new Error("independent implementation section must include a bash command block");
+  const commands = commandBlock[1].split("\n").map((line) => line.trim()).filter(Boolean);
+  if (commands.length !== 3) throw new Error("independent implementation section must expose exactly three commands");
+  const version = releaseAnchor.npmVersion;
+  if (!commands.every((command) => command.includes(`@kungfu-tech/kfd@${version}`))) {
+    throw new Error("independent implementation commands must pin the exact release anchor version");
+  }
+  const blocks = paragraphBlocks(markdown);
+  const boundary = (needle, message) => {
+    const value = blocks.find((block) => block.includes(needle));
+    if (!value) throw new Error(message);
+    return value;
+  };
+  const links = [...markdown.matchAll(/\[([^\]]+)\]\((\/(?:agent-hub|verify)\/)\)/g)]
+    .map((match) => ({
+      id: match[2] === "/agent-hub/" ? "agent-hub" : "verify",
+      label: match[1],
+      url: match[2],
+    }));
+  if (links.length !== 2) throw new Error("independent implementation section must link /agent-hub/ and /verify/");
+  return {
+    label: "Implement and verify KFD independently",
+    promise,
+    release: {
+      package: releaseAnchor.npmPackage,
+      version,
+      anchor: KFD_RELEASE_PATH,
+      immutable: true,
+    },
+    supportedLanguages: [
+      { id: "python", label: "Python", starter: "adapter.py" },
+      { id: "rust", label: "Rust", starter: "target/release/kfd-agent-hub-rust-starter" },
+      { id: "node", label: "Node.js", starter: "adapter.mjs" },
+      { id: "cpp", label: "C++", starter: "build/kfd-agent-hub-cpp-starter" },
+    ],
+    steps: [
+      { id: "scaffold", label: "Scaffold", command: commands[0], capability: capabilities.commands.scaffold },
+      { id: "test", label: "Test Hub 20", command: commands[1], capability: capabilities.commands.test },
+      { id: "verify", label: "Verify offline", command: commands[2], capability: capabilities.commands.verify },
+    ],
+    links,
+    starterBoundary: boundary("deterministic, fail-closed starter", "independent implementation section must preserve the starter boundary"),
+    offlineBoundary: boundary("Package acquisition is separate", "independent implementation section must preserve the offline boundary"),
+    claimBoundary: boundary("do not certify", "independent implementation section must preserve the non-certifying boundary"),
   };
 };
 
@@ -582,6 +635,7 @@ export const buildSiteBundle = ({
   semanticMatrix,
   warrantManifest,
   firstWaveReport,
+  releaseAnchor,
 }) => {
   const readme = parseReadme(readmeText);
   const foundationDocument = parseReadme(foundationText);
@@ -592,6 +646,11 @@ export const buildSiteBundle = ({
   const { lead } = introLead(readme.intro);
   const { decisionKinds } = introLead(readme.sections["What KFD is"] || "");
   const foundationTriad = parseFoundationTriad(readme.sections["Foundation triad"] || "");
+  const independentImplementation = parseIndependentImplementation(
+    readme.sections["Implement and verify KFD independently"] || "",
+    agentHubCapabilities,
+    releaseAnchor,
+  );
   const foundation = parseFoundation(foundationDocument.sections["Foundation structure"] || "");
   const productWitness = parseProductWitness(foundationDocument.sections["Load-bearing product witness"] || "");
   const practiceGuidelines = parsePracticeGuidelines(foundationDocument.sections["Practice guidelines"] || "");
@@ -649,6 +708,16 @@ export const buildSiteBundle = ({
       role: "first-screen",
       priority: 5,
       presentation: "future-picture",
+      firstScreen: true,
+    }),
+    section({
+      id: "independent-implementation",
+      sourceHeading: "Implement and verify KFD independently",
+      title: "Implement and verify KFD independently",
+      markdown: readme.sections["Implement and verify KFD independently"],
+      role: "first-screen",
+      priority: 8,
+      presentation: "independent-implementation-steps",
       firstScreen: true,
     }),
     section({
@@ -808,6 +877,7 @@ export const buildSiteBundle = ({
       lead,
       decisionKinds,
       futurePicture,
+      independentImplementation,
       foundationTriad,
       foundation,
       productWitness,
@@ -827,14 +897,20 @@ export const buildSiteBundle = ({
             "future-picture.claimBoundary",
             "future-picture.pastToFuture",
             "future-picture.kungfuPath",
+            "independent-implementation.promise",
+            "independent-implementation.supportedLanguages",
+            "independent-implementation.steps",
+            "independent-implementation.links",
+            "independent-implementation.offlineBoundary",
+            "independent-implementation.claimBoundary",
             "foundation-triad",
             "product-witness.principle",
             "foundation-triad.links",
           ],
-          maxPrimarySections: 2,
-          note: "The first viewport should ask the system-continuity question, state KFD's engineering answer and claim boundary, and expose the foundation triad before registry, renderer, or implementation detail.",
+          maxPrimarySections: 3,
+          note: "The first viewport should ask the system-continuity question, make independent implementation and offline verification directly actionable, and begin the package-owned three-step path before installed-product, registry, or renderer detail.",
         },
-        primary: ["future-picture", "foundation-triad", "why-this-question-matters", "what-kfd-is", "adoption-boundary", "current-candidates", "product-proof-path"],
+        primary: ["future-picture", "independent-implementation", "foundation-triad", "why-this-question-matters", "what-kfd-is", "adoption-boundary", "current-candidates", "product-proof-path"],
         detail: {
           route: "/foundation",
           source: FOUNDATION_PATH,
@@ -1003,6 +1079,7 @@ export const buildSiteBundle = ({
       ownedByKfd: [
         "homepage title and text",
         "homepage section projection from README.md",
+        "first-screen independent implementation promise, languages, commands, links, and boundaries",
         "foundation explanation page from docs/foundation.md",
         "load-bearing dogfood evidence page from docs/load-bearing-dogfood.md",
         "formal reference overview from docs/formal-model.md",
@@ -1063,6 +1140,7 @@ export const readInputs = () => ({
   semanticMatrix: JSON.parse(readFileSync(SEMANTIC_MATRIX_PATH, "utf8")),
   warrantManifest: JSON.parse(readFileSync(WARRANT_MANIFEST_PATH, "utf8")),
   firstWaveReport: JSON.parse(readFileSync(FIRST_WAVE_REPORT_PATH, "utf8")),
+  releaseAnchor: JSON.parse(readFileSync(KFD_RELEASE_PATH, "utf8")),
 });
 
 export const generatedSiteBundle = () => buildSiteBundle(readInputs());
