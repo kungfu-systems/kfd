@@ -679,6 +679,9 @@ if (siteBundle.routes?.candidateFormalPattern !== "/drafts/{id}/formal") {
   fail("site bundle routes.candidateFormalPattern must be /drafts/{id}/formal");
 }
 if (siteBundle.routes?.agentHub !== "/agent-hub") fail("site bundle routes.agentHub must be /agent-hub");
+if (siteBundle.routes?.independentVerification !== "/verify") {
+  fail("site bundle routes.independentVerification must be /verify");
+}
 const agentHubPage = siteBundle.agentHubPage;
 if (agentHubPage?.url !== siteBundle.routes.agentHub) fail("site bundle agentHubPage.url must match routes.agentHub");
 if (agentHubPage?.normative !== false || agentHubPage?.status !== "experimental") {
@@ -830,6 +833,65 @@ if (
   )
 ) {
   fail("site bundle standalonePages must declare the load-bearing page for generic site discovery");
+}
+const independentVerificationPage = siteBundle.independentVerificationPage;
+if (
+  siteBundle.source?.independentVerifier !== "docs/independent-verifier.md" ||
+  siteBundle.source?.semanticSelfSufficiencyMatrix !== "evidence/semantic-self-sufficiency/kfd-1-13.json" ||
+  siteBundle.source?.warrantEvidenceManifest !== "profiles/warrant-evidence/manifest.json" ||
+  siteBundle.source?.primitiveEvidenceFirstWaveReport !== "evidence/primitive-evidence/first-wave-report.json" ||
+  independentVerificationPage?.id !== "independent-verification" ||
+  independentVerificationPage?.url !== siteBundle.routes.independentVerification ||
+  independentVerificationPage?.normative !== false ||
+  independentVerificationPage?.status !== "experimental" ||
+  independentVerificationPage?.rendering?.kind !== "markdown-document" ||
+  !independentVerificationPage?.markdown?.startsWith("# Implement and verify KFD independently")
+) {
+  fail("site bundle must expose the renderer-ready non-normative /verify implementation and verification path");
+}
+if (
+  independentVerificationPage?.semanticSelfSufficiency?.entryCount !== 13 ||
+  independentVerificationPage?.semanticSelfSufficiency?.entries?.length !== 13 ||
+  !independentVerificationPage.semanticSelfSufficiency.entries.some((entry) =>
+    entry.id === "KFD-10" && entry.lifecycleStatus === "draft" && entry.coverage === "partial"
+  )
+) {
+  fail("site bundle /verify page must expose the 13-entry matrix and preserve KFD-10 draft partial status");
+}
+if (
+  independentVerificationPage?.warrantEvidence?.fixedVectorCount !== 14 ||
+  independentVerificationPage?.warrantEvidence?.decisionStatus !== "draft" ||
+  independentVerificationPage?.warrantEvidence?.extraction?.mode !== "published-kfd-package" ||
+  independentVerificationPage?.warrantEvidence?.extraction?.offline !== true ||
+  independentVerificationPage?.warrantEvidence?.runtimeDependencies?.length !== 0 ||
+  independentVerificationPage?.firstWaveEvidence?.qualifying !== false ||
+  independentVerificationPage?.firstWaveEvidence?.selfCertified !== false
+) {
+  fail("site bundle /verify page must preserve package-only Warrant 14 and non-qualifying non-self-certified boundaries");
+}
+for (const assetPath of [
+  "evidence/semantic-self-sufficiency/kfd-1-13.json",
+  "profiles/warrant-evidence/manifest.json",
+  "evidence/primitive-evidence/first-wave-report.json",
+  "schemas/kfd-semantic-self-sufficiency-matrix.schema.json",
+]) {
+  const asset = independentVerificationPage?.machineAssets?.find((entry) => entry.sourcePath === assetPath);
+  if (!asset?.url?.startsWith("/") || !asset?.digest?.startsWith("sha256:")) {
+    fail(`site bundle /verify machine asset ${assetPath} must expose a stable URL and digest`);
+  }
+}
+if (!siteBundle.standalonePages.some((entry) =>
+  entry.id === independentVerificationPage?.id &&
+  entry.url === "/verify" &&
+  entry.rendering?.kind === "markdown-document"
+)) {
+  fail("site bundle standalonePages must declare /verify for generic site discovery");
+}
+if (
+  siteBundle.homepage?.productProofPath?.independentVerification?.url !== "/verify" ||
+  !siteBundle.homepage?.displayPlan?.readingPath?.includes("/verify")
+) {
+  fail("site bundle homepage product proof path and reading path must discover /verify");
 }
 if (
   siteBundle.terminologyPage?.id !== "terminology" ||
@@ -1965,6 +2027,11 @@ if (!Array.isArray(boundary.ownedByKfd) || !boundary.ownedByKfd.includes("histor
 }
 if (!Array.isArray(boundary.ownedByKfd) || !boundary.ownedByKfd.includes("load-bearing dogfood evidence page from docs/load-bearing-dogfood.md")) {
   fail("site bundle renderingBoundary.ownedByKfd must include the load-bearing dogfood page");
+}
+if (!Array.isArray(boundary.ownedByKfd) ||
+    !boundary.ownedByKfd.includes("independent implementation and verification page from docs/independent-verifier.md") ||
+    !boundary.ownedByKfd.includes("semantic self-sufficiency matrix, Warrant profile, machine evidence routes, and claim boundaries")) {
+  fail("site bundle renderingBoundary.ownedByKfd must retain /verify content and evidence authority");
 }
 if (!Array.isArray(boundary.ownedByKfd) ||
     !boundary.ownedByKfd.includes("canonical terminology contract and explanatory subtitles from terminology.json")) {

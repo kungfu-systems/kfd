@@ -1,4 +1,5 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { pathToFileURL } from "node:url";
 
 const README_PATH = "README.md";
@@ -18,6 +19,11 @@ const AGENT_HUB_PROFILE_PATH = "profiles/agent-hub/README.md";
 const AGENT_HUB_GUIDE_PATH = "profiles/agent-hub/implementer-guide.md";
 const AGENT_HUB_CAPABILITIES_PATH = "profiles/agent-hub/cli-capabilities.json";
 const AGENT_HUB_MANIFEST_PATH = "profiles/agent-hub/manifest.json";
+const INDEPENDENT_VERIFIER_PATH = "docs/independent-verifier.md";
+const SEMANTIC_MATRIX_PATH = "evidence/semantic-self-sufficiency/kfd-1-13.json";
+const SEMANTIC_MATRIX_SCHEMA_PATH = "schemas/kfd-semantic-self-sufficiency-matrix.schema.json";
+const WARRANT_MANIFEST_PATH = "profiles/warrant-evidence/manifest.json";
+const FIRST_WAVE_REPORT_PATH = "evidence/primitive-evidence/first-wave-report.json";
 const SITE_BUNDLE_PATH = "site/kfd-site.json";
 
 const normalizeLines = (value) => String(value || "").replace(/\r\n/g, "\n").trim();
@@ -156,6 +162,12 @@ const parsePracticeGuidelines = (markdown) => ({
 const parseProductProofPath = (markdown) => ({
   heading: "Product proof path",
   body: paragraphBlocks(markdown)[0] || "",
+  independentVerification: {
+    label: "Implement and verify KFD independently",
+    sourcePath: INDEPENDENT_VERIFIER_PATH,
+    url: "/verify",
+    note: "Start from an immutable package cut; inspect the coverage matrix, package-only verifier, fixed vectors, outcomes, and explicit gaps.",
+  },
 });
 
 const usagePathForEntry = (entry) => `docs/KFD-${entry.number}-usage.md`;
@@ -436,6 +448,119 @@ const buildAgentHubPage = ({ profileText, guideText, capabilities, manifest }) =
   };
 };
 
+const buildIndependentVerificationPage = ({
+  guideText,
+  semanticMatrix,
+  warrantManifest,
+  firstWaveReport,
+}) => {
+  const guide = parseReadme(guideText);
+  const digestFor = (sourcePath) => warrantManifest.surfaces
+    .find((surface) => surface.path === sourcePath)?.digest;
+  const machineAsset = (sourcePath, url, role) => ({
+    sourcePath,
+    url,
+    mediaType: "application/json",
+    role,
+    digest: digestFor(sourcePath) || `sha256:${createHash("sha256").update(readFileSync(sourcePath)).digest("hex")}`,
+  });
+  const lifecycleCounts = semanticMatrix.entries.reduce((counts, entry) => ({
+    ...counts,
+    [entry.lifecycleStatus]: (counts[entry.lifecycleStatus] || 0) + 1,
+  }), {});
+  const coverageCounts = semanticMatrix.entries.reduce((counts, entry) => ({
+    ...counts,
+    [entry.coverage]: (counts[entry.coverage] || 0) + 1,
+  }), {});
+
+  return {
+    id: "independent-verification",
+    title: guide.title,
+    sourcePath: INDEPENDENT_VERIFIER_PATH,
+    url: "/verify",
+    relationship: "implementation-and-independent-verification-guide",
+    normative: false,
+    status: "experimental",
+    authorityNote: "Numbered decisions remain authoritative. This page projects packaged implementation and verification evidence without activating drafts or certifying adopters.",
+    releaseIdentity: {
+      package: "@kungfu-tech/kfd",
+      packageAnchor: "kfd.release.json",
+      publicReleasePassport: "Buildchain release Passport for the exact immutable package",
+      releaseEvidenceOwner: "Buildchain",
+      consumingSiteManifest: "/manifest.json",
+      rule: "Verify one immutable package version, integrity, source coordinate, and rendered-site consumption cut; never infer conformance from a mutable alias.",
+    },
+    commands: {
+      verifyWarrantBundle: "node bin/kfd.mjs verify warrant-evidence profiles/warrant-evidence/fixtures/buildchain-dev-delivery-warrant.json --json",
+      checkWarrantProfile: "node scripts/check-warrant-evidence.mjs",
+    },
+    semanticSelfSufficiency: {
+      contract: semanticMatrix.contract,
+      sourcePath: SEMANTIC_MATRIX_PATH,
+      schemaPath: SEMANTIC_MATRIX_SCHEMA_PATH,
+      entryCount: semanticMatrix.entries.length,
+      lifecycleCounts,
+      coverageCounts,
+      entries: semanticMatrix.entries.map((entry) => ({
+        id: entry.id,
+        lifecycleStatus: entry.lifecycleStatus,
+        coverage: entry.coverage,
+        normativeSources: entry.normativeSources,
+        schemas: entry.schemas,
+        fixtures: entry.fixtures,
+        failureTests: entry.failureTests,
+        verifiers: entry.verifiers,
+        gaps: entry.gaps,
+      })),
+      claimBoundary: semanticMatrix.claimBoundary,
+    },
+    warrantEvidence: {
+      profile: `${warrantManifest.profile.id}@${warrantManifest.profile.version}`,
+      status: warrantManifest.profile.status,
+      manifestPath: WARRANT_MANIFEST_PATH,
+      fixedVectorCount: warrantManifest.warrantConformance.fixedVectorCount,
+      decision: warrantManifest.warrantConformance.decision,
+      decisionStatus: warrantManifest.warrantConformance.decisionStatus,
+      extraction: warrantManifest.extraction,
+      runtimeDependencies: warrantManifest.runtimeDependencies,
+      forbiddenDependencies: warrantManifest.forbiddenDependencies,
+      report: warrantManifest.report,
+      claimBoundary: warrantManifest.claimBoundary,
+    },
+    firstWaveEvidence: {
+      sourcePath: FIRST_WAVE_REPORT_PATH,
+      cut: firstWaveReport.cut,
+      outcomes: firstWaveReport.outcomes,
+      kfd10Status: firstWaveReport.kfd10Status,
+      qualifying: firstWaveReport.qualifying,
+      selfCertified: firstWaveReport.selfCertified,
+      nextEvidence: firstWaveReport.nextEvidence,
+    },
+    machineAssets: [
+      machineAsset(SEMANTIC_MATRIX_PATH, "/evidence/semantic-self-sufficiency/kfd-1-13.json", "implementation-map"),
+      machineAsset(WARRANT_MANIFEST_PATH, "/profiles/warrant-evidence/manifest.json", "verification-profile"),
+      machineAsset(FIRST_WAVE_REPORT_PATH, "/evidence/primitive-evidence/first-wave-report.json", "evidence-report"),
+      machineAsset(SEMANTIC_MATRIX_SCHEMA_PATH, "/schemas/kfd-semantic-self-sufficiency-matrix.schema.json", "schema"),
+    ],
+    rendering: {
+      kind: "markdown-document",
+      tocDepth: 3,
+      navigationLabel: "Verify KFD",
+      navigationGroup: "foundation",
+      navigationOrder: 25,
+    },
+    markdown: stripFrontmatter(guideText),
+    rendererContract: {
+      showReleaseIdentity: true,
+      showCommands: true,
+      showCoverageSummary: true,
+      showMachineAssets: true,
+      showClaimBoundaries: true,
+      note: "Render the declared facts and links without converting package verification into certification, draft activation, independent adoption, or production fitness.",
+    },
+  };
+};
+
 export const buildSiteBundle = ({
   readmeText,
   foundationText,
@@ -453,6 +578,10 @@ export const buildSiteBundle = ({
   agentHubGuideText,
   agentHubCapabilities,
   agentHubManifest,
+  independentVerifierText,
+  semanticMatrix,
+  warrantManifest,
+  firstWaveReport,
 }) => {
   const readme = parseReadme(readmeText);
   const foundationDocument = parseReadme(foundationText);
@@ -486,6 +615,12 @@ export const buildSiteBundle = ({
     guideText: agentHubGuideText,
     capabilities: agentHubCapabilities,
     manifest: agentHubManifest,
+  });
+  const independentVerificationPage = buildIndependentVerificationPage({
+    guideText: independentVerifierText,
+    semanticMatrix,
+    warrantManifest,
+    firstWaveReport,
   });
   const loadBearingPage = {
     id: "load-bearing-dogfood",
@@ -641,6 +776,11 @@ export const buildSiteBundle = ({
       agentHubGuide: AGENT_HUB_GUIDE_PATH,
       agentHubCapabilities: AGENT_HUB_CAPABILITIES_PATH,
       agentHubManifest: AGENT_HUB_MANIFEST_PATH,
+      independentVerifier: INDEPENDENT_VERIFIER_PATH,
+      semanticSelfSufficiencyMatrix: SEMANTIC_MATRIX_PATH,
+      semanticSelfSufficiencySchema: SEMANTIC_MATRIX_SCHEMA_PATH,
+      warrantEvidenceManifest: WARRANT_MANIFEST_PATH,
+      primitiveEvidenceFirstWaveReport: FIRST_WAVE_REPORT_PATH,
       decisionsDir: "decisions",
       candidatesDir: "drafts",
     },
@@ -656,6 +796,7 @@ export const buildSiteBundle = ({
       candidatePattern: "/drafts/{id}",
       candidateFormalPattern: "/drafts/{id}/formal",
       agentHub: "/agent-hub",
+      independentVerification: "/verify",
       decisionPattern: "/{number}",
       decisionUsagePattern: "/{number}/usage",
       decisionFormalPattern: "/{number}/formal",
@@ -699,7 +840,7 @@ export const buildSiteBundle = ({
           source: FOUNDATION_PATH,
           sections: ["foundation-structure", "load-bearing-product-witness", "practice-guidelines"],
         },
-        readingPath: ["/", "/foundation", "/under-load", "/formal", "/cases", "/drafts", "/{number}"],
+        readingPath: ["/", "/foundation", "/verify", "/under-load", "/formal", "/cases", "/drafts", "/{number}"],
         support: ["agent-quickstart", "decision-metadata"],
         currentDecisions: {
           source: REGISTRY_PATH,
@@ -732,7 +873,8 @@ export const buildSiteBundle = ({
       markdown: normalizeLines(foundationText),
     },
     loadBearingPage,
-    standalonePages: [loadBearingPage],
+    independentVerificationPage,
+    standalonePages: [loadBearingPage, independentVerificationPage],
     formalPage: {
       id: "formal-model",
       title: formalDocument.title,
@@ -883,6 +1025,8 @@ export const buildSiteBundle = ({
         "decision formal reference markdown bodies",
         "KFD-11 through KFD-13 activation contract discovery manifest",
         "Agent Hub executable onboarding page, command surface, protocol boundary, and recovery guidance",
+        "independent implementation and verification page from docs/independent-verifier.md",
+        "semantic self-sufficiency matrix, Warrant profile, machine evidence routes, and claim boundaries",
       ],
       ownedBySite: [
         "HTML structure",
@@ -915,6 +1059,10 @@ export const readInputs = () => ({
   agentHubGuideText: readFileSync(AGENT_HUB_GUIDE_PATH, "utf8"),
   agentHubCapabilities: JSON.parse(readFileSync(AGENT_HUB_CAPABILITIES_PATH, "utf8")),
   agentHubManifest: JSON.parse(readFileSync(AGENT_HUB_MANIFEST_PATH, "utf8")),
+  independentVerifierText: readFileSync(INDEPENDENT_VERIFIER_PATH, "utf8"),
+  semanticMatrix: JSON.parse(readFileSync(SEMANTIC_MATRIX_PATH, "utf8")),
+  warrantManifest: JSON.parse(readFileSync(WARRANT_MANIFEST_PATH, "utf8")),
+  firstWaveReport: JSON.parse(readFileSync(FIRST_WAVE_REPORT_PATH, "utf8")),
 });
 
 export const generatedSiteBundle = () => buildSiteBundle(readInputs());
