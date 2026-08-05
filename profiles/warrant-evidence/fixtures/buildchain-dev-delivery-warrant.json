@@ -1,0 +1,100 @@
+{
+  "$schema": "https://kfd.libkungfu.dev/schemas/kfd-evidence/primitive-evidence-bundle.schema.json",
+  "schemaVersion": 1,
+  "contract": "kfd.primitive-evidence-bundle/v1",
+  "bundleId": "buildchain-dev-delivery-warrant-2026-08-05",
+  "primitive": "Warrant",
+  "source": {
+    "repository": "https://github.com/kungfu-systems/buildchain",
+    "commit": "22338823464024efb0bb72231c29cca9f61d72bb",
+    "tree": "41e9c79122c20751f76fb1f0e355d316c4d096a0",
+    "path": "packages/core/dev-delivery-warrant.js",
+    "contentRoot": "sha256:dcb2f8899ce001fa6f4c42306891f0dd7146d3752a2e8f4da494ab7db3f4b054",
+    "public": true,
+    "retained": true
+  },
+  "pressureField": "A qualified slow pull request needs one durable, non-preemptive, expiring and fenced delivery turn while final protected-ref authority remains external.",
+  "mapping": {
+    "decision": "KFD-10",
+    "primitive": "Warrant",
+    "kfdClauses": [
+      "decisions/KFD-10.md#rule",
+      "decisions/KFD-10.md#independence",
+      "docs/KFD-10-formal.md#derivation-and-invariants"
+    ]
+  },
+  "evidenceClass": "generic-candidate",
+  "candidateInvariants": [
+    "authority binds one exact target cut",
+    "stale or expired authority fails closed",
+    "occurrence does not create authority"
+  ],
+  "reusableTestRoots": [
+    "sha256:dcb2f8899ce001fa6f4c42306891f0dd7146d3752a2e8f4da494ab7db3f4b054"
+  ],
+  "failureOrCounterexample": "The source lacks a portable issuer-holder pair and independent revocation event, so it cannot prove the complete generic KFD-10 lifecycle.",
+  "review": {
+    "state": "self-reviewed",
+    "reviewerClass": "same-steward",
+    "evidenceRoots": [
+      "sha256:dcb2f8899ce001fa6f4c42306891f0dd7146d3752a2e8f4da494ab7db3f4b054"
+    ]
+  },
+  "lineage": {
+    "sourceEntryId": "buildchain-dev-delivery-warrant-2026-08-05",
+    "predecessorBundleIds": []
+  },
+  "observation": {
+    "upstreamContract": "kungfu.buildchain.dev-delivery-warrant/v1",
+    "kind": "implementation-contract",
+    "summary": "A leased, fenced delivery authority binds one exact candidate, protected base, source and proof roots, generation, expected old state, and expiry."
+  },
+  "assessment": {
+    "verdict": "partial",
+    "genericClaims": [
+      {
+        "id": "exact-target-binding",
+        "status": "proved",
+        "basis": "The warrant binds repository, protected base, candidate, source head, proof roots, generation, and expected-old state root."
+      },
+      {
+        "id": "expiry",
+        "status": "proved",
+        "basis": "Every warrant has issuedAt and expiresAt; mutation rejects an expired lease."
+      },
+      {
+        "id": "issuer-holder",
+        "status": "missing",
+        "basis": "The retained object does not independently identify both issuer and holder."
+      },
+      {
+        "id": "revocation",
+        "status": "missing",
+        "basis": "Expiry recovery and terminal close are explicit, but an independent revocation transition is not present."
+      },
+      {
+        "id": "consumption-history",
+        "status": "partial",
+        "basis": "Terminal close clears the active warrant and the Git ref retains queue history, but the warrant object has no portable consumed event chain."
+      }
+    ],
+    "profileSpecificClaims": [
+      {
+        "id": "protected-delivery-fencing",
+        "status": "proved",
+        "basis": "The exact fencing token and lease generation gate Buildchain delivery queue mutations."
+      },
+      {
+        "id": "github-merge-authority",
+        "status": "invalidated",
+        "basis": "The source explicitly leaves final protected-ref authority with GitHub Merge Queue."
+      }
+    ],
+    "promotion": {
+      "allowed": false,
+      "reason": "One product implementation is evidence for candidate clauses, not authority to activate or universally define KFD-10."
+    }
+  },
+  "qualifying": false,
+  "selfCertified": false
+}

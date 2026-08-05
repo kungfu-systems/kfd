@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.warrant-evidence-failure-codes/v1",
+  "codes": [
+    "bundle-contract-invalid",
+    "bundle-source-unregistered",
+    "bundle-source-coordinate-invalid",
+    "bundle-claim-boundary-invalid",
+    "bundle-self-promotion",
+    "warrant-contract-invalid",
+    "warrant-missing-issuer",
+    "warrant-missing-holder",
+    "warrant-scope-mismatch",
+    "warrant-target-roots-missing",
+    "warrant-expired",
+    "warrant-revoked",
+    "warrant-consumed",
+    "warrant-stale-target",
+    "warrant-authority-amplification",
+    "warrant-delegation-chain-missing",
+    "warrant-residual-responsibility-missing",
+    "warrant-authorization-occurrence-conflated",
+    "warrant-history-missing"
+  ]
+}

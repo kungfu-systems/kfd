@@ -27,6 +27,14 @@ but unauthorized, authorized but never occur, and successful but were not
 authorized. Demonstrate that delegation does not silently transfer residual
 responsibility.
 
+The experimental
+[`Warrant Evidence profile`](../profiles/warrant-evidence/README.md) supplies a
+package-only witness schema, fixed positive and negative vectors, explicit
+failure codes, and an offline verifier for those boundaries. Its first harness
+is maintained by the same stewarding organization and therefore demonstrates
+mechanical clean-room self-sufficiency, not independent organizational
+adoption, certification, or activation readiness.
+
 ## Migration from the candidate
 
 The numbered decision and formal reference now own the draft rule. The
