@@ -778,8 +778,70 @@ if (!siteBundle.homepage?.foundationTriad?.links?.some((entry) => entry.url === 
 if (!siteBundle.homepage?.foundationTriad?.links?.some((entry) => entry.url === "/cases")) {
   fail("site bundle homepage foundation triad must expose the /cases historical depth choice");
 }
+const independentImplementation = siteBundle.homepage?.independentImplementation;
+const independentPromise = "Implement KFD without Kungfu — scaffold an adapter in Python, Rust, Node.js, or C++, then verify it offline.";
+if (independentImplementation?.promise !== independentPromise) {
+  fail("site bundle homepage independent implementation promise must remain exact");
+}
+if (independentImplementation?.release?.package !== packageJson.name ||
+    independentImplementation?.release?.version !== packageJson.version ||
+    independentImplementation?.release?.anchor !== "kfd.release.json" ||
+    independentImplementation?.release?.immutable !== true) {
+  fail("site bundle independent implementation release must bind the exact immutable package anchor");
+}
+if (JSON.stringify(independentImplementation?.supportedLanguages?.map((entry) => entry.label)) !==
+    JSON.stringify(["Python", "Rust", "Node.js", "C++"])) {
+  fail("site bundle independent implementation must expose Python, Rust, Node.js, and C++ in promise order");
+}
+if (JSON.stringify(independentImplementation?.steps?.map((entry) => entry.id)) !==
+    JSON.stringify(["scaffold", "test", "verify"])) {
+  fail("site bundle independent implementation steps must remain scaffold, test, verify");
+}
+const exactIndependentCommands = [
+  `npx --yes --package @kungfu-tech/kfd@${packageJson.version} kfd scaffold agent-hub --language python --output my-agent-hub-adapter`,
+  `npx --yes --package @kungfu-tech/kfd@${packageJson.version} kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json`,
+  `npx --yes --package @kungfu-tech/kfd@${packageJson.version} kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py --json`,
+];
+if (JSON.stringify(independentImplementation?.steps?.map((entry) => entry.command)) !== JSON.stringify(exactIndependentCommands)) {
+  fail("site bundle independent implementation commands must match the exact package-owned three-step path");
+}
+for (const [index, capability] of [agentHubPage.commands.scaffold, agentHubPage.commands.test, agentHubPage.commands.verify].entries()) {
+  if (independentImplementation?.steps?.[index]?.capability !== capability) {
+    fail("site bundle independent implementation steps must bind Agent Hub CLI capabilities");
+  }
+}
+if (JSON.stringify(independentImplementation?.links?.map((entry) => entry.url)) !== JSON.stringify(["/agent-hub/", "/verify/"])) {
+  fail("site bundle independent implementation must expose /agent-hub/ and /verify/ reader links");
+}
+for (const boundary of ["starterBoundary", "offlineBoundary", "claimBoundary"]) {
+  if (!independentImplementation?.[boundary]) fail(`site bundle independent implementation must expose ${boundary}`);
+}
+for (const nonClaim of ["certify", "security", "production fitness", "complete semantic coverage", "KFD-10 activation", "independent organization"]) {
+  if (!independentImplementation?.claimBoundary?.includes(nonClaim)) {
+    fail(`site bundle independent implementation claim boundary must preserve ${nonClaim}`);
+  }
+}
+if (!independentImplementation?.offlineBoundary?.includes("performs no network access")) {
+  fail("site bundle independent implementation must distinguish package acquisition from offline verification");
+}
+for (const requiredField of [
+  "independent-implementation.promise",
+  "independent-implementation.supportedLanguages",
+  "independent-implementation.steps",
+  "independent-implementation.links",
+  "independent-implementation.offlineBoundary",
+  "independent-implementation.claimBoundary",
+]) {
+  if (!siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes(requiredField)) {
+    fail(`site bundle homepage displayPlan firstScreen must include ${requiredField}`);
+  }
+}
+if (siteBundle.homepage?.displayPlan?.firstScreen?.maxPrimarySections !== 3) {
+  fail("site bundle homepage first screen must reserve three primary sections");
+}
 const requiredHomepageSections = {
   "future-picture": "README.md",
+  "independent-implementation": "README.md",
   "foundation-triad": "README.md",
   "why-this-question-matters": "README.md",
   "what-kfd-is": "README.md",
