@@ -30,5 +30,8 @@ command = "node -e \"console.log('kfd build: source package')\""
 [lifecycle.verify]
 command = "npm run check"
 
+[lifecycle.check]
+command = "npm run check"
+
 [lifecycle.publish]
 command = "node scripts/npm-publish-transaction.mjs"
