@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.self-conformance-counterevidence/v1",
+  "cycleId": "federated-work-continuity-first-cycle",
+  "candidateId": "federated-work-continuity",
+  "items": [
+    {
+      "id": "existing-initiative-alternative",
+      "source": "cases/live/federated-work-continuity/cuts/0002-work.json",
+      "sourceRoot": "sha256:ef73aa8b71af65db49ed5deb69606ac96c69c742d887271d8192aee537b4c8e2",
+      "finding": "KFD already accepts Initiative for one continuing coordinated software-work context, so Work must demonstrate a responsibility that Initiative plus typed Assignment relations cannot preserve."
+    },
+    {
+      "id": "independent-review-absent",
+      "source": "cases/live/federated-work-continuity/reviews/README.md",
+      "sourceRoot": "sha256:a26c9bfad7287d92fcd542e3bf0639e2aac39ae97e6cde10010641ac9d3b2429",
+      "finding": "The retained source says that no independent qualification review has completed."
+    },
+    {
+      "id": "no-cross-domain-transfer",
+      "source": "cases/live/federated-work-continuity/README.md",
+      "sourceRoot": "sha256:722c9a49b95eaf8cf4efd4c9f771a6221222b5baa8db810f133197c9a6b8acc9",
+      "finding": "The founding software implementation does not supply the required non-software or structurally non-isomorphic comparison."
+    },
+    {
+      "id": "no-fixed-root-decision-witness",
+      "source": "cases/live/federated-work-continuity/distinguishability.md",
+      "sourceRoot": "sha256:1819f4bd609ab86716a712047e9af076ee318ff18a79bee269129189f4f7f671",
+      "finding": "No retained result shows that changing Work membership changes coordination or settlement while Initiative and Assignment roots remain fixed."
+    },
+    {
+      "id": "no-measured-reconstruction-cost",
+      "source": "cases/live/federated-work-continuity/distinguishability.md",
+      "sourceRoot": "sha256:1819f4bd609ab86716a712047e9af076ee318ff18a79bee269129189f4f7f671",
+      "finding": "The deletion argument identifies burden but does not measure it in a consequence-bearing journey."
+    }
+  ],
+  "disposition": "retain-provisional",
+  "claimBoundary": "These items justify a provisional non-promotion outcome for this cycle. They do not reject the Candidate permanently or establish that no new Primitive can ever be justified."
+}

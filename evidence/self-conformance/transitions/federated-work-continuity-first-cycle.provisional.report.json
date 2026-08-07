@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.verification-report/v1",
+  "profile": "kfd.self-conformance-transition/v1",
+  "valid": true,
+  "qualifying": false,
+  "selfCertified": false,
+  "offline": true,
+  "checks": [
+    {
+      "id": "authority-review-separation",
+      "status": "pass"
+    },
+    {
+      "id": "bundle-contract",
+      "status": "pass"
+    },
+    {
+      "id": "canonical-json",
+      "status": "pass"
+    },
+    {
+      "id": "claim-boundary",
+      "status": "pass"
+    },
+    {
+      "id": "expected-result",
+      "status": "pass"
+    },
+    {
+      "id": "predecessor-chain",
+      "status": "pass"
+    },
+    {
+      "id": "root-binding",
+      "status": "pass"
+    },
+    {
+      "id": "set-ordering",
+      "status": "pass"
+    },
+    {
+      "id": "transition-state",
+      "status": "pass"
+    }
+  ],
+  "issues": []
+}
