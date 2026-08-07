@@ -59,6 +59,10 @@ function exactHexAt(commit, relative) {
   return exactByteRoot(result.stdout).slice("sha256:".length);
 }
 
+function gitCommitAvailable(commit) {
+  return spawnSync("git", ["cat-file", "-e", `${commit}^{commit}`], { cwd: root }).status === 0;
+}
+
 function countBy(values, key) {
   const result = {};
   for (const value of values) result[value[key]] = (result[value[key]] ?? 0) + 1;
@@ -86,6 +90,7 @@ const caseRegistry = readJson("cases/registry.json");
 const anchor = readJson("profiles/self-conformance/bootstrap-anchor.json");
 const manifest = readJson("profiles/self-conformance/manifest.json");
 const genesisReviewedCommit = request.chain[0].bundle.proposedState.immutableCoordinates.commit;
+const genesisReviewedCommitAvailable = !extracted && gitCommitAvailable(genesisReviewedCommit);
 const historicallyMutableGenesisInputs = new Set(["candidate", "candidate-registry", "live-case-registry"]);
 
 const candidate = draftRegistry.candidates.find(({ id }) => id === assessment.candidateId);
@@ -106,7 +111,7 @@ assert.equal(terminalCut.decision.outcome, "no-new-primitive");
 
 for (const input of genesis.exactInputs) {
   if (historicallyMutableGenesisInputs.has(input.id)) {
-    if (!extracted) {
+    if (genesisReviewedCommitAvailable) {
       assert.equal(exactHexAt(genesisReviewedCommit, input.path), input.sha256, `${input.id} reviewed genesis root drifted`);
     }
   } else {
