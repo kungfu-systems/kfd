@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.self-conformance-pressure-field/v1",
+  "cycleId": "federated-work-continuity-first-cycle",
+  "selectedAt": "2026-08-07",
+  "selectedCandidate": {
+    "id": "federated-work-continuity",
+    "status": "incubating",
+    "path": "drafts/federated-work-continuity.md",
+    "sourceCommit": "e037b49027cad424698660f8e2302bf0b0c695e6",
+    "contentRoot": "sha256:34c18ee555ad217b525843dc5f7014ccff25cf88fa0920bf8a6471638231bdf9"
+  },
+  "provenance": {
+    "repository": "https://github.com/kungfu-systems/kfd",
+    "candidateRegistryPath": "drafts/registry.json",
+    "candidateRegistryRoot": "sha256:7e6eeaca3d3c84aacba04af72b447a9778c93b97883854c174d03f609d4ffea1",
+    "liveCasePath": "cases/live/federated-work-continuity/README.md",
+    "selectionReason": "The live candidate already exposes a real unresolved choice among an independent Work object, a perspective-bound Work view, and no new Primitive, while the repository records concrete implementation pressure and explicit qualification falsifiers."
+  },
+  "claimBoundary": "This cycle tests whether the existing public evidence qualifies Federated Work Continuity for promotion. It does not establish Work as a Primitive, allocate a KFD number, prefer an entity over a derived view, certify an implementation, prove cross-domain transfer, or authorize lifecycle status change.",
+  "expectedChecks": [
+    "authority-and-component-cut-preservation",
+    "cross-domain-transfer",
+    "fixed-root-deletion-and-fuse-witnesses",
+    "independent-review",
+    "initiative-and-view-alternative-comparison",
+    "measured-reconstruction-cost",
+    "multi-workspace-federation-dogfood"
+  ],
+  "knownGaps": [
+    "No qualified non-software or structurally non-isomorphic adopter comparison is retained.",
+    "No measured reconstruction-cost comparison selects stable entity, derived view, or no-new-Primitive semantics.",
+    "The deletion and fuse witnesses remain analytic or inconclusive rather than independently reproduced.",
+    "The founding implementation is product evidence and cannot serve as normative authority."
+  ],
+  "governanceOwners": [
+    {
+      "role": "review-disposition",
+      "actor": "dongkeren",
+      "responsibility": "Retain an honest qualification disposition without allocating a number or changing canonical status."
+    },
+    {
+      "role": "independent-review",
+      "actor": "kungfu-origin",
+      "responsibility": "Review the exact public evidence and transition record independently from the authoring identity."
+    }
+  ],
+  "allowedOutcomes": [
+    "no-new-kfd",
+    "promoted",
+    "provisional",
+    "rejected",
+    "revised"
+  ],
+  "immutableInputs": [
+    {
+      "path": "drafts/federated-work-continuity.md",
+      "root": "sha256:34c18ee555ad217b525843dc5f7014ccff25cf88fa0920bf8a6471638231bdf9"
+    },
+    {
+      "path": "drafts/registry.json",
+      "root": "sha256:7e6eeaca3d3c84aacba04af72b447a9778c93b97883854c174d03f609d4ffea1"
+    },
+    {
+      "path": "evidence/semantic-self-sufficiency/kfd-1-13.json",
+      "root": "sha256:95df77d76070a435eac092beef35db798ce5f39e3281e88b4231787bf0d8648f"
+    },
+    {
+      "path": "profiles/self-conformance/lifecycle-gates.json",
+      "root": "sha256:0ba98836f811dc61aeea36f0635dfb422665ca2d63b9a74131164ecf6d33b241"
+    },
+    {
+      "path": "profiles/self-conformance/manifest.json",
+      "root": "sha256:b78f0b1f08a690a5885407b611344153dee5f8f79bae920e192e5e9fef7ffa6a"
+    }
+  ],
+  "executionRule": "Evaluate the declared checks against these immutable inputs, preserve counterevidence, and retain a non-promotion result when qualification remains inconclusive. The profile, expected output, and history must not be rewritten after observing the result."
+}
