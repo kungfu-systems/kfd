@@ -29,6 +29,10 @@ const redundancyPath = "evidence/self-conformance/qualification/recursive-normat
 const replayPath = "evidence/self-conformance/qualification/recursive-normative-self-conformance.replay.json";
 const requestPath = "evidence/self-conformance/transitions/recursive-normative-self-conformance-genesis.request.json";
 const reportPath = "evidence/self-conformance/transitions/recursive-normative-self-conformance-genesis.report.json";
+const terminalRequestPath = "evidence/self-conformance/transitions/recursive-normative-self-conformance-terminal.request.json";
+const terminalReportPath = "evidence/self-conformance/transitions/recursive-normative-self-conformance-terminal.report.json";
+const assessmentReviewPath = "evidence/self-conformance/reviews/recursive-normative-self-conformance.assessment.json";
+const terminalCutPath = "cases/live/recursive-normative-self-conformance/cuts/0002-no-new-kfd.json";
 const verificationPath = "evidence/self-conformance/qualification/recursive-normative-self-conformance.verification.json";
 
 function run(command, args, options = {}) {
@@ -49,6 +53,12 @@ function exactHex(relative) {
   return exactByteRoot(bytes(relative)).slice("sha256:".length);
 }
 
+function exactHexAt(commit, relative) {
+  const result = spawnSync("git", ["show", `${commit}:${relative}`], { cwd: root, encoding: null });
+  assert.equal(result.status, 0, result.stderr?.toString("utf8") || `cannot read ${relative} at ${commit}`);
+  return exactByteRoot(result.stdout).slice("sha256:".length);
+}
+
 function countBy(values, key) {
   const result = {};
   for (const value of values) result[value[key]] = (result[value[key]] ?? 0) + 1;
@@ -66,25 +76,42 @@ const redundancy = readJson(redundancyPath);
 const replay = readJson(replayPath);
 const request = readJson(requestPath);
 const retainedReport = readJson(reportPath);
+const terminalRequest = readJson(terminalRequestPath);
+const retainedTerminalReport = readJson(terminalReportPath);
+const assessmentReview = readJson(assessmentReviewPath);
+const terminalCut = readJson(terminalCutPath);
+const retainedVerification = readJson(verificationPath);
 const draftRegistry = readJson("drafts/registry.json");
 const caseRegistry = readJson("cases/registry.json");
 const anchor = readJson("profiles/self-conformance/bootstrap-anchor.json");
 const manifest = readJson("profiles/self-conformance/manifest.json");
+const genesisReviewedCommit = request.chain[0].bundle.proposedState.immutableCoordinates.commit;
+const historicallyMutableGenesisInputs = new Set(["candidate", "candidate-registry", "live-case-registry"]);
 
 const candidate = draftRegistry.candidates.find(({ id }) => id === assessment.candidateId);
 assert.ok(candidate, "Candidate is missing from the draft registry");
-assert.equal(candidate.status, "qualifying");
+assert.equal(candidate.status, "merged");
 assert.equal(candidate.slotBinding, "non-binding");
 assert.equal(Object.hasOwn(candidate, "slotHint"), false, "Candidate must not preallocate a slot hint");
+assert.equal(Object.hasOwn(candidate, "number"), false, "Candidate must not allocate a number");
 assert.equal(genesis.candidateNumber, null);
 assert.equal(genesis.candidateStatus, "qualifying");
 const liveCase = caseRegistry.cases.find(({ id }) => id === assessment.candidateId);
 assert.ok(liveCase, "KFD-5 live case is missing");
-assert.equal(liveCase.status, "active");
-assert.equal(liveCase.candidateTracks[0].status, "provisional");
+assert.equal(liveCase.status, "closed");
+assert.equal(liveCase.candidateTracks[0].status, "no-new-primitive");
+assert.equal(liveCase.candidateTracks[0].currentCut.path, terminalCutPath);
+assert.equal(liveCase.candidateTracks[0].currentCut.sha256, exactHex(terminalCutPath));
+assert.equal(terminalCut.decision.outcome, "no-new-primitive");
 
 for (const input of genesis.exactInputs) {
-  assert.equal(exactHex(input.path), input.sha256, `${input.id} exact input root drifted`);
+  if (historicallyMutableGenesisInputs.has(input.id)) {
+    if (!extracted) {
+      assert.equal(exactHexAt(genesisReviewedCommit, input.path), input.sha256, `${input.id} reviewed genesis root drifted`);
+    }
+  } else {
+    assert.equal(exactHex(input.path), input.sha256, `${input.id} exact input root drifted`);
+  }
 }
 for (const input of redundancy.fixedInputs) {
   assert.equal(exactHex(input.path), input.sha256, `${input.id} redundancy input root drifted`);
@@ -140,6 +167,7 @@ assert.equal(canonicalJson(retainedReport), canonicalJson(reproducedReport), "re
 
 const candidateBundle = request.chain[0].bundle;
 assert.equal(candidateBundle.transition, "candidate-genesis");
+assert.equal(candidateBundle.evidenceRoots.includes(semanticRoot(genesis)), true);
 assert.equal(candidateBundle.predecessor.bootstrapAnchorRoot, semanticRoot(anchor));
 assert.equal(candidateBundle.schemaSetRoot, manifest.schemaSetRoot);
 assert.equal(candidateBundle.verifierRoot, lifecycleGateEnvironment.installedVerifierRoot);
@@ -159,6 +187,57 @@ overclaimingBundle.claimBoundary = "This certifies semantic truth.";
 assert.equal(
   inspectTransitionBundle(overclaimingBundle, { bootstrapAnchor: anchor, schemaSetRoot: manifest.schemaSetRoot }).code,
   "scp-claim-overreach",
+);
+
+assert.equal(assessmentReview.reviewer, "kungfu-origin");
+assert.equal(assessmentReview.state, "APPROVED");
+assert.equal(assessmentReview.reviewedCommit, "5791476b226b0ce26f98538704e71f7e29e04956");
+assert.equal(terminalRequest.lifecyclePath, "qualification");
+assert.equal(terminalRequest.chain.length, 2);
+assert.equal(canonicalJson(terminalRequest.chain[0]), canonicalJson(request.chain[0]));
+const terminalEntry = terminalRequest.chain[1];
+assert.equal(terminalEntry.bundle.transition, "no-new-kfd");
+assert.equal(terminalEntry.bundle.proposedState.semanticState, "no-new-kfd");
+assert.equal(terminalEntry.bundle.proposedState.subject.number, null);
+assert.equal(terminalEntry.bundle.proposedState.publicationState, "unpublished");
+assert.equal(terminalEntry.bundle.proposedState.immutableCoordinates.commit, assessmentReview.reviewedCommit);
+assert.equal(terminalEntry.bundle.proposedState.immutableCoordinates.contentRoot, exactByteRoot(bytes(assessmentPath)));
+for (const rootValue of [
+  semanticRoot(assessment),
+  semanticRoot(counterevidence),
+  semanticRoot(retainedVerification),
+  semanticRoot(assessmentReview),
+]) {
+  assert.equal(terminalEntry.bundle.evidenceRoots.includes(rootValue), true);
+}
+assert.equal(terminalEntry.authorityReceipt.role, "review-disposition");
+assert.equal(terminalEntry.authorityReceipt.actor, "dongkeren");
+assert.equal(terminalEntry.reviewReceipt.reviewer, "kungfu-origin");
+assert.equal(terminalEntry.reviewReceipt.independent, true);
+assert.equal(terminalEntry.reviewReceipt.author === terminalEntry.reviewReceipt.reviewer, false);
+assert.equal(new Set([
+  terminalEntry.reviewReceipt.author,
+  terminalEntry.reviewReceipt.reviewer,
+  terminalEntry.authorityReceipt.actor,
+]).size, 3, "assessment author, independent reviewer, and disposition authority must remain distinct");
+assert.deepEqual(terminalRequest.counterevidenceRoots, [semanticRoot(counterevidence)]);
+assert.equal(semanticRoot(terminalEntry.bundle), terminalRequest.expectedTerminalBundleRoot);
+const reproducedTerminalReport = verifyLifecycleGate(terminalRequest);
+assert.equal(reproducedTerminalReport.valid, true, JSON.stringify(reproducedTerminalReport.issues));
+assert.equal(reproducedTerminalReport.lifecyclePath, "qualification");
+assert.equal(reproducedTerminalReport.outcome, "non-promotion");
+assert.equal(reproducedTerminalReport.transitionAdmissible, false);
+assert.equal(reproducedTerminalReport.automaticTransition, false);
+assert.equal(reproducedTerminalReport.verifierNecessary, true);
+assert.equal(reproducedTerminalReport.verifierSufficient, false);
+assert.equal(reproducedTerminalReport.humanApproved, false);
+assert.equal(reproducedTerminalReport.numberAllocated, false);
+assert.equal(reproducedTerminalReport.statusChanged, false);
+assert.equal(reproducedTerminalReport.releaseAuthorized, false);
+assert.equal(
+  canonicalJson(retainedTerminalReport),
+  canonicalJson(reproducedTerminalReport),
+  "retained terminal lifecycle report drifted",
 );
 
 const verification = {
@@ -206,7 +285,7 @@ if (write) {
   process.exit(0);
 } else {
   assert.equal(
-    canonicalJson(readJson(verificationPath)),
+    canonicalJson(retainedVerification),
     canonicalJson(verification),
     "retained recursive verification report drifted",
   );
@@ -226,8 +305,12 @@ if (!extracted && !write) {
     replayPath,
     verificationPath,
     "evidence/self-conformance/reviews/recursive-normative-self-conformance.genesis.json",
+    assessmentReviewPath,
     requestPath,
     reportPath,
+    terminalRequestPath,
+    terminalReportPath,
+    terminalCutPath,
     "profiles/self-conformance/bootstrap-anchor.json",
     "profiles/self-conformance/bootstrap-evidence.json",
     "profiles/self-conformance/issue-codes.json",
@@ -265,5 +348,5 @@ if (!extracted && !write) {
 }
 
 console.log(
-  `Recursive normative Self-Conformance check passed: ${genesis.exactInputs.length} genesis roots, ${replay.cases.length} replay cases, no-new-kfd proposal, fail-closed substitutions, offline package-only clean room${extracted ? " (extracted)" : ""}`,
+  `Recursive normative Self-Conformance check passed: ${genesis.exactInputs.length} genesis roots, ${replay.cases.length} replay cases, reviewed no-new-kfd terminal disposition, fail-closed substitutions, offline package-only clean room${extracted ? " (extracted)" : ""}`,
 );
