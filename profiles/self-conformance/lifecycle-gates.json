@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.self-conformance-lifecycle-gates/v1",
+  "profile": "kfd-self-conformance@1.0.0-alpha.1",
+  "verifier": {
+    "kind": "self-conformance-transition",
+    "path": "verifier/dist/kfd_verifier.wasm",
+    "independent": true,
+    "offline": true
+  },
+  "paths": [
+    {
+      "id": "candidate",
+      "transitions": ["candidate-genesis", "revision-required", "rejection", "provisional-retention", "no-new-kfd"],
+      "authorityRoles": ["provenance-owner", "review-disposition"],
+      "decisions": ["record-candidate", "revise", "reject", "retain-provisional", "no-new-kfd"]
+    },
+    {
+      "id": "qualification",
+      "transitions": ["candidate-qualification", "revision-required", "rejection", "provisional-retention", "no-new-kfd"],
+      "authorityRoles": ["evidence-review-authority", "review-disposition"],
+      "decisions": ["qualify", "revise", "reject", "retain-provisional", "no-new-kfd"]
+    },
+    {
+      "id": "draft-promotion",
+      "transitions": ["numbered-draft-promotion", "revision-required", "rejection", "provisional-retention", "no-new-kfd"],
+      "authorityRoles": ["maintainer-numbering", "review-disposition"],
+      "decisions": ["promote", "revise", "reject", "retain-provisional", "no-new-kfd"]
+    },
+    {
+      "id": "activation",
+      "transitions": ["activation"],
+      "authorityRoles": ["maintainer-status"],
+      "decisions": ["activate"]
+    },
+    {
+      "id": "supersession",
+      "transitions": ["supersession"],
+      "authorityRoles": ["maintainer-status"],
+      "decisions": ["supersede"]
+    },
+    {
+      "id": "foundation-revision",
+      "transitions": ["foundation-revision"],
+      "authorityRoles": ["maintainer-foundation-revision"],
+      "decisions": ["revise-foundation"]
+    },
+    {
+      "id": "release",
+      "transitions": ["release-packaging"],
+      "authorityRoles": ["release-authority"],
+      "decisions": ["package"]
+    }
+  ],
+  "nonPromotionTransitions": ["revision-required", "rejection", "provisional-retention", "no-new-kfd"],
+  "retention": {
+    "request": true,
+    "report": true,
+    "authorityReceipt": true,
+    "independentReviewReceipt": true,
+    "counterevidence": true,
+    "exactRoots": true
+  },
+  "claimBoundary": "A lifecycle gate verifies exact structural evidence and the presence, separation, and scope of supplied governance receipts. It does not allocate a number, change status, approve, merge, publish, certify, or replace accountable human authority."
+}

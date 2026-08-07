@@ -34,3 +34,11 @@ check / check
 Keeping the branch protection rule and the workflow-emitted status name aligned
 is part of KFD-1's "facts must not drift" requirement: the release gate cannot
 depend on a stale status context that no current workflow can produce.
+
+Before an alpha or production package transition, retain a `release` lifecycle
+gate request/report pair under `evidence/self-conformance/transitions/`. Its
+terminal transition is `release-packaging`, its authority role is
+`release-authority`, and its complete predecessor chain begins at the approved
+bootstrap anchor. The package gate verifies this pair during `npm run check`;
+it does not replace the protected channel PR, Buildchain Passport, publisher
+authority, or required independent approval.

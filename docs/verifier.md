@@ -8,7 +8,7 @@ confidence: high
 sensitivity: public
 evidence_grade: B
 review_state: self-reviewed
-last_reviewed: 2026-07-17
+last_reviewed: 2026-08-07
 ---
 
 # KFD independent verifier
@@ -33,6 +33,7 @@ kfd verify atlas <file-or-directory> [--json]
 kfd verify episode <directory> [--json]
 kfd verify agent-runtime-report <report.json> [--json]
 kfd verify self-conformance-transition <transition-bundle.json> [--json]
+kfd gate self-conformance-lifecycle <request.json> --output <report.json> [--json]
 kfd bundle <kind> <file-or-directory> --output <bundle.json>
 kfd verify bundle <bundle.json> [--json]
 ```
@@ -210,6 +211,29 @@ claim-overreach failures. Historical regressions remain protocol fixtures and
 do not import adopter behavior. A pass remains structural, non-qualifying,
 non-self-certified, offline, and insufficient for any governance or release
 decision.
+
+### KFD Self-Conformance lifecycle gate
+
+The host-side lifecycle gate composes the independent transition verifier with
+the published `lifecycle-gates.json` policy. For every entry from the approved
+bootstrap anchor to the requested terminal transition it reproduces the WASM
+report, checks the exact bundle/report/package roots, verifies state and
+predecessor continuity, and matches the supplied authority and independent-
+review receipt bytes to the roots carried by the bundle.
+
+The terminal Candidate, qualification, draft-promotion, activation,
+supersession, Foundation Revision, or release path must match its published
+transition, authority role, and decision. Absent, stale, wrong-root,
+wrong-predecessor, wrong-authority, missing-review, claim-overreach, and
+package-substitution evidence fails closed with stable diagnostics. A valid
+revision, rejection, provisional-retention, or no-new-KFD chain returns
+`non-promotion` and retains counterevidence; it is not coerced into `proceed`.
+
+This composition is intentionally host-side because it reads a chain of
+objects and produces a retained gate report. Every transition bundle inside
+the chain is still verified by the independent packaged WebAssembly core. The
+gate marks `verifierNecessary: true`, `verifierSufficient: false`, and all
+automatic authority flags false.
 
 ### KFD Agent Hub report
 

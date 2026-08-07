@@ -53,6 +53,8 @@ writeJson(vectorPath, vectors);
 const surfacePaths = [
   "profiles/self-conformance/README.md",
   "profiles/self-conformance/implementer-guide.md",
+  "profiles/self-conformance/lifecycle-gates.json",
+  "profiles/self-conformance/lifecycle-gate-matrix.json",
   anchorPath,
   evidencePath,
   issuePath,
@@ -60,7 +62,12 @@ const surfacePaths = [
   "profiles/self-conformance/extraction-manifest.json",
   ...schemaPaths,
   "scripts/self-conformance-contract.mjs",
+  "scripts/self-conformance-lifecycle-gate.mjs",
   "scripts/check-self-conformance-profile.mjs",
+  "scripts/check-self-conformance-lifecycle.mjs",
+  "scripts/check-self-conformance-changes.mjs",
+  "bin/kfd.mjs",
+  "verifier/dist/kfd_verifier.wasm",
 ];
 const roleFor = (relative) => {
   if (relative.endsWith("README.md")) return "authority";
@@ -68,6 +75,10 @@ const roleFor = (relative) => {
   if (relative.includes("/schemas/") || relative.startsWith("schemas/")) return "schema";
   if (relative.includes("vectors/")) return "vectors";
   if (relative.endsWith("extraction-manifest.json")) return "extraction";
+  if (relative.endsWith("lifecycle-gates.json")) return "policy";
+  if (relative.endsWith("lifecycle-gate-matrix.json")) return "vectors";
+  if (relative.endsWith(".wasm")) return "verifier";
+  if (relative.startsWith("bin/")) return "cli";
   if (relative.startsWith("scripts/")) return "check";
   return "reference";
 };
@@ -89,7 +100,7 @@ const impactEntry = {
   id: "kfd-self-conformance-profile-v1",
   impact: "minor",
   class: "additive",
-  rationale: "KFD additively publishes the versioned kfd-self-conformance 1.0.0-alpha.1 profile, finite predecessor/bootstrap rules, state and transition schemas, stable issue namespace, canonical contract vectors, an independent native/WebAssembly verifier matrix, clean-room package closure, and explicit non-authority boundaries without changing any Candidate number or decision status."
+  rationale: "KFD additively publishes the versioned kfd-self-conformance 1.0.0-alpha.1 profile, finite predecessor/bootstrap rules, state and transition schemas, stable issue namespaces, canonical contract vectors, an independent native/WebAssembly verifier matrix, seven official lifecycle gates with separate authority and review receipts, complete-chain and package-substitution checks, clean-room package closure, and explicit non-authority boundaries without changing any Candidate number or decision status."
 };
 impact.surfaceImpacts = impact.surfaceImpacts.filter(({ id }) => id !== impactEntry.id);
 impact.surfaceImpacts.push(impactEntry);
@@ -103,9 +114,27 @@ packageJson.exports["./self-conformance/issue-codes.json"] = "./profiles/self-co
 packageJson.exports["./self-conformance/vectors.json"] = "./profiles/self-conformance/vectors/contract-vectors.json";
 packageJson.exports["./self-conformance/schemas/*"] = "./schemas/kfd-self-conformance/*";
 packageJson.exports["./self-conformance/verifier-matrix.json"] = "./verifier/specs/self-conformance-matrix.json";
+packageJson.exports["./self-conformance/lifecycle-gates.json"] = "./profiles/self-conformance/lifecycle-gates.json";
+packageJson.exports["./self-conformance/lifecycle-gate-matrix.json"] = "./profiles/self-conformance/lifecycle-gate-matrix.json";
+packageJson.exports["./self-conformance/lifecycle-gate-request.schema.json"] = "./schemas/kfd-self-conformance/lifecycle-gate-request.schema.json";
+packageJson.exports["./self-conformance/lifecycle-gate-report.schema.json"] = "./schemas/kfd-self-conformance/lifecycle-gate-report.schema.json";
 packageJson.scripts["check:self-conformance-profile"] = "node scripts/check-self-conformance-profile.mjs";
-packageJson.scripts.check = "node scripts/check.mjs && npm run check:warrant-evidence && npm run check:agent-hub && npm run check:agent-hub-conformance && npm run check:agent-runtime && npm run check:self-conformance-profile && npm run check:verifier";
+packageJson.scripts["check:self-conformance-lifecycle"] = "node scripts/check-self-conformance-lifecycle.mjs && node scripts/check-self-conformance-changes.mjs";
+packageJson.scripts.check = "node scripts/check.mjs && npm run check:warrant-evidence && npm run check:agent-hub && npm run check:agent-hub-conformance && npm run check:agent-runtime && npm run check:self-conformance-profile && npm run check:self-conformance-lifecycle && npm run check:verifier";
 writeJson(packagePath, packageJson);
+
+const agentRuntimeManifestPath = "profiles/agent-runtime/manifest.json";
+const agentRuntimeManifest = readJson(agentRuntimeManifestPath);
+agentRuntimeManifest.surfaces = agentRuntimeManifest.surfaces.map((surface) => ({
+  ...surface,
+  digest: exactByteRoot(bytes(surface.path)),
+}));
+writeJson(agentRuntimeManifestPath, agentRuntimeManifest);
+
+const agentHubManifestPath = "profiles/agent-hub/manifest.json";
+const agentHubManifest = readJson(agentHubManifestPath);
+agentHubManifest.runtimeDependency.manifestDigest = exactByteRoot(bytes(agentRuntimeManifestPath));
+writeJson(agentHubManifestPath, agentHubManifest);
 
 const standardsPath = "standards.json";
 const standards = readJson(standardsPath);
@@ -117,6 +146,8 @@ const additions = {
   selfConformanceTransitionReport: "transition-report",
   selfConformancePackageManifest: "package-manifest",
   selfConformanceVectorRegistry: "vector-registry",
+  selfConformanceLifecycleGateRequest: "lifecycle-gate-request",
+  selfConformanceLifecycleGateReport: "lifecycle-gate-report",
 };
 for (const [key, stem] of Object.entries(additions)) {
   const schemaId = `https://kfd.libkungfu.dev/schemas/kfd-self-conformance/${stem}.schema.json`;
@@ -150,6 +181,9 @@ const registered = [
   ["kfd-self-conformance-contract-vectors", "integration-time", "profiles/self-conformance/vectors/contract-vectors.json", "Fixed positive and fail-closed contract vectors."],
   ["kfd-self-conformance-verifier", "integration-time", "verifier/crates/core/src/profiles/self_conformance_transition.rs", "Independent fail-closed Rust verifier shared by native and WebAssembly projections."],
   ["kfd-self-conformance-verifier-matrix", "integration-time", "verifier/specs/self-conformance-matrix.json", "Invariant-to-case map, adversarial mutations, and protocol failure history."]
+  ,["kfd-self-conformance-lifecycle-policy", "cross-time", "profiles/self-conformance/lifecycle-gates.json", "Official lifecycle path, transition, governance receipt, and retention policy."]
+  ,["kfd-self-conformance-lifecycle-gate", "integration-time", "scripts/self-conformance-lifecycle-gate.mjs", "Package-only complete-chain gate over independent verifier reports and separate governance receipts."]
+  ,["kfd-self-conformance-lifecycle-matrix", "integration-time", "profiles/self-conformance/lifecycle-gate-matrix.json", "Seven official paths and stable fail-closed lifecycle diagnostics."]
 ].map(([id, klass, sourcePath, description]) => ({
   id,
   class: klass,

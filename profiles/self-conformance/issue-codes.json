@@ -3,6 +3,26 @@
   "contract": "kfd.self-conformance-issue-codes/v1",
   "profile": "kfd-self-conformance@1.0.0-alpha.1",
   "codes": [
+    "scg-authority-coordinate-mismatch",
+    "scg-authority-role-invalid",
+    "scg-authority-root-mismatch",
+    "scg-counterevidence-order-invalid",
+    "scg-entry-report-root-mismatch",
+    "scg-entry-root-mismatch",
+    "scg-path-transition-mismatch",
+    "scg-path-unsupported",
+    "scg-predecessor-chain-invalid",
+    "scg-predecessor-stale",
+    "scg-request-invalid",
+    "scg-review-coordinate-mismatch",
+    "scg-review-not-independent",
+    "scg-review-receipt-missing",
+    "scg-review-root-mismatch",
+    "scg-terminal-root-mismatch",
+    "scg-transition-evidence-absent",
+    "scg-verifier-execution-failed",
+    "scg-verifier-package-substitution",
+    "scg-verifier-root-mismatch",
     "scp-authority-receipt-missing",
     "scp-bootstrap-anchor-invalid",
     "scp-claim-boundary-missing",
@@ -28,5 +48,5 @@
   ],
   "ordering": ["code", "path", "message"],
   "unknownFailureCode": "scp-contract-invalid",
-  "claimBoundary": "Issue codes identify structural failures only; they do not express semantic truth, approval, certification, adoption, or release authority."
+  "claimBoundary": "Issue codes identify transition or lifecycle-gate structural failures only; they do not express semantic truth, approval, certification, adoption, numbering, status, or release authority."
 }

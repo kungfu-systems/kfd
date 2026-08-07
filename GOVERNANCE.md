@@ -90,6 +90,15 @@ Canonical stewardship is intentionally narrower than intellectual ownership:
 participants may disagree, fork, publish alternatives, or decline adoption.
 Disagreement is a valid cooperation state.
 
+Official lifecycle and release decisions additionally retain the package-owned
+Self-Conformance request/report pair described in
+`profiles/self-conformance/README.md`. That structural gate verifies exact
+roots, predecessor continuity, and receipt separation; it cannot act as a
+maintainer, reviewer, merger, or publisher. A verifier pass without the
+applicable authority receipt and independent-review receipt is therefore not a
+governance decision, and a valid non-promotion report remains a first-class
+outcome.
+
 ## Maintainer admission and succession
 
 Maintainer access is based on demonstrated stewardship rather than employment
