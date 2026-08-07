@@ -4893,6 +4893,307 @@
             "claimBoundary": "Provisional only. Warrant-bound Decision plus Admission, typed upgrade-manifest relation, SemVer and channel precedence, and no-new-Primitive outcomes remain live; independent adoption, transfer, numbering, and movement authority are not claimed."
           }
         ]
+      },
+      {
+        "id": "recursive-normative-self-conformance",
+        "title": "Recursive normative self-conformance",
+        "kind": "primitive-discovery-case",
+        "status": "active",
+        "standard": "kfd-5",
+        "url": "/cases/live/recursive-normative-self-conformance",
+        "relationship": "provisional-live-case",
+        "claimBoundary": "This case asks KFD to process one pre-number Candidate through its fixed Profile while preserving non-retroactivity and authority separation. It does not prove an independent Primitive, historical Profile conformance, numbering, activation, certification, merge, or release.",
+        "humanEntry": {
+          "path": "cases/live/recursive-normative-self-conformance/README.md",
+          "markdown": "# Recursive normative self-conformance live case\n\nThis case asks KFD's published Self-Conformance Profile to process the next\npre-number Candidate about recursive normative self-application. It is a\nqualification case, not proof that a new Primitive exists.\n\n## Fixed inputs\n\n- Candidate: [`drafts/recursive-normative-self-conformance.md`](../../../drafts/recursive-normative-self-conformance.md)\n- Genesis: [`genesis.md`](genesis.md)\n- KFD-5 cut: [`cuts/0001-recursive-normative-self-conformance.json`](cuts/0001-recursive-normative-self-conformance.json)\n- Method trace: [`kfd-method-trace.md`](kfd-method-trace.md)\n- Ontology split: [`ontology-split.md`](ontology-split.md)\n- Distinguishability: [`distinguishability.md`](distinguishability.md)\n- Historical replay: [`evidence/self-conformance/qualification/recursive-normative-self-conformance.replay.json`](../../../evidence/self-conformance/qualification/recursive-normative-self-conformance.replay.json)\n- Review boundary: [`reviews/README.md`](reviews/README.md)\n\n## Current state\n\nThe initial KFD-5 cut is `provisional`. The evidence deliberately leaves the\nterminal disposition to a later independently reviewed exact cut. Candidate\nregistration does not allocate a number, and the structural verifier cannot\nchange this state.\n\n## Qualification question\n\nDoes recursive normative self-conformance carry a responsibility not already\nrecoverable from KFD-1, KFD-2, KFD-5, KFD-11, and the fixed\n`kfd-self-conformance@1.0.0-alpha.1` Profile?\n\nThe live hypothesis is that the procedure is valuable but derivable. The\nrequired terminal options remain open: qualify, retain provisional, reject,\nor record `no-new-kfd`.\n\n## Claim boundary\n\nThis case records one first-party recursive dogfood exercise. It does not\nprove universal necessity, historical conformance before the Profile existed,\nan independent implementation, a KFD number, activation, certification,\napproval, merge, or release authority."
+        },
+        "genesis": {
+          "path": "cases/live/recursive-normative-self-conformance/genesis.md",
+          "markdown": "# Genesis\n\n## Perspective\n\nThe observer is a successor KFD steward attempting to change the normative\nsystem after the Self-Conformance Profile became a published contract. From\nthis position, adopter-facing conformance rules and KFD's own governance can\ndrift apart unless the same exact-root obligations remain inspectable.\n\n## Current ontology\n\nThe installed ontology already contains immutable Fact cuts, fact-bound trust,\nparticipant-visible constraints, perspective, KFD-5 Candidate genesis and\nqualification, Claim/Assessment/Decision/Admission separation, and the\nSelf-Conformance Profile's transition bundles and lifecycle gate.\n\n## Methods\n\nGenesis combines reconstruction pressure and structural compression. The\npressure is repeated reconstruction of how a normative system applies its own\nrules. The compression hypothesis is that one named procedure could make the\nrecursive path legible. Neither method receives authority to qualify the\nresult.\n\n## Evidence cut\n\nThe machine cut binds the current KFD-1, KFD-2, KFD-5, KFD-11, Profile\nbootstrap anchor, Profile manifest, historical activation and Foundation\nRevision records, this case, and the pre-number Candidate. Later evidence may\ncite the containing Git commit without putting that commit into its own\npreimage.\n\n## Candidate object\n\n`recursive-normative-self-conformance` is a proposed procedure requiring a\nnormative system's load-bearing self-change to traverse fixed-root genesis,\nqualification, independent review, separate disposition, and explicit\nadmission or non-promotion.\n\n## Claim boundary\n\nThe genesis claims that the composition is worth testing. It does not claim a\nnew irreducible Primitive, historical execution before the Profile existed,\nsemantic truth, successful qualification, numbering, or governance authority."
+        },
+        "methodTrace": {
+          "path": "cases/live/recursive-normative-self-conformance/kfd-method-trace.md",
+          "markdown": "# KFD method trace\n\n1. KFD-1 fixes the normative and package coordinates.\n2. KFD-2 turns the Candidate and replay claims into assessable statements with\n   gaps and counterevidence.\n3. KFD-4 declares the successor-steward perspective; no historical actor's\n   perspective is synthesized.\n4. KFD-5 records genesis, alternatives, minimum closure, deletion, fuse,\n   falsifiers, dogfood, and an explicit no-new-Primitive outcome option.\n5. KFD-11 keeps the generated claim, structural assessment, independent\n   review, disposition, and repository admission separate.\n6. The Self-Conformance Profile verifies exact transition structure from its\n   unchanged bootstrap anchor and fixed package root.\n\nHistorical statements are typed as `historical-fact`,\n`retrospective-reconstruction`, or `counterfactual-replay`. A later Profile\ncannot retroactively turn earlier governance into a conforming Profile run.\n\nThe method terminates only with an authority-separated disposition. A valid\nstructural report remains necessary but insufficient."
+        },
+        "propagationHypothesis": {
+          "path": "cases/live/recursive-normative-self-conformance/propagation-hypothesis.md",
+          "markdown": "# Propagation hypothesis\n\nThe procedure may transfer to standards, policy repositories, schema\nregistries, and governance systems that impose conformance on adopters while\nchanging their own rules. Transfer would require a non-KFD implementation to\nretain exact normative cuts, independent verification, review and decision\nauthority, non-retroactivity, and a visible non-promotion outcome.\n\nNo cross-domain adopter is retained in this cut. Transfer therefore remains a\nfalsifiable hypothesis and cannot support qualification by itself."
+        },
+        "reviewIndex": {
+          "path": "cases/live/recursive-normative-self-conformance/reviews/README.md",
+          "markdown": "# Review index\n\nNo independent qualification review is retained in the genesis cut.\n\nThe independent reviewer must inspect the exact Candidate, KFD-5 cut,\nredundancy matrix, historical replay, generated lifecycle request/report,\nnative/WASM parity result, clean-room package result, and adversarial failures.\nThe review must state whether historical labels are accurate, existing KFD\nauthority is preserved, and the proposed terminal disposition follows from the\nevidence.\n\nThe author, structural verifier, and disposition authority cannot satisfy this\nreview merely by naming different roles. The final record must cite an\nindependent exact-commit review coordinate. Review of a predecessor cut does\nnot automatically approve a later disposition commit."
+        },
+        "ontologySplit": {
+          "path": "cases/live/recursive-normative-self-conformance/ontology-split.md",
+          "markdown": "# Ontology split\n\n| Alternative | Smallest responsibility | What remains independently addressable |\n| --- | --- | --- |\n| New KFD procedure | Recursive self-application as its own normative object | identity, lifecycle, review and disposition |\n| KFD-1 + KFD-2 + KFD-5 + KFD-11 closure | Composition of existing responsibilities | exact cuts, trust claim, genesis/qualification, decision/admission |\n| Self-Conformance Profile only | Repository-native implementation contract | package root, verifier, receipts, transition chain |\n| Governance prose | Maintainer convention | no machine closure; repeated reconstruction remains |\n| No action | Existing rules remain distributed | no new surface and no explicit composition |\n\nThe Profile is an implementation contract, while numbered KFDs are normative\ndecisions. That distinction prevents the Profile from silently becoming its\nown semantic authority. The central qualification test is whether the proposed\nCandidate adds a new responsibility beyond the existing normative closure, not\nwhether the Profile is useful."
+        },
+        "distinguishabilityArgument": {
+          "path": "cases/live/recursive-normative-self-conformance/distinguishability.md",
+          "markdown": "# Distinguishability and redundancy\n\n## Minimum closure\n\nThe useful recursive path needs an exact predecessor, a candidate genesis, a\nfact-bound assessment, a verifier independent of the generator, a review role\nindependent of the author, a disposition authority, and explicit admission or\nretained non-promotion.\n\n## Deletion test\n\nDelete the Candidate while retaining KFD-1, KFD-2, KFD-5, KFD-11, and the\nSelf-Conformance Profile. Every decision-relevant observation remains\nexpressible: roots cannot drift; claims remain assessable; genesis remains\nseparate from qualification; decision remains separate from admission; and the\nProfile retains candidate, qualification, rejection, provisional, and\n`no-new-kfd` transitions.\n\nThe deletion therefore removes a convenient name but does not yet remove an\nindependent responsibility.\n\n## Fuse test\n\nFuse the Candidate into KFD-5 as “apply this procedure to KFD itself.” The\nfixed-root and trust duties remain supplied by KFD-1 and KFD-2, while KFD-11\nsupplies the authority-separated terminal path. No contradiction or hidden\nauthority appears. Fuse into the Profile instead and the normative claim\nbecomes implementation-specific, so the Profile cannot be the sole authority.\n\n## Cross-domain test\n\nThe same composition is plausible outside KFD but no independent adopter cut\nis retained. This is a gap for a new universal procedure, but not a gap in the\nclaim that KFD can dogfood its existing rules.\n\n## Falsifiers\n\n- An independently reproduced case needs recursive authority or lifecycle\n  semantics that cannot be represented by KFD-1/KFD-2/KFD-5/KFD-11.\n- Deleting the Candidate changes a bounded governance decision despite all\n  existing roots and receipts remaining fixed.\n- Fusing the Candidate into existing KFDs creates an unavoidable ambiguity or\n  grants an authority those KFDs cannot safely represent.\n- A non-KFD adopter requires the same new object and cannot implement the\n  closure without repeatedly reconstructing it.\n- The fixed package cannot reject substituted roots, predecessors, authority,\n  review, or claim overreach without extending its normative contract.\n\n## Provisional reading\n\nThe current analytic result favors derivability and eventual `no-new-kfd`, but\nthis document has no disposition authority. Independent review may qualify,\nretain, reject, or confirm the no-new result against the exact evidence cut."
+        },
+        "candidateTracks": [
+          {
+            "id": "recursive-normative-self-conformance",
+            "title": "Recursive normative self-conformance",
+            "status": "provisional",
+            "definition": "A proposed procedure requiring a normative system's load-bearing self-change to traverse exact-root genesis, fact-bound qualification, independent review, authority-separated disposition, and explicit admission or retained non-promotion.",
+            "currentCut": {
+              "path": "cases/live/recursive-normative-self-conformance/cuts/0001-recursive-normative-self-conformance.json",
+              "sha256": "4a046ba5e093368ecb26fb5d2dec6174452bc62b31bd4713fa5e4bb3c1c4f03f",
+              "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-5/primitive-discovery.schema.json",
+              "schemaVersion": 3,
+              "record": {
+                "schemaVersion": 3,
+                "contract": "kfd-5-primitive-discovery",
+                "standard": "kfd-5",
+                "candidate": {
+                  "id": "recursive-normative-self-conformance",
+                  "title": "Recursive normative self-conformance",
+                  "problemStatement": "A normative system can impose exact conformance on adopters while reconstructing or bypassing those duties when changing its own rules.",
+                  "scope": "Pre-number KFD self-change from exact genesis through qualification, independent review, authority-separated disposition, and explicit admission or retained non-promotion; numbering, activation, merge, and release remain outside the candidate."
+                },
+                "genesis": {
+                  "methods": [
+                    "reconstruction-pressure",
+                    "structural-compression"
+                  ],
+                  "observationPerspective": {
+                    "id": "successor-kfd-steward",
+                    "bearer": "successor KFD steward",
+                    "role": "change the normative system after the Self-Conformance Profile became load-bearing",
+                    "proximity": "direct repository and governance boundary",
+                    "consequences": [
+                      "must distinguish structural validity from semantic and governance authority",
+                      "must preserve historical coordinates while admitting a successor cut",
+                      "must avoid self-certification"
+                    ],
+                    "naturalObjects": [
+                      "normative cut",
+                      "candidate genesis",
+                      "qualification evidence",
+                      "review receipt",
+                      "terminal disposition",
+                      "admission result"
+                    ]
+                  },
+                  "currentOntology": [
+                    "KFD-1 fact cuts and compatibility boundaries",
+                    "KFD-2 claims and assessments",
+                    "KFD-5 candidate genesis and qualification",
+                    "KFD-11 claim, assessment, decision, and admission",
+                    "Self-Conformance transition bundles and lifecycle gates"
+                  ],
+                  "observation": "The recursive path is useful but currently distributed across normative decisions and a repository Profile, creating repeated reconstruction pressure and a risk that Profile verification is mistaken for semantic or governance authority.",
+                  "candidateObject": "A procedure requiring load-bearing normative self-change to use the same fixed-root, authority-separated conformance path required of adopters.",
+                  "claimBoundary": "Genesis proposes a testable composition and does not claim irreducibility, universality, historical execution before the Profile existed, qualification, numbering, activation, merge, or release.",
+                  "methodEvidence": [
+                    {
+                      "kind": "file",
+                      "coordinate": "drafts/recursive-normative-self-conformance.md",
+                      "observer": "successor KFD steward"
+                    },
+                    {
+                      "kind": "file",
+                      "coordinate": "cases/live/recursive-normative-self-conformance/distinguishability.md",
+                      "observer": "qualification author"
+                    },
+                    {
+                      "kind": "file",
+                      "coordinate": "profiles/self-conformance/lifecycle-gates.json",
+                      "observer": "published profile"
+                    }
+                  ],
+                  "methodNotes": "Reconstruction pressure generates the candidate; structural compression compares a new named procedure with the existing KFD-1/KFD-2/KFD-5/KFD-11 closure."
+                },
+                "boundaryPressure": {
+                  "contactSides": [
+                    "normative rules imposed on adopters",
+                    "governance changes made by the normative system"
+                  ],
+                  "implicitHandling": "Maintainers and agents reconstruct the self-application path from multiple decisions, repository rules, review conventions, and verifier outputs.",
+                  "pressureChanges": [
+                    {
+                      "kind": "new-participant",
+                      "description": "Successor agents must recover authority boundaries without private maintainer context."
+                    },
+                    {
+                      "kind": "authority",
+                      "description": "A structural verifier can appear authoritative even though it cannot decide semantic truth, numbering, activation, merge, or release."
+                    }
+                  ],
+                  "observedFailures": [
+                    "Passing structural reports can be overstated as qualification.",
+                    "Retrospective reconstruction can be mislabeled as historical execution.",
+                    "One actor can be described under multiple role names and mistaken for independent review."
+                  ],
+                  "mediationClaim": "An explicit recursive path may keep fixed evidence, structural verification, review, disposition, and admission independently inspectable.",
+                  "internalObjectAlternative": "Treat the path as the composed application of KFD-1, KFD-2, KFD-5, KFD-11, and the Self-Conformance Profile without a new KFD."
+                },
+                "grounding": {
+                  "pressure": [
+                    "The Self-Conformance Profile already processes KFD lifecycle changes but cannot supply semantic or governance authority.",
+                    "Historical KFD changes predate the Profile and require typed non-retroactive replay.",
+                    "The proposed procedure may duplicate the existing normative closure."
+                  ],
+                  "factSources": [
+                    {
+                      "kind": "file",
+                      "coordinate": "profiles/self-conformance/manifest.json"
+                    },
+                    {
+                      "kind": "file",
+                      "coordinate": "profiles/self-conformance/bootstrap-anchor.json"
+                    },
+                    {
+                      "kind": "file",
+                      "coordinate": "evidence/kfd-7/activation-record.json"
+                    },
+                    {
+                      "kind": "file",
+                      "coordinate": "docs/foundation-revision-2026-07-21-decision-admission.json"
+                    }
+                  ],
+                  "evidenceBoundary": "Public files in the exact genesis commit and immutable historical Git/review coordinates cited by them; no private transcript, live network state, or later review is included.",
+                  "knownGaps": [
+                    "Independent qualification review is not yet retained.",
+                    "No non-KFD adopter reproduces the candidate as an irreducible object.",
+                    "Historical KFD-1 through KFD-3 bootstrap did not run the later Self-Conformance Profile.",
+                    "The terminal disposition remains open."
+                  ]
+                },
+                "participants": [
+                  {
+                    "id": "qualification-author",
+                    "kind": "agent",
+                    "functions": [
+                      "candidate-generation",
+                      "perspective-declaration",
+                      "scalable-reasoning"
+                    ]
+                  },
+                  {
+                    "id": "kfd-repository",
+                    "kind": "collective",
+                    "functions": [
+                      "evidence-custody"
+                    ]
+                  },
+                  {
+                    "id": "independent-reviewer-pending",
+                    "kind": "other",
+                    "functions": [
+                      "verification"
+                    ]
+                  },
+                  {
+                    "id": "disposition-authority-pending",
+                    "kind": "human",
+                    "functions": [
+                      "decision"
+                    ]
+                  }
+                ],
+                "alternatives": [
+                  {
+                    "name": "New numbered KFD procedure",
+                    "disposition": "unresolved",
+                    "reason": "Would make recursive self-application explicit but must first prove an independent responsibility beyond existing KFDs."
+                  },
+                  {
+                    "name": "KFD-1, KFD-2, KFD-5, and KFD-11 composition",
+                    "disposition": "retained",
+                    "reason": "Already supplies exact cuts, fact-bound assessment, genesis/qualification separation, and decision/admission separation."
+                  },
+                  {
+                    "name": "Self-Conformance Profile only",
+                    "disposition": "retained",
+                    "reason": "Supplies deterministic structural machinery but cannot become normative, semantic, or governance authority."
+                  },
+                  {
+                    "name": "No explicit self-conformance path",
+                    "disposition": "rejected",
+                    "reason": "Leaves repeated reconstruction and authority confusion unaddressed even if no new KFD is ultimately justified."
+                  }
+                ],
+                "contractModel": {
+                  "identity": "One pre-number recursive normative self-conformance Candidate bound to an exact genesis cut.",
+                  "boundary": "Normative self-change only; adopter implementations, numbering, activation, protected merge, and release remain under their own authorities.",
+                  "authority": "Genesis author, structural verifier, independent reviewer, disposition authority, repository admission, and release authority remain distinct.",
+                  "lifecycle": "absent -> candidate -> qualified, provisional, rejected, or no-new-kfd -> optional separately authorized promotion and admission",
+                  "operations": [
+                    "bind-genesis",
+                    "replay-history",
+                    "compare-redundancy",
+                    "verify-structure",
+                    "review-exact-cut",
+                    "record-disposition",
+                    "admit-or-retain-non-promotion"
+                  ]
+                },
+                "tests": {
+                  "minimumClosure": {
+                    "result": "pass",
+                    "evidence": [
+                      {
+                        "kind": "file",
+                        "coordinate": "cases/live/recursive-normative-self-conformance/distinguishability.md"
+                      }
+                    ],
+                    "notes": "The minimum useful path is explicit; whether it requires a new Primitive remains unresolved."
+                  },
+                  "deletion": {
+                    "result": "inconclusive",
+                    "evidence": [
+                      {
+                        "kind": "file",
+                        "coordinate": "cases/live/recursive-normative-self-conformance/distinguishability.md"
+                      }
+                    ],
+                    "notes": "Analytic deletion preserves every current decision observation, favoring derivability pending independent review."
+                  },
+                  "fuse": {
+                    "result": "inconclusive",
+                    "evidence": [
+                      {
+                        "kind": "file",
+                        "coordinate": "cases/live/recursive-normative-self-conformance/ontology-split.md"
+                      }
+                    ],
+                    "notes": "The candidate fuses into the existing normative closure without contradiction, but the Profile alone cannot own normative authority."
+                  },
+                  "falsifiers": [
+                    "A fixed-root decision changes when the Candidate is deleted while KFD-1, KFD-2, KFD-5, KFD-11, and the Profile remain available.",
+                    "A non-KFD adopter requires an independent recursive identity, boundary, authority, lifecycle, or operation that the existing closure cannot express.",
+                    "Fusing the Candidate into existing KFDs creates unavoidable authority ambiguity.",
+                    "The fixed package cannot fail closed on root, predecessor, review, authority, package, or claim substitution without a new normative contract.",
+                    "No new KFD is justified if deletion preserves every decision observation and the Candidate only names the existing composition."
+                  ],
+                  "dogfood": {
+                    "result": "inconclusive",
+                    "evidence": [
+                      {
+                        "kind": "file",
+                        "coordinate": "cases/live/recursive-normative-self-conformance/README.md"
+                      }
+                    ],
+                    "notes": "The first recursive run is open. Structural and clean-room evidence plus independent review are still required."
+                  }
+                },
+                "decision": {
+                  "outcome": "provisional",
+                  "owner": "independent-review-and-disposition-pending",
+                  "reason": "The candidate is generated and analytically favors derivability, but the fixed-root replay, clean-room verification, native/WASM parity, independent review, and authority-separated terminal disposition are not yet retained.",
+                  "residualRisks": [
+                    "Role labels may be mistaken for actual independent authority.",
+                    "Retrospective replay may be overstated as historical conformance.",
+                    "A useful named composition may be over-promoted into a redundant KFD."
+                  ]
+                }
+              }
+            },
+            "claimBoundary": "Provisional only. The initial cut records genesis and analytic redundancy pressure; it does not decide qualification, allocate a number, certify the Profile, or supply independent review or disposition authority."
+          }
+        ]
       }
     ]
   },
@@ -4910,7 +5211,7 @@
       "numberedDraftSource": "registry.json",
       "stableFreeze": "first-non-prerelease-release"
     },
-    "indexMarkdown": "# KFD Candidates\n\nKFD Candidates preserve potentially load-bearing portable engineering rules\nbefore a KFD number is allocated. They are pre-number drafts, not numbered\ndecisions.\n\nThe machine source is [`registry.json`](registry.json). A candidate may carry\na non-binding `slotHint` to preserve the current ordering hypothesis. The hint\ndoes not reserve, allocate, or promise that number. Only an explicit promotion\ncreates a numbered KFD under `decisions/` and `registry.json`.\n\n```text\ncandidate\n  -> qualification\n  -> explicit promotion\n  -> numbered draft\n  -> activation evidence\n  -> active KFD\n```\n\nCandidates may be revised, reordered, merged, split, withdrawn, rejected, or\npromoted while their published coordinates remain immutable. Their current\nstatus and claim boundary must remain machine-readable.\n\nAny participant may propose a candidate, counterexample, adopter Profile, or\nqualification evidence through the public process in\n[`CONTRIBUTING.md`](../CONTRIBUTING.md). Maintainers remain responsible for\nofficial numbering and status decisions.\n\nPromoted lineage:\n\n- [Cross-domain action primitives](action-state-separation.md) was explicitly\n  promoted into active [KFD-7](../decisions/KFD-7.md).\n- [Atlas action perspective](atlas-action-perspective.md) was explicitly\n  promoted into numbered draft [KFD-8](../decisions/KFD-8.md).\n- [Pursuit intent continuity](pursuit-intent-continuity.md) was explicitly\n  promoted into numbered draft [KFD-9](../decisions/KFD-9.md).\n- [Warrant bounded authority](warrant-bounded-authority.md) was explicitly\n  promoted into numbered draft [KFD-10](../decisions/KFD-10.md).\n- [Claim, Assessment, Decision, and Admission](claim-assessment-decision-admission.md)\n  was allocated to numbered draft [KFD-11](../decisions/KFD-11.md) by the\n  [2026-07-21 pre-stable Foundation Revision](../docs/foundation-revision-2026-07-21-decision-admission.md).\n\nIncubating now:\n\n- [Federated Work Continuity](federated-work-continuity.md) asks whether one\n  user-level body of work remains independently identifiable across the\n  Assignments, workspaces, and cuts through which it advances. Its strongest\n  alternatives remain Initiative, a perspective-bound derived view, and no new\n  Primitive.\n\nThe promoted pages remain public lineage and do not replace their numbered\ndecisions. Incubating pages are non-normative and allocate no number.\n\nSee [Contributing](../CONTRIBUTING.md) and\n[Governance](../GOVERNANCE.md) for open proposal, candidate promotion,\npre-stable Foundation Revision, stewardship, and Foundation Freeze rules.",
+    "indexMarkdown": "# KFD Candidates\n\nKFD Candidates preserve potentially load-bearing portable engineering rules\nbefore a KFD number is allocated. They are pre-number drafts, not numbered\ndecisions.\n\nThe machine source is [`registry.json`](registry.json). A candidate may carry\na non-binding `slotHint` to preserve the current ordering hypothesis. The hint\ndoes not reserve, allocate, or promise that number. Only an explicit promotion\ncreates a numbered KFD under `decisions/` and `registry.json`.\n\n```text\ncandidate\n  -> qualification\n  -> explicit promotion\n  -> numbered draft\n  -> activation evidence\n  -> active KFD\n```\n\nCandidates may be revised, reordered, merged, split, withdrawn, rejected, or\npromoted while their published coordinates remain immutable. Their current\nstatus and claim boundary must remain machine-readable.\n\nAny participant may propose a candidate, counterexample, adopter Profile, or\nqualification evidence through the public process in\n[`CONTRIBUTING.md`](../CONTRIBUTING.md). Maintainers remain responsible for\nofficial numbering and status decisions.\n\nPromoted lineage:\n\n- [Cross-domain action primitives](action-state-separation.md) was explicitly\n  promoted into active [KFD-7](../decisions/KFD-7.md).\n- [Atlas action perspective](atlas-action-perspective.md) was explicitly\n  promoted into numbered draft [KFD-8](../decisions/KFD-8.md).\n- [Pursuit intent continuity](pursuit-intent-continuity.md) was explicitly\n  promoted into numbered draft [KFD-9](../decisions/KFD-9.md).\n- [Warrant bounded authority](warrant-bounded-authority.md) was explicitly\n  promoted into numbered draft [KFD-10](../decisions/KFD-10.md).\n- [Claim, Assessment, Decision, and Admission](claim-assessment-decision-admission.md)\n  was allocated to numbered draft [KFD-11](../decisions/KFD-11.md) by the\n  [2026-07-21 pre-stable Foundation Revision](../docs/foundation-revision-2026-07-21-decision-admission.md).\n\nIncubating now:\n\n- [Federated Work Continuity](federated-work-continuity.md) asks whether one\n  user-level body of work remains independently identifiable across the\n  Assignments, workspaces, and cuts through which it advances. Its strongest\n  alternatives remain Initiative, a perspective-bound derived view, and no new\n  Primitive.\n- [Recursive normative self-conformance](recursive-normative-self-conformance.md)\n  asks whether a normative system's fixed-root self-application is an\n  independent procedure or the derivable closure of KFD-1, KFD-2, KFD-5,\n  KFD-11, and the existing Self-Conformance Profile. It is qualifying without a\n  slot hint or number, and `no-new-kfd` remains an explicit terminal outcome.\n\nThe promoted pages remain public lineage and do not replace their numbered\ndecisions. Incubating pages are non-normative and allocate no number.\n\nSee [Contributing](../CONTRIBUTING.md) and\n[Governance](../GOVERNANCE.md) for open proposal, candidate promotion,\npre-stable Foundation Revision, stewardship, and Foundation Freeze rules.",
     "candidates": [
       {
         "id": "action-state-separation",
@@ -5119,6 +5420,37 @@
         "relationship": "pre-number-non-normative-candidate",
         "normative": false,
         "markdown": "# KFD Candidate: Federated Work Continuity\n\n- Candidate status: incubating\n- Kind candidate: principle\n- Slot binding: non-binding\n- Number allocated: no\n\n[Formal candidate](formal/federated-work-continuity.md) ·\n[Live case](../cases/live/federated-work-continuity/README.md)\n\n## One sentence\n\nWork must remain identifiable independently of the assignments, workspaces,\nand cuts through which it advances.\n\n## Candidate rule\n\nFrom the position of a person responsible for a real outcome, the primary\nobject is often not one task, repository, session, or execution location. It is\nthe coherent body of work whose responsibilities may be decomposed across many\nparticipants and fact worlds.\n\nThis candidate uses **Work** for that possible higher-layer boundary. A Work\nview should make independently inspectable:\n\n- the declared whole being advanced from one stated perspective;\n- the typed Initiative and Assignment relations currently included;\n- the owning fact world of every authoritative object;\n- the component cuts, proof state, unresolved references, and degradation;\n- the current action frontier: what may proceed, what awaits judgment, and what\n  remains unsettled.\n\nWork does not create a global clock, merge autonomous fact authorities, or\ninfer completion from child progress. A federated view may bind many component\ncuts while preserving that no single atomic global cut exists.\n\n## Why this may be a Primitive\n\nTask systems usually expose the places where work is executed. Repository\nviews expose source boundaries. Initiative and Assignment views expose\ncontinuing coordination and bounded responsibility. A user coordinating work\nacross those boundaries still has to reconstruct a different question:\n\n```text\nWhat is the one thing I am advancing, where are its live responsibilities,\nwhat has been accepted, and what can happen next?\n```\n\nIf removing a Work-level identity or view forces that reconstruction while all\ncomponent facts remain valid, Work carries an independent burden. If an\nInitiative or an ordinary typed query answers the same question without loss,\nno new Primitive is justified.\n\n## Current competing hypotheses\n\nThe candidate deliberately keeps three outcomes open:\n\n1. **Independent Work object**: a stable identity survives decomposition,\n   workspace movement, several Initiatives, and successive settlements.\n2. **Perspective-bound Work view**: one root reference, relation policy, and\n   set of component cuts derive the useful whole without new fact authority.\n3. **No new Primitive**: Initiative plus Assignment Graph and existing query\n   contracts provide equivalent continuity at lower cost.\n\nThe current evidence does not select among them. Product terminology may use\nWork before ontology qualification, but it must not present a derived view as\nan independently authoritative entity.\n\n## Distinction from adjacent objects\n\n| Object | Responsibility not owned by Work |\n|---|---|\n| Pursuit | Continuing direction and consequence meaning |\n| Atlas | Perspective, admitted sources, cut, freshness, and declared loss |\n| Warrant | Bounded and revocable authority |\n| Episode | Realized causal occurrence |\n| Initiative | One continuing coordinated software-work context |\n| Assignment | One bounded accepted responsibility |\n| Project Cut | What one project officially became at a settled boundary |\n\nWork may bind and present these objects. It cannot absorb their authority or\nmake their independently variable states co-vary.\n\n## Engineering hypothesis\n\nA first implementation may use:\n\n```text\nworkspace-qualified WorkRef\n  + typed Assignment Graph\n  + component workspace cuts and proofs\n  + declared traversal policy and observer\n  + current action frontier\n  = perspective-bound Work view\n```\n\nPaths remain locators. Every semantic mutation routes to the owning fact world.\nUnavailable workspaces and unresolved references remain visible. The view is\nportable only to the extent that its component identities, cuts, relation\npolicy, and declared loss are portable.\n\n## Qualification gate\n\nPromotion requires at least:\n\n1. a completed federated implementation in which one real body of work spans\n   several independently authoritative workspaces;\n2. a deletion witness showing that removing Work changes continuation or\n   settlement decisions while Initiative and Assignment facts remain fixed;\n3. a fuse witness showing why Work cannot safely be identical to Initiative,\n   Assignment, Pursuit, repository, workspace, Portfolio, or Project Cut;\n4. comparison of stable-entity and derived-view implementations;\n5. path movement, unavailable workspace, stale cut, relation-cycle, and partial\n   handshake qualification without hidden global authority;\n6. evidence that the user-facing view lowers reconstruction cost while exact\n   authority and residual risk remain available to agents;\n7. at least one non-software or structurally non-isomorphic adopter comparison;\n8. independent review and an explicit KFD-5 promotion decision.\n\n## Falsifiers\n\nThe candidate weakens, is subsumed, or should be rejected if:\n\n- one Initiative plus typed Assignment relations answers every Work question\n  without changed decisions or material reconstruction;\n- Work membership is only an unstable query preference with no durable\n  identity, consequence, or continuation semantics;\n- a Work view requires centralizing or duplicating component authority;\n- progress aggregation hides pending review, settlement, unavailable evidence,\n  or conflicting cuts;\n- the model transfers poorly beyond one multi-repository software workflow;\n- users gain no measurable reduction in context reconstruction or decision\n  effort.\n\n## Numbering boundary\n\nThis candidate has no allocated KFD number and makes no slot reservation. Its\nlive case is provisional. Only an explicit, independently reviewed promotion\nafter KFD-5 qualification may create a numbered decision."
+      },
+      {
+        "id": "recursive-normative-self-conformance",
+        "title": "Recursive normative self-conformance",
+        "status": "qualifying",
+        "kindCandidate": "procedure",
+        "slotBinding": "non-binding",
+        "oneSentence": "A normative system should route load-bearing changes to its own rules through the same fixed-root, authority-separated conformance path it requires of adopters.",
+        "path": "drafts/recursive-normative-self-conformance.md",
+        "sourceCases": [
+          {
+            "id": "recursive-normative-self-conformance",
+            "path": "cases/live/recursive-normative-self-conformance/README.md"
+          }
+        ],
+        "promotionGate": [
+          "exact-root-kfd-5-genesis",
+          "historical-replay-with-non-retroactivity",
+          "kfd-1-2-5-11-redundancy-analysis",
+          "native-wasm-parity",
+          "package-only-clean-room",
+          "fail-closed-adversarial-bundles",
+          "independent-exact-cut-review",
+          "authority-separated-terminal-disposition"
+        ],
+        "claimBoundary": "This qualifying pre-number Candidate tests whether recursive normative self-conformance is an independent KFD or the derivable closure of KFD-1, KFD-2, KFD-5, KFD-11, and the fixed Self-Conformance Profile. It has no slot hint, number, active status, self-certification, merge authority, or release authority.",
+        "url": "/drafts/recursive-normative-self-conformance",
+        "sourcePath": "drafts/recursive-normative-self-conformance.md",
+        "relationship": "pre-number-non-normative-candidate",
+        "normative": false,
+        "markdown": "# Recursive normative self-conformance\n\n- Candidate ID: `recursive-normative-self-conformance`\n- Status: qualifying\n- Kind candidate: procedure\n- Number: none\n- Slot binding: non-binding\n\n## One sentence\n\nA normative system should route load-bearing changes to its own rules through\nthe same fixed-root, authority-separated conformance path it requires of\nadopters.\n\n## Candidate claim\n\nThe proposed procedure makes recursive application explicit:\n\n```text\ndeclared normative cut\n  -> pre-number genesis\n  -> fact-bound qualification\n  -> independent review\n  -> authority-separated disposition\n  -> admitted successor cut or retained non-promotion\n```\n\nThe fixed cut, verifier, review, and disposition authorities remain distinct.\nA generator cannot certify its own candidate. A structural verifier cannot\nchoose the semantic outcome. A passing report cannot allocate a number,\nactivate a decision, merge a change, or publish a release.\n\n## Why this is only a Candidate\n\nKFD already contains most or all of this responsibility:\n\n- KFD-1 preserves exact normative coordinates and compatibility boundaries;\n- KFD-2 makes conformance claims fact-bound and risk-bounded;\n- KFD-5 separates genesis from qualification and permits `no new primitive`;\n- KFD-11 separates claim, assessment, authorized decision, and admission;\n- the Self-Conformance Profile supplies a fixed package, transition verifier,\n  lifecycle chain, review receipt, and explicit non-authority boundary.\n\nThe open question is therefore not whether recursive self-application is\nuseful. It is whether that composition needs an additional numbered KFD or is\nalready the minimum closure of existing decisions and the Profile.\n\n## Qualification burden\n\nThe Candidate must survive all of the following without relying on its own\ntext as proof:\n\n1. exact-root KFD-5 genesis;\n2. deletion and fuse comparison against KFD-1, KFD-2, KFD-5, and KFD-11;\n3. replay of KFD-1 through KFD-3 bootstrap, KFD-7 activation, the KFD-11\n   through KFD-13 Foundation Revision, and at least one retained gap;\n4. package-only clean-room verification and native/WASM parity;\n5. adversarial failure when roots, predecessor, review, authority, package, or\n   claim boundary are substituted;\n6. independent review of the exact evidence cut;\n7. a terminal `qualified`, `provisional`, `rejected`, or `no-new-kfd`\n   disposition issued by an authority other than the generator or verifier.\n\n## No-new-KFD condition\n\nNo new KFD is justified if deletion of this Candidate leaves the combined\nKFD-1/KFD-2/KFD-5/KFD-11 obligations and the fixed Self-Conformance Profile\nable to reproduce every decision-relevant observation, while adding the\nCandidate only names their composition rather than a new identity, boundary,\nauthority, lifecycle, or operation.\n\n## Claim boundary\n\nThis Candidate has no number and no active status. It does not amend existing\nKFD text, reinterpret historical releases, certify the Self-Conformance\nProfile, approve its own evidence, or authorize promotion, merge, or release."
       }
     ]
   },
@@ -5187,6 +5519,15 @@
         "url": "/drafts/federated-work-continuity/",
         "claimBoundary": "This incubating candidate preserves a perspective-generated Work hypothesis before federation dogfood. It does not establish an independent Work entity, allocate a KFD number, supersede Initiative, prefer entity over derived-view semantics, prove cross-domain transfer, or qualify a product implementation.",
         "markdown": "# KFD Candidate: Federated Work Continuity\n\n- Candidate status: incubating\n- Kind candidate: principle\n- Slot binding: non-binding\n- Number allocated: no\n\n[Formal candidate](formal/federated-work-continuity.md) ·\n[Live case](../cases/live/federated-work-continuity/README.md)\n\n## One sentence\n\nWork must remain identifiable independently of the assignments, workspaces,\nand cuts through which it advances.\n\n## Candidate rule\n\nFrom the position of a person responsible for a real outcome, the primary\nobject is often not one task, repository, session, or execution location. It is\nthe coherent body of work whose responsibilities may be decomposed across many\nparticipants and fact worlds.\n\nThis candidate uses **Work** for that possible higher-layer boundary. A Work\nview should make independently inspectable:\n\n- the declared whole being advanced from one stated perspective;\n- the typed Initiative and Assignment relations currently included;\n- the owning fact world of every authoritative object;\n- the component cuts, proof state, unresolved references, and degradation;\n- the current action frontier: what may proceed, what awaits judgment, and what\n  remains unsettled.\n\nWork does not create a global clock, merge autonomous fact authorities, or\ninfer completion from child progress. A federated view may bind many component\ncuts while preserving that no single atomic global cut exists.\n\n## Why this may be a Primitive\n\nTask systems usually expose the places where work is executed. Repository\nviews expose source boundaries. Initiative and Assignment views expose\ncontinuing coordination and bounded responsibility. A user coordinating work\nacross those boundaries still has to reconstruct a different question:\n\n```text\nWhat is the one thing I am advancing, where are its live responsibilities,\nwhat has been accepted, and what can happen next?\n```\n\nIf removing a Work-level identity or view forces that reconstruction while all\ncomponent facts remain valid, Work carries an independent burden. If an\nInitiative or an ordinary typed query answers the same question without loss,\nno new Primitive is justified.\n\n## Current competing hypotheses\n\nThe candidate deliberately keeps three outcomes open:\n\n1. **Independent Work object**: a stable identity survives decomposition,\n   workspace movement, several Initiatives, and successive settlements.\n2. **Perspective-bound Work view**: one root reference, relation policy, and\n   set of component cuts derive the useful whole without new fact authority.\n3. **No new Primitive**: Initiative plus Assignment Graph and existing query\n   contracts provide equivalent continuity at lower cost.\n\nThe current evidence does not select among them. Product terminology may use\nWork before ontology qualification, but it must not present a derived view as\nan independently authoritative entity.\n\n## Distinction from adjacent objects\n\n| Object | Responsibility not owned by Work |\n|---|---|\n| Pursuit | Continuing direction and consequence meaning |\n| Atlas | Perspective, admitted sources, cut, freshness, and declared loss |\n| Warrant | Bounded and revocable authority |\n| Episode | Realized causal occurrence |\n| Initiative | One continuing coordinated software-work context |\n| Assignment | One bounded accepted responsibility |\n| Project Cut | What one project officially became at a settled boundary |\n\nWork may bind and present these objects. It cannot absorb their authority or\nmake their independently variable states co-vary.\n\n## Engineering hypothesis\n\nA first implementation may use:\n\n```text\nworkspace-qualified WorkRef\n  + typed Assignment Graph\n  + component workspace cuts and proofs\n  + declared traversal policy and observer\n  + current action frontier\n  = perspective-bound Work view\n```\n\nPaths remain locators. Every semantic mutation routes to the owning fact world.\nUnavailable workspaces and unresolved references remain visible. The view is\nportable only to the extent that its component identities, cuts, relation\npolicy, and declared loss are portable.\n\n## Qualification gate\n\nPromotion requires at least:\n\n1. a completed federated implementation in which one real body of work spans\n   several independently authoritative workspaces;\n2. a deletion witness showing that removing Work changes continuation or\n   settlement decisions while Initiative and Assignment facts remain fixed;\n3. a fuse witness showing why Work cannot safely be identical to Initiative,\n   Assignment, Pursuit, repository, workspace, Portfolio, or Project Cut;\n4. comparison of stable-entity and derived-view implementations;\n5. path movement, unavailable workspace, stale cut, relation-cycle, and partial\n   handshake qualification without hidden global authority;\n6. evidence that the user-facing view lowers reconstruction cost while exact\n   authority and residual risk remain available to agents;\n7. at least one non-software or structurally non-isomorphic adopter comparison;\n8. independent review and an explicit KFD-5 promotion decision.\n\n## Falsifiers\n\nThe candidate weakens, is subsumed, or should be rejected if:\n\n- one Initiative plus typed Assignment relations answers every Work question\n  without changed decisions or material reconstruction;\n- Work membership is only an unstable query preference with no durable\n  identity, consequence, or continuation semantics;\n- a Work view requires centralizing or duplicating component authority;\n- progress aggregation hides pending review, settlement, unavailable evidence,\n  or conflicting cuts;\n- the model transfers poorly beyond one multi-repository software workflow;\n- users gain no measurable reduction in context reconstruction or decision\n  effort.\n\n## Numbering boundary\n\nThis candidate has no allocated KFD number and makes no slot reservation. Its\nlive case is provisional. Only an explicit, independently reviewed promotion\nafter KFD-5 qualification may create a numbered decision."
+      },
+      {
+        "id": "recursive-normative-self-conformance",
+        "title": "Recursive normative self-conformance",
+        "status": "qualifying",
+        "sourcePath": "drafts/recursive-normative-self-conformance.md",
+        "url": "/drafts/recursive-normative-self-conformance/",
+        "claimBoundary": "This qualifying pre-number Candidate tests whether recursive normative self-conformance is an independent KFD or the derivable closure of KFD-1, KFD-2, KFD-5, KFD-11, and the fixed Self-Conformance Profile. It has no slot hint, number, active status, self-certification, merge authority, or release authority.",
+        "markdown": "# Recursive normative self-conformance\n\n- Candidate ID: `recursive-normative-self-conformance`\n- Status: qualifying\n- Kind candidate: procedure\n- Number: none\n- Slot binding: non-binding\n\n## One sentence\n\nA normative system should route load-bearing changes to its own rules through\nthe same fixed-root, authority-separated conformance path it requires of\nadopters.\n\n## Candidate claim\n\nThe proposed procedure makes recursive application explicit:\n\n```text\ndeclared normative cut\n  -> pre-number genesis\n  -> fact-bound qualification\n  -> independent review\n  -> authority-separated disposition\n  -> admitted successor cut or retained non-promotion\n```\n\nThe fixed cut, verifier, review, and disposition authorities remain distinct.\nA generator cannot certify its own candidate. A structural verifier cannot\nchoose the semantic outcome. A passing report cannot allocate a number,\nactivate a decision, merge a change, or publish a release.\n\n## Why this is only a Candidate\n\nKFD already contains most or all of this responsibility:\n\n- KFD-1 preserves exact normative coordinates and compatibility boundaries;\n- KFD-2 makes conformance claims fact-bound and risk-bounded;\n- KFD-5 separates genesis from qualification and permits `no new primitive`;\n- KFD-11 separates claim, assessment, authorized decision, and admission;\n- the Self-Conformance Profile supplies a fixed package, transition verifier,\n  lifecycle chain, review receipt, and explicit non-authority boundary.\n\nThe open question is therefore not whether recursive self-application is\nuseful. It is whether that composition needs an additional numbered KFD or is\nalready the minimum closure of existing decisions and the Profile.\n\n## Qualification burden\n\nThe Candidate must survive all of the following without relying on its own\ntext as proof:\n\n1. exact-root KFD-5 genesis;\n2. deletion and fuse comparison against KFD-1, KFD-2, KFD-5, and KFD-11;\n3. replay of KFD-1 through KFD-3 bootstrap, KFD-7 activation, the KFD-11\n   through KFD-13 Foundation Revision, and at least one retained gap;\n4. package-only clean-room verification and native/WASM parity;\n5. adversarial failure when roots, predecessor, review, authority, package, or\n   claim boundary are substituted;\n6. independent review of the exact evidence cut;\n7. a terminal `qualified`, `provisional`, `rejected`, or `no-new-kfd`\n   disposition issued by an authority other than the generator or verifier.\n\n## No-new-KFD condition\n\nNo new KFD is justified if deletion of this Candidate leaves the combined\nKFD-1/KFD-2/KFD-5/KFD-11 obligations and the fixed Self-Conformance Profile\nable to reproduce every decision-relevant observation, while adding the\nCandidate only names their composition rather than a new identity, boundary,\nauthority, lifecycle, or operation.\n\n## Claim boundary\n\nThis Candidate has no number and no active status. It does not amend existing\nKFD text, reinterpret historical releases, certify the Self-Conformance\nProfile, approve its own evidence, or authorize promotion, merge, or release."
       }
     ],
     "formalPages": {

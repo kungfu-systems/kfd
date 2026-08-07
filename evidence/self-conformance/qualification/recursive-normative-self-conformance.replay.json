@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.recursive-normative-self-conformance-replay/v1",
+  "candidateId": "recursive-normative-self-conformance",
+  "profile": "kfd-self-conformance@1.0.0-alpha.1",
+  "fixedInputs": [
+    {
+      "id": "bootstrap-anchor",
+      "path": "profiles/self-conformance/bootstrap-anchor.json",
+      "sha256": "5e1b1d984607d7805dd5a014b705f97e4794c8bc0b3de4ab70ae78ee394424af"
+    },
+    {
+      "id": "profile-manifest",
+      "path": "profiles/self-conformance/manifest.json",
+      "sha256": "b78f0b1f08a690a5885407b611344153dee5f8f79bae920e192e5e9fef7ffa6a"
+    },
+    {
+      "id": "kfd-1",
+      "path": "decisions/KFD-1.md",
+      "sha256": "f504d02736a50006786103c31843ab759e54d160056f756780aeb9b7da1a914a"
+    },
+    {
+      "id": "kfd-2",
+      "path": "decisions/KFD-2.md",
+      "sha256": "026ed1d23fbb45fd5b3163962ce736a757e383230af09556c8fb4b56f5e802b5"
+    },
+    {
+      "id": "kfd-3",
+      "path": "decisions/KFD-3.md",
+      "sha256": "5691761dcab21fcdeaf748655f20f61de74b906cd9f5cd03459131fd78082f83"
+    },
+    {
+      "id": "kfd-6",
+      "path": "decisions/KFD-6.md",
+      "sha256": "4013dd0880711d5acb20267345cd18ddf8fdf60b0ce0ab4c1e008334cdf96386"
+    },
+    {
+      "id": "kfd-7-activation",
+      "path": "evidence/kfd-7/activation-record.json",
+      "sha256": "67ffebb73f943892f1854e2916a90f1fb082c61d33f64c0e7f8af5393189eb6e"
+    },
+    {
+      "id": "foundation-revision",
+      "path": "docs/foundation-revision-2026-07-21-decision-admission.json",
+      "sha256": "54ff62c8e9e5afe883044f1b4e0b3f2239a63eb945fc2424d792152bbf665313"
+    },
+    {
+      "id": "kfd-11",
+      "path": "decisions/KFD-11.md",
+      "sha256": "68b56c111da243609db8f609b48b73331e0e52c16ee549e6f631ad7ddc09fe6c"
+    },
+    {
+      "id": "kfd-12",
+      "path": "decisions/KFD-12.md",
+      "sha256": "4b89bfe3f0610a67239f3e0a1ab4bb4ce11443876b75e92fdfd0bdafe0b9bbe5"
+    },
+    {
+      "id": "kfd-13",
+      "path": "decisions/KFD-13.md",
+      "sha256": "5557074f4f321686a6ad0ab05b60ebdfc9291ef7e25bca4b5a7756d096c8a12e"
+    }
+  ],
+  "cases": [
+    {
+      "id": "kfd-1-through-kfd-3-bootstrap",
+      "classification": "retrospective-reconstruction",
+      "historicalCoordinate": "git:214a49c1cd0fd10501eb48e89e71206c9e01c088",
+      "observedOutcome": "KFD-1, KFD-2, and KFD-3 were introduced together before the Self-Conformance Profile existed.",
+      "replayOutcome": "Their current files can be assessed as a coherent foundation triad, but no later Profile run can be claimed as a historical fact.",
+      "expectedDisposition": "non-retroactive-reconstruction",
+      "gap": "Original genesis and review cannot be reconstructed from the current package alone."
+    },
+    {
+      "id": "kfd-7-positive-activation",
+      "classification": "historical-fact",
+      "historicalCoordinate": "review:https://github.com/kungfu-systems/kfd/pull/190#pullrequestreview-4728837515",
+      "observedOutcome": "KFD-7 was activated from two exact product Profile cuts after independent product and KFD-level reviews.",
+      "replayOutcome": "The retained record satisfies the positive authority-separation shape expected by the later Profile without asserting that the Profile ran at activation time.",
+      "expectedDisposition": "positive-activation-preserved",
+      "gap": null
+    },
+    {
+      "id": "kfd-11-through-kfd-13-foundation-revision",
+      "classification": "historical-fact",
+      "historicalCoordinate": "git:903737e47e047c0d3aedce98fdf3751cbc9b7aab",
+      "observedOutcome": "The pre-stable Foundation Revision allocated KFD-11 and renumbered the former KFD-11 and KFD-12 meanings to KFD-12 and KFD-13 while preserving old coordinates.",
+      "replayOutcome": "Foundation revision and activation remain different lifecycle effects; KFD-11, KFD-12, and KFD-13 remain draft.",
+      "expectedDisposition": "foundation-revised-without-activation",
+      "gap": null
+    },
+    {
+      "id": "kfd-6-partial-autonomous-discovery",
+      "classification": "historical-fact",
+      "historicalCoordinate": "file:decisions/KFD-6.md",
+      "observedOutcome": "KFD-6 retains early feasibility evidence but explicitly lacks a conforming experiment, held-out transfer, systematic false-candidate rejection, and autonomous triggering.",
+      "replayOutcome": "The missing evidence remains visible and must not be projected as pass or activation.",
+      "expectedDisposition": "partial-gap-preserved",
+      "gap": "KFD-6 remains draft and non-activated."
+    },
+    {
+      "id": "profile-counterfactual-over-history",
+      "classification": "counterfactual-replay",
+      "historicalCoordinate": "package:@kungfu-tech/kfd@1.0.0-alpha.1#kfd-self-conformance",
+      "observedOutcome": "The Profile postdates the replayed events.",
+      "replayOutcome": "Applying its lifecycle vocabulary can test present structural compatibility, but cannot rewrite authorship, review, status, release, or historical execution.",
+      "expectedDisposition": "no-retroactive-conformance",
+      "gap": "Counterfactual structural compatibility is not historical proof."
+    }
+  ],
+  "invariants": [
+    "Every fixed input must match its exact package bytes.",
+    "Every replay case must use one published classification.",
+    "The KFD-7 case must preserve activation and independent review.",
+    "The Foundation Revision case must preserve old coordinates and non-activation of KFD-11 through KFD-13.",
+    "The KFD-1 through KFD-3 bootstrap must not be relabeled historical Profile conformance.",
+    "At least one partial or gap outcome must remain visible.",
+    "The counterfactual replay must not change any decision, registry, package, review, or release coordinate."
+  ],
+  "claimBoundary": "This fixed-root replay distinguishes historical facts, retrospective reconstruction, and counterfactual replay. It does not rewrite history, prove original intent, certify a decision, or authorize a lifecycle transition."
+}

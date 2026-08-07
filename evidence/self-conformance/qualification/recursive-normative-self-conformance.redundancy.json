@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.recursive-normative-self-conformance-redundancy/v1",
+  "candidateId": "recursive-normative-self-conformance",
+  "comparisonBasis": "Minimum closure, deletion, fuse, and cross-domain tests against exact current KFD decision files.",
+  "fixedInputs": [
+    {
+      "id": "kfd-1",
+      "path": "decisions/KFD-1.md",
+      "sha256": "f504d02736a50006786103c31843ab759e54d160056f756780aeb9b7da1a914a"
+    },
+    {
+      "id": "kfd-2",
+      "path": "decisions/KFD-2.md",
+      "sha256": "026ed1d23fbb45fd5b3163962ce736a757e383230af09556c8fb4b56f5e802b5"
+    },
+    {
+      "id": "kfd-5",
+      "path": "decisions/KFD-5.md",
+      "sha256": "47e3c8f6633e84b798719f76ca4ed19ddf93eeb54b321b98db552e111a697a3e"
+    },
+    {
+      "id": "kfd-11",
+      "path": "decisions/KFD-11.md",
+      "sha256": "68b56c111da243609db8f609b48b73331e0e52c16ee549e6f631ad7ddc09fe6c"
+    },
+    {
+      "id": "self-conformance-profile",
+      "path": "profiles/self-conformance/manifest.json",
+      "sha256": "b78f0b1f08a690a5885407b611344153dee5f8f79bae920e192e5e9fef7ffa6a"
+    }
+  ],
+  "minimumClosure": [
+    "exact normative predecessor and evidence roots",
+    "pre-number candidate genesis separated from qualification",
+    "fact-bound claim and assessment",
+    "structural verifier separated from generator",
+    "independent exact-cut review",
+    "disposition authority separated from review and verification",
+    "explicit admission or retained non-promotion"
+  ],
+  "matrix": [
+    {
+      "decision": "KFD-1",
+      "suppliedResponsibilities": [
+        "declared fact source",
+        "immutable coordinates",
+        "compatibility boundary",
+        "pre-stable Foundation Revision non-retroactivity"
+      ],
+      "candidateRemainder": "Does not itself supply genesis, qualification, or disposition roles."
+    },
+    {
+      "decision": "KFD-2",
+      "suppliedResponsibilities": [
+        "fact-bound claim",
+        "purpose-bound assessment",
+        "residual risk and known gaps",
+        "separate verification and decision owners"
+      ],
+      "candidateRemainder": "Does not itself define the Candidate lifecycle or admission transition."
+    },
+    {
+      "decision": "KFD-5",
+      "suppliedResponsibilities": [
+        "perspective-declared genesis",
+        "alternatives and falsifiers",
+        "minimum closure, deletion, fuse, and dogfood tests",
+        "accepted, provisional, rejected, subsumed, and no-new-primitive outcomes"
+      ],
+      "candidateRemainder": "Does not itself implement a fixed package or protected repository admission."
+    },
+    {
+      "decision": "KFD-11",
+      "suppliedResponsibilities": [
+        "Claim, Assessment, Decision, and Admission separation",
+        "Warrant-bound disposition",
+        "successor Fact publication only after Admission"
+      ],
+      "candidateRemainder": "Does not itself define KFD-5 genesis or the Self-Conformance package."
+    }
+  ],
+  "tests": {
+    "deletion": {
+      "result": "derivable",
+      "finding": "Deleting the Candidate preserves every decision-relevant observation through the combined decisions and fixed Profile."
+    },
+    "fuse": {
+      "result": "derivable",
+      "finding": "Fusing the recursive application into KFD-5 plus KFD-11 preserves genesis, qualification, disposition, and admission while KFD-1 and KFD-2 retain roots and trust."
+    },
+    "crossDomain": {
+      "result": "gap",
+      "finding": "No non-KFD adopter demonstrates a new irreducible recursive object."
+    },
+    "profileOnly": {
+      "result": "insufficient",
+      "finding": "The Profile supplies deterministic structure but cannot own semantic or governance authority."
+    }
+  },
+  "preliminaryConclusion": {
+    "outcome": "no-new-kfd-candidate",
+    "reason": "Recursive application is useful and should remain explicit, but the evidence currently identifies a composition of existing normative responsibilities rather than a new identity, boundary, authority, lifecycle, or operation.",
+    "authority": "proposal-only-pending-independent-review-and-disposition"
+  },
+  "claimBoundary": "This matrix is deterministic analytic evidence over fixed files. It does not issue the terminal disposition or certify semantic truth."
+}
