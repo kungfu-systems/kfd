@@ -43,7 +43,7 @@ assert.equal(manifest.verifierRequirement.native, true);
 assert.equal(manifest.verifierRequirement.wasm, true);
 assert.equal(manifest.verifierRequirement.byteParity, true);
 assert.equal(manifest.verifierRequirement.independent, true);
-assert.equal(issues.codes.length, 22);
+assert.equal(issues.codes.length, 42);
 assert.deepEqual(issues.codes, [...issues.codes].sort());
 assert.equal(new Set(issues.codes).size, issues.codes.length);
 for (const value of [manifest.schemaSetRoot, manifest.vectorSetRoot, manifest.issueSetRoot, manifest.bootstrapAnchorRoot]) {
@@ -54,7 +54,7 @@ const schemaPaths = fs.readdirSync(path.join(root, "schemas/kfd-self-conformance
   .filter((name) => name.endsWith(".schema.json"))
   .sort()
   .map((name) => `schemas/kfd-self-conformance/${name}`);
-assert.equal(schemaPaths.length, 6);
+assert.equal(schemaPaths.length, 8);
 const schemaSetRoot = semanticRoot(schemaPaths.map((relative) => ({
   path: relative,
   contentRoot: exactByteRoot(bytes(relative)),
@@ -111,6 +111,10 @@ if (!extracted) {
     "./self-conformance/vectors.json": "./profiles/self-conformance/vectors/contract-vectors.json",
     "./self-conformance/schemas/*": "./schemas/kfd-self-conformance/*",
     "./self-conformance/verifier-matrix.json": "./verifier/specs/self-conformance-matrix.json",
+    "./self-conformance/lifecycle-gates.json": "./profiles/self-conformance/lifecycle-gates.json",
+    "./self-conformance/lifecycle-gate-matrix.json": "./profiles/self-conformance/lifecycle-gate-matrix.json",
+    "./self-conformance/lifecycle-gate-request.schema.json": "./schemas/kfd-self-conformance/lifecycle-gate-request.schema.json",
+    "./self-conformance/lifecycle-gate-report.schema.json": "./schemas/kfd-self-conformance/lifecycle-gate-report.schema.json",
   })) assert.equal(packageJson.exports[alias], target, `missing export ${alias}`);
 
   const registered = new Set(standards.standards["kfd-1"].surfaceRegister.surfaces.map(({ id }) => id));
@@ -123,6 +127,9 @@ if (!extracted) {
     "kfd-self-conformance-contract-vectors",
     "kfd-self-conformance-verifier",
     "kfd-self-conformance-verifier-matrix",
+    "kfd-self-conformance-lifecycle-policy",
+    "kfd-self-conformance-lifecycle-gate",
+    "kfd-self-conformance-lifecycle-matrix",
   ]) assert.equal(registered.has(id), true, `missing KFD-1 surface ${id}`);
   const classification = impact.surfaceImpacts.find(({ id }) => id === "kfd-self-conformance-profile-v1");
   assert.equal(classification?.class, "additive");
@@ -154,9 +161,14 @@ if (!extracted) {
       expected: 0,
     });
     assert.equal(output.includes("Self-Conformance contract check passed"), true);
+    const lifecycleOutput = run("node", ["scripts/check-self-conformance-lifecycle.mjs"], {
+      cwd: extractionRoot,
+      expected: 0,
+    });
+    assert.equal(lifecycleOutput.includes("Self-Conformance lifecycle gates passed"), true);
   } finally {
     fs.rmSync(temporary, { recursive: true, force: true });
   }
 }
 
-console.log("Self-Conformance contract check passed: 6 schemas, 17 vectors, finite alpha.55 bootstrap, additive/minor KFD-1 surface, offline packed clean-room");
+console.log("Self-Conformance contract check passed: 8 schemas, 17 vectors, 7 lifecycle gates, finite alpha.55 bootstrap, additive/minor KFD-1 surface, offline packed clean-room");

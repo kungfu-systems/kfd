@@ -18,6 +18,18 @@ const SCHEMAS: &[(&str, &[u8])] = &[
         include_bytes!("../../../../../schemas/kfd-self-conformance/bootstrap-anchor.schema.json"),
     ),
     (
+        "schemas/kfd-self-conformance/lifecycle-gate-report.schema.json",
+        include_bytes!(
+            "../../../../../schemas/kfd-self-conformance/lifecycle-gate-report.schema.json"
+        ),
+    ),
+    (
+        "schemas/kfd-self-conformance/lifecycle-gate-request.schema.json",
+        include_bytes!(
+            "../../../../../schemas/kfd-self-conformance/lifecycle-gate-request.schema.json"
+        ),
+    ),
+    (
         "schemas/kfd-self-conformance/package-manifest.schema.json",
         include_bytes!("../../../../../schemas/kfd-self-conformance/package-manifest.schema.json"),
     ),

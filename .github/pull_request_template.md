@@ -20,12 +20,14 @@
 
 - [ ] A substantive change has a reviewer other than its author
 - [ ] Activation or Foundation Revision has an independent reviewer
+- [ ] Any official Candidate/lifecycle/release transition retains a reproducible Self-Conformance request/report pair
 
 ## Compatibility and registry agreement
 
 - [ ] `node scripts/check.mjs` passes
 - [ ] Applicability, compatibility, migration, and supersession impact are explicit
 - [ ] Published coordinates remain immutable
+- [ ] Self-Conformance verifier evidence remains separate from numbering, status, review, merge, and release authority
 - [ ] After Foundation Freeze, decision texts remain append-only (supersession over rewrite)
 
 ## Version impact (per KFD-1)

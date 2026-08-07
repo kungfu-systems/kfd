@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.self-conformance-lifecycle-gate-matrix/v1",
+  "profile": "kfd-self-conformance@1.0.0-alpha.1",
+  "positivePaths": [
+    "candidate",
+    "qualification",
+    "draft-promotion",
+    "activation",
+    "supersession",
+    "foundation-revision",
+    "release"
+  ],
+  "failureCases": [
+    { "id": "scg-f001", "category": "absent", "mutation": "remove-chain", "code": "scg-transition-evidence-absent" },
+    { "id": "scg-f002", "category": "stale", "mutation": "stale-predecessor-report", "code": "scg-predecessor-stale" },
+    { "id": "scg-f003", "category": "wrong-root", "mutation": "wrong-terminal-root", "code": "scg-terminal-root-mismatch" },
+    { "id": "scg-f004", "category": "wrong-predecessor", "mutation": "wrong-predecessor-state", "code": "scg-predecessor-chain-invalid" },
+    { "id": "scg-f005", "category": "wrong-authority", "mutation": "wrong-authority-role", "code": "scg-authority-role-invalid" },
+    { "id": "scg-f006", "category": "missing-review", "mutation": "remove-review", "code": "scg-review-receipt-missing" },
+    { "id": "scg-f007", "category": "claim-overreach", "mutation": "claim-overreach", "code": "scp-claim-overreach" },
+    { "id": "scg-f008", "category": "package-substitution", "mutation": "substitute-package", "code": "scg-verifier-package-substitution" }
+  ],
+  "claimBoundary": "The matrix proves deterministic gate behavior over fixed fixtures only; it does not authorize any lifecycle transition."
+}

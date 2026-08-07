@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-self-conformance/lifecycle-gate-request.schema.json",
+  "title": "KFD Self-Conformance lifecycle gate request",
+  "type": "object",
+  "required": ["schemaVersion", "contract", "profile", "gateId", "lifecyclePath", "fixedPackageRoot", "expectedTerminalBundleRoot", "chain", "counterevidenceRoots"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "contract": { "const": "kfd.self-conformance-lifecycle-gate-request/v1" },
+    "profile": { "const": "kfd-self-conformance@1.0.0-alpha.1" },
+    "gateId": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "lifecyclePath": { "enum": ["candidate", "qualification", "draft-promotion", "activation", "supersession", "foundation-revision", "release"] },
+    "fixedPackageRoot": { "$ref": "#/$defs/root" },
+    "expectedTerminalBundleRoot": { "$ref": "#/$defs/root" },
+    "chain": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["bundle", "authorityReceipt", "reviewReceipt", "packageRoot", "expectedBundleRoot", "expectedReportRoot"],
+        "properties": {
+          "bundle": { "$ref": "transition-bundle.schema.json" },
+          "authorityReceipt": { "$ref": "#/$defs/authorityReceipt" },
+          "reviewReceipt": { "$ref": "#/$defs/reviewReceipt" },
+          "packageRoot": { "$ref": "#/$defs/root" },
+          "expectedBundleRoot": { "$ref": "#/$defs/root" },
+          "expectedReportRoot": { "$ref": "#/$defs/root" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "counterevidenceRoots": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/root" } }
+  },
+  "$defs": {
+    "root": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "authorityReceipt": {
+      "type": "object",
+      "required": ["schemaVersion", "contract", "receiptId", "lifecyclePath", "transition", "previousStateRoot", "proposedStateRoot", "role", "decision", "actor", "claimBoundary"],
+      "properties": {
+        "schemaVersion": { "const": 1 },
+        "contract": { "const": "kfd.self-conformance-lifecycle-authority-receipt/v1" },
+        "receiptId": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+        "lifecyclePath": { "type": "string", "minLength": 1 },
+        "transition": { "type": "string", "minLength": 1 },
+        "previousStateRoot": { "$ref": "#/$defs/root" },
+        "proposedStateRoot": { "$ref": "#/$defs/root" },
+        "role": { "type": "string", "minLength": 1 },
+        "decision": { "type": "string", "minLength": 1 },
+        "actor": { "type": "string", "minLength": 1 },
+        "claimBoundary": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "reviewReceipt": {
+      "type": "object",
+      "required": ["schemaVersion", "contract", "receiptId", "transition", "previousStateRoot", "proposedStateRoot", "author", "reviewer", "independent", "verdict", "claimBoundary"],
+      "properties": {
+        "schemaVersion": { "const": 1 },
+        "contract": { "const": "kfd.self-conformance-lifecycle-review-receipt/v1" },
+        "receiptId": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+        "transition": { "type": "string", "minLength": 1 },
+        "previousStateRoot": { "$ref": "#/$defs/root" },
+        "proposedStateRoot": { "$ref": "#/$defs/root" },
+        "author": { "type": "string", "minLength": 1 },
+        "reviewer": { "type": "string", "minLength": 1 },
+        "independent": { "const": true },
+        "verdict": { "enum": ["approve", "revise", "reject"] },
+        "claimBoundary": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

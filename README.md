@@ -385,6 +385,7 @@ npx @kungfu-tech/kfd verify episode path/to/sealed/episode
 npx @kungfu-tech/kfd test agent-runtime --adapter path/to/adapter --output report.json
 npx @kungfu-tech/kfd verify agent-runtime-report report.json
 npx @kungfu-tech/kfd verify warrant-evidence profiles/warrant-evidence/fixtures/buildchain-dev-delivery-warrant.json --json
+npx @kungfu-tech/kfd gate self-conformance-lifecycle transition.request.json --output transition.report.json --json
 npx --yes --package @kungfu-tech/kfd@alpha kfd demo agent-hub --output agent-hub-demo-report.json
 npx --yes --package @kungfu-tech/kfd@alpha kfd capabilities agent-hub --json
 npx --yes --package @kungfu-tech/kfd@alpha kfd scaffold agent-hub --language python --output my-agent-hub-adapter
@@ -400,7 +401,9 @@ The generic verifier and Agent runtime verifier emit
 `kfd.agent-hub-report-verifier/v1`. All remain non-qualifying and perform no
 network access. Verification proves only the named profile checks; it does not
 prove source completeness, work quality, human approval, or release
-authorization. See
+authorization. The lifecycle gate additionally checks a complete predecessor
+chain and separate supplied authority/review receipts, but still performs no
+numbering, status, approval, merge, or release action. See
 [`docs/verifier.md`](docs/verifier.md) for the contracts and
 [`docs/verifier-inventory.md`](docs/verifier-inventory.md) for the extraction
 boundary and public-spec gaps. The separate JavaScript Warrant verifier and its

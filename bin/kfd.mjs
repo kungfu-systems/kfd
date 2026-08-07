@@ -20,6 +20,7 @@ function usage() {
   kfd verify agent-hub-report <report.json> [--adapter <path>] [--json]
   kfd verify warrant-evidence <bundle.json> [--json]
   kfd verify kfd-10-witness <witness.json> [--json]
+  kfd gate self-conformance-lifecycle <request.json> --output <report.json> [--json]
   kfd verify <kfd-record|passport|pack|atlas|episode|agent-runtime-report|self-conformance-transition|bundle> <path> [--schema <path>] [--json]
   kfd bundle <kfd-record|passport|pack|atlas|episode|agent-runtime-report|self-conformance-transition> <path> --output <bundle.json>`;
 }
@@ -194,6 +195,13 @@ async function main(args) {
       "../scripts/warrant-evidence-verifier.mjs"
     );
     process.exitCode = runWarrantWitnessVerifier(args.slice(2));
+    return;
+  }
+  if (args[0] === "gate" && args[1] === "self-conformance-lifecycle") {
+    const { runSelfConformanceLifecycleGate } = await import(
+      "../scripts/self-conformance-lifecycle-gate.mjs"
+    );
+    process.exitCode = runSelfConformanceLifecycleGate(args.slice(2));
     return;
   }
   if (args.length < 3) throw new Error("missing command, kind, or path");

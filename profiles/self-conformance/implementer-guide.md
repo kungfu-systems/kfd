@@ -48,6 +48,22 @@ inventory, canonical roots, package contents, and absence of forbidden
 dependencies. The independent verifier matrix is a separate executable check;
 neither check approves a lifecycle transition.
 
+For an official lifecycle transition, create a request conforming to
+`lifecycle-gate-request.schema.json`. Its `chain` begins at the packaged
+bootstrap anchor and contains every intervening bundle, independently computed
+report root, package root, authority receipt, and review receipt. Then run:
+
+```bash
+node bin/kfd.mjs gate self-conformance-lifecycle request.json \
+  --output report.json --json
+```
+
+The command invokes the package's independent WebAssembly verifier for every
+chain entry and separately checks governance-receipt roots and roles. Preserve
+the request and report together. An output path is create-only, so an earlier
+report cannot be silently overwritten; regenerate to a new path and review the
+root change instead.
+
 Never infer missing authority, review, evidence, gap, or predecessor data.
 Reject unknown versions and issue codes. Do not read `$HOME`, `.git`, private
 registries, environment credentials, or network resources. A fixture pass is
