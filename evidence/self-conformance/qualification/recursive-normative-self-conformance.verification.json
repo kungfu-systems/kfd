@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.recursive-normative-self-conformance-verification/v1",
+  "candidateId": "recursive-normative-self-conformance",
+  "profile": "kfd-self-conformance@1.0.0-alpha.1",
+  "assessmentRoot": "sha256:9781a8dd1abc44f28ad2c8091162b7ef300aec29144a06c8bae254b1ec6dccf5",
+  "counterevidenceRoot": "sha256:ea6b3c50588f2867527aad93469a7d5f5384c83b57e072c7348888380deacbb2",
+  "candidateRequestRoot": "sha256:4d00f631267f5cab971cf8dd3a035cb20955e333d6eddedf626ab2ade86e30f5",
+  "candidateReportRoot": "sha256:7071efef09ef04846dc4e6c2cc4eb2b38fe715032bc1b0f36ffc51e1b71533e2",
+  "replayClassifications": {
+    "historical-fact": 3,
+    "retrospective-reconstruction": 1,
+    "counterfactual-replay": 1
+  },
+  "redundancyOutcome": "no-new-kfd",
+  "checks": [
+    {
+      "id": "candidate-pre-number",
+      "status": "pass"
+    },
+    {
+      "id": "exact-genesis-inputs",
+      "status": "pass"
+    },
+    {
+      "id": "exact-redundancy-inputs",
+      "status": "pass"
+    },
+    {
+      "id": "historical-replay-coverage",
+      "status": "pass"
+    },
+    {
+      "id": "historical-non-retroactivity",
+      "status": "pass"
+    },
+    {
+      "id": "minimum-closure-deletion-fuse",
+      "status": "pass"
+    },
+    {
+      "id": "cross-domain-gap-retained",
+      "status": "pass"
+    },
+    {
+      "id": "candidate-lifecycle-reproduced",
+      "status": "pass"
+    },
+    {
+      "id": "authority-and-review-separated",
+      "status": "pass"
+    },
+    {
+      "id": "package-review-authority-claim-substitution-fail-closed",
+      "status": "pass"
+    }
+  ],
+  "cleanRoom": {
+    "input": "npm-package-files-only",
+    "offline": true,
+    "networkDependencies": [],
+    "ambientHomeDependencies": [],
+    "productCheckoutDependencies": []
+  },
+  "authority": {
+    "verifierNecessary": true,
+    "verifierSufficient": false,
+    "recommendationOnly": true,
+    "terminalDispositionRetained": false
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.recursive-normative-self-conformance-counterevidence/v1",
+  "candidateId": "recursive-normative-self-conformance",
+  "assessmentId": "recursive-normative-self-conformance-no-new-kfd-proposal",
+  "dispositionUnderTest": "no-new-kfd",
+  "retainedAgainstPromotion": [
+    {
+      "id": "derivable-minimum-closure",
+      "observation": "The minimum closure is expressible by KFD-1, KFD-2, KFD-5, KFD-11, and the fixed Profile without a new identity, boundary, authority, lifecycle, or operation."
+    },
+    {
+      "id": "deletion-preserves-observations",
+      "observation": "Removing the Candidate name leaves every bounded decision observation available through the existing closure."
+    },
+    {
+      "id": "fuse-preserves-role-separation",
+      "observation": "Fusing the procedure into existing responsibilities remains coherent when structural, review, disposition, admission, and release roles stay explicit."
+    },
+    {
+      "id": "cross-domain-transfer-absent",
+      "observation": "No independent non-KFD adopter demonstrates an irreducible recursive responsibility."
+    },
+    {
+      "id": "profile-is-not-authority",
+      "observation": "The Profile can reproduce structural reports but cannot select semantic truth or governance disposition."
+    }
+  ],
+  "conditionsThatWouldReopen": [
+    "A fixed-root decision observation changes when the Candidate is deleted while the existing closure remains available.",
+    "A non-KFD adopter demonstrates a recursive responsibility that cannot be represented by the existing closure.",
+    "Fuse testing reveals unavoidable authority ambiguity despite explicit role separation.",
+    "The fixed package fails to reject root, predecessor, review, authority, package, or claim-boundary substitution."
+  ],
+  "handling": "Retain this counterevidence with any no-new-kfd lifecycle request. A later reopening requires a new exact cut and cannot mutate this assessment.",
+  "claimBoundary": "Counterevidence prevents promotion-by-omission. It does not itself decide no-new-kfd or foreclose a later independently evidenced Candidate."
+}
