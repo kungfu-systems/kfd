@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-self-conformance/transition-report.schema.json",
+  "title": "KFD Self-Conformance transition report",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "contract",
+    "profile",
+    "bundleRoot",
+    "predecessorReportRoot",
+    "valid",
+    "expectedMatch",
+    "qualifying",
+    "selfCertified",
+    "semanticTruth",
+    "humanApproved",
+    "releaseAuthorized",
+    "adoptionProven",
+    "certified",
+    "offline",
+    "checks",
+    "issues"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "contract": { "const": "kfd.self-conformance-transition-report/v1" },
+    "profile": { "const": "kfd-self-conformance@1.0.0-alpha.1" },
+    "bundleRoot": { "$ref": "#/$defs/root" },
+    "predecessorReportRoot": { "oneOf": [{ "$ref": "#/$defs/root" }, { "type": "null" }] },
+    "valid": { "type": "boolean" },
+    "expectedMatch": { "type": "boolean" },
+    "qualifying": { "const": false },
+    "selfCertified": { "const": false },
+    "semanticTruth": { "const": false },
+    "humanApproved": { "const": false },
+    "releaseAuthorized": { "const": false },
+    "adoptionProven": { "const": false },
+    "certified": { "const": false },
+    "offline": { "const": true },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "status"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "status": { "enum": ["pass", "fail"] }
+        },
+        "additionalProperties": false
+      }
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["code", "path", "message"],
+        "properties": {
+          "code": { "type": "string", "pattern": "^scp-[a-z0-9]+(?:-[a-z0-9]+)*$" },
+          "path": { "type": "string" },
+          "message": { "type": "string", "minLength": 1 }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "$defs": {
+    "root": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+  },
+  "additionalProperties": false
+}

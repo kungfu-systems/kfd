@@ -62,7 +62,13 @@
         "agentRuntimeAdapterRequest": "https://kfd.libkungfu.dev/schemas/kfd-agent-runtime/adapter-request.schema.json",
         "agentRuntimeAdapterResponse": "https://kfd.libkungfu.dev/schemas/kfd-agent-runtime/adapter-response.schema.json",
         "agentRuntimeSuite": "https://kfd.libkungfu.dev/schemas/kfd-agent-runtime/suite.schema.json",
-        "agentRuntimeReport": "https://kfd.libkungfu.dev/schemas/kfd-agent-runtime/report.schema.json"
+        "agentRuntimeReport": "https://kfd.libkungfu.dev/schemas/kfd-agent-runtime/report.schema.json",
+        "selfConformanceState": "https://kfd.libkungfu.dev/schemas/kfd-self-conformance/state.schema.json",
+        "selfConformanceBootstrapAnchor": "https://kfd.libkungfu.dev/schemas/kfd-self-conformance/bootstrap-anchor.schema.json",
+        "selfConformanceTransitionBundle": "https://kfd.libkungfu.dev/schemas/kfd-self-conformance/transition-bundle.schema.json",
+        "selfConformanceTransitionReport": "https://kfd.libkungfu.dev/schemas/kfd-self-conformance/transition-report.schema.json",
+        "selfConformancePackageManifest": "https://kfd.libkungfu.dev/schemas/kfd-self-conformance/package-manifest.schema.json",
+        "selfConformanceVectorRegistry": "https://kfd.libkungfu.dev/schemas/kfd-self-conformance/vector-registry.schema.json"
       },
       "schemaPaths": {
         "metadata": "schemas/kfd-standards.schema.json",
@@ -84,7 +90,13 @@
         "agentRuntimeAdapterRequest": "schemas/kfd-agent-runtime/adapter-request.schema.json",
         "agentRuntimeAdapterResponse": "schemas/kfd-agent-runtime/adapter-response.schema.json",
         "agentRuntimeSuite": "schemas/kfd-agent-runtime/suite.schema.json",
-        "agentRuntimeReport": "schemas/kfd-agent-runtime/report.schema.json"
+        "agentRuntimeReport": "schemas/kfd-agent-runtime/report.schema.json",
+        "selfConformanceState": "schemas/kfd-self-conformance/state.schema.json",
+        "selfConformanceBootstrapAnchor": "schemas/kfd-self-conformance/bootstrap-anchor.schema.json",
+        "selfConformanceTransitionBundle": "schemas/kfd-self-conformance/transition-bundle.schema.json",
+        "selfConformanceTransitionReport": "schemas/kfd-self-conformance/transition-report.schema.json",
+        "selfConformancePackageManifest": "schemas/kfd-self-conformance/package-manifest.schema.json",
+        "selfConformanceVectorRegistry": "schemas/kfd-self-conformance/vector-registry.schema.json"
       },
       "interfaces": {
         "contractWorld": {
@@ -219,6 +231,48 @@
           "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-agent-runtime/report.schema.json",
           "schemaPath": "schemas/kfd-agent-runtime/report.schema.json",
           "compatibilityRule": "Changes to adapter identity, artifact/source binding, suite/profile roots, transcript/result roots, partition meaning, offline verification, qualification, or self-certification require a new report contract."
+        },
+        "selfConformanceState": {
+          "contract": "kfd.self-conformance-state/v1",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-self-conformance/state.schema.json",
+          "schemaPath": "schemas/kfd-self-conformance/state.schema.json",
+          "compatibilityRule": "Changes to required roots, transition meaning, canonicalization, issue meaning, recursion, or responsibility boundaries require a successor profile or explicit compatibility action."
+        },
+        "selfConformanceBootstrapAnchor": {
+          "contract": "kfd.self-conformance-bootstrap-anchor/v1",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-self-conformance/bootstrap-anchor.schema.json",
+          "schemaPath": "schemas/kfd-self-conformance/bootstrap-anchor.schema.json",
+          "compatibilityRule": "Changes to required roots, transition meaning, canonicalization, issue meaning, recursion, or responsibility boundaries require a successor profile or explicit compatibility action."
+        },
+        "selfConformanceTransitionBundle": {
+          "contract": "kfd.self-conformance-transition-bundle/v1",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-self-conformance/transition-bundle.schema.json",
+          "schemaPath": "schemas/kfd-self-conformance/transition-bundle.schema.json",
+          "compatibilityRule": "Changes to required roots, transition meaning, canonicalization, issue meaning, recursion, or responsibility boundaries require a successor profile or explicit compatibility action."
+        },
+        "selfConformanceTransitionReport": {
+          "contract": "kfd.self-conformance-transition-report/v1",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-self-conformance/transition-report.schema.json",
+          "schemaPath": "schemas/kfd-self-conformance/transition-report.schema.json",
+          "compatibilityRule": "Changes to required roots, transition meaning, canonicalization, issue meaning, recursion, or responsibility boundaries require a successor profile or explicit compatibility action."
+        },
+        "selfConformancePackageManifest": {
+          "contract": "kfd.self-conformance-package-manifest/v1",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-self-conformance/package-manifest.schema.json",
+          "schemaPath": "schemas/kfd-self-conformance/package-manifest.schema.json",
+          "compatibilityRule": "Changes to required roots, transition meaning, canonicalization, issue meaning, recursion, or responsibility boundaries require a successor profile or explicit compatibility action."
+        },
+        "selfConformanceVectorRegistry": {
+          "contract": "kfd.self-conformance-vector-registry/v1",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-self-conformance/vector-registry.schema.json",
+          "schemaPath": "schemas/kfd-self-conformance/vector-registry.schema.json",
+          "compatibilityRule": "Changes to required roots, transition meaning, canonicalization, issue meaning, recursion, or responsibility boundaries require a successor profile or explicit compatibility action."
         }
       },
       "concepts": {
@@ -255,7 +309,10 @@
         "runtimeVectorRegistry": "fixed rooted positive and negative runtime vector registry",
         "runtimeAdapter": "topology-neutral product-owned black-box adapter",
         "runtimeConformanceReport": "artifact-bound non-qualifying fixed-suite execution report",
-        "coreExperimentalPartition": "explicit separation of normative Core checks from non-normative Experimental checks"
+        "coreExperimentalPartition": "explicit separation of normative Core checks from non-normative Experimental checks",
+        "selfConformanceProfile": "KFD-owned finite structural proof contract for KFD lifecycle and package transitions",
+        "selfConformanceBootstrapAnchor": "reviewed predecessor package and state root that terminates recursive verification",
+        "selfConformanceTransitionBundle": "root-bound proposed KFD lifecycle transition with separate authority and review receipts"
       },
       "surfaceRegister": {
         "factSource": "standards.json#/standards/kfd-1/surfaceRegister",
@@ -273,7 +330,9 @@
           {
             "id": "kfd-agent-hub-conformance-authority",
             "class": "cross-time",
-            "classes": ["cross-time"],
+            "classes": [
+              "cross-time"
+            ],
             "description": "Published authority for the experimental adopter-facing Agent Hub conformance profile.",
             "sourcePath": "profiles/agent-hub/README.md",
             "weldRationale": "Adopters bind the fixed suite, adapter boundary, report claims, non-claims, and offline verification workflow to one public path.",
@@ -287,7 +346,10 @@
           {
             "id": "kfd-agent-hub-conformance-manifest",
             "class": "integration-time",
-            "classes": ["integration-time", "cross-time"],
+            "classes": [
+              "integration-time",
+              "cross-time"
+            ],
             "description": "Digest-bound manifest for the exact Agent Hub conformance profile and rooted public surfaces.",
             "sourcePath": "profiles/agent-hub/manifest.json",
             "weldRationale": "Runners, reports, and verifiers select one immutable profile closure rather than mutable package aliases.",
@@ -301,7 +363,10 @@
           {
             "id": "kfd-agent-hub-20-vector-registry",
             "class": "cross-time",
-            "classes": ["integration-time", "cross-time"],
+            "classes": [
+              "integration-time",
+              "cross-time"
+            ],
             "description": "Fixed rooted registry of 20 cross-Hub positive and negative conformance vectors.",
             "sourcePath": "profiles/agent-hub/vectors/hub-20.json",
             "weldRationale": "Adapters and retained reports bind exact vector IDs, scenarios, expected three-field outcomes, categories, and claims.",
@@ -315,7 +380,10 @@
           {
             "id": "kfd-agent-hub-conformance-report-schema",
             "class": "integration-time",
-            "classes": ["integration-time", "cross-time"],
+            "classes": [
+              "integration-time",
+              "cross-time"
+            ],
             "description": "Published JSON schema for package-, adapter-, capability-, suite-, and transcript-bound Agent Hub reports.",
             "sourcePath": "schemas/kfd-agent-hub/report.schema.json",
             "weldRationale": "Humans, agents, CI, and release systems receive exact roots, outcomes, residual risks, and non-certification boundaries.",
@@ -329,7 +397,9 @@
           {
             "id": "kfd-agent-hub-conformance-runner",
             "class": "integration-time",
-            "classes": ["integration-time"],
+            "classes": [
+              "integration-time"
+            ],
             "description": "Packaged offline runner for the kfd test agent-hub black-box command.",
             "sourcePath": "scripts/agent-hub-runner.mjs",
             "weldRationale": "Every adopter adapter receives the same handshake and 20 requests while caller working-directory, artifact hashing, transcript rooting, timeout, and output behavior remain auditable.",
@@ -343,7 +413,10 @@
           {
             "id": "kfd-agent-hub-conformance-report-verifier",
             "class": "integration-time",
-            "classes": ["integration-time", "cross-time"],
+            "classes": [
+              "integration-time",
+              "cross-time"
+            ],
             "description": "Independent packaged offline verifier for Agent Hub reports and fixed public roots.",
             "sourcePath": "scripts/agent-hub-report-verifier.mjs",
             "weldRationale": "Consumers fail closed on package, profile, protocol, vector, inventory, capability, adapter, response, transcript, result, and claim-scope drift without invoking Hub code or the network.",
@@ -357,7 +430,10 @@
           {
             "id": "kfd-agent-hub-cli-capabilities",
             "class": "integration-time",
-            "classes": ["integration-time", "cross-time"],
+            "classes": [
+              "integration-time",
+              "cross-time"
+            ],
             "description": "Machine-readable Agent Hub executable-onboarding commands, languages, exit codes, verifier boundary, claim boundary, and recovery.",
             "sourcePath": "profiles/agent-hub/cli-capabilities.json",
             "weldRationale": "Humans, agents, package consumers, and CI discover the same single-kfd demo, scaffold, test, and verification surfaces without inferring behavior from prose or package layout.",
@@ -371,7 +447,9 @@
           {
             "id": "kfd-agent-hub-scaffold-generator",
             "class": "integration-time",
-            "classes": ["integration-time"],
+            "classes": [
+              "integration-time"
+            ],
             "description": "Packaged fail-closed generator for C++, Node.js, Python, and Rust Agent Hub adapter starters.",
             "sourcePath": "scripts/agent-hub-scaffold.mjs",
             "weldRationale": "Generation uses rooted packaged templates, rejects existing destinations and symlink parents, and preserves the distinction between envelope smoke evidence and Hub 20 behavior evidence.",
@@ -2043,6 +2121,105 @@
               "none": "Changes outside the terminology contract do not change its registered vocabulary.",
               "unclassifiable": "If terminology impact cannot be classified, the dependent gate fails until the contract is repaired."
             }
+          },
+          {
+            "id": "kfd-self-conformance-authority",
+            "class": "cross-time",
+            "classes": [
+              "cross-time"
+            ],
+            "description": "Normative profile, state machine, recursion, and claim boundary.",
+            "sourcePath": "profiles/self-conformance/README.md",
+            "weldRationale": "Implementers, reports, lifecycle gates, and clean-room checks bind this exact versioned surface.",
+            "impactProjection": {
+              "breaking": "Incompatible changes require a successor Self-Conformance Profile or explicit compatibility action.",
+              "additive": "Backward-compatible additions must be declared and retain the exact prior profile closure.",
+              "none": "Changes outside this surface create no KFD-1 impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, repair the register before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-self-conformance-manifest",
+            "class": "integration-time",
+            "classes": [
+              "integration-time",
+              "cross-time"
+            ],
+            "description": "Digest-bound clean-room profile closure.",
+            "sourcePath": "profiles/self-conformance/manifest.json",
+            "weldRationale": "Implementers, reports, lifecycle gates, and clean-room checks bind this exact versioned surface.",
+            "impactProjection": {
+              "breaking": "Incompatible changes require a successor Self-Conformance Profile or explicit compatibility action.",
+              "additive": "Backward-compatible additions must be declared and retain the exact prior profile closure.",
+              "none": "Changes outside this surface create no KFD-1 impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, repair the register before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-self-conformance-transition-bundle",
+            "class": "integration-time",
+            "classes": [
+              "integration-time",
+              "cross-time"
+            ],
+            "description": "Machine contract for exact proposed transitions.",
+            "sourcePath": "schemas/kfd-self-conformance/transition-bundle.schema.json",
+            "weldRationale": "Implementers, reports, lifecycle gates, and clean-room checks bind this exact versioned surface.",
+            "impactProjection": {
+              "breaking": "Incompatible changes require a successor Self-Conformance Profile or explicit compatibility action.",
+              "additive": "Backward-compatible additions must be declared and retain the exact prior profile closure.",
+              "none": "Changes outside this surface create no KFD-1 impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, repair the register before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-self-conformance-transition-report",
+            "class": "cross-time",
+            "classes": [
+              "cross-time"
+            ],
+            "description": "Persisted non-authoritative verification result.",
+            "sourcePath": "schemas/kfd-self-conformance/transition-report.schema.json",
+            "weldRationale": "Implementers, reports, lifecycle gates, and clean-room checks bind this exact versioned surface.",
+            "impactProjection": {
+              "breaking": "Incompatible changes require a successor Self-Conformance Profile or explicit compatibility action.",
+              "additive": "Backward-compatible additions must be declared and retain the exact prior profile closure.",
+              "none": "Changes outside this surface create no KFD-1 impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, repair the register before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-self-conformance-bootstrap-anchor",
+            "class": "cross-time",
+            "classes": [
+              "cross-time"
+            ],
+            "description": "Reviewed finite predecessor for the first profile chain.",
+            "sourcePath": "profiles/self-conformance/bootstrap-anchor.json",
+            "weldRationale": "Implementers, reports, lifecycle gates, and clean-room checks bind this exact versioned surface.",
+            "impactProjection": {
+              "breaking": "Incompatible changes require a successor Self-Conformance Profile or explicit compatibility action.",
+              "additive": "Backward-compatible additions must be declared and retain the exact prior profile closure.",
+              "none": "Changes outside this surface create no KFD-1 impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, repair the register before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-self-conformance-contract-vectors",
+            "class": "integration-time",
+            "classes": [
+              "integration-time",
+              "cross-time"
+            ],
+            "description": "Fixed positive and fail-closed contract vectors.",
+            "sourcePath": "profiles/self-conformance/vectors/contract-vectors.json",
+            "weldRationale": "Implementers, reports, lifecycle gates, and clean-room checks bind this exact versioned surface.",
+            "impactProjection": {
+              "breaking": "Incompatible changes require a successor Self-Conformance Profile or explicit compatibility action.",
+              "additive": "Backward-compatible additions must be declared and retain the exact prior profile closure.",
+              "none": "Changes outside this surface create no KFD-1 impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, repair the register before the dependent gate may pass."
+            }
           }
         ]
       }
@@ -2757,7 +2934,7 @@
       "document": {
         "path": "decisions/KFD-11.md",
         "url": "https://kfd.libkungfu.dev/11",
-      "sha256": "68b56c111da243609db8f609b48b73331e0e52c16ee549e6f631ad7ddc09fe6c"
+        "sha256": "68b56c111da243609db8f609b48b73331e0e52c16ee549e6f631ad7ddc09fe6c"
       },
       "formalModel": {
         "path": "docs/KFD-11-formal.md",
