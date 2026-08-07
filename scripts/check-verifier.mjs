@@ -207,6 +207,7 @@ assert.doesNotMatch(
 const selfConformanceTemporary = fs.mkdtempSync(
   path.join(os.tmpdir(), "kfd-self-conformance-verifier-"),
 );
+let retainedCandidateParityCases = 0;
 try {
   for (const testCase of selfConformanceMatrix.cases) {
     let source;
@@ -262,6 +263,69 @@ try {
       );
     } else {
       assert.deepEqual(report.issues, [], `${testCase.id}: positive fixture emitted issues`);
+    }
+  }
+
+  const retainedCandidateRequestPath = path.join(
+    root,
+    "evidence/self-conformance/transitions/recursive-normative-self-conformance-genesis.request.json",
+  );
+  if (fs.existsSync(retainedCandidateRequestPath)) {
+    const retainedCandidateRequest = JSON.parse(fs.readFileSync(retainedCandidateRequestPath, "utf8"));
+    for (const [index, entry] of retainedCandidateRequest.chain.entries()) {
+      const fixturePath = path.join(selfConformanceTemporary, `retained-candidate-${index}.json`);
+      fs.writeFileSync(fixturePath, `${JSON.stringify(entry.bundle, null, 2)}\n`);
+      const native = run(
+        "cargo",
+        [...nativeArgs, "verify", "self-conformance-transition", fixturePath, "--json"],
+      );
+      const wasm = run(
+        "node",
+        ["bin/kfd.mjs", "verify", "self-conformance-transition", fixturePath, "--json"],
+      );
+      assert.equal(wasm, native, `retained Candidate ${index}: native and WASM reports differ`);
+      const report = JSON.parse(native);
+      assert.equal(report.valid, true);
+      assert.equal(report.qualifying, false);
+      assert.equal(report.selfCertified, false);
+      assert.equal(report.offline, true);
+      assert.equal(semanticRoot(report), entry.expectedReportRoot);
+      retainedCandidateParityCases += 1;
+
+      for (const mutation of [
+        {
+          id: "predecessor-root",
+          code: "scp-predecessor-root-mismatch",
+          apply(bundle) {
+            bundle.previousStateRoot = "sha256:0000000000000000000000000000000000000000000000000000000000000000";
+          },
+        },
+        {
+          id: "claim-overreach",
+          code: "scp-claim-overreach",
+          apply(bundle) {
+            bundle.claimBoundary = "This certifies semantic truth.";
+          },
+        },
+      ]) {
+        const mutated = structuredClone(entry.bundle);
+        mutation.apply(mutated);
+        const mutationPath = path.join(selfConformanceTemporary, `retained-candidate-${index}-${mutation.id}.json`);
+        fs.writeFileSync(mutationPath, `${JSON.stringify(mutated, null, 2)}\n`);
+        const nativeRejected = run(
+          "cargo",
+          [...nativeArgs, "verify", "self-conformance-transition", mutationPath, "--json"],
+          1,
+        );
+        const wasmRejected = run(
+          "node",
+          ["bin/kfd.mjs", "verify", "self-conformance-transition", mutationPath, "--json"],
+          1,
+        );
+        assert.equal(wasmRejected, nativeRejected, `retained Candidate ${mutation.id}: native and WASM rejections differ`);
+        assert.equal(JSON.parse(nativeRejected).issues.some(({ code }) => code === mutation.code), true);
+        retainedCandidateParityCases += 1;
+      }
     }
   }
 } finally {
@@ -510,5 +574,5 @@ assert.doesNotMatch(
   /\b(fetch|https?\.request)\s*\(/u,
 );
 console.log(
-  `check-verifier: ${cases.length} legacy parity fixtures, ${9 + rejectedKfdRecords.length} legacy adversarial rejections, and ${selfConformanceMatrix.cases.length} Self-Conformance native/WASM matrix cases ok`,
+  `check-verifier: ${cases.length} legacy parity fixtures, ${9 + rejectedKfdRecords.length} legacy adversarial rejections, ${selfConformanceMatrix.cases.length} Self-Conformance matrix cases, and ${retainedCandidateParityCases} retained Candidate native/WASM cases ok`,
 );

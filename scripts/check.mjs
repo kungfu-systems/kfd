@@ -3,6 +3,8 @@
 // its contents or versioning surface.
 import { readFileSync, existsSync, readdirSync } from "node:fs";
 import crypto from "node:crypto";
+import process from "node:process";
+import { spawnSync } from "node:child_process";
 import { generatedSiteBundle } from "./update-site-bundle.mjs";
 
 const fail = (msg) => { console.error(`check: ${msg}`); process.exitCode = 1; };
@@ -2602,6 +2604,20 @@ if (!Array.isArray(releaseImpact.surfaceImpacts) || releaseImpact.surfaceImpacts
   }
   for (const surfaceId of requiredSurfaces) {
     if (!seenSurfaces.has(surfaceId)) fail(`release-impact missing surface ${surfaceId}`);
+  }
+}
+
+const recursiveCandidateAssessment = "evidence/self-conformance/qualification/recursive-normative-self-conformance.assessment.json";
+if (existsSync(recursiveCandidateAssessment)) {
+  const candidateCheck = spawnSync(
+    process.execPath,
+    ["scripts/check-recursive-normative-self-conformance.mjs"],
+    { encoding: "utf8", env: { ...process.env, npm_config_offline: "true" } },
+  );
+  if (candidateCheck.status !== 0) {
+    fail(`recursive normative Self-Conformance check failed\n${candidateCheck.stdout}${candidateCheck.stderr}`);
+  } else if (!candidateCheck.stdout.includes("Recursive normative Self-Conformance check passed")) {
+    fail("recursive normative Self-Conformance check returned no success receipt");
   }
 }
 
