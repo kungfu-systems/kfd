@@ -82,8 +82,23 @@ able to reproduce every decision-relevant observation, while adding the
 Candidate only names their composition rather than a new identity, boundary,
 authority, lifecycle, or operation.
 
+## Terminal disposition
+
+The exact assessment cut at
+`5791476b226b0ce26f98538704e71f7e29e04956` satisfied that condition.
+Independent review `PRR_kwDOTLH7GM8AAAABIy0qZA` accepted `no-new-kfd`: the
+procedure remains useful as an explicit composition, but it adds no irreducible
+identity, boundary, authority, lifecycle, or operation. The retained terminal
+Profile report is a non-promotion outcome and does not allocate a number.
+
+The Candidate registry records `merged` to preserve this lineage. Here,
+`merged` means merged into the existing normative closure, not merged Git state,
+activation, publication, or release. Reopening requires a new exact evidence
+cut satisfying one of the retained counterconditions.
+
 ## Claim boundary
 
-This Candidate has no number and no active status. It does not amend existing
+This Candidate has no number and no active status. Its `no-new-kfd` disposition
+does not amend existing
 KFD text, reinterpret historical releases, certify the Self-Conformance
 Profile, approve its own evidence, or authorize promotion, merge, or release.
