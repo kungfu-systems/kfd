@@ -89,7 +89,7 @@ const impactEntry = {
   id: "kfd-self-conformance-profile-v1",
   impact: "minor",
   class: "additive",
-  rationale: "KFD additively publishes the versioned kfd-self-conformance 1.0.0-alpha.1 profile, finite predecessor/bootstrap rules, state and transition schemas, stable issue namespace, canonical positive and negative vectors, clean-room package manifest, and explicit non-authority boundaries without changing any Candidate number or decision status."
+  rationale: "KFD additively publishes the versioned kfd-self-conformance 1.0.0-alpha.1 profile, finite predecessor/bootstrap rules, state and transition schemas, stable issue namespace, canonical contract vectors, an independent native/WebAssembly verifier matrix, clean-room package closure, and explicit non-authority boundaries without changing any Candidate number or decision status."
 };
 impact.surfaceImpacts = impact.surfaceImpacts.filter(({ id }) => id !== impactEntry.id);
 impact.surfaceImpacts.push(impactEntry);
@@ -102,6 +102,7 @@ packageJson.exports["./self-conformance/bootstrap-anchor.json"] = "./profiles/se
 packageJson.exports["./self-conformance/issue-codes.json"] = "./profiles/self-conformance/issue-codes.json";
 packageJson.exports["./self-conformance/vectors.json"] = "./profiles/self-conformance/vectors/contract-vectors.json";
 packageJson.exports["./self-conformance/schemas/*"] = "./schemas/kfd-self-conformance/*";
+packageJson.exports["./self-conformance/verifier-matrix.json"] = "./verifier/specs/self-conformance-matrix.json";
 packageJson.scripts["check:self-conformance-profile"] = "node scripts/check-self-conformance-profile.mjs";
 packageJson.scripts.check = "node scripts/check.mjs && npm run check:warrant-evidence && npm run check:agent-hub && npm run check:agent-hub-conformance && npm run check:agent-runtime && npm run check:self-conformance-profile && npm run check:verifier";
 writeJson(packagePath, packageJson);
@@ -146,7 +147,9 @@ const registered = [
   ["kfd-self-conformance-transition-bundle", "integration-time", "schemas/kfd-self-conformance/transition-bundle.schema.json", "Machine contract for exact proposed transitions."],
   ["kfd-self-conformance-transition-report", "cross-time", "schemas/kfd-self-conformance/transition-report.schema.json", "Persisted non-authoritative verification result."],
   ["kfd-self-conformance-bootstrap-anchor", "cross-time", "profiles/self-conformance/bootstrap-anchor.json", "Reviewed finite predecessor for the first profile chain."],
-  ["kfd-self-conformance-contract-vectors", "integration-time", "profiles/self-conformance/vectors/contract-vectors.json", "Fixed positive and fail-closed contract vectors."]
+  ["kfd-self-conformance-contract-vectors", "integration-time", "profiles/self-conformance/vectors/contract-vectors.json", "Fixed positive and fail-closed contract vectors."],
+  ["kfd-self-conformance-verifier", "integration-time", "verifier/crates/core/src/profiles/self_conformance_transition.rs", "Independent fail-closed Rust verifier shared by native and WebAssembly projections."],
+  ["kfd-self-conformance-verifier-matrix", "integration-time", "verifier/specs/self-conformance-matrix.json", "Invariant-to-case map, adversarial mutations, and protocol failure history."]
 ].map(([id, klass, sourcePath, description]) => ({
   id,
   class: klass,

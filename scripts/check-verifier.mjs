@@ -5,6 +5,7 @@ import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
+import { applyOperations, semanticRoot } from "./self-conformance-contract.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const verifier = path.join(root, "verifier");
@@ -139,6 +140,132 @@ for (const fixture of rejectedKfdRecords) {
   if (fixture.endsWith("invalid-lower-level-escalation.json")) {
     assert.equal(issueKeys.has("schema-const:/gates/kfd12/operationalEvidence"), true, "structural conformance must not auto-escalate to activation pass");
   }
+}
+
+const selfConformanceMatrix = JSON.parse(
+  fs.readFileSync(path.join(verifier, "specs", "self-conformance-matrix.json"), "utf8"),
+);
+const selfConformanceVectors = JSON.parse(
+  fs.readFileSync(
+    path.join(root, "profiles", "self-conformance", "vectors", "contract-vectors.json"),
+    "utf8",
+  ),
+);
+const selfConformanceIssues = new Set(
+  JSON.parse(
+    fs.readFileSync(path.join(root, "profiles", "self-conformance", "issue-codes.json"), "utf8"),
+  ).codes,
+);
+const reportPredecessorFixture = JSON.parse(
+  fs.readFileSync(
+    path.join(verifier, "fixtures", "self-conformance", "valid-report-predecessor.json"),
+    "utf8",
+  ),
+);
+assert.equal(selfConformanceMatrix.contract, "kfd.self-conformance-verifier-matrix/v1");
+assert.equal(selfConformanceMatrix.profile, "kfd-self-conformance@1.0.0-alpha.1");
+const matrixCases = new Map(selfConformanceMatrix.cases.map((testCase) => [testCase.id, testCase]));
+assert.equal(matrixCases.size, selfConformanceMatrix.cases.length, "matrix case IDs must be unique");
+for (const invariant of selfConformanceMatrix.invariants) {
+  assert.ok(invariant.positiveCases.length > 0, `${invariant.id} needs a positive case`);
+  assert.ok(invariant.failureCases.length > 0, `${invariant.id} needs a failure case`);
+  assert.ok(invariant.issueCodes.length > 0, `${invariant.id} needs a stable issue code`);
+  for (const id of [...invariant.positiveCases, ...invariant.failureCases]) {
+    assert.ok(matrixCases.has(id), `${invariant.id} references unknown case ${id}`);
+  }
+  for (const code of invariant.issueCodes) {
+    assert.ok(selfConformanceIssues.has(code), `${invariant.id} references unpublished issue ${code}`);
+  }
+}
+for (const category of [
+  "missing",
+  "malformed",
+  "stale",
+  "conflicting",
+  "reordered",
+  "substituted",
+  "circular",
+  "self-containing",
+  "wrong-predecessor",
+  "wrong-authority",
+  "review-gap",
+  "claim-overreach",
+]) {
+  assert.ok(
+    selfConformanceMatrix.cases.some((testCase) => testCase.category === category),
+    `matrix is missing ${category} coverage`,
+  );
+}
+const historyCases = selfConformanceMatrix.cases.filter(({ history }) => history);
+assert.ok(historyCases.length >= 4, "failure history must remain first-class");
+assert.doesNotMatch(
+  JSON.stringify(historyCases),
+  /kungfu|buildchain|kfx|agent[- ]hub|adopter[- ]specific/iu,
+  "failure history must not promote adopter-specific behavior",
+);
+
+const selfConformanceTemporary = fs.mkdtempSync(
+  path.join(os.tmpdir(), "kfd-self-conformance-verifier-"),
+);
+try {
+  for (const testCase of selfConformanceMatrix.cases) {
+    let source;
+    if (testCase.fixture === "raw") {
+      source = testCase.raw;
+    } else {
+      const base = testCase.fixture === "valid-report-predecessor"
+        ? reportPredecessorFixture
+        : selfConformanceVectors.base.bundle;
+      source = `${JSON.stringify(applyOperations(base, testCase.operations), null, 2)}\n`;
+    }
+    const fixturePath = path.join(selfConformanceTemporary, `${testCase.id}.json`);
+    fs.writeFileSync(fixturePath, source);
+    const expectedExit = testCase.expected.valid ? 0 : 1;
+    const native = run(
+      "cargo",
+      [...nativeArgs, "verify", "self-conformance-transition", fixturePath, "--json"],
+      expectedExit,
+    );
+    const wasm = run(
+      "node",
+      ["bin/kfd.mjs", "verify", "self-conformance-transition", fixturePath, "--json"],
+      expectedExit,
+    );
+    assert.equal(wasm, native, `${testCase.id}: native and WASM reports differ`);
+    const report = JSON.parse(native);
+    assert.equal(report.valid, testCase.expected.valid, `${testCase.id}: validity drifted`);
+    assert.equal(report.qualifying, false, `${testCase.id}: verifier must not qualify`);
+    assert.equal(report.selfCertified, false, `${testCase.id}: verifier must not self-certify`);
+    assert.equal(report.offline, true, `${testCase.id}: verifier must remain offline`);
+    assert.deepEqual(
+      report.checks.map(({ id }) => id),
+      [...report.checks.map(({ id }) => id)].sort(),
+      `${testCase.id}: checks must be sorted by ID`,
+    );
+    assert.deepEqual(
+      report.issues,
+      [...report.issues].sort((left, right) =>
+        [left.code, left.path, left.message].join("\0")
+          .localeCompare([right.code, right.path, right.message].join("\0"), "en")),
+      `${testCase.id}: issues must be sorted by code, path, and message`,
+    );
+    const reportRoot = semanticRoot(report);
+    assert.equal(reportRoot, semanticRoot(JSON.parse(wasm)), `${testCase.id}: report roots differ`);
+    if (testCase.expected.code) {
+      assert.ok(
+        report.issues.some(({ code }) => code === testCase.expected.code),
+        `${testCase.id}: expected issue ${testCase.expected.code}, got ${JSON.stringify(report.issues)}`,
+      );
+      assert.ok(
+        report.issues.every(({ code }) => selfConformanceIssues.has(code)),
+        `${testCase.id}: report used an unpublished issue code`,
+      );
+    } else {
+      assert.deepEqual(report.issues, [], `${testCase.id}: positive fixture emitted issues`);
+    }
+  }
+} finally {
+  fs.rmSync(selfConformanceTemporary, { recursive: true, force: true });
 }
 
 const generatedPack = JSON.parse(
@@ -382,4 +509,6 @@ assert.doesNotMatch(
   fs.readFileSync(path.join(root, "bin", "kfd.mjs"), "utf8"),
   /\b(fetch|https?\.request)\s*\(/u,
 );
-console.log(`check-verifier: ${cases.length} native/WASM parity fixtures and ${9 + rejectedKfdRecords.length} adversarial rejections ok`);
+console.log(
+  `check-verifier: ${cases.length} legacy parity fixtures, ${9 + rejectedKfdRecords.length} legacy adversarial rejections, and ${selfConformanceMatrix.cases.length} Self-Conformance native/WASM matrix cases ok`,
+);
