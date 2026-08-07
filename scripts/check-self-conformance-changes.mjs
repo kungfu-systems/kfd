@@ -64,9 +64,19 @@ function discoverChangedPaths() {
     encoding: "utf8",
   });
   if (resolved.status !== 0) {
-    throw new Error(`Self-Conformance change gate cannot resolve ${reference}; provide full base history or KFD_SELF_CONFORMANCE_CHANGED_PATHS`);
+    const sourceSha = process.env.BUILDCHAIN_SOURCE_SHA || "";
+    const sourceTree = process.env.BUILDCHAIN_SOURCE_TREE_SHA || "";
+    const currentSha = git(["rev-parse", "HEAD"]).trim();
+    const currentTree = git(["rev-parse", "HEAD^{tree}"]).trim();
+    if (sourceSha !== currentSha || sourceTree !== currentTree) {
+      throw new Error(
+        `Self-Conformance change gate cannot resolve ${reference}; provide full base history, exact Buildchain source SHA/tree, or KFD_SELF_CONFORMANCE_CHANGED_PATHS`,
+      );
+    }
+    return { mode: "exact-build-replay", paths: [] };
   }
   return {
+    mode: "changed-paths",
     paths: git(["diff", "--name-only", `${reference}...HEAD`]).trim().split("\n").filter(Boolean),
   };
 }
@@ -115,7 +125,7 @@ function main() {
     afterRegistry,
   });
   const retained = checkRetainedLifecycleEvidence(required);
-  console.log(`Self-Conformance change gate passed: required=${required.join(",") || "none"}; retained=${retained.count}`);
+  console.log(`Self-Conformance change gate passed: required=${required.join(",") || "none"}; retained=${retained.count}; mode=${discovery.mode || "explicit-paths"}`);
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main();
