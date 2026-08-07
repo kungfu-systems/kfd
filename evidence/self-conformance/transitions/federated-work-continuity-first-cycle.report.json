@@ -1,0 +1,146 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.self-conformance-lifecycle-gate-report/v1",
+  "profile": "kfd-self-conformance@1.0.0-alpha.1",
+  "gateId": "federated-work-continuity-first-cycle",
+  "lifecyclePath": "qualification",
+  "requestRoot": "sha256:3a64419e36931fae26cff2963c6ce8e83e31c60c180ea068ac85df778bc59b16",
+  "fixedPackageRoot": "sha256:596a1e4b0d57e93fefcb4f32ff2df5be35a56cf86fb8864f5d0ab09b12cd8770",
+  "terminalBundleRoot": "sha256:b71d9e7103872bbca4d380fae15b4da3f296a1b480c3da5cfcc5733c59616de7",
+  "terminalReportRoot": "sha256:0fb85f2dbd11dba10648bbc85a7f8a563674d4b18c6d6dfe452c6db80b40d9bb",
+  "valid": true,
+  "outcome": "non-promotion",
+  "transitionAdmissible": false,
+  "automaticTransition": false,
+  "verifierNecessary": true,
+  "verifierSufficient": false,
+  "humanApproved": false,
+  "releaseAuthorized": false,
+  "numberAllocated": false,
+  "statusChanged": false,
+  "chain": [
+    {
+      "index": 0,
+      "transition": "candidate-genesis",
+      "bundleRoot": "sha256:6019c78012f5c7b58fdaa0c43f3f688228226b124f37cfdb7c9898a7edec1ebd",
+      "reportRoot": "sha256:0fb85f2dbd11dba10648bbc85a7f8a563674d4b18c6d6dfe452c6db80b40d9bb",
+      "packageRoot": "sha256:596a1e4b0d57e93fefcb4f32ff2df5be35a56cf86fb8864f5d0ab09b12cd8770",
+      "authorityReceiptRoot": "sha256:01f45c5b3e27e5dc889cfd234fe496923fa929faf6ceb60af969d14a2f811f36",
+      "reviewReceiptRoot": "sha256:44a769c62376e0e6d9276f114ef4e31d5b92c8e476603ebd27e5af1ad1e394cf",
+      "verifierValid": true
+    },
+    {
+      "index": 1,
+      "transition": "provisional-retention",
+      "bundleRoot": "sha256:b71d9e7103872bbca4d380fae15b4da3f296a1b480c3da5cfcc5733c59616de7",
+      "reportRoot": "sha256:0fb85f2dbd11dba10648bbc85a7f8a563674d4b18c6d6dfe452c6db80b40d9bb",
+      "packageRoot": "sha256:596a1e4b0d57e93fefcb4f32ff2df5be35a56cf86fb8864f5d0ab09b12cd8770",
+      "authorityReceiptRoot": "sha256:77334972b826dfa91804335c36f5e6b96888c2d9b58cc3de62bd1e4f680471ef",
+      "reviewReceiptRoot": "sha256:e82e774d31ec9ef447334130addba71492f7c34cfc5614427d54cc7abd88ceef",
+      "verifierValid": true
+    }
+  ],
+  "counterevidenceRoots": [
+    "sha256:27cbbc8d476f8063f43a713cfd390efad27753ea4001e4ca0121967050dd9bbe"
+  ],
+  "checks": [
+    {
+      "id": "authority-receipt-contract",
+      "status": "pass"
+    },
+    {
+      "id": "authority-receipt-coordinates",
+      "status": "pass"
+    },
+    {
+      "id": "authority-receipt-root",
+      "status": "pass"
+    },
+    {
+      "id": "authority-role",
+      "status": "pass"
+    },
+    {
+      "id": "bootstrap-anchor",
+      "status": "pass"
+    },
+    {
+      "id": "chain-entry-contract",
+      "status": "pass"
+    },
+    {
+      "id": "counterevidence-roots",
+      "status": "pass"
+    },
+    {
+      "id": "entry-package-root",
+      "status": "pass"
+    },
+    {
+      "id": "exact-bundle-roots",
+      "status": "pass"
+    },
+    {
+      "id": "exact-report-roots",
+      "status": "pass"
+    },
+    {
+      "id": "exact-verifier-root",
+      "status": "pass"
+    },
+    {
+      "id": "fixed-package-root",
+      "status": "pass"
+    },
+    {
+      "id": "independent-review-receipt",
+      "status": "pass"
+    },
+    {
+      "id": "independent-transition-verifier",
+      "status": "pass"
+    },
+    {
+      "id": "lifecycle-path",
+      "status": "pass"
+    },
+    {
+      "id": "path-transition",
+      "status": "pass"
+    },
+    {
+      "id": "predecessor-roots",
+      "status": "pass"
+    },
+    {
+      "id": "predecessor-state",
+      "status": "pass"
+    },
+    {
+      "id": "request-contract",
+      "status": "pass"
+    },
+    {
+      "id": "review-receipt-contract",
+      "status": "pass"
+    },
+    {
+      "id": "review-receipt-coordinates",
+      "status": "pass"
+    },
+    {
+      "id": "review-receipt-root",
+      "status": "pass"
+    },
+    {
+      "id": "terminal-bundle-root",
+      "status": "pass"
+    },
+    {
+      "id": "transition-chain",
+      "status": "pass"
+    }
+  ],
+  "issues": [],
+  "offline": true
+}
