@@ -32,6 +32,7 @@ kfd verify pack <file-or-directory> [--json]
 kfd verify atlas <file-or-directory> [--json]
 kfd verify episode <directory> [--json]
 kfd verify agent-runtime-report <report.json> [--json]
+kfd verify self-conformance-transition <transition-bundle.json> [--json]
 kfd bundle <kind> <file-or-directory> --output <bundle.json>
 kfd verify bundle <bundle.json> [--json]
 ```
@@ -187,6 +188,28 @@ incomplete results, placeholder source commits, or stronger claim flags fail
 closed. Verification does not attest that the recorded process execution
 occurred; it proves the retained report is closed under the packaged profile
 and roots.
+
+### KFD Self-Conformance transition
+
+The `kfd.self-conformance-transition/v1` profile independently verifies the
+published `kfd-self-conformance@1.0.0-alpha.1` transition contract:
+
+- strict canonical JSON, closed bundle/state fields, and exact profile version;
+- recomputed previous/proposed state roots and the packaged schema-set root;
+- sorted, unique evidence, gap, and immutable-coordinate sets;
+- separate verifier, authority, review, evidence, and predecessor root roles;
+- the exact reviewed bootstrap anchor or a finite report/package predecessor;
+- non-self-containing and non-circular root preimages;
+- the closed transition table, subject/publication preservation, explicit gaps,
+  bounded claims, and expected-result agreement.
+
+The fixed machine matrix covers positive bootstrap and report-predecessor
+chains plus missing, malformed, stale, conflicting, reordered, substituted,
+circular, self-containing, wrong-predecessor, wrong-authority, review-gap, and
+claim-overreach failures. Historical regressions remain protocol fixtures and
+do not import adopter behavior. A pass remains structural, non-qualifying,
+non-self-certified, offline, and insufficient for any governance or release
+decision.
 
 ### KFD Agent Hub report
 

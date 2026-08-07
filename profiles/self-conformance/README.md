@@ -43,6 +43,12 @@ The profile has five load-bearing object kinds:
 Every object uses `schemaVersion: 1` and an exact `contract` string. Unknown
 versions, fields, transitions, issue codes, or root algorithms fail closed.
 
+The independent Rust/WebAssembly projection is selected with
+`self-conformance-transition`. It implements the published contract directly;
+it does not call the JavaScript contract check or any product runtime. Its
+machine-readable invariant map and adversarial cases are fixed in
+`verifier/specs/self-conformance-matrix.json`.
+
 ## Canonical roots and the recursion boundary
 
 All semantic roots use `sha256-kfd-canonical-json-v1`:
@@ -164,6 +170,12 @@ The stable issue namespace is published in
 issues, but canonical reports order issues by `code`, then `path`, then
 `message`. Unknown failures use `scp-contract-invalid`; they must never be
 treated as success or silently ignored.
+
+Set-like arrays are strictly UTF-8 sorted and unique. Roots assigned to
+evidence, verifier, authority, review, predecessor report, and predecessor
+package roles may not collapse into one another. These checks expose
+`scp-set-order-invalid`, `scp-root-substitution`, and `scp-root-conflict`
+without interpreting the semantic content of an authority or review receipt.
 
 ## Fixed package and versioning
 

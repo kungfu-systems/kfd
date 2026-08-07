@@ -1,0 +1,389 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.self-conformance-verifier-matrix/v1",
+  "profile": "kfd-self-conformance@1.0.0-alpha.1",
+  "claimBoundary": "This matrix tests only fixed structural and cryptographic invariants. Historical cases preserve protocol regressions without importing adopter-specific semantics, and a pass does not qualify, certify, approve, promote, or authorize a release.",
+  "invariants": [
+    {
+      "id": "canonical-json-domain",
+      "positiveCases": ["matrix-positive-bootstrap", "matrix-positive-report-predecessor"],
+      "failureCases": ["history-duplicate-json-key", "matrix-malformed-root"],
+      "issueCodes": ["scp-contract-invalid"]
+    },
+    {
+      "id": "closed-bundle-contract",
+      "positiveCases": ["matrix-positive-bootstrap"],
+      "failureCases": ["matrix-unknown-field", "matrix-contract-substitution"],
+      "issueCodes": ["scp-contract-invalid"]
+    },
+    {
+      "id": "exact-profile-version",
+      "positiveCases": ["matrix-positive-bootstrap"],
+      "failureCases": ["matrix-profile-version"],
+      "issueCodes": ["scp-profile-version-unsupported"]
+    },
+    {
+      "id": "evidence-root-closure",
+      "positiveCases": ["matrix-positive-bootstrap"],
+      "failureCases": ["matrix-evidence-missing", "matrix-malformed-root"],
+      "issueCodes": ["scp-evidence-roots-missing", "scp-contract-invalid"]
+    },
+    {
+      "id": "state-root-binding",
+      "positiveCases": ["matrix-positive-bootstrap", "matrix-positive-report-predecessor"],
+      "failureCases": ["history-stale-predecessor-root", "matrix-stale-proposed-root"],
+      "issueCodes": ["scp-predecessor-root-mismatch", "scp-proposed-root-mismatch"]
+    },
+    {
+      "id": "schema-and-verifier-binding",
+      "positiveCases": ["matrix-positive-bootstrap"],
+      "failureCases": ["matrix-schema-substitution", "matrix-verifier-missing"],
+      "issueCodes": ["scp-schema-set-root-mismatch", "scp-verifier-root-missing"]
+    },
+    {
+      "id": "set-order-and-uniqueness",
+      "positiveCases": ["matrix-positive-bootstrap"],
+      "failureCases": ["matrix-reordered-evidence", "matrix-duplicate-evidence", "matrix-reordered-known-gaps"],
+      "issueCodes": ["scp-set-order-invalid"]
+    },
+    {
+      "id": "authority-review-separation",
+      "positiveCases": ["matrix-positive-bootstrap"],
+      "failureCases": ["matrix-wrong-authority", "matrix-review-gap", "history-authority-review-collapse"],
+      "issueCodes": ["scp-authority-receipt-missing", "scp-review-receipt-missing", "scp-root-substitution"]
+    },
+    {
+      "id": "explicit-bounded-claims",
+      "positiveCases": ["matrix-positive-bootstrap"],
+      "failureCases": ["matrix-claim-missing", "matrix-claim-overreach"],
+      "issueCodes": ["scp-claim-boundary-missing", "scp-claim-overreach"]
+    },
+    {
+      "id": "finite-predecessor-chain",
+      "positiveCases": ["matrix-positive-bootstrap", "matrix-positive-report-predecessor"],
+      "failureCases": ["matrix-wrong-bootstrap", "matrix-wrong-predecessor", "matrix-conflicting-predecessor", "matrix-circular-predecessor"],
+      "issueCodes": ["scp-bootstrap-anchor-invalid", "scp-predecessor-root-mismatch", "scp-root-conflict"]
+    },
+    {
+      "id": "non-self-containing-preimage",
+      "positiveCases": ["matrix-positive-bootstrap"],
+      "failureCases": ["history-current-report-self-reference", "matrix-current-package-self-reference"],
+      "issueCodes": ["scp-self-containing-report", "scp-self-containing-package"]
+    },
+    {
+      "id": "transition-state-table",
+      "positiveCases": ["matrix-positive-bootstrap", "matrix-positive-report-predecessor"],
+      "failureCases": ["matrix-unknown-transition", "matrix-root-consistent-state-jump", "matrix-substituted-subject"],
+      "issueCodes": ["scp-transition-unsupported", "scp-transition-state-invalid"]
+    },
+    {
+      "id": "expected-result-agreement",
+      "positiveCases": ["matrix-positive-bootstrap"],
+      "failureCases": ["matrix-expected-fail"],
+      "issueCodes": ["scp-expected-result-mismatch"]
+    },
+    {
+      "id": "explicit-gaps-and-coordinates",
+      "positiveCases": ["matrix-positive-bootstrap"],
+      "failureCases": ["matrix-known-gaps-missing", "matrix-coordinate-missing"],
+      "issueCodes": ["scp-known-gaps-missing", "scp-immutable-coordinate-missing"]
+    }
+  ],
+  "cases": [
+    {
+      "id": "matrix-positive-bootstrap",
+      "invariant": "all",
+      "category": "positive-bootstrap",
+      "fixture": "contract-base",
+      "history": false,
+      "operations": [],
+      "expected": { "valid": true, "code": null }
+    },
+    {
+      "id": "matrix-positive-report-predecessor",
+      "invariant": "finite-predecessor-chain",
+      "category": "positive-cross-version",
+      "fixture": "valid-report-predecessor",
+      "history": false,
+      "operations": [],
+      "expected": { "valid": true, "code": null }
+    },
+    {
+      "id": "history-duplicate-json-key",
+      "invariant": "canonical-json-domain",
+      "category": "malformed",
+      "fixture": "raw",
+      "history": true,
+      "raw": "{\"schemaVersion\":1,\"schemaVersion\":1}",
+      "operations": [],
+      "expected": { "valid": false, "code": "scp-contract-invalid" }
+    },
+    {
+      "id": "matrix-unknown-field",
+      "invariant": "closed-bundle-contract",
+      "category": "malformed",
+      "fixture": "contract-base",
+      "history": false,
+      "operations": [{ "op": "add", "path": "/undeclared", "value": true }],
+      "expected": { "valid": false, "code": "scp-contract-invalid" }
+    },
+    {
+      "id": "matrix-contract-substitution",
+      "invariant": "closed-bundle-contract",
+      "category": "substituted",
+      "fixture": "contract-base",
+      "history": false,
+      "operations": [{ "op": "replace", "path": "/contract", "value": "kfd.self-conformance-transition-bundle/v2" }],
+      "expected": { "valid": false, "code": "scp-contract-invalid" }
+    },
+    {
+      "id": "matrix-profile-version",
+      "invariant": "exact-profile-version",
+      "category": "cross-version",
+      "fixture": "contract-base",
+      "history": false,
+      "operations": [{ "op": "replace", "path": "/profile", "value": "kfd-self-conformance@2" }],
+      "expected": { "valid": false, "code": "scp-profile-version-unsupported" }
+    },
+    {
+      "id": "matrix-evidence-missing",
+      "invariant": "evidence-root-closure",
+      "category": "missing",
+      "fixture": "contract-base",
+      "history": false,
+      "operations": [{ "op": "remove", "path": "/evidenceRoots" }],
+      "expected": { "valid": false, "code": "scp-evidence-roots-missing" }
+    },
+    {
+      "id": "matrix-malformed-root",
+      "invariant": "evidence-root-closure",
+      "category": "malformed",
+      "fixture": "contract-base",
+      "history": false,
+      "operations": [{ "op": "replace", "path": "/evidenceRoots/0", "value": "sha256:not-a-root" }],
+      "expected": { "valid": false, "code": "scp-contract-invalid" }
+    },
+    {
+      "id": "history-stale-predecessor-root",
+      "invariant": "state-root-binding",
+      "category": "stale",
+      "fixture": "contract-base",
+      "history": true,
+      "operations": [{ "op": "replace", "path": "/previousStateRoot", "value": "sha256:2222222222222222222222222222222222222222222222222222222222222222" }],
+      "expected": { "valid": false, "code": "scp-predecessor-root-mismatch" }
+    },
+    {
+      "id": "matrix-stale-proposed-root",
+      "invariant": "state-root-binding",
+      "category": "stale",
+      "fixture": "contract-base",
+      "history": false,
+      "operations": [{ "op": "replace", "path": "/proposedStateRoot", "value": "sha256:2222222222222222222222222222222222222222222222222222222222222222" }],
+      "expected": { "valid": false, "code": "scp-proposed-root-mismatch" }
+    },
+    {
+      "id": "matrix-schema-substitution",
+      "invariant": "schema-and-verifier-binding",
+      "category": "substituted",
+      "fixture": "contract-base",
+      "history": false,
+      "operations": [{ "op": "replace", "path": "/schemaSetRoot", "value": "sha256:5555555555555555555555555555555555555555555555555555555555555555" }],
+      "expected": { "valid": false, "code": "scp-schema-set-root-mismatch" }
+    },
+    {
+      "id": "matrix-verifier-missing",
+      "invariant": "schema-and-verifier-binding",
+      "category": "missing",
+      "fixture": "contract-base",
+      "history": false,
+      "operations": [{ "op": "remove", "path": "/verifierRoot" }],
+      "expected": { "valid": false, "code": "scp-verifier-root-missing" }
+    },
+    {
+      "id": "matrix-reordered-evidence",
+      "invariant": "set-order-and-uniqueness",
+      "category": "reordered",
+      "fixture": "contract-base",
+      "history": false,
+      "operations": [{ "op": "replace", "path": "/evidenceRoots", "value": ["sha256:b5ab736d335f4dbf791a5e81f611940886f96a35bb9d1e4df7e77ba28497cd81", "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"] }],
+      "expected": { "valid": false, "code": "scp-set-order-invalid" }
+    },
+    {
+      "id": "matrix-duplicate-evidence",
+      "invariant": "set-order-and-uniqueness",
+      "category": "conflicting",
+      "fixture": "contract-base",
+      "history": false,
+      "operations": [{ "op": "replace", "path": "/evidenceRoots", "value": ["sha256:b5ab736d335f4dbf791a5e81f611940886f96a35bb9d1e4df7e77ba28497cd81", "sha256:b5ab736d335f4dbf791a5e81f611940886f96a35bb9d1e4df7e77ba28497cd81"] }],
+      "expected": { "valid": false, "code": "scp-set-order-invalid" }
+    },
+    {
+      "id": "matrix-reordered-known-gaps",
+      "invariant": "set-order-and-uniqueness",
+      "category": "reordered",
+      "fixture": "contract-base",
+      "history": false,
+      "operations": [{ "op": "replace", "path": "/knownGaps", "value": ["z gap", "a gap"] }],
+      "expected": { "valid": false, "code": "scp-set-order-invalid" }
+    },
+    {
+      "id": "matrix-wrong-authority",
+      "invariant": "authority-review-separation",
+      "category": "wrong-authority",
+      "fixture": "contract-base",
+      "history": false,
+      "operations": [{ "op": "remove", "path": "/authorityReceiptRoot" }],
+      "expected": { "valid": false, "code": "scp-authority-receipt-missing" }
+    },
+    {
+      "id": "matrix-review-gap",
+      "invariant": "authority-review-separation",
+      "category": "review-gap",
+      "fixture": "contract-base",
+      "history": false,
+      "operations": [{ "op": "replace", "path": "/reviewReceiptRoot", "value": "" }],
+      "expected": { "valid": false, "code": "scp-review-receipt-missing" }
+    },
+    {
+      "id": "history-authority-review-collapse",
+      "invariant": "authority-review-separation",
+      "category": "substituted",
+      "fixture": "contract-base",
+      "history": true,
+      "operations": [{ "op": "replace", "path": "/authorityReceiptRoot", "value": "sha256:ece39181a43fd02698807ad2310b4dae56ab2e5e5c7519e7295fa224e3804611" }],
+      "expected": { "valid": false, "code": "scp-root-substitution" }
+    },
+    {
+      "id": "matrix-claim-missing",
+      "invariant": "explicit-bounded-claims",
+      "category": "missing",
+      "fixture": "contract-base",
+      "history": false,
+      "operations": [{ "op": "replace", "path": "/claimBoundary", "value": "" }],
+      "expected": { "valid": false, "code": "scp-claim-boundary-missing" }
+    },
+    {
+      "id": "matrix-claim-overreach",
+      "invariant": "explicit-bounded-claims",
+      "category": "claim-overreach",
+      "fixture": "contract-base",
+      "history": false,
+      "operations": [{ "op": "replace", "path": "/claimBoundary", "value": "This structurally proves semantic truth." }],
+      "expected": { "valid": false, "code": "scp-claim-overreach" }
+    },
+    {
+      "id": "matrix-wrong-bootstrap",
+      "invariant": "finite-predecessor-chain",
+      "category": "wrong-predecessor",
+      "fixture": "contract-base",
+      "history": false,
+      "operations": [{ "op": "replace", "path": "/predecessor/bootstrapAnchorRoot", "value": "sha256:4444444444444444444444444444444444444444444444444444444444444444" }],
+      "expected": { "valid": false, "code": "scp-bootstrap-anchor-invalid" }
+    },
+    {
+      "id": "matrix-wrong-predecessor",
+      "invariant": "finite-predecessor-chain",
+      "category": "wrong-predecessor",
+      "fixture": "contract-base",
+      "history": false,
+      "operations": [{ "op": "replace", "path": "/predecessor/kind", "value": "report" }],
+      "expected": { "valid": false, "code": "scp-predecessor-root-mismatch" }
+    },
+    {
+      "id": "matrix-conflicting-predecessor",
+      "invariant": "finite-predecessor-chain",
+      "category": "conflicting",
+      "fixture": "valid-report-predecessor",
+      "history": false,
+      "operations": [{ "op": "replace", "path": "/predecessor/reportRoot", "value": "sha256:7777777777777777777777777777777777777777777777777777777777777777" }],
+      "expected": { "valid": false, "code": "scp-root-conflict" }
+    },
+    {
+      "id": "matrix-circular-predecessor",
+      "invariant": "finite-predecessor-chain",
+      "category": "circular",
+      "fixture": "valid-report-predecessor",
+      "history": false,
+      "operations": [{ "op": "replace", "path": "/predecessor/reportRoot", "value": "sha256:0e7a9a8abbfa7febc283df3b46afdc5c1ffdd626f460078840db29dea4244082" }],
+      "expected": { "valid": false, "code": "scp-root-conflict" }
+    },
+    {
+      "id": "history-current-report-self-reference",
+      "invariant": "non-self-containing-preimage",
+      "category": "self-containing",
+      "fixture": "contract-base",
+      "history": true,
+      "operations": [{ "op": "add", "path": "/reportRoot", "value": "sha256:3333333333333333333333333333333333333333333333333333333333333333" }],
+      "expected": { "valid": false, "code": "scp-self-containing-report" }
+    },
+    {
+      "id": "matrix-current-package-self-reference",
+      "invariant": "non-self-containing-preimage",
+      "category": "self-containing",
+      "fixture": "contract-base",
+      "history": false,
+      "operations": [{ "op": "add", "path": "/packageRoot", "value": "sha256:3333333333333333333333333333333333333333333333333333333333333333" }],
+      "expected": { "valid": false, "code": "scp-self-containing-package" }
+    },
+    {
+      "id": "matrix-unknown-transition",
+      "invariant": "transition-state-table",
+      "category": "malformed",
+      "fixture": "contract-base",
+      "history": false,
+      "operations": [{ "op": "replace", "path": "/transition", "value": "automatic-promotion" }],
+      "expected": { "valid": false, "code": "scp-transition-unsupported" }
+    },
+    {
+      "id": "matrix-root-consistent-state-jump",
+      "invariant": "transition-state-table",
+      "category": "substituted",
+      "fixture": "contract-base",
+      "history": false,
+      "operations": [
+        { "op": "replace", "path": "/proposedState/semanticState", "value": "active" },
+        { "op": "replace", "path": "/proposedStateRoot", "value": "sha256:ffa625ab28a42eb6e998092b13249e29c941d13299ce9a2bf85d87fb38e7630e" }
+      ],
+      "expected": { "valid": false, "code": "scp-transition-state-invalid" }
+    },
+    {
+      "id": "matrix-substituted-subject",
+      "invariant": "transition-state-table",
+      "category": "substituted",
+      "fixture": "contract-base",
+      "history": false,
+      "operations": [
+        { "op": "replace", "path": "/proposedState/subject/id", "value": "substituted-pressure" },
+        { "op": "replace", "path": "/proposedStateRoot", "value": "sha256:d4d1d4ff549960bd21f3b4a4b298b12414c23dc98aecb46063ae5c66f30eb2d1" }
+      ],
+      "expected": { "valid": false, "code": "scp-transition-state-invalid" }
+    },
+    {
+      "id": "matrix-expected-fail",
+      "invariant": "expected-result-agreement",
+      "category": "conflicting",
+      "fixture": "contract-base",
+      "history": false,
+      "operations": [{ "op": "replace", "path": "/expectedResult", "value": "fail" }],
+      "expected": { "valid": false, "code": "scp-expected-result-mismatch" }
+    },
+    {
+      "id": "matrix-known-gaps-missing",
+      "invariant": "explicit-gaps-and-coordinates",
+      "category": "missing",
+      "fixture": "contract-base",
+      "history": false,
+      "operations": [{ "op": "remove", "path": "/knownGaps" }],
+      "expected": { "valid": false, "code": "scp-known-gaps-missing" }
+    },
+    {
+      "id": "matrix-coordinate-missing",
+      "invariant": "explicit-gaps-and-coordinates",
+      "category": "missing",
+      "fixture": "contract-base",
+      "history": false,
+      "operations": [{ "op": "remove", "path": "/immutableCoordinates" }],
+      "expected": { "valid": false, "code": "scp-immutable-coordinate-missing" }
+    }
+  ]
+}

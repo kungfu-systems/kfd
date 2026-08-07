@@ -93,9 +93,23 @@ impl VerificationReport {
     }
 
     pub fn finish(mut self) -> Self {
-        self.issues.sort_by(|left, right| {
-            (&left.path, &left.code, &left.message).cmp(&(&right.path, &right.code, &right.message))
-        });
+        if self.profile == "kfd.self-conformance-transition/v1" {
+            self.issues.sort_by(|left, right| {
+                (&left.code, &left.path, &left.message).cmp(&(
+                    &right.code,
+                    &right.path,
+                    &right.message,
+                ))
+            });
+        } else {
+            self.issues.sort_by(|left, right| {
+                (&left.path, &left.code, &left.message).cmp(&(
+                    &right.path,
+                    &right.code,
+                    &right.message,
+                ))
+            });
+        }
         self.issues.dedup();
         self.checks.sort_by(|left, right| left.id.cmp(&right.id));
         self.checks.dedup_by(|left, right| left.id == right.id);
@@ -127,6 +141,7 @@ pub fn verify_bundle(bundle: &VerificationBundle) -> VerificationReport {
         "atlas" => profiles::atlas::verify(bundle),
         "episode" => profiles::episode::verify(bundle),
         "agent-runtime-report" => profiles::agent_runtime_report::verify(bundle),
+        "self-conformance-transition" => profiles::self_conformance_transition::verify(bundle),
         other => invalid_bundle_report(format!("unsupported verification kind: {other}")),
     }
 }

@@ -62,6 +62,28 @@ try {
   );
   assert.equal(installed.status, 0, installed.stderr);
   assert.equal(JSON.parse(installed.stdout).valid, true);
+  const selfConformance = spawnSync(
+    path.join(installRoot, "bin", "kfd"),
+    [
+      "verify",
+      "self-conformance-transition",
+      path.join(
+        extraction,
+        "verifier",
+        "fixtures",
+        "self-conformance",
+        "valid-report-predecessor.json",
+      ),
+      "--json",
+    ],
+    { cwd: extraction, encoding: "utf8" },
+  );
+  assert.equal(selfConformance.status, 0, selfConformance.stderr);
+  const selfConformanceReport = JSON.parse(selfConformance.stdout);
+  assert.equal(selfConformanceReport.valid, true);
+  assert.equal(selfConformanceReport.qualifying, false);
+  assert.equal(selfConformanceReport.selfCertified, false);
+  assert.equal(selfConformanceReport.offline, true);
   const metadata = spawnSync(
     "cargo",
     [

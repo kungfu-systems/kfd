@@ -6,3 +6,4 @@ pub mod episode;
 pub mod kfd_record;
 pub mod pack;
 pub mod passport;
+pub mod self_conformance_transition;
