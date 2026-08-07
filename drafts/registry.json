@@ -186,6 +186,32 @@
         "maintainer-promotion"
       ],
       "claimBoundary": "This incubating candidate preserves a perspective-generated Work hypothesis before federation dogfood. It does not establish an independent Work entity, allocate a KFD number, supersede Initiative, prefer entity over derived-view semantics, prove cross-domain transfer, or qualify a product implementation."
+    },
+    {
+      "id": "recursive-normative-self-conformance",
+      "title": "Recursive normative self-conformance",
+      "status": "qualifying",
+      "kindCandidate": "procedure",
+      "slotBinding": "non-binding",
+      "oneSentence": "A normative system should route load-bearing changes to its own rules through the same fixed-root, authority-separated conformance path it requires of adopters.",
+      "path": "drafts/recursive-normative-self-conformance.md",
+      "sourceCases": [
+        {
+          "id": "recursive-normative-self-conformance",
+          "path": "cases/live/recursive-normative-self-conformance/README.md"
+        }
+      ],
+      "promotionGate": [
+        "exact-root-kfd-5-genesis",
+        "historical-replay-with-non-retroactivity",
+        "kfd-1-2-5-11-redundancy-analysis",
+        "native-wasm-parity",
+        "package-only-clean-room",
+        "fail-closed-adversarial-bundles",
+        "independent-exact-cut-review",
+        "authority-separated-terminal-disposition"
+      ],
+      "claimBoundary": "This qualifying pre-number Candidate tests whether recursive normative self-conformance is an independent KFD or the derivable closure of KFD-1, KFD-2, KFD-5, KFD-11, and the fixed Self-Conformance Profile. It has no slot hint, number, active status, self-certification, merge authority, or release authority."
     }
   ]
 }

@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.recursive-normative-self-conformance-genesis/v1",
+  "candidateId": "recursive-normative-self-conformance",
+  "candidateNumber": null,
+  "candidateStatus": "qualifying",
+  "profile": "kfd-self-conformance@1.0.0-alpha.1",
+  "perspective": {
+    "id": "successor-kfd-steward",
+    "role": "change KFD after its Self-Conformance Profile became load-bearing",
+    "acceptedFactBoundary": "Public files and immutable coordinates retained in the exact containing Git commit",
+    "knownLoss": "Original private conversations and unrecorded historical perspectives are excluded"
+  },
+  "currentOntology": [
+    "KFD-1 immutable fact cuts and compatibility",
+    "KFD-2 fact-bound claims and assessments",
+    "KFD-5 candidate genesis and qualification",
+    "KFD-11 claim, assessment, decision, and admission",
+    "kfd-self-conformance@1.0.0-alpha.1 structural lifecycle"
+  ],
+  "methods": [
+    "reconstruction-pressure",
+    "structural-compression",
+    "fixed-root-historical-replay"
+  ],
+  "candidateClaim": "A normative system should route load-bearing changes to its own rules through the same fixed-root, authority-separated conformance path it requires of adopters.",
+  "exactInputs": [
+    {
+      "id": "candidate",
+      "path": "drafts/recursive-normative-self-conformance.md",
+      "sha256": "bb69b572a77374cc606cfd56a994bee109ab20b354cd34063f19dd60d02cada3"
+    },
+    {
+      "id": "kfd-5-cut",
+      "path": "cases/live/recursive-normative-self-conformance/cuts/0001-recursive-normative-self-conformance.json",
+      "sha256": "4a046ba5e093368ecb26fb5d2dec6174452bc62b31bd4713fa5e4bb3c1c4f03f"
+    },
+    {
+      "id": "redundancy-matrix",
+      "path": "evidence/self-conformance/qualification/recursive-normative-self-conformance.redundancy.json",
+      "sha256": "39e0144b696b0a43ddfee044affe942b039e8b31c0d8f098c6b318e73ca9f9c7"
+    },
+    {
+      "id": "historical-replay",
+      "path": "evidence/self-conformance/qualification/recursive-normative-self-conformance.replay.json",
+      "sha256": "7034905c714777bc9c6c018f3a21595e4d4e8aeb5ce7bfb250bb19a88590b32f"
+    },
+    {
+      "id": "candidate-registry",
+      "path": "drafts/registry.json",
+      "sha256": "07e20f2034d4ff64d55bc5d2eab5ca06e4b319f78c9aa4741b9697869a4d7d6c"
+    },
+    {
+      "id": "live-case-registry",
+      "path": "cases/registry.json",
+      "sha256": "acec3db0686683fa262bce4e4de28ce03dd43c0d077ee691e7e80d80ddc2e57b"
+    },
+    {
+      "id": "profile-bootstrap-anchor",
+      "path": "profiles/self-conformance/bootstrap-anchor.json",
+      "sha256": "5e1b1d984607d7805dd5a014b705f97e4794c8bc0b3de4ab70ae78ee394424af"
+    },
+    {
+      "id": "profile-manifest",
+      "path": "profiles/self-conformance/manifest.json",
+      "sha256": "b78f0b1f08a690a5885407b611344153dee5f8f79bae920e192e5e9fef7ffa6a"
+    }
+  ],
+  "alternatives": [
+    {
+      "id": "new-kfd",
+      "status": "under-test",
+      "claim": "Allocate a new normative procedure for recursive self-application."
+    },
+    {
+      "id": "existing-closure",
+      "status": "retained",
+      "claim": "Apply KFD-1, KFD-2, KFD-5, and KFD-11 together, using the Profile as a non-authoritative implementation."
+    },
+    {
+      "id": "profile-only",
+      "status": "insufficient",
+      "claim": "Treat the Profile as semantic and governance authority."
+    },
+    {
+      "id": "no-explicit-path",
+      "status": "rejected",
+      "claim": "Continue reconstructing the recursive path from prose and convention."
+    }
+  ],
+  "falsifiers": [
+    "Deleting the Candidate changes a bounded decision even though KFD-1, KFD-2, KFD-5, KFD-11, and the Profile remain fixed.",
+    "Fusing the Candidate into the existing closure creates an unavoidable authority ambiguity.",
+    "A non-KFD adopter requires an independent recursive identity, boundary, authority, lifecycle, or operation.",
+    "The fixed package cannot fail closed on a substituted root, predecessor, review, authority, package, or claim boundary."
+  ],
+  "noNewKfdConditions": [
+    "The minimum closure is completely derivable from KFD-1, KFD-2, KFD-5, KFD-11, and the fixed Profile.",
+    "Deletion preserves every decision-relevant observation.",
+    "Fuse testing introduces no contradiction or hidden authority.",
+    "No independent cross-domain cut establishes a new irreducible responsibility.",
+    "The Candidate provides a useful name for composition but no new identity, boundary, authority, lifecycle, or operation."
+  ],
+  "authoritySeparation": {
+    "generator": "qualification-author",
+    "structuralVerifier": "native-and-wasm-kfd-verifier-projections",
+    "independentReviewer": "pending-exact-commit-review",
+    "dispositionAuthority": "pending-maintainer-disposition",
+    "repositoryAdmission": "protected-kfd-review-and-merge",
+    "releaseAuthority": "separate-and-not-requested"
+  },
+  "knownGaps": [
+    "No independent exact-commit qualification review is retained in the genesis cut.",
+    "No authority-separated terminal disposition is retained in the genesis cut.",
+    "No non-KFD adopter demonstrates irreducibility.",
+    "KFD-1 through KFD-3 bootstrap can only be reconstructed retrospectively under the later Profile."
+  ],
+  "claimBoundary": "This exact-root genesis opens qualification only. It does not certify the Candidate or Profile, allocate a number, change status, approve, merge, activate, publish, or release."
+}
