@@ -51,12 +51,24 @@ export function classifyChangedPaths(paths, options = {}) {
 
 function discoverChangedPaths() {
   const explicit = process.env.KFD_SELF_CONFORMANCE_CHANGED_PATHS;
-  if (explicit !== undefined) return explicit.split("\n").map((value) => value.trim()).filter(Boolean);
+  if (explicit !== undefined) {
+    return {
+      paths: explicit.split("\n").map((value) => value.trim()).filter(Boolean),
+    };
+  }
   const baseRef = process.env.KFD_SELF_CONFORMANCE_BASE_REF || process.env.GITHUB_BASE_REF || "";
-  if (!baseRef) return [];
+  if (!baseRef) return { paths: [] };
   const reference = `origin/${baseRef}`;
-  git(["rev-parse", "--verify", reference]);
-  return git(["diff", "--name-only", `${reference}...HEAD`]).trim().split("\n").filter(Boolean);
+  const resolved = spawnSync("git", ["rev-parse", "--verify", `${reference}^{commit}`], {
+    cwd: root,
+    encoding: "utf8",
+  });
+  if (resolved.status !== 0) {
+    throw new Error(`Self-Conformance change gate cannot resolve ${reference}; provide full base history or KFD_SELF_CONFORMANCE_CHANGED_PATHS`);
+  }
+  return {
+    paths: git(["diff", "--name-only", `${reference}...HEAD`]).trim().split("\n").filter(Boolean),
+  };
 }
 
 function readBaseRegistry(baseRef) {
@@ -94,10 +106,10 @@ export function checkRetainedLifecycleEvidence(requiredPaths = []) {
 }
 
 function main() {
-  const paths = discoverChangedPaths();
+  const discovery = discoverChangedPaths();
   const baseRef = process.env.KFD_SELF_CONFORMANCE_BASE_REF || process.env.GITHUB_BASE_REF || "";
   const afterRegistry = JSON.parse(fs.readFileSync(path.join(root, "registry.json"), "utf8"));
-  const required = classifyChangedPaths(paths, {
+  const required = classifyChangedPaths(discovery.paths, {
     baseRef,
     beforeRegistry: readBaseRegistry(baseRef),
     afterRegistry,
