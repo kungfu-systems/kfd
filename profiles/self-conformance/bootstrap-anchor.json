@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.self-conformance-bootstrap-anchor/v1",
+  "profile": "kfd-self-conformance@1.0.0-alpha.1",
+  "anchorId": "kfd-alpha-55-pre-profile",
+  "stateRoot": "sha256:dee2c0c23b30ab37395b548af698bf9800a9b33ebcba5efdf34c7c250ebf1049",
+  "packageRoot": "sha256:114c195fea83c65ec84e52def6c2afced8a4ca9d2c9abe813f5c9c5d3b50260a",
+  "authorityReceiptRoot": "sha256:fde3c40133fc784783fcb1951c5bf14c2f9217779f01270c6e7f2bd273bdc9ba",
+  "reviewReceiptRoot": "sha256:adb5c5c91d91c8a217479b2d3341262efd584c69bc4a655840682b46d88734e9",
+  "coordinate": {
+    "repository": "https://github.com/kungfu-systems/kfd",
+    "commit": "a219407a45f43bfec1dba9df72b4469424aa4b19",
+    "packageVersion": "1.0.0-alpha.55"
+  },
+  "rationale": "The immutable alpha.55 package and its independently reviewed release/dev merge are the last public KFD cut before this profile contract. The anchor records that the self-conformance pressure field was absent at that cut.",
+  "claimBoundary": "This anchor establishes a finite predecessor for later profile-governed transitions. It does not validate the current profile, authorize a lifecycle transition, or prove semantic correctness."
+}

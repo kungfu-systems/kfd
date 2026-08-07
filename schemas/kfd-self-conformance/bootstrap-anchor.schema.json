@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-self-conformance/bootstrap-anchor.schema.json",
+  "title": "KFD Self-Conformance bootstrap anchor",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "contract",
+    "profile",
+    "anchorId",
+    "stateRoot",
+    "packageRoot",
+    "authorityReceiptRoot",
+    "reviewReceiptRoot",
+    "coordinate",
+    "rationale",
+    "claimBoundary"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "contract": { "const": "kfd.self-conformance-bootstrap-anchor/v1" },
+    "profile": { "const": "kfd-self-conformance@1.0.0-alpha.1" },
+    "anchorId": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "stateRoot": { "$ref": "#/$defs/root" },
+    "packageRoot": { "$ref": "#/$defs/root" },
+    "authorityReceiptRoot": { "$ref": "#/$defs/root" },
+    "reviewReceiptRoot": { "$ref": "#/$defs/root" },
+    "coordinate": {
+      "type": "object",
+      "required": ["repository", "commit", "packageVersion"],
+      "properties": {
+        "repository": { "type": "string", "format": "uri" },
+        "commit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "packageVersion": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "rationale": { "type": "string", "minLength": 1 },
+    "claimBoundary": { "type": "string", "minLength": 1 }
+  },
+  "$defs": {
+    "root": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+  },
+  "additionalProperties": false
+}

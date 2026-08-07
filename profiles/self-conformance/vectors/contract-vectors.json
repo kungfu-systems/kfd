@@ -1,0 +1,417 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.self-conformance-vector-registry/v1",
+  "profile": "kfd-self-conformance@1.0.0-alpha.1",
+  "base": {
+    "bootstrapAnchor": {
+      "schemaVersion": 1,
+      "contract": "kfd.self-conformance-bootstrap-anchor/v1",
+      "profile": "kfd-self-conformance@1.0.0-alpha.1",
+      "anchorId": "kfd-alpha-55-pre-profile",
+      "stateRoot": "sha256:dee2c0c23b30ab37395b548af698bf9800a9b33ebcba5efdf34c7c250ebf1049",
+      "packageRoot": "sha256:114c195fea83c65ec84e52def6c2afced8a4ca9d2c9abe813f5c9c5d3b50260a",
+      "authorityReceiptRoot": "sha256:fde3c40133fc784783fcb1951c5bf14c2f9217779f01270c6e7f2bd273bdc9ba",
+      "reviewReceiptRoot": "sha256:adb5c5c91d91c8a217479b2d3341262efd584c69bc4a655840682b46d88734e9",
+      "coordinate": {
+        "repository": "https://github.com/kungfu-systems/kfd",
+        "commit": "a219407a45f43bfec1dba9df72b4469424aa4b19",
+        "packageVersion": "1.0.0-alpha.55"
+      },
+      "rationale": "The immutable alpha.55 package and its independently reviewed release/dev merge are the last public KFD cut before this profile contract. The anchor records that the self-conformance pressure field was absent at that cut.",
+      "claimBoundary": "This anchor establishes a finite predecessor for later profile-governed transitions. It does not validate the current profile, authorize a lifecycle transition, or prove semantic correctness."
+    },
+    "exampleEvidence": {
+      "evidenceArtifact": {
+        "contract": "kfd.self-conformance-example-evidence/v1",
+        "pressureField": "Demonstrate a finite, non-self-containing KFD conformance chain.",
+        "nonNormative": true
+      },
+      "authorityReceipt": {
+        "contract": "kfd.self-conformance-example-authority/v1",
+        "authority": "fixture-only",
+        "authorized": false
+      },
+      "reviewReceipt": {
+        "contract": "kfd.self-conformance-example-review/v1",
+        "reviewer": "fixture-only",
+        "independent": false
+      },
+      "verifierDescriptor": {
+        "contract": "kfd.self-conformance-contract-check/v1",
+        "implementation": "scripts/self-conformance-contract.mjs",
+        "independent": false
+      }
+    },
+    "bundle": {
+      "schemaVersion": 1,
+      "contract": "kfd.self-conformance-transition-bundle/v1",
+      "profile": "kfd-self-conformance@1.0.0-alpha.1",
+      "bundleId": "example-candidate-genesis",
+      "transition": "candidate-genesis",
+      "previousState": {
+        "schemaVersion": 1,
+        "contract": "kfd.self-conformance-state/v1",
+        "profile": "kfd-self-conformance@1.0.0-alpha.1",
+        "subject": {
+          "id": "kfd-self-conformance-pressure",
+          "kind": "pressure-field",
+          "number": null
+        },
+        "semanticState": "absent",
+        "publicationState": "unpublished",
+        "immutableCoordinates": {
+          "repository": "https://github.com/kungfu-systems/kfd",
+          "commit": "a219407a45f43bfec1dba9df72b4469424aa4b19",
+          "path": "drafts/registry.json",
+          "contentRoot": "sha256:7e6eeaca3d3c84aacba04af72b447a9778c93b97883854c174d03f609d4ffea1",
+          "packageVersion": "1.0.0-alpha.55",
+          "packageRoot": "sha256:114c195fea83c65ec84e52def6c2afced8a4ca9d2c9abe813f5c9c5d3b50260a"
+        }
+      },
+      "previousStateRoot": "sha256:dee2c0c23b30ab37395b548af698bf9800a9b33ebcba5efdf34c7c250ebf1049",
+      "proposedState": {
+        "schemaVersion": 1,
+        "contract": "kfd.self-conformance-state/v1",
+        "profile": "kfd-self-conformance@1.0.0-alpha.1",
+        "subject": {
+          "id": "kfd-self-conformance-pressure",
+          "kind": "pressure-field",
+          "number": null
+        },
+        "semanticState": "candidate",
+        "publicationState": "unpublished",
+        "immutableCoordinates": {
+          "repository": "https://example.invalid/kfd-clean-room",
+          "commit": "ffffffffffffffffffffffffffffffffffffffff",
+          "path": "candidates/self-conformance.md",
+          "contentRoot": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+        }
+      },
+      "proposedStateRoot": "sha256:0e7a9a8abbfa7febc283df3b46afdc5c1ffdd626f460078840db29dea4244082",
+      "predecessor": {
+        "kind": "bootstrap",
+        "bootstrapAnchorRoot": "sha256:26961922619d090faf9c76f8bf0e25947100a5d13be6831366f1a0933c7ced59",
+        "reportRoot": null,
+        "packageRoot": "sha256:114c195fea83c65ec84e52def6c2afced8a4ca9d2c9abe813f5c9c5d3b50260a"
+      },
+      "evidenceRoots": [
+        "sha256:b5ab736d335f4dbf791a5e81f611940886f96a35bb9d1e4df7e77ba28497cd81"
+      ],
+      "schemaSetRoot": "sha256:b22ed964f65c9c3abbc3279a6e8a07114f133d42dc118d5eff0817df0314d050",
+      "verifierRoot": "sha256:3c89beaa1efdfb8911d97035622b78f72f87709339aaeead5a3c08789e7dcfe0",
+      "authorityReceiptRoot": "sha256:3bb5a62394c9acf2b4a27b462ef409e6bca7355951c0b5a825678ddbe869767e",
+      "reviewReceiptRoot": "sha256:ece39181a43fd02698807ad2310b4dae56ab2e5e5c7519e7295fa224e3804611",
+      "claimBoundary": "Fixture-only structural example; no semantic truth, human approval, certification, adoption, numbering, status, or release authority is claimed.",
+      "knownGaps": [
+        "The example authority and review receipts are deliberately non-authoritative fixtures."
+      ],
+      "expectedResult": "pass",
+      "immutableCoordinates": [
+        {
+          "kind": "document",
+          "value": "candidates/self-conformance.md@ffffffffffffffffffffffffffffffffffffffff",
+          "root": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+        }
+      ]
+    },
+    "report": {
+      "schemaVersion": 1,
+      "contract": "kfd.self-conformance-transition-report/v1",
+      "profile": "kfd-self-conformance@1.0.0-alpha.1",
+      "bundleRoot": "sha256:66466452bdc9d0b9dff402ad2a5024ad222b3da09fbb8b1508a7c8ee3b3b34ae",
+      "predecessorReportRoot": null,
+      "valid": true,
+      "expectedMatch": true,
+      "qualifying": false,
+      "selfCertified": false,
+      "semanticTruth": false,
+      "humanApproved": false,
+      "releaseAuthorized": false,
+      "adoptionProven": false,
+      "certified": false,
+      "offline": true,
+      "checks": [
+        {
+          "id": "bundle-contract",
+          "status": "pass"
+        },
+        {
+          "id": "root-binding",
+          "status": "pass"
+        },
+        {
+          "id": "transition-state",
+          "status": "pass"
+        }
+      ],
+      "issues": []
+    }
+  },
+  "vectors": [
+    {
+      "id": "scp-v001",
+      "invariant": "The fixed candidate-genesis example closes from the reviewed bootstrap without claiming authority.",
+      "polarity": "positive",
+      "operations": [],
+      "expected": {
+        "valid": true,
+        "code": null
+      }
+    },
+    {
+      "id": "scp-v002",
+      "invariant": "Unknown profile versions fail closed.",
+      "polarity": "negative",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/profile",
+          "value": "kfd-self-conformance@2"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "scp-profile-version-unsupported"
+      }
+    },
+    {
+      "id": "scp-v003",
+      "invariant": "Evidence roots are required.",
+      "polarity": "negative",
+      "operations": [
+        {
+          "op": "remove",
+          "path": "/evidenceRoots"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "scp-evidence-roots-missing"
+      }
+    },
+    {
+      "id": "scp-v004",
+      "invariant": "The previous state root must recompute exactly.",
+      "polarity": "negative",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/previousStateRoot",
+          "value": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "scp-predecessor-root-mismatch"
+      }
+    },
+    {
+      "id": "scp-v005",
+      "invariant": "Candidate genesis cannot jump directly to Active.",
+      "polarity": "negative",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/proposedState/semanticState",
+          "value": "active"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "scp-proposed-root-mismatch"
+      }
+    },
+    {
+      "id": "scp-v006",
+      "invariant": "Authority receipts cannot be inferred.",
+      "polarity": "negative",
+      "operations": [
+        {
+          "op": "remove",
+          "path": "/authorityReceiptRoot"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "scp-authority-receipt-missing"
+      }
+    },
+    {
+      "id": "scp-v007",
+      "invariant": "Independent-review receipts cannot be inferred.",
+      "polarity": "negative",
+      "operations": [
+        {
+          "op": "remove",
+          "path": "/reviewReceiptRoot"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "scp-review-receipt-missing"
+      }
+    },
+    {
+      "id": "scp-v008",
+      "invariant": "A transition bundle cannot contain its current report root.",
+      "polarity": "negative",
+      "operations": [
+        {
+          "op": "add",
+          "path": "/reportRoot",
+          "value": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "scp-self-containing-report"
+      }
+    },
+    {
+      "id": "scp-v009",
+      "invariant": "Claim boundaries are required.",
+      "polarity": "negative",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/claimBoundary",
+          "value": ""
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "scp-claim-boundary-missing"
+      }
+    },
+    {
+      "id": "scp-v010",
+      "invariant": "Known gaps must be explicit even when empty.",
+      "polarity": "negative",
+      "operations": [
+        {
+          "op": "remove",
+          "path": "/knownGaps"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "scp-known-gaps-missing"
+      }
+    },
+    {
+      "id": "scp-v011",
+      "invariant": "Bootstrap anchors are exact roots.",
+      "polarity": "negative",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/predecessor/bootstrapAnchorRoot",
+          "value": "sha256:4444444444444444444444444444444444444444444444444444444444444444"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "scp-bootstrap-anchor-invalid"
+      }
+    },
+    {
+      "id": "scp-v012",
+      "invariant": "Verifier identity is mandatory.",
+      "polarity": "negative",
+      "operations": [
+        {
+          "op": "remove",
+          "path": "/verifierRoot"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "scp-verifier-root-missing"
+      }
+    },
+    {
+      "id": "scp-v013",
+      "invariant": "Immutable coordinates are mandatory.",
+      "polarity": "negative",
+      "operations": [
+        {
+          "op": "remove",
+          "path": "/immutableCoordinates"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "scp-immutable-coordinate-missing"
+      }
+    },
+    {
+      "id": "scp-v014",
+      "invariant": "Structural evidence cannot claim semantic truth.",
+      "polarity": "negative",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/claimBoundary",
+          "value": "This structurally proves semantic truth."
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "scp-claim-overreach"
+      }
+    },
+    {
+      "id": "scp-v015",
+      "invariant": "The expected result must agree with structural validity.",
+      "polarity": "negative",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/expectedResult",
+          "value": "fail"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "scp-expected-result-mismatch"
+      }
+    },
+    {
+      "id": "scp-v016",
+      "invariant": "The schema set root is exact.",
+      "polarity": "negative",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/schemaSetRoot",
+          "value": "sha256:5555555555555555555555555555555555555555555555555555555555555555"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "scp-schema-set-root-mismatch"
+      }
+    },
+    {
+      "id": "scp-v017",
+      "invariant": "A root-consistent Candidate genesis cannot jump directly to Active.",
+      "polarity": "negative",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/proposedState/semanticState",
+          "value": "active"
+        },
+        {
+          "op": "replace",
+          "path": "/proposedStateRoot",
+          "value": "sha256:ffa625ab28a42eb6e998092b13249e29c941d13299ce9a2bf85d87fb38e7630e"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "scp-transition-state-invalid"
+      }
+    }
+  ]
+}

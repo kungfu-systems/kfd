@@ -90,10 +90,15 @@
     "./decisions/*.md": "./decisions/*.md",
     "./docs/*": "./docs/*",
     "./evidence/kfd-7/activation-record.json": "./evidence/kfd-7/activation-record.json",
-    "./terminology.json": "./terminology.json"
+    "./terminology.json": "./terminology.json",
+    "./self-conformance/manifest.json": "./profiles/self-conformance/manifest.json",
+    "./self-conformance/bootstrap-anchor.json": "./profiles/self-conformance/bootstrap-anchor.json",
+    "./self-conformance/issue-codes.json": "./profiles/self-conformance/issue-codes.json",
+    "./self-conformance/vectors.json": "./profiles/self-conformance/vectors/contract-vectors.json",
+    "./self-conformance/schemas/*": "./schemas/kfd-self-conformance/*"
   },
   "scripts": {
-    "check": "node scripts/check.mjs && npm run check:warrant-evidence && npm run check:agent-hub && npm run check:agent-hub-conformance && npm run check:agent-runtime && npm run check:verifier",
+    "check": "node scripts/check.mjs && npm run check:warrant-evidence && npm run check:agent-hub && npm run check:agent-hub-conformance && npm run check:agent-runtime && npm run check:self-conformance-profile && npm run check:verifier",
     "check:warrant-evidence": "node scripts/check-warrant-evidence.mjs",
     "check:agent-hub": "node scripts/check-agent-hub-profile.mjs",
     "check:agent-hub-conformance": "node scripts/check-agent-hub-conformance-profile.mjs",
@@ -108,7 +113,8 @@
     "update:site-bundle": "node scripts/update-site-bundle.mjs",
     "update:kfd-1-witness": "node scripts/update-kfd-1-witness.mjs",
     "update:kfd-2-claim": "node scripts/update-kfd-2-claim.mjs",
-    "update:kfd-3-witness": "node scripts/update-kfd-3-witness.mjs"
+    "update:kfd-3-witness": "node scripts/update-kfd-3-witness.mjs",
+    "check:self-conformance-profile": "node scripts/check-self-conformance-profile.mjs"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",

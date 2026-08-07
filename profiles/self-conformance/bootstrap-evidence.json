@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.self-conformance-bootstrap-evidence/v1",
+  "state": {
+    "schemaVersion": 1,
+    "contract": "kfd.self-conformance-state/v1",
+    "profile": "kfd-self-conformance@1.0.0-alpha.1",
+    "subject": {
+      "id": "kfd-self-conformance-pressure",
+      "kind": "pressure-field",
+      "number": null
+    },
+    "semanticState": "absent",
+    "publicationState": "unpublished",
+    "immutableCoordinates": {
+      "repository": "https://github.com/kungfu-systems/kfd",
+      "commit": "a219407a45f43bfec1dba9df72b4469424aa4b19",
+      "path": "drafts/registry.json",
+      "contentRoot": "sha256:7e6eeaca3d3c84aacba04af72b447a9778c93b97883854c174d03f609d4ffea1",
+      "packageVersion": "1.0.0-alpha.55",
+      "packageRoot": "sha256:114c195fea83c65ec84e52def6c2afced8a4ca9d2c9abe813f5c9c5d3b50260a"
+    }
+  },
+  "authorityReceipt": {
+    "schemaVersion": 1,
+    "contract": "kfd.self-conformance-bootstrap-authority-receipt/v1",
+    "subject": "@kungfu-tech/kfd@1.0.0-alpha.55",
+    "sourceTag": "v1.0.0-alpha.55",
+    "sourceCommit": "a219407a45f43bfec1dba9df72b4469424aa4b19",
+    "packageRoot": "sha256:114c195fea83c65ec84e52def6c2afced8a4ca9d2c9abe813f5c9c5d3b50260a",
+    "npmIntegrity": "sha512-C8BMvrtQFJnFE/+XanFvtLiDrtYOOSs2gxYyEhLF2uDPYJLCvfTQLQxFqrbrvpxtRs7bCLFb6GvnyOZSdXveag==",
+    "releaseAnchorPath": "kfd.release.json",
+    "releaseAnchorContentRoot": "sha256:dc4d466451a4fbc3f5154c9e84e8882b129a70db27c976c61ba0a381509b56ae",
+    "claimBoundary": "This receipt binds the published alpha.55 package coordinate and release anchor only; it does not approve the later Self-Conformance Profile."
+  },
+  "reviewReceipt": {
+    "schemaVersion": 1,
+    "contract": "kfd.self-conformance-bootstrap-review-receipt/v1",
+    "source": "public-github-review",
+    "approvals": [
+      {
+        "pullRequest": "https://github.com/kungfu-systems/kfd/pull/317",
+        "reviewId": "PRR_kwDOTLH7GM8AAAABIgOM8w",
+        "reviewer": "dongkeren",
+        "state": "APPROVED",
+        "reviewedCommit": "55aa8bb9677b122fd2ffb5245e59a9eb5d0f4f50",
+        "submittedAt": "2026-08-05T14:45:11Z",
+        "mergeCommit": "a219407a45f43bfec1dba9df72b4469424aa4b19",
+        "mergedBy": "kungfu-origin"
+      },
+      {
+        "pullRequest": "https://github.com/kungfu-systems/kfd/pull/318",
+        "reviewId": "PRR_kwDOTLH7GM8AAAABIgVygA",
+        "reviewer": "dongkeren",
+        "state": "APPROVED",
+        "reviewedCommit": "a219407a45f43bfec1dba9df72b4469424aa4b19",
+        "submittedAt": "2026-08-05T14:56:28Z",
+        "mergeCommit": "316587b570b15808e9e0ee0c69845e47699585b7",
+        "mergedBy": "kungfu-origin"
+      }
+    ],
+    "claimBoundary": "These public approvals establish the reviewed predecessor package and dev-line merge only; they do not review or approve the later Self-Conformance Profile."
+  }
+}
