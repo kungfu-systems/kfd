@@ -20,8 +20,8 @@ function usage() {
   kfd verify agent-hub-report <report.json> [--adapter <path>] [--json]
   kfd verify warrant-evidence <bundle.json> [--json]
   kfd verify kfd-10-witness <witness.json> [--json]
-  kfd verify <kfd-record|passport|pack|atlas|episode|agent-runtime-report|bundle> <path> [--schema <path>] [--json]
-  kfd bundle <kfd-record|passport|pack|atlas|episode|agent-runtime-report> <path> --output <bundle.json>`;
+  kfd verify <kfd-record|passport|pack|atlas|episode|agent-runtime-report|self-conformance-transition|bundle> <path> [--schema <path>] [--json]
+  kfd bundle <kfd-record|passport|pack|atlas|episode|agent-runtime-report|self-conformance-transition> <path> --output <bundle.json>`;
 }
 
 function regularText(filePath) {

@@ -43,7 +43,7 @@ assert.equal(manifest.verifierRequirement.native, true);
 assert.equal(manifest.verifierRequirement.wasm, true);
 assert.equal(manifest.verifierRequirement.byteParity, true);
 assert.equal(manifest.verifierRequirement.independent, true);
-assert.equal(issues.codes.length, 19);
+assert.equal(issues.codes.length, 22);
 assert.deepEqual(issues.codes, [...issues.codes].sort());
 assert.equal(new Set(issues.codes).size, issues.codes.length);
 for (const value of [manifest.schemaSetRoot, manifest.vectorSetRoot, manifest.issueSetRoot, manifest.bootstrapAnchorRoot]) {
@@ -110,6 +110,7 @@ if (!extracted) {
     "./self-conformance/issue-codes.json": "./profiles/self-conformance/issue-codes.json",
     "./self-conformance/vectors.json": "./profiles/self-conformance/vectors/contract-vectors.json",
     "./self-conformance/schemas/*": "./schemas/kfd-self-conformance/*",
+    "./self-conformance/verifier-matrix.json": "./verifier/specs/self-conformance-matrix.json",
   })) assert.equal(packageJson.exports[alias], target, `missing export ${alias}`);
 
   const registered = new Set(standards.standards["kfd-1"].surfaceRegister.surfaces.map(({ id }) => id));
@@ -120,6 +121,8 @@ if (!extracted) {
     "kfd-self-conformance-transition-report",
     "kfd-self-conformance-bootstrap-anchor",
     "kfd-self-conformance-contract-vectors",
+    "kfd-self-conformance-verifier",
+    "kfd-self-conformance-verifier-matrix",
   ]) assert.equal(registered.has(id), true, `missing KFD-1 surface ${id}`);
   const classification = impact.surfaceImpacts.find(({ id }) => id === "kfd-self-conformance-profile-v1");
   assert.equal(classification?.class, "additive");

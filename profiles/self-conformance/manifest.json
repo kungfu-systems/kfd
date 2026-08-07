@@ -10,7 +10,7 @@
   "rootAlgorithm": "sha256-kfd-canonical-json-v1",
   "schemaSetRoot": "sha256:b22ed964f65c9c3abbc3279a6e8a07114f133d42dc118d5eff0817df0314d050",
   "vectorSetRoot": "sha256:7aa445ee976770ecb1b8146db6382d738156b6ae289454abb7b6c720de1121f5",
-  "issueSetRoot": "sha256:b765e9f4c6b8ad74d83239745be1ae2d95a9af118880c6dd517a6b0e5bb90dd0",
+  "issueSetRoot": "sha256:8254068e966c29ef5f9ca2257288d7ccdff1fdc2f152874d40452be0918993d4",
   "bootstrapAnchorRoot": "sha256:26961922619d090faf9c76f8bf0e25947100a5d13be6831366f1a0933c7ced59",
   "verifierRequirement": {
     "native": true,
@@ -34,7 +34,7 @@
     {
       "path": "profiles/self-conformance/README.md",
       "role": "authority",
-      "digest": "sha256:e35f374b710abd5a2d5e9e0c89a69adc7839959fa5998539ba5135b52378c511"
+      "digest": "sha256:f931552c84da5d2c5f6db795af63c8c107bac2a7b10c0f2a44b108b0ce5a1026"
     },
     {
       "path": "profiles/self-conformance/bootstrap-anchor.json",
@@ -54,12 +54,12 @@
     {
       "path": "profiles/self-conformance/implementer-guide.md",
       "role": "guide",
-      "digest": "sha256:45baebb759f8827c4e54485ca203885c5313b5b6d9b819c89a020e280821b54f"
+      "digest": "sha256:546dd5e3ef77acb249313712afd4a9d2c8b9267e5ac3bafc0474d280f66f7306"
     },
     {
       "path": "profiles/self-conformance/issue-codes.json",
       "role": "reference",
-      "digest": "sha256:5c27420a9836ec705e5bcd1f2a128542e43fc743761a16566a70aa2c9bf31e7e"
+      "digest": "sha256:ecc80ddda1f3be83d1fe35875e055443865776bedf36913c5434c07011d482e3"
     },
     {
       "path": "profiles/self-conformance/vectors/contract-vectors.json",
@@ -99,7 +99,7 @@
     {
       "path": "scripts/check-self-conformance-profile.mjs",
       "role": "check",
-      "digest": "sha256:ae0d4d6377231fbbde6a1729822f2691a277b4308853a1ab2492a82482e690bf"
+      "digest": "sha256:bebcd92bcacc319b18ce98f7c9496be4421a8d2dda43f5618b017a2ff5b46468"
     },
     {
       "path": "scripts/self-conformance-contract.mjs",

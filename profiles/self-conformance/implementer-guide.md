@@ -33,10 +33,20 @@ Run the package-owned contract check offline:
 npm run check:self-conformance-profile
 ```
 
-The check proves the fixed contract closure, schema and vector inventory,
-canonical roots, package contents, and absence of forbidden dependencies. It
-is not the independent native/WebAssembly verifier matrix and does not approve
-any lifecycle transition.
+Run the independent packaged WebAssembly verifier over one transition bundle:
+
+```bash
+node bin/kfd.mjs verify self-conformance-transition transition-bundle.json --json
+```
+
+The native CLI accepts the same kind and input. Both projections share one
+Rust core and the fixed verifier matrix requires byte-identical reports,
+semantic report roots, issue ordering, and exit classification.
+
+The contract check proves the fixed contract closure, schema and vector
+inventory, canonical roots, package contents, and absence of forbidden
+dependencies. The independent verifier matrix is a separate executable check;
+neither check approves a lifecycle transition.
 
 Never infer missing authority, review, evidence, gap, or predecessor data.
 Reject unknown versions and issue codes. Do not read `$HOME`, `.git`, private
