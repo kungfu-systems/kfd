@@ -8,9 +8,9 @@
   },
   "authority": "profiles/self-conformance/README.md",
   "rootAlgorithm": "sha256-kfd-canonical-json-v1",
-  "schemaSetRoot": "sha256:b22ed964f65c9c3abbc3279a6e8a07114f133d42dc118d5eff0817df0314d050",
-  "vectorSetRoot": "sha256:7aa445ee976770ecb1b8146db6382d738156b6ae289454abb7b6c720de1121f5",
-  "issueSetRoot": "sha256:8254068e966c29ef5f9ca2257288d7ccdff1fdc2f152874d40452be0918993d4",
+  "schemaSetRoot": "sha256:8def5dbde4cb0659f8d913c4145c4373fe031022158d5bbdc0db0bdb177fc45b",
+  "vectorSetRoot": "sha256:1d6b6c4a078ad8c65b0820971488576b3b72f313cf2ab5054e2efc0e74527efc",
+  "issueSetRoot": "sha256:be6433e24a82e7af33669c0ce755ef9369631359a6225930a0060ab399bb7098",
   "bootstrapAnchorRoot": "sha256:26961922619d090faf9c76f8bf0e25947100a5d13be6831366f1a0933c7ced59",
   "verifierRequirement": {
     "native": true,
@@ -32,9 +32,14 @@
   ],
   "surfaces": [
     {
+      "path": "bin/kfd.mjs",
+      "role": "cli",
+      "digest": "sha256:21279980be205e67aa752f3b6d15cd91ac2ccc644229905b8ca40e30fce1c2b4"
+    },
+    {
       "path": "profiles/self-conformance/README.md",
       "role": "authority",
-      "digest": "sha256:f931552c84da5d2c5f6db795af63c8c107bac2a7b10c0f2a44b108b0ce5a1026"
+      "digest": "sha256:87a0a4a0d025c2e42df3e6815d396c9625d9499bab0e6cfdb14857f36e5bbdef"
     },
     {
       "path": "profiles/self-conformance/bootstrap-anchor.json",
@@ -49,27 +54,47 @@
     {
       "path": "profiles/self-conformance/extraction-manifest.json",
       "role": "extraction",
-      "digest": "sha256:cae4d0fb788da76e9397a67b2dba333cd40805b7df8166b6dd645f3b8abf17a7"
+      "digest": "sha256:566107a357769c190bf5235050af89e4cd3016a676d64833d03f2ec180af11bc"
     },
     {
       "path": "profiles/self-conformance/implementer-guide.md",
       "role": "guide",
-      "digest": "sha256:546dd5e3ef77acb249313712afd4a9d2c8b9267e5ac3bafc0474d280f66f7306"
+      "digest": "sha256:252fd9e36e1db5478e3bf7e784fac2e46b4dd3b34036f4572f7fb739ca4a77ab"
     },
     {
       "path": "profiles/self-conformance/issue-codes.json",
       "role": "reference",
-      "digest": "sha256:ecc80ddda1f3be83d1fe35875e055443865776bedf36913c5434c07011d482e3"
+      "digest": "sha256:e5ad0dcb9a5ee4d20853c828fa8435cae96fadf4427e12a4622352647b1633a7"
+    },
+    {
+      "path": "profiles/self-conformance/lifecycle-gate-matrix.json",
+      "role": "vectors",
+      "digest": "sha256:bfd8a790cfbc334d915e2037ff8356a7de76fd455a4ddcdef2f1811d91712af5"
+    },
+    {
+      "path": "profiles/self-conformance/lifecycle-gates.json",
+      "role": "policy",
+      "digest": "sha256:0ba98836f811dc61aeea36f0635dfb422665ca2d63b9a74131164ecf6d33b241"
     },
     {
       "path": "profiles/self-conformance/vectors/contract-vectors.json",
       "role": "vectors",
-      "digest": "sha256:364428704d34f1e3995d390dc8e76eb72cf29c0f8b29d2d5c1d95739fa6ea8df"
+      "digest": "sha256:9763d990ac844185e0032c8f0bf66e66e895cf6a55f12b5089bc522471ab3842"
     },
     {
       "path": "schemas/kfd-self-conformance/bootstrap-anchor.schema.json",
       "role": "schema",
       "digest": "sha256:0a1d8d789879f0c1196cb29ca23846f77f86b0c6ba088e72dda033ce35d64a0f"
+    },
+    {
+      "path": "schemas/kfd-self-conformance/lifecycle-gate-report.schema.json",
+      "role": "schema",
+      "digest": "sha256:5bc557c04b0fa93703fadb41b702edf946d2cb4f81ce8534a5d355ce07484cdd"
+    },
+    {
+      "path": "schemas/kfd-self-conformance/lifecycle-gate-request.schema.json",
+      "role": "schema",
+      "digest": "sha256:165d475d0596f5a876295503797d18a72b585201730b9a6edb5199febff0da70"
     },
     {
       "path": "schemas/kfd-self-conformance/package-manifest.schema.json",
@@ -97,14 +122,34 @@
       "digest": "sha256:253b15fd5317d8f9bf07eeb7eb75e509bd705c4ad39bb8e955e21dd02c49c946"
     },
     {
+      "path": "scripts/check-self-conformance-changes.mjs",
+      "role": "check",
+      "digest": "sha256:6d2dee6ce83a3dc5427c6b53a4d6388fe9d3c25dc72e79d0b248e7a672d4bce1"
+    },
+    {
+      "path": "scripts/check-self-conformance-lifecycle.mjs",
+      "role": "check",
+      "digest": "sha256:cd540fcc441d45c3a9476de40762239089302d5c8cbc909b99903d9f7915105b"
+    },
+    {
       "path": "scripts/check-self-conformance-profile.mjs",
       "role": "check",
-      "digest": "sha256:bebcd92bcacc319b18ce98f7c9496be4421a8d2dda43f5618b017a2ff5b46468"
+      "digest": "sha256:a5dc23416049873208369e217053f8ee8102033a77ee45d098a15cfe0835bfeb"
     },
     {
       "path": "scripts/self-conformance-contract.mjs",
       "role": "check",
       "digest": "sha256:40a0d749b043ddcec75769579ca07107c39893454519c66648b9217846af5f1e"
+    },
+    {
+      "path": "scripts/self-conformance-lifecycle-gate.mjs",
+      "role": "check",
+      "digest": "sha256:3d561230ff7872b63341308c37c82b8f2c34548922c01fc5c3916ca2d8c186d5"
+    },
+    {
+      "path": "verifier/dist/kfd_verifier.wasm",
+      "role": "verifier",
+      "digest": "sha256:ec577004be9f0d30ce69a60a30979767489a86fb5c47d32393a8ca76b840e9aa"
     }
   ],
   "claimBoundary": "The fixed package proves only the published Self-Conformance contract closure and vectors. It does not prove semantic truth, approval, certification, adoption, product fitness, lifecycle authority, or release authorization."

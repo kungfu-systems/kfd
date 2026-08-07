@@ -189,3 +189,34 @@ profile or explicit compatibility action.
 The profile does not change any entry in `drafts/registry.json` or
 `registry.json`. Profile publication is not a Candidate promotion or KFD status
 transition.
+
+## Official lifecycle gate
+
+Every official Candidate, qualification, numbered-draft promotion, activation,
+supersession, Foundation Revision, and release-packaging path consumes
+`profiles/self-conformance/lifecycle-gates.json`. The gate request retains the
+complete chain from the reviewed bootstrap anchor, each transition bundle, its
+independently reproduced report root, the package root, the actual authority
+receipt, the independent-review receipt, and counterevidence roots. The
+terminal path, transition, role, and decision must match the published policy.
+
+Run the package-owned gate with no network or product checkout:
+
+```bash
+kfd gate self-conformance-lifecycle transition.request.json \
+  --output transition.report.json --json
+```
+
+Both files are retained under `evidence/self-conformance/transitions/` for an
+official repository transition. The report is reproduced during
+repository-native checks; a missing pair, stale report, wrong root, incomplete
+predecessor chain, wrong authority role, non-independent review, claim
+overreach, or verifier-package substitution fails closed with a stable `scg-*`
+or underlying `scp-*` diagnostic.
+
+The gate never applies a transition. A `proceed` report says that the supplied
+structural proof and separately supplied governance receipts are mutually
+consistent. It does not allocate a number, change status, approve, merge, or
+release. `revision-required`, `rejection`, `provisional-retention`, and
+`no-new-kfd` remain valid retained `non-promotion` outcomes; counterevidence is
+not discarded to manufacture a passing promotion.

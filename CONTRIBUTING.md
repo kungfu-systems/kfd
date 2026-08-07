@@ -88,6 +88,34 @@ review.
 
 ## Ground rules
 
+### Self-Conformance evidence for official transitions
+
+An official Candidate record, Candidate qualification, numbered-draft
+promotion, activation, supersession, Foundation Revision, or release packaging
+change must retain a Self-Conformance lifecycle gate request and its reproduced
+report under `evidence/self-conformance/transitions/`. The request must bind the
+complete predecessor chain from the approved bootstrap anchor, not only the
+current package or proposed state.
+
+The structural verifier is necessary and insufficient. Maintainer numbering,
+status, Foundation Revision, and release decisions remain separate authority
+receipts, and a reviewer other than the author remains a separate review
+receipt. A gate report never performs those decisions. Rejected, revised,
+provisional, and `no new KFD is justified` outcomes retain their report and
+counterevidence exactly like a promotion request.
+
+Use the fixed package only:
+
+```bash
+kfd gate self-conformance-lifecycle evidence/self-conformance/transitions/<id>.request.json \
+  --output evidence/self-conformance/transitions/<id>.report.json --json
+```
+
+Repository-native checks reproduce every retained report and, on pull requests,
+fail closed when a detected official transition lacks a valid request/report
+pair. See `profiles/self-conformance/README.md` for the contract and stable
+diagnostics.
+
 - Every published package, tag, and commit is immutable. Before the first
   stable KFD release, the Foundation Revision procedure below may explicitly
   authorize substantive refinement or structural correction. Every affected

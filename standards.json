@@ -68,7 +68,9 @@
         "selfConformanceTransitionBundle": "https://kfd.libkungfu.dev/schemas/kfd-self-conformance/transition-bundle.schema.json",
         "selfConformanceTransitionReport": "https://kfd.libkungfu.dev/schemas/kfd-self-conformance/transition-report.schema.json",
         "selfConformancePackageManifest": "https://kfd.libkungfu.dev/schemas/kfd-self-conformance/package-manifest.schema.json",
-        "selfConformanceVectorRegistry": "https://kfd.libkungfu.dev/schemas/kfd-self-conformance/vector-registry.schema.json"
+        "selfConformanceVectorRegistry": "https://kfd.libkungfu.dev/schemas/kfd-self-conformance/vector-registry.schema.json",
+        "selfConformanceLifecycleGateRequest": "https://kfd.libkungfu.dev/schemas/kfd-self-conformance/lifecycle-gate-request.schema.json",
+        "selfConformanceLifecycleGateReport": "https://kfd.libkungfu.dev/schemas/kfd-self-conformance/lifecycle-gate-report.schema.json"
       },
       "schemaPaths": {
         "metadata": "schemas/kfd-standards.schema.json",
@@ -96,7 +98,9 @@
         "selfConformanceTransitionBundle": "schemas/kfd-self-conformance/transition-bundle.schema.json",
         "selfConformanceTransitionReport": "schemas/kfd-self-conformance/transition-report.schema.json",
         "selfConformancePackageManifest": "schemas/kfd-self-conformance/package-manifest.schema.json",
-        "selfConformanceVectorRegistry": "schemas/kfd-self-conformance/vector-registry.schema.json"
+        "selfConformanceVectorRegistry": "schemas/kfd-self-conformance/vector-registry.schema.json",
+        "selfConformanceLifecycleGateRequest": "schemas/kfd-self-conformance/lifecycle-gate-request.schema.json",
+        "selfConformanceLifecycleGateReport": "schemas/kfd-self-conformance/lifecycle-gate-report.schema.json"
       },
       "interfaces": {
         "contractWorld": {
@@ -272,6 +276,20 @@
           "schemaVersion": 1,
           "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-self-conformance/vector-registry.schema.json",
           "schemaPath": "schemas/kfd-self-conformance/vector-registry.schema.json",
+          "compatibilityRule": "Changes to required roots, transition meaning, canonicalization, issue meaning, recursion, or responsibility boundaries require a successor profile or explicit compatibility action."
+        },
+        "selfConformanceLifecycleGateRequest": {
+          "contract": "kfd.self-conformance-lifecycle-gate-request/v1",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-self-conformance/lifecycle-gate-request.schema.json",
+          "schemaPath": "schemas/kfd-self-conformance/lifecycle-gate-request.schema.json",
+          "compatibilityRule": "Changes to required roots, transition meaning, canonicalization, issue meaning, recursion, or responsibility boundaries require a successor profile or explicit compatibility action."
+        },
+        "selfConformanceLifecycleGateReport": {
+          "contract": "kfd.self-conformance-lifecycle-gate-report/v1",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-self-conformance/lifecycle-gate-report.schema.json",
+          "schemaPath": "schemas/kfd-self-conformance/lifecycle-gate-report.schema.json",
           "compatibilityRule": "Changes to required roots, transition meaning, canonicalization, issue meaning, recursion, or responsibility boundaries require a successor profile or explicit compatibility action."
         }
       },
@@ -2247,6 +2265,56 @@
             ],
             "description": "Invariant-to-case map, adversarial mutations, and protocol failure history.",
             "sourcePath": "verifier/specs/self-conformance-matrix.json",
+            "weldRationale": "Implementers, reports, lifecycle gates, and clean-room checks bind this exact versioned surface.",
+            "impactProjection": {
+              "breaking": "Incompatible changes require a successor Self-Conformance Profile or explicit compatibility action.",
+              "additive": "Backward-compatible additions must be declared and retain the exact prior profile closure.",
+              "none": "Changes outside this surface create no KFD-1 impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, repair the register before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-self-conformance-lifecycle-policy",
+            "class": "cross-time",
+            "classes": [
+              "cross-time"
+            ],
+            "description": "Official lifecycle path, transition, governance receipt, and retention policy.",
+            "sourcePath": "profiles/self-conformance/lifecycle-gates.json",
+            "weldRationale": "Implementers, reports, lifecycle gates, and clean-room checks bind this exact versioned surface.",
+            "impactProjection": {
+              "breaking": "Incompatible changes require a successor Self-Conformance Profile or explicit compatibility action.",
+              "additive": "Backward-compatible additions must be declared and retain the exact prior profile closure.",
+              "none": "Changes outside this surface create no KFD-1 impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, repair the register before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-self-conformance-lifecycle-gate",
+            "class": "integration-time",
+            "classes": [
+              "integration-time",
+              "cross-time"
+            ],
+            "description": "Package-only complete-chain gate over independent verifier reports and separate governance receipts.",
+            "sourcePath": "scripts/self-conformance-lifecycle-gate.mjs",
+            "weldRationale": "Implementers, reports, lifecycle gates, and clean-room checks bind this exact versioned surface.",
+            "impactProjection": {
+              "breaking": "Incompatible changes require a successor Self-Conformance Profile or explicit compatibility action.",
+              "additive": "Backward-compatible additions must be declared and retain the exact prior profile closure.",
+              "none": "Changes outside this surface create no KFD-1 impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, repair the register before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-self-conformance-lifecycle-matrix",
+            "class": "integration-time",
+            "classes": [
+              "integration-time",
+              "cross-time"
+            ],
+            "description": "Seven official paths and stable fail-closed lifecycle diagnostics.",
+            "sourcePath": "profiles/self-conformance/lifecycle-gate-matrix.json",
             "weldRationale": "Implementers, reports, lifecycle gates, and clean-room checks bind this exact versioned surface.",
             "impactProjection": {
               "breaking": "Incompatible changes require a successor Self-Conformance Profile or explicit compatibility action.",
