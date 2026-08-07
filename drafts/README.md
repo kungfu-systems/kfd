@@ -8,7 +8,7 @@ confidence: high
 sensitivity: public
 evidence_grade: B
 review_state: self-reviewed
-last_reviewed: 2026-07-21
+last_reviewed: 2026-08-08
 ---
 
 # KFD Candidates
@@ -61,6 +61,11 @@ Incubating now:
   Assignments, workspaces, and cuts through which it advances. Its strongest
   alternatives remain Initiative, a perspective-bound derived view, and no new
   Primitive.
+- [Recursive normative self-conformance](recursive-normative-self-conformance.md)
+  asks whether a normative system's fixed-root self-application is an
+  independent procedure or the derivable closure of KFD-1, KFD-2, KFD-5,
+  KFD-11, and the existing Self-Conformance Profile. It is qualifying without a
+  slot hint or number, and `no-new-kfd` remains an explicit terminal outcome.
 
 The promoted pages remain public lineage and do not replace their numbered
 decisions. Incubating pages are non-normative and allocate no number.

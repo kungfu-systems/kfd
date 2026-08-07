@@ -2017,14 +2017,54 @@
       "sha256": "a2b658c8658c266cc9ec2614834efe2e5bc4425c7877c39fe0833d8a5afee4d7"
     },
     {
+      "id": "case:recursive-normative-self-conformance:entry",
+      "sourcePath": "cases/live/recursive-normative-self-conformance/README.md",
+      "sha256": "7e7e0af783357362a6e97cc1fe43c05f57ed7f8caa898b4c4c154e3568279ff8"
+    },
+    {
+      "id": "case:recursive-normative-self-conformance:genesis",
+      "sourcePath": "cases/live/recursive-normative-self-conformance/genesis.md",
+      "sha256": "f121303c149164c6efaee552e373de3114a3413d8a17d3146cf4c9d4b36f57ba"
+    },
+    {
+      "id": "case:recursive-normative-self-conformance:method-trace",
+      "sourcePath": "cases/live/recursive-normative-self-conformance/kfd-method-trace.md",
+      "sha256": "2ad0d23219baab9cea64fe5ceef64fb1b4f1e25b4b632aa59f9ed757dab4ebea"
+    },
+    {
+      "id": "case:recursive-normative-self-conformance:propagation-hypothesis",
+      "sourcePath": "cases/live/recursive-normative-self-conformance/propagation-hypothesis.md",
+      "sha256": "1a5024bdd5fb304bc8c85e23188804a5c1e881bbddbb1f3b793aa5686377621f"
+    },
+    {
+      "id": "case:recursive-normative-self-conformance:review-index",
+      "sourcePath": "cases/live/recursive-normative-self-conformance/reviews/README.md",
+      "sha256": "7095d7d9c3b8f9ee8bb693283589e0db6602001c3fb8a9b7eb6aa3bf6a24dc3f"
+    },
+    {
+      "id": "case:recursive-normative-self-conformance:ontology-split",
+      "sourcePath": "cases/live/recursive-normative-self-conformance/ontology-split.md",
+      "sha256": "88e6195521f11744af478b289fba8e365cb18b33318700a1ad478454ff19d6f8"
+    },
+    {
+      "id": "case:recursive-normative-self-conformance:distinguishability-argument",
+      "sourcePath": "cases/live/recursive-normative-self-conformance/distinguishability.md",
+      "sha256": "74965c30892c2b12ee143d1c5b55e395447a25fabb405f05b2d4e6ddcece0790"
+    },
+    {
+      "id": "case:recursive-normative-self-conformance:candidate:recursive-normative-self-conformance:current-cut",
+      "sourcePath": "cases/live/recursive-normative-self-conformance/cuts/0001-recursive-normative-self-conformance.json",
+      "sha256": "4a046ba5e093368ecb26fb5d2dec6174452bc62b31bd4713fa5e4bb3c1c4f03f"
+    },
+    {
       "id": "candidate:index",
       "sourcePath": "drafts/README.md",
-      "sha256": "b38ac52a3199fd599d2102c63cc41714b2660f49a8edf805bae6a352f1d76d28"
+      "sha256": "3b295b515f5806c08d23efab93d1a80b606376f61bec09273dc41fee490cbf2d"
     },
     {
       "id": "candidate:registry",
       "sourcePath": "drafts/registry.json",
-      "sha256": "7e6eeaca3d3c84aacba04af72b447a9778c93b97883854c174d03f609d4ffea1"
+      "sha256": "07e20f2034d4ff64d55bc5d2eab5ca06e4b319f78c9aa4741b9697869a4d7d6c"
     },
     {
       "id": "candidate:action-state-separation",
@@ -2055,6 +2095,11 @@
       "id": "candidate:federated-work-continuity",
       "sourcePath": "drafts/federated-work-continuity.md",
       "sha256": "34c18ee555ad217b525843dc5f7014ccff25cf88fa0920bf8a6471638231bdf9"
+    },
+    {
+      "id": "candidate:recursive-normative-self-conformance",
+      "sourcePath": "drafts/recursive-normative-self-conformance.md",
+      "sha256": "bb69b572a77374cc606cfd56a994bee109ab20b354cd34063f19dd60d02cada3"
     },
     {
       "id": "candidate:atlas-action-perspective:formal",
@@ -2463,12 +2508,12 @@
     {
       "id": "metadata:live-case-registry",
       "sourcePath": "cases/registry.json",
-      "sha256": "eab3f9666c39022a03f552303ae4d684ff2df53699296192b0768f430d5d1d68"
+      "sha256": "acec3db0686683fa262bce4e4de28ce03dd43c0d077ee691e7e80d80ddc2e57b"
     },
     {
       "id": "metadata:candidate-registry",
       "sourcePath": "drafts/registry.json",
-      "sha256": "7e6eeaca3d3c84aacba04af72b447a9778c93b97883854c174d03f609d4ffea1"
+      "sha256": "07e20f2034d4ff64d55bc5d2eab5ca06e4b319f78c9aa4741b9697869a4d7d6c"
     },
     {
       "id": "metadata:release-impact",
@@ -2503,12 +2548,12 @@
     {
       "id": "metadata:kfd-2-foundation-trust-claims",
       "sourcePath": ".buildchain/kfd-2/kfd-foundation.trust-claims.json",
-      "sha256": "7d227848011892faf48de5a086aa357160d1d958586cc02c9887abdd9e1a5e67"
+      "sha256": "12be23c8b2767400a1965c7ec358bba63ee4cfb9371ee63d7e32fe0dfbbf9fe4"
     },
     {
       "id": "metadata:kfd-2-foundation-trust-assessment",
       "sourcePath": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json",
-      "sha256": "8a980652d4e7158f9d43405eb4a6632d66d6791a40f4bb79727ed6ff072390cb"
+      "sha256": "25ef9af492910a8cade95348dfeb574c68d6e4d388095e34b2552138aee1d397"
     }
   ],
   "packageExports": [
@@ -2527,7 +2572,7 @@
     {
       "id": "site:kfd-site-bundle",
       "sourcePath": "site/kfd-site.json",
-      "sha256": "293f86d3097ea944d4538002fe50c88a4c11fc923b28e68f806bc325881b7a5e"
+      "sha256": "7631f3b00c625c7bc1d35729bc20b66cad4379aea4fbab3bc5c322af565cd1da"
     },
     {
       "id": "site:release-propagation",
