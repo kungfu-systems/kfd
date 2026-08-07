@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.recursive-normative-self-conformance-assessment/v1",
+  "assessmentId": "recursive-normative-self-conformance-no-new-kfd-proposal",
+  "candidateId": "recursive-normative-self-conformance",
+  "purpose": "Determine whether the reviewed pre-number Candidate adds an irreducible KFD responsibility or names a derivable composition of existing responsibilities.",
+  "evaluatedCut": {
+    "repository": "https://github.com/kungfu-systems/kfd",
+    "commit": "09cd4a5c86ba12af8cc603f97e5c2f8a74315973",
+    "pullRequest": "https://github.com/kungfu-systems/kfd/pull/326"
+  },
+  "fixedEvidence": [
+    {
+      "id": "genesis",
+      "path": "evidence/self-conformance/qualification/recursive-normative-self-conformance.genesis.json",
+      "root": "sha256:682ce14c22e7d26c699a19b9a33565454280d0e933d61effa989d7318cfa2926",
+      "rootKind": "exact-bytes"
+    },
+    {
+      "id": "redundancy",
+      "path": "evidence/self-conformance/qualification/recursive-normative-self-conformance.redundancy.json",
+      "root": "sha256:39e0144b696b0a43ddfee044affe942b039e8b31c0d8f098c6b318e73ca9f9c7",
+      "rootKind": "exact-bytes"
+    },
+    {
+      "id": "historical-replay",
+      "path": "evidence/self-conformance/qualification/recursive-normative-self-conformance.replay.json",
+      "root": "sha256:7034905c714777bc9c6c018f3a21595e4d4e8aeb5ce7bfb250bb19a88590b32f",
+      "rootKind": "exact-bytes"
+    },
+    {
+      "id": "genesis-review",
+      "path": "evidence/self-conformance/reviews/recursive-normative-self-conformance.genesis.json",
+      "root": "sha256:b5f1e6b7abc94ef9749f39ed90112c4379d8ebfa4dfd323b2bf6207ea29c6795",
+      "rootKind": "semantic-json"
+    },
+    {
+      "id": "candidate-lifecycle-request",
+      "path": "evidence/self-conformance/transitions/recursive-normative-self-conformance-genesis.request.json",
+      "root": "sha256:4d00f631267f5cab971cf8dd3a035cb20955e333d6eddedf626ab2ade86e30f5",
+      "rootKind": "semantic-json"
+    },
+    {
+      "id": "candidate-lifecycle-report",
+      "path": "evidence/self-conformance/transitions/recursive-normative-self-conformance-genesis.report.json",
+      "root": "sha256:7071efef09ef04846dc4e6c2cc4eb2b38fe715032bc1b0f36ffc51e1b71533e2",
+      "rootKind": "semantic-json"
+    }
+  ],
+  "replayAssessment": {
+    "requiredCases": [
+      "kfd-1-through-kfd-3-bootstrap",
+      "kfd-7-positive-activation",
+      "kfd-11-through-kfd-13-foundation-revision",
+      "kfd-6-partial-autonomous-discovery",
+      "profile-counterfactual-over-history"
+    ],
+    "classificationCounts": {
+      "historical-fact": 3,
+      "retrospective-reconstruction": 1,
+      "counterfactual-replay": 1
+    },
+    "nonRetroactivity": "pass",
+    "finding": "The replay distinguishes retained historical facts from later reconstruction and counterfactual Profile application; it does not infer original conformance."
+  },
+  "redundancyAssessment": {
+    "minimumClosure": "derivable",
+    "deletion": "derivable",
+    "fuse": "derivable",
+    "crossDomainTransfer": "no-independent-object-observed",
+    "profileAlone": "insufficient-and-non-authoritative",
+    "finding": "KFD-1, KFD-2, KFD-5, and KFD-11 supply the normative responsibilities, while the fixed Profile supplies non-authoritative structural machinery."
+  },
+  "falsifierAssessment": [
+    {
+      "id": "deletion-changes-decision-observation",
+      "result": "not-observed",
+      "effect": "supports-no-new-kfd"
+    },
+    {
+      "id": "fuse-creates-authority-ambiguity",
+      "result": "not-observed-with-explicit-role-separation",
+      "effect": "supports-no-new-kfd"
+    },
+    {
+      "id": "cross-domain-irreducible-responsibility",
+      "result": "not-demonstrated",
+      "effect": "withholds-new-kfd"
+    },
+    {
+      "id": "fixed-profile-cannot-fail-closed",
+      "result": "falsified-by-retained-adversarial-suite",
+      "effect": "supports-no-new-kfd"
+    }
+  ],
+  "semanticConclusion": {
+    "outcome": "no-new-kfd",
+    "state": "proposal-pending-independent-review-and-disposition",
+    "reason": "The Candidate is a useful explicit name for recursive application, but every observed responsibility is derivable from the existing KFD closure plus a fixed non-authoritative Profile.",
+    "normativeEffect": "none-before-terminal-receipt-and-repository-admission"
+  },
+  "authoritySeparation": {
+    "assessmentAuthor": "qualification-author",
+    "structuralVerifier": "kfd-native-and-wasm-projections",
+    "independentReviewer": "pending-exact-assessment-cut-review",
+    "dispositionAuthority": "pending-after-independent-review",
+    "repositoryAdmission": "protected-kfd-pull-request",
+    "releaseAuthority": "not-requested"
+  },
+  "residualRisks": [
+    "No independent non-KFD adopter has tested cross-domain transfer.",
+    "The useful procedure name could be mistaken for a new normative Primitive after a no-new-KFD disposition.",
+    "Structural validity could be overstated as semantic qualification unless the terminal receipt retains its non-authority boundary."
+  ],
+  "claimBoundary": "This purpose-bound assessment proposes no-new-kfd for independent review. It cannot approve its own conclusion, issue the terminal disposition, change Candidate status, allocate a number, merge, publish, or release."
+}
