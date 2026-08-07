@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.self-conformance-transition-bundle/v1",
+  "profile": "kfd-self-conformance@1.0.0-alpha.1",
+  "bundleId": "federated-work-continuity-first-cycle-provisional",
+  "transition": "provisional-retention",
+  "previousState": {
+    "schemaVersion": 1,
+    "contract": "kfd.self-conformance-state/v1",
+    "profile": "kfd-self-conformance@1.0.0-alpha.1",
+    "subject": {
+      "id": "kfd-self-conformance-pressure",
+      "kind": "pressure-field",
+      "number": null
+    },
+    "semanticState": "candidate",
+    "publicationState": "unpublished",
+    "immutableCoordinates": {
+      "repository": "https://github.com/kungfu-systems/kfd",
+      "commit": "3835eff362c05f0389ee913196a3dc46cc8767a9",
+      "path": "evidence/self-conformance/qualification/federated-work-continuity-first-cycle.pressure.json",
+      "contentRoot": "sha256:414b5ae7b5afeae114780b8509b2780b836025e9c60618e2a0d71ec5e9c72aa3"
+    }
+  },
+  "previousStateRoot": "sha256:4e9a9c58ed35d24095249536a9065503a267ff6e7f1d6d93f766dae737b95e82",
+  "proposedState": {
+    "schemaVersion": 1,
+    "contract": "kfd.self-conformance-state/v1",
+    "profile": "kfd-self-conformance@1.0.0-alpha.1",
+    "subject": {
+      "id": "kfd-self-conformance-pressure",
+      "kind": "pressure-field",
+      "number": null
+    },
+    "semanticState": "provisional",
+    "publicationState": "unpublished",
+    "immutableCoordinates": {
+      "repository": "https://github.com/kungfu-systems/kfd",
+      "commit": "3835eff362c05f0389ee913196a3dc46cc8767a9",
+      "path": "evidence/self-conformance/qualification/federated-work-continuity-first-cycle.pressure.json",
+      "contentRoot": "sha256:414b5ae7b5afeae114780b8509b2780b836025e9c60618e2a0d71ec5e9c72aa3"
+    }
+  },
+  "proposedStateRoot": "sha256:3f562fa724c1333fddee7d107838d73090cc2051369fe7b2091a6371a8e8af96",
+  "predecessor": {
+    "kind": "report",
+    "bootstrapAnchorRoot": null,
+    "reportRoot": "sha256:0fb85f2dbd11dba10648bbc85a7f8a563674d4b18c6d6dfe452c6db80b40d9bb",
+    "packageRoot": "sha256:596a1e4b0d57e93fefcb4f32ff2df5be35a56cf86fb8864f5d0ab09b12cd8770"
+  },
+  "evidenceRoots": [
+    "sha256:ad8674b96dba0497e70c6ca7729a9d2f3fcfda76d34b648e90a189bea9dd3310"
+  ],
+  "schemaSetRoot": "sha256:8def5dbde4cb0659f8d913c4145c4373fe031022158d5bbdc0db0bdb177fc45b",
+  "verifierRoot": "sha256:ec577004be9f0d30ce69a60a30979767489a86fb5c47d32393a8ca76b840e9aa",
+  "authorityReceiptRoot": "sha256:77334972b826dfa91804335c36f5e6b96888c2d9b58cc3de62bd1e4f680471ef",
+  "reviewReceiptRoot": "sha256:e82e774d31ec9ef447334130addba71492f7c34cfc5614427d54cc7abd88ceef",
+  "claimBoundary": "This bundle records structural evidence for one bounded dogfood transition only; no semantic truth, certification, adoption, numbering, status, approval, merge, or release authority is claimed.",
+  "knownGaps": [
+    "fixed-root decision-change witness",
+    "independent qualification review over complete evidence",
+    "measured reconstruction-cost comparison",
+    "non-software or structurally non-isomorphic transfer"
+  ],
+  "expectedResult": "pass",
+  "immutableCoordinates": [
+    {
+      "kind": "document",
+      "value": "evidence/self-conformance/qualification/federated-work-continuity-first-cycle.assessment.json#sha256:ad8674b96dba0497e70c6ca7729a9d2f3fcfda76d34b648e90a189bea9dd3310",
+      "root": "sha256:ad8674b96dba0497e70c6ca7729a9d2f3fcfda76d34b648e90a189bea9dd3310"
+    }
+  ]
+}

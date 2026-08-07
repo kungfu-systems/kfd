@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.self-conformance-qualification-assessment/v1",
+  "cycleId": "federated-work-continuity-first-cycle",
+  "candidateId": "federated-work-continuity",
+  "pressureDeclarationRoot": "sha256:dc0df003aba75c8dcabba33e8bcb17dc57b0d967f8bc442267a8d49ae77557cc",
+  "inputCommit": "3835eff362c05f0389ee913196a3dc46cc8767a9",
+  "checks": [
+    {
+      "id": "authority-and-component-cut-preservation",
+      "result": "supported",
+      "evidence": [
+        "cases/live/federated-work-continuity/cuts/0002-work.json"
+      ],
+      "finding": "The current Work Control evidence keeps Initiative, Assignment, WorkRef, Portfolio observation, workspace, review, and Project Cut authority distinct. This supports the boundary but does not establish an independent Work Primitive."
+    },
+    {
+      "id": "cross-domain-transfer",
+      "result": "absent",
+      "evidence": [],
+      "finding": "No retained non-software or structurally non-isomorphic adopter comparison exists."
+    },
+    {
+      "id": "fixed-root-deletion-and-fuse-witnesses",
+      "result": "inconclusive",
+      "evidence": [
+        "cases/live/federated-work-continuity/distinguishability.md",
+        "cases/live/federated-work-continuity/ontology-split.md"
+      ],
+      "finding": "The experiments are specified, but no independently reproduced result changes a bounded decision while component roots remain fixed."
+    },
+    {
+      "id": "independent-review",
+      "result": "absent",
+      "evidence": [
+        "cases/live/federated-work-continuity/reviews/README.md"
+      ],
+      "finding": "The source explicitly records that no independent qualification review has completed. Review of this disposition cannot retroactively supply the missing qualification evidence."
+    },
+    {
+      "id": "initiative-and-view-alternative-comparison",
+      "result": "inconclusive",
+      "evidence": [
+        "cases/live/federated-work-continuity/cuts/0002-work.json",
+        "cases/live/federated-work-continuity/ontology-split.md"
+      ],
+      "finding": "Independent entity, derived Work view, Initiative plus Assignment Graph, Portfolio vocabulary, and no-new-Primitive alternatives all remain viable."
+    },
+    {
+      "id": "measured-reconstruction-cost",
+      "result": "absent",
+      "evidence": [
+        "cases/live/federated-work-continuity/distinguishability.md"
+      ],
+      "finding": "Reconstruction pressure is stated but no consequence-bearing user journey has a retained measurement."
+    },
+    {
+      "id": "multi-workspace-federation-dogfood",
+      "result": "partial",
+      "evidence": [
+        "cases/live/federated-work-continuity/README.md",
+        "cases/live/federated-work-continuity/cuts/0002-work.json"
+      ],
+      "finding": "Founding Work Control implementation pressure exists, while comparative KFD-5 dogfood remains inconclusive."
+    }
+  ],
+  "semanticConclusion": {
+    "outcome": "provisional",
+    "decision": "retain-provisional",
+    "reason": "One boundary-preservation check is supported and implementation dogfood is partial, but the deletion and fuse witnesses remain inconclusive and cross-domain transfer, measured reconstruction cost, and an independent qualification review are absent."
+  },
+  "unresolvedGaps": [
+    "fixed-root decision-change witness",
+    "independent qualification review over complete evidence",
+    "measured reconstruction-cost comparison",
+    "non-software or structurally non-isomorphic transfer"
+  ],
+  "nonClaims": [
+    "No KFD number is allocated.",
+    "No implementation is qualified or certified.",
+    "No lifecycle status change is performed by the verifier.",
+    "No ontology alternative is selected.",
+    "No semantic truth or cross-domain necessity is proved."
+  ]
+}
