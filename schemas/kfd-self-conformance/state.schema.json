@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-self-conformance/state.schema.json",
+  "title": "KFD Self-Conformance state",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "contract",
+    "profile",
+    "subject",
+    "semanticState",
+    "publicationState",
+    "immutableCoordinates"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "contract": { "const": "kfd.self-conformance-state/v1" },
+    "profile": { "const": "kfd-self-conformance@1.0.0-alpha.1" },
+    "subject": {
+      "type": "object",
+      "required": ["id", "kind"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "kind": {
+          "enum": ["pressure-field", "candidate", "numbered-decision", "foundation", "release"]
+        },
+        "number": { "type": ["integer", "null"], "minimum": 1 }
+      },
+      "additionalProperties": false
+    },
+    "semanticState": {
+      "enum": [
+        "absent",
+        "candidate",
+        "qualified",
+        "numbered-draft",
+        "active",
+        "superseded",
+        "foundation-revised",
+        "revised",
+        "rejected",
+        "provisional",
+        "no-new-kfd"
+      ]
+    },
+    "publicationState": { "enum": ["unpublished", "packaged"] },
+    "immutableCoordinates": {
+      "type": "object",
+      "required": ["repository", "commit", "path", "contentRoot"],
+      "properties": {
+        "repository": { "type": "string", "format": "uri" },
+        "commit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "path": { "type": "string", "minLength": 1, "pattern": "^(?!/)(?!.*\\.\\./).+$" },
+        "contentRoot": { "$ref": "#/$defs/root" },
+        "packageVersion": { "type": "string", "minLength": 1 },
+        "packageRoot": { "$ref": "#/$defs/root" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "root": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+  },
+  "additionalProperties": false
+}

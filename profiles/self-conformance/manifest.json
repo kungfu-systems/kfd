@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.self-conformance-package-manifest/v1",
+  "profile": {
+    "id": "kfd-self-conformance",
+    "version": "1.0.0-alpha.1",
+    "status": "experimental"
+  },
+  "authority": "profiles/self-conformance/README.md",
+  "rootAlgorithm": "sha256-kfd-canonical-json-v1",
+  "schemaSetRoot": "sha256:b22ed964f65c9c3abbc3279a6e8a07114f133d42dc118d5eff0817df0314d050",
+  "vectorSetRoot": "sha256:7aa445ee976770ecb1b8146db6382d738156b6ae289454abb7b6c720de1121f5",
+  "issueSetRoot": "sha256:b765e9f4c6b8ad74d83239745be1ae2d95a9af118880c6dd517a6b0e5bb90dd0",
+  "bootstrapAnchorRoot": "sha256:26961922619d090faf9c76f8bf0e25947100a5d13be6831366f1a0933c7ced59",
+  "verifierRequirement": {
+    "native": true,
+    "wasm": true,
+    "byteParity": true,
+    "offline": true,
+    "independent": true
+  },
+  "runtimeDependencies": [],
+  "forbiddenDependencies": [
+    "Kungfu runtime or checkout",
+    "Buildchain runtime or checkout",
+    "KFX runtime or checkout",
+    "external control-plane workspace",
+    "private repository or registry",
+    "network access",
+    "ambient Home state",
+    "credentials or tokens"
+  ],
+  "surfaces": [
+    {
+      "path": "profiles/self-conformance/README.md",
+      "role": "authority",
+      "digest": "sha256:e35f374b710abd5a2d5e9e0c89a69adc7839959fa5998539ba5135b52378c511"
+    },
+    {
+      "path": "profiles/self-conformance/bootstrap-anchor.json",
+      "role": "reference",
+      "digest": "sha256:5e1b1d984607d7805dd5a014b705f97e4794c8bc0b3de4ab70ae78ee394424af"
+    },
+    {
+      "path": "profiles/self-conformance/bootstrap-evidence.json",
+      "role": "reference",
+      "digest": "sha256:5ae0d2e8dcf31d57fe095caf697a8873806b98c996c577bf5f2c17232e64a3c1"
+    },
+    {
+      "path": "profiles/self-conformance/extraction-manifest.json",
+      "role": "extraction",
+      "digest": "sha256:cae4d0fb788da76e9397a67b2dba333cd40805b7df8166b6dd645f3b8abf17a7"
+    },
+    {
+      "path": "profiles/self-conformance/implementer-guide.md",
+      "role": "guide",
+      "digest": "sha256:45baebb759f8827c4e54485ca203885c5313b5b6d9b819c89a020e280821b54f"
+    },
+    {
+      "path": "profiles/self-conformance/issue-codes.json",
+      "role": "reference",
+      "digest": "sha256:5c27420a9836ec705e5bcd1f2a128542e43fc743761a16566a70aa2c9bf31e7e"
+    },
+    {
+      "path": "profiles/self-conformance/vectors/contract-vectors.json",
+      "role": "vectors",
+      "digest": "sha256:364428704d34f1e3995d390dc8e76eb72cf29c0f8b29d2d5c1d95739fa6ea8df"
+    },
+    {
+      "path": "schemas/kfd-self-conformance/bootstrap-anchor.schema.json",
+      "role": "schema",
+      "digest": "sha256:0a1d8d789879f0c1196cb29ca23846f77f86b0c6ba088e72dda033ce35d64a0f"
+    },
+    {
+      "path": "schemas/kfd-self-conformance/package-manifest.schema.json",
+      "role": "schema",
+      "digest": "sha256:7c6ab674ecc7cff2d5b925d221637272942abf9295fb72ddf323bbd056f2f1d8"
+    },
+    {
+      "path": "schemas/kfd-self-conformance/state.schema.json",
+      "role": "schema",
+      "digest": "sha256:433d3c3661b009c3d9e301027d8f4aebf2cedac6f8518c3687395fb8acd3deb4"
+    },
+    {
+      "path": "schemas/kfd-self-conformance/transition-bundle.schema.json",
+      "role": "schema",
+      "digest": "sha256:6c2f00cb85fdef7004195bd01cbf890470c27e791bd6a79aaeceb2f3bb459f73"
+    },
+    {
+      "path": "schemas/kfd-self-conformance/transition-report.schema.json",
+      "role": "schema",
+      "digest": "sha256:17c930354ce9780ab2932513b563e2cbf2df7d14669b1e984c271cc91430c304"
+    },
+    {
+      "path": "schemas/kfd-self-conformance/vector-registry.schema.json",
+      "role": "schema",
+      "digest": "sha256:253b15fd5317d8f9bf07eeb7eb75e509bd705c4ad39bb8e955e21dd02c49c946"
+    },
+    {
+      "path": "scripts/check-self-conformance-profile.mjs",
+      "role": "check",
+      "digest": "sha256:ae0d4d6377231fbbde6a1729822f2691a277b4308853a1ab2492a82482e690bf"
+    },
+    {
+      "path": "scripts/self-conformance-contract.mjs",
+      "role": "check",
+      "digest": "sha256:40a0d749b043ddcec75769579ca07107c39893454519c66648b9217846af5f1e"
+    }
+  ],
+  "claimBoundary": "The fixed package proves only the published Self-Conformance contract closure and vectors. It does not prove semantic truth, approval, certification, adoption, product fitness, lifecycle authority, or release authorization."
+}

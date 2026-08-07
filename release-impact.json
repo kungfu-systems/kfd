@@ -245,6 +245,12 @@
       "impact": "minor",
       "class": "additive",
       "rationale": "KFD-1 now publishes a machine-readable schema for canonical reader URLs, latest aliases, immutable version artifact URLs, artifact digests, source coordinates, lineage, site consumption, and archive policies that prevent same-version digest drift or destructive deletion of immutable publication prefixes."
+    },
+    {
+      "id": "kfd-self-conformance-profile-v1",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD additively publishes the versioned kfd-self-conformance 1.0.0-alpha.1 profile, finite predecessor/bootstrap rules, state and transition schemas, stable issue namespace, canonical positive and negative vectors, clean-room package manifest, and explicit non-authority boundaries without changing any Candidate number or decision status."
     }
   ],
   "summary": "KFD v1.0 is an open, evidence-governed engineering standard under development for reliable action and continuity under uncertainty. Its current decisions form a small, testable foundation rather than a claimed final theory. Kungfu-systems remains the founding steward and mandatory adopter, while any adopter may declare an independent scope and any participant may propose, challenge, implement, or review KFD work. KFD-7 revision 7 distinguishes the Fact-Episode Ontology from the Action Responsibility Geometry of direction, perspective, and authority; KFD-8 through KFD-10 allocate its draft perspective, direction, and authority coordinates. The authorized pre-stable Foundation Revision allocates KFD-11 to Claim-Assessment-Decision-Admission separation and maps the two software-domain applications to KFD-12 and KFD-13 while preserving immutable prior coordinates. Universal minimality and future Profile qualification remain unclaimed."

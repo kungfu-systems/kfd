@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-self-conformance/vector-registry.schema.json",
+  "title": "KFD Self-Conformance contract vector registry",
+  "type": "object",
+  "required": ["schemaVersion", "contract", "profile", "base", "vectors"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "contract": { "const": "kfd.self-conformance-vector-registry/v1" },
+    "profile": { "const": "kfd-self-conformance@1.0.0-alpha.1" },
+    "base": {
+      "type": "object",
+      "required": ["bootstrapAnchor", "exampleEvidence", "bundle", "report"],
+      "properties": {
+        "bootstrapAnchor": { "$ref": "bootstrap-anchor.schema.json" },
+        "exampleEvidence": { "type": "object" },
+        "bundle": { "$ref": "transition-bundle.schema.json" },
+        "report": { "$ref": "transition-report.schema.json" }
+      },
+      "additionalProperties": false
+    },
+    "vectors": {
+      "type": "array",
+      "minItems": 2,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "required": ["id", "invariant", "polarity", "operations", "expected"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^scp-v[0-9]{3}$" },
+          "invariant": { "type": "string", "minLength": 1 },
+          "polarity": { "enum": ["positive", "negative"] },
+          "operations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["op", "path"],
+              "properties": {
+                "op": { "enum": ["add", "remove", "replace"] },
+                "path": { "type": "string", "pattern": "^/" },
+                "value": {}
+              },
+              "additionalProperties": false
+            }
+          },
+          "expected": {
+            "type": "object",
+            "required": ["valid", "code"],
+            "properties": {
+              "valid": { "type": "boolean" },
+              "code": { "type": ["string", "null"] }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

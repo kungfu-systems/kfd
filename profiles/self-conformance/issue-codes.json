@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.self-conformance-issue-codes/v1",
+  "profile": "kfd-self-conformance@1.0.0-alpha.1",
+  "codes": [
+    "scp-authority-receipt-missing",
+    "scp-bootstrap-anchor-invalid",
+    "scp-claim-boundary-missing",
+    "scp-claim-overreach",
+    "scp-contract-invalid",
+    "scp-evidence-roots-missing",
+    "scp-expected-result-mismatch",
+    "scp-immutable-coordinate-missing",
+    "scp-known-gaps-missing",
+    "scp-predecessor-root-mismatch",
+    "scp-profile-version-unsupported",
+    "scp-proposed-root-mismatch",
+    "scp-review-receipt-missing",
+    "scp-schema-set-root-mismatch",
+    "scp-self-containing-package",
+    "scp-self-containing-report",
+    "scp-transition-state-invalid",
+    "scp-transition-unsupported",
+    "scp-verifier-root-missing"
+  ],
+  "ordering": ["code", "path", "message"],
+  "unknownFailureCode": "scp-contract-invalid",
+  "claimBoundary": "Issue codes identify structural failures only; they do not express semantic truth, approval, certification, adoption, or release authority."
+}

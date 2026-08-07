@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.self-conformance-extraction-manifest/v1",
+  "profile": "kfd-self-conformance@1.0.0-alpha.1",
+  "mode": "published-kfd-package",
+  "offline": true,
+  "files": [
+    "LICENSE",
+    "profiles/self-conformance/README.md",
+    "profiles/self-conformance/implementer-guide.md",
+    "profiles/self-conformance/manifest.json",
+    "profiles/self-conformance/extraction-manifest.json",
+    "profiles/self-conformance/bootstrap-anchor.json",
+    "profiles/self-conformance/bootstrap-evidence.json",
+    "profiles/self-conformance/issue-codes.json",
+    "profiles/self-conformance/vectors/contract-vectors.json",
+    "schemas/kfd-self-conformance/bootstrap-anchor.schema.json",
+    "schemas/kfd-self-conformance/package-manifest.schema.json",
+    "schemas/kfd-self-conformance/state.schema.json",
+    "schemas/kfd-self-conformance/transition-bundle.schema.json",
+    "schemas/kfd-self-conformance/transition-report.schema.json",
+    "schemas/kfd-self-conformance/vector-registry.schema.json",
+    "scripts/self-conformance-contract.mjs",
+    "scripts/check-self-conformance-profile.mjs"
+  ],
+  "forbidden": [
+    "Kungfu runtime or checkout",
+    "Buildchain runtime or checkout",
+    "KFX runtime or checkout",
+    "external control-plane workspace",
+    "private repository or registry",
+    "network access",
+    "ambient Home state",
+    "credentials or tokens"
+  ],
+  "claimBoundary": "This allowlist reproduces the profile contract and fixed contract vectors only; the independent native/WebAssembly verifier matrix is a separately versioned surface."
+}
