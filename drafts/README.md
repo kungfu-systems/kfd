@@ -61,11 +61,14 @@ Incubating now:
   Assignments, workspaces, and cuts through which it advances. Its strongest
   alternatives remain Initiative, a perspective-bound derived view, and no new
   Primitive.
+
+Resolved without a new KFD:
+
 - [Recursive normative self-conformance](recursive-normative-self-conformance.md)
-  asks whether a normative system's fixed-root self-application is an
-  independent procedure or the derivable closure of KFD-1, KFD-2, KFD-5,
-  KFD-11, and the existing Self-Conformance Profile. It is qualifying without a
-  slot hint or number, and `no-new-kfd` remains an explicit terminal outcome.
+  is retained as the explicit composition of KFD-1, KFD-2, KFD-5, KFD-11, and
+  the fixed Self-Conformance Profile. Independent exact-cut review accepted the
+  `no-new-kfd` disposition; the Candidate is `merged` without a slot hint,
+  number, or change to any numbered KFD.
 
 The promoted pages remain public lineage and do not replace their numbered
 decisions. Incubating pages are non-normative and allocate no number.

@@ -1,0 +1,237 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.self-conformance-lifecycle-gate-request/v1",
+  "profile": "kfd-self-conformance@1.0.0-alpha.1",
+  "gateId": "recursive-normative-self-conformance-terminal",
+  "lifecyclePath": "qualification",
+  "fixedPackageRoot": "sha256:596a1e4b0d57e93fefcb4f32ff2df5be35a56cf86fb8864f5d0ab09b12cd8770",
+  "expectedTerminalBundleRoot": "sha256:1dda7286370c7221d87539d4749fb07017f94238040e324c02fc633c19b797e9",
+  "chain": [
+    {
+      "bundle": {
+        "schemaVersion": 1,
+        "contract": "kfd.self-conformance-transition-bundle/v1",
+        "profile": "kfd-self-conformance@1.0.0-alpha.1",
+        "bundleId": "recursive-normative-self-conformance-genesis",
+        "transition": "candidate-genesis",
+        "previousState": {
+          "schemaVersion": 1,
+          "contract": "kfd.self-conformance-state/v1",
+          "profile": "kfd-self-conformance@1.0.0-alpha.1",
+          "subject": {
+            "id": "kfd-self-conformance-pressure",
+            "kind": "pressure-field",
+            "number": null
+          },
+          "semanticState": "absent",
+          "publicationState": "unpublished",
+          "immutableCoordinates": {
+            "repository": "https://github.com/kungfu-systems/kfd",
+            "commit": "a219407a45f43bfec1dba9df72b4469424aa4b19",
+            "path": "drafts/registry.json",
+            "contentRoot": "sha256:7e6eeaca3d3c84aacba04af72b447a9778c93b97883854c174d03f609d4ffea1",
+            "packageVersion": "1.0.0-alpha.55",
+            "packageRoot": "sha256:114c195fea83c65ec84e52def6c2afced8a4ca9d2c9abe813f5c9c5d3b50260a"
+          }
+        },
+        "previousStateRoot": "sha256:dee2c0c23b30ab37395b548af698bf9800a9b33ebcba5efdf34c7c250ebf1049",
+        "proposedState": {
+          "schemaVersion": 1,
+          "contract": "kfd.self-conformance-state/v1",
+          "profile": "kfd-self-conformance@1.0.0-alpha.1",
+          "subject": {
+            "id": "kfd-self-conformance-pressure",
+            "kind": "pressure-field",
+            "number": null
+          },
+          "semanticState": "candidate",
+          "publicationState": "unpublished",
+          "immutableCoordinates": {
+            "repository": "https://github.com/kungfu-systems/kfd",
+            "commit": "7fb4c67718807856bd001dd7bf3c64bd32189827",
+            "path": "evidence/self-conformance/qualification/recursive-normative-self-conformance.genesis.json",
+            "contentRoot": "sha256:682ce14c22e7d26c699a19b9a33565454280d0e933d61effa989d7318cfa2926"
+          }
+        },
+        "proposedStateRoot": "sha256:8c268b506617a08c00eefefa06db334481873cdcfbfef473a2d57f74cb57cc8a",
+        "predecessor": {
+          "kind": "bootstrap",
+          "bootstrapAnchorRoot": "sha256:26961922619d090faf9c76f8bf0e25947100a5d13be6831366f1a0933c7ced59",
+          "reportRoot": null,
+          "packageRoot": "sha256:114c195fea83c65ec84e52def6c2afced8a4ca9d2c9abe813f5c9c5d3b50260a"
+        },
+        "evidenceRoots": [
+          "sha256:4145f8eff1a9352e9eab3189853da44f795df10615f13b664dc826caaa745bea",
+          "sha256:b5f1e6b7abc94ef9749f39ed90112c4379d8ebfa4dfd323b2bf6207ea29c6795"
+        ],
+        "schemaSetRoot": "sha256:8def5dbde4cb0659f8d913c4145c4373fe031022158d5bbdc0db0bdb177fc45b",
+        "verifierRoot": "sha256:ec577004be9f0d30ce69a60a30979767489a86fb5c47d32393a8ca76b840e9aa",
+        "authorityReceiptRoot": "sha256:7584445751699c88d126b02ecc5716acb3ae80a1501f7a6538f8eb95abb4c689",
+        "reviewReceiptRoot": "sha256:f714cd1a32c4b7b1560e5597244d8826981c26cb0d77a0473ffbd2375c35d7b5",
+        "claimBoundary": "This bundle records one reviewed pre-number Candidate genesis. Structural validity is necessary but cannot certify semantic truth or supply terminal disposition, numbering, activation, merge, publication, or release authority.",
+        "knownGaps": [
+          "No authority-separated terminal disposition has been reviewed or retained.",
+          "No non-KFD adopter demonstrates an irreducible recursive responsibility.",
+          "The KFD-1 through KFD-3 bootstrap remains retrospective reconstruction under the later Profile.",
+          "The reviewed genesis predates this structural lifecycle envelope."
+        ],
+        "expectedResult": "pass",
+        "immutableCoordinates": [
+          {
+            "kind": "document",
+            "value": "https://github.com/kungfu-systems/kfd/pull/326/commits/7fb4c67718807856bd001dd7bf3c64bd32189827#sha256:682ce14c22e7d26c699a19b9a33565454280d0e933d61effa989d7318cfa2926",
+            "root": "sha256:682ce14c22e7d26c699a19b9a33565454280d0e933d61effa989d7318cfa2926"
+          },
+          {
+            "kind": "document",
+            "value": "https://github.com/kungfu-systems/kfd/pull/326#pullrequestreview-4884841518#sha256:b5f1e6b7abc94ef9749f39ed90112c4379d8ebfa4dfd323b2bf6207ea29c6795",
+            "root": "sha256:b5f1e6b7abc94ef9749f39ed90112c4379d8ebfa4dfd323b2bf6207ea29c6795"
+          }
+        ]
+      },
+      "authorityReceipt": {
+        "schemaVersion": 1,
+        "contract": "kfd.self-conformance-lifecycle-authority-receipt/v1",
+        "receiptId": "recursive-normative-self-conformance-genesis-authority",
+        "lifecyclePath": "candidate",
+        "transition": "candidate-genesis",
+        "previousStateRoot": "sha256:dee2c0c23b30ab37395b548af698bf9800a9b33ebcba5efdf34c7c250ebf1049",
+        "proposedStateRoot": "sha256:8c268b506617a08c00eefefa06db334481873cdcfbfef473a2d57f74cb57cc8a",
+        "role": "provenance-owner",
+        "decision": "record-candidate",
+        "actor": "dongkeren",
+        "claimBoundary": "This receipt records the reviewed genesis as a pre-number Candidate only. It does not decide qualification, terminal disposition, numbering, activation, merge, publication, or release."
+      },
+      "reviewReceipt": {
+        "schemaVersion": 1,
+        "contract": "kfd.self-conformance-lifecycle-review-receipt/v1",
+        "receiptId": "recursive-normative-self-conformance-genesis-review",
+        "transition": "candidate-genesis",
+        "previousStateRoot": "sha256:dee2c0c23b30ab37395b548af698bf9800a9b33ebcba5efdf34c7c250ebf1049",
+        "proposedStateRoot": "sha256:8c268b506617a08c00eefefa06db334481873cdcfbfef473a2d57f74cb57cc8a",
+        "author": "dongkeren",
+        "reviewer": "kungfu-origin",
+        "independent": true,
+        "verdict": "approve",
+        "claimBoundary": "This receipt projects public review PRR_kwDOTLH7GM8AAAABIyjELg of exact commit 7fb4c67718807856bd001dd7bf3c64bd32189827 into the structural gate. It covers genesis only and does not approve any later terminal disposition."
+      },
+      "packageRoot": "sha256:596a1e4b0d57e93fefcb4f32ff2df5be35a56cf86fb8864f5d0ab09b12cd8770",
+      "expectedBundleRoot": "sha256:154809d0f44fcd39a08077e79390d9f0dd18dff6d3ca2229e9e1654b1557faf2",
+      "expectedReportRoot": "sha256:0fb85f2dbd11dba10648bbc85a7f8a563674d4b18c6d6dfe452c6db80b40d9bb"
+    },
+    {
+      "bundle": {
+        "schemaVersion": 1,
+        "contract": "kfd.self-conformance-transition-bundle/v1",
+        "profile": "kfd-self-conformance@1.0.0-alpha.1",
+        "bundleId": "recursive-normative-self-conformance-terminal",
+        "transition": "no-new-kfd",
+        "previousState": {
+          "schemaVersion": 1,
+          "contract": "kfd.self-conformance-state/v1",
+          "profile": "kfd-self-conformance@1.0.0-alpha.1",
+          "subject": {
+            "id": "kfd-self-conformance-pressure",
+            "kind": "pressure-field",
+            "number": null
+          },
+          "semanticState": "candidate",
+          "publicationState": "unpublished",
+          "immutableCoordinates": {
+            "repository": "https://github.com/kungfu-systems/kfd",
+            "commit": "7fb4c67718807856bd001dd7bf3c64bd32189827",
+            "path": "evidence/self-conformance/qualification/recursive-normative-self-conformance.genesis.json",
+            "contentRoot": "sha256:682ce14c22e7d26c699a19b9a33565454280d0e933d61effa989d7318cfa2926"
+          }
+        },
+        "previousStateRoot": "sha256:8c268b506617a08c00eefefa06db334481873cdcfbfef473a2d57f74cb57cc8a",
+        "proposedState": {
+          "schemaVersion": 1,
+          "contract": "kfd.self-conformance-state/v1",
+          "profile": "kfd-self-conformance@1.0.0-alpha.1",
+          "subject": {
+            "id": "kfd-self-conformance-pressure",
+            "kind": "pressure-field",
+            "number": null
+          },
+          "semanticState": "no-new-kfd",
+          "publicationState": "unpublished",
+          "immutableCoordinates": {
+            "repository": "https://github.com/kungfu-systems/kfd",
+            "commit": "5791476b226b0ce26f98538704e71f7e29e04956",
+            "path": "evidence/self-conformance/qualification/recursive-normative-self-conformance.assessment.json",
+            "contentRoot": "sha256:b61a2fd28bc264baabf206235232fc0e55279b637d72912cd65c3419bfbbcfd7"
+          }
+        },
+        "proposedStateRoot": "sha256:5505317857f69803838d14339b0eaea8804ae3ec51b8ce8264ea1e92f13ff43c",
+        "predecessor": {
+          "kind": "report",
+          "bootstrapAnchorRoot": null,
+          "reportRoot": "sha256:0fb85f2dbd11dba10648bbc85a7f8a563674d4b18c6d6dfe452c6db80b40d9bb",
+          "packageRoot": "sha256:596a1e4b0d57e93fefcb4f32ff2df5be35a56cf86fb8864f5d0ab09b12cd8770"
+        },
+        "evidenceRoots": [
+          "sha256:083b266be9a7909fce3de59b8846e901266a60d9858f56db5788a2e1cd6bd1c4",
+          "sha256:9781a8dd1abc44f28ad2c8091162b7ef300aec29144a06c8bae254b1ec6dccf5",
+          "sha256:cf7fd7a90e6aebca3e5da01dac43aa1639e6bd4a6eddcf7b19525c57ff916ed8",
+          "sha256:ea6b3c50588f2867527aad93469a7d5f5384c83b57e072c7348888380deacbb2"
+        ],
+        "schemaSetRoot": "sha256:8def5dbde4cb0659f8d913c4145c4373fe031022158d5bbdc0db0bdb177fc45b",
+        "verifierRoot": "sha256:ec577004be9f0d30ce69a60a30979767489a86fb5c47d32393a8ca76b840e9aa",
+        "authorityReceiptRoot": "sha256:c1d0647da2403268db7367d2d236e1cd4f05b98d7f560c94c821095c57348079",
+        "reviewReceiptRoot": "sha256:6119545041dfffd7fd7d45f37bf605bfabbf97784bcf5e887b9028e336811720",
+        "claimBoundary": "This bundle retains the authority-separated no-new-kfd disposition as a non-promotion outcome. Structural validity cannot approve itself, allocate a number, change a numbered KFD, merge, publish, or release.",
+        "knownGaps": [
+          "No independent non-KFD adopter has tested cross-domain transfer.",
+          "Structural validity could be overstated as semantic qualification unless the terminal receipt retains its non-authority boundary.",
+          "The useful procedure name could be mistaken for a new normative Primitive after a no-new-KFD disposition."
+        ],
+        "expectedResult": "pass",
+        "immutableCoordinates": [
+          {
+            "kind": "document",
+            "value": "https://github.com/kungfu-systems/kfd/pull/326/commits/5791476b226b0ce26f98538704e71f7e29e04956#sha256:b61a2fd28bc264baabf206235232fc0e55279b637d72912cd65c3419bfbbcfd7",
+            "root": "sha256:b61a2fd28bc264baabf206235232fc0e55279b637d72912cd65c3419bfbbcfd7"
+          },
+          {
+            "kind": "document",
+            "value": "https://github.com/kungfu-systems/kfd/pull/326#pullrequestreview-4885129828#sha256:cf7fd7a90e6aebca3e5da01dac43aa1639e6bd4a6eddcf7b19525c57ff916ed8",
+            "root": "sha256:cf7fd7a90e6aebca3e5da01dac43aa1639e6bd4a6eddcf7b19525c57ff916ed8"
+          }
+        ]
+      },
+      "authorityReceipt": {
+        "schemaVersion": 1,
+        "contract": "kfd.self-conformance-lifecycle-authority-receipt/v1",
+        "receiptId": "recursive-normative-self-conformance-terminal-authority",
+        "lifecyclePath": "qualification",
+        "transition": "no-new-kfd",
+        "previousStateRoot": "sha256:8c268b506617a08c00eefefa06db334481873cdcfbfef473a2d57f74cb57cc8a",
+        "proposedStateRoot": "sha256:5505317857f69803838d14339b0eaea8804ae3ec51b8ce8264ea1e92f13ff43c",
+        "role": "review-disposition",
+        "decision": "no-new-kfd",
+        "actor": "dongkeren",
+        "claimBoundary": "This disposition records no-new-kfd after independent semantic review PRR_kwDOTLH7GM8AAAABIy0qZA. It allocates no number, changes no numbered KFD, and does not authorize merge, publication, or release."
+      },
+      "reviewReceipt": {
+        "schemaVersion": 1,
+        "contract": "kfd.self-conformance-lifecycle-review-receipt/v1",
+        "receiptId": "recursive-normative-self-conformance-terminal-review",
+        "transition": "no-new-kfd",
+        "previousStateRoot": "sha256:8c268b506617a08c00eefefa06db334481873cdcfbfef473a2d57f74cb57cc8a",
+        "proposedStateRoot": "sha256:5505317857f69803838d14339b0eaea8804ae3ec51b8ce8264ea1e92f13ff43c",
+        "author": "qualification-author",
+        "reviewer": "kungfu-origin",
+        "independent": true,
+        "verdict": "approve",
+        "claimBoundary": "This receipt projects public review PRR_kwDOTLH7GM8AAAABIy0qZA of exact assessment commit 5791476b226b0ce26f98538704e71f7e29e04956. The review accepts the semantic recommendation but did not pre-review this later envelope."
+      },
+      "packageRoot": "sha256:596a1e4b0d57e93fefcb4f32ff2df5be35a56cf86fb8864f5d0ab09b12cd8770",
+      "expectedBundleRoot": "sha256:1dda7286370c7221d87539d4749fb07017f94238040e324c02fc633c19b797e9",
+      "expectedReportRoot": "sha256:0fb85f2dbd11dba10648bbc85a7f8a563674d4b18c6d6dfe452c6db80b40d9bb"
+    }
+  ],
+  "counterevidenceRoots": [
+    "sha256:ea6b3c50588f2867527aad93469a7d5f5384c83b57e072c7348888380deacbb2"
+  ]
+}
