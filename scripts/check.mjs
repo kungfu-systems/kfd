@@ -957,6 +957,74 @@ if (
 ) {
   fail("site bundle homepage product proof path and reading path must discover /verify");
 }
+const selfConformancePage = siteBundle.selfConformancePage;
+if (
+  siteBundle.source?.selfConformanceProfile !== "profiles/self-conformance/README.md" ||
+  siteBundle.source?.selfConformanceManifest !== "profiles/self-conformance/manifest.json" ||
+  siteBundle.source?.recursiveSelfConformanceTerminalReport !== "evidence/self-conformance/transitions/recursive-normative-self-conformance-terminal.report.json" ||
+  siteBundle.routes?.selfConformance !== "/verify/self-conformance" ||
+  selfConformancePage?.id !== "self-conformance" ||
+  selfConformancePage?.url !== siteBundle.routes.selfConformance ||
+  selfConformancePage?.title !== "How KFD changes itself" ||
+  selfConformancePage?.normative !== false ||
+  selfConformancePage?.status !== "experimental" ||
+  selfConformancePage?.rendering?.kind !== "self-conformance-guide"
+) {
+  fail("site bundle must expose the package-owned non-normative Self-Conformance page contract");
+}
+if (
+  selfConformancePage?.verifierBoundary?.requirement?.native !== true ||
+  selfConformancePage?.verifierBoundary?.requirement?.wasm !== true ||
+  selfConformancePage?.verifierBoundary?.requirement?.byteParity !== true ||
+  selfConformancePage?.releaseSeparation?.verifierNecessary !== true ||
+  selfConformancePage?.releaseSeparation?.verifierSufficient !== false ||
+  selfConformancePage?.releaseSeparation?.humanApprovalRequired !== true ||
+  selfConformancePage?.releaseSeparation?.releaseAuthoritySeparate !== true
+) {
+  fail("site bundle Self-Conformance page must preserve verifier parity and authority separation");
+}
+if (
+  selfConformancePage?.recursiveCase?.candidate?.status !== "merged" ||
+  selfConformancePage?.recursiveCase?.candidate?.normative !== false ||
+  selfConformancePage?.recursiveCase?.liveCase?.status !== "closed" ||
+  selfConformancePage?.recursiveCase?.liveCase?.outcome !== "no-new-primitive" ||
+  selfConformancePage?.recursiveCase?.terminal?.outcome !== "non-promotion" ||
+  selfConformancePage?.recursiveCase?.terminal?.valid !== true ||
+  selfConformancePage?.recursiveCase?.terminal?.verifierSufficient !== false ||
+  selfConformancePage?.recursiveCase?.terminal?.humanApproved !== false ||
+  selfConformancePage?.recursiveCase?.terminal?.releaseAuthorized !== false ||
+  selfConformancePage?.recursiveCase?.terminal?.numberAllocated !== false ||
+  selfConformancePage?.recursiveCase?.terminal?.statusChanged !== false
+) {
+  fail("site bundle Self-Conformance page must preserve the terminal no-new-kfd, non-authorizing result");
+}
+for (const assetPath of [
+  "profiles/self-conformance/manifest.json",
+  "profiles/self-conformance/lifecycle-gates.json",
+  "profiles/self-conformance/lifecycle-gate-matrix.json",
+  "profiles/self-conformance/issue-codes.json",
+  "evidence/self-conformance/qualification/recursive-normative-self-conformance.assessment.json",
+  "evidence/self-conformance/qualification/recursive-normative-self-conformance.verification.json",
+  "evidence/self-conformance/transitions/recursive-normative-self-conformance-terminal.report.json",
+]) {
+  const asset = selfConformancePage?.machineAssets?.find((entry) => entry.sourcePath === assetPath);
+  if (!asset?.url?.startsWith("/") || !asset?.digest?.startsWith("sha256:")) {
+    fail(`site bundle Self-Conformance machine asset ${assetPath} must expose a stable URL and digest`);
+  }
+}
+if (
+  siteBundle.homepage?.selfConformance?.url !== "/verify/self-conformance" ||
+  !siteBundle.homepage?.displayPlan?.readingPath?.includes("/verify/self-conformance") ||
+  siteBundle.verificationLanes?.length !== 2 ||
+  siteBundle.verificationLanes?.[0]?.url !== "/verify" ||
+  siteBundle.verificationLanes?.[1]?.url !== "/verify/self-conformance" ||
+  JSON.stringify(siteBundle.independentVerificationPage?.lanes) !== JSON.stringify(siteBundle.verificationLanes) ||
+  !siteBundle.standalonePages.some((entry) =>
+    entry.id === selfConformancePage?.id && entry.url === "/verify/self-conformance"
+  )
+) {
+  fail("site bundle must make Self-Conformance discoverable from the homepage, reading path, and standalone pages");
+}
 if (
   siteBundle.terminologyPage?.id !== "terminology" ||
   siteBundle.terminologyPage?.sourcePath !== "docs/terminology.md" ||

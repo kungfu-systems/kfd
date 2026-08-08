@@ -23,6 +23,15 @@
     "semanticSelfSufficiencySchema": "schemas/kfd-semantic-self-sufficiency-matrix.schema.json",
     "warrantEvidenceManifest": "profiles/warrant-evidence/manifest.json",
     "primitiveEvidenceFirstWaveReport": "evidence/primitive-evidence/first-wave-report.json",
+    "selfConformanceProfile": "profiles/self-conformance/README.md",
+    "selfConformanceImplementerGuide": "profiles/self-conformance/implementer-guide.md",
+    "selfConformanceManifest": "profiles/self-conformance/manifest.json",
+    "selfConformanceLifecycleGates": "profiles/self-conformance/lifecycle-gates.json",
+    "selfConformanceVerifierMatrix": "profiles/self-conformance/lifecycle-gate-matrix.json",
+    "selfConformanceIssueCodes": "profiles/self-conformance/issue-codes.json",
+    "recursiveSelfConformanceAssessment": "evidence/self-conformance/qualification/recursive-normative-self-conformance.assessment.json",
+    "recursiveSelfConformanceVerification": "evidence/self-conformance/qualification/recursive-normative-self-conformance.verification.json",
+    "recursiveSelfConformanceTerminalReport": "evidence/self-conformance/transitions/recursive-normative-self-conformance-terminal.report.json",
     "decisionsDir": "decisions",
     "candidatesDir": "drafts"
   },
@@ -39,6 +48,7 @@
     "candidateFormalPattern": "/drafts/{id}/formal",
     "agentHub": "/agent-hub",
     "independentVerification": "/verify",
+    "selfConformance": "/verify/self-conformance",
     "decisionPattern": "/{number}",
     "decisionUsagePattern": "/{number}/usage",
     "decisionFormalPattern": "/{number}/formal",
@@ -321,6 +331,12 @@
         "note": "Start from an immutable package cut; inspect the coverage matrix, package-only verifier, fixed vectors, outcomes, and explicit gaps."
       }
     },
+    "selfConformance": {
+      "label": "How KFD changes itself",
+      "url": "/verify/self-conformance",
+      "status": "experimental",
+      "claimBoundary": "The fixed package proves only the published Self-Conformance contract closure and vectors. It does not prove semantic truth, approval, certification, adoption, product fitness, lifecycle authority, or release authorization."
+    },
     "currentDecisions": {
       "heading": "Current decisions",
       "source": "registry.json"
@@ -515,6 +531,7 @@
         "/",
         "/foundation",
         "/verify",
+        "/verify/self-conformance",
         "/under-load",
         "/formal",
         "/cases",
@@ -1041,8 +1058,619 @@
       "showMachineAssets": true,
       "showClaimBoundaries": true,
       "note": "Render the declared facts and links without converting package verification into certification, draft activation, independent adoption, or production fitness."
+    },
+    "lanes": [
+      {
+        "id": "independent-implementation",
+        "title": "Implement and verify KFD independently",
+        "url": "/verify",
+        "relationship": "implementation-and-independent-verification-guide",
+        "claimBoundary": "Render the declared facts and links without converting package verification into certification, draft activation, independent adoption, or production fitness."
+      },
+      {
+        "id": "governed-self-change",
+        "title": "How KFD changes itself",
+        "url": "/verify/self-conformance",
+        "relationship": "package-owned-governed-self-change-projection",
+        "claimBoundary": "This page projects the fixed KFD package. Numbered decisions, Profile contracts, exact evidence roots, and accountable human authority remain authoritative."
+      }
+    ]
+  },
+  "selfConformancePage": {
+    "id": "self-conformance",
+    "title": "How KFD changes itself",
+    "sourcePath": "profiles/self-conformance/README.md",
+    "url": "/verify/self-conformance",
+    "relationship": "package-owned-governed-self-change-projection",
+    "normative": false,
+    "status": "experimental",
+    "authorityNote": "This page projects the fixed KFD package. Numbered decisions, Profile contracts, exact evidence roots, and accountable human authority remain authoritative.",
+    "profile": {
+      "id": "kfd-self-conformance",
+      "version": "1.0.0-alpha.1",
+      "status": "experimental"
+    },
+    "governedObjects": [
+      "Candidate genesis and qualification",
+      "numbered-draft promotion",
+      "activation and supersession",
+      "foundation revision",
+      "release packaging"
+    ],
+    "lifecycle": {
+      "paths": [
+        {
+          "id": "candidate",
+          "transitions": [
+            "candidate-genesis",
+            "revision-required",
+            "rejection",
+            "provisional-retention",
+            "no-new-kfd"
+          ],
+          "authorityRoles": [
+            "provenance-owner",
+            "review-disposition"
+          ],
+          "decisions": [
+            "record-candidate",
+            "revise",
+            "reject",
+            "retain-provisional",
+            "no-new-kfd"
+          ]
+        },
+        {
+          "id": "qualification",
+          "transitions": [
+            "candidate-qualification",
+            "revision-required",
+            "rejection",
+            "provisional-retention",
+            "no-new-kfd"
+          ],
+          "authorityRoles": [
+            "evidence-review-authority",
+            "review-disposition"
+          ],
+          "decisions": [
+            "qualify",
+            "revise",
+            "reject",
+            "retain-provisional",
+            "no-new-kfd"
+          ]
+        },
+        {
+          "id": "draft-promotion",
+          "transitions": [
+            "numbered-draft-promotion",
+            "revision-required",
+            "rejection",
+            "provisional-retention",
+            "no-new-kfd"
+          ],
+          "authorityRoles": [
+            "maintainer-numbering",
+            "review-disposition"
+          ],
+          "decisions": [
+            "promote",
+            "revise",
+            "reject",
+            "retain-provisional",
+            "no-new-kfd"
+          ]
+        },
+        {
+          "id": "activation",
+          "transitions": [
+            "activation"
+          ],
+          "authorityRoles": [
+            "maintainer-status"
+          ],
+          "decisions": [
+            "activate"
+          ]
+        },
+        {
+          "id": "supersession",
+          "transitions": [
+            "supersession"
+          ],
+          "authorityRoles": [
+            "maintainer-status"
+          ],
+          "decisions": [
+            "supersede"
+          ]
+        },
+        {
+          "id": "foundation-revision",
+          "transitions": [
+            "foundation-revision"
+          ],
+          "authorityRoles": [
+            "maintainer-foundation-revision"
+          ],
+          "decisions": [
+            "revise-foundation"
+          ]
+        },
+        {
+          "id": "release",
+          "transitions": [
+            "release-packaging"
+          ],
+          "authorityRoles": [
+            "release-authority"
+          ],
+          "decisions": [
+            "package"
+          ]
+        }
+      ],
+      "nonPromotionTransitions": [
+        "revision-required",
+        "rejection",
+        "provisional-retention",
+        "no-new-kfd"
+      ],
+      "claimBoundary": "A lifecycle gate verifies exact structural evidence and the presence, separation, and scope of supplied governance receipts. It does not allocate a number, change status, approve, merge, publish, certify, or replace accountable human authority."
+    },
+    "verifierBoundary": {
+      "requirement": {
+        "native": true,
+        "wasm": true,
+        "byteParity": true,
+        "offline": true,
+        "independent": true
+      },
+      "matrix": {
+        "schemaVersion": 1,
+        "contract": "kfd.self-conformance-lifecycle-gate-matrix/v1",
+        "profile": "kfd-self-conformance@1.0.0-alpha.1",
+        "positivePaths": [
+          "candidate",
+          "qualification",
+          "draft-promotion",
+          "activation",
+          "supersession",
+          "foundation-revision",
+          "release"
+        ],
+        "failureCases": [
+          {
+            "id": "scg-f001",
+            "category": "absent",
+            "mutation": "remove-chain",
+            "code": "scg-transition-evidence-absent"
+          },
+          {
+            "id": "scg-f002",
+            "category": "stale",
+            "mutation": "stale-predecessor-report",
+            "code": "scg-predecessor-stale"
+          },
+          {
+            "id": "scg-f003",
+            "category": "wrong-root",
+            "mutation": "wrong-terminal-root",
+            "code": "scg-terminal-root-mismatch"
+          },
+          {
+            "id": "scg-f004",
+            "category": "wrong-predecessor",
+            "mutation": "wrong-predecessor-state",
+            "code": "scg-predecessor-chain-invalid"
+          },
+          {
+            "id": "scg-f005",
+            "category": "wrong-authority",
+            "mutation": "wrong-authority-role",
+            "code": "scg-authority-role-invalid"
+          },
+          {
+            "id": "scg-f006",
+            "category": "missing-review",
+            "mutation": "remove-review",
+            "code": "scg-review-receipt-missing"
+          },
+          {
+            "id": "scg-f007",
+            "category": "claim-overreach",
+            "mutation": "claim-overreach",
+            "code": "scp-claim-overreach"
+          },
+          {
+            "id": "scg-f008",
+            "category": "package-substitution",
+            "mutation": "substitute-package",
+            "code": "scg-verifier-package-substitution"
+          }
+        ],
+        "claimBoundary": "The matrix proves deterministic gate behavior over fixed fixtures only; it does not authorize any lifecycle transition."
+      },
+      "issueCodes": {
+        "schemaVersion": 1,
+        "contract": "kfd.self-conformance-issue-codes/v1",
+        "profile": "kfd-self-conformance@1.0.0-alpha.1",
+        "codes": [
+          "scg-authority-coordinate-mismatch",
+          "scg-authority-role-invalid",
+          "scg-authority-root-mismatch",
+          "scg-counterevidence-order-invalid",
+          "scg-entry-report-root-mismatch",
+          "scg-entry-root-mismatch",
+          "scg-path-transition-mismatch",
+          "scg-path-unsupported",
+          "scg-predecessor-chain-invalid",
+          "scg-predecessor-stale",
+          "scg-request-invalid",
+          "scg-review-coordinate-mismatch",
+          "scg-review-not-independent",
+          "scg-review-receipt-missing",
+          "scg-review-root-mismatch",
+          "scg-terminal-root-mismatch",
+          "scg-transition-evidence-absent",
+          "scg-verifier-execution-failed",
+          "scg-verifier-package-substitution",
+          "scg-verifier-root-mismatch",
+          "scp-authority-receipt-missing",
+          "scp-bootstrap-anchor-invalid",
+          "scp-claim-boundary-missing",
+          "scp-claim-overreach",
+          "scp-contract-invalid",
+          "scp-evidence-roots-missing",
+          "scp-expected-result-mismatch",
+          "scp-immutable-coordinate-missing",
+          "scp-known-gaps-missing",
+          "scp-predecessor-root-mismatch",
+          "scp-profile-version-unsupported",
+          "scp-proposed-root-mismatch",
+          "scp-review-receipt-missing",
+          "scp-root-conflict",
+          "scp-root-substitution",
+          "scp-schema-set-root-mismatch",
+          "scp-self-containing-package",
+          "scp-self-containing-report",
+          "scp-set-order-invalid",
+          "scp-transition-state-invalid",
+          "scp-transition-unsupported",
+          "scp-verifier-root-missing"
+        ],
+        "ordering": [
+          "code",
+          "path",
+          "message"
+        ],
+        "unknownFailureCode": "scp-contract-invalid",
+        "claimBoundary": "Issue codes identify transition or lifecycle-gate structural failures only; they do not express semantic truth, approval, certification, adoption, numbering, status, or release authority."
+      },
+      "claimBoundary": "The fixed package proves only the published Self-Conformance contract closure and vectors. It does not prove semantic truth, approval, certification, adoption, product fitness, lifecycle authority, or release authorization."
+    },
+    "commands": [
+      {
+        "id": "gate-lifecycle",
+        "label": "Evaluate a lifecycle gate",
+        "command": "kfd gate self-conformance-lifecycle <request> --output <report> --json"
+      },
+      {
+        "id": "verify-transition",
+        "label": "Verify a transition report",
+        "command": "kfd verify self-conformance-transition <report> --json"
+      }
+    ],
+    "releaseSeparation": {
+      "verifierNecessary": true,
+      "verifierSufficient": false,
+      "humanApprovalRequired": true,
+      "releaseAuthoritySeparate": true,
+      "note": "A valid verifier report is necessary structural evidence. It cannot approve, merge, publish, certify, allocate a number, change status, or authorize a release."
+    },
+    "recursiveCase": {
+      "id": "recursive-normative-self-conformance",
+      "candidate": {
+        "url": "/drafts/recursive-normative-self-conformance",
+        "status": "merged",
+        "normative": false,
+        "claimBoundary": "This pre-number Candidate was merged into the explicit composition of KFD-1, KFD-2, KFD-5, KFD-11, and the fixed Self-Conformance Profile under a no-new-kfd disposition. It has no slot hint, number, active status, self-certification, merge authority, or release authority."
+      },
+      "liveCase": {
+        "url": "/cases/live/recursive-normative-self-conformance",
+        "status": "closed",
+        "outcome": "no-new-primitive",
+        "claimBoundary": "This closed case retains the no-new-kfd result and its reopening conditions. It does not infer historical Profile conformance, allocate a number, activate a KFD, certify the Profile, or authorize release."
+      },
+      "terminal": {
+        "outcome": "non-promotion",
+        "valid": true,
+        "verifierNecessary": true,
+        "verifierSufficient": false,
+        "humanApproved": false,
+        "releaseAuthorized": false,
+        "numberAllocated": false,
+        "statusChanged": false,
+        "requestRoot": "sha256:6de7f6436870f4ac5d0e608e631b787371eb318ff680a15b90db7e5b4aac8dc6",
+        "fixedPackageRoot": "sha256:596a1e4b0d57e93fefcb4f32ff2df5be35a56cf86fb8864f5d0ab09b12cd8770",
+        "terminalBundleRoot": "sha256:1dda7286370c7221d87539d4749fb07017f94238040e324c02fc633c19b797e9",
+        "terminalReportRoot": "sha256:0fb85f2dbd11dba10648bbc85a7f8a563674d4b18c6d6dfe452c6db80b40d9bb"
+      },
+      "assessment": {
+        "schemaVersion": 1,
+        "contract": "kfd.recursive-normative-self-conformance-assessment/v1",
+        "assessmentId": "recursive-normative-self-conformance-no-new-kfd-proposal",
+        "candidateId": "recursive-normative-self-conformance",
+        "purpose": "Determine whether the reviewed pre-number Candidate adds an irreducible KFD responsibility or names a derivable composition of existing responsibilities.",
+        "evaluatedCut": {
+          "repository": "https://github.com/kungfu-systems/kfd",
+          "commit": "09cd4a5c86ba12af8cc603f97e5c2f8a74315973",
+          "pullRequest": "https://github.com/kungfu-systems/kfd/pull/326"
+        },
+        "fixedEvidence": [
+          {
+            "id": "genesis",
+            "path": "evidence/self-conformance/qualification/recursive-normative-self-conformance.genesis.json",
+            "root": "sha256:682ce14c22e7d26c699a19b9a33565454280d0e933d61effa989d7318cfa2926",
+            "rootKind": "exact-bytes"
+          },
+          {
+            "id": "redundancy",
+            "path": "evidence/self-conformance/qualification/recursive-normative-self-conformance.redundancy.json",
+            "root": "sha256:39e0144b696b0a43ddfee044affe942b039e8b31c0d8f098c6b318e73ca9f9c7",
+            "rootKind": "exact-bytes"
+          },
+          {
+            "id": "historical-replay",
+            "path": "evidence/self-conformance/qualification/recursive-normative-self-conformance.replay.json",
+            "root": "sha256:7034905c714777bc9c6c018f3a21595e4d4e8aeb5ce7bfb250bb19a88590b32f",
+            "rootKind": "exact-bytes"
+          },
+          {
+            "id": "genesis-review",
+            "path": "evidence/self-conformance/reviews/recursive-normative-self-conformance.genesis.json",
+            "root": "sha256:b5f1e6b7abc94ef9749f39ed90112c4379d8ebfa4dfd323b2bf6207ea29c6795",
+            "rootKind": "semantic-json"
+          },
+          {
+            "id": "candidate-lifecycle-request",
+            "path": "evidence/self-conformance/transitions/recursive-normative-self-conformance-genesis.request.json",
+            "root": "sha256:4d00f631267f5cab971cf8dd3a035cb20955e333d6eddedf626ab2ade86e30f5",
+            "rootKind": "semantic-json"
+          },
+          {
+            "id": "candidate-lifecycle-report",
+            "path": "evidence/self-conformance/transitions/recursive-normative-self-conformance-genesis.report.json",
+            "root": "sha256:7071efef09ef04846dc4e6c2cc4eb2b38fe715032bc1b0f36ffc51e1b71533e2",
+            "rootKind": "semantic-json"
+          }
+        ],
+        "replayAssessment": {
+          "requiredCases": [
+            "kfd-1-through-kfd-3-bootstrap",
+            "kfd-7-positive-activation",
+            "kfd-11-through-kfd-13-foundation-revision",
+            "kfd-6-partial-autonomous-discovery",
+            "profile-counterfactual-over-history"
+          ],
+          "classificationCounts": {
+            "historical-fact": 3,
+            "retrospective-reconstruction": 1,
+            "counterfactual-replay": 1
+          },
+          "nonRetroactivity": "pass",
+          "finding": "The replay distinguishes retained historical facts from later reconstruction and counterfactual Profile application; it does not infer original conformance."
+        },
+        "redundancyAssessment": {
+          "minimumClosure": "derivable",
+          "deletion": "derivable",
+          "fuse": "derivable",
+          "crossDomainTransfer": "no-independent-object-observed",
+          "profileAlone": "insufficient-and-non-authoritative",
+          "finding": "KFD-1, KFD-2, KFD-5, and KFD-11 supply the normative responsibilities, while the fixed Profile supplies non-authoritative structural machinery."
+        },
+        "falsifierAssessment": [
+          {
+            "id": "deletion-changes-decision-observation",
+            "result": "not-observed",
+            "effect": "supports-no-new-kfd"
+          },
+          {
+            "id": "fuse-creates-authority-ambiguity",
+            "result": "not-observed-with-explicit-role-separation",
+            "effect": "supports-no-new-kfd"
+          },
+          {
+            "id": "cross-domain-irreducible-responsibility",
+            "result": "not-demonstrated",
+            "effect": "withholds-new-kfd"
+          },
+          {
+            "id": "fixed-profile-cannot-fail-closed",
+            "result": "falsified-by-retained-adversarial-suite",
+            "effect": "supports-no-new-kfd"
+          }
+        ],
+        "semanticConclusion": {
+          "outcome": "no-new-kfd",
+          "state": "proposal-pending-independent-review-and-disposition",
+          "reason": "The Candidate is a useful explicit name for recursive application, but every observed responsibility is derivable from the existing KFD closure plus a fixed non-authoritative Profile.",
+          "normativeEffect": "none-before-terminal-receipt-and-repository-admission"
+        },
+        "authoritySeparation": {
+          "assessmentAuthor": "qualification-author",
+          "structuralVerifier": "kfd-native-and-wasm-projections",
+          "independentReviewer": "pending-exact-assessment-cut-review",
+          "dispositionAuthority": "pending-after-independent-review",
+          "repositoryAdmission": "protected-kfd-pull-request",
+          "releaseAuthority": "not-requested"
+        },
+        "residualRisks": [
+          "No independent non-KFD adopter has tested cross-domain transfer.",
+          "The useful procedure name could be mistaken for a new normative Primitive after a no-new-KFD disposition.",
+          "Structural validity could be overstated as semantic qualification unless the terminal receipt retains its non-authority boundary."
+        ],
+        "claimBoundary": "This purpose-bound assessment proposes no-new-kfd for independent review. It cannot approve its own conclusion, issue the terminal disposition, change Candidate status, allocate a number, merge, publish, or release."
+      },
+      "verification": {
+        "schemaVersion": 1,
+        "contract": "kfd.recursive-normative-self-conformance-verification/v1",
+        "candidateId": "recursive-normative-self-conformance",
+        "profile": "kfd-self-conformance@1.0.0-alpha.1",
+        "assessmentRoot": "sha256:9781a8dd1abc44f28ad2c8091162b7ef300aec29144a06c8bae254b1ec6dccf5",
+        "counterevidenceRoot": "sha256:ea6b3c50588f2867527aad93469a7d5f5384c83b57e072c7348888380deacbb2",
+        "candidateRequestRoot": "sha256:4d00f631267f5cab971cf8dd3a035cb20955e333d6eddedf626ab2ade86e30f5",
+        "candidateReportRoot": "sha256:7071efef09ef04846dc4e6c2cc4eb2b38fe715032bc1b0f36ffc51e1b71533e2",
+        "replayClassifications": {
+          "historical-fact": 3,
+          "retrospective-reconstruction": 1,
+          "counterfactual-replay": 1
+        },
+        "redundancyOutcome": "no-new-kfd",
+        "checks": [
+          {
+            "id": "candidate-pre-number",
+            "status": "pass"
+          },
+          {
+            "id": "exact-genesis-inputs",
+            "status": "pass"
+          },
+          {
+            "id": "exact-redundancy-inputs",
+            "status": "pass"
+          },
+          {
+            "id": "historical-replay-coverage",
+            "status": "pass"
+          },
+          {
+            "id": "historical-non-retroactivity",
+            "status": "pass"
+          },
+          {
+            "id": "minimum-closure-deletion-fuse",
+            "status": "pass"
+          },
+          {
+            "id": "cross-domain-gap-retained",
+            "status": "pass"
+          },
+          {
+            "id": "candidate-lifecycle-reproduced",
+            "status": "pass"
+          },
+          {
+            "id": "authority-and-review-separated",
+            "status": "pass"
+          },
+          {
+            "id": "package-review-authority-claim-substitution-fail-closed",
+            "status": "pass"
+          }
+        ],
+        "cleanRoom": {
+          "input": "npm-package-files-only",
+          "offline": true,
+          "networkDependencies": [],
+          "ambientHomeDependencies": [],
+          "productCheckoutDependencies": []
+        },
+        "authority": {
+          "verifierNecessary": true,
+          "verifierSufficient": false,
+          "recommendationOnly": true,
+          "terminalDispositionRetained": false
+        }
+      }
+    },
+    "machineAssets": [
+      {
+        "sourcePath": "profiles/self-conformance/manifest.json",
+        "url": "/profiles/self-conformance/manifest.json",
+        "mediaType": "application/json",
+        "role": "profile-manifest",
+        "digest": "sha256:b78f0b1f08a690a5885407b611344153dee5f8f79bae920e192e5e9fef7ffa6a"
+      },
+      {
+        "sourcePath": "profiles/self-conformance/lifecycle-gates.json",
+        "url": "/profiles/self-conformance/lifecycle-gates.json",
+        "mediaType": "application/json",
+        "role": "lifecycle-gates",
+        "digest": "sha256:0ba98836f811dc61aeea36f0635dfb422665ca2d63b9a74131164ecf6d33b241"
+      },
+      {
+        "sourcePath": "profiles/self-conformance/lifecycle-gate-matrix.json",
+        "url": "/profiles/self-conformance/lifecycle-gate-matrix.json",
+        "mediaType": "application/json",
+        "role": "verifier-matrix",
+        "digest": "sha256:bfd8a790cfbc334d915e2037ff8356a7de76fd455a4ddcdef2f1811d91712af5"
+      },
+      {
+        "sourcePath": "profiles/self-conformance/issue-codes.json",
+        "url": "/profiles/self-conformance/issue-codes.json",
+        "mediaType": "application/json",
+        "role": "issue-codes",
+        "digest": "sha256:e5ad0dcb9a5ee4d20853c828fa8435cae96fadf4427e12a4622352647b1633a7"
+      },
+      {
+        "sourcePath": "evidence/self-conformance/qualification/recursive-normative-self-conformance.assessment.json",
+        "url": "/evidence/self-conformance/qualification/recursive-normative-self-conformance.assessment.json",
+        "mediaType": "application/json",
+        "role": "qualification-assessment",
+        "digest": "sha256:b61a2fd28bc264baabf206235232fc0e55279b637d72912cd65c3419bfbbcfd7"
+      },
+      {
+        "sourcePath": "evidence/self-conformance/qualification/recursive-normative-self-conformance.verification.json",
+        "url": "/evidence/self-conformance/qualification/recursive-normative-self-conformance.verification.json",
+        "mediaType": "application/json",
+        "role": "independent-verification",
+        "digest": "sha256:c74ac5cfd1206d1fd36e4c1f65125a2bd790a2f7fbab53187595394ea87d8efe"
+      },
+      {
+        "sourcePath": "evidence/self-conformance/transitions/recursive-normative-self-conformance-terminal.report.json",
+        "url": "/evidence/self-conformance/transitions/recursive-normative-self-conformance-terminal.report.json",
+        "mediaType": "application/json",
+        "role": "terminal-transition-report",
+        "digest": "sha256:e4ac94237f2a3a3dd2467a39158f1a8a6b0e0882722a11973d01f12c99ad801a"
+      }
+    ],
+    "rendering": {
+      "kind": "self-conformance-guide",
+      "navigationLabel": "Self-Conformance",
+      "navigationGroup": "verify",
+      "navigationOrder": 26
+    },
+    "markdown": "# KFD Self-Conformance Profile v1\n\n`kfd-self-conformance@1.0.0-alpha.1` defines how KFD records evidence about\nits own Candidate, decision, lifecycle, and package transitions. It is a\nportable structural proof contract. It is not an authority to allocate a KFD\nnumber, change a decision status, approve a Foundation Revision, publish a\nrelease, certify an adopter, or declare a claim true.\n\nThe normative closure is the fixed package rooted by\n`profiles/self-conformance/manifest.json`. The profile uses only KFD-owned\npublic files and `sha256-kfd-canonical-json-v1`; no product checkout, hosted\nservice, private repository, network, credential, or ambient Home state is\npart of the contract.\n\n## Conformance objects\n\nThe profile has five load-bearing object kinds:\n\n1. a **state** records the semantic and publication state of one immutable KFD\n   subject coordinate;\n2. a **bootstrap anchor** names the reviewed predecessor from which the first\n   profile-governed chain begins;\n3. a **transition bundle** binds the previous and proposed state roots,\n   evidence, schema set, verifier, authority, review, claim boundary, gaps,\n   immutable coordinates, and expected result;\n4. a **report** records only enumerated structural checks over one exact bundle;\n5. a **package manifest** closes the profile, schemas, vectors, bundle, report,\n   predecessor, and verifier coordinates without including its own digest.\n\nEvery object uses `schemaVersion: 1` and an exact `contract` string. Unknown\nversions, fields, transitions, issue codes, or root algorithms fail closed.\n\nThe independent Rust/WebAssembly projection is selected with\n`self-conformance-transition`. It implements the published contract directly;\nit does not call the JavaScript contract check or any product runtime. Its\nmachine-readable invariant map and adversarial cases are fixed in\n`verifier/specs/self-conformance-matrix.json`.\n\n## Canonical roots and the recursion boundary\n\nAll semantic roots use `sha256-kfd-canonical-json-v1`:\n\n- input is JSON with no duplicate keys;\n- object keys are ordered by UTF-8 byte order;\n- strings and keys are NFC-normalized before admission;\n- integers are non-negative and at most `2^53 - 1`;\n- floating point and exponent forms are forbidden;\n- canonical JSON has no insignificant whitespace and ends in one LF;\n- SHA-256 is encoded as `sha256:` plus 64 lowercase hexadecimal digits.\n\nThe state root is computed from the complete state object. The transition\nbundle root is computed from the complete bundle. The report root is computed\nfrom the complete report, which binds `bundleRoot` but has no `reportRoot`\nfield. The package root is computed from the complete package manifest, which\nhas no `packageRoot` field.\n\nRecursion is therefore finite:\n\n```text\nreviewed bootstrap anchor\n  -> transition bundle root\n  -> report root\n  -> package root\n  -> next transition predecessor roots\n```\n\nA transition may bind only predecessor report and package roots. A current\nreport or package digest must never occur in its own digest preimage. A\ncurrent-version-only pass is not evidence about its predecessor.\n\n## State model\n\nA state separates `semanticState` from `publicationState`. Packaging must not\nsilently change semantic status.\n\nSemantic states are:\n\n- `absent`: no Candidate or numbered decision has been created;\n- `candidate`: a non-normative pressure-field proposal exists;\n- `qualified`: the Candidate has the evidence required to request promotion;\n- `numbered-draft`: maintainers allocated a number and retained draft status;\n- `active`: maintainers activated a numbered decision;\n- `superseded`: an active decision was explicitly superseded;\n- `foundation-revised`: a pre-stable Foundation Revision was authorized;\n- `revised`: the proposal returned for substantive revision;\n- `rejected`: the proposal was rejected with retained rationale;\n- `provisional`: incubation continues without promotion;\n- `no-new-kfd`: the pressure field was resolved without a new KFD.\n\nPublication state is `unpublished` or `packaged`. `release-packaging` changes\nonly publication state and preserves semantic state and subject identity.\n\n## Transition table\n\n| Transition | Allowed previous semantic state | Proposed semantic state | Authority boundary |\n| --- | --- | --- | --- |\n| `candidate-genesis` | `absent` | `candidate` | provenance owner records a Candidate; no number |\n| `candidate-qualification` | `candidate`, `revised`, `provisional` | `qualified` | evidence review only; no promotion |\n| `numbered-draft-promotion` | `qualified` | `numbered-draft` | maintainer numbering decision plus independent review |\n| `activation` | `numbered-draft` | `active` | maintainer activation plus independent review |\n| `supersession` | `active` | `superseded` | maintainer supersession plus successor lineage |\n| `foundation-revision` | `numbered-draft`, `active` | `foundation-revised` | explicit pre-stable authorization, mapping, and review |\n| `release-packaging` | any retained semantic state | unchanged | release authority; structural pass is insufficient |\n| `revision-required` | `candidate`, `qualified` | `revised` | reviewer rationale retained |\n| `rejection` | `candidate`, `qualified`, `revised`, `provisional` | `rejected` | accountable disposition retained |\n| `provisional-retention` | `candidate`, `qualified`, `revised`, `provisional` | `provisional` | gap and next-review boundary retained |\n| `no-new-kfd` | `absent`, `candidate`, `qualified`, `revised`, `provisional` | `no-new-kfd` | pressure-field rationale retained |\n\nExcept for `release-packaging`, official semantic transitions preserve\n`publicationState`. A later package may contain any retained terminal outcome;\npackaging does not turn that outcome into success.\n\n## Required bundle bindings\n\nA transition bundle must bind:\n\n- the complete previous and proposed states and their independently recomputed\n  roots;\n- the predecessor kind, bootstrap-anchor root, and predecessor report and\n  package roots where applicable;\n- one or more evidence roots;\n- the exact schema-set root and verifier root;\n- separate authority and independent-review receipt roots;\n- an explicit claim boundary and known-gap array, including an empty array\n  when no gap is known;\n- immutable repository/package coordinates;\n- the expected structural result.\n\nSubstitution, omission, reordering of set-like material, stale predecessor\nroots, circular roots, missing authority, missing review, and claim widening\nare invalid. Array ordering is significant unless the relevant schema calls\nthe array a set; producers must sort root sets lexically and reject duplicates.\n\n## Report and claim boundary\n\nA passing report means only that the checks listed in `checks` passed for the\nexact bundle under the exact profile, schema set, and verifier roots. Reports\nfix `qualifying`, `selfCertified`, `semanticTruth`, `humanApproved`,\n`releaseAuthorized`, `adoptionProven`, and `certified` to `false`.\n\nHuman governance remains external and explicit. The bundle retains authority\nand review receipts so a lifecycle gate can require them, but the verifier does\nnot mint or interpret that authority beyond the enumerated structural checks.\n\n## Bootstrap trust anchor\n\nThe bootstrap anchor is an explicit reviewed exception to predecessor-report\nrecursion. It binds the last pre-profile state and package roots, the exact KFD\ncoordinate, authority and review receipts, rationale, and claim boundary. Only\n`candidate-genesis` may begin from a bootstrap predecessor. Replacing the\nanchor starts a different chain and requires an explicit compatibility action.\n\n## Stable diagnostics\n\nThe stable issue namespace is published in\n`profiles/self-conformance/issue-codes.json`. A verifier may report multiple\nissues, but canonical reports order issues by `code`, then `path`, then\n`message`. Unknown failures use `scp-contract-invalid`; they must never be\ntreated as success or silently ignored.\n\nSet-like arrays are strictly UTF-8 sorted and unique. Roots assigned to\nevidence, verifier, authority, review, predecessor report, and predecessor\npackage roles may not collapse into one another. These checks expose\n`scp-set-order-invalid`, `scp-root-substitution`, and `scp-root-conflict`\nwithout interpreting the semantic content of an authority or review receipt.\n\n## Fixed package and versioning\n\nThe extraction manifest is an allowlist. A clean-room implementation may use\nonly the listed files. The profile contract, schemas, issue inventory, vectors,\nand package rules are KFD-1 welded surfaces with additive/minor impact for this\nfirst publication. Incompatible changes to required fields, canonical roots,\ntransition meaning, claim boundaries, or issue meaning require a successor\nprofile or explicit compatibility action.\n\nThe profile does not change any entry in `drafts/registry.json` or\n`registry.json`. Profile publication is not a Candidate promotion or KFD status\ntransition.\n\n## Official lifecycle gate\n\nEvery official Candidate, qualification, numbered-draft promotion, activation,\nsupersession, Foundation Revision, and release-packaging path consumes\n`profiles/self-conformance/lifecycle-gates.json`. The gate request retains the\ncomplete chain from the reviewed bootstrap anchor, each transition bundle, its\nindependently reproduced report root, the package root, the actual authority\nreceipt, the independent-review receipt, and counterevidence roots. The\nterminal path, transition, role, and decision must match the published policy.\n\nRun the package-owned gate with no network or product checkout:\n\n```bash\nkfd gate self-conformance-lifecycle transition.request.json \\\n  --output transition.report.json --json\n```\n\nBoth files are retained under `evidence/self-conformance/transitions/` for an\nofficial repository transition. The report is reproduced during\nrepository-native checks; a missing pair, stale report, wrong root, incomplete\npredecessor chain, wrong authority role, non-independent review, claim\noverreach, or verifier-package substitution fails closed with a stable `scg-*`\nor underlying `scp-*` diagnostic.\n\nThe gate never applies a transition. A `proceed` report says that the supplied\nstructural proof and separately supplied governance receipts are mutually\nconsistent. It does not allocate a number, change status, approve, merge, or\nrelease. `revision-required`, `rejection`, `provisional-retention`, and\n`no-new-kfd` remain valid retained `non-promotion` outcomes; counterevidence is\nnot discarded to manufacture a passing promotion.",
+    "implementerGuideMarkdown": "# Self-Conformance clean-room guide\n\nStart from an extracted `@kungfu-tech/kfd` package, not a repository sibling or\nproduct checkout. Read these files in order:\n\n1. `profiles/self-conformance/README.md`;\n2. `profiles/self-conformance/manifest.json`;\n3. `schemas/kfd-self-conformance/*.schema.json`;\n4. `profiles/self-conformance/issue-codes.json`;\n5. `profiles/self-conformance/vectors/contract-vectors.json`.\n\nImplement `sha256-kfd-canonical-json-v1` exactly, recompute every state and\nbundle root, validate the predecessor or bootstrap chain, then emit a report\nthat conforms to `transition-report.schema.json`. Sort checks by `id` and\nissues by `code`, `path`, and `message` before serialization.\n\nRun the package-owned contract check offline:\n\n```bash\nnpm run check:self-conformance-profile\n```\n\nRun the independent packaged WebAssembly verifier over one transition bundle:\n\n```bash\nnode bin/kfd.mjs verify self-conformance-transition transition-bundle.json --json\n```\n\nThe native CLI accepts the same kind and input. Both projections share one\nRust core and the fixed verifier matrix requires byte-identical reports,\nsemantic report roots, issue ordering, and exit classification.\n\nThe contract check proves the fixed contract closure, schema and vector\ninventory, canonical roots, package contents, and absence of forbidden\ndependencies. The independent verifier matrix is a separate executable check;\nneither check approves a lifecycle transition.\n\nFor an official lifecycle transition, create a request conforming to\n`lifecycle-gate-request.schema.json`. Its `chain` begins at the packaged\nbootstrap anchor and contains every intervening bundle, independently computed\nreport root, package root, authority receipt, and review receipt. Then run:\n\n```bash\nnode bin/kfd.mjs gate self-conformance-lifecycle request.json \\\n  --output report.json --json\n```\n\nThe command invokes the package's independent WebAssembly verifier for every\nchain entry and separately checks governance-receipt roots and roles. Preserve\nthe request and report together. An output path is create-only, so an earlier\nreport cannot be silently overwritten; regenerate to a new path and review the\nroot change instead.\n\nNever infer missing authority, review, evidence, gap, or predecessor data.\nReject unknown versions and issue codes. Do not read `$HOME`, `.git`, private\nregistries, environment credentials, or network resources. A fixture pass is\nevidence about the fixture only.",
+    "rendererContract": {
+      "showGovernedObjects": true,
+      "showLifecycle": true,
+      "showVerifierBoundary": true,
+      "showCommands": true,
+      "showReleaseSeparation": true,
+      "showRecursiveCase": true,
+      "showMachineAssets": true,
+      "note": "Render package-declared facts and boundaries without inferring self-certification, promotion, number allocation, approval, release authorization, or production fitness."
     }
   },
+  "verificationLanes": [
+    {
+      "id": "independent-implementation",
+      "title": "Implement and verify KFD independently",
+      "url": "/verify",
+      "relationship": "implementation-and-independent-verification-guide",
+      "claimBoundary": "Render the declared facts and links without converting package verification into certification, draft activation, independent adoption, or production fitness."
+    },
+    {
+      "id": "governed-self-change",
+      "title": "How KFD changes itself",
+      "url": "/verify/self-conformance",
+      "relationship": "package-owned-governed-self-change-projection",
+      "claimBoundary": "This page projects the fixed KFD package. Numbered decisions, Profile contracts, exact evidence roots, and accountable human authority remain authoritative."
+    }
+  ],
   "standalonePages": [
     {
       "id": "load-bearing-dogfood",
@@ -1516,6 +2144,601 @@
         "showMachineAssets": true,
         "showClaimBoundaries": true,
         "note": "Render the declared facts and links without converting package verification into certification, draft activation, independent adoption, or production fitness."
+      },
+      "lanes": [
+        {
+          "id": "independent-implementation",
+          "title": "Implement and verify KFD independently",
+          "url": "/verify",
+          "relationship": "implementation-and-independent-verification-guide",
+          "claimBoundary": "Render the declared facts and links without converting package verification into certification, draft activation, independent adoption, or production fitness."
+        },
+        {
+          "id": "governed-self-change",
+          "title": "How KFD changes itself",
+          "url": "/verify/self-conformance",
+          "relationship": "package-owned-governed-self-change-projection",
+          "claimBoundary": "This page projects the fixed KFD package. Numbered decisions, Profile contracts, exact evidence roots, and accountable human authority remain authoritative."
+        }
+      ]
+    },
+    {
+      "id": "self-conformance",
+      "title": "How KFD changes itself",
+      "sourcePath": "profiles/self-conformance/README.md",
+      "url": "/verify/self-conformance",
+      "relationship": "package-owned-governed-self-change-projection",
+      "normative": false,
+      "status": "experimental",
+      "authorityNote": "This page projects the fixed KFD package. Numbered decisions, Profile contracts, exact evidence roots, and accountable human authority remain authoritative.",
+      "profile": {
+        "id": "kfd-self-conformance",
+        "version": "1.0.0-alpha.1",
+        "status": "experimental"
+      },
+      "governedObjects": [
+        "Candidate genesis and qualification",
+        "numbered-draft promotion",
+        "activation and supersession",
+        "foundation revision",
+        "release packaging"
+      ],
+      "lifecycle": {
+        "paths": [
+          {
+            "id": "candidate",
+            "transitions": [
+              "candidate-genesis",
+              "revision-required",
+              "rejection",
+              "provisional-retention",
+              "no-new-kfd"
+            ],
+            "authorityRoles": [
+              "provenance-owner",
+              "review-disposition"
+            ],
+            "decisions": [
+              "record-candidate",
+              "revise",
+              "reject",
+              "retain-provisional",
+              "no-new-kfd"
+            ]
+          },
+          {
+            "id": "qualification",
+            "transitions": [
+              "candidate-qualification",
+              "revision-required",
+              "rejection",
+              "provisional-retention",
+              "no-new-kfd"
+            ],
+            "authorityRoles": [
+              "evidence-review-authority",
+              "review-disposition"
+            ],
+            "decisions": [
+              "qualify",
+              "revise",
+              "reject",
+              "retain-provisional",
+              "no-new-kfd"
+            ]
+          },
+          {
+            "id": "draft-promotion",
+            "transitions": [
+              "numbered-draft-promotion",
+              "revision-required",
+              "rejection",
+              "provisional-retention",
+              "no-new-kfd"
+            ],
+            "authorityRoles": [
+              "maintainer-numbering",
+              "review-disposition"
+            ],
+            "decisions": [
+              "promote",
+              "revise",
+              "reject",
+              "retain-provisional",
+              "no-new-kfd"
+            ]
+          },
+          {
+            "id": "activation",
+            "transitions": [
+              "activation"
+            ],
+            "authorityRoles": [
+              "maintainer-status"
+            ],
+            "decisions": [
+              "activate"
+            ]
+          },
+          {
+            "id": "supersession",
+            "transitions": [
+              "supersession"
+            ],
+            "authorityRoles": [
+              "maintainer-status"
+            ],
+            "decisions": [
+              "supersede"
+            ]
+          },
+          {
+            "id": "foundation-revision",
+            "transitions": [
+              "foundation-revision"
+            ],
+            "authorityRoles": [
+              "maintainer-foundation-revision"
+            ],
+            "decisions": [
+              "revise-foundation"
+            ]
+          },
+          {
+            "id": "release",
+            "transitions": [
+              "release-packaging"
+            ],
+            "authorityRoles": [
+              "release-authority"
+            ],
+            "decisions": [
+              "package"
+            ]
+          }
+        ],
+        "nonPromotionTransitions": [
+          "revision-required",
+          "rejection",
+          "provisional-retention",
+          "no-new-kfd"
+        ],
+        "claimBoundary": "A lifecycle gate verifies exact structural evidence and the presence, separation, and scope of supplied governance receipts. It does not allocate a number, change status, approve, merge, publish, certify, or replace accountable human authority."
+      },
+      "verifierBoundary": {
+        "requirement": {
+          "native": true,
+          "wasm": true,
+          "byteParity": true,
+          "offline": true,
+          "independent": true
+        },
+        "matrix": {
+          "schemaVersion": 1,
+          "contract": "kfd.self-conformance-lifecycle-gate-matrix/v1",
+          "profile": "kfd-self-conformance@1.0.0-alpha.1",
+          "positivePaths": [
+            "candidate",
+            "qualification",
+            "draft-promotion",
+            "activation",
+            "supersession",
+            "foundation-revision",
+            "release"
+          ],
+          "failureCases": [
+            {
+              "id": "scg-f001",
+              "category": "absent",
+              "mutation": "remove-chain",
+              "code": "scg-transition-evidence-absent"
+            },
+            {
+              "id": "scg-f002",
+              "category": "stale",
+              "mutation": "stale-predecessor-report",
+              "code": "scg-predecessor-stale"
+            },
+            {
+              "id": "scg-f003",
+              "category": "wrong-root",
+              "mutation": "wrong-terminal-root",
+              "code": "scg-terminal-root-mismatch"
+            },
+            {
+              "id": "scg-f004",
+              "category": "wrong-predecessor",
+              "mutation": "wrong-predecessor-state",
+              "code": "scg-predecessor-chain-invalid"
+            },
+            {
+              "id": "scg-f005",
+              "category": "wrong-authority",
+              "mutation": "wrong-authority-role",
+              "code": "scg-authority-role-invalid"
+            },
+            {
+              "id": "scg-f006",
+              "category": "missing-review",
+              "mutation": "remove-review",
+              "code": "scg-review-receipt-missing"
+            },
+            {
+              "id": "scg-f007",
+              "category": "claim-overreach",
+              "mutation": "claim-overreach",
+              "code": "scp-claim-overreach"
+            },
+            {
+              "id": "scg-f008",
+              "category": "package-substitution",
+              "mutation": "substitute-package",
+              "code": "scg-verifier-package-substitution"
+            }
+          ],
+          "claimBoundary": "The matrix proves deterministic gate behavior over fixed fixtures only; it does not authorize any lifecycle transition."
+        },
+        "issueCodes": {
+          "schemaVersion": 1,
+          "contract": "kfd.self-conformance-issue-codes/v1",
+          "profile": "kfd-self-conformance@1.0.0-alpha.1",
+          "codes": [
+            "scg-authority-coordinate-mismatch",
+            "scg-authority-role-invalid",
+            "scg-authority-root-mismatch",
+            "scg-counterevidence-order-invalid",
+            "scg-entry-report-root-mismatch",
+            "scg-entry-root-mismatch",
+            "scg-path-transition-mismatch",
+            "scg-path-unsupported",
+            "scg-predecessor-chain-invalid",
+            "scg-predecessor-stale",
+            "scg-request-invalid",
+            "scg-review-coordinate-mismatch",
+            "scg-review-not-independent",
+            "scg-review-receipt-missing",
+            "scg-review-root-mismatch",
+            "scg-terminal-root-mismatch",
+            "scg-transition-evidence-absent",
+            "scg-verifier-execution-failed",
+            "scg-verifier-package-substitution",
+            "scg-verifier-root-mismatch",
+            "scp-authority-receipt-missing",
+            "scp-bootstrap-anchor-invalid",
+            "scp-claim-boundary-missing",
+            "scp-claim-overreach",
+            "scp-contract-invalid",
+            "scp-evidence-roots-missing",
+            "scp-expected-result-mismatch",
+            "scp-immutable-coordinate-missing",
+            "scp-known-gaps-missing",
+            "scp-predecessor-root-mismatch",
+            "scp-profile-version-unsupported",
+            "scp-proposed-root-mismatch",
+            "scp-review-receipt-missing",
+            "scp-root-conflict",
+            "scp-root-substitution",
+            "scp-schema-set-root-mismatch",
+            "scp-self-containing-package",
+            "scp-self-containing-report",
+            "scp-set-order-invalid",
+            "scp-transition-state-invalid",
+            "scp-transition-unsupported",
+            "scp-verifier-root-missing"
+          ],
+          "ordering": [
+            "code",
+            "path",
+            "message"
+          ],
+          "unknownFailureCode": "scp-contract-invalid",
+          "claimBoundary": "Issue codes identify transition or lifecycle-gate structural failures only; they do not express semantic truth, approval, certification, adoption, numbering, status, or release authority."
+        },
+        "claimBoundary": "The fixed package proves only the published Self-Conformance contract closure and vectors. It does not prove semantic truth, approval, certification, adoption, product fitness, lifecycle authority, or release authorization."
+      },
+      "commands": [
+        {
+          "id": "gate-lifecycle",
+          "label": "Evaluate a lifecycle gate",
+          "command": "kfd gate self-conformance-lifecycle <request> --output <report> --json"
+        },
+        {
+          "id": "verify-transition",
+          "label": "Verify a transition report",
+          "command": "kfd verify self-conformance-transition <report> --json"
+        }
+      ],
+      "releaseSeparation": {
+        "verifierNecessary": true,
+        "verifierSufficient": false,
+        "humanApprovalRequired": true,
+        "releaseAuthoritySeparate": true,
+        "note": "A valid verifier report is necessary structural evidence. It cannot approve, merge, publish, certify, allocate a number, change status, or authorize a release."
+      },
+      "recursiveCase": {
+        "id": "recursive-normative-self-conformance",
+        "candidate": {
+          "url": "/drafts/recursive-normative-self-conformance",
+          "status": "merged",
+          "normative": false,
+          "claimBoundary": "This pre-number Candidate was merged into the explicit composition of KFD-1, KFD-2, KFD-5, KFD-11, and the fixed Self-Conformance Profile under a no-new-kfd disposition. It has no slot hint, number, active status, self-certification, merge authority, or release authority."
+        },
+        "liveCase": {
+          "url": "/cases/live/recursive-normative-self-conformance",
+          "status": "closed",
+          "outcome": "no-new-primitive",
+          "claimBoundary": "This closed case retains the no-new-kfd result and its reopening conditions. It does not infer historical Profile conformance, allocate a number, activate a KFD, certify the Profile, or authorize release."
+        },
+        "terminal": {
+          "outcome": "non-promotion",
+          "valid": true,
+          "verifierNecessary": true,
+          "verifierSufficient": false,
+          "humanApproved": false,
+          "releaseAuthorized": false,
+          "numberAllocated": false,
+          "statusChanged": false,
+          "requestRoot": "sha256:6de7f6436870f4ac5d0e608e631b787371eb318ff680a15b90db7e5b4aac8dc6",
+          "fixedPackageRoot": "sha256:596a1e4b0d57e93fefcb4f32ff2df5be35a56cf86fb8864f5d0ab09b12cd8770",
+          "terminalBundleRoot": "sha256:1dda7286370c7221d87539d4749fb07017f94238040e324c02fc633c19b797e9",
+          "terminalReportRoot": "sha256:0fb85f2dbd11dba10648bbc85a7f8a563674d4b18c6d6dfe452c6db80b40d9bb"
+        },
+        "assessment": {
+          "schemaVersion": 1,
+          "contract": "kfd.recursive-normative-self-conformance-assessment/v1",
+          "assessmentId": "recursive-normative-self-conformance-no-new-kfd-proposal",
+          "candidateId": "recursive-normative-self-conformance",
+          "purpose": "Determine whether the reviewed pre-number Candidate adds an irreducible KFD responsibility or names a derivable composition of existing responsibilities.",
+          "evaluatedCut": {
+            "repository": "https://github.com/kungfu-systems/kfd",
+            "commit": "09cd4a5c86ba12af8cc603f97e5c2f8a74315973",
+            "pullRequest": "https://github.com/kungfu-systems/kfd/pull/326"
+          },
+          "fixedEvidence": [
+            {
+              "id": "genesis",
+              "path": "evidence/self-conformance/qualification/recursive-normative-self-conformance.genesis.json",
+              "root": "sha256:682ce14c22e7d26c699a19b9a33565454280d0e933d61effa989d7318cfa2926",
+              "rootKind": "exact-bytes"
+            },
+            {
+              "id": "redundancy",
+              "path": "evidence/self-conformance/qualification/recursive-normative-self-conformance.redundancy.json",
+              "root": "sha256:39e0144b696b0a43ddfee044affe942b039e8b31c0d8f098c6b318e73ca9f9c7",
+              "rootKind": "exact-bytes"
+            },
+            {
+              "id": "historical-replay",
+              "path": "evidence/self-conformance/qualification/recursive-normative-self-conformance.replay.json",
+              "root": "sha256:7034905c714777bc9c6c018f3a21595e4d4e8aeb5ce7bfb250bb19a88590b32f",
+              "rootKind": "exact-bytes"
+            },
+            {
+              "id": "genesis-review",
+              "path": "evidence/self-conformance/reviews/recursive-normative-self-conformance.genesis.json",
+              "root": "sha256:b5f1e6b7abc94ef9749f39ed90112c4379d8ebfa4dfd323b2bf6207ea29c6795",
+              "rootKind": "semantic-json"
+            },
+            {
+              "id": "candidate-lifecycle-request",
+              "path": "evidence/self-conformance/transitions/recursive-normative-self-conformance-genesis.request.json",
+              "root": "sha256:4d00f631267f5cab971cf8dd3a035cb20955e333d6eddedf626ab2ade86e30f5",
+              "rootKind": "semantic-json"
+            },
+            {
+              "id": "candidate-lifecycle-report",
+              "path": "evidence/self-conformance/transitions/recursive-normative-self-conformance-genesis.report.json",
+              "root": "sha256:7071efef09ef04846dc4e6c2cc4eb2b38fe715032bc1b0f36ffc51e1b71533e2",
+              "rootKind": "semantic-json"
+            }
+          ],
+          "replayAssessment": {
+            "requiredCases": [
+              "kfd-1-through-kfd-3-bootstrap",
+              "kfd-7-positive-activation",
+              "kfd-11-through-kfd-13-foundation-revision",
+              "kfd-6-partial-autonomous-discovery",
+              "profile-counterfactual-over-history"
+            ],
+            "classificationCounts": {
+              "historical-fact": 3,
+              "retrospective-reconstruction": 1,
+              "counterfactual-replay": 1
+            },
+            "nonRetroactivity": "pass",
+            "finding": "The replay distinguishes retained historical facts from later reconstruction and counterfactual Profile application; it does not infer original conformance."
+          },
+          "redundancyAssessment": {
+            "minimumClosure": "derivable",
+            "deletion": "derivable",
+            "fuse": "derivable",
+            "crossDomainTransfer": "no-independent-object-observed",
+            "profileAlone": "insufficient-and-non-authoritative",
+            "finding": "KFD-1, KFD-2, KFD-5, and KFD-11 supply the normative responsibilities, while the fixed Profile supplies non-authoritative structural machinery."
+          },
+          "falsifierAssessment": [
+            {
+              "id": "deletion-changes-decision-observation",
+              "result": "not-observed",
+              "effect": "supports-no-new-kfd"
+            },
+            {
+              "id": "fuse-creates-authority-ambiguity",
+              "result": "not-observed-with-explicit-role-separation",
+              "effect": "supports-no-new-kfd"
+            },
+            {
+              "id": "cross-domain-irreducible-responsibility",
+              "result": "not-demonstrated",
+              "effect": "withholds-new-kfd"
+            },
+            {
+              "id": "fixed-profile-cannot-fail-closed",
+              "result": "falsified-by-retained-adversarial-suite",
+              "effect": "supports-no-new-kfd"
+            }
+          ],
+          "semanticConclusion": {
+            "outcome": "no-new-kfd",
+            "state": "proposal-pending-independent-review-and-disposition",
+            "reason": "The Candidate is a useful explicit name for recursive application, but every observed responsibility is derivable from the existing KFD closure plus a fixed non-authoritative Profile.",
+            "normativeEffect": "none-before-terminal-receipt-and-repository-admission"
+          },
+          "authoritySeparation": {
+            "assessmentAuthor": "qualification-author",
+            "structuralVerifier": "kfd-native-and-wasm-projections",
+            "independentReviewer": "pending-exact-assessment-cut-review",
+            "dispositionAuthority": "pending-after-independent-review",
+            "repositoryAdmission": "protected-kfd-pull-request",
+            "releaseAuthority": "not-requested"
+          },
+          "residualRisks": [
+            "No independent non-KFD adopter has tested cross-domain transfer.",
+            "The useful procedure name could be mistaken for a new normative Primitive after a no-new-KFD disposition.",
+            "Structural validity could be overstated as semantic qualification unless the terminal receipt retains its non-authority boundary."
+          ],
+          "claimBoundary": "This purpose-bound assessment proposes no-new-kfd for independent review. It cannot approve its own conclusion, issue the terminal disposition, change Candidate status, allocate a number, merge, publish, or release."
+        },
+        "verification": {
+          "schemaVersion": 1,
+          "contract": "kfd.recursive-normative-self-conformance-verification/v1",
+          "candidateId": "recursive-normative-self-conformance",
+          "profile": "kfd-self-conformance@1.0.0-alpha.1",
+          "assessmentRoot": "sha256:9781a8dd1abc44f28ad2c8091162b7ef300aec29144a06c8bae254b1ec6dccf5",
+          "counterevidenceRoot": "sha256:ea6b3c50588f2867527aad93469a7d5f5384c83b57e072c7348888380deacbb2",
+          "candidateRequestRoot": "sha256:4d00f631267f5cab971cf8dd3a035cb20955e333d6eddedf626ab2ade86e30f5",
+          "candidateReportRoot": "sha256:7071efef09ef04846dc4e6c2cc4eb2b38fe715032bc1b0f36ffc51e1b71533e2",
+          "replayClassifications": {
+            "historical-fact": 3,
+            "retrospective-reconstruction": 1,
+            "counterfactual-replay": 1
+          },
+          "redundancyOutcome": "no-new-kfd",
+          "checks": [
+            {
+              "id": "candidate-pre-number",
+              "status": "pass"
+            },
+            {
+              "id": "exact-genesis-inputs",
+              "status": "pass"
+            },
+            {
+              "id": "exact-redundancy-inputs",
+              "status": "pass"
+            },
+            {
+              "id": "historical-replay-coverage",
+              "status": "pass"
+            },
+            {
+              "id": "historical-non-retroactivity",
+              "status": "pass"
+            },
+            {
+              "id": "minimum-closure-deletion-fuse",
+              "status": "pass"
+            },
+            {
+              "id": "cross-domain-gap-retained",
+              "status": "pass"
+            },
+            {
+              "id": "candidate-lifecycle-reproduced",
+              "status": "pass"
+            },
+            {
+              "id": "authority-and-review-separated",
+              "status": "pass"
+            },
+            {
+              "id": "package-review-authority-claim-substitution-fail-closed",
+              "status": "pass"
+            }
+          ],
+          "cleanRoom": {
+            "input": "npm-package-files-only",
+            "offline": true,
+            "networkDependencies": [],
+            "ambientHomeDependencies": [],
+            "productCheckoutDependencies": []
+          },
+          "authority": {
+            "verifierNecessary": true,
+            "verifierSufficient": false,
+            "recommendationOnly": true,
+            "terminalDispositionRetained": false
+          }
+        }
+      },
+      "machineAssets": [
+        {
+          "sourcePath": "profiles/self-conformance/manifest.json",
+          "url": "/profiles/self-conformance/manifest.json",
+          "mediaType": "application/json",
+          "role": "profile-manifest",
+          "digest": "sha256:b78f0b1f08a690a5885407b611344153dee5f8f79bae920e192e5e9fef7ffa6a"
+        },
+        {
+          "sourcePath": "profiles/self-conformance/lifecycle-gates.json",
+          "url": "/profiles/self-conformance/lifecycle-gates.json",
+          "mediaType": "application/json",
+          "role": "lifecycle-gates",
+          "digest": "sha256:0ba98836f811dc61aeea36f0635dfb422665ca2d63b9a74131164ecf6d33b241"
+        },
+        {
+          "sourcePath": "profiles/self-conformance/lifecycle-gate-matrix.json",
+          "url": "/profiles/self-conformance/lifecycle-gate-matrix.json",
+          "mediaType": "application/json",
+          "role": "verifier-matrix",
+          "digest": "sha256:bfd8a790cfbc334d915e2037ff8356a7de76fd455a4ddcdef2f1811d91712af5"
+        },
+        {
+          "sourcePath": "profiles/self-conformance/issue-codes.json",
+          "url": "/profiles/self-conformance/issue-codes.json",
+          "mediaType": "application/json",
+          "role": "issue-codes",
+          "digest": "sha256:e5ad0dcb9a5ee4d20853c828fa8435cae96fadf4427e12a4622352647b1633a7"
+        },
+        {
+          "sourcePath": "evidence/self-conformance/qualification/recursive-normative-self-conformance.assessment.json",
+          "url": "/evidence/self-conformance/qualification/recursive-normative-self-conformance.assessment.json",
+          "mediaType": "application/json",
+          "role": "qualification-assessment",
+          "digest": "sha256:b61a2fd28bc264baabf206235232fc0e55279b637d72912cd65c3419bfbbcfd7"
+        },
+        {
+          "sourcePath": "evidence/self-conformance/qualification/recursive-normative-self-conformance.verification.json",
+          "url": "/evidence/self-conformance/qualification/recursive-normative-self-conformance.verification.json",
+          "mediaType": "application/json",
+          "role": "independent-verification",
+          "digest": "sha256:c74ac5cfd1206d1fd36e4c1f65125a2bd790a2f7fbab53187595394ea87d8efe"
+        },
+        {
+          "sourcePath": "evidence/self-conformance/transitions/recursive-normative-self-conformance-terminal.report.json",
+          "url": "/evidence/self-conformance/transitions/recursive-normative-self-conformance-terminal.report.json",
+          "mediaType": "application/json",
+          "role": "terminal-transition-report",
+          "digest": "sha256:e4ac94237f2a3a3dd2467a39158f1a8a6b0e0882722a11973d01f12c99ad801a"
+        }
+      ],
+      "rendering": {
+        "kind": "self-conformance-guide",
+        "navigationLabel": "Self-Conformance",
+        "navigationGroup": "verify",
+        "navigationOrder": 26
+      },
+      "markdown": "# KFD Self-Conformance Profile v1\n\n`kfd-self-conformance@1.0.0-alpha.1` defines how KFD records evidence about\nits own Candidate, decision, lifecycle, and package transitions. It is a\nportable structural proof contract. It is not an authority to allocate a KFD\nnumber, change a decision status, approve a Foundation Revision, publish a\nrelease, certify an adopter, or declare a claim true.\n\nThe normative closure is the fixed package rooted by\n`profiles/self-conformance/manifest.json`. The profile uses only KFD-owned\npublic files and `sha256-kfd-canonical-json-v1`; no product checkout, hosted\nservice, private repository, network, credential, or ambient Home state is\npart of the contract.\n\n## Conformance objects\n\nThe profile has five load-bearing object kinds:\n\n1. a **state** records the semantic and publication state of one immutable KFD\n   subject coordinate;\n2. a **bootstrap anchor** names the reviewed predecessor from which the first\n   profile-governed chain begins;\n3. a **transition bundle** binds the previous and proposed state roots,\n   evidence, schema set, verifier, authority, review, claim boundary, gaps,\n   immutable coordinates, and expected result;\n4. a **report** records only enumerated structural checks over one exact bundle;\n5. a **package manifest** closes the profile, schemas, vectors, bundle, report,\n   predecessor, and verifier coordinates without including its own digest.\n\nEvery object uses `schemaVersion: 1` and an exact `contract` string. Unknown\nversions, fields, transitions, issue codes, or root algorithms fail closed.\n\nThe independent Rust/WebAssembly projection is selected with\n`self-conformance-transition`. It implements the published contract directly;\nit does not call the JavaScript contract check or any product runtime. Its\nmachine-readable invariant map and adversarial cases are fixed in\n`verifier/specs/self-conformance-matrix.json`.\n\n## Canonical roots and the recursion boundary\n\nAll semantic roots use `sha256-kfd-canonical-json-v1`:\n\n- input is JSON with no duplicate keys;\n- object keys are ordered by UTF-8 byte order;\n- strings and keys are NFC-normalized before admission;\n- integers are non-negative and at most `2^53 - 1`;\n- floating point and exponent forms are forbidden;\n- canonical JSON has no insignificant whitespace and ends in one LF;\n- SHA-256 is encoded as `sha256:` plus 64 lowercase hexadecimal digits.\n\nThe state root is computed from the complete state object. The transition\nbundle root is computed from the complete bundle. The report root is computed\nfrom the complete report, which binds `bundleRoot` but has no `reportRoot`\nfield. The package root is computed from the complete package manifest, which\nhas no `packageRoot` field.\n\nRecursion is therefore finite:\n\n```text\nreviewed bootstrap anchor\n  -> transition bundle root\n  -> report root\n  -> package root\n  -> next transition predecessor roots\n```\n\nA transition may bind only predecessor report and package roots. A current\nreport or package digest must never occur in its own digest preimage. A\ncurrent-version-only pass is not evidence about its predecessor.\n\n## State model\n\nA state separates `semanticState` from `publicationState`. Packaging must not\nsilently change semantic status.\n\nSemantic states are:\n\n- `absent`: no Candidate or numbered decision has been created;\n- `candidate`: a non-normative pressure-field proposal exists;\n- `qualified`: the Candidate has the evidence required to request promotion;\n- `numbered-draft`: maintainers allocated a number and retained draft status;\n- `active`: maintainers activated a numbered decision;\n- `superseded`: an active decision was explicitly superseded;\n- `foundation-revised`: a pre-stable Foundation Revision was authorized;\n- `revised`: the proposal returned for substantive revision;\n- `rejected`: the proposal was rejected with retained rationale;\n- `provisional`: incubation continues without promotion;\n- `no-new-kfd`: the pressure field was resolved without a new KFD.\n\nPublication state is `unpublished` or `packaged`. `release-packaging` changes\nonly publication state and preserves semantic state and subject identity.\n\n## Transition table\n\n| Transition | Allowed previous semantic state | Proposed semantic state | Authority boundary |\n| --- | --- | --- | --- |\n| `candidate-genesis` | `absent` | `candidate` | provenance owner records a Candidate; no number |\n| `candidate-qualification` | `candidate`, `revised`, `provisional` | `qualified` | evidence review only; no promotion |\n| `numbered-draft-promotion` | `qualified` | `numbered-draft` | maintainer numbering decision plus independent review |\n| `activation` | `numbered-draft` | `active` | maintainer activation plus independent review |\n| `supersession` | `active` | `superseded` | maintainer supersession plus successor lineage |\n| `foundation-revision` | `numbered-draft`, `active` | `foundation-revised` | explicit pre-stable authorization, mapping, and review |\n| `release-packaging` | any retained semantic state | unchanged | release authority; structural pass is insufficient |\n| `revision-required` | `candidate`, `qualified` | `revised` | reviewer rationale retained |\n| `rejection` | `candidate`, `qualified`, `revised`, `provisional` | `rejected` | accountable disposition retained |\n| `provisional-retention` | `candidate`, `qualified`, `revised`, `provisional` | `provisional` | gap and next-review boundary retained |\n| `no-new-kfd` | `absent`, `candidate`, `qualified`, `revised`, `provisional` | `no-new-kfd` | pressure-field rationale retained |\n\nExcept for `release-packaging`, official semantic transitions preserve\n`publicationState`. A later package may contain any retained terminal outcome;\npackaging does not turn that outcome into success.\n\n## Required bundle bindings\n\nA transition bundle must bind:\n\n- the complete previous and proposed states and their independently recomputed\n  roots;\n- the predecessor kind, bootstrap-anchor root, and predecessor report and\n  package roots where applicable;\n- one or more evidence roots;\n- the exact schema-set root and verifier root;\n- separate authority and independent-review receipt roots;\n- an explicit claim boundary and known-gap array, including an empty array\n  when no gap is known;\n- immutable repository/package coordinates;\n- the expected structural result.\n\nSubstitution, omission, reordering of set-like material, stale predecessor\nroots, circular roots, missing authority, missing review, and claim widening\nare invalid. Array ordering is significant unless the relevant schema calls\nthe array a set; producers must sort root sets lexically and reject duplicates.\n\n## Report and claim boundary\n\nA passing report means only that the checks listed in `checks` passed for the\nexact bundle under the exact profile, schema set, and verifier roots. Reports\nfix `qualifying`, `selfCertified`, `semanticTruth`, `humanApproved`,\n`releaseAuthorized`, `adoptionProven`, and `certified` to `false`.\n\nHuman governance remains external and explicit. The bundle retains authority\nand review receipts so a lifecycle gate can require them, but the verifier does\nnot mint or interpret that authority beyond the enumerated structural checks.\n\n## Bootstrap trust anchor\n\nThe bootstrap anchor is an explicit reviewed exception to predecessor-report\nrecursion. It binds the last pre-profile state and package roots, the exact KFD\ncoordinate, authority and review receipts, rationale, and claim boundary. Only\n`candidate-genesis` may begin from a bootstrap predecessor. Replacing the\nanchor starts a different chain and requires an explicit compatibility action.\n\n## Stable diagnostics\n\nThe stable issue namespace is published in\n`profiles/self-conformance/issue-codes.json`. A verifier may report multiple\nissues, but canonical reports order issues by `code`, then `path`, then\n`message`. Unknown failures use `scp-contract-invalid`; they must never be\ntreated as success or silently ignored.\n\nSet-like arrays are strictly UTF-8 sorted and unique. Roots assigned to\nevidence, verifier, authority, review, predecessor report, and predecessor\npackage roles may not collapse into one another. These checks expose\n`scp-set-order-invalid`, `scp-root-substitution`, and `scp-root-conflict`\nwithout interpreting the semantic content of an authority or review receipt.\n\n## Fixed package and versioning\n\nThe extraction manifest is an allowlist. A clean-room implementation may use\nonly the listed files. The profile contract, schemas, issue inventory, vectors,\nand package rules are KFD-1 welded surfaces with additive/minor impact for this\nfirst publication. Incompatible changes to required fields, canonical roots,\ntransition meaning, claim boundaries, or issue meaning require a successor\nprofile or explicit compatibility action.\n\nThe profile does not change any entry in `drafts/registry.json` or\n`registry.json`. Profile publication is not a Candidate promotion or KFD status\ntransition.\n\n## Official lifecycle gate\n\nEvery official Candidate, qualification, numbered-draft promotion, activation,\nsupersession, Foundation Revision, and release-packaging path consumes\n`profiles/self-conformance/lifecycle-gates.json`. The gate request retains the\ncomplete chain from the reviewed bootstrap anchor, each transition bundle, its\nindependently reproduced report root, the package root, the actual authority\nreceipt, the independent-review receipt, and counterevidence roots. The\nterminal path, transition, role, and decision must match the published policy.\n\nRun the package-owned gate with no network or product checkout:\n\n```bash\nkfd gate self-conformance-lifecycle transition.request.json \\\n  --output transition.report.json --json\n```\n\nBoth files are retained under `evidence/self-conformance/transitions/` for an\nofficial repository transition. The report is reproduced during\nrepository-native checks; a missing pair, stale report, wrong root, incomplete\npredecessor chain, wrong authority role, non-independent review, claim\noverreach, or verifier-package substitution fails closed with a stable `scg-*`\nor underlying `scp-*` diagnostic.\n\nThe gate never applies a transition. A `proceed` report says that the supplied\nstructural proof and separately supplied governance receipts are mutually\nconsistent. It does not allocate a number, change status, approve, merge, or\nrelease. `revision-required`, `rejection`, `provisional-retention`, and\n`no-new-kfd` remain valid retained `non-promotion` outcomes; counterevidence is\nnot discarded to manufacture a passing promotion.",
+      "implementerGuideMarkdown": "# Self-Conformance clean-room guide\n\nStart from an extracted `@kungfu-tech/kfd` package, not a repository sibling or\nproduct checkout. Read these files in order:\n\n1. `profiles/self-conformance/README.md`;\n2. `profiles/self-conformance/manifest.json`;\n3. `schemas/kfd-self-conformance/*.schema.json`;\n4. `profiles/self-conformance/issue-codes.json`;\n5. `profiles/self-conformance/vectors/contract-vectors.json`.\n\nImplement `sha256-kfd-canonical-json-v1` exactly, recompute every state and\nbundle root, validate the predecessor or bootstrap chain, then emit a report\nthat conforms to `transition-report.schema.json`. Sort checks by `id` and\nissues by `code`, `path`, and `message` before serialization.\n\nRun the package-owned contract check offline:\n\n```bash\nnpm run check:self-conformance-profile\n```\n\nRun the independent packaged WebAssembly verifier over one transition bundle:\n\n```bash\nnode bin/kfd.mjs verify self-conformance-transition transition-bundle.json --json\n```\n\nThe native CLI accepts the same kind and input. Both projections share one\nRust core and the fixed verifier matrix requires byte-identical reports,\nsemantic report roots, issue ordering, and exit classification.\n\nThe contract check proves the fixed contract closure, schema and vector\ninventory, canonical roots, package contents, and absence of forbidden\ndependencies. The independent verifier matrix is a separate executable check;\nneither check approves a lifecycle transition.\n\nFor an official lifecycle transition, create a request conforming to\n`lifecycle-gate-request.schema.json`. Its `chain` begins at the packaged\nbootstrap anchor and contains every intervening bundle, independently computed\nreport root, package root, authority receipt, and review receipt. Then run:\n\n```bash\nnode bin/kfd.mjs gate self-conformance-lifecycle request.json \\\n  --output report.json --json\n```\n\nThe command invokes the package's independent WebAssembly verifier for every\nchain entry and separately checks governance-receipt roots and roles. Preserve\nthe request and report together. An output path is create-only, so an earlier\nreport cannot be silently overwritten; regenerate to a new path and review the\nroot change instead.\n\nNever infer missing authority, review, evidence, gap, or predecessor data.\nReject unknown versions and issue codes. Do not read `$HOME`, `.git`, private\nregistries, environment credentials, or network resources. A fixture pass is\nevidence about the fixture only.",
+      "rendererContract": {
+        "showGovernedObjects": true,
+        "showLifecycle": true,
+        "showVerifierBoundary": true,
+        "showCommands": true,
+        "showReleaseSeparation": true,
+        "showRecursiveCase": true,
+        "showMachineAssets": true,
+        "note": "Render package-declared facts and boundaries without inferring self-certification, promotion, number allocation, approval, release authorization, or production fitness."
       }
     }
   ],
