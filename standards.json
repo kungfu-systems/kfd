@@ -780,7 +780,7 @@
               "cross-time"
             ],
             "description": "Platform-neutral WebAssembly projection of the independent verifier core.",
-            "sourcePath": "verifier/dist/kfd_verifier.wasm",
+            "sourcePath": "verifier/dist/kfd_verifier_current.wasm",
             "weldRationale": "Package consumers can verify exact shipped executable bytes while native/WASM parity remains testable.",
             "impactProjection": {
               "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
