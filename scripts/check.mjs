@@ -432,6 +432,8 @@ for (const verifierPath of [
   "verifier/extraction-manifest.json",
   "verifier/dist/kfd_verifier.wasm",
   "verifier/dist/kfd_verifier.wasm.sha256",
+  "verifier/dist/kfd_verifier_current.wasm",
+  "verifier/dist/kfd_verifier_current.wasm.sha256",
 ]) {
   if (!existsSync(verifierPath)) fail(`missing independent verifier surface ${verifierPath}`);
 }

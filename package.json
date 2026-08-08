@@ -1,6 +1,6 @@
 {
   "name": "@kungfu-tech/kfd",
-  "version": "1.0.0-alpha.56",
+  "version": "1.0.0-alpha.57",
   "description": "KFD: an open, evidence-governed engineering standard for reliable action and continuity under uncertainty",
   "license": "Apache-2.0",
   "bin": {
@@ -70,7 +70,9 @@
     "./release-impact.json": "./release-impact.json",
     "./verifier/bundle.schema.json": "./schemas/kfd-verification-bundle.schema.json",
     "./verifier/report.schema.json": "./schemas/kfd-verification-report.schema.json",
-    "./verifier/wasm": "./verifier/dist/kfd_verifier.wasm",
+    "./verifier/wasm": "./verifier/dist/kfd_verifier_current.wasm",
+    "./verifier/current-cli": "./bin/kfd-verify-current.mjs",
+    "./self-conformance/verifier.wasm": "./verifier/dist/kfd_verifier.wasm",
     "./warrant-evidence/manifest.json": "./profiles/warrant-evidence/manifest.json",
     "./warrant-evidence/registry.json": "./evidence/primitive-evidence/registry.json",
     "./warrant-evidence/primitive-evidence-bundle.schema.json": "./schemas/kfd-evidence/primitive-evidence-bundle.schema.json",

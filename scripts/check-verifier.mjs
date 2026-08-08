@@ -91,7 +91,7 @@ const cases = [
 
 for (const [kind, fixture] of cases) {
   const native = run("cargo", [...nativeArgs, "verify", kind, fixture, "--json"]);
-  const wasm = run("node", ["bin/kfd.mjs", "verify", kind, fixture, "--json"]);
+  const wasm = run("node", ["bin/kfd-verify-current.mjs", "verify", kind, fixture, "--json"]);
   assert.equal(wasm, native, `${kind} native and WASM reports differ`);
   const report = JSON.parse(native);
   assert.equal(report.valid, true, `${kind} fixture must pass`);
@@ -111,7 +111,7 @@ const rejectedKfdRecords = [
 ];
 for (const fixture of rejectedKfdRecords) {
   const native = run("cargo", [...nativeArgs, "verify", "kfd-record", fixture, "--json"], 1);
-  const wasm = run("node", ["bin/kfd.mjs", "verify", "kfd-record", fixture, "--json"], 1);
+  const wasm = run("node", ["bin/kfd-verify-current.mjs", "verify", "kfd-record", fixture, "--json"], 1);
   assert.equal(wasm, native, `${fixture} native and WASM rejections differ`);
   const report = JSON.parse(native);
   assert.equal(report.valid, false, `${fixture} must fail closed`);
@@ -384,7 +384,7 @@ try {
   );
   const wasmMissingQualificationBasis = run(
     "node",
-    ["bin/kfd.mjs", "verify", "kfd-record", missingQualificationBasisPath, "--json"],
+    ["bin/kfd-verify-current.mjs", "verify", "kfd-record", missingQualificationBasisPath, "--json"],
     1,
   );
   assert.equal(
@@ -416,7 +416,7 @@ try {
   );
   const wasmActivationWithPlannedEvidence = run(
     "node",
-    ["bin/kfd.mjs", "verify", "kfd-record", activationWithPlannedEvidencePath, "--json"],
+    ["bin/kfd-verify-current.mjs", "verify", "kfd-record", activationWithPlannedEvidencePath, "--json"],
     1,
   );
   assert.equal(
@@ -466,7 +466,7 @@ try {
   );
   const wasmActivationWithoutSessionProof = run(
     "node",
-    ["bin/kfd.mjs", "verify", "kfd-record", activationWithoutSessionProofPath, "--json"],
+    ["bin/kfd-verify-current.mjs", "verify", "kfd-record", activationWithoutSessionProofPath, "--json"],
     1,
   );
   assert.equal(
@@ -496,7 +496,7 @@ try {
   );
   const wasm = run(
     "node",
-    ["bin/kfd.mjs", "verify", "episode", temporary, "--json"],
+    ["bin/kfd-verify-current.mjs", "verify", "episode", temporary, "--json"],
     1,
   );
   assert.equal(wasm, native, "mutated Episode rejection must match byte for byte");
@@ -513,7 +513,7 @@ try {
   pack.roots.pack = "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
   fs.writeFileSync(packPath, `${JSON.stringify(pack)}\n`);
   const nativePack = run("cargo", [...nativeArgs, "verify", "pack", packDirectory, "--json"], 1);
-  const wasmPack = run("node", ["bin/kfd.mjs", "verify", "pack", packDirectory, "--json"], 1);
+  const wasmPack = run("node", ["bin/kfd-verify-current.mjs", "verify", "pack", packDirectory, "--json"], 1);
   assert.equal(wasmPack, nativePack, "mutated Pack rejection must match byte for byte");
 
   const atlasDirectory = path.join(temporary, "atlas");
@@ -527,7 +527,7 @@ try {
   human.derived = false;
   fs.writeFileSync(humanPath, `${JSON.stringify(human)}\n`);
   const nativeAtlas = run("cargo", [...nativeArgs, "verify", "atlas", atlasDirectory, "--json"], 1);
-  const wasmAtlas = run("node", ["bin/kfd.mjs", "verify", "atlas", atlasDirectory, "--json"], 1);
+  const wasmAtlas = run("node", ["bin/kfd-verify-current.mjs", "verify", "atlas", atlasDirectory, "--json"], 1);
   assert.equal(wasmAtlas, nativeAtlas, "mutated Atlas rejection must match byte for byte");
 
   const passportDirectory = path.join(temporary, "passport");
@@ -538,7 +538,7 @@ try {
     "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc";
   fs.writeFileSync(passportPath, `${JSON.stringify(passport)}\n`);
   const nativePassport = run("cargo", [...nativeArgs, "verify", "passport", passportDirectory, "--json"], 1);
-  const wasmPassport = run("node", ["bin/kfd.mjs", "verify", "passport", passportDirectory, "--json"], 1);
+  const wasmPassport = run("node", ["bin/kfd-verify-current.mjs", "verify", "passport", passportDirectory, "--json"], 1);
   assert.equal(wasmPassport, nativePassport, "mutated Passport rejection must match byte for byte");
 
   const recordPath = path.join(temporary, "record.json");
@@ -555,14 +555,14 @@ try {
   );
   const wasmSchema = run(
     "node",
-    ["bin/kfd.mjs", "verify", "kfd-record", recordPath, "--schema", schemaPath, "--json"],
+    ["bin/kfd-verify-current.mjs", "verify", "kfd-record", recordPath, "--schema", schemaPath, "--json"],
     1,
   );
   assert.equal(wasmSchema, nativeSchema, "unsupported schema keyword rejection must match byte for byte");
   const symlinkPath = path.join(temporary, "passport-link");
   fs.symlinkSync(passportDirectory, symlinkPath, "dir");
   run("cargo", [...nativeArgs, "verify", "passport", symlinkPath, "--json"], 2);
-  run("node", ["bin/kfd.mjs", "verify", "passport", symlinkPath, "--json"], 2);
+  run("node", ["bin/kfd-verify-current.mjs", "verify", "passport", symlinkPath, "--json"], 2);
 } finally {
   fs.rmSync(temporary, { recursive: true, force: true });
 }
