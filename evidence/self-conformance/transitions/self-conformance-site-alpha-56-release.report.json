@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.self-conformance-lifecycle-gate-report/v1",
+  "profile": "kfd-self-conformance@1.0.0-alpha.1",
+  "gateId": "self-conformance-site-alpha-56-release",
+  "lifecyclePath": "release",
+  "requestRoot": "sha256:01c8046d53def482a194734b71f259ed37ee2b67b2666ce059627d2d337eac04",
+  "fixedPackageRoot": "sha256:596a1e4b0d57e93fefcb4f32ff2df5be35a56cf86fb8864f5d0ab09b12cd8770",
+  "terminalBundleRoot": "sha256:1da58c369ac804b4ffc47c38818c11818267805ba37b09c3f4176edc45cf8cd0",
+  "terminalReportRoot": "sha256:0fb85f2dbd11dba10648bbc85a7f8a563674d4b18c6d6dfe452c6db80b40d9bb",
+  "valid": true,
+  "outcome": "proceed",
+  "transitionAdmissible": true,
+  "automaticTransition": false,
+  "verifierNecessary": true,
+  "verifierSufficient": false,
+  "humanApproved": false,
+  "releaseAuthorized": false,
+  "numberAllocated": false,
+  "statusChanged": false,
+  "chain": [
+    {
+      "index": 0,
+      "transition": "candidate-genesis",
+      "bundleRoot": "sha256:154809d0f44fcd39a08077e79390d9f0dd18dff6d3ca2229e9e1654b1557faf2",
+      "reportRoot": "sha256:0fb85f2dbd11dba10648bbc85a7f8a563674d4b18c6d6dfe452c6db80b40d9bb",
+      "packageRoot": "sha256:596a1e4b0d57e93fefcb4f32ff2df5be35a56cf86fb8864f5d0ab09b12cd8770",
+      "authorityReceiptRoot": "sha256:7584445751699c88d126b02ecc5716acb3ae80a1501f7a6538f8eb95abb4c689",
+      "reviewReceiptRoot": "sha256:f714cd1a32c4b7b1560e5597244d8826981c26cb0d77a0473ffbd2375c35d7b5",
+      "verifierValid": true
+    },
+    {
+      "index": 1,
+      "transition": "release-packaging",
+      "bundleRoot": "sha256:1da58c369ac804b4ffc47c38818c11818267805ba37b09c3f4176edc45cf8cd0",
+      "reportRoot": "sha256:0fb85f2dbd11dba10648bbc85a7f8a563674d4b18c6d6dfe452c6db80b40d9bb",
+      "packageRoot": "sha256:596a1e4b0d57e93fefcb4f32ff2df5be35a56cf86fb8864f5d0ab09b12cd8770",
+      "authorityReceiptRoot": "sha256:b8e75b3c89b8d9fba6b538ef74e225cbc05ae08742905e67af5ea0e2a479414a",
+      "reviewReceiptRoot": "sha256:704bca7bde3a5c7b5d847a69afdc99e722d31c3cbcfc0b335c1e196d7ce96acf",
+      "verifierValid": true
+    }
+  ],
+  "counterevidenceRoots": [],
+  "checks": [
+    {
+      "id": "authority-receipt-contract",
+      "status": "pass"
+    },
+    {
+      "id": "authority-receipt-coordinates",
+      "status": "pass"
+    },
+    {
+      "id": "authority-receipt-root",
+      "status": "pass"
+    },
+    {
+      "id": "authority-role",
+      "status": "pass"
+    },
+    {
+      "id": "bootstrap-anchor",
+      "status": "pass"
+    },
+    {
+      "id": "chain-entry-contract",
+      "status": "pass"
+    },
+    {
+      "id": "counterevidence-roots",
+      "status": "pass"
+    },
+    {
+      "id": "entry-package-root",
+      "status": "pass"
+    },
+    {
+      "id": "exact-bundle-roots",
+      "status": "pass"
+    },
+    {
+      "id": "exact-report-roots",
+      "status": "pass"
+    },
+    {
+      "id": "exact-verifier-root",
+      "status": "pass"
+    },
+    {
+      "id": "fixed-package-root",
+      "status": "pass"
+    },
+    {
+      "id": "independent-review-receipt",
+      "status": "pass"
+    },
+    {
+      "id": "independent-transition-verifier",
+      "status": "pass"
+    },
+    {
+      "id": "lifecycle-path",
+      "status": "pass"
+    },
+    {
+      "id": "path-transition",
+      "status": "pass"
+    },
+    {
+      "id": "predecessor-roots",
+      "status": "pass"
+    },
+    {
+      "id": "predecessor-state",
+      "status": "pass"
+    },
+    {
+      "id": "request-contract",
+      "status": "pass"
+    },
+    {
+      "id": "review-receipt-contract",
+      "status": "pass"
+    },
+    {
+      "id": "review-receipt-coordinates",
+      "status": "pass"
+    },
+    {
+      "id": "review-receipt-root",
+      "status": "pass"
+    },
+    {
+      "id": "terminal-bundle-root",
+      "status": "pass"
+    },
+    {
+      "id": "transition-chain",
+      "status": "pass"
+    }
+  ],
+  "issues": [],
+  "offline": true
+}
