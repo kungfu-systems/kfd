@@ -206,7 +206,7 @@ pub fn verify(bundle: &VerificationBundle) -> VerificationReport {
         report.issue(
             "declared-scope",
             "/declared_scope",
-            "declared scope does not bind Atlas project, visibility, and roots",
+            "declared scope does not bind Atlas identity, visibility, and roots",
         );
     }
     if atlas

@@ -6,20 +6,23 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const wasmPath = path.join(root, "verifier", "dist", "kfd_verifier.wasm");
-const checksumPath = `${wasmPath}.sha256`;
-const bytes = fs.readFileSync(wasmPath);
-const expected = fs.readFileSync(checksumPath, "utf8").trim().split(/\s+/u)[0];
-const actual = crypto.createHash("sha256").update(bytes).digest("hex");
-assert.equal(actual, expected, "packaged verifier WASM digest drifted");
-const compiled = new WebAssembly.Module(bytes);
-assert.deepEqual(
-  WebAssembly.Module.imports(compiled),
-  [],
-  "packaged verifier WASM must not depend on host imports",
-);
-const module = await WebAssembly.instantiate(bytes, {});
-for (const name of ["memory", "kfd_alloc", "kfd_free", "kfd_verify"]) {
-  assert.ok(module.instance.exports[name], `packaged verifier WASM is missing ${name}`);
+const artifacts = ["kfd_verifier.wasm", "kfd_verifier_current.wasm"];
+for (const artifact of artifacts) {
+  const wasmPath = path.join(root, "verifier", "dist", artifact);
+  const checksumPath = `${wasmPath}.sha256`;
+  const bytes = fs.readFileSync(wasmPath);
+  const expected = fs.readFileSync(checksumPath, "utf8").trim().split(/\s+/u)[0];
+  const actual = crypto.createHash("sha256").update(bytes).digest("hex");
+  assert.equal(actual, expected, `${artifact} digest drifted`);
+  const compiled = new WebAssembly.Module(bytes);
+  assert.deepEqual(
+    WebAssembly.Module.imports(compiled),
+    [],
+    `${artifact} must not depend on host imports`,
+  );
+  const module = await WebAssembly.instantiate(bytes, {});
+  for (const name of ["memory", "kfd_alloc", "kfd_free", "kfd_verify"]) {
+    assert.ok(module.instance.exports[name], `${artifact} is missing ${name}`);
+  }
+  console.error(`check-verifier-artifact: ${artifact} sha256:${actual} exports ok`);
 }
-console.error(`check-verifier-artifact: sha256:${actual} exports ok`);

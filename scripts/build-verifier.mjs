@@ -52,13 +52,13 @@ const source = path.join(
   "kfd_verifier_wasm.wasm",
 );
 const outputDirectory = path.join(root, "verifier", "dist");
-const output = path.join(outputDirectory, "kfd_verifier.wasm");
+const output = path.join(outputDirectory, "kfd_verifier_current.wasm");
 fs.mkdirSync(outputDirectory, { recursive: true });
 fs.copyFileSync(source, output);
 const bytes = fs.readFileSync(output);
 const digest = crypto.createHash("sha256").update(bytes).digest("hex");
 fs.writeFileSync(
-  path.join(outputDirectory, "kfd_verifier.wasm.sha256"),
-  `${digest}  kfd_verifier.wasm\n`,
+  path.join(outputDirectory, "kfd_verifier_current.wasm.sha256"),
+  `${digest}  kfd_verifier_current.wasm\n`,
 );
 console.log(`build-verifier: ${path.relative(root, output)} sha256:${digest}`);
