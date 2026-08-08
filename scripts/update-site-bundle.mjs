@@ -24,6 +24,16 @@ const SEMANTIC_MATRIX_PATH = "evidence/semantic-self-sufficiency/kfd-1-13.json";
 const SEMANTIC_MATRIX_SCHEMA_PATH = "schemas/kfd-semantic-self-sufficiency-matrix.schema.json";
 const WARRANT_MANIFEST_PATH = "profiles/warrant-evidence/manifest.json";
 const FIRST_WAVE_REPORT_PATH = "evidence/primitive-evidence/first-wave-report.json";
+const SELF_CONFORMANCE_PROFILE_PATH = "profiles/self-conformance/README.md";
+const SELF_CONFORMANCE_IMPLEMENTER_GUIDE_PATH = "profiles/self-conformance/implementer-guide.md";
+const SELF_CONFORMANCE_MANIFEST_PATH = "profiles/self-conformance/manifest.json";
+const SELF_CONFORMANCE_LIFECYCLE_GATES_PATH = "profiles/self-conformance/lifecycle-gates.json";
+const SELF_CONFORMANCE_VERIFIER_MATRIX_PATH = "profiles/self-conformance/lifecycle-gate-matrix.json";
+const SELF_CONFORMANCE_ISSUE_CODES_PATH = "profiles/self-conformance/issue-codes.json";
+const RECURSIVE_SELF_CONFORMANCE_ID = "recursive-normative-self-conformance";
+const RECURSIVE_ASSESSMENT_PATH = "evidence/self-conformance/qualification/recursive-normative-self-conformance.assessment.json";
+const RECURSIVE_VERIFICATION_PATH = "evidence/self-conformance/qualification/recursive-normative-self-conformance.verification.json";
+const RECURSIVE_TERMINAL_REPORT_PATH = "evidence/self-conformance/transitions/recursive-normative-self-conformance-terminal.report.json";
 const KFD_RELEASE_PATH = "kfd.release.json";
 const SITE_BUNDLE_PATH = "site/kfd-site.json";
 
@@ -614,6 +624,140 @@ const buildIndependentVerificationPage = ({
   };
 };
 
+const buildSelfConformancePage = ({
+  profileText,
+  implementerGuideText,
+  manifest,
+  lifecycleGates,
+  verifierMatrix,
+  issueCodes,
+  assessment,
+  verification,
+  terminalReport,
+  candidate,
+  liveCase,
+}) => {
+  const machineAsset = (sourcePath, url, role) => ({
+    sourcePath,
+    url,
+    mediaType: "application/json",
+    role,
+    digest: `sha256:${createHash("sha256").update(readFileSync(sourcePath)).digest("hex")}`,
+  });
+
+  if (!candidate || !liveCase) throw new Error("recursive self-conformance Candidate and live case must exist");
+  if (terminalReport.outcome !== "non-promotion" || terminalReport.numberAllocated !== false) {
+    throw new Error("recursive self-conformance terminal evidence must remain a non-promotion without number allocation");
+  }
+
+  return {
+    id: "self-conformance",
+    title: "How KFD changes itself",
+    sourcePath: SELF_CONFORMANCE_PROFILE_PATH,
+    url: "/verify/self-conformance",
+    relationship: "package-owned-governed-self-change-projection",
+    normative: false,
+    status: manifest.profile.status,
+    authorityNote: "This page projects the fixed KFD package. Numbered decisions, Profile contracts, exact evidence roots, and accountable human authority remain authoritative.",
+    profile: manifest.profile,
+    governedObjects: [
+      "Candidate genesis and qualification",
+      "numbered-draft promotion",
+      "activation and supersession",
+      "foundation revision",
+      "release packaging",
+    ],
+    lifecycle: {
+      paths: lifecycleGates.paths,
+      nonPromotionTransitions: lifecycleGates.nonPromotionTransitions,
+      claimBoundary: lifecycleGates.claimBoundary,
+    },
+    verifierBoundary: {
+      requirement: manifest.verifierRequirement,
+      matrix: verifierMatrix,
+      issueCodes,
+      claimBoundary: manifest.claimBoundary,
+    },
+    commands: [
+      {
+        id: "gate-lifecycle",
+        label: "Evaluate a lifecycle gate",
+        command: "kfd gate self-conformance-lifecycle <request> --output <report> --json",
+      },
+      {
+        id: "verify-transition",
+        label: "Verify a transition report",
+        command: "kfd verify self-conformance-transition <report> --json",
+      },
+    ],
+    releaseSeparation: {
+      verifierNecessary: true,
+      verifierSufficient: false,
+      humanApprovalRequired: true,
+      releaseAuthoritySeparate: true,
+      note: "A valid verifier report is necessary structural evidence. It cannot approve, merge, publish, certify, allocate a number, change status, or authorize a release.",
+    },
+    recursiveCase: {
+      id: RECURSIVE_SELF_CONFORMANCE_ID,
+      candidate: {
+        url: candidate.url,
+        status: candidate.status,
+        normative: candidate.normative,
+        claimBoundary: candidate.claimBoundary,
+      },
+      liveCase: {
+        url: liveCase.url,
+        status: liveCase.status,
+        outcome: liveCase.candidateTracks[0]?.status,
+        claimBoundary: liveCase.claimBoundary,
+      },
+      terminal: {
+        outcome: terminalReport.outcome,
+        valid: terminalReport.valid,
+        verifierNecessary: terminalReport.verifierNecessary,
+        verifierSufficient: terminalReport.verifierSufficient,
+        humanApproved: terminalReport.humanApproved,
+        releaseAuthorized: terminalReport.releaseAuthorized,
+        numberAllocated: terminalReport.numberAllocated,
+        statusChanged: terminalReport.statusChanged,
+        requestRoot: terminalReport.requestRoot,
+        fixedPackageRoot: terminalReport.fixedPackageRoot,
+        terminalBundleRoot: terminalReport.terminalBundleRoot,
+        terminalReportRoot: terminalReport.terminalReportRoot,
+      },
+      assessment,
+      verification,
+    },
+    machineAssets: [
+      machineAsset(SELF_CONFORMANCE_MANIFEST_PATH, "/profiles/self-conformance/manifest.json", "profile-manifest"),
+      machineAsset(SELF_CONFORMANCE_LIFECYCLE_GATES_PATH, "/profiles/self-conformance/lifecycle-gates.json", "lifecycle-gates"),
+      machineAsset(SELF_CONFORMANCE_VERIFIER_MATRIX_PATH, "/profiles/self-conformance/lifecycle-gate-matrix.json", "verifier-matrix"),
+      machineAsset(SELF_CONFORMANCE_ISSUE_CODES_PATH, "/profiles/self-conformance/issue-codes.json", "issue-codes"),
+      machineAsset(RECURSIVE_ASSESSMENT_PATH, `/${RECURSIVE_ASSESSMENT_PATH}`, "qualification-assessment"),
+      machineAsset(RECURSIVE_VERIFICATION_PATH, `/${RECURSIVE_VERIFICATION_PATH}`, "independent-verification"),
+      machineAsset(RECURSIVE_TERMINAL_REPORT_PATH, `/${RECURSIVE_TERMINAL_REPORT_PATH}`, "terminal-transition-report"),
+    ],
+    rendering: {
+      kind: "self-conformance-guide",
+      navigationLabel: "Self-Conformance",
+      navigationGroup: "verify",
+      navigationOrder: 26,
+    },
+    markdown: stripFrontmatter(profileText),
+    implementerGuideMarkdown: stripFrontmatter(implementerGuideText),
+    rendererContract: {
+      showGovernedObjects: true,
+      showLifecycle: true,
+      showVerifierBoundary: true,
+      showCommands: true,
+      showReleaseSeparation: true,
+      showRecursiveCase: true,
+      showMachineAssets: true,
+      note: "Render package-declared facts and boundaries without inferring self-certification, promotion, number allocation, approval, release authorization, or production fitness.",
+    },
+  };
+};
+
 export const buildSiteBundle = ({
   readmeText,
   foundationText,
@@ -635,6 +779,15 @@ export const buildSiteBundle = ({
   semanticMatrix,
   warrantManifest,
   firstWaveReport,
+  selfConformanceProfileText,
+  selfConformanceImplementerGuideText,
+  selfConformanceManifest,
+  selfConformanceLifecycleGates,
+  selfConformanceVerifierMatrix,
+  selfConformanceIssueCodes,
+  recursiveAssessment,
+  recursiveVerification,
+  recursiveTerminalReport,
   releaseAnchor,
 }) => {
   const readme = parseReadme(readmeText);
@@ -681,6 +834,36 @@ export const buildSiteBundle = ({
     warrantManifest,
     firstWaveReport,
   });
+  const selfConformancePage = buildSelfConformancePage({
+    profileText: selfConformanceProfileText,
+    implementerGuideText: selfConformanceImplementerGuideText,
+    manifest: selfConformanceManifest,
+    lifecycleGates: selfConformanceLifecycleGates,
+    verifierMatrix: selfConformanceVerifierMatrix,
+    issueCodes: selfConformanceIssueCodes,
+    assessment: recursiveAssessment,
+    verification: recursiveVerification,
+    terminalReport: recursiveTerminalReport,
+    candidate: candidatePages.find((entry) => entry.id === RECURSIVE_SELF_CONFORMANCE_ID),
+    liveCase: liveCasePages.find((entry) => entry.id === RECURSIVE_SELF_CONFORMANCE_ID),
+  });
+  const verificationLanes = [
+    {
+      id: "independent-implementation",
+      title: "Implement and verify KFD independently",
+      url: independentVerificationPage.url,
+      relationship: independentVerificationPage.relationship,
+      claimBoundary: independentVerificationPage.rendererContract.note,
+    },
+    {
+      id: "governed-self-change",
+      title: selfConformancePage.title,
+      url: selfConformancePage.url,
+      relationship: selfConformancePage.relationship,
+      claimBoundary: selfConformancePage.authorityNote,
+    },
+  ];
+  independentVerificationPage.lanes = verificationLanes;
   const loadBearingPage = {
     id: "load-bearing-dogfood",
     title: loadBearingDocument.title,
@@ -850,6 +1033,15 @@ export const buildSiteBundle = ({
       semanticSelfSufficiencySchema: SEMANTIC_MATRIX_SCHEMA_PATH,
       warrantEvidenceManifest: WARRANT_MANIFEST_PATH,
       primitiveEvidenceFirstWaveReport: FIRST_WAVE_REPORT_PATH,
+      selfConformanceProfile: SELF_CONFORMANCE_PROFILE_PATH,
+      selfConformanceImplementerGuide: SELF_CONFORMANCE_IMPLEMENTER_GUIDE_PATH,
+      selfConformanceManifest: SELF_CONFORMANCE_MANIFEST_PATH,
+      selfConformanceLifecycleGates: SELF_CONFORMANCE_LIFECYCLE_GATES_PATH,
+      selfConformanceVerifierMatrix: SELF_CONFORMANCE_VERIFIER_MATRIX_PATH,
+      selfConformanceIssueCodes: SELF_CONFORMANCE_ISSUE_CODES_PATH,
+      recursiveSelfConformanceAssessment: RECURSIVE_ASSESSMENT_PATH,
+      recursiveSelfConformanceVerification: RECURSIVE_VERIFICATION_PATH,
+      recursiveSelfConformanceTerminalReport: RECURSIVE_TERMINAL_REPORT_PATH,
       decisionsDir: "decisions",
       candidatesDir: "drafts",
     },
@@ -866,6 +1058,7 @@ export const buildSiteBundle = ({
       candidateFormalPattern: "/drafts/{id}/formal",
       agentHub: "/agent-hub",
       independentVerification: "/verify",
+      selfConformance: "/verify/self-conformance",
       decisionPattern: "/{number}",
       decisionUsagePattern: "/{number}/usage",
       decisionFormalPattern: "/{number}/formal",
@@ -883,6 +1076,12 @@ export const buildSiteBundle = ({
       productWitness,
       practiceGuidelines,
       productProofPath,
+      selfConformance: {
+        label: "How KFD changes itself",
+        url: "/verify/self-conformance",
+        status: selfConformanceManifest.profile.status,
+        claimBoundary: selfConformanceManifest.claimBoundary,
+      },
       currentDecisions: {
         heading: "Current decisions",
         source: REGISTRY_PATH,
@@ -916,7 +1115,7 @@ export const buildSiteBundle = ({
           source: FOUNDATION_PATH,
           sections: ["foundation-structure", "load-bearing-product-witness", "practice-guidelines"],
         },
-        readingPath: ["/", "/foundation", "/verify", "/under-load", "/formal", "/cases", "/drafts", "/{number}"],
+        readingPath: ["/", "/foundation", "/verify", "/verify/self-conformance", "/under-load", "/formal", "/cases", "/drafts", "/{number}"],
         support: ["agent-quickstart", "decision-metadata"],
         currentDecisions: {
           source: REGISTRY_PATH,
@@ -950,7 +1149,9 @@ export const buildSiteBundle = ({
     },
     loadBearingPage,
     independentVerificationPage,
-    standalonePages: [loadBearingPage, independentVerificationPage],
+    selfConformancePage,
+    verificationLanes,
+    standalonePages: [loadBearingPage, independentVerificationPage, selfConformancePage],
     formalPage: {
       id: "formal-model",
       title: formalDocument.title,
@@ -1140,6 +1341,15 @@ export const readInputs = () => ({
   semanticMatrix: JSON.parse(readFileSync(SEMANTIC_MATRIX_PATH, "utf8")),
   warrantManifest: JSON.parse(readFileSync(WARRANT_MANIFEST_PATH, "utf8")),
   firstWaveReport: JSON.parse(readFileSync(FIRST_WAVE_REPORT_PATH, "utf8")),
+  selfConformanceProfileText: readFileSync(SELF_CONFORMANCE_PROFILE_PATH, "utf8"),
+  selfConformanceImplementerGuideText: readFileSync(SELF_CONFORMANCE_IMPLEMENTER_GUIDE_PATH, "utf8"),
+  selfConformanceManifest: JSON.parse(readFileSync(SELF_CONFORMANCE_MANIFEST_PATH, "utf8")),
+  selfConformanceLifecycleGates: JSON.parse(readFileSync(SELF_CONFORMANCE_LIFECYCLE_GATES_PATH, "utf8")),
+  selfConformanceVerifierMatrix: JSON.parse(readFileSync(SELF_CONFORMANCE_VERIFIER_MATRIX_PATH, "utf8")),
+  selfConformanceIssueCodes: JSON.parse(readFileSync(SELF_CONFORMANCE_ISSUE_CODES_PATH, "utf8")),
+  recursiveAssessment: JSON.parse(readFileSync(RECURSIVE_ASSESSMENT_PATH, "utf8")),
+  recursiveVerification: JSON.parse(readFileSync(RECURSIVE_VERIFICATION_PATH, "utf8")),
+  recursiveTerminalReport: JSON.parse(readFileSync(RECURSIVE_TERMINAL_REPORT_PATH, "utf8")),
   releaseAnchor: JSON.parse(readFileSync(KFD_RELEASE_PATH, "utf8")),
 });
 
