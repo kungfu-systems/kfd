@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.self-conformance-lifecycle-gate-report/v1",
+  "profile": "kfd-self-conformance@1.0.0-alpha.1",
+  "gateId": "durable-result-identity-availability-genesis",
+  "lifecyclePath": "candidate",
+  "requestRoot": "sha256:7a3c73875e5f92eea12402b259c7b74c1536ff5554cf809791dc4bdb4cccfedf",
+  "fixedPackageRoot": "sha256:596a1e4b0d57e93fefcb4f32ff2df5be35a56cf86fb8864f5d0ab09b12cd8770",
+  "terminalBundleRoot": "sha256:6006236c951faa020db14d0bec08dbb6234a20139e7cd2a3323122b52fb5740e",
+  "terminalReportRoot": "sha256:0fb85f2dbd11dba10648bbc85a7f8a563674d4b18c6d6dfe452c6db80b40d9bb",
+  "valid": true,
+  "outcome": "proceed",
+  "transitionAdmissible": true,
+  "automaticTransition": false,
+  "verifierNecessary": true,
+  "verifierSufficient": false,
+  "humanApproved": false,
+  "releaseAuthorized": false,
+  "numberAllocated": false,
+  "statusChanged": false,
+  "chain": [
+    {
+      "index": 0,
+      "transition": "candidate-genesis",
+      "bundleRoot": "sha256:6006236c951faa020db14d0bec08dbb6234a20139e7cd2a3323122b52fb5740e",
+      "reportRoot": "sha256:0fb85f2dbd11dba10648bbc85a7f8a563674d4b18c6d6dfe452c6db80b40d9bb",
+      "packageRoot": "sha256:596a1e4b0d57e93fefcb4f32ff2df5be35a56cf86fb8864f5d0ab09b12cd8770",
+      "authorityReceiptRoot": "sha256:92bb883c4f846f8c0bd9ad06acd0b6a7ac6753332d3a67a65a0ce63a93444946",
+      "reviewReceiptRoot": "sha256:10a28ce5059031f93085ac607b72c4e95046e12ec88f2a37557fa555727bd735",
+      "verifierValid": true
+    }
+  ],
+  "counterevidenceRoots": [
+    "sha256:6646c32153d9d8bdb03ec913b795e4fbf026434c523717a550226593dccb7d9e"
+  ],
+  "checks": [
+    {
+      "id": "authority-receipt-contract",
+      "status": "pass"
+    },
+    {
+      "id": "authority-receipt-coordinates",
+      "status": "pass"
+    },
+    {
+      "id": "authority-receipt-root",
+      "status": "pass"
+    },
+    {
+      "id": "authority-role",
+      "status": "pass"
+    },
+    {
+      "id": "bootstrap-anchor",
+      "status": "pass"
+    },
+    {
+      "id": "chain-entry-contract",
+      "status": "pass"
+    },
+    {
+      "id": "counterevidence-roots",
+      "status": "pass"
+    },
+    {
+      "id": "entry-package-root",
+      "status": "pass"
+    },
+    {
+      "id": "exact-bundle-roots",
+      "status": "pass"
+    },
+    {
+      "id": "exact-report-roots",
+      "status": "pass"
+    },
+    {
+      "id": "exact-verifier-root",
+      "status": "pass"
+    },
+    {
+      "id": "fixed-package-root",
+      "status": "pass"
+    },
+    {
+      "id": "independent-review-receipt",
+      "status": "pass"
+    },
+    {
+      "id": "independent-transition-verifier",
+      "status": "pass"
+    },
+    {
+      "id": "lifecycle-path",
+      "status": "pass"
+    },
+    {
+      "id": "path-transition",
+      "status": "pass"
+    },
+    {
+      "id": "request-contract",
+      "status": "pass"
+    },
+    {
+      "id": "review-receipt-contract",
+      "status": "pass"
+    },
+    {
+      "id": "review-receipt-coordinates",
+      "status": "pass"
+    },
+    {
+      "id": "review-receipt-root",
+      "status": "pass"
+    },
+    {
+      "id": "terminal-bundle-root",
+      "status": "pass"
+    },
+    {
+      "id": "transition-chain",
+      "status": "pass"
+    }
+  ],
+  "issues": [],
+  "offline": true
+}

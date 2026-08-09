@@ -72,7 +72,7 @@
       "promise": "Implement KFD without Kungfu — scaffold an adapter in Python, Rust, Node.js, or C++, then verify it offline.",
       "release": {
         "package": "@kungfu-tech/kfd",
-        "version": "1.0.0-alpha.57",
+        "version": "1.0.0-alpha.58",
         "anchor": "kfd.release.json",
         "immutable": true
       },
@@ -102,19 +102,19 @@
         {
           "id": "scaffold",
           "label": "Scaffold",
-          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.57 kfd scaffold agent-hub --language python --output my-agent-hub-adapter",
+          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.58 kfd scaffold agent-hub --language python --output my-agent-hub-adapter",
           "capability": "kfd scaffold agent-hub --language <cpp|node|python|rust> --output <new-directory> [--json]"
         },
         {
           "id": "test",
           "label": "Test Hub 20",
-          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.57 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json",
+          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.58 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json",
           "capability": "kfd test agent-hub --adapter <path> --output <report.json>"
         },
         {
           "id": "verify",
           "label": "Verify offline",
-          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.57 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py --json",
+          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.58 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py --json",
           "capability": "kfd verify agent-hub-report <report.json> [--adapter <path>] [--json]"
         }
       ],
@@ -362,7 +362,7 @@
         "homepagePriority": 8,
         "defaultPresentation": "independent-implementation-steps",
         "includeInFirstScreen": true,
-        "markdown": "**Implement KFD without Kungfu — scaffold an adapter in Python, Rust, Node.js,\nor C++, then verify it offline.**\n\nUse the immutable `@kungfu-tech/kfd@1.0.0-alpha.57` package cut and follow the\npackage-owned [Agent Hub workflow](profiles/agent-hub/README.md) or inspect the\ncomplete [independent verification boundary](docs/independent-verifier.md):\n\n```bash\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.57 kfd scaffold agent-hub --language python --output my-agent-hub-adapter\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.57 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.57 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py --json\n```\n\nThe scaffold is a deterministic, fail-closed starter: its smoke path checks\nonly the JSONL envelope, and implementers must replace the missing product\nsemantics before the fixed Hub 20 suite can pass.\n\nPackage acquisition is separate from offline verification. Network or a local\npackage cache may be needed to obtain the immutable package bytes; after the\npackage, report, and optional adapter bytes are present, the report verifier\nperforms no network access.\n\nThese results do not certify an implementation or prove security, production\nfitness, complete semantic coverage, KFD-10 activation, or adoption by an\nindependent organization. [Open the complete Agent Hub guide](/agent-hub/) ·\n[Inspect the verifier and coverage matrix](/verify/)"
+        "markdown": "**Implement KFD without Kungfu — scaffold an adapter in Python, Rust, Node.js,\nor C++, then verify it offline.**\n\nUse the immutable `@kungfu-tech/kfd@1.0.0-alpha.58` package cut and follow the\npackage-owned [Agent Hub workflow](profiles/agent-hub/README.md) or inspect the\ncomplete [independent verification boundary](docs/independent-verifier.md):\n\n```bash\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.58 kfd scaffold agent-hub --language python --output my-agent-hub-adapter\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.58 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.58 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py --json\n```\n\nThe scaffold is a deterministic, fail-closed starter: its smoke path checks\nonly the JSONL envelope, and implementers must replace the missing product\nsemantics before the fixed Hub 20 suite can pass.\n\nPackage acquisition is separate from offline verification. Network or a local\npackage cache may be needed to obtain the immutable package bytes; after the\npackage, report, and optional adapter bytes are present, the report verifier\nperforms no network access.\n\nThese results do not certify an implementation or prove security, production\nfitness, complete semantic coverage, KFD-10 activation, or adoption by an\nindependent organization. [Open the complete Agent Hub guide](/agent-hub/) ·\n[Inspect the verifier and coverage matrix](/verify/)"
       },
       {
         "id": "foundation-triad",
@@ -6452,6 +6452,363 @@
             "claimBoundary": "The independently reviewed cut records no-new-primitive for KFD-5 and no-new-kfd for the Candidate. It preserves the useful procedure as explicit composition but allocates no number and changes no numbered KFD."
           }
         ]
+      },
+      {
+        "id": "durable-result-identity-availability",
+        "title": "Durable Result Identity and Availability Separation",
+        "kind": "primitive-discovery-case",
+        "status": "active",
+        "standard": "kfd-5",
+        "url": "/cases/live/durable-result-identity-availability",
+        "relationship": "provisional-live-case",
+        "claimBoundary": "This case preserves one exact product-generated hypothesis and its unresolved alternatives. It does not allocate a KFD number, make Stage Capsule normative, qualify cross-domain transfer, certify Buildchain v4, or enable production reuse.",
+        "humanEntry": {
+          "path": "cases/live/durable-result-identity-availability/README.md",
+          "markdown": "# Durable Result Identity and Availability Separation\n\nThis live case asks whether Buildchain v4 Stage Capsule exposed a portable\nprinciple or a strong product-specific composition:\n\n> When a durable result may be reused, must identity, retention commitment,\n> observed availability, transport, and qualification remain independently\n> addressable?\n\n## Current result\n\n```text\ncandidate: Durable Result Identity and Availability Separation\nstatus: provisional\nminimum closure: analytically plausible\ndeletion test: not run outside Buildchain\nfuse test: partial in Buildchain shadow qualification\ndogfood: six founding-ecosystem shadow campaigns; no production reuse\n```\n\nBuildchain's exact Wave 2 merge demonstrates that the separation is coherent,\nprovider-neutral, cross-process, and testable on three operating systems. It\ndoes not establish that the responsibility is irreducible from KFD-1, KFD-2,\nKFD-7, existing cache/provenance systems, or an adopter-owned Domain Profile.\n\n## Case surfaces\n\n- [Genesis](genesis.md)\n- [Ontology alternatives](ontology-split.md)\n- [Conditional distinguishability](distinguishability.md)\n- [KFD method trace](kfd-method-trace.md)\n- [Propagation boundary](propagation-hypothesis.md)\n- [Current KFD-5 cut](cuts/0001-durable-result-identity-availability.json)\n- [Qualification reviews](reviews/README.md)\n- [Candidate](../../../drafts/durable-result-identity-availability.md)\n\n## Claim boundary\n\nThis case opens qualification only. It does not allocate a KFD number, make\nBuildchain terminology normative, qualify cross-domain transfer, certify\nBuildchain v4, enable production Stage Capsule reuse, or select promotion over\nsubsumption, rejection, or `no-new-kfd`.\n\nThe case is limited to the cited public repository evidence; private\ndiscussion and unretained runner payloads are outside its evidence cut."
+        },
+        "genesis": {
+          "path": "cases/live/durable-result-identity-availability/genesis.md",
+          "markdown": "# Genesis: From Cache Hit to Defensible Reuse\n\n## Initial observer\n\nThe initial observer was evaluating Buildchain v4 recovery after a late build\nstage failed. The familiar objects were an action key, cached bytes, an\nartifact locator, a retention policy, and a build result.\n\nFrom that position, the problem looked like reliable cross-run caching.\n\n## Perspective transformation\n\nThe observer changed to the successor process that must decide whether it may\nsafely reuse a retained result after time, process, platform, policy, and\nprovider state have changed.\n\nFrom that position, one apparent cache fact separated into several questions:\n\n```text\nWhat exact result is this?\nWas anyone committed to retain it?\nIs it available and intact now?\nWhere can it be retrieved?\nIs it still qualified for this exact purpose?\n```\n\nBuildchain Stage Capsule made those questions independently variable and\ncomputed reuse only from explicit roots and an explicit evaluation clock.\n\n## Why genesis is not qualification\n\nAction cache and content-addressed storage already separate action metadata\nfrom output bytes. Provenance already binds outputs to production inputs and\nprocesses. KFD-1, KFD-2, and KFD-7 already require non-drifting facts,\nfact-bound trust, and visible degraded coordinates.\n\nThe new observation may therefore be a portable principle, a direct\ncomposition of existing KFDs, a Buildchain-specific Domain Profile, or only a\nparticularly careful cache protocol. This cut preserves all four outcomes.\n\nThis reconstruction is limited to public repository evidence; private\ndiscussion and unretained hosted-runner payloads are outside the cut."
+        },
+        "methodTrace": {
+          "path": "cases/live/durable-result-identity-availability/kfd-method-trace.md",
+          "markdown": "# KFD Method Trace\n\n## KFD-1\n\nThe Candidate preserves one exact Buildchain source cut and treats identity,\navailability observations, and future qualification cuts as welded surfaces\nthat cannot drift together silently.\n\n## KFD-2\n\nReuse is a claim assessed from exact roots and explicit current facts. A digest,\npromise, location, or prior pass cannot substitute for present evidence and\nresidual risk.\n\n## KFD-4\n\nThe observer changes from the producer that just completed a stage to the\nsuccessor process deciding whether the result remains usable after conditions\nchanged.\n\n## KFD-5\n\nBuildchain supplies genesis and founding dogfood, not promotion. Existing KFD\ncomposition, Buildchain Profile, prior-art composition, and no new KFD remain\nlive alternatives.\n\n## KFD-7 and KFD-13 boundaries\n\nStage Capsule records product-domain facts and supports recovery action; it is\nnot a new action coordinate or Project Cut. A future principle must preserve\nthose authorities rather than absorb them.\n\n## KFD-6 boundary\n\nNo autonomous discovery claim is made. Human judgment selected the pressure\nfield; the agent reconstructed public evidence, alternatives, and falsifiers."
+        },
+        "propagationHypothesis": {
+          "path": "cases/live/durable-result-identity-availability/propagation-hypothesis.md",
+          "markdown": "# Propagation Boundary\n\nIf the principle transfers, one small decision surface could serve build\nstages, agent checkpoints, scientific pipelines, model or dataset custody, and\nbackup restoration:\n\n```text\nidentify exact result\n  -> inspect retention commitment\n  -> observe current availability and transport\n  -> assess qualification for this purpose and time\n  -> restore or rebuild without rewriting history\n```\n\nThe hypothesis remains unverified. Domains may have different custody,\nprivacy, authority, or liveness requirements; some have no meaningful\nretention promise. A general KFD must allow absent or unsupported coordinates\nto remain explicit instead of forcing Buildchain's schema onto them."
+        },
+        "reviewIndex": {
+          "path": "cases/live/durable-result-identity-availability/reviews/README.md",
+          "markdown": "# Durable Result Identity and Availability Reviews\n\nAn independent exact-commit genesis review was completed by `kungfu-origin`\nfor commit `5b05f24f69ea2f293c21eec0b830d6e60eec7868` on\n[PR 337](https://github.com/kungfu-systems/kfd/pull/337#pullrequestreview-4891051647).\nIt approves retaining this exact incubating, pre-number Candidate genesis and\nits KFD-5 cut. It does not qualify or promote the Candidate, allocate a number,\nauthorize a terminal disposition, or make Buildchain normative.\n\nThe retained machine-readable review evidence and Self-Conformance lifecycle\npair are:\n\n- `evidence/self-conformance/reviews/durable-result-identity-availability.genesis.json`;\n- `evidence/self-conformance/transitions/durable-result-identity-availability-genesis.request.json`;\n- `evidence/self-conformance/transitions/durable-result-identity-availability-genesis.report.json`.\n\nNo independent qualification review has been completed. A later qualification\nreview should evaluate:\n\n1. whether the Candidate states a portable responsibility rather than a\n   Buildchain schema;\n2. whether KFD-1, KFD-2, KFD-7, and KFD-13 redundancy is treated seriously;\n3. whether action cache, CAS, provenance, registry, and retention-policy prior\n   art can reproduce the same decisions;\n4. whether the Buildchain evidence is accurately bounded as shadow-only and\n   first-party;\n5. whether deletion and fuse tests demand changed decisions rather than model\n   elegance;\n6. whether non-build transfer and independent implementation are real gates;\n7. whether promotion, subsumption, rejection, and `no-new-kfd` remain equally\n   admissible outcomes."
+        },
+        "ontologySplit": {
+          "path": "cases/live/durable-result-identity-availability/ontology-split.md",
+          "markdown": "# Ontology Alternatives\n\nThe question is not whether Stage Capsule is useful. It is where the durable\nseparation belongs.\n\n| Hypothesis | Normative owner | Main risk |\n|---|---|---|\n| New KFD principle | KFD defines the cross-domain separation; adopters map it | Promotes a build-cache pattern before transfer is proved |\n| Existing KFD composition | KFD-1, KFD-2, and KFD-7 already imply the rule | Leaves a repeatedly reconstructed responsibility unnamed |\n| Buildchain Domain Profile | Buildchain owns Stage Capsule and its exact fields | Similar failures recur in unrelated domains |\n| Infrastructure composition | Action cache, CAS, provenance, and storage policy | Locators or policy are still mistaken for current evidence |\n\n## Proposed semantic split\n\n```text\nresult identity\n  != retention commitment\n  != observed availability\n  != transport coordinate\n  != reuse assessment\n```\n\nQualification may be bound into result identity by exact root while remaining\nan independently inspectable authority. Physical co-location is allowed;\nsemantic substitution is not.\n\n## Forbidden fusion\n\n- A content root must not prove present availability.\n- A retention promise must not prove successful custody.\n- A transport locator must not become result or storage authority.\n- Historical qualification must not prove current purpose fitness.\n- One successful restore must not authorize provider or production effects."
+        },
+        "distinguishabilityArgument": {
+          "path": "cases/live/durable-result-identity-availability/distinguishability.md",
+          "markdown": "# Conditional Distinguishability\n\n## Deletion experiment\n\nHold fixed the result content, action or transformation, qualification, store,\nprovider, and receiver purpose. Remove the explicit separation between\nidentity, retention, current availability, transport, and reuse assessment.\n\nDeletion matters only if a participant then makes a different unsafe decision\nor must materially reconstruct one of these facts from mutable provider state,\nlogs, convention, or operator memory. Cleaner schema design is not sufficient.\n\nBuildchain demonstrates likely deletion pressure through missing, expired,\npartial, corrupt, quarantined, root-mismatch, cross-platform, cross-stage, and\ndrift campaigns. A non-build fixed-root deletion witness remains absent.\n\n## Fuse experiment\n\nThe responsibilities are operationally distinguishable when, with the same\nresult identity:\n\n- a retention commitment expires without changing historical bytes;\n- availability changes from present to missing or corrupt;\n- a transport locator moves without changing result identity;\n- qualification becomes insufficient for a new purpose;\n- a receiver rejects reuse while preserving the historical result;\n- two stores report different availability without creating two results.\n\nBuildchain's shadow contract supports these variations. Qualification must\nshow that at least one unrelated adopter also needs them and cannot obtain the\nsame decisions from ordinary content-addressed storage plus policy.\n\n## Current verdict\n\nThe candidate is sufficiently distinguishable to incubate, not to number.\nProduct evidence is strong; cross-domain irreducibility and redundancy against\nexisting KFDs remain unresolved."
+        },
+        "candidateTracks": [
+          {
+            "id": "durable-result-identity-availability",
+            "title": "Durable Result Identity and Availability Separation",
+            "status": "provisional",
+            "definition": "A possible cross-domain principle requiring reusable durable results to keep immutable identity, retention commitment, observed availability, transport coordinates, qualification, and reuse assessment independently addressable.",
+            "currentCut": {
+              "path": "cases/live/durable-result-identity-availability/cuts/0001-durable-result-identity-availability.json",
+              "sha256": "815855150156ab6870f2dd24c2ee57d49ea81422a439f028f90813ac259fe000",
+              "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-5/primitive-discovery.schema.json",
+              "schemaVersion": 3,
+              "record": {
+                "schemaVersion": 3,
+                "contract": "kfd-5-primitive-discovery",
+                "standard": "kfd-5",
+                "candidate": {
+                  "id": "durable-result-identity-availability",
+                  "title": "Durable Result Identity and Availability Separation",
+                  "problemStatement": "Systems that reuse durable results across time or location can mistake an immutable result identity, a retention promise, a current availability observation, a transport locator, or prior qualification as proof of the others.",
+                  "scope": "Incubating cross-domain principle generated from Buildchain v4 Stage Capsule; numbering, cross-domain transfer, independent implementation, production reuse, and universal necessity are not claimed."
+                },
+                "genesis": {
+                  "methods": [
+                    "direct-situated-judgment",
+                    "perspective-transformation",
+                    "reconstruction-pressure",
+                    "structural-compression"
+                  ],
+                  "observationPerspective": {
+                    "id": "build-recovery-producer",
+                    "bearer": "Buildchain maintainers and agents implementing staged build recovery",
+                    "role": "producer of retained build-stage results",
+                    "proximity": "inside Stage Capsule contract, store, checkpoint, resume, and qualification implementation",
+                    "consequences": [
+                      "bears false reuse, false rebuild, corrupted restore, provider coupling, and recovery defects"
+                    ],
+                    "naturalObjects": [
+                      "build stage",
+                      "action key",
+                      "output manifest",
+                      "content-addressed store",
+                      "provider artifact",
+                      "resume plan"
+                    ]
+                  },
+                  "currentOntology": [
+                    "KFD-1 fact cut and welded surface",
+                    "KFD-2 claim and trust assessment",
+                    "KFD-7 Fact and Episode",
+                    "KFD-13 Project Cut",
+                    "action cache and action result",
+                    "content-addressed store",
+                    "artifact provenance",
+                    "Buildchain Stage Capsule"
+                  ],
+                  "observation": "Buildchain recovery could not safely treat a digest, retained blob, provider locator, retention policy, or earlier qualification as one cache-hit fact. The successor process needed each coordinate to vary without rewriting the others.",
+                  "candidateObject": "A portable separation principle may require reusable durable results to keep immutable identity, retention commitment, observed availability, transport coordinates, and qualification independently addressable.",
+                  "claimBoundary": "The cut opens qualification of the separation and does not decide whether it is a new KFD, an existing-KFD composition, a Buildchain Domain Profile, an infrastructure composition, or no new Primitive.",
+                  "methodEvidence": [
+                    {
+                      "kind": "git",
+                      "coordinate": "https://github.com/kungfu-systems/buildchain/commit/7499b8dc988af2f9f1cb1796230adf3bee33bac1",
+                      "observer": "Buildchain v4 exact merge cut"
+                    },
+                    {
+                      "kind": "git",
+                      "coordinate": "https://github.com/kungfu-systems/buildchain/pull/2476",
+                      "observer": "protected qualification and independent review"
+                    },
+                    {
+                      "kind": "file",
+                      "coordinate": "drafts/durable-result-identity-availability.md",
+                      "observer": "KFD Candidate genesis"
+                    }
+                  ],
+                  "transformedPerspective": {
+                    "id": "successor-result-consumer",
+                    "bearer": "a later process, agent, or operator deciding whether to reuse a durable result",
+                    "role": "receiver and consequence bearer for restore or rebuild",
+                    "proximity": "inside current purpose, time, availability, and recovery consequences but outside the original execution",
+                    "consequences": [
+                      "bears unsafe reuse, unnecessary rebuild, unavailable evidence, stale qualification, and hidden custody failure"
+                    ],
+                    "naturalObjects": [
+                      "exact result",
+                      "retention commitment",
+                      "current availability",
+                      "retrieval path",
+                      "purpose-bound reuse decision"
+                    ]
+                  },
+                  "transformation": "The observer moved from the producer that had just completed a stage to the successor process that must decide whether the result remains reusable after process, time, platform, policy, store, and provider state may have changed.",
+                  "newlyVisibleNeed": "The successor needs to reject or permit reuse without inferring availability from identity, identity from location, custody from promise, or current qualification from a historical pass.",
+                  "methodNotes": "The exact Buildchain cut is founding evidence only. Public prior art and existing KFD composition remain active alternatives."
+                },
+                "boundaryPressure": {
+                  "contactSides": [
+                    "immutable result identity and historical production evidence",
+                    "a successor receiver observing mutable storage, transport, policy, and purpose conditions"
+                  ],
+                  "implicitHandling": "Systems commonly reconstruct the reuse decision from cache hits, provider IDs, mutable locators, retention configuration, logs, timestamps, and operator knowledge.",
+                  "pressureChanges": [
+                    {
+                      "kind": "latency",
+                      "description": "Reuse occurs after the producing process and its ambient state have disappeared."
+                    },
+                    {
+                      "kind": "heterogeneity",
+                      "description": "Results move across platforms, stores, providers, processes, and receiver policies."
+                    },
+                    {
+                      "kind": "consequence",
+                      "description": "False reuse can ship incorrect bytes while false rebuild wastes time and scarce compute."
+                    },
+                    {
+                      "kind": "authority",
+                      "description": "Storage, transport, qualification, and production execution may have different owners."
+                    }
+                  ],
+                  "observedFailures": [
+                    "A provider artifact ID or locator is treated as immutable semantic identity.",
+                    "A retention policy is treated as proof that bytes are present and intact.",
+                    "A content digest is treated as proof that content remains retrievable.",
+                    "Historical qualification is reused after source, platform, toolchain, policy, or purpose drift.",
+                    "A cache hit silently grants provider or production stage-skipping authority."
+                  ],
+                  "mediationClaim": "Separating identity, retention, availability, transport, qualification, and reuse assessment may let successors restore or rebuild deterministically without rewriting history or importing provider authority.",
+                  "internalObjectAlternative": "KFD-1, KFD-2, KFD-7, action-cache/CAS contracts, provenance, and adopter-owned storage policy may provide equivalent closure without a new KFD."
+                },
+                "grounding": {
+                  "pressure": [
+                    "Buildchain v4 required three separate roots for identity, capsule retention, and current availability.",
+                    "Its store and resume planner keep content, transport, qualification, and provider effects separate.",
+                    "Six real-runner shadow campaigns and adversarial cases passed at one protected merge cut.",
+                    "The implementation remains first-party, shadow-only, and production-reuse disabled.",
+                    "Existing cache and provenance standards already cover major parts of the mechanism."
+                  ],
+                  "factSources": [
+                    {
+                      "kind": "git",
+                      "coordinate": "https://github.com/kungfu-systems/buildchain/blob/7499b8dc988af2f9f1cb1796230adf3bee33bac1/docs/v4-stage-capsule.md",
+                      "observer": "Buildchain v4 contract guide"
+                    },
+                    {
+                      "kind": "git",
+                      "coordinate": "https://github.com/kungfu-systems/buildchain/blob/7499b8dc988af2f9f1cb1796230adf3bee33bac1/architecture/v4-stage-capsule-contract.json",
+                      "observer": "Buildchain v4 executable architecture"
+                    },
+                    {
+                      "kind": "git",
+                      "coordinate": "https://github.com/bazelbuild/remote-apis",
+                      "observer": "Remote Execution and caching prior art"
+                    },
+                    {
+                      "kind": "other",
+                      "coordinate": "https://slsa.dev/spec/v1.2/provenance",
+                      "observer": "artifact provenance prior art"
+                    },
+                    {
+                      "kind": "file",
+                      "coordinate": "cases/live/durable-result-identity-availability/distinguishability.md",
+                      "observer": "KFD Candidate qualification"
+                    }
+                  ],
+                  "evidenceBoundary": "The cut retains exact public Buildchain contracts, PR review and hosted check outcomes, existing KFD decisions, and bounded public prior art. It contains no independent non-Buildchain implementation, production reuse, non-software transfer, exhaustive prior-art review, or authority-separated terminal KFD disposition.",
+                  "knownGaps": [
+                    "No independent implementation outside the Buildchain writer code",
+                    "No structurally non-build transfer",
+                    "No production reuse under a bounded rollback gate",
+                    "No measured cross-domain deletion or fuse witness",
+                    "No exhaustive prior-art comparison",
+                    "No independent exact-cut KFD qualification review",
+                    "No terminal promotion, subsumption, rejection, or no-new-kfd disposition"
+                  ]
+                },
+                "participants": [
+                  {
+                    "id": "human-candidate-sponsor",
+                    "kind": "human",
+                    "functions": [
+                      "perspective-declaration",
+                      "candidate-generation",
+                      "decision"
+                    ]
+                  },
+                  {
+                    "id": "agent-evidence-reconstructor",
+                    "kind": "agent",
+                    "functions": [
+                      "candidate-generation",
+                      "scalable-reasoning"
+                    ]
+                  },
+                  {
+                    "id": "future-independent-review",
+                    "kind": "collective",
+                    "functions": [
+                      "evidence-custody",
+                      "verification"
+                    ]
+                  }
+                ],
+                "alternatives": [
+                  {
+                    "name": "New portable KFD principle",
+                    "disposition": "unresolved",
+                    "reason": "The separation may change safe reuse decisions in domains beyond software builds, but no transfer witness exists."
+                  },
+                  {
+                    "name": "KFD-1, KFD-2, and KFD-7 composition",
+                    "disposition": "retained",
+                    "reason": "Non-drifting fact surfaces, fact-bound trust, and visible degraded coordinates may already imply the full responsibility."
+                  },
+                  {
+                    "name": "Buildchain Domain Profile",
+                    "disposition": "retained",
+                    "reason": "Stage Capsule may be a product-specific realization whose exact fields should remain adopter-owned."
+                  },
+                  {
+                    "name": "Action cache, CAS, provenance, and retention policy composition",
+                    "disposition": "retained",
+                    "reason": "Established infrastructure may provide equivalent closure with less normative expansion."
+                  },
+                  {
+                    "name": "No new Primitive",
+                    "disposition": "unresolved",
+                    "reason": "The current evidence is compatible with a useful explicit composition that deserves no KFD number."
+                  }
+                ],
+                "contractModel": {
+                  "identity": "A durable result binds exact inputs, transformation, environment or platform boundary, outputs, and referenced qualification roots without mutable provider or transport coordinates.",
+                  "boundary": "Result identity, retention commitment, observed availability, transport coordinate, qualification, explicit evaluation cut, and receiver-owned reuse decision remain semantically distinguishable.",
+                  "authority": "The principle would not create storage, transport, qualification, provider, production, or receiver authority; each remains independently owned and cited.",
+                  "lifecycle": "A result identity remains immutable while commitments, availability observations, transport coordinates, qualifications, and reuse assessments gain successor cuts, expire, degrade, or are revoked without rewriting it.",
+                  "operations": [
+                    "identify",
+                    "commit-retention",
+                    "observe-availability",
+                    "locate",
+                    "verify-content",
+                    "assess-qualification",
+                    "decide-reuse",
+                    "restore",
+                    "rebuild",
+                    "quarantine"
+                  ]
+                },
+                "tests": {
+                  "minimumClosure": {
+                    "result": "inconclusive",
+                    "evidence": [
+                      {
+                        "kind": "file",
+                        "coordinate": "drafts/durable-result-identity-availability.md"
+                      }
+                    ],
+                    "notes": "Buildchain closes one product model, but the minimum portable vocabulary and optional-coordinate semantics remain unqualified."
+                  },
+                  "deletion": {
+                    "result": "inconclusive",
+                    "evidence": [
+                      {
+                        "kind": "file",
+                        "coordinate": "cases/live/durable-result-identity-availability/distinguishability.md"
+                      }
+                    ],
+                    "notes": "Buildchain fault campaigns demonstrate local pressure, but no non-build fixed-root case shows a changed decision or measured reconstruction burden."
+                  },
+                  "fuse": {
+                    "result": "inconclusive",
+                    "evidence": [
+                      {
+                        "kind": "git",
+                        "coordinate": "https://github.com/kungfu-systems/buildchain/pull/2476"
+                      },
+                      {
+                        "kind": "file",
+                        "coordinate": "cases/live/durable-result-identity-availability/ontology-split.md"
+                      }
+                    ],
+                    "notes": "The product contract varies responsibilities independently, but existing KFD and infrastructure compositions have not been shown insufficient."
+                  },
+                  "falsifiers": [
+                    "Existing KFD decisions and an adopter Profile reproduce every bounded reuse decision at lower total cost.",
+                    "Action cache, CAS, provenance, and ordinary retention policy supply equivalent closure.",
+                    "The distinction fails to transfer to a structurally non-build domain.",
+                    "Independent implementations cannot preserve the separation without importing Buildchain-specific fields.",
+                    "Production use requires hidden provider identity, ambient state, or fused authority.",
+                    "The model produces no measurable safety or reconstruction benefit."
+                  ],
+                  "dogfood": {
+                    "result": "inconclusive",
+                    "evidence": [
+                      {
+                        "kind": "git",
+                        "coordinate": "https://github.com/kungfu-systems/buildchain/commit/7499b8dc988af2f9f1cb1796230adf3bee33bac1"
+                      }
+                    ],
+                    "notes": "Buildchain self-dogfood and Kungfu shadow consumers passed three-platform campaigns, but production reuse, independent implementation, and cross-domain transfer were intentionally disabled or absent."
+                  }
+                },
+                "decision": {
+                  "outcome": "provisional",
+                  "owner": "KFD maintainers subject to independent exact-cut review",
+                  "reason": "The founding implementation demonstrates a coherent and consequential separation, while existing KFD and mature infrastructure alternatives prevent promotion without cross-domain deletion, fuse, production, and independent-implementation evidence.",
+                  "residualRisks": [
+                    "The Candidate may merely restate KFD-1, KFD-2, and KFD-7.",
+                    "Buildchain terminology may leak into a supposedly portable principle.",
+                    "First-party shadow evidence may be mistaken for independent or production qualification.",
+                    "Additional coordinates may increase complexity without changing decisions.",
+                    "Provider-neutral schemas may still encode build-specific assumptions.",
+                    "A new KFD could duplicate mature cache, provenance, and custody standards."
+                  ]
+                }
+              }
+            },
+            "claimBoundary": "Provisional only. The founding Buildchain cut is first-party and shadow-only; existing KFD composition, a Buildchain Domain Profile, mature cache/provenance mechanisms, and no-new-Primitive outcomes remain live."
+          }
+        ]
       }
     ]
   },
@@ -6469,7 +6826,7 @@
       "numberedDraftSource": "registry.json",
       "stableFreeze": "first-non-prerelease-release"
     },
-    "indexMarkdown": "# KFD Candidates\n\nKFD Candidates preserve potentially load-bearing portable engineering rules\nbefore a KFD number is allocated. They are pre-number drafts, not numbered\ndecisions.\n\nThe machine source is [`registry.json`](registry.json). A candidate may carry\na non-binding `slotHint` to preserve the current ordering hypothesis. The hint\ndoes not reserve, allocate, or promise that number. Only an explicit promotion\ncreates a numbered KFD under `decisions/` and `registry.json`.\n\n```text\ncandidate\n  -> qualification\n  -> explicit promotion\n  -> numbered draft\n  -> activation evidence\n  -> active KFD\n```\n\nCandidates may be revised, reordered, merged, split, withdrawn, rejected, or\npromoted while their published coordinates remain immutable. Their current\nstatus and claim boundary must remain machine-readable.\n\nAny participant may propose a candidate, counterexample, adopter Profile, or\nqualification evidence through the public process in\n[`CONTRIBUTING.md`](../CONTRIBUTING.md). Maintainers remain responsible for\nofficial numbering and status decisions.\n\nPromoted lineage:\n\n- [Cross-domain action primitives](action-state-separation.md) was explicitly\n  promoted into active [KFD-7](../decisions/KFD-7.md).\n- [Atlas action perspective](atlas-action-perspective.md) was explicitly\n  promoted into numbered draft [KFD-8](../decisions/KFD-8.md).\n- [Pursuit intent continuity](pursuit-intent-continuity.md) was explicitly\n  promoted into numbered draft [KFD-9](../decisions/KFD-9.md).\n- [Warrant bounded authority](warrant-bounded-authority.md) was explicitly\n  promoted into numbered draft [KFD-10](../decisions/KFD-10.md).\n- [Claim, Assessment, Decision, and Admission](claim-assessment-decision-admission.md)\n  was allocated to numbered draft [KFD-11](../decisions/KFD-11.md) by the\n  [2026-07-21 pre-stable Foundation Revision](../docs/foundation-revision-2026-07-21-decision-admission.md).\n\nIncubating now:\n\n- [Federated Work Continuity](federated-work-continuity.md) asks whether one\n  user-level body of work remains independently identifiable across the\n  Assignments, workspaces, and cuts through which it advances. Its strongest\n  alternatives remain Initiative, a perspective-bound derived view, and no new\n  Primitive.\n\nResolved without a new KFD:\n\n- [Recursive normative self-conformance](recursive-normative-self-conformance.md)\n  is retained as the explicit composition of KFD-1, KFD-2, KFD-5, KFD-11, and\n  the fixed Self-Conformance Profile. Independent exact-cut review accepted the\n  `no-new-kfd` disposition; the Candidate is `merged` without a slot hint,\n  number, or change to any numbered KFD.\n\nThe promoted pages remain public lineage and do not replace their numbered\ndecisions. Incubating pages are non-normative and allocate no number.\n\nSee [Contributing](../CONTRIBUTING.md) and\n[Governance](../GOVERNANCE.md) for open proposal, candidate promotion,\npre-stable Foundation Revision, stewardship, and Foundation Freeze rules.",
+    "indexMarkdown": "# KFD Candidates\n\nKFD Candidates preserve potentially load-bearing portable engineering rules\nbefore a KFD number is allocated. They are pre-number drafts, not numbered\ndecisions.\n\nThe machine source is [`registry.json`](registry.json). A candidate may carry\na non-binding `slotHint` to preserve the current ordering hypothesis. The hint\ndoes not reserve, allocate, or promise that number. Only an explicit promotion\ncreates a numbered KFD under `decisions/` and `registry.json`.\n\n```text\ncandidate\n  -> qualification\n  -> explicit promotion\n  -> numbered draft\n  -> activation evidence\n  -> active KFD\n```\n\nCandidates may be revised, reordered, merged, split, withdrawn, rejected, or\npromoted while their published coordinates remain immutable. Their current\nstatus and claim boundary must remain machine-readable.\n\nAny participant may propose a candidate, counterexample, adopter Profile, or\nqualification evidence through the public process in\n[`CONTRIBUTING.md`](../CONTRIBUTING.md). Maintainers remain responsible for\nofficial numbering and status decisions.\n\nPromoted lineage:\n\n- [Cross-domain action primitives](action-state-separation.md) was explicitly\n  promoted into active [KFD-7](../decisions/KFD-7.md).\n- [Atlas action perspective](atlas-action-perspective.md) was explicitly\n  promoted into numbered draft [KFD-8](../decisions/KFD-8.md).\n- [Pursuit intent continuity](pursuit-intent-continuity.md) was explicitly\n  promoted into numbered draft [KFD-9](../decisions/KFD-9.md).\n- [Warrant bounded authority](warrant-bounded-authority.md) was explicitly\n  promoted into numbered draft [KFD-10](../decisions/KFD-10.md).\n- [Claim, Assessment, Decision, and Admission](claim-assessment-decision-admission.md)\n  was allocated to numbered draft [KFD-11](../decisions/KFD-11.md) by the\n  [2026-07-21 pre-stable Foundation Revision](../docs/foundation-revision-2026-07-21-decision-admission.md).\n\nIncubating now:\n\n- [Federated Work Continuity](federated-work-continuity.md) asks whether one\n  user-level body of work remains independently identifiable across the\n  Assignments, workspaces, and cuts through which it advances. Its strongest\n  alternatives remain Initiative, a perspective-bound derived view, and no new\n  Primitive.\n- [Durable Result Identity and Availability Separation](durable-result-identity-availability.md)\n  asks whether cross-time reuse requires result identity, retention commitment,\n  observed availability, transport coordinates, and qualification to remain\n  independently addressable. Its strongest alternatives remain existing KFD\n  composition, a Buildchain Domain Profile, mature cache/provenance contracts,\n  and no new KFD.\n\nResolved without a new KFD:\n\n- [Recursive normative self-conformance](recursive-normative-self-conformance.md)\n  is retained as the explicit composition of KFD-1, KFD-2, KFD-5, KFD-11, and\n  the fixed Self-Conformance Profile. Independent exact-cut review accepted the\n  `no-new-kfd` disposition; the Candidate is `merged` without a slot hint,\n  number, or change to any numbered KFD.\n\nThe promoted pages remain public lineage and do not replace their numbered\ndecisions. Incubating pages are non-normative and allocate no number.\n\nSee [Contributing](../CONTRIBUTING.md) and\n[Governance](../GOVERNANCE.md) for open proposal, candidate promotion,\npre-stable Foundation Revision, stewardship, and Foundation Freeze rules.",
     "candidates": [
       {
         "id": "action-state-separation",
@@ -6709,6 +7066,39 @@
         "relationship": "pre-number-non-normative-candidate",
         "normative": false,
         "markdown": "# Recursive normative self-conformance\n\n- Candidate ID: `recursive-normative-self-conformance`\n- Status: qualifying\n- Kind candidate: procedure\n- Number: none\n- Slot binding: non-binding\n\n## One sentence\n\nA normative system should route load-bearing changes to its own rules through\nthe same fixed-root, authority-separated conformance path it requires of\nadopters.\n\n## Candidate claim\n\nThe proposed procedure makes recursive application explicit:\n\n```text\ndeclared normative cut\n  -> pre-number genesis\n  -> fact-bound qualification\n  -> independent review\n  -> authority-separated disposition\n  -> admitted successor cut or retained non-promotion\n```\n\nThe fixed cut, verifier, review, and disposition authorities remain distinct.\nA generator cannot certify its own candidate. A structural verifier cannot\nchoose the semantic outcome. A passing report cannot allocate a number,\nactivate a decision, merge a change, or publish a release.\n\n## Why this is only a Candidate\n\nKFD already contains most or all of this responsibility:\n\n- KFD-1 preserves exact normative coordinates and compatibility boundaries;\n- KFD-2 makes conformance claims fact-bound and risk-bounded;\n- KFD-5 separates genesis from qualification and permits `no new primitive`;\n- KFD-11 separates claim, assessment, authorized decision, and admission;\n- the Self-Conformance Profile supplies a fixed package, transition verifier,\n  lifecycle chain, review receipt, and explicit non-authority boundary.\n\nThe open question is therefore not whether recursive self-application is\nuseful. It is whether that composition needs an additional numbered KFD or is\nalready the minimum closure of existing decisions and the Profile.\n\n## Qualification burden\n\nThe Candidate must survive all of the following without relying on its own\ntext as proof:\n\n1. exact-root KFD-5 genesis;\n2. deletion and fuse comparison against KFD-1, KFD-2, KFD-5, and KFD-11;\n3. replay of KFD-1 through KFD-3 bootstrap, KFD-7 activation, the KFD-11\n   through KFD-13 Foundation Revision, and at least one retained gap;\n4. package-only clean-room verification and native/WASM parity;\n5. adversarial failure when roots, predecessor, review, authority, package, or\n   claim boundary are substituted;\n6. independent review of the exact evidence cut;\n7. a terminal `qualified`, `provisional`, `rejected`, or `no-new-kfd`\n   disposition issued by an authority other than the generator or verifier.\n\n## No-new-KFD condition\n\nNo new KFD is justified if deletion of this Candidate leaves the combined\nKFD-1/KFD-2/KFD-5/KFD-11 obligations and the fixed Self-Conformance Profile\nable to reproduce every decision-relevant observation, while adding the\nCandidate only names their composition rather than a new identity, boundary,\nauthority, lifecycle, or operation.\n\n## Terminal disposition\n\nThe exact assessment cut at\n`5791476b226b0ce26f98538704e71f7e29e04956` satisfied that condition.\nIndependent review `PRR_kwDOTLH7GM8AAAABIy0qZA` accepted `no-new-kfd`: the\nprocedure remains useful as an explicit composition, but it adds no irreducible\nidentity, boundary, authority, lifecycle, or operation. The retained terminal\nProfile report is a non-promotion outcome and does not allocate a number.\n\nThe Candidate registry records `merged` to preserve this lineage. Here,\n`merged` means merged into the existing normative closure, not merged Git state,\nactivation, publication, or release. Reopening requires a new exact evidence\ncut satisfying one of the retained counterconditions.\n\n## Claim boundary\n\nThis Candidate has no number and no active status. Its `no-new-kfd` disposition\ndoes not amend existing\nKFD text, reinterpret historical releases, certify the Self-Conformance\nProfile, approve its own evidence, or authorize promotion, merge, or release."
+      },
+      {
+        "id": "durable-result-identity-availability",
+        "title": "Durable Result Identity and Availability Separation",
+        "status": "incubating",
+        "kindCandidate": "principle",
+        "slotBinding": "non-binding",
+        "oneSentence": "When a durable result may be reused across time or location, its immutable identity, retention commitment, observed availability, transport coordinates, and qualification must remain independently addressable.",
+        "path": "drafts/durable-result-identity-availability.md",
+        "sourceCases": [
+          {
+            "id": "durable-result-identity-availability",
+            "path": "cases/live/durable-result-identity-availability/README.md"
+          }
+        ],
+        "promotionGate": [
+          "exact-root-kfd-5-genesis",
+          "kfd-1-2-7-13-redundancy-analysis",
+          "cache-cas-provenance-retention-prior-art-comparison",
+          "fixed-root-deletion-and-fuse-witnesses",
+          "structurally-non-build-transfer",
+          "independent-non-buildchain-implementation",
+          "bounded-production-dogfood-with-rollback",
+          "independent-exact-cut-review",
+          "authority-separated-terminal-disposition",
+          "maintainer-promotion"
+        ],
+        "claimBoundary": "This incubating Candidate preserves a portable separation hypothesis generated from Buildchain v4 Stage Capsule. It has no slot hint, number, active status, cross-domain qualification, independent implementation, production-reuse authority, certification, or preference over subsumption, rejection, and no-new-kfd outcomes.",
+        "url": "/drafts/durable-result-identity-availability",
+        "sourcePath": "drafts/durable-result-identity-availability.md",
+        "relationship": "pre-number-non-normative-candidate",
+        "normative": false,
+        "markdown": "# KFD Candidate: Durable Result Identity and Availability Separation\n\n- Candidate status: incubating\n- Kind candidate: principle\n- Slot binding: non-binding\n- Number allocated: no\n\n[Live case](../cases/live/durable-result-identity-availability/README.md)\n\n## One sentence\n\nWhen a durable result may be reused across time or location, its immutable\nidentity, retention commitment, observed availability, transport coordinates,\nand qualification must remain independently addressable.\n\n## Candidate rule\n\nA content digest answers what bytes or canonical facts a result binds. It does\nnot prove that those bytes remain available, that anyone promised to retain\nthem, that a transport currently reaches them, or that the result remains\nqualified for a receiver's purpose.\n\nAn adopting system should therefore preserve separately:\n\n- **result identity**: the exact inputs, transformation, environment boundary,\n  outputs, and qualification roots that define the result;\n- **retention commitment**: who or what promises to retain it, under which\n  class and until which declared boundary;\n- **availability observation**: whether the result is currently available,\n  missing, partial, corrupt, quarantined, expired, or unverifiable at an\n  explicit observation cut;\n- **transport coordinate**: how a caller may attempt retrieval without\n  confusing a mutable locator with result identity or storage authority;\n- **reuse assessment**: an explicit-time, exact-root, fail-closed decision\n  that may reject reuse without changing the historical result.\n\nThese responsibilities may share one physical record. They remain distinct\nwhen one can change, expire, fail, move, or be revoked without silently\nchanging another.\n\n## Founding pressure field\n\nBuildchain v4 Stage Capsule is the founding product witness. At exact merge\ncommit `7499b8dc988af2f9f1cb1796230adf3bee33bac1`, it separates identity,\nretention promise, availability, transport observations, qualification, and\nreuse; restores content from a content-addressed store; and plans deterministic\nresume after late-stage failure. Its protected qualification ran Buildchain\nself-dogfood and a Kungfu shadow consumer on Linux x64, macOS arm64, and\nWindows x64 with fail-closed fault campaigns.\n\nThat evidence is strong product genesis, not cross-domain qualification. The\nimplementation remains shadow-only: TypeScript v3 is the sole writer, Rust is\nvalidation-only, production reuse is disabled, and Buildchain and Kungfu are\ninside the same founding ecosystem.\n\n## Why this may deserve a portable principle\n\nExisting build systems already combine action keys, result metadata, and\ncontent-addressed storage. Provenance formats bind artifacts to how they were\nproduced. The potentially irreducible burden exposed by Stage Capsule is\nnarrower: systems repeatedly treat a stable identity, a retention policy, a\ncurrent observation, a locator, and a trust decision as if any one proved the\nothers.\n\nIf the distinction changes safe reuse and recovery decisions across unrelated\ndomains, it may be a portable principle. If KFD-1, KFD-2, KFD-7, ordinary\ncontent-addressed storage, and adopter-specific Profiles reproduce every\ndecision-relevant observation, no new KFD is justified.\n\n## Competing hypotheses\n\n1. **New portable principle**: cross-time reuse requires identity, retention,\n   availability, transport, and qualification separation in any domain.\n2. **KFD-1/KFD-2/KFD-7 composition**: non-drifting facts, fact-bound trust, and\n   visible degraded coordinates already imply the complete responsibility.\n3. **Buildchain Domain Profile**: the separation is valuable but specific to\n   staged build recovery and should remain adopter-owned.\n4. **Existing infrastructure composition**: action cache, CAS, provenance, and\n   explicit storage policy provide equivalent closure without KFD expansion.\n\n## Qualification gate\n\nPromotion requires at least:\n\n1. exact-root KFD-5 genesis and a retained Buildchain founding cut;\n2. deletion and fuse comparison against KFD-1, KFD-2, KFD-7, and KFD-13;\n3. prior-art comparison against Remote Execution/CAS, provenance, reproducible\n   build records, artifact registries, and ordinary lease or retention policy;\n4. one structurally non-build transfer, such as agent checkpoint continuation,\n   scientific workflow recovery, dataset/model custody, or backup restoration;\n5. an implementation that does not reuse Buildchain writer code and can vary\n   identity, retention, availability, transport, and qualification independently;\n6. bounded production dogfood with explicit rollback, zero false reuse, and\n   measured false rebuild and reconstruction cost;\n7. independent exact-cut review and an authority-separated terminal\n   disposition of promotion, subsumption, rejection, or `no-new-kfd`;\n8. explicit maintainer promotion if and only if the responsibility remains\n   irreducible after those tests.\n\n## Falsifiers\n\nThe candidate should be subsumed, rejected, or closed with no new KFD if:\n\n- existing KFD decisions and an adopter Profile reproduce every bounded reuse\n  and recovery decision without hidden reconstruction;\n- the distinction is only a clearer schema for build-cache metadata;\n- independent domains do not need retention commitment or transport to remain\n  separately addressable;\n- a digest plus ordinary storage and trust policy provides equivalent closure\n  at lower total cost;\n- production use requires provider identity, ambient state, or a second\n  authority that contradicts the proposed separation;\n- measured users or agents receive no safer decision or lower reconstruction\n  burden from the additional model.\n\n## Interest and claim boundary\n\nKungfu-systems stewards KFD and owns the founding Buildchain implementation,\nso the first-party product interest is material and explicit. Independent\nreview and a non-Buildchain implementation are required before promotion.\n\nThe genesis evidence is limited to the public sources named above. Private\ndiscussions, credentials, hidden model state, and unretained hosted-runner\npayloads are outside the evidence cut.\n\nThis Candidate has no number, slot hint, active status, certification,\nproduction-reuse authority, or cross-domain qualification. It does not make\nStage Capsule normative, require one schema or store, certify Buildchain v4,\nor prevent a terminal `no-new-kfd` disposition."
       }
     ]
   },
@@ -6786,6 +7176,15 @@
         "url": "/drafts/recursive-normative-self-conformance/",
         "claimBoundary": "This pre-number Candidate was merged into the explicit composition of KFD-1, KFD-2, KFD-5, KFD-11, and the fixed Self-Conformance Profile under a no-new-kfd disposition. It has no slot hint, number, active status, self-certification, merge authority, or release authority.",
         "markdown": "# Recursive normative self-conformance\n\n- Candidate ID: `recursive-normative-self-conformance`\n- Status: qualifying\n- Kind candidate: procedure\n- Number: none\n- Slot binding: non-binding\n\n## One sentence\n\nA normative system should route load-bearing changes to its own rules through\nthe same fixed-root, authority-separated conformance path it requires of\nadopters.\n\n## Candidate claim\n\nThe proposed procedure makes recursive application explicit:\n\n```text\ndeclared normative cut\n  -> pre-number genesis\n  -> fact-bound qualification\n  -> independent review\n  -> authority-separated disposition\n  -> admitted successor cut or retained non-promotion\n```\n\nThe fixed cut, verifier, review, and disposition authorities remain distinct.\nA generator cannot certify its own candidate. A structural verifier cannot\nchoose the semantic outcome. A passing report cannot allocate a number,\nactivate a decision, merge a change, or publish a release.\n\n## Why this is only a Candidate\n\nKFD already contains most or all of this responsibility:\n\n- KFD-1 preserves exact normative coordinates and compatibility boundaries;\n- KFD-2 makes conformance claims fact-bound and risk-bounded;\n- KFD-5 separates genesis from qualification and permits `no new primitive`;\n- KFD-11 separates claim, assessment, authorized decision, and admission;\n- the Self-Conformance Profile supplies a fixed package, transition verifier,\n  lifecycle chain, review receipt, and explicit non-authority boundary.\n\nThe open question is therefore not whether recursive self-application is\nuseful. It is whether that composition needs an additional numbered KFD or is\nalready the minimum closure of existing decisions and the Profile.\n\n## Qualification burden\n\nThe Candidate must survive all of the following without relying on its own\ntext as proof:\n\n1. exact-root KFD-5 genesis;\n2. deletion and fuse comparison against KFD-1, KFD-2, KFD-5, and KFD-11;\n3. replay of KFD-1 through KFD-3 bootstrap, KFD-7 activation, the KFD-11\n   through KFD-13 Foundation Revision, and at least one retained gap;\n4. package-only clean-room verification and native/WASM parity;\n5. adversarial failure when roots, predecessor, review, authority, package, or\n   claim boundary are substituted;\n6. independent review of the exact evidence cut;\n7. a terminal `qualified`, `provisional`, `rejected`, or `no-new-kfd`\n   disposition issued by an authority other than the generator or verifier.\n\n## No-new-KFD condition\n\nNo new KFD is justified if deletion of this Candidate leaves the combined\nKFD-1/KFD-2/KFD-5/KFD-11 obligations and the fixed Self-Conformance Profile\nable to reproduce every decision-relevant observation, while adding the\nCandidate only names their composition rather than a new identity, boundary,\nauthority, lifecycle, or operation.\n\n## Terminal disposition\n\nThe exact assessment cut at\n`5791476b226b0ce26f98538704e71f7e29e04956` satisfied that condition.\nIndependent review `PRR_kwDOTLH7GM8AAAABIy0qZA` accepted `no-new-kfd`: the\nprocedure remains useful as an explicit composition, but it adds no irreducible\nidentity, boundary, authority, lifecycle, or operation. The retained terminal\nProfile report is a non-promotion outcome and does not allocate a number.\n\nThe Candidate registry records `merged` to preserve this lineage. Here,\n`merged` means merged into the existing normative closure, not merged Git state,\nactivation, publication, or release. Reopening requires a new exact evidence\ncut satisfying one of the retained counterconditions.\n\n## Claim boundary\n\nThis Candidate has no number and no active status. Its `no-new-kfd` disposition\ndoes not amend existing\nKFD text, reinterpret historical releases, certify the Self-Conformance\nProfile, approve its own evidence, or authorize promotion, merge, or release."
+      },
+      {
+        "id": "durable-result-identity-availability",
+        "title": "Durable Result Identity and Availability Separation",
+        "status": "incubating",
+        "sourcePath": "drafts/durable-result-identity-availability.md",
+        "url": "/drafts/durable-result-identity-availability/",
+        "claimBoundary": "This incubating Candidate preserves a portable separation hypothesis generated from Buildchain v4 Stage Capsule. It has no slot hint, number, active status, cross-domain qualification, independent implementation, production-reuse authority, certification, or preference over subsumption, rejection, and no-new-kfd outcomes.",
+        "markdown": "# KFD Candidate: Durable Result Identity and Availability Separation\n\n- Candidate status: incubating\n- Kind candidate: principle\n- Slot binding: non-binding\n- Number allocated: no\n\n[Live case](../cases/live/durable-result-identity-availability/README.md)\n\n## One sentence\n\nWhen a durable result may be reused across time or location, its immutable\nidentity, retention commitment, observed availability, transport coordinates,\nand qualification must remain independently addressable.\n\n## Candidate rule\n\nA content digest answers what bytes or canonical facts a result binds. It does\nnot prove that those bytes remain available, that anyone promised to retain\nthem, that a transport currently reaches them, or that the result remains\nqualified for a receiver's purpose.\n\nAn adopting system should therefore preserve separately:\n\n- **result identity**: the exact inputs, transformation, environment boundary,\n  outputs, and qualification roots that define the result;\n- **retention commitment**: who or what promises to retain it, under which\n  class and until which declared boundary;\n- **availability observation**: whether the result is currently available,\n  missing, partial, corrupt, quarantined, expired, or unverifiable at an\n  explicit observation cut;\n- **transport coordinate**: how a caller may attempt retrieval without\n  confusing a mutable locator with result identity or storage authority;\n- **reuse assessment**: an explicit-time, exact-root, fail-closed decision\n  that may reject reuse without changing the historical result.\n\nThese responsibilities may share one physical record. They remain distinct\nwhen one can change, expire, fail, move, or be revoked without silently\nchanging another.\n\n## Founding pressure field\n\nBuildchain v4 Stage Capsule is the founding product witness. At exact merge\ncommit `7499b8dc988af2f9f1cb1796230adf3bee33bac1`, it separates identity,\nretention promise, availability, transport observations, qualification, and\nreuse; restores content from a content-addressed store; and plans deterministic\nresume after late-stage failure. Its protected qualification ran Buildchain\nself-dogfood and a Kungfu shadow consumer on Linux x64, macOS arm64, and\nWindows x64 with fail-closed fault campaigns.\n\nThat evidence is strong product genesis, not cross-domain qualification. The\nimplementation remains shadow-only: TypeScript v3 is the sole writer, Rust is\nvalidation-only, production reuse is disabled, and Buildchain and Kungfu are\ninside the same founding ecosystem.\n\n## Why this may deserve a portable principle\n\nExisting build systems already combine action keys, result metadata, and\ncontent-addressed storage. Provenance formats bind artifacts to how they were\nproduced. The potentially irreducible burden exposed by Stage Capsule is\nnarrower: systems repeatedly treat a stable identity, a retention policy, a\ncurrent observation, a locator, and a trust decision as if any one proved the\nothers.\n\nIf the distinction changes safe reuse and recovery decisions across unrelated\ndomains, it may be a portable principle. If KFD-1, KFD-2, KFD-7, ordinary\ncontent-addressed storage, and adopter-specific Profiles reproduce every\ndecision-relevant observation, no new KFD is justified.\n\n## Competing hypotheses\n\n1. **New portable principle**: cross-time reuse requires identity, retention,\n   availability, transport, and qualification separation in any domain.\n2. **KFD-1/KFD-2/KFD-7 composition**: non-drifting facts, fact-bound trust, and\n   visible degraded coordinates already imply the complete responsibility.\n3. **Buildchain Domain Profile**: the separation is valuable but specific to\n   staged build recovery and should remain adopter-owned.\n4. **Existing infrastructure composition**: action cache, CAS, provenance, and\n   explicit storage policy provide equivalent closure without KFD expansion.\n\n## Qualification gate\n\nPromotion requires at least:\n\n1. exact-root KFD-5 genesis and a retained Buildchain founding cut;\n2. deletion and fuse comparison against KFD-1, KFD-2, KFD-7, and KFD-13;\n3. prior-art comparison against Remote Execution/CAS, provenance, reproducible\n   build records, artifact registries, and ordinary lease or retention policy;\n4. one structurally non-build transfer, such as agent checkpoint continuation,\n   scientific workflow recovery, dataset/model custody, or backup restoration;\n5. an implementation that does not reuse Buildchain writer code and can vary\n   identity, retention, availability, transport, and qualification independently;\n6. bounded production dogfood with explicit rollback, zero false reuse, and\n   measured false rebuild and reconstruction cost;\n7. independent exact-cut review and an authority-separated terminal\n   disposition of promotion, subsumption, rejection, or `no-new-kfd`;\n8. explicit maintainer promotion if and only if the responsibility remains\n   irreducible after those tests.\n\n## Falsifiers\n\nThe candidate should be subsumed, rejected, or closed with no new KFD if:\n\n- existing KFD decisions and an adopter Profile reproduce every bounded reuse\n  and recovery decision without hidden reconstruction;\n- the distinction is only a clearer schema for build-cache metadata;\n- independent domains do not need retention commitment or transport to remain\n  separately addressable;\n- a digest plus ordinary storage and trust policy provides equivalent closure\n  at lower total cost;\n- production use requires provider identity, ambient state, or a second\n  authority that contradicts the proposed separation;\n- measured users or agents receive no safer decision or lower reconstruction\n  burden from the additional model.\n\n## Interest and claim boundary\n\nKungfu-systems stewards KFD and owns the founding Buildchain implementation,\nso the first-party product interest is material and explicit. Independent\nreview and a non-Buildchain implementation are required before promotion.\n\nThe genesis evidence is limited to the public sources named above. Private\ndiscussions, credentials, hidden model state, and unretained hosted-runner\npayloads are outside the evidence cut.\n\nThis Candidate has no number, slot hint, active status, certification,\nproduction-reuse authority, or cross-domain qualification. It does not make\nStage Capsule normative, require one schema or store, certify Buildchain v4,\nor prevent a terminal `no-new-kfd` disposition."
       }
     ],
     "formalPages": {
