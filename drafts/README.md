@@ -61,6 +61,12 @@ Incubating now:
   Assignments, workspaces, and cuts through which it advances. Its strongest
   alternatives remain Initiative, a perspective-bound derived view, and no new
   Primitive.
+- [Durable Result Identity and Availability Separation](durable-result-identity-availability.md)
+  asks whether cross-time reuse requires result identity, retention commitment,
+  observed availability, transport coordinates, and qualification to remain
+  independently addressable. Its strongest alternatives remain existing KFD
+  composition, a Buildchain Domain Profile, mature cache/provenance contracts,
+  and no new KFD.
 
 Resolved without a new KFD:
 
