@@ -13,9 +13,22 @@ last_reviewed: 2026-08-09
 
 # Durable Result Identity and Availability Reviews
 
-No independent qualification review has been completed.
+An independent exact-commit genesis review was completed by `kungfu-origin`
+for commit `5b05f24f69ea2f293c21eec0b830d6e60eec7868` on
+[PR 337](https://github.com/kungfu-systems/kfd/pull/337#pullrequestreview-4891051647).
+It approves retaining this exact incubating, pre-number Candidate genesis and
+its KFD-5 cut. It does not qualify or promote the Candidate, allocate a number,
+authorize a terminal disposition, or make Buildchain normative.
 
-The first exact-cut review should evaluate:
+The retained machine-readable review evidence and Self-Conformance lifecycle
+pair are:
+
+- `evidence/self-conformance/reviews/durable-result-identity-availability.genesis.json`;
+- `evidence/self-conformance/transitions/durable-result-identity-availability-genesis.request.json`;
+- `evidence/self-conformance/transitions/durable-result-identity-availability-genesis.report.json`.
+
+No independent qualification review has been completed. A later qualification
+review should evaluate:
 
 1. whether the Candidate states a portable responsibility rather than a
    Buildchain schema;
