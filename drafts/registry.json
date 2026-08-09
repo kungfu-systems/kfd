@@ -212,6 +212,34 @@
         "authority-separated-terminal-disposition"
       ],
       "claimBoundary": "This pre-number Candidate was merged into the explicit composition of KFD-1, KFD-2, KFD-5, KFD-11, and the fixed Self-Conformance Profile under a no-new-kfd disposition. It has no slot hint, number, active status, self-certification, merge authority, or release authority."
+    },
+    {
+      "id": "durable-result-identity-availability",
+      "title": "Durable Result Identity and Availability Separation",
+      "status": "incubating",
+      "kindCandidate": "principle",
+      "slotBinding": "non-binding",
+      "oneSentence": "When a durable result may be reused across time or location, its immutable identity, retention commitment, observed availability, transport coordinates, and qualification must remain independently addressable.",
+      "path": "drafts/durable-result-identity-availability.md",
+      "sourceCases": [
+        {
+          "id": "durable-result-identity-availability",
+          "path": "cases/live/durable-result-identity-availability/README.md"
+        }
+      ],
+      "promotionGate": [
+        "exact-root-kfd-5-genesis",
+        "kfd-1-2-7-13-redundancy-analysis",
+        "cache-cas-provenance-retention-prior-art-comparison",
+        "fixed-root-deletion-and-fuse-witnesses",
+        "structurally-non-build-transfer",
+        "independent-non-buildchain-implementation",
+        "bounded-production-dogfood-with-rollback",
+        "independent-exact-cut-review",
+        "authority-separated-terminal-disposition",
+        "maintainer-promotion"
+      ],
+      "claimBoundary": "This incubating Candidate preserves a portable separation hypothesis generated from Buildchain v4 Stage Capsule. It has no slot hint, number, active status, cross-domain qualification, independent implementation, production-reuse authority, certification, or preference over subsumption, rejection, and no-new-kfd outcomes."
     }
   ]
 }

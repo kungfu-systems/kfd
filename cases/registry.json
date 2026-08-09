@@ -235,6 +235,36 @@
         }
       ],
       "claimBoundary": "This closed case retains the no-new-kfd result and its reopening conditions. It does not infer historical Profile conformance, allocate a number, activate a KFD, certify the Profile, or authorize release."
+    },
+    {
+      "id": "durable-result-identity-availability",
+      "title": "Durable Result Identity and Availability Separation",
+      "kind": "primitive-discovery-case",
+      "status": "active",
+      "standard": "kfd-5",
+      "humanEntry": "cases/live/durable-result-identity-availability/README.md",
+      "genesis": "cases/live/durable-result-identity-availability/genesis.md",
+      "methodTrace": "cases/live/durable-result-identity-availability/kfd-method-trace.md",
+      "propagationHypothesis": "cases/live/durable-result-identity-availability/propagation-hypothesis.md",
+      "reviewIndex": "cases/live/durable-result-identity-availability/reviews/README.md",
+      "ontologySplit": "cases/live/durable-result-identity-availability/ontology-split.md",
+      "distinguishabilityArgument": "cases/live/durable-result-identity-availability/distinguishability.md",
+      "candidateTracks": [
+        {
+          "id": "durable-result-identity-availability",
+          "title": "Durable Result Identity and Availability Separation",
+          "status": "provisional",
+          "definition": "A possible cross-domain principle requiring reusable durable results to keep immutable identity, retention commitment, observed availability, transport coordinates, qualification, and reuse assessment independently addressable.",
+          "currentCut": {
+            "path": "cases/live/durable-result-identity-availability/cuts/0001-durable-result-identity-availability.json",
+            "sha256": "815855150156ab6870f2dd24c2ee57d49ea81422a439f028f90813ac259fe000",
+            "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-5/primitive-discovery.schema.json",
+            "schemaVersion": 3
+          },
+          "claimBoundary": "Provisional only. The founding Buildchain cut is first-party and shadow-only; existing KFD composition, a Buildchain Domain Profile, mature cache/provenance mechanisms, and no-new-Primitive outcomes remain live."
+        }
+      ],
+      "claimBoundary": "This case preserves one exact product-generated hypothesis and its unresolved alternatives. It does not allocate a KFD number, make Stage Capsule normative, qualify cross-domain transfer, certify Buildchain v4, or enable production reuse."
     }
   ]
 }
