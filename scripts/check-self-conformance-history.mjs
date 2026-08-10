@@ -11,13 +11,14 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const reportPath = "profiles/self-conformance/history/historical-lineage.report.json";
 const report = JSON.parse(fs.readFileSync(path.join(root, reportPath), "utf8"));
 const exactRoot = (relative, base = root) => `sha256:${crypto.createHash("sha256").update(fs.readFileSync(path.join(base, relative))).digest("hex")}`;
-const run = (command, args, expected = 0, cwd = root) => {
-  const result = spawnSync(command, args, { cwd, encoding: "utf8", env: { ...process.env, npm_config_offline: "true" } });
+const run = (command, args, expected = 0, cwd = root, env = {}) => {
+  const result = spawnSync(command, args, { cwd, encoding: "utf8", env: { ...process.env, npm_config_offline: "true", ...env } });
   assert.equal(result.status, expected, `${command} ${args.join(" ")}\n${result.stderr}\n${result.stdout}`);
   return result.stdout.trim();
 };
 
 run("node", ["scripts/generate-self-conformance-history.mjs"]);
+run("node", ["scripts/generate-self-conformance-history.mjs"], 0, root, { KFD_SELF_CONFORMANCE_HISTORY_SOURCE_MODE: "cache" });
 assert.equal(report.retrospective, true);
 assert.equal(report.profileAvailableAtEvent, false);
 assert.deepEqual(report.foundation.active, ["KFD-1", "KFD-2", "KFD-3", "KFD-4", "KFD-5"]);
