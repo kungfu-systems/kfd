@@ -70,7 +70,8 @@
         "selfConformancePackageManifest": "https://kfd.libkungfu.dev/schemas/kfd-self-conformance/package-manifest.schema.json",
         "selfConformanceVectorRegistry": "https://kfd.libkungfu.dev/schemas/kfd-self-conformance/vector-registry.schema.json",
         "selfConformanceLifecycleGateRequest": "https://kfd.libkungfu.dev/schemas/kfd-self-conformance/lifecycle-gate-request.schema.json",
-        "selfConformanceLifecycleGateReport": "https://kfd.libkungfu.dev/schemas/kfd-self-conformance/lifecycle-gate-report.schema.json"
+        "selfConformanceLifecycleGateReport": "https://kfd.libkungfu.dev/schemas/kfd-self-conformance/lifecycle-gate-report.schema.json",
+        "adopterConformanceManifest": "https://kfd.libkungfu.dev/schemas/kfd-adopter-conformance/manifest.schema.json"
       },
       "schemaPaths": {
         "metadata": "schemas/kfd-standards.schema.json",
@@ -100,7 +101,8 @@
         "selfConformancePackageManifest": "schemas/kfd-self-conformance/package-manifest.schema.json",
         "selfConformanceVectorRegistry": "schemas/kfd-self-conformance/vector-registry.schema.json",
         "selfConformanceLifecycleGateRequest": "schemas/kfd-self-conformance/lifecycle-gate-request.schema.json",
-        "selfConformanceLifecycleGateReport": "schemas/kfd-self-conformance/lifecycle-gate-report.schema.json"
+        "selfConformanceLifecycleGateReport": "schemas/kfd-self-conformance/lifecycle-gate-report.schema.json",
+        "adopterConformanceManifest": "schemas/kfd-adopter-conformance/manifest.schema.json"
       },
       "interfaces": {
         "contractWorld": {
@@ -291,6 +293,13 @@
           "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-self-conformance/lifecycle-gate-report.schema.json",
           "schemaPath": "schemas/kfd-self-conformance/lifecycle-gate-report.schema.json",
           "compatibilityRule": "Changes to required roots, transition meaning, canonicalization, issue meaning, recursion, or responsibility boundaries require a successor profile or explicit compatibility action."
+        },
+        "adopterConformanceManifest": {
+          "contract": "kfd.adopter-conformance-manifest/v1",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-adopter-conformance/manifest.schema.json",
+          "schemaPath": "schemas/kfd-adopter-conformance/manifest.schema.json",
+          "compatibilityRule": "Changes to registry-set conservation, declaration states, root semantics, evidence roles, decision-specific witness or release bindings, or authority boundaries require a successor contract."
         }
       },
       "concepts": {
