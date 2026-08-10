@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "contract": "kfd.primitive-evidence-registry/v1",
-  "profile": "kfd-warrant-evidence@0.1.0-alpha.1",
+  "profile": "kfd-warrant-evidence@0.2.0-alpha.1",
   "entries": [
     {
       "id": "buildchain-dev-delivery-warrant-2026-08-05",
@@ -62,6 +62,57 @@
         "reviewerClass": "same-steward"
       },
       "lineage": []
+    },
+    {
+      "id": "buildchain-v3-delivery-warrant-2026-08-11",
+      "primitive": "Warrant",
+      "upstreamContract": "kungfu.buildchain.dev-delivery-warrant/v1",
+      "evidenceClass": "generic-candidate",
+      "pressureField": "fenced renewable authority, expiry recovery and idempotent settlement for one exact protected-delivery candidate",
+      "bundle": "profiles/warrant-evidence/fixtures/buildchain-v3-delivery-warrant.json",
+      "source": {
+        "repository": "https://github.com/kungfu-systems/buildchain",
+        "commit": "56aee4f72e3b6beb9eead71c8d596640313f6e7d",
+        "tree": "0a32ddd21adc87310b83cb216349dfecc145fa49",
+        "path": "packages/core/dev-delivery-warrant.js",
+        "contentRoot": "sha256:084b586e798779c324b5fb68b6d2e9a9e2cc397daba1bd9f78a34d584c51f445",
+        "public": true,
+        "retained": true
+      },
+      "supportingSources": [
+        {"path": "packages/core/dev-delivery-warrant-cancellation.js", "contentRoot": "sha256:e445477b22f775944c03a795ba525e0465b0a479613c23693c819d6121493505"},
+        {"path": "packages/core/dev-delivery-warrant-settlement.js", "contentRoot": "sha256:0a7485a6c3e7d95ae3b3be64626feb18c6cff37ee5a93b82ee1ca7ad8355f4df"},
+        {"path": "packages/core/dev-delivery-proof.js", "contentRoot": "sha256:356c7174543fe36ff4ab68bb5e72b5c44cff8c62a33cd98781b603ffac84a460"},
+        {"path": "docs/dev-delivery-warrant.md", "contentRoot": "sha256:866c561aa9eee1c3ccce5ae768db0674474cd86e3bc55578bcbc5f5603dae3a4"},
+        {"path": "tests/dev-delivery-warrant.test.mjs", "contentRoot": "sha256:ec3048b257f856f3806edd8c7cc06675aecceb216f918b0753ed1a9943f2cfb8"}
+      ],
+      "review": {"state": "self-reviewed", "reviewerClass": "same-steward"},
+      "lineage": ["buildchain-dev-delivery-warrant-2026-08-05"]
+    },
+    {
+      "id": "kungfu-kfx-runtime-warrant-2026-08-11",
+      "primitive": "Warrant",
+      "upstreamContract": "kungfu.kfx.warrant-fact/v2",
+      "evidenceClass": "generic-candidate",
+      "pressureField": "pre-side-effect Warrant issuance, exact named-Cut fencing and one rooted Work/Episode/Settlement transition",
+      "bundle": "profiles/warrant-evidence/fixtures/kungfu-kfx-runtime-warrant.json",
+      "source": {
+        "repository": "https://github.com/kungfu-systems/kungfu",
+        "commit": "0b6e1491e92c950c1a8c71b3bb9373526f7d1571",
+        "tree": "cf9c3c7dd96f776403290c88969205f39f8b0a5c",
+        "path": "framework/core/src/libkungfu/src/runtime/kfx/native_registry.cpp",
+        "contentRoot": "sha256:98881b2110239f54706b05da88d8a847442b82782a32805aaa6d65faa9b21808",
+        "public": true,
+        "retained": true
+      },
+      "supportingSources": [
+        {"path": "framework/core/src/libkungfu/src/runtime/kfx/native_authority.cpp", "contentRoot": "sha256:b835b37e36308d2955249e5674e1c78fdd2ae2d1c40e77eb7efc70bf42fd8ad9"},
+        {"path": "framework/core/src/libkungfu/tests/native_kfx_contract_tests.cpp", "contentRoot": "sha256:a59334a0986c01f187456a162f8129d2baeb6a3377f10797247689b2b4f52bf1"},
+        {"path": "framework/kfx/kungfu-kfx.contract.json", "contentRoot": "sha256:4c17dddae597d19eb9ead4d3767669e3f8343a3b41cc9deb42c8eb5ff08a514d"},
+        {"path": "framework/kfx/kungfu-kfx-domain-profile.contract.json", "contentRoot": "sha256:f9a2f70105954f0460344174b254e7b3993fb5e5a2a7adfca9809398484c87d3"}
+      ],
+      "review": {"state": "self-reviewed", "reviewerClass": "same-steward"},
+      "lineage": ["kungfu-kfx-recovery-warrant-2026-08-05"]
     }
   ],
   "claimBoundary": "Registry inclusion proves only that KFD retained and hashed the named public source coordinates. It does not qualify KFD-10, certify either product, or convert a product-specific field into universal semantics."

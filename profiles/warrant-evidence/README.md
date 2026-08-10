@@ -6,8 +6,9 @@ layers:
 
 1. a **Primitive Evidence Bundle** records an exact public source coordinate
    and separates generic candidate claims from product-profile claims; and
-2. a **KFD-10 Warrant witness** tests the current numbered draft against fixed
-   positive and negative vectors.
+2. a **KFD-10 Warrant lifecycle witness** tests purpose, authority,
+   lease/generation/fencing, continuation, recovery, revocation, settlement,
+   residual responsibility, and retained history against fixed vectors.
 
 Neither layer can activate a draft, certify an adopter, or promote its own
 claims. `qualifying` and `selfCertified` are fixed to `false`.
@@ -40,24 +41,27 @@ runtime dependencies.
 
 | KFD-10 draft clause | Fixed vector | Expected outcome |
 | --- | --- | --- |
+| purpose binds the observed transition without product privilege | `warrant-001` | `warrant-valid` |
 | issuer is explicit | `warrant-002` | `warrant-missing-issuer` |
-| holder is explicit | `warrant-003` | `warrant-missing-holder` |
+| holder is explicit and current | `warrant-003`, `warrant-015` | missing or stale holder rejection |
 | action, subject, and resource scope are bounded | `warrant-004` | `warrant-scope-mismatch` |
-| exact target roots are required | `warrant-005`, `warrant-009` | missing or stale target rejection |
-| expiry fails closed | `warrant-006` | `warrant-expired` |
+| exact target roots are required | `warrant-005`, `warrant-009` | missing or substituted root rejection |
+| expiry, generation, and fencing fail closed | `warrant-006`, `warrant-016`, `warrant-017` | expired or stale holder rejection |
+| continuation binds the current generation and fence | `warrant-018` | `warrant-continuation-stale` |
+| recovery rejects the old holder and creates one successor | `warrant-019` | `warrant-recovery-stale` |
 | revocation fails closed | `warrant-007` | `warrant-revoked` |
-| consumption prevents reuse | `warrant-008` | `warrant-consumed` |
+| settlement consumes authority and prevents reuse | `warrant-008`, `warrant-020`, `warrant-021` | reuse, duplicate, or root-drift rejection |
 | derived authority cannot amplify | `warrant-010` | `warrant-authority-amplification` |
 | delegation preserves its chain | `warrant-011` | `warrant-delegation-chain-missing` |
 | responsibility does not silently transfer | `warrant-012` | `warrant-residual-responsibility-missing` |
 | occurrence is not authorization | `warrant-013` | `warrant-authorization-occurrence-conflated` |
-| invalidation does not erase history | `warrant-014` | `warrant-history-missing` |
-| bounded active authority is admissible | `warrant-001` | `warrant-valid` |
+| invalidation does not erase or rewrite history | `warrant-014`, `warrant-022` | missing or rewritten history rejection |
+| a current lease is non-preemptive | `warrant-023` | `warrant-preemption-allowed` |
 
 Vector prefixes above abbreviate the full IDs in
 `profiles/warrant-evidence/vectors/kfd-10.json`.
 
-## First retained sources
+## Retained evidence waves
 
 The first registry cut retains:
 
@@ -70,6 +74,19 @@ semantics remain profile-specific. Missing issuer, holder, revocation,
 consumption, responsibility, or history fields remain visible gaps rather than
 being inferred from surrounding code.
 
+The second registry cut retains exact current protected-source coordinates for:
+
+- Buildchain v3 Delivery Warrant continuation, expiry recovery, fencing, and
+  idempotent terminal settlement; and
+- Kungfu KFX Warrant Fact issuance, exact named-Cut mutation authority,
+  consumption, Episode/Settlement closure, and immutable Fact history.
+
+The exact roots and a `proved` / `partial` / `missing` / `invalidated` matrix
+are published in `evidence/primitive-evidence/second-wave-report.json`. Its
+competing-model rows and falsifiers remain part of the evidence boundary.
+Buildchain merge authority, KFX product identity, capability admission, and
+the chosen product storage or CAS mechanism do not become generic privilege.
+
 ## Clean-room claim boundary
 
 A clean checkout or npm package is sufficient to run the verifier and all
@@ -78,6 +95,6 @@ self-sufficient for the named profile. It does not prove that the model is a
 complete theory of authority, that independent implementations agree beyond
 the fixed vectors, or that KFD-10 is ready for activation.
 
-The packaged reference harness is maintained in the same repository and by
-the same stewarding organization as this profile. It is deliberately not
+The packaged reference harness and both retained product families are
+maintained by the same stewarding organization. They are deliberately not
 reported as independent organizational adoption or external certification.

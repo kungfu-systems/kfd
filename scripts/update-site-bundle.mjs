@@ -24,6 +24,7 @@ const SEMANTIC_MATRIX_PATH = "evidence/semantic-self-sufficiency/kfd-1-13.json";
 const SEMANTIC_MATRIX_SCHEMA_PATH = "schemas/kfd-semantic-self-sufficiency-matrix.schema.json";
 const WARRANT_MANIFEST_PATH = "profiles/warrant-evidence/manifest.json";
 const FIRST_WAVE_REPORT_PATH = "evidence/primitive-evidence/first-wave-report.json";
+const SECOND_WAVE_REPORT_PATH = "evidence/primitive-evidence/second-wave-report.json";
 const SELF_CONFORMANCE_PROFILE_PATH = "profiles/self-conformance/README.md";
 const SELF_CONFORMANCE_IMPLEMENTER_GUIDE_PATH = "profiles/self-conformance/implementer-guide.md";
 const SELF_CONFORMANCE_MANIFEST_PATH = "profiles/self-conformance/manifest.json";
@@ -520,6 +521,7 @@ const buildIndependentVerificationPage = ({
   semanticMatrix,
   warrantManifest,
   firstWaveReport,
+  secondWaveReport,
 }) => {
   const guide = parseReadme(guideText);
   const digestFor = (sourcePath) => warrantManifest.surfaces
@@ -603,10 +605,24 @@ const buildIndependentVerificationPage = ({
       selfCertified: firstWaveReport.selfCertified,
       nextEvidence: firstWaveReport.nextEvidence,
     },
+    secondWaveEvidence: {
+      sourcePath: SECOND_WAVE_REPORT_PATH,
+      cut: secondWaveReport.cut,
+      sources: secondWaveReport.sources,
+      matrix: secondWaveReport.matrix,
+      competingModels: secondWaveReport.competingModels,
+      outcomes: secondWaveReport.outcomes,
+      kfd10Status: secondWaveReport.kfd10Status,
+      activationCriteriaProved: secondWaveReport.activationCriteriaProved,
+      qualifying: secondWaveReport.qualifying,
+      selfCertified: secondWaveReport.selfCertified,
+      claimBoundary: secondWaveReport.claimBoundary,
+    },
     machineAssets: [
       machineAsset(SEMANTIC_MATRIX_PATH, "/evidence/semantic-self-sufficiency/kfd-1-13.json", "implementation-map"),
       machineAsset(WARRANT_MANIFEST_PATH, "/profiles/warrant-evidence/manifest.json", "verification-profile"),
       machineAsset(FIRST_WAVE_REPORT_PATH, "/evidence/primitive-evidence/first-wave-report.json", "evidence-report"),
+      machineAsset(SECOND_WAVE_REPORT_PATH, "/evidence/primitive-evidence/second-wave-report.json", "evidence-report"),
       machineAsset(SEMANTIC_MATRIX_SCHEMA_PATH, "/schemas/kfd-semantic-self-sufficiency-matrix.schema.json", "schema"),
     ],
     rendering: {
@@ -830,6 +846,7 @@ export const buildSiteBundle = ({
   semanticMatrix,
   warrantManifest,
   firstWaveReport,
+  secondWaveReport,
   selfConformanceProfileText,
   selfConformanceImplementerGuideText,
   selfConformanceManifest,
@@ -887,6 +904,7 @@ export const buildSiteBundle = ({
     semanticMatrix,
     warrantManifest,
     firstWaveReport,
+    secondWaveReport,
   });
   const selfConformancePage = buildSelfConformancePage({
     profileText: selfConformanceProfileText,
@@ -1402,6 +1420,7 @@ export const readInputs = () => ({
   semanticMatrix: JSON.parse(readFileSync(SEMANTIC_MATRIX_PATH, "utf8")),
   warrantManifest: JSON.parse(readFileSync(WARRANT_MANIFEST_PATH, "utf8")),
   firstWaveReport: JSON.parse(readFileSync(FIRST_WAVE_REPORT_PATH, "utf8")),
+  secondWaveReport: JSON.parse(readFileSync(SECOND_WAVE_REPORT_PATH, "utf8")),
   selfConformanceProfileText: readFileSync(SELF_CONFORMANCE_PROFILE_PATH, "utf8"),
   selfConformanceImplementerGuideText: readFileSync(SELF_CONFORMANCE_IMPLEMENTER_GUIDE_PATH, "utf8"),
   selfConformanceManifest: JSON.parse(readFileSync(SELF_CONFORMANCE_MANIFEST_PATH, "utf8")),

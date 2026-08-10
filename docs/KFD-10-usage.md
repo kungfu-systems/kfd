@@ -29,11 +29,17 @@ responsibility.
 
 The experimental
 [`Warrant Evidence profile`](../profiles/warrant-evidence/README.md) supplies a
-package-only witness schema, fixed positive and negative vectors, explicit
+package-only lifecycle witness schema, fixed positive and negative vectors, explicit
 failure codes, and an offline verifier for those boundaries. Its first harness
 is maintained by the same stewarding organization and therefore demonstrates
 mechanical clean-room self-sufficiency, not independent organizational
 adoption, certification, or activation readiness.
+
+The second evidence wave adds exact Buildchain v3 and Kungfu KFX source cuts,
+competing authorization models, falsifiers, and an explicit evidence-grade
+matrix. It keeps lease/fencing and named-Cut/CAS mechanisms profile-specific
+while testing their common purpose, bounded-authority, recovery, settlement,
+history, and residual-responsibility observations.
 
 ## Migration from the candidate
 

@@ -68,9 +68,10 @@ Machine output is JSON with stable contract names and rooted closure fields.
 
 An initialized manifest declares every pinned registry row as `not-used`. A
 witness operation changes only the selected declaration in a newly written
-manifest. The current inventory admits `kfd-warrant-evidence` only for
-`KFD-10`; unknown decision IDs, witness profiles, fields, roots, and package
-substitutions fail closed. KFD-10 remains draft, so adding its witness retains
+manifest. The current inventory admits the second-wave `kfd-warrant-evidence`
+`0.2.0-alpha.1` lifecycle profile only for `KFD-10`. Unknown profile versions,
+unknown decision IDs, witness profiles, fields, roots, and package substitutions
+fail closed. KFD-10 remains draft, so adding its witness retains
 `draft-evidence`, empty claims, and no adoption, activation, release, runtime,
 or certification authority.
 
