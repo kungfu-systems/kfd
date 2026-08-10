@@ -9,16 +9,16 @@
     "id": "kungfu-systems/kfd",
     "artifact": {
       "kind": "other",
-      "coordinate": "kfd-adopter-package-cut:sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd",
-      "root": "sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd"
+      "coordinate": "kfd-adopter-package-cut:sha256:07bea3dacab8cba10901539a5acb958db1ee09738fd424c9933f9baa2187675b",
+      "root": "sha256:07bea3dacab8cba10901539a5acb958db1ee09738fd424c9933f9baa2187675b"
     },
     "scope": "KFD package governance, verification profiles, release evidence, and adopter-toolchain dogfood"
   },
   "kfdCut": {
     "package": {
       "name": "@kungfu-tech/kfd",
-      "version": "1.0.0-alpha.59",
-      "artifactRoot": "sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd"
+      "version": "1.0.0-alpha.60",
+      "artifactRoot": "sha256:07bea3dacab8cba10901539a5acb958db1ee09738fd424c9933f9baa2187675b"
     },
     "registry": {
       "path": "registry.json",
@@ -73,19 +73,19 @@
       "implementationEvidence": [
         {
           "kind": "implementation",
-          "coordinate": "kfd-package-cut:sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd#.buildchain/kfd-1/contract-world.witness.json",
-          "root": "sha256:1c961f0b7f8a73b7e6145a4f1ae6394c20a0bf7c3de3f132c02e84a4b9b348ec",
+          "coordinate": "kfd-package-cut:sha256:07bea3dacab8cba10901539a5acb958db1ee09738fd424c9933f9baa2187675b#.buildchain/kfd-1/contract-world.witness.json",
+          "root": "sha256:fb3cc58ec545c22f52ee083539fbbb133c931675dcf3766de5355fa4d4c2a1c4",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd"
+          "kfdPackageRoot": "sha256:07bea3dacab8cba10901539a5acb958db1ee09738fd424c9933f9baa2187675b"
         }
       ],
       "verificationEvidence": [
         {
           "kind": "verification",
-          "coordinate": "kfd-package-cut:sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd#scripts/check.mjs",
+          "coordinate": "kfd-package-cut:sha256:07bea3dacab8cba10901539a5acb958db1ee09738fd424c9933f9baa2187675b#scripts/check.mjs",
           "root": "sha256:582b727b217bc214f7805a0f16009cf580da4a1e6c982aedabf25ce02564ccbf",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd"
+          "kfdPackageRoot": "sha256:07bea3dacab8cba10901539a5acb958db1ee09738fd424c9933f9baa2187675b"
         }
       ],
       "negativeEvidence": [],
@@ -108,19 +108,19 @@
       "implementationEvidence": [
         {
           "kind": "implementation",
-          "coordinate": "kfd-package-cut:sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd#.buildchain/kfd-2/public-release-trust.claim.json",
-          "root": "sha256:b0dc96912af7e9121186701922558bf829c05c387c1cbb720e384b7131a117fe",
+          "coordinate": "kfd-package-cut:sha256:07bea3dacab8cba10901539a5acb958db1ee09738fd424c9933f9baa2187675b#.buildchain/kfd-2/public-release-trust.claim.json",
+          "root": "sha256:d6f168dd736dd00a434cf2a8b808454115e5855bca8be1245657e210c650b502",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd"
+          "kfdPackageRoot": "sha256:07bea3dacab8cba10901539a5acb958db1ee09738fd424c9933f9baa2187675b"
         }
       ],
       "verificationEvidence": [
         {
           "kind": "verification",
-          "coordinate": "kfd-package-cut:sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd#scripts/check.mjs",
+          "coordinate": "kfd-package-cut:sha256:07bea3dacab8cba10901539a5acb958db1ee09738fd424c9933f9baa2187675b#scripts/check.mjs",
           "root": "sha256:582b727b217bc214f7805a0f16009cf580da4a1e6c982aedabf25ce02564ccbf",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd"
+          "kfdPackageRoot": "sha256:07bea3dacab8cba10901539a5acb958db1ee09738fd424c9933f9baa2187675b"
         }
       ],
       "negativeEvidence": [],
@@ -143,19 +143,19 @@
       "implementationEvidence": [
         {
           "kind": "implementation",
-          "coordinate": "kfd-package-cut:sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd#.buildchain/kfd-3/collaboration-interface.artifact.json",
-          "root": "sha256:18526b4ee8eedbdcac3aae4363907a320768af5f7937190651018d913f1dd414",
+          "coordinate": "kfd-package-cut:sha256:07bea3dacab8cba10901539a5acb958db1ee09738fd424c9933f9baa2187675b#.buildchain/kfd-3/collaboration-interface.artifact.json",
+          "root": "sha256:d6002e3317d529fe7f592f76d48e3979b8c67573a3614353c2507cdcab4a38b9",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd"
+          "kfdPackageRoot": "sha256:07bea3dacab8cba10901539a5acb958db1ee09738fd424c9933f9baa2187675b"
         }
       ],
       "verificationEvidence": [
         {
           "kind": "verification",
-          "coordinate": "kfd-package-cut:sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd#scripts/check.mjs",
+          "coordinate": "kfd-package-cut:sha256:07bea3dacab8cba10901539a5acb958db1ee09738fd424c9933f9baa2187675b#scripts/check.mjs",
           "root": "sha256:582b727b217bc214f7805a0f16009cf580da4a1e6c982aedabf25ce02564ccbf",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd"
+          "kfdPackageRoot": "sha256:07bea3dacab8cba10901539a5acb958db1ee09738fd424c9933f9baa2187675b"
         }
       ],
       "negativeEvidence": [],
@@ -178,19 +178,19 @@
       "implementationEvidence": [
         {
           "kind": "implementation",
-          "coordinate": "kfd-package-cut:sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd#profiles/perspective-conformance/manifest.json",
+          "coordinate": "kfd-package-cut:sha256:07bea3dacab8cba10901539a5acb958db1ee09738fd424c9933f9baa2187675b#profiles/perspective-conformance/manifest.json",
           "root": "sha256:8a59221e74cac3a4e893b12abc8144d0ba913a2bce278bb0f92b30b9a232ebc3",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd"
+          "kfdPackageRoot": "sha256:07bea3dacab8cba10901539a5acb958db1ee09738fd424c9933f9baa2187675b"
         }
       ],
       "verificationEvidence": [
         {
           "kind": "verification",
-          "coordinate": "kfd-package-cut:sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd#scripts/check-perspective-conformance.mjs",
+          "coordinate": "kfd-package-cut:sha256:07bea3dacab8cba10901539a5acb958db1ee09738fd424c9933f9baa2187675b#scripts/check-perspective-conformance.mjs",
           "root": "sha256:f83e9db39d63ff2dad818f931669cee1d88e8a0774a2ecdcb001b8c576294b44",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd"
+          "kfdPackageRoot": "sha256:07bea3dacab8cba10901539a5acb958db1ee09738fd424c9933f9baa2187675b"
         }
       ],
       "negativeEvidence": [],
@@ -213,19 +213,19 @@
       "implementationEvidence": [
         {
           "kind": "implementation",
-          "coordinate": "kfd-package-cut:sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd#evidence/primitive-evidence/second-wave-report.json",
+          "coordinate": "kfd-package-cut:sha256:07bea3dacab8cba10901539a5acb958db1ee09738fd424c9933f9baa2187675b#evidence/primitive-evidence/second-wave-report.json",
           "root": "sha256:b0ed807dee3e93f0e6764c9d7b4b67c2a7da5a7580e169c03811ec3ec0732149",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd"
+          "kfdPackageRoot": "sha256:07bea3dacab8cba10901539a5acb958db1ee09738fd424c9933f9baa2187675b"
         }
       ],
       "verificationEvidence": [
         {
           "kind": "verification",
-          "coordinate": "kfd-package-cut:sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd#scripts/check-warrant-evidence.mjs",
+          "coordinate": "kfd-package-cut:sha256:07bea3dacab8cba10901539a5acb958db1ee09738fd424c9933f9baa2187675b#scripts/check-warrant-evidence.mjs",
           "root": "sha256:e0d0045efbfaf71bb1e6ac73e2f8dcf70e2503685f7808f2fab237e135feb13a",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd"
+          "kfdPackageRoot": "sha256:07bea3dacab8cba10901539a5acb958db1ee09738fd424c9933f9baa2187675b"
         }
       ],
       "negativeEvidence": [],
@@ -265,19 +265,19 @@
       "implementationEvidence": [
         {
           "kind": "implementation",
-          "coordinate": "kfd-package-cut:sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd#evidence/kfd-7/activation-record.json",
+          "coordinate": "kfd-package-cut:sha256:07bea3dacab8cba10901539a5acb958db1ee09738fd424c9933f9baa2187675b#evidence/kfd-7/activation-record.json",
           "root": "sha256:67ffebb73f943892f1854e2916a90f1fb082c61d33f64c0e7f8af5393189eb6e",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd"
+          "kfdPackageRoot": "sha256:07bea3dacab8cba10901539a5acb958db1ee09738fd424c9933f9baa2187675b"
         }
       ],
       "verificationEvidence": [
         {
           "kind": "verification",
-          "coordinate": "kfd-package-cut:sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd#scripts/check.mjs",
+          "coordinate": "kfd-package-cut:sha256:07bea3dacab8cba10901539a5acb958db1ee09738fd424c9933f9baa2187675b#scripts/check.mjs",
           "root": "sha256:582b727b217bc214f7805a0f16009cf580da4a1e6c982aedabf25ce02564ccbf",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd"
+          "kfdPackageRoot": "sha256:07bea3dacab8cba10901539a5acb958db1ee09738fd424c9933f9baa2187675b"
         }
       ],
       "negativeEvidence": [],
@@ -300,19 +300,19 @@
       "implementationEvidence": [
         {
           "kind": "implementation",
-          "coordinate": "kfd-package-cut:sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd#profiles/perspective-conformance/manifest.json",
+          "coordinate": "kfd-package-cut:sha256:07bea3dacab8cba10901539a5acb958db1ee09738fd424c9933f9baa2187675b#profiles/perspective-conformance/manifest.json",
           "root": "sha256:8a59221e74cac3a4e893b12abc8144d0ba913a2bce278bb0f92b30b9a232ebc3",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd"
+          "kfdPackageRoot": "sha256:07bea3dacab8cba10901539a5acb958db1ee09738fd424c9933f9baa2187675b"
         }
       ],
       "verificationEvidence": [
         {
           "kind": "verification",
-          "coordinate": "kfd-package-cut:sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd#scripts/check-perspective-conformance.mjs",
+          "coordinate": "kfd-package-cut:sha256:07bea3dacab8cba10901539a5acb958db1ee09738fd424c9933f9baa2187675b#scripts/check-perspective-conformance.mjs",
           "root": "sha256:f83e9db39d63ff2dad818f931669cee1d88e8a0774a2ecdcb001b8c576294b44",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd"
+          "kfdPackageRoot": "sha256:07bea3dacab8cba10901539a5acb958db1ee09738fd424c9933f9baa2187675b"
         }
       ],
       "negativeEvidence": [],
@@ -350,19 +350,19 @@
       "implementationEvidence": [
         {
           "kind": "implementation",
-          "coordinate": "kfd-package-cut:sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd#evidence/primitive-evidence/second-wave-report.json",
+          "coordinate": "kfd-package-cut:sha256:07bea3dacab8cba10901539a5acb958db1ee09738fd424c9933f9baa2187675b#evidence/primitive-evidence/second-wave-report.json",
           "root": "sha256:b0ed807dee3e93f0e6764c9d7b4b67c2a7da5a7580e169c03811ec3ec0732149",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd"
+          "kfdPackageRoot": "sha256:07bea3dacab8cba10901539a5acb958db1ee09738fd424c9933f9baa2187675b"
         }
       ],
       "verificationEvidence": [
         {
           "kind": "verification",
-          "coordinate": "kfd-package-cut:sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd#scripts/check-warrant-evidence.mjs",
+          "coordinate": "kfd-package-cut:sha256:07bea3dacab8cba10901539a5acb958db1ee09738fd424c9933f9baa2187675b#scripts/check-warrant-evidence.mjs",
           "root": "sha256:e0d0045efbfaf71bb1e6ac73e2f8dcf70e2503685f7808f2fab237e135feb13a",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd"
+          "kfdPackageRoot": "sha256:07bea3dacab8cba10901539a5acb958db1ee09738fd424c9933f9baa2187675b"
         }
       ],
       "negativeEvidence": [],
@@ -373,10 +373,10 @@
           "profileId": "kfd-warrant-evidence",
           "profileManifestPath": "profiles/warrant-evidence/manifest.json",
           "profileManifestRoot": "sha256:1032006a7435408761916de291abc8ee239594e70d739f28c3b29b60da75a755",
-          "witnessCoordinate": "kfd-package-cut:sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd#evidence/primitive-evidence/second-wave-report.json",
+          "witnessCoordinate": "kfd-package-cut:sha256:07bea3dacab8cba10901539a5acb958db1ee09738fd424c9933f9baa2187675b#evidence/primitive-evidence/second-wave-report.json",
           "witnessRoot": "sha256:b0ed807dee3e93f0e6764c9d7b4b67c2a7da5a7580e169c03811ec3ec0732149",
           "verifierRoot": "sha256:d15753d39938aa91cc50eb9bfa91dfc013570565a2395fd35d93d4ddda10adea",
-          "kfdPackageRoot": "sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd"
+          "kfdPackageRoot": "sha256:07bea3dacab8cba10901539a5acb958db1ee09738fd424c9933f9baa2187675b"
         }
       ],
       "releaseBindingIds": [],
