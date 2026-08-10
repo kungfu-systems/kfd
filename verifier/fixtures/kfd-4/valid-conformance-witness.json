@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd-4-conformance-witness",
+  "standard": "kfd-4",
+  "profileVersion": "0.1.0-alpha.1",
+  "witnessId": "kfd4-i8-i12-positive",
+  "absoluteContext": false,
+  "sourceFrame": {
+    "observer": "participant:author",
+    "factCutRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "sourceRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "authorityRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "causalOrder": [{ "before": "proposal", "after": "review" }]
+  },
+  "targetFrame": {
+    "observer": "participant:reviewer",
+    "factCutRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "sourceRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "authorityRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "causalOrder": [{ "before": "proposal", "after": "review" }]
+  },
+  "transformation": {
+    "preserved": ["factCutRoot", "sourceRoot", "authorityRoot", "causalOrder"],
+    "changed": ["observer"],
+    "declaredLoss": ["author-local drafting context is not reproduced"],
+    "contradictionDeclared": false
+  },
+  "invariants": ["I8", "I9", "I10", "I11", "I12"],
+  "verification": { "claimBoundary": "This witness checks only declared KFD-4 I8-I12 frame invariants." }
+}

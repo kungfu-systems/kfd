@@ -95,6 +95,10 @@ const SCHEMAS: &[(&str, &str)] = &[
         include_str!("../../../../schemas/kfd-4/perspective-replay.schema.json"),
     ),
     (
+        "schemas/kfd-4/conformance-witness.schema.json",
+        include_str!("../../../../schemas/kfd-4/conformance-witness.schema.json"),
+    ),
+    (
         "schemas/kfd-5/primitive-discovery.schema.json",
         include_str!("../../../../schemas/kfd-5/primitive-discovery.schema.json"),
     ),
@@ -105,6 +109,10 @@ const SCHEMAS: &[(&str, &str)] = &[
     (
         "schemas/kfd-7/domain-profile.schema.json",
         include_str!("../../../../schemas/kfd-7/domain-profile.schema.json"),
+    ),
+    (
+        "schemas/kfd-8/atlas-coordinate.schema.json",
+        include_str!("../../../../schemas/kfd-8/atlas-coordinate.schema.json"),
     ),
     (
         "schemas/kfd-11/decision-admission.schema.json",
@@ -182,9 +190,11 @@ pub fn schema_for_record(record: &Value) -> Option<(String, Value)> {
         "kfd-3-witness" => "schemas/kfd-3/witness.schema.json",
         "kfd-4-observer-perspective" => "schemas/kfd-4/observer-perspective.schema.json",
         "kfd-4-perspective-replay" => "schemas/kfd-4/perspective-replay.schema.json",
+        "kfd-4-conformance-witness" => "schemas/kfd-4/conformance-witness.schema.json",
         "kfd-5-primitive-discovery" => "schemas/kfd-5/primitive-discovery.schema.json",
         "kfd-6-autonomous-discovery-loop" => "schemas/kfd-6/autonomous-discovery-loop.schema.json",
         "kfd-7-domain-profile" => "schemas/kfd-7/domain-profile.schema.json",
+        "kfd-8-atlas-coordinate" => "schemas/kfd-8/atlas-coordinate.schema.json",
         "kfd-11-decision-admission" => "schemas/kfd-11/decision-admission.schema.json",
         "kfd-11-adopter-witness" => "schemas/kfd-11/adopter-witness.schema.json",
         "kfd-12-adopter-witness" => "schemas/kfd-12/adopter-witness.schema.json",

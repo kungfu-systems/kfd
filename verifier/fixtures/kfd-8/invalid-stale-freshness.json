@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1, "contract": "kfd-8-atlas-coordinate", "standard": "kfd-8", "profileVersion": "0.1.0-alpha.1",
+  "identity": { "atlasId": "atlas:review", "version": "1", "root": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" },
+  "holder": { "id": "reviewer", "purpose": "invalid hidden staleness" },
+  "sources": [{ "id": "repository", "authority": "canonical-repository", "factCutRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" }],
+  "factCut": { "id": "git:head", "root": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" },
+  "scope": { "included": ["tracked source"], "omitted": ["newer cut"], "unknowns": [] },
+  "freshness": { "state": "current", "observedAt": "2026-08-09T00:00:00Z", "condition": "newer cut exists" },
+  "loss": ["newer cut omitted"], "state": { "stale": true, "degraded": false, "conflicted": false },
+  "lineage": { "predecessorRoots": [], "transformation": "genesis", "preservedRoots": [] },
+  "currentReference": { "id": "atlas:review:current", "pointsToRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "priorRoots": [] },
+  "semanticInferences": { "pursuit": false, "warrant": false, "completeness": false, "currentValidity": false },
+  "verification": { "claimBoundary": "Negative stale/freshness visibility vector." }
+}

@@ -2184,7 +2184,7 @@
     {
       "id": "doc:kfd-4-formal",
       "sourcePath": "docs/KFD-4-formal.md",
-      "sha256": "31a71f977cc163430b9a29754c7153b861cf23c8935eb9d52dd9f26be010b11b"
+      "sha256": "811134da84de1715a31cbf381d3e9185f8e2aad47d9c07a1d34132ef34744d78"
     },
     {
       "id": "doc:kfd-5-formal",
@@ -2204,7 +2204,7 @@
     {
       "id": "doc:kfd-8-formal",
       "sourcePath": "docs/KFD-8-formal.md",
-      "sha256": "1506124d2ab8a274692dcdbf0649acfbe97b807bc333dc512c092baf9ba4ff45"
+      "sha256": "ebce9500c48d7d70a20cdff1b5f6cfa856b00d7dd1853a16c897f76d7bb57bcf"
     },
     {
       "id": "doc:kfd-9-formal",
@@ -2474,6 +2474,11 @@
       "sha256": "86567c1d5d32ac2ce621a596c08d2702c0facea0d0cfcb836ac31a170dc19779"
     },
     {
+      "id": "schema:kfd-4:conformance-witness",
+      "sourcePath": "schemas/kfd-4/conformance-witness.schema.json",
+      "sha256": "38ffe6f7f034271775cbec90665af5258e63692a4a7f93693c8bcfc0077ac720"
+    },
+    {
       "id": "schema:kfd-4:observer-perspective",
       "sourcePath": "schemas/kfd-4/observer-perspective.schema.json",
       "sha256": "806bdc4e06e58ddb0833f69044c9321ea0a8e3e11fd8c662be19d1752e3b070c"
@@ -2502,6 +2507,11 @@
       "id": "schema:kfd-7:domain-profile",
       "sourcePath": "schemas/kfd-7/domain-profile.schema.json",
       "sha256": "d0eebde019306ad43fbf7711283f16c0d0ea7dfc0bec0b359a1afd83959d05a9"
+    },
+    {
+      "id": "schema:kfd-8:atlas-coordinate",
+      "sourcePath": "schemas/kfd-8/atlas-coordinate.schema.json",
+      "sha256": "e586b286b51ea7bbe7c41e279bc6d45cef0183065ab0cf7a43f38b5e3f869aeb"
     },
     {
       "id": "schema:kfd-11:decision-admission",
@@ -2543,7 +2553,7 @@
     {
       "id": "metadata:standards",
       "sourcePath": "standards.json",
-      "sha256": "e849d00499489a7fa28aa3c4873ee3f965e5b0f74e1ea1473a5f41a737484149"
+      "sha256": "783695044fc2026d206972abff5be2fdaf175c74aea8112274bc45114d8db682"
     },
     {
       "id": "metadata:terminology",
@@ -2563,7 +2573,7 @@
     {
       "id": "metadata:release-impact",
       "sourcePath": "release-impact.json",
-      "sha256": "8db778c458bc8d2a24b2ad95778ba3812fdcc612e0083c4e2236757b31b30411"
+      "sha256": "98d6f24fa3f7e2083fa6a8eaabb890ae880be391d2e3e4d976f0208862be7d16"
     },
     {
       "id": "metadata:release-anchor",
@@ -2588,36 +2598,36 @@
     {
       "id": "metadata:kfd-2-public-release-trust-claim",
       "sourcePath": ".buildchain/kfd-2/public-release-trust.claim.json",
-      "sha256": "3964ec99db0ba1e25444b3dc8ce0f394e5e14ac3d57c4d876aa33fdf0d61f674"
+      "sha256": "6df6e8861206bfed0aab063f2cdc0cae9fff94c1ab10f23baf54229489f744e2"
     },
     {
       "id": "metadata:kfd-2-foundation-trust-claims",
       "sourcePath": ".buildchain/kfd-2/kfd-foundation.trust-claims.json",
-      "sha256": "b21f75a1ea44ed29ed964d1e52fc3fbde264ee6d9fe68b47c9a8451ed9aedc6d"
+      "sha256": "ce144a9495ae2db417ba74f843445efa370aab4355644a44ead9fadcf72ddd02"
     },
     {
       "id": "metadata:kfd-2-foundation-trust-assessment",
       "sourcePath": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json",
-      "sha256": "17133f46a432bff10c5b4e196124a93703fedeeb1912e007281e771343c78508"
+      "sha256": "0422c3fe0d6aed091132d10242655484aef7f34a9edf153ee2c428f502472444"
     }
   ],
   "packageExports": [
     {
       "id": "export:package-json",
       "sourcePath": "package.json#exports",
-      "sha256": "eec4979285c46ff68f65aae02befc96fa2eddf88908855c3c4634fc53bfc1e24"
+      "sha256": "04e5a3fb9905f3f15ba2696e427ec3bd266d51cd03a814c205482997d42d0c78"
     },
     {
       "id": "export:npm-files",
       "sourcePath": "package.json#files",
-      "sha256": "eec4979285c46ff68f65aae02befc96fa2eddf88908855c3c4634fc53bfc1e24"
+      "sha256": "04e5a3fb9905f3f15ba2696e427ec3bd266d51cd03a814c205482997d42d0c78"
     }
   ],
   "siteConsumptionContracts": [
     {
       "id": "site:kfd-site-bundle",
       "sourcePath": "site/kfd-site.json",
-      "sha256": "79e44c31fba1905a285af0980a9e44996818c4fc261c2dae1e9b29cc0d4a9fc4"
+      "sha256": "3b763633af09ccaa2773642a002b6c0a8e14b1665bd7fb71e19bce252829022a"
     },
     {
       "id": "site:release-propagation",

@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.perspective-conformance-manifest/v1",
+  "profile": { "id": "kfd-perspective-conformance", "version": "0.1.0-alpha.1", "status": "experimental" },
+  "decisionStatus": { "KFD-4": "active", "KFD-8": "draft" },
+  "schemas": [
+    "schemas/kfd-4/conformance-witness.schema.json",
+    "schemas/kfd-8/atlas-coordinate.schema.json"
+  ],
+  "vectors": "profiles/perspective-conformance/vectors.json",
+  "issueCodes": "profiles/perspective-conformance/issue-codes.json",
+  "surfaces": [
+    { "path": "schemas/kfd-4/conformance-witness.schema.json", "role": "schema", "sha256": "38ffe6f7f034271775cbec90665af5258e63692a4a7f93693c8bcfc0077ac720" },
+    { "path": "schemas/kfd-8/atlas-coordinate.schema.json", "role": "schema", "sha256": "e586b286b51ea7bbe7c41e279bc6d45cef0183065ab0cf7a43f38b5e3f869aeb" },
+    { "path": "profiles/perspective-conformance/vectors.json", "role": "fixed-vectors", "sha256": "1899428a2335071b38db586cc10d67238ac75c034d22b6092be91f4d14e1fb0d" },
+    { "path": "profiles/perspective-conformance/issue-codes.json", "role": "stable-diagnostics", "sha256": "3688f98282d6f3d25c4b27061bf3e909adc10aa6df55a04713781c8f0c957ea7" },
+    { "path": "verifier/crates/core/src/profiles/kfd_record.rs", "role": "native-wasm-core", "sha256": "21bdf365e46793cfd62282b1f274638c2232f2cb3dfa403cb868fdf4d18241fb" },
+    { "path": "scripts/check-perspective-conformance.mjs", "role": "parity-and-drift-check", "sha256": "f83e9db39d63ff2dad818f931669cee1d88e8a0774a2ecdcb001b8c576294b44" }
+  ],
+  "claimBoundary": "A pass proves only the packaged structural and declared cross-field invariants. It does not activate KFD-8, qualify an adopter, infer authority or direction, certify completeness, or establish current validity."
+}
