@@ -90,6 +90,7 @@
     "./adopter-conformance/issue-codes.json": "./profiles/adopter-conformance/issue-codes.json",
     "./adopter-conformance/vectors.json": "./profiles/adopter-conformance/vectors.json",
     "./adopter-conformance/toolchain.json": "./profiles/adopter-conformance/toolchain.json",
+    "./adopter-conformance/adopters/kfd/manifest.json": "./profiles/adopter-conformance/adopters/kfd/manifest.json",
     "./adopter-conformance/verifier": "./scripts/adopter-conformance-contract.mjs",
     "./adopter-conformance/toolchain": "./scripts/adopter-toolchain.mjs",
     "./scripts/*.mjs": "./scripts/*.mjs",
@@ -123,9 +124,10 @@
     "./self-conformance/historical-replay.schema.json": "./schemas/kfd-self-conformance-history/historical-replay.schema.json"
   },
   "scripts": {
-    "check": "node scripts/check.mjs && npm run check:adopter-conformance && npm run check:adopter-toolchain && npm run check:warrant-evidence && npm run check:agent-hub && npm run check:agent-hub-conformance && npm run check:agent-runtime && npm run check:self-conformance-profile && npm run check:self-conformance-lifecycle && npm run check:self-conformance-history && npm run check:verifier",
+    "check": "node scripts/check.mjs && npm run check:adopter-conformance && npm run check:adopter-toolchain && npm run check:kfd-self-adopter && npm run check:warrant-evidence && npm run check:agent-hub && npm run check:agent-hub-conformance && npm run check:agent-runtime && npm run check:self-conformance-profile && npm run check:self-conformance-lifecycle && npm run check:self-conformance-history && npm run check:verifier",
     "check:adopter-conformance": "node scripts/check-adopter-conformance.mjs",
     "check:adopter-toolchain": "node scripts/check-adopter-toolchain.mjs",
+    "check:kfd-self-adopter": "node scripts/check-kfd-self-adopter.mjs",
     "check:warrant-evidence": "node scripts/check-warrant-evidence.mjs",
     "check:agent-hub": "node scripts/check-agent-hub-profile.mjs",
     "check:agent-hub-conformance": "node scripts/check-agent-hub-conformance-profile.mjs",

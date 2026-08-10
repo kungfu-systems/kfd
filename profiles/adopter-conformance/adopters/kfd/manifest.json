@@ -1,0 +1,453 @@
+{
+  "$schema": "https://kfd.libkungfu.dev/schemas/kfd-adopter-conformance/manifest.schema.json",
+  "schemaVersion": 1,
+  "contract": "kfd.adopter-conformance-manifest/v1",
+  "manifestId": "kfd-full-cut-self-declaration",
+  "rootAlgorithm": "sha256-kfd-canonical-json-v1",
+  "byteDigestAlgorithm": "sha256-bytes-v1",
+  "adopter": {
+    "id": "kungfu-systems/kfd",
+    "artifact": {
+      "kind": "other",
+      "coordinate": "kfd-adopter-package-cut:sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd",
+      "root": "sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd"
+    },
+    "scope": "KFD package governance, verification profiles, release evidence, and adopter-toolchain dogfood"
+  },
+  "kfdCut": {
+    "package": {
+      "name": "@kungfu-tech/kfd",
+      "version": "1.0.0-alpha.59",
+      "artifactRoot": "sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd"
+    },
+    "registry": {
+      "path": "registry.json",
+      "schemaVersion": 1,
+      "contract": "kfd-registry",
+      "root": "sha256:8ab283dd225e8940a4f9d92eca7d59fff6e8d29e66275c03baa923ad2ff63298"
+    },
+    "standards": {
+      "path": "standards.json",
+      "schemaVersion": 2,
+      "contract": "kfd-standards-metadata",
+      "root": "sha256:37beb576053dd8d75ebb2606974b99c30ae2dbd2bba11b80a1d4468994476ed8"
+    },
+    "schemaSet": [
+      {
+        "path": "schemas/kfd-adopter-conformance/manifest.schema.json",
+        "byteRoot": "sha256:6443189167e6b65c8b6154530af58c38bc2e6471bc3a4d2e7eea1f310fb8d2d6",
+        "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-adopter-conformance/manifest.schema.json"
+      }
+    ],
+    "schemaSetRoot": "sha256:69a9647ccb658460a65e17d5028bbfde5cde1b19b1170fdf44eed656eef5ddd4",
+    "vectorSet": [
+      {
+        "path": "profiles/adopter-conformance/vectors.json",
+        "byteRoot": "sha256:85dbfba06f6286e0a3c4d7b15dbdcc77d01464d5031d925ac1f4f7263f07117d",
+        "contract": "kfd.adopter-conformance-vectors/v1"
+      }
+    ],
+    "vectorSetRoot": "sha256:47ec647e7471037e07c91b2f62223024eb3c3b5ad87309560ab9989b41554b07",
+    "verifierSet": [
+      {
+        "path": "scripts/adopter-conformance-contract.mjs",
+        "byteRoot": "sha256:a98170b011cd22980222fa671c178344314304852372767ec55f5292ca777fbf",
+        "kind": "source"
+      },
+      {
+        "path": "scripts/warrant-evidence-verifier.mjs",
+        "byteRoot": "sha256:d15753d39938aa91cc50eb9bfa91dfc013570565a2395fd35d93d4ddda10adea",
+        "kind": "source"
+      }
+    ],
+    "verifierSetRoot": "sha256:aad9b4193e965b68e465bbe4e648e5a03c3d78a6575dfda1d5e90943404779f4",
+    "decisionSetRoot": "sha256:c22abfcbf92313e2ed94f9d7ec01208726b99bd33f71176652f2ca0956de6c86"
+  },
+  "decisions": [
+    {
+      "id": "KFD-1",
+      "number": 1,
+      "registryStatus": "active",
+      "state": "candidate",
+      "usage": "used",
+      "implementationEvidence": [
+        {
+          "kind": "implementation",
+          "coordinate": "kfd-package-cut:sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd#.buildchain/kfd-1/contract-world.witness.json",
+          "root": "sha256:1c961f0b7f8a73b7e6145a4f1ae6394c20a0bf7c3de3f132c02e84a4b9b348ec",
+          "observedAt": "2026-08-11T00:00:00Z",
+          "kfdPackageRoot": "sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd"
+        }
+      ],
+      "verificationEvidence": [
+        {
+          "kind": "verification",
+          "coordinate": "kfd-package-cut:sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd#scripts/check.mjs",
+          "root": "sha256:582b727b217bc214f7805a0f16009cf580da4a1e6c982aedabf25ce02564ccbf",
+          "observedAt": "2026-08-11T00:00:00Z",
+          "kfdPackageRoot": "sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd"
+        }
+      ],
+      "negativeEvidence": [],
+      "reviews": [],
+      "witnessBindings": [],
+      "releaseBindingIds": [],
+      "claims": [
+        "KFD keeps declared facts and generated artifacts in one rooted contract world."
+      ],
+      "gaps": [
+        "This candidate declaration lacks a decision-specific independent adopter assessment and does not claim completed adoption."
+      ]
+    },
+    {
+      "id": "KFD-2",
+      "number": 2,
+      "registryStatus": "active",
+      "state": "candidate",
+      "usage": "used",
+      "implementationEvidence": [
+        {
+          "kind": "implementation",
+          "coordinate": "kfd-package-cut:sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd#.buildchain/kfd-2/public-release-trust.claim.json",
+          "root": "sha256:b0dc96912af7e9121186701922558bf829c05c387c1cbb720e384b7131a117fe",
+          "observedAt": "2026-08-11T00:00:00Z",
+          "kfdPackageRoot": "sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd"
+        }
+      ],
+      "verificationEvidence": [
+        {
+          "kind": "verification",
+          "coordinate": "kfd-package-cut:sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd#scripts/check.mjs",
+          "root": "sha256:582b727b217bc214f7805a0f16009cf580da4a1e6c982aedabf25ce02564ccbf",
+          "observedAt": "2026-08-11T00:00:00Z",
+          "kfdPackageRoot": "sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd"
+        }
+      ],
+      "negativeEvidence": [],
+      "reviews": [],
+      "witnessBindings": [],
+      "releaseBindingIds": [],
+      "claims": [
+        "KFD release trust begins from explicit package, source, review, and publication facts."
+      ],
+      "gaps": [
+        "This candidate declaration lacks a decision-specific independent adopter assessment and does not claim completed adoption."
+      ]
+    },
+    {
+      "id": "KFD-3",
+      "number": 3,
+      "registryStatus": "active",
+      "state": "candidate",
+      "usage": "used",
+      "implementationEvidence": [
+        {
+          "kind": "implementation",
+          "coordinate": "kfd-package-cut:sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd#.buildchain/kfd-3/collaboration-interface.artifact.json",
+          "root": "sha256:18526b4ee8eedbdcac3aae4363907a320768af5f7937190651018d913f1dd414",
+          "observedAt": "2026-08-11T00:00:00Z",
+          "kfdPackageRoot": "sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd"
+        }
+      ],
+      "verificationEvidence": [
+        {
+          "kind": "verification",
+          "coordinate": "kfd-package-cut:sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd#scripts/check.mjs",
+          "root": "sha256:582b727b217bc214f7805a0f16009cf580da4a1e6c982aedabf25ce02564ccbf",
+          "observedAt": "2026-08-11T00:00:00Z",
+          "kfdPackageRoot": "sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd"
+        }
+      ],
+      "negativeEvidence": [],
+      "reviews": [],
+      "witnessBindings": [],
+      "releaseBindingIds": [],
+      "claims": [
+        "KFD publishes a machine-readable collaboration interface with explicit participant boundaries."
+      ],
+      "gaps": [
+        "This candidate declaration lacks a decision-specific independent adopter assessment and does not claim completed adoption."
+      ]
+    },
+    {
+      "id": "KFD-4",
+      "number": 4,
+      "registryStatus": "active",
+      "state": "candidate",
+      "usage": "used",
+      "implementationEvidence": [
+        {
+          "kind": "implementation",
+          "coordinate": "kfd-package-cut:sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd#profiles/perspective-conformance/manifest.json",
+          "root": "sha256:8a59221e74cac3a4e893b12abc8144d0ba913a2bce278bb0f92b30b9a232ebc3",
+          "observedAt": "2026-08-11T00:00:00Z",
+          "kfdPackageRoot": "sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd"
+        }
+      ],
+      "verificationEvidence": [
+        {
+          "kind": "verification",
+          "coordinate": "kfd-package-cut:sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd#scripts/check-perspective-conformance.mjs",
+          "root": "sha256:f83e9db39d63ff2dad818f931669cee1d88e8a0774a2ecdcb001b8c576294b44",
+          "observedAt": "2026-08-11T00:00:00Z",
+          "kfdPackageRoot": "sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd"
+        }
+      ],
+      "negativeEvidence": [],
+      "reviews": [],
+      "witnessBindings": [],
+      "releaseBindingIds": [],
+      "claims": [
+        "KFD records observer perspective in its packaged perspective-conformance profile."
+      ],
+      "gaps": [
+        "This candidate declaration lacks a decision-specific independent adopter assessment and does not claim completed adoption."
+      ]
+    },
+    {
+      "id": "KFD-5",
+      "number": 5,
+      "registryStatus": "active",
+      "state": "candidate",
+      "usage": "evaluating",
+      "implementationEvidence": [
+        {
+          "kind": "implementation",
+          "coordinate": "kfd-package-cut:sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd#evidence/primitive-evidence/second-wave-report.json",
+          "root": "sha256:b0ed807dee3e93f0e6764c9d7b4b67c2a7da5a7580e169c03811ec3ec0732149",
+          "observedAt": "2026-08-11T00:00:00Z",
+          "kfdPackageRoot": "sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd"
+        }
+      ],
+      "verificationEvidence": [
+        {
+          "kind": "verification",
+          "coordinate": "kfd-package-cut:sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd#scripts/check-warrant-evidence.mjs",
+          "root": "sha256:e0d0045efbfaf71bb1e6ac73e2f8dcf70e2503685f7808f2fab237e135feb13a",
+          "observedAt": "2026-08-11T00:00:00Z",
+          "kfdPackageRoot": "sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd"
+        }
+      ],
+      "negativeEvidence": [],
+      "reviews": [],
+      "witnessBindings": [],
+      "releaseBindingIds": [],
+      "claims": [
+        "KFD retains cross-product primitive-evidence comparisons without promoting a partial result."
+      ],
+      "gaps": [
+        "This candidate declaration lacks a decision-specific independent adopter assessment and does not claim completed adoption."
+      ]
+    },
+    {
+      "id": "KFD-6",
+      "number": 6,
+      "registryStatus": "draft",
+      "state": "unsupported",
+      "usage": "unused",
+      "implementationEvidence": [],
+      "verificationEvidence": [],
+      "negativeEvidence": [],
+      "reviews": [],
+      "witnessBindings": [],
+      "releaseBindingIds": [],
+      "claims": [],
+      "gaps": [
+        "KFD has no package-only autonomous-discovery-loop adopter witness for this cut."
+      ]
+    },
+    {
+      "id": "KFD-7",
+      "number": 7,
+      "registryStatus": "active",
+      "state": "candidate",
+      "usage": "used",
+      "implementationEvidence": [
+        {
+          "kind": "implementation",
+          "coordinate": "kfd-package-cut:sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd#evidence/kfd-7/activation-record.json",
+          "root": "sha256:67ffebb73f943892f1854e2916a90f1fb082c61d33f64c0e7f8af5393189eb6e",
+          "observedAt": "2026-08-11T00:00:00Z",
+          "kfdPackageRoot": "sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd"
+        }
+      ],
+      "verificationEvidence": [
+        {
+          "kind": "verification",
+          "coordinate": "kfd-package-cut:sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd#scripts/check.mjs",
+          "root": "sha256:582b727b217bc214f7805a0f16009cf580da4a1e6c982aedabf25ce02564ccbf",
+          "observedAt": "2026-08-11T00:00:00Z",
+          "kfdPackageRoot": "sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd"
+        }
+      ],
+      "negativeEvidence": [],
+      "reviews": [],
+      "witnessBindings": [],
+      "releaseBindingIds": [],
+      "claims": [
+        "KFD retains the reviewed activation record and separate product-profile evidence for KFD-7."
+      ],
+      "gaps": [
+        "This candidate declaration lacks a decision-specific independent adopter assessment and does not claim completed adoption."
+      ]
+    },
+    {
+      "id": "KFD-8",
+      "number": 8,
+      "registryStatus": "draft",
+      "state": "draft-evidence",
+      "usage": "evaluating",
+      "implementationEvidence": [
+        {
+          "kind": "implementation",
+          "coordinate": "kfd-package-cut:sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd#profiles/perspective-conformance/manifest.json",
+          "root": "sha256:8a59221e74cac3a4e893b12abc8144d0ba913a2bce278bb0f92b30b9a232ebc3",
+          "observedAt": "2026-08-11T00:00:00Z",
+          "kfdPackageRoot": "sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd"
+        }
+      ],
+      "verificationEvidence": [
+        {
+          "kind": "verification",
+          "coordinate": "kfd-package-cut:sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd#scripts/check-perspective-conformance.mjs",
+          "root": "sha256:f83e9db39d63ff2dad818f931669cee1d88e8a0774a2ecdcb001b8c576294b44",
+          "observedAt": "2026-08-11T00:00:00Z",
+          "kfdPackageRoot": "sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd"
+        }
+      ],
+      "negativeEvidence": [],
+      "reviews": [],
+      "witnessBindings": [],
+      "releaseBindingIds": [],
+      "claims": [],
+      "gaps": [
+        "The packaged perspective evidence does not activate draft KFD-8 or qualify KFD as an adopter."
+      ]
+    },
+    {
+      "id": "KFD-9",
+      "number": 9,
+      "registryStatus": "draft",
+      "state": "unsupported",
+      "usage": "unused",
+      "implementationEvidence": [],
+      "verificationEvidence": [],
+      "negativeEvidence": [],
+      "reviews": [],
+      "witnessBindings": [],
+      "releaseBindingIds": [],
+      "claims": [],
+      "gaps": [
+        "KFD has no full-cut durable-result adopter witness and makes no hidden KFD-9 use claim."
+      ]
+    },
+    {
+      "id": "KFD-10",
+      "number": 10,
+      "registryStatus": "draft",
+      "state": "draft-evidence",
+      "usage": "evaluating",
+      "implementationEvidence": [
+        {
+          "kind": "implementation",
+          "coordinate": "kfd-package-cut:sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd#evidence/primitive-evidence/second-wave-report.json",
+          "root": "sha256:b0ed807dee3e93f0e6764c9d7b4b67c2a7da5a7580e169c03811ec3ec0732149",
+          "observedAt": "2026-08-11T00:00:00Z",
+          "kfdPackageRoot": "sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd"
+        }
+      ],
+      "verificationEvidence": [
+        {
+          "kind": "verification",
+          "coordinate": "kfd-package-cut:sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd#scripts/check-warrant-evidence.mjs",
+          "root": "sha256:e0d0045efbfaf71bb1e6ac73e2f8dcf70e2503685f7808f2fab237e135feb13a",
+          "observedAt": "2026-08-11T00:00:00Z",
+          "kfdPackageRoot": "sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd"
+        }
+      ],
+      "negativeEvidence": [],
+      "reviews": [],
+      "witnessBindings": [
+        {
+          "decisionId": "KFD-10",
+          "profileId": "kfd-warrant-evidence",
+          "profileManifestPath": "profiles/warrant-evidence/manifest.json",
+          "profileManifestRoot": "sha256:1032006a7435408761916de291abc8ee239594e70d739f28c3b29b60da75a755",
+          "witnessCoordinate": "kfd-package-cut:sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd#evidence/primitive-evidence/second-wave-report.json",
+          "witnessRoot": "sha256:b0ed807dee3e93f0e6764c9d7b4b67c2a7da5a7580e169c03811ec3ec0732149",
+          "verifierRoot": "sha256:d15753d39938aa91cc50eb9bfa91dfc013570565a2395fd35d93d4ddda10adea",
+          "kfdPackageRoot": "sha256:d09bdf85be881b724bdfa2a5682b6a49beca1a8d450a005d345816dc0c6e91bd"
+        }
+      ],
+      "releaseBindingIds": [],
+      "claims": [],
+      "gaps": [
+        "The second-wave Warrant evidence is partial, non-qualifying, and cannot activate draft KFD-10."
+      ]
+    },
+    {
+      "id": "KFD-11",
+      "number": 11,
+      "registryStatus": "draft",
+      "state": "not-used",
+      "usage": "unused",
+      "implementationEvidence": [],
+      "verificationEvidence": [],
+      "negativeEvidence": [],
+      "reviews": [],
+      "witnessBindings": [],
+      "releaseBindingIds": [],
+      "claims": [],
+      "gaps": [
+        "KFD publishes the draft but does not use KFD-11 as adopter authority in this cut."
+      ]
+    },
+    {
+      "id": "KFD-12",
+      "number": 12,
+      "registryStatus": "draft",
+      "state": "not-used",
+      "usage": "unused",
+      "implementationEvidence": [],
+      "verificationEvidence": [],
+      "negativeEvidence": [],
+      "reviews": [],
+      "witnessBindings": [],
+      "releaseBindingIds": [],
+      "claims": [],
+      "gaps": [
+        "KFD publishes the draft but does not use KFD-12 as adopter authority in this cut."
+      ]
+    },
+    {
+      "id": "KFD-13",
+      "number": 13,
+      "registryStatus": "draft",
+      "state": "not-used",
+      "usage": "unused",
+      "implementationEvidence": [],
+      "verificationEvidence": [],
+      "negativeEvidence": [],
+      "reviews": [],
+      "witnessBindings": [],
+      "releaseBindingIds": [],
+      "claims": [],
+      "gaps": [
+        "KFD publishes the draft but does not use KFD-13 as adopter authority in this cut."
+      ]
+    }
+  ],
+  "releaseBindings": [],
+  "claimBoundary": {
+    "declarationOnly": true,
+    "runtimePermission": false,
+    "releaseAuthorization": false,
+    "independentlyCertified": false,
+    "semanticTruth": false
+  },
+  "gaps": [
+    "Active rows remain candidates until decision-specific independent assessment and release binding exist.",
+    "Draft evidence cannot activate a draft, widen authority, or certify KFD.",
+    "Unsupported and not-used rows remain explicit and fail closed instead of being inferred as adoption."
+  ]
+}
