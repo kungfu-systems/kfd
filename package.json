@@ -86,6 +86,9 @@
     "./perspective-conformance/issue-codes.json": "./profiles/perspective-conformance/issue-codes.json",
     "./adopter-conformance/README.md": "./profiles/adopter-conformance/README.md",
     "./adopter-conformance/manifest.schema.json": "./schemas/kfd-adopter-conformance/manifest.schema.json",
+    "./adopter-conformance/issue-codes.json": "./profiles/adopter-conformance/issue-codes.json",
+    "./adopter-conformance/vectors.json": "./profiles/adopter-conformance/vectors.json",
+    "./adopter-conformance/verifier": "./scripts/adopter-conformance-contract.mjs",
     "./scripts/*.mjs": "./scripts/*.mjs",
     "./buildchain/kfd-1/contract-world.witness.json": "./.buildchain/kfd-1/contract-world.witness.json",
     "./buildchain/kfd-2/public-release-trust.claim.json": "./.buildchain/kfd-2/public-release-trust.claim.json",
@@ -117,7 +120,8 @@
     "./self-conformance/historical-replay.schema.json": "./schemas/kfd-self-conformance-history/historical-replay.schema.json"
   },
   "scripts": {
-    "check": "node scripts/check.mjs && npm run check:warrant-evidence && npm run check:agent-hub && npm run check:agent-hub-conformance && npm run check:agent-runtime && npm run check:self-conformance-profile && npm run check:self-conformance-lifecycle && npm run check:self-conformance-history && npm run check:verifier",
+    "check": "node scripts/check.mjs && npm run check:adopter-conformance && npm run check:warrant-evidence && npm run check:agent-hub && npm run check:agent-hub-conformance && npm run check:agent-runtime && npm run check:self-conformance-profile && npm run check:self-conformance-lifecycle && npm run check:self-conformance-history && npm run check:verifier",
+    "check:adopter-conformance": "node scripts/check-adopter-conformance.mjs",
     "check:warrant-evidence": "node scripts/check-warrant-evidence.mjs",
     "check:agent-hub": "node scripts/check-agent-hub-profile.mjs",
     "check:agent-hub-conformance": "node scripts/check-agent-hub-conformance-profile.mjs",

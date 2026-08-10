@@ -11,10 +11,51 @@ const outputPaths = [
   "verifier/fixtures/self-conformance-history/historical-lineage.report.json",
 ];
 const repository = "https://github.com/kungfu-systems/kfd";
+const sourceMode = process.env.KFD_SELF_CONFORMANCE_HISTORY_SOURCE_MODE || "auto";
+if (!["auto", "cache"].includes(sourceMode)) throw new Error(`Unsupported historical source mode: ${sourceMode}`);
 
-const gitJson = (commit, file) => JSON.parse(execFileSync(
-  "git", ["show", `${commit}:${file}`], { cwd: root, encoding: "utf8" },
-));
+const lockedHistoricalRoots = Object.freeze({
+  "alpha28-registry": "sha256:5daccf563706ed87b521298b92c50e07505881dae28297dd86f4e0630dc4de8b",
+  "foundation-revision-admission": "sha256:2b1818caa9d418d84e707a52968eaf3f4d35ac33ded780b3204ad180f1a370f7",
+  "foundation-revision-registry": "sha256:204014d1169071ef6ecc72989ae2dc63c1545df230e23b7f784a5f6ecad27898",
+  "kfd7-activation-record": "sha256:2f23c6e87e00270be8198401ef57efb59a121c247a47e1006a0e9dad25d63627",
+  "kfd7-active-registry": "sha256:8187db2d9256679e29df25a92aae7c5dc4cc3af154cceef6a1fce874135d4a79",
+  "kfd7-candidate-registry": "sha256:cd112627b57e13a6d7bb9b53f681c44e0c3b0a63c3a8b059df1d977878852dd7",
+  "kfd7-numbered-registry": "sha256:90f3316cee9cf5bbb2efd5da21e38b9a85eb49403fb9b245416a567ca6ed18b0",
+  "kfd7-qualified-decision": "sha256:4b2dc449a85dbbbd46e7b4607878076da6b6c2dc3234c399635c04448ed4209e",
+  "kfd7-refined-candidates": "sha256:ea484c7f3a28be72e2a75f7171627e73e55a51129a043daa314bb6d1e7bf37fe",
+  "numbered-drafts-pr225": "sha256:9d78aa653d55e33a13ff763c5434beca06dc6fafcd32ab98d2773db87abf4a51",
+});
+const cachedReportPath = path.join(root, outputPaths[0]);
+const cachedReport = fs.existsSync(cachedReportPath) ? JSON.parse(fs.readFileSync(cachedReportPath, "utf8")) : { sources: [] };
+const cachedSources = new Map(cachedReport.sources.map((source) => [source.id, source]));
+
+const lockedGitPayload = ({ id, commit, sourcePath, parse = JSON.parse }) => {
+  const expectedRoot = lockedHistoricalRoots[id];
+  if (!expectedRoot) throw new Error(`Historical source ${id} has no locked semantic root`);
+
+  if (sourceMode === "auto") {
+    try {
+      const payload = parse(execFileSync("git", ["show", `${commit}:${sourcePath}`], { cwd: root, encoding: "utf8" }));
+      const actualRoot = semanticRoot(payload);
+      if (actualRoot !== expectedRoot) throw new Error(`Historical Git source ${id} root mismatch: expected ${expectedRoot}, got ${actualRoot}`);
+      return payload;
+    } catch (error) {
+      const detail = `${error?.stderr || ""}\n${error?.message || ""}`;
+      if (!/fatal:|bad object|invalid object|unknown revision|not a valid object/i.test(detail)) throw error;
+    }
+  }
+
+  const cached = cachedSources.get(id);
+  if (!cached || cached.commit !== commit || cached.path !== sourcePath) {
+    throw new Error(`Historical source cache coordinate mismatch for ${id}@${commit}:${sourcePath}`);
+  }
+  const cachedRoot = semanticRoot(cached.payload);
+  if (cached.contentRoot !== expectedRoot || cachedRoot !== expectedRoot) {
+    throw new Error(`Historical source cache root mismatch for ${id}: expected ${expectedRoot}, got ${cached.contentRoot}/${cachedRoot}`);
+  }
+  return cached.payload;
+};
 
 const prFacts = {
   146: { head: "8ae3946812effb7cc04c26b7ce396d70abf2eae0", merge: "04f839e8e7834c9eda3d46424de2f59f53623e8f", mergedAt: "2026-07-17T00:52:03Z", reviewCommit: "8ae3946812effb7cc04c26b7ce396d70abf2eae0" },
@@ -39,6 +80,13 @@ const addSource = ({ id, kind, commit = null, sourcePath, payload, sourceReposit
     payload,
   });
 };
+const addLockedGitSource = ({ id, kind, commit, sourcePath, parse }) => addSource({
+  id,
+  kind,
+  commit,
+  sourcePath,
+  payload: lockedGitPayload({ id, commit, sourcePath, parse }),
+});
 
 const addPr = (number) => {
   const facts = prFacts[number];
@@ -61,7 +109,7 @@ const addPr = (number) => {
 for (const number of Object.keys(prFacts).map(Number)) addPr(number);
 
 const alpha28Commit = "04f839e8e7834c9eda3d46424de2f59f53623e8f";
-addSource({ id: "alpha28-registry", kind: "git-registry", commit: alpha28Commit, sourcePath: "registry.json", payload: gitJson(alpha28Commit, "registry.json") });
+addLockedGitSource({ id: "alpha28-registry", kind: "git-registry", commit: alpha28Commit, sourcePath: "registry.json" });
 addSource({
   id: "alpha28-package", kind: "npm-package", sourcePath: "npm:@kungfu-tech/kfd@1.0.0-alpha.28",
   sourceRepository: "https://registry.npmjs.org/@kungfu-tech/kfd/1.0.0-alpha.28",
@@ -72,12 +120,12 @@ addSource({
     integrity: "sha512-pTNOaJOgsfMehptEFcqhICzuO/c0ZJwrYlZcgLgIbOu2V2c/MDCKOuPXmD/RH1dpIjQ+SfZROuQqsPH5ERlQ/w==",
   },
 });
-addSource({ id: "kfd7-candidate-registry", kind: "git-registry", commit: prFacts[159].merge, sourcePath: "drafts/registry.json", payload: gitJson(prFacts[159].merge, "drafts/registry.json") });
-addSource({ id: "kfd7-refined-candidates", kind: "git-registry", commit: prFacts[176].merge, sourcePath: "drafts/registry.json", payload: gitJson(prFacts[176].merge, "drafts/registry.json") });
-addSource({ id: "kfd7-numbered-registry", kind: "git-registry", commit: prFacts[180].merge, sourcePath: "registry.json", payload: gitJson(prFacts[180].merge, "registry.json") });
-addSource({ id: "kfd7-qualified-decision", kind: "git-document", commit: prFacts[186].merge, sourcePath: "decisions/KFD-7.md", payload: execFileSync("git", ["show", `${prFacts[186].merge}:decisions/KFD-7.md`], { cwd: root, encoding: "utf8" }) });
-addSource({ id: "kfd7-activation-record", kind: "git-document", commit: prFacts[190].merge, sourcePath: "evidence/kfd-7/activation-record.json", payload: gitJson(prFacts[190].merge, "evidence/kfd-7/activation-record.json") });
-addSource({ id: "kfd7-active-registry", kind: "git-registry", commit: prFacts[190].merge, sourcePath: "registry.json", payload: gitJson(prFacts[190].merge, "registry.json") });
+addLockedGitSource({ id: "kfd7-candidate-registry", kind: "git-registry", commit: prFacts[159].merge, sourcePath: "drafts/registry.json" });
+addLockedGitSource({ id: "kfd7-refined-candidates", kind: "git-registry", commit: prFacts[176].merge, sourcePath: "drafts/registry.json" });
+addLockedGitSource({ id: "kfd7-numbered-registry", kind: "git-registry", commit: prFacts[180].merge, sourcePath: "registry.json" });
+addLockedGitSource({ id: "kfd7-qualified-decision", kind: "git-document", commit: prFacts[186].merge, sourcePath: "decisions/KFD-7.md", parse: (value) => value });
+addLockedGitSource({ id: "kfd7-activation-record", kind: "git-document", commit: prFacts[190].merge, sourcePath: "evidence/kfd-7/activation-record.json" });
+addLockedGitSource({ id: "kfd7-active-registry", kind: "git-registry", commit: prFacts[190].merge, sourcePath: "registry.json" });
 addSource({
   id: "alpha36-package", kind: "npm-package", sourcePath: "npm:@kungfu-tech/kfd@1.0.0-alpha.36",
   sourceRepository: "https://registry.npmjs.org/@kungfu-tech/kfd/1.0.0-alpha.36",
@@ -89,9 +137,9 @@ addSource({
     integrity: "sha512-SmIE0qf7kHf2g8lIRhigfqoYsO5eHDvJLE3nogXnjAVEFe/uw0jjsDTOx2nPwaq2yC04tHmNtynHj/UcIEb4SA==",
   },
 });
-addSource({ id: "numbered-drafts-pr225", kind: "git-registry", commit: prFacts[225].merge, sourcePath: "registry.json", payload: gitJson(prFacts[225].merge, "registry.json") });
-addSource({ id: "foundation-revision-admission", kind: "git-document", commit: prFacts[230].merge, sourcePath: "docs/foundation-revision-2026-07-21-decision-admission.json", payload: gitJson(prFacts[230].merge, "docs/foundation-revision-2026-07-21-decision-admission.json") });
-addSource({ id: "foundation-revision-registry", kind: "git-registry", commit: prFacts[230].merge, sourcePath: "registry.json", payload: gitJson(prFacts[230].merge, "registry.json") });
+addLockedGitSource({ id: "numbered-drafts-pr225", kind: "git-registry", commit: prFacts[225].merge, sourcePath: "registry.json" });
+addLockedGitSource({ id: "foundation-revision-admission", kind: "git-document", commit: prFacts[230].merge, sourcePath: "docs/foundation-revision-2026-07-21-decision-admission.json" });
+addLockedGitSource({ id: "foundation-revision-registry", kind: "git-registry", commit: prFacts[230].merge, sourcePath: "registry.json" });
 
 const terminalRequest = JSON.parse(fs.readFileSync(path.join(root, "evidence/self-conformance/transitions/recursive-normative-self-conformance-terminal.request.json"), "utf8"));
 const terminalEntry = terminalRequest.chain.at(-1);
