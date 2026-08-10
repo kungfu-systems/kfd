@@ -20,7 +20,7 @@
       "title": "Facts must not drift",
       "kind": "procedure",
       "status": "active",
-      "revision": 6,
+      "revision": 7,
       "metadataSchemaVersion": "2",
       "document": {
         "path": "decisions/KFD-1.md",
@@ -743,6 +743,90 @@
             "description": "Published JSON schema for deterministic independent verification reports.",
             "sourcePath": "schemas/kfd-verification-report.schema.json",
             "weldRationale": "Humans, agents, CI systems, and package consumers receive the same explicit non-qualifying result contract.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-adopter-conformance-authority",
+            "class": "cross-time",
+            "classes": [
+              "cross-time"
+            ],
+            "description": "Published full-cut adopter declaration, evidence, release, runtime, and certification authority boundary.",
+            "sourcePath": "profiles/adopter-conformance/README.md",
+            "weldRationale": "Adopters and verifiers bind the same package-only root semantics and cannot promote structural verification into another authority.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-adopter-conformance-manifest-schema",
+            "class": "integration-time",
+            "classes": [
+              "integration-time",
+              "cross-time"
+            ],
+            "description": "Published JSON schema for complete decision declarations over one exact KFD package cut.",
+            "sourcePath": "schemas/kfd-adopter-conformance/manifest.schema.json",
+            "weldRationale": "Adopters preserve the registry-derived row set, explicit maturity states, rooted evidence, decision witnesses, release bindings, and fixed non-claims.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-adopter-conformance-vectors",
+            "class": "integration-time",
+            "classes": [
+              "integration-time",
+              "cross-time"
+            ],
+            "description": "Fixed positive and fail-closed full-cut adopter vectors.",
+            "sourcePath": "profiles/adopter-conformance/vectors.json",
+            "weldRationale": "Independent implementations replay the same missing, duplicate, mismatch, widening, substitution, staleness, use, and claim failures.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-adopter-conformance-issue-codes",
+            "class": "integration-time",
+            "classes": [
+              "integration-time",
+              "cross-time"
+            ],
+            "description": "Stable fail-closed diagnostics for the version 1 adopter manifest contract.",
+            "sourcePath": "profiles/adopter-conformance/issue-codes.json",
+            "weldRationale": "Consumers compare machine-readable failures without importing product-specific error vocabularies or hidden approval state.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-adopter-conformance-reference-verifier",
+            "class": "integration-time",
+            "classes": [
+              "integration-time",
+              "cross-time"
+            ],
+            "description": "Package-only JavaScript reference seam for cross-object adopter-manifest semantics.",
+            "sourcePath": "scripts/adopter-conformance-contract.mjs",
+            "weldRationale": "The explicit cut bytes, package root, verification-time cut, and freshness policy reproduce offline without Atlas, sibling checkouts, Home state, or network access.",
             "impactProjection": {
               "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
               "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",

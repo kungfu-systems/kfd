@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.adopter-conformance-vectors/v1",
+  "profile": "kfd.adopter-conformance-manifest/v1",
+  "cut": {
+    "expectedPackageRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "registry": {
+      "schemaVersion": 1,
+      "contract": "kfd-registry",
+      "entries": [
+        { "id": "KFD-1", "number": 1, "status": "active", "path": "decisions/KFD-1.md" },
+        { "id": "KFD-2", "number": 2, "status": "draft", "path": "decisions/KFD-2.md" },
+        { "id": "KFD-3", "number": 3, "status": "active", "path": "decisions/KFD-3.md" }
+      ]
+    },
+    "standards": {
+      "schemaVersion": 2,
+      "contract": "kfd-standards-metadata",
+      "standards": {
+        "kfd-1": { "id": "KFD-1" },
+        "kfd-2": { "id": "KFD-2" },
+        "kfd-3": { "id": "KFD-3" }
+      }
+    },
+    "surfaces": {
+      "schemas": [
+        { "path": "schemas/fixture/manifest.schema.json", "schemaId": "https://kfd.libkungfu.dev/schemas/fixture/manifest.schema.json" }
+      ],
+      "vectors": [
+        { "path": "profiles/fixture/vectors.json", "contract": "kfd.fixture-vectors/v1" }
+      ],
+      "verifiers": [
+        { "path": "scripts/fixture-verifier.mjs", "kind": "source" }
+      ]
+    },
+    "files": {
+      "schemas/fixture/manifest.schema.json": "{\"$id\":\"https://kfd.libkungfu.dev/schemas/fixture/manifest.schema.json\"}\n",
+      "profiles/fixture/vectors.json": "{\"schemaVersion\":1,\"contract\":\"kfd.fixture-vectors/v1\"}\n",
+      "scripts/fixture-verifier.mjs": "export const fixtureVerifier = true;\n",
+      "profiles/kfd-1/manifest.json": "{\"schemaVersion\":1,\"contract\":\"kfd.fixture-profile/v1\",\"decisionId\":\"KFD-1\"}\n"
+    },
+    "evidencePolicy": {
+      "verifiedAt": "2026-08-10T12:00:00Z",
+      "maxAgeSeconds": 172800
+    }
+  },
+  "baseManifestTemplate": {
+    "$schema": "https://kfd.libkungfu.dev/schemas/kfd-adopter-conformance/manifest.schema.json",
+    "schemaVersion": 1,
+    "contract": "kfd.adopter-conformance-manifest/v1",
+    "manifestId": "fixture-full-cut-adopter",
+    "rootAlgorithm": "sha256-kfd-canonical-json-v1",
+    "byteDigestAlgorithm": "sha256-bytes-v1",
+    "adopter": {
+      "id": "example-third-party",
+      "artifact": {
+        "kind": "git-commit",
+        "coordinate": "example/repository@0123456789abcdef",
+        "root": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "scope": "fixture-only"
+    },
+    "decisions": [
+      {
+        "id": "KFD-1",
+        "number": 1,
+        "registryStatus": "active",
+        "state": "adopted",
+        "usage": "used",
+        "implementationEvidence": [
+          {
+            "kind": "implementation",
+            "coordinate": "example/repository@0123456789abcdef#implementation",
+            "root": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "observedAt": "2026-08-09T12:00:00Z",
+            "kfdPackageRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        ],
+        "verificationEvidence": [
+          {
+            "kind": "verification",
+            "coordinate": "example/repository@0123456789abcdef#verification",
+            "root": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "observedAt": "2026-08-09T12:00:00Z",
+            "kfdPackageRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        ],
+        "negativeEvidence": [],
+        "reviews": [],
+        "witnessBindings": [
+          {
+            "decisionId": "KFD-1",
+            "profileId": "kfd-fixture-profile",
+            "profileManifestPath": "profiles/kfd-1/manifest.json",
+            "profileManifestRoot": "derive-from-cut",
+            "witnessCoordinate": "example/repository@0123456789abcdef#witness",
+            "witnessRoot": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "verifierRoot": "derive-from-cut",
+            "kfdPackageRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        ],
+        "releaseBindingIds": ["example-release"],
+        "claims": ["KFD-1 adopted within fixture-only scope"],
+        "gaps": []
+      },
+      {
+        "id": "KFD-2",
+        "number": 2,
+        "registryStatus": "draft",
+        "state": "draft-evidence",
+        "usage": "evaluating",
+        "implementationEvidence": [],
+        "verificationEvidence": [
+          {
+            "kind": "verification",
+            "coordinate": "example/repository@0123456789abcdef#draft-observation",
+            "root": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+            "observedAt": "2026-08-09T12:00:00Z",
+            "kfdPackageRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        ],
+        "negativeEvidence": [],
+        "reviews": [],
+        "witnessBindings": [],
+        "releaseBindingIds": [],
+        "claims": [],
+        "gaps": ["Draft authority remains non-adoptable"]
+      },
+      {
+        "id": "KFD-3",
+        "number": 3,
+        "registryStatus": "active",
+        "state": "not-used",
+        "usage": "unused",
+        "implementationEvidence": [],
+        "verificationEvidence": [],
+        "negativeEvidence": [],
+        "reviews": [],
+        "witnessBindings": [],
+        "releaseBindingIds": [],
+        "claims": [],
+        "gaps": []
+      }
+    ],
+    "releaseBindings": [
+      {
+        "id": "example-release",
+        "artifact": {
+          "kind": "git-commit",
+          "coordinate": "example/repository@0123456789abcdef",
+          "root": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        },
+        "releasePassport": {
+          "kind": "other",
+          "coordinate": "example/repository/releases/fixture#passport",
+          "root": "sha256:9999999999999999999999999999999999999999999999999999999999999999"
+        },
+        "kfdPackageRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    ],
+    "claimBoundary": {
+      "declarationOnly": true,
+      "runtimePermission": false,
+      "releaseAuthorization": false,
+      "independentlyCertified": false,
+      "semanticTruth": false
+    },
+    "gaps": []
+  },
+  "cases": [
+    { "id": "positive-full-cut", "operations": [], "valid": true, "issueCodes": [] },
+    { "id": "negative-missing-row", "operations": [{ "op": "remove", "path": "/decisions/2" }], "valid": false, "issueCodes": ["acm-decision-row-missing"] },
+    { "id": "negative-duplicate-row", "operations": [{ "op": "copy", "from": "/decisions/2", "path": "/decisions/-" }], "valid": false, "issueCodes": ["acm-decision-row-duplicate"] },
+    { "id": "negative-row-reorder", "operations": [{ "op": "swap", "path": "/decisions/0", "with": "/decisions/1" }], "valid": false, "issueCodes": ["acm-registry-mismatch"] },
+    { "id": "negative-registry-mismatch", "operations": [{ "op": "replace", "path": "/decisions/0/number", "value": 99 }], "valid": false, "issueCodes": ["acm-registry-mismatch"] },
+    { "id": "negative-draft-widening", "operations": [{ "op": "replace", "path": "/decisions/1/state", "value": "adopted" }], "valid": false, "issueCodes": ["acm-draft-authority-widening"] },
+    { "id": "negative-witness-mismatch", "operations": [{ "op": "replace", "path": "/decisions/0/witnessBindings/0/decisionId", "value": "KFD-3" }], "valid": false, "issueCodes": ["acm-witness-binding-mismatch"] },
+    { "id": "negative-release-mismatch", "operations": [{ "op": "replace", "path": "/releaseBindings/0/artifact/coordinate", "value": "example/repository@substituted" }], "valid": false, "issueCodes": ["acm-release-binding-mismatch"] },
+    { "id": "negative-root-substitution", "operations": [{ "op": "replace", "path": "/kfdCut/schemaSet/0/byteRoot", "value": "sha256:0000000000000000000000000000000000000000000000000000000000000000" }], "valid": false, "issueCodes": ["acm-root-substitution"] },
+    { "id": "negative-stale-evidence", "operations": [{ "op": "replace", "path": "/decisions/0/verificationEvidence/0/observedAt", "value": "2026-07-01T00:00:00Z" }], "valid": false, "issueCodes": ["acm-evidence-stale"] },
+    { "id": "negative-undeclared-use", "operations": [{ "op": "replace", "path": "/decisions/2/usage", "value": "used" }], "valid": false, "issueCodes": ["acm-undeclared-use"] },
+    { "id": "negative-not-used-claim", "operations": [{ "op": "add", "path": "/decisions/2/claims/-", "value": "KFD-3 adopted" }], "valid": false, "issueCodes": ["acm-not-used-claim"] }
+  ]
+}
