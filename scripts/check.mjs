@@ -90,6 +90,7 @@ for (const markdownPath of markdownPaths) {
 const expectedEvidenceUpdate = "node scripts/update-site-bundle.mjs && node scripts/update-kfd-2-claim.mjs && node scripts/update-kfd-1-witness.mjs && node scripts/update-kfd-3-witness.mjs";
 const expectedPackageDescription = "KFD: an open, evidence-governed engineering standard for reliable action and continuity under uncertainty";
 const releasePropagationConfig = JSON.parse(readFileSync("buildchain.release-propagation.json", "utf8"));
+const buildWorkflowText = readFileSync(".github/workflows/build.yml", "utf8");
 const promotionWorkflowText = readFileSync(".github/workflows/buildchain-ref-promotion.yml", "utf8");
 const recoveryWorkflowText = readFileSync(".github/workflows/release-propagation.yml", "utf8");
 if (packageJson.scripts?.["update:evidence"] !== expectedEvidenceUpdate) {
@@ -133,6 +134,10 @@ if (releasePropagationProfile?.contract !== "kungfu-buildchain-github-web-surfac
 if (!promotionWorkflowText.includes("uses: kungfu-systems/buildchain/.github/workflows/release-candidate-promote.yml@v3-alpha") ||
     !promotionWorkflowText.includes("release-propagation-config-path: buildchain.release-propagation.json")) {
   fail("Buildchain promotion must capture KFD propagation Work through the v3 alpha contract");
+}
+if (!buildWorkflowText.includes("uses: kungfu-systems/buildchain/.github/workflows/build.yml@v3-alpha") ||
+    !/^\s*checkout-history-mode:\s*full\s*$/m.test(buildWorkflowText)) {
+  fail("Buildchain verification must retain full source history for KFD historical self-conformance replay");
 }
 if (/^\s*release\s*:/m.test(recoveryWorkflowText) ||
     /gh pr (?:create|merge)|git push/.test(recoveryWorkflowText) ||
