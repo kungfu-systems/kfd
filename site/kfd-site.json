@@ -76,7 +76,7 @@
       "promise": "Implement KFD without Kungfu — scaffold an adapter in Python, Rust, Node.js, or C++, then verify it offline.",
       "release": {
         "package": "@kungfu-tech/kfd",
-        "version": "1.0.0-alpha.58",
+        "version": "1.0.0-alpha.59",
         "anchor": "kfd.release.json",
         "immutable": true
       },
@@ -106,19 +106,19 @@
         {
           "id": "scaffold",
           "label": "Scaffold",
-          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.58 kfd scaffold agent-hub --language python --output my-agent-hub-adapter",
+          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.59 kfd scaffold agent-hub --language python --output my-agent-hub-adapter",
           "capability": "kfd scaffold agent-hub --language <cpp|node|python|rust> --output <new-directory> [--json]"
         },
         {
           "id": "test",
           "label": "Test Hub 20",
-          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.58 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json",
+          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.59 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json",
           "capability": "kfd test agent-hub --adapter <path> --output <report.json>"
         },
         {
           "id": "verify",
           "label": "Verify offline",
-          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.58 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py --json",
+          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.59 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py --json",
           "capability": "kfd verify agent-hub-report <report.json> [--adapter <path>] [--json]"
         }
       ],
@@ -366,7 +366,7 @@
         "homepagePriority": 8,
         "defaultPresentation": "independent-implementation-steps",
         "includeInFirstScreen": true,
-        "markdown": "**Implement KFD without Kungfu — scaffold an adapter in Python, Rust, Node.js,\nor C++, then verify it offline.**\n\nUse the immutable `@kungfu-tech/kfd@1.0.0-alpha.58` package cut and follow the\npackage-owned [Agent Hub workflow](profiles/agent-hub/README.md) or inspect the\ncomplete [independent verification boundary](docs/independent-verifier.md):\n\n```bash\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.58 kfd scaffold agent-hub --language python --output my-agent-hub-adapter\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.58 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.58 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py --json\n```\n\nThe scaffold is a deterministic, fail-closed starter: its smoke path checks\nonly the JSONL envelope, and implementers must replace the missing product\nsemantics before the fixed Hub 20 suite can pass.\n\nPackage acquisition is separate from offline verification. Network or a local\npackage cache may be needed to obtain the immutable package bytes; after the\npackage, report, and optional adapter bytes are present, the report verifier\nperforms no network access.\n\nThese results do not certify an implementation or prove security, production\nfitness, complete semantic coverage, KFD-10 activation, or adoption by an\nindependent organization. [Open the complete Agent Hub guide](/agent-hub/) ·\n[Inspect the verifier and coverage matrix](/verify/)"
+        "markdown": "**Implement KFD without Kungfu — scaffold an adapter in Python, Rust, Node.js,\nor C++, then verify it offline.**\n\nUse the immutable `@kungfu-tech/kfd@1.0.0-alpha.59` package cut and follow the\npackage-owned [Agent Hub workflow](profiles/agent-hub/README.md) or inspect the\ncomplete [independent verification boundary](docs/independent-verifier.md):\n\n```bash\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.59 kfd scaffold agent-hub --language python --output my-agent-hub-adapter\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.59 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.59 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py --json\n```\n\nThe scaffold is a deterministic, fail-closed starter: its smoke path checks\nonly the JSONL envelope, and implementers must replace the missing product\nsemantics before the fixed Hub 20 suite can pass.\n\nPackage acquisition is separate from offline verification. Network or a local\npackage cache may be needed to obtain the immutable package bytes; after the\npackage, report, and optional adapter bytes are present, the report verifier\nperforms no network access.\n\nThese results do not certify an implementation or prove security, production\nfitness, complete semantic coverage, KFD-10 activation, or adoption by an\nindependent organization. [Open the complete Agent Hub guide](/agent-hub/) ·\n[Inspect the verifier and coverage matrix](/verify/)"
       },
       {
         "id": "foundation-triad",
