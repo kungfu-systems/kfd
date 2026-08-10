@@ -27,14 +27,14 @@ qualification, and promotion separate.
 **Implement KFD without Kungfu — scaffold an adapter in Python, Rust, Node.js,
 or C++, then verify it offline.**
 
-Use the immutable `@kungfu-tech/kfd@1.0.0-alpha.58` package cut and follow the
+Use the immutable `@kungfu-tech/kfd@1.0.0-alpha.59` package cut and follow the
 package-owned [Agent Hub workflow](profiles/agent-hub/README.md) or inspect the
 complete [independent verification boundary](docs/independent-verifier.md):
 
 ```bash
-npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.58 kfd scaffold agent-hub --language python --output my-agent-hub-adapter
-npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.58 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json
-npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.58 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py --json
+npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.59 kfd scaffold agent-hub --language python --output my-agent-hub-adapter
+npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.59 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json
+npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.59 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py --json
 ```
 
 The scaffold is a deterministic, fail-closed starter: its smoke path checks
