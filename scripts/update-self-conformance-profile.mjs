@@ -100,7 +100,7 @@ const impactEntry = {
   id: "kfd-self-conformance-profile-v1",
   impact: "minor",
   class: "additive",
-  rationale: "KFD additively publishes the versioned kfd-self-conformance 1.0.0-alpha.1 profile, finite predecessor/bootstrap rules, state and transition schemas, stable issue namespaces, canonical contract vectors, an independent native/WebAssembly verifier matrix, seven official lifecycle gates with separate authority and review receipts, complete-chain and package-substitution checks, clean-room package closure, and explicit non-authority boundaries without changing any Candidate number or decision status."
+  rationale: "KFD preserves the kfd-self-conformance 1.0.0-alpha.1 semantic contract while additively replaying retained lifecycle evidence against its reviewed package-manifest and verifier-byte cut, and retains the companion historical profile with machine-reproducible alpha.28 lineage, explicit retrospective boundaries, Native/WebAssembly parity, offline clean-room closure, and no Candidate number or decision-status change."
 };
 impact.surfaceImpacts = impact.surfaceImpacts.filter(({ id }) => id !== impactEntry.id);
 impact.surfaceImpacts.push(impactEntry);
@@ -120,7 +120,7 @@ packageJson.exports["./self-conformance/lifecycle-gate-request.schema.json"] = "
 packageJson.exports["./self-conformance/lifecycle-gate-report.schema.json"] = "./schemas/kfd-self-conformance/lifecycle-gate-report.schema.json";
 packageJson.scripts["check:self-conformance-profile"] = "node scripts/check-self-conformance-profile.mjs";
 packageJson.scripts["check:self-conformance-lifecycle"] = "node scripts/check-self-conformance-lifecycle.mjs && node scripts/check-self-conformance-changes.mjs";
-packageJson.scripts.check = "node scripts/check.mjs && npm run check:warrant-evidence && npm run check:agent-hub && npm run check:agent-hub-conformance && npm run check:agent-runtime && npm run check:self-conformance-profile && npm run check:self-conformance-lifecycle && npm run check:verifier";
+packageJson.scripts.check = "node scripts/check.mjs && npm run check:adopter-conformance && npm run check:warrant-evidence && npm run check:agent-hub && npm run check:agent-hub-conformance && npm run check:agent-runtime && npm run check:self-conformance-profile && npm run check:self-conformance-lifecycle && npm run check:self-conformance-history && npm run check:verifier";
 writeJson(packagePath, packageJson);
 
 const agentRuntimeManifestPath = "profiles/agent-runtime/manifest.json";
