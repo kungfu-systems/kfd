@@ -105,6 +105,170 @@ function issue(report, code, path, message) {
   report.issues.push({ code, path, message });
 }
 
+function objectShape(report, value, path, required, optional = []) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    issue(report, "acm-structure-invalid", path, "Expected a JSON object.");
+    return false;
+  }
+  const admitted = new Set([...required, ...optional]);
+  for (const key of Object.keys(value)) {
+    if (!admitted.has(key)) {
+      issue(report, "acm-structure-invalid", `${path}/${key}`, "Unknown manifest fields fail closed.");
+    }
+  }
+  for (const key of required) {
+    if (!Object.hasOwn(value, key)) {
+      issue(report, "acm-structure-invalid", `${path}/${key}`, "Required manifest field is missing.");
+    }
+  }
+  return true;
+}
+
+function arrayShape(report, value, path) {
+  if (!Array.isArray(value)) {
+    issue(report, "acm-structure-invalid", path, "Expected a JSON array.");
+    return [];
+  }
+  return value;
+}
+
+function verifyManifestShape(report, manifest) {
+  if (!objectShape(report, manifest, "/", [
+    "schemaVersion", "contract", "manifestId", "rootAlgorithm", "byteDigestAlgorithm",
+    "adopter", "kfdCut", "decisions", "releaseBindings", "claimBoundary", "gaps",
+  ], ["$schema"])) return;
+  if (objectShape(report, manifest.adopter, "/adopter", ["id", "artifact", "scope"])) {
+    objectShape(report, manifest.adopter.artifact, "/adopter/artifact", ["kind", "coordinate", "root"]);
+  }
+  if (objectShape(report, manifest.kfdCut, "/kfdCut", [
+    "package", "registry", "standards", "schemaSet", "schemaSetRoot", "vectorSet",
+    "vectorSetRoot", "verifierSet", "verifierSetRoot", "decisionSetRoot",
+  ])) {
+    objectShape(report, manifest.kfdCut.package, "/kfdCut/package", ["name", "version", "artifactRoot"]);
+    for (const key of ["registry", "standards"]) {
+      objectShape(report, manifest.kfdCut[key], `/kfdCut/${key}`, ["path", "schemaVersion", "contract", "root"]);
+    }
+    for (const [key, extra] of [["schemaSet", "schemaId"], ["vectorSet", "contract"], ["verifierSet", "kind"]]) {
+      for (const [index, row] of arrayShape(report, manifest.kfdCut[key], `/kfdCut/${key}`).entries()) {
+        objectShape(report, row, `/kfdCut/${key}/${index}`, ["path", "byteRoot", extra]);
+      }
+    }
+  }
+  for (const [index, row] of arrayShape(report, manifest.decisions, "/decisions").entries()) {
+    const rowPath = `/decisions/${index}`;
+    if (!objectShape(report, row, rowPath, [
+      "id", "number", "registryStatus", "state", "usage", "implementationEvidence",
+      "verificationEvidence", "negativeEvidence", "reviews", "witnessBindings",
+      "releaseBindingIds", "claims", "gaps",
+    ])) continue;
+    for (const key of ["implementationEvidence", "verificationEvidence", "negativeEvidence", "reviews"]) {
+      for (const [evidenceIndex, evidence] of arrayShape(report, row[key], `${rowPath}/${key}`).entries()) {
+        objectShape(report, evidence, `${rowPath}/${key}/${evidenceIndex}`, [
+          "kind", "coordinate", "root", "observedAt", "kfdPackageRoot",
+        ]);
+      }
+    }
+    for (const [witnessIndex, witness] of arrayShape(report, row.witnessBindings, `${rowPath}/witnessBindings`).entries()) {
+      objectShape(report, witness, `${rowPath}/witnessBindings/${witnessIndex}`, [
+        "decisionId", "profileId", "profileManifestPath", "profileManifestRoot",
+        "witnessCoordinate", "witnessRoot", "verifierRoot", "kfdPackageRoot",
+      ]);
+    }
+    for (const key of ["releaseBindingIds", "claims", "gaps"]) arrayShape(report, row[key], `${rowPath}/${key}`);
+  }
+  for (const [index, binding] of arrayShape(report, manifest.releaseBindings, "/releaseBindings").entries()) {
+    const bindingPath = `/releaseBindings/${index}`;
+    if (!objectShape(report, binding, bindingPath, ["id", "artifact", "releasePassport", "kfdPackageRoot"])) continue;
+    objectShape(report, binding.artifact, `${bindingPath}/artifact`, ["kind", "coordinate", "root"]);
+    objectShape(report, binding.releasePassport, `${bindingPath}/releasePassport`, ["kind", "coordinate", "root"]);
+  }
+  objectShape(report, manifest.claimBoundary, "/claimBoundary", [
+    "declarationOnly", "runtimePermission", "releaseAuthorization", "independentlyCertified", "semanticTruth",
+  ]);
+  arrayShape(report, manifest.gaps, "/gaps");
+}
+
+function verifyManifestValues(report, manifest) {
+  const valueIssue = (path, message) => issue(report, "acm-structure-invalid", path, message);
+  const nonEmpty = (value, path) => {
+    if (typeof value !== "string" || value.length === 0) valueIssue(path, "Expected a non-empty string.");
+  };
+  const root = (value, path) => {
+    if (!validRoot(value)) valueIssue(path, "Expected sha256: plus 64 lowercase hexadecimal characters.");
+  };
+  const oneOf = (value, admitted, path) => {
+    if (!admitted.includes(value)) valueIssue(path, `Unsupported value: ${String(value)}.`);
+  };
+  const stringSet = (value, path) => {
+    if (!Array.isArray(value)) return;
+    value.forEach((entry, index) => nonEmpty(entry, `${path}/${index}`));
+    if (new Set(value).size !== value.length) valueIssue(path, "Set-like string arrays must not contain duplicates.");
+  };
+  if (manifest.$schema !== undefined
+    && manifest.$schema !== "https://kfd.libkungfu.dev/schemas/kfd-adopter-conformance/manifest.schema.json") {
+    valueIssue("/$schema", "Unsupported manifest schema identifier.");
+  }
+  nonEmpty(manifest.manifestId, "/manifestId");
+  nonEmpty(manifest.adopter.id, "/adopter/id");
+  nonEmpty(manifest.adopter.scope, "/adopter/scope");
+  oneOf(manifest.adopter.artifact.kind, ["git-commit", "package", "container", "archive", "release", "other"], "/adopter/artifact/kind");
+  nonEmpty(manifest.adopter.artifact.coordinate, "/adopter/artifact/coordinate");
+  root(manifest.adopter.artifact.root, "/adopter/artifact/root");
+  root(manifest.kfdCut.package.artifactRoot, "/kfdCut/package/artifactRoot");
+  for (const key of ["schemaSetRoot", "vectorSetRoot", "verifierSetRoot", "decisionSetRoot"]) {
+    root(manifest.kfdCut[key], `/kfdCut/${key}`);
+  }
+  for (const key of ["schemaSet", "vectorSet", "verifierSet"]) {
+    manifest.kfdCut[key].forEach((surface, index) => {
+      nonEmpty(surface.path, `/kfdCut/${key}/${index}/path`);
+      root(surface.byteRoot, `/kfdCut/${key}/${index}/byteRoot`);
+    });
+  }
+  manifest.decisions.forEach((row, index) => {
+    const rowPath = `/decisions/${index}`;
+    if (!Number.isSafeInteger(row.number) || row.number < 1) valueIssue(`${rowPath}/number`, "Decision number must be a positive safe integer.");
+    oneOf(row.registryStatus, ["active", "draft", "superseded"], `${rowPath}/registryStatus`);
+    oneOf(row.state, ["adopted", "candidate", "draft-evidence", "unsupported", "not-used"], `${rowPath}/state`);
+    oneOf(row.usage, ["used", "evaluating", "unused"], `${rowPath}/usage`);
+    for (const key of ["implementationEvidence", "verificationEvidence", "negativeEvidence", "reviews"]) {
+      row[key].forEach((evidence, evidenceIndex) => {
+        const evidencePath = `${rowPath}/${key}/${evidenceIndex}`;
+        oneOf(evidence.kind, ["implementation", "verification", "negative", "review"], `${evidencePath}/kind`);
+        nonEmpty(evidence.coordinate, `${evidencePath}/coordinate`);
+        root(evidence.root, `${evidencePath}/root`);
+        if (typeof evidence.observedAt !== "string" || !Number.isFinite(Date.parse(evidence.observedAt))) {
+          valueIssue(`${evidencePath}/observedAt`, "Evidence time must be a valid date-time.");
+        }
+        root(evidence.kfdPackageRoot, `${evidencePath}/kfdPackageRoot`);
+      });
+    }
+    row.witnessBindings.forEach((witness, witnessIndex) => {
+      const witnessPath = `${rowPath}/witnessBindings/${witnessIndex}`;
+      for (const key of ["decisionId", "profileId", "profileManifestPath", "witnessCoordinate"]) nonEmpty(witness[key], `${witnessPath}/${key}`);
+      for (const key of ["profileManifestRoot", "witnessRoot", "verifierRoot", "kfdPackageRoot"]) root(witness[key], `${witnessPath}/${key}`);
+    });
+    for (const key of ["releaseBindingIds", "claims", "gaps"]) stringSet(row[key], `${rowPath}/${key}`);
+  });
+  manifest.releaseBindings.forEach((binding, index) => {
+    const bindingPath = `/releaseBindings/${index}`;
+    nonEmpty(binding.id, `${bindingPath}/id`);
+    root(binding.kfdPackageRoot, `${bindingPath}/kfdPackageRoot`);
+    for (const key of ["artifact", "releasePassport"]) {
+      oneOf(binding[key].kind, ["git-commit", "package", "container", "archive", "release", "other"], `${bindingPath}/${key}/kind`);
+      nonEmpty(binding[key].coordinate, `${bindingPath}/${key}/coordinate`);
+      root(binding[key].root, `${bindingPath}/${key}/root`);
+    }
+  });
+  stringSet(manifest.gaps, "/gaps");
+}
+
+export function inspectAdopterManifestShape(manifest) {
+  const report = verificationReport();
+  verifyManifestShape(report, manifest);
+  if (report.issues.length === 0) verifyManifestValues(report, manifest);
+  return finish(report, ["/structure"]);
+}
+
 function finish(report, checks) {
   for (const id of sortedUnique(checks)) {
     report.checks.push({
@@ -184,6 +348,9 @@ export function verifyAdopterManifest(manifest, context) {
     "/decisions",
     "/releaseBindings",
   ];
+  verifyManifestShape(report, manifest);
+  if (report.issues.length === 0) verifyManifestValues(report, manifest);
+  if (report.issues.length > 0) return finish(report, checks);
   let derived;
   try {
     derived = deriveAdopterCut(context);

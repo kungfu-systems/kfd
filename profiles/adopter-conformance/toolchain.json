@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.adopter-toolchain-inventory/v1",
+  "registryPath": "registry.json",
+  "standardsPath": "standards.json",
+  "surfaces": {
+    "schemas": [
+      {
+        "path": "schemas/kfd-adopter-conformance/manifest.schema.json",
+        "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-adopter-conformance/manifest.schema.json"
+      }
+    ],
+    "vectors": [
+      {
+        "path": "profiles/adopter-conformance/vectors.json",
+        "contract": "kfd.adopter-conformance-vectors/v1"
+      }
+    ],
+    "verifiers": [
+      {
+        "path": "scripts/adopter-conformance-contract.mjs",
+        "kind": "source"
+      },
+      {
+        "path": "scripts/warrant-evidence-verifier.mjs",
+        "kind": "source"
+      }
+    ]
+  },
+  "witnessProfiles": [
+    {
+      "id": "kfd-warrant-evidence",
+      "profileVersion": "0.2.0-alpha.1",
+      "witnessContract": "kfd.warrant-conformance-witness/v2",
+      "decisionIds": ["KFD-10"],
+      "manifestPath": "profiles/warrant-evidence/manifest.json",
+      "verifierPath": "scripts/warrant-evidence-verifier.mjs"
+    }
+  ],
+  "claimBoundary": "The toolchain declares, roots, compares, and bundles adopter evidence. It does not certify adoption, authorize runtime action or release, activate a draft KFD, or establish semantic truth."
+}

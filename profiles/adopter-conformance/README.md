@@ -8,7 +8,7 @@ confidence: high
 sensitivity: public
 evidence_grade: B
 review_state: self-reviewed
-last_reviewed: 2026-08-10
+last_reviewed: 2026-08-11
 ---
 
 # KFD Full-Cut Adopter Conformance Manifest v1
@@ -101,10 +101,32 @@ and fail-closed cases for missing, duplicate, and reordered rows, registry
 mismatch, draft widening, witness and release mismatch, root substitution,
 stale evidence, undeclared use, and claims on a `not-used` row.
 
-This JavaScript seam fixes the version 1 cross-object semantics and gives
-clean-room implementations executable vectors. It is not the complete native,
-WebAssembly, or command-line toolchain and does not make a passing report an
-adoption, release, runtime, or certification decision.
+The package CLI exposes the same seam through `kfd adopter init`, `witness`,
+`verify`, `diff`, and `bundle`. Its fixed inventory is
+`profiles/adopter-conformance/toolchain.json`; the Agent-readable invocation,
+machine-output, and recovery contract is
+`profiles/adopter-conformance/agent-brief.md`. The Node projection is complete
+for these five package-only operations. Native and WebAssembly parity is a
+separate required delivery surface and is not inferred from this JavaScript
+implementation. No passing report makes an adoption, release, runtime, or
+certification decision.
+
+## KFD self-declaration
+
+KFD dogfoods the contract at
+`profiles/adopter-conformance/adopters/kfd/manifest.json`. Its package root is
+the canonical semantic root of the exact package name/version, registry,
+standards, schema set, vector set, verifier set, and derived decision set. This
+finite cut deliberately excludes the self-manifest from its own preimage.
+The npm tarball integrity, source commit, GitHub release, and Release Passport
+remain separate publication facts and must be read back independently.
+
+The declaration covers every registry row and preserves uncertainty: active
+uses remain `candidate` without independent decision-specific assessment,
+draft evidence remains `draft-evidence`, unsupported surfaces remain explicit,
+and unused drafts remain `not-used`. `node scripts/check-kfd-self-adopter.mjs`
+reproduces all evidence roots, rejects cut and authority substitutions, and
+replays from a clean packed-package extraction without Home or network state.
 
 ## Five separate authorities
 

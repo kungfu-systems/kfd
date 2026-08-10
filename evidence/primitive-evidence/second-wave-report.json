@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.primitive-evidence-second-wave-report/v1",
+  "profile": "kfd-warrant-evidence@0.2.0-alpha.1",
+  "cut": "2026-08-11",
+  "sources": [
+    {
+      "bundleId": "buildchain-v3-delivery-warrant-2026-08-11",
+      "commit": "56aee4f72e3b6beb9eead71c8d596640313f6e7d",
+      "tree": "0a32ddd21adc87310b83cb216349dfecc145fa49",
+      "contentRoot": "sha256:084b586e798779c324b5fb68b6d2e9a9e2cc397daba1bd9f78a34d584c51f445"
+    },
+    {
+      "bundleId": "kungfu-kfx-runtime-warrant-2026-08-11",
+      "commit": "0b6e1491e92c950c1a8c71b3bb9373526f7d1571",
+      "tree": "cf9c3c7dd96f776403290c88969205f39f8b0a5c",
+      "contentRoot": "sha256:98881b2110239f54706b05da88d8a847442b82782a32805aaa6d65faa9b21808"
+    }
+  ],
+  "matrix": [
+    {"property": "purpose", "buildchain": "proved", "kfx": "proved", "combined": "proved", "falsifier": "The action can be replayed under a different purpose without changing the authority root."},
+    {"property": "issuer-holder", "buildchain": "missing", "kfx": "partial", "combined": "partial", "falsifier": "A stale or substituted holder can use the same Warrant without an independently rooted transfer."},
+    {"property": "exact-target-roots", "buildchain": "proved", "kfx": "proved", "combined": "proved", "falsifier": "Replacing source, package, Cut, proof or policy roots preserves authorization."},
+    {"property": "lease-generation-fencing", "buildchain": "proved", "kfx": "partial", "combined": "partial", "falsifier": "An expired generation or stale fence can advance the same protected state."},
+    {"property": "continuation", "buildchain": "proved", "kfx": "missing", "combined": "partial", "falsifier": "Heartbeat or continuation widens scope, changes holder, or revives an expired generation."},
+    {"property": "recovery", "buildchain": "proved", "kfx": "partial", "combined": "partial", "falsifier": "Recovery accepts the old holder/fence or rewrites the expired attempt instead of creating a successor coordinate."},
+    {"property": "revocation", "buildchain": "partial", "kfx": "partial", "combined": "partial", "falsifier": "A revocation-equivalent event remains indistinguishable from ordinary expiry, close or package cancellation."},
+    {"property": "settlement", "buildchain": "proved", "kfx": "proved", "combined": "proved", "falsifier": "The same terminal evidence can apply twice, or settlement can omit exact prior state, evidence or successor roots."},
+    {"property": "delegation", "buildchain": "missing", "kfx": "missing", "combined": "missing", "falsifier": "Derived authority widens scope or consequence while retaining the same parent root."},
+    {"property": "residual-responsibility", "buildchain": "missing", "kfx": "missing", "combined": "missing", "falsifier": "Delegation or settlement silently erases issuer/holder responsibility for residual risk."},
+    {"property": "history", "buildchain": "proved", "kfx": "proved", "combined": "proved", "falsifier": "A later recovery, revocation or settlement can rewrite or remove earlier authority-use evidence."},
+    {"property": "product-privilege-boundary", "buildchain": "proved", "kfx": "proved", "combined": "proved", "falsifier": "Merge authority, package identity, capability admission or product-system status can be synthesized from Warrant conformance."}
+  ],
+  "competingModels": [
+    {
+      "id": "capability-or-approval-token",
+      "status": "partial",
+      "lowerTotalCostWhen": "The token already preserves exact purpose, holder, target roots, attenuation, expiry, revocation, use and responsibility without reconstruction.",
+      "falsifierForWarrant": "An existing token model reproduces every decision observation and negative vector with less lifecycle ceremony and no hidden authority inference."
+    },
+    {
+      "id": "assignment-or-task-lease",
+      "status": "invalidated",
+      "lowerTotalCostWhen": "Work ownership and action authority are truly identical for the entire consequence boundary.",
+      "falsifierForWarrant": "Changing Work holder, session or scheduler state never changes the permitted action set independently of the task definition."
+    },
+    {
+      "id": "expected-old-transaction-only",
+      "status": "partial",
+      "lowerTotalCostWhen": "Single-writer CAS plus authenticated actor identity fully captures purpose, scope, expiry, revocation and residual responsibility.",
+      "falsifierForWarrant": "Every unsafe authority substitution is already rejected by transaction preconditions without a separately addressable authority coordinate."
+    },
+    {
+      "id": "event-log-reconstruction",
+      "status": "partial",
+      "lowerTotalCostWhen": "Authority at any historical cut can be reproduced without ambient policy, mutable identity, or retrospective success inference.",
+      "falsifierForWarrant": "The log derives the same admissible action set and responsibility boundary at lower total cost for every fixed vector."
+    }
+  ],
+  "outcomes": {
+    "proved": ["purpose binding", "exact target roots", "terminal settlement", "immutable history", "product privilege separation"],
+    "partial": ["portable issuer-holder identity", "portable lease/generation/fencing", "continuation", "recovery", "revocation"],
+    "missing": ["portable delegation chain", "portable residual-responsibility transfer", "independent adopter implementation"],
+    "invalidated": ["Assignment or Session is action authority", "occurrence or success retroactively authorizes action", "protected merge or product-system privilege follows from Warrant conformance", "one product implementation can activate KFD-10"]
+  },
+  "kfd10Status": "draft",
+  "activationCriteriaProved": false,
+  "qualifying": false,
+  "selfCertified": false,
+  "claimBoundary": "This retained matrix compares two product implementations and four competing models. It does not activate KFD-10, certify either product, grant runtime or release authority, or establish independent adoption."
+}

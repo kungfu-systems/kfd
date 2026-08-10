@@ -34,7 +34,7 @@
     {
       "path": "bin/kfd.mjs",
       "role": "cli",
-      "digest": "sha256:18f8f0fca98bc922061cf6acbee1fff70288abb24151b8aa8ebaece067cd79f7"
+      "digest": "sha256:21279980be205e67aa752f3b6d15cd91ac2ccc644229905b8ca40e30fce1c2b4"
     },
     {
       "path": "profiles/self-conformance/README.md",
@@ -54,7 +54,7 @@
     {
       "path": "profiles/self-conformance/extraction-manifest.json",
       "role": "extraction",
-      "digest": "sha256:4c04fe626674a9984758cec3950b2279ee52ff248fb21bf20474e97f9ffa9859"
+      "digest": "sha256:566107a357769c190bf5235050af89e4cd3016a676d64833d03f2ec180af11bc"
     },
     {
       "path": "profiles/self-conformance/implementer-guide.md",
@@ -124,7 +124,7 @@
     {
       "path": "scripts/check-self-conformance-changes.mjs",
       "role": "check",
-      "digest": "sha256:aead9a8fceea710f960c0eb32a25a6b9822ef470ddab9ba9f624993d34e07563"
+      "digest": "sha256:d795d7ad746f81aab65303fa8c7c0af055d61478bbc32172a276b37919b698d2"
     },
     {
       "path": "scripts/check-self-conformance-lifecycle.mjs",
@@ -144,12 +144,12 @@
     {
       "path": "scripts/self-conformance-lifecycle-gate.mjs",
       "role": "check",
-      "digest": "sha256:634805ae2b113a45ea61c09a749e65e441db778c556c2edf170e4133f10b7d4a"
+      "digest": "sha256:3d561230ff7872b63341308c37c82b8f2c34548922c01fc5c3916ca2d8c186d5"
     },
     {
       "path": "verifier/dist/kfd_verifier.wasm",
       "role": "verifier",
-      "digest": "sha256:d4aff1defe0226c7c97a16cb929a3c078a67617abda761a4c4bce43e3c24636e"
+      "digest": "sha256:ec577004be9f0d30ce69a60a30979767489a86fb5c47d32393a8ca76b840e9aa"
     }
   ],
   "claimBoundary": "The fixed package proves only the published Self-Conformance contract closure and vectors. It does not prove semantic truth, approval, certification, adoption, product fitness, lifecycle authority, or release authorization."

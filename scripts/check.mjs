@@ -980,7 +980,7 @@ if (
   fail("site bundle /verify page must expose the 13-entry matrix and preserve KFD-10 draft partial status");
 }
 if (
-  independentVerificationPage?.warrantEvidence?.fixedVectorCount !== 14 ||
+  independentVerificationPage?.warrantEvidence?.fixedVectorCount !== 23 ||
   independentVerificationPage?.warrantEvidence?.decisionStatus !== "draft" ||
   independentVerificationPage?.warrantEvidence?.extraction?.mode !== "published-kfd-package" ||
   independentVerificationPage?.warrantEvidence?.extraction?.offline !== true ||
@@ -988,12 +988,24 @@ if (
   independentVerificationPage?.firstWaveEvidence?.qualifying !== false ||
   independentVerificationPage?.firstWaveEvidence?.selfCertified !== false
 ) {
-  fail("site bundle /verify page must preserve package-only Warrant 14 and non-qualifying non-self-certified boundaries");
+  fail("site bundle /verify page must preserve package-only Warrant 23 and non-qualifying non-self-certified boundaries");
+}
+if (
+  independentVerificationPage?.secondWaveEvidence?.sources?.length !== 2 ||
+  independentVerificationPage?.secondWaveEvidence?.matrix?.length !== 12 ||
+  independentVerificationPage?.secondWaveEvidence?.competingModels?.length !== 4 ||
+  independentVerificationPage?.secondWaveEvidence?.kfd10Status !== "draft" ||
+  independentVerificationPage?.secondWaveEvidence?.activationCriteriaProved !== false ||
+  independentVerificationPage?.secondWaveEvidence?.qualifying !== false ||
+  independentVerificationPage?.secondWaveEvidence?.selfCertified !== false
+) {
+  fail("site bundle /verify page must preserve exact second-wave roots, matrix, competing models, and draft non-activation boundaries");
 }
 for (const assetPath of [
   "evidence/semantic-self-sufficiency/kfd-1-13.json",
   "profiles/warrant-evidence/manifest.json",
   "evidence/primitive-evidence/first-wave-report.json",
+  "evidence/primitive-evidence/second-wave-report.json",
   "schemas/kfd-semantic-self-sufficiency-matrix.schema.json",
 ]) {
   const asset = independentVerificationPage?.machineAssets?.find((entry) => entry.sourcePath === assetPath);
@@ -1625,6 +1637,9 @@ for (const [surfaceId, sourcePath] of [
   ["kfd-adopter-conformance-vectors", adopterConformanceVectorsPath],
   ["kfd-adopter-conformance-issue-codes", adopterConformanceIssueCodesPath],
   ["kfd-adopter-conformance-reference-verifier", adopterConformanceVerifierPath],
+  ["kfd-adopter-toolchain-inventory", "profiles/adopter-conformance/toolchain.json"],
+  ["kfd-adopter-toolchain-node", "scripts/adopter-toolchain.mjs"],
+  ["kfd-adopter-toolchain-agent-brief", "profiles/adopter-conformance/agent-brief.md"],
 ]) {
   if (adopterConformanceSurfaces.get(surfaceId) !== sourcePath) {
     fail(`KFD-1 surface register must weld ${surfaceId} to ${sourcePath}`);

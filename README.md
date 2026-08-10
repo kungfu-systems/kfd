@@ -27,14 +27,14 @@ qualification, and promotion separate.
 **Implement KFD without Kungfu — scaffold an adapter in Python, Rust, Node.js,
 or C++, then verify it offline.**
 
-Use the immutable `@kungfu-tech/kfd@1.0.0-alpha.59` package cut and follow the
+Use the immutable `@kungfu-tech/kfd@1.0.0-alpha.60` package cut and follow the
 package-owned [Agent Hub workflow](profiles/agent-hub/README.md) or inspect the
 complete [independent verification boundary](docs/independent-verifier.md):
 
 ```bash
-npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.59 kfd scaffold agent-hub --language python --output my-agent-hub-adapter
-npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.59 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json
-npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.59 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py --json
+npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.60 kfd scaffold agent-hub --language python --output my-agent-hub-adapter
+npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.60 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json
+npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.60 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py --json
 ```
 
 The scaffold is a deterministic, fail-closed starter: its smoke path checks
@@ -302,7 +302,7 @@ results.
 The experimental
 [Warrant Evidence profile](profiles/warrant-evidence/README.md) retains exact
 public implementation coordinates as Primitive Evidence Bundles and tests the
-KFD-10 numbered draft against 14 fixed positive and negative vectors. It keeps
+KFD-10 numbered draft against 23 fixed lifecycle vectors. It keeps
 generic candidate claims separate from Buildchain- or KFX-specific behavior,
 runs from the KFD package alone, and cannot activate or self-certify KFD-10.
 
@@ -319,7 +319,7 @@ claims inspectable and falsifiable.
 The stable [`/verify`](https://kfd.libkungfu.dev/verify) path explains how to
 implement and verify KFD from one immutable package cut. It projects the
 KFD-1 through KFD-13 semantic self-sufficiency matrix, the package-only Warrant
-verifier and its 14 fixed vectors, the first-wave evidence outcomes, and the
+verifier and its 23 fixed vectors, the retained evidence-wave outcomes, and the
 non-activation boundary. The same page declares stable machine paths so a
 reader does not have to trust the rendered explanation.
 

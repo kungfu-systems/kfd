@@ -1,0 +1,80 @@
+{
+  "$schema": "https://kfd.libkungfu.dev/schemas/kfd-evidence/primitive-evidence-bundle.schema.json",
+  "schemaVersion": 1,
+  "contract": "kfd.primitive-evidence-bundle/v1",
+  "bundleId": "buildchain-v3-delivery-warrant-2026-08-11",
+  "primitive": "Warrant",
+  "source": {
+    "repository": "https://github.com/kungfu-systems/buildchain",
+    "commit": "56aee4f72e3b6beb9eead71c8d596640313f6e7d",
+    "tree": "0a32ddd21adc87310b83cb216349dfecc145fa49",
+    "path": "packages/core/dev-delivery-warrant.js",
+    "contentRoot": "sha256:084b586e798779c324b5fb68b6d2e9a9e2cc397daba1bd9f78a34d584c51f445",
+    "public": true,
+    "retained": true
+  },
+  "pressureField": "A protected delivery candidate needs one exact, durable, non-preemptive turn whose holder can continue only through the current lease generation and fence, recover visibly after expiry, and settle once without acquiring protected-ref authority.",
+  "mapping": {
+    "decision": "KFD-10",
+    "primitive": "Warrant",
+    "kfdClauses": [
+      "decisions/KFD-10.md#rule",
+      "decisions/KFD-10.md#independence",
+      "docs/KFD-10-formal.md#derivation-and-invariants",
+      "docs/KFD-10-formal.md#transitions"
+    ]
+  },
+  "evidenceClass": "generic-candidate",
+  "candidateInvariants": [
+    "one live generation and fencing token bind one exact target cut",
+    "heartbeat continues but does not widen the current authority",
+    "expiry recovery rejects the old fence and mints a successor generation",
+    "terminal settlement binds exact evidence and expected-old state",
+    "duplicate terminal evidence is a rooted no-op rather than a second transition",
+    "final protected-ref authority remains external"
+  ],
+  "reusableTestRoots": [
+    "sha256:084b586e798779c324b5fb68b6d2e9a9e2cc397daba1bd9f78a34d584c51f445",
+    "sha256:ec3048b257f856f3806edd8c7cc06675aecceb216f918b0753ed1a9943f2cfb8"
+  ],
+  "failureOrCounterexample": "The product Warrant still does not carry a generic issuer-holder-delegation-residual-responsibility object, and queue cancellation or merge-queue behavior cannot be promoted into universal Warrant semantics.",
+  "review": {
+    "state": "self-reviewed",
+    "reviewerClass": "same-steward",
+    "evidenceRoots": [
+      "sha256:084b586e798779c324b5fb68b6d2e9a9e2cc397daba1bd9f78a34d584c51f445",
+      "sha256:ec3048b257f856f3806edd8c7cc06675aecceb216f918b0753ed1a9943f2cfb8"
+    ]
+  },
+  "lineage": {
+    "sourceEntryId": "buildchain-v3-delivery-warrant-2026-08-11",
+    "predecessorBundleIds": ["buildchain-dev-delivery-warrant-2026-08-05"]
+  },
+  "observation": {
+    "upstreamContract": "kungfu.buildchain.dev-delivery-warrant/v1",
+    "kind": "implementation-contract",
+    "summary": "Buildchain v3 binds purpose and exact candidate roots to a renewable lease generation, fencing token and expected-old state, then preserves continuation, expiry recovery, terminal evidence, duplicate no-op and queue history while leaving merge authority outside the Warrant."
+  },
+  "assessment": {
+    "verdict": "partial",
+    "genericClaims": [
+      {"id": "purpose-and-exact-cut", "status": "proved", "basis": "Candidate identity and proof roots bind one exact repository, protected base, source head and delivery purpose."},
+      {"id": "lease-generation-fencing", "status": "proved", "basis": "Selection mints one expiring generation and fencing token; heartbeat and every active mutation require both exact values."},
+      {"id": "continuation-and-non-preemption", "status": "proved", "basis": "Heartbeat extends only the current generation, while a second controller cannot advance the same expected-old state."},
+      {"id": "expiry-recovery", "status": "proved", "basis": "Recovery retains candidate age, rejects the expired fence, and requires reselection for a successor generation."},
+      {"id": "terminal-settlement", "status": "proved", "basis": "Terminal settlement binds evidence and expected-old state; exact duplicates return a rooted explicit no-op."},
+      {"id": "portable-principal-and-responsibility", "status": "missing", "basis": "The product object does not expose a generic issuer, holder, delegation chain, or residual-responsibility allocation."},
+      {"id": "independent-revocation", "status": "partial", "basis": "Expiry recovery and terminal close fence execution, while queued cancellation is not a generic revocation transition for an active Warrant."}
+    ],
+    "profileSpecificClaims": [
+      {"id": "protected-delivery-queue", "status": "proved", "basis": "The queue ref and expected-old transaction establish Buildchain-specific single-writer delivery ordering."},
+      {"id": "merge-authority", "status": "invalidated", "basis": "GitHub protected merge checks remain the final protected-ref authority and are not granted by the Delivery Warrant."}
+    ],
+    "promotion": {
+      "allowed": false,
+      "reason": "A mature product implementation supplies pressure evidence and falsifiers, not independent authority to activate or universally define KFD-10."
+    }
+  },
+  "qualifying": false,
+  "selfCertified": false
+}

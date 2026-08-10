@@ -20,6 +20,7 @@ const negativeBundles = JSON.parse(fs.readFileSync(path.join(root, "profiles/war
 const packageJson = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
 const decisionRegistry = JSON.parse(fs.readFileSync(path.join(root, "registry.json"), "utf8"));
 const coverageMatrix = JSON.parse(fs.readFileSync(path.join(root, "evidence/semantic-self-sufficiency/kfd-1-13.json"), "utf8"));
+const secondWave = JSON.parse(fs.readFileSync(path.join(root, "evidence/primitive-evidence/second-wave-report.json"), "utf8"));
 
 function sha256(bytes) {
   return `sha256:${crypto.createHash("sha256").update(bytes).digest("hex")}`;
@@ -43,11 +44,27 @@ assert.equal(manifest.contract, "kfd.warrant-evidence-profile-manifest/v1");
 assert.equal(manifest.profile.status, "experimental");
 assert.equal(manifest.warrantConformance.decisionStatus, "draft");
 assert.equal(manifest.runtimeDependencies.length, 0);
-assert.equal(manifest.primitiveEvidence.fixedBundleCount, 2);
-assert.equal(manifest.warrantConformance.fixedVectorCount, 14);
-assert.equal(registry.entries.length, 2);
-assert.equal(vectors.vectors.length, 14);
+assert.equal(manifest.profile.version, "0.2.0-alpha.1");
+assert.equal(manifest.primitiveEvidence.fixedBundleCount, 4);
+assert.equal(manifest.warrantConformance.contract, "kfd.warrant-conformance-witness/v2");
+assert.equal(manifest.warrantConformance.fixedVectorCount, 23);
+assert.equal(registry.entries.length, 4);
+assert.equal(vectors.contract, "kfd.warrant-conformance-vectors/v2");
+assert.equal(vectors.vectors.length, 23);
 assert.equal(decisionRegistry.entries.find(({ id }) => id === "KFD-10")?.status, "draft");
+assert.equal(secondWave.contract, "kfd.primitive-evidence-second-wave-report/v1");
+assert.equal(secondWave.sources.length, 2);
+assert.equal(secondWave.matrix.length, 12);
+assert.equal(secondWave.competingModels.length, 4);
+assert.equal(secondWave.kfd10Status, "draft");
+assert.equal(secondWave.activationCriteriaProved, false);
+assert.equal(secondWave.qualifying, false);
+assert.equal(secondWave.selfCertified, false);
+assert.deepEqual(
+  [...new Set(secondWave.matrix.map(({ combined }) => combined))].sort(),
+  ["missing", "partial", "proved"],
+);
+for (const row of secondWave.matrix) assert.ok(row.falsifier.length > 0, `${row.property} is missing a falsifier`);
 
 assert.equal(coverageMatrix.contract, "kfd.semantic-self-sufficiency-matrix/v1");
 assert.equal(coverageMatrix.entries.length, 13);
@@ -84,6 +101,8 @@ for (const surface of manifest.surfaces) {
 const fixturePaths = [
   "profiles/warrant-evidence/fixtures/buildchain-dev-delivery-warrant.json",
   "profiles/warrant-evidence/fixtures/kungfu-kfx-recovery-warrant.json",
+  "profiles/warrant-evidence/fixtures/buildchain-v3-delivery-warrant.json",
+  "profiles/warrant-evidence/fixtures/kungfu-kfx-runtime-warrant.json",
 ];
 for (const fixturePath of fixturePaths) {
   const bundle = JSON.parse(fs.readFileSync(path.join(root, fixturePath), "utf8"));
@@ -152,6 +171,8 @@ try {
     "schemas/kfd-evidence/primitive-evidence-bundle.schema.json",
     "schemas/kfd-10/conformance-witness.schema.json",
     "evidence/primitive-evidence/registry.json",
+    "evidence/primitive-evidence/second-wave-report.json",
+    "evidence/primitive-evidence/second-wave-report.md",
     "evidence/semantic-self-sufficiency/kfd-1-13.json",
     "schemas/kfd-semantic-self-sufficiency-matrix.schema.json",
   ]) {
@@ -182,4 +203,4 @@ try {
   fs.rmSync(temporary, { recursive: true, force: true });
 }
 
-console.log("Warrant evidence check passed: 2 exact-source bundles, 14 KFD-10 vectors, 2 adversarial bundle mutations, offline packed clean-room");
+console.log("Warrant evidence check passed: 4 exact-source bundles, 23 KFD-10 lifecycle vectors, 2 adversarial bundle mutations, second-wave matrix, offline packed clean-room");

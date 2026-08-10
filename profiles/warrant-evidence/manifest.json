@@ -3,7 +3,7 @@
   "contract": "kfd.warrant-evidence-profile-manifest/v1",
   "profile": {
     "id": "kfd-warrant-evidence",
-    "version": "0.1.0-alpha.1",
+    "version": "0.2.0-alpha.1",
     "status": "experimental",
     "authority": "profiles/warrant-evidence/README.md"
   },
@@ -11,19 +11,19 @@
     "contract": "kfd.primitive-evidence-bundle/v1",
     "schema": "schemas/kfd-evidence/primitive-evidence-bundle.schema.json",
     "registry": "evidence/primitive-evidence/registry.json",
-    "fixedBundleCount": 2,
+    "fixedBundleCount": 4,
     "fixedNegativeCount": 2
   },
   "warrantConformance": {
-    "contract": "kfd.warrant-conformance-witness/v1",
+    "contract": "kfd.warrant-conformance-witness/v2",
     "schema": "schemas/kfd-10/conformance-witness.schema.json",
     "vectors": "profiles/warrant-evidence/vectors/kfd-10.json",
-    "fixedVectorCount": 14,
+    "fixedVectorCount": 23,
     "decision": "decisions/KFD-10.md",
     "decisionStatus": "draft"
   },
   "report": {
-    "path": "evidence/primitive-evidence/first-wave-report.json",
+    "path": "evidence/primitive-evidence/second-wave-report.json",
     "verdict": "partial",
     "qualifying": false,
     "selfCertified": false
@@ -45,7 +45,7 @@
     {
       "path": "profiles/warrant-evidence/README.md",
       "role": "authority",
-      "digest": "sha256:e637f18208ea0286b67a805b8b9e9f585fbb76e71d13b8be620449168ded5c76"
+      "digest": "sha256:5820244feee3943b332fa3e609a6ba7e1aec171c2d1c27cc6b973aae3ef04f05"
     },
     {
       "path": "schemas/kfd-evidence/primitive-evidence-bundle.schema.json",
@@ -55,12 +55,12 @@
     {
       "path": "schemas/kfd-10/conformance-witness.schema.json",
       "role": "schema",
-      "digest": "sha256:b1c98264df7521e50b78f6057001182767b27e12fbf92b446d5c1c4c822c26c5"
+      "digest": "sha256:4ada3796047618fca327af8759f99e6548d93a1edf53c7a14336d480ea86d980"
     },
     {
       "path": "evidence/primitive-evidence/registry.json",
       "role": "registry",
-      "digest": "sha256:8823ed831e3fd1096aaf6185d7a1f8ffc75e464cb8e7585c612cda1b9296ded2"
+      "digest": "sha256:f600a0187fc7e3a3799a7fd3987d82b335218baac3f56fcf3ee0fb817d9f7827"
     },
     {
       "path": "profiles/warrant-evidence/fixtures/buildchain-dev-delivery-warrant.json",
@@ -73,6 +73,16 @@
       "digest": "sha256:a0cf960c19428aa726bbb236329b418415c6636ecc850c9be168cab3f86e7da7"
     },
     {
+      "path": "profiles/warrant-evidence/fixtures/buildchain-v3-delivery-warrant.json",
+      "role": "fixture",
+      "digest": "sha256:6affa2c007a26d40fb169c496bce4fb3bc3845a55a59513b2b98dab4aa92bb5c"
+    },
+    {
+      "path": "profiles/warrant-evidence/fixtures/kungfu-kfx-runtime-warrant.json",
+      "role": "fixture",
+      "digest": "sha256:c9ddff55d4edf26babccfea83edcb26c8fbd5a543d49e26b76d2c6edfbc58d45"
+    },
+    {
       "path": "profiles/warrant-evidence/fixtures/negative-cases.json",
       "role": "fixture",
       "digest": "sha256:98125ad886009d608e4b0ef33e44410e3022d7afdabed141ce4ac74b06011b74"
@@ -80,12 +90,12 @@
     {
       "path": "profiles/warrant-evidence/vectors/kfd-10.json",
       "role": "vectors",
-      "digest": "sha256:a92639d65d9b4a2ee6f2e4b620eafaeae1ec446183a235f90d45918ab26a444c"
+      "digest": "sha256:1fee02fda9fcc4bfacb4d42937ca92d248be66de03d45b20e76ceb0481ee02b2"
     },
     {
       "path": "profiles/warrant-evidence/failure-codes.json",
       "role": "reference",
-      "digest": "sha256:6c0f7eb9083243880f2e2eae8c08ef1b1d3860f6639e4083dabab2aaf3e77ee0"
+      "digest": "sha256:a2d40ac45733b0a4513d73f6c99cf09574e5e867bbd1f6f4ce0874be0ad8aa8b"
     },
     {
       "path": "profiles/warrant-evidence/extraction-manifest.json",
@@ -95,12 +105,12 @@
     {
       "path": "scripts/warrant-evidence-verifier.mjs",
       "role": "verifier",
-      "digest": "sha256:6bba9d00554bd78b7688486e406fee84f8d9fe592af9cff4766f84f34b816e16"
+      "digest": "sha256:d15753d39938aa91cc50eb9bfa91dfc013570565a2395fd35d93d4ddda10adea"
     },
     {
       "path": "docs/independent-verifier.md",
       "role": "guide",
-      "digest": "sha256:9c51991da6fc2adbf98b4328b98b70765432a0ec53566668407ca12180ef41c2"
+      "digest": "sha256:d8b843781efb3ef83bb94d0f6dcc965e05eaf2926fb6007e290296a04c332137"
     },
     {
       "path": "docs/semantic-self-sufficiency-matrix.md",
@@ -126,6 +136,16 @@
       "path": "evidence/primitive-evidence/first-wave-report.md",
       "role": "report",
       "digest": "sha256:a596be08a62367174dd5b014e2b65e3750e3c700ff66a2b398beae7eefa8d0d8"
+    },
+    {
+      "path": "evidence/primitive-evidence/second-wave-report.json",
+      "role": "report",
+      "digest": "sha256:b0ed807dee3e93f0e6764c9d7b4b67c2a7da5a7580e169c03811ec3ec0732149"
+    },
+    {
+      "path": "evidence/primitive-evidence/second-wave-report.md",
+      "role": "report",
+      "digest": "sha256:197ecba420cc8c3a5e3f55230507c82f8b9f618c251c871bb78de5ff4605287a"
     }
   ],
   "claimBoundary": "Passing the profile proves only the fixed KFD package cut and retained evidence inputs. It does not activate KFD-10, certify an adopter, authenticate an upstream repository, or prove production fitness."

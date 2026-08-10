@@ -76,7 +76,7 @@
       "promise": "Implement KFD without Kungfu — scaffold an adapter in Python, Rust, Node.js, or C++, then verify it offline.",
       "release": {
         "package": "@kungfu-tech/kfd",
-        "version": "1.0.0-alpha.59",
+        "version": "1.0.0-alpha.60",
         "anchor": "kfd.release.json",
         "immutable": true
       },
@@ -106,19 +106,19 @@
         {
           "id": "scaffold",
           "label": "Scaffold",
-          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.59 kfd scaffold agent-hub --language python --output my-agent-hub-adapter",
+          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.60 kfd scaffold agent-hub --language python --output my-agent-hub-adapter",
           "capability": "kfd scaffold agent-hub --language <cpp|node|python|rust> --output <new-directory> [--json]"
         },
         {
           "id": "test",
           "label": "Test Hub 20",
-          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.59 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json",
+          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.60 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json",
           "capability": "kfd test agent-hub --adapter <path> --output <report.json>"
         },
         {
           "id": "verify",
           "label": "Verify offline",
-          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.59 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py --json",
+          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.60 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py --json",
           "capability": "kfd verify agent-hub-report <report.json> [--adapter <path>] [--json]"
         }
       ],
@@ -366,7 +366,7 @@
         "homepagePriority": 8,
         "defaultPresentation": "independent-implementation-steps",
         "includeInFirstScreen": true,
-        "markdown": "**Implement KFD without Kungfu — scaffold an adapter in Python, Rust, Node.js,\nor C++, then verify it offline.**\n\nUse the immutable `@kungfu-tech/kfd@1.0.0-alpha.59` package cut and follow the\npackage-owned [Agent Hub workflow](profiles/agent-hub/README.md) or inspect the\ncomplete [independent verification boundary](docs/independent-verifier.md):\n\n```bash\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.59 kfd scaffold agent-hub --language python --output my-agent-hub-adapter\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.59 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.59 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py --json\n```\n\nThe scaffold is a deterministic, fail-closed starter: its smoke path checks\nonly the JSONL envelope, and implementers must replace the missing product\nsemantics before the fixed Hub 20 suite can pass.\n\nPackage acquisition is separate from offline verification. Network or a local\npackage cache may be needed to obtain the immutable package bytes; after the\npackage, report, and optional adapter bytes are present, the report verifier\nperforms no network access.\n\nThese results do not certify an implementation or prove security, production\nfitness, complete semantic coverage, KFD-10 activation, or adoption by an\nindependent organization. [Open the complete Agent Hub guide](/agent-hub/) ·\n[Inspect the verifier and coverage matrix](/verify/)"
+        "markdown": "**Implement KFD without Kungfu — scaffold an adapter in Python, Rust, Node.js,\nor C++, then verify it offline.**\n\nUse the immutable `@kungfu-tech/kfd@1.0.0-alpha.60` package cut and follow the\npackage-owned [Agent Hub workflow](profiles/agent-hub/README.md) or inspect the\ncomplete [independent verification boundary](docs/independent-verifier.md):\n\n```bash\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.60 kfd scaffold agent-hub --language python --output my-agent-hub-adapter\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.60 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.60 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py --json\n```\n\nThe scaffold is a deterministic, fail-closed starter: its smoke path checks\nonly the JSONL envelope, and implementers must replace the missing product\nsemantics before the fixed Hub 20 suite can pass.\n\nPackage acquisition is separate from offline verification. Network or a local\npackage cache may be needed to obtain the immutable package bytes; after the\npackage, report, and optional adapter bytes are present, the report verifier\nperforms no network access.\n\nThese results do not certify an implementation or prove security, production\nfitness, complete semantic coverage, KFD-10 activation, or adoption by an\nindependent organization. [Open the complete Agent Hub guide](/agent-hub/) ·\n[Inspect the verifier and coverage matrix](/verify/)"
       },
       {
         "id": "foundation-triad",
@@ -465,7 +465,7 @@
         "homepagePriority": 30,
         "defaultPresentation": "proof-path",
         "includeInFirstScreen": false,
-        "markdown": "KFDs are not a detached manifesto, but they are not a demand that readers adopt\na Kungfu product before understanding the decisions. The product-witness rule\nstarts with this package itself: `standards.json`, `schemas/`, `docs/`,\n`site/kfd-site.json`, and `scripts/check.mjs` show how KFD-1 through KFD-13 are\nexpressed as consumable interfaces for both humans and agents. These surfaces\ndo not prove every adopter or product correct; they make the KFD package's own\nclaims inspectable and falsifiable.\n\nThe stable [`/verify`](https://kfd.libkungfu.dev/verify) path explains how to\nimplement and verify KFD from one immutable package cut. It projects the\nKFD-1 through KFD-13 semantic self-sufficiency matrix, the package-only Warrant\nverifier and its 14 fixed vectors, the first-wave evidence outcomes, and the\nnon-activation boundary. The same page declares stable machine paths so a\nreader does not have to trust the rendered explanation.\n\nKFD also publishes pre-number candidates under `drafts/` and provisional live\ncases under `cases/`. A candidate registry keeps ordering hypotheses from\nsilently becoming numbered authority. A live case freezes\ncandidate genesis, points to immutable KFD-5 qualification cuts, and keeps\nsupporting and contradicting evidence open. Live cases are dogfood records,\nnot numbered decisions, accepted Primitive claims, or product capability\nannouncements.\n\nThe non-normative [KFD Under Load](docs/load-bearing-dogfood.md) baseline\nconnects those individual witnesses into one dated founding-adopter evidence\ncut. It explains what the current primitive system is already carrying, how\npressure changed the implementation, which confidence updates are warranted,\nand which generalization gates remain open. It does not replace the numbered\ndecisions or promote incomplete work into qualification.\n\nThe complete explanatory path is published at\n[`docs/foundation.md`](docs/foundation.md) and projected to the\nstable site route `/foundation`. It explains the decisions without replacing\ntheir numbered authoritative texts. The non-normative formal layer begins at\n[`docs/formal-model.md`](docs/formal-model.md), with one versioned formal\nreference under `docs/KFD-N-formal.md` and the stable route `/N/formal` for\neach decision. It makes objects, invariants, transitions, invalid states, and\nproof obligations explicit without claiming to replace the decisions or prove\nnatural-language meaning from package bytes.\n\nFor the broader witness set, use the main Kungfu product entrypoint\n(`https://kungfu.tech`) for product philosophy, and Buildchain\n(`https://buildchain.libkungfu.dev`) for release and provenance\naccountability. This registry states the commitments; the open products expose\nwhere those commitments are carried, where evidence can be inspected, and\nwhere remaining risk still belongs.\n\nRendered index: `https://kfd.libkungfu.dev` (stable machine path per entry,\ne.g. `https://kfd.libkungfu.dev/1`). This repository publishes\n`@kungfu-tech/kfd` — the decision texts plus a machine-readable\n`registry.json` — which the site consumes as its single fact source.\n\nMachine consumers that need KFD-owned standard identity should read\n`standards.json`. It is the versioned metadata surface for stable standard\nkeys, decision and formal-reference routes and SHA-256 digests, schema IDs,\nKFD-owned concept names, and machine-interface contract versions. In Node or\nTypeScript projects, import it as:\n\n```js\nimport standards from \"@kungfu-tech/kfd/standards.json\" with { type: \"json\" };\n```"
+        "markdown": "KFDs are not a detached manifesto, but they are not a demand that readers adopt\na Kungfu product before understanding the decisions. The product-witness rule\nstarts with this package itself: `standards.json`, `schemas/`, `docs/`,\n`site/kfd-site.json`, and `scripts/check.mjs` show how KFD-1 through KFD-13 are\nexpressed as consumable interfaces for both humans and agents. These surfaces\ndo not prove every adopter or product correct; they make the KFD package's own\nclaims inspectable and falsifiable.\n\nThe stable [`/verify`](https://kfd.libkungfu.dev/verify) path explains how to\nimplement and verify KFD from one immutable package cut. It projects the\nKFD-1 through KFD-13 semantic self-sufficiency matrix, the package-only Warrant\nverifier and its 23 fixed vectors, the retained evidence-wave outcomes, and the\nnon-activation boundary. The same page declares stable machine paths so a\nreader does not have to trust the rendered explanation.\n\nKFD also publishes pre-number candidates under `drafts/` and provisional live\ncases under `cases/`. A candidate registry keeps ordering hypotheses from\nsilently becoming numbered authority. A live case freezes\ncandidate genesis, points to immutable KFD-5 qualification cuts, and keeps\nsupporting and contradicting evidence open. Live cases are dogfood records,\nnot numbered decisions, accepted Primitive claims, or product capability\nannouncements.\n\nThe non-normative [KFD Under Load](docs/load-bearing-dogfood.md) baseline\nconnects those individual witnesses into one dated founding-adopter evidence\ncut. It explains what the current primitive system is already carrying, how\npressure changed the implementation, which confidence updates are warranted,\nand which generalization gates remain open. It does not replace the numbered\ndecisions or promote incomplete work into qualification.\n\nThe complete explanatory path is published at\n[`docs/foundation.md`](docs/foundation.md) and projected to the\nstable site route `/foundation`. It explains the decisions without replacing\ntheir numbered authoritative texts. The non-normative formal layer begins at\n[`docs/formal-model.md`](docs/formal-model.md), with one versioned formal\nreference under `docs/KFD-N-formal.md` and the stable route `/N/formal` for\neach decision. It makes objects, invariants, transitions, invalid states, and\nproof obligations explicit without claiming to replace the decisions or prove\nnatural-language meaning from package bytes.\n\nFor the broader witness set, use the main Kungfu product entrypoint\n(`https://kungfu.tech`) for product philosophy, and Buildchain\n(`https://buildchain.libkungfu.dev`) for release and provenance\naccountability. This registry states the commitments; the open products expose\nwhere those commitments are carried, where evidence can be inspected, and\nwhere remaining risk still belongs.\n\nRendered index: `https://kfd.libkungfu.dev` (stable machine path per entry,\ne.g. `https://kfd.libkungfu.dev/1`). This repository publishes\n`@kungfu-tech/kfd` — the decision texts plus a machine-readable\n`registry.json` — which the site consumes as its single fact source.\n\nMachine consumers that need KFD-owned standard identity should read\n`standards.json`. It is the versioned metadata surface for stable standard\nkeys, decision and formal-reference routes and SHA-256 digests, schema IDs,\nKFD-owned concept names, and machine-interface contract versions. In Node or\nTypeScript projects, import it as:\n\n```js\nimport standards from \"@kungfu-tech/kfd/standards.json\" with { type: \"json\" };\n```"
       },
       {
         "id": "agent-quickstart",
@@ -968,10 +968,10 @@
       "claimBoundary": "This matrix is an auditable repository-coverage cache. It does not change KFD lifecycle status, make a draft active, or turn a referenced adopter implementation into normative authority."
     },
     "warrantEvidence": {
-      "profile": "kfd-warrant-evidence@0.1.0-alpha.1",
+      "profile": "kfd-warrant-evidence@0.2.0-alpha.1",
       "status": "experimental",
       "manifestPath": "profiles/warrant-evidence/manifest.json",
-      "fixedVectorCount": 14,
+      "fixedVectorCount": 23,
       "decision": "decisions/KFD-10.md",
       "decisionStatus": "draft",
       "extraction": {
@@ -988,7 +988,7 @@
         "network access"
       ],
       "report": {
-        "path": "evidence/primitive-evidence/first-wave-report.json",
+        "path": "evidence/primitive-evidence/second-wave-report.json",
         "verdict": "partial",
         "qualifying": false,
         "selfCertified": false
@@ -1032,6 +1032,168 @@
         "competing authorization model comparison at lower total cost"
       ]
     },
+    "secondWaveEvidence": {
+      "sourcePath": "evidence/primitive-evidence/second-wave-report.json",
+      "cut": "2026-08-11",
+      "sources": [
+        {
+          "bundleId": "buildchain-v3-delivery-warrant-2026-08-11",
+          "commit": "56aee4f72e3b6beb9eead71c8d596640313f6e7d",
+          "tree": "0a32ddd21adc87310b83cb216349dfecc145fa49",
+          "contentRoot": "sha256:084b586e798779c324b5fb68b6d2e9a9e2cc397daba1bd9f78a34d584c51f445"
+        },
+        {
+          "bundleId": "kungfu-kfx-runtime-warrant-2026-08-11",
+          "commit": "0b6e1491e92c950c1a8c71b3bb9373526f7d1571",
+          "tree": "cf9c3c7dd96f776403290c88969205f39f8b0a5c",
+          "contentRoot": "sha256:98881b2110239f54706b05da88d8a847442b82782a32805aaa6d65faa9b21808"
+        }
+      ],
+      "matrix": [
+        {
+          "property": "purpose",
+          "buildchain": "proved",
+          "kfx": "proved",
+          "combined": "proved",
+          "falsifier": "The action can be replayed under a different purpose without changing the authority root."
+        },
+        {
+          "property": "issuer-holder",
+          "buildchain": "missing",
+          "kfx": "partial",
+          "combined": "partial",
+          "falsifier": "A stale or substituted holder can use the same Warrant without an independently rooted transfer."
+        },
+        {
+          "property": "exact-target-roots",
+          "buildchain": "proved",
+          "kfx": "proved",
+          "combined": "proved",
+          "falsifier": "Replacing source, package, Cut, proof or policy roots preserves authorization."
+        },
+        {
+          "property": "lease-generation-fencing",
+          "buildchain": "proved",
+          "kfx": "partial",
+          "combined": "partial",
+          "falsifier": "An expired generation or stale fence can advance the same protected state."
+        },
+        {
+          "property": "continuation",
+          "buildchain": "proved",
+          "kfx": "missing",
+          "combined": "partial",
+          "falsifier": "Heartbeat or continuation widens scope, changes holder, or revives an expired generation."
+        },
+        {
+          "property": "recovery",
+          "buildchain": "proved",
+          "kfx": "partial",
+          "combined": "partial",
+          "falsifier": "Recovery accepts the old holder/fence or rewrites the expired attempt instead of creating a successor coordinate."
+        },
+        {
+          "property": "revocation",
+          "buildchain": "partial",
+          "kfx": "partial",
+          "combined": "partial",
+          "falsifier": "A revocation-equivalent event remains indistinguishable from ordinary expiry, close or package cancellation."
+        },
+        {
+          "property": "settlement",
+          "buildchain": "proved",
+          "kfx": "proved",
+          "combined": "proved",
+          "falsifier": "The same terminal evidence can apply twice, or settlement can omit exact prior state, evidence or successor roots."
+        },
+        {
+          "property": "delegation",
+          "buildchain": "missing",
+          "kfx": "missing",
+          "combined": "missing",
+          "falsifier": "Derived authority widens scope or consequence while retaining the same parent root."
+        },
+        {
+          "property": "residual-responsibility",
+          "buildchain": "missing",
+          "kfx": "missing",
+          "combined": "missing",
+          "falsifier": "Delegation or settlement silently erases issuer/holder responsibility for residual risk."
+        },
+        {
+          "property": "history",
+          "buildchain": "proved",
+          "kfx": "proved",
+          "combined": "proved",
+          "falsifier": "A later recovery, revocation or settlement can rewrite or remove earlier authority-use evidence."
+        },
+        {
+          "property": "product-privilege-boundary",
+          "buildchain": "proved",
+          "kfx": "proved",
+          "combined": "proved",
+          "falsifier": "Merge authority, package identity, capability admission or product-system status can be synthesized from Warrant conformance."
+        }
+      ],
+      "competingModels": [
+        {
+          "id": "capability-or-approval-token",
+          "status": "partial",
+          "lowerTotalCostWhen": "The token already preserves exact purpose, holder, target roots, attenuation, expiry, revocation, use and responsibility without reconstruction.",
+          "falsifierForWarrant": "An existing token model reproduces every decision observation and negative vector with less lifecycle ceremony and no hidden authority inference."
+        },
+        {
+          "id": "assignment-or-task-lease",
+          "status": "invalidated",
+          "lowerTotalCostWhen": "Work ownership and action authority are truly identical for the entire consequence boundary.",
+          "falsifierForWarrant": "Changing Work holder, session or scheduler state never changes the permitted action set independently of the task definition."
+        },
+        {
+          "id": "expected-old-transaction-only",
+          "status": "partial",
+          "lowerTotalCostWhen": "Single-writer CAS plus authenticated actor identity fully captures purpose, scope, expiry, revocation and residual responsibility.",
+          "falsifierForWarrant": "Every unsafe authority substitution is already rejected by transaction preconditions without a separately addressable authority coordinate."
+        },
+        {
+          "id": "event-log-reconstruction",
+          "status": "partial",
+          "lowerTotalCostWhen": "Authority at any historical cut can be reproduced without ambient policy, mutable identity, or retrospective success inference.",
+          "falsifierForWarrant": "The log derives the same admissible action set and responsibility boundary at lower total cost for every fixed vector."
+        }
+      ],
+      "outcomes": {
+        "proved": [
+          "purpose binding",
+          "exact target roots",
+          "terminal settlement",
+          "immutable history",
+          "product privilege separation"
+        ],
+        "partial": [
+          "portable issuer-holder identity",
+          "portable lease/generation/fencing",
+          "continuation",
+          "recovery",
+          "revocation"
+        ],
+        "missing": [
+          "portable delegation chain",
+          "portable residual-responsibility transfer",
+          "independent adopter implementation"
+        ],
+        "invalidated": [
+          "Assignment or Session is action authority",
+          "occurrence or success retroactively authorizes action",
+          "protected merge or product-system privilege follows from Warrant conformance",
+          "one product implementation can activate KFD-10"
+        ]
+      },
+      "kfd10Status": "draft",
+      "activationCriteriaProved": false,
+      "qualifying": false,
+      "selfCertified": false,
+      "claimBoundary": "This retained matrix compares two product implementations and four competing models. It does not activate KFD-10, certify either product, grant runtime or release authority, or establish independent adoption."
+    },
     "machineAssets": [
       {
         "sourcePath": "evidence/semantic-self-sufficiency/kfd-1-13.json",
@@ -1045,7 +1207,7 @@
         "url": "/profiles/warrant-evidence/manifest.json",
         "mediaType": "application/json",
         "role": "verification-profile",
-        "digest": "sha256:0b541b09b7a22142a8c70d2bc06e15f75c2a0a1cb27ac8444e377740ff3360b0"
+        "digest": "sha256:1032006a7435408761916de291abc8ee239594e70d739f28c3b29b60da75a755"
       },
       {
         "sourcePath": "evidence/primitive-evidence/first-wave-report.json",
@@ -1053,6 +1215,13 @@
         "mediaType": "application/json",
         "role": "evidence-report",
         "digest": "sha256:b1f0eb6918f0bf61760a3cadf496c1edb17bab962dcd1a41e2f5875e4b4aa62e"
+      },
+      {
+        "sourcePath": "evidence/primitive-evidence/second-wave-report.json",
+        "url": "/evidence/primitive-evidence/second-wave-report.json",
+        "mediaType": "application/json",
+        "role": "evidence-report",
+        "digest": "sha256:b0ed807dee3e93f0e6764c9d7b4b67c2a7da5a7580e169c03811ec3ec0732149"
       },
       {
         "sourcePath": "schemas/kfd-semantic-self-sufficiency-matrix.schema.json",
@@ -1069,7 +1238,7 @@
       "navigationGroup": "foundation",
       "navigationOrder": 25
     },
-    "markdown": "# Implement and verify KFD independently\n\nKFD is published as an implementable protocol package, not only as rendered\nprose. A consumer can start from one immutable `@kungfu-tech/kfd` release and\ninspect the numbered decisions, schemas, fixtures, failing cases, fixed vectors,\nand offline verifiers without installing Kungfu, checking out Buildchain,\nopening an Atlas workspace, reaching a private registry, or using the network.\n\n## Start from a fixed package cut\n\nPin one immutable package version and retain its npm integrity and source\ncoordinate. The consuming site publishes those exact release coordinates in\nits `/manifest.json`; inside the package, `kfd.release.json` declares the\nanchored package cut, while the public Buildchain release Passport binds the\npublished artifact. Do not infer conformance from the mutable `latest` alias or\nfrom a rendered page alone.\n\nThe machine-readable\n[`KFD-1 through KFD-13 semantic self-sufficiency matrix`](../evidence/semantic-self-sufficiency/kfd-1-13.json)\nis the implementation map. For every numbered decision it names the normative\nsource, available schemas, fixtures, failure tests, offline verifiers, current\ncoverage, and explicit gaps. Empty fields and `partial` or `gap` coverage are\nwork still owed; they are not silently filled by Kungfu product behavior.\n\nAn independent implementation can therefore proceed decision by decision:\n\n1. read the numbered decision as authority;\n2. implement the declared schemas and invariants without importing product\n   internals;\n3. run the packaged positive, negative, and fixed-vector evidence where it\n   exists;\n4. preserve the matrix's stated gaps and lifecycle status in its own claim;\n5. publish an adopter witness without asking the KFD package to self-certify it.\n\n## Run the package-only verifier\n\nFor the experimental Warrant evidence profile:\n\n```sh\nnode bin/kfd.mjs verify warrant-evidence \\\n  profiles/warrant-evidence/fixtures/buildchain-dev-delivery-warrant.json --json\n\nnode scripts/check-warrant-evidence.mjs\n```\n\nThe first command verifies a Primitive Evidence Bundle against the packaged\nregistry. The second checks both retained bundles, all fixed KFD-10 vectors,\nmanifest digests, forbidden dependency boundaries, and a freshly packed npm\nartifact in a temporary clean-room directory.\n\nThe packaged\n[`Warrant Evidence manifest`](../profiles/warrant-evidence/manifest.json)\nfixes 14 positive and negative vectors, declares zero runtime dependencies, and\nforbids product checkouts, private sources, and network access. The\n[`first-wave report`](../evidence/primitive-evidence/first-wave-report.json)\nseparates proved, partial, missing, and invalidated outcomes so an implementer\ncan reproduce the current evidence without inheriting its conclusions.\n\n## What a pass proves\n\n- the named JSON contract and exact public source coordinate are structurally\n  valid and present in the packaged evidence registry;\n- generic and product-profile claims remain separately evidence-graded;\n- the bundle cannot set qualification, certification, or promotion authority;\n- the fixed experimental KFD-10 vectors produce their registered outcomes;\n- the package contains all required inputs and runs the verifier offline.\n\n## What a pass does not prove\n\nA pass does not activate KFD-10, certify a product, authenticate the upstream\nrepository, execute upstream code, establish legal authority, prove security\nor production fitness, or show independent adoption beyond the packaged\nclean-room harness.\n\nKFD-10 remains `draft`. The current Warrant report remains `partial`, with\n`qualifying: false` and `selfCertified: false`. The package demonstrates a\nbounded independent verification method; only separately accountable adopter\nevidence can demonstrate an independent implementation.\n\nThe Rust/WASM verifier remains authoritative for its registered kinds. The\nWarrant evidence verifier is a separate public JavaScript profile surface and\ndoes not silently widen the Rust/WASM inventory.",
+    "markdown": "# Implement and verify KFD independently\n\nKFD is published as an implementable protocol package, not only as rendered\nprose. A consumer can start from one immutable `@kungfu-tech/kfd` release and\ninspect the numbered decisions, schemas, fixtures, failing cases, fixed vectors,\nand offline verifiers without installing Kungfu, checking out Buildchain,\nopening an Atlas workspace, reaching a private registry, or using the network.\n\n## Start from a fixed package cut\n\nPin one immutable package version and retain its npm integrity and source\ncoordinate. The consuming site publishes those exact release coordinates in\nits `/manifest.json`; inside the package, `kfd.release.json` declares the\nanchored package cut, while the public Buildchain release Passport binds the\npublished artifact. Do not infer conformance from the mutable `latest` alias or\nfrom a rendered page alone.\n\nThe machine-readable\n[`KFD-1 through KFD-13 semantic self-sufficiency matrix`](../evidence/semantic-self-sufficiency/kfd-1-13.json)\nis the implementation map. For every numbered decision it names the normative\nsource, available schemas, fixtures, failure tests, offline verifiers, current\ncoverage, and explicit gaps. Empty fields and `partial` or `gap` coverage are\nwork still owed; they are not silently filled by Kungfu product behavior.\n\nAn independent implementation can therefore proceed decision by decision:\n\n1. read the numbered decision as authority;\n2. implement the declared schemas and invariants without importing product\n   internals;\n3. run the packaged positive, negative, and fixed-vector evidence where it\n   exists;\n4. preserve the matrix's stated gaps and lifecycle status in its own claim;\n5. publish an adopter witness without asking the KFD package to self-certify it.\n\n## Run the package-only verifier\n\nFor the experimental Warrant evidence profile:\n\n```sh\nnode bin/kfd.mjs verify warrant-evidence \\\n  profiles/warrant-evidence/fixtures/buildchain-dev-delivery-warrant.json --json\n\nnode scripts/check-warrant-evidence.mjs\n```\n\nThe first command verifies a Primitive Evidence Bundle against the packaged\nregistry. The second checks all four retained bundles, all fixed KFD-10 vectors,\nmanifest digests, forbidden dependency boundaries, and a freshly packed npm\nartifact in a temporary clean-room directory.\n\nThe packaged\n[`Warrant Evidence manifest`](../profiles/warrant-evidence/manifest.json)\nfixes 23 positive and negative lifecycle vectors, declares zero runtime dependencies, and\nforbids product checkouts, private sources, and network access. The\n[`first-wave report`](../evidence/primitive-evidence/first-wave-report.json)\nseparates proved, partial, missing, and invalidated outcomes so an implementer\ncan reproduce the current evidence without inheriting its conclusions.\nThe [`second-wave report`](../evidence/primitive-evidence/second-wave-report.json)\nadds current protected Buildchain v3 and Kungfu KFX roots, competing models,\nand a falsifier for every evidence-matrix row.\n\n## What a pass proves\n\n- the named JSON contract and exact public source coordinate are structurally\n  valid and present in the packaged evidence registry;\n- generic and product-profile claims remain separately evidence-graded;\n- the bundle cannot set qualification, certification, or promotion authority;\n- the fixed experimental KFD-10 vectors produce their registered outcomes;\n- the package contains all required inputs and runs the verifier offline.\n\n## What a pass does not prove\n\nA pass does not activate KFD-10, certify a product, authenticate the upstream\nrepository, execute upstream code, establish legal authority, prove security\nor production fitness, or show independent adoption beyond the packaged\nclean-room harness.\n\nKFD-10 remains `draft`. The current Warrant report remains `partial`. Its\nsecond wave retains exact Buildchain v3 and Kungfu KFX source cuts plus a\ncompeting-model and falsifier matrix, with `qualifying: false` and\n`selfCertified: false`. The package demonstrates a\nbounded independent verification method; only separately accountable adopter\nevidence can demonstrate an independent implementation.\n\nThe Rust/WASM verifier remains authoritative for its registered kinds. The\nWarrant evidence verifier is a separate public JavaScript profile surface and\ndoes not silently widen the Rust/WASM inventory.",
     "rendererContract": {
       "showReleaseIdentity": true,
       "showCommands": true,
@@ -1836,7 +2005,7 @@
         "url": "/profiles/self-conformance/manifest.json",
         "mediaType": "application/json",
         "role": "profile-manifest",
-        "digest": "sha256:b78f0b1f08a690a5885407b611344153dee5f8f79bae920e192e5e9fef7ffa6a"
+        "digest": "sha256:9b17a754adefa197e0b05b82531cc22e16ebbd3ea39e5b9bfeb788c3de7a0b6c"
       },
       {
         "sourcePath": "profiles/self-conformance/lifecycle-gates.json",
@@ -1892,7 +2061,7 @@
         "url": "/profiles/self-conformance/history/manifest.json",
         "mediaType": "application/json",
         "role": "historical-manifest",
-        "digest": "sha256:9c43a3eb944c047fef7e66537cf354fc2168aeed0ec6600a4831983c1bf562d3"
+        "digest": "sha256:ef73988d345e2f5d66d58cc57b23cc9cfc6f870f8c116ea19df828981e4a3ffc"
       }
     ],
     "rendering": {
@@ -2310,10 +2479,10 @@
         "claimBoundary": "This matrix is an auditable repository-coverage cache. It does not change KFD lifecycle status, make a draft active, or turn a referenced adopter implementation into normative authority."
       },
       "warrantEvidence": {
-        "profile": "kfd-warrant-evidence@0.1.0-alpha.1",
+        "profile": "kfd-warrant-evidence@0.2.0-alpha.1",
         "status": "experimental",
         "manifestPath": "profiles/warrant-evidence/manifest.json",
-        "fixedVectorCount": 14,
+        "fixedVectorCount": 23,
         "decision": "decisions/KFD-10.md",
         "decisionStatus": "draft",
         "extraction": {
@@ -2330,7 +2499,7 @@
           "network access"
         ],
         "report": {
-          "path": "evidence/primitive-evidence/first-wave-report.json",
+          "path": "evidence/primitive-evidence/second-wave-report.json",
           "verdict": "partial",
           "qualifying": false,
           "selfCertified": false
@@ -2374,6 +2543,168 @@
           "competing authorization model comparison at lower total cost"
         ]
       },
+      "secondWaveEvidence": {
+        "sourcePath": "evidence/primitive-evidence/second-wave-report.json",
+        "cut": "2026-08-11",
+        "sources": [
+          {
+            "bundleId": "buildchain-v3-delivery-warrant-2026-08-11",
+            "commit": "56aee4f72e3b6beb9eead71c8d596640313f6e7d",
+            "tree": "0a32ddd21adc87310b83cb216349dfecc145fa49",
+            "contentRoot": "sha256:084b586e798779c324b5fb68b6d2e9a9e2cc397daba1bd9f78a34d584c51f445"
+          },
+          {
+            "bundleId": "kungfu-kfx-runtime-warrant-2026-08-11",
+            "commit": "0b6e1491e92c950c1a8c71b3bb9373526f7d1571",
+            "tree": "cf9c3c7dd96f776403290c88969205f39f8b0a5c",
+            "contentRoot": "sha256:98881b2110239f54706b05da88d8a847442b82782a32805aaa6d65faa9b21808"
+          }
+        ],
+        "matrix": [
+          {
+            "property": "purpose",
+            "buildchain": "proved",
+            "kfx": "proved",
+            "combined": "proved",
+            "falsifier": "The action can be replayed under a different purpose without changing the authority root."
+          },
+          {
+            "property": "issuer-holder",
+            "buildchain": "missing",
+            "kfx": "partial",
+            "combined": "partial",
+            "falsifier": "A stale or substituted holder can use the same Warrant without an independently rooted transfer."
+          },
+          {
+            "property": "exact-target-roots",
+            "buildchain": "proved",
+            "kfx": "proved",
+            "combined": "proved",
+            "falsifier": "Replacing source, package, Cut, proof or policy roots preserves authorization."
+          },
+          {
+            "property": "lease-generation-fencing",
+            "buildchain": "proved",
+            "kfx": "partial",
+            "combined": "partial",
+            "falsifier": "An expired generation or stale fence can advance the same protected state."
+          },
+          {
+            "property": "continuation",
+            "buildchain": "proved",
+            "kfx": "missing",
+            "combined": "partial",
+            "falsifier": "Heartbeat or continuation widens scope, changes holder, or revives an expired generation."
+          },
+          {
+            "property": "recovery",
+            "buildchain": "proved",
+            "kfx": "partial",
+            "combined": "partial",
+            "falsifier": "Recovery accepts the old holder/fence or rewrites the expired attempt instead of creating a successor coordinate."
+          },
+          {
+            "property": "revocation",
+            "buildchain": "partial",
+            "kfx": "partial",
+            "combined": "partial",
+            "falsifier": "A revocation-equivalent event remains indistinguishable from ordinary expiry, close or package cancellation."
+          },
+          {
+            "property": "settlement",
+            "buildchain": "proved",
+            "kfx": "proved",
+            "combined": "proved",
+            "falsifier": "The same terminal evidence can apply twice, or settlement can omit exact prior state, evidence or successor roots."
+          },
+          {
+            "property": "delegation",
+            "buildchain": "missing",
+            "kfx": "missing",
+            "combined": "missing",
+            "falsifier": "Derived authority widens scope or consequence while retaining the same parent root."
+          },
+          {
+            "property": "residual-responsibility",
+            "buildchain": "missing",
+            "kfx": "missing",
+            "combined": "missing",
+            "falsifier": "Delegation or settlement silently erases issuer/holder responsibility for residual risk."
+          },
+          {
+            "property": "history",
+            "buildchain": "proved",
+            "kfx": "proved",
+            "combined": "proved",
+            "falsifier": "A later recovery, revocation or settlement can rewrite or remove earlier authority-use evidence."
+          },
+          {
+            "property": "product-privilege-boundary",
+            "buildchain": "proved",
+            "kfx": "proved",
+            "combined": "proved",
+            "falsifier": "Merge authority, package identity, capability admission or product-system status can be synthesized from Warrant conformance."
+          }
+        ],
+        "competingModels": [
+          {
+            "id": "capability-or-approval-token",
+            "status": "partial",
+            "lowerTotalCostWhen": "The token already preserves exact purpose, holder, target roots, attenuation, expiry, revocation, use and responsibility without reconstruction.",
+            "falsifierForWarrant": "An existing token model reproduces every decision observation and negative vector with less lifecycle ceremony and no hidden authority inference."
+          },
+          {
+            "id": "assignment-or-task-lease",
+            "status": "invalidated",
+            "lowerTotalCostWhen": "Work ownership and action authority are truly identical for the entire consequence boundary.",
+            "falsifierForWarrant": "Changing Work holder, session or scheduler state never changes the permitted action set independently of the task definition."
+          },
+          {
+            "id": "expected-old-transaction-only",
+            "status": "partial",
+            "lowerTotalCostWhen": "Single-writer CAS plus authenticated actor identity fully captures purpose, scope, expiry, revocation and residual responsibility.",
+            "falsifierForWarrant": "Every unsafe authority substitution is already rejected by transaction preconditions without a separately addressable authority coordinate."
+          },
+          {
+            "id": "event-log-reconstruction",
+            "status": "partial",
+            "lowerTotalCostWhen": "Authority at any historical cut can be reproduced without ambient policy, mutable identity, or retrospective success inference.",
+            "falsifierForWarrant": "The log derives the same admissible action set and responsibility boundary at lower total cost for every fixed vector."
+          }
+        ],
+        "outcomes": {
+          "proved": [
+            "purpose binding",
+            "exact target roots",
+            "terminal settlement",
+            "immutable history",
+            "product privilege separation"
+          ],
+          "partial": [
+            "portable issuer-holder identity",
+            "portable lease/generation/fencing",
+            "continuation",
+            "recovery",
+            "revocation"
+          ],
+          "missing": [
+            "portable delegation chain",
+            "portable residual-responsibility transfer",
+            "independent adopter implementation"
+          ],
+          "invalidated": [
+            "Assignment or Session is action authority",
+            "occurrence or success retroactively authorizes action",
+            "protected merge or product-system privilege follows from Warrant conformance",
+            "one product implementation can activate KFD-10"
+          ]
+        },
+        "kfd10Status": "draft",
+        "activationCriteriaProved": false,
+        "qualifying": false,
+        "selfCertified": false,
+        "claimBoundary": "This retained matrix compares two product implementations and four competing models. It does not activate KFD-10, certify either product, grant runtime or release authority, or establish independent adoption."
+      },
       "machineAssets": [
         {
           "sourcePath": "evidence/semantic-self-sufficiency/kfd-1-13.json",
@@ -2387,7 +2718,7 @@
           "url": "/profiles/warrant-evidence/manifest.json",
           "mediaType": "application/json",
           "role": "verification-profile",
-          "digest": "sha256:0b541b09b7a22142a8c70d2bc06e15f75c2a0a1cb27ac8444e377740ff3360b0"
+          "digest": "sha256:1032006a7435408761916de291abc8ee239594e70d739f28c3b29b60da75a755"
         },
         {
           "sourcePath": "evidence/primitive-evidence/first-wave-report.json",
@@ -2395,6 +2726,13 @@
           "mediaType": "application/json",
           "role": "evidence-report",
           "digest": "sha256:b1f0eb6918f0bf61760a3cadf496c1edb17bab962dcd1a41e2f5875e4b4aa62e"
+        },
+        {
+          "sourcePath": "evidence/primitive-evidence/second-wave-report.json",
+          "url": "/evidence/primitive-evidence/second-wave-report.json",
+          "mediaType": "application/json",
+          "role": "evidence-report",
+          "digest": "sha256:b0ed807dee3e93f0e6764c9d7b4b67c2a7da5a7580e169c03811ec3ec0732149"
         },
         {
           "sourcePath": "schemas/kfd-semantic-self-sufficiency-matrix.schema.json",
@@ -2411,7 +2749,7 @@
         "navigationGroup": "foundation",
         "navigationOrder": 25
       },
-      "markdown": "# Implement and verify KFD independently\n\nKFD is published as an implementable protocol package, not only as rendered\nprose. A consumer can start from one immutable `@kungfu-tech/kfd` release and\ninspect the numbered decisions, schemas, fixtures, failing cases, fixed vectors,\nand offline verifiers without installing Kungfu, checking out Buildchain,\nopening an Atlas workspace, reaching a private registry, or using the network.\n\n## Start from a fixed package cut\n\nPin one immutable package version and retain its npm integrity and source\ncoordinate. The consuming site publishes those exact release coordinates in\nits `/manifest.json`; inside the package, `kfd.release.json` declares the\nanchored package cut, while the public Buildchain release Passport binds the\npublished artifact. Do not infer conformance from the mutable `latest` alias or\nfrom a rendered page alone.\n\nThe machine-readable\n[`KFD-1 through KFD-13 semantic self-sufficiency matrix`](../evidence/semantic-self-sufficiency/kfd-1-13.json)\nis the implementation map. For every numbered decision it names the normative\nsource, available schemas, fixtures, failure tests, offline verifiers, current\ncoverage, and explicit gaps. Empty fields and `partial` or `gap` coverage are\nwork still owed; they are not silently filled by Kungfu product behavior.\n\nAn independent implementation can therefore proceed decision by decision:\n\n1. read the numbered decision as authority;\n2. implement the declared schemas and invariants without importing product\n   internals;\n3. run the packaged positive, negative, and fixed-vector evidence where it\n   exists;\n4. preserve the matrix's stated gaps and lifecycle status in its own claim;\n5. publish an adopter witness without asking the KFD package to self-certify it.\n\n## Run the package-only verifier\n\nFor the experimental Warrant evidence profile:\n\n```sh\nnode bin/kfd.mjs verify warrant-evidence \\\n  profiles/warrant-evidence/fixtures/buildchain-dev-delivery-warrant.json --json\n\nnode scripts/check-warrant-evidence.mjs\n```\n\nThe first command verifies a Primitive Evidence Bundle against the packaged\nregistry. The second checks both retained bundles, all fixed KFD-10 vectors,\nmanifest digests, forbidden dependency boundaries, and a freshly packed npm\nartifact in a temporary clean-room directory.\n\nThe packaged\n[`Warrant Evidence manifest`](../profiles/warrant-evidence/manifest.json)\nfixes 14 positive and negative vectors, declares zero runtime dependencies, and\nforbids product checkouts, private sources, and network access. The\n[`first-wave report`](../evidence/primitive-evidence/first-wave-report.json)\nseparates proved, partial, missing, and invalidated outcomes so an implementer\ncan reproduce the current evidence without inheriting its conclusions.\n\n## What a pass proves\n\n- the named JSON contract and exact public source coordinate are structurally\n  valid and present in the packaged evidence registry;\n- generic and product-profile claims remain separately evidence-graded;\n- the bundle cannot set qualification, certification, or promotion authority;\n- the fixed experimental KFD-10 vectors produce their registered outcomes;\n- the package contains all required inputs and runs the verifier offline.\n\n## What a pass does not prove\n\nA pass does not activate KFD-10, certify a product, authenticate the upstream\nrepository, execute upstream code, establish legal authority, prove security\nor production fitness, or show independent adoption beyond the packaged\nclean-room harness.\n\nKFD-10 remains `draft`. The current Warrant report remains `partial`, with\n`qualifying: false` and `selfCertified: false`. The package demonstrates a\nbounded independent verification method; only separately accountable adopter\nevidence can demonstrate an independent implementation.\n\nThe Rust/WASM verifier remains authoritative for its registered kinds. The\nWarrant evidence verifier is a separate public JavaScript profile surface and\ndoes not silently widen the Rust/WASM inventory.",
+      "markdown": "# Implement and verify KFD independently\n\nKFD is published as an implementable protocol package, not only as rendered\nprose. A consumer can start from one immutable `@kungfu-tech/kfd` release and\ninspect the numbered decisions, schemas, fixtures, failing cases, fixed vectors,\nand offline verifiers without installing Kungfu, checking out Buildchain,\nopening an Atlas workspace, reaching a private registry, or using the network.\n\n## Start from a fixed package cut\n\nPin one immutable package version and retain its npm integrity and source\ncoordinate. The consuming site publishes those exact release coordinates in\nits `/manifest.json`; inside the package, `kfd.release.json` declares the\nanchored package cut, while the public Buildchain release Passport binds the\npublished artifact. Do not infer conformance from the mutable `latest` alias or\nfrom a rendered page alone.\n\nThe machine-readable\n[`KFD-1 through KFD-13 semantic self-sufficiency matrix`](../evidence/semantic-self-sufficiency/kfd-1-13.json)\nis the implementation map. For every numbered decision it names the normative\nsource, available schemas, fixtures, failure tests, offline verifiers, current\ncoverage, and explicit gaps. Empty fields and `partial` or `gap` coverage are\nwork still owed; they are not silently filled by Kungfu product behavior.\n\nAn independent implementation can therefore proceed decision by decision:\n\n1. read the numbered decision as authority;\n2. implement the declared schemas and invariants without importing product\n   internals;\n3. run the packaged positive, negative, and fixed-vector evidence where it\n   exists;\n4. preserve the matrix's stated gaps and lifecycle status in its own claim;\n5. publish an adopter witness without asking the KFD package to self-certify it.\n\n## Run the package-only verifier\n\nFor the experimental Warrant evidence profile:\n\n```sh\nnode bin/kfd.mjs verify warrant-evidence \\\n  profiles/warrant-evidence/fixtures/buildchain-dev-delivery-warrant.json --json\n\nnode scripts/check-warrant-evidence.mjs\n```\n\nThe first command verifies a Primitive Evidence Bundle against the packaged\nregistry. The second checks all four retained bundles, all fixed KFD-10 vectors,\nmanifest digests, forbidden dependency boundaries, and a freshly packed npm\nartifact in a temporary clean-room directory.\n\nThe packaged\n[`Warrant Evidence manifest`](../profiles/warrant-evidence/manifest.json)\nfixes 23 positive and negative lifecycle vectors, declares zero runtime dependencies, and\nforbids product checkouts, private sources, and network access. The\n[`first-wave report`](../evidence/primitive-evidence/first-wave-report.json)\nseparates proved, partial, missing, and invalidated outcomes so an implementer\ncan reproduce the current evidence without inheriting its conclusions.\nThe [`second-wave report`](../evidence/primitive-evidence/second-wave-report.json)\nadds current protected Buildchain v3 and Kungfu KFX roots, competing models,\nand a falsifier for every evidence-matrix row.\n\n## What a pass proves\n\n- the named JSON contract and exact public source coordinate are structurally\n  valid and present in the packaged evidence registry;\n- generic and product-profile claims remain separately evidence-graded;\n- the bundle cannot set qualification, certification, or promotion authority;\n- the fixed experimental KFD-10 vectors produce their registered outcomes;\n- the package contains all required inputs and runs the verifier offline.\n\n## What a pass does not prove\n\nA pass does not activate KFD-10, certify a product, authenticate the upstream\nrepository, execute upstream code, establish legal authority, prove security\nor production fitness, or show independent adoption beyond the packaged\nclean-room harness.\n\nKFD-10 remains `draft`. The current Warrant report remains `partial`. Its\nsecond wave retains exact Buildchain v3 and Kungfu KFX source cuts plus a\ncompeting-model and falsifier matrix, with `qualifying: false` and\n`selfCertified: false`. The package demonstrates a\nbounded independent verification method; only separately accountable adopter\nevidence can demonstrate an independent implementation.\n\nThe Rust/WASM verifier remains authoritative for its registered kinds. The\nWarrant evidence verifier is a separate public JavaScript profile surface and\ndoes not silently widen the Rust/WASM inventory.",
       "rendererContract": {
         "showReleaseIdentity": true,
         "showCommands": true,
@@ -3178,7 +3516,7 @@
           "url": "/profiles/self-conformance/manifest.json",
           "mediaType": "application/json",
           "role": "profile-manifest",
-          "digest": "sha256:b78f0b1f08a690a5885407b611344153dee5f8f79bae920e192e5e9fef7ffa6a"
+          "digest": "sha256:9b17a754adefa197e0b05b82531cc22e16ebbd3ea39e5b9bfeb788c3de7a0b6c"
         },
         {
           "sourcePath": "profiles/self-conformance/lifecycle-gates.json",
@@ -3234,7 +3572,7 @@
           "url": "/profiles/self-conformance/history/manifest.json",
           "mediaType": "application/json",
           "role": "historical-manifest",
-          "digest": "sha256:9c43a3eb944c047fef7e66537cf354fc2168aeed0ec6600a4831983c1bf562d3"
+          "digest": "sha256:ef73988d345e2f5d66d58cc57b23cc9cfc6f870f8c116ea19df828981e4a3ffc"
         }
       ],
       "rendering": {
@@ -8133,7 +8471,7 @@
           "formalModelVersion": 1,
           "formalModelStatus": "experimental",
           "authorityPath": "decisions/KFD-10.md",
-          "sha256": "7a98571e9dc8b302156292173896a188f469cf6161ea0144701f1f0b70a2f98d",
+          "sha256": "59da2ef4dc8aa8da297bd26161b9208ac988d0bb59b27cdc06f5ceb4773d510c",
           "title": "KFD-10 formal reference"
         },
         {

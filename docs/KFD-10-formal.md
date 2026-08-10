@@ -68,8 +68,8 @@ reducing unsafe inference or repeated investigation.
 ## Experimental conformance profile
 
 The versioned, non-qualifying
-[`kfd-10-warrant@0.1.0-alpha.1`](../profiles/warrant-evidence/README.md)
+[`kfd-10-warrant@0.2.0-alpha.1`](../profiles/warrant-evidence/README.md)
 profile makes W1 through W6 and the lifecycle boundaries above testable from
-the KFD package alone. Its witness schema, 14 fixed vectors, failure codes, and
+the KFD package alone. Its witness schema, 23 fixed vectors, failure codes, and
 Primitive Evidence Bundles are experimental conformance assets, not normative
 additions to this formal reference and not evidence that KFD-10 is active.
