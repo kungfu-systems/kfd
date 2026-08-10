@@ -39,6 +39,11 @@ const candidateRegistrySchema = JSON.parse(readFileSync(candidateRegistrySchemaP
 const releaseImpact = JSON.parse(readFileSync("release-impact.json", "utf8"));
 const adopterConformanceSchemaPath = "schemas/kfd-adopter-conformance/manifest.schema.json";
 const adopterConformanceSchema = JSON.parse(readFileSync(adopterConformanceSchemaPath, "utf8"));
+const adopterConformanceIssueCodesPath = "profiles/adopter-conformance/issue-codes.json";
+const adopterConformanceIssueCodes = JSON.parse(readFileSync(adopterConformanceIssueCodesPath, "utf8"));
+const adopterConformanceVectorsPath = "profiles/adopter-conformance/vectors.json";
+const adopterConformanceVectors = JSON.parse(readFileSync(adopterConformanceVectorsPath, "utf8"));
+const adopterConformanceVerifierPath = "scripts/adopter-conformance-contract.mjs";
 const foundationRevisionPath = "docs/foundation-revision-2026-07-21-decision-admission.json";
 const foundationRevision = JSON.parse(readFileSync(foundationRevisionPath, "utf8"));
 const packageJson = JSON.parse(readFileSync("package.json", "utf8"));
@@ -162,8 +167,35 @@ for (const state of ["adopted", "candidate", "draft-evidence", "unsupported", "n
   }
 }
 if (packageJson.exports?.["./adopter-conformance/README.md"] !== "./profiles/adopter-conformance/README.md" ||
-    packageJson.exports?.["./adopter-conformance/manifest.schema.json"] !== `./${adopterConformanceSchemaPath}`) {
-  fail("package.json must expose the adopter conformance authority and manifest schema");
+    packageJson.exports?.["./adopter-conformance/manifest.schema.json"] !== `./${adopterConformanceSchemaPath}` ||
+    packageJson.exports?.["./adopter-conformance/issue-codes.json"] !== `./${adopterConformanceIssueCodesPath}` ||
+    packageJson.exports?.["./adopter-conformance/vectors.json"] !== `./${adopterConformanceVectorsPath}` ||
+    packageJson.exports?.["./adopter-conformance/verifier"] !== `./${adopterConformanceVerifierPath}`) {
+  fail("package.json must expose the adopter conformance authority, schema, diagnostics, vectors, and verifier seam");
+}
+if (adopterConformanceIssueCodes.contract !== "kfd.adopter-conformance-issue-codes/v1" ||
+    adopterConformanceVectors.contract !== "kfd.adopter-conformance-vectors/v1" ||
+    adopterConformanceVectors.profile !== "kfd.adopter-conformance-manifest/v1") {
+  fail("adopter conformance diagnostics and vectors must select the exact version 1 contract");
+}
+const adopterConformanceCaseIds = new Set(adopterConformanceVectors.cases?.map((entry) => entry.id));
+for (const requiredCase of [
+  "positive-full-cut",
+  "negative-missing-row",
+  "negative-duplicate-row",
+  "negative-row-reorder",
+  "negative-registry-mismatch",
+  "negative-draft-widening",
+  "negative-witness-mismatch",
+  "negative-release-mismatch",
+  "negative-root-substitution",
+  "negative-stale-evidence",
+  "negative-undeclared-use",
+  "negative-not-used-claim",
+]) {
+  if (!adopterConformanceCaseIds.has(requiredCase)) {
+    fail(`adopter conformance vectors must retain ${requiredCase}`);
+  }
 }
 if (!packageJson.files?.includes(activationContractsPath) || packageJson.exports?.[`./${activationContractsPath}`] !== `./${activationContractsPath}`) {
   fail("package.json must publish the activation-contracts discovery manifest");
@@ -1583,6 +1615,20 @@ if (kfd1?.schemaIds?.adopterConformanceManifest !== adopterConformanceSchema.$id
     kfd1?.schemaPaths?.adopterConformanceManifest !== adopterConformanceSchemaPath ||
     kfd1?.interfaces?.adopterConformanceManifest?.contract !== "kfd.adopter-conformance-manifest/v1") {
   fail("KFD-1 standards metadata must weld the adopter conformance manifest interface");
+}
+const adopterConformanceSurfaces = new Map(
+  kfd1?.surfaceRegister?.surfaces?.map((entry) => [entry.id, entry.sourcePath]),
+);
+for (const [surfaceId, sourcePath] of [
+  ["kfd-adopter-conformance-authority", "profiles/adopter-conformance/README.md"],
+  ["kfd-adopter-conformance-manifest-schema", adopterConformanceSchemaPath],
+  ["kfd-adopter-conformance-vectors", adopterConformanceVectorsPath],
+  ["kfd-adopter-conformance-issue-codes", adopterConformanceIssueCodesPath],
+  ["kfd-adopter-conformance-reference-verifier", adopterConformanceVerifierPath],
+]) {
+  if (adopterConformanceSurfaces.get(surfaceId) !== sourcePath) {
+    fail(`KFD-1 surface register must weld ${surfaceId} to ${sourcePath}`);
+  }
 }
 const expectedKfd1SurfaceClasses = ["integration-time", "cross-time"];
 const expectedKfd1ImpactClasses = ["breaking", "additive", "none", "unclassifiable"];
