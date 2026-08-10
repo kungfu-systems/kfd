@@ -1,9 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 import fs from "node:fs";
-import os from "node:os";
 import path from "node:path";
 import process from "node:process";
-import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import {
   PROFILE,
@@ -18,8 +16,9 @@ const readJson = (relative) => JSON.parse(fs.readFileSync(path.join(packageRoot,
 const policy = readJson("profiles/self-conformance/lifecycle-gates.json");
 const manifest = readJson("profiles/self-conformance/manifest.json");
 const bootstrapAnchor = readJson("profiles/self-conformance/bootstrap-anchor.json");
+const installedVerifierBytes = fs.readFileSync(path.join(packageRoot, policy.verifier.path));
 const installedPackageRoot = semanticRoot(manifest);
-const installedVerifierRoot = exactByteRoot(fs.readFileSync(path.join(packageRoot, policy.verifier.path)));
+const installedVerifierRoot = exactByteRoot(installedVerifierBytes);
 const NON_PROMOTION = new Set(policy.nonPromotionTransitions);
 
 function compareUtf8(left, right) {
@@ -61,33 +60,46 @@ function receiptMatchesBundle(receipt, bundle) {
     && receipt?.proposedStateRoot === bundle.proposedStateRoot;
 }
 
-function verifyTransition(bundle, temporary, index) {
-  const inputPath = path.join(temporary, `bundle-${String(index).padStart(3, "0")}.json`);
-  fs.writeFileSync(inputPath, `${JSON.stringify(bundle, null, 2)}\n`, { flag: "wx" });
-  const result = spawnSync(
-    process.execPath,
-    [path.join(packageRoot, "bin/kfd.mjs"), "verify", "self-conformance-transition", inputPath, "--json"],
-    { cwd: packageRoot, encoding: "utf8", env: { ...process.env, npm_config_offline: "true" } },
-  );
+function verifyWasm(verifierBytes, input) {
+  const module = new WebAssembly.Module(verifierBytes);
+  const instance = new WebAssembly.Instance(module, {});
+  const { memory, kfd_alloc: alloc, kfd_free: free, kfd_verify: verify } = instance.exports;
+  const bytes = new TextEncoder().encode(input);
+  const inputPointer = alloc(bytes.length);
+  new Uint8Array(memory.buffer, inputPointer, bytes.length).set(bytes);
+  let packed;
+  try {
+    packed = verify(inputPointer, bytes.length);
+  } finally {
+    free(inputPointer, bytes.length);
+  }
+  const outputPointer = Number(packed >> 32n);
+  const outputLength = Number(packed & 0xffffffffn);
+  const output = new Uint8Array(memory.buffer, outputPointer, outputLength).slice();
+  free(outputPointer, outputLength);
+  return new TextDecoder().decode(output);
+}
+
+function verifyTransition(bundle, verifierBytes, index) {
   let report;
   try {
-    report = JSON.parse(result.stdout);
-  } catch {
+    report = JSON.parse(verifyWasm(verifierBytes, JSON.stringify({
+      schemaVersion: 1,
+      contract: "kfd.verification-bundle/v1",
+      kind: "self-conformance-transition",
+      primary: JSON.stringify(bundle),
+      artifacts: {},
+    })));
+  } catch (error) {
     return {
       report: null,
-      issue: issue("scg-verifier-execution-failed", `/chain/${index}/bundle`, result.stderr.trim() || "Independent verifier did not return JSON."),
-    };
-  }
-  if (![0, 1].includes(result.status)) {
-    return {
-      report,
-      issue: issue("scg-verifier-execution-failed", `/chain/${index}/bundle`, result.stderr.trim() || `Independent verifier exited ${result.status}.`),
+      issue: issue("scg-verifier-execution-failed", `/chain/${index}/bundle`, error.message || "Independent verifier did not return JSON."),
     };
   }
   return { report, issue: null };
 }
 
-function baseReport(request) {
+function baseReport(request, environment) {
   return {
     schemaVersion: 1,
     contract: "kfd.self-conformance-lifecycle-gate-report/v1",
@@ -97,7 +109,7 @@ function baseReport(request) {
     requestRoot: semanticRoot(request ?? {}),
     fixedPackageRoot: ROOT_PATTERN.test(request?.fixedPackageRoot ?? "")
       ? request.fixedPackageRoot
-      : installedPackageRoot,
+      : environment.packageRoot,
     terminalBundleRoot: null,
     terminalReportRoot: null,
     valid: false,
@@ -118,8 +130,8 @@ function baseReport(request) {
   };
 }
 
-export function verifyLifecycleGate(request) {
-  const output = baseReport(request);
+function verifyLifecycleGateWithEnvironment(request, environment) {
+  const output = baseReport(request, environment);
   const issues = [];
   const checks = new Map();
   const mark = (id, ok) => checks.set(id, (checks.get(id) ?? true) && ok);
@@ -144,7 +156,7 @@ export function verifyLifecycleGate(request) {
   mark("lifecycle-path", Boolean(pathPolicy));
   if (!pathPolicy) issues.push(issue("scg-path-unsupported", "/lifecyclePath", "The lifecycle path is not published by this profile."));
 
-  const packageMatch = request?.fixedPackageRoot === installedPackageRoot;
+  const packageMatch = request?.fixedPackageRoot === environment.packageRoot;
   mark("fixed-package-root", packageMatch);
   if (!packageMatch) {
     issues.push(issue(
@@ -165,8 +177,7 @@ export function verifyLifecycleGate(request) {
     issues.push(issue("scg-transition-evidence-absent", "/chain", "At least one complete transition entry is required."));
   } else {
     mark("transition-chain", true);
-    const temporary = fs.mkdtempSync(path.join(os.tmpdir(), "kfd-self-conformance-lifecycle-"));
-    try {
+    {
       let previous = null;
       for (const [index, entry] of request.chain.entries()) {
         const bundle = entry?.bundle;
@@ -197,7 +208,7 @@ export function verifyLifecycleGate(request) {
         }
 
         if (bundle) {
-          const verified = verifyTransition(bundle, temporary, index);
+          const verified = verifyTransition(bundle, environment.verifierBytes, index);
           verifierReport = verified.report;
           if (verified.issue) issues.push(verified.issue);
           if (verifierReport) {
@@ -212,7 +223,7 @@ export function verifyLifecycleGate(request) {
           } else mark("independent-transition-verifier", false);
         }
 
-        const verifierRootMatches = bundle?.verifierRoot === installedVerifierRoot;
+        const verifierRootMatches = bundle?.verifierRoot === environment.verifierRoot;
         mark("exact-verifier-root", verifierRootMatches);
         if (!verifierRootMatches) {
           issues.push(issue("scg-verifier-root-mismatch", `/chain/${index}/bundle/verifierRoot`, "The bundle does not bind the installed independent verifier bytes."));
@@ -340,8 +351,6 @@ export function verifyLifecycleGate(request) {
           proposedStateRoot: bundle?.proposedStateRoot,
         };
       }
-    } finally {
-      fs.rmSync(temporary, { recursive: true, force: true });
     }
 
     const terminalEntry = request.chain.at(-1);
@@ -370,6 +379,25 @@ export function verifyLifecycleGate(request) {
     : "blocked";
   output.transitionAdmissible = output.valid && output.outcome === "proceed";
   return output;
+}
+
+export function verifyLifecycleGate(request) {
+  return verifyLifecycleGateWithEnvironment(request, {
+    packageRoot: installedPackageRoot,
+    verifierRoot: installedVerifierRoot,
+    verifierBytes: installedVerifierBytes,
+  });
+}
+
+export function verifyLifecycleGateAtCut(request, cut) {
+  if (!cut?.packageManifest || !(cut.verifierBytes instanceof Uint8Array)) {
+    throw new TypeError("reviewed cut requires packageManifest and verifierBytes");
+  }
+  return verifyLifecycleGateWithEnvironment(request, {
+    packageRoot: semanticRoot(cut.packageManifest),
+    verifierRoot: exactByteRoot(cut.verifierBytes),
+    verifierBytes: cut.verifierBytes,
+  });
 }
 
 export function runSelfConformanceLifecycleGate(args) {

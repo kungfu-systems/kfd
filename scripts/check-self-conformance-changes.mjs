@@ -6,10 +6,20 @@ import process from "node:process";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { canonicalJson } from "./self-conformance-contract.mjs";
-import { verifyLifecycleGate } from "./self-conformance-lifecycle-gate.mjs";
+import { verifyLifecycleGateAtCut } from "./self-conformance-lifecycle-gate.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const evidenceDirectory = path.join(root, "evidence/self-conformance/transitions");
+const reviewedCut = {
+  packageManifest: JSON.parse(fs.readFileSync(path.join(
+    root,
+    "evidence/self-conformance/qualification/recursive-normative-self-conformance.profile-manifest.json",
+  ), "utf8")),
+  verifierBytes: fs.readFileSync(path.join(
+    root,
+    "evidence/self-conformance/qualification/recursive-normative-self-conformance.verifier.wasm",
+  )),
+};
 
 function git(args, expected = 0) {
   const result = spawnSync("git", args, { cwd: root, encoding: "utf8" });
@@ -100,7 +110,7 @@ export function checkRetainedLifecycleEvidence(requiredPaths = []) {
   let count = 0;
   for (const requestPath of retainedRequests()) {
     const request = JSON.parse(fs.readFileSync(requestPath, "utf8"));
-    const report = verifyLifecycleGate(request);
+    const report = verifyLifecycleGateAtCut(request, reviewedCut);
     assert.equal(report.valid, true, `${path.relative(root, requestPath)}: ${JSON.stringify(report.issues)}`);
     const reportPath = requestPath.replace(/\.request\.json$/, ".report.json");
     assert.equal(fs.existsSync(reportPath), true, `missing retained lifecycle report: ${path.relative(root, reportPath)}`);

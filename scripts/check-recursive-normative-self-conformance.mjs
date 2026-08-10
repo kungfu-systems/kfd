@@ -13,8 +13,7 @@ import {
   semanticRoot,
 } from "./self-conformance-contract.mjs";
 import {
-  lifecycleGateEnvironment,
-  verifyLifecycleGate,
+  verifyLifecycleGateAtCut,
 } from "./self-conformance-lifecycle-gate.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -34,6 +33,12 @@ const terminalReportPath = "evidence/self-conformance/transitions/recursive-norm
 const assessmentReviewPath = "evidence/self-conformance/reviews/recursive-normative-self-conformance.assessment.json";
 const terminalCutPath = "cases/live/recursive-normative-self-conformance/cuts/0002-no-new-kfd.json";
 const verificationPath = "evidence/self-conformance/qualification/recursive-normative-self-conformance.verification.json";
+const reviewedProfileManifestPath = "evidence/self-conformance/qualification/recursive-normative-self-conformance.profile-manifest.json";
+const reviewedVerifierPath = "evidence/self-conformance/qualification/recursive-normative-self-conformance.verifier.wasm";
+const reviewedCut = {
+  packageManifest: readJson(reviewedProfileManifestPath),
+  verifierBytes: bytes(reviewedVerifierPath),
+};
 
 function run(command, args, options = {}) {
   const result = spawnSync(command, args, {
@@ -70,7 +75,7 @@ function countBy(values, key) {
 }
 
 function issueCodes(request) {
-  return new Set(verifyLifecycleGate(request).issues.map(({ code }) => code));
+  return new Set(verifyLifecycleGateAtCut(request, reviewedCut).issues.map(({ code }) => code));
 }
 
 const assessment = readJson(assessmentPath);
@@ -93,6 +98,21 @@ const genesisReviewedCommit = request.chain[0].bundle.proposedState.immutableCoo
 const genesisReviewedCommitAvailable = !extracted && gitCommitAvailable(genesisReviewedCommit);
 const historicallyMutableGenesisInputs = new Set(["candidate", "candidate-registry", "live-case-registry"]);
 
+function assertReviewedProfileManifest(input) {
+  assert.equal(
+    exactHex(reviewedProfileManifestPath),
+    input.sha256,
+    `${input.id} packaged reviewed snapshot drifted`,
+  );
+  if (genesisReviewedCommitAvailable) {
+    assert.equal(
+      exactHexAt(genesisReviewedCommit, input.path),
+      input.sha256,
+      `${input.id} reviewed commit root drifted`,
+    );
+  }
+}
+
 const candidate = draftRegistry.candidates.find(({ id }) => id === assessment.candidateId);
 assert.ok(candidate, "Candidate is missing from the draft registry");
 assert.equal(candidate.status, "merged");
@@ -110,7 +130,9 @@ assert.equal(liveCase.candidateTracks[0].currentCut.sha256, exactHex(terminalCut
 assert.equal(terminalCut.decision.outcome, "no-new-primitive");
 
 for (const input of genesis.exactInputs) {
-  if (historicallyMutableGenesisInputs.has(input.id)) {
+  if (input.id === "profile-manifest") {
+    assertReviewedProfileManifest(input);
+  } else if (historicallyMutableGenesisInputs.has(input.id)) {
     if (genesisReviewedCommitAvailable) {
       assert.equal(exactHexAt(genesisReviewedCommit, input.path), input.sha256, `${input.id} reviewed genesis root drifted`);
     }
@@ -119,7 +141,8 @@ for (const input of genesis.exactInputs) {
   }
 }
 for (const input of redundancy.fixedInputs) {
-  assert.equal(exactHex(input.path), input.sha256, `${input.id} redundancy input root drifted`);
+  if (input.id === "self-conformance-profile") assertReviewedProfileManifest(input);
+  else assert.equal(exactHex(input.path), input.sha256, `${input.id} redundancy input root drifted`);
 }
 for (const input of assessment.fixedEvidence) {
   const value = input.rootKind === "exact-bytes"
@@ -160,7 +183,7 @@ assert.equal(counterevidence.dispositionUnderTest, "no-new-kfd");
 assert.ok(counterevidence.retainedAgainstPromotion.length >= 5);
 assert.ok(counterevidence.conditionsThatWouldReopen.length >= 4);
 
-const reproducedReport = verifyLifecycleGate(request);
+const reproducedReport = verifyLifecycleGateAtCut(request, reviewedCut);
 assert.equal(reproducedReport.valid, true, JSON.stringify(reproducedReport.issues));
 assert.equal(reproducedReport.outcome, "proceed");
 assert.equal(reproducedReport.lifecyclePath, "candidate");
@@ -175,7 +198,7 @@ assert.equal(candidateBundle.transition, "candidate-genesis");
 assert.equal(candidateBundle.evidenceRoots.includes(semanticRoot(genesis)), true);
 assert.equal(candidateBundle.predecessor.bootstrapAnchorRoot, semanticRoot(anchor));
 assert.equal(candidateBundle.schemaSetRoot, manifest.schemaSetRoot);
-assert.equal(candidateBundle.verifierRoot, lifecycleGateEnvironment.installedVerifierRoot);
+assert.equal(candidateBundle.verifierRoot, exactByteRoot(reviewedCut.verifierBytes));
 assert.equal(semanticRoot(candidateBundle), request.expectedTerminalBundleRoot);
 
 const packageSubstitution = structuredClone(request);
@@ -227,7 +250,7 @@ assert.equal(new Set([
 ]).size, 3, "assessment author, independent reviewer, and disposition authority must remain distinct");
 assert.deepEqual(terminalRequest.counterevidenceRoots, [semanticRoot(counterevidence)]);
 assert.equal(semanticRoot(terminalEntry.bundle), terminalRequest.expectedTerminalBundleRoot);
-const reproducedTerminalReport = verifyLifecycleGate(terminalRequest);
+const reproducedTerminalReport = verifyLifecycleGateAtCut(terminalRequest, reviewedCut);
 assert.equal(reproducedTerminalReport.valid, true, JSON.stringify(reproducedTerminalReport.issues));
 assert.equal(reproducedTerminalReport.lifecyclePath, "qualification");
 assert.equal(reproducedTerminalReport.outcome, "non-promotion");
@@ -308,6 +331,8 @@ if (!extracted && !write) {
     genesisPath,
     redundancyPath,
     replayPath,
+    reviewedProfileManifestPath,
+    reviewedVerifierPath,
     verificationPath,
     "evidence/self-conformance/reviews/recursive-normative-self-conformance.genesis.json",
     assessmentReviewPath,
