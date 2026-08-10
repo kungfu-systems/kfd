@@ -57,17 +57,20 @@ node scripts/check-warrant-evidence.mjs
 ```
 
 The first command verifies a Primitive Evidence Bundle against the packaged
-registry. The second checks both retained bundles, all fixed KFD-10 vectors,
+registry. The second checks all four retained bundles, all fixed KFD-10 vectors,
 manifest digests, forbidden dependency boundaries, and a freshly packed npm
 artifact in a temporary clean-room directory.
 
 The packaged
 [`Warrant Evidence manifest`](../profiles/warrant-evidence/manifest.json)
-fixes 14 positive and negative vectors, declares zero runtime dependencies, and
+fixes 23 positive and negative lifecycle vectors, declares zero runtime dependencies, and
 forbids product checkouts, private sources, and network access. The
 [`first-wave report`](../evidence/primitive-evidence/first-wave-report.json)
 separates proved, partial, missing, and invalidated outcomes so an implementer
 can reproduce the current evidence without inheriting its conclusions.
+The [`second-wave report`](../evidence/primitive-evidence/second-wave-report.json)
+adds current protected Buildchain v3 and Kungfu KFX roots, competing models,
+and a falsifier for every evidence-matrix row.
 
 ## What a pass proves
 
@@ -85,8 +88,10 @@ repository, execute upstream code, establish legal authority, prove security
 or production fitness, or show independent adoption beyond the packaged
 clean-room harness.
 
-KFD-10 remains `draft`. The current Warrant report remains `partial`, with
-`qualifying: false` and `selfCertified: false`. The package demonstrates a
+KFD-10 remains `draft`. The current Warrant report remains `partial`. Its
+second wave retains exact Buildchain v3 and Kungfu KFX source cuts plus a
+competing-model and falsifier matrix, with `qualifying: false` and
+`selfCertified: false`. The package demonstrates a
 bounded independent verification method; only separately accountable adopter
 evidence can demonstrate an independent implementation.
 

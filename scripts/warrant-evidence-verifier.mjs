@@ -10,6 +10,8 @@ const shaPattern = /^[a-f0-9]{40}$/u;
 const statuses = new Set(["proved", "partial", "missing", "invalidated"]);
 const evidenceClasses = new Set(["generic-candidate", "profile-specific", "counterexample", "no-new-primitive", "unresolved"]);
 const reviewStates = new Set(["self-reviewed", "independent-reviewed", "revision-required"]);
+const evidenceProfile = "kfd-warrant-evidence@0.2.0-alpha.1";
+const warrantProfile = "kfd-10-warrant@0.2.0-alpha.1";
 
 function issue(code, pathValue, message) {
   return { code, path: pathValue, message };
@@ -72,7 +74,7 @@ export function verifyPrimitiveEvidenceBundle(bundle, options = {}) {
       bundle?.contract !== "kfd.primitive-evidence-bundle/v1" ||
       bundle?.primitive !== "Warrant") {
     issues.push(issue("bundle-contract-invalid", "", "unsupported Primitive Evidence Bundle contract"));
-    return report("kfd-warrant-evidence@0.1.0-alpha.1", issues);
+    return report(evidenceProfile, issues);
   }
   const entry = registry.entries?.find(({ id }) => id === bundle.bundleId);
   if (!entry || entry.primitive !== bundle.primitive || entry.upstreamContract !== bundle.observation?.upstreamContract) {
@@ -111,7 +113,7 @@ export function verifyPrimitiveEvidenceBundle(bundle, options = {}) {
       bundle.selfCertified !== false) {
     issues.push(issue("bundle-self-promotion", "/assessment/promotion", "evidence cannot promote, qualify, or self-certify a primitive"));
   }
-  return report("kfd-warrant-evidence@0.1.0-alpha.1", issues);
+  return report(evidenceProfile, issues);
 }
 
 function nonEmptyStrings(value) {
@@ -125,82 +127,144 @@ function sameSet(left, right) {
 }
 
 function witnessFailure(code, pathValue, message) {
-  return report("kfd-10-warrant@0.1.0-alpha.1", [issue(code, pathValue, message)]);
+  return report(warrantProfile, [issue(code, pathValue, message)]);
 }
 
 export function verifyWarrantConformanceWitness(value) {
   if (value?.$schema !== "https://kfd.libkungfu.dev/schemas/kfd-10/conformance-witness.schema.json" ||
-      value?.schemaVersion !== 1 ||
-      value?.contract !== "kfd.warrant-conformance-witness/v1" ||
-      value?.profile !== "kfd-10-warrant@0.1.0-alpha.1" ||
+      value?.schemaVersion !== 2 ||
+      value?.contract !== "kfd.warrant-conformance-witness/v2" ||
+      value?.profile !== warrantProfile ||
       value?.qualifying !== false || value?.selfCertified !== false ||
       !rootPattern.test(value?.warrant?.root ?? "")) {
     return witnessFailure("warrant-contract-invalid", "", "unsupported or scope-widened Warrant witness");
   }
   const warrant = value.warrant;
   const observation = value.observation ?? {};
-  if (typeof warrant.issuer !== "string" || warrant.issuer.length === 0) {
-    return witnessFailure("warrant-missing-issuer", "/warrant/issuer", "issuer is independently required");
+  const purpose = warrant.purpose ?? {};
+  const authority = warrant.authority ?? {};
+  const lease = warrant.lease ?? {};
+  if (typeof purpose.statement !== "string" || purpose.statement.length === 0 ||
+      purpose.action !== observation.action || purpose.subject !== observation.subject ||
+      purpose.resource !== observation.resource || typeof purpose.targetState !== "string" ||
+      purpose.targetState.length === 0 || !nonEmptyStrings(purpose.nonClaims)) {
+    return witnessFailure("warrant-purpose-mismatch", "/warrant/purpose", "purpose must bind the observed action boundary without importing product privilege");
   }
-  if (typeof warrant.holder !== "string" || warrant.holder.length === 0) {
-    return witnessFailure("warrant-missing-holder", "/warrant/holder", "holder is independently required");
+  if (typeof authority.issuer !== "string" || authority.issuer.length === 0) {
+    return witnessFailure("warrant-missing-issuer", "/warrant/authority/issuer", "issuer is independently required");
   }
-  if (!nonEmptyStrings(warrant.scope?.actions) ||
-      !nonEmptyStrings(warrant.scope?.subjects) ||
-      !nonEmptyStrings(warrant.scope?.resources) ||
-      !warrant.scope.actions.includes(observation.action) ||
-      !warrant.scope.subjects.includes(observation.subject) ||
-      !warrant.scope.resources.includes(observation.resource)) {
+  if (typeof authority.holder !== "string" || authority.holder.length === 0) {
+    return witnessFailure("warrant-missing-holder", "/warrant/authority/holder", "holder is independently required");
+  }
+  if (observation.holder !== authority.holder) {
+    return witnessFailure("warrant-stale-holder", "/observation/holder", "the presenting holder must match the exact current authority holder");
+  }
+  if (!nonEmptyStrings(authority.scope?.actions) ||
+      !nonEmptyStrings(authority.scope?.subjects) ||
+      !nonEmptyStrings(authority.scope?.resources) ||
+      !authority.scope.actions.includes(observation.action) ||
+      !authority.scope.subjects.includes(observation.subject) ||
+      !authority.scope.resources.includes(observation.resource)) {
     return witnessFailure("warrant-scope-mismatch", "/observation", "observed action, subject, and resource must remain inside the Warrant scope");
   }
-  if (!nonEmptyStrings(warrant.targetRoots) || !warrant.targetRoots.every((root) => rootPattern.test(root))) {
-    return witnessFailure("warrant-target-roots-missing", "/warrant/targetRoots", "one or more exact target roots are required");
+  if (!nonEmptyStrings(authority.targetRoots) || !authority.targetRoots.every((root) => rootPattern.test(root))) {
+    return witnessFailure("warrant-target-roots-missing", "/warrant/authority/targetRoots", "one or more exact target roots are required");
   }
   const observedAt = Date.parse(observation.at ?? "");
-  const notBefore = Date.parse(warrant.validity?.notBefore ?? "");
-  const expiresAt = Date.parse(warrant.validity?.expiresAt ?? "");
+  const notBefore = Date.parse(lease.notBefore ?? "");
+  const expiresAt = Date.parse(lease.expiresAt ?? "");
   if (!Number.isFinite(observedAt) || !Number.isFinite(notBefore) || !Number.isFinite(expiresAt) || observedAt < notBefore || observedAt >= expiresAt) {
-    return witnessFailure("warrant-expired", "/warrant/validity", "Warrant must be inside its explicit validity window");
+    return witnessFailure("warrant-expired", "/warrant/lease", "Warrant use must be inside its explicit lease window");
   }
-  if (warrant.lifecycle?.state === "revoked" || warrant.lifecycle?.revokedAt) {
-    return witnessFailure("warrant-revoked", "/warrant/lifecycle", "revoked authority fails closed");
+  if (warrant.revocation?.state === "revoked" || warrant.revocation?.revokedAt) {
+    return witnessFailure("warrant-revoked", "/warrant/revocation", "revoked authority fails closed");
   }
-  if (warrant.lifecycle?.state === "consumed" || warrant.lifecycle?.consumedAt) {
-    return witnessFailure("warrant-consumed", "/warrant/lifecycle", "consumed authority cannot authorize another occurrence");
+  if (warrant.authorization?.reuseAttempted === true) {
+    return witnessFailure("warrant-consumed", "/warrant/authorization/reuseAttempted", "settled authority cannot authorize another occurrence");
   }
-  if (warrant.lifecycle?.state !== "active") {
-    return witnessFailure("warrant-expired", "/warrant/lifecycle/state", "inactive authority fails closed");
+  if (lease.nonPreemptive !== true) {
+    return witnessFailure("warrant-preemption-allowed", "/warrant/lease/nonPreemptive", "one current lease generation must not be silently preempted");
   }
-  if (!sameSet(warrant.targetRoots, observation.targetRoots)) {
-    return witnessFailure("warrant-stale-target", "/observation/targetRoots", "observed target roots do not match the authorized cut");
+  if (!sameSet(authority.targetRoots, observation.targetRoots)) {
+    return witnessFailure("warrant-root-substitution", "/observation/targetRoots", "observed target roots do not match the authorized cut");
   }
-  const parentCeiling = warrant.derivation?.parentConsequenceCeiling;
-  const childCeiling = warrant.scope?.consequenceCeiling;
-  if (warrant.derivation?.parentRoot &&
-      (!warrant.derivation.attenuated ||
+  if (observation.generation !== lease.generation) {
+    return witnessFailure("warrant-stale-generation", "/observation/generation", "the presenting lease generation is stale");
+  }
+  if (observation.fencingToken !== lease.fencingToken) {
+    return witnessFailure("warrant-stale-fence", "/observation/fencingToken", "the presenting fencing token is stale");
+  }
+  const continuationAt = Date.parse(warrant.continuation?.heartbeatAt ?? "");
+  if (warrant.continuation?.state !== "continued" ||
+      warrant.continuation?.expectedGeneration !== lease.generation ||
+      warrant.continuation?.expectedFencingToken !== lease.fencingToken ||
+      !rootPattern.test(warrant.continuation?.receiptRoot ?? "") ||
+      !Number.isFinite(continuationAt) || continuationAt < notBefore || continuationAt > observedAt) {
+    return witnessFailure("warrant-continuation-stale", "/warrant/continuation", "continuation must bind the same live generation and fence before use");
+  }
+  if (warrant.recovery?.performed !== true ||
+      !Number.isInteger(warrant.recovery?.expiredGeneration) ||
+      warrant.recovery.expiredGeneration >= lease.generation ||
+      warrant.recovery?.successorGeneration !== lease.generation ||
+      warrant.recovery?.successorFencingToken !== lease.fencingToken ||
+      warrant.recovery?.rejectedFencingToken === lease.fencingToken ||
+      !rootPattern.test(warrant.recovery?.expectedOldRoot ?? "") ||
+      !rootPattern.test(warrant.recovery?.receiptRoot ?? "")) {
+    return witnessFailure("warrant-recovery-stale", "/warrant/recovery", "recovery must reject the expired holder and mint the exact successor generation and fence");
+  }
+  const parentCeiling = authority.derivation?.parentConsequenceCeiling;
+  const childCeiling = authority.scope?.consequenceCeiling;
+  if (authority.derivation?.parentRoot &&
+      (!authority.derivation.attenuated ||
        !Number.isInteger(parentCeiling) || !Number.isInteger(childCeiling) ||
        childCeiling > parentCeiling) &&
-      !rootPattern.test(warrant.derivation?.independentAuthorityRoot ?? "")) {
-    return witnessFailure("warrant-authority-amplification", "/warrant/derivation", "derived authority must attenuate its parent or bind a new independent source");
+      !rootPattern.test(authority.derivation?.independentAuthorityRoot ?? "")) {
+    return witnessFailure("warrant-authority-amplification", "/warrant/authority/derivation", "derived authority must attenuate its parent or bind a new independent source");
   }
-  if (warrant.delegation?.delegated === true &&
-      (typeof warrant.delegation.from !== "string" || warrant.delegation.from.length === 0)) {
-    return witnessFailure("warrant-delegation-chain-missing", "/warrant/delegation/from", "delegation must preserve its source holder");
+  if (authority.delegation?.delegated === true &&
+      (typeof authority.delegation.from !== "string" || authority.delegation.from.length === 0 ||
+       !Array.isArray(authority.delegation.chainRoots) || authority.delegation.chainRoots.length === 0 ||
+       !authority.delegation.chainRoots.every((root) => rootPattern.test(root)))) {
+    return witnessFailure("warrant-delegation-chain-missing", "/warrant/authority/delegation", "delegation must preserve its source holder and rooted chain");
   }
-  if (!nonEmptyStrings(warrant.delegation?.residualResponsibility)) {
-    return witnessFailure("warrant-residual-responsibility-missing", "/warrant/delegation/residualResponsibility", "delegation cannot silently erase residual responsibility");
+  if (!nonEmptyStrings(authority.residualResponsibility)) {
+    return witnessFailure("warrant-residual-responsibility-missing", "/warrant/authority/residualResponsibility", "delegation cannot silently erase residual responsibility");
   }
   if (warrant.authorization?.occurrenceUsedAsAuthority !== false ||
       typeof warrant.authorization?.authorized !== "boolean" ||
-      typeof warrant.authorization?.occurred !== "boolean") {
+      typeof warrant.authorization?.occurred !== "boolean" ||
+      warrant.authorization.authorized !== true || warrant.authorization.occurred !== true) {
     return witnessFailure("warrant-authorization-occurrence-conflated", "/warrant/authorization", "authorization and occurrence must remain independent facts");
   }
-  if (!Array.isArray(warrant.history) || warrant.history.length === 0 ||
-      !warrant.history.every((event) => typeof event?.event === "string" && rootPattern.test(event?.root ?? "") && Number.isFinite(Date.parse(event?.at ?? "")))) {
-    return witnessFailure("warrant-history-missing", "/warrant/history", "authority history must remain inspectable after lifecycle changes");
+  const settlementAt = Date.parse(warrant.settlement?.at ?? "");
+  if (warrant.settlement?.duplicate === true) {
+    return witnessFailure("warrant-duplicate-settlement", "/warrant/settlement/duplicate", "duplicate settlement is a rooted no-op, not authority to apply another transition");
+  }
+  if (warrant.settlement?.state !== "applied" ||
+      !Number.isFinite(settlementAt) || settlementAt < observedAt ||
+      !rootPattern.test(warrant.settlement?.evidenceRoot ?? "") ||
+      !rootPattern.test(warrant.settlement?.expectedOldRoot ?? "") ||
+      !rootPattern.test(warrant.settlement?.nextStateRoot ?? "") ||
+      !rootPattern.test(warrant.settlement?.receiptRoot ?? "") ||
+      warrant.settlement.expectedOldRoot === warrant.settlement.nextStateRoot) {
+    return witnessFailure("warrant-settlement-root-drift", "/warrant/settlement", "an applied settlement must bind evidence and a distinct exact old and successor state root");
+  }
+  if (warrant.history?.rewritten === true) {
+    return witnessFailure("warrant-history-rewritten", "/warrant/history/rewritten", "later lifecycle evidence cannot rewrite retained Warrant history");
+  }
+  const events = warrant.history?.events;
+  if (!rootPattern.test(warrant.history?.priorRoot ?? "") ||
+      !rootPattern.test(warrant.history?.currentRoot ?? "") ||
+      warrant.history.priorRoot === warrant.history.currentRoot ||
+      !Array.isArray(events) || events.length < 6 ||
+      !events.every((event) => typeof event?.event === "string" && rootPattern.test(event?.root ?? "") &&
+        Number.isInteger(event?.generation) && Number.isFinite(Date.parse(event?.at ?? ""))) ||
+      !["issued", "expired", "recovered", "continued", "occurred", "settled"].every((kind) =>
+        events.some(({ event }) => event === kind))) {
+    return witnessFailure("warrant-history-missing", "/warrant/history", "authority history must retain issuance, expiry, recovery, continuation, occurrence, and settlement");
   }
   return {
-    ...report("kfd-10-warrant@0.1.0-alpha.1", []),
+    ...report(warrantProfile, []),
     code: "warrant-valid",
   };
 }

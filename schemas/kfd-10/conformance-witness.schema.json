@@ -1,128 +1,202 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://kfd.libkungfu.dev/schemas/kfd-10/conformance-witness.schema.json",
-  "title": "KFD-10 experimental Warrant conformance witness",
+  "title": "KFD-10 experimental Warrant lifecycle conformance witness",
   "type": "object",
-  "required": [
-    "$schema",
-    "schemaVersion",
-    "contract",
-    "profile",
-    "warrant",
-    "observation",
-    "qualifying",
-    "selfCertified"
-  ],
+  "required": ["$schema", "schemaVersion", "contract", "profile", "warrant", "observation", "qualifying", "selfCertified"],
   "properties": {
-    "$schema": { "const": "https://kfd.libkungfu.dev/schemas/kfd-10/conformance-witness.schema.json" },
-    "schemaVersion": { "const": 1 },
-    "contract": { "const": "kfd.warrant-conformance-witness/v1" },
-    "profile": { "const": "kfd-10-warrant@0.1.0-alpha.1" },
+    "$schema": {"const": "https://kfd.libkungfu.dev/schemas/kfd-10/conformance-witness.schema.json"},
+    "schemaVersion": {"const": 2},
+    "contract": {"const": "kfd.warrant-conformance-witness/v2"},
+    "profile": {"const": "kfd-10-warrant@0.2.0-alpha.1"},
     "warrant": {
       "type": "object",
-      "required": ["id", "root", "issuer", "holder", "scope", "targetRoots", "validity", "lifecycle", "derivation", "delegation", "authorization", "history"],
+      "required": ["id", "root", "purpose", "authority", "lease", "continuation", "recovery", "revocation", "settlement", "authorization", "history"],
       "properties": {
-        "id": { "type": "string", "minLength": 1 },
-        "root": { "$ref": "#/$defs/root" },
-        "issuer": { "type": "string", "minLength": 1 },
-        "holder": { "type": "string", "minLength": 1 },
-        "scope": {
+        "id": {"type": "string", "minLength": 1},
+        "root": {"$ref": "#/$defs/root"},
+        "purpose": {
           "type": "object",
-          "required": ["actions", "subjects", "resources", "consequenceCeiling"],
+          "required": ["statement", "action", "subject", "resource", "targetState", "nonClaims"],
           "properties": {
-            "actions": { "$ref": "#/$defs/nonEmptyStrings" },
-            "subjects": { "$ref": "#/$defs/nonEmptyStrings" },
-            "resources": { "$ref": "#/$defs/nonEmptyStrings" },
-            "consequenceCeiling": { "type": "integer", "minimum": 0 }
+            "statement": {"type": "string", "minLength": 1},
+            "action": {"type": "string", "minLength": 1},
+            "subject": {"type": "string", "minLength": 1},
+            "resource": {"type": "string", "minLength": 1},
+            "targetState": {"type": "string", "minLength": 1},
+            "nonClaims": {"$ref": "#/$defs/nonEmptyStrings"}
           },
           "additionalProperties": false
         },
-        "targetRoots": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/root" } },
-        "validity": {
+        "authority": {
           "type": "object",
-          "required": ["notBefore", "expiresAt"],
+          "required": ["issuer", "holder", "scope", "targetRoots", "derivation", "delegation", "residualResponsibility"],
           "properties": {
-            "notBefore": { "type": "string", "format": "date-time" },
-            "expiresAt": { "type": "string", "format": "date-time" }
+            "issuer": {"type": "string", "minLength": 1},
+            "holder": {"type": "string", "minLength": 1},
+            "scope": {
+              "type": "object",
+              "required": ["actions", "subjects", "resources", "consequenceCeiling"],
+              "properties": {
+                "actions": {"$ref": "#/$defs/nonEmptyStrings"},
+                "subjects": {"$ref": "#/$defs/nonEmptyStrings"},
+                "resources": {"$ref": "#/$defs/nonEmptyStrings"},
+                "consequenceCeiling": {"type": "integer", "minimum": 0}
+              },
+              "additionalProperties": false
+            },
+            "targetRoots": {"$ref": "#/$defs/nonEmptyRoots"},
+            "derivation": {
+              "type": "object",
+              "required": ["parentRoot", "parentConsequenceCeiling", "attenuated", "independentAuthorityRoot"],
+              "properties": {
+                "parentRoot": {"anyOf": [{"$ref": "#/$defs/root"}, {"type": "null"}]},
+                "parentConsequenceCeiling": {"type": ["integer", "null"], "minimum": 0},
+                "attenuated": {"type": "boolean"},
+                "independentAuthorityRoot": {"anyOf": [{"$ref": "#/$defs/root"}, {"type": "null"}]}
+              },
+              "additionalProperties": false
+            },
+            "delegation": {
+              "type": "object",
+              "required": ["delegated", "from", "chainRoots"],
+              "properties": {
+                "delegated": {"type": "boolean"},
+                "from": {"type": ["string", "null"]},
+                "chainRoots": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/root"}}
+              },
+              "additionalProperties": false
+            },
+            "residualResponsibility": {"$ref": "#/$defs/nonEmptyStrings"}
           },
           "additionalProperties": false
         },
-        "lifecycle": {
+        "lease": {
           "type": "object",
-          "required": ["state", "revokedAt", "consumedAt"],
+          "required": ["id", "generation", "fencingToken", "notBefore", "expiresAt", "renewable", "nonPreemptive"],
           "properties": {
-            "state": { "enum": ["active", "revoked", "consumed", "expired"] },
-            "revokedAt": { "type": ["string", "null"] },
-            "consumedAt": { "type": ["string", "null"] }
+            "id": {"type": "string", "minLength": 1},
+            "generation": {"type": "integer", "minimum": 1},
+            "fencingToken": {"$ref": "#/$defs/root"},
+            "notBefore": {"type": "string", "format": "date-time"},
+            "expiresAt": {"type": "string", "format": "date-time"},
+            "renewable": {"type": "boolean"},
+            "nonPreemptive": {"type": "boolean"}
           },
           "additionalProperties": false
         },
-        "derivation": {
+        "continuation": {
           "type": "object",
-          "required": ["parentRoot", "parentConsequenceCeiling", "attenuated", "independentAuthorityRoot"],
+          "required": ["state", "heartbeatAt", "expectedGeneration", "expectedFencingToken", "receiptRoot"],
           "properties": {
-            "parentRoot": { "anyOf": [{ "$ref": "#/$defs/root" }, { "type": "null" }] },
-            "parentConsequenceCeiling": { "type": ["integer", "null"], "minimum": 0 },
-            "attenuated": { "type": "boolean" },
-            "independentAuthorityRoot": { "anyOf": [{ "$ref": "#/$defs/root" }, { "type": "null" }] }
+            "state": {"const": "continued"},
+            "heartbeatAt": {"type": "string", "format": "date-time"},
+            "expectedGeneration": {"type": "integer", "minimum": 1},
+            "expectedFencingToken": {"$ref": "#/$defs/root"},
+            "receiptRoot": {"$ref": "#/$defs/root"}
           },
           "additionalProperties": false
         },
-        "delegation": {
+        "recovery": {
           "type": "object",
-          "required": ["delegated", "from", "residualResponsibility"],
+          "required": ["performed", "expiredGeneration", "rejectedFencingToken", "expectedOldRoot", "successorGeneration", "successorFencingToken", "receiptRoot"],
           "properties": {
-            "delegated": { "type": "boolean" },
-            "from": { "type": ["string", "null"] },
-            "residualResponsibility": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+            "performed": {"const": true},
+            "expiredGeneration": {"type": "integer", "minimum": 1},
+            "rejectedFencingToken": {"$ref": "#/$defs/root"},
+            "expectedOldRoot": {"$ref": "#/$defs/root"},
+            "successorGeneration": {"type": "integer", "minimum": 1},
+            "successorFencingToken": {"$ref": "#/$defs/root"},
+            "receiptRoot": {"$ref": "#/$defs/root"}
+          },
+          "additionalProperties": false
+        },
+        "revocation": {
+          "type": "object",
+          "required": ["state", "revokedAt", "authorityRoot"],
+          "properties": {
+            "state": {"enum": ["not-revoked", "revoked"]},
+            "revokedAt": {"type": ["string", "null"]},
+            "authorityRoot": {"$ref": "#/$defs/root"}
+          },
+          "additionalProperties": false
+        },
+        "settlement": {
+          "type": "object",
+          "required": ["state", "at", "outcome", "evidenceRoot", "expectedOldRoot", "nextStateRoot", "duplicate", "receiptRoot"],
+          "properties": {
+            "state": {"const": "applied"},
+            "at": {"type": "string", "format": "date-time"},
+            "outcome": {"type": "string", "minLength": 1},
+            "evidenceRoot": {"$ref": "#/$defs/root"},
+            "expectedOldRoot": {"$ref": "#/$defs/root"},
+            "nextStateRoot": {"$ref": "#/$defs/root"},
+            "duplicate": {"type": "boolean"},
+            "receiptRoot": {"$ref": "#/$defs/root"}
           },
           "additionalProperties": false
         },
         "authorization": {
           "type": "object",
-          "required": ["authorized", "occurred", "occurrenceUsedAsAuthority"],
+          "required": ["authorized", "occurred", "occurrenceUsedAsAuthority", "reuseAttempted"],
           "properties": {
-            "authorized": { "type": "boolean" },
-            "occurred": { "type": "boolean" },
-            "occurrenceUsedAsAuthority": { "const": false }
+            "authorized": {"type": "boolean"},
+            "occurred": {"type": "boolean"},
+            "occurrenceUsedAsAuthority": {"const": false},
+            "reuseAttempted": {"type": "boolean"}
           },
           "additionalProperties": false
         },
         "history": {
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "type": "object",
-            "required": ["event", "at", "root"],
-            "properties": {
-              "event": { "enum": ["granted", "attenuated", "delegated", "renewed", "revoked", "consumed", "expired", "refused"] },
-              "at": { "type": "string", "format": "date-time" },
-              "root": { "$ref": "#/$defs/root" }
-            },
-            "additionalProperties": false
-          }
+          "type": "object",
+          "required": ["priorRoot", "currentRoot", "rewritten", "events"],
+          "properties": {
+            "priorRoot": {"$ref": "#/$defs/root"},
+            "currentRoot": {"$ref": "#/$defs/root"},
+            "rewritten": {"const": false},
+            "events": {
+              "type": "array",
+              "minItems": 6,
+              "items": {
+                "type": "object",
+                "required": ["event", "at", "root", "generation"],
+                "properties": {
+                  "event": {"enum": ["issued", "expired", "recovered", "continued", "occurred", "settled", "attenuated", "delegated", "renewed", "revoked", "refused"]},
+                  "at": {"type": "string", "format": "date-time"},
+                  "root": {"$ref": "#/$defs/root"},
+                  "generation": {"type": "integer", "minimum": 1}
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "additionalProperties": false
         }
       },
       "additionalProperties": false
     },
     "observation": {
       "type": "object",
-      "required": ["at", "action", "subject", "resource", "targetRoots"],
+      "required": ["at", "holder", "action", "subject", "resource", "targetRoots", "generation", "fencingToken"],
       "properties": {
-        "at": { "type": "string", "format": "date-time" },
-        "action": { "type": "string", "minLength": 1 },
-        "subject": { "type": "string", "minLength": 1 },
-        "resource": { "type": "string", "minLength": 1 },
-        "targetRoots": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/root" } }
+        "at": {"type": "string", "format": "date-time"},
+        "holder": {"type": "string", "minLength": 1},
+        "action": {"type": "string", "minLength": 1},
+        "subject": {"type": "string", "minLength": 1},
+        "resource": {"type": "string", "minLength": 1},
+        "targetRoots": {"$ref": "#/$defs/nonEmptyRoots"},
+        "generation": {"type": "integer", "minimum": 1},
+        "fencingToken": {"$ref": "#/$defs/root"}
       },
       "additionalProperties": false
     },
-    "qualifying": { "const": false },
-    "selfCertified": { "const": false }
+    "qualifying": {"const": false},
+    "selfCertified": {"const": false}
   },
   "$defs": {
-    "root": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
-    "nonEmptyStrings": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+    "root": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "nonEmptyStrings": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "nonEmptyRoots": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/root"}}
   },
   "additionalProperties": false
 }
