@@ -30,6 +30,8 @@
   "witnessProfiles": [
     {
       "id": "kfd-warrant-evidence",
+      "profileVersion": "0.2.0-alpha.1",
+      "witnessContract": "kfd.warrant-conformance-witness/v2",
       "decisionIds": ["KFD-10"],
       "manifestPath": "profiles/warrant-evidence/manifest.json",
       "verifierPath": "scripts/warrant-evidence-verifier.mjs"

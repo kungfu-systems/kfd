@@ -1,177 +1,144 @@
 {
-  "schemaVersion": 1,
-  "contract": "kfd.warrant-conformance-vectors/v1",
-  "profile": "kfd-10-warrant@0.1.0-alpha.1",
+  "schemaVersion": 2,
+  "contract": "kfd.warrant-conformance-vectors/v2",
+  "profile": "kfd-10-warrant@0.2.0-alpha.1",
   "baseWitness": {
     "$schema": "https://kfd.libkungfu.dev/schemas/kfd-10/conformance-witness.schema.json",
-    "schemaVersion": 1,
-    "contract": "kfd.warrant-conformance-witness/v1",
-    "profile": "kfd-10-warrant@0.1.0-alpha.1",
+    "schemaVersion": 2,
+    "contract": "kfd.warrant-conformance-witness/v2",
+    "profile": "kfd-10-warrant@0.2.0-alpha.1",
     "warrant": {
-      "id": "warrant:clean-room:001",
+      "id": "warrant:clean-room:lifecycle:001",
       "root": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-      "issuer": "issuer:workspace-owner",
-      "holder": "holder:clean-room-agent",
-      "scope": {
-        "actions": ["apply-reviewed-change"],
-        "subjects": ["subject:repository"],
-        "resources": ["resource:feature-branch"],
-        "consequenceCeiling": 1
+      "purpose": {
+        "statement": "Apply one reviewed change to one exact repository cut and settle the observed outcome.",
+        "action": "apply-reviewed-change",
+        "subject": "subject:repository",
+        "resource": "resource:feature-branch",
+        "targetState": "reviewed-change-applied",
+        "nonClaims": ["release-authority", "product-system-identity"]
       },
-      "targetRoots": [
-        "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
-      ],
-      "validity": {
-        "notBefore": "2026-08-05T00:00:00Z",
-        "expiresAt": "2026-08-06T00:00:00Z"
+      "authority": {
+        "issuer": "issuer:workspace-owner",
+        "holder": "holder:clean-room-agent",
+        "scope": {
+          "actions": ["apply-reviewed-change"],
+          "subjects": ["subject:repository"],
+          "resources": ["resource:feature-branch"],
+          "consequenceCeiling": 1
+        },
+        "targetRoots": ["sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"],
+        "derivation": {
+          "parentRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "parentConsequenceCeiling": 2,
+          "attenuated": true,
+          "independentAuthorityRoot": null
+        },
+        "delegation": {
+          "delegated": false,
+          "from": null,
+          "chainRoots": []
+        },
+        "residualResponsibility": ["issuer:workspace-owner", "holder:clean-room-agent"]
       },
-      "lifecycle": {
-        "state": "active",
+      "lease": {
+        "id": "lease:clean-room:002",
+        "generation": 2,
+        "fencingToken": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "notBefore": "2026-08-05T10:00:00Z",
+        "expiresAt": "2026-08-05T14:00:00Z",
+        "renewable": true,
+        "nonPreemptive": true
+      },
+      "continuation": {
+        "state": "continued",
+        "heartbeatAt": "2026-08-05T11:00:00Z",
+        "expectedGeneration": 2,
+        "expectedFencingToken": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "receiptRoot": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+      },
+      "recovery": {
+        "performed": true,
+        "expiredGeneration": 1,
+        "rejectedFencingToken": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "expectedOldRoot": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "successorGeneration": 2,
+        "successorFencingToken": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "receiptRoot": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+      },
+      "revocation": {
+        "state": "not-revoked",
         "revokedAt": null,
-        "consumedAt": null
+        "authorityRoot": "sha256:4444444444444444444444444444444444444444444444444444444444444444"
       },
-      "derivation": {
-        "parentRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
-        "parentConsequenceCeiling": 2,
-        "attenuated": true,
-        "independentAuthorityRoot": null
-      },
-      "delegation": {
-        "delegated": false,
-        "from": null,
-        "residualResponsibility": ["issuer:workspace-owner"]
+      "settlement": {
+        "state": "applied",
+        "at": "2026-08-05T13:00:00Z",
+        "outcome": "completed",
+        "evidenceRoot": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+        "expectedOldRoot": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+        "nextStateRoot": "sha256:7777777777777777777777777777777777777777777777777777777777777777",
+        "duplicate": false,
+        "receiptRoot": "sha256:8888888888888888888888888888888888888888888888888888888888888888"
       },
       "authorization": {
         "authorized": true,
-        "occurred": false,
-        "occurrenceUsedAsAuthority": false
+        "occurred": true,
+        "occurrenceUsedAsAuthority": false,
+        "reuseAttempted": false
       },
-      "history": [
-        {
-          "event": "granted",
-          "at": "2026-08-05T00:00:00Z",
-          "root": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
-        }
-      ]
+      "history": {
+        "priorRoot": "sha256:9999999999999999999999999999999999999999999999999999999999999999",
+        "currentRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab",
+        "rewritten": false,
+        "events": [
+          {"event": "issued", "at": "2026-08-05T08:00:00Z", "root": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1", "generation": 1},
+          {"event": "expired", "at": "2026-08-05T09:00:00Z", "root": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa2", "generation": 1},
+          {"event": "recovered", "at": "2026-08-05T10:00:00Z", "root": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa3", "generation": 2},
+          {"event": "continued", "at": "2026-08-05T11:00:00Z", "root": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa4", "generation": 2},
+          {"event": "occurred", "at": "2026-08-05T12:00:00Z", "root": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa5", "generation": 2},
+          {"event": "settled", "at": "2026-08-05T13:00:00Z", "root": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa6", "generation": 2}
+        ]
+      }
     },
     "observation": {
       "at": "2026-08-05T12:00:00Z",
+      "holder": "holder:clean-room-agent",
       "action": "apply-reviewed-change",
       "subject": "subject:repository",
       "resource": "resource:feature-branch",
-      "targetRoots": [
-        "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
-      ]
+      "targetRoots": ["sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"],
+      "generation": 2,
+      "fencingToken": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
     },
     "qualifying": false,
     "selfCertified": false
   },
   "patchSemantics": "Each patch key is a dot-separated object path. A null value deletes the final field; any other value replaces it.",
   "vectors": [
-    {
-      "id": "warrant-001-valid-bounded-authority",
-      "polarity": "positive",
-      "patch": {},
-      "expected": { "valid": true, "code": "warrant-valid" }
-    },
-    {
-      "id": "warrant-002-missing-issuer",
-      "polarity": "negative",
-      "patch": { "warrant.issuer": null },
-      "expected": { "valid": false, "code": "warrant-missing-issuer" }
-    },
-    {
-      "id": "warrant-003-missing-holder",
-      "polarity": "negative",
-      "patch": { "warrant.holder": null },
-      "expected": { "valid": false, "code": "warrant-missing-holder" }
-    },
-    {
-      "id": "warrant-004-out-of-scope-action",
-      "polarity": "negative",
-      "patch": { "observation.action": "push-protected-branch" },
-      "expected": { "valid": false, "code": "warrant-scope-mismatch" }
-    },
-    {
-      "id": "warrant-005-missing-exact-roots",
-      "polarity": "negative",
-      "patch": { "warrant.targetRoots": [] },
-      "expected": { "valid": false, "code": "warrant-target-roots-missing" }
-    },
-    {
-      "id": "warrant-006-expired",
-      "polarity": "negative",
-      "patch": { "warrant.validity.expiresAt": "2026-08-05T01:00:00Z" },
-      "expected": { "valid": false, "code": "warrant-expired" }
-    },
-    {
-      "id": "warrant-007-revoked",
-      "polarity": "negative",
-      "patch": {
-        "warrant.lifecycle.state": "revoked",
-        "warrant.lifecycle.revokedAt": "2026-08-05T06:00:00Z"
-      },
-      "expected": { "valid": false, "code": "warrant-revoked" }
-    },
-    {
-      "id": "warrant-008-consumed",
-      "polarity": "negative",
-      "patch": {
-        "warrant.lifecycle.state": "consumed",
-        "warrant.lifecycle.consumedAt": "2026-08-05T06:00:00Z"
-      },
-      "expected": { "valid": false, "code": "warrant-consumed" }
-    },
-    {
-      "id": "warrant-009-stale-target",
-      "polarity": "negative",
-      "patch": {
-        "observation.targetRoots": [
-          "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
-        ]
-      },
-      "expected": { "valid": false, "code": "warrant-stale-target" }
-    },
-    {
-      "id": "warrant-010-authority-amplification",
-      "polarity": "negative",
-      "patch": {
-        "warrant.scope.consequenceCeiling": 3,
-        "warrant.derivation.attenuated": false
-      },
-      "expected": { "valid": false, "code": "warrant-authority-amplification" }
-    },
-    {
-      "id": "warrant-011-delegation-chain-missing",
-      "polarity": "negative",
-      "patch": {
-        "warrant.delegation.delegated": true,
-        "warrant.delegation.from": null
-      },
-      "expected": { "valid": false, "code": "warrant-delegation-chain-missing" }
-    },
-    {
-      "id": "warrant-012-residual-responsibility-missing",
-      "polarity": "negative",
-      "patch": { "warrant.delegation.residualResponsibility": [] },
-      "expected": { "valid": false, "code": "warrant-residual-responsibility-missing" }
-    },
-    {
-      "id": "warrant-013-occurrence-used-as-authority",
-      "polarity": "negative",
-      "patch": {
-        "warrant.authorization.authorized": false,
-        "warrant.authorization.occurred": true,
-        "warrant.authorization.occurrenceUsedAsAuthority": true
-      },
-      "expected": { "valid": false, "code": "warrant-authorization-occurrence-conflated" }
-    },
-    {
-      "id": "warrant-014-history-not-preserved",
-      "polarity": "negative",
-      "patch": { "warrant.history": [] },
-      "expected": { "valid": false, "code": "warrant-history-missing" }
-    }
+    {"id": "warrant-001-valid-fenced-recovered-settled-authority", "polarity": "positive", "patch": {}, "expected": {"valid": true, "code": "warrant-valid"}},
+    {"id": "warrant-002-missing-issuer", "polarity": "negative", "patch": {"warrant.authority.issuer": null}, "expected": {"valid": false, "code": "warrant-missing-issuer"}},
+    {"id": "warrant-003-missing-holder", "polarity": "negative", "patch": {"warrant.authority.holder": null}, "expected": {"valid": false, "code": "warrant-missing-holder"}},
+    {"id": "warrant-004-out-of-scope-action", "polarity": "negative", "patch": {"warrant.purpose.action": "push-protected-branch", "observation.action": "push-protected-branch"}, "expected": {"valid": false, "code": "warrant-scope-mismatch"}},
+    {"id": "warrant-005-missing-exact-roots", "polarity": "negative", "patch": {"warrant.authority.targetRoots": []}, "expected": {"valid": false, "code": "warrant-target-roots-missing"}},
+    {"id": "warrant-006-expired-lease", "polarity": "negative", "patch": {"warrant.lease.expiresAt": "2026-08-05T11:00:00Z"}, "expected": {"valid": false, "code": "warrant-expired"}},
+    {"id": "warrant-007-revoked-authority", "polarity": "negative", "patch": {"warrant.revocation.state": "revoked", "warrant.revocation.revokedAt": "2026-08-05T11:30:00Z"}, "expected": {"valid": false, "code": "warrant-revoked"}},
+    {"id": "warrant-008-consumed-authority-reused", "polarity": "negative", "patch": {"warrant.authorization.reuseAttempted": true}, "expected": {"valid": false, "code": "warrant-consumed"}},
+    {"id": "warrant-009-target-root-substitution", "polarity": "negative", "patch": {"observation.targetRoots": ["sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"]}, "expected": {"valid": false, "code": "warrant-root-substitution"}},
+    {"id": "warrant-010-authority-amplification", "polarity": "negative", "patch": {"warrant.authority.scope.consequenceCeiling": 3, "warrant.authority.derivation.attenuated": false}, "expected": {"valid": false, "code": "warrant-authority-amplification"}},
+    {"id": "warrant-011-delegation-chain-missing", "polarity": "negative", "patch": {"warrant.authority.delegation.delegated": true, "warrant.authority.delegation.from": null, "warrant.authority.delegation.chainRoots": []}, "expected": {"valid": false, "code": "warrant-delegation-chain-missing"}},
+    {"id": "warrant-012-residual-responsibility-missing", "polarity": "negative", "patch": {"warrant.authority.residualResponsibility": []}, "expected": {"valid": false, "code": "warrant-residual-responsibility-missing"}},
+    {"id": "warrant-013-occurrence-used-as-authority", "polarity": "negative", "patch": {"warrant.authorization.authorized": false, "warrant.authorization.occurred": true, "warrant.authorization.occurrenceUsedAsAuthority": true}, "expected": {"valid": false, "code": "warrant-authorization-occurrence-conflated"}},
+    {"id": "warrant-014-history-not-preserved", "polarity": "negative", "patch": {"warrant.history.events": []}, "expected": {"valid": false, "code": "warrant-history-missing"}},
+    {"id": "warrant-015-stale-holder", "polarity": "negative", "patch": {"observation.holder": "holder:stale-controller"}, "expected": {"valid": false, "code": "warrant-stale-holder"}},
+    {"id": "warrant-016-stale-lease-generation", "polarity": "negative", "patch": {"observation.generation": 1}, "expected": {"valid": false, "code": "warrant-stale-generation"}},
+    {"id": "warrant-017-stale-fencing-token", "polarity": "negative", "patch": {"observation.fencingToken": "sha256:1111111111111111111111111111111111111111111111111111111111111111"}, "expected": {"valid": false, "code": "warrant-stale-fence"}},
+    {"id": "warrant-018-continuation-generation-drift", "polarity": "negative", "patch": {"warrant.continuation.expectedGeneration": 1}, "expected": {"valid": false, "code": "warrant-continuation-stale"}},
+    {"id": "warrant-019-recovery-successor-drift", "polarity": "negative", "patch": {"warrant.recovery.successorGeneration": 3}, "expected": {"valid": false, "code": "warrant-recovery-stale"}},
+    {"id": "warrant-020-duplicate-settlement", "polarity": "negative", "patch": {"warrant.settlement.duplicate": true, "warrant.settlement.nextStateRoot": "sha256:6666666666666666666666666666666666666666666666666666666666666666"}, "expected": {"valid": false, "code": "warrant-duplicate-settlement"}},
+    {"id": "warrant-021-settlement-root-drift", "polarity": "negative", "patch": {"warrant.settlement.nextStateRoot": "sha256:6666666666666666666666666666666666666666666666666666666666666666"}, "expected": {"valid": false, "code": "warrant-settlement-root-drift"}},
+    {"id": "warrant-022-history-rewritten", "polarity": "negative", "patch": {"warrant.history.rewritten": true}, "expected": {"valid": false, "code": "warrant-history-rewritten"}},
+    {"id": "warrant-023-preemptive-lease", "polarity": "negative", "patch": {"warrant.lease.nonPreemptive": false}, "expected": {"valid": false, "code": "warrant-preemption-allowed"}}
   ],
-  "claimBoundary": "The vectors test the experimental KFD-10 draft profile only. Passing them is not KFD-10 activation, certification, legal authority, security review, or proof of production fitness."
+  "claimBoundary": "The vectors test the experimental KFD-10 draft lifecycle profile only. Passing them is not KFD-10 activation, certification, legal authority, security review, product privilege, or proof of production fitness."
 }

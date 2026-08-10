@@ -1,0 +1,80 @@
+{
+  "$schema": "https://kfd.libkungfu.dev/schemas/kfd-evidence/primitive-evidence-bundle.schema.json",
+  "schemaVersion": 1,
+  "contract": "kfd.primitive-evidence-bundle/v1",
+  "bundleId": "kungfu-kfx-runtime-warrant-2026-08-11",
+  "primitive": "Warrant",
+  "source": {
+    "repository": "https://github.com/kungfu-systems/kungfu",
+    "commit": "0b6e1491e92c950c1a8c71b3bb9373526f7d1571",
+    "tree": "cf9c3c7dd96f776403290c88969205f39f8b0a5c",
+    "path": "framework/core/src/libkungfu/src/runtime/kfx/native_registry.cpp",
+    "contentRoot": "sha256:98881b2110239f54706b05da88d8a847442b82782a32805aaa6d65faa9b21808",
+    "public": true,
+    "retained": true
+  },
+  "pressureField": "A KFX mutation must issue one Warrant into the current named Fact Cut before materialization, prove that exact Warrant/Cut/revision is still current, and settle Work, Warrant, Episode and outcome into one successor Cut without letting package identity or runtime capability synthesize authority.",
+  "mapping": {
+    "decision": "KFD-10",
+    "primitive": "Warrant",
+    "kfdClauses": [
+      "decisions/KFD-10.md#rule",
+      "decisions/KFD-10.md#independence",
+      "docs/KFD-10-formal.md#derivation-and-invariants",
+      "docs/KFD-10-formal.md#transitions"
+    ]
+  },
+  "evidenceClass": "generic-candidate",
+  "candidateInvariants": [
+    "purpose, operation, package and authority roots determine the planned Warrant",
+    "the Warrant Fact is issued into a named Cut before materialization",
+    "mutation presents the exact planned Warrant root, Cut root and revision",
+    "settlement consumes the Warrant and records Work, Episode and Settlement in one successor Cut",
+    "history is reconstructed from immutable Fact versions rather than a private lifecycle journal",
+    "capability admission and product identity do not become Warrant authority"
+  ],
+  "reusableTestRoots": [
+    "sha256:98881b2110239f54706b05da88d8a847442b82782a32805aaa6d65faa9b21808",
+    "sha256:a59334a0986c01f187456a162f8129d2baeb6a3377f10797247689b2b4f52bf1"
+  ],
+  "failureOrCounterexample": "KFX uses named-Cut revision fencing rather than a generic renewable lease object and does not independently prove generic delegation, residual-responsibility transfer, renewal, or holder takeover semantics.",
+  "review": {
+    "state": "self-reviewed",
+    "reviewerClass": "same-steward",
+    "evidenceRoots": [
+      "sha256:98881b2110239f54706b05da88d8a847442b82782a32805aaa6d65faa9b21808",
+      "sha256:a59334a0986c01f187456a162f8129d2baeb6a3377f10797247689b2b4f52bf1"
+    ]
+  },
+  "lineage": {
+    "sourceEntryId": "kungfu-kfx-runtime-warrant-2026-08-11",
+    "predecessorBundleIds": ["kungfu-kfx-recovery-warrant-2026-08-05"]
+  },
+  "observation": {
+    "upstreamContract": "kungfu.kfx.warrant-fact/v2",
+    "kind": "implementation-contract",
+    "summary": "KFX issues a purpose-bound Warrant Fact before mutation, checks exact Warrant/Cut/revision authority before side effects, and consumes it through Work/Episode/Settlement Facts and expected-old Cut CAS."
+  },
+  "assessment": {
+    "verdict": "partial",
+    "genericClaims": [
+      {"id": "purpose-and-authority-roots", "status": "proved", "basis": "The plan binds purpose, operation, package, policy, admission, capability and approval roots into the Warrant root."},
+      {"id": "pre-side-effect-issuance", "status": "proved", "basis": "A Warrant Fact and issuance receipt advance the named Cut before package materialization begins."},
+      {"id": "stale-authority-rejection", "status": "proved", "basis": "Apply requires the exact planned Warrant root and current authority Cut/revision; stale plans and concurrent writers fail closed."},
+      {"id": "consumption-and-settlement", "status": "proved", "basis": "The successor Cut records settled Work, consumed Warrant, realized Episode and Settlement with a rooted receipt."},
+      {"id": "immutable-history", "status": "proved", "basis": "History reconstructs immutable Warrant and settlement Fact versions without a second KFX lifecycle journal."},
+      {"id": "lease-generation-continuation", "status": "missing", "basis": "KFX uses Cut/revision CAS and exact Warrant roots, not a portable renewable lease generation, heartbeat or takeover contract."},
+      {"id": "delegation-and-residual-responsibility", "status": "missing", "basis": "The retained runtime facts do not express a generic delegation chain or residual-responsibility transfer."}
+    ],
+    "profileSpecificClaims": [
+      {"id": "named-fact-cut-authority", "status": "proved", "basis": "KFX owns one named Cut whose exact expected-old revision serializes lifecycle mutation."},
+      {"id": "capability-equals-authority", "status": "invalidated", "basis": "Capability grants, product assembly and supply-chain admission remain separate inputs and cannot synthesize the Warrant."}
+    ],
+    "promotion": {
+      "allowed": false,
+      "reason": "KFX demonstrates one product-specific Warrant lifecycle and cannot self-promote the KFD draft or impose its Fact kernel on adopters."
+    }
+  },
+  "qualifying": false,
+  "selfCertified": false
+}
