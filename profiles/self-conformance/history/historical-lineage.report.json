@@ -117,7 +117,7 @@
       "id": "foundation-revision-admission",
       "kind": "git-document",
       "repository": "https://github.com/kungfu-systems/kfd",
-      "commit": "8d9d6338afd62e01aac4c776313ba40e44f7700a",
+      "commit": "903737e47e047c0d3aedce98fdf3751cbc9b7aab",
       "path": "docs/foundation-revision-2026-07-21-decision-admission.json",
       "contentRoot": "sha256:2b1818caa9d418d84e707a52968eaf3f4d35ac33ded780b3204ad180f1a370f7",
       "payload": {
@@ -176,7 +176,7 @@
       "id": "foundation-revision-registry",
       "kind": "git-registry",
       "repository": "https://github.com/kungfu-systems/kfd",
-      "commit": "8d9d6338afd62e01aac4c776313ba40e44f7700a",
+      "commit": "903737e47e047c0d3aedce98fdf3751cbc9b7aab",
       "path": "registry.json",
       "contentRoot": "sha256:204014d1169071ef6ecc72989ae2dc63c1545df230e23b7f784a5f6ecad27898",
       "payload": {
@@ -320,7 +320,7 @@
       "id": "kfd7-activation-record",
       "kind": "git-document",
       "repository": "https://github.com/kungfu-systems/kfd",
-      "commit": "a56a3d3bcaa2889a931b3891d2085496d2760db4",
+      "commit": "bca202feb823f9c3234753b05dfd4dff460e69f6",
       "path": "evidence/kfd-7/activation-record.json",
       "contentRoot": "sha256:2f23c6e87e00270be8198401ef57efb59a121c247a47e1006a0e9dad25d63627",
       "payload": {
@@ -395,7 +395,7 @@
       "id": "kfd7-active-registry",
       "kind": "git-registry",
       "repository": "https://github.com/kungfu-systems/kfd",
-      "commit": "a56a3d3bcaa2889a931b3891d2085496d2760db4",
+      "commit": "bca202feb823f9c3234753b05dfd4dff460e69f6",
       "path": "registry.json",
       "contentRoot": "sha256:8187db2d9256679e29df25a92aae7c5dc4cc3af154cceef6a1fce874135d4a79",
       "payload": {
@@ -479,7 +479,7 @@
       "id": "kfd7-candidate-registry",
       "kind": "git-registry",
       "repository": "https://github.com/kungfu-systems/kfd",
-      "commit": "31a3227e33453883cdcd874b198d8e3443be75e0",
+      "commit": "cbffaf8bbe1c5f012b860798fce756de3cebbc80",
       "path": "drafts/registry.json",
       "contentRoot": "sha256:cd112627b57e13a6d7bb9b53f681c44e0c3b0a63c3a8b059df1d977878852dd7",
       "payload": {
@@ -524,7 +524,7 @@
       "id": "kfd7-numbered-registry",
       "kind": "git-registry",
       "repository": "https://github.com/kungfu-systems/kfd",
-      "commit": "bcecac09397d0f105fe2863ef35eb853def244ac",
+      "commit": "8fa0000cf3d1c7ce0802a013a6b5103177b3630e",
       "path": "registry.json",
       "contentRoot": "sha256:90f3316cee9cf5bbb2efd5da21e38b9a85eb49403fb9b245416a567ca6ed18b0",
       "payload": {
@@ -608,7 +608,7 @@
       "id": "kfd7-qualified-decision",
       "kind": "git-document",
       "repository": "https://github.com/kungfu-systems/kfd",
-      "commit": "56e8fd1081bc1616c6e2cbfaa6b047fbec7cbfae",
+      "commit": "1b96f1de9d189ad5a2cac90de0ac2322cab1177f",
       "path": "decisions/KFD-7.md",
       "contentRoot": "sha256:4b2dc449a85dbbbd46e7b4607878076da6b6c2dc3234c399635c04448ed4209e",
       "payload": "# KFD-7: Real-world action must keep its responsibilities distinct\n\n- Status: draft\n- Number: 7\n- Kind: principle\n- Applies to: every kungfu-systems product, repository, agent workflow, and participant-facing interface that represents consequential real-world action\n\n## One sentence\n\nReal-world action must keep direction, perspective, authority, and occurrence\nindependently addressable.\n\nAction begins from fact-bound direction, perspective, and authority, encounters\nreality, and returns as independently replayable causal experience.\n\n## Status and gate\n\nKFD-7 is a numbered draft promoted from the\n[cross-domain action-Primitive candidate](../drafts/action-state-separation.md).\nIts number and authority are allocated; its activation evidence remains open.\n\nThe current model has enough theoretical closure to become an organization\ndecision: state and occurrence are not interchangeable, and direction,\nperspective, and authority can change safe action independently. Activation\nstill requires product evidence that this separation transfers across domains\nand lowers total reconstruction, authority, and consequence risk without\nforcing unnecessary ceremony on ordinary work.\n\n## Substrate boundary\n\nKFD-7 distinguishes two complementary operational substrates:\n\n```text\nFact cut       what holds at a declared authority and evidence boundary\nCausal record  what occurred between declared boundaries\n```\n\nA causal record may be carried by an Episode. It preserves action,\nconsequence, cost, failure, retry, authority use, and causal order rather than\nonly before-and-after state. Equal endpoints do not imply equal experience.\n\nFact cuts and causal records remain independently addressable. A causal record\ndoes not silently admit its endpoint as current fact, and a state transition\ndoes not erase the path that produced it.\n\n## Action responsibilities\n\nConsequential action requires three independently addressable responsibilities:\n\n```text\ndirection             Pursuit\nperspective and cut   Atlas\nauthority boundary    Warrant\nrealized occurrence   Episode or another bounded causal record\n```\n\nThe names Atlas, Pursuit, Warrant, and Episode identify the first\nkungfu-systems action profiles. The principle is the separation of semantic\nresponsibility:\n\n- direction states which continuing change and consequences matter;\n- perspective states from where, from which accepted facts, and at which cut\n  action is judged;\n- authority states which transition may be performed, by whom, and under which\n  constraints;\n- occurrence preserves what actually happened.\n\nNone may be silently derived from another. Intention does not grant authority.\nAvailable perspective is not complete reality. Permission or planning does not\nprove occurrence. Occurrence does not prove progress, completion, or\nauthorization.\n\n## Action closure\n\nThe normative closure is:\n\n```text\ndeclared Fact cut\n  -> independently addressable direction, perspective, and authority\n  -> bounded action encounters reality\n  -> independently replayable causal record\n  -> claims, review, correction, and explicit admission\n  -> successor Fact cut\n```\n\nThe order is semantic, not a mandatory interface sequence. Low-consequence\nwork may use inspectable defaults and progressive disclosure. Simplification\nmay reduce ceremony but must not fuse responsibility or fabricate a missing\nrole from another one.\n\n## Conservative session limit\n\nKFD-7 is a conservative extension of ordinary agent sessions. When work has\none local direction, one adequate bounded context, one stable authority grant,\none contiguous execution, and sparse Fact change, an implementation must be\nable to project:\n\n```text\nPursuit  -> goal\nAtlas    -> context\nWarrant  -> tool permissions\nEpisode  -> session, run, or transcript\nFact     -> input state and result\n```\n\nThe participant need not manage five explicit objects in this limit. The\nsession-compatible surface is conforming when it preserves the relevant\ndirection, perspective boundary, effective authority, realized occurrence,\nand admitted result, and keeps its defaults inspectable.\n\nThe formal reference defines this as a conditional round-trip theorem:\nexpanding a session-compressible session into the five responsibilities and\nprojecting it back must preserve those five decision observations. A product\ndoes not re-prove the abstract theorem; it proves that its concrete expansion,\nprojection, and compressibility boundary refine it.\n\nThis compression is conditional. The independent responsibilities must become\naddressable when work crosses directions, perspectives or freshness cuts,\nauthority states, causal Episodes, or material Fact branches. A session\ntherefore remains a valid local interaction and runtime object; it is not the\nsole model of consequential real-world work.\n\nContext is likewise not sufficient by itself. The same visible context can\nsupport different valid action sets when the Pursuit, Warrant, or Atlas cut and\nfreshness differ. One physical session record may still conform, but only when\nit preserves those responsibilities rather than treating context as their\nsubstitute.\n\n## Gate\n\nKFD-7 applies when an action has durable, cross-participant, cross-tool,\nauthority-bearing, safety-relevant, or materially costly consequences. A\npurely local reversible operation may rely on defaults when the defaults and\ntheir consequence boundary remain inspectable.\n\nA conforming claim:\n\n- binds action to a declared fact cut and perspective;\n- preserves continuing direction independently of one execution;\n- identifies applicable authority and its constraints;\n- records realized occurrence independently of planned or expected state;\n- preserves causal boundaries and composition across successor cuts;\n- keeps missing, defaulted, derived, expired, revoked, or degraded\n  responsibilities visible;\n- does not infer completion, success, permission, or reality completeness from\n  the wrong object.\n\n## Reference Profile contract\n\nKFD publishes `schemas/kfd-7/action-contract.schema.json` as a version 2 draft\nProfile declaration. It does not prescribe a universal product object model.\nIt gives products and release systems one machine-readable place to declare:\n\n- the Fact, Episode, Pursuit, Atlas, and Warrant responsibility mappings;\n- Profile-owned lifecycle vocabulary and implementation coordinates;\n- supported transitions with preconditions, effects, receipts, evidence,\n  denial reasons, and residual risks;\n- prohibited cross-role inferences and retained evidence obligations;\n- extension ownership, non-claims, qualification state, and activation verdict;\n- the standard session round-trip and context-insufficiency references, plus\n  the evidence categories used to qualify a concrete implementation.\n\nAll five responsibility declarations remain required even when a product uses\none physical record or a low-complexity session projection. The declaration\nexplains the mapping or inspectable default; it does not require five stores,\nforms, or commands. Schema conformance proves declaration closure only. It does\nnot prove role necessity, runtime behavior, product fitness, or activation.\n\n## Activation\n\nKFD-7 remains draft until real product evidence:\n\n- demonstrates counterfactual independence by holding two action\n  responsibilities fixed while varying the third;\n- transfers the model across non-isomorphic work domains;\n- distinguishes equal-endpoint but causally different Episodes;\n- represents concurrency, compensation, failure, and retry without hidden\n  reconstruction;\n- demonstrates a low-complexity session round trip without semantic loss or\n  manual object ceremony;\n- shows that complexity breakpoints expose the required independent roles;\n- proves that the implementation refines the standard round-trip theorem and\n  retains same-payload counterexamples where valid action differs;\n- compares task, goal, workflow, session, approval, capability, and fused\n  alternatives;\n- demonstrates lower total lifecycle cost or materially safer action.\n\nAn `activate` verdict additionally binds an exact evidence cut, independent\nreview, at least one retained product witness, and no planned or failed\nevidence obligation. Missing evidence remains visible; it is never projected\nas pass.\n\nFailure is evidence for revision, simplification, or rejection of the proposed\nprofiles. It is not permission to infer one responsibility from another.\n\n## Relation to KFD-1 through KFD-6\n\nKFD-1 keeps fact cuts and causal records from drifting. KFD-2 makes claims about\nthem assessable. KFD-3 lets participants exchange trusted value without hidden\npressure. KFD-4 supplies declared reference frames and inspectable\ntransformations. KFD-5 separates the genesis of action Primitives from their\nqualification. KFD-6 asks whether causal experience can sustain autonomous\ndiscovery. KFD-7 turns those foundations back toward action:\n\n```text\nnon-drifting facts\n  -> bounded trust\n  -> transparent cooperation\n  -> declared perspective\n  -> qualified Primitives\n  -> grounded discovery\n  -> fact-bound real-world action\n```\n\n## Verification\n\nThe non-normative reference semantics are published in\n`docs/KFD-7-formal.md`. The draft Profile contract is published at\n`schemas/kfd-7/action-contract.schema.json` and is implemented independently by\nthe native and WebAssembly verifier projections. Current package verification\nproves document, metadata, route, digest, declaration, and negative-fixture\nclosure. It does not prove cross-domain minimality, runtime behavior, product\nusability, or activation.\n\n## Adopters\n\nExperimental adopters cite KFD-7 when they expose the action model and keep its\nstatus `draft`. They own the evidence for role independence, fact-cut\nadmission, causal fidelity, authority correctness, progressive disclosure, and\ndomain transfer.\n"
@@ -617,7 +617,7 @@
       "id": "kfd7-refined-candidates",
       "kind": "git-registry",
       "repository": "https://github.com/kungfu-systems/kfd",
-      "commit": "72402ac2a035cb9ff8835f3d2f66d6fd4fe827cd",
+      "commit": "d9711c64573fba844aeb43780a8323ee6f901155",
       "path": "drafts/registry.json",
       "contentRoot": "sha256:ea484c7f3a28be72e2a75f7171627e73e55a51129a043daa314bb6d1e7bf37fe",
       "payload": {
@@ -930,7 +930,7 @@
       "id": "numbered-drafts-pr225",
       "kind": "git-registry",
       "repository": "https://github.com/kungfu-systems/kfd",
-      "commit": "d66307c4f985d6036b1d0fb440866903f534d770",
+      "commit": "9040c33475e1120c588d6bba780d4bdc0f66a521",
       "path": "registry.json",
       "contentRoot": "sha256:9d78aa653d55e33a13ff763c5434beca06dc6fafcd32ab98d2773db87abf4a51",
       "payload": {

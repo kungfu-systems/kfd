@@ -72,12 +72,12 @@ addSource({
     integrity: "sha512-pTNOaJOgsfMehptEFcqhICzuO/c0ZJwrYlZcgLgIbOu2V2c/MDCKOuPXmD/RH1dpIjQ+SfZROuQqsPH5ERlQ/w==",
   },
 });
-addSource({ id: "kfd7-candidate-registry", kind: "git-registry", commit: prFacts[159].head, sourcePath: "drafts/registry.json", payload: gitJson(prFacts[159].head, "drafts/registry.json") });
-addSource({ id: "kfd7-refined-candidates", kind: "git-registry", commit: prFacts[176].head, sourcePath: "drafts/registry.json", payload: gitJson(prFacts[176].head, "drafts/registry.json") });
-addSource({ id: "kfd7-numbered-registry", kind: "git-registry", commit: prFacts[180].head, sourcePath: "registry.json", payload: gitJson(prFacts[180].head, "registry.json") });
-addSource({ id: "kfd7-qualified-decision", kind: "git-document", commit: prFacts[186].head, sourcePath: "decisions/KFD-7.md", payload: execFileSync("git", ["show", `${prFacts[186].head}:decisions/KFD-7.md`], { cwd: root, encoding: "utf8" }) });
-addSource({ id: "kfd7-activation-record", kind: "git-document", commit: prFacts[190].head, sourcePath: "evidence/kfd-7/activation-record.json", payload: gitJson(prFacts[190].head, "evidence/kfd-7/activation-record.json") });
-addSource({ id: "kfd7-active-registry", kind: "git-registry", commit: prFacts[190].head, sourcePath: "registry.json", payload: gitJson(prFacts[190].head, "registry.json") });
+addSource({ id: "kfd7-candidate-registry", kind: "git-registry", commit: prFacts[159].merge, sourcePath: "drafts/registry.json", payload: gitJson(prFacts[159].merge, "drafts/registry.json") });
+addSource({ id: "kfd7-refined-candidates", kind: "git-registry", commit: prFacts[176].merge, sourcePath: "drafts/registry.json", payload: gitJson(prFacts[176].merge, "drafts/registry.json") });
+addSource({ id: "kfd7-numbered-registry", kind: "git-registry", commit: prFacts[180].merge, sourcePath: "registry.json", payload: gitJson(prFacts[180].merge, "registry.json") });
+addSource({ id: "kfd7-qualified-decision", kind: "git-document", commit: prFacts[186].merge, sourcePath: "decisions/KFD-7.md", payload: execFileSync("git", ["show", `${prFacts[186].merge}:decisions/KFD-7.md`], { cwd: root, encoding: "utf8" }) });
+addSource({ id: "kfd7-activation-record", kind: "git-document", commit: prFacts[190].merge, sourcePath: "evidence/kfd-7/activation-record.json", payload: gitJson(prFacts[190].merge, "evidence/kfd-7/activation-record.json") });
+addSource({ id: "kfd7-active-registry", kind: "git-registry", commit: prFacts[190].merge, sourcePath: "registry.json", payload: gitJson(prFacts[190].merge, "registry.json") });
 addSource({
   id: "alpha36-package", kind: "npm-package", sourcePath: "npm:@kungfu-tech/kfd@1.0.0-alpha.36",
   sourceRepository: "https://registry.npmjs.org/@kungfu-tech/kfd/1.0.0-alpha.36",
@@ -89,9 +89,9 @@ addSource({
     integrity: "sha512-SmIE0qf7kHf2g8lIRhigfqoYsO5eHDvJLE3nogXnjAVEFe/uw0jjsDTOx2nPwaq2yC04tHmNtynHj/UcIEb4SA==",
   },
 });
-addSource({ id: "numbered-drafts-pr225", kind: "git-registry", commit: prFacts[225].head, sourcePath: "registry.json", payload: gitJson(prFacts[225].head, "registry.json") });
-addSource({ id: "foundation-revision-admission", kind: "git-document", commit: prFacts[230].head, sourcePath: "docs/foundation-revision-2026-07-21-decision-admission.json", payload: gitJson(prFacts[230].head, "docs/foundation-revision-2026-07-21-decision-admission.json") });
-addSource({ id: "foundation-revision-registry", kind: "git-registry", commit: prFacts[230].head, sourcePath: "registry.json", payload: gitJson(prFacts[230].head, "registry.json") });
+addSource({ id: "numbered-drafts-pr225", kind: "git-registry", commit: prFacts[225].merge, sourcePath: "registry.json", payload: gitJson(prFacts[225].merge, "registry.json") });
+addSource({ id: "foundation-revision-admission", kind: "git-document", commit: prFacts[230].merge, sourcePath: "docs/foundation-revision-2026-07-21-decision-admission.json", payload: gitJson(prFacts[230].merge, "docs/foundation-revision-2026-07-21-decision-admission.json") });
+addSource({ id: "foundation-revision-registry", kind: "git-registry", commit: prFacts[230].merge, sourcePath: "registry.json", payload: gitJson(prFacts[230].merge, "registry.json") });
 
 const terminalRequest = JSON.parse(fs.readFileSync(path.join(root, "evidence/self-conformance/transitions/recursive-normative-self-conformance-terminal.request.json"), "utf8"));
 const terminalEntry = terminalRequest.chain.at(-1);
