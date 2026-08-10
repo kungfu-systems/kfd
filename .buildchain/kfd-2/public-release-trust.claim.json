@@ -5,12 +5,12 @@
   "sourceBindings": [
     {
       "path": "package.json",
-      "sha256": "eec4979285c46ff68f65aae02befc96fa2eddf88908855c3c4634fc53bfc1e24",
+      "sha256": "fdb9812a96606775ff36596d8d3bf62236e986c7bb29b3e9064e4b9e7ef9f5d6",
       "id": "package-version-and-exports"
     },
     {
       "path": "kfd.release.json",
-      "sha256": "e73fa43c5b269fe1dba4abf117788c815fec7c5fad45a9ce3e9fd654820be37f",
+      "sha256": "1b4368ead51988228293f2ebc92e2ae94703c33961271264a3fbd01acbc305ac",
       "id": "anchored-release-version"
     },
     {
@@ -20,12 +20,12 @@
     },
     {
       "path": "standards.json",
-      "sha256": "e849d00499489a7fa28aa3c4873ee3f965e5b0f74e1ea1473a5f41a737484149",
+      "sha256": "021f730ee3c816ca9207480832136185f6453e10d491bb2e52b66a04476dbedc",
       "id": "standards-metadata"
     },
     {
       "path": "release-impact.json",
-      "sha256": "8db778c458bc8d2a24b2ad95778ba3812fdcc612e0083c4e2236757b31b30411",
+      "sha256": "3f9617e90f372220f9ad321ce2c9dc2467717a13aea88c318eeba1eef22a91de",
       "id": "release-impact-ledger"
     },
     {
@@ -47,12 +47,12 @@
   "machineEvidence": [
     {
       "path": "scripts/check.mjs",
-      "sha256": "0a72b2ca325acca6e2fc1153c93f7eeaa868f4206e57c8c12a264d7afecfc756",
+      "sha256": "aeab1a87213d3b553ee3257e8087b62cc20d41905a10bc3b186c0bd7c788be17",
       "id": "self-verification-command"
     },
     {
       "path": ".github/workflows/build.yml",
-      "sha256": "a7eef159b516c9c96b554979a40aeec86ec8062476752393175fc6eebf951ac8",
+      "sha256": "b79aeb80009a55b92489474d4ad90911ac8f3b523f952bf33e89bab4279f3ae3",
       "id": "buildchain-build-workflow"
     },
     {
@@ -87,16 +87,16 @@
     }
   ],
   "hashes": {
-    "package-version-and-exports": "eec4979285c46ff68f65aae02befc96fa2eddf88908855c3c4634fc53bfc1e24",
-    "anchored-release-version": "e73fa43c5b269fe1dba4abf117788c815fec7c5fad45a9ce3e9fd654820be37f",
+    "package-version-and-exports": "fdb9812a96606775ff36596d8d3bf62236e986c7bb29b3e9064e4b9e7ef9f5d6",
+    "anchored-release-version": "1b4368ead51988228293f2ebc92e2ae94703c33961271264a3fbd01acbc305ac",
     "decision-registry": "54d5e013c933cfcd6886f6b01d411d2f1888448e4b87f82cfa8d2245ab2f28a5",
-    "standards-metadata": "e849d00499489a7fa28aa3c4873ee3f965e5b0f74e1ea1473a5f41a737484149",
-    "release-impact-ledger": "8db778c458bc8d2a24b2ad95778ba3812fdcc612e0083c4e2236757b31b30411",
+    "standards-metadata": "021f730ee3c816ca9207480832136185f6453e10d491bb2e52b66a04476dbedc",
+    "release-impact-ledger": "3f9617e90f372220f9ad321ce2c9dc2467717a13aea88c318eeba1eef22a91de",
     "buildchain-release-contract": "931a275cb0238c63f0e190e6036893f23973668aea1e800b86a1743e824eae5b",
     "buildchain-alpha-runtime-contract-lock": "454de21cee49e99f53ef90b6df085601a5d6877aa3fcd77a81ac72d1be45f3f8",
     "buildchain-runtime-contract-lock": "4b3361400b814d8d4dece70579a9bb02d0134eec3170953f7996a88db2a2698c",
-    "self-verification-command": "0a72b2ca325acca6e2fc1153c93f7eeaa868f4206e57c8c12a264d7afecfc756",
-    "buildchain-build-workflow": "a7eef159b516c9c96b554979a40aeec86ec8062476752393175fc6eebf951ac8",
+    "self-verification-command": "aeab1a87213d3b553ee3257e8087b62cc20d41905a10bc3b186c0bd7c788be17",
+    "buildchain-build-workflow": "b79aeb80009a55b92489474d4ad90911ac8f3b523f952bf33e89bab4279f3ae3",
     "buildchain-promotion-workflow": "fe4eca35b542d11d232588d3d792da31339dceabd957eb9e630d281f215346b3",
     "kfd-2-trust-taxonomy-schema": "a663d301a663cadb8567e3010361f5a630b76b6518ed7603dfd58cbd4e64a658",
     "kfd-2-trust-claims-schema": "5f452a5973502273f0249116b3a4171549a84515d8ba5286a09f173db4f0e03a",
@@ -107,15 +107,15 @@
   "artifacts": [
     {
       "name": "@kungfu-tech/kfd",
-      "version": "1.0.0-alpha.58",
+      "version": "1.0.0-alpha.59",
       "path": "package.json",
-      "sha256": "eec4979285c46ff68f65aae02befc96fa2eddf88908855c3c4634fc53bfc1e24"
+      "sha256": "fdb9812a96606775ff36596d8d3bf62236e986c7bb29b3e9064e4b9e7ef9f5d6"
     },
     {
       "name": "kfd-release-anchor",
-      "version": "1.0.0-alpha.58",
+      "version": "1.0.0-alpha.59",
       "path": "kfd.release.json",
-      "sha256": "e73fa43c5b269fe1dba4abf117788c815fec7c5fad45a9ce3e9fd654820be37f"
+      "sha256": "1b4368ead51988228293f2ebc92e2ae94703c33961271264a3fbd01acbc305ac"
     }
   ],
   "verification": {

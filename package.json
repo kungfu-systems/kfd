@@ -1,6 +1,6 @@
 {
   "name": "@kungfu-tech/kfd",
-  "version": "1.0.0-alpha.58",
+  "version": "1.0.0-alpha.59",
   "description": "KFD: an open, evidence-governed engineering standard for reliable action and continuity under uncertainty",
   "license": "Apache-2.0",
   "bin": {
@@ -58,6 +58,8 @@
     "./registry.json": "./registry.json",
     "./standards.json": "./standards.json",
     "./activation-contracts.json": "./activation-contracts.json",
+    "./kfd-4/conformance-witness.schema.json": "./schemas/kfd-4/conformance-witness.schema.json",
+    "./kfd-8/atlas-coordinate.schema.json": "./schemas/kfd-8/atlas-coordinate.schema.json",
     "./kfd-11/adopter-witness.schema.json": "./schemas/kfd-11/adopter-witness.schema.json",
     "./kfd-12/adopter-witness.schema.json": "./schemas/kfd-12/adopter-witness.schema.json",
     "./kfd-13/adopter-witness.schema.json": "./schemas/kfd-13/adopter-witness.schema.json",
@@ -79,6 +81,11 @@
     "./warrant-evidence/kfd-10-conformance-witness.schema.json": "./schemas/kfd-10/conformance-witness.schema.json",
     "./semantic-self-sufficiency/matrix.json": "./evidence/semantic-self-sufficiency/kfd-1-13.json",
     "./semantic-self-sufficiency/matrix.schema.json": "./schemas/kfd-semantic-self-sufficiency-matrix.schema.json",
+    "./perspective-conformance/manifest.json": "./profiles/perspective-conformance/manifest.json",
+    "./perspective-conformance/vectors.json": "./profiles/perspective-conformance/vectors.json",
+    "./perspective-conformance/issue-codes.json": "./profiles/perspective-conformance/issue-codes.json",
+    "./adopter-conformance/README.md": "./profiles/adopter-conformance/README.md",
+    "./adopter-conformance/manifest.schema.json": "./schemas/kfd-adopter-conformance/manifest.schema.json",
     "./scripts/*.mjs": "./scripts/*.mjs",
     "./buildchain/kfd-1/contract-world.witness.json": "./.buildchain/kfd-1/contract-world.witness.json",
     "./buildchain/kfd-2/public-release-trust.claim.json": "./.buildchain/kfd-2/public-release-trust.claim.json",
@@ -102,15 +109,21 @@
     "./self-conformance/lifecycle-gates.json": "./profiles/self-conformance/lifecycle-gates.json",
     "./self-conformance/lifecycle-gate-matrix.json": "./profiles/self-conformance/lifecycle-gate-matrix.json",
     "./self-conformance/lifecycle-gate-request.schema.json": "./schemas/kfd-self-conformance/lifecycle-gate-request.schema.json",
-    "./self-conformance/lifecycle-gate-report.schema.json": "./schemas/kfd-self-conformance/lifecycle-gate-report.schema.json"
+    "./self-conformance/lifecycle-gate-report.schema.json": "./schemas/kfd-self-conformance/lifecycle-gate-report.schema.json",
+    "./self-conformance/history.json": "./profiles/self-conformance/history/historical-lineage.report.json",
+    "./self-conformance/history-manifest.json": "./profiles/self-conformance/history/manifest.json",
+    "./self-conformance/history-issue-codes.json": "./profiles/self-conformance/history/issue-codes.json",
+    "./self-conformance/history-cli": "./bin/kfd-history.mjs",
+    "./self-conformance/historical-replay.schema.json": "./schemas/kfd-self-conformance-history/historical-replay.schema.json"
   },
   "scripts": {
-    "check": "node scripts/check.mjs && npm run check:warrant-evidence && npm run check:agent-hub && npm run check:agent-hub-conformance && npm run check:agent-runtime && npm run check:self-conformance-profile && npm run check:self-conformance-lifecycle && npm run check:verifier",
+    "check": "node scripts/check.mjs && npm run check:warrant-evidence && npm run check:agent-hub && npm run check:agent-hub-conformance && npm run check:agent-runtime && npm run check:self-conformance-profile && npm run check:self-conformance-lifecycle && npm run check:self-conformance-history && npm run check:verifier",
     "check:warrant-evidence": "node scripts/check-warrant-evidence.mjs",
     "check:agent-hub": "node scripts/check-agent-hub-profile.mjs",
     "check:agent-hub-conformance": "node scripts/check-agent-hub-conformance-profile.mjs",
     "check:agent-runtime": "node scripts/check-agent-runtime-profile.mjs",
-    "check:verifier": "cargo test --locked --manifest-path verifier/Cargo.toml --workspace && node scripts/check-verifier.mjs && node scripts/check-verifier-extraction.mjs",
+    "check:perspective-conformance": "node scripts/check-perspective-conformance.mjs",
+    "check:verifier": "cargo test --locked --manifest-path verifier/Cargo.toml --workspace && npm run check:perspective-conformance && node scripts/check-verifier.mjs && node scripts/check-verifier-extraction.mjs",
     "check:verifier-artifact": "node scripts/check-verifier-artifact.mjs",
     "build:verifier": "node scripts/build-verifier.mjs",
     "generate:agent-runtime-vectors": "node scripts/generate-agent-runtime-vectors.mjs --write",
@@ -122,7 +135,8 @@
     "update:kfd-2-claim": "node scripts/update-kfd-2-claim.mjs",
     "update:kfd-3-witness": "node scripts/update-kfd-3-witness.mjs",
     "check:self-conformance-profile": "node scripts/check-self-conformance-profile.mjs",
-    "check:self-conformance-lifecycle": "node scripts/check-self-conformance-lifecycle.mjs && node scripts/check-self-conformance-changes.mjs"
+    "check:self-conformance-lifecycle": "node scripts/check-self-conformance-lifecycle.mjs && node scripts/check-self-conformance-changes.mjs",
+    "check:self-conformance-history": "node scripts/check-self-conformance-history.mjs"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",

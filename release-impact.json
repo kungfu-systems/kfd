@@ -13,6 +13,12 @@
   },
   "surfaceImpacts": [
     {
+      "id": "kfd-full-cut-adopter-manifest-contract",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD additively publishes the package-only kfd.adopter-conformance-manifest/v1 schema and normative contract. It binds an adopter to one exact package, registry, standards, schema, vector, verifier, and complete decision cut; separates adopted, candidate, draft-evidence, unsupported, and not-used declarations; binds decision-specific witnesses and release passports; and explicitly grants no runtime, release, semantic-truth, activation, or certification authority."
+    },
+    {
       "id": "kfd-independent-verifier",
       "impact": "minor",
       "class": "additive",
@@ -23,6 +29,12 @@
       "impact": "minor",
       "class": "additive",
       "rationale": "KFD additively extends the version 1 verification-bundle kind vocabulary with Self-Conformance transition bundles while preserving the version 1 verification-report shape; standards.json welds the executable, schema, fixed-root, issue-order, and responsibility-boundary surfaces under KFD-1."
+    },
+    {
+      "id": "kfd-perspective-conformance-alpha",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD additively publishes the kfd-perspective-conformance 0.1.0-alpha.1 profile: a versioned KFD-4 I8-I12 witness, a draft KFD-8 Atlas coordinate witness, fixed positive and negative vectors, stable offline diagnostics, native/WASM byte parity, and clean-room extraction coverage. KFD-4 remains active, KFD-8 remains draft, and passing is non-qualifying and non-self-certified."
     },
     {
       "id": "kfd-verifier-xinfa-initiative-resolution",
@@ -253,16 +265,16 @@
       "rationale": "KFD-1 now publishes a machine-readable schema for canonical reader URLs, latest aliases, immutable version artifact URLs, artifact digests, source coordinates, lineage, site consumption, and archive policies that prevent same-version digest drift or destructive deletion of immutable publication prefixes."
     },
     {
-      "id": "kfd-self-conformance-profile-v1",
-      "impact": "minor",
-      "class": "additive",
-      "rationale": "KFD additively publishes the versioned kfd-self-conformance 1.0.0-alpha.1 profile, finite predecessor/bootstrap rules, state and transition schemas, stable issue namespaces, canonical contract vectors, an independent native/WebAssembly verifier matrix, seven official lifecycle gates with separate authority and review receipts, complete-chain and package-substitution checks, clean-room package closure, and explicit non-authority boundaries without changing any Candidate number or decision status."
-    },
-    {
       "id": "kfd-self-conformance-site-projection",
       "impact": "minor",
       "class": "additive",
-      "rationale": "KFD additively owns a renderer-ready How KFD changes itself projection, two verification lanes, governed lifecycle and authority boundaries, exact CLI entrypoints, seven stable machine assets, and the terminal recursive no-new-kfd evidence. The projection allocates no number, changes no numbered semantics, grants no verifier or Site authority, and keeps packaging and release separately authorized."
+      "rationale": "KFD additively owns a renderer-ready How KFD changes itself projection, live and retrospective verification lanes, governed lifecycle and authority boundaries, exact CLI entrypoints, historical lineage assets, and the terminal recursive no-new-kfd evidence. The projection allocates no number, changes no numbered semantics, grants no verifier or Site authority, and keeps packaging and release separately authorized."
+    },
+    {
+      "id": "kfd-self-conformance-profile-v1",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD preserves the byte-identical kfd-self-conformance 1.0.0-alpha.1 live closure and additively publishes a companion historical profile: a machine-reproducible alpha.28 lineage, explicit retrospective boundaries, stable diagnostics, the same independent Rust core projected through Native/WebAssembly, offline clean-room closure, and explicit convergence that does not replace the alpha.55 anchor or change any Candidate number or decision status."
     }
   ],
   "summary": "KFD v1.0 is an open, evidence-governed engineering standard under development for reliable action and continuity under uncertainty. Its current decisions form a small, testable foundation rather than a claimed final theory. Kungfu-systems remains the founding steward and mandatory adopter, while any adopter may declare an independent scope and any participant may propose, challenge, implement, or review KFD work. KFD-7 revision 7 distinguishes the Fact-Episode Ontology from the Action Responsibility Geometry of direction, perspective, and authority; KFD-8 through KFD-10 allocate its draft perspective, direction, and authority coordinates. The authorized pre-stable Foundation Revision allocates KFD-11 to Claim-Assessment-Decision-Admission separation and maps the two software-domain applications to KFD-12 and KFD-13 while preserving immutable prior coordinates. Universal minimality and future Profile qualification remain unclaimed."

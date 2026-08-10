@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.self-conformance-history-extraction-manifest/v1",
+  "profile": "kfd-self-conformance-history@1.0.0-alpha.1",
+  "offline": true,
+  "files": [
+    "bin/kfd-history.mjs",
+    "profiles/self-conformance/history/README.md",
+    "profiles/self-conformance/history/extraction-manifest.json",
+    "profiles/self-conformance/history/historical-lineage.report.json",
+    "profiles/self-conformance/history/implementer-guide.md",
+    "profiles/self-conformance/history/issue-codes.json",
+    "profiles/self-conformance/history/manifest.json",
+    "schemas/kfd-self-conformance-history/historical-replay.schema.json",
+    "verifier/dist/kfd_verifier_current.wasm",
+    "verifier/dist/kfd_verifier_current.wasm.sha256"
+  ],
+  "forbiddenDependencies": [
+    "network access",
+    "Git checkout",
+    "product runtime",
+    "private corpus",
+    "ambient Home state",
+    "credentials or tokens"
+  ],
+  "claimBoundary": "This allowlist reproduces the historical report offline; it does not recreate public authority or mutate KFD state."
+}

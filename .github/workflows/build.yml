@@ -22,6 +22,7 @@ jobs:
     with:
       buildchain-alpha-contract-lock-path: buildchain.alpha-contract-lock.json
       buildchain-stable-contract-lock-path: buildchain.contract-lock.json
+      checkout-history-mode: full
       runner-preset: custom
       platforms-json: >-
         [{"id":"linux-x64","name":"Linux x64","runner":"[\"ubuntu-24.04\"]"}]

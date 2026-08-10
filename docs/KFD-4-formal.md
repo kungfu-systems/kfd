@@ -161,7 +161,7 @@ constraints, and transformation loss remain inspectable.
 |---|---|---|---|
 | Perspective-bound timeline | Engineering objects, Gate | `schemas/kfd-4/observer-perspective.schema.json` | Mixed |
 | `I2-I5` replay declaration | Engineering objects, Gate | `schemas/kfd-4/perspective-replay.schema.json` | Mixed |
-| `I8-I12` reference-frame invariants | Reference-frame rule | None; current schemas preserve selected frame fields only | Manual or mixed |
+| `I8-I12` reference-frame invariants | Reference-frame rule | `schemas/kfd-4/conformance-witness.schema.json`, `profiles/perspective-conformance/vectors.json` | Machine for the declared structural and cross-field subset; semantic truth remains mixed |
 | Primitive signal handoff | Authority boundary | KFD-4 replay profile to KFD-5 candidate record | Machine for declared linkage |
 | KFD package profile wiring | Verification | `standards.json`, `scripts/check.mjs` | Machine |
 
@@ -203,6 +203,10 @@ Evidence against `H4` includes:
 
 This hypothesis is not enforced by the current schemas. KFD-5 and KFD-6 provide
 the qualification and comparative-learning boundaries needed to test it.
+
+The additive `kfd-perspective-conformance@0.1.0-alpha.1` profile does not
+enforce `H4`. It closes only the fixed I8-I12 witness boundary and keeps the
+active decision semantics and broader empirical claims unchanged.
 
 ## Non-claims and extension points
 

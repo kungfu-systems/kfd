@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1, "contract": "kfd-8-atlas-coordinate", "standard": "kfd-8", "profileVersion": "0.1.0-alpha.1",
+  "identity": { "atlasId": "atlas:review", "version": "2", "root": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc" },
+  "holder": { "id": "reviewer", "purpose": "invalid rewritten current reference" },
+  "sources": [{ "id": "repository", "authority": "canonical-repository", "factCutRoot": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd" }],
+  "factCut": { "id": "git:head", "root": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd" },
+  "scope": { "included": ["tracked source"], "omitted": [], "unknowns": [] },
+  "freshness": { "state": "current", "observedAt": "2026-08-10T00:00:00Z", "condition": "bound cut" },
+  "loss": [], "state": { "stale": false, "degraded": false, "conflicted": false },
+  "lineage": { "predecessorRoots": ["sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"], "transformation": "refresh", "preservedRoots": ["sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"] },
+  "currentReference": { "id": "atlas:review:current", "pointsToRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc", "priorRoots": [] },
+  "semanticInferences": { "pursuit": false, "warrant": false, "completeness": false, "currentValidity": false },
+  "verification": { "claimBoundary": "Negative current-reference rewrite vector." }
+}

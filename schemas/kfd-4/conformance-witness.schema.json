@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-4/conformance-witness.schema.json",
+  "title": "KFD-4 reference-frame conformance witness",
+  "type": "object",
+  "required": ["schemaVersion", "contract", "standard", "profileVersion", "witnessId", "absoluteContext", "sourceFrame", "targetFrame", "transformation", "invariants", "verification"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "contract": { "const": "kfd-4-conformance-witness" },
+    "standard": { "const": "kfd-4" },
+    "profileVersion": { "const": "0.1.0-alpha.1" },
+    "witnessId": { "type": "string", "minLength": 1 },
+    "absoluteContext": { "type": "boolean" },
+    "sourceFrame": { "$ref": "#/$defs/frame" },
+    "targetFrame": { "$ref": "#/$defs/frame" },
+    "transformation": {
+      "type": "object",
+      "required": ["preserved", "changed", "declaredLoss", "contradictionDeclared"],
+      "properties": {
+        "preserved": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": ["observer", "factCutRoot", "sourceRoot", "authorityRoot", "causalOrder"] } },
+        "changed": { "type": "array", "uniqueItems": true, "items": { "enum": ["observer", "factCutRoot", "sourceRoot", "authorityRoot", "causalOrder"] } },
+        "declaredLoss": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "contradictionDeclared": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "invariants": {
+      "type": "array",
+      "minItems": 5,
+      "uniqueItems": true,
+      "items": { "enum": ["I8", "I9", "I10", "I11", "I12"] }
+    },
+    "verification": { "$ref": "#/$defs/verification" }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "root": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "causalEdge": {
+      "type": "object",
+      "required": ["before", "after"],
+      "properties": {
+        "before": { "type": "string", "minLength": 1 },
+        "after": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "frame": {
+      "type": "object",
+      "required": ["observer", "factCutRoot", "sourceRoot", "authorityRoot", "causalOrder"],
+      "properties": {
+        "observer": { "type": "string", "minLength": 1 },
+        "factCutRoot": { "$ref": "#/$defs/root" },
+        "sourceRoot": { "$ref": "#/$defs/root" },
+        "authorityRoot": { "$ref": "#/$defs/root" },
+        "causalOrder": { "type": "array", "items": { "$ref": "#/$defs/causalEdge" } }
+      },
+      "additionalProperties": false
+    },
+    "verification": {
+      "type": "object",
+      "required": ["claimBoundary"],
+      "properties": {
+        "claimBoundary": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    }
+  }
+}

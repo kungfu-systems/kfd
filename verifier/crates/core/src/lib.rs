@@ -142,6 +142,7 @@ pub fn verify_bundle(bundle: &VerificationBundle) -> VerificationReport {
         "episode" => profiles::episode::verify(bundle),
         "agent-runtime-report" => profiles::agent_runtime_report::verify(bundle),
         "self-conformance-transition" => profiles::self_conformance_transition::verify(bundle),
+        "self-conformance-history" => profiles::self_conformance_history::verify(bundle),
         other => invalid_bundle_report(format!("unsupported verification kind: {other}")),
     }
 }

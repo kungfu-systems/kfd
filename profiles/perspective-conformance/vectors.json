@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.perspective-conformance-vectors/v1",
+  "profile": "kfd-perspective-conformance@0.1.0-alpha.1",
+  "cases": [
+    { "id": "kfd4-positive-i8-i12", "decision": "KFD-4", "fixture": "verifier/fixtures/kfd-4/valid-conformance-witness.json", "valid": true, "issueCodes": [], "reportSha256": "7e3b8bf08c6b9af533e4c84ee3d28fa68c7b91200acac0cdfb70700030bc407a" },
+    { "id": "kfd4-negative-absolute-context", "decision": "KFD-4", "fixture": "verifier/fixtures/kfd-4/invalid-absolute-context.json", "valid": false, "issueCodes": ["kfd4-absolute-context"], "reportSha256": "029ef750b3c742649c962d22ba567a0353261ea6ef5fa1a29bc164a2eb6fe3a1" },
+    { "id": "kfd4-negative-undeclared-invariants", "decision": "KFD-4", "fixture": "verifier/fixtures/kfd-4/invalid-undeclared-invariants.json", "valid": false, "issueCodes": ["kfd4-invariants-undeclared"], "reportSha256": "fbb0bccb91a21228b23c29c59a0cc4602b94cb890aca7674d4ae5f6c786d54ea" },
+    { "id": "kfd4-negative-mutated-invariant", "decision": "KFD-4", "fixture": "verifier/fixtures/kfd-4/invalid-mutated-invariant.json", "valid": false, "issueCodes": ["kfd4-invariant-mismatch"], "reportSha256": "ef83c280f5910126cd8b98649c9b97a9fa9f6fe23056ca2075e374834d541e77" },
+    { "id": "kfd4-negative-causal-reversal", "decision": "KFD-4", "fixture": "verifier/fixtures/kfd-4/invalid-causal-reversal.json", "valid": false, "issueCodes": ["kfd4-causal-reversal"], "reportSha256": "16441a2f2a1f85f332ad1b969021f5a2eddc52c33a511d38c6f1f93c19af12f0" },
+    { "id": "kfd4-negative-silent-mutation", "decision": "KFD-4", "fixture": "verifier/fixtures/kfd-4/invalid-silent-frame-mutation.json", "valid": false, "issueCodes": ["kfd4-silent-frame-mutation"], "reportSha256": "e002ee0b2668d13de698f41caecfc87089d31186c84c7176977c77271fe7b87f" },
+    { "id": "kfd8-positive-current", "decision": "KFD-8", "fixture": "verifier/fixtures/kfd-8/valid-current-atlas.json", "valid": true, "issueCodes": [], "reportSha256": "3c8181552a6fe09eb6fdafbd675cdab465e8cf95fe2b6917252a308bf0dec669" },
+    { "id": "kfd8-positive-degraded-conflicted", "decision": "KFD-8", "fixture": "verifier/fixtures/kfd-8/valid-degraded-atlas.json", "valid": true, "issueCodes": [], "reportSha256": "3c8181552a6fe09eb6fdafbd675cdab465e8cf95fe2b6917252a308bf0dec669" },
+    { "id": "kfd8-negative-identity-mismatch", "decision": "KFD-8", "fixture": "verifier/fixtures/kfd-8/invalid-identity-mismatch.json", "valid": false, "issueCodes": ["kfd8-current-reference-mismatch"], "reportSha256": "a8a13961df05ea70396871900b7dadbe07ffcc9626695493f961c88b80fc332b" },
+    { "id": "kfd8-negative-current-reference-rewrite", "decision": "KFD-8", "fixture": "verifier/fixtures/kfd-8/invalid-current-reference-rewrite.json", "valid": false, "issueCodes": ["kfd8-current-reference-rewrite"], "reportSha256": "fd90244c16af081f4b017537cf98892b4b34022eafa48efea41a24eaffda4c61" },
+    { "id": "kfd8-negative-semantic-inference", "decision": "KFD-8", "fixture": "verifier/fixtures/kfd-8/invalid-semantic-inference.json", "valid": false, "issueCodes": ["kfd8-semantic-inference"], "reportSha256": "f18e5d20845e07841bf369bc0b36e68a23a0f23688332042b4bc945aac121585" },
+    { "id": "kfd8-negative-unbound-cut", "decision": "KFD-8", "fixture": "verifier/fixtures/kfd-8/invalid-unbound-cut.json", "valid": false, "issueCodes": ["kfd8-fact-cut-unbound"], "reportSha256": "acad59e7f77a0dd67edfb41dfe32ab938478cf3e894f2cde97271a9d1039e704" },
+    { "id": "kfd8-negative-state-loss", "decision": "KFD-8", "fixture": "verifier/fixtures/kfd-8/invalid-state-loss.json", "valid": false, "issueCodes": ["kfd8-declared-state-inconsistent"], "reportSha256": "1d02a690088c4f160f9758625c3707ead3366e76cd0c0da306fd53121d814db9" },
+    { "id": "kfd8-negative-stale-freshness", "decision": "KFD-8", "fixture": "verifier/fixtures/kfd-8/invalid-stale-freshness.json", "valid": false, "issueCodes": ["kfd8-declared-state-inconsistent"], "reportSha256": "b7b46529fd665d751e7b9d5a3f5126e84a1693856793dfd661d35a3f6f85efd1" },
+    { "id": "kfd8-negative-conflict-unknowns", "decision": "KFD-8", "fixture": "verifier/fixtures/kfd-8/invalid-conflict-unknowns.json", "valid": false, "issueCodes": ["kfd8-declared-state-inconsistent"], "reportSha256": "4c0f4ec9e7f8969127c60d265848a2305ec6f47f06f0c58e1b1c58a99d43ae54" }
+  ]
+}

@@ -40,12 +40,12 @@
       "id": "KFD-4",
       "lifecycleStatus": "active",
       "normativeSources": ["decisions/KFD-4.md"],
-      "schemas": ["schemas/kfd-4/observer-perspective.schema.json", "schemas/kfd-4/perspective-replay.schema.json"],
-      "fixtures": [],
-      "failureTests": [],
-      "verifiers": ["verifier/crates/core/src/lib.rs"],
-      "coverage": "partial",
-      "gaps": ["standalone fixed positive and negative perspective vector inventory"]
+      "schemas": ["schemas/kfd-4/conformance-witness.schema.json", "schemas/kfd-4/observer-perspective.schema.json", "schemas/kfd-4/perspective-replay.schema.json"],
+      "fixtures": ["profiles/perspective-conformance/vectors.json", "verifier/fixtures/kfd-4/valid-conformance-witness.json"],
+      "failureTests": ["profiles/perspective-conformance/vectors.json"],
+      "verifiers": ["scripts/check-perspective-conformance.mjs", "verifier/crates/core/src/lib.rs"],
+      "coverage": "complete",
+      "gaps": ["independent cross-domain replay corpus"]
     },
     {
       "id": "KFD-5",
@@ -84,12 +84,12 @@
       "id": "KFD-8",
       "lifecycleStatus": "draft",
       "normativeSources": ["decisions/KFD-8.md"],
-      "schemas": [],
-      "fixtures": [],
-      "failureTests": [],
-      "verifiers": [],
-      "coverage": "gap",
-      "gaps": ["versioned conformance witness", "fixed falsifier vectors", "offline verifier"]
+      "schemas": ["schemas/kfd-8/atlas-coordinate.schema.json"],
+      "fixtures": ["profiles/perspective-conformance/vectors.json", "verifier/fixtures/kfd-8/valid-current-atlas.json", "verifier/fixtures/kfd-8/valid-degraded-atlas.json"],
+      "failureTests": ["profiles/perspective-conformance/vectors.json"],
+      "verifiers": ["scripts/check-perspective-conformance.mjs", "verifier/crates/core/src/lib.rs"],
+      "coverage": "partial",
+      "gaps": ["independent adopter evidence before any activation consideration"]
     },
     {
       "id": "KFD-9",
