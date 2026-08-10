@@ -107,10 +107,15 @@
     "./self-conformance/lifecycle-gates.json": "./profiles/self-conformance/lifecycle-gates.json",
     "./self-conformance/lifecycle-gate-matrix.json": "./profiles/self-conformance/lifecycle-gate-matrix.json",
     "./self-conformance/lifecycle-gate-request.schema.json": "./schemas/kfd-self-conformance/lifecycle-gate-request.schema.json",
-    "./self-conformance/lifecycle-gate-report.schema.json": "./schemas/kfd-self-conformance/lifecycle-gate-report.schema.json"
+    "./self-conformance/lifecycle-gate-report.schema.json": "./schemas/kfd-self-conformance/lifecycle-gate-report.schema.json",
+    "./self-conformance/history.json": "./profiles/self-conformance/history/historical-lineage.report.json",
+    "./self-conformance/history-manifest.json": "./profiles/self-conformance/history/manifest.json",
+    "./self-conformance/history-issue-codes.json": "./profiles/self-conformance/history/issue-codes.json",
+    "./self-conformance/history-cli": "./bin/kfd-history.mjs",
+    "./self-conformance/historical-replay.schema.json": "./schemas/kfd-self-conformance-history/historical-replay.schema.json"
   },
   "scripts": {
-    "check": "node scripts/check.mjs && npm run check:warrant-evidence && npm run check:agent-hub && npm run check:agent-hub-conformance && npm run check:agent-runtime && npm run check:self-conformance-profile && npm run check:self-conformance-lifecycle && npm run check:verifier",
+    "check": "node scripts/check.mjs && npm run check:warrant-evidence && npm run check:agent-hub && npm run check:agent-hub-conformance && npm run check:agent-runtime && npm run check:self-conformance-profile && npm run check:self-conformance-lifecycle && npm run check:self-conformance-history && npm run check:verifier",
     "check:warrant-evidence": "node scripts/check-warrant-evidence.mjs",
     "check:agent-hub": "node scripts/check-agent-hub-profile.mjs",
     "check:agent-hub-conformance": "node scripts/check-agent-hub-conformance-profile.mjs",
@@ -128,7 +133,8 @@
     "update:kfd-2-claim": "node scripts/update-kfd-2-claim.mjs",
     "update:kfd-3-witness": "node scripts/update-kfd-3-witness.mjs",
     "check:self-conformance-profile": "node scripts/check-self-conformance-profile.mjs",
-    "check:self-conformance-lifecycle": "node scripts/check-self-conformance-lifecycle.mjs && node scripts/check-self-conformance-changes.mjs"
+    "check:self-conformance-lifecycle": "node scripts/check-self-conformance-lifecycle.mjs && node scripts/check-self-conformance-changes.mjs",
+    "check:self-conformance-history": "node scripts/check-self-conformance-history.mjs"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",

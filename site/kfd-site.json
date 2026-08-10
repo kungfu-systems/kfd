@@ -29,6 +29,10 @@
     "selfConformanceLifecycleGates": "profiles/self-conformance/lifecycle-gates.json",
     "selfConformanceVerifierMatrix": "profiles/self-conformance/lifecycle-gate-matrix.json",
     "selfConformanceIssueCodes": "profiles/self-conformance/issue-codes.json",
+    "selfConformanceHistory": "profiles/self-conformance/history/historical-lineage.report.json",
+    "selfConformanceHistoryGuide": "profiles/self-conformance/history/README.md",
+    "selfConformanceHistoryImplementer": "profiles/self-conformance/history/implementer-guide.md",
+    "selfConformanceHistoryManifest": "profiles/self-conformance/history/manifest.json",
     "recursiveSelfConformanceAssessment": "evidence/self-conformance/qualification/recursive-normative-self-conformance.assessment.json",
     "recursiveSelfConformanceVerification": "evidence/self-conformance/qualification/recursive-normative-self-conformance.verification.json",
     "recursiveSelfConformanceTerminalReport": "evidence/self-conformance/transitions/recursive-normative-self-conformance-terminal.report.json",
@@ -1375,8 +1379,234 @@
         "id": "verify-transition",
         "label": "Verify a transition report",
         "command": "kfd verify self-conformance-transition <report> --json"
+      },
+      {
+        "id": "verify-history",
+        "label": "Replay immutable historical lineage",
+        "command": "node bin/kfd-history.mjs verify profiles/self-conformance/history/historical-lineage.report.json --json"
       }
     ],
+    "historicalLineage": {
+      "reportId": "kfd-history-alpha28-to-live-alpha55",
+      "retrospective": true,
+      "profileAvailableAtEvent": false,
+      "bootstrapBoundary": {
+        "id": "kfd-alpha28-foundation-cut",
+        "gitCommit": "04f839e8e7834c9eda3d46424de2f59f53623e8f",
+        "gitTag": "v1.0.0-alpha.28",
+        "packageName": "@kungfu-tech/kfd",
+        "packageVersion": "1.0.0-alpha.28",
+        "packageRoot": "sha256:279cf2adcfe0c5cd9d31ecf0e6317d5a5f2ff854c49c39f7e135ad4e2cc43ce1",
+        "active": [
+          "KFD-1",
+          "KFD-2",
+          "KFD-3",
+          "KFD-4",
+          "KFD-5"
+        ],
+        "draft": [
+          "KFD-6"
+        ],
+        "absent": [
+          "KFD-7"
+        ],
+        "note": "This alpha.28 cut is a retrospective foundation. It is not the live Profile bootstrap and does not claim contemporaneous Profile execution."
+      },
+      "kfd7Walkthrough": [
+        {
+          "sequence": 1,
+          "id": "kfd7-candidate-pr159",
+          "transition": "candidate-genesis",
+          "before": "absent",
+          "after": "candidate",
+          "sourceIds": [
+            "kfd7-candidate-registry",
+            "pr-159-authority",
+            "pr-159-review"
+          ]
+        },
+        {
+          "sequence": 2,
+          "id": "kfd7-refinement-pr176",
+          "transition": "candidate-refinement",
+          "before": "candidate",
+          "after": "candidate",
+          "sourceIds": [
+            "kfd7-refined-candidates",
+            "pr-176-authority",
+            "pr-176-review"
+          ]
+        },
+        {
+          "sequence": 3,
+          "id": "kfd7-numbered-draft-pr180",
+          "transition": "numbered-draft-promotion",
+          "before": "candidate",
+          "after": "numbered-draft",
+          "sourceIds": [
+            "kfd7-numbered-registry",
+            "pr-180-authority",
+            "pr-180-review"
+          ]
+        },
+        {
+          "sequence": 4,
+          "id": "kfd7-qualification-pr186",
+          "transition": "qualification",
+          "before": "numbered-draft",
+          "after": "qualified-numbered-draft",
+          "sourceIds": [
+            "kfd7-qualified-decision",
+            "pr-186-authority",
+            "pr-186-review"
+          ]
+        },
+        {
+          "sequence": 5,
+          "id": "kfd7-activation-pr190",
+          "transition": "activation",
+          "before": "qualified-numbered-draft",
+          "after": "active",
+          "sourceIds": [
+            "kfd7-activation-record",
+            "kfd7-active-registry",
+            "pr-190-authority",
+            "pr-190-review"
+          ]
+        },
+        {
+          "sequence": 6,
+          "id": "kfd7-alpha36-packaging",
+          "transition": "release-packaging",
+          "before": "active",
+          "after": "active-packaged",
+          "sourceIds": [
+            "alpha36-package",
+            "pr-190-authority",
+            "pr-190-review"
+          ]
+        }
+      ],
+      "transitionRecipes": [
+        {
+          "transition": "candidate-genesis",
+          "before": "absent",
+          "after": "candidate"
+        },
+        {
+          "transition": "candidate-refinement",
+          "before": "candidate",
+          "after": "candidate"
+        },
+        {
+          "transition": "numbered-draft-promotion",
+          "before": "candidate",
+          "after": "numbered-draft"
+        },
+        {
+          "transition": "qualification",
+          "before": "numbered-draft",
+          "after": "qualified-numbered-draft"
+        },
+        {
+          "transition": "activation",
+          "before": "qualified-numbered-draft",
+          "after": "active"
+        },
+        {
+          "transition": "release-packaging",
+          "before": "active",
+          "after": "active-packaged"
+        },
+        {
+          "transition": "no-new-kfd",
+          "before": "candidate",
+          "after": "no-new-kfd"
+        }
+      ],
+      "coverage": [
+        {
+          "subjectId": "KFD-10",
+          "terminalState": "numbered-draft",
+          "normativePromotionClaimed": false
+        },
+        {
+          "subjectId": "KFD-11",
+          "terminalState": "numbered-draft",
+          "normativePromotionClaimed": false
+        },
+        {
+          "subjectId": "KFD-7",
+          "terminalState": "active-packaged",
+          "normativePromotionClaimed": false
+        },
+        {
+          "subjectId": "KFD-8",
+          "terminalState": "numbered-draft",
+          "normativePromotionClaimed": false
+        },
+        {
+          "subjectId": "KFD-9",
+          "terminalState": "numbered-draft",
+          "normativePromotionClaimed": false
+        },
+        {
+          "subjectId": "kfd-self-conformance-pressure",
+          "terminalState": "no-new-kfd",
+          "normativePromotionClaimed": false
+        },
+        {
+          "subjectId": "project-settlement",
+          "terminalState": "foundation-revised-draft",
+          "normativePromotionClaimed": false
+        },
+        {
+          "subjectId": "software-responsibility-transition",
+          "terminalState": "foundation-revised-draft",
+          "normativePromotionClaimed": false
+        }
+      ],
+      "numberingMappings": [
+        {
+          "from": null,
+          "to": "KFD-11@pre-2026-07-21",
+          "relation": "historical-number"
+        },
+        {
+          "from": null,
+          "to": "KFD-12@pre-2026-07-21",
+          "relation": "historical-number"
+        },
+        {
+          "from": null,
+          "to": "KFD-11",
+          "relation": "allocated-by-foundation-revision"
+        },
+        {
+          "from": "KFD-11@pre-2026-07-21",
+          "to": "KFD-12",
+          "relation": "renumbered"
+        },
+        {
+          "from": "KFD-12@pre-2026-07-21",
+          "to": "KFD-13",
+          "relation": "renumbered"
+        }
+      ],
+      "convergence": {
+        "historicalTerminalSourceId": "no-new-kfd-report",
+        "liveAnchorSourceId": "self-conformance-live-alpha55-anchor",
+        "liveAnchorId": "kfd-alpha-55-pre-profile",
+        "liveAnchorRoot": "sha256:26961922619d090faf9c76f8bf0e25947100a5d13be6831366f1a0933c7ced59",
+        "livePackageRoot": "sha256:114c195fea83c65ec84e52def6c2afced8a4ca9d2c9abe813f5c9c5d3b50260a",
+        "compatibility": "additive",
+        "historicalDoesNotReplaceLive": true
+      },
+      "nextAction": "Choose a current lifecycle action from the actual terminal state; preserve partial, draft, revised, rejected, provisional, or no-new-kfd outcomes instead of manufacturing promotion.",
+      "limits": "This report is a later, structural replay over immutable public coordinates. It does not assert that the Profile existed or ran at an event, prove semantic truth, activate a draft, certify an implementation, authorize a release, or replace the alpha.55 live anchor.",
+      "markdown": "# KFD historical Self-Conformance\n\nThis additive history profile replays immutable KFD events without changing the\nlive `kfd-self-conformance@1.0.0-alpha.1` contract. The live contract, its\nalpha.55 bootstrap, retained reports, issue inventory, manifest, and verifier\nbytes remain unchanged.\n\n## Bootstrap boundary\n\nThe retrospective Foundation Cut is commit\n`04f839e8e7834c9eda3d46424de2f59f53623e8f`, tag\n`v1.0.0-alpha.28`, package `@kungfu-tech/kfd@1.0.0-alpha.28`, and tarball root\n`sha256:279cf2adcfe0c5cd9d31ecf0e6317d5a5f2ff854c49c39f7e135ad4e2cc43ce1`.\nAt that cut KFD-1 through KFD-5 were active, KFD-6 was draft, and KFD-7 was\nabsent. PR #146 and its exact-head `kungfu-origin` approval are separate source\npayloads.\n\nEvery history report and episode declares `retrospective: true` and\n`profileAvailableAtEvent: false`. This is a later reconstruction, not a claim\nthat historical actors ran a Profile that did not exist.\n\n## KFD-7 walkthrough\n\nKFD-7 moves through PR #159 Candidate genesis, PR #176 Candidate refinement,\nPR #180 numbered draft, PR #186 qualification, PR #190 activation with the\nBuildchain and Kungfu product-profile evidence, and alpha.36 packaging. Each\nstep retains its actual terminal state; later activation is never projected\nbackward.\n\n## Coverage\n\nKFD-8 through KFD-10 stop at numbered draft. The Foundation Revision retains\nold KFD-11 as present KFD-12 and old KFD-12 as present KFD-13, while allocating\nthe present KFD-11; all remain draft. The recursive `no-new-kfd` result remains\na valid non-promotion outcome.\n\n## Convergence and limits\n\nThe history report converges additively with `kfd-alpha-55-pre-profile`; it does\nnot replace that anchor. A pass proves only structural closure of the embedded\nimmutable source payloads, time boundary, generic transition recipes,\nauthority/review separation, and declared terminal outcomes. It does not prove\nsemantic truth, activation, adoption, certification, fitness, or release\nauthority.",
+      "implementerGuideMarkdown": "# Historical Self-Conformance clean-room guide\n\nFrom the extracted package, run:\n\n```bash\nnode bin/kfd-history.mjs verify \\\n  profiles/self-conformance/history/historical-lineage.report.json --json\n```\n\nThe CLI uses the package's current WebAssembly build of the same Rust verifier\ncore as the native CLI. Verification is offline and recomputes every embedded\nsource payload root.\n\nApply the generic recipes literally: Candidate genesis is `absent ->\ncandidate`; refinement is `candidate -> candidate`; numbered draft is\n`candidate -> numbered-draft` or an explicitly bounded historical observation;\nqualification is `numbered-draft -> qualified-numbered-draft`; activation is\n`qualified-numbered-draft -> active`; packaging is `active ->\nactive-packaged`; Foundation allocation/revision requires explicit numbering\nmaps; and non-promotion may end at `no-new-kfd`.\n\nChoose the next action from the actual terminal state. Preserve missing\nevidence, draft, revision, rejection, provisional, or non-promotion outcomes;\nnever select a stronger transition merely to complete a chain. A passing replay\ndoes not mutate `registry.json` or authorize a current lifecycle action."
+    },
     "releaseSeparation": {
       "verifierNecessary": true,
       "verifierSufficient": false,
@@ -1649,6 +1879,20 @@
         "mediaType": "application/json",
         "role": "terminal-transition-report",
         "digest": "sha256:e4ac94237f2a3a3dd2467a39158f1a8a6b0e0882722a11973d01f12c99ad801a"
+      },
+      {
+        "sourcePath": "profiles/self-conformance/history/historical-lineage.report.json",
+        "url": "/profiles/self-conformance/history/historical-lineage.report.json",
+        "mediaType": "application/json",
+        "role": "historical-lineage",
+        "digest": "sha256:d49fc25d5f1816a4f8b4d68aa78ced0f556a80a315d96520eb09f57273a72c1b"
+      },
+      {
+        "sourcePath": "profiles/self-conformance/history/manifest.json",
+        "url": "/profiles/self-conformance/history/manifest.json",
+        "mediaType": "application/json",
+        "role": "historical-manifest",
+        "digest": "sha256:9c43a3eb944c047fef7e66537cf354fc2168aeed0ec6600a4831983c1bf562d3"
       }
     ],
     "rendering": {
@@ -1666,6 +1910,7 @@
       "showCommands": true,
       "showReleaseSeparation": true,
       "showRecursiveCase": true,
+      "showHistoricalLineage": true,
       "showMachineAssets": true,
       "note": "Render package-declared facts and boundaries without inferring self-certification, promotion, number allocation, approval, release authorization, or production fitness."
     }
@@ -2476,8 +2721,234 @@
           "id": "verify-transition",
           "label": "Verify a transition report",
           "command": "kfd verify self-conformance-transition <report> --json"
+        },
+        {
+          "id": "verify-history",
+          "label": "Replay immutable historical lineage",
+          "command": "node bin/kfd-history.mjs verify profiles/self-conformance/history/historical-lineage.report.json --json"
         }
       ],
+      "historicalLineage": {
+        "reportId": "kfd-history-alpha28-to-live-alpha55",
+        "retrospective": true,
+        "profileAvailableAtEvent": false,
+        "bootstrapBoundary": {
+          "id": "kfd-alpha28-foundation-cut",
+          "gitCommit": "04f839e8e7834c9eda3d46424de2f59f53623e8f",
+          "gitTag": "v1.0.0-alpha.28",
+          "packageName": "@kungfu-tech/kfd",
+          "packageVersion": "1.0.0-alpha.28",
+          "packageRoot": "sha256:279cf2adcfe0c5cd9d31ecf0e6317d5a5f2ff854c49c39f7e135ad4e2cc43ce1",
+          "active": [
+            "KFD-1",
+            "KFD-2",
+            "KFD-3",
+            "KFD-4",
+            "KFD-5"
+          ],
+          "draft": [
+            "KFD-6"
+          ],
+          "absent": [
+            "KFD-7"
+          ],
+          "note": "This alpha.28 cut is a retrospective foundation. It is not the live Profile bootstrap and does not claim contemporaneous Profile execution."
+        },
+        "kfd7Walkthrough": [
+          {
+            "sequence": 1,
+            "id": "kfd7-candidate-pr159",
+            "transition": "candidate-genesis",
+            "before": "absent",
+            "after": "candidate",
+            "sourceIds": [
+              "kfd7-candidate-registry",
+              "pr-159-authority",
+              "pr-159-review"
+            ]
+          },
+          {
+            "sequence": 2,
+            "id": "kfd7-refinement-pr176",
+            "transition": "candidate-refinement",
+            "before": "candidate",
+            "after": "candidate",
+            "sourceIds": [
+              "kfd7-refined-candidates",
+              "pr-176-authority",
+              "pr-176-review"
+            ]
+          },
+          {
+            "sequence": 3,
+            "id": "kfd7-numbered-draft-pr180",
+            "transition": "numbered-draft-promotion",
+            "before": "candidate",
+            "after": "numbered-draft",
+            "sourceIds": [
+              "kfd7-numbered-registry",
+              "pr-180-authority",
+              "pr-180-review"
+            ]
+          },
+          {
+            "sequence": 4,
+            "id": "kfd7-qualification-pr186",
+            "transition": "qualification",
+            "before": "numbered-draft",
+            "after": "qualified-numbered-draft",
+            "sourceIds": [
+              "kfd7-qualified-decision",
+              "pr-186-authority",
+              "pr-186-review"
+            ]
+          },
+          {
+            "sequence": 5,
+            "id": "kfd7-activation-pr190",
+            "transition": "activation",
+            "before": "qualified-numbered-draft",
+            "after": "active",
+            "sourceIds": [
+              "kfd7-activation-record",
+              "kfd7-active-registry",
+              "pr-190-authority",
+              "pr-190-review"
+            ]
+          },
+          {
+            "sequence": 6,
+            "id": "kfd7-alpha36-packaging",
+            "transition": "release-packaging",
+            "before": "active",
+            "after": "active-packaged",
+            "sourceIds": [
+              "alpha36-package",
+              "pr-190-authority",
+              "pr-190-review"
+            ]
+          }
+        ],
+        "transitionRecipes": [
+          {
+            "transition": "candidate-genesis",
+            "before": "absent",
+            "after": "candidate"
+          },
+          {
+            "transition": "candidate-refinement",
+            "before": "candidate",
+            "after": "candidate"
+          },
+          {
+            "transition": "numbered-draft-promotion",
+            "before": "candidate",
+            "after": "numbered-draft"
+          },
+          {
+            "transition": "qualification",
+            "before": "numbered-draft",
+            "after": "qualified-numbered-draft"
+          },
+          {
+            "transition": "activation",
+            "before": "qualified-numbered-draft",
+            "after": "active"
+          },
+          {
+            "transition": "release-packaging",
+            "before": "active",
+            "after": "active-packaged"
+          },
+          {
+            "transition": "no-new-kfd",
+            "before": "candidate",
+            "after": "no-new-kfd"
+          }
+        ],
+        "coverage": [
+          {
+            "subjectId": "KFD-10",
+            "terminalState": "numbered-draft",
+            "normativePromotionClaimed": false
+          },
+          {
+            "subjectId": "KFD-11",
+            "terminalState": "numbered-draft",
+            "normativePromotionClaimed": false
+          },
+          {
+            "subjectId": "KFD-7",
+            "terminalState": "active-packaged",
+            "normativePromotionClaimed": false
+          },
+          {
+            "subjectId": "KFD-8",
+            "terminalState": "numbered-draft",
+            "normativePromotionClaimed": false
+          },
+          {
+            "subjectId": "KFD-9",
+            "terminalState": "numbered-draft",
+            "normativePromotionClaimed": false
+          },
+          {
+            "subjectId": "kfd-self-conformance-pressure",
+            "terminalState": "no-new-kfd",
+            "normativePromotionClaimed": false
+          },
+          {
+            "subjectId": "project-settlement",
+            "terminalState": "foundation-revised-draft",
+            "normativePromotionClaimed": false
+          },
+          {
+            "subjectId": "software-responsibility-transition",
+            "terminalState": "foundation-revised-draft",
+            "normativePromotionClaimed": false
+          }
+        ],
+        "numberingMappings": [
+          {
+            "from": null,
+            "to": "KFD-11@pre-2026-07-21",
+            "relation": "historical-number"
+          },
+          {
+            "from": null,
+            "to": "KFD-12@pre-2026-07-21",
+            "relation": "historical-number"
+          },
+          {
+            "from": null,
+            "to": "KFD-11",
+            "relation": "allocated-by-foundation-revision"
+          },
+          {
+            "from": "KFD-11@pre-2026-07-21",
+            "to": "KFD-12",
+            "relation": "renumbered"
+          },
+          {
+            "from": "KFD-12@pre-2026-07-21",
+            "to": "KFD-13",
+            "relation": "renumbered"
+          }
+        ],
+        "convergence": {
+          "historicalTerminalSourceId": "no-new-kfd-report",
+          "liveAnchorSourceId": "self-conformance-live-alpha55-anchor",
+          "liveAnchorId": "kfd-alpha-55-pre-profile",
+          "liveAnchorRoot": "sha256:26961922619d090faf9c76f8bf0e25947100a5d13be6831366f1a0933c7ced59",
+          "livePackageRoot": "sha256:114c195fea83c65ec84e52def6c2afced8a4ca9d2c9abe813f5c9c5d3b50260a",
+          "compatibility": "additive",
+          "historicalDoesNotReplaceLive": true
+        },
+        "nextAction": "Choose a current lifecycle action from the actual terminal state; preserve partial, draft, revised, rejected, provisional, or no-new-kfd outcomes instead of manufacturing promotion.",
+        "limits": "This report is a later, structural replay over immutable public coordinates. It does not assert that the Profile existed or ran at an event, prove semantic truth, activate a draft, certify an implementation, authorize a release, or replace the alpha.55 live anchor.",
+        "markdown": "# KFD historical Self-Conformance\n\nThis additive history profile replays immutable KFD events without changing the\nlive `kfd-self-conformance@1.0.0-alpha.1` contract. The live contract, its\nalpha.55 bootstrap, retained reports, issue inventory, manifest, and verifier\nbytes remain unchanged.\n\n## Bootstrap boundary\n\nThe retrospective Foundation Cut is commit\n`04f839e8e7834c9eda3d46424de2f59f53623e8f`, tag\n`v1.0.0-alpha.28`, package `@kungfu-tech/kfd@1.0.0-alpha.28`, and tarball root\n`sha256:279cf2adcfe0c5cd9d31ecf0e6317d5a5f2ff854c49c39f7e135ad4e2cc43ce1`.\nAt that cut KFD-1 through KFD-5 were active, KFD-6 was draft, and KFD-7 was\nabsent. PR #146 and its exact-head `kungfu-origin` approval are separate source\npayloads.\n\nEvery history report and episode declares `retrospective: true` and\n`profileAvailableAtEvent: false`. This is a later reconstruction, not a claim\nthat historical actors ran a Profile that did not exist.\n\n## KFD-7 walkthrough\n\nKFD-7 moves through PR #159 Candidate genesis, PR #176 Candidate refinement,\nPR #180 numbered draft, PR #186 qualification, PR #190 activation with the\nBuildchain and Kungfu product-profile evidence, and alpha.36 packaging. Each\nstep retains its actual terminal state; later activation is never projected\nbackward.\n\n## Coverage\n\nKFD-8 through KFD-10 stop at numbered draft. The Foundation Revision retains\nold KFD-11 as present KFD-12 and old KFD-12 as present KFD-13, while allocating\nthe present KFD-11; all remain draft. The recursive `no-new-kfd` result remains\na valid non-promotion outcome.\n\n## Convergence and limits\n\nThe history report converges additively with `kfd-alpha-55-pre-profile`; it does\nnot replace that anchor. A pass proves only structural closure of the embedded\nimmutable source payloads, time boundary, generic transition recipes,\nauthority/review separation, and declared terminal outcomes. It does not prove\nsemantic truth, activation, adoption, certification, fitness, or release\nauthority.",
+        "implementerGuideMarkdown": "# Historical Self-Conformance clean-room guide\n\nFrom the extracted package, run:\n\n```bash\nnode bin/kfd-history.mjs verify \\\n  profiles/self-conformance/history/historical-lineage.report.json --json\n```\n\nThe CLI uses the package's current WebAssembly build of the same Rust verifier\ncore as the native CLI. Verification is offline and recomputes every embedded\nsource payload root.\n\nApply the generic recipes literally: Candidate genesis is `absent ->\ncandidate`; refinement is `candidate -> candidate`; numbered draft is\n`candidate -> numbered-draft` or an explicitly bounded historical observation;\nqualification is `numbered-draft -> qualified-numbered-draft`; activation is\n`qualified-numbered-draft -> active`; packaging is `active ->\nactive-packaged`; Foundation allocation/revision requires explicit numbering\nmaps; and non-promotion may end at `no-new-kfd`.\n\nChoose the next action from the actual terminal state. Preserve missing\nevidence, draft, revision, rejection, provisional, or non-promotion outcomes;\nnever select a stronger transition merely to complete a chain. A passing replay\ndoes not mutate `registry.json` or authorize a current lifecycle action."
+      },
       "releaseSeparation": {
         "verifierNecessary": true,
         "verifierSufficient": false,
@@ -2750,6 +3221,20 @@
           "mediaType": "application/json",
           "role": "terminal-transition-report",
           "digest": "sha256:e4ac94237f2a3a3dd2467a39158f1a8a6b0e0882722a11973d01f12c99ad801a"
+        },
+        {
+          "sourcePath": "profiles/self-conformance/history/historical-lineage.report.json",
+          "url": "/profiles/self-conformance/history/historical-lineage.report.json",
+          "mediaType": "application/json",
+          "role": "historical-lineage",
+          "digest": "sha256:d49fc25d5f1816a4f8b4d68aa78ced0f556a80a315d96520eb09f57273a72c1b"
+        },
+        {
+          "sourcePath": "profiles/self-conformance/history/manifest.json",
+          "url": "/profiles/self-conformance/history/manifest.json",
+          "mediaType": "application/json",
+          "role": "historical-manifest",
+          "digest": "sha256:9c43a3eb944c047fef7e66537cf354fc2168aeed0ec6600a4831983c1bf562d3"
         }
       ],
       "rendering": {
@@ -2767,6 +3252,7 @@
         "showCommands": true,
         "showReleaseSeparation": true,
         "showRecursiveCase": true,
+        "showHistoricalLineage": true,
         "showMachineAssets": true,
         "note": "Render package-declared facts and boundaries without inferring self-certification, promotion, number allocation, approval, release authorization, or production fitness."
       }

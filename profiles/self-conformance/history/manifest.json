@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.self-conformance-history-package-manifest/v1",
+  "profile": {
+    "id": "kfd-self-conformance-history",
+    "version": "1.0.0-alpha.1",
+    "status": "experimental"
+  },
+  "baseProfile": "kfd-self-conformance@1.0.0-alpha.1",
+  "compatibility": "additive",
+  "historicalDoesNotReplaceLive": true,
+  "liveManifestExactRoot": "sha256:b78f0b1f08a690a5885407b611344153dee5f8f79bae920e192e5e9fef7ffa6a",
+  "reportRoot": "sha256:1764973acc5e67156099f30b00f10ff4169002ec5fd9df33d9e6531c9efe5237",
+  "issueSetRoot": "sha256:f444088e2ba83d165af646e37c69810c6ad8f3299510d17b1f9dc285467a7d1f",
+  "surfaces": [
+    {
+      "path": "bin/kfd-history.mjs",
+      "role": "cli",
+      "digest": "sha256:c94db2b512851a530a751a409aee6221b4226bd6dd78f233719cd340c4d6910b"
+    },
+    {
+      "path": "profiles/self-conformance/history/README.md",
+      "role": "authority",
+      "digest": "sha256:6c933e648e28424d7691574d8a3ebb9ef8681a04a8456567f15b0ee5715f9ba4"
+    },
+    {
+      "path": "profiles/self-conformance/history/extraction-manifest.json",
+      "role": "extraction",
+      "digest": "sha256:e22307b2e1492c1ad15fade48dda5d332e85792814ed3762393a86bf37985a7f"
+    },
+    {
+      "path": "profiles/self-conformance/history/historical-lineage.report.json",
+      "role": "evidence",
+      "digest": "sha256:d49fc25d5f1816a4f8b4d68aa78ced0f556a80a315d96520eb09f57273a72c1b"
+    },
+    {
+      "path": "profiles/self-conformance/history/implementer-guide.md",
+      "role": "guide",
+      "digest": "sha256:8b9099190857088dfbd36a3180f76513e9230c6a3558aef6afc859ad12e2ceba"
+    },
+    {
+      "path": "profiles/self-conformance/history/issue-codes.json",
+      "role": "diagnostics",
+      "digest": "sha256:69f96173a6a47a3b5a782c0659c0389acd00aa6ecaae220c2a70d11a4d39e299"
+    },
+    {
+      "path": "schemas/kfd-self-conformance-history/historical-replay.schema.json",
+      "role": "schema",
+      "digest": "sha256:f23169e92a9b2f7ab9202e1a39f81724f27d61257ba92d8561d8c8e761eb5287"
+    },
+    {
+      "path": "verifier/dist/kfd_verifier_current.wasm",
+      "role": "verifier",
+      "digest": "sha256:827f52bf7ce156c3e0529dde91771015c160f694ba3d2ff68f44cbef9b4f68c9"
+    }
+  ],
+  "runtimeDependencies": [],
+  "claimBoundary": "The history package closes a later structural replay only. It does not modify the byte-identical live Profile closure, claim contemporaneous execution, or supply semantic or governance authority."
+}

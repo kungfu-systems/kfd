@@ -1,0 +1,1749 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.self-conformance-historical-replay/v1",
+  "profile": "kfd-self-conformance@1.0.0-alpha.1",
+  "reportId": "kfd-history-alpha28-to-live-alpha55",
+  "retrospective": true,
+  "profileAvailableAtEvent": false,
+  "generatedFromImmutableSources": true,
+  "sources": [
+    {
+      "id": "alpha28-package",
+      "kind": "npm-package",
+      "repository": "https://registry.npmjs.org/@kungfu-tech/kfd/1.0.0-alpha.28",
+      "commit": null,
+      "path": "npm:@kungfu-tech/kfd@1.0.0-alpha.28",
+      "contentRoot": "sha256:3d1adb0af8cb5238c0eea27fe7ad7b900fbf54b3733839582da76c8a3c9e64c0",
+      "payload": {
+        "name": "@kungfu-tech/kfd",
+        "version": "1.0.0-alpha.28",
+        "tarballSha256": "sha256:279cf2adcfe0c5cd9d31ecf0e6317d5a5f2ff854c49c39f7e135ad4e2cc43ce1",
+        "shasum": "c783cffa29b361f2a6675ceef9d34f2763b7da7e",
+        "integrity": "sha512-pTNOaJOgsfMehptEFcqhICzuO/c0ZJwrYlZcgLgIbOu2V2c/MDCKOuPXmD/RH1dpIjQ+SfZROuQqsPH5ERlQ/w=="
+      }
+    },
+    {
+      "id": "alpha28-registry",
+      "kind": "git-registry",
+      "repository": "https://github.com/kungfu-systems/kfd",
+      "commit": "04f839e8e7834c9eda3d46424de2f59f53623e8f",
+      "path": "registry.json",
+      "contentRoot": "sha256:5daccf563706ed87b521298b92c50e07505881dae28297dd86f4e0630dc4de8b",
+      "payload": {
+        "schemaVersion": 1,
+        "contract": "kfd-registry",
+        "entries": [
+          {
+            "number": 1,
+            "id": "KFD-1",
+            "slug": "kfd-1",
+            "title": "Facts must not drift: contract worlds need one fact source",
+            "kind": "procedure",
+            "status": "active",
+            "path": "decisions/KFD-1.md",
+            "url": "https://kfd.libkungfu.dev/1"
+          },
+          {
+            "number": 2,
+            "id": "KFD-2",
+            "slug": "kfd-2",
+            "title": "Trust must start from facts: responsibility must be inspectable",
+            "kind": "principle",
+            "status": "active",
+            "path": "decisions/KFD-2.md",
+            "url": "https://kfd.libkungfu.dev/2"
+          },
+          {
+            "number": 3,
+            "id": "KFD-3",
+            "slug": "kfd-3",
+            "title": "Cooperation must start from trusted value: compliance must not be coerced",
+            "kind": "principle",
+            "status": "active",
+            "path": "decisions/KFD-3.md",
+            "url": "https://kfd.libkungfu.dev/3"
+          },
+          {
+            "number": 4,
+            "id": "KFD-4",
+            "slug": "kfd-4",
+            "title": "Views must remain bound to declared perspectives: timelines make perspective durable and replay makes it transferable",
+            "kind": "principle",
+            "status": "active",
+            "path": "decisions/KFD-4.md",
+            "url": "https://kfd.libkungfu.dev/4"
+          },
+          {
+            "number": 5,
+            "id": "KFD-5",
+            "slug": "kfd-5",
+            "title": "Primitive discovery must join perspective-grounded judgment with scalable reasoning: discovery and qualification are different acts",
+            "kind": "procedure",
+            "status": "active",
+            "path": "decisions/KFD-5.md",
+            "url": "https://kfd.libkungfu.dev/5"
+          },
+          {
+            "number": 6,
+            "id": "KFD-6",
+            "slug": "kfd-6",
+            "title": "Autonomous discovery must remain grounded in causal experience: the loop must transform perspectives, not only mine patterns",
+            "kind": "procedure",
+            "status": "draft",
+            "path": "decisions/KFD-6.md",
+            "url": "https://kfd.libkungfu.dev/6"
+          }
+        ]
+      }
+    },
+    {
+      "id": "alpha36-package",
+      "kind": "npm-package",
+      "repository": "https://registry.npmjs.org/@kungfu-tech/kfd/1.0.0-alpha.36",
+      "commit": null,
+      "path": "npm:@kungfu-tech/kfd@1.0.0-alpha.36",
+      "contentRoot": "sha256:ba4561977b529af084a9a9f87741e7461ce0e8931aa4cf887b7ab46cfb97a557",
+      "payload": {
+        "name": "@kungfu-tech/kfd",
+        "version": "1.0.0-alpha.36",
+        "sourceTag": "v1.0.0-alpha.36",
+        "sourceCommit": "c80a6b19d93d733e872bae6d53d1555aeed0b162",
+        "tarballSha256": "sha256:ef8a14fb2f7bbb36c09c434589f6a9eae30d47e8ca928774a04072282c44ee32",
+        "shasum": "6f7d1148484f69b24492e93a1390fd0788834b86",
+        "integrity": "sha512-SmIE0qf7kHf2g8lIRhigfqoYsO5eHDvJLE3nogXnjAVEFe/uw0jjsDTOx2nPwaq2yC04tHmNtynHj/UcIEb4SA=="
+      }
+    },
+    {
+      "id": "foundation-revision-admission",
+      "kind": "git-document",
+      "repository": "https://github.com/kungfu-systems/kfd",
+      "commit": "903737e47e047c0d3aedce98fdf3751cbc9b7aab",
+      "path": "docs/foundation-revision-2026-07-21-decision-admission.json",
+      "contentRoot": "sha256:2b1818caa9d418d84e707a52968eaf3f4d35ac33ded780b3204ad180f1a370f7",
+      "payload": {
+        "schema": "kfd.foundation-revision/v1",
+        "id": "decision-admission-layer-2026-07-21",
+        "status": "review-coordinate-declared",
+        "preStable": true,
+        "impact": {
+          "level": "major",
+          "class": "breaking"
+        },
+        "authorization": {
+          "status": "authorized",
+          "authority": "kfd-maintainer",
+          "record": "docs/foundation-revision-2026-07-21-decision-admission.md"
+        },
+        "independentReview": {
+          "status": "review-coordinate-declared",
+          "coordinate": "https://github.com/kungfu-systems/kfd/pull/230"
+        },
+        "mappings": [
+          {
+            "from": null,
+            "to": "KFD-11",
+            "relation": "allocated-by-foundation-revision",
+            "meaning": "Consequential settlement must separate claim, assessment, decision, and admission"
+          },
+          {
+            "from": "KFD-11@pre-2026-07-21",
+            "to": "KFD-12",
+            "relation": "renumbered",
+            "meaning": "Software work must keep Initiative and Assignment distinct"
+          },
+          {
+            "from": "KFD-12@pre-2026-07-21",
+            "to": "KFD-13",
+            "relation": "renumbered",
+            "meaning": "Project settlement must bind authorities without absorbing them"
+          }
+        ],
+        "preservedCoordinates": {
+          "commits": true,
+          "tags": true,
+          "packages": true,
+          "digests": true,
+          "immutableRenderedArtifacts": true
+        },
+        "nonClaims": [
+          "The revision does not activate KFD-11, KFD-12, or KFD-13.",
+          "The revision does not reinterpret immutable prerelease coordinates.",
+          "The revision does not establish universal cross-domain qualification."
+        ]
+      }
+    },
+    {
+      "id": "foundation-revision-registry",
+      "kind": "git-registry",
+      "repository": "https://github.com/kungfu-systems/kfd",
+      "commit": "903737e47e047c0d3aedce98fdf3751cbc9b7aab",
+      "path": "registry.json",
+      "contentRoot": "sha256:204014d1169071ef6ecc72989ae2dc63c1545df230e23b7f784a5f6ecad27898",
+      "payload": {
+        "schemaVersion": 1,
+        "contract": "kfd-registry",
+        "entries": [
+          {
+            "number": 1,
+            "id": "KFD-1",
+            "slug": "kfd-1",
+            "title": "Facts must not drift",
+            "kind": "procedure",
+            "status": "active",
+            "path": "decisions/KFD-1.md",
+            "url": "https://kfd.libkungfu.dev/1"
+          },
+          {
+            "number": 2,
+            "id": "KFD-2",
+            "slug": "kfd-2",
+            "title": "Trust must start from facts",
+            "kind": "principle",
+            "status": "active",
+            "path": "decisions/KFD-2.md",
+            "url": "https://kfd.libkungfu.dev/2"
+          },
+          {
+            "number": 3,
+            "id": "KFD-3",
+            "slug": "kfd-3",
+            "title": "Cooperation must start from trusted value",
+            "kind": "principle",
+            "status": "active",
+            "path": "decisions/KFD-3.md",
+            "url": "https://kfd.libkungfu.dev/3"
+          },
+          {
+            "number": 4,
+            "id": "KFD-4",
+            "slug": "kfd-4",
+            "title": "Views must remain bound to declared perspectives",
+            "kind": "principle",
+            "status": "active",
+            "path": "decisions/KFD-4.md",
+            "url": "https://kfd.libkungfu.dev/4"
+          },
+          {
+            "number": 5,
+            "id": "KFD-5",
+            "slug": "kfd-5",
+            "title": "Primitive discovery must separate genesis from qualification",
+            "kind": "procedure",
+            "status": "active",
+            "path": "decisions/KFD-5.md",
+            "url": "https://kfd.libkungfu.dev/5"
+          },
+          {
+            "number": 6,
+            "id": "KFD-6",
+            "slug": "kfd-6",
+            "title": "Autonomous discovery must remain grounded in causal experience",
+            "kind": "procedure",
+            "status": "draft",
+            "path": "decisions/KFD-6.md",
+            "url": "https://kfd.libkungfu.dev/6"
+          },
+          {
+            "number": 7,
+            "id": "KFD-7",
+            "slug": "kfd-7",
+            "title": "Real-world action must keep state, occurrence, and action coordinates distinct",
+            "kind": "principle",
+            "status": "active",
+            "path": "decisions/KFD-7.md",
+            "url": "https://kfd.libkungfu.dev/7"
+          },
+          {
+            "number": 8,
+            "id": "KFD-8",
+            "slug": "kfd-8",
+            "title": "Perspective must remain bound to admitted facts and declared loss",
+            "kind": "principle",
+            "status": "draft",
+            "path": "decisions/KFD-8.md",
+            "url": "https://kfd.libkungfu.dev/8"
+          },
+          {
+            "number": 9,
+            "id": "KFD-9",
+            "slug": "kfd-9",
+            "title": "Continuing direction must outlive the actions that advance it",
+            "kind": "principle",
+            "status": "draft",
+            "path": "decisions/KFD-9.md",
+            "url": "https://kfd.libkungfu.dev/9"
+          },
+          {
+            "number": 10,
+            "id": "KFD-10",
+            "slug": "kfd-10",
+            "title": "Authority must remain explicit, bounded, and revocable",
+            "kind": "principle",
+            "status": "draft",
+            "path": "decisions/KFD-10.md",
+            "url": "https://kfd.libkungfu.dev/10"
+          },
+          {
+            "number": 11,
+            "id": "KFD-11",
+            "slug": "kfd-11",
+            "title": "Consequential settlement must separate claim, assessment, decision, and admission",
+            "kind": "procedure",
+            "status": "draft",
+            "path": "decisions/KFD-11.md",
+            "url": "https://kfd.libkungfu.dev/11"
+          },
+          {
+            "number": 12,
+            "id": "KFD-12",
+            "slug": "kfd-12",
+            "title": "Software work must keep Initiative and Assignment distinct",
+            "kind": "principle",
+            "status": "draft",
+            "path": "decisions/KFD-12.md",
+            "url": "https://kfd.libkungfu.dev/12"
+          },
+          {
+            "number": 13,
+            "id": "KFD-13",
+            "slug": "kfd-13",
+            "title": "Project settlement must bind authorities without absorbing them",
+            "kind": "procedure",
+            "status": "draft",
+            "path": "decisions/KFD-13.md",
+            "url": "https://kfd.libkungfu.dev/13"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kfd7-activation-record",
+      "kind": "git-document",
+      "repository": "https://github.com/kungfu-systems/kfd",
+      "commit": "bca202feb823f9c3234753b05dfd4dff460e69f6",
+      "path": "evidence/kfd-7/activation-record.json",
+      "contentRoot": "sha256:2f23c6e87e00270be8198401ef57efb59a121c247a47e1006a0e9dad25d63627",
+      "payload": {
+        "schemaVersion": 1,
+        "contract": "kfd-7-activation-evidence",
+        "standard": "kfd-7",
+        "status": "activated",
+        "evidenceCut": {
+          "kfdPackage": "npm:@kungfu-tech/kfd@1.0.0-alpha.35",
+          "buildchain": {
+            "profile": "buildchain-release-transaction-profile@0.1.0",
+            "implementation": "git:https://github.com/kungfu-systems/buildchain@1c830d6612782208896b709c7d5b982c85a873c7#packages/core/kfd7-buildchain-profile.js",
+            "qualification": "git:https://github.com/kungfu-systems/buildchain@bd1d62e0a0c6a07e2271b1fd1a7ec7bc09ec6712",
+            "activation": "git:https://github.com/kungfu-systems/buildchain@014ae623a34602ccaf7223a9b575066b30dcb9b6",
+            "merge": "git:https://github.com/kungfu-systems/buildchain@f5a591fc79b84ba1b5809f2523060bcc4fd4739e",
+            "qualificationReview": "https://github.com/kungfu-systems/buildchain/pull/1383#pullrequestreview-4728683864",
+            "activationReview": "https://github.com/kungfu-systems/buildchain/pull/1383#pullrequestreview-4728690266",
+            "actionContract": "https://github.com/kungfu-systems/buildchain/blob/f5a591fc79b84ba1b5809f2523060bcc4fd4739e/packages/core/kfd7-buildchain-action-contract.json",
+            "runtimeEvidence": [
+              "https://github.com/kungfu-systems/buildchain/blob/f5a591fc79b84ba1b5809f2523060bcc4fd4739e/tests/kfd7-buildchain-profile.test.mjs",
+              "https://github.com/kungfu-systems/buildchain/tree/f5a591fc79b84ba1b5809f2523060bcc4fd4739e/packages/core/kfd7-evidence"
+            ]
+          },
+          "kungfu": {
+            "profile": "kungfu-kfd-7-action-profile@0.1.0",
+            "implementation": "git:https://github.com/kungfu-systems/kungfu@91a7a2b6f406e996b0b1d69421af260d69be3878#framework/core/src/python/kungfu/agent/work_profile.py",
+            "qualification": "git:https://github.com/kungfu-systems/kungfu@8f6eff198751af109ddbeead8db4390d35303880",
+            "activation": "git:https://github.com/kungfu-systems/kungfu@8347329092c5d32e45d349b71eda9fbd30aff205",
+            "merge": "git:https://github.com/kungfu-systems/kungfu@218e253573bf38ffde745c5b192c1d18e319f43e",
+            "qualificationReview": "https://github.com/kungfu-systems/kungfu/pull/1091#pullrequestreview-4728705815",
+            "activationReview": "https://github.com/kungfu-systems/kungfu/pull/1096#pullrequestreview-4728790299",
+            "actionContract": "https://github.com/kungfu-systems/kungfu/blob/218e253573bf38ffde745c5b192c1d18e319f43e/framework/agent-work/kungfu-kfd-7-action-contract.json",
+            "runtimeEvidence": [
+              "https://github.com/kungfu-systems/kungfu/blob/218e253573bf38ffde745c5b192c1d18e319f43e/framework/core/tests/python/test_agent_work_state_contract.py",
+              "https://github.com/kungfu-systems/kungfu/tree/218e253573bf38ffde745c5b192c1d18e319f43e/framework/agent-work/evidence/kfd-7"
+            ],
+            "ci": {
+              "sourceAcceptance": "https://github.com/kungfu-systems/kungfu/actions/runs/29649895687",
+              "affectedNative": "https://github.com/kungfu-systems/kungfu/actions/runs/29649895515",
+              "crossPlatform": "https://github.com/kungfu-systems/kungfu/actions/runs/29649895533",
+              "mergeGroup": "https://github.com/kungfu-systems/kungfu/actions/runs/29650646497"
+            }
+          }
+        },
+        "qualification": {
+          "result": "passed",
+          "profileCount": 2,
+          "nonIsomorphicDomains": [
+            "release transaction and publication authority",
+            "durable agent work state and causal continuation"
+          ],
+          "theorem": "kfd-7-session-round-trip-preservation@1",
+          "corollary": "kfd-7-context-insufficiency@1",
+          "requiredEvidenceCategories": 13,
+          "openRequiredEvidenceCategories": 0,
+          "independentProductReviews": 4,
+          "residualRisk": []
+        },
+        "activation": {
+          "decision": "activate",
+          "independentReview": "https://github.com/kungfu-systems/kfd/pull/190#pullrequestreview-4728837515",
+          "activatedAt": "2026-07-18T16:12:08Z"
+        },
+        "nonClaims": [
+          "Two qualified first-party Profiles do not prove one universal storage shape, user interface, lifecycle vocabulary, or globally minimal ontology.",
+          "KFD-7 does not turn a product action-contract verdict into legal authority or proof of real-world success.",
+          "Future Profiles must qualify their own mappings, breakpoints, evidence, non-claims, and residual risks."
+        ]
+      }
+    },
+    {
+      "id": "kfd7-active-registry",
+      "kind": "git-registry",
+      "repository": "https://github.com/kungfu-systems/kfd",
+      "commit": "bca202feb823f9c3234753b05dfd4dff460e69f6",
+      "path": "registry.json",
+      "contentRoot": "sha256:8187db2d9256679e29df25a92aae7c5dc4cc3af154cceef6a1fce874135d4a79",
+      "payload": {
+        "schemaVersion": 1,
+        "contract": "kfd-registry",
+        "entries": [
+          {
+            "number": 1,
+            "id": "KFD-1",
+            "slug": "kfd-1",
+            "title": "Facts must not drift",
+            "kind": "procedure",
+            "status": "active",
+            "path": "decisions/KFD-1.md",
+            "url": "https://kfd.libkungfu.dev/1"
+          },
+          {
+            "number": 2,
+            "id": "KFD-2",
+            "slug": "kfd-2",
+            "title": "Trust must start from facts",
+            "kind": "principle",
+            "status": "active",
+            "path": "decisions/KFD-2.md",
+            "url": "https://kfd.libkungfu.dev/2"
+          },
+          {
+            "number": 3,
+            "id": "KFD-3",
+            "slug": "kfd-3",
+            "title": "Cooperation must start from trusted value",
+            "kind": "principle",
+            "status": "active",
+            "path": "decisions/KFD-3.md",
+            "url": "https://kfd.libkungfu.dev/3"
+          },
+          {
+            "number": 4,
+            "id": "KFD-4",
+            "slug": "kfd-4",
+            "title": "Views must remain bound to declared perspectives",
+            "kind": "principle",
+            "status": "active",
+            "path": "decisions/KFD-4.md",
+            "url": "https://kfd.libkungfu.dev/4"
+          },
+          {
+            "number": 5,
+            "id": "KFD-5",
+            "slug": "kfd-5",
+            "title": "Primitive discovery must separate genesis from qualification",
+            "kind": "procedure",
+            "status": "active",
+            "path": "decisions/KFD-5.md",
+            "url": "https://kfd.libkungfu.dev/5"
+          },
+          {
+            "number": 6,
+            "id": "KFD-6",
+            "slug": "kfd-6",
+            "title": "Autonomous discovery must remain grounded in causal experience",
+            "kind": "procedure",
+            "status": "draft",
+            "path": "decisions/KFD-6.md",
+            "url": "https://kfd.libkungfu.dev/6"
+          },
+          {
+            "number": 7,
+            "id": "KFD-7",
+            "slug": "kfd-7",
+            "title": "Real-world action must keep its responsibilities distinct",
+            "kind": "principle",
+            "status": "active",
+            "path": "decisions/KFD-7.md",
+            "url": "https://kfd.libkungfu.dev/7"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kfd7-candidate-registry",
+      "kind": "git-registry",
+      "repository": "https://github.com/kungfu-systems/kfd",
+      "commit": "cbffaf8bbe1c5f012b860798fce756de3cebbc80",
+      "path": "drafts/registry.json",
+      "contentRoot": "sha256:cd112627b57e13a6d7bb9b53f681c44e0c3b0a63c3a8b059df1d977878852dd7",
+      "payload": {
+        "$schema": "https://kfd.libkungfu.dev/schemas/kfd-candidate-registry.schema.json",
+        "schemaVersion": 1,
+        "contract": "kfd-candidate-registry",
+        "numberingPolicy": {
+          "allocation": "promotion-only",
+          "slotHints": "non-binding",
+          "numberedDraftSource": "registry.json",
+          "stableFreeze": "first-non-prerelease-release"
+        },
+        "candidates": [
+          {
+            "id": "action-state-separation",
+            "title": "Independent action state",
+            "status": "incubating",
+            "kindCandidate": "principle",
+            "slotHint": 7,
+            "slotBinding": "non-binding",
+            "oneSentence": "Real-world work must preserve intent, perspective, authority, and consequence as independently addressable facts.",
+            "path": "drafts/action-state-separation.md",
+            "sourceCases": [
+              {
+                "id": "proof-carrying-work-object",
+                "path": "cases/live/proof-carrying-work-object/README.md"
+              }
+            ],
+            "promotionGate": [
+              "observed-deletion-witnesses",
+              "cross-domain-transfer",
+              "rival-model-comparison",
+              "counterexample-review",
+              "product-witness"
+            ],
+            "claimBoundary": "This candidate does not allocate KFD-7, require four named storage objects, establish universal necessity, or create a normative organization decision."
+          }
+        ]
+      }
+    },
+    {
+      "id": "kfd7-numbered-registry",
+      "kind": "git-registry",
+      "repository": "https://github.com/kungfu-systems/kfd",
+      "commit": "8fa0000cf3d1c7ce0802a013a6b5103177b3630e",
+      "path": "registry.json",
+      "contentRoot": "sha256:90f3316cee9cf5bbb2efd5da21e38b9a85eb49403fb9b245416a567ca6ed18b0",
+      "payload": {
+        "schemaVersion": 1,
+        "contract": "kfd-registry",
+        "entries": [
+          {
+            "number": 1,
+            "id": "KFD-1",
+            "slug": "kfd-1",
+            "title": "Facts must not drift",
+            "kind": "procedure",
+            "status": "active",
+            "path": "decisions/KFD-1.md",
+            "url": "https://kfd.libkungfu.dev/1"
+          },
+          {
+            "number": 2,
+            "id": "KFD-2",
+            "slug": "kfd-2",
+            "title": "Trust must start from facts",
+            "kind": "principle",
+            "status": "active",
+            "path": "decisions/KFD-2.md",
+            "url": "https://kfd.libkungfu.dev/2"
+          },
+          {
+            "number": 3,
+            "id": "KFD-3",
+            "slug": "kfd-3",
+            "title": "Cooperation must start from trusted value",
+            "kind": "principle",
+            "status": "active",
+            "path": "decisions/KFD-3.md",
+            "url": "https://kfd.libkungfu.dev/3"
+          },
+          {
+            "number": 4,
+            "id": "KFD-4",
+            "slug": "kfd-4",
+            "title": "Views must remain bound to declared perspectives",
+            "kind": "principle",
+            "status": "active",
+            "path": "decisions/KFD-4.md",
+            "url": "https://kfd.libkungfu.dev/4"
+          },
+          {
+            "number": 5,
+            "id": "KFD-5",
+            "slug": "kfd-5",
+            "title": "Primitive discovery must separate genesis from qualification",
+            "kind": "procedure",
+            "status": "active",
+            "path": "decisions/KFD-5.md",
+            "url": "https://kfd.libkungfu.dev/5"
+          },
+          {
+            "number": 6,
+            "id": "KFD-6",
+            "slug": "kfd-6",
+            "title": "Autonomous discovery must remain grounded in causal experience",
+            "kind": "procedure",
+            "status": "draft",
+            "path": "decisions/KFD-6.md",
+            "url": "https://kfd.libkungfu.dev/6"
+          },
+          {
+            "number": 7,
+            "id": "KFD-7",
+            "slug": "kfd-7",
+            "title": "Real-world action must keep its responsibilities distinct",
+            "kind": "principle",
+            "status": "draft",
+            "path": "decisions/KFD-7.md",
+            "url": "https://kfd.libkungfu.dev/7"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kfd7-qualified-decision",
+      "kind": "git-document",
+      "repository": "https://github.com/kungfu-systems/kfd",
+      "commit": "1b96f1de9d189ad5a2cac90de0ac2322cab1177f",
+      "path": "decisions/KFD-7.md",
+      "contentRoot": "sha256:4b2dc449a85dbbbd46e7b4607878076da6b6c2dc3234c399635c04448ed4209e",
+      "payload": "# KFD-7: Real-world action must keep its responsibilities distinct\n\n- Status: draft\n- Number: 7\n- Kind: principle\n- Applies to: every kungfu-systems product, repository, agent workflow, and participant-facing interface that represents consequential real-world action\n\n## One sentence\n\nReal-world action must keep direction, perspective, authority, and occurrence\nindependently addressable.\n\nAction begins from fact-bound direction, perspective, and authority, encounters\nreality, and returns as independently replayable causal experience.\n\n## Status and gate\n\nKFD-7 is a numbered draft promoted from the\n[cross-domain action-Primitive candidate](../drafts/action-state-separation.md).\nIts number and authority are allocated; its activation evidence remains open.\n\nThe current model has enough theoretical closure to become an organization\ndecision: state and occurrence are not interchangeable, and direction,\nperspective, and authority can change safe action independently. Activation\nstill requires product evidence that this separation transfers across domains\nand lowers total reconstruction, authority, and consequence risk without\nforcing unnecessary ceremony on ordinary work.\n\n## Substrate boundary\n\nKFD-7 distinguishes two complementary operational substrates:\n\n```text\nFact cut       what holds at a declared authority and evidence boundary\nCausal record  what occurred between declared boundaries\n```\n\nA causal record may be carried by an Episode. It preserves action,\nconsequence, cost, failure, retry, authority use, and causal order rather than\nonly before-and-after state. Equal endpoints do not imply equal experience.\n\nFact cuts and causal records remain independently addressable. A causal record\ndoes not silently admit its endpoint as current fact, and a state transition\ndoes not erase the path that produced it.\n\n## Action responsibilities\n\nConsequential action requires three independently addressable responsibilities:\n\n```text\ndirection             Pursuit\nperspective and cut   Atlas\nauthority boundary    Warrant\nrealized occurrence   Episode or another bounded causal record\n```\n\nThe names Atlas, Pursuit, Warrant, and Episode identify the first\nkungfu-systems action profiles. The principle is the separation of semantic\nresponsibility:\n\n- direction states which continuing change and consequences matter;\n- perspective states from where, from which accepted facts, and at which cut\n  action is judged;\n- authority states which transition may be performed, by whom, and under which\n  constraints;\n- occurrence preserves what actually happened.\n\nNone may be silently derived from another. Intention does not grant authority.\nAvailable perspective is not complete reality. Permission or planning does not\nprove occurrence. Occurrence does not prove progress, completion, or\nauthorization.\n\n## Action closure\n\nThe normative closure is:\n\n```text\ndeclared Fact cut\n  -> independently addressable direction, perspective, and authority\n  -> bounded action encounters reality\n  -> independently replayable causal record\n  -> claims, review, correction, and explicit admission\n  -> successor Fact cut\n```\n\nThe order is semantic, not a mandatory interface sequence. Low-consequence\nwork may use inspectable defaults and progressive disclosure. Simplification\nmay reduce ceremony but must not fuse responsibility or fabricate a missing\nrole from another one.\n\n## Conservative session limit\n\nKFD-7 is a conservative extension of ordinary agent sessions. When work has\none local direction, one adequate bounded context, one stable authority grant,\none contiguous execution, and sparse Fact change, an implementation must be\nable to project:\n\n```text\nPursuit  -> goal\nAtlas    -> context\nWarrant  -> tool permissions\nEpisode  -> session, run, or transcript\nFact     -> input state and result\n```\n\nThe participant need not manage five explicit objects in this limit. The\nsession-compatible surface is conforming when it preserves the relevant\ndirection, perspective boundary, effective authority, realized occurrence,\nand admitted result, and keeps its defaults inspectable.\n\nThe formal reference defines this as a conditional round-trip theorem:\nexpanding a session-compressible session into the five responsibilities and\nprojecting it back must preserve those five decision observations. A product\ndoes not re-prove the abstract theorem; it proves that its concrete expansion,\nprojection, and compressibility boundary refine it.\n\nThis compression is conditional. The independent responsibilities must become\naddressable when work crosses directions, perspectives or freshness cuts,\nauthority states, causal Episodes, or material Fact branches. A session\ntherefore remains a valid local interaction and runtime object; it is not the\nsole model of consequential real-world work.\n\nContext is likewise not sufficient by itself. The same visible context can\nsupport different valid action sets when the Pursuit, Warrant, or Atlas cut and\nfreshness differ. One physical session record may still conform, but only when\nit preserves those responsibilities rather than treating context as their\nsubstitute.\n\n## Gate\n\nKFD-7 applies when an action has durable, cross-participant, cross-tool,\nauthority-bearing, safety-relevant, or materially costly consequences. A\npurely local reversible operation may rely on defaults when the defaults and\ntheir consequence boundary remain inspectable.\n\nA conforming claim:\n\n- binds action to a declared fact cut and perspective;\n- preserves continuing direction independently of one execution;\n- identifies applicable authority and its constraints;\n- records realized occurrence independently of planned or expected state;\n- preserves causal boundaries and composition across successor cuts;\n- keeps missing, defaulted, derived, expired, revoked, or degraded\n  responsibilities visible;\n- does not infer completion, success, permission, or reality completeness from\n  the wrong object.\n\n## Reference Profile contract\n\nKFD publishes `schemas/kfd-7/action-contract.schema.json` as a version 2 draft\nProfile declaration. It does not prescribe a universal product object model.\nIt gives products and release systems one machine-readable place to declare:\n\n- the Fact, Episode, Pursuit, Atlas, and Warrant responsibility mappings;\n- Profile-owned lifecycle vocabulary and implementation coordinates;\n- supported transitions with preconditions, effects, receipts, evidence,\n  denial reasons, and residual risks;\n- prohibited cross-role inferences and retained evidence obligations;\n- extension ownership, non-claims, qualification state, and activation verdict;\n- the standard session round-trip and context-insufficiency references, plus\n  the evidence categories used to qualify a concrete implementation.\n\nAll five responsibility declarations remain required even when a product uses\none physical record or a low-complexity session projection. The declaration\nexplains the mapping or inspectable default; it does not require five stores,\nforms, or commands. Schema conformance proves declaration closure only. It does\nnot prove role necessity, runtime behavior, product fitness, or activation.\n\n## Activation\n\nKFD-7 remains draft until real product evidence:\n\n- demonstrates counterfactual independence by holding two action\n  responsibilities fixed while varying the third;\n- transfers the model across non-isomorphic work domains;\n- distinguishes equal-endpoint but causally different Episodes;\n- represents concurrency, compensation, failure, and retry without hidden\n  reconstruction;\n- demonstrates a low-complexity session round trip without semantic loss or\n  manual object ceremony;\n- shows that complexity breakpoints expose the required independent roles;\n- proves that the implementation refines the standard round-trip theorem and\n  retains same-payload counterexamples where valid action differs;\n- compares task, goal, workflow, session, approval, capability, and fused\n  alternatives;\n- demonstrates lower total lifecycle cost or materially safer action.\n\nAn `activate` verdict additionally binds an exact evidence cut, independent\nreview, at least one retained product witness, and no planned or failed\nevidence obligation. Missing evidence remains visible; it is never projected\nas pass.\n\nFailure is evidence for revision, simplification, or rejection of the proposed\nprofiles. It is not permission to infer one responsibility from another.\n\n## Relation to KFD-1 through KFD-6\n\nKFD-1 keeps fact cuts and causal records from drifting. KFD-2 makes claims about\nthem assessable. KFD-3 lets participants exchange trusted value without hidden\npressure. KFD-4 supplies declared reference frames and inspectable\ntransformations. KFD-5 separates the genesis of action Primitives from their\nqualification. KFD-6 asks whether causal experience can sustain autonomous\ndiscovery. KFD-7 turns those foundations back toward action:\n\n```text\nnon-drifting facts\n  -> bounded trust\n  -> transparent cooperation\n  -> declared perspective\n  -> qualified Primitives\n  -> grounded discovery\n  -> fact-bound real-world action\n```\n\n## Verification\n\nThe non-normative reference semantics are published in\n`docs/KFD-7-formal.md`. The draft Profile contract is published at\n`schemas/kfd-7/action-contract.schema.json` and is implemented independently by\nthe native and WebAssembly verifier projections. Current package verification\nproves document, metadata, route, digest, declaration, and negative-fixture\nclosure. It does not prove cross-domain minimality, runtime behavior, product\nusability, or activation.\n\n## Adopters\n\nExperimental adopters cite KFD-7 when they expose the action model and keep its\nstatus `draft`. They own the evidence for role independence, fact-cut\nadmission, causal fidelity, authority correctness, progressive disclosure, and\ndomain transfer.\n"
+    },
+    {
+      "id": "kfd7-refined-candidates",
+      "kind": "git-registry",
+      "repository": "https://github.com/kungfu-systems/kfd",
+      "commit": "d9711c64573fba844aeb43780a8323ee6f901155",
+      "path": "drafts/registry.json",
+      "contentRoot": "sha256:ea484c7f3a28be72e2a75f7171627e73e55a51129a043daa314bb6d1e7bf37fe",
+      "payload": {
+        "$schema": "https://kfd.libkungfu.dev/schemas/kfd-candidate-registry.schema.json",
+        "schemaVersion": 1,
+        "contract": "kfd-candidate-registry",
+        "numberingPolicy": {
+          "allocation": "promotion-only",
+          "slotHints": "non-binding",
+          "numberedDraftSource": "registry.json",
+          "stableFreeze": "first-non-prerelease-release"
+        },
+        "candidates": [
+          {
+            "id": "action-state-separation",
+            "title": "Cross-domain action primitives",
+            "status": "incubating",
+            "kindCandidate": "principle",
+            "slotHint": 7,
+            "slotBinding": "non-binding",
+            "oneSentence": "Real-world action must begin from independently addressable, fact-bound direction, perspective, and authority, and return as independently replayable causal experience.",
+            "path": "drafts/action-state-separation.md",
+            "sourceCases": [
+              {
+                "id": "proof-carrying-work-object",
+                "path": "cases/live/proof-carrying-work-object/README.md"
+              }
+            ],
+            "promotionGate": [
+              "observed-deletion-witnesses",
+              "cross-domain-transfer",
+              "rival-model-comparison",
+              "counterexample-review",
+              "product-witness"
+            ],
+            "claimBoundary": "This candidate does not allocate KFD-7, turn Fact or Episode into a domain-Primitive claim, require named physical stores, establish universal necessity, or create a normative organization decision. Its elaboration candidates carry non-binding slot hints only."
+          },
+          {
+            "id": "atlas-action-perspective",
+            "title": "Atlas action perspective",
+            "status": "incubating",
+            "kindCandidate": "principle",
+            "slotHint": 8,
+            "slotBinding": "non-binding",
+            "oneSentence": "Every consequential action must bind to an addressable perspective and fact cut.",
+            "path": "drafts/atlas-action-perspective.md",
+            "sourceCases": [
+              {
+                "id": "proof-carrying-work-object",
+                "path": "cases/live/proof-carrying-work-object/README.md"
+              }
+            ],
+            "promotionGate": [
+              "perspective-deletion-witnesses",
+              "cross-domain-transfer",
+              "context-alternative-comparison",
+              "perspective-replay-evidence",
+              "dual-first-product-witness"
+            ],
+            "claimBoundary": "This candidate does not allocate KFD-8, require the name Atlas, mandate one serialization or product surface, claim perspective completeness, or create a normative organization decision."
+          },
+          {
+            "id": "pursuit-intent-continuity",
+            "title": "Pursuit intent continuity",
+            "status": "incubating",
+            "kindCandidate": "principle",
+            "slotHint": 9,
+            "slotBinding": "non-binding",
+            "oneSentence": "Intent that survives an action must have an identity independent of the action that advances it.",
+            "path": "drafts/pursuit-intent-continuity.md",
+            "sourceCases": [
+              {
+                "id": "proof-carrying-work-object",
+                "path": "cases/live/proof-carrying-work-object/README.md"
+              }
+            ],
+            "promotionGate": [
+              "continuity-deletion-witnesses",
+              "cross-domain-transfer",
+              "goal-alternative-comparison",
+              "settlement-distinguishability",
+              "product-witness"
+            ],
+            "claimBoundary": "This candidate does not allocate KFD-9, require the name Pursuit, mandate one decomposition shape or workflow, establish universal necessity, or create a normative organization decision."
+          },
+          {
+            "id": "warrant-bounded-authority",
+            "title": "Warrant bounded authority",
+            "status": "incubating",
+            "kindCandidate": "principle",
+            "slotHint": 10,
+            "slotBinding": "non-binding",
+            "oneSentence": "Permission to act must remain explicit, bounded, derivable, and independently revocable.",
+            "path": "drafts/warrant-bounded-authority.md",
+            "sourceCases": [
+              {
+                "id": "proof-carrying-work-object",
+                "path": "cases/live/proof-carrying-work-object/README.md"
+              }
+            ],
+            "promotionGate": [
+              "authority-deletion-witnesses",
+              "cross-domain-transfer",
+              "authorization-alternative-comparison",
+              "revocation-and-attenuation-evidence",
+              "product-witness"
+            ],
+            "claimBoundary": "This candidate does not allocate KFD-10, require the name Warrant, replace domain authorization systems, establish universal necessity, or create a normative organization decision."
+          }
+        ]
+      }
+    },
+    {
+      "id": "no-new-kfd-authority",
+      "kind": "git-document",
+      "repository": "https://github.com/kungfu-systems/kfd",
+      "commit": "5791476b226b0ce26f98538704e71f7e29e04956",
+      "path": "evidence/self-conformance/transitions/recursive-normative-self-conformance-terminal.request.json#authorityReceipt",
+      "contentRoot": "sha256:c1d0647da2403268db7367d2d236e1cd4f05b98d7f560c94c821095c57348079",
+      "payload": {
+        "schemaVersion": 1,
+        "contract": "kfd.self-conformance-lifecycle-authority-receipt/v1",
+        "receiptId": "recursive-normative-self-conformance-terminal-authority",
+        "lifecyclePath": "qualification",
+        "transition": "no-new-kfd",
+        "previousStateRoot": "sha256:8c268b506617a08c00eefefa06db334481873cdcfbfef473a2d57f74cb57cc8a",
+        "proposedStateRoot": "sha256:5505317857f69803838d14339b0eaea8804ae3ec51b8ce8264ea1e92f13ff43c",
+        "role": "review-disposition",
+        "decision": "no-new-kfd",
+        "actor": "dongkeren",
+        "claimBoundary": "This disposition records no-new-kfd after independent semantic review PRR_kwDOTLH7GM8AAAABIy0qZA. It allocates no number, changes no numbered KFD, and does not authorize merge, publication, or release."
+      }
+    },
+    {
+      "id": "no-new-kfd-report",
+      "kind": "git-document",
+      "repository": "https://github.com/kungfu-systems/kfd",
+      "commit": "5791476b226b0ce26f98538704e71f7e29e04956",
+      "path": "evidence/self-conformance/transitions/recursive-normative-self-conformance-terminal.report.json",
+      "contentRoot": "sha256:b7de83591b563364ceac432dc1a4a3d7e2e00c91224ea0e7be9657dbbd3adb40",
+      "payload": {
+        "schemaVersion": 1,
+        "contract": "kfd.self-conformance-lifecycle-gate-report/v1",
+        "profile": "kfd-self-conformance@1.0.0-alpha.1",
+        "gateId": "recursive-normative-self-conformance-terminal",
+        "lifecyclePath": "qualification",
+        "requestRoot": "sha256:6de7f6436870f4ac5d0e608e631b787371eb318ff680a15b90db7e5b4aac8dc6",
+        "fixedPackageRoot": "sha256:596a1e4b0d57e93fefcb4f32ff2df5be35a56cf86fb8864f5d0ab09b12cd8770",
+        "terminalBundleRoot": "sha256:1dda7286370c7221d87539d4749fb07017f94238040e324c02fc633c19b797e9",
+        "terminalReportRoot": "sha256:0fb85f2dbd11dba10648bbc85a7f8a563674d4b18c6d6dfe452c6db80b40d9bb",
+        "valid": true,
+        "outcome": "non-promotion",
+        "transitionAdmissible": false,
+        "automaticTransition": false,
+        "verifierNecessary": true,
+        "verifierSufficient": false,
+        "humanApproved": false,
+        "releaseAuthorized": false,
+        "numberAllocated": false,
+        "statusChanged": false,
+        "chain": [
+          {
+            "index": 0,
+            "transition": "candidate-genesis",
+            "bundleRoot": "sha256:154809d0f44fcd39a08077e79390d9f0dd18dff6d3ca2229e9e1654b1557faf2",
+            "reportRoot": "sha256:0fb85f2dbd11dba10648bbc85a7f8a563674d4b18c6d6dfe452c6db80b40d9bb",
+            "packageRoot": "sha256:596a1e4b0d57e93fefcb4f32ff2df5be35a56cf86fb8864f5d0ab09b12cd8770",
+            "authorityReceiptRoot": "sha256:7584445751699c88d126b02ecc5716acb3ae80a1501f7a6538f8eb95abb4c689",
+            "reviewReceiptRoot": "sha256:f714cd1a32c4b7b1560e5597244d8826981c26cb0d77a0473ffbd2375c35d7b5",
+            "verifierValid": true
+          },
+          {
+            "index": 1,
+            "transition": "no-new-kfd",
+            "bundleRoot": "sha256:1dda7286370c7221d87539d4749fb07017f94238040e324c02fc633c19b797e9",
+            "reportRoot": "sha256:0fb85f2dbd11dba10648bbc85a7f8a563674d4b18c6d6dfe452c6db80b40d9bb",
+            "packageRoot": "sha256:596a1e4b0d57e93fefcb4f32ff2df5be35a56cf86fb8864f5d0ab09b12cd8770",
+            "authorityReceiptRoot": "sha256:c1d0647da2403268db7367d2d236e1cd4f05b98d7f560c94c821095c57348079",
+            "reviewReceiptRoot": "sha256:6119545041dfffd7fd7d45f37bf605bfabbf97784bcf5e887b9028e336811720",
+            "verifierValid": true
+          }
+        ],
+        "counterevidenceRoots": [
+          "sha256:ea6b3c50588f2867527aad93469a7d5f5384c83b57e072c7348888380deacbb2"
+        ],
+        "checks": [
+          {
+            "id": "authority-receipt-contract",
+            "status": "pass"
+          },
+          {
+            "id": "authority-receipt-coordinates",
+            "status": "pass"
+          },
+          {
+            "id": "authority-receipt-root",
+            "status": "pass"
+          },
+          {
+            "id": "authority-role",
+            "status": "pass"
+          },
+          {
+            "id": "bootstrap-anchor",
+            "status": "pass"
+          },
+          {
+            "id": "chain-entry-contract",
+            "status": "pass"
+          },
+          {
+            "id": "counterevidence-roots",
+            "status": "pass"
+          },
+          {
+            "id": "entry-package-root",
+            "status": "pass"
+          },
+          {
+            "id": "exact-bundle-roots",
+            "status": "pass"
+          },
+          {
+            "id": "exact-report-roots",
+            "status": "pass"
+          },
+          {
+            "id": "exact-verifier-root",
+            "status": "pass"
+          },
+          {
+            "id": "fixed-package-root",
+            "status": "pass"
+          },
+          {
+            "id": "independent-review-receipt",
+            "status": "pass"
+          },
+          {
+            "id": "independent-transition-verifier",
+            "status": "pass"
+          },
+          {
+            "id": "lifecycle-path",
+            "status": "pass"
+          },
+          {
+            "id": "path-transition",
+            "status": "pass"
+          },
+          {
+            "id": "predecessor-roots",
+            "status": "pass"
+          },
+          {
+            "id": "predecessor-state",
+            "status": "pass"
+          },
+          {
+            "id": "request-contract",
+            "status": "pass"
+          },
+          {
+            "id": "review-receipt-contract",
+            "status": "pass"
+          },
+          {
+            "id": "review-receipt-coordinates",
+            "status": "pass"
+          },
+          {
+            "id": "review-receipt-root",
+            "status": "pass"
+          },
+          {
+            "id": "terminal-bundle-root",
+            "status": "pass"
+          },
+          {
+            "id": "transition-chain",
+            "status": "pass"
+          }
+        ],
+        "issues": [],
+        "offline": true
+      }
+    },
+    {
+      "id": "no-new-kfd-review",
+      "kind": "git-document",
+      "repository": "https://github.com/kungfu-systems/kfd",
+      "commit": "5791476b226b0ce26f98538704e71f7e29e04956",
+      "path": "evidence/self-conformance/transitions/recursive-normative-self-conformance-terminal.request.json#reviewReceipt",
+      "contentRoot": "sha256:6119545041dfffd7fd7d45f37bf605bfabbf97784bcf5e887b9028e336811720",
+      "payload": {
+        "schemaVersion": 1,
+        "contract": "kfd.self-conformance-lifecycle-review-receipt/v1",
+        "receiptId": "recursive-normative-self-conformance-terminal-review",
+        "transition": "no-new-kfd",
+        "previousStateRoot": "sha256:8c268b506617a08c00eefefa06db334481873cdcfbfef473a2d57f74cb57cc8a",
+        "proposedStateRoot": "sha256:5505317857f69803838d14339b0eaea8804ae3ec51b8ce8264ea1e92f13ff43c",
+        "author": "qualification-author",
+        "reviewer": "kungfu-origin",
+        "independent": true,
+        "verdict": "approve",
+        "claimBoundary": "This receipt projects public review PRR_kwDOTLH7GM8AAAABIy0qZA of exact assessment commit 5791476b226b0ce26f98538704e71f7e29e04956. The review accepts the semantic recommendation but did not pre-review this later envelope."
+      }
+    },
+    {
+      "id": "numbered-drafts-pr225",
+      "kind": "git-registry",
+      "repository": "https://github.com/kungfu-systems/kfd",
+      "commit": "9040c33475e1120c588d6bba780d4bdc0f66a521",
+      "path": "registry.json",
+      "contentRoot": "sha256:9d78aa653d55e33a13ff763c5434beca06dc6fafcd32ab98d2773db87abf4a51",
+      "payload": {
+        "schemaVersion": 1,
+        "contract": "kfd-registry",
+        "entries": [
+          {
+            "number": 1,
+            "id": "KFD-1",
+            "slug": "kfd-1",
+            "title": "Facts must not drift",
+            "kind": "procedure",
+            "status": "active",
+            "path": "decisions/KFD-1.md",
+            "url": "https://kfd.libkungfu.dev/1"
+          },
+          {
+            "number": 2,
+            "id": "KFD-2",
+            "slug": "kfd-2",
+            "title": "Trust must start from facts",
+            "kind": "principle",
+            "status": "active",
+            "path": "decisions/KFD-2.md",
+            "url": "https://kfd.libkungfu.dev/2"
+          },
+          {
+            "number": 3,
+            "id": "KFD-3",
+            "slug": "kfd-3",
+            "title": "Cooperation must start from trusted value",
+            "kind": "principle",
+            "status": "active",
+            "path": "decisions/KFD-3.md",
+            "url": "https://kfd.libkungfu.dev/3"
+          },
+          {
+            "number": 4,
+            "id": "KFD-4",
+            "slug": "kfd-4",
+            "title": "Views must remain bound to declared perspectives",
+            "kind": "principle",
+            "status": "active",
+            "path": "decisions/KFD-4.md",
+            "url": "https://kfd.libkungfu.dev/4"
+          },
+          {
+            "number": 5,
+            "id": "KFD-5",
+            "slug": "kfd-5",
+            "title": "Primitive discovery must separate genesis from qualification",
+            "kind": "procedure",
+            "status": "active",
+            "path": "decisions/KFD-5.md",
+            "url": "https://kfd.libkungfu.dev/5"
+          },
+          {
+            "number": 6,
+            "id": "KFD-6",
+            "slug": "kfd-6",
+            "title": "Autonomous discovery must remain grounded in causal experience",
+            "kind": "procedure",
+            "status": "draft",
+            "path": "decisions/KFD-6.md",
+            "url": "https://kfd.libkungfu.dev/6"
+          },
+          {
+            "number": 7,
+            "id": "KFD-7",
+            "slug": "kfd-7",
+            "title": "Real-world action must keep state, occurrence, and action coordinates distinct",
+            "kind": "principle",
+            "status": "active",
+            "path": "decisions/KFD-7.md",
+            "url": "https://kfd.libkungfu.dev/7"
+          },
+          {
+            "number": 8,
+            "id": "KFD-8",
+            "slug": "kfd-8",
+            "title": "Perspective must remain bound to admitted facts and declared loss",
+            "kind": "principle",
+            "status": "draft",
+            "path": "decisions/KFD-8.md",
+            "url": "https://kfd.libkungfu.dev/8"
+          },
+          {
+            "number": 9,
+            "id": "KFD-9",
+            "slug": "kfd-9",
+            "title": "Continuing direction must outlive the actions that advance it",
+            "kind": "principle",
+            "status": "draft",
+            "path": "decisions/KFD-9.md",
+            "url": "https://kfd.libkungfu.dev/9"
+          },
+          {
+            "number": 10,
+            "id": "KFD-10",
+            "slug": "kfd-10",
+            "title": "Authority must remain explicit, bounded, and revocable",
+            "kind": "principle",
+            "status": "draft",
+            "path": "decisions/KFD-10.md",
+            "url": "https://kfd.libkungfu.dev/10"
+          },
+          {
+            "number": 11,
+            "id": "KFD-11",
+            "slug": "kfd-11",
+            "title": "Software work must keep responsibility transitions distinct",
+            "kind": "principle",
+            "status": "draft",
+            "path": "decisions/KFD-11.md",
+            "url": "https://kfd.libkungfu.dev/11"
+          },
+          {
+            "number": 12,
+            "id": "KFD-12",
+            "slug": "kfd-12",
+            "title": "Project settlement must bind authorities without absorbing them",
+            "kind": "procedure",
+            "status": "draft",
+            "path": "decisions/KFD-12.md",
+            "url": "https://kfd.libkungfu.dev/12"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pr-146-authority",
+      "kind": "github-pr",
+      "repository": "https://github.com/kungfu-systems/kfd",
+      "commit": "8ae3946812effb7cc04c26b7ce396d70abf2eae0",
+      "path": "https://github.com/kungfu-systems/kfd/pull/146",
+      "contentRoot": "sha256:fe7da223ab30bb9b343f7ec0a101b85a67f8a5ef7698111a9ad766ae86e0f8e4",
+      "payload": {
+        "number": 146,
+        "url": "https://github.com/kungfu-systems/kfd/pull/146",
+        "head": "8ae3946812effb7cc04c26b7ce396d70abf2eae0",
+        "merge": "04f839e8e7834c9eda3d46424de2f59f53623e8f",
+        "mergedAt": "2026-07-17T00:52:03Z",
+        "author": "dongkeren"
+      }
+    },
+    {
+      "id": "pr-146-review",
+      "kind": "github-pr",
+      "repository": "https://github.com/kungfu-systems/kfd",
+      "commit": "8ae3946812effb7cc04c26b7ce396d70abf2eae0",
+      "path": "https://github.com/kungfu-systems/kfd/pull/146/reviews",
+      "contentRoot": "sha256:c22885597241244ab2f8c4f25e98def31f4bb0a380b79e7fa295605a52de868e",
+      "payload": {
+        "number": 146,
+        "reviewer": "kungfu-origin",
+        "state": "APPROVED",
+        "reviewedCommit": "8ae3946812effb7cc04c26b7ce396d70abf2eae0",
+        "independentFrom": "dongkeren"
+      }
+    },
+    {
+      "id": "pr-159-authority",
+      "kind": "github-pr",
+      "repository": "https://github.com/kungfu-systems/kfd",
+      "commit": "31a3227e33453883cdcd874b198d8e3443be75e0",
+      "path": "https://github.com/kungfu-systems/kfd/pull/159",
+      "contentRoot": "sha256:99bf31080a0e6be07801354fa7ac787f8a178830039615c8dc9c78c66bc0ae40",
+      "payload": {
+        "number": 159,
+        "url": "https://github.com/kungfu-systems/kfd/pull/159",
+        "head": "31a3227e33453883cdcd874b198d8e3443be75e0",
+        "merge": "cbffaf8bbe1c5f012b860798fce756de3cebbc80",
+        "mergedAt": "2026-07-17T09:10:11Z",
+        "author": "dongkeren"
+      }
+    },
+    {
+      "id": "pr-159-review",
+      "kind": "github-pr",
+      "repository": "https://github.com/kungfu-systems/kfd",
+      "commit": "31a3227e33453883cdcd874b198d8e3443be75e0",
+      "path": "https://github.com/kungfu-systems/kfd/pull/159/reviews",
+      "contentRoot": "sha256:68f0b2d9807dfbd5e7fdd7077b0413e814fd87735e1028b8332a6625ea3e04c5",
+      "payload": {
+        "number": 159,
+        "reviewer": "kungfu-origin",
+        "state": "APPROVED",
+        "reviewedCommit": "31a3227e33453883cdcd874b198d8e3443be75e0",
+        "independentFrom": "dongkeren"
+      }
+    },
+    {
+      "id": "pr-176-authority",
+      "kind": "github-pr",
+      "repository": "https://github.com/kungfu-systems/kfd",
+      "commit": "72402ac2a035cb9ff8835f3d2f66d6fd4fe827cd",
+      "path": "https://github.com/kungfu-systems/kfd/pull/176",
+      "contentRoot": "sha256:f8087a9a3c3efbf71ad6f7b7c06446761fa0ca4ddcbe937155ac6239a70a5da0",
+      "payload": {
+        "number": 176,
+        "url": "https://github.com/kungfu-systems/kfd/pull/176",
+        "head": "72402ac2a035cb9ff8835f3d2f66d6fd4fe827cd",
+        "merge": "d9711c64573fba844aeb43780a8323ee6f901155",
+        "mergedAt": "2026-07-18T02:03:26Z",
+        "author": "dongkeren"
+      }
+    },
+    {
+      "id": "pr-176-review",
+      "kind": "github-pr",
+      "repository": "https://github.com/kungfu-systems/kfd",
+      "commit": "72402ac2a035cb9ff8835f3d2f66d6fd4fe827cd",
+      "path": "https://github.com/kungfu-systems/kfd/pull/176/reviews",
+      "contentRoot": "sha256:a8c13c639cbdf13f32ec3670bca2bfa678842df2f5b1a9767c3049b267d883ad",
+      "payload": {
+        "number": 176,
+        "reviewer": "kungfu-origin",
+        "state": "APPROVED",
+        "reviewedCommit": "72402ac2a035cb9ff8835f3d2f66d6fd4fe827cd",
+        "independentFrom": "dongkeren"
+      }
+    },
+    {
+      "id": "pr-180-authority",
+      "kind": "github-pr",
+      "repository": "https://github.com/kungfu-systems/kfd",
+      "commit": "bcecac09397d0f105fe2863ef35eb853def244ac",
+      "path": "https://github.com/kungfu-systems/kfd/pull/180",
+      "contentRoot": "sha256:f4b779febb9b0c3de77a5d0ae976593fddd146ad4aea7fc6ff669387c12bd009",
+      "payload": {
+        "number": 180,
+        "url": "https://github.com/kungfu-systems/kfd/pull/180",
+        "head": "bcecac09397d0f105fe2863ef35eb853def244ac",
+        "merge": "8fa0000cf3d1c7ce0802a013a6b5103177b3630e",
+        "mergedAt": "2026-07-18T08:31:55Z",
+        "author": "dongkeren"
+      }
+    },
+    {
+      "id": "pr-180-review",
+      "kind": "github-pr",
+      "repository": "https://github.com/kungfu-systems/kfd",
+      "commit": "bcecac09397d0f105fe2863ef35eb853def244ac",
+      "path": "https://github.com/kungfu-systems/kfd/pull/180/reviews",
+      "contentRoot": "sha256:acf9e9df3895759e334bc127bcb3c1985ef59fe531f8c6e69f3246149d8aa722",
+      "payload": {
+        "number": 180,
+        "reviewer": "kungfu-origin",
+        "state": "APPROVED",
+        "reviewedCommit": "bcecac09397d0f105fe2863ef35eb853def244ac",
+        "independentFrom": "dongkeren"
+      }
+    },
+    {
+      "id": "pr-186-authority",
+      "kind": "github-pr",
+      "repository": "https://github.com/kungfu-systems/kfd",
+      "commit": "56e8fd1081bc1616c6e2cbfaa6b047fbec7cbfae",
+      "path": "https://github.com/kungfu-systems/kfd/pull/186",
+      "contentRoot": "sha256:d879741b63e89dfbb2662ab2dc06acc87eaec3d6532ca075a777b58d6e142bb3",
+      "payload": {
+        "number": 186,
+        "url": "https://github.com/kungfu-systems/kfd/pull/186",
+        "head": "56e8fd1081bc1616c6e2cbfaa6b047fbec7cbfae",
+        "merge": "1b96f1de9d189ad5a2cac90de0ac2322cab1177f",
+        "mergedAt": "2026-07-18T09:57:23Z",
+        "author": "dongkeren"
+      }
+    },
+    {
+      "id": "pr-186-review",
+      "kind": "github-pr",
+      "repository": "https://github.com/kungfu-systems/kfd",
+      "commit": "56e8fd1081bc1616c6e2cbfaa6b047fbec7cbfae",
+      "path": "https://github.com/kungfu-systems/kfd/pull/186/reviews",
+      "contentRoot": "sha256:2b37f1d83dd8a7e41e54f85bc9fad3ca35c9df698f109c737a0f3e1a01a5f0a9",
+      "payload": {
+        "number": 186,
+        "reviewer": "kungfu-origin",
+        "state": "APPROVED",
+        "reviewedCommit": "56e8fd1081bc1616c6e2cbfaa6b047fbec7cbfae",
+        "independentFrom": "dongkeren"
+      }
+    },
+    {
+      "id": "pr-190-authority",
+      "kind": "github-pr",
+      "repository": "https://github.com/kungfu-systems/kfd",
+      "commit": "a56a3d3bcaa2889a931b3891d2085496d2760db4",
+      "path": "https://github.com/kungfu-systems/kfd/pull/190",
+      "contentRoot": "sha256:72eea53b42596b3d7649d11722c519796610e1e3c4ddb9c3f3438f096716c342",
+      "payload": {
+        "number": 190,
+        "url": "https://github.com/kungfu-systems/kfd/pull/190",
+        "head": "a56a3d3bcaa2889a931b3891d2085496d2760db4",
+        "merge": "bca202feb823f9c3234753b05dfd4dff460e69f6",
+        "mergedAt": "2026-07-18T16:21:44Z",
+        "author": "dongkeren"
+      }
+    },
+    {
+      "id": "pr-190-review",
+      "kind": "github-pr",
+      "repository": "https://github.com/kungfu-systems/kfd",
+      "commit": "a56a3d3bcaa2889a931b3891d2085496d2760db4",
+      "path": "https://github.com/kungfu-systems/kfd/pull/190/reviews",
+      "contentRoot": "sha256:72c0f4d05a1d65a636022c1d262cf870aa15eccfa1d1689573316a2b4ee3275b",
+      "payload": {
+        "number": 190,
+        "reviewer": "kungfu-origin",
+        "state": "APPROVED",
+        "reviewedCommit": "a56a3d3bcaa2889a931b3891d2085496d2760db4",
+        "independentFrom": "dongkeren"
+      }
+    },
+    {
+      "id": "pr-225-authority",
+      "kind": "github-pr",
+      "repository": "https://github.com/kungfu-systems/kfd",
+      "commit": "d66307c4f985d6036b1d0fb440866903f534d770",
+      "path": "https://github.com/kungfu-systems/kfd/pull/225",
+      "contentRoot": "sha256:072dafeda01c73f6d48d66847cea4ab937330dfdea54df0fca7d4cd8ff1e075e",
+      "payload": {
+        "number": 225,
+        "url": "https://github.com/kungfu-systems/kfd/pull/225",
+        "head": "d66307c4f985d6036b1d0fb440866903f534d770",
+        "merge": "9040c33475e1120c588d6bba780d4bdc0f66a521",
+        "mergedAt": "2026-07-21T00:28:43Z",
+        "author": "dongkeren"
+      }
+    },
+    {
+      "id": "pr-225-review",
+      "kind": "github-pr",
+      "repository": "https://github.com/kungfu-systems/kfd",
+      "commit": "d66307c4f985d6036b1d0fb440866903f534d770",
+      "path": "https://github.com/kungfu-systems/kfd/pull/225/reviews",
+      "contentRoot": "sha256:1fdb03a06b207e922f01c24beb8673e1d64aac9ca12ba92f6bc5dadde35efe5f",
+      "payload": {
+        "number": 225,
+        "reviewer": "kungfu-origin",
+        "state": "APPROVED",
+        "reviewedCommit": "d66307c4f985d6036b1d0fb440866903f534d770",
+        "independentFrom": "dongkeren"
+      }
+    },
+    {
+      "id": "pr-230-authority",
+      "kind": "github-pr",
+      "repository": "https://github.com/kungfu-systems/kfd",
+      "commit": "8d9d6338afd62e01aac4c776313ba40e44f7700a",
+      "path": "https://github.com/kungfu-systems/kfd/pull/230",
+      "contentRoot": "sha256:d86b6658f75fa58a4e2e70a5e4f7c4145603d7e1f85ddb7305d532debcffa139",
+      "payload": {
+        "number": 230,
+        "url": "https://github.com/kungfu-systems/kfd/pull/230",
+        "head": "8d9d6338afd62e01aac4c776313ba40e44f7700a",
+        "merge": "903737e47e047c0d3aedce98fdf3751cbc9b7aab",
+        "mergedAt": "2026-07-21T03:05:46Z",
+        "author": "dongkeren"
+      }
+    },
+    {
+      "id": "pr-230-review",
+      "kind": "github-pr",
+      "repository": "https://github.com/kungfu-systems/kfd",
+      "commit": "8d9d6338afd62e01aac4c776313ba40e44f7700a",
+      "path": "https://github.com/kungfu-systems/kfd/pull/230/reviews",
+      "contentRoot": "sha256:caa012f0985fa872f0733d08c09140b223cc1d90b80aab432fcc33c0c9dbe58d",
+      "payload": {
+        "number": 230,
+        "reviewer": "kungfu-origin",
+        "state": "APPROVED",
+        "reviewedCommit": "8d9d6338afd62e01aac4c776313ba40e44f7700a",
+        "independentFrom": "dongkeren"
+      }
+    },
+    {
+      "id": "self-conformance-live-alpha55-anchor",
+      "kind": "git-document",
+      "repository": "https://github.com/kungfu-systems/kfd",
+      "commit": "a219407a45f43bfec1dba9df72b4469424aa4b19",
+      "path": "profiles/self-conformance/bootstrap-anchor.json",
+      "contentRoot": "sha256:26961922619d090faf9c76f8bf0e25947100a5d13be6831366f1a0933c7ced59",
+      "payload": {
+        "schemaVersion": 1,
+        "contract": "kfd.self-conformance-bootstrap-anchor/v1",
+        "profile": "kfd-self-conformance@1.0.0-alpha.1",
+        "anchorId": "kfd-alpha-55-pre-profile",
+        "stateRoot": "sha256:dee2c0c23b30ab37395b548af698bf9800a9b33ebcba5efdf34c7c250ebf1049",
+        "packageRoot": "sha256:114c195fea83c65ec84e52def6c2afced8a4ca9d2c9abe813f5c9c5d3b50260a",
+        "authorityReceiptRoot": "sha256:fde3c40133fc784783fcb1951c5bf14c2f9217779f01270c6e7f2bd273bdc9ba",
+        "reviewReceiptRoot": "sha256:adb5c5c91d91c8a217479b2d3341262efd584c69bc4a655840682b46d88734e9",
+        "coordinate": {
+          "repository": "https://github.com/kungfu-systems/kfd",
+          "commit": "a219407a45f43bfec1dba9df72b4469424aa4b19",
+          "packageVersion": "1.0.0-alpha.55"
+        },
+        "rationale": "The immutable alpha.55 package and its independently reviewed release/dev merge are the last public KFD cut before this profile contract. The anchor records that the self-conformance pressure field was absent at that cut.",
+        "claimBoundary": "This anchor establishes a finite predecessor for later profile-governed transitions. It does not validate the current profile, authorize a lifecycle transition, or prove semantic correctness."
+      }
+    }
+  ],
+  "foundation": {
+    "id": "kfd-alpha28-foundation-cut",
+    "gitCommit": "04f839e8e7834c9eda3d46424de2f59f53623e8f",
+    "gitTag": "v1.0.0-alpha.28",
+    "packageName": "@kungfu-tech/kfd",
+    "packageVersion": "1.0.0-alpha.28",
+    "packageRoot": "sha256:279cf2adcfe0c5cd9d31ecf0e6317d5a5f2ff854c49c39f7e135ad4e2cc43ce1",
+    "registrySourceId": "alpha28-registry",
+    "authoritySourceId": "pr-146-authority",
+    "reviewSourceId": "pr-146-review",
+    "active": [
+      "KFD-1",
+      "KFD-2",
+      "KFD-3",
+      "KFD-4",
+      "KFD-5"
+    ],
+    "draft": [
+      "KFD-6"
+    ],
+    "absent": [
+      "KFD-7"
+    ]
+  },
+  "episodes": [
+    {
+      "sequence": 1,
+      "terminalAtEvent": true,
+      "retrospective": true,
+      "profileAvailableAtEvent": false,
+      "numberingMappings": [],
+      "claimBoundary": "This episode replays immutable historical structure only. It does not create contemporaneous Profile execution, semantic truth, lifecycle authority, or a new normative transition.",
+      "id": "kfd7-candidate-pr159",
+      "subjectId": "KFD-7",
+      "transition": "candidate-genesis",
+      "before": "absent",
+      "after": "candidate",
+      "sourceIds": [
+        "kfd7-candidate-registry",
+        "pr-159-authority",
+        "pr-159-review"
+      ],
+      "authoritySourceId": "pr-159-authority",
+      "reviewSourceId": "pr-159-review"
+    },
+    {
+      "sequence": 2,
+      "terminalAtEvent": true,
+      "retrospective": true,
+      "profileAvailableAtEvent": false,
+      "numberingMappings": [],
+      "claimBoundary": "This episode replays immutable historical structure only. It does not create contemporaneous Profile execution, semantic truth, lifecycle authority, or a new normative transition.",
+      "id": "kfd7-refinement-pr176",
+      "subjectId": "KFD-7",
+      "transition": "candidate-refinement",
+      "before": "candidate",
+      "after": "candidate",
+      "sourceIds": [
+        "kfd7-refined-candidates",
+        "pr-176-authority",
+        "pr-176-review"
+      ],
+      "authoritySourceId": "pr-176-authority",
+      "reviewSourceId": "pr-176-review"
+    },
+    {
+      "sequence": 3,
+      "terminalAtEvent": true,
+      "retrospective": true,
+      "profileAvailableAtEvent": false,
+      "numberingMappings": [],
+      "claimBoundary": "This episode replays immutable historical structure only. It does not create contemporaneous Profile execution, semantic truth, lifecycle authority, or a new normative transition.",
+      "id": "kfd7-numbered-draft-pr180",
+      "subjectId": "KFD-7",
+      "transition": "numbered-draft-promotion",
+      "before": "candidate",
+      "after": "numbered-draft",
+      "sourceIds": [
+        "kfd7-numbered-registry",
+        "pr-180-authority",
+        "pr-180-review"
+      ],
+      "authoritySourceId": "pr-180-authority",
+      "reviewSourceId": "pr-180-review"
+    },
+    {
+      "sequence": 4,
+      "terminalAtEvent": true,
+      "retrospective": true,
+      "profileAvailableAtEvent": false,
+      "numberingMappings": [],
+      "claimBoundary": "This episode replays immutable historical structure only. It does not create contemporaneous Profile execution, semantic truth, lifecycle authority, or a new normative transition.",
+      "id": "kfd7-qualification-pr186",
+      "subjectId": "KFD-7",
+      "transition": "qualification",
+      "before": "numbered-draft",
+      "after": "qualified-numbered-draft",
+      "sourceIds": [
+        "kfd7-qualified-decision",
+        "pr-186-authority",
+        "pr-186-review"
+      ],
+      "authoritySourceId": "pr-186-authority",
+      "reviewSourceId": "pr-186-review"
+    },
+    {
+      "sequence": 5,
+      "terminalAtEvent": true,
+      "retrospective": true,
+      "profileAvailableAtEvent": false,
+      "numberingMappings": [],
+      "claimBoundary": "This episode replays immutable historical structure only. It does not create contemporaneous Profile execution, semantic truth, lifecycle authority, or a new normative transition.",
+      "id": "kfd7-activation-pr190",
+      "subjectId": "KFD-7",
+      "transition": "activation",
+      "before": "qualified-numbered-draft",
+      "after": "active",
+      "sourceIds": [
+        "kfd7-activation-record",
+        "kfd7-active-registry",
+        "pr-190-authority",
+        "pr-190-review"
+      ],
+      "authoritySourceId": "pr-190-authority",
+      "reviewSourceId": "pr-190-review"
+    },
+    {
+      "sequence": 6,
+      "terminalAtEvent": true,
+      "retrospective": true,
+      "profileAvailableAtEvent": false,
+      "numberingMappings": [],
+      "claimBoundary": "This episode replays immutable historical structure only. It does not create contemporaneous Profile execution, semantic truth, lifecycle authority, or a new normative transition.",
+      "id": "kfd7-alpha36-packaging",
+      "subjectId": "KFD-7",
+      "transition": "release-packaging",
+      "before": "active",
+      "after": "active-packaged",
+      "sourceIds": [
+        "alpha36-package",
+        "pr-190-authority",
+        "pr-190-review"
+      ],
+      "authoritySourceId": "pr-190-authority",
+      "reviewSourceId": "pr-190-review"
+    },
+    {
+      "sequence": 7,
+      "terminalAtEvent": true,
+      "retrospective": true,
+      "profileAvailableAtEvent": false,
+      "numberingMappings": [],
+      "claimBoundary": "This episode replays immutable historical structure only. It does not create contemporaneous Profile execution, semantic truth, lifecycle authority, or a new normative transition.",
+      "id": "kfd-8-numbered-draft-pr225",
+      "subjectId": "KFD-8",
+      "transition": "numbered-draft-observation",
+      "before": "absent",
+      "after": "numbered-draft",
+      "sourceIds": [
+        "numbered-drafts-pr225",
+        "pr-225-authority",
+        "pr-225-review"
+      ],
+      "authoritySourceId": "pr-225-authority",
+      "reviewSourceId": "pr-225-review"
+    },
+    {
+      "sequence": 8,
+      "terminalAtEvent": true,
+      "retrospective": true,
+      "profileAvailableAtEvent": false,
+      "numberingMappings": [],
+      "claimBoundary": "This episode replays immutable historical structure only. It does not create contemporaneous Profile execution, semantic truth, lifecycle authority, or a new normative transition.",
+      "id": "kfd-9-numbered-draft-pr225",
+      "subjectId": "KFD-9",
+      "transition": "numbered-draft-observation",
+      "before": "absent",
+      "after": "numbered-draft",
+      "sourceIds": [
+        "numbered-drafts-pr225",
+        "pr-225-authority",
+        "pr-225-review"
+      ],
+      "authoritySourceId": "pr-225-authority",
+      "reviewSourceId": "pr-225-review"
+    },
+    {
+      "sequence": 9,
+      "terminalAtEvent": true,
+      "retrospective": true,
+      "profileAvailableAtEvent": false,
+      "numberingMappings": [],
+      "claimBoundary": "This episode replays immutable historical structure only. It does not create contemporaneous Profile execution, semantic truth, lifecycle authority, or a new normative transition.",
+      "id": "kfd-10-numbered-draft-pr225",
+      "subjectId": "KFD-10",
+      "transition": "numbered-draft-observation",
+      "before": "absent",
+      "after": "numbered-draft",
+      "sourceIds": [
+        "numbered-drafts-pr225",
+        "pr-225-authority",
+        "pr-225-review"
+      ],
+      "authoritySourceId": "pr-225-authority",
+      "reviewSourceId": "pr-225-review"
+    },
+    {
+      "sequence": 10,
+      "terminalAtEvent": true,
+      "retrospective": true,
+      "profileAvailableAtEvent": false,
+      "numberingMappings": [
+        {
+          "from": null,
+          "to": "KFD-11@pre-2026-07-21",
+          "relation": "historical-number"
+        }
+      ],
+      "claimBoundary": "This episode replays immutable historical structure only. It does not create contemporaneous Profile execution, semantic truth, lifecycle authority, or a new normative transition.",
+      "id": "software-responsibility-pre-revision",
+      "subjectId": "software-responsibility-transition",
+      "transition": "numbered-draft-observation",
+      "before": "absent",
+      "after": "numbered-draft",
+      "sourceIds": [
+        "numbered-drafts-pr225",
+        "pr-225-authority",
+        "pr-225-review"
+      ],
+      "authoritySourceId": "pr-225-authority",
+      "reviewSourceId": "pr-225-review"
+    },
+    {
+      "sequence": 11,
+      "terminalAtEvent": true,
+      "retrospective": true,
+      "profileAvailableAtEvent": false,
+      "numberingMappings": [
+        {
+          "from": null,
+          "to": "KFD-12@pre-2026-07-21",
+          "relation": "historical-number"
+        }
+      ],
+      "claimBoundary": "This episode replays immutable historical structure only. It does not create contemporaneous Profile execution, semantic truth, lifecycle authority, or a new normative transition.",
+      "id": "project-settlement-pre-revision",
+      "subjectId": "project-settlement",
+      "transition": "numbered-draft-observation",
+      "before": "absent",
+      "after": "numbered-draft",
+      "sourceIds": [
+        "numbered-drafts-pr225",
+        "pr-225-authority",
+        "pr-225-review"
+      ],
+      "authoritySourceId": "pr-225-authority",
+      "reviewSourceId": "pr-225-review"
+    },
+    {
+      "sequence": 12,
+      "terminalAtEvent": true,
+      "retrospective": true,
+      "profileAvailableAtEvent": false,
+      "numberingMappings": [
+        {
+          "from": null,
+          "to": "KFD-11",
+          "relation": "allocated-by-foundation-revision"
+        }
+      ],
+      "claimBoundary": "This episode replays immutable historical structure only. It does not create contemporaneous Profile execution, semantic truth, lifecycle authority, or a new normative transition.",
+      "id": "consequential-settlement-foundation-allocation",
+      "subjectId": "KFD-11",
+      "transition": "foundation-allocation",
+      "before": "absent",
+      "after": "numbered-draft",
+      "sourceIds": [
+        "foundation-revision-admission",
+        "foundation-revision-registry",
+        "pr-230-authority",
+        "pr-230-review"
+      ],
+      "authoritySourceId": "pr-230-authority",
+      "reviewSourceId": "pr-230-review"
+    },
+    {
+      "sequence": 13,
+      "terminalAtEvent": true,
+      "retrospective": true,
+      "profileAvailableAtEvent": false,
+      "numberingMappings": [
+        {
+          "from": "KFD-11@pre-2026-07-21",
+          "to": "KFD-12",
+          "relation": "renumbered"
+        }
+      ],
+      "claimBoundary": "This episode replays immutable historical structure only. It does not create contemporaneous Profile execution, semantic truth, lifecycle authority, or a new normative transition.",
+      "id": "software-responsibility-foundation-revision",
+      "subjectId": "software-responsibility-transition",
+      "transition": "foundation-revision",
+      "before": "numbered-draft",
+      "after": "foundation-revised-draft",
+      "sourceIds": [
+        "foundation-revision-admission",
+        "foundation-revision-registry",
+        "pr-230-authority",
+        "pr-230-review"
+      ],
+      "authoritySourceId": "pr-230-authority",
+      "reviewSourceId": "pr-230-review"
+    },
+    {
+      "sequence": 14,
+      "terminalAtEvent": true,
+      "retrospective": true,
+      "profileAvailableAtEvent": false,
+      "numberingMappings": [
+        {
+          "from": "KFD-12@pre-2026-07-21",
+          "to": "KFD-13",
+          "relation": "renumbered"
+        }
+      ],
+      "claimBoundary": "This episode replays immutable historical structure only. It does not create contemporaneous Profile execution, semantic truth, lifecycle authority, or a new normative transition.",
+      "id": "project-settlement-foundation-revision",
+      "subjectId": "project-settlement",
+      "transition": "foundation-revision",
+      "before": "numbered-draft",
+      "after": "foundation-revised-draft",
+      "sourceIds": [
+        "foundation-revision-admission",
+        "foundation-revision-registry",
+        "pr-230-authority",
+        "pr-230-review"
+      ],
+      "authoritySourceId": "pr-230-authority",
+      "reviewSourceId": "pr-230-review"
+    },
+    {
+      "sequence": 15,
+      "terminalAtEvent": true,
+      "retrospective": true,
+      "profileAvailableAtEvent": false,
+      "numberingMappings": [],
+      "claimBoundary": "This episode replays immutable historical structure only. It does not create contemporaneous Profile execution, semantic truth, lifecycle authority, or a new normative transition.",
+      "id": "recursive-candidate-no-new-kfd",
+      "subjectId": "kfd-self-conformance-pressure",
+      "transition": "no-new-kfd",
+      "before": "candidate",
+      "after": "no-new-kfd",
+      "sourceIds": [
+        "no-new-kfd-authority",
+        "no-new-kfd-report",
+        "no-new-kfd-review"
+      ],
+      "authoritySourceId": "no-new-kfd-authority",
+      "reviewSourceId": "no-new-kfd-review"
+    }
+  ],
+  "outcomes": [
+    {
+      "subjectId": "KFD-10",
+      "terminalState": "numbered-draft",
+      "normativePromotionClaimed": false
+    },
+    {
+      "subjectId": "KFD-11",
+      "terminalState": "numbered-draft",
+      "normativePromotionClaimed": false
+    },
+    {
+      "subjectId": "KFD-7",
+      "terminalState": "active-packaged",
+      "normativePromotionClaimed": false
+    },
+    {
+      "subjectId": "KFD-8",
+      "terminalState": "numbered-draft",
+      "normativePromotionClaimed": false
+    },
+    {
+      "subjectId": "KFD-9",
+      "terminalState": "numbered-draft",
+      "normativePromotionClaimed": false
+    },
+    {
+      "subjectId": "kfd-self-conformance-pressure",
+      "terminalState": "no-new-kfd",
+      "normativePromotionClaimed": false
+    },
+    {
+      "subjectId": "project-settlement",
+      "terminalState": "foundation-revised-draft",
+      "normativePromotionClaimed": false
+    },
+    {
+      "subjectId": "software-responsibility-transition",
+      "terminalState": "foundation-revised-draft",
+      "normativePromotionClaimed": false
+    }
+  ],
+  "convergence": {
+    "historicalTerminalSourceId": "no-new-kfd-report",
+    "liveAnchorSourceId": "self-conformance-live-alpha55-anchor",
+    "liveAnchorId": "kfd-alpha-55-pre-profile",
+    "liveAnchorRoot": "sha256:26961922619d090faf9c76f8bf0e25947100a5d13be6831366f1a0933c7ced59",
+    "livePackageRoot": "sha256:114c195fea83c65ec84e52def6c2afced8a4ca9d2c9abe813f5c9c5d3b50260a",
+    "compatibility": "additive",
+    "historicalDoesNotReplaceLive": true
+  },
+  "claimBoundary": "This report is a later, structural replay over immutable public coordinates. It does not assert that the Profile existed or ran at an event, prove semantic truth, activate a draft, certify an implementation, authorize a release, or replace the alpha.55 live anchor."
+}

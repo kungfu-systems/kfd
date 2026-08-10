@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.self-conformance-history-issue-codes/v1",
+  "profile": "kfd-self-conformance-history@1.0.0-alpha.1",
+  "codes": [
+    "sch-claim-boundary-missing",
+    "sch-claim-overreach",
+    "sch-contract-invalid",
+    "sch-convergence-invalid",
+    "sch-convergence-root-mismatch",
+    "sch-episode-invalid",
+    "sch-episode-missing",
+    "sch-foundation-invalid",
+    "sch-outcome-invalid",
+    "sch-outcome-mismatch",
+    "sch-review-not-independent",
+    "sch-set-order-invalid",
+    "sch-source-invalid",
+    "sch-source-missing",
+    "sch-source-root-mismatch",
+    "sch-temporal-boundary-invalid",
+    "sch-transition-invalid"
+  ],
+  "ordering": ["path", "code", "message"],
+  "claimBoundary": "Historical diagnostics identify structural replay failures only; they do not express semantic truth or governance authority."
+}
