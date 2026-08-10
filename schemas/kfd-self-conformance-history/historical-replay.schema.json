@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-self-conformance/historical-replay.schema.json",
+  "title": "KFD Self-Conformance historical replay",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "contract",
+    "profile",
+    "reportId",
+    "retrospective",
+    "profileAvailableAtEvent",
+    "generatedFromImmutableSources",
+    "sources",
+    "foundation",
+    "episodes",
+    "outcomes",
+    "convergence",
+    "claimBoundary"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "contract": { "const": "kfd.self-conformance-historical-replay/v1" },
+    "profile": { "const": "kfd-self-conformance@1.0.0-alpha.1" },
+    "reportId": { "type": "string", "minLength": 1 },
+    "retrospective": { "const": true },
+    "profileAvailableAtEvent": { "const": false },
+    "generatedFromImmutableSources": { "const": true },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/source" }
+    },
+    "foundation": {
+      "type": "object",
+      "required": ["id", "gitCommit", "gitTag", "packageName", "packageVersion", "packageRoot", "registrySourceId", "authoritySourceId", "reviewSourceId", "active", "draft", "absent"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "gitCommit": { "$ref": "#/$defs/commit" },
+        "gitTag": { "type": "string", "minLength": 1 },
+        "packageName": { "type": "string", "minLength": 1 },
+        "packageVersion": { "type": "string", "minLength": 1 },
+        "packageRoot": { "$ref": "#/$defs/root" },
+        "registrySourceId": { "type": "string", "minLength": 1 },
+        "authoritySourceId": { "type": "string", "minLength": 1 },
+        "reviewSourceId": { "type": "string", "minLength": 1 },
+        "active": { "$ref": "#/$defs/stringSet" },
+        "draft": { "$ref": "#/$defs/stringSet" },
+        "absent": { "$ref": "#/$defs/stringSet" }
+      },
+      "additionalProperties": false
+    },
+    "episodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/episode" }
+    },
+    "outcomes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["subjectId", "terminalState", "normativePromotionClaimed"],
+        "properties": {
+          "subjectId": { "type": "string", "minLength": 1 },
+          "terminalState": { "type": "string", "minLength": 1 },
+          "normativePromotionClaimed": { "const": false }
+        },
+        "additionalProperties": false
+      }
+    },
+    "convergence": {
+      "type": "object",
+      "required": ["historicalTerminalSourceId", "liveAnchorSourceId", "liveAnchorId", "liveAnchorRoot", "livePackageRoot", "compatibility", "historicalDoesNotReplaceLive"],
+      "properties": {
+        "historicalTerminalSourceId": { "type": "string", "minLength": 1 },
+        "liveAnchorSourceId": { "type": "string", "minLength": 1 },
+        "liveAnchorId": { "type": "string", "minLength": 1 },
+        "liveAnchorRoot": { "$ref": "#/$defs/root" },
+        "livePackageRoot": { "$ref": "#/$defs/root" },
+        "compatibility": { "const": "additive" },
+        "historicalDoesNotReplaceLive": { "const": true }
+      },
+      "additionalProperties": false
+    },
+    "claimBoundary": { "type": "string", "minLength": 1 }
+  },
+  "$defs": {
+    "root": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "commit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "stringSet": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "source": {
+      "type": "object",
+      "required": ["id", "kind", "repository", "commit", "path", "contentRoot", "payload"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "kind": { "enum": ["git-document", "git-registry", "github-pr", "npm-package"] },
+        "repository": { "type": "string", "minLength": 1 },
+        "commit": { "oneOf": [{ "$ref": "#/$defs/commit" }, { "type": "null" }] },
+        "path": { "type": "string", "minLength": 1 },
+        "contentRoot": { "$ref": "#/$defs/root" },
+        "payload": {}
+      },
+      "additionalProperties": false
+    },
+    "mapping": {
+      "type": "object",
+      "required": ["from", "to", "relation"],
+      "properties": {
+        "from": { "oneOf": [{ "type": "string", "minLength": 1 }, { "type": "null" }] },
+        "to": { "type": "string", "minLength": 1 },
+        "relation": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "episode": {
+      "type": "object",
+      "required": ["sequence", "id", "subjectId", "transition", "before", "after", "terminalAtEvent", "sourceIds", "authoritySourceId", "reviewSourceId", "retrospective", "profileAvailableAtEvent", "numberingMappings", "claimBoundary"],
+      "properties": {
+        "sequence": { "type": "integer", "minimum": 1 },
+        "id": { "type": "string", "minLength": 1 },
+        "subjectId": { "type": "string", "minLength": 1 },
+        "transition": { "enum": ["candidate-genesis", "candidate-refinement", "numbered-draft-promotion", "numbered-draft-observation", "qualification", "activation", "release-packaging", "foundation-revision", "foundation-allocation", "no-new-kfd"] },
+        "before": { "type": "string", "minLength": 1 },
+        "after": { "type": "string", "minLength": 1 },
+        "terminalAtEvent": { "type": "boolean" },
+        "sourceIds": { "$ref": "#/$defs/stringSet" },
+        "authoritySourceId": { "type": "string", "minLength": 1 },
+        "reviewSourceId": { "type": "string", "minLength": 1 },
+        "retrospective": { "const": true },
+        "profileAvailableAtEvent": { "const": false },
+        "numberingMappings": { "type": "array", "items": { "$ref": "#/$defs/mapping" } },
+        "claimBoundary": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

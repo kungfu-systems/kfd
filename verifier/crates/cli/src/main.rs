@@ -11,8 +11,8 @@ use std::process::ExitCode;
 
 fn usage() -> &'static str {
     "usage:
-  kfd verify <kfd-record|passport|pack|atlas|episode|agent-runtime-report|self-conformance-transition|bundle> <path> [--schema <path>] [--json]
-  kfd bundle <kfd-record|passport|pack|atlas|episode|agent-runtime-report|self-conformance-transition> <path> --output <bundle.json>"
+  kfd verify <kfd-record|passport|pack|atlas|episode|agent-runtime-report|self-conformance-transition|self-conformance-history|bundle> <path> [--schema <path>] [--json]
+  kfd bundle <kfd-record|passport|pack|atlas|episode|agent-runtime-report|self-conformance-transition|self-conformance-history> <path> --output <bundle.json>"
 }
 
 fn read_regular(path: &Path) -> Result<String, String> {
@@ -73,6 +73,9 @@ fn primary_name(kind: &str) -> Result<&'static str, String> {
         "agent-runtime-report" => Err("agent-runtime-report expects a JSON file".to_owned()),
         "self-conformance-transition" => {
             Err("self-conformance-transition expects a JSON file".to_owned())
+        }
+        "self-conformance-history" => {
+            Err("self-conformance-history expects a JSON file".to_owned())
         }
         "kfd-record" => Err("kfd-record expects a JSON file".to_owned()),
         other => Err(format!("unsupported verification kind: {other}")),

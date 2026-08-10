@@ -30,6 +30,10 @@ const SELF_CONFORMANCE_MANIFEST_PATH = "profiles/self-conformance/manifest.json"
 const SELF_CONFORMANCE_LIFECYCLE_GATES_PATH = "profiles/self-conformance/lifecycle-gates.json";
 const SELF_CONFORMANCE_VERIFIER_MATRIX_PATH = "profiles/self-conformance/lifecycle-gate-matrix.json";
 const SELF_CONFORMANCE_ISSUE_CODES_PATH = "profiles/self-conformance/issue-codes.json";
+const SELF_CONFORMANCE_HISTORY_PATH = "profiles/self-conformance/history/historical-lineage.report.json";
+const SELF_CONFORMANCE_HISTORY_GUIDE_PATH = "profiles/self-conformance/history/README.md";
+const SELF_CONFORMANCE_HISTORY_IMPLEMENTER_PATH = "profiles/self-conformance/history/implementer-guide.md";
+const SELF_CONFORMANCE_HISTORY_MANIFEST_PATH = "profiles/self-conformance/history/manifest.json";
 const RECURSIVE_SELF_CONFORMANCE_ID = "recursive-normative-self-conformance";
 const RECURSIVE_ASSESSMENT_PATH = "evidence/self-conformance/qualification/recursive-normative-self-conformance.assessment.json";
 const RECURSIVE_VERIFICATION_PATH = "evidence/self-conformance/qualification/recursive-normative-self-conformance.verification.json";
@@ -634,6 +638,9 @@ const buildSelfConformancePage = ({
   assessment,
   verification,
   terminalReport,
+  history,
+  historyGuideText,
+  historyImplementerText,
   candidate,
   liveCase,
 }) => {
@@ -689,7 +696,48 @@ const buildSelfConformancePage = ({
         label: "Verify a transition report",
         command: "kfd verify self-conformance-transition <report> --json",
       },
+      {
+        id: "verify-history",
+        label: "Replay immutable historical lineage",
+        command: "node bin/kfd-history.mjs verify profiles/self-conformance/history/historical-lineage.report.json --json",
+      },
     ],
+    historicalLineage: {
+      reportId: history.reportId,
+      retrospective: history.retrospective,
+      profileAvailableAtEvent: history.profileAvailableAtEvent,
+      bootstrapBoundary: {
+        id: history.foundation.id,
+        gitCommit: history.foundation.gitCommit,
+        gitTag: history.foundation.gitTag,
+        packageName: history.foundation.packageName,
+        packageVersion: history.foundation.packageVersion,
+        packageRoot: history.foundation.packageRoot,
+        active: history.foundation.active,
+        draft: history.foundation.draft,
+        absent: history.foundation.absent,
+        note: "This alpha.28 cut is a retrospective foundation. It is not the live Profile bootstrap and does not claim contemporaneous Profile execution.",
+      },
+      kfd7Walkthrough: history.episodes
+        .filter(({ subjectId }) => subjectId === "KFD-7")
+        .map(({ sequence, id, transition, before, after, sourceIds }) => ({ sequence, id, transition, before, after, sourceIds })),
+      transitionRecipes: [
+        { transition: "candidate-genesis", before: "absent", after: "candidate" },
+        { transition: "candidate-refinement", before: "candidate", after: "candidate" },
+        { transition: "numbered-draft-promotion", before: "candidate", after: "numbered-draft" },
+        { transition: "qualification", before: "numbered-draft", after: "qualified-numbered-draft" },
+        { transition: "activation", before: "qualified-numbered-draft", after: "active" },
+        { transition: "release-packaging", before: "active", after: "active-packaged" },
+        { transition: "no-new-kfd", before: "candidate", after: "no-new-kfd" },
+      ],
+      coverage: history.outcomes,
+      numberingMappings: history.episodes.flatMap(({ numberingMappings }) => numberingMappings),
+      convergence: history.convergence,
+      nextAction: "Choose a current lifecycle action from the actual terminal state; preserve partial, draft, revised, rejected, provisional, or no-new-kfd outcomes instead of manufacturing promotion.",
+      limits: history.claimBoundary,
+      markdown: stripFrontmatter(historyGuideText),
+      implementerGuideMarkdown: stripFrontmatter(historyImplementerText),
+    },
     releaseSeparation: {
       verifierNecessary: true,
       verifierSufficient: false,
@@ -736,6 +784,8 @@ const buildSelfConformancePage = ({
       machineAsset(RECURSIVE_ASSESSMENT_PATH, `/${RECURSIVE_ASSESSMENT_PATH}`, "qualification-assessment"),
       machineAsset(RECURSIVE_VERIFICATION_PATH, `/${RECURSIVE_VERIFICATION_PATH}`, "independent-verification"),
       machineAsset(RECURSIVE_TERMINAL_REPORT_PATH, `/${RECURSIVE_TERMINAL_REPORT_PATH}`, "terminal-transition-report"),
+      machineAsset(SELF_CONFORMANCE_HISTORY_PATH, `/${SELF_CONFORMANCE_HISTORY_PATH}`, "historical-lineage"),
+      machineAsset(SELF_CONFORMANCE_HISTORY_MANIFEST_PATH, `/${SELF_CONFORMANCE_HISTORY_MANIFEST_PATH}`, "historical-manifest"),
     ],
     rendering: {
       kind: "self-conformance-guide",
@@ -752,6 +802,7 @@ const buildSelfConformancePage = ({
       showCommands: true,
       showReleaseSeparation: true,
       showRecursiveCase: true,
+      showHistoricalLineage: true,
       showMachineAssets: true,
       note: "Render package-declared facts and boundaries without inferring self-certification, promotion, number allocation, approval, release authorization, or production fitness.",
     },
@@ -785,6 +836,9 @@ export const buildSiteBundle = ({
   selfConformanceLifecycleGates,
   selfConformanceVerifierMatrix,
   selfConformanceIssueCodes,
+  selfConformanceHistory,
+  selfConformanceHistoryGuideText,
+  selfConformanceHistoryImplementerText,
   recursiveAssessment,
   recursiveVerification,
   recursiveTerminalReport,
@@ -841,6 +895,9 @@ export const buildSiteBundle = ({
     lifecycleGates: selfConformanceLifecycleGates,
     verifierMatrix: selfConformanceVerifierMatrix,
     issueCodes: selfConformanceIssueCodes,
+    history: selfConformanceHistory,
+    historyGuideText: selfConformanceHistoryGuideText,
+    historyImplementerText: selfConformanceHistoryImplementerText,
     assessment: recursiveAssessment,
     verification: recursiveVerification,
     terminalReport: recursiveTerminalReport,
@@ -1039,6 +1096,10 @@ export const buildSiteBundle = ({
       selfConformanceLifecycleGates: SELF_CONFORMANCE_LIFECYCLE_GATES_PATH,
       selfConformanceVerifierMatrix: SELF_CONFORMANCE_VERIFIER_MATRIX_PATH,
       selfConformanceIssueCodes: SELF_CONFORMANCE_ISSUE_CODES_PATH,
+      selfConformanceHistory: SELF_CONFORMANCE_HISTORY_PATH,
+      selfConformanceHistoryGuide: SELF_CONFORMANCE_HISTORY_GUIDE_PATH,
+      selfConformanceHistoryImplementer: SELF_CONFORMANCE_HISTORY_IMPLEMENTER_PATH,
+      selfConformanceHistoryManifest: SELF_CONFORMANCE_HISTORY_MANIFEST_PATH,
       recursiveSelfConformanceAssessment: RECURSIVE_ASSESSMENT_PATH,
       recursiveSelfConformanceVerification: RECURSIVE_VERIFICATION_PATH,
       recursiveSelfConformanceTerminalReport: RECURSIVE_TERMINAL_REPORT_PATH,
@@ -1347,6 +1408,9 @@ export const readInputs = () => ({
   selfConformanceLifecycleGates: JSON.parse(readFileSync(SELF_CONFORMANCE_LIFECYCLE_GATES_PATH, "utf8")),
   selfConformanceVerifierMatrix: JSON.parse(readFileSync(SELF_CONFORMANCE_VERIFIER_MATRIX_PATH, "utf8")),
   selfConformanceIssueCodes: JSON.parse(readFileSync(SELF_CONFORMANCE_ISSUE_CODES_PATH, "utf8")),
+  selfConformanceHistory: JSON.parse(readFileSync(SELF_CONFORMANCE_HISTORY_PATH, "utf8")),
+  selfConformanceHistoryGuideText: readFileSync(SELF_CONFORMANCE_HISTORY_GUIDE_PATH, "utf8"),
+  selfConformanceHistoryImplementerText: readFileSync(SELF_CONFORMANCE_HISTORY_IMPLEMENTER_PATH, "utf8"),
   recursiveAssessment: JSON.parse(readFileSync(RECURSIVE_ASSESSMENT_PATH, "utf8")),
   recursiveVerification: JSON.parse(readFileSync(RECURSIVE_VERIFICATION_PATH, "utf8")),
   recursiveTerminalReport: JSON.parse(readFileSync(RECURSIVE_TERMINAL_REPORT_PATH, "utf8")),
