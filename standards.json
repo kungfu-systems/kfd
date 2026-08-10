@@ -2529,7 +2529,7 @@
         "status": "experimental",
         "normative": false,
         "authorityPath": "decisions/KFD-4.md",
-        "sha256": "31a71f977cc163430b9a29754c7153b861cf23c8935eb9d52dd9f26be010b11b"
+        "sha256": "811134da84de1715a31cbf381d3e9185f8e2aad47d9c07a1d34132ef34744d78"
       },
       "compatibility": {
         "packageLine": "v1.0",
@@ -2538,16 +2538,25 @@
         "rule": "Before the first stable release, maintainer-authorized semantic refinement must declare breaking decision-surface impact; after stable, substantive change mints a new KFD."
       },
       "schemaIds": {
+        "conformanceWitness": "https://kfd.libkungfu.dev/schemas/kfd-4/conformance-witness.schema.json",
         "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json",
         "observerPerspective": "https://kfd.libkungfu.dev/schemas/kfd-4/observer-perspective.schema.json",
         "perspectiveReplay": "https://kfd.libkungfu.dev/schemas/kfd-4/perspective-replay.schema.json"
       },
       "schemaPaths": {
+        "conformanceWitness": "schemas/kfd-4/conformance-witness.schema.json",
         "metadata": "schemas/kfd-standards.schema.json",
         "observerPerspective": "schemas/kfd-4/observer-perspective.schema.json",
         "perspectiveReplay": "schemas/kfd-4/perspective-replay.schema.json"
       },
       "interfaces": {
+        "conformanceWitness": {
+          "contract": "kfd-4-conformance-witness",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-4/conformance-witness.schema.json",
+          "schemaPath": "schemas/kfd-4/conformance-witness.schema.json",
+          "compatibilityRule": "Compatible additions may keep schemaVersion 1; semantic or required-field changes require a new interface version or contract."
+        },
         "observerPerspective": {
           "contract": "kfd-4-observer-perspective",
           "schemaVersion": 1,
@@ -2925,7 +2934,7 @@
         "status": "experimental",
         "normative": false,
         "authorityPath": "decisions/KFD-8.md",
-        "sha256": "1506124d2ab8a274692dcdbf0649acfbe97b807bc333dc512c092baf9ba4ff45"
+        "sha256": "ebce9500c48d7d70a20cdff1b5f6cfa856b00d7dd1853a16c897f76d7bb57bcf"
       },
       "compatibility": {
         "packageLine": "v1.0",
@@ -2934,10 +2943,21 @@
         "rule": "Before stable, this numbered draft may be refined with explicit lineage and synchronized projections; after stable, substantive change requires an explicit KFD-1 compatibility action."
       },
       "schemaIds": {
+        "atlasCoordinate": "https://kfd.libkungfu.dev/schemas/kfd-8/atlas-coordinate.schema.json",
         "metadata": "https://kfd.libkungfu.dev/schemas/kfd-standards.schema.json"
       },
       "schemaPaths": {
+        "atlasCoordinate": "schemas/kfd-8/atlas-coordinate.schema.json",
         "metadata": "schemas/kfd-standards.schema.json"
+      },
+      "interfaces": {
+        "atlasCoordinate": {
+          "contract": "kfd-8-atlas-coordinate",
+          "schemaVersion": 1,
+          "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-8/atlas-coordinate.schema.json",
+          "schemaPath": "schemas/kfd-8/atlas-coordinate.schema.json",
+          "compatibilityRule": "Compatible additions may keep schemaVersion 1; semantic or required-field changes require a new interface version or contract."
+        }
       },
       "concepts": {
         "atlas": "independently addressable perspective coordinate bound to a perspective holder, declared vantage or decision purpose, admitted Fact cut, typed source authority, freshness conditions, omissions, conflicts, unknowns, and declared transformation loss"

@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd-8-atlas-coordinate",
+  "standard": "kfd-8",
+  "profileVersion": "0.1.0-alpha.1",
+  "identity": { "atlasId": "atlas:review", "version": "2", "root": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc" },
+  "holder": { "id": "reviewer", "purpose": "compare a stale conflicted cut" },
+  "sources": [{ "id": "repository", "authority": "canonical-repository", "relevance": "decision source", "factCutRoot": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd" }],
+  "factCut": { "id": "git:previous", "root": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd" },
+  "scope": { "included": ["tracked source"], "omitted": ["new remote commits"], "unknowns": ["conflict resolution outcome"] },
+  "freshness": { "state": "stale", "observedAt": "2026-08-09T00:00:00Z", "condition": "newer remote cut exists" },
+  "loss": ["new remote commits are absent", "conflict is unresolved"],
+  "state": { "stale": true, "degraded": true, "conflicted": true },
+  "lineage": { "predecessorRoots": ["sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"], "transformation": "refresh-with-declared-loss", "preservedRoots": ["sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"] },
+  "currentReference": { "id": "atlas:review:current", "pointsToRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc", "priorRoots": ["sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"] },
+  "semanticInferences": { "pursuit": false, "warrant": false, "completeness": false, "currentValidity": false },
+  "verification": { "claimBoundary": "Visible degraded state remains non-qualifying and does not rewrite the prior coordinate." }
+}

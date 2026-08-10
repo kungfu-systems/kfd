@@ -56,6 +56,15 @@ Declare -> Refresh -> Transform | Degrade | Compare -> Supersede
 Every consequential transition preserves prior roots. Concrete lifecycle
 labels remain Domain Profile-owned.
 
+## Machine mapping
+
+`schemas/kfd-8/atlas-coordinate.schema.json` and the fixed
+`profiles/perspective-conformance/vectors.json` inventory make identity, source
+authority, exact Fact cut, freshness, omission and loss, stale/degraded/conflict
+visibility, lineage, moving-reference non-rewrite, and semantic non-inference
+machine-checkable through the shared native/WASM verifier core. A pass remains
+offline, non-qualifying, and non-self-certified; it does not activate KFD-8.
+
 ## Falsifiers
 
 The draft weakens if ordinary context or snapshot objects preserve equivalent

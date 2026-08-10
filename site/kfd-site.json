@@ -634,9 +634,8 @@
         "draft": 7
       },
       "coverageCounts": {
-        "complete": 4,
-        "partial": 8,
-        "gap": 1
+        "complete": 5,
+        "partial": 8
       },
       "entries": [
         {
@@ -721,21 +720,28 @@
         {
           "id": "KFD-4",
           "lifecycleStatus": "active",
-          "coverage": "partial",
+          "coverage": "complete",
           "normativeSources": [
             "decisions/KFD-4.md"
           ],
           "schemas": [
+            "schemas/kfd-4/conformance-witness.schema.json",
             "schemas/kfd-4/observer-perspective.schema.json",
             "schemas/kfd-4/perspective-replay.schema.json"
           ],
-          "fixtures": [],
-          "failureTests": [],
+          "fixtures": [
+            "profiles/perspective-conformance/vectors.json",
+            "verifier/fixtures/kfd-4/valid-conformance-witness.json"
+          ],
+          "failureTests": [
+            "profiles/perspective-conformance/vectors.json"
+          ],
           "verifiers": [
+            "scripts/check-perspective-conformance.mjs",
             "verifier/crates/core/src/lib.rs"
           ],
           "gaps": [
-            "standalone fixed positive and negative perspective vector inventory"
+            "independent cross-domain replay corpus"
           ]
         },
         {
@@ -809,18 +815,27 @@
         {
           "id": "KFD-8",
           "lifecycleStatus": "draft",
-          "coverage": "gap",
+          "coverage": "partial",
           "normativeSources": [
             "decisions/KFD-8.md"
           ],
-          "schemas": [],
-          "fixtures": [],
-          "failureTests": [],
-          "verifiers": [],
+          "schemas": [
+            "schemas/kfd-8/atlas-coordinate.schema.json"
+          ],
+          "fixtures": [
+            "profiles/perspective-conformance/vectors.json",
+            "verifier/fixtures/kfd-8/valid-current-atlas.json",
+            "verifier/fixtures/kfd-8/valid-degraded-atlas.json"
+          ],
+          "failureTests": [
+            "profiles/perspective-conformance/vectors.json"
+          ],
+          "verifiers": [
+            "scripts/check-perspective-conformance.mjs",
+            "verifier/crates/core/src/lib.rs"
+          ],
           "gaps": [
-            "versioned conformance witness",
-            "fixed falsifier vectors",
-            "offline verifier"
+            "independent adopter evidence before any activation consideration"
           ]
         },
         {
@@ -1019,14 +1034,14 @@
         "url": "/evidence/semantic-self-sufficiency/kfd-1-13.json",
         "mediaType": "application/json",
         "role": "implementation-map",
-        "digest": "sha256:95df77d76070a435eac092beef35db798ce5f39e3281e88b4231787bf0d8648f"
+        "digest": "sha256:893bd12f32a7dab45e954f9dfa4a2cecb36982e1d9a84c5108fbf14d72335b9b"
       },
       {
         "sourcePath": "profiles/warrant-evidence/manifest.json",
         "url": "/profiles/warrant-evidence/manifest.json",
         "mediaType": "application/json",
         "role": "verification-profile",
-        "digest": "sha256:7c5c3857018d5c7b1f81a42af4a17cccced4a074e4d72ef70781fd4a62e09755"
+        "digest": "sha256:0b541b09b7a22142a8c70d2bc06e15f75c2a0a1cb27ac8444e377740ff3360b0"
       },
       {
         "sourcePath": "evidence/primitive-evidence/first-wave-report.json",
@@ -1720,9 +1735,8 @@
           "draft": 7
         },
         "coverageCounts": {
-          "complete": 4,
-          "partial": 8,
-          "gap": 1
+          "complete": 5,
+          "partial": 8
         },
         "entries": [
           {
@@ -1807,21 +1821,28 @@
           {
             "id": "KFD-4",
             "lifecycleStatus": "active",
-            "coverage": "partial",
+            "coverage": "complete",
             "normativeSources": [
               "decisions/KFD-4.md"
             ],
             "schemas": [
+              "schemas/kfd-4/conformance-witness.schema.json",
               "schemas/kfd-4/observer-perspective.schema.json",
               "schemas/kfd-4/perspective-replay.schema.json"
             ],
-            "fixtures": [],
-            "failureTests": [],
+            "fixtures": [
+              "profiles/perspective-conformance/vectors.json",
+              "verifier/fixtures/kfd-4/valid-conformance-witness.json"
+            ],
+            "failureTests": [
+              "profiles/perspective-conformance/vectors.json"
+            ],
             "verifiers": [
+              "scripts/check-perspective-conformance.mjs",
               "verifier/crates/core/src/lib.rs"
             ],
             "gaps": [
-              "standalone fixed positive and negative perspective vector inventory"
+              "independent cross-domain replay corpus"
             ]
           },
           {
@@ -1895,18 +1916,27 @@
           {
             "id": "KFD-8",
             "lifecycleStatus": "draft",
-            "coverage": "gap",
+            "coverage": "partial",
             "normativeSources": [
               "decisions/KFD-8.md"
             ],
-            "schemas": [],
-            "fixtures": [],
-            "failureTests": [],
-            "verifiers": [],
+            "schemas": [
+              "schemas/kfd-8/atlas-coordinate.schema.json"
+            ],
+            "fixtures": [
+              "profiles/perspective-conformance/vectors.json",
+              "verifier/fixtures/kfd-8/valid-current-atlas.json",
+              "verifier/fixtures/kfd-8/valid-degraded-atlas.json"
+            ],
+            "failureTests": [
+              "profiles/perspective-conformance/vectors.json"
+            ],
+            "verifiers": [
+              "scripts/check-perspective-conformance.mjs",
+              "verifier/crates/core/src/lib.rs"
+            ],
             "gaps": [
-              "versioned conformance witness",
-              "fixed falsifier vectors",
-              "offline verifier"
+              "independent adopter evidence before any activation consideration"
             ]
           },
           {
@@ -2105,14 +2135,14 @@
           "url": "/evidence/semantic-self-sufficiency/kfd-1-13.json",
           "mediaType": "application/json",
           "role": "implementation-map",
-          "digest": "sha256:95df77d76070a435eac092beef35db798ce5f39e3281e88b4231787bf0d8648f"
+          "digest": "sha256:893bd12f32a7dab45e954f9dfa4a2cecb36982e1d9a84c5108fbf14d72335b9b"
         },
         {
           "sourcePath": "profiles/warrant-evidence/manifest.json",
           "url": "/profiles/warrant-evidence/manifest.json",
           "mediaType": "application/json",
           "role": "verification-profile",
-          "digest": "sha256:7c5c3857018d5c7b1f81a42af4a17cccced4a074e4d72ef70781fd4a62e09755"
+          "digest": "sha256:0b541b09b7a22142a8c70d2bc06e15f75c2a0a1cb27ac8444e377740ff3360b0"
         },
         {
           "sourcePath": "evidence/primitive-evidence/first-wave-report.json",
@@ -7509,7 +7539,7 @@
           "formalModelVersion": 2,
           "formalModelStatus": "experimental",
           "authorityPath": "decisions/KFD-4.md",
-          "sha256": "31a71f977cc163430b9a29754c7153b861cf23c8935eb9d52dd9f26be010b11b",
+          "sha256": "811134da84de1715a31cbf381d3e9185f8e2aad47d9c07a1d34132ef34744d78",
           "title": "KFD-4 formal reference"
         },
         {
@@ -7581,7 +7611,7 @@
           "formalModelVersion": 1,
           "formalModelStatus": "experimental",
           "authorityPath": "decisions/KFD-8.md",
-          "sha256": "1506124d2ab8a274692dcdbf0649acfbe97b807bc333dc512c092baf9ba4ff45",
+          "sha256": "ebce9500c48d7d70a20cdff1b5f6cfa856b00d7dd1853a16c897f76d7bb57bcf",
           "title": "KFD-8 formal reference"
         },
         {

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd-4-conformance-witness",
+  "standard": "kfd-4",
+  "profileVersion": "0.1.0-alpha.1",
+  "witnessId": "kfd4-i9-negative",
+  "absoluteContext": false,
+  "sourceFrame": { "observer": "author", "factCutRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "sourceRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", "authorityRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc", "causalOrder": [] },
+  "targetFrame": { "observer": "author", "factCutRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "sourceRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", "authorityRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc", "causalOrder": [] },
+  "transformation": { "preserved": ["observer", "factCutRoot", "sourceRoot", "authorityRoot", "causalOrder"], "changed": [], "declaredLoss": [], "contradictionDeclared": false },
+  "invariants": ["I8", "I9", "I10", "I11"],
+  "verification": { "claimBoundary": "Negative I9 vector." }
+}

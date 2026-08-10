@@ -25,6 +25,12 @@
       "rationale": "KFD additively extends the version 1 verification-bundle kind vocabulary with Self-Conformance transition bundles while preserving the version 1 verification-report shape; standards.json welds the executable, schema, fixed-root, issue-order, and responsibility-boundary surfaces under KFD-1."
     },
     {
+      "id": "kfd-perspective-conformance-alpha",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD additively publishes the kfd-perspective-conformance 0.1.0-alpha.1 profile: a versioned KFD-4 I8-I12 witness, a draft KFD-8 Atlas coordinate witness, fixed positive and negative vectors, stable offline diagnostics, native/WASM byte parity, and clean-room extraction coverage. KFD-4 remains active, KFD-8 remains draft, and passing is non-qualifying and non-self-certified."
+    },
+    {
       "id": "kfd-verifier-xinfa-initiative-resolution",
       "impact": "minor",
       "class": "additive",

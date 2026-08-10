@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1, "contract": "kfd-8-atlas-coordinate", "standard": "kfd-8", "profileVersion": "0.1.0-alpha.1",
+  "identity": { "atlasId": "atlas:review", "version": "1", "root": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" },
+  "holder": { "id": "reviewer", "purpose": "invalid hidden conflict" },
+  "sources": [{ "id": "repository", "authority": "canonical-repository", "factCutRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" }],
+  "factCut": { "id": "git:head", "root": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" },
+  "scope": { "included": ["tracked source"], "omitted": [], "unknowns": [] },
+  "freshness": { "state": "current", "observedAt": "2026-08-10T00:00:00Z", "condition": "bound cut" },
+  "loss": ["conflict details omitted"], "state": { "stale": false, "degraded": true, "conflicted": true },
+  "lineage": { "predecessorRoots": [], "transformation": "genesis", "preservedRoots": [] },
+  "currentReference": { "id": "atlas:review:current", "pointsToRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "priorRoots": [] },
+  "semanticInferences": { "pursuit": false, "warrant": false, "completeness": false, "currentValidity": false },
+  "verification": { "claimBoundary": "Negative conflict/unknown visibility vector." }
+}
