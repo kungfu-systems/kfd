@@ -1625,6 +1625,9 @@ for (const [surfaceId, sourcePath] of [
   ["kfd-adopter-conformance-vectors", adopterConformanceVectorsPath],
   ["kfd-adopter-conformance-issue-codes", adopterConformanceIssueCodesPath],
   ["kfd-adopter-conformance-reference-verifier", adopterConformanceVerifierPath],
+  ["kfd-adopter-toolchain-inventory", "profiles/adopter-conformance/toolchain.json"],
+  ["kfd-adopter-toolchain-node", "scripts/adopter-toolchain.mjs"],
+  ["kfd-adopter-toolchain-agent-brief", "profiles/adopter-conformance/agent-brief.md"],
 ]) {
   if (adopterConformanceSurfaces.get(surfaceId) !== sourcePath) {
     fail(`KFD-1 surface register must weld ${surfaceId} to ${sourcePath}`);

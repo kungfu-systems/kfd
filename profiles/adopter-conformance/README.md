@@ -101,10 +101,15 @@ and fail-closed cases for missing, duplicate, and reordered rows, registry
 mismatch, draft widening, witness and release mismatch, root substitution,
 stale evidence, undeclared use, and claims on a `not-used` row.
 
-This JavaScript seam fixes the version 1 cross-object semantics and gives
-clean-room implementations executable vectors. It is not the complete native,
-WebAssembly, or command-line toolchain and does not make a passing report an
-adoption, release, runtime, or certification decision.
+The package CLI exposes the same seam through `kfd adopter init`, `witness`,
+`verify`, `diff`, and `bundle`. Its fixed inventory is
+`profiles/adopter-conformance/toolchain.json`; the Agent-readable invocation,
+machine-output, and recovery contract is
+`profiles/adopter-conformance/agent-brief.md`. The Node projection is complete
+for these five package-only operations. Native and WebAssembly parity is a
+separate required delivery surface and is not inferred from this JavaScript
+implementation. No passing report makes an adoption, release, runtime, or
+certification decision.
 
 ## Five separate authorities
 
