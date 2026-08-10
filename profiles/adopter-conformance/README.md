@@ -82,6 +82,30 @@ The schema expresses structural state constraints. The package verifier owns
 the cross-object checks for set conservation, root reproduction, reference
 resolution, stale evidence, undeclared use, and claim widening.
 
+## Package-only verification seam
+
+The version 1 reference seam is published as
+`scripts/adopter-conformance-contract.mjs`. It accepts the manifest together
+with strictly admitted JSON values for the pinned registry and standards plus
+explicit bytes for schema, vector, verifier, and referenced profile-manifest
+surfaces. The caller also supplies the expected package artifact root and an
+evidence policy containing one `verifiedAt` cut and `maxAgeSeconds`. Neither
+wall-clock time nor a local cache is read implicitly, so the same inputs
+reproduce the same result offline.
+
+`deriveAdopterCut` constructs the rooted cut from those bytes.
+`verifyAdopterManifest` returns `kfd.verification-report/v1` with stable issue
+codes from `profiles/adopter-conformance/issue-codes.json`. The fixed suite in
+`profiles/adopter-conformance/vectors.json` retains one positive full-cut case
+and fail-closed cases for missing, duplicate, and reordered rows, registry
+mismatch, draft widening, witness and release mismatch, root substitution,
+stale evidence, undeclared use, and claims on a `not-used` row.
+
+This JavaScript seam fixes the version 1 cross-object semantics and gives
+clean-room implementations executable vectors. It is not the complete native,
+WebAssembly, or command-line toolchain and does not make a passing report an
+adoption, release, runtime, or certification decision.
+
 ## Five separate authorities
 
 The following layers must not be collapsed:
