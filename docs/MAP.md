@@ -130,6 +130,7 @@
 | How do I independently verify KFD records, release passports, Xinfa Pack/Atlas objects, or qualified Git Episodes? | [`verifier.md`](verifier.md) |
 | How do I verify Primitive Evidence Bundles and the experimental KFD-10 Warrant vectors from the KFD package alone? | [`independent-verifier.md`](independent-verifier.md) and [`../profiles/warrant-evidence/README.md`](../profiles/warrant-evidence/README.md) |
 | What is the finite KFD Self-Conformance Profile, bootstrap anchor, transition bundle, and non-authority report contract? | [`../profiles/self-conformance/README.md`](../profiles/self-conformance/README.md), its [`manifest`](../profiles/self-conformance/manifest.json), and [`fixed vectors`](../profiles/self-conformance/vectors/contract-vectors.json) |
+| How does an adopter declare every decision against one exact package cut without turning evidence into runtime, release, or certification authority? | [`../profiles/adopter-conformance/README.md`](../profiles/adopter-conformance/README.md) and its [`manifest schema`](../schemas/kfd-adopter-conformance/manifest.schema.json) |
 | Where are the verifier semantic differences and public-specification gaps recorded? | [`verifier-inventory.md`](verifier-inventory.md) |
 | Where is the public KFD fact source? | [`../README.md`](../README.md#decision-metadata) and [`../site/kfd-site.json`](../site/kfd-site.json) decision metadata |
 | What does Apache-2.0 cover, and what remains official/trademark-bound? | [`../TRADEMARKS.md`](../TRADEMARKS.md) |

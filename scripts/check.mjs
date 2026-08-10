@@ -37,6 +37,8 @@ const candidateRegistrySchemaPath = "schemas/kfd-candidate-registry.schema.json"
 const candidateRegistry = JSON.parse(readFileSync(candidateRegistryPath, "utf8"));
 const candidateRegistrySchema = JSON.parse(readFileSync(candidateRegistrySchemaPath, "utf8"));
 const releaseImpact = JSON.parse(readFileSync("release-impact.json", "utf8"));
+const adopterConformanceSchemaPath = "schemas/kfd-adopter-conformance/manifest.schema.json";
+const adopterConformanceSchema = JSON.parse(readFileSync(adopterConformanceSchemaPath, "utf8"));
 const foundationRevisionPath = "docs/foundation-revision-2026-07-21-decision-admission.json";
 const foundationRevision = JSON.parse(readFileSync(foundationRevisionPath, "utf8"));
 const packageJson = JSON.parse(readFileSync("package.json", "utf8"));
@@ -141,6 +143,22 @@ if (/^\s*release\s*:/m.test(recoveryWorkflowText) ||
 }
 if (packageJson.bin?.kfd !== "./bin/kfd.mjs") {
   fail("package.json must publish the kfd verifier bin");
+}
+if (adopterConformanceSchema.$id !== "https://kfd.libkungfu.dev/schemas/kfd-adopter-conformance/manifest.schema.json" ||
+    adopterConformanceSchema.properties?.contract?.const !== "kfd.adopter-conformance-manifest/v1" ||
+    adopterConformanceSchema.properties?.schemaVersion?.const !== 1 ||
+    adopterConformanceSchema.properties?.rootAlgorithm?.const !== "sha256-kfd-canonical-json-v1" ||
+    adopterConformanceSchema.properties?.byteDigestAlgorithm?.const !== "sha256-bytes-v1") {
+  fail("adopter conformance schema must expose the canonical version 1 contract and root algorithm");
+}
+for (const state of ["adopted", "candidate", "draft-evidence", "unsupported", "not-used"]) {
+  if (!adopterConformanceSchema.$defs?.decisionDeclaration?.properties?.state?.enum?.includes(state)) {
+    fail(`adopter conformance schema must include declaration state ${state}`);
+  }
+}
+if (packageJson.exports?.["./adopter-conformance/README.md"] !== "./profiles/adopter-conformance/README.md" ||
+    packageJson.exports?.["./adopter-conformance/manifest.schema.json"] !== `./${adopterConformanceSchemaPath}`) {
+  fail("package.json must expose the adopter conformance authority and manifest schema");
 }
 if (!packageJson.files?.includes(activationContractsPath) || packageJson.exports?.[`./${activationContractsPath}`] !== `./${activationContractsPath}`) {
   fail("package.json must publish the activation-contracts discovery manifest");
@@ -1555,6 +1573,11 @@ for (const concept of ["factSource", "contractWorld", "weldedSurfaceRegister", "
 }
 for (const iface of ["contractWorld", "witness", "publicationUrlSemantics", "candidateRegistry"]) {
   if (!kfd1?.interfaces?.[iface]) fail(`KFD-1 standards metadata missing interface ${iface}`);
+}
+if (kfd1?.schemaIds?.adopterConformanceManifest !== adopterConformanceSchema.$id ||
+    kfd1?.schemaPaths?.adopterConformanceManifest !== adopterConformanceSchemaPath ||
+    kfd1?.interfaces?.adopterConformanceManifest?.contract !== "kfd.adopter-conformance-manifest/v1") {
+  fail("KFD-1 standards metadata must weld the adopter conformance manifest interface");
 }
 const expectedKfd1SurfaceClasses = ["integration-time", "cross-time"];
 const expectedKfd1ImpactClasses = ["breaking", "additive", "none", "unclassifiable"];

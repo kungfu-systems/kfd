@@ -13,6 +13,12 @@
   },
   "surfaceImpacts": [
     {
+      "id": "kfd-full-cut-adopter-manifest-contract",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD additively publishes the package-only kfd.adopter-conformance-manifest/v1 schema and normative contract. It binds an adopter to one exact package, registry, standards, schema, vector, verifier, and complete decision cut; separates adopted, candidate, draft-evidence, unsupported, and not-used declarations; binds decision-specific witnesses and release passports; and explicitly grants no runtime, release, semantic-truth, activation, or certification authority."
+    },
+    {
       "id": "kfd-independent-verifier",
       "impact": "minor",
       "class": "additive",

@@ -10,11 +10,11 @@
     "kind": "standard-metadata",
     "name": "KFD standards metadata and release propagation surfaces",
     "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-1/contract-world.schema.json",
-    "digest": "sha256:da300732ac5fdcaabb23db956dbf65a25c5fa92f20d441b82ce7f500c7815261"
+    "digest": "sha256:021f730ee3c816ca9207480832136185f6453e10d491bb2e52b66a04476dbedc"
   },
   "canonicalPolicy": {
     "path": "standards.json",
-    "sha256": "da300732ac5fdcaabb23db956dbf65a25c5fa92f20d441b82ce7f500c7815261"
+    "sha256": "021f730ee3c816ca9207480832136185f6453e10d491bb2e52b66a04476dbedc"
   },
   "registry": {
     "path": "registry.json",
@@ -1016,9 +1016,9 @@
     {
       "name": "kfd-standards",
       "sourcePath": "standards.json",
-      "sourceSha256": "da300732ac5fdcaabb23db956dbf65a25c5fa92f20d441b82ce7f500c7815261",
+      "sourceSha256": "021f730ee3c816ca9207480832136185f6453e10d491bb2e52b66a04476dbedc",
       "artifactPath": "standards.json",
-      "expectedSha256": "da300732ac5fdcaabb23db956dbf65a25c5fa92f20d441b82ce7f500c7815261",
+      "expectedSha256": "021f730ee3c816ca9207480832136185f6453e10d491bb2e52b66a04476dbedc",
       "byteForByte": true,
       "class": "integration-time",
       "classes": [
@@ -1296,9 +1296,9 @@
     {
       "name": "kfd-doc-map",
       "sourcePath": "docs/MAP.md",
-      "sourceSha256": "6171e453949e02a769d9948f95166c8e4f5d5042a786058386c8ffff4d47f72f",
+      "sourceSha256": "d4b0bfe730ef4ee4d70256b5dfb92d439548025382a0794eb06f75ce7bea2066",
       "artifactPath": "docs/MAP.md",
-      "expectedSha256": "6171e453949e02a769d9948f95166c8e4f5d5042a786058386c8ffff4d47f72f",
+      "expectedSha256": "d4b0bfe730ef4ee4d70256b5dfb92d439548025382a0794eb06f75ce7bea2066",
       "byteForByte": true,
       "class": "cross-time",
       "classes": [
@@ -1316,9 +1316,9 @@
     {
       "name": "release-impact-ledger",
       "sourcePath": "release-impact.json",
-      "sourceSha256": "4cf9e004252c545300c47d28dc24d09c65e792320229ac756fb95f52207673ee",
+      "sourceSha256": "3f9617e90f372220f9ad321ce2c9dc2467717a13aea88c318eeba1eef22a91de",
       "artifactPath": "release-impact.json",
-      "expectedSha256": "4cf9e004252c545300c47d28dc24d09c65e792320229ac756fb95f52207673ee",
+      "expectedSha256": "3f9617e90f372220f9ad321ce2c9dc2467717a13aea88c318eeba1eef22a91de",
       "byteForByte": true,
       "class": "cross-time",
       "classes": [
@@ -1336,9 +1336,9 @@
     {
       "name": "kfd-check-gate",
       "sourcePath": "scripts/check.mjs",
-      "sourceSha256": "0a72b2ca325acca6e2fc1153c93f7eeaa868f4206e57c8c12a264d7afecfc756",
+      "sourceSha256": "b015190134d8209ac621e613057b9b194f34923b52c6d1b89d68c033ab6d3a93",
       "artifactPath": "scripts/check.mjs",
-      "expectedSha256": "0a72b2ca325acca6e2fc1153c93f7eeaa868f4206e57c8c12a264d7afecfc756",
+      "expectedSha256": "b015190134d8209ac621e613057b9b194f34923b52c6d1b89d68c033ab6d3a93",
       "byteForByte": true,
       "class": "integration-time",
       "classes": [
@@ -1457,9 +1457,9 @@
     {
       "name": "kfd-package-manifest",
       "sourcePath": "package.json",
-      "sourceSha256": "dc7b2c9474814a55feb907ddcf18b77827f5f9c4302dd5225a4588eb56f439a0",
+      "sourceSha256": "7889b9d580a4b1b26ca5915edef841b67bce629fd7b91c1034a703df432d000f",
       "artifactPath": "package.json",
-      "expectedSha256": "dc7b2c9474814a55feb907ddcf18b77827f5f9c4302dd5225a4588eb56f439a0",
+      "expectedSha256": "7889b9d580a4b1b26ca5915edef841b67bce629fd7b91c1034a703df432d000f",
       "byteForByte": true,
       "class": "integration-time",
       "classes": [
@@ -1498,9 +1498,9 @@
     {
       "name": "kfd-2-public-release-trust-claim",
       "sourcePath": ".buildchain/kfd-2/public-release-trust.claim.json",
-      "sourceSha256": "3741dca062d6978370f0f4e3232f5b33dfe04c50bf9fe31aa37c66e4c7280115",
+      "sourceSha256": "e1202d386c2f08806a0c92de13e0505a5c14ca6c2fefba7d04e41d26bf62e646",
       "artifactPath": ".buildchain/kfd-2/public-release-trust.claim.json",
-      "expectedSha256": "3741dca062d6978370f0f4e3232f5b33dfe04c50bf9fe31aa37c66e4c7280115",
+      "expectedSha256": "e1202d386c2f08806a0c92de13e0505a5c14ca6c2fefba7d04e41d26bf62e646",
       "byteForByte": true,
       "class": "integration-time",
       "classes": [
@@ -1558,9 +1558,9 @@
     {
       "name": "kfd-2-foundation-trust-claims",
       "sourcePath": ".buildchain/kfd-2/kfd-foundation.trust-claims.json",
-      "sourceSha256": "65b88f21a3443c41ded2711e455feccfc40cea1e9d8dcf0bd6869f48111ad537",
+      "sourceSha256": "881109e61b99d527db8bebf61301d004241fd7f0cd57d8bc12f628fabf53124a",
       "artifactPath": ".buildchain/kfd-2/kfd-foundation.trust-claims.json",
-      "expectedSha256": "65b88f21a3443c41ded2711e455feccfc40cea1e9d8dcf0bd6869f48111ad537",
+      "expectedSha256": "881109e61b99d527db8bebf61301d004241fd7f0cd57d8bc12f628fabf53124a",
       "byteForByte": true,
       "class": "integration-time",
       "classes": [
@@ -1578,9 +1578,9 @@
     {
       "name": "kfd-2-foundation-trust-assessment",
       "sourcePath": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json",
-      "sourceSha256": "fb9c2d0f01caef5d9f5b3105a618f9f9edd3e6ab084f8c6a8e77fe5830cebddb",
+      "sourceSha256": "fca914d085a8d615379f05bf6cb1e622d9de01af0a2cbad4cde8d9da09ffdbf1",
       "artifactPath": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json",
-      "expectedSha256": "fb9c2d0f01caef5d9f5b3105a618f9f9edd3e6ab084f8c6a8e77fe5830cebddb",
+      "expectedSha256": "fca914d085a8d615379f05bf6cb1e622d9de01af0a2cbad4cde8d9da09ffdbf1",
       "byteForByte": true,
       "class": "integration-time",
       "classes": [
