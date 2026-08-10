@@ -835,6 +835,56 @@
             }
           },
           {
+            "id": "kfd-adopter-toolchain-inventory",
+            "class": "cross-time",
+            "classes": [
+              "integration-time",
+              "cross-time"
+            ],
+            "description": "Fixed package-relative schema, vector, verifier, and witness-profile inventory for the adopter toolchain.",
+            "sourcePath": "profiles/adopter-conformance/toolchain.json",
+            "weldRationale": "Clean-room adopters reproduce one explicit package cut without directory scans becoming declaration authority.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-adopter-toolchain-node",
+            "class": "integration-time",
+            "classes": [
+              "integration-time",
+              "cross-time"
+            ],
+            "description": "Package-only Node implementation of adopter init, witness, verify, diff, and bundle.",
+            "sourcePath": "scripts/adopter-toolchain.mjs",
+            "weldRationale": "All five operations use the same rooted registry-derived declaration and fail-closed package context without product or host authority.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
+            "id": "kfd-adopter-toolchain-agent-brief",
+            "class": "cross-time",
+            "classes": [
+              "cross-time"
+            ],
+            "description": "Agent-readable package-only invocation, machine-output, authority-boundary, and recovery guide.",
+            "sourcePath": "profiles/adopter-conformance/agent-brief.md",
+            "weldRationale": "A clean-room Agent can operate the public toolchain without private context, sibling repositories, or implicit recovery rules.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
             "id": "kfd-verifier-rust-core",
             "class": "integration-time",
             "classes": [

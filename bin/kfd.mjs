@@ -20,6 +20,18 @@ function usage() {
   kfd verify agent-hub-report <report.json> [--adapter <path>] [--json]
   kfd verify warrant-evidence <bundle.json> [--json]
   kfd verify kfd-10-witness <witness.json> [--json]
+  kfd adopter init --manifest-id <id> --adopter-id <id> --artifact-kind <kind>
+    --artifact-coordinate <coordinate> --artifact-root <sha256:...> --scope <scope>
+    --package-root <sha256:...> --verified-at <date-time> --max-age-seconds <seconds>
+    --output <manifest.json> [--json]
+  kfd adopter witness <manifest.json> --decision <KFD-N> --profile <profile-id>
+    --coordinate <coordinate> --witness-root <sha256:...> --package-root <sha256:...>
+    --verified-at <date-time> --max-age-seconds <seconds> --output <manifest.json> [--json]
+  kfd adopter verify <manifest.json> --package-root <sha256:...>
+    --verified-at <date-time> --max-age-seconds <seconds> [--output <report.json>] [--json]
+  kfd adopter diff <before.json> <after.json> [--output <report.json>] [--json]
+  kfd adopter bundle <manifest.json> --package-root <sha256:...>
+    --verified-at <date-time> --max-age-seconds <seconds> --output <bundle.json> [--json]
   kfd gate self-conformance-lifecycle <request.json> --output <report.json> [--json]
   kfd verify <kfd-record|passport|pack|atlas|episode|agent-runtime-report|self-conformance-transition|bundle> <path> [--schema <path>] [--json]
   kfd bundle <kfd-record|passport|pack|atlas|episode|agent-runtime-report|self-conformance-transition> <path> --output <bundle.json>`;
@@ -105,7 +117,116 @@ async function verifyWasm(bundleText) {
   return new TextDecoder().decode(output);
 }
 
+function adopterFlags(args, positionalCount) {
+  const positional = args.slice(0, positionalCount);
+  if (positional.length !== positionalCount || positional.some((value) => value.startsWith("--"))) {
+    throw new Error("adopter command is missing a positional input");
+  }
+  const flags = {};
+  for (let index = positionalCount; index < args.length; index += 1) {
+    const flag = args[index];
+    if (flag === "--json") continue;
+    if (!flag.startsWith("--") || !args[index + 1] || args[index + 1].startsWith("--")) {
+      throw new Error(`unsupported or incomplete argument: ${flag}`);
+    }
+    const name = flag.slice(2);
+    if (Object.hasOwn(flags, name)) throw new Error(`duplicate argument: ${flag}`);
+    flags[name] = args[++index];
+  }
+  return { positional, flags };
+}
+
+function exactFlags(flags, admitted) {
+  for (const name of Object.keys(flags)) {
+    if (!admitted.includes(name)) throw new Error(`unsupported argument: --${name}`);
+  }
+}
+
+function adopterContext(flags) {
+  return {
+    packageArtifactRoot: flags["package-root"],
+    verifiedAt: flags["verified-at"],
+    maxAgeSeconds: flags["max-age-seconds"],
+  };
+}
+
+async function runAdopter(args) {
+  const command = args[0];
+  const toolchain = await import("../scripts/adopter-toolchain.mjs");
+  if (command === "init") {
+    const { flags } = adopterFlags(args.slice(1), 0);
+    exactFlags(flags, [
+      "manifest-id", "adopter-id", "artifact-kind", "artifact-coordinate", "artifact-root",
+      "scope", "package-root", "verified-at", "max-age-seconds", "output",
+    ]);
+    if (!flags.output) throw new Error("adopter init requires --output");
+    const manifest = toolchain.initAdopterManifest({
+      ...adopterContext(flags),
+      manifestId: flags["manifest-id"],
+      adopterId: flags["adopter-id"],
+      artifactKind: flags["artifact-kind"],
+      artifactCoordinate: flags["artifact-coordinate"],
+      artifactRoot: flags["artifact-root"],
+      scope: flags.scope,
+    });
+    toolchain.writeAdopterJson(flags.output, manifest);
+    console.log(JSON.stringify({ valid: true, output: path.resolve(flags.output), manifestRoot: (await import("../scripts/self-conformance-contract.mjs")).semanticRoot(manifest) }));
+    return 0;
+  }
+  if (command === "witness") {
+    const { positional: [input], flags } = adopterFlags(args.slice(1), 1);
+    exactFlags(flags, [
+      "decision", "profile", "coordinate", "witness-root", "package-root",
+      "verified-at", "max-age-seconds", "output",
+    ]);
+    if (!flags.output) throw new Error("adopter witness requires --output");
+    const manifest = toolchain.addAdopterWitness(toolchain.readAdopterJson(input), {
+      ...adopterContext(flags),
+      decisionId: flags.decision,
+      profileId: flags.profile,
+      witnessCoordinate: flags.coordinate,
+      witnessRoot: flags["witness-root"],
+    });
+    toolchain.writeAdopterJson(flags.output, manifest);
+    console.log(JSON.stringify({ valid: true, output: path.resolve(flags.output), decision: flags.decision, profile: flags.profile }));
+    return 0;
+  }
+  if (command === "verify") {
+    const { positional: [input], flags } = adopterFlags(args.slice(1), 1);
+    exactFlags(flags, ["package-root", "verified-at", "max-age-seconds", "output"]);
+    const report = toolchain.verifyAdopterManifestFromPackage(toolchain.readAdopterJson(input), adopterContext(flags));
+    if (flags.output) toolchain.writeAdopterJson(flags.output, report);
+    else console.log(JSON.stringify(report));
+    return report.valid ? 0 : 1;
+  }
+  if (command === "diff") {
+    const { positional: [before, after], flags } = adopterFlags(args.slice(1), 2);
+    exactFlags(flags, ["output"]);
+    const report = toolchain.diffAdopterManifests(
+      toolchain.readAdopterJson(before),
+      toolchain.readAdopterJson(after),
+    );
+    if (flags.output) toolchain.writeAdopterJson(flags.output, report);
+    else console.log(JSON.stringify(report));
+    return 0;
+  }
+  if (command === "bundle") {
+    const { positional: [input], flags } = adopterFlags(args.slice(1), 1);
+    exactFlags(flags, ["package-root", "verified-at", "max-age-seconds", "output"]);
+    if (!flags.output) throw new Error("adopter bundle requires --output");
+    const bundle = toolchain.bundleAdopterManifest(toolchain.readAdopterJson(input), adopterContext(flags));
+    toolchain.writeAdopterJson(flags.output, bundle);
+    console.log(JSON.stringify({ valid: true, output: path.resolve(flags.output), bundleRoot: bundle.bundleRoot }));
+    return 0;
+  }
+  throw new Error(`unsupported adopter command: ${command ?? "missing"}`);
+}
+
 async function main(args) {
+  if (args[0] === "adopter") {
+    process.exitCode = await runAdopter(args.slice(1));
+    return;
+  }
   if (args[0] === "demo" && args[1] === "agent-hub") {
     let output;
     let referenceAdapter = "state-machine";
