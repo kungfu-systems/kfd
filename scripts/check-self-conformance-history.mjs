@@ -45,6 +45,16 @@ assert.deepEqual(
 assert.equal(report.outcomes.find(({ subjectId }) => subjectId === "kfd-self-conformance-pressure").terminalState, "no-new-kfd");
 assert.equal(report.convergence.liveAnchorId, "kfd-alpha-55-pre-profile");
 assert.equal(report.convergence.historicalDoesNotReplaceLive, true);
+for (const relative of [
+  "README.md",
+  "profiles/self-conformance/README.md",
+  "profiles/self-conformance/history/README.md",
+  "profiles/self-conformance/history/implementer-guide.md",
+]) {
+  const text = fs.readFileSync(path.join(root, relative), "utf8");
+  assert.match(text, /retrospective structural conformance/i, `${relative}: reader model phrase missing`);
+  assert.match(text, /profileAvailableAtEvent: false/, `${relative}: historical time boundary missing`);
+}
 
 const nativeArgs = ["run", "--quiet", "--locked", "--manifest-path", "verifier/Cargo.toml", "-p", "kfd-verifier-cli", "--"];
 const native = run("cargo", [...nativeArgs, "verify", "self-conformance-history", reportPath, "--json"]);

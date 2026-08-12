@@ -8,10 +8,15 @@ confidence: high
 sensitivity: public
 evidence_grade: B
 review_state: self-reviewed
-last_reviewed: 2026-08-10
+last_reviewed: 2026-08-12
 ---
 
 # Historical Self-Conformance clean-room guide
+
+This command evaluates retrospective structural conformance only. It must
+retain `retrospective: true` and `profileAvailableAtEvent: false`; a successful
+replay never implies contemporaneous Profile execution or retroactive approval,
+authority, activation, certification, or status change.
 
 From the extracted package, run:
 

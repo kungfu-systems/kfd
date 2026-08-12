@@ -8,15 +8,16 @@ confidence: high
 sensitivity: public
 evidence_grade: B
 review_state: self-reviewed
-last_reviewed: 2026-08-10
+last_reviewed: 2026-08-12
 ---
 
 # KFD historical Self-Conformance
 
-This additive history profile replays immutable KFD events without changing the
-live `kfd-self-conformance@1.0.0-alpha.1` contract. The live contract, its
-alpha.55 bootstrap, retained reports, issue inventory, manifest, and verifier
-bytes remain unchanged.
+This additive history profile provides **retrospective structural conformance**
+by replaying immutable KFD events without changing the live
+`kfd-self-conformance@1.0.0-alpha.1` contract. The live contract, its alpha.55
+bootstrap, retained reports, issue inventory, manifest, and verifier bytes
+remain unchanged.
 
 ## Bootstrap boundary
 
@@ -30,7 +31,8 @@ payloads.
 
 Every history report and episode declares `retrospective: true` and
 `profileAvailableAtEvent: false`. This is a later reconstruction, not a claim
-that historical actors ran a Profile that did not exist.
+that historical actors ran a Profile that did not exist. It cannot
+retroactively approve, authorize, activate, certify, or change an event.
 
 ## KFD-7 walkthrough
 
