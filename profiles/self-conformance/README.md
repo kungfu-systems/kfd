@@ -8,7 +8,7 @@ confidence: high
 sensitivity: public
 evidence_grade: B
 review_state: self-reviewed
-last_reviewed: 2026-08-07
+last_reviewed: 2026-08-12
 ---
 
 # KFD Self-Conformance Profile v1
@@ -24,6 +24,30 @@ The normative closure is the fixed package rooted by
 public files and `sha256-kfd-canonical-json-v1`; no product checkout, hosted
 service, private repository, network, credential, or ambient Home state is
 part of the contract.
+
+## Reader model: prospective gate and retrospective replay
+
+Read KFD Self-Conformance as two connected lanes, not as one timeless claim:
+
+1. **Prospective governance** applies the live Profile to official Candidate
+   genesis, qualification, numbering, status, Foundation Revision, and
+   release-packaging transitions. Ordinary edits remain edits unless an
+   official lifecycle path is invoked.
+2. **Retrospective structural conformance** replays immutable public evidence
+   from the alpha.28 Foundation Cut to its additive convergence with the
+   alpha.55 pre-Profile live anchor. It always declares
+   `retrospective: true` and `profileAvailableAtEvent: false`.
+
+The retrospective lane does not assert that historical actors possessed or
+ran the later Profile, and it cannot retroactively approve, authorize,
+activate, certify, or change any historical event. Across both lanes, the
+verifier supplies necessary structural evidence but is never sufficient for
+semantic truth, human approval, numbering, status change, adoption,
+publication, release authority, or production fitness.
+
+[Inspect the historical guide](history/README.md) ·
+[Inspect the historical report](history/historical-lineage.report.json) ·
+[Inspect the live manifest](manifest.json)
 
 ## Conformance objects
 

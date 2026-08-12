@@ -22,6 +22,30 @@ implementation, not its adoption boundary. Accumulating Episodes alone does
 not discover or prove a Primitive; KFD-5 and KFD-6 keep generation,
 qualification, and promotion separate.
 
+## How KFD governs its own change
+
+KFD Self-Conformance has two connected lanes with different time boundaries:
+
+- **Prospective governance** gates official Candidate genesis, qualification,
+  numbering, status, Foundation Revision, and release-packaging transitions
+  under the live Profile. Ordinary repository edits do not silently become
+  lifecycle transitions.
+- **Retrospective structural conformance** replays immutable public evidence
+  from the alpha.28 Foundation Cut and converges additively on the alpha.55
+  pre-Profile live anchor. Every replay declares `retrospective: true` and
+  `profileAvailableAtEvent: false`; it never projects the later Profile into
+  the historical event.
+
+In both lanes, structural verification is necessary but not sufficient.
+Passing evidence cannot approve, number, activate, certify, publish, or
+authorize a release, and it cannot establish semantic truth, adoption, or
+production fitness. Accountable human authority remains separate and explicit.
+
+[Read the Self-Conformance Profile](profiles/self-conformance/README.md) ·
+[Replay the historical lineage](profiles/self-conformance/history/README.md) ·
+[Inspect the historical report](profiles/self-conformance/history/historical-lineage.report.json) ·
+[Inspect the live manifest](profiles/self-conformance/manifest.json)
+
 ## Implement and verify KFD independently
 
 **Implement KFD without Kungfu — scaffold an adapter in Python, Rust, Node.js,
