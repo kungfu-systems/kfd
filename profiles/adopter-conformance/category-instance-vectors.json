@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.adopter-category-instance-vectors/v1",
+  "instanceContract": "kfd.adopter-category-instance-manifest/v1",
+  "template": {
+    "$schema": "https://kfd.libkungfu.dev/schemas/kfd-adopter-conformance/category-instance-manifest.schema.json",
+    "schemaVersion": 1,
+    "contract": "kfd.adopter-category-instance-manifest/v1",
+    "instanceId": "example.org/product@1.0.0",
+    "rootAlgorithm": "sha256-kfd-canonical-json-v1",
+    "project": {
+      "adopterId": "example.org/product",
+      "source": {
+        "kind": "git-commit",
+        "coordinate": "git+https://example.org/product.git#1111111111111111111111111111111111111111",
+        "root": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+      },
+      "artifact": {
+        "kind": "package",
+        "coordinate": "pkg:generic/example-product@1.0.0",
+        "root": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+      },
+      "release": {
+        "kind": "release",
+        "coordinate": "https://example.org/product/releases/1.0.0",
+        "root": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+      }
+    },
+    "adopterManifest": {
+      "contract": "kfd.adopter-conformance-manifest/v1",
+      "manifestId": "replace-at-test-time",
+      "root": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    "kfdCut": {
+      "packageVersion": "replace-at-test-time",
+      "packageRoot": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+      "categoryCatalogRoot": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    "selection": {
+      "schemaVersion": 1,
+      "contract": "kfd.adopter-category-profile-selection/v1",
+      "profiles": [
+        { "id": "kfd.adopter-category/delivery-infrastructure", "version": "1.0.0" },
+        { "id": "kfd.adopter-category/product-runtime", "version": "1.0.0" }
+      ]
+    },
+    "selectionRoot": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "requirements": [],
+    "claimBoundary": {
+      "categoryConformanceIsDeclarationOnly": true,
+      "evidenceTransfer": false,
+      "runtimePermission": false,
+      "releaseAuthorization": false,
+      "independentCertification": false,
+      "semanticAuthorityTransfer": false
+    }
+  },
+  "cases": [
+    { "id": "positive-project-instance", "selectionOperations": [], "catalogOperations": [], "instanceOperations": [], "valid": true, "issueCodes": [] },
+    { "id": "negative-duplicate-profile", "selectionOperations": [{ "op": "add", "path": "/profiles/-", "value": { "id": "kfd.adopter-category/product-runtime", "version": "1.0.0" } }], "catalogOperations": [], "instanceOperations": [], "valid": false, "issueCodes": ["acp-composition-invalid"] },
+    { "id": "negative-stale-profile-version", "selectionOperations": [{ "op": "replace", "path": "/profiles/1/version", "value": "2.0.0" }], "catalogOperations": [], "instanceOperations": [], "valid": false, "issueCodes": ["acp-profile-version-stale"] },
+    { "id": "negative-missing-evidence", "selectionOperations": [], "catalogOperations": [], "instanceOperations": [{ "op": "replace", "path": "/requirements/0/evidence", "value": [] }], "valid": false, "issueCodes": ["acp-evidence-missing"] },
+    { "id": "negative-project-evidence-reuse", "selectionOperations": [], "catalogOperations": [], "instanceOperations": [{ "op": "replace", "path": "/project/source/coordinate", "value": "git+https://example.org/other.git#2222222222222222222222222222222222222222" }], "valid": false, "issueCodes": ["acp-evidence-reuse"] },
+    { "id": "negative-evidence-stale", "selectionOperations": [], "catalogOperations": [], "instanceOperations": [{ "op": "replace", "path": "/requirements/0/evidence/0/observedAt", "value": "2026-08-01T00:00:00Z" }], "valid": false, "issueCodes": ["acp-evidence-stale"] },
+    { "id": "negative-adopter-manifest-substitution", "selectionOperations": [], "catalogOperations": [], "instanceOperations": [{ "op": "replace", "path": "/adopterManifest/root", "value": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" }], "valid": false, "issueCodes": ["acp-instance-binding-mismatch"] },
+    { "id": "negative-artifact-substitution", "selectionOperations": [], "catalogOperations": [], "instanceOperations": [{ "op": "replace", "path": "/project/artifact/root", "value": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" }], "valid": false, "issueCodes": ["acp-evidence-reuse", "acp-instance-binding-mismatch"] },
+    { "id": "negative-release-substitution", "selectionOperations": [], "catalogOperations": [], "instanceOperations": [{ "op": "replace", "path": "/project/release/root", "value": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" }], "valid": false, "issueCodes": ["acp-evidence-reuse", "acp-instance-binding-mismatch"] },
+    { "id": "negative-claim-widening", "selectionOperations": [], "catalogOperations": [], "instanceOperations": [{ "op": "replace", "path": "/claimBoundary/runtimePermission", "value": true }], "valid": false, "issueCodes": ["acp-claim-widening"] }
+  ]
+}

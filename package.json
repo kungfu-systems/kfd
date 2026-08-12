@@ -1,6 +1,6 @@
 {
   "name": "@kungfu-tech/kfd",
-  "version": "1.0.0-alpha.61",
+  "version": "1.0.0-alpha.62",
   "description": "KFD: an open, evidence-governed engineering standard for reliable action and continuity under uncertainty",
   "license": "Apache-2.0",
   "bin": {
@@ -87,11 +87,18 @@
     "./adopter-conformance/README.md": "./profiles/adopter-conformance/README.md",
     "./adopter-conformance/agent-brief.md": "./profiles/adopter-conformance/agent-brief.md",
     "./adopter-conformance/manifest.schema.json": "./schemas/kfd-adopter-conformance/manifest.schema.json",
+    "./adopter-conformance/category-profile-catalog.schema.json": "./schemas/kfd-adopter-conformance/category-profile-catalog.schema.json",
+    "./adopter-conformance/category-instance-manifest.schema.json": "./schemas/kfd-adopter-conformance/category-instance-manifest.schema.json",
     "./adopter-conformance/issue-codes.json": "./profiles/adopter-conformance/issue-codes.json",
     "./adopter-conformance/vectors.json": "./profiles/adopter-conformance/vectors.json",
+    "./adopter-conformance/category-profiles.json": "./profiles/adopter-conformance/category-profiles.json",
+    "./adopter-conformance/category-profile-vectors.json": "./profiles/adopter-conformance/category-profile-vectors.json",
+    "./adopter-conformance/category-instance-vectors.json": "./profiles/adopter-conformance/category-instance-vectors.json",
     "./adopter-conformance/toolchain.json": "./profiles/adopter-conformance/toolchain.json",
     "./adopter-conformance/adopters/kfd/manifest.json": "./profiles/adopter-conformance/adopters/kfd/manifest.json",
     "./adopter-conformance/verifier": "./scripts/adopter-conformance-contract.mjs",
+    "./adopter-conformance/category-profile-resolver": "./scripts/adopter-category-profile-contract.mjs",
+    "./adopter-conformance/category-instance-verifier": "./scripts/adopter-category-instance-contract.mjs",
     "./adopter-conformance/toolchain": "./scripts/adopter-toolchain.mjs",
     "./scripts/*.mjs": "./scripts/*.mjs",
     "./buildchain/kfd-1/contract-world.witness.json": "./.buildchain/kfd-1/contract-world.witness.json",
@@ -124,8 +131,10 @@
     "./self-conformance/historical-replay.schema.json": "./schemas/kfd-self-conformance-history/historical-replay.schema.json"
   },
   "scripts": {
-    "check": "node scripts/check.mjs && npm run check:adopter-conformance && npm run check:adopter-toolchain && npm run check:kfd-self-adopter && npm run check:warrant-evidence && npm run check:agent-hub && npm run check:agent-hub-conformance && npm run check:agent-runtime && npm run check:self-conformance-profile && npm run check:self-conformance-lifecycle && npm run check:self-conformance-history && npm run check:verifier",
+    "check": "node scripts/check.mjs && npm run check:adopter-conformance && npm run check:adopter-category-profiles && npm run check:adopter-category-instances && npm run check:adopter-toolchain && npm run check:kfd-self-adopter && npm run check:warrant-evidence && npm run check:agent-hub && npm run check:agent-hub-conformance && npm run check:agent-runtime && npm run check:self-conformance-profile && npm run check:self-conformance-lifecycle && npm run check:self-conformance-history && npm run check:verifier",
     "check:adopter-conformance": "node scripts/check-adopter-conformance.mjs",
+    "check:adopter-category-profiles": "node scripts/check-adopter-category-profiles.mjs",
+    "check:adopter-category-instances": "node scripts/check-adopter-category-instances.mjs",
     "check:adopter-toolchain": "node scripts/check-adopter-toolchain.mjs",
     "check:kfd-self-adopter": "node scripts/check-kfd-self-adopter.mjs",
     "check:warrant-evidence": "node scripts/check-warrant-evidence.mjs",

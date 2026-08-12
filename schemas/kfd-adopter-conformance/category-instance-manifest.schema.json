@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-adopter-conformance/category-instance-manifest.schema.json",
+  "title": "KFD Adopter Category Instance Manifest",
+  "description": "Binds project coordinates and project-owned category evidence to one exact full-cut adopter manifest, KFD package cut, category catalog, and deterministic profile selection. Validity does not grant runtime, release, semantic, or certification authority.",
+  "type": "object",
+  "required": ["schemaVersion", "contract", "instanceId", "rootAlgorithm", "project", "adopterManifest", "kfdCut", "selection", "selectionRoot", "requirements", "claimBoundary"],
+  "properties": {
+    "$schema": { "const": "https://kfd.libkungfu.dev/schemas/kfd-adopter-conformance/category-instance-manifest.schema.json" },
+    "schemaVersion": { "const": 1 },
+    "contract": { "const": "kfd.adopter-category-instance-manifest/v1" },
+    "instanceId": { "$ref": "#/$defs/nonEmpty" },
+    "rootAlgorithm": { "const": "sha256-kfd-canonical-json-v1" },
+    "project": {
+      "type": "object",
+      "required": ["adopterId", "source", "artifact", "release"],
+      "properties": {
+        "adopterId": { "$ref": "#/$defs/nonEmpty" },
+        "source": { "$ref": "#/$defs/coordinate" },
+        "artifact": { "$ref": "#/$defs/coordinate" },
+        "release": { "$ref": "#/$defs/coordinate" }
+      },
+      "additionalProperties": false
+    },
+    "adopterManifest": {
+      "type": "object",
+      "required": ["contract", "manifestId", "root"],
+      "properties": {
+        "contract": { "const": "kfd.adopter-conformance-manifest/v1" },
+        "manifestId": { "$ref": "#/$defs/nonEmpty" },
+        "root": { "$ref": "#/$defs/root" }
+      },
+      "additionalProperties": false
+    },
+    "kfdCut": {
+      "type": "object",
+      "required": ["packageVersion", "packageRoot", "categoryCatalogRoot"],
+      "properties": {
+        "packageVersion": { "$ref": "#/$defs/nonEmpty" },
+        "packageRoot": { "$ref": "#/$defs/root" },
+        "categoryCatalogRoot": { "$ref": "#/$defs/root" }
+      },
+      "additionalProperties": false
+    },
+    "selection": {
+      "type": "object",
+      "required": ["schemaVersion", "contract", "profiles"],
+      "properties": {
+        "schemaVersion": { "const": 1 },
+        "contract": { "const": "kfd.adopter-category-profile-selection/v1" },
+        "profiles": {
+          "type": "array",
+          "items": { "$ref": "category-profile-catalog.schema.json#/$defs/profileReference" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "selectionRoot": { "$ref": "#/$defs/root" },
+    "requirements": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "evidence"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+          "evidence": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "$ref": "#/$defs/evidence" }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "claimBoundary": {
+      "type": "object",
+      "required": ["categoryConformanceIsDeclarationOnly", "evidenceTransfer", "runtimePermission", "releaseAuthorization", "independentCertification", "semanticAuthorityTransfer"],
+      "properties": {
+        "categoryConformanceIsDeclarationOnly": { "const": true },
+        "evidenceTransfer": { "const": false },
+        "runtimePermission": { "const": false },
+        "releaseAuthorization": { "const": false },
+        "independentCertification": { "const": false },
+        "semanticAuthorityTransfer": { "const": false }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "nonEmpty": { "type": "string", "minLength": 1 },
+    "root": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "coordinate": {
+      "type": "object",
+      "required": ["kind", "coordinate", "root"],
+      "properties": {
+        "kind": { "enum": ["archive", "container", "git-commit", "other", "package", "release"] },
+        "coordinate": { "$ref": "#/$defs/nonEmpty" },
+        "root": { "$ref": "#/$defs/root" }
+      },
+      "additionalProperties": false
+    },
+    "evidence": {
+      "type": "object",
+      "required": ["kind", "coordinate", "root", "observedAt", "projectInstanceId", "projectRoot", "adopterManifestRoot", "kfdPackageRoot", "categorySelectionRoot"],
+      "properties": {
+        "kind": { "enum": ["declaration", "implementation", "negative", "review", "verification"] },
+        "coordinate": { "$ref": "#/$defs/nonEmpty" },
+        "root": { "$ref": "#/$defs/root" },
+        "observedAt": { "type": "string", "format": "date-time" },
+        "projectInstanceId": { "$ref": "#/$defs/nonEmpty" },
+        "projectRoot": { "$ref": "#/$defs/root" },
+        "adopterManifestRoot": { "$ref": "#/$defs/root" },
+        "kfdPackageRoot": { "$ref": "#/$defs/root" },
+        "categorySelectionRoot": { "$ref": "#/$defs/root" }
+      },
+      "additionalProperties": false
+    }
+  }
+}

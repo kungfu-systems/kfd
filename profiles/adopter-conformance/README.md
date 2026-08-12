@@ -82,6 +82,62 @@ The schema expresses structural state constraints. The package verifier owns
 the cross-object checks for set conservation, root reproduction, reference
 resolution, stale evidence, undeclared use, and claim widening.
 
+## Project-neutral category profiles
+
+`profiles/adopter-conformance/category-profiles.json` defines a versioned base
+profile and the initial `specification-authority`, `delivery-infrastructure`,
+`product-runtime`, and `independent-clean-room` profiles. The catalog contains
+no adopter or project IDs. Each category adds evidence obligations above the
+base full-cut declaration; it does not change the meaning of any non-KFD
+specification.
+
+`resolveAdopterCategoryProfiles` in
+`scripts/adopter-category-profile-contract.mjs` resolves the base profile and
+all transitive parents, then emits UTF-8-sorted profile references and the
+deterministic union of requirement identities. Repeated identical obligations
+coalesce. The same requirement identity with different bytes, inheritance
+cycles, duplicate selections, unknown profiles, stale versions, or attempts to
+make evidence transferable fail with stable `acp-*` issue codes.
+
+Category resolution is declaration-only. It never transfers implementation
+evidence between adopters and never grants semantic authority, runtime
+permission, release authorization, or independent certification. The catalog
+schema and fixed cross-profile vectors are exported from the npm package so a
+clean-room implementation can reproduce these rules without a source checkout.
+
+## Project category instances and evidence ownership
+
+`kfd.adopter-category-instance-manifest/v1` is the explicit project-instance
+layer. It binds one adopter identity and its exact source, artifact, and release
+coordinates to one verified full-cut adopter manifest, KFD package root,
+category-catalog root, deterministic selection root, and the complete resolved
+requirement set. Every evidence item repeats the project root, adopter-manifest
+root, KFD package root, and selection root. Evidence copied from another
+project, package cut, manifest, or category selection therefore fails closed;
+category composition never inherits another adopter's evidence.
+
+The package verifier in
+`scripts/adopter-category-instance-contract.mjs` requires a valid report for
+the referenced full-cut manifest and an explicit evidence-freshness cut. It
+then checks exact requirement conservation and each profile's evidence-kind
+minimums. Missing evidence, stale evidence, stale profile versions, invalid
+composition, coordinate substitution, root drift, and authority widening use
+stable `acp-*` diagnostics. A passing report says only that this declaration
+and its evidence conform to the selected category contract. It cannot approve
+or publish a release, authorize a runtime, transfer semantic authority, or
+independently certify the project.
+
+Existing `kfd.adopter-conformance-manifest/v1` files remain valid unprofiled
+full-cut declarations. Absence of a category-instance manifest is never
+silently reinterpreted as selection of the base category. Migration is
+explicit and additive: retain the immutable full-cut manifest, create a new
+category-instance manifest that references its exact root, select zero
+additional profiles for base-only conformance or name exact versioned category
+profiles, and provide fresh project-bound evidence for every resolved
+requirement. Old evidence is reusable only when it already carries every exact
+version 1 project binding; otherwise it remains historical input rather than
+conformance evidence.
+
 ## Package-only verification seam
 
 The version 1 reference seam is published as
