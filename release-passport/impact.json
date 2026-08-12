@@ -1,0 +1,329 @@
+{
+  "schemaVersion": 1,
+  "contract": "kungfu-buildchain-impact",
+  "release": {
+    "tag": "v1.0.0-alpha.61",
+    "line": "v1.0",
+    "channel": "release",
+    "targetRef": "release/v1/v1.0"
+  },
+  "versionImpact": {
+    "final": "major",
+    "source": "kfd-open-standard-governance",
+    "rationale": "This pre-stable line revises KFD from a kungfu-systems organization-only decision registry into an open, evidence-governed engineering standard with adopter-facing applicability and public proposal, counterevidence, implementation, and review paths. Kungfu-systems remains the founding steward and mandatory adopter rather than the standard's adoption boundary. The line also includes active KFD-1 through KFD-5 and KFD-7, draft KFD-6, the formal reference layer, live Primitive cases, and a machine-readable KFD Candidate registry. Major remains the honest cumulative pre-stable decision and machine-surface impact while the fixed outer package line remains v1.0."
+  },
+  "surfaceImpacts": [
+    {
+      "id": "kfd-full-cut-adopter-manifest-contract",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD additively publishes the package-only kfd.adopter-conformance-manifest/v1 schema and normative contract. It binds an adopter to one exact package, registry, standards, schema, vector, verifier, and complete decision cut; separates adopted, candidate, draft-evidence, unsupported, and not-used declarations; binds decision-specific witnesses and release passports; and explicitly grants no runtime, release, semantic-truth, activation, or certification authority.",
+      "source": ""
+    },
+    {
+      "id": "kfd-independent-verifier",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD additively publishes an independently extractable Rust verifier core, native CLI, raw WebAssembly projection, and npm bin for KFD records, Buildchain release passports, Xinfa Context Packs, Xinfa Atlases, qualified Git Workspace Episode shadows, rooted Agent runtime conformance reports, and Self-Conformance transition bundles. The verifier uses only packaged public schemas and specifications, performs no network access, and remains explicitly non-qualifying and non-self-certified.",
+      "source": ""
+    },
+    {
+      "id": "kfd-verifier-contracts",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD additively extends the version 1 verification-bundle kind vocabulary with Self-Conformance transition bundles while preserving the version 1 verification-report shape; standards.json welds the executable, schema, fixed-root, issue-order, and responsibility-boundary surfaces under KFD-1.",
+      "source": ""
+    },
+    {
+      "id": "kfd-perspective-conformance-alpha",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD additively publishes the kfd-perspective-conformance 0.1.0-alpha.1 profile: a versioned KFD-4 I8-I12 witness, a draft KFD-8 Atlas coordinate witness, fixed positive and negative vectors, stable offline diagnostics, native/WASM byte parity, and clean-room extraction coverage. KFD-4 remains active, KFD-8 remains draft, and passing is non-qualifying and non-self-certified.",
+      "source": ""
+    },
+    {
+      "id": "kfd-verifier-xinfa-initiative-resolution",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "The packaged current verifier synchronizes Xinfa's neutral Initiative route-resolution vocabulary and current generic Atlas golden roots from the format owner's dc69b0e1da33b9f5a1a9b0a37865db9d1fde4a33 source commit. The frozen Self-Conformance verifier remains separately bound to its immutable profile evidence.",
+      "source": ""
+    },
+    {
+      "id": "kfd-content",
+      "impact": "major",
+      "class": "breaking",
+      "rationale": "The pre-stable line positions KFD's deepest question as reliable action and continuity under uncertainty, while explicitly treating that framing as a testable foundation rather than a final theory. It includes substantive refinement of KFD-1 through KFD-7 and expands their applicability from kungfu-systems-only surfaces to declared adopter scopes without weakening the founding organization's commitments. KFD-1 distinguishes admitted state cuts from bounded causal records while preserving both as non-drifting load-bearing surfaces. KFD-4 replaces absolute-context assumptions with declared reference frames, inspectable transformations, and preserved invariants. KFD-7 activates the action model from commit-addressed Buildchain and Kungfu Profile evidence while preserving product-owned qualification and non-claims. Before the first stable release, fully evidenced correction may change the latest numbered structure only with breaking impact, preserved coordinates, lineage, migration, and review.",
+      "source": ""
+    },
+    {
+      "id": "kfd-open-standard-governance",
+      "impact": "major",
+      "class": "breaking",
+      "rationale": "KFD now identifies itself as an open, evidence-governed engineering standard under development. Any participant may propose, challenge, implement, adopt, or review KFD work, while accountable maintainers retain canonical numbering, status, and release stewardship. GOVERNANCE.md records roles, public decision criteria, conflicts, maintainer succession, founding adoption, and the pre-stable migration from organization-only applicability to declared adopter scope. Structured GitHub forms expose proposal, counterevidence, and adopter Profile paths, while the pull request template requires claim, interest, review, compatibility, and release-impact disclosure.",
+      "source": ""
+    },
+    {
+      "id": "kfd-registry-schema",
+      "impact": "patch",
+      "class": "compatible",
+      "rationale": "registry.json keeps schemaVersion 1 and the existing entry shape, including number, id, slug, title, kind, status, path, and url; slug and path values are stable number coordinates.",
+      "source": ""
+    },
+    {
+      "id": "kfd-candidate-registry",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD keeps a version 1 candidate registry and additively gives the Atlas, Pursuit, and Warrant candidates explicit non-normative formal-reference metadata. Candidate IDs, promotion meaning, and slot binding remain unchanged; the formal pages do not allocate KFD-8 through KFD-10.",
+      "source": ""
+    },
+    {
+      "id": "kfd-federated-work-continuity-candidate",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD additively publishes the unnumbered Federated Work Continuity candidate, its experimental formal comparison of independent-entity, derived-view, Initiative, and no-new-Primitive outcomes, and a provisional KFD-5 live case. The candidate allocates no KFD number, records no completed federation dogfood, preserves component workspace authority and cuts, and leaves Work qualification, cross-domain transfer, and independent review explicitly open.",
+      "source": ""
+    },
+    {
+      "id": "kfd-durable-result-identity-availability-candidate",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD additively publishes the unnumbered Durable Result Identity and Availability Separation candidate, its first KFD-5 live-case cut, and retained Self-Conformance genesis evidence. The candidate separates immutable identity, retention commitment, observed availability, transport coordinates, and qualification without allocating a KFD number, promoting normative status, or treating Buildchain evidence as cross-domain proof.",
+      "source": ""
+    },
+    {
+      "id": "kfd-action-primitive-candidate-system",
+      "impact": "major",
+      "class": "breaking",
+      "rationale": "Before stable publication, KFD defines the cross-domain action principle through a falsifiable Fact-Episode Ontology and Action Responsibility Geometry: Fact cuts are admitted states, Episodes are replayable causal objects, and Atlas, Pursuit, and Warrant independently constrain perspective, direction, and authority. Two non-isomorphic product Profiles retain counterfactual independence, session round-trip, complexity-breakpoint, context-insufficiency, retry, compensation, and causal evidence. KFD-8 through KFD-10 now allocate those three draft responsibilities; literal physical spacetime or Euclidean dimensionality is not claimed, and implementation design remains product-owned.",
+      "source": ""
+    },
+    {
+      "id": "kfd-11-decision-admission-foundation-revision",
+      "impact": "major",
+      "class": "breaking",
+      "rationale": "The authorized pre-stable Foundation Revision allocates KFD-11 to the cross-domain Claim-Assessment-Decision-Admission procedure and maps the former software-work KFD-11 and Project Cut KFD-12 to current KFD-12 and KFD-13. Immutable commits, packages, digests, rendered artifacts, and KFD-5 cuts retain their original coordinates. The revision publishes a human and machine migration map, requires independent pull-request review, adds the version 1 decision-admission schema, and leaves all three decisions draft.",
+      "source": ""
+    },
+    {
+      "id": "kfd-field-responsibility-matrix",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD additively publishes a non-normative field ownership matrix separating kernel envelopes, cross-domain semantic cores, Domain Profiles, and participant projections across Fact, Episode, Atlas, Pursuit, Warrant, Claim, Assessment, Decision, Admission, Initiative, Assignment, and Project Cut. It narrows universal field claims without prescribing physical storage or UI decomposition.",
+      "source": ""
+    },
+    {
+      "id": "kfd-7-reference-contract",
+      "impact": "major",
+      "class": "breaking",
+      "rationale": "The sole pre-stable KFD-7 machine interface is Domain Profile Declaration version 1. It directly separates ontologyBindings[] for Fact and Episode from actionCoordinates[] for Pursuit, Atlas, and Warrant. The contract retains the conditional session round-trip theorem, context-insufficiency corollary, concrete Domain Profile refinement, complexity-breakpoint evidence, and same-payload counterexamples. Schema conformance remains non-qualifying; the separate activation record binds retained product evidence and independent review.",
+      "source": ""
+    },
+    {
+      "id": "kfd-standards-metadata",
+      "impact": "major",
+      "class": "breaking",
+      "rationale": "The version 2 standards metadata registers active KFD-7 revision 7, binds its decision and formal digests, publishes the canonical Fact-Episode Ontology, Action Responsibility Geometry, Domain Profile terminology, and the sole version 1 Domain Profile Declaration interface. It also registers the repository terminology contract and keeps the activation record and guide as cross-time evidence surfaces. The contract fixes ontology binding, action-coordinate mapping, transition, theorem reference, qualification evidence, non-claim, and activation declaration while leaving product storage and lifecycle vocabulary product-owned.",
+      "source": ""
+    },
+    {
+      "id": "kfd-package-structure",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "The package publishes CONTRIBUTING.md and GOVERNANCE.md as offline governance surfaces, canonical terminology as docs/terminology.md plus terminology.json, formal child pages for the Atlas, Pursuit, and Warrant candidates, KFD-7 evidence surfaces, the versioned protocols/ namespace, and the profiles/ namespace for executable conformance profiles.",
+      "source": ""
+    },
+    {
+      "id": "kfd-agent-hub-alpha-profile",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD additively publishes the non-numbered kfd-agent-hub 0.1.0-alpha.1 profile with a digest-bound manifest, topology-neutral capability and responsibility-exchange schemas, an explicit receiver-verdict state machine, negative cases, a single-runtime versus cross-Hub gap matrix, and a public implementer/review path. Existing numbered decisions, registry entries, KFD-7 Domain Profile declarations, package paths, and adopter-owned product semantics remain unchanged.",
+      "source": ""
+    },
+    {
+      "id": "kfd-agent-hub-conformance-alpha",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD additively publishes the non-numbered kfd-agent-hub-conformance 0.1.0-alpha.1 adopter profile, fixed rooted Agent Hub 20 registry, dual-Hub JSONL adapter contract, capability- and artifact-bound report, independent offline JavaScript verifier, deterministic runner, zero-configuration reference demo, machine-readable CLI capability boundary, and fail-closed C++, Node.js, Python, and Rust adapter starters. It also exposes the first-party Kungfu run and offline-recheck commands through the authority text and generated site bundle, while preserving KFD ownership of the suite and verifier and Kungfu ownership of product behavior and explanation. Passing remains non-qualifying and non-certifying; starter smoke tests exercise only the envelope and the profile does not promote provisional runtime semantics or prove production interoperability.",
+      "source": ""
+    },
+    {
+      "id": "kfd-agent-runtime-conformance-alpha",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD additively publishes the non-numbered kfd-agent-runtime 0.1.0-alpha.1 black-box profile, fixed rooted KFD Runtime 100 registry, 35 Core and 65 Experimental result partitions, JSONL adapter contract, artifact-bound report, offline native/WASM verifier profile, deterministic runner, and two structurally different non-product reference adapters. Passing remains non-qualifying and non-self-certified; provisional Pursuit, Atlas, Warrant, fuller ActionBinding, and recovery semantics are not promoted by tests.",
+      "source": ""
+    },
+    {
+      "id": "kfd-warrant-evidence-alpha-profile",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD additively publishes the non-numbered kfd-warrant-evidence 0.1.0-alpha.1 profile, Primitive Evidence Bundle and KFD-10 Warrant witness schemas, two exact public source bundles, 14 fixed positive and negative draft vectors, an offline package-only verifier, extraction manifest, and first-wave proved/partial/missing/invalidated report. Passing remains non-qualifying and non-self-certified; Buildchain and KFX fields remain profile-specific evidence, and KFD-10 remains draft.",
+      "source": ""
+    },
+    {
+      "id": "kfd-semantic-self-sufficiency-matrix",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD additively publishes a KFD-1 through KFD-13 coverage matrix that names each normative source, machine contract, fixture and failing-case inventory, offline verifier, current coverage, and explicit gap. The matrix reconciles canonical repository paths without inventing aliases and is an auditable coverage cache rather than new decision authority.",
+      "source": ""
+    },
+    {
+      "id": "kfd-independent-verification-site-page",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD additively publishes a stable non-normative /verify page contract that joins the immutable package identity rule, KFD-1 through KFD-13 semantic self-sufficiency matrix, package-only Warrant verifier, 14 fixed vectors, first-wave proved/partial/missing/invalidated outcomes, and stable machine evidence routes. The page preserves KFD-10 draft status and remains explicitly non-qualifying and non-self-certified; the downstream site owns presentation and exact release consumption, not protocol semantics or certification.",
+      "source": ""
+    },
+    {
+      "id": "kfd-buildchain-contract-lock",
+      "impact": "minor",
+      "class": "release-governance",
+      "rationale": "KFD now uses Buildchain v3 floating workflow refs with consumer-owned alpha and stable contract locks, so Buildchain runtime contract drift is checked before heavy build or promotion work while retaining the floating-ref upgrade flow.",
+      "source": ""
+    },
+    {
+      "id": "kfd-site-homepage-bundle",
+      "impact": "major",
+      "class": "breaking",
+      "rationale": "The schemaVersion 2 site bundle exposes the homepage core question, engineering answer, claim boundary, KFD Foundation, terminology page, and explicit non-normative formal child pages at /drafts/{id}/formal/ for candidates that declare a formalReference. Renderers consume declared routes and do not infer semantics from package layout.",
+      "source": ""
+    },
+    {
+      "id": "kfd-load-bearing-dogfood-baseline",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD additively publishes a dated, non-normative founding-adopter evidence synthesis and a first-class /under-load site route. The renderer-ready loadBearingPage carries the complete Markdown body, source path, relationship, authority boundary, and reading-order declaration without changing numbered decisions, accepted live-case cuts, existing routes, or adopter qualification status.",
+      "source": ""
+    },
+    {
+      "id": "kfd-agent-hub-site-bundle",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "The schemaVersion 2 site bundle additively exposes a first-class /agent-hub route and renderer-ready page generated from the packaged Agent Hub profile, implementer guide, CLI capabilities, and manifest. It includes executable onboarding commands, the direct Kungfu installed-product qualification and recheck path, the four scaffold languages, jsonl-stdio/v1, Hub 20, exit codes, rooted-report verification, recovery, and the experimental non-certifying host-only boundary without changing existing routes or profile authority.",
+      "source": ""
+    },
+    {
+      "id": "kfd-independent-implementation-first-screen",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD additively owns a structured first-screen promise and exact scaffold, Hub 20 test, and offline report-verification path for Python, Rust, Node.js, and C++. The bundle binds the immutable package coordinate, Agent Hub CLI capabilities, reader routes, fail-closed starter boundary, package-acquisition boundary, and explicit non-certifying claims without changing numbered decisions, activating KFD-10, or treating the downstream site as semantic authority.",
+      "source": ""
+    },
+    {
+      "id": "kfd-site-decision-usage-pages",
+      "impact": "patch",
+      "class": "compatible",
+      "rationale": "KFD usage pages add consistent links to their authoritative decision, formal reference, and documentation map while stable /N/usage routes and implementation guidance remain unchanged.",
+      "source": ""
+    },
+    {
+      "id": "kfd-3-self-collaboration",
+      "impact": "minor",
+      "class": "release-passport",
+      "rationale": "KFD refreshes its collaboration interface and pre-build/artifact witnesses to expose KFD-7 decision, formal, usage, activation evidence, trust, and promoted-lineage surfaces equally to humans, agents, package consumers, and site consumers.",
+      "source": ""
+    },
+    {
+      "id": "kfd-3-trusted-value-evidence",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD-3 collaboration interfaces now declare explicit valueEvidence that binds participant-facing value claims to fact artifacts, evidence artifacts, KFD-2 trust assessments, and residual-risk state.",
+      "source": ""
+    },
+    {
+      "id": "kfd-2-public-release-trust-claim",
+      "impact": "minor",
+      "class": "release-passport",
+      "rationale": "KFD now ships an explicit machine-bound public KFD-2 release trust claim and passes it into Buildchain release passport generation.",
+      "source": ""
+    },
+    {
+      "id": "kfd-2-generic-trust-assessment-core",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD-2 generic trust claims assess KFD-7 as an active action-responsibility principle. Package identity, formal binding, promotion lineage, two exact product cuts, independent review, activation verdict, and participant-facing closure are machine-checkable; universal minimality and future adopter qualification remain explicit non-claims rather than inherited evidence.",
+      "source": ""
+    },
+    {
+      "id": "kfd-numbered-paths",
+      "impact": "minor",
+      "class": "compatible",
+      "rationale": "Decision documents now use stable numbered paths under decisions/KFD-N.md, while usage documentation uses docs/KFD-N-usage.md to distinguish authoritative decision text from consumer implementation notes.",
+      "source": ""
+    },
+    {
+      "id": "kfd-release-anchor",
+      "impact": "minor",
+      "class": "release-governance",
+      "rationale": "KFD now declares its package version through an anchored/manual release manifest so package version state is an explicit release fact rather than an auto-derived Buildchain side effect.",
+      "source": ""
+    },
+    {
+      "id": "kfd-release-propagation",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD alpha and stable publication now pass a strict package-release propagation config into Buildchain v3. Only after npm integrity and gitHead, the Git tag target, the public release Passport bytes, and the exact downstream base SHA agree does publication capture a paused claim-only Work for site-libkungfu-dev. Publication has no downstream branch, pull-request, merge, or production authority; an Agent must claim the Work and carry its exact lock through review, protected merge, deployment, and online readback.",
+      "source": ""
+    },
+    {
+      "id": "kfd-1-compatibility-impact-core",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD-1 now defines breaking, additive, none, and unclassifiable as the generic compatibility-impact core, with release versioning as one projection rather than the only interpretation.",
+      "source": ""
+    },
+    {
+      "id": "kfd-1-surface-register",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "standards.json registers the KFD-7 decision, formal reference, usage page, activation guide, machine evidence record, promoted source-candidate lineage, the Agent Hub alpha surfaces, and the Agent runtime authority, manifest, fixed vectors, adapter/report schemas, runner, and verifier as integration-time and cross-time surfaces. The KFD-1 witness binds these surfaces and preserves the separate KFD-8 through KFD-10 candidate boundaries.",
+      "source": ""
+    },
+    {
+      "id": "kfd-formal-reference-layer",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD publishes an experimental non-normative formal page for every numbered decision through KFD-7. KFD-7 formalizes Fact cuts, causal paths, action coordinates, counterfactual independence, invalid states, and activation proof obligations while decisions/KFD-N.md remains normative.",
+      "source": ""
+    },
+    {
+      "id": "kfd-4-perspective-replay-interface",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD-4 additively publishes a version 1 contract for perspective-preserving and contrastive replay, including source-view boundaries, reconstruction loss, degraded state, and primitive-signal mismatches.",
+      "source": ""
+    },
+    {
+      "id": "kfd-5-live-case-registry",
+      "impact": "major",
+      "class": "breaking",
+      "rationale": "The pre-stable KFD-5 live-case registry advances from version 1 to version 2. Stable case identity and genesis remain preserved, case lifecycle is separated into active/closed/archived, and every case exposes an ontology-split surface plus one or more independently named candidate tracks with their own qualification status, claim boundary, and SHA-256-addressed KFD-5 version 3 current cut. Version 2 also permits additive qualification arguments without treating them as candidate promotion. The first case therefore tracks Pursuit and Warrant and their conditional distinguishability obligations without rewriting the fused Proof-Carrying Work Object genesis. Registry closure does not qualify or promote either candidate.",
+      "source": ""
+    },
+    {
+      "id": "kfd-1-publication-url-semantics",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD-1 now publishes a machine-readable schema for canonical reader URLs, latest aliases, immutable version artifact URLs, artifact digests, source coordinates, lineage, site consumption, and archive policies that prevent same-version digest drift or destructive deletion of immutable publication prefixes.",
+      "source": ""
+    },
+    {
+      "id": "kfd-self-conformance-site-projection",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD additively owns a renderer-ready How KFD changes itself projection, live and retrospective verification lanes, governed lifecycle and authority boundaries, exact CLI entrypoints, historical lineage assets, and the terminal recursive no-new-kfd evidence. The projection allocates no number, changes no numbered semantics, grants no verifier or Site authority, and keeps packaging and release separately authorized.",
+      "source": ""
+    },
+    {
+      "id": "kfd-self-conformance-profile-v1",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD preserves the kfd-self-conformance 1.0.0-alpha.1 semantic contract while additively replaying retained lifecycle evidence against its reviewed package-manifest and verifier-byte cut, and retains the companion historical profile with machine-reproducible alpha.28 lineage, explicit retrospective boundaries, Native/WebAssembly parity, offline clean-room closure, and no Candidate number or decision-status change.",
+      "source": ""
+    }
+  ],
+  "summary": "KFD v1.0 is an open, evidence-governed engineering standard under development for reliable action and continuity under uncertainty. Its current decisions form a small, testable foundation rather than a claimed final theory. Kungfu-systems remains the founding steward and mandatory adopter, while any adopter may declare an independent scope and any participant may propose, challenge, implement, or review KFD work. KFD-7 revision 7 distinguishes the Fact-Episode Ontology from the Action Responsibility Geometry of direction, perspective, and authority; KFD-8 through KFD-10 allocate its draft perspective, direction, and authority coordinates. The authorized pre-stable Foundation Revision allocates KFD-11 to Claim-Assessment-Decision-Admission separation and maps the two software-domain applications to KFD-12 and KFD-13 while preserving immutable prior coordinates. Universal minimality and future Profile qualification remain unclaimed.",
+  "classification": "major",
+  "breaking": true,
+  "migrationRequired": true
+}
