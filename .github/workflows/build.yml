@@ -17,10 +17,9 @@ permissions:
 
 jobs:
   kfd:
-    uses: kungfu-systems/buildchain/.github/workflows/build.yml@8b7f89a407b450ba3532f785bfcebecc3326a6e7
+    uses: kungfu-systems/buildchain/.github/workflows/build.yml@v3-alpha
     secrets: inherit
     with:
-      buildchain-ref: 8b7f89a407b450ba3532f785bfcebecc3326a6e7
       buildchain-alpha-contract-lock-path: buildchain.alpha-contract-lock.json
       buildchain-stable-contract-lock-path: buildchain.contract-lock.json
       checkout-history-mode: full
