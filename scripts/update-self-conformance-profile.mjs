@@ -120,7 +120,7 @@ packageJson.exports["./self-conformance/lifecycle-gate-request.schema.json"] = "
 packageJson.exports["./self-conformance/lifecycle-gate-report.schema.json"] = "./schemas/kfd-self-conformance/lifecycle-gate-report.schema.json";
 packageJson.scripts["check:self-conformance-profile"] = "node scripts/check-self-conformance-profile.mjs";
 packageJson.scripts["check:self-conformance-lifecycle"] = "node scripts/check-self-conformance-lifecycle.mjs && node scripts/check-self-conformance-changes.mjs";
-packageJson.scripts.check = "node scripts/check.mjs && npm run check:adopter-conformance && npm run check:adopter-toolchain && npm run check:warrant-evidence && npm run check:agent-hub && npm run check:agent-hub-conformance && npm run check:agent-runtime && npm run check:self-conformance-profile && npm run check:self-conformance-lifecycle && npm run check:self-conformance-history && npm run check:verifier";
+packageJson.scripts.check = "node scripts/check.mjs && npm run check:adopter-conformance && npm run check:adopter-toolchain && npm run check:kfd-self-adopter && npm run check:warrant-evidence && npm run check:agent-hub && npm run check:agent-hub-conformance && npm run check:agent-runtime && npm run check:self-conformance-profile && npm run check:self-conformance-lifecycle && npm run check:self-conformance-history && npm run check:verifier";
 writeJson(packagePath, packageJson);
 
 const agentRuntimeManifestPath = "profiles/agent-runtime/manifest.json";

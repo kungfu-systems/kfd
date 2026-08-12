@@ -895,11 +895,12 @@ for (const requiredField of [
     fail(`site bundle homepage displayPlan firstScreen must include ${requiredField}`);
   }
 }
-if (siteBundle.homepage?.displayPlan?.firstScreen?.maxPrimarySections !== 3) {
-  fail("site bundle homepage first screen must reserve three primary sections");
+if (siteBundle.homepage?.displayPlan?.firstScreen?.maxPrimarySections !== 4) {
+  fail("site bundle homepage first screen must reserve four primary sections");
 }
 const requiredHomepageSections = {
   "future-picture": "README.md",
+  "self-conformance-reader-model": "README.md",
   "independent-implementation": "README.md",
   "foundation-triad": "README.md",
   "why-this-question-matters": "README.md",
@@ -1037,6 +1038,7 @@ if (
   selfConformancePage?.title !== "How KFD changes itself" ||
   selfConformancePage?.normative !== false ||
   selfConformancePage?.status !== "experimental" ||
+  selfConformancePage?.rendererContract?.showReaderModel !== true ||
   selfConformancePage?.rendering?.kind !== "self-conformance-guide"
 ) {
   fail("site bundle must expose the package-owned non-normative Self-Conformance page contract");
@@ -1051,6 +1053,26 @@ if (
   selfConformancePage?.releaseSeparation?.releaseAuthoritySeparate !== true
 ) {
   fail("site bundle Self-Conformance page must preserve verifier parity and authority separation");
+}
+const selfConformanceReaderModel = selfConformancePage?.readerModel;
+if (
+  selfConformanceReaderModel?.prospective?.label !== "Prospective governance" ||
+  selfConformanceReaderModel?.retrospective?.label !== "Retrospective structural conformance" ||
+  selfConformanceReaderModel?.retrospective?.start?.packageVersion !== "1.0.0-alpha.28" ||
+  selfConformanceReaderModel?.retrospective?.convergence?.liveAnchorId !== "kfd-alpha-55-pre-profile" ||
+  selfConformanceReaderModel?.retrospective?.convergence?.historicalDoesNotReplaceLive !== true ||
+  selfConformanceReaderModel?.retrospective?.retrospective !== true ||
+  selfConformanceReaderModel?.retrospective?.profileAvailableAtEvent !== false ||
+  selfConformanceReaderModel?.authorityBoundary?.verifierNecessary !== true ||
+  selfConformanceReaderModel?.authorityBoundary?.verifierSufficient !== false ||
+  selfConformanceReaderModel?.authorityBoundary?.humanApprovalRequired !== true ||
+  selfConformanceReaderModel?.authorityBoundary?.forbiddenInferences?.length !== 6 ||
+  JSON.stringify(siteBundle.homepage?.selfConformance?.readerModel) !== JSON.stringify(selfConformanceReaderModel) ||
+  !siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes("self-conformance.readerModel.prospective") ||
+  !siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes("self-conformance.readerModel.retrospective") ||
+  !siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes("self-conformance.readerModel.authorityBoundary")
+) {
+  fail("site bundle must expose one first-screen reader model for prospective governance and retrospective structural conformance without widening authority");
 }
 if (
   selfConformancePage?.recursiveCase?.candidate?.status !== "merged" ||
