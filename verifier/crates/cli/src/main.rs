@@ -11,8 +11,13 @@ use std::process::ExitCode;
 
 fn usage() -> &'static str {
     "usage:
+  kfd --version
   kfd verify <kfd-record|passport|pack|atlas|episode|agent-runtime-report|self-conformance-transition|self-conformance-history|bundle> <path> [--schema <path>] [--json]
   kfd bundle <kfd-record|passport|pack|atlas|episode|agent-runtime-report|self-conformance-transition|self-conformance-history> <path> --output <bundle.json>"
+}
+
+fn version() -> String {
+    format!("kfd {}", env!("CARGO_PKG_VERSION"))
 }
 
 fn read_regular(path: &Path) -> Result<String, String> {
@@ -136,6 +141,14 @@ fn main() -> ExitCode {
 }
 
 fn run(args: Vec<String>) -> Result<ExitCode, String> {
+    if args.len() == 1 && matches!(args[0].as_str(), "--version" | "-V") {
+        println!("{}", version());
+        return Ok(ExitCode::SUCCESS);
+    }
+    if args.len() == 1 && matches!(args[0].as_str(), "--help" | "-h") {
+        println!("{}", usage());
+        return Ok(ExitCode::SUCCESS);
+    }
     if args.len() < 3 {
         return Err("missing command, kind, or path".to_owned());
     }
@@ -204,5 +217,17 @@ fn run(args: Vec<String>) -> Result<ExitCode, String> {
             Ok(ExitCode::SUCCESS)
         }
         other => Err(format!("unsupported command: {other}")),
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::{usage, version};
+
+    #[test]
+    fn public_identity_is_stable() {
+        assert_eq!(version(), concat!("kfd ", env!("CARGO_PKG_VERSION")));
+        assert!(usage().contains("kfd verify"));
+        assert!(!usage().contains("kfd-verifier"));
     }
 }

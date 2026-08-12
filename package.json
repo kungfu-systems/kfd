@@ -1,6 +1,6 @@
 {
   "name": "@kungfu-tech/kfd",
-  "version": "1.0.0-alpha.62",
+  "version": "1.0.0-alpha.63",
   "description": "KFD: an open, evidence-governed engineering standard for reliable action and continuity under uncertainty",
   "license": "Apache-2.0",
   "bin": {
@@ -131,7 +131,7 @@
     "./self-conformance/historical-replay.schema.json": "./schemas/kfd-self-conformance-history/historical-replay.schema.json"
   },
   "scripts": {
-    "check": "node scripts/check.mjs && npm run check:adopter-conformance && npm run check:adopter-category-profiles && npm run check:adopter-category-instances && npm run check:adopter-toolchain && npm run check:kfd-self-adopter && npm run check:warrant-evidence && npm run check:agent-hub && npm run check:agent-hub-conformance && npm run check:agent-runtime && npm run check:self-conformance-profile && npm run check:self-conformance-lifecycle && npm run check:self-conformance-history && npm run check:verifier",
+    "check": "node scripts/check.mjs && npm run check:adopter-conformance && npm run check:adopter-category-profiles && npm run check:adopter-category-instances && npm run check:adopter-toolchain && npm run check:kfd-self-adopter && npm run check:warrant-evidence && npm run check:agent-hub && npm run check:agent-hub-conformance && npm run check:agent-runtime && npm run check:self-conformance-profile && npm run check:self-conformance-lifecycle && npm run check:self-conformance-history && npm run check:native-release && npm run check:verifier",
     "check:adopter-conformance": "node scripts/check-adopter-conformance.mjs",
     "check:adopter-category-profiles": "node scripts/check-adopter-category-profiles.mjs",
     "check:adopter-category-instances": "node scripts/check-adopter-category-instances.mjs",
@@ -143,7 +143,9 @@
     "check:agent-runtime": "node scripts/check-agent-runtime-profile.mjs",
     "check:perspective-conformance": "node scripts/check-perspective-conformance.mjs",
     "check:verifier": "cargo test --locked --manifest-path verifier/Cargo.toml --workspace && npm run check:perspective-conformance && node scripts/check-verifier.mjs && node scripts/check-verifier-extraction.mjs",
+    "check:native-release": "node scripts/check-native-release.mjs",
     "check:verifier-artifact": "node scripts/check-verifier-artifact.mjs",
+    "build:native-release": "node scripts/build-native-release.mjs",
     "build:verifier": "node scripts/build-verifier.mjs",
     "generate:agent-runtime-vectors": "node scripts/generate-agent-runtime-vectors.mjs --write",
     "generate:agent-hub-vectors": "node scripts/generate-agent-hub-vectors.mjs --write && node scripts/update-agent-hub-manifest.mjs",
