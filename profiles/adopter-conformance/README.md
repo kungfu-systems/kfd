@@ -82,6 +82,29 @@ The schema expresses structural state constraints. The package verifier owns
 the cross-object checks for set conservation, root reproduction, reference
 resolution, stale evidence, undeclared use, and claim widening.
 
+## Project-neutral category profiles
+
+`profiles/adopter-conformance/category-profiles.json` defines a versioned base
+profile and the initial `specification-authority`, `delivery-infrastructure`,
+`product-runtime`, and `independent-clean-room` profiles. The catalog contains
+no adopter or project IDs. Each category adds evidence obligations above the
+base full-cut declaration; it does not change the meaning of any non-KFD
+specification.
+
+`resolveAdopterCategoryProfiles` in
+`scripts/adopter-category-profile-contract.mjs` resolves the base profile and
+all transitive parents, then emits UTF-8-sorted profile references and the
+deterministic union of requirement identities. Repeated identical obligations
+coalesce. The same requirement identity with different bytes, inheritance
+cycles, duplicate selections, unknown profiles, stale versions, or attempts to
+make evidence transferable fail with stable `acp-*` issue codes.
+
+Category resolution is declaration-only. It never transfers implementation
+evidence between adopters and never grants semantic authority, runtime
+permission, release authorization, or independent certification. The catalog
+schema and fixed cross-profile vectors are exported from the npm package so a
+clean-room implementation can reproduce these rules without a source checkout.
+
 ## Package-only verification seam
 
 The version 1 reference seam is published as

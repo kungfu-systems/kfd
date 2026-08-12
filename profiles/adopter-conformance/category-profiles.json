@@ -1,0 +1,164 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.adopter-category-profile-catalog/v1",
+  "rootAlgorithm": "sha256-kfd-canonical-json-v1",
+  "baseProfile": {
+    "id": "kfd.adopter-category/base",
+    "version": "1.0.0"
+  },
+  "claimBoundary": {
+    "categoryConformanceIsDeclarationOnly": true,
+    "evidenceTransfer": false,
+    "runtimePermission": false,
+    "releaseAuthorization": false,
+    "independentCertification": false,
+    "semanticAuthorityTransfer": false
+  },
+  "profiles": [
+    {
+      "id": "kfd.adopter-category/base",
+      "version": "1.0.0",
+      "extends": [],
+      "requirements": [
+        {
+          "id": "adopter-identity",
+          "evidenceKinds": ["declaration"],
+          "minimumEvidencePerKind": 1,
+          "transferable": false
+        },
+        {
+          "id": "claim-boundary",
+          "evidenceKinds": ["declaration"],
+          "minimumEvidencePerKind": 1,
+          "transferable": false
+        },
+        {
+          "id": "kfd-cut",
+          "evidenceKinds": ["verification"],
+          "minimumEvidencePerKind": 1,
+          "transferable": false
+        },
+        {
+          "id": "source-artifact",
+          "evidenceKinds": ["implementation"],
+          "minimumEvidencePerKind": 1,
+          "transferable": false
+        }
+      ]
+    },
+    {
+      "id": "kfd.adopter-category/specification-authority",
+      "version": "1.0.0",
+      "extends": [
+        {
+          "id": "kfd.adopter-category/base",
+          "version": "1.0.0"
+        }
+      ],
+      "requirements": [
+        {
+          "id": "semantic-authority",
+          "evidenceKinds": ["declaration", "implementation", "review", "verification"],
+          "minimumEvidencePerKind": 1,
+          "transferable": false
+        },
+        {
+          "id": "specification-transition",
+          "evidenceKinds": ["declaration", "review", "verification"],
+          "minimumEvidencePerKind": 1,
+          "transferable": false
+        }
+      ]
+    },
+    {
+      "id": "kfd.adopter-category/delivery-infrastructure",
+      "version": "1.0.0",
+      "extends": [
+        {
+          "id": "kfd.adopter-category/base",
+          "version": "1.0.0"
+        }
+      ],
+      "requirements": [
+        {
+          "id": "artifact-readback",
+          "evidenceKinds": ["verification"],
+          "minimumEvidencePerKind": 1,
+          "transferable": false
+        },
+        {
+          "id": "delivery-policy-cut",
+          "evidenceKinds": ["declaration", "verification"],
+          "minimumEvidencePerKind": 1,
+          "transferable": false
+        },
+        {
+          "id": "protected-delivery",
+          "evidenceKinds": ["implementation", "review", "verification"],
+          "minimumEvidencePerKind": 1,
+          "transferable": false
+        }
+      ]
+    },
+    {
+      "id": "kfd.adopter-category/product-runtime",
+      "version": "1.0.0",
+      "extends": [
+        {
+          "id": "kfd.adopter-category/base",
+          "version": "1.0.0"
+        }
+      ],
+      "requirements": [
+        {
+          "id": "runtime-implementation",
+          "evidenceKinds": ["implementation", "verification"],
+          "minimumEvidencePerKind": 1,
+          "transferable": false
+        },
+        {
+          "id": "runtime-permission-boundary",
+          "evidenceKinds": ["declaration", "verification"],
+          "minimumEvidencePerKind": 1,
+          "transferable": false
+        },
+        {
+          "id": "runtime-qualification",
+          "evidenceKinds": ["negative", "verification"],
+          "minimumEvidencePerKind": 1,
+          "transferable": false
+        }
+      ]
+    },
+    {
+      "id": "kfd.adopter-category/independent-clean-room",
+      "version": "1.0.0",
+      "extends": [
+        {
+          "id": "kfd.adopter-category/base",
+          "version": "1.0.0"
+        }
+      ],
+      "requirements": [
+        {
+          "id": "independence-attestation",
+          "evidenceKinds": ["declaration", "review"],
+          "minimumEvidencePerKind": 1,
+          "transferable": false
+        },
+        {
+          "id": "independent-implementation",
+          "evidenceKinds": ["implementation"],
+          "minimumEvidencePerKind": 1,
+          "transferable": false
+        },
+        {
+          "id": "reproduction",
+          "evidenceKinds": ["negative", "verification"],
+          "minimumEvidencePerKind": 1,
+          "transferable": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-adopter-conformance/category-profile-catalog.schema.json",
+  "title": "KFD Adopter Category Profile Catalog",
+  "description": "Project-neutral category requirements layered above kfd.adopter-conformance-manifest/v1. Catalog validity and resolution do not transfer evidence or grant runtime, release, semantic, or certification authority.",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "contract",
+    "rootAlgorithm",
+    "baseProfile",
+    "claimBoundary",
+    "profiles"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "contract": { "const": "kfd.adopter-category-profile-catalog/v1" },
+    "rootAlgorithm": { "const": "sha256-kfd-canonical-json-v1" },
+    "baseProfile": { "$ref": "#/$defs/profileReference" },
+    "claimBoundary": {
+      "type": "object",
+      "required": [
+        "categoryConformanceIsDeclarationOnly",
+        "evidenceTransfer",
+        "runtimePermission",
+        "releaseAuthorization",
+        "independentCertification",
+        "semanticAuthorityTransfer"
+      ],
+      "properties": {
+        "categoryConformanceIsDeclarationOnly": { "const": true },
+        "evidenceTransfer": { "const": false },
+        "runtimePermission": { "const": false },
+        "releaseAuthorization": { "const": false },
+        "independentCertification": { "const": false },
+        "semanticAuthorityTransfer": { "const": false }
+      },
+      "additionalProperties": false
+    },
+    "profiles": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/profile" }
+    }
+  },
+  "$defs": {
+    "profileId": {
+      "type": "string",
+      "pattern": "^kfd\\.adopter-category/[a-z][a-z0-9-]*$"
+    },
+    "profileVersion": {
+      "type": "string",
+      "pattern": "^[1-9][0-9]*\\.[0-9]+\\.[0-9]+$"
+    },
+    "profileReference": {
+      "type": "object",
+      "required": ["id", "version"],
+      "properties": {
+        "id": { "$ref": "#/$defs/profileId" },
+        "version": { "$ref": "#/$defs/profileVersion" }
+      },
+      "additionalProperties": false
+    },
+    "requirement": {
+      "type": "object",
+      "required": ["id", "evidenceKinds", "minimumEvidencePerKind", "transferable"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*$"
+        },
+        "evidenceKinds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": ["declaration", "implementation", "negative", "review", "verification"]
+          }
+        },
+        "minimumEvidencePerKind": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "transferable": { "const": false }
+      },
+      "additionalProperties": false
+    },
+    "profile": {
+      "type": "object",
+      "required": ["id", "version", "extends", "requirements"],
+      "properties": {
+        "id": { "$ref": "#/$defs/profileId" },
+        "version": { "$ref": "#/$defs/profileVersion" },
+        "extends": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/profileReference" }
+        },
+        "requirements": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/requirement" }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
