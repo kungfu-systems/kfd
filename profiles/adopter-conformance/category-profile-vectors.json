@@ -1,0 +1,242 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.adopter-category-profile-vectors/v1",
+  "catalogContract": "kfd.adopter-category-profile-catalog/v1",
+  "selectionTemplate": {
+    "schemaVersion": 1,
+    "contract": "kfd.adopter-category-profile-selection/v1",
+    "profiles": []
+  },
+  "cases": [
+    {
+      "id": "positive-base-only",
+      "selectionOperations": [],
+      "catalogOperations": [],
+      "valid": true,
+      "issueCodes": [],
+      "selectedProfileIds": ["kfd.adopter-category/base"],
+      "requirementIds": ["adopter-identity", "claim-boundary", "kfd-cut", "source-artifact"]
+    },
+    {
+      "id": "positive-specification-authority",
+      "selectionOperations": [
+        {
+          "op": "add",
+          "path": "/profiles/-",
+          "value": {
+            "id": "kfd.adopter-category/specification-authority",
+            "version": "1.0.0"
+          }
+        }
+      ],
+      "catalogOperations": [],
+      "valid": true,
+      "issueCodes": [],
+      "selectedProfileIds": [
+        "kfd.adopter-category/base",
+        "kfd.adopter-category/specification-authority"
+      ],
+      "requirementIds": [
+        "adopter-identity",
+        "claim-boundary",
+        "kfd-cut",
+        "semantic-authority",
+        "source-artifact",
+        "specification-transition"
+      ]
+    },
+    {
+      "id": "positive-four-profile-composition",
+      "selectionOperations": [
+        {
+          "op": "add",
+          "path": "/profiles/-",
+          "value": {
+            "id": "kfd.adopter-category/specification-authority",
+            "version": "1.0.0"
+          }
+        },
+        {
+          "op": "add",
+          "path": "/profiles/-",
+          "value": {
+            "id": "kfd.adopter-category/delivery-infrastructure",
+            "version": "1.0.0"
+          }
+        },
+        {
+          "op": "add",
+          "path": "/profiles/-",
+          "value": {
+            "id": "kfd.adopter-category/product-runtime",
+            "version": "1.0.0"
+          }
+        },
+        {
+          "op": "add",
+          "path": "/profiles/-",
+          "value": {
+            "id": "kfd.adopter-category/independent-clean-room",
+            "version": "1.0.0"
+          }
+        }
+      ],
+      "catalogOperations": [],
+      "valid": true,
+      "issueCodes": [],
+      "selectedProfileIds": [
+        "kfd.adopter-category/base",
+        "kfd.adopter-category/delivery-infrastructure",
+        "kfd.adopter-category/independent-clean-room",
+        "kfd.adopter-category/product-runtime",
+        "kfd.adopter-category/specification-authority"
+      ],
+      "requirementIds": [
+        "adopter-identity",
+        "artifact-readback",
+        "claim-boundary",
+        "delivery-policy-cut",
+        "independence-attestation",
+        "independent-implementation",
+        "kfd-cut",
+        "protected-delivery",
+        "reproduction",
+        "runtime-implementation",
+        "runtime-permission-boundary",
+        "runtime-qualification",
+        "semantic-authority",
+        "source-artifact",
+        "specification-transition"
+      ]
+    },
+    {
+      "id": "negative-unknown-profile",
+      "selectionOperations": [
+        {
+          "op": "add",
+          "path": "/profiles/-",
+          "value": {
+            "id": "kfd.adopter-category/unknown",
+            "version": "1.0.0"
+          }
+        }
+      ],
+      "catalogOperations": [],
+      "valid": false,
+      "issueCodes": ["acp-profile-unknown"]
+    },
+    {
+      "id": "negative-stale-profile-version",
+      "selectionOperations": [
+        {
+          "op": "add",
+          "path": "/profiles/-",
+          "value": {
+            "id": "kfd.adopter-category/product-runtime",
+            "version": "2.0.0"
+          }
+        }
+      ],
+      "catalogOperations": [],
+      "valid": false,
+      "issueCodes": ["acp-profile-version-stale"]
+    },
+    {
+      "id": "negative-duplicate-selection",
+      "selectionOperations": [
+        {
+          "op": "add",
+          "path": "/profiles/-",
+          "value": {
+            "id": "kfd.adopter-category/product-runtime",
+            "version": "1.0.0"
+          }
+        },
+        {
+          "op": "add",
+          "path": "/profiles/-",
+          "value": {
+            "id": "kfd.adopter-category/product-runtime",
+            "version": "1.0.0"
+          }
+        }
+      ],
+      "catalogOperations": [],
+      "valid": false,
+      "issueCodes": ["acp-composition-invalid"]
+    },
+    {
+      "id": "negative-inheritance-cycle",
+      "selectionOperations": [
+        {
+          "op": "add",
+          "path": "/profiles/-",
+          "value": {
+            "id": "kfd.adopter-category/specification-authority",
+            "version": "1.0.0"
+          }
+        }
+      ],
+      "catalogOperations": [
+        {
+          "op": "replace",
+          "path": "/profiles/1/extends/0",
+          "value": {
+            "id": "kfd.adopter-category/product-runtime",
+            "version": "1.0.0"
+          }
+        },
+        {
+          "op": "replace",
+          "path": "/profiles/3/extends/0",
+          "value": {
+            "id": "kfd.adopter-category/specification-authority",
+            "version": "1.0.0"
+          }
+        }
+      ],
+      "valid": false,
+      "issueCodes": ["acp-composition-conflict"]
+    },
+    {
+      "id": "negative-requirement-conflict",
+      "selectionOperations": [
+        {
+          "op": "add",
+          "path": "/profiles/-",
+          "value": {
+            "id": "kfd.adopter-category/product-runtime",
+            "version": "1.0.0"
+          }
+        }
+      ],
+      "catalogOperations": [
+        {
+          "op": "add",
+          "path": "/profiles/3/requirements/-",
+          "value": {
+            "id": "adopter-identity",
+            "evidenceKinds": ["review"],
+            "minimumEvidencePerKind": 1,
+            "transferable": false
+          }
+        }
+      ],
+      "valid": false,
+      "issueCodes": ["acp-composition-conflict"]
+    },
+    {
+      "id": "negative-claim-widening",
+      "selectionOperations": [],
+      "catalogOperations": [
+        {
+          "op": "replace",
+          "path": "/claimBoundary/runtimePermission",
+          "value": true
+        }
+      ],
+      "valid": false,
+      "issueCodes": ["acp-claim-widening"]
+    }
+  ]
+}
