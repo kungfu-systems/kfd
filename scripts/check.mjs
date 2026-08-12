@@ -51,6 +51,11 @@ const adopterCategoryProfiles = JSON.parse(readFileSync(adopterCategoryProfilesP
 const adopterCategoryProfileVectorsPath = "profiles/adopter-conformance/category-profile-vectors.json";
 const adopterCategoryProfileVectors = JSON.parse(readFileSync(adopterCategoryProfileVectorsPath, "utf8"));
 const adopterCategoryProfileResolverPath = "scripts/adopter-category-profile-contract.mjs";
+const adopterCategoryInstanceSchemaPath = "schemas/kfd-adopter-conformance/category-instance-manifest.schema.json";
+const adopterCategoryInstanceSchema = JSON.parse(readFileSync(adopterCategoryInstanceSchemaPath, "utf8"));
+const adopterCategoryInstanceVectorsPath = "profiles/adopter-conformance/category-instance-vectors.json";
+const adopterCategoryInstanceVectors = JSON.parse(readFileSync(adopterCategoryInstanceVectorsPath, "utf8"));
+const adopterCategoryInstanceVerifierPath = "scripts/adopter-category-instance-contract.mjs";
 const foundationRevisionPath = "docs/foundation-revision-2026-07-21-decision-admission.json";
 const foundationRevision = JSON.parse(readFileSync(foundationRevisionPath, "utf8"));
 const packageJson = JSON.parse(readFileSync("package.json", "utf8"));
@@ -181,16 +186,26 @@ if (adopterCategoryProfileSchema.$id !== "https://kfd.libkungfu.dev/schemas/kfd-
     adopterCategoryProfileVectors.catalogContract !== adopterCategoryProfiles.contract) {
   fail("adopter category profiles must expose one exact versioned catalog, schema, and vector contract");
 }
+if (adopterCategoryInstanceSchema.$id !== "https://kfd.libkungfu.dev/schemas/kfd-adopter-conformance/category-instance-manifest.schema.json" ||
+    adopterCategoryInstanceSchema.properties?.contract?.const !== "kfd.adopter-category-instance-manifest/v1" ||
+    adopterCategoryInstanceSchema.properties?.schemaVersion?.const !== 1 ||
+    adopterCategoryInstanceVectors.contract !== "kfd.adopter-category-instance-vectors/v1" ||
+    adopterCategoryInstanceVectors.instanceContract !== "kfd.adopter-category-instance-manifest/v1") {
+  fail("adopter category instances must expose one exact versioned manifest, schema, and vector contract");
+}
 if (packageJson.exports?.["./adopter-conformance/README.md"] !== "./profiles/adopter-conformance/README.md" ||
     packageJson.exports?.["./adopter-conformance/manifest.schema.json"] !== `./${adopterConformanceSchemaPath}` ||
     packageJson.exports?.["./adopter-conformance/category-profile-catalog.schema.json"] !== `./${adopterCategoryProfileSchemaPath}` ||
+    packageJson.exports?.["./adopter-conformance/category-instance-manifest.schema.json"] !== `./${adopterCategoryInstanceSchemaPath}` ||
     packageJson.exports?.["./adopter-conformance/issue-codes.json"] !== `./${adopterConformanceIssueCodesPath}` ||
     packageJson.exports?.["./adopter-conformance/vectors.json"] !== `./${adopterConformanceVectorsPath}` ||
     packageJson.exports?.["./adopter-conformance/category-profiles.json"] !== `./${adopterCategoryProfilesPath}` ||
     packageJson.exports?.["./adopter-conformance/category-profile-vectors.json"] !== `./${adopterCategoryProfileVectorsPath}` ||
+    packageJson.exports?.["./adopter-conformance/category-instance-vectors.json"] !== `./${adopterCategoryInstanceVectorsPath}` ||
     packageJson.exports?.["./adopter-conformance/verifier"] !== `./${adopterConformanceVerifierPath}` ||
-    packageJson.exports?.["./adopter-conformance/category-profile-resolver"] !== `./${adopterCategoryProfileResolverPath}`) {
-  fail("package.json must expose the adopter conformance and category-profile schemas, diagnostics, vectors, and verifier seams");
+    packageJson.exports?.["./adopter-conformance/category-profile-resolver"] !== `./${adopterCategoryProfileResolverPath}` ||
+    packageJson.exports?.["./adopter-conformance/category-instance-verifier"] !== `./${adopterCategoryInstanceVerifierPath}`) {
+  fail("package.json must expose adopter conformance, category-profile, and category-instance schemas, diagnostics, vectors, and verifier seams");
 }
 if (adopterConformanceIssueCodes.contract !== "kfd.adopter-conformance-issue-codes/v1" ||
     adopterConformanceVectors.contract !== "kfd.adopter-conformance-vectors/v1" ||
