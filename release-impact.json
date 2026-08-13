@@ -25,6 +25,12 @@
       "rationale": "KFD additively publishes a specification-authority adopter delivery adapter that verifies exact public Buildchain and prior KFD package bytes, rejects same-cut circular validation, preserves recursive Self-Conformance and adopter delivery as separate roots, and joins them without granting release authority, certification, or semantic authority transfer."
     },
     {
+      "id": "kfd-specification-authority-transition-contract",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD additively publishes a package-only specification-authority transition schema, verifier, and fixed positive and fail-closed vectors. Initial bootstrap binds an independently reviewed prior public KFD cut; subsequent changes require the exact prior cut and its verifier, declare changed candidate-generation, profile, schema, and verifier roots, reject circular current-cut authority, and grant no qualification, certification, release, truth, or authority-transfer claim."
+    },
+    {
       "id": "kfd-independent-verifier",
       "impact": "minor",
       "class": "additive",
