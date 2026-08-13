@@ -249,26 +249,47 @@ try {
       artifactRoot: currentManifest.kfdCut.package.artifactRoot,
     },
   };
+  const priorCutCandidate = {
+    ...candidate,
+    instanceId: "kungfu-systems/kfd@1.0.0-alpha.65",
+    version: "1.0.0-alpha.65",
+    artifact: coordinate(
+      "package",
+      "@kungfu-tech/kfd@1.0.0-alpha.65",
+      "next-candidate-package",
+    ),
+    release: coordinate(
+      "release",
+      "https://github.com/kungfu-systems/kfd/releases/tag/v1.0.0-alpha.65",
+      "next-candidate-release-passport",
+    ),
+  };
   const priorCutTransition = {
     ...specificationTransition,
-    transitionId: "kfd-alpha63-to-alpha64-delivery-prior-cut",
+    transitionId: "kfd-alpha64-to-alpha65-delivery-prior-cut",
     mode: "prior-cut",
     authority: {
       packageVersion: currentPackage.version,
       packageRoot: priorCutAuthorityPackages.kfd.artifactRoot,
       verifierRoot: candidateVerifierRoot,
     },
+    candidate: {
+      packageVersion: priorCutCandidate.version,
+      packageRoot: priorCutCandidate.artifact.root,
+      verifierRoot: candidateVerifierRoot,
+    },
     changedSurfaces: specificationTransition.changedSurfaces
       .filter(({ id }) => id !== "verifier")
       .map((surface) => ({
         ...surface,
-        beforeRoot: semanticRoot({ surface: surface.id, cut: "alpha63" }),
+        beforeRoot: semanticRoot({ surface: surface.id, cut: "alpha64" }),
+        afterRoot: semanticRoot({ surface: surface.id, cut: "alpha65" }),
       })),
     bootstrapAnchor: null,
   };
   const priorCut = await createPublishedKfdSpecificationAuthorityDelivery({
     authorityPackages: priorCutAuthorityPackages,
-    candidate,
+    candidate: priorCutCandidate,
     evidence: evidence(),
     recursiveSelfConformance,
     specificationTransition: priorCutTransition,
