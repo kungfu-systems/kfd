@@ -76,6 +76,12 @@ jobs:
       buildchain-contract-lock-path: ${{ startsWith(github.event.workflow_run.head_branch || inputs['target-ref'], 'alpha/') && 'buildchain.alpha-contract-lock.json' || 'buildchain.contract-lock.json' }}
       package-manager: custom
       artifact-name: kfd
+      artifact-patterns: |
+        kfd-x86_64-unknown-linux-gnu-*
+        kfd-aarch64-unknown-linux-gnu-*
+        kfd-x86_64-apple-darwin-*
+        kfd-aarch64-apple-darwin-*
+        kfd-x86_64-pc-windows-msvc-*
       release-candidate-workflow-file: build.yml
       release-candidate-workflow-name: Build
       required-status-check: "check / check"
