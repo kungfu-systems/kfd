@@ -32,7 +32,7 @@ package_set_order = "platforms-first-main-last"
 main_package = "@kungfu-tech/kfd"
 
 [lifecycle.install]
-command = "node -e \"console.log('kfd install: no dependencies')\""
+command = "npm ci --ignore-scripts"
 
 [lifecycle.build]
 command = "node -e \"console.log('kfd build: source package')\""
