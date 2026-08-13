@@ -903,6 +903,19 @@ if (JSON.stringify(independentImplementation?.steps?.map((entry) => entry.id)) !
     JSON.stringify(["scaffold", "test", "verify"])) {
   fail("site bundle independent implementation steps must remain scaffold, test, verify");
 }
+const nativeCli = independentImplementation?.nativeCli;
+if (
+  nativeCli?.installCommand !== "brew install kungfu-systems/tap/kfd" ||
+  nativeCli?.versionCommand !== "kfd --version" ||
+  nativeCli?.executable !== "kfd" ||
+  nativeCli?.requiresCoding !== false ||
+  JSON.stringify(nativeCli?.platforms) !== JSON.stringify(["macOS", "Linux"]) ||
+  JSON.stringify(nativeCli?.capabilities) !== JSON.stringify(["verify", "bundle"]) ||
+  !nativeCli?.capabilityBoundary?.includes("use the npm workflow above") ||
+  nativeCli?.docs?.url !== "https://github.com/kungfu-systems/kfd/blob/dev/v1/v1.0/docs/native-cli.md"
+) {
+  fail("site bundle independent implementation must expose the bounded native Homebrew install path");
+}
 const exactIndependentCommands = [
   `npx --yes --package @kungfu-tech/kfd@${packageJson.version} kfd scaffold agent-hub --language python --output my-agent-hub-adapter`,
   `npx --yes --package @kungfu-tech/kfd@${packageJson.version} kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json`,
@@ -933,6 +946,7 @@ if (!independentImplementation?.offlineBoundary?.includes("performs no network a
 for (const requiredField of [
   "independent-implementation.promise",
   "independent-implementation.supportedLanguages",
+  "independent-implementation.nativeCli",
   "independent-implementation.steps",
   "independent-implementation.links",
   "independent-implementation.offlineBoundary",

@@ -77,11 +77,21 @@ independent organization. [Open the complete Agent Hub guide](/agent-hub/) ·
 
 ### Native `kfd`
 
+Install the Rust-native offline verifier on macOS or Linux with Homebrew. No
+coding is required to install it or verify an existing KFD report:
+
+```bash
+brew install kungfu-systems/tap/kfd
+kfd --version
+```
+
 Each KFD GitHub Release now carries Rust-native archives for Linux x86_64 and
 arm64, macOS x86_64 and arm64, and Windows x86_64. The executable name is
 permanently `kfd` (`kfd.exe` on Windows), and `kfd --version` matches the exact
-KFD Release version. Every target includes a SHA-256 file and source-bound
-provenance. See [Native CLI downloads and capability boundaries](docs/native-cli.md).
+KFD Release version. The native CLI provides `verify` and `bundle`; use the npm
+workflow above when you need `scaffold` or `test` orchestration. Every target
+includes a SHA-256 file and source-bound provenance. See
+[Native CLI downloads and capability boundaries](docs/native-cli.md).
 
 ## Foundation triad
 

@@ -157,6 +157,22 @@ const parseIndependentImplementation = (markdown, capabilities, releaseAnchor) =
       url: match[2],
     }));
   if (links.length !== 2) throw new Error("independent implementation section must link /agent-hub/ and /verify/");
+  const nativeSection = markdown.match(/### Native `kfd`\n\n([\s\S]+)$/)?.[1] || "";
+  const nativeCommands = nativeSection.match(/```bash\n([\s\S]*?)\n```/)?.[1]
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean) || [];
+  if (JSON.stringify(nativeCommands) !== JSON.stringify([
+    "brew install kungfu-systems/tap/kfd",
+    "kfd --version",
+  ])) {
+    throw new Error("native kfd section must expose the exact Homebrew install and version commands");
+  }
+  const nativeBlocks = paragraphBlocks(nativeSection);
+  const nativeBoundary = nativeBlocks.find((block) => block.includes("use the npm workflow above"));
+  if (!nativeBoundary) {
+    throw new Error("native kfd section must preserve the npm orchestration capability boundary");
+  }
   return {
     label: "Implement and verify KFD independently",
     promise,
@@ -177,6 +193,21 @@ const parseIndependentImplementation = (markdown, capabilities, releaseAnchor) =
       { id: "test", label: "Test Hub 20", command: commands[1], capability: capabilities.commands.test },
       { id: "verify", label: "Verify offline", command: commands[2], capability: capabilities.commands.verify },
     ],
+    nativeCli: {
+      label: "Install the native kfd CLI",
+      summary: "No coding is required. Install the Rust-native offline verifier with one command.",
+      installCommand: nativeCommands[0],
+      versionCommand: nativeCommands[1],
+      executable: "kfd",
+      platforms: ["macOS", "Linux"],
+      requiresCoding: false,
+      capabilities: ["verify", "bundle"],
+      capabilityBoundary: nativeBoundary,
+      docs: {
+        label: "Native CLI downloads and capability boundaries",
+        url: "https://github.com/kungfu-systems/kfd/blob/dev/v1/v1.0/docs/native-cli.md",
+      },
+    },
     links,
     starterBoundary: boundary("deterministic, fail-closed starter", "independent implementation section must preserve the starter boundary"),
     offlineBoundary: boundary("Package acquisition is separate", "independent implementation section must preserve the offline boundary"),
@@ -1239,6 +1270,7 @@ export const buildSiteBundle = ({
             "self-conformance.readerModel.authorityBoundary",
             "independent-implementation.promise",
             "independent-implementation.supportedLanguages",
+            "independent-implementation.nativeCli",
             "independent-implementation.steps",
             "independent-implementation.links",
             "independent-implementation.offlineBoundary",
