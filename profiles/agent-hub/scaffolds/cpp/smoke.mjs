@@ -7,9 +7,17 @@ import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
 const root = path.dirname(fileURLToPath(import.meta.url));
-const compiler = process.env.CXX || (process.platform === "win32" ? "cl" : "c++");
+const compilerCandidates = process.env.CXX
+  ? [process.env.CXX]
+  : (process.platform === "win32" ? ["cl", "clang++", "g++"] : ["c++"]);
+const compiler = compilerCandidates.find((candidate) => {
+  const isMsvc = /(?:^|[\\/])(?:cl|clang-cl)(?:\.exe)?$/iu.test(candidate);
+  return !spawnSync(candidate, [isMsvc ? "/?" : "--version"], { stdio: "ignore" }).error;
+});
+assert.ok(compiler, `no C++ compiler found; tried ${compilerCandidates.join(", ")}`);
+const isMsvc = /(?:^|[\\/])(?:cl|clang-cl)(?:\.exe)?$/iu.test(compiler);
 const executable = path.join(os.tmpdir(), `kfd-agent-hub-cpp-smoke-${process.pid}${process.platform === "win32" ? ".exe" : ""}`);
-const compileArgs = process.platform === "win32"
+const compileArgs = isMsvc
   ? ["/std:c++17", path.join(root, "adapter.cpp"), `/Fe:${executable}`]
   : ["-std=c++17", path.join(root, "adapter.cpp"), "-o", executable];
 const compiled = spawnSync(compiler, compileArgs, { encoding: "utf8" });
