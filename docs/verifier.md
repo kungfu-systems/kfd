@@ -25,6 +25,11 @@ claim that a passing object satisfies the checks enumerated by that profile.
 
 ## Command surface
 
+The Rust-native binary implements the offline `verify` and `bundle` commands
+shown below. Commands such as `gate`, `scaffold`, and `test` are supplied by the
+npm host and are not native-binary capabilities. See
+[Native CLI downloads](native-cli.md) for platform assets and checksums.
+
 ```text
 kfd verify kfd-record <json-file> [--schema <schema-file>] [--json]
 kfd verify passport <file-or-directory> [--json]
@@ -33,12 +38,12 @@ kfd verify atlas <file-or-directory> [--json]
 kfd verify episode <directory> [--json]
 kfd verify agent-runtime-report <report.json> [--json]
 kfd verify self-conformance-transition <transition-bundle.json> [--json]
-kfd gate self-conformance-lifecycle <request.json> --output <report.json> [--json]
 kfd bundle <kind> <file-or-directory> --output <bundle.json>
 kfd verify bundle <bundle.json> [--json]
 ```
 
-`npx @kungfu-tech/kfd` uses the packaged WebAssembly projection. Native and
+`npx @kungfu-tech/kfd` provides the broader host command surface and uses the
+packaged WebAssembly projection for shared verification operations. Native and
 WebAssembly verification consume the same
 `kfd.verification-bundle/v1` input and emit the same
 `kfd.verification-report/v1` JSON bytes.

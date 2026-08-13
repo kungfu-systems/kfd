@@ -13,6 +13,7 @@ import {
 } from "./warrant-evidence-verifier.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";
 const manifest = JSON.parse(fs.readFileSync(path.join(root, "profiles/warrant-evidence/manifest.json"), "utf8"));
 const registry = JSON.parse(fs.readFileSync(path.join(root, "evidence/primitive-evidence/registry.json"), "utf8"));
 const vectors = JSON.parse(fs.readFileSync(path.join(root, "profiles/warrant-evidence/vectors/kfd-10.json"), "utf8"));
@@ -31,6 +32,7 @@ function run(command, args, options = {}) {
     cwd: options.cwd ?? root,
     encoding: "utf8",
     env: { ...process.env, npm_config_offline: "true", ...options.env },
+    shell: process.platform === "win32" && command === npmCommand,
   });
   assert.equal(
     result.status,
@@ -159,7 +161,7 @@ for (const [alias, target] of Object.entries({
 
 const temporary = fs.mkdtempSync(path.join(os.tmpdir(), "kfd-warrant-evidence-"));
 try {
-  const dryRun = JSON.parse(run("npm", ["pack", "--json", "--dry-run", "--ignore-scripts"]));
+  const dryRun = JSON.parse(run(npmCommand, ["pack", "--json", "--dry-run", "--ignore-scripts"]));
   const packaged = new Set(dryRun[0].files.map(({ path: filePath }) => filePath));
   for (const required of [
     "bin/kfd.mjs",
@@ -184,7 +186,7 @@ try {
     assert.equal(filePath.includes(".git/"), false, `package leaked ${filePath}`);
   }
 
-  const packed = JSON.parse(run("npm", ["pack", "--json", "--ignore-scripts", "--pack-destination", temporary]));
+  const packed = JSON.parse(run(npmCommand, ["pack", "--json", "--ignore-scripts", "--pack-destination", temporary]));
   const tarball = path.join(temporary, packed[0].filename);
   run("tar", ["-xzf", tarball, "-C", temporary]);
   const packageDir = path.join(temporary, "package");

@@ -15,6 +15,16 @@ type = "json"
 path = "package.json"
 key = "version"
 
+[[version.files]]
+type = "json"
+path = "kfd.release.json"
+key = "npmVersion"
+
+[[version.files]]
+type = "toml"
+path = "verifier/Cargo.toml"
+key = "workspace.package.version"
+
 [publish]
 mode = "publish-final-version"
 auth = "trusted-publishing"

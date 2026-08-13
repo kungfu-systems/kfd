@@ -22,7 +22,7 @@
       "id": "kfd-independent-verifier",
       "impact": "minor",
       "class": "additive",
-      "rationale": "KFD additively publishes an independently extractable Rust verifier core, native CLI, raw WebAssembly projection, and npm bin for KFD records, Buildchain release passports, Xinfa Context Packs, Xinfa Atlases, qualified Git Workspace Episode shadows, rooted Agent runtime conformance reports, and Self-Conformance transition bundles. The verifier uses only packaged public schemas and specifications, performs no network access, and remains explicitly non-qualifying and non-self-certified."
+      "rationale": "KFD additively publishes an independently extractable Rust verifier core, stable native kfd CLI, raw WebAssembly projection, and npm bin for KFD records, Buildchain release passports, Xinfa Context Packs, Xinfa Atlases, qualified Git Workspace Episode shadows, rooted Agent runtime conformance reports, and Self-Conformance transition bundles. Each GitHub Release carries five platform-native archives with per-target checksums and source/version provenance. The native binary implements the offline verify and bundle subset; broader orchestration remains npm-host-only. The verifier uses only packaged public schemas and specifications, performs no network access, and remains explicitly non-qualifying and non-self-certified."
     },
     {
       "id": "kfd-verifier-contracts",
