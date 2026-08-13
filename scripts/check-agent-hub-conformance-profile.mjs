@@ -13,7 +13,7 @@ const sha256 = (bytes) => `sha256:${crypto.createHash("sha256").update(bytes).di
 const read = (file) => fs.readFileSync(path.join(root, file));
 const json = (file) => JSON.parse(read(file));
 function run(command, args, expected = 0, cwd = root) {
-  const result = spawnSync(command, args, { cwd, encoding: "utf8" });
+  const result = spawnSync(command, args, { cwd, encoding: "utf8", shell: process.platform === "win32" && command === npmCommand });
   assert.equal(result.status, expected, `${command} ${args.join(" ")}\nstdout:\n${result.stdout}\nstderr:\n${result.stderr}`);
   return result.stdout.trim();
 }

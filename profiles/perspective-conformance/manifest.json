@@ -15,7 +15,7 @@
     { "path": "profiles/perspective-conformance/vectors.json", "role": "fixed-vectors", "sha256": "1899428a2335071b38db586cc10d67238ac75c034d22b6092be91f4d14e1fb0d" },
     { "path": "profiles/perspective-conformance/issue-codes.json", "role": "stable-diagnostics", "sha256": "3688f98282d6f3d25c4b27061bf3e909adc10aa6df55a04713781c8f0c957ea7" },
     { "path": "verifier/crates/core/src/profiles/kfd_record.rs", "role": "native-wasm-core", "sha256": "21bdf365e46793cfd62282b1f274638c2232f2cb3dfa403cb868fdf4d18241fb" },
-    { "path": "scripts/check-perspective-conformance.mjs", "role": "parity-and-drift-check", "sha256": "f64c671d4526e8d1352d2b721e902aa8e84e50de4b3c77964352c508c5e20619" }
+    { "path": "scripts/check-perspective-conformance.mjs", "role": "parity-and-drift-check", "sha256": "4d2636d5d68d5e5cd7162393c12bf073af9bb843f51bc3afd23f397753e5bfed" }
   ],
   "claimBoundary": "A pass proves only the packaged structural and declared cross-field invariants. It does not activate KFD-8, qualify an adopter, infer authority or direction, certify completeness, or establish current validity."
 }

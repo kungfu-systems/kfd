@@ -13,7 +13,7 @@ const reportPath = "profiles/self-conformance/history/historical-lineage.report.
 const report = JSON.parse(fs.readFileSync(path.join(root, reportPath), "utf8"));
 const exactRoot = (relative, base = root) => `sha256:${crypto.createHash("sha256").update(fs.readFileSync(path.join(base, relative))).digest("hex")}`;
 const run = (command, args, expected = 0, cwd = root, env = {}) => {
-  const result = spawnSync(command, args, { cwd, encoding: "utf8", env: { ...process.env, npm_config_offline: "true", ...env } });
+  const result = spawnSync(command, args, { cwd, encoding: "utf8", env: { ...process.env, npm_config_offline: "true", ...env }, shell: process.platform === "win32" && command === npmCommand });
   assert.equal(result.status, expected, `${command} ${args.join(" ")}\n${result.stderr}\n${result.stdout}`);
   return result.stdout.trim();
 };

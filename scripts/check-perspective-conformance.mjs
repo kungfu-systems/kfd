@@ -111,7 +111,7 @@ if (process.env.KFD_PERSPECTIVE_SKIP_EXTRACTION !== "1") {
     const packed = spawnSync(
       npmCommand,
       ["pack", "--ignore-scripts", "--json", "--pack-destination", extraction],
-      { cwd: root, encoding: "utf8" },
+      { cwd: root, encoding: "utf8", shell: process.platform === "win32" },
     );
     assert.equal(packed.status, 0, `clean package creation failed\n${packed.stderr}`);
     const [{ filename }] = JSON.parse(packed.stdout);

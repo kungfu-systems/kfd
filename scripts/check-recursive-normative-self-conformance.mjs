@@ -46,6 +46,7 @@ function run(command, args, options = {}) {
     cwd: options.cwd ?? root,
     encoding: "utf8",
     env: { ...process.env, npm_config_offline: "true" },
+    shell: process.platform === "win32" && command === npmCommand,
   });
   assert.equal(
     result.status,
