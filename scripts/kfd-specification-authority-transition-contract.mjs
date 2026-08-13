@@ -161,7 +161,9 @@ export function verifyKfdSpecificationAuthorityTransition(manifest, context = {}
 
   if (manifest.mode === "bootstrap") {
     if (!exactObject(manifest.bootstrapAnchor, ["packageVersion", "packageRoot", "reviewRoot"])
-      || !same(manifest.bootstrapAnchor, context.bootstrapAnchor)) {
+      || !same(manifest.bootstrapAnchor, context.bootstrapAnchor)
+      || manifest.bootstrapAnchor?.packageVersion !== manifest.authority?.packageVersion
+      || manifest.bootstrapAnchor?.packageRoot !== manifest.authority?.packageRoot) {
       issue(report, "ksat-bootstrap-anchor-mismatch", "/bootstrapAnchor", "Initial transition bootstrap must bind the reviewed prior public KFD anchor.");
     } else {
       report.bootstrap = true;

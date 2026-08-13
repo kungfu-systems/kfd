@@ -6,7 +6,11 @@ import { pathToFileURL } from "node:url";
 
 import { withPublishedBuildchainDeliveryAuthority } from "@kungfu-tech/buildchain/published-delivery-authority";
 
-import { semanticRoot } from "./self-conformance-contract.mjs";
+import {
+  exactByteRoot,
+  semanticRoot,
+} from "./self-conformance-contract.mjs";
+import { verifyKfdSpecificationAuthorityTransition } from "./kfd-specification-authority-transition-contract.mjs";
 
 export const KFD_SPECIFICATION_AUTHORITY_DELIVERY_CONTRACT =
   "kfd.specification-authority-delivery/v1";
@@ -122,6 +126,15 @@ async function loadPublishedKfdRuntime(temporaryRoot) {
     roots: resolve("@kungfu-tech/kfd/scripts/self-conformance-contract.mjs"),
     catalog: resolve("@kungfu-tech/kfd/adopter-conformance/category-profiles.json"),
   };
+  let transitionVerifierPath = null;
+  try {
+    transitionVerifierPath = resolve(
+      "@kungfu-tech/kfd/adopter-conformance/specification-authority-transition",
+    );
+  } catch (error) {
+    if (error?.code !== "ERR_PACKAGE_PATH_NOT_EXPORTED"
+      && error?.code !== "MODULE_NOT_FOUND") throw error;
+  }
   const [toolchain, profileResolver, instanceVerifier, roots, packageJson, catalog] =
     await Promise.all([
       import(pathToFileURL(modulePaths.toolchain).href),
@@ -131,6 +144,9 @@ async function loadPublishedKfdRuntime(temporaryRoot) {
       readFile(packageJsonPath, "utf8").then(JSON.parse),
       readFile(modulePaths.catalog, "utf8").then(JSON.parse),
     ]);
+  const publishedTransitionVerifier = transitionVerifierPath
+    ? await import(pathToFileURL(transitionVerifierPath).href)
+    : null;
   const functions = {
     initAdopterManifest: toolchain.initAdopterManifest,
     verifyAdopterManifestFromPackage:
@@ -148,10 +164,35 @@ async function loadPublishedKfdRuntime(temporaryRoot) {
   }
   return {
     ...functions,
+    verifySpecificationAuthorityTransition:
+      publishedTransitionVerifier?.verifyKfdSpecificationAuthorityTransition ?? null,
     packageJson,
     packageRoot: path.dirname(packageJsonPath),
     catalog,
+    categoryInstanceVerifierRoot: exactByteRoot(
+      await readFile(modulePaths.instanceVerifier),
+    ),
+    specificationTransitionVerifierRoot: transitionVerifierPath
+      ? exactByteRoot(await readFile(transitionVerifierPath))
+      : null,
   };
+}
+
+function requireTransitionEvidence(evidence, transition) {
+  const expected = {
+    declaration: transition.evidence?.declarationRoot,
+    review: transition.evidence?.reviewRoot,
+    verification: transition.evidence?.verificationRoot,
+  };
+  for (const [kind, root] of Object.entries(expected)) {
+    if (!evidence.some((entry) => entry.requirementId === "specification-transition"
+      && entry.kind === kind
+      && entry.root === root)) {
+      throw new Error(
+        `specification-transition ${kind} evidence must bind the transition manifest`,
+      );
+    }
+  }
 }
 
 function materializeInstance({
@@ -229,6 +270,8 @@ export async function createPublishedKfdSpecificationAuthorityDelivery({
   candidate,
   evidence = [],
   recursiveSelfConformance,
+  specificationTransition,
+  transitionBootstrapAnchor = null,
   verifiedAt,
   maxAgeSeconds = 86400,
 } = {}) {
@@ -245,6 +288,10 @@ export async function createPublishedKfdSpecificationAuthorityDelivery({
   }
   const recursive = exactRecursiveSelfConformance(recursiveSelfConformance);
   const suppliedEvidence = evidence.map(exactEvidence);
+  requireTransitionEvidence(suppliedEvidence, specificationTransition ?? {});
+  const candidateTransitionVerifierRoot = exactByteRoot(
+    await readFile(new URL("./kfd-specification-authority-transition-contract.mjs", import.meta.url)),
+  );
   const verificationTime = requireText(verifiedAt, "verifiedAt");
   if (!Number.isFinite(Date.parse(verificationTime))) {
     throw new TypeError("verifiedAt must be a date-time");
@@ -263,6 +310,44 @@ export async function createPublishedKfdSpecificationAuthorityDelivery({
       ) {
         throw new Error(
           "KFD specification authority delivery requires an independent older KFD semantic cut",
+        );
+      }
+      if (specificationTransition?.candidate?.packageVersion !== version
+        || specificationTransition?.candidate?.packageRoot !== artifact.root
+        || specificationTransition?.candidate?.verifierRoot !== candidateTransitionVerifierRoot) {
+        throw new Error(
+          "specification transition must bind the exact candidate package and verifier bytes",
+        );
+      }
+      const priorCutMode = specificationTransition?.mode === "prior-cut";
+      if (priorCutMode
+        && (typeof kfdRuntime.verifySpecificationAuthorityTransition !== "function"
+          || !kfdRuntime.specificationTransitionVerifierRoot)) {
+        throw new Error(
+          "prior-cut transition requires the published authority KFD transition verifier",
+        );
+      }
+      const authorityVerifierRoot = priorCutMode
+        ? kfdRuntime.specificationTransitionVerifierRoot
+        : kfdRuntime.categoryInstanceVerifierRoot;
+      const transitionContext = {
+        authorityPackageVersion: packages.kfd.version,
+        authorityPackageRoot: packages.kfd.artifactRoot,
+        authorityVerifierRoot,
+        bootstrapAnchor: transitionBootstrapAnchor,
+        transitionVerifierPackageVersion: priorCutMode ? packages.kfd.version : null,
+        transitionVerifierPackageRoot: priorCutMode ? packages.kfd.artifactRoot : null,
+        transitionVerifierRoot: priorCutMode ? authorityVerifierRoot : null,
+      };
+      const transitionReport = (priorCutMode
+        ? kfdRuntime.verifySpecificationAuthorityTransition
+        : verifyKfdSpecificationAuthorityTransition)(
+        specificationTransition,
+        transitionContext,
+      );
+      if (!transitionReport.valid) {
+        throw new Error(
+          `KFD specification transition failed closed: ${JSON.stringify(transitionReport.issues)}`,
         );
       }
       const adopterManifest = kfdRuntime.initAdopterManifest({
@@ -371,6 +456,8 @@ export async function createPublishedKfdSpecificationAuthorityDelivery({
         contract: KFD_SPECIFICATION_AUTHORITY_RELEASE_JOIN_CONTRACT,
         candidate: { package: artifact, release },
         recursiveSelfConformanceRoot: recursive.root,
+        specificationTransitionRoot: transitionReport.transitionRoot,
+        specificationTransitionReportRoot: transitionReport.reportRoot,
         adopterDeliveryGateRoot: gateResult.gateRoot,
         authorityRoot,
       };
@@ -386,6 +473,14 @@ export async function createPublishedKfdSpecificationAuthorityDelivery({
         },
         candidate: { instanceId, version, source, artifact, release },
         recursiveSelfConformance: recursive,
+        specificationTransition: {
+          authorityMode: priorCutMode
+            ? "published-prior-cut-verifier"
+            : "reviewed-bootstrap-anchor",
+          candidateVerifierRoot: candidateTransitionVerifierRoot,
+          manifest: structuredClone(specificationTransition),
+          report: transitionReport,
+        },
         adopterManifest,
         adopterReport,
         instanceManifest,
@@ -394,6 +489,8 @@ export async function createPublishedKfdSpecificationAuthorityDelivery({
         deliveryJoin,
         roots: {
           recursiveSelfConformance: recursive.root,
+          specificationTransition: transitionReport.transitionRoot,
+          specificationTransitionReport: transitionReport.reportRoot,
           adopterManifest: kfdRuntime.semanticRoot(adopterManifest),
           instanceManifest: kfdRuntime.semanticRoot(instanceManifest),
           instanceReport: instanceReport.reportRoot,
