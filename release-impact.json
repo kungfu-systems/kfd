@@ -19,6 +19,12 @@
       "rationale": "KFD additively publishes the package-only kfd.adopter-conformance-manifest/v1 schema and normative contract. It binds an adopter to one exact package, registry, standards, schema, vector, verifier, and complete decision cut; separates adopted, candidate, draft-evidence, unsupported, and not-used declarations; binds decision-specific witnesses and release passports; and explicitly grants no runtime, release, semantic-truth, activation, or certification authority."
     },
     {
+      "id": "kfd-specification-authority-delivery-gate",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD additively publishes a specification-authority adopter delivery adapter that verifies exact public Buildchain and prior KFD package bytes, rejects same-cut circular validation, preserves recursive Self-Conformance and adopter delivery as separate roots, and joins them without granting release authority, certification, or semantic authority transfer."
+    },
+    {
       "id": "kfd-independent-verifier",
       "impact": "minor",
       "class": "additive",
