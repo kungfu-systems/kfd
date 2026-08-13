@@ -17,6 +17,19 @@ KFD publishes a Rust-native executable named `kfd` for every supported desktop
 target. The name is stable across upgrades: POSIX archives contain `kfd`, and
 Windows archives contain `kfd.exe`.
 
+## Install with Homebrew
+
+On macOS or Linux, install the native CLI from the Kungfu Systems tap:
+
+```sh
+brew install kungfu-systems/tap/kfd
+kfd --version
+```
+
+No coding is required to install the CLI or use it to verify an existing KFD
+report. Homebrew selects the native archive for arm64 or x86_64 and keeps the
+user-facing executable name `kfd` across upgrades.
+
 ## Download and verify
 
 Choose the archive for your operating system and architecture from the matching
