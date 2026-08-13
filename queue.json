@@ -3,7 +3,7 @@
   "contract": "kungfu-buildchain-dev-delivery-warrant-queue",
   "repository": "kungfu-systems/kfd",
   "protectedBase": "dev/v1/v1.0",
-  "generation": 95,
+  "generation": 96,
   "fencingCounter": 26,
   "policy": {
     "agingSeconds": 900,
@@ -974,8 +974,42 @@
         "verifier/dist/kfd_verifier_current.wasm",
         "verifier/dist/kfd_verifier_current.wasm.sha256"
       ]
+    },
+    {
+      "repository": "kungfu-systems/kfd",
+      "protectedBase": "dev/v1/v1.0",
+      "pullRequestNumber": 395,
+      "assignmentRoot": "sha256:f6b88d8f9e234ac5707b793e66369229380b2d15bceb543aca8c81eb6e4898f6",
+      "initiativeRoot": "sha256:d920566acb73fa2c94c5bf97965334ea3d22df942b0035da580c66ab0f572f73",
+      "sourceIdentityRoot": "sha256:7a8540feb367f8e6ef7d18f64942d66487049efd4f4b0abb54181971d27f1d7d",
+      "deliveryClass": "native-proof-required",
+      "candidateId": "sha256:b2728decc9f27d427fe20ec66816b827423b1883fceb09802f2e3e50a08c2238",
+      "sourceHead": "d84138366d66ff180b5bd40a00bc0780e65c6f9c",
+      "sourcePatchRoot": "sha256:bbf70346293e654aad08d46dc251c393f226c1899c0a6a2de9c89c5be1466b9d",
+      "sourceProofRoot": "sha256:eb93502585fedb437dea3627505def8d19f10bbac69f02e4b6e4d0297e31e57d",
+      "planRoot": "sha256:d3673a4e58235af2fd76e99b1c0fb773d1082b88cd916ab97e0f5d6979924f34",
+      "closureRoot": "sha256:46cb70750a8db017d24a1cfb19c82c9ff54bfdabbbab35a72a3eb5cbf41a6a5d",
+      "dependencyRoot": "sha256:109ff396ecd9b77257d184ce788dfcf84bc6f0ad28192a7457116c4d164ef146",
+      "toolchainRoot": "sha256:a62ebc5b51967ba7c991e63c8278f53d9c42aa2fa4f789d657c5271bac6555ac",
+      "environmentRoot": "sha256:08ec2ea2123efbcce748e7c1985740bf633119dfe5578389e6e5db4bdd813af2",
+      "sourceWorkflowRunId": 0,
+      "priority": "expedited",
+      "enqueuedAt": "2026-08-13T01:29:36.659Z",
+      "updatedAt": "2026-08-13T01:29:36.659Z",
+      "attempts": 1,
+      "recoveries": 0,
+      "status": "queued",
+      "terminal": null,
+      "affectedPaths": [
+        ".buildchain/kfd-1/contract-world.witness.json",
+        ".buildchain/kfd-2/public-release-trust.claim.json",
+        ".buildchain/kfd-3/collaboration-interface.artifact.json",
+        ".buildchain/kfd-3/collaboration-interface.prebuild.json",
+        ".github/workflows/buildchain-ref-promotion.yml",
+        "profiles/adopter-conformance/adopters/kfd/manifest.json"
+      ]
     }
   ],
-  "updatedAt": "2026-08-13T00:51:49.105Z",
-  "stateRoot": "sha256:24f7552221815462ae85331a39fc5814b22adf98579accdb22a822162b7bc03f"
+  "updatedAt": "2026-08-13T01:29:36.659Z",
+  "stateRoot": "sha256:73d63b5e2169b25e63a67488e68a67bc8ddcd8d125fc99eb6c477706d23419af"
 }
