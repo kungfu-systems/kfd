@@ -17,6 +17,7 @@ import {
 } from "./self-conformance-lifecycle-gate.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";
 const extracted = process.argv.includes("--extracted");
 const write = process.argv.includes("--write");
 const readJson = (relative, base = root) => JSON.parse(fs.readFileSync(path.join(base, relative), "utf8"));
@@ -356,10 +357,10 @@ if (!extracted && !write) {
   const uniqueFiles = [...new Set(cleanRoomFiles)].sort();
   const temporary = fs.mkdtempSync(path.join(os.tmpdir(), "kfd-recursive-clean-room-"));
   try {
-    const dryRun = JSON.parse(run("npm", ["pack", "--json", "--dry-run", "--ignore-scripts"]));
+    const dryRun = JSON.parse(run(npmCommand, ["pack", "--json", "--dry-run", "--ignore-scripts"]));
     const packaged = new Set(dryRun[0].files.map(({ path: relative }) => relative));
     for (const relative of uniqueFiles) assert.equal(packaged.has(relative), true, `package missing ${relative}`);
-    const packed = JSON.parse(run("npm", ["pack", "--json", "--ignore-scripts", "--pack-destination", temporary]));
+    const packed = JSON.parse(run(npmCommand, ["pack", "--json", "--ignore-scripts", "--pack-destination", temporary]));
     run("tar", ["-xzf", path.join(temporary, packed[0].filename), "-C", temporary]);
     const packageRoot = path.join(temporary, "package");
     const cleanRoot = path.join(temporary, "clean-room");

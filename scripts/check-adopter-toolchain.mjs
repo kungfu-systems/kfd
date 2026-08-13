@@ -8,6 +8,7 @@ import { fileURLToPath } from "node:url";
 import { semanticRoot } from "./self-conformance-contract.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";
 const packageArtifactRoot = "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
 const adopterArtifactRoot = "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
 const witnessRoot = "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc";
@@ -149,7 +150,7 @@ if (process.env.KFD_ADOPTER_TOOLCHAIN_SKIP_EXTRACTION !== "1") {
   const extraction = fs.mkdtempSync(path.join(os.tmpdir(), "kfd-adopter-toolchain-package-"));
   try {
     const packed = spawnSync(
-      "npm",
+      npmCommand,
       ["pack", "--ignore-scripts", "--json", "--pack-destination", extraction],
       { cwd: root, encoding: "utf8" },
     );
