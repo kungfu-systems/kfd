@@ -419,7 +419,7 @@
     {
       "id": "doc:readme",
       "sourcePath": "README.md",
-      "sha256": "5e4d594ea3b8c929a5cbdff1aef42d13089d78ebfbd680bc72418d647a356e63"
+      "sha256": "5c8681ea753f207d51a53472298faaede8bf07bcc64da6747bc71e9b2fcc7fe0"
     },
     {
       "id": "doc:contributing",
@@ -1353,12 +1353,12 @@
     {
       "id": "metadata:release-impact",
       "sourcePath": "release-impact.json",
-      "sha256": "f85cd1490569e410b7d925e7801010810f1a4252098e70c7f740c56e78f7e4b9"
+      "sha256": "4cf509c2bf1efd472e2059d10da24ba2c2ad4faa23e10993827bf3f2f32999a6"
     },
     {
       "id": "metadata:release-anchor",
       "sourcePath": "kfd.release.json",
-      "sha256": "a08858f0a21ca53bc2a77952450b14c395c6fa82539064d99659f513aac56585"
+      "sha256": "952fc0f331d53528d9de156bcba8d5152536e7fc2c88503d2818f21ae9ea2789"
     },
     {
       "id": "metadata:kfd-7-activation-evidence",
@@ -1378,7 +1378,7 @@
     {
       "id": "metadata:kfd-2-public-release-trust-claim",
       "sourcePath": ".buildchain/kfd-2/public-release-trust.claim.json",
-      "sha256": "8048086b4412bbe3aa0e13a7d24bfbaafe2684d7e001ac3055f0ddd8b4692e16"
+      "sha256": "53a48545ff0218316e8cde10446b2c80e5f5754f04638b337d2d99fdc14320b4"
     },
     {
       "id": "metadata:kfd-2-foundation-trust-claims",
@@ -1395,19 +1395,19 @@
     {
       "id": "export:package-json",
       "sourcePath": "package.json#exports",
-      "sha256": "783e5405a594decd051db2810856126822625f6efd002a198f41101989e093f2"
+      "sha256": "7ce981a170664e44d75b9773d1a5078a240f3af207b5fff47b05ae81f08f4143"
     },
     {
       "id": "export:npm-files",
       "sourcePath": "package.json#files",
-      "sha256": "783e5405a594decd051db2810856126822625f6efd002a198f41101989e093f2"
+      "sha256": "7ce981a170664e44d75b9773d1a5078a240f3af207b5fff47b05ae81f08f4143"
     }
   ],
   "siteConsumptionContracts": [
     {
       "id": "site:kfd-site-bundle",
       "sourcePath": "site/kfd-site.json",
-      "sha256": "3a5684812a91f77aa551d4db2a4679e5f04b0845ff52f7732d52d24059c0bfb3"
+      "sha256": "206cde0e272b0356e160b758b02d264b7e3329437868753be81f06671eee51a0"
     },
     {
       "id": "site:release-propagation",
@@ -1419,7 +1419,7 @@
     "minimalEntrypoints": [
       {
         "path": "README.md",
-        "sha256": "5e4d594ea3b8c929a5cbdff1aef42d13089d78ebfbd680bc72418d647a356e63",
+        "sha256": "5c8681ea753f207d51a53472298faaede8bf07bcc64da6747bc71e9b2fcc7fe0",
         "description": "Start from the KFD worldview and current decision set."
       },
       {
@@ -1489,17 +1489,17 @@
       },
       {
         "path": "package.json#exports",
-        "sha256": "783e5405a594decd051db2810856126822625f6efd002a198f41101989e093f2",
+        "sha256": "7ce981a170664e44d75b9773d1a5078a240f3af207b5fff47b05ae81f08f4143",
         "description": "Consume the shipped npm package surfaces."
       },
       {
         "path": "kfd.release.json",
-        "sha256": "a08858f0a21ca53bc2a77952450b14c395c6fa82539064d99659f513aac56585",
+        "sha256": "952fc0f331d53528d9de156bcba8d5152536e7fc2c88503d2818f21ae9ea2789",
         "description": "Inspect the explicit KFD package version anchor for the current Buildchain release line."
       },
       {
         "path": ".buildchain/kfd-2/public-release-trust.claim.json",
-        "sha256": "8048086b4412bbe3aa0e13a7d24bfbaafe2684d7e001ac3055f0ddd8b4692e16",
+        "sha256": "53a48545ff0218316e8cde10446b2c80e5f5754f04638b337d2d99fdc14320b4",
         "description": "Inspect the explicit public KFD-2 claim passed into Buildchain release passport generation."
       },
       {
@@ -1514,14 +1514,14 @@
       },
       {
         "path": "site/kfd-site.json",
-        "sha256": "3a5684812a91f77aa551d4db2a4679e5f04b0845ff52f7732d52d24059c0bfb3",
+        "sha256": "206cde0e272b0356e160b758b02d264b7e3329437868753be81f06671eee51a0",
         "description": "Render KFD-owned homepage, foundation explanation, formal references, historical and live cases, and decision pages without duplicating extraction logic."
       }
     ],
     "discoverability": [
       {
         "path": "README.md",
-        "sha256": "5e4d594ea3b8c929a5cbdff1aef42d13089d78ebfbd680bc72418d647a356e63",
+        "sha256": "5c8681ea753f207d51a53472298faaede8bf07bcc64da6747bc71e9b2fcc7fe0",
         "description": "Human and agent entrypoint"
       },
       {
@@ -1596,7 +1596,7 @@
       },
       {
         "path": ".buildchain/kfd-2/public-release-trust.claim.json",
-        "sha256": "8048086b4412bbe3aa0e13a7d24bfbaafe2684d7e001ac3055f0ddd8b4692e16",
+        "sha256": "53a48545ff0218316e8cde10446b2c80e5f5754f04638b337d2d99fdc14320b4",
         "description": "KFD-2 public release trust claim"
       },
       {
@@ -1611,19 +1611,19 @@
       },
       {
         "path": "package.json",
-        "sha256": "783e5405a594decd051db2810856126822625f6efd002a198f41101989e093f2",
+        "sha256": "7ce981a170664e44d75b9773d1a5078a240f3af207b5fff47b05ae81f08f4143",
         "description": "Package export map"
       },
       {
         "path": "site/kfd-site.json",
-        "sha256": "3a5684812a91f77aa551d4db2a4679e5f04b0845ff52f7732d52d24059c0bfb3",
+        "sha256": "206cde0e272b0356e160b758b02d264b7e3329437868753be81f06671eee51a0",
         "description": "Site content projection"
       }
     ],
     "valueEvidence": [
       {
         "path": "README.md",
-        "sha256": "5e4d594ea3b8c929a5cbdff1aef42d13089d78ebfbd680bc72418d647a356e63",
+        "sha256": "5c8681ea753f207d51a53472298faaede8bf07bcc64da6747bc71e9b2fcc7fe0",
         "description": "KFD-3 value evidence for kfd-foundation: KFD helps humans and agents understand the KFD Foundation and inspect precise non-normative formal references before adopting or extending KFD decisions."
       },
       {
@@ -1723,7 +1723,7 @@
       },
       {
         "path": "site/kfd-site.json",
-        "sha256": "3a5684812a91f77aa551d4db2a4679e5f04b0845ff52f7732d52d24059c0bfb3",
+        "sha256": "206cde0e272b0356e160b758b02d264b7e3329437868753be81f06671eee51a0",
         "description": "KFD-3 value evidence for kfd-foundation: KFD helps humans and agents understand the KFD Foundation and inspect precise non-normative formal references before adopting or extending KFD decisions."
       },
       {
@@ -1748,7 +1748,7 @@
       },
       {
         "path": "package.json#exports",
-        "sha256": "783e5405a594decd051db2810856126822625f6efd002a198f41101989e093f2",
+        "sha256": "7ce981a170664e44d75b9773d1a5078a240f3af207b5fff47b05ae81f08f4143",
         "description": "KFD-3 value evidence for kfd-machine-consumption: KFD gives agents and release systems machine-readable standards, schemas, package exports, and witnesses so they can consume KFD without relying on private context."
       },
       {
@@ -1900,14 +1900,14 @@
       },
       {
         "path": "site/kfd-site.json",
-        "sha256": "3a5684812a91f77aa551d4db2a4679e5f04b0845ff52f7732d52d24059c0bfb3",
+        "sha256": "206cde0e272b0356e160b758b02d264b7e3329437868753be81f06671eee51a0",
         "description": "Site rendering boundary"
       }
     ],
     "choicePaths": [
       {
         "path": "README.md",
-        "sha256": "5e4d594ea3b8c929a5cbdff1aef42d13089d78ebfbd680bc72418d647a356e63",
+        "sha256": "5c8681ea753f207d51a53472298faaede8bf07bcc64da6747bc71e9b2fcc7fe0",
         "description": "Human reading path"
       },
       {
@@ -1962,7 +1962,7 @@
       },
       {
         "path": ".buildchain/kfd-2/public-release-trust.claim.json",
-        "sha256": "8048086b4412bbe3aa0e13a7d24bfbaafe2684d7e001ac3055f0ddd8b4692e16",
+        "sha256": "53a48545ff0218316e8cde10446b2c80e5f5754f04638b337d2d99fdc14320b4",
         "description": "Agent release trust claim path"
       },
       {
@@ -1977,7 +1977,7 @@
       },
       {
         "path": "package.json",
-        "sha256": "783e5405a594decd051db2810856126822625f6efd002a198f41101989e093f2",
+        "sha256": "7ce981a170664e44d75b9773d1a5078a240f3af207b5fff47b05ae81f08f4143",
         "description": "Package consumption path"
       }
     ],

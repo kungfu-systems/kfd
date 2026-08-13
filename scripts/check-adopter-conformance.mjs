@@ -12,6 +12,7 @@ import {
 import { exactByteRoot, semanticRoot } from "./self-conformance-contract.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";
 const profileRoot = path.join(root, "profiles", "adopter-conformance");
 const vectors = JSON.parse(fs.readFileSync(path.join(profileRoot, "vectors.json"), "utf8"));
 const issueCodes = JSON.parse(fs.readFileSync(path.join(profileRoot, "issue-codes.json"), "utf8"));
@@ -171,9 +172,9 @@ if (process.env.KFD_ADOPTER_SKIP_EXTRACTION !== "1") {
   const extraction = fs.mkdtempSync(path.join(os.tmpdir(), "kfd-adopter-package-"));
   try {
     const packed = spawnSync(
-      "npm",
+      npmCommand,
       ["pack", "--ignore-scripts", "--json", "--pack-destination", extraction],
-      { cwd: root, encoding: "utf8" },
+      { cwd: root, encoding: "utf8", shell: process.platform === "win32" },
     );
     assert.equal(packed.status, 0, `clean package creation failed\n${packed.stderr}`);
     const [{ filename }] = JSON.parse(packed.stdout);

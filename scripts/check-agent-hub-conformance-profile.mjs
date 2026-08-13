@@ -8,11 +8,12 @@ import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";
 const sha256 = (bytes) => `sha256:${crypto.createHash("sha256").update(bytes).digest("hex")}`;
 const read = (file) => fs.readFileSync(path.join(root, file));
 const json = (file) => JSON.parse(read(file));
 function run(command, args, expected = 0, cwd = root) {
-  const result = spawnSync(command, args, { cwd, encoding: "utf8" });
+  const result = spawnSync(command, args, { cwd, encoding: "utf8", shell: process.platform === "win32" && command === npmCommand });
   assert.equal(result.status, expected, `${command} ${args.join(" ")}\nstdout:\n${result.stdout}\nstderr:\n${result.stderr}`);
   return result.stdout.trim();
 }
@@ -148,7 +149,7 @@ try {
   }
 
   const packDirectory = path.join(temporary, "pack"); fs.mkdirSync(packDirectory);
-  const pack = JSON.parse(run("npm", ["pack", "--json", "--pack-destination", packDirectory]));
+  const pack = JSON.parse(run(npmCommand, ["pack", "--json", "--pack-destination", packDirectory]));
   assert.equal(pack.length, 1);
   assert.equal(
     pack[0].files.some(({ path: packedPath }) => /(?:^|\/)(?:target|node_modules|__pycache__|build)(?:\/|$)|\.pyc$/u.test(packedPath)),

@@ -15,6 +15,7 @@ import {
 } from "./generate-kfd-adopter-manifest.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";
 const manifest = JSON.parse(fs.readFileSync(path.join(root, KFD_SELF_MANIFEST_PATH), "utf8"));
 assert.equal(fs.readFileSync(path.join(root, KFD_SELF_MANIFEST_PATH), "utf8"), expectedKfdAdopterManifestText(), "KFD self-manifest drifted from its exact package cut");
 
@@ -68,7 +69,7 @@ assert.match(semanticRoot(manifest), /^sha256:[0-9a-f]{64}$/);
 if (process.env.KFD_SELF_ADOPTER_SKIP_EXTRACTION !== "1") {
   const extraction = fs.mkdtempSync(path.join(os.tmpdir(), "kfd-self-adopter-package-"));
   try {
-    const packed = spawnSync("npm", ["pack", "--ignore-scripts", "--json", "--pack-destination", extraction], { cwd: root, encoding: "utf8" });
+    const packed = spawnSync(npmCommand, ["pack", "--ignore-scripts", "--json", "--pack-destination", extraction], { cwd: root, encoding: "utf8", shell: process.platform === "win32" });
     assert.equal(packed.status, 0, packed.stderr);
     const [{ filename }] = JSON.parse(packed.stdout);
     const unpacked = spawnSync("tar", ["-xzf", path.join(extraction, filename), "-C", extraction], { encoding: "utf8" });

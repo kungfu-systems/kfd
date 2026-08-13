@@ -2,9 +2,10 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import { spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 
 const input = fs.readFileSync(new URL("./fixtures/requests.jsonl", import.meta.url), "utf8");
-const result = spawnSync(process.execPath, [new URL("./adapter.mjs", import.meta.url).pathname], { input, encoding: "utf8" });
+const result = spawnSync(process.execPath, [fileURLToPath(new URL("./adapter.mjs", import.meta.url))], { input, encoding: "utf8" });
 assert.equal(result.status, 0, result.stderr);
 assert.equal(result.stderr, "");
 const responses = result.stdout.trim().split("\n").map(JSON.parse);

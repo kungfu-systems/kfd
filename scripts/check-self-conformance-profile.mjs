@@ -15,6 +15,7 @@ import {
 } from "./self-conformance-contract.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";
 const extracted = process.argv.includes("--extracted");
 const readJson = (relative, base = root) => JSON.parse(fs.readFileSync(path.join(base, relative), "utf8"));
 const bytes = (relative, base = root) => fs.readFileSync(path.join(base, relative));
@@ -23,6 +24,7 @@ const run = (command, args, options = {}) => {
     cwd: options.cwd ?? root,
     encoding: "utf8",
     env: { ...process.env, npm_config_offline: "true" },
+    shell: process.platform === "win32" && command === npmCommand,
   });
   assert.equal(result.status, options.expected ?? 0, `${command} ${args.join(" ")}\n${result.stdout}\n${result.stderr}`);
   return result.stdout.trim();
@@ -139,7 +141,7 @@ if (!extracted) {
 if (!extracted) {
   const temporary = fs.mkdtempSync(path.join(os.tmpdir(), "kfd-self-conformance-"));
   try {
-    const dryRun = JSON.parse(run("npm", ["pack", "--json", "--dry-run", "--ignore-scripts"]));
+    const dryRun = JSON.parse(run(npmCommand, ["pack", "--json", "--dry-run", "--ignore-scripts"]));
     const packaged = new Set(dryRun[0].files.map(({ path: relative }) => relative));
     for (const relative of extraction.files) assert.equal(packaged.has(relative), true, `package missing ${relative}`);
     for (const relative of packaged) {
@@ -147,7 +149,7 @@ if (!extracted) {
       assert.equal(relative.includes(".git/"), false, `package leaked ${relative}`);
       assert.equal(relative.startsWith("node_modules/"), false, `package leaked ${relative}`);
     }
-    const packed = JSON.parse(run("npm", ["pack", "--json", "--ignore-scripts", "--pack-destination", temporary]));
+    const packed = JSON.parse(run(npmCommand, ["pack", "--json", "--ignore-scripts", "--pack-destination", temporary]));
     run("tar", ["-xzf", path.join(temporary, packed[0].filename), "-C", temporary]);
     const packageRoot = path.join(temporary, "package");
     const extractionRoot = path.join(temporary, "clean-room");

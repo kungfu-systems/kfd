@@ -51,14 +51,14 @@ production fitness. Accountable human authority remains separate and explicit.
 **Implement KFD without Kungfu — scaffold an adapter in Python, Rust, Node.js,
 or C++, then verify it offline.**
 
-Use the immutable `@kungfu-tech/kfd@1.0.0-alpha.62` package cut and follow the
+Use the immutable `@kungfu-tech/kfd@1.0.0-alpha.63` package cut and follow the
 package-owned [Agent Hub workflow](profiles/agent-hub/README.md) or inspect the
 complete [independent verification boundary](docs/independent-verifier.md):
 
 ```bash
-npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.62 kfd scaffold agent-hub --language python --output my-agent-hub-adapter
-npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.62 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json
-npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.62 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py --json
+npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.63 kfd scaffold agent-hub --language python --output my-agent-hub-adapter
+npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.63 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json
+npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.63 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py --json
 ```
 
 The scaffold is a deterministic, fail-closed starter: its smoke path checks
@@ -74,6 +74,14 @@ These results do not certify an implementation or prove security, production
 fitness, complete semantic coverage, KFD-10 activation, or adoption by an
 independent organization. [Open the complete Agent Hub guide](/agent-hub/) ·
 [Inspect the verifier and coverage matrix](/verify/)
+
+### Native `kfd`
+
+Each KFD GitHub Release now carries Rust-native archives for Linux x86_64 and
+arm64, macOS x86_64 and arm64, and Windows x86_64. The executable name is
+permanently `kfd` (`kfd.exe` on Windows), and `kfd --version` matches the exact
+KFD Release version. Every target includes a SHA-256 file and source-bound
+provenance. See [Native CLI downloads and capability boundaries](docs/native-cli.md).
 
 ## Foundation triad
 

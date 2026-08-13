@@ -8,11 +8,12 @@ import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";
 const reportPath = "profiles/self-conformance/history/historical-lineage.report.json";
 const report = JSON.parse(fs.readFileSync(path.join(root, reportPath), "utf8"));
 const exactRoot = (relative, base = root) => `sha256:${crypto.createHash("sha256").update(fs.readFileSync(path.join(base, relative))).digest("hex")}`;
 const run = (command, args, expected = 0, cwd = root, env = {}) => {
-  const result = spawnSync(command, args, { cwd, encoding: "utf8", env: { ...process.env, npm_config_offline: "true", ...env } });
+  const result = spawnSync(command, args, { cwd, encoding: "utf8", env: { ...process.env, npm_config_offline: "true", ...env }, shell: process.platform === "win32" && command === npmCommand });
   assert.equal(result.status, expected, `${command} ${args.join(" ")}\n${result.stderr}\n${result.stdout}`);
   return result.stdout.trim();
 };
@@ -98,7 +99,7 @@ for (const surface of manifest.surfaces) assert.equal(surface.digest, exactRoot(
 const extraction = JSON.parse(fs.readFileSync(path.join(root, "profiles/self-conformance/history/extraction-manifest.json"), "utf8"));
 const packedTemporary = fs.mkdtempSync(path.join(os.tmpdir(), "kfd-self-conformance-history-pack-"));
 try {
-  const packed = JSON.parse(run("npm", ["pack", "--json", "--ignore-scripts", "--pack-destination", packedTemporary]));
+  const packed = JSON.parse(run(npmCommand, ["pack", "--json", "--ignore-scripts", "--pack-destination", packedTemporary]));
   run("tar", ["-xzf", path.join(packedTemporary, packed[0].filename), "-C", packedTemporary]);
   const packageRoot = path.join(packedTemporary, "package");
   for (const relative of extraction.files) assert.equal(fs.existsSync(path.join(packageRoot, relative)), true, `packed history surface missing ${relative}`);

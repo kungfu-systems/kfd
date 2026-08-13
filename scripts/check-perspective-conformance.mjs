@@ -8,6 +8,7 @@ import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";
 const profileRoot = path.join(root, "profiles", "perspective-conformance");
 const manifest = JSON.parse(fs.readFileSync(path.join(profileRoot, "manifest.json"), "utf8"));
 const vectors = JSON.parse(fs.readFileSync(path.join(profileRoot, "vectors.json"), "utf8"));
@@ -108,9 +109,9 @@ if (process.env.KFD_PERSPECTIVE_SKIP_EXTRACTION !== "1") {
   const extraction = fs.mkdtempSync(path.join(os.tmpdir(), "kfd-perspective-package-"));
   try {
     const packed = spawnSync(
-      "npm",
+      npmCommand,
       ["pack", "--ignore-scripts", "--json", "--pack-destination", extraction],
-      { cwd: root, encoding: "utf8" },
+      { cwd: root, encoding: "utf8", shell: process.platform === "win32" },
     );
     assert.equal(packed.status, 0, `clean package creation failed\n${packed.stderr}`);
     const [{ filename }] = JSON.parse(packed.stdout);
