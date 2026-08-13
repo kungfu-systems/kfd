@@ -111,6 +111,16 @@
       "expected": { "valid": false, "issueCodes": ["ksat-bootstrap-anchor-mismatch"], "bootstrap": false, "priorCutVerified": false, "circular": false }
     },
     {
+      "id": "negative-bootstrap-anchor-wrong-authority",
+      "manifestOperations": [
+        { "op": "replace", "path": "/bootstrapAnchor/packageRoot", "value": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" }
+      ],
+      "contextOperations": [
+        { "op": "replace", "path": "/bootstrapAnchor/packageRoot", "value": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" }
+      ],
+      "expected": { "valid": false, "issueCodes": ["ksat-bootstrap-anchor-mismatch"], "bootstrap": false, "priorCutVerified": false, "circular": false }
+    },
+    {
       "id": "negative-missing-independent-review",
       "manifestOperations": [
         { "op": "replace", "path": "/evidence/reviewRoot", "value": "missing" }

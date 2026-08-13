@@ -51,6 +51,11 @@ const evidenceRequirements = [
   ["source-artifact", ["implementation"]],
   ["specification-transition", ["declaration", "review", "verification"]],
 ];
+const transitionEvidenceRoots = Object.freeze({
+  declaration: semanticRoot({ transitionEvidence: "declaration" }),
+  review: semanticRoot({ transitionEvidence: "independent-review" }),
+  verification: semanticRoot({ transitionEvidence: "verification" }),
+});
 
 function evidence() {
   return evidenceRequirements.flatMap(([requirementId, kinds]) =>
@@ -58,7 +63,9 @@ function evidence() {
       requirementId,
       kind,
       coordinate: `evidence://kungfu-systems/kfd/${requirementId}/${kind}`,
-      root: semanticRoot({ requirementId, kind }),
+      root: requirementId === "specification-transition"
+        ? transitionEvidenceRoots[kind]
+        : semanticRoot({ requirementId, kind }),
       observedAt: verifiedAt,
     })),
   );
@@ -125,11 +132,75 @@ try {
     root: semanticRoot({ result: "recursive-self-conformance-passed" }),
     status: "passed",
   };
+  const authorityVerifierRoot = fileRoot(
+    path.join(kfdPackageRoot, "scripts/adopter-category-instance-contract.mjs"),
+  );
+  const candidateVerifierRoot = fileRoot(
+    path.join(root, "scripts/kfd-specification-authority-transition-contract.mjs"),
+  );
+  const transitionBootstrapAnchor = {
+    packageVersion: kfdPackage.version,
+    packageRoot: authorityPackages.kfd.artifactRoot,
+    reviewRoot: semanticRoot({ review: "published-alpha62-bootstrap-anchor" }),
+  };
+  const specificationTransition = {
+    $schema: "https://kfd.libkungfu.dev/schemas/kfd-adopter-conformance/specification-authority-transition.schema.json",
+    schemaVersion: 1,
+    contract: "kfd.specification-authority-transition/v1",
+    transitionId: "kfd-alpha62-to-alpha64-delivery-bootstrap",
+    mode: "bootstrap",
+    authority: {
+      packageVersion: kfdPackage.version,
+      packageRoot: authorityPackages.kfd.artifactRoot,
+      verifierRoot: authorityVerifierRoot,
+    },
+    candidate: {
+      packageVersion: candidate.version,
+      packageRoot: candidate.artifact.root,
+      verifierRoot: candidateVerifierRoot,
+    },
+    changedSurfaces: [
+      {
+        id: "candidate-generation",
+        beforeRoot: semanticRoot({ surface: "candidate-generation", cut: "alpha62" }),
+        afterRoot: semanticRoot({ surface: "candidate-generation", cut: "alpha64" }),
+      },
+      {
+        id: "profile",
+        beforeRoot: semanticRoot({ surface: "profile", cut: "alpha62" }),
+        afterRoot: semanticRoot({ surface: "profile", cut: "alpha64" }),
+      },
+      {
+        id: "schema",
+        beforeRoot: semanticRoot({ surface: "schema", cut: "alpha62" }),
+        afterRoot: semanticRoot({ surface: "schema", cut: "alpha64" }),
+      },
+      {
+        id: "verifier",
+        beforeRoot: authorityVerifierRoot,
+        afterRoot: candidateVerifierRoot,
+      },
+    ],
+    bootstrapAnchor: structuredClone(transitionBootstrapAnchor),
+    evidence: {
+      declarationRoot: transitionEvidenceRoots.declaration,
+      reviewRoot: transitionEvidenceRoots.review,
+      verificationRoot: transitionEvidenceRoots.verification,
+    },
+    claimBoundary: {
+      semanticTruth: false,
+      selfCertification: false,
+      releaseAuthorization: false,
+      authorityTransfer: false,
+    },
+  };
   const result = await createPublishedKfdSpecificationAuthorityDelivery({
     authorityPackages,
     candidate,
     evidence: evidence(),
     recursiveSelfConformance,
+    specificationTransition,
+    transitionBootstrapAnchor,
     verifiedAt,
   });
   assert.equal(result.status, "passed");
@@ -142,11 +213,71 @@ try {
   assert.equal(result.selfCertified, false);
   assert.equal(result.releaseAuthorized, false);
   assert.notEqual(result.roots.recursiveSelfConformance, result.roots.gateResult);
+  assert.equal(result.specificationTransition.authorityMode, "reviewed-bootstrap-anchor");
+  assert.equal(result.specificationTransition.report.bootstrap, true);
+  assert.equal(result.specificationTransition.report.circular, false);
+  assert.equal(result.specificationTransition.report.valid, true);
+  assert.notEqual(result.roots.specificationTransition, result.roots.gateResult);
+  assert.notEqual(result.roots.specificationTransitionReport, result.roots.gateResult);
   assert.equal(
     result.deliveryJoin.recursiveSelfConformanceRoot,
     result.roots.recursiveSelfConformance,
   );
   assert.equal(result.deliveryJoin.adopterDeliveryGateRoot, result.roots.gateResult);
+  assert.equal(
+    result.deliveryJoin.specificationTransitionRoot,
+    result.roots.specificationTransition,
+  );
+  assert.equal(
+    result.deliveryJoin.specificationTransitionReportRoot,
+    result.roots.specificationTransitionReport,
+  );
+
+  const currentPackage = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
+  const currentManifest = JSON.parse(fs.readFileSync(
+    path.join(root, "profiles/adopter-conformance/adopters/kfd/manifest.json"),
+    "utf8",
+  ));
+  const currentArchive = pack(root, scratch);
+  const priorCutAuthorityPackages = {
+    ...authorityPackages,
+    kfd: {
+      name: "@kungfu-tech/kfd",
+      version: currentPackage.version,
+      archivePath: currentArchive.archivePath,
+      archiveRoot: currentArchive.archiveRoot,
+      artifactRoot: currentManifest.kfdCut.package.artifactRoot,
+    },
+  };
+  const priorCutTransition = {
+    ...specificationTransition,
+    transitionId: "kfd-alpha63-to-alpha64-delivery-prior-cut",
+    mode: "prior-cut",
+    authority: {
+      packageVersion: currentPackage.version,
+      packageRoot: priorCutAuthorityPackages.kfd.artifactRoot,
+      verifierRoot: candidateVerifierRoot,
+    },
+    changedSurfaces: specificationTransition.changedSurfaces
+      .filter(({ id }) => id !== "verifier")
+      .map((surface) => ({
+        ...surface,
+        beforeRoot: semanticRoot({ surface: surface.id, cut: "alpha63" }),
+      })),
+    bootstrapAnchor: null,
+  };
+  const priorCut = await createPublishedKfdSpecificationAuthorityDelivery({
+    authorityPackages: priorCutAuthorityPackages,
+    candidate,
+    evidence: evidence(),
+    recursiveSelfConformance,
+    specificationTransition: priorCutTransition,
+    verifiedAt,
+  });
+  assert.equal(priorCut.specificationTransition.authorityMode, "published-prior-cut-verifier");
+  assert.equal(priorCut.specificationTransition.report.priorCutVerified, true);
+  assert.equal(priorCut.specificationTransition.report.circular, false);
+  assert.equal(priorCut.specificationTransition.report.valid, true);
 
   const alternateRecursive = await createPublishedKfdSpecificationAuthorityDelivery({
     authorityPackages,
@@ -156,6 +287,8 @@ try {
       ...recursiveSelfConformance,
       root: semanticRoot({ result: "independent-recursive-replay" }),
     },
+    specificationTransition,
+    transitionBootstrapAnchor,
     verifiedAt,
   });
   assert.equal(alternateRecursive.roots.gateResult, result.roots.gateResult);
@@ -175,6 +308,14 @@ try {
       },
       evidence: evidence(),
       recursiveSelfConformance,
+      specificationTransition: {
+        ...specificationTransition,
+        candidate: {
+          ...specificationTransition.candidate,
+          packageVersion: kfdPackage.version,
+        },
+      },
+      transitionBootstrapAnchor,
       verifiedAt,
     }),
     /independent older KFD semantic cut/,
@@ -185,6 +326,8 @@ try {
       candidate,
       evidence: evidence().slice(1),
       recursiveSelfConformance,
+      specificationTransition,
+      transitionBootstrapAnchor,
       verifiedAt,
     }),
     /specification-authority instance failed closed/,
@@ -194,5 +337,5 @@ try {
 }
 
 console.log(
-  "check-kfd-specification-authority-delivery: exact Buildchain/KFD N-1 authority, anti-circular gate, and separate release join passed",
+  "check-kfd-specification-authority-delivery: exact Buildchain/KFD authority, rooted bootstrap and published prior-cut transition verification, anti-circular gate, and separate release join passed",
 );

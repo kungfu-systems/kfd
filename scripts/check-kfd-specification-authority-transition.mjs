@@ -38,7 +38,7 @@ assert.equal(schema.$id, vectors.template.$schema);
 assert.equal(schema.properties.contract.const, KFD_SPECIFICATION_AUTHORITY_TRANSITION);
 assert.equal(new Set(vectors.cases.map(({ id }) => id)).size, vectors.cases.length);
 assert.equal(vectors.cases.filter(({ expected }) => expected.valid).length, 2);
-assert.equal(vectors.cases.filter(({ expected }) => !expected.valid).length, 7);
+assert.equal(vectors.cases.filter(({ expected }) => !expected.valid).length, 8);
 
 for (const vector of vectors.cases) {
   const manifest = applyOperations(vectors.template, vector.manifestOperations);
@@ -77,10 +77,10 @@ if (!extracted) {
     const output = run("node", [
       "scripts/check-kfd-specification-authority-transition.mjs", "--extracted",
     ], extractedRoot);
-    assert.equal(output.includes("2 positive and 7 fail-closed package-only vectors passed"), true);
+    assert.equal(output.includes("2 positive and 8 fail-closed package-only vectors passed"), true);
   } finally {
     fs.rmSync(temporary, { recursive: true, force: true });
   }
 }
 
-console.log("check-kfd-specification-authority-transition: 2 positive and 7 fail-closed package-only vectors passed");
+console.log("check-kfd-specification-authority-transition: 2 positive and 8 fail-closed package-only vectors passed");
