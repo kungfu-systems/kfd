@@ -912,7 +912,7 @@ if (
   JSON.stringify(nativeCli?.platforms) !== JSON.stringify(["macOS", "Linux"]) ||
   JSON.stringify(nativeCli?.capabilities) !== JSON.stringify(["verify", "bundle"]) ||
   !nativeCli?.capabilityBoundary?.includes("use the npm workflow above") ||
-  nativeCli?.docs?.url !== "https://github.com/kungfu-systems/kfd/blob/dev/v1/v1.0/docs/native-cli.md"
+  nativeCli?.docs?.url !== `https://github.com/kungfu-systems/kfd/blob/v${packageJson.version}/docs/native-cli.md`
 ) {
   fail("site bundle independent implementation must expose the bounded native Homebrew install path");
 }

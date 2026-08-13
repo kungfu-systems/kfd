@@ -205,7 +205,7 @@ const parseIndependentImplementation = (markdown, capabilities, releaseAnchor) =
       capabilityBoundary: nativeBoundary,
       docs: {
         label: "Native CLI downloads and capability boundaries",
-        url: "https://github.com/kungfu-systems/kfd/blob/dev/v1/v1.0/docs/native-cli.md",
+        url: `https://github.com/kungfu-systems/kfd/blob/v${version}/docs/native-cli.md`,
       },
     },
     links,
