@@ -251,22 +251,22 @@ try {
   };
   const priorCutCandidate = {
     ...candidate,
-    instanceId: "kungfu-systems/kfd@1.0.0-alpha.65",
-    version: "1.0.0-alpha.65",
+    instanceId: "kungfu-systems/kfd@1.0.0-alpha.66",
+    version: "1.0.0-alpha.66",
     artifact: coordinate(
       "package",
-      "@kungfu-tech/kfd@1.0.0-alpha.65",
+      "@kungfu-tech/kfd@1.0.0-alpha.66",
       "next-candidate-package",
     ),
     release: coordinate(
       "release",
-      "https://github.com/kungfu-systems/kfd/releases/tag/v1.0.0-alpha.65",
+      "https://github.com/kungfu-systems/kfd/releases/tag/v1.0.0-alpha.66",
       "next-candidate-release-passport",
     ),
   };
   const priorCutTransition = {
     ...specificationTransition,
-    transitionId: "kfd-alpha64-to-alpha65-delivery-prior-cut",
+    transitionId: "kfd-alpha65-to-alpha66-delivery-prior-cut",
     mode: "prior-cut",
     authority: {
       packageVersion: currentPackage.version,
@@ -282,8 +282,8 @@ try {
       .filter(({ id }) => id !== "verifier")
       .map((surface) => ({
         ...surface,
-        beforeRoot: semanticRoot({ surface: surface.id, cut: "alpha64" }),
-        afterRoot: semanticRoot({ surface: surface.id, cut: "alpha65" }),
+        beforeRoot: semanticRoot({ surface: surface.id, cut: "alpha65" }),
+        afterRoot: semanticRoot({ surface: surface.id, cut: "alpha66" }),
       })),
     bootstrapAnchor: null,
   };
