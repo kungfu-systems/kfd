@@ -116,6 +116,19 @@ if (packageJson.scripts?.["update:evidence"] !== expectedEvidenceUpdate) {
 if (packageJson.description !== expectedPackageDescription) {
   fail("package.json description must preserve KFD's open-standard positioning");
 }
+if (packageJson.dependencies?.["@kungfu-tech/buildchain"] !== "3.0.9-alpha.11" ||
+    packageJson.exports?.["./adopter-conformance/specification-authority-delivery"] !== "./scripts/kfd-specification-authority-delivery.mjs" ||
+    packageJson.scripts?.["check:kfd-specification-authority-delivery"] !== "node scripts/check-kfd-specification-authority-delivery.mjs" ||
+    !packageJson.scripts?.check?.includes("npm run check:kfd-specification-authority-delivery")) {
+  fail("KFD specification-authority delivery must pin Buildchain Alpha.11 and publish its checked adapter");
+}
+if (packageJson.exports?.["./adopter-conformance/specification-authority-transition"] !== "./scripts/kfd-specification-authority-transition-contract.mjs" ||
+    packageJson.exports?.["./adopter-conformance/specification-authority-transition.schema.json"] !== "./schemas/kfd-adopter-conformance/specification-authority-transition.schema.json" ||
+    packageJson.exports?.["./adopter-conformance/specification-authority-transition-vectors.json"] !== "./profiles/adopter-conformance/specification-authority-transition-vectors.json" ||
+    packageJson.scripts?.["check:kfd-specification-authority-transition"] !== "node scripts/check-kfd-specification-authority-transition.mjs" ||
+    !packageJson.scripts?.check?.includes("npm run check:kfd-specification-authority-transition")) {
+  fail("KFD specification-authority transitions must publish their schema, verifier, fixed vectors, and check");
+}
 if (releasePropagationConfig.schemaVersion !== 1 ||
     releasePropagationConfig.contract !== "kungfu-buildchain-package-release-propagation" ||
     releasePropagationConfig.sourceNode !== "kfd" ||

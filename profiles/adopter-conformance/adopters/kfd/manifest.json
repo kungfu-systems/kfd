@@ -9,16 +9,16 @@
     "id": "kungfu-systems/kfd",
     "artifact": {
       "kind": "other",
-      "coordinate": "kfd-adopter-package-cut:sha256:00d5171bd2993ad2f50b2324848d1a09c5c8b5e8304d91a3375d5fb2fe338e65",
-      "root": "sha256:00d5171bd2993ad2f50b2324848d1a09c5c8b5e8304d91a3375d5fb2fe338e65"
+      "coordinate": "kfd-adopter-package-cut:sha256:4129db6f7e9613005b615eec19506cd6a4cb3ec9da482b09449b4c0639f1e7a7",
+      "root": "sha256:4129db6f7e9613005b615eec19506cd6a4cb3ec9da482b09449b4c0639f1e7a7"
     },
     "scope": "KFD package governance, verification profiles, release evidence, and adopter-toolchain dogfood"
   },
   "kfdCut": {
     "package": {
       "name": "@kungfu-tech/kfd",
-      "version": "1.0.0-alpha.63",
-      "artifactRoot": "sha256:00d5171bd2993ad2f50b2324848d1a09c5c8b5e8304d91a3375d5fb2fe338e65"
+      "version": "1.0.0-alpha.64",
+      "artifactRoot": "sha256:4129db6f7e9613005b615eec19506cd6a4cb3ec9da482b09449b4c0639f1e7a7"
     },
     "registry": {
       "path": "registry.json",
@@ -73,19 +73,19 @@
       "implementationEvidence": [
         {
           "kind": "implementation",
-          "coordinate": "kfd-package-cut:sha256:00d5171bd2993ad2f50b2324848d1a09c5c8b5e8304d91a3375d5fb2fe338e65#.buildchain/kfd-1/contract-world.witness.json",
-          "root": "sha256:e87b106ba653aaa97ad2c1f1b52b81ea30e5e15efea812e29e9493821ed16b20",
+          "coordinate": "kfd-package-cut:sha256:4129db6f7e9613005b615eec19506cd6a4cb3ec9da482b09449b4c0639f1e7a7#.buildchain/kfd-1/contract-world.witness.json",
+          "root": "sha256:31406ccfee5be540dc08c2864f02c7cbdf05c2ecadc8fce2ad3ac570432d5396",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:00d5171bd2993ad2f50b2324848d1a09c5c8b5e8304d91a3375d5fb2fe338e65"
+          "kfdPackageRoot": "sha256:4129db6f7e9613005b615eec19506cd6a4cb3ec9da482b09449b4c0639f1e7a7"
         }
       ],
       "verificationEvidence": [
         {
           "kind": "verification",
-          "coordinate": "kfd-package-cut:sha256:00d5171bd2993ad2f50b2324848d1a09c5c8b5e8304d91a3375d5fb2fe338e65#scripts/check.mjs",
-          "root": "sha256:8c7a6840edb000c89caa5a30811537ece49405df73c00c6cff44c5dd3bebe7bf",
+          "coordinate": "kfd-package-cut:sha256:4129db6f7e9613005b615eec19506cd6a4cb3ec9da482b09449b4c0639f1e7a7#scripts/check.mjs",
+          "root": "sha256:1a31899e4006bd3ceebe497b9ba07ab6f0dd69636cefca87cef951cc9ed9da5c",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:00d5171bd2993ad2f50b2324848d1a09c5c8b5e8304d91a3375d5fb2fe338e65"
+          "kfdPackageRoot": "sha256:4129db6f7e9613005b615eec19506cd6a4cb3ec9da482b09449b4c0639f1e7a7"
         }
       ],
       "negativeEvidence": [],
@@ -108,19 +108,19 @@
       "implementationEvidence": [
         {
           "kind": "implementation",
-          "coordinate": "kfd-package-cut:sha256:00d5171bd2993ad2f50b2324848d1a09c5c8b5e8304d91a3375d5fb2fe338e65#.buildchain/kfd-2/public-release-trust.claim.json",
-          "root": "sha256:4d9edea7d496197a0154cd234e8ab198a9a3fddb9e41376e6e0f951fb6b7cd31",
+          "coordinate": "kfd-package-cut:sha256:4129db6f7e9613005b615eec19506cd6a4cb3ec9da482b09449b4c0639f1e7a7#.buildchain/kfd-2/public-release-trust.claim.json",
+          "root": "sha256:621c44d571730e29849f8dace024005437db917aa8264092a9678b5d58df4986",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:00d5171bd2993ad2f50b2324848d1a09c5c8b5e8304d91a3375d5fb2fe338e65"
+          "kfdPackageRoot": "sha256:4129db6f7e9613005b615eec19506cd6a4cb3ec9da482b09449b4c0639f1e7a7"
         }
       ],
       "verificationEvidence": [
         {
           "kind": "verification",
-          "coordinate": "kfd-package-cut:sha256:00d5171bd2993ad2f50b2324848d1a09c5c8b5e8304d91a3375d5fb2fe338e65#scripts/check.mjs",
-          "root": "sha256:8c7a6840edb000c89caa5a30811537ece49405df73c00c6cff44c5dd3bebe7bf",
+          "coordinate": "kfd-package-cut:sha256:4129db6f7e9613005b615eec19506cd6a4cb3ec9da482b09449b4c0639f1e7a7#scripts/check.mjs",
+          "root": "sha256:1a31899e4006bd3ceebe497b9ba07ab6f0dd69636cefca87cef951cc9ed9da5c",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:00d5171bd2993ad2f50b2324848d1a09c5c8b5e8304d91a3375d5fb2fe338e65"
+          "kfdPackageRoot": "sha256:4129db6f7e9613005b615eec19506cd6a4cb3ec9da482b09449b4c0639f1e7a7"
         }
       ],
       "negativeEvidence": [],
@@ -143,19 +143,19 @@
       "implementationEvidence": [
         {
           "kind": "implementation",
-          "coordinate": "kfd-package-cut:sha256:00d5171bd2993ad2f50b2324848d1a09c5c8b5e8304d91a3375d5fb2fe338e65#.buildchain/kfd-3/collaboration-interface.artifact.json",
-          "root": "sha256:0cc257315911c817b7d6de04538f550b1801250d3ec231878cd7c1c60ca5f9bd",
+          "coordinate": "kfd-package-cut:sha256:4129db6f7e9613005b615eec19506cd6a4cb3ec9da482b09449b4c0639f1e7a7#.buildchain/kfd-3/collaboration-interface.artifact.json",
+          "root": "sha256:aa82f760bd89ffd7b700a52288633f25d6b3a3c752eb23fc20cf91db48d4f035",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:00d5171bd2993ad2f50b2324848d1a09c5c8b5e8304d91a3375d5fb2fe338e65"
+          "kfdPackageRoot": "sha256:4129db6f7e9613005b615eec19506cd6a4cb3ec9da482b09449b4c0639f1e7a7"
         }
       ],
       "verificationEvidence": [
         {
           "kind": "verification",
-          "coordinate": "kfd-package-cut:sha256:00d5171bd2993ad2f50b2324848d1a09c5c8b5e8304d91a3375d5fb2fe338e65#scripts/check.mjs",
-          "root": "sha256:8c7a6840edb000c89caa5a30811537ece49405df73c00c6cff44c5dd3bebe7bf",
+          "coordinate": "kfd-package-cut:sha256:4129db6f7e9613005b615eec19506cd6a4cb3ec9da482b09449b4c0639f1e7a7#scripts/check.mjs",
+          "root": "sha256:1a31899e4006bd3ceebe497b9ba07ab6f0dd69636cefca87cef951cc9ed9da5c",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:00d5171bd2993ad2f50b2324848d1a09c5c8b5e8304d91a3375d5fb2fe338e65"
+          "kfdPackageRoot": "sha256:4129db6f7e9613005b615eec19506cd6a4cb3ec9da482b09449b4c0639f1e7a7"
         }
       ],
       "negativeEvidence": [],
@@ -178,19 +178,19 @@
       "implementationEvidence": [
         {
           "kind": "implementation",
-          "coordinate": "kfd-package-cut:sha256:00d5171bd2993ad2f50b2324848d1a09c5c8b5e8304d91a3375d5fb2fe338e65#profiles/perspective-conformance/manifest.json",
+          "coordinate": "kfd-package-cut:sha256:4129db6f7e9613005b615eec19506cd6a4cb3ec9da482b09449b4c0639f1e7a7#profiles/perspective-conformance/manifest.json",
           "root": "sha256:35dba3661b3c4fae8bfc100f1b5efd071b9454801a77cecc496d656cc072b4bc",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:00d5171bd2993ad2f50b2324848d1a09c5c8b5e8304d91a3375d5fb2fe338e65"
+          "kfdPackageRoot": "sha256:4129db6f7e9613005b615eec19506cd6a4cb3ec9da482b09449b4c0639f1e7a7"
         }
       ],
       "verificationEvidence": [
         {
           "kind": "verification",
-          "coordinate": "kfd-package-cut:sha256:00d5171bd2993ad2f50b2324848d1a09c5c8b5e8304d91a3375d5fb2fe338e65#scripts/check-perspective-conformance.mjs",
+          "coordinate": "kfd-package-cut:sha256:4129db6f7e9613005b615eec19506cd6a4cb3ec9da482b09449b4c0639f1e7a7#scripts/check-perspective-conformance.mjs",
           "root": "sha256:4d2636d5d68d5e5cd7162393c12bf073af9bb843f51bc3afd23f397753e5bfed",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:00d5171bd2993ad2f50b2324848d1a09c5c8b5e8304d91a3375d5fb2fe338e65"
+          "kfdPackageRoot": "sha256:4129db6f7e9613005b615eec19506cd6a4cb3ec9da482b09449b4c0639f1e7a7"
         }
       ],
       "negativeEvidence": [],
@@ -213,19 +213,19 @@
       "implementationEvidence": [
         {
           "kind": "implementation",
-          "coordinate": "kfd-package-cut:sha256:00d5171bd2993ad2f50b2324848d1a09c5c8b5e8304d91a3375d5fb2fe338e65#evidence/primitive-evidence/second-wave-report.json",
+          "coordinate": "kfd-package-cut:sha256:4129db6f7e9613005b615eec19506cd6a4cb3ec9da482b09449b4c0639f1e7a7#evidence/primitive-evidence/second-wave-report.json",
           "root": "sha256:b0ed807dee3e93f0e6764c9d7b4b67c2a7da5a7580e169c03811ec3ec0732149",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:00d5171bd2993ad2f50b2324848d1a09c5c8b5e8304d91a3375d5fb2fe338e65"
+          "kfdPackageRoot": "sha256:4129db6f7e9613005b615eec19506cd6a4cb3ec9da482b09449b4c0639f1e7a7"
         }
       ],
       "verificationEvidence": [
         {
           "kind": "verification",
-          "coordinate": "kfd-package-cut:sha256:00d5171bd2993ad2f50b2324848d1a09c5c8b5e8304d91a3375d5fb2fe338e65#scripts/check-warrant-evidence.mjs",
+          "coordinate": "kfd-package-cut:sha256:4129db6f7e9613005b615eec19506cd6a4cb3ec9da482b09449b4c0639f1e7a7#scripts/check-warrant-evidence.mjs",
           "root": "sha256:f57bc0b853d9146d1e91396ef21198ba115f0d123623de530bbba34dd8ad1220",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:00d5171bd2993ad2f50b2324848d1a09c5c8b5e8304d91a3375d5fb2fe338e65"
+          "kfdPackageRoot": "sha256:4129db6f7e9613005b615eec19506cd6a4cb3ec9da482b09449b4c0639f1e7a7"
         }
       ],
       "negativeEvidence": [],
@@ -265,19 +265,19 @@
       "implementationEvidence": [
         {
           "kind": "implementation",
-          "coordinate": "kfd-package-cut:sha256:00d5171bd2993ad2f50b2324848d1a09c5c8b5e8304d91a3375d5fb2fe338e65#evidence/kfd-7/activation-record.json",
+          "coordinate": "kfd-package-cut:sha256:4129db6f7e9613005b615eec19506cd6a4cb3ec9da482b09449b4c0639f1e7a7#evidence/kfd-7/activation-record.json",
           "root": "sha256:67ffebb73f943892f1854e2916a90f1fb082c61d33f64c0e7f8af5393189eb6e",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:00d5171bd2993ad2f50b2324848d1a09c5c8b5e8304d91a3375d5fb2fe338e65"
+          "kfdPackageRoot": "sha256:4129db6f7e9613005b615eec19506cd6a4cb3ec9da482b09449b4c0639f1e7a7"
         }
       ],
       "verificationEvidence": [
         {
           "kind": "verification",
-          "coordinate": "kfd-package-cut:sha256:00d5171bd2993ad2f50b2324848d1a09c5c8b5e8304d91a3375d5fb2fe338e65#scripts/check.mjs",
-          "root": "sha256:8c7a6840edb000c89caa5a30811537ece49405df73c00c6cff44c5dd3bebe7bf",
+          "coordinate": "kfd-package-cut:sha256:4129db6f7e9613005b615eec19506cd6a4cb3ec9da482b09449b4c0639f1e7a7#scripts/check.mjs",
+          "root": "sha256:1a31899e4006bd3ceebe497b9ba07ab6f0dd69636cefca87cef951cc9ed9da5c",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:00d5171bd2993ad2f50b2324848d1a09c5c8b5e8304d91a3375d5fb2fe338e65"
+          "kfdPackageRoot": "sha256:4129db6f7e9613005b615eec19506cd6a4cb3ec9da482b09449b4c0639f1e7a7"
         }
       ],
       "negativeEvidence": [],
@@ -300,19 +300,19 @@
       "implementationEvidence": [
         {
           "kind": "implementation",
-          "coordinate": "kfd-package-cut:sha256:00d5171bd2993ad2f50b2324848d1a09c5c8b5e8304d91a3375d5fb2fe338e65#profiles/perspective-conformance/manifest.json",
+          "coordinate": "kfd-package-cut:sha256:4129db6f7e9613005b615eec19506cd6a4cb3ec9da482b09449b4c0639f1e7a7#profiles/perspective-conformance/manifest.json",
           "root": "sha256:35dba3661b3c4fae8bfc100f1b5efd071b9454801a77cecc496d656cc072b4bc",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:00d5171bd2993ad2f50b2324848d1a09c5c8b5e8304d91a3375d5fb2fe338e65"
+          "kfdPackageRoot": "sha256:4129db6f7e9613005b615eec19506cd6a4cb3ec9da482b09449b4c0639f1e7a7"
         }
       ],
       "verificationEvidence": [
         {
           "kind": "verification",
-          "coordinate": "kfd-package-cut:sha256:00d5171bd2993ad2f50b2324848d1a09c5c8b5e8304d91a3375d5fb2fe338e65#scripts/check-perspective-conformance.mjs",
+          "coordinate": "kfd-package-cut:sha256:4129db6f7e9613005b615eec19506cd6a4cb3ec9da482b09449b4c0639f1e7a7#scripts/check-perspective-conformance.mjs",
           "root": "sha256:4d2636d5d68d5e5cd7162393c12bf073af9bb843f51bc3afd23f397753e5bfed",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:00d5171bd2993ad2f50b2324848d1a09c5c8b5e8304d91a3375d5fb2fe338e65"
+          "kfdPackageRoot": "sha256:4129db6f7e9613005b615eec19506cd6a4cb3ec9da482b09449b4c0639f1e7a7"
         }
       ],
       "negativeEvidence": [],
@@ -350,19 +350,19 @@
       "implementationEvidence": [
         {
           "kind": "implementation",
-          "coordinate": "kfd-package-cut:sha256:00d5171bd2993ad2f50b2324848d1a09c5c8b5e8304d91a3375d5fb2fe338e65#evidence/primitive-evidence/second-wave-report.json",
+          "coordinate": "kfd-package-cut:sha256:4129db6f7e9613005b615eec19506cd6a4cb3ec9da482b09449b4c0639f1e7a7#evidence/primitive-evidence/second-wave-report.json",
           "root": "sha256:b0ed807dee3e93f0e6764c9d7b4b67c2a7da5a7580e169c03811ec3ec0732149",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:00d5171bd2993ad2f50b2324848d1a09c5c8b5e8304d91a3375d5fb2fe338e65"
+          "kfdPackageRoot": "sha256:4129db6f7e9613005b615eec19506cd6a4cb3ec9da482b09449b4c0639f1e7a7"
         }
       ],
       "verificationEvidence": [
         {
           "kind": "verification",
-          "coordinate": "kfd-package-cut:sha256:00d5171bd2993ad2f50b2324848d1a09c5c8b5e8304d91a3375d5fb2fe338e65#scripts/check-warrant-evidence.mjs",
+          "coordinate": "kfd-package-cut:sha256:4129db6f7e9613005b615eec19506cd6a4cb3ec9da482b09449b4c0639f1e7a7#scripts/check-warrant-evidence.mjs",
           "root": "sha256:f57bc0b853d9146d1e91396ef21198ba115f0d123623de530bbba34dd8ad1220",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:00d5171bd2993ad2f50b2324848d1a09c5c8b5e8304d91a3375d5fb2fe338e65"
+          "kfdPackageRoot": "sha256:4129db6f7e9613005b615eec19506cd6a4cb3ec9da482b09449b4c0639f1e7a7"
         }
       ],
       "negativeEvidence": [],
@@ -373,10 +373,10 @@
           "profileId": "kfd-warrant-evidence",
           "profileManifestPath": "profiles/warrant-evidence/manifest.json",
           "profileManifestRoot": "sha256:1032006a7435408761916de291abc8ee239594e70d739f28c3b29b60da75a755",
-          "witnessCoordinate": "kfd-package-cut:sha256:00d5171bd2993ad2f50b2324848d1a09c5c8b5e8304d91a3375d5fb2fe338e65#evidence/primitive-evidence/second-wave-report.json",
+          "witnessCoordinate": "kfd-package-cut:sha256:4129db6f7e9613005b615eec19506cd6a4cb3ec9da482b09449b4c0639f1e7a7#evidence/primitive-evidence/second-wave-report.json",
           "witnessRoot": "sha256:b0ed807dee3e93f0e6764c9d7b4b67c2a7da5a7580e169c03811ec3ec0732149",
           "verifierRoot": "sha256:d15753d39938aa91cc50eb9bfa91dfc013570565a2395fd35d93d4ddda10adea",
-          "kfdPackageRoot": "sha256:00d5171bd2993ad2f50b2324848d1a09c5c8b5e8304d91a3375d5fb2fe338e65"
+          "kfdPackageRoot": "sha256:4129db6f7e9613005b615eec19506cd6a4cb3ec9da482b09449b4c0639f1e7a7"
         }
       ],
       "releaseBindingIds": [],

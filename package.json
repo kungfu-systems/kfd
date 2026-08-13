@@ -1,6 +1,6 @@
 {
   "name": "@kungfu-tech/kfd",
-  "version": "1.0.0-alpha.63",
+  "version": "1.0.0-alpha.64",
   "description": "KFD: an open, evidence-governed engineering standard for reliable action and continuity under uncertainty",
   "license": "Apache-2.0",
   "bin": {
@@ -100,6 +100,10 @@
     "./adopter-conformance/category-profile-resolver": "./scripts/adopter-category-profile-contract.mjs",
     "./adopter-conformance/category-instance-verifier": "./scripts/adopter-category-instance-contract.mjs",
     "./adopter-conformance/toolchain": "./scripts/adopter-toolchain.mjs",
+    "./adopter-conformance/specification-authority-delivery": "./scripts/kfd-specification-authority-delivery.mjs",
+    "./adopter-conformance/specification-authority-transition": "./scripts/kfd-specification-authority-transition-contract.mjs",
+    "./adopter-conformance/specification-authority-transition.schema.json": "./schemas/kfd-adopter-conformance/specification-authority-transition.schema.json",
+    "./adopter-conformance/specification-authority-transition-vectors.json": "./profiles/adopter-conformance/specification-authority-transition-vectors.json",
     "./scripts/*.mjs": "./scripts/*.mjs",
     "./buildchain/kfd-1/contract-world.witness.json": "./.buildchain/kfd-1/contract-world.witness.json",
     "./buildchain/kfd-2/public-release-trust.claim.json": "./.buildchain/kfd-2/public-release-trust.claim.json",
@@ -131,12 +135,14 @@
     "./self-conformance/historical-replay.schema.json": "./schemas/kfd-self-conformance-history/historical-replay.schema.json"
   },
   "scripts": {
-    "check": "node scripts/check.mjs && npm run check:adopter-conformance && npm run check:adopter-category-profiles && npm run check:adopter-category-instances && npm run check:adopter-toolchain && npm run check:kfd-self-adopter && npm run check:warrant-evidence && npm run check:agent-hub && npm run check:agent-hub-conformance && npm run check:agent-runtime && npm run check:self-conformance-profile && npm run check:self-conformance-lifecycle && npm run check:self-conformance-history && npm run check:native-release && npm run check:verifier",
+    "check": "node scripts/check.mjs && npm run check:adopter-conformance && npm run check:adopter-category-profiles && npm run check:adopter-category-instances && npm run check:adopter-toolchain && npm run check:kfd-self-adopter && npm run check:kfd-specification-authority-delivery && npm run check:kfd-specification-authority-transition && npm run check:warrant-evidence && npm run check:agent-hub && npm run check:agent-hub-conformance && npm run check:agent-runtime && npm run check:self-conformance-profile && npm run check:self-conformance-lifecycle && npm run check:self-conformance-history && npm run check:native-release && npm run check:verifier",
     "check:adopter-conformance": "node scripts/check-adopter-conformance.mjs",
     "check:adopter-category-profiles": "node scripts/check-adopter-category-profiles.mjs",
     "check:adopter-category-instances": "node scripts/check-adopter-category-instances.mjs",
     "check:adopter-toolchain": "node scripts/check-adopter-toolchain.mjs",
     "check:kfd-self-adopter": "node scripts/check-kfd-self-adopter.mjs",
+    "check:kfd-specification-authority-delivery": "node scripts/check-kfd-specification-authority-delivery.mjs",
+    "check:kfd-specification-authority-transition": "node scripts/check-kfd-specification-authority-transition.mjs",
     "check:warrant-evidence": "node scripts/check-warrant-evidence.mjs",
     "check:agent-hub": "node scripts/check-agent-hub-profile.mjs",
     "check:agent-hub-conformance": "node scripts/check-agent-hub-conformance-profile.mjs",
@@ -158,6 +164,9 @@
     "check:self-conformance-profile": "node scripts/check-self-conformance-profile.mjs",
     "check:self-conformance-lifecycle": "node scripts/check-self-conformance-lifecycle.mjs && node scripts/check-self-conformance-changes.mjs",
     "check:self-conformance-history": "node scripts/check-self-conformance-history.mjs"
+  },
+  "dependencies": {
+    "@kungfu-tech/buildchain": "3.0.9-alpha.11"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",

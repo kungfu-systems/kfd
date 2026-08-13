@@ -1,0 +1,181 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.specification-authority-transition-vectors/v1",
+  "template": {
+    "$schema": "https://kfd.libkungfu.dev/schemas/kfd-adopter-conformance/specification-authority-transition.schema.json",
+    "schemaVersion": 1,
+    "contract": "kfd.specification-authority-transition/v1",
+    "transitionId": "kfd-alpha62-to-alpha64-specification-authority",
+    "mode": "bootstrap",
+    "authority": {
+      "packageVersion": "1.0.0-alpha.62",
+      "packageRoot": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "verifierRoot": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+    },
+    "candidate": {
+      "packageVersion": "1.0.0-alpha.64",
+      "packageRoot": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+      "verifierRoot": "sha256:4444444444444444444444444444444444444444444444444444444444444444"
+    },
+    "changedSurfaces": [
+      {
+        "id": "candidate-generation",
+        "beforeRoot": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+        "afterRoot": "sha256:7777777777777777777777777777777777777777777777777777777777777777"
+      },
+      {
+        "id": "profile",
+        "beforeRoot": "sha256:8888888888888888888888888888888888888888888888888888888888888888",
+        "afterRoot": "sha256:9999999999999999999999999999999999999999999999999999999999999999"
+      },
+      {
+        "id": "schema",
+        "beforeRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "afterRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      {
+        "id": "verifier",
+        "beforeRoot": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "afterRoot": "sha256:4444444444444444444444444444444444444444444444444444444444444444"
+      }
+    ],
+    "bootstrapAnchor": {
+      "packageVersion": "1.0.0-alpha.62",
+      "packageRoot": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "reviewRoot": "sha256:5555555555555555555555555555555555555555555555555555555555555555"
+    },
+    "evidence": {
+      "declarationRoot": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "reviewRoot": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "verificationRoot": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+    },
+    "claimBoundary": {
+      "semanticTruth": false,
+      "selfCertification": false,
+      "releaseAuthorization": false,
+      "authorityTransfer": false
+    }
+  },
+  "context": {
+    "authorityPackageVersion": "1.0.0-alpha.62",
+    "authorityPackageRoot": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+    "authorityVerifierRoot": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+    "bootstrapAnchor": {
+      "packageVersion": "1.0.0-alpha.62",
+      "packageRoot": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "reviewRoot": "sha256:5555555555555555555555555555555555555555555555555555555555555555"
+    },
+    "transitionVerifierPackageVersion": "1.0.0-alpha.62",
+    "transitionVerifierPackageRoot": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+    "transitionVerifierRoot": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+  },
+  "cases": [
+    {
+      "id": "positive-reviewed-bootstrap",
+      "manifestOperations": [],
+      "contextOperations": [],
+      "expected": { "valid": true, "issueCodes": [], "bootstrap": true, "priorCutVerified": false, "circular": false }
+    },
+    {
+      "id": "positive-prior-cut-forward-transition",
+      "manifestOperations": [
+        { "op": "replace", "path": "/mode", "value": "prior-cut" },
+        { "op": "replace", "path": "/bootstrapAnchor", "value": null }
+      ],
+      "contextOperations": [],
+      "expected": { "valid": true, "issueCodes": [], "bootstrap": false, "priorCutVerified": true, "circular": false }
+    },
+    {
+      "id": "negative-same-cut-circular",
+      "manifestOperations": [
+        { "op": "replace", "path": "/candidate/packageVersion", "value": "1.0.0-alpha.62" },
+        { "op": "replace", "path": "/candidate/packageRoot", "value": "sha256:1111111111111111111111111111111111111111111111111111111111111111" }
+      ],
+      "contextOperations": [],
+      "expected": { "valid": false, "issueCodes": ["ksat-circular-authority", "ksat-cut-not-forward"], "bootstrap": true, "priorCutVerified": false, "circular": true }
+    },
+    {
+      "id": "negative-release-line-rollback",
+      "manifestOperations": [
+        { "op": "replace", "path": "/candidate/packageVersion", "value": "1.0.0-alpha.61" }
+      ],
+      "contextOperations": [],
+      "expected": { "valid": false, "issueCodes": ["ksat-cut-not-forward"], "bootstrap": true, "priorCutVerified": false, "circular": false }
+    },
+    {
+      "id": "negative-bootstrap-anchor-substitution",
+      "manifestOperations": [],
+      "contextOperations": [
+        { "op": "replace", "path": "/bootstrapAnchor/reviewRoot", "value": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" }
+      ],
+      "expected": { "valid": false, "issueCodes": ["ksat-bootstrap-anchor-mismatch"], "bootstrap": false, "priorCutVerified": false, "circular": false }
+    },
+    {
+      "id": "negative-bootstrap-anchor-wrong-authority",
+      "manifestOperations": [
+        { "op": "replace", "path": "/bootstrapAnchor/packageRoot", "value": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" }
+      ],
+      "contextOperations": [
+        { "op": "replace", "path": "/bootstrapAnchor/packageRoot", "value": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" }
+      ],
+      "expected": { "valid": false, "issueCodes": ["ksat-bootstrap-anchor-mismatch"], "bootstrap": false, "priorCutVerified": false, "circular": false }
+    },
+    {
+      "id": "negative-missing-independent-review",
+      "manifestOperations": [
+        { "op": "replace", "path": "/evidence/reviewRoot", "value": "missing" }
+      ],
+      "contextOperations": [],
+      "expected": { "valid": false, "issueCodes": ["ksat-evidence-missing"], "bootstrap": true, "priorCutVerified": false, "circular": false }
+    },
+    {
+      "id": "negative-current-verifier-as-prior-authority",
+      "manifestOperations": [
+        { "op": "replace", "path": "/mode", "value": "prior-cut" },
+        { "op": "replace", "path": "/bootstrapAnchor", "value": null }
+      ],
+      "contextOperations": [
+        { "op": "replace", "path": "/transitionVerifierPackageVersion", "value": "1.0.0-alpha.64" },
+        { "op": "replace", "path": "/transitionVerifierPackageRoot", "value": "sha256:3333333333333333333333333333333333333333333333333333333333333333" },
+        { "op": "replace", "path": "/transitionVerifierRoot", "value": "sha256:4444444444444444444444444444444444444444444444444444444444444444" }
+      ],
+      "expected": { "valid": false, "issueCodes": ["ksat-prior-verifier-mismatch"], "bootstrap": false, "priorCutVerified": false, "circular": true }
+    },
+    {
+      "id": "negative-verifier-surface-omitted",
+      "manifestOperations": [
+        {
+          "op": "replace",
+          "path": "/changedSurfaces",
+          "value": [
+            {
+              "id": "candidate-generation",
+              "beforeRoot": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+              "afterRoot": "sha256:7777777777777777777777777777777777777777777777777777777777777777"
+            },
+            {
+              "id": "profile",
+              "beforeRoot": "sha256:8888888888888888888888888888888888888888888888888888888888888888",
+              "afterRoot": "sha256:9999999999999999999999999999999999999999999999999999999999999999"
+            },
+            {
+              "id": "schema",
+              "beforeRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "afterRoot": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+            }
+          ]
+        }
+      ],
+      "contextOperations": [],
+      "expected": { "valid": false, "issueCodes": ["ksat-verifier-surface-missing"], "bootstrap": true, "priorCutVerified": false, "circular": false }
+    },
+    {
+      "id": "negative-verifier-surface-substitution",
+      "manifestOperations": [
+        { "op": "replace", "path": "/changedSurfaces/3/afterRoot", "value": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" }
+      ],
+      "contextOperations": [],
+      "expected": { "valid": false, "issueCodes": ["ksat-verifier-surface-mismatch"], "bootstrap": true, "priorCutVerified": false, "circular": false }
+    }
+  ]
+}
