@@ -11,9 +11,54 @@
     "kungfuProduct": "kungfu agent hub qualify --output-dir <new-directory> [--json]"
   },
   "scaffoldLanguages": ["cpp", "node", "python", "rust"],
+  "dimensions": {
+    "behavior": {
+      "question": "Does the adapter implement the fixed Hub semantics?",
+      "measure": "Hub 20 passed scenarios",
+      "conforming": "20/20",
+      "starter": "0/20"
+    },
+    "evidence": {
+      "question": "Can the report, package roots, capability roots, outcomes, and optional adapter bytes be recomputed offline?",
+      "measure": "agent-hub-report verifier valid",
+      "conforming": true,
+      "starter": true
+    },
+    "authority": {
+      "question": "Does this experimental result grant qualification or certification?",
+      "measure": "qualifying and certification claims",
+      "conforming": { "qualifying": false, "certification": false },
+      "starter": { "qualifying": false, "certification": false }
+    }
+  },
+  "paths": {
+    "reference": {
+      "purpose": "See a complete implementation succeed before writing an adapter.",
+      "expected": {
+        "demoExitCode": 0,
+        "behavior": "20/20",
+        "evidence": "valid",
+        "qualifying": false,
+        "certification": false
+      }
+    },
+    "starter": {
+      "purpose": "Implement product-owned Hub semantics from a fail-closed starter.",
+      "expected": {
+        "scaffoldExitCode": 0,
+        "smokeExitCode": 0,
+        "testExitCode": 1,
+        "behavior": "0/20",
+        "verifyExitCode": 0,
+        "evidence": "valid",
+        "qualifying": false,
+        "certification": false
+      }
+    }
+  },
   "exitCodes": {
-    "0": "suite passed, report verified, or scaffold completed",
-    "1": "execution completed but a conformance or verification check failed",
+    "0": "the requested operation completed; for test this means 20/20, while for verify it means evidence closure is valid",
+    "1": "test completed below 20/20, or evidence verification found invalid closure",
     "2": "invalid invocation, unsafe path, malformed JSON, process failure, or envelope failure"
   },
   "reportVerification": {
@@ -22,7 +67,7 @@
     "sharedRustWasmChecks": [],
     "parityBoundary": "No Agent Hub report check is duplicated in the Rust/WASM verifier. The single host verifier binds installed package bytes and optional adapter bytes; native/WASM verification-bundle profiles remain separate semantic authorities. Moving this profile requires a versioned bundle kind and byte-for-byte native/WASM parity before the host verifier can be retired."
   },
-  "claimBoundary": "Demo success and generated starter smoke success are non-qualifying, non-certifying evidence. Only kfd test agent-hub executes Hub 20 against the named adapter artifact. Kungfu may project that report into an exact installed-product qualification, but it does not turn the result into KFD certification, a security assessment, production fitness, remote-network interoperability, or external adoption.",
+  "claimBoundary": "Behavior, evidence, and authority are independent dimensions. A generated starter intentionally produces 0/20 behavior while its report and adapter binding verify as valid evidence; neither that result nor a 20/20 demo grants qualification or certification. Only kfd test agent-hub executes Hub 20 against the named adapter artifact. Kungfu may project that report into an exact installed-product qualification, but it does not turn the result into KFD certification, a security assessment, production fitness, remote-network interoperability, or external adoption.",
   "firstPartyProductProjection": {
     "product": "Kungfu",
     "run": "kungfu agent hub qualify --output-dir <new-directory>",

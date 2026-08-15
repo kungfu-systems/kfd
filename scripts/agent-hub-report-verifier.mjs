@@ -104,16 +104,30 @@ export function verifyAgentHubReport(report, { adapterPath } = {}) {
   check("declared-validity", report?.valid === (passedCount === 20), "report-validity-mismatch", "declared validity does not match fixed outcomes");
   if (adapterPath) check("adapter-artifact", report?.adapter?.artifactDigest === sha256(regular(path.resolve(adapterPath))), "adapter-artifact-digest-mismatch", "adapter bytes do not match the report artifact digest");
   const valid = issues.length === 0;
-  return { schemaVersion: 1, contract: "kfd.agent-hub-report-verifier/v1", valid, reportDigest: semanticRoot(report), checks, issues, adapterArtifactChecked: Boolean(adapterPath) };
+  return {
+    schemaVersion: 1,
+    contract: "kfd.agent-hub-report-verifier/v1",
+    valid,
+    dimensions: {
+      behavior: { passed: passedCount, total: 20, conforming: report?.valid === true },
+      evidence: { valid, adapterArtifactChecked: Boolean(adapterPath) },
+      authority: { qualifying: report?.qualifying === true, certification: report?.certification === true },
+    },
+    reportDigest: semanticRoot(report),
+    checks,
+    issues,
+    adapterArtifactChecked: Boolean(adapterPath),
+  };
 }
 
 export function runAgentHubReportVerifier(args) {
   let reportPath;
   let adapterPath;
   let outputPath;
+  let json = false;
   for (let index = 0; index < args.length; index += 1) {
-    if (args[index] === "--json") continue;
-    if (args[index] === "--adapter" && args[index + 1]) adapterPath = args[++index];
+    if (args[index] === "--json") json = true;
+    else if (args[index] === "--adapter" && args[index + 1]) adapterPath = args[++index];
     else if (args[index] === "--output" && args[index + 1]) outputPath = args[++index];
     else if (!reportPath) reportPath = args[index];
     else throw new Error(`unsupported argument: ${args[index]}`);
@@ -125,8 +139,15 @@ export function runAgentHubReportVerifier(args) {
     const output = path.resolve(outputPath);
     if (!fs.existsSync(path.dirname(output))) throw new Error(`output parent does not exist: ${path.dirname(output)}`);
     fs.writeFileSync(output, `${JSON.stringify(result, null, 2)}\n`, { flag: "wx" });
-  } else {
+  } else if (json) {
     console.log(JSON.stringify(result));
+  } else {
+    const { behavior, evidence, authority } = result.dimensions;
+    console.log([
+      `Behavior: ${behavior.passed}/${behavior.total} (${behavior.conforming ? "conforming" : "not conforming"})`,
+      `Evidence: ${evidence.valid ? "valid" : "invalid"} (adapter bytes ${evidence.adapterArtifactChecked ? "checked" : "not checked"})`,
+      `Authority: qualifying=${authority.qualifying}; certification=${authority.certification}`,
+    ].join("\n"));
   }
   return result.valid ? 0 : 1;
 }
