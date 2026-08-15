@@ -5,7 +5,7 @@
   "assessedClaims": {
     "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-2/trust-claims.schema.json",
     "path": ".buildchain/kfd-2/kfd-foundation.trust-claims.json",
-    "digest": "sha256:fd146bc4814bc4c2029869616ca3f458c9814957e9528179b95d76d98a22e38d"
+    "digest": "sha256:ad9e9b9c19363a595a9cc0c6281c44b8a3aa1814049d27449eaaf86d482c0f25"
   },
   "result": "warning",
   "projection": {
@@ -29,7 +29,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": "standards.json",
-          "digest": "sha256:4cc77b8364fa5d4f158933ee3c89640b9ef1e2979c45c2fd9e7d69060258255e",
+          "digest": "sha256:65ba7a433345452567284f201b5c7ee8dc0e412aa66a22c880089a2b6a04c1ed",
           "description": "Fact standards.json is present and hashable."
         },
         {
@@ -55,7 +55,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": "scripts/check.mjs",
-          "digest": "sha256:108ce1bf47531d5340d5808e6141405f6903a48b5e841898e11f3111e59f5daf",
+          "digest": "sha256:e4251fc11dd6ddb645c0fe6987639aac97ea670182e14f79cce74a7a9a584dd9",
           "description": "The package check gate validates the KFD-1 schema, surface register, witness, and hashes."
         }
       ],
@@ -87,7 +87,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": ".buildchain/kfd-3/collaboration-interface.json",
-          "digest": "sha256:bf991c9f82094c37101b747b80ac9908bcfdd552f07875ab6ba6a27343a81f8c",
+          "digest": "sha256:ce8551d7e17837ebadfea61b75f13d319b03de17454b5e1f0ed99b1d4f5f5fa9",
           "description": "Fact .buildchain/kfd-3/collaboration-interface.json is present and hashable."
         }
       ],
@@ -105,7 +105,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": ".buildchain/kfd-3/collaboration-interface.json",
-          "digest": "sha256:bf991c9f82094c37101b747b80ac9908bcfdd552f07875ab6ba6a27343a81f8c",
+          "digest": "sha256:ce8551d7e17837ebadfea61b75f13d319b03de17454b5e1f0ed99b1d4f5f5fa9",
           "description": "KFD-3 source collaboration interface declares reachable participant-facing surfaces and value evidence."
         },
         {
@@ -113,7 +113,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": "scripts/check.mjs",
-          "digest": "sha256:108ce1bf47531d5340d5808e6141405f6903a48b5e841898e11f3111e59f5daf",
+          "digest": "sha256:e4251fc11dd6ddb645c0fe6987639aac97ea670182e14f79cce74a7a9a584dd9",
           "description": "The package check gate validates KFD-3 interface closure and witness parity."
         }
       ],
@@ -164,7 +164,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": "standards.json",
-          "digest": "sha256:4cc77b8364fa5d4f158933ee3c89640b9ef1e2979c45c2fd9e7d69060258255e",
+          "digest": "sha256:65ba7a433345452567284f201b5c7ee8dc0e412aa66a22c880089a2b6a04c1ed",
           "description": "Fact standards.json is present and hashable."
         },
         {
@@ -206,7 +206,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": "standards.json",
-          "digest": "sha256:4cc77b8364fa5d4f158933ee3c89640b9ef1e2979c45c2fd9e7d69060258255e",
+          "digest": "sha256:65ba7a433345452567284f201b5c7ee8dc0e412aa66a22c880089a2b6a04c1ed",
           "description": "Standards metadata exposes the KFD-4 schema ID, path, interface version, and concept names."
         },
         {
@@ -214,7 +214,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": "scripts/check.mjs",
-          "digest": "sha256:108ce1bf47531d5340d5808e6141405f6903a48b5e841898e11f3111e59f5daf",
+          "digest": "sha256:e4251fc11dd6ddb645c0fe6987639aac97ea670182e14f79cce74a7a9a584dd9",
           "description": "The package check gate validates the KFD-4 timeline and replay schemas plus standards metadata; it does not assess adopter-specific capture or replay fidelity."
         }
       ],
@@ -254,7 +254,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": "standards.json",
-          "digest": "sha256:4cc77b8364fa5d4f158933ee3c89640b9ef1e2979c45c2fd9e7d69060258255e",
+          "digest": "sha256:65ba7a433345452567284f201b5c7ee8dc0e412aa66a22c880089a2b6a04c1ed",
           "description": "Fact standards.json is present and hashable."
         },
         {
@@ -280,7 +280,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": "scripts/check.mjs",
-          "digest": "sha256:108ce1bf47531d5340d5808e6141405f6903a48b5e841898e11f3111e59f5daf",
+          "digest": "sha256:e4251fc11dd6ddb645c0fe6987639aac97ea670182e14f79cce74a7a9a584dd9",
           "description": "The package check gate validates the KFD-5 interface and metadata; it does not certify adopter candidates."
         }
       ],
@@ -320,7 +320,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": "standards.json",
-          "digest": "sha256:4cc77b8364fa5d4f158933ee3c89640b9ef1e2979c45c2fd9e7d69060258255e",
+          "digest": "sha256:65ba7a433345452567284f201b5c7ee8dc0e412aa66a22c880089a2b6a04c1ed",
           "description": "Fact standards.json is present and hashable."
         },
         {
@@ -346,7 +346,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": "scripts/check.mjs",
-          "digest": "sha256:108ce1bf47531d5340d5808e6141405f6903a48b5e841898e11f3111e59f5daf",
+          "digest": "sha256:e4251fc11dd6ddb645c0fe6987639aac97ea670182e14f79cce74a7a9a584dd9",
           "description": "The package check gate validates draft status, required generation experiments, bounded method comparison, conditional boundary hypothesis, and anti-self-certification constants."
         }
       ],
@@ -429,7 +429,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": "standards.json",
-          "digest": "sha256:4cc77b8364fa5d4f158933ee3c89640b9ef1e2979c45c2fd9e7d69060258255e",
+          "digest": "sha256:65ba7a433345452567284f201b5c7ee8dc0e412aa66a22c880089a2b6a04c1ed",
           "description": "Fact standards.json is present and hashable."
         },
         {
@@ -471,7 +471,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": "scripts/check.mjs",
-          "digest": "sha256:108ce1bf47531d5340d5808e6141405f6903a48b5e841898e11f3111e59f5daf",
+          "digest": "sha256:e4251fc11dd6ddb645c0fe6987639aac97ea670182e14f79cce74a7a9a584dd9",
           "description": "The package check gate validates KFD-7 identity, formal binding, theorem and corollary references, Profile evidence categories, active status, activation review, trust projection, and participant-facing closure."
         }
       ],
@@ -527,7 +527,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": "standards.json",
-          "digest": "sha256:4cc77b8364fa5d4f158933ee3c89640b9ef1e2979c45c2fd9e7d69060258255e",
+          "digest": "sha256:65ba7a433345452567284f201b5c7ee8dc0e412aa66a22c880089a2b6a04c1ed",
           "description": "Fact standards.json is present and hashable."
         },
         {
@@ -569,7 +569,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": "scripts/check.mjs",
-          "digest": "sha256:108ce1bf47531d5340d5808e6141405f6903a48b5e841898e11f3111e59f5daf",
+          "digest": "sha256:e4251fc11dd6ddb645c0fe6987639aac97ea670182e14f79cce74a7a9a584dd9",
           "description": "The package gate checks KFD-11 interface identity, required separation fields, field-matrix coverage, and Foundation Revision closure."
         }
       ],

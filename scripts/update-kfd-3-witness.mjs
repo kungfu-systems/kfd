@@ -94,6 +94,7 @@ const schemaSurfaces = [...new Set(Object.values(standards.standards).flatMap(
 const groupedSurfaces = {
   docs: [
     { id: "doc:readme", sourcePath: "README.md", sha256: sha256File("README.md") },
+    { id: "doc:conceptual-compression", sourcePath: "docs/conceptual-compression.md", sha256: sha256File("docs/conceptual-compression.md") },
     { id: "doc:contributing", sourcePath: "CONTRIBUTING.md", sha256: sha256File("CONTRIBUTING.md") },
     { id: "doc:governance", sourcePath: "GOVERNANCE.md", sha256: sha256File("GOVERNANCE.md") },
     { id: "doc:kfd-proposal-form", sourcePath: ".github/ISSUE_TEMPLATE/kfd-proposal.yml", sha256: sha256File(".github/ISSUE_TEMPLATE/kfd-proposal.yml") },
@@ -266,6 +267,7 @@ const artifact = {
     minimalEntrypoints: collaborationInterface.minimalEntrypoints.map((entry) => pointer(entry.surface, entry.purpose)),
     discoverability: [
       pointer("README.md", "Human and agent entrypoint"),
+      pointer("docs/conceptual-compression.md", "Ten-minute KFD reader model through one software-delivery Work"),
       pointer("docs/foundation.md", "Complete non-numbered foundation explanation"),
       pointer("docs/terminology.md", "Canonical terminology and layer boundaries"),
       pointer("terminology.json", "Machine-readable terminology contract"),
@@ -296,6 +298,7 @@ const artifact = {
     ],
     choicePaths: [
       pointer("README.md", "Human reading path"),
+      pointer("docs/conceptual-compression.md", "Human and agent ten-minute conceptual reading path"),
       pointer("docs/foundation.md", "Human and agent foundation reading path"),
       pointer("docs/formal-model.md", "Human and agent formal reference entrypoint"),
       pointer("docs/primitive-discovery-cases.md", "Human and agent historical case path"),
@@ -315,6 +318,7 @@ const artifact = {
       pointer("CONTRIBUTING.md"),
       pointer("GOVERNANCE.md"),
       pointer("docs/MAP.md"),
+      pointer("docs/conceptual-compression.md"),
       pointer("docs/foundation.md"),
       pointer("docs/formal-model.md"),
       pointer("docs/primitive-discovery-cases.md"),

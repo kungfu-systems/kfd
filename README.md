@@ -22,6 +22,30 @@ implementation, not its adoption boundary. Accumulating Episodes alone does
 not discover or prove a Primitive; KFD-5 and KFD-6 keep generation,
 qualification, and promotion separate.
 
+## Start here: the agent is not the center of truth
+
+Most agent systems are described from the agent outward: its context, task,
+tools, actions, and output. KFD starts from the continuity of the work instead.
+
+What must remain continuous when the agent, session, repository, authority, or
+execution path changes—but the work continues?
+
+```text
+running != authorized
+retry != same attempt
+same output != same result
+success != admitted Fact
+```
+
+One real delivery broke all four equivalences. Following it from healthy action
+through authority loss, rejected recovery, a valid successor, and settlement
+reveals why KFD separates Fact, Episode, Atlas, Pursuit, and Warrant—and why the
+agent is a participant in the work, not its center of truth.
+
+[See the real failure that forces this model](docs/conceptual-compression.md) ·
+[Use the terminology contract](docs/terminology.md) ·
+[Inspect the founding-adopter evidence](docs/load-bearing-dogfood.md)
+
 ## How KFD governs its own change
 
 KFD Self-Conformance has two connected lanes with different time boundaries:
@@ -51,14 +75,14 @@ production fitness. Accountable human authority remains separate and explicit.
 **Implement KFD without Kungfu — scaffold an adapter in Python, Rust, Node.js,
 or C++, then verify it offline.**
 
-Use the immutable `@kungfu-tech/kfd@1.0.0-alpha.65` package cut and follow the
+Use the immutable `@kungfu-tech/kfd@1.0.0-alpha.66` package cut and follow the
 package-owned [Agent Hub workflow](profiles/agent-hub/README.md) or inspect the
 complete [independent verification boundary](docs/independent-verifier.md):
 
 ```bash
-npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.65 kfd scaffold agent-hub --language python --output my-agent-hub-adapter
-npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.65 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json
-npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.65 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py --json
+npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.66 kfd scaffold agent-hub --language python --output my-agent-hub-adapter
+npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.66 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json
+npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.66 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py --json
 ```
 
 The scaffold is a deterministic, fail-closed starter: its smoke path checks
@@ -691,6 +715,11 @@ The first screen should be derived from this README:
   path is not known in advance.
 - Claim boundary: the third paragraph must state that KFD is a small, testable
   foundation rather than a final answer or complete theory of complex systems.
+- Conceptual compression: `Start here: the agent is not the center of truth`
+  must expose the work-centered question, all four false equivalences, and the
+  real-failure call to action, with `/concepts` as the first depth route. The
+  complete `2 + 3` model belongs on that depth page rather than in the first
+  viewport, and familiar stack labels must not become one-to-one KFD aliases.
 - Independent implementation: the exact promise, four supported languages,
   ordered scaffold/test/verify commands, offline boundary, non-certifying
   boundary, and `/agent-hub/` plus `/verify/` links must appear before the
@@ -711,14 +740,16 @@ the package directory layout. A site renderer may adapt layout, navigation,
 typography, and visual assets, but it should not maintain separate wording that
 can drift from this package.
 
-`site/kfd-site.json` is generated from this README and
-`docs/foundation.md` and `docs/primitive-discovery-cases.md` by
-`scripts/update-site-bundle.mjs`. The README owns the concise homepage; the
-foundation document owns the complete explanation; the cases document owns
-the non-normative historical anchors. The generated bundle exposes ordered
-homepage sections, the `/foundation` and `/cases` pages, and a display plan that
-separates first-screen, primary, detail, and support content. Site repositories
-should consume that bundle instead of parsing the Markdown files. The renderer
+`site/kfd-site.json` is generated from this README,
+`docs/conceptual-compression.md`, `docs/foundation.md`, and
+`docs/primitive-discovery-cases.md` by `scripts/update-site-bundle.mjs`. The
+README owns the concise homepage; the conceptual-compression document owns the
+ten-minute reader model; the foundation document owns the complete
+explanation; the cases document owns the non-normative historical anchors. The
+generated bundle exposes ordered homepage sections, the `/concepts`,
+`/foundation`, and `/cases` pages, and a display plan that separates
+first-screen, primary, detail, and support content. Site repositories should
+consume that bundle instead of parsing the Markdown files. The renderer
 contract remains machine metadata, not ordinary homepage content.
 
 ## Release impact ledger

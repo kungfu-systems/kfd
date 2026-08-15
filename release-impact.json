@@ -175,6 +175,12 @@
       "rationale": "The schemaVersion 2 site bundle exposes the homepage core question, engineering answer, claim boundary, KFD Foundation, terminology page, and explicit non-normative formal child pages at /drafts/{id}/formal/ for candidates that declare a formalReference. Renderers consume declared routes and do not infer semantics from package layout."
     },
     {
+      "id": "kfd-conceptual-compression-site-page",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD additively publishes a ten-minute non-normative Conceptual Compression explanation, a first-class /concepts route, a complete software-delivery Work from admitted Fact through failure, recovery, settlement, and successor Fact, and a structured core-model projection sourced from terminology.json. The page preserves numbered decisions as semantic authority, keeps the KFD 2 + 3 responsibilities distinct, and does not promote familiar stack labels or founding-adopter lifecycle fields into universal KFD semantics."
+    },
+    {
       "id": "kfd-load-bearing-dogfood-baseline",
       "impact": "minor",
       "class": "additive",
