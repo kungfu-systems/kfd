@@ -5,6 +5,8 @@
 | Your question | Document |
 |---|---|
 | What deepest problem does KFD address, and what decisions exist? | [`../README.md`](../README.md) |
+| Can I understand the complete model in ten minutes through one real software-delivery Work? | [`conceptual-compression.md`](conceptual-compression.md) |
+| How do context, task, permission, logs, workflow, and judgment relate to Fact, Episode, Atlas, Pursuit, and Warrant without becoming one-to-one aliases? | [`conceptual-compression.md`](conceptual-compression.md#the-model-in-one-view), then [`terminology.md`](terminology.md#the-core-2--3-structure) |
 | How can a bounded, goal-directed system remain continuous while acting and changing under uncertainty? | [`../README.md`](../README.md), then [`foundation.md`](foundation.md) |
 | Is KFD an internal kungfu-systems rulebook or an open engineering standard? | [`../README.md`](../README.md#what-kfd-is) and [`../GOVERNANCE.md`](../GOVERNANCE.md) |
 | Who may propose, challenge, implement, adopt, or review a KFD? | [`../CONTRIBUTING.md`](../CONTRIBUTING.md) |
@@ -135,6 +137,7 @@
 | Where is the public KFD fact source? | [`../README.md`](../README.md#decision-metadata) and [`../site/kfd-site.json`](../site/kfd-site.json) decision metadata |
 | What does Apache-2.0 cover, and what remains official/trademark-bound? | [`../TRADEMARKS.md`](../TRADEMARKS.md) |
 | What should a site renderer consume to render `kfd.libkungfu.dev`? | [`../site/kfd-site.json`](../site/kfd-site.json) |
+| How should a site render the ten-minute KFD reader model? | [`../site/kfd-site.json`](../site/kfd-site.json) — `conceptualCompressionPage` owns `/concepts`, projects canonical terms from `terminology.json`, and carries the complete non-normative Markdown body |
 | How should a site render the executable Agent Hub onboarding path? | [`../site/kfd-site.json`](../site/kfd-site.json) — `agentHubPage` owns `/agent-hub` and is generated from the packaged profile, implementer guide, capabilities, and manifest |
 | How should a site render the load-bearing dogfood baseline? | [`../site/kfd-site.json`](../site/kfd-site.json) — `loadBearingPage` owns `/under-load`, declares its non-normative authority boundary, and carries the complete Markdown body |
 | How should a site render provisional live cases? | [`../site/kfd-site.json`](../site/kfd-site.json) — `liveCases` maps the registry to `/cases/live/{id}` |

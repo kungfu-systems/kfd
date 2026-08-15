@@ -3,6 +3,7 @@ import { createHash } from "node:crypto";
 import { pathToFileURL } from "node:url";
 
 const README_PATH = "README.md";
+const CONCEPTUAL_COMPRESSION_PATH = "docs/conceptual-compression.md";
 const FOUNDATION_PATH = "docs/foundation.md";
 const LOAD_BEARING_PATH = "docs/load-bearing-dogfood.md";
 const TERMINOLOGY_PATH = "docs/terminology.md";
@@ -401,6 +402,129 @@ const section = ({ id, sourceHeading, title, markdown, role, priority, presentat
   includeInFirstScreen: firstScreen,
   markdown: normalizeLines(markdown),
 });
+
+const parseConceptualCompressionTeaser = (markdown) => {
+  const code = markdown.match(/```text\n([\s\S]*?)\n```/);
+  if (!code) throw new Error("Conceptual compression teaser must include the false-equivalence block");
+  const before = markdown.slice(0, code.index).trim();
+  const after = markdown.slice((code.index ?? 0) + code[0].length).trim();
+  const beforeBlocks = paragraphBlocks(before);
+  const blocks = paragraphBlocks(after);
+  const falseEquivalences = code[1].split("\n").map((line) => line.trim()).filter(Boolean);
+  const links = [...after.matchAll(/\[([^\]]+)\]\(([^)]+)\)/g)].map((link) => ({
+    label: link[1],
+    sourceTarget: link[2],
+    url: link[2] === CONCEPTUAL_COMPRESSION_PATH
+      ? "/concepts"
+      : link[2] === TERMINOLOGY_PATH
+        ? "/terminology"
+        : link[2] === LOAD_BEARING_PATH
+          ? "/under-load"
+          : link[2],
+  }));
+  const cta = links[0];
+  return {
+    eyebrow: "Start here · 10-minute model",
+    title: "The agent is not the center of truth.",
+    question: beforeBlocks[1] || "",
+    falseEquivalences,
+    failurePrompt: blocks[0] || "",
+    cta,
+    // Compatibility aliases for schemaVersion 2 renderers.
+    label: "The agent is not the center of truth.",
+    url: "/concepts",
+    summary: beforeBlocks[0] || "",
+    model: normalizeLines(code[1]),
+    boundary: blocks[0] || "",
+    links,
+  };
+};
+
+const buildConceptualCompressionPage = ({ text, terminology }) => {
+  const document = parseReadme(text);
+  const termById = new Map((terminology.terms ?? []).map((entry) => [entry.id, entry]));
+  const structureById = new Map((terminology.structures ?? []).map((entry) => [entry.termId, entry]));
+  const requireTerm = (id) => {
+    const term = termById.get(id);
+    if (!term) throw new Error(`terminology.json must define ${id} for conceptual compression`);
+    return term;
+  };
+  const requireStructure = (id) => {
+    const structure = structureById.get(id);
+    if (!structure) throw new Error(`terminology.json must define ${id} for conceptual compression`);
+    return structure;
+  };
+  const requiredSections = [
+    ["model-in-one-view", "The model in one view"],
+    ["one-real-software-delivery-work", "One real software-delivery Work"],
+    ["failure-does-not-collapse-the-model", "Failure does not collapse the model"],
+    ["settlement-returns-to-fact", "Settlement returns to Fact"],
+    ["software-work-composes-the-core", "Software work composes the core"],
+    ["common-misreadings", "Common misreadings"],
+    ["ten-minute-reading-check", "Ten-minute reading check"],
+    ["continue-to-authority-and-evidence", "Continue to authority and evidence"],
+  ];
+  const sections = requiredSections.map(([id, heading]) => {
+    const markdown = document.sections[heading];
+    if (!markdown) throw new Error(`Conceptual compression page must define ${heading}`);
+    return {
+      id,
+      title: heading,
+      sourcePath: CONCEPTUAL_COMPRESSION_PATH,
+      sourceHeading: heading,
+      markdown: normalizeLines(markdown),
+    };
+  });
+
+  return {
+    id: "conceptual-compression",
+    title: document.title,
+    sourcePath: CONCEPTUAL_COMPRESSION_PATH,
+    url: "/concepts",
+    relationship: "non-normative-reader-compression-of-numbered-decisions",
+    normative: false,
+    authorityNote: "Numbered decisions remain authoritative; terminology.json owns the canonical names and anti-misreading boundaries projected by this page.",
+    lead: paragraphBlocks(document.intro)[1] || paragraphBlocks(document.intro)[0] || "",
+    coreModel: {
+      ontology: {
+        structure: requireStructure("fact-episode-ontology"),
+        terms: [requireTerm("fact"), requireTerm("episode")],
+      },
+      actionGeometry: {
+        structure: requireStructure("action-responsibility-geometry"),
+        terms: [requireTerm("atlas"), requireTerm("pursuit"), requireTerm("warrant")],
+      },
+      settlement: ["claim", "assessment", "decision", "admission"].map(requireTerm),
+      softwareProfile: ["initiative", "assignment", "project-cut"].map(requireTerm),
+    },
+    sections,
+    rendering: {
+      kind: "conceptual-compression",
+      tocDepth: 3,
+      navigationLabel: "Concepts",
+      navigationGroup: "foundation",
+      navigationOrder: 10,
+      progressiveDisclosure: [
+        "model-in-one-view",
+        "one-real-software-delivery-work",
+        "failure-does-not-collapse-the-model",
+        "settlement-returns-to-fact",
+        "software-work-composes-the-core",
+        "common-misreadings",
+        "ten-minute-reading-check",
+        "continue-to-authority-and-evidence",
+      ],
+    },
+    markdown: stripFrontmatter(text),
+    rendererContract: {
+      showCoreModelFirst: true,
+      showWorkedExampleAsOneSequence: true,
+      showFailureRecoveryAndSettlement: true,
+      showAuthorityBoundary: true,
+      note: "Render KFD-owned wording and terminology projections without replacing canonical terms with familiar stack aliases or promoting founding-adopter fields into universal semantics.",
+    },
+  };
+};
 
 const buildAgentHubPage = ({ profileText, guideText, capabilities, manifest }) => {
   const profile = parseReadme(profileText);
@@ -906,6 +1030,7 @@ const buildSelfConformancePage = ({
 
 export const buildSiteBundle = ({
   readmeText,
+  conceptualCompressionText,
   foundationText,
   loadBearingText,
   formalText,
@@ -941,11 +1066,15 @@ export const buildSiteBundle = ({
   releaseAnchor,
 }) => {
   const readme = parseReadme(readmeText);
+  const conceptualCompressionDocument = parseReadme(conceptualCompressionText);
   const foundationDocument = parseReadme(foundationText);
   const loadBearingDocument = parseReadme(loadBearingText);
   const formalDocument = parseReadme(formalText);
   const casesDocument = parseReadme(casesText);
   const futurePicture = parseFuturePicture(readme.intro);
+  const conceptualCompression = parseConceptualCompressionTeaser(
+    readme.sections["Start here: the agent is not the center of truth"] || "",
+  );
   const { lead } = introLead(readme.intro);
   const { decisionKinds } = introLead(readme.sections["What KFD is"] || "");
   const foundationTriad = parseFoundationTriad(readme.sections["Foundation triad"] || "");
@@ -972,6 +1101,10 @@ export const buildSiteBundle = ({
     claimBoundary: entry.claimBoundary,
     markdown: entry.markdown,
   }));
+  const conceptualCompressionPage = buildConceptualCompressionPage({
+    text: conceptualCompressionText,
+    terminology,
+  });
   const agentHubPage = buildAgentHubPage({
     profileText: agentHubProfileText,
     guideText: agentHubGuideText,
@@ -1045,6 +1178,16 @@ export const buildSiteBundle = ({
       role: "first-screen",
       priority: 5,
       presentation: "future-picture",
+      firstScreen: true,
+    }),
+    section({
+      id: "conceptual-compression",
+      sourceHeading: "Start here: the agent is not the center of truth",
+      title: "The agent is not the center of truth",
+      markdown: readme.sections["Start here: the agent is not the center of truth"],
+      role: "first-screen",
+      priority: 6,
+      presentation: "conceptual-compression",
       firstScreen: true,
     }),
     section({
@@ -1178,6 +1321,7 @@ export const buildSiteBundle = ({
     source: {
       package: "@kungfu-tech/kfd",
       homepageTextSource: README_PATH,
+      conceptualCompressionTextSource: CONCEPTUAL_COMPRESSION_PATH,
       foundationTextSource: FOUNDATION_PATH,
       loadBearingTextSource: LOAD_BEARING_PATH,
       formalTextSource: FORMAL_PATH,
@@ -1215,6 +1359,7 @@ export const buildSiteBundle = ({
     },
     routes: {
       home: "/",
+      conceptualCompression: "/concepts",
       foundation: "/foundation",
       underLoad: "/under-load",
       formal: "/formal",
@@ -1238,6 +1383,7 @@ export const buildSiteBundle = ({
       lead,
       decisionKinds,
       futurePicture,
+      conceptualCompression,
       independentImplementation,
       foundationTriad,
       foundation,
@@ -1265,6 +1411,12 @@ export const buildSiteBundle = ({
             "future-picture.claimBoundary",
             "future-picture.pastToFuture",
             "future-picture.kungfuPath",
+            "conceptual-compression.eyebrow",
+            "conceptual-compression.title",
+            "conceptual-compression.question",
+            "conceptual-compression.falseEquivalences",
+            "conceptual-compression.failurePrompt",
+            "conceptual-compression.cta",
             "self-conformance.readerModel.prospective",
             "self-conformance.readerModel.retrospective",
             "self-conformance.readerModel.authorityBoundary",
@@ -1279,16 +1431,16 @@ export const buildSiteBundle = ({
             "product-witness.principle",
             "foundation-triad.links",
           ],
-          maxPrimarySections: 4,
-          note: "The first viewport should ask the system-continuity question, connect prospective governance with retrospective structural conformance without widening authority, make independent implementation and offline verification directly actionable, and begin the package-owned three-step path before installed-product, registry, or renderer detail.",
+          maxPrimarySections: 5,
+          note: "The first viewport should move readers from an agent-centered model to work continuity, expose the four false equivalences and the /concepts real-failure route without duplicating the complete model, connect prospective governance with retrospective structural conformance without widening authority, make independent implementation and offline verification directly actionable, and begin the package-owned three-step path before installed-product, registry, or renderer detail.",
         },
-        primary: ["future-picture", "self-conformance-reader-model", "independent-implementation", "foundation-triad", "why-this-question-matters", "what-kfd-is", "adoption-boundary", "current-candidates", "product-proof-path"],
+        primary: ["future-picture", "conceptual-compression", "self-conformance-reader-model", "independent-implementation", "foundation-triad", "why-this-question-matters", "what-kfd-is", "adoption-boundary", "current-candidates", "product-proof-path"],
         detail: {
           route: "/foundation",
           source: FOUNDATION_PATH,
           sections: ["foundation-structure", "load-bearing-product-witness", "practice-guidelines"],
         },
-        readingPath: ["/", "/foundation", "/verify", "/verify/self-conformance", "/under-load", "/formal", "/cases", "/drafts", "/{number}"],
+        readingPath: ["/", "/concepts", "/foundation", "/verify", "/verify/self-conformance", "/under-load", "/formal", "/cases", "/drafts", "/{number}"],
         support: ["agent-quickstart", "decision-metadata"],
         currentDecisions: {
           source: REGISTRY_PATH,
@@ -1310,6 +1462,10 @@ export const buildSiteBundle = ({
         note: "This is a machine/renderer contract for site implementers. It should not be rendered as ordinary homepage content.",
       },
     },
+    conceptualCompressionPage: {
+      ...conceptualCompressionPage,
+      title: conceptualCompressionDocument.title,
+    },
     foundationPage: {
       id: "foundation",
       title: foundationDocument.title,
@@ -1324,7 +1480,7 @@ export const buildSiteBundle = ({
     independentVerificationPage,
     selfConformancePage,
     verificationLanes,
-    standalonePages: [loadBearingPage, independentVerificationPage, selfConformancePage],
+    standalonePages: [conceptualCompressionPage, loadBearingPage, independentVerificationPage, selfConformancePage],
     formalPage: {
       id: "formal-model",
       title: formalDocument.title,
@@ -1453,6 +1609,7 @@ export const buildSiteBundle = ({
       ownedByKfd: [
         "homepage title and text",
         "homepage section projection from README.md",
+        "conceptual compression page from docs/conceptual-compression.md and canonical terminology projection from terminology.json",
         "first-screen independent implementation promise, languages, commands, links, and boundaries",
         "foundation explanation page from docs/foundation.md",
         "load-bearing dogfood evidence page from docs/load-bearing-dogfood.md",
@@ -1495,6 +1652,7 @@ export const buildSiteBundle = ({
 
 export const readInputs = () => ({
   readmeText: readFileSync(README_PATH, "utf8"),
+  conceptualCompressionText: readFileSync(CONCEPTUAL_COMPRESSION_PATH, "utf8"),
   foundationText: readFileSync(FOUNDATION_PATH, "utf8"),
   loadBearingText: readFileSync(LOAD_BEARING_PATH, "utf8"),
   formalText: readFileSync(FORMAL_PATH, "utf8"),
