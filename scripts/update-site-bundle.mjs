@@ -140,10 +140,13 @@ const parseIndependentImplementation = (markdown, capabilities, releaseAnchor) =
   const commandBlock = markdown.match(/```bash\n([\s\S]*?)\n```/);
   if (!commandBlock) throw new Error("independent implementation section must include a bash command block");
   const commands = commandBlock[1].split("\n").map((line) => line.trim()).filter(Boolean);
-  if (commands.length !== 3) throw new Error("independent implementation section must expose exactly three commands");
+  if (commands.length !== 4) throw new Error("independent implementation section must expose scaffold, smoke, test, and verify commands");
   const version = releaseAnchor.npmVersion;
-  if (!commands.every((command) => command.includes(`@kungfu-tech/kfd@${version}`))) {
+  if (![commands[0], commands[2], commands[3]].every((command) => command.includes(`@kungfu-tech/kfd@${version}`))) {
     throw new Error("independent implementation commands must pin the exact release anchor version");
+  }
+  if (commands[1] !== "python3 my-agent-hub-adapter/smoke.py") {
+    throw new Error("independent implementation section must expose the Python starter smoke command");
   }
   const blocks = paragraphBlocks(markdown);
   const boundary = (needle, message) => {
@@ -151,13 +154,13 @@ const parseIndependentImplementation = (markdown, capabilities, releaseAnchor) =
     if (!value) throw new Error(message);
     return value;
   };
-  const links = [...markdown.matchAll(/\[([^\]]+)\]\((\/(?:agent-hub|verify)\/)\)/g)]
+  const links = [...markdown.matchAll(/\[([^\]]+)\]\((\/agent-hub\/#report-verification|\/verify\/)\)/g)]
     .map((match) => ({
-      id: match[2] === "/agent-hub/" ? "agent-hub" : "verify",
+      id: match[2].startsWith("/agent-hub/") ? "agent-hub-report-verification" : "verify",
       label: match[1],
       url: match[2],
     }));
-  if (links.length !== 2) throw new Error("independent implementation section must link /agent-hub/ and /verify/");
+  if (links.length !== 2) throw new Error("independent implementation section must link Agent Hub report verification and /verify/");
   const nativeSection = markdown.match(/### Native `kfd`\n\n([\s\S]+)$/)?.[1] || "";
   const nativeCommands = nativeSection.match(/```bash\n([\s\S]*?)\n```/)?.[1]
     .split("\n")
@@ -191,9 +194,19 @@ const parseIndependentImplementation = (markdown, capabilities, releaseAnchor) =
     ],
     steps: [
       { id: "scaffold", label: "Scaffold", command: commands[0], capability: capabilities.commands.scaffold },
-      { id: "test", label: "Test Hub 20", command: commands[1], capability: capabilities.commands.test },
-      { id: "verify", label: "Verify offline", command: commands[2], capability: capabilities.commands.verify },
+      { id: "smoke", label: "Run envelope smoke", command: commands[1], expectedExitCode: 0 },
+      { id: "implement", label: "Implement Hub semantics", expected: "advance behavior from 0/20 to 20/20" },
+      { id: "test", label: "Test Hub 20", command: commands[2], capability: capabilities.commands.test, starterExpectedExitCode: 1 },
+      { id: "verify", label: "Verify report evidence", command: commands[3], capability: capabilities.commands.verify, expectedExitCode: 0 },
     ],
+    dimensions: capabilities.dimensions,
+    paths: {
+      reference: {
+        ...capabilities.paths.reference,
+        command: `npx --yes --package @kungfu-tech/kfd@${version} kfd demo agent-hub --output agent-hub-demo-report.json`,
+      },
+      starter: capabilities.paths.starter,
+    },
     nativeCli: {
       label: "Install the native kfd CLI",
       summary: "No coding is required. Install the Rust-native offline verifier with one command.",
@@ -211,6 +224,7 @@ const parseIndependentImplementation = (markdown, capabilities, releaseAnchor) =
     },
     links,
     starterBoundary: boundary("deterministic, fail-closed starter", "independent implementation section must preserve the starter boundary"),
+    implementationBoundary: boundary("Implementers then replace", "independent implementation section must preserve the Hub semantics implementation boundary"),
     offlineBoundary: boundary("Package acquisition is separate", "independent implementation section must preserve the offline boundary"),
     claimBoundary: boundary("do not certify", "independent implementation section must preserve the non-certifying boundary"),
   };
@@ -560,12 +574,21 @@ const buildAgentHubPage = ({ profileText, guideText, capabilities, manifest }) =
     },
     commands: capabilities.commands,
     scaffoldLanguages: capabilities.scaffoldLanguages,
+    dimensions: capabilities.dimensions,
+    paths: capabilities.paths,
     exitCodes: capabilities.exitCodes,
     reportVerification: capabilities.reportVerification,
     claimBoundary: capabilities.claimBoundary,
     firstPartyProductProjection: capabilities.firstPartyProductProjection,
     recovery: capabilities.recovery,
     sections: [
+      pageSection({
+        id: "three-independent-dimensions",
+        title: "Three independent dimensions",
+        sourcePath: AGENT_HUB_PROFILE_PATH,
+        markdown: profile.sections["Three independent dimensions"],
+        presentation: "dimension-cards",
+      }),
       pageSection({
         id: "five-minute-packaged-quickstart",
         title: "Five-minute packaged quickstart",
@@ -586,6 +609,13 @@ const buildAgentHubPage = ({ profileText, guideText, capabilities, manifest }) =
         sourcePath: AGENT_HUB_PROFILE_PATH,
         markdown: profile.sections["Scaffold an adopter adapter"],
         presentation: "language-scaffolds",
+      }),
+      pageSection({
+        id: "implement-hub-semantics",
+        title: "Implement Hub semantics",
+        sourcePath: AGENT_HUB_PROFILE_PATH,
+        markdown: profile.sections["Implement Hub semantics"],
+        presentation: "semantic-implementation",
       }),
       pageSection({
         id: "run-the-fixed-suite-against-an-adopter",
@@ -630,10 +660,10 @@ const buildAgentHubPage = ({ profileText, guideText, capabilities, manifest }) =
         presentation: "evidence-roots",
       }),
       pageSection({
-        id: "fail-closed-verification",
-        title: "Fail-closed verification",
+        id: "report-verification",
+        title: "Report verification",
         sourcePath: AGENT_HUB_GUIDE_PATH,
-        markdown: guide.sections["Fail-closed verification"],
+        markdown: guide.sections["Report verification"],
         presentation: "verification-boundary",
       }),
       pageSection({
@@ -653,20 +683,22 @@ const buildAgentHubPage = ({ profileText, guideText, capabilities, manifest }) =
     ],
     rendererContract: {
       primary: [
+        "three-independent-dimensions",
         "five-minute-packaged-quickstart",
         "scaffold-an-adopter-adapter",
+        "implement-hub-semantics",
         "run-the-fixed-suite-against-an-adopter",
       ],
       detail: [
         "executable-onboarding-surfaces",
         "adapter-binding",
         "reports-and-roots",
-        "fail-closed-verification",
+        "report-verification",
         "starter-claim-and-recovery",
         "reference-adapters",
       ],
       boundary: ["fixed-boundaries", "claim-boundary"],
-      note: "Render commands and machine-readable boundaries from this page object. Do not infer certification, production fitness, or language-runtime parity from scaffold availability.",
+      note: "Render the behavior, evidence, and authority dimensions before commands. Preserve the reference 20/20 path and starter 0/20 path as different teaching flows. Do not infer certification, production fitness, or language-runtime parity from scaffold availability.",
     },
   };
 };
@@ -1423,6 +1455,8 @@ export const buildSiteBundle = ({
             "independent-implementation.promise",
             "independent-implementation.supportedLanguages",
             "independent-implementation.nativeCli",
+            "independent-implementation.dimensions",
+            "independent-implementation.paths",
             "independent-implementation.steps",
             "independent-implementation.links",
             "independent-implementation.offlineBoundary",
@@ -1432,7 +1466,7 @@ export const buildSiteBundle = ({
             "foundation-triad.links",
           ],
           maxPrimarySections: 5,
-          note: "The first viewport should move readers from an agent-centered model to work continuity, expose the four false equivalences and the /concepts real-failure route without duplicating the complete model, connect prospective governance with retrospective structural conformance without widening authority, make independent implementation and offline verification directly actionable, and begin the package-owned three-step path before installed-product, registry, or renderer detail.",
+          note: "The first viewport should move readers from an agent-centered model to work continuity, expose the four false equivalences and the /concepts real-failure route without duplicating the complete model, connect prospective governance with retrospective structural conformance without widening authority, make independent implementation and offline verification directly actionable, and begin the reference-success or five-step adopter path before installed-product, registry, or renderer detail.",
         },
         primary: ["future-picture", "conceptual-compression", "self-conformance-reader-model", "independent-implementation", "foundation-triad", "why-this-question-matters", "what-kfd-is", "adoption-boundary", "current-candidates", "product-proof-path"],
         detail: {

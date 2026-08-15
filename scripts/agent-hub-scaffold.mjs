@@ -58,13 +58,23 @@ export function runAgentHubScaffold(rawArgs) {
     language: options.language,
     output,
     binding: "jsonl-stdio/v1",
-    conformance: "starter-envelope-smoke-only",
+    conformance: "evidence-valid-negative-starter",
+    expected: {
+      smoke: { exitCode: 0, valid: true },
+      behavior: { exitCode: 1, passed: 0, total: 20, conforming: false },
+      evidence: { exitCode: 0, valid: true, adapterArtifactChecked: true },
+      authority: { qualifying: false, certification: false },
+    },
     qualifying: false,
     certification: false,
     next: JSON.parse(fs.readFileSync(path.join(output, "kfd-scaffold.json"), "utf8")),
   };
   if (options.json) console.log(JSON.stringify(result));
-  else console.log(`KFD Agent Hub ${options.language} starter -> ${output}\nScope: envelope smoke only; implement Hub semantics before running Hub 20.`);
+  else console.log([
+    `KFD Agent Hub ${options.language} starter -> ${output}`,
+    "Expected before implementation: smoke exit 0; Hub 20 exit 1 (0/20); offline evidence verify exit 0.",
+    "Authority: qualifying=false; certification=false. Replace evaluate() to implement product-owned Hub semantics.",
+  ].join("\n"));
   return 0;
 }
 
