@@ -736,6 +736,9 @@ if (JSON.stringify(siteBundle) !== JSON.stringify(expectedSiteBundle)) {
   fail("site/kfd-site.json must match the generated README.md homepage bundle; run npm run update:site-bundle");
 }
 if (siteBundle.source?.homepageTextSource !== "README.md") fail("site bundle homepageTextSource must be README.md");
+if (siteBundle.source?.conceptualCompressionTextSource !== "docs/conceptual-compression.md") {
+  fail("site bundle conceptualCompressionTextSource must be docs/conceptual-compression.md");
+}
 if (siteBundle.source?.foundationTextSource !== "docs/foundation.md") {
   fail("site bundle foundationTextSource must be docs/foundation.md");
 }
@@ -771,6 +774,9 @@ if (!Array.isArray(siteBundle.homepage?.sections) || siteBundle.homepage.section
   fail("site bundle homepage.sections must expose generated homepage and foundation sections");
 }
 if (siteBundle.routes?.foundation !== "/foundation") fail("site bundle routes.foundation must be /foundation");
+if (siteBundle.routes?.conceptualCompression !== "/concepts") {
+  fail("site bundle routes.conceptualCompression must be /concepts");
+}
 if (siteBundle.routes?.underLoad !== "/under-load") fail("site bundle routes.underLoad must be /under-load");
 if (siteBundle.routes?.formal !== "/formal") fail("site bundle routes.formal must be /formal");
 if (siteBundle.routes?.cases !== "/cases") fail("site bundle routes.cases must be /cases");
@@ -858,6 +864,42 @@ for (const requiredField of [
   "future-picture.claimBoundary",
   "future-picture.pastToFuture",
   "future-picture.kungfuPath",
+]) {
+  if (!siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes(requiredField)) {
+    fail(`site bundle homepage displayPlan firstScreen must include ${requiredField}`);
+  }
+}
+const conceptualCompressionTeaser = siteBundle.homepage?.conceptualCompression;
+if (
+  conceptualCompressionTeaser?.eyebrow !== "Start here · 10-minute model" ||
+  conceptualCompressionTeaser?.title !== "The agent is not the center of truth." ||
+  !conceptualCompressionTeaser?.question?.includes("the work continues") ||
+  JSON.stringify(conceptualCompressionTeaser?.falseEquivalences) !== JSON.stringify([
+    "running != authorized",
+    "retry != same attempt",
+    "same output != same result",
+    "success != admitted Fact",
+  ]) ||
+  !conceptualCompressionTeaser?.failurePrompt?.includes("broke all four equivalences") ||
+  conceptualCompressionTeaser?.cta?.label !== "See the real failure that forces this model" ||
+  conceptualCompressionTeaser?.cta?.url !== "/concepts" ||
+  conceptualCompressionTeaser?.label !== "The agent is not the center of truth." ||
+  conceptualCompressionTeaser?.url !== "/concepts" ||
+  !conceptualCompressionTeaser?.summary?.includes("agent systems") ||
+  conceptualCompressionTeaser?.model !== conceptualCompressionTeaser.falseEquivalences.join("\n") ||
+  conceptualCompressionTeaser?.boundary !== conceptualCompressionTeaser.failurePrompt ||
+  JSON.stringify(conceptualCompressionTeaser?.links?.map((entry) => entry.url)) !==
+    JSON.stringify(["/concepts", "/terminology", "/under-load"])
+) {
+  fail("site bundle homepage conceptual compression must expose the work-centered hook, four false equivalences, real-failure CTA, and exact reader links");
+}
+for (const requiredField of [
+  "conceptual-compression.eyebrow",
+  "conceptual-compression.title",
+  "conceptual-compression.question",
+  "conceptual-compression.falseEquivalences",
+  "conceptual-compression.failurePrompt",
+  "conceptual-compression.cta",
 ]) {
   if (!siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes(requiredField)) {
     fail(`site bundle homepage displayPlan firstScreen must include ${requiredField}`);
@@ -956,11 +998,12 @@ for (const requiredField of [
     fail(`site bundle homepage displayPlan firstScreen must include ${requiredField}`);
   }
 }
-if (siteBundle.homepage?.displayPlan?.firstScreen?.maxPrimarySections !== 4) {
-  fail("site bundle homepage first screen must reserve four primary sections");
+if (siteBundle.homepage?.displayPlan?.firstScreen?.maxPrimarySections !== 5) {
+  fail("site bundle homepage first screen must reserve five primary sections");
 }
 const requiredHomepageSections = {
   "future-picture": "README.md",
+  "conceptual-compression": "README.md",
   "self-conformance-reader-model": "README.md",
   "independent-implementation": "README.md",
   "foundation-triad": "README.md",
@@ -979,6 +1022,78 @@ for (const [requiredSection, sourcePath] of Object.entries(requiredHomepageSecti
   if (!siteBundle.homepage.sections.some((entry) => entry.id === requiredSection && entry.sourcePath === sourcePath && entry.markdown)) {
     fail(`site bundle homepage.sections must include ${sourcePath} projection ${requiredSection}`);
   }
+}
+const conceptualCompressionPage = siteBundle.conceptualCompressionPage;
+const expectedConceptualSections = [
+  "model-in-one-view",
+  "one-real-software-delivery-work",
+  "failure-does-not-collapse-the-model",
+  "settlement-returns-to-fact",
+  "software-work-composes-the-core",
+  "common-misreadings",
+  "ten-minute-reading-check",
+  "continue-to-authority-and-evidence",
+];
+const terminologyStructureById = new Map((terminology.structures ?? []).map((entry) => [entry.termId, entry]));
+const expectedConceptualTerms = (ids) => ids.map((id) => terminologyById.get(id));
+if (
+  conceptualCompressionPage?.id !== "conceptual-compression" ||
+  conceptualCompressionPage?.title !== "KFD Conceptual Compression" ||
+  conceptualCompressionPage?.sourcePath !== "docs/conceptual-compression.md" ||
+  conceptualCompressionPage?.url !== siteBundle.routes.conceptualCompression ||
+  conceptualCompressionPage?.relationship !== "non-normative-reader-compression-of-numbered-decisions" ||
+  conceptualCompressionPage?.normative !== false ||
+  conceptualCompressionPage?.rendering?.kind !== "conceptual-compression" ||
+  conceptualCompressionPage?.rendererContract?.showCoreModelFirst !== true ||
+  conceptualCompressionPage?.rendererContract?.showWorkedExampleAsOneSequence !== true ||
+  conceptualCompressionPage?.rendererContract?.showFailureRecoveryAndSettlement !== true ||
+  !conceptualCompressionPage?.markdown?.startsWith("# KFD Conceptual Compression")
+) {
+  fail("site bundle conceptualCompressionPage must expose the complete non-normative /concepts reader contract");
+}
+if (
+  JSON.stringify(conceptualCompressionPage?.sections?.map((entry) => entry.id)) !== JSON.stringify(expectedConceptualSections) ||
+  JSON.stringify(conceptualCompressionPage?.rendering?.progressiveDisclosure) !== JSON.stringify(expectedConceptualSections) ||
+  conceptualCompressionPage?.sections?.some((entry) => !entry.markdown?.trim())
+) {
+  fail("site bundle conceptualCompressionPage must preserve every required worked-model section in reading order");
+}
+if (
+  JSON.stringify(conceptualCompressionPage?.coreModel?.ontology?.structure) !==
+    JSON.stringify(terminologyStructureById.get("fact-episode-ontology")) ||
+  JSON.stringify(conceptualCompressionPage?.coreModel?.ontology?.terms) !==
+    JSON.stringify(expectedConceptualTerms(["fact", "episode"])) ||
+  JSON.stringify(conceptualCompressionPage?.coreModel?.actionGeometry?.structure) !==
+    JSON.stringify(terminologyStructureById.get("action-responsibility-geometry")) ||
+  JSON.stringify(conceptualCompressionPage?.coreModel?.actionGeometry?.terms) !==
+    JSON.stringify(expectedConceptualTerms(["atlas", "pursuit", "warrant"])) ||
+  JSON.stringify(conceptualCompressionPage?.coreModel?.settlement) !==
+    JSON.stringify(expectedConceptualTerms(["claim", "assessment", "decision", "admission"])) ||
+  JSON.stringify(conceptualCompressionPage?.coreModel?.softwareProfile) !==
+    JSON.stringify(expectedConceptualTerms(["initiative", "assignment", "project-cut"]))
+) {
+  fail("site bundle conceptualCompressionPage must project its core model exactly from terminology.json");
+}
+for (const requiredPhrase of [
+  "a KFD reader projection",
+  "No old generation authorizes the new attempt",
+  "Only successful Admission publishes",
+  "Another domain may use different vocabulary",
+  "one-to-one aliases",
+]) {
+  if (!conceptualCompressionPage?.markdown?.includes(requiredPhrase)) {
+    fail(`site bundle conceptualCompressionPage must preserve anti-misreading boundary: ${requiredPhrase}`);
+  }
+}
+if (
+  !siteBundle.homepage?.displayPlan?.readingPath?.includes("/concepts") ||
+  siteBundle.homepage?.displayPlan?.readingPath?.[1] !== "/concepts" ||
+  !siteBundle.standalonePages?.some((entry) =>
+    entry.id === "conceptual-compression" && entry.url === "/concepts" && entry.rendering?.kind === "conceptual-compression"
+  ) ||
+  !siteBundle.renderingBoundary?.ownedByKfd?.some((entry) => entry.includes("conceptual compression page"))
+) {
+  fail("site bundle must make KFD-owned Conceptual Compression unavoidable in the homepage reading path and standalone discovery");
 }
 if (
   siteBundle.homepage?.displayPlan?.detail?.route !== "/foundation" ||
@@ -2328,6 +2443,10 @@ if (!Array.isArray(boundary.ownedByKfd) || !boundary.ownedByKfd.includes("homepa
 if (!Array.isArray(boundary.ownedByKfd) || !boundary.ownedByKfd.includes("homepage section projection from README.md")) {
   fail("site bundle renderingBoundary.ownedByKfd must include homepage section projection from README.md");
 }
+if (!Array.isArray(boundary.ownedByKfd) ||
+    !boundary.ownedByKfd.includes("conceptual compression page from docs/conceptual-compression.md and canonical terminology projection from terminology.json")) {
+  fail("site bundle renderingBoundary.ownedByKfd must retain Conceptual Compression wording and terminology authority");
+}
 if (!Array.isArray(boundary.ownedByKfd) || !boundary.ownedByKfd.includes("historical cases page from docs/primitive-discovery-cases.md")) {
   fail("site bundle renderingBoundary.ownedByKfd must include the historical cases page");
 }
@@ -2367,6 +2486,7 @@ if (!kfd1Witness) {
     const witnessedSurfaceNames = new Set(kfd1Witness.surfaces.map((surface) => surface.name));
     for (const requiredSurface of [
       "readme",
+      "conceptual-compression-doc",
       "kfd-1-publication-url-semantics-schema",
       "kfd-2-trust-taxonomy-schema",
       "kfd-2-trust-claims-schema",
@@ -2635,6 +2755,11 @@ if (!kfd3Interface) {
   if (!kfd3Interface.minimalEntrypoints.some((entry) => entry.id === "foundation" && entry.surface === "docs/foundation.md")) {
     fail("KFD-3 collaboration interface must expose docs/foundation.md as a minimal entrypoint");
   }
+  if (!kfd3Interface.minimalEntrypoints.some((entry) =>
+    entry.id === "conceptual-compression" && entry.surface === "docs/conceptual-compression.md"
+  )) {
+    fail("KFD-3 collaboration interface must expose docs/conceptual-compression.md as a minimal entrypoint");
+  }
   if (!kfd3Interface.minimalEntrypoints.some((entry) => entry.id === "terminology" && entry.surface === "docs/terminology.md") ||
       !kfd3Interface.minimalEntrypoints.some((entry) => entry.id === "terminology-contract" && entry.surface === "terminology.json")) {
     fail("KFD-3 collaboration interface must expose both human and machine terminology entrypoints");
@@ -2654,6 +2779,11 @@ if (!kfd3Interface) {
   if (!Array.isArray(kfd3Interface.surfaces) || kfd3Interface.surfaces.length === 0) fail("KFD-3 collaboration interface surfaces[] is required");
   if (!kfd3Interface.surfaces.some((entry) => entry.id === "foundation" && entry.discoverability?.path === "docs/foundation.md")) {
     fail("KFD-3 collaboration interface must classify docs/foundation.md as a participant-facing surface");
+  }
+  if (!kfd3Interface.surfaces.some((entry) =>
+    entry.id === "conceptual-compression" && entry.discoverability?.path === "docs/conceptual-compression.md"
+  )) {
+    fail("KFD-3 collaboration interface must classify docs/conceptual-compression.md as a participant-facing surface");
   }
   if (!kfd3Interface.surfaces.some((entry) => entry.id === "terminology" && entry.discoverability?.path === "docs/terminology.md") ||
       !kfd3Interface.surfaces.some((entry) => entry.id === "terminology-contract" && entry.discoverability?.path === "terminology.json")) {
@@ -2713,6 +2843,9 @@ if (!kfd3Interface) {
       fail("KFD-3 foundation value evidence must bind docs/foundation.md");
     }
     const foundationEvidence = kfd3Interface.valueEvidence.find((entry) => entry.id === "kfd-foundation");
+    if (!foundationEvidence?.facts?.some((fact) => fact.path === "docs/conceptual-compression.md")) {
+      fail("KFD-3 foundation value evidence must bind docs/conceptual-compression.md");
+    }
     for (const requiredPath of ["decisions/KFD-7.md", "docs/KFD-7-formal.md", "docs/KFD-7-usage.md"]) {
       if (!foundationEvidence?.facts?.some((fact) => fact.path === requiredPath)) {
         fail(`KFD-3 foundation value evidence must bind ${requiredPath}`);

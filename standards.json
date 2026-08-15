@@ -949,6 +949,22 @@
             }
           },
           {
+            "id": "conceptual-compression-doc",
+            "class": "cross-time",
+            "classes": [
+              "cross-time"
+            ],
+            "description": "Published non-normative ten-minute KFD Conceptual Compression explanation at docs/conceptual-compression.md.",
+            "sourcePath": "docs/conceptual-compression.md",
+            "weldRationale": "Humans, agents, and site consumers can recover the complete 2 + 3 action, failure, recovery, and settlement model from one package-owned reader path while numbered decisions and canonical terminology retain authority.",
+            "impactProjection": {
+              "breaking": "Incompatible changes to this registered surface require an explicit compatibility action before the dependent gate may pass.",
+              "additive": "Backward-compatible additions to this registered surface must be declared and may proceed through the domain projection as additive impact.",
+              "none": "Changes that do not touch this registered surface do not create KFD-1 compatibility impact for this surface.",
+              "unclassifiable": "If impact cannot be classified, the surface register is deficient and must be fixed before the dependent gate may pass."
+            }
+          },
+          {
             "id": "foundation-doc",
             "class": "cross-time",
             "classes": [

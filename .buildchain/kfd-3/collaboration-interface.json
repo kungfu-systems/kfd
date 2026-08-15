@@ -89,6 +89,12 @@
       "purpose": "Start from the KFD worldview and current decision set."
     },
     {
+      "id": "conceptual-compression",
+      "surface": "docs/conceptual-compression.md",
+      "participants": ["human-reader", "agent-reader", "site-consumer"],
+      "purpose": "Understand the complete KFD 2 + 3 action model through one software-delivery Work before descending into normative and implementation detail."
+    },
+    {
       "id": "foundation",
       "surface": "docs/foundation.md",
       "participants": ["human-reader", "agent-reader", "site-consumer"],
@@ -210,6 +216,14 @@
       "participants": ["human-reader", "agent-reader"],
       "value": "KFD's public worldview entrypoint and site homepage text source.",
       "discoverability": { "fromMinimalEntrypoint": true, "path": "README.md" },
+      "maturity": "stable"
+    },
+    {
+      "id": "conceptual-compression",
+      "kind": "markdown-doc",
+      "participants": ["human-reader", "agent-reader", "site-consumer"],
+      "value": "Ten-minute non-normative compression of the Fact-Episode Ontology, Action Responsibility Geometry, software-delivery failure and recovery, and settlement back to Fact.",
+      "discoverability": { "fromMinimalEntrypoint": true, "path": "docs/conceptual-compression.md" },
       "maturity": "stable"
     },
     {
@@ -468,6 +482,7 @@
       "participants": ["human-reader", "agent-reader", "external-contributor", "adopter", "independent-reviewer", "maintainer"],
       "facts": [
         { "path": "README.md" },
+        { "path": "docs/conceptual-compression.md" },
         { "path": "CONTRIBUTING.md" },
         { "path": "GOVERNANCE.md" },
         { "path": "docs/foundation.md" },
@@ -655,7 +670,7 @@
     {
       "id": "read-human-docs",
       "participants": ["human-reader"],
-      "choice": "Read README.md, docs/foundation.md, docs/formal-model.md, docs/MAP.md, decisions/*.md, docs/KFD-N-formal.md, pre-number candidates through drafts/registry.json, and provisional cases through cases/registry.json directly."
+      "choice": "Read README.md, docs/conceptual-compression.md, docs/foundation.md, docs/formal-model.md, docs/MAP.md, decisions/*.md, docs/KFD-N-formal.md, pre-number candidates through drafts/registry.json, and provisional cases through cases/registry.json directly."
     },
     {
       "id": "consume-machine-metadata",
@@ -705,6 +720,6 @@
   "closure": {
     "classificationMode": "closed-world",
     "unclassifiedEntrypointsPolicy": "fail",
-    "reachableSurfaceSource": "This file plus package.json#exports, CONTRIBUTING.md, GOVERNANCE.md, .github/ISSUE_TEMPLATE/*.yml, .github/pull_request_template.md, docs/foundation.md, docs/formal-model.md, docs/KFD-*-formal.md, docs/MAP.md, cases/registry.json, drafts/registry.json, registry.json, standards.json, and Buildchain witness files."
+    "reachableSurfaceSource": "This file plus package.json#exports, CONTRIBUTING.md, GOVERNANCE.md, .github/ISSUE_TEMPLATE/*.yml, .github/pull_request_template.md, docs/conceptual-compression.md, docs/foundation.md, docs/formal-model.md, docs/KFD-*-formal.md, docs/MAP.md, cases/registry.json, drafts/registry.json, registry.json, standards.json, and Buildchain witness files."
   }
 }

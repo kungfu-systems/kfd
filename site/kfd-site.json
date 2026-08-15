@@ -4,6 +4,7 @@
   "source": {
     "package": "@kungfu-tech/kfd",
     "homepageTextSource": "README.md",
+    "conceptualCompressionTextSource": "docs/conceptual-compression.md",
     "foundationTextSource": "docs/foundation.md",
     "loadBearingTextSource": "docs/load-bearing-dogfood.md",
     "formalTextSource": "docs/formal-model.md",
@@ -41,6 +42,7 @@
   },
   "routes": {
     "home": "/",
+    "conceptualCompression": "/concepts",
     "foundation": "/foundation",
     "underLoad": "/under-load",
     "formal": "/formal",
@@ -71,12 +73,51 @@
       "pastToFuture": "KFD's deepest question may not be **\"How does an agent execute a task?\"** It may be: **How can a bounded, goal-directed system act and change in an unpredictable world without losing continuity with itself?**",
       "kungfuPath": "KFD is an open, evidence-governed engineering standard for preserving facts, boundaries, perspective, and responsibility when the path is not known in advance. It develops a small set of portable principles, procedures, schemas, and verification contracts through which humans, agents, organizations, and software systems can act, learn, and change without silent drift. It therefore treats a well-formed Episode as more than a trace: it is a durable historical asset that future humans and agents can replay when today's ontology no longer explains reality."
     },
+    "conceptualCompression": {
+      "eyebrow": "Start here · 10-minute model",
+      "title": "The agent is not the center of truth.",
+      "question": "What must remain continuous when the agent, session, repository, authority, or execution path changes—but the work continues?",
+      "falseEquivalences": [
+        "running != authorized",
+        "retry != same attempt",
+        "same output != same result",
+        "success != admitted Fact"
+      ],
+      "failurePrompt": "One real delivery broke all four equivalences. Following it from healthy action through authority loss, rejected recovery, a valid successor, and settlement reveals why KFD separates Fact, Episode, Atlas, Pursuit, and Warrant—and why the agent is a participant in the work, not its center of truth.",
+      "cta": {
+        "label": "See the real failure that forces this model",
+        "sourceTarget": "docs/conceptual-compression.md",
+        "url": "/concepts"
+      },
+      "label": "The agent is not the center of truth.",
+      "url": "/concepts",
+      "summary": "Most agent systems are described from the agent outward: its context, task, tools, actions, and output. KFD starts from the continuity of the work instead.",
+      "model": "running != authorized\nretry != same attempt\nsame output != same result\nsuccess != admitted Fact",
+      "boundary": "One real delivery broke all four equivalences. Following it from healthy action through authority loss, rejected recovery, a valid successor, and settlement reveals why KFD separates Fact, Episode, Atlas, Pursuit, and Warrant—and why the agent is a participant in the work, not its center of truth.",
+      "links": [
+        {
+          "label": "See the real failure that forces this model",
+          "sourceTarget": "docs/conceptual-compression.md",
+          "url": "/concepts"
+        },
+        {
+          "label": "Use the terminology contract",
+          "sourceTarget": "docs/terminology.md",
+          "url": "/terminology"
+        },
+        {
+          "label": "Inspect the founding-adopter evidence",
+          "sourceTarget": "docs/load-bearing-dogfood.md",
+          "url": "/under-load"
+        }
+      ]
+    },
     "independentImplementation": {
       "label": "Implement and verify KFD independently",
       "promise": "Implement KFD without Kungfu — scaffold an adapter in Python, Rust, Node.js, or C++, then verify it offline.",
       "release": {
         "package": "@kungfu-tech/kfd",
-        "version": "1.0.0-alpha.65",
+        "version": "1.0.0-alpha.66",
         "anchor": "kfd.release.json",
         "immutable": true
       },
@@ -106,19 +147,19 @@
         {
           "id": "scaffold",
           "label": "Scaffold",
-          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.65 kfd scaffold agent-hub --language python --output my-agent-hub-adapter",
+          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.66 kfd scaffold agent-hub --language python --output my-agent-hub-adapter",
           "capability": "kfd scaffold agent-hub --language <cpp|node|python|rust> --output <new-directory> [--json]"
         },
         {
           "id": "test",
           "label": "Test Hub 20",
-          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.65 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json",
+          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.66 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json",
           "capability": "kfd test agent-hub --adapter <path> --output <report.json>"
         },
         {
           "id": "verify",
           "label": "Verify offline",
-          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.65 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py --json",
+          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.66 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py --json",
           "capability": "kfd verify agent-hub-report <report.json> [--adapter <path>] [--json]"
         }
       ],
@@ -140,7 +181,7 @@
         "capabilityBoundary": "Each KFD GitHub Release now carries Rust-native archives for Linux x86_64 and arm64, macOS x86_64 and arm64, and Windows x86_64. The executable name is permanently `kfd` (`kfd.exe` on Windows), and `kfd --version` matches the exact KFD Release version. The native CLI provides `verify` and `bundle`; use the npm workflow above when you need `scaffold` or `test` orchestration. Every target includes a SHA-256 file and source-bound provenance. See [Native CLI downloads and capability boundaries](docs/native-cli.md).",
         "docs": {
           "label": "Native CLI downloads and capability boundaries",
-          "url": "https://github.com/kungfu-systems/kfd/blob/v1.0.0-alpha.65/docs/native-cli.md"
+          "url": "https://github.com/kungfu-systems/kfd/blob/v1.0.0-alpha.66/docs/native-cli.md"
         }
       },
       "links": [
@@ -438,6 +479,17 @@
         "markdown": "KFD's deepest question may not be **\"How does an agent execute a task?\"** It\nmay be: **How can a bounded, goal-directed system act and change in an\nunpredictable world without losing continuity with itself?**\n\nKFD is an open, evidence-governed engineering standard for preserving facts,\nboundaries, perspective, and responsibility when the path is not known in\nadvance. It develops a small set of portable principles, procedures, schemas,\nand verification contracts through which humans, agents, organizations, and\nsoftware systems can act, learn, and change without silent drift. It therefore\ntreats a well-formed Episode as more than a trace: it is a durable historical\nasset that future humans and agents can replay when today's ontology no longer\nexplains reality.\n\nKFD does not claim to be the final answer or a complete theory of complex\nsystems. It publishes a small, testable foundation for adoption,\nimplementation, challenge, counterevidence, and revision. The breadth covered\nby its current decisions is evidence that a general action structure may\nexist, not proof that KFD has finished discovering it. Kungfu is its founding\nimplementation, not its adoption boundary. Accumulating Episodes alone does\nnot discover or prove a Primitive; KFD-5 and KFD-6 keep generation,\nqualification, and promotion separate."
       },
       {
+        "id": "conceptual-compression",
+        "sourcePath": "README.md",
+        "sourceHeading": "Start here: the agent is not the center of truth",
+        "title": "The agent is not the center of truth",
+        "renderRole": "first-screen",
+        "homepagePriority": 6,
+        "defaultPresentation": "conceptual-compression",
+        "includeInFirstScreen": true,
+        "markdown": "Most agent systems are described from the agent outward: its context, task,\ntools, actions, and output. KFD starts from the continuity of the work instead.\n\nWhat must remain continuous when the agent, session, repository, authority, or\nexecution path changes—but the work continues?\n\n```text\nrunning != authorized\nretry != same attempt\nsame output != same result\nsuccess != admitted Fact\n```\n\nOne real delivery broke all four equivalences. Following it from healthy action\nthrough authority loss, rejected recovery, a valid successor, and settlement\nreveals why KFD separates Fact, Episode, Atlas, Pursuit, and Warrant—and why the\nagent is a participant in the work, not its center of truth.\n\n[See the real failure that forces this model](docs/conceptual-compression.md) ·\n[Use the terminology contract](docs/terminology.md) ·\n[Inspect the founding-adopter evidence](docs/load-bearing-dogfood.md)"
+      },
+      {
         "id": "self-conformance-reader-model",
         "sourcePath": "README.md",
         "sourceHeading": "How KFD governs its own change",
@@ -457,7 +509,7 @@
         "homepagePriority": 8,
         "defaultPresentation": "independent-implementation-steps",
         "includeInFirstScreen": true,
-        "markdown": "**Implement KFD without Kungfu — scaffold an adapter in Python, Rust, Node.js,\nor C++, then verify it offline.**\n\nUse the immutable `@kungfu-tech/kfd@1.0.0-alpha.65` package cut and follow the\npackage-owned [Agent Hub workflow](profiles/agent-hub/README.md) or inspect the\ncomplete [independent verification boundary](docs/independent-verifier.md):\n\n```bash\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.65 kfd scaffold agent-hub --language python --output my-agent-hub-adapter\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.65 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.65 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py --json\n```\n\nThe scaffold is a deterministic, fail-closed starter: its smoke path checks\nonly the JSONL envelope, and implementers must replace the missing product\nsemantics before the fixed Hub 20 suite can pass.\n\nPackage acquisition is separate from offline verification. Network or a local\npackage cache may be needed to obtain the immutable package bytes; after the\npackage, report, and optional adapter bytes are present, the report verifier\nperforms no network access.\n\nThese results do not certify an implementation or prove security, production\nfitness, complete semantic coverage, KFD-10 activation, or adoption by an\nindependent organization. [Open the complete Agent Hub guide](/agent-hub/) ·\n[Inspect the verifier and coverage matrix](/verify/)\n\n### Native `kfd`\n\nInstall the Rust-native offline verifier on macOS or Linux with Homebrew. No\ncoding is required to install it or verify an existing KFD report:\n\n```bash\nbrew install kungfu-systems/tap/kfd\nkfd --version\n```\n\nEach KFD GitHub Release now carries Rust-native archives for Linux x86_64 and\narm64, macOS x86_64 and arm64, and Windows x86_64. The executable name is\npermanently `kfd` (`kfd.exe` on Windows), and `kfd --version` matches the exact\nKFD Release version. The native CLI provides `verify` and `bundle`; use the npm\nworkflow above when you need `scaffold` or `test` orchestration. Every target\nincludes a SHA-256 file and source-bound provenance. See\n[Native CLI downloads and capability boundaries](docs/native-cli.md)."
+        "markdown": "**Implement KFD without Kungfu — scaffold an adapter in Python, Rust, Node.js,\nor C++, then verify it offline.**\n\nUse the immutable `@kungfu-tech/kfd@1.0.0-alpha.66` package cut and follow the\npackage-owned [Agent Hub workflow](profiles/agent-hub/README.md) or inspect the\ncomplete [independent verification boundary](docs/independent-verifier.md):\n\n```bash\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.66 kfd scaffold agent-hub --language python --output my-agent-hub-adapter\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.66 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.66 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py --json\n```\n\nThe scaffold is a deterministic, fail-closed starter: its smoke path checks\nonly the JSONL envelope, and implementers must replace the missing product\nsemantics before the fixed Hub 20 suite can pass.\n\nPackage acquisition is separate from offline verification. Network or a local\npackage cache may be needed to obtain the immutable package bytes; after the\npackage, report, and optional adapter bytes are present, the report verifier\nperforms no network access.\n\nThese results do not certify an implementation or prove security, production\nfitness, complete semantic coverage, KFD-10 activation, or adoption by an\nindependent organization. [Open the complete Agent Hub guide](/agent-hub/) ·\n[Inspect the verifier and coverage matrix](/verify/)\n\n### Native `kfd`\n\nInstall the Rust-native offline verifier on macOS or Linux with Homebrew. No\ncoding is required to install it or verify an existing KFD report:\n\n```bash\nbrew install kungfu-systems/tap/kfd\nkfd --version\n```\n\nEach KFD GitHub Release now carries Rust-native archives for Linux x86_64 and\narm64, macOS x86_64 and arm64, and Windows x86_64. The executable name is\npermanently `kfd` (`kfd.exe` on Windows), and `kfd --version` matches the exact\nKFD Release version. The native CLI provides `verify` and `bundle`; use the npm\nworkflow above when you need `scaffold` or `test` orchestration. Every target\nincludes a SHA-256 file and source-bound provenance. See\n[Native CLI downloads and capability boundaries](docs/native-cli.md)."
       },
       {
         "id": "foundation-triad",
@@ -590,6 +642,12 @@
           "future-picture.claimBoundary",
           "future-picture.pastToFuture",
           "future-picture.kungfuPath",
+          "conceptual-compression.eyebrow",
+          "conceptual-compression.title",
+          "conceptual-compression.question",
+          "conceptual-compression.falseEquivalences",
+          "conceptual-compression.failurePrompt",
+          "conceptual-compression.cta",
           "self-conformance.readerModel.prospective",
           "self-conformance.readerModel.retrospective",
           "self-conformance.readerModel.authorityBoundary",
@@ -604,11 +662,12 @@
           "product-witness.principle",
           "foundation-triad.links"
         ],
-        "maxPrimarySections": 4,
-        "note": "The first viewport should ask the system-continuity question, connect prospective governance with retrospective structural conformance without widening authority, make independent implementation and offline verification directly actionable, and begin the package-owned three-step path before installed-product, registry, or renderer detail."
+        "maxPrimarySections": 5,
+        "note": "The first viewport should move readers from an agent-centered model to work continuity, expose the four false equivalences and the /concepts real-failure route without duplicating the complete model, connect prospective governance with retrospective structural conformance without widening authority, make independent implementation and offline verification directly actionable, and begin the package-owned three-step path before installed-product, registry, or renderer detail."
       },
       "primary": [
         "future-picture",
+        "conceptual-compression",
         "self-conformance-reader-model",
         "independent-implementation",
         "foundation-triad",
@@ -629,6 +688,7 @@
       },
       "readingPath": [
         "/",
+        "/concepts",
         "/foundation",
         "/verify",
         "/verify/self-conformance",
@@ -671,9 +731,298 @@
       "homepagePriority": 90,
       "defaultPresentation": "developer-note",
       "includeInFirstScreen": false,
-      "markdown": "This README is also the homepage text source for `https://kfd.libkungfu.dev`.\nWhen `site-libkungfu-dev` consumes the `@kungfu-tech/kfd` npm package to render\nthe KFD site, it should treat this file as the canonical homepage copy, not as\nan implementation note to paraphrase in the site repository.\n\nThe first screen should be derived from this README:\n\n- Page identity: the top-level heading.\n- Core question: the opening paragraph must ask how a bounded, goal-directed\n  system can act and change in an unpredictable world without losing continuity\n  with itself. KFD must not be reduced to an Agent task-execution protocol.\n- Engineering answer: the second paragraph must identify facts, boundaries,\n  perspective, and responsibility as the inspectable basis for action when the\n  path is not known in advance.\n- Claim boundary: the third paragraph must state that KFD is a small, testable\n  foundation rather than a final answer or complete theory of complex systems.\n- Independent implementation: the exact promise, four supported languages,\n  ordered scaffold/test/verify commands, offline boundary, non-certifying\n  boundary, and `/agent-hub/` plus `/verify/` links must appear before the\n  Foundation triad and before any installed Kungfu product projection.\n- Foundation signal: the `Foundation triad` section, especially the three\n  one-line commitments and the product-witness rule immediately below them.\n- Depth choice: the foundation link must route to the non-numbered explanatory\n  page at `/foundation`, and the historical cases link must route to `/cases`;\n  registry, renderer, and implementation detail stay outside the first screen.\n\nDecision cards, detail links, and machine paths should come from\n`registry.json`. The machine-readable site bundle lives at `site/kfd-site.json`\nand gives renderers stable fields for the homepage, the foundation explanation\npage, product proof path, decision routes, candidate routes, and rendering\nboundary. `candidatePages` owns the `/drafts/` index and stable\n`/drafts/{id}/` page declarations; renderers must not infer those routes from\nthe package directory layout. A site renderer may adapt layout, navigation,\ntypography, and visual assets, but it should not maintain separate wording that\ncan drift from this package.\n\n`site/kfd-site.json` is generated from this README and\n`docs/foundation.md` and `docs/primitive-discovery-cases.md` by\n`scripts/update-site-bundle.mjs`. The README owns the concise homepage; the\nfoundation document owns the complete explanation; the cases document owns\nthe non-normative historical anchors. The generated bundle exposes ordered\nhomepage sections, the `/foundation` and `/cases` pages, and a display plan that\nseparates first-screen, primary, detail, and support content. Site repositories\nshould consume that bundle instead of parsing the Markdown files. The renderer\ncontract remains machine metadata, not ordinary homepage content.",
+      "markdown": "This README is also the homepage text source for `https://kfd.libkungfu.dev`.\nWhen `site-libkungfu-dev` consumes the `@kungfu-tech/kfd` npm package to render\nthe KFD site, it should treat this file as the canonical homepage copy, not as\nan implementation note to paraphrase in the site repository.\n\nThe first screen should be derived from this README:\n\n- Page identity: the top-level heading.\n- Core question: the opening paragraph must ask how a bounded, goal-directed\n  system can act and change in an unpredictable world without losing continuity\n  with itself. KFD must not be reduced to an Agent task-execution protocol.\n- Engineering answer: the second paragraph must identify facts, boundaries,\n  perspective, and responsibility as the inspectable basis for action when the\n  path is not known in advance.\n- Claim boundary: the third paragraph must state that KFD is a small, testable\n  foundation rather than a final answer or complete theory of complex systems.\n- Conceptual compression: `Start here: the agent is not the center of truth`\n  must expose the work-centered question, all four false equivalences, and the\n  real-failure call to action, with `/concepts` as the first depth route. The\n  complete `2 + 3` model belongs on that depth page rather than in the first\n  viewport, and familiar stack labels must not become one-to-one KFD aliases.\n- Independent implementation: the exact promise, four supported languages,\n  ordered scaffold/test/verify commands, offline boundary, non-certifying\n  boundary, and `/agent-hub/` plus `/verify/` links must appear before the\n  Foundation triad and before any installed Kungfu product projection.\n- Foundation signal: the `Foundation triad` section, especially the three\n  one-line commitments and the product-witness rule immediately below them.\n- Depth choice: the foundation link must route to the non-numbered explanatory\n  page at `/foundation`, and the historical cases link must route to `/cases`;\n  registry, renderer, and implementation detail stay outside the first screen.\n\nDecision cards, detail links, and machine paths should come from\n`registry.json`. The machine-readable site bundle lives at `site/kfd-site.json`\nand gives renderers stable fields for the homepage, the foundation explanation\npage, product proof path, decision routes, candidate routes, and rendering\nboundary. `candidatePages` owns the `/drafts/` index and stable\n`/drafts/{id}/` page declarations; renderers must not infer those routes from\nthe package directory layout. A site renderer may adapt layout, navigation,\ntypography, and visual assets, but it should not maintain separate wording that\ncan drift from this package.\n\n`site/kfd-site.json` is generated from this README,\n`docs/conceptual-compression.md`, `docs/foundation.md`, and\n`docs/primitive-discovery-cases.md` by `scripts/update-site-bundle.mjs`. The\nREADME owns the concise homepage; the conceptual-compression document owns the\nten-minute reader model; the foundation document owns the complete\nexplanation; the cases document owns the non-normative historical anchors. The\ngenerated bundle exposes ordered homepage sections, the `/concepts`,\n`/foundation`, and `/cases` pages, and a display plan that separates\nfirst-screen, primary, detail, and support content. Site repositories should\nconsume that bundle instead of parsing the Markdown files. The renderer\ncontract remains machine metadata, not ordinary homepage content.",
       "renderAsHomepageContent": false,
       "note": "This is a machine/renderer contract for site implementers. It should not be rendered as ordinary homepage content."
+    }
+  },
+  "conceptualCompressionPage": {
+    "id": "conceptual-compression",
+    "title": "KFD Conceptual Compression",
+    "sourcePath": "docs/conceptual-compression.md",
+    "url": "/concepts",
+    "relationship": "non-normative-reader-compression-of-numbered-decisions",
+    "normative": false,
+    "authorityNote": "Numbered decisions remain authoritative; terminology.json owns the canonical names and anti-misreading boundaries projected by this page.",
+    "lead": "# KFD Conceptual Compression",
+    "coreModel": {
+      "ontology": {
+        "structure": {
+          "termId": "fact-episode-ontology",
+          "members": [
+            "fact",
+            "episode"
+          ]
+        },
+        "terms": [
+          {
+            "id": "fact",
+            "canonical": "Fact",
+            "layer": "kfd-7-ontology-binding",
+            "subtitle": "Admitted state at a declared evidence boundary",
+            "compactSubtitle": "Admitted state",
+            "question": "What is admitted?",
+            "definition": "State admitted into a contract world under a declared source, authority, evidence, and cut boundary. Its independently addressable formal carrier is a Fact Cut.",
+            "notThis": [
+              "absolute truth",
+              "every observation",
+              "a Causal Record"
+            ]
+          },
+          {
+            "id": "episode",
+            "canonical": "Episode",
+            "layer": "kfd-7-ontology-binding",
+            "subtitle": "Replayable causal record between Fact cuts",
+            "compactSubtitle": "Replayable causal record",
+            "question": "What happened?",
+            "definition": "An independently addressable and replayable object that binds a Causal Record to declared Fact cuts, perspective, omissions, and loss.",
+            "notThis": [
+              "a session by definition",
+              "a transcript by definition",
+              "an intended or authorized action",
+              "proof of success, progress, completion, or authorization"
+            ]
+          }
+        ]
+      },
+      "actionGeometry": {
+        "structure": {
+          "termId": "action-responsibility-geometry",
+          "members": [
+            "atlas",
+            "pursuit",
+            "warrant"
+          ]
+        },
+        "terms": [
+          {
+            "id": "atlas",
+            "canonical": "Atlas",
+            "layer": "reference-coordinate",
+            "subtitle": "Declared perspective over admitted facts",
+            "compactSubtitle": "Declared perspective",
+            "question": "From where is it judged?",
+            "definition": "The independently addressable perspective coordinate that binds accepted facts, observation boundary, cut, freshness, omissions, and loss.",
+            "notThis": [
+              "complete reality",
+              "generic context without source, cut, freshness, omissions, and loss",
+              "a Pursuit or Warrant"
+            ]
+          },
+          {
+            "id": "pursuit",
+            "canonical": "Pursuit",
+            "layer": "reference-coordinate",
+            "subtitle": "Continuing direction and progress relation",
+            "compactSubtitle": "Continuing direction",
+            "question": "What change is sought?",
+            "definition": "The independently addressable direction coordinate that identifies the continuing change being sought and the relation by which progress is judged.",
+            "notThis": [
+              "a one-shot task",
+              "a plan",
+              "authority to act"
+            ]
+          },
+          {
+            "id": "warrant",
+            "canonical": "Warrant",
+            "layer": "reference-coordinate",
+            "subtitle": "Bounded authority for admissible transitions",
+            "compactSubtitle": "Bounded authority",
+            "question": "What action is allowed?",
+            "definition": "The independently addressable authority coordinate that identifies which transition may be performed, by whom, under which constraints, and until when.",
+            "notThis": [
+              "authentication",
+              "a capability alone",
+              "intention or assignment",
+              "proof that an action occurred"
+            ]
+          }
+        ]
+      },
+      "settlement": [
+        {
+          "id": "claim",
+          "canonical": "Claim",
+          "layer": "kfd-11-consequential-settlement",
+          "subtitle": "Exact proposition offered for reliance",
+          "compactSubtitle": "Bounded proposition",
+          "question": "What exact proposition is a participant asking others to rely on?",
+          "definition": "An independently addressable proposition made by a declared participant against exact Fact and evidence cuts, with an inspectable audit boundary and declared limitations.",
+          "notThis": [
+            "evidence by itself",
+            "an Episode by itself",
+            "an Assessment",
+            "a Decision"
+          ]
+        },
+        {
+          "id": "assessment",
+          "canonical": "Assessment",
+          "layer": "kfd-11-consequential-settlement",
+          "subtitle": "Purpose-bound trust judgment",
+          "compactSubtitle": "Trust judgment",
+          "question": "For what purpose and within what evidence boundary may this Claim be trusted?",
+          "definition": "A purpose-bound, revisable trust judgment over an exact Claim and checked evidence cut that exposes result, gaps, residual risk, and assurance responsibility.",
+          "notThis": [
+            "universal truth",
+            "authority to decide",
+            "a Decision",
+            "successful Admission"
+          ]
+        },
+        {
+          "id": "decision",
+          "canonical": "Decision",
+          "layer": "kfd-11-consequential-settlement",
+          "subtitle": "Authorized disposition with requested effects",
+          "compactSubtitle": "Authorized disposition",
+          "question": "Who decided what disposition under which authority?",
+          "definition": "An independently addressable disposition of assessed Claims, issued by a declared decision maker under an exact Warrant and policy, with explicit conditions, requested effects, reasons, and residual risk.",
+          "notThis": [
+            "an Assessment",
+            "occurrence",
+            "successful Admission",
+            "a successor Fact cut"
+          ]
+        },
+        {
+          "id": "admission",
+          "canonical": "Admission",
+          "layer": "kfd-11-consequential-settlement",
+          "subtitle": "Recorded result of applying an authorized transition",
+          "compactSubtitle": "Transition result",
+          "question": "Did the authorized requested effect enter the owning state authority?",
+          "definition": "The independently recorded result of presenting a Decision's requested transition to the owning admission authority, including a successor Fact cut only when admission succeeds.",
+          "notThis": [
+            "a Decision",
+            "process success",
+            "a passing Assessment",
+            "a fabricated successor state"
+          ]
+        }
+      ],
+      "softwareProfile": [
+        {
+          "id": "initiative",
+          "canonical": "Initiative",
+          "layer": "kfd-12-software-domain-work-context",
+          "subtitle": "Continuing coordinated work context",
+          "compactSubtitle": "Coordinated work context",
+          "question": "What continuing work are these responsibilities advancing?",
+          "definition": "An independently addressable software-domain context for continuing coordinated work that preserves coordination purpose, scope, participants, relevant Pursuits, Assignment relations, lineage, and settlement state without redefining Pursuit direction.",
+          "notThis": [
+            "an intention statement alone",
+            "a Pursuit",
+            "a project or repository by definition",
+            "one execution session"
+          ]
+        },
+        {
+          "id": "assignment",
+          "canonical": "Assignment",
+          "layer": "kfd-12-software-domain-bounded-responsibility",
+          "subtitle": "Responsibility proposed to, accepted by, or held by a participant",
+          "compactSubtitle": "Bounded responsibility",
+          "question": "Who is responsible for this bounded work under which evidence boundary?",
+          "definition": "An independently addressable software-domain responsibility proposed to, accepted by, or held by a participant that binds accepted responsibility, Initiative, Pursuit, Atlas, Warrant, evidence obligations, settlement policy, and lineage without duplicating Pursuit direction.",
+          "notThis": [
+            "a task description alone",
+            "a Warrant",
+            "an Episode",
+            "a completion claim"
+          ]
+        },
+        {
+          "id": "project-cut",
+          "canonical": "Project Cut",
+          "layer": "kfd-13-software-project-settlement"
+        }
+      ]
+    },
+    "sections": [
+      {
+        "id": "model-in-one-view",
+        "title": "The model in one view",
+        "sourcePath": "docs/conceptual-compression.md",
+        "sourceHeading": "The model in one view",
+        "markdown": "```text\nFact@cut0\n  + Atlas       From which admitted facts and perspective is action judged?\n  + Pursuit     What continuing change is being sought?\n  + Warrant     What bounded transition may be performed now, by whom?\n      |\n      v\n  bounded action encounters reality\n      |\n      v\n  Episode       What actually happened, with which consequence and loss?\n      |\n      v\n  Claim -> Assessment -> Decision -> Admission\n      |\n      v\nFact@cut1\n```\n\nThe model begins with five primary names, but they are not five peers:\n\n```text\nFact + Episode\n  -> Fact-Episode Ontology\n\nAtlas + Pursuit + Warrant\n  -> Action Responsibility Geometry\n```\n\nThese five explain what action is grounded in and what it produces. **Claim,\nAssessment, Decision, and Admission** are four later settlement\nresponsibilities: they explain how an Episode may, or may not, become successor\nFact.\n\n| Term | Independent responsibility | Reader question | Numbered authority |\n| --- | --- | --- | --- |\n| **Fact** | Admitted state at a declared evidence boundary | What is admitted? | [KFD-7](../decisions/KFD-7.md) |\n| **Episode** | Replayable causal record between Fact cuts | What happened? | [KFD-7](../decisions/KFD-7.md) |\n| **Atlas** | Declared perspective over admitted facts | From where is it judged? | [KFD-8](../decisions/KFD-8.md) draft |\n| **Pursuit** | Continuing direction and progress relation | What change is sought? | [KFD-9](../decisions/KFD-9.md) draft |\n| **Warrant** | Bounded authority for admissible transitions | What action is allowed? | [KFD-10](../decisions/KFD-10.md) draft |\n\nFact and Episode describe admitted state and realized occurrence in KFD's\ncontract world. Atlas, Pursuit, and Warrant constrain consequential action over\nthat world. None may silently manufacture another: intention does not grant\nauthority, available context is not complete reality, permission does not\nprove occurrence, and occurrence does not prove success or admission.\nAtlas is not whatever data happens to be available; it is the declared frame\nfrom which this action is judged."
+      },
+      {
+        "id": "one-real-software-delivery-work",
+        "title": "One real software-delivery Work",
+        "sourcePath": "docs/conceptual-compression.md",
+        "sourceHeading": "One real software-delivery Work",
+        "markdown": "### The Warrant disappeared while work was still running\n\nThis is a reconstruction of one public Kungfu delivery history from 12–13\nAugust 2026. It begins with\n[PR #3054](https://github.com/kungfu-systems/kungfu/pull/3054), passes through\nthe repair and replay attempts in\n[PR #3055](https://github.com/kungfu-systems/kungfu/pull/3055) and\n[PR #3059](https://github.com/kungfu-systems/kungfu/pull/3059), and settles with\n[PR #3064](https://github.com/kungfu-systems/kungfu/pull/3064).\n\nThe pressure can be stated in one sentence:\n\n> A healthy native run lost its Warrant while work was still running; the\n> repair then reached the same reviewed tree through a history that the\n> software Profile's project-level [Project Cut](../decisions/KFD-13.md) could\n> not admit; only a new linear successor completed protected settlement.\n\nThis delivery is one pressure field for KFD, not the boundary of the model.\nSoftware provides unusually inspectable evidence, but another domain may carry\nthe same responsibilities through different objects and records.\n\n### The five beats\n\n| Beat | What happened | What becomes impossible to confuse |\n| --- | --- | --- |\n| **1. Start** | #3054 began a bounded attempt to ship two-phase Delivery Warrant behavior. Its exact source and evidence were bound to an initial Warrant; the native run was healthy and partly complete. | A Pursuit and an executing attempt exist, but neither is admitted successor Fact. |\n| **2. Authority loss** | The old patrol closed the Warrant before the run finished. Another candidate acquired the next generation, and the running attempt stopped when it detected fence loss. | Healthy execution is not current authority. A stale attempt must stop even when its code appears sound. |\n| **3. Repair and rejection** | #3059 preserved the intended result and added full-lifetime heartbeat and fencing. It reached the reviewed result tree, but Project Cut rejected the non-linear history that produced it. | Same result tree does not mean same causal history, and a valid endpoint cannot erase an inadmissible path. |\n| **4. Successor** | #3064 was prepared from the current protected base as one signed linear successor. It carried the reviewed #3059 tree through new source and history coordinates, then passed the native gates under a successor Warrant. | Recovery can preserve the sought consequence while replacing the perspective, responsibility boundary, and authority for the next attempt. |\n| **5. Settlement** | Queue admission passed, protected merge updated the owning ref, and Buildchain closed the exact fenced attempt. | Checks support a Claim; accountable assessment, decision, and Admission are still required before successor Fact becomes current. |\n\nThe continuing **Pursuit** can be said without any issue number: *ship the\nreviewed two-phase Warrant behavior safely onto the protected development\nline*. The PR, Assignment, candidate, Warrant, run, and merge are bounded\nobjects used to pursue that direction; none is the Pursuit itself.\n\n### Watch the coordinates move independently\n\n```text\nsame continuing delivery direction\n  |\n  +-- PR #3054 / initial Warrant\n  |     -> healthy work loses fence\n  |     -> failed attempt retained\n  |\n  +-- PR #3059 / same reviewed result tree\n  |     -> non-linear history rejected by Project Cut\n  |     -> rejected attempt retained\n  |\n  +-- PR #3064 / linear successor / successor Warrant\n        -> qualified execution\n        -> protected merge\n        -> exact terminal settlement\n```\n\nRead the case once across all five coordinates:\n\n- **Fact** stays at the protected pre-admission state through both failures.\n- **Pursuit** survives the PRs, candidates, and attempts.\n- **Atlas** changes when #3064 binds a new protected base and linear history,\n  even though the reviewed result tree stays equal.\n- **Warrant** from the failed attempt cannot authorize its successor. No old generation authorizes the new attempt.\n- **Episode** keeps the cancelled run, replay rejection, and successful run as\n  three distinct causal records.\n\nThe first Atlas, Warrant, and Episode remain historical coordinates; they are\nnot edited into the successful successor.\n\nThis is the break from the agent-centered model promised at the beginning: the\nrun, PR, Assignment, Atlas, and Warrant changed, while the Pursuit and retained\ncausal history made the continuing work recognizable."
+      },
+      {
+        "id": "failure-does-not-collapse-the-model",
+        "title": "Failure does not collapse the model",
+        "sourcePath": "docs/conceptual-compression.md",
+        "sourceHeading": "Failure does not collapse the model",
+        "markdown": "After failure, the prior Fact remains current, the Pursuit may continue, and\nthe original Atlas and Episode remain replayable. The expired, revoked, or\nfence-lost Warrant cannot authorize recovery. A retry is therefore a new causal\nattempt under current facts, perspective, direction, and authority—not “the\nsame task again” under ambient permission."
+      },
+      {
+        "id": "settlement-returns-to-fact",
+        "title": "Settlement returns to Fact",
+        "sourcePath": "docs/conceptual-compression.md",
+        "sourceHeading": "Settlement returns to Fact",
+        "markdown": "Execution and settlement are distinct:\n\n```text\nexecution\n  Pursuit + Atlas + Warrant\n    -> bounded action\n    -> Episode\n\nsettlement\n  Claim + Assessment + authorized Decision\n    -> Admission\n    -> successor Fact cut only on success\n```\n\nThe agent cannot make its own output Fact. It can produce an Episode and\nsupport a Claim; the owning authorities still assess, decide, and admit the\nsuccessor.\n\nIn this history, exact checks support the **Claim**; review and queue policy\nsupply **Assessment**; the authorized merge disposition records the\n**Decision**; and the protected-ref update records **Admission**. The exact\nfenced close then settles the attempt. This is a KFD reader projection over\nnative records, not a claim that GitHub or Buildchain emitted same-named KFD\nobjects.\n\nBuildchain does not own the protected ref, so its qualified Warrant cannot\nmerge a PR. Only successful Admission publishes the successor Fact cut. A\npassing test can support a Claim, but cannot assess itself, grant decision\nauthority, or prove Admission. [KFD-11](../decisions/KFD-11.md) owns these\nboundaries.\n\nExecutable expiry, fencing, recovery, and settlement probes remain in the\n[Buildchain v3 evidence bundle](../profiles/warrant-evidence/fixtures/buildchain-v3-delivery-warrant.json)\nand [second-wave report](../evidence/primitive-evidence/second-wave-report.md)."
+      },
+      {
+        "id": "software-work-composes-the-core",
+        "title": "Software work composes the core",
+        "sourcePath": "docs/conceptual-compression.md",
+        "sourceHeading": "Software work composes the core",
+        "markdown": "KFD-12 and KFD-13 give software development a Domain Profile above the\ncross-domain core:\n\n```text\nInitiative\n  continuing coordinated software work\n    |\n    +-- Assignment\n          accepted bounded responsibility\n          + Pursuit\n          + Atlas\n          + Warrant\n          + evidence and settlement obligations\n          |\n          +-- Episode(s)\n          +-- Claim -> Assessment -> Decision -> Admission\n\nProject Cut\n  optional project-level settlement of selected authoritative roots\n```\n\nAn [Initiative](../decisions/KFD-12.md) groups continuing coordinated work. An\nAssignment records who proposed, accepted, or holds bounded responsibility; it\nis neither the Pursuit nor the Warrant. A\n[Project Cut](../decisions/KFD-13.md) publishes one verifiable project\nsettlement without absorbing its source authorities.\n\nThese are software-domain objects. Another domain may use different vocabulary,\nlifecycle, storage, and settlement objects while preserving the Fact-Episode\nOntology and Action Responsibility Geometry through its own Domain Profile."
+      },
+      {
+        "id": "common-misreadings",
+        "title": "Common misreadings",
+        "sourcePath": "docs/conceptual-compression.md",
+        "sourceHeading": "Common misreadings",
+        "markdown": "Once the agent is no longer the center of truth, context, task, permission,\nlogs, and success can no longer stand in for these independent\nresponsibilities:\n\n| Familiar compression | What KFD preserves instead |\n| --- | --- |\n| context = everything the agent can see | Atlas declares source, Fact cut, scope, freshness, omissions, conflict, and loss. |\n| task = durable intent and responsibility | Pursuit preserves direction; Assignment separately records accepted software-work responsibility. |\n| permission = capability or credential | Warrant binds exact subject, purpose, holder, constraints, validity, and authority lineage. |\n| logs = what happened | Episode binds a causal record to declared cuts, perspective, omissions, and loss; a log may be only one input. |\n| execution success = completion | Episode supports a Claim; settlement still requires Assessment, authorized Decision, and Admission. |\n| approval = admitted state | Decision requests an effect; Admission records whether the owning authority accepted it. |\n| latest state validates earlier work | Earlier Atlas, Warrant, Episode, Claim, and Assessment roots remain bound to their original cuts. |\n| five names require five forms or services | One simple session may project the distinctions when later inspection can recover every decision-relevant responsibility. |\n\nThe conservative session limit remains important. In one local, reversible,\nsingle-direction interaction, a product may present goal, context, tool\npermission, run, and result instead of exposing five objects. Complexity must\nbecome explicit only when direction, perspective, authority, Episodes, Fact\nbranches, participants, or settlement boundaries vary independently."
+      },
+      {
+        "id": "ten-minute-reading-check",
+        "title": "Ten-minute reading check",
+        "sourcePath": "docs/conceptual-compression.md",
+        "sourceHeading": "Ten-minute reading check",
+        "markdown": "After this page, a reader should be able to answer:\n\n1. Why are Fact and Episode not interchangeable?\n2. Why are Atlas, Pursuit, and Warrant three coordinates rather than generic\n   context plus a task?\n3. Why can a Pursuit continue after its current Warrant expires, is revoked,\n   or loses its fence?\n4. Why does a failed Episode remain valuable after successful recovery?\n5. Why can neither a passing test nor an Episode publish successor Fact?\n6. Which responsibilities belong to the cross-domain core, and which belong to\n   the software-development Domain Profile?\n7. Which numbered decision, terminology entry, schema, or public evidence path\n   should be inspected when a compact statement is not precise enough?\n\nIf those answers are not recoverable, the explanation has compressed away a\ndecision-relevant distinction and should fail review."
+      },
+      {
+        "id": "continue-to-authority-and-evidence",
+        "title": "Continue to authority and evidence",
+        "sourcePath": "docs/conceptual-compression.md",
+        "sourceHeading": "Continue to authority and evidence",
+        "markdown": "### Optional audit trail — skip on first read\n\nThe five beats are the reader model. These exact public coordinates preserve\nthe audit path without making identifiers part of the conceptual vocabulary.\n\n| UTC | Retained coordinate |\n| --- | --- |\n| 12 Aug 18:17 | #3054 opened with Initiative, Assignment, exact source, identity, dependency, toolchain, plan, and closure roots. |\n| 12 Aug 18:24 | Buildchain marked exact head `52373d46...` source-qualified. |\n| 12 Aug 23:21 | Exact-source run `31626882279`, attempt 3, was executing under provisional Warrant generation `376`; one native shard was still running. |\n| 12 Aug 23:31 | The old patrol closed generation `376`; a later candidate acquired `377`; the running attempt detected fence loss and cancelled. |\n| 13 Aug 00:18 | #3059 combined #3054's two-phase behavior with #3055's full-lifetime heartbeat and fencing repair; the failed run remained linked as evidence. |\n| 13 Aug 02:50–03:07 | #3059 reached the reviewed final tree, failed non-linear Project Cut replay, and closed in favor of a successor. |\n| 13 Aug 03:06 | #3064 was prepared from the current protected base with one signed linear commit and the same candidate tree reviewed in #3059. |\n| 13 Aug 04:33–05:32 | The successor passed KFD, Shifu, both native shards, and the aggregate native gate under generation `389`. |\n| 13 Aug 05:33–05:39 | Queue admission passed, protected merge completed at 05:38, and exact fenced terminal close completed at 05:39. |\n\n- Read [KFD-7](../decisions/KFD-7.md) for the active cross-domain action\n  principle and conservative session limit.\n- Read [KFD-8](../decisions/KFD-8.md), [KFD-9](../decisions/KFD-9.md), and\n  [KFD-10](../decisions/KFD-10.md) for the separately allocated draft\n  responsibilities of Atlas, Pursuit, and Warrant.\n- Read [KFD-11](../decisions/KFD-11.md) for consequential settlement and\n  [KFD-12](../decisions/KFD-12.md) plus [KFD-13](../decisions/KFD-13.md) for the\n  software-development Domain Profile.\n- Use the [terminology contract](terminology.md) before interpreting overloaded\n  names, the [formal model](formal-model.md) for precise invariants, and\n  [KFD Under Load](load-bearing-dogfood.md) for the bounded founding-adopter\n  evidence cut."
+      }
+    ],
+    "rendering": {
+      "kind": "conceptual-compression",
+      "tocDepth": 3,
+      "navigationLabel": "Concepts",
+      "navigationGroup": "foundation",
+      "navigationOrder": 10,
+      "progressiveDisclosure": [
+        "model-in-one-view",
+        "one-real-software-delivery-work",
+        "failure-does-not-collapse-the-model",
+        "settlement-returns-to-fact",
+        "software-work-composes-the-core",
+        "common-misreadings",
+        "ten-minute-reading-check",
+        "continue-to-authority-and-evidence"
+      ]
+    },
+    "markdown": "# KFD Conceptual Compression\n\nMost agent systems today are described from the agent outward: what context it\nsees, what task it has, what tools it may use, what it did, and what it\nproduced. KFD begins from a different question: **what must remain continuous\nwhen the agent, session, repository, authority, or execution path changes—but\nthe work continues?**\n\nIf the agent is treated as the center of truth, difficult cases collapse into\nfalse equivalences: a running agent appears to remain authorized; a retry\nappears to be the same task again; the same output appears to be the same\nresult; and a successful run appears to have established accepted state. Real\nsystems can break every one of those equivalences.\n\nThis guide follows one delivery in which they all failed. A healthy run lost\nits authority while it was still executing. A repair produced the same\nreviewed tree through a history that could not be admitted. Only a new\nsuccessor, acting from current facts and authority, completed settlement.\n\nThe case reveals why KFD separates Fact, Episode, Atlas, Pursuit, and\nWarrant—and why an agent is a participant in the work, not the container that\ngives the work its identity, authority, history, or truth.\n\nHere, **work** is an ordinary reader label for the continuing thing being\nexplained; it does not assert that Work is a qualified KFD Primitive or add it\nto the `2 + 3` core. Software is the example because its evidence is unusually\ninspectable; it is not the boundary of KFD. This page is a non-normative\nreader's guide: the numbered texts under `decisions/` and the\n[terminology contract](terminology.md) remain authoritative. KFD terms are not\none-to-one aliases for a familiar engineering stack.\n\n## The model in one view\n\n```text\nFact@cut0\n  + Atlas       From which admitted facts and perspective is action judged?\n  + Pursuit     What continuing change is being sought?\n  + Warrant     What bounded transition may be performed now, by whom?\n      |\n      v\n  bounded action encounters reality\n      |\n      v\n  Episode       What actually happened, with which consequence and loss?\n      |\n      v\n  Claim -> Assessment -> Decision -> Admission\n      |\n      v\nFact@cut1\n```\n\nThe model begins with five primary names, but they are not five peers:\n\n```text\nFact + Episode\n  -> Fact-Episode Ontology\n\nAtlas + Pursuit + Warrant\n  -> Action Responsibility Geometry\n```\n\nThese five explain what action is grounded in and what it produces. **Claim,\nAssessment, Decision, and Admission** are four later settlement\nresponsibilities: they explain how an Episode may, or may not, become successor\nFact.\n\n| Term | Independent responsibility | Reader question | Numbered authority |\n| --- | --- | --- | --- |\n| **Fact** | Admitted state at a declared evidence boundary | What is admitted? | [KFD-7](../decisions/KFD-7.md) |\n| **Episode** | Replayable causal record between Fact cuts | What happened? | [KFD-7](../decisions/KFD-7.md) |\n| **Atlas** | Declared perspective over admitted facts | From where is it judged? | [KFD-8](../decisions/KFD-8.md) draft |\n| **Pursuit** | Continuing direction and progress relation | What change is sought? | [KFD-9](../decisions/KFD-9.md) draft |\n| **Warrant** | Bounded authority for admissible transitions | What action is allowed? | [KFD-10](../decisions/KFD-10.md) draft |\n\nFact and Episode describe admitted state and realized occurrence in KFD's\ncontract world. Atlas, Pursuit, and Warrant constrain consequential action over\nthat world. None may silently manufacture another: intention does not grant\nauthority, available context is not complete reality, permission does not\nprove occurrence, and occurrence does not prove success or admission.\nAtlas is not whatever data happens to be available; it is the declared frame\nfrom which this action is judged.\n\n## One real software-delivery Work\n\n### The Warrant disappeared while work was still running\n\nThis is a reconstruction of one public Kungfu delivery history from 12–13\nAugust 2026. It begins with\n[PR #3054](https://github.com/kungfu-systems/kungfu/pull/3054), passes through\nthe repair and replay attempts in\n[PR #3055](https://github.com/kungfu-systems/kungfu/pull/3055) and\n[PR #3059](https://github.com/kungfu-systems/kungfu/pull/3059), and settles with\n[PR #3064](https://github.com/kungfu-systems/kungfu/pull/3064).\n\nThe pressure can be stated in one sentence:\n\n> A healthy native run lost its Warrant while work was still running; the\n> repair then reached the same reviewed tree through a history that the\n> software Profile's project-level [Project Cut](../decisions/KFD-13.md) could\n> not admit; only a new linear successor completed protected settlement.\n\nThis delivery is one pressure field for KFD, not the boundary of the model.\nSoftware provides unusually inspectable evidence, but another domain may carry\nthe same responsibilities through different objects and records.\n\n### The five beats\n\n| Beat | What happened | What becomes impossible to confuse |\n| --- | --- | --- |\n| **1. Start** | #3054 began a bounded attempt to ship two-phase Delivery Warrant behavior. Its exact source and evidence were bound to an initial Warrant; the native run was healthy and partly complete. | A Pursuit and an executing attempt exist, but neither is admitted successor Fact. |\n| **2. Authority loss** | The old patrol closed the Warrant before the run finished. Another candidate acquired the next generation, and the running attempt stopped when it detected fence loss. | Healthy execution is not current authority. A stale attempt must stop even when its code appears sound. |\n| **3. Repair and rejection** | #3059 preserved the intended result and added full-lifetime heartbeat and fencing. It reached the reviewed result tree, but Project Cut rejected the non-linear history that produced it. | Same result tree does not mean same causal history, and a valid endpoint cannot erase an inadmissible path. |\n| **4. Successor** | #3064 was prepared from the current protected base as one signed linear successor. It carried the reviewed #3059 tree through new source and history coordinates, then passed the native gates under a successor Warrant. | Recovery can preserve the sought consequence while replacing the perspective, responsibility boundary, and authority for the next attempt. |\n| **5. Settlement** | Queue admission passed, protected merge updated the owning ref, and Buildchain closed the exact fenced attempt. | Checks support a Claim; accountable assessment, decision, and Admission are still required before successor Fact becomes current. |\n\nThe continuing **Pursuit** can be said without any issue number: *ship the\nreviewed two-phase Warrant behavior safely onto the protected development\nline*. The PR, Assignment, candidate, Warrant, run, and merge are bounded\nobjects used to pursue that direction; none is the Pursuit itself.\n\n### Watch the coordinates move independently\n\n```text\nsame continuing delivery direction\n  |\n  +-- PR #3054 / initial Warrant\n  |     -> healthy work loses fence\n  |     -> failed attempt retained\n  |\n  +-- PR #3059 / same reviewed result tree\n  |     -> non-linear history rejected by Project Cut\n  |     -> rejected attempt retained\n  |\n  +-- PR #3064 / linear successor / successor Warrant\n        -> qualified execution\n        -> protected merge\n        -> exact terminal settlement\n```\n\nRead the case once across all five coordinates:\n\n- **Fact** stays at the protected pre-admission state through both failures.\n- **Pursuit** survives the PRs, candidates, and attempts.\n- **Atlas** changes when #3064 binds a new protected base and linear history,\n  even though the reviewed result tree stays equal.\n- **Warrant** from the failed attempt cannot authorize its successor. No old generation authorizes the new attempt.\n- **Episode** keeps the cancelled run, replay rejection, and successful run as\n  three distinct causal records.\n\nThe first Atlas, Warrant, and Episode remain historical coordinates; they are\nnot edited into the successful successor.\n\nThis is the break from the agent-centered model promised at the beginning: the\nrun, PR, Assignment, Atlas, and Warrant changed, while the Pursuit and retained\ncausal history made the continuing work recognizable.\n\n## Failure does not collapse the model\n\nAfter failure, the prior Fact remains current, the Pursuit may continue, and\nthe original Atlas and Episode remain replayable. The expired, revoked, or\nfence-lost Warrant cannot authorize recovery. A retry is therefore a new causal\nattempt under current facts, perspective, direction, and authority—not “the\nsame task again” under ambient permission.\n\n## Settlement returns to Fact\n\nExecution and settlement are distinct:\n\n```text\nexecution\n  Pursuit + Atlas + Warrant\n    -> bounded action\n    -> Episode\n\nsettlement\n  Claim + Assessment + authorized Decision\n    -> Admission\n    -> successor Fact cut only on success\n```\n\nThe agent cannot make its own output Fact. It can produce an Episode and\nsupport a Claim; the owning authorities still assess, decide, and admit the\nsuccessor.\n\nIn this history, exact checks support the **Claim**; review and queue policy\nsupply **Assessment**; the authorized merge disposition records the\n**Decision**; and the protected-ref update records **Admission**. The exact\nfenced close then settles the attempt. This is a KFD reader projection over\nnative records, not a claim that GitHub or Buildchain emitted same-named KFD\nobjects.\n\nBuildchain does not own the protected ref, so its qualified Warrant cannot\nmerge a PR. Only successful Admission publishes the successor Fact cut. A\npassing test can support a Claim, but cannot assess itself, grant decision\nauthority, or prove Admission. [KFD-11](../decisions/KFD-11.md) owns these\nboundaries.\n\nExecutable expiry, fencing, recovery, and settlement probes remain in the\n[Buildchain v3 evidence bundle](../profiles/warrant-evidence/fixtures/buildchain-v3-delivery-warrant.json)\nand [second-wave report](../evidence/primitive-evidence/second-wave-report.md).\n\n## Software work composes the core\n\nKFD-12 and KFD-13 give software development a Domain Profile above the\ncross-domain core:\n\n```text\nInitiative\n  continuing coordinated software work\n    |\n    +-- Assignment\n          accepted bounded responsibility\n          + Pursuit\n          + Atlas\n          + Warrant\n          + evidence and settlement obligations\n          |\n          +-- Episode(s)\n          +-- Claim -> Assessment -> Decision -> Admission\n\nProject Cut\n  optional project-level settlement of selected authoritative roots\n```\n\nAn [Initiative](../decisions/KFD-12.md) groups continuing coordinated work. An\nAssignment records who proposed, accepted, or holds bounded responsibility; it\nis neither the Pursuit nor the Warrant. A\n[Project Cut](../decisions/KFD-13.md) publishes one verifiable project\nsettlement without absorbing its source authorities.\n\nThese are software-domain objects. Another domain may use different vocabulary,\nlifecycle, storage, and settlement objects while preserving the Fact-Episode\nOntology and Action Responsibility Geometry through its own Domain Profile.\n\n## Common misreadings\n\nOnce the agent is no longer the center of truth, context, task, permission,\nlogs, and success can no longer stand in for these independent\nresponsibilities:\n\n| Familiar compression | What KFD preserves instead |\n| --- | --- |\n| context = everything the agent can see | Atlas declares source, Fact cut, scope, freshness, omissions, conflict, and loss. |\n| task = durable intent and responsibility | Pursuit preserves direction; Assignment separately records accepted software-work responsibility. |\n| permission = capability or credential | Warrant binds exact subject, purpose, holder, constraints, validity, and authority lineage. |\n| logs = what happened | Episode binds a causal record to declared cuts, perspective, omissions, and loss; a log may be only one input. |\n| execution success = completion | Episode supports a Claim; settlement still requires Assessment, authorized Decision, and Admission. |\n| approval = admitted state | Decision requests an effect; Admission records whether the owning authority accepted it. |\n| latest state validates earlier work | Earlier Atlas, Warrant, Episode, Claim, and Assessment roots remain bound to their original cuts. |\n| five names require five forms or services | One simple session may project the distinctions when later inspection can recover every decision-relevant responsibility. |\n\nThe conservative session limit remains important. In one local, reversible,\nsingle-direction interaction, a product may present goal, context, tool\npermission, run, and result instead of exposing five objects. Complexity must\nbecome explicit only when direction, perspective, authority, Episodes, Fact\nbranches, participants, or settlement boundaries vary independently.\n\n## Ten-minute reading check\n\nAfter this page, a reader should be able to answer:\n\n1. Why are Fact and Episode not interchangeable?\n2. Why are Atlas, Pursuit, and Warrant three coordinates rather than generic\n   context plus a task?\n3. Why can a Pursuit continue after its current Warrant expires, is revoked,\n   or loses its fence?\n4. Why does a failed Episode remain valuable after successful recovery?\n5. Why can neither a passing test nor an Episode publish successor Fact?\n6. Which responsibilities belong to the cross-domain core, and which belong to\n   the software-development Domain Profile?\n7. Which numbered decision, terminology entry, schema, or public evidence path\n   should be inspected when a compact statement is not precise enough?\n\nIf those answers are not recoverable, the explanation has compressed away a\ndecision-relevant distinction and should fail review.\n\n## Continue to authority and evidence\n\n### Optional audit trail — skip on first read\n\nThe five beats are the reader model. These exact public coordinates preserve\nthe audit path without making identifiers part of the conceptual vocabulary.\n\n| UTC | Retained coordinate |\n| --- | --- |\n| 12 Aug 18:17 | #3054 opened with Initiative, Assignment, exact source, identity, dependency, toolchain, plan, and closure roots. |\n| 12 Aug 18:24 | Buildchain marked exact head `52373d46...` source-qualified. |\n| 12 Aug 23:21 | Exact-source run `31626882279`, attempt 3, was executing under provisional Warrant generation `376`; one native shard was still running. |\n| 12 Aug 23:31 | The old patrol closed generation `376`; a later candidate acquired `377`; the running attempt detected fence loss and cancelled. |\n| 13 Aug 00:18 | #3059 combined #3054's two-phase behavior with #3055's full-lifetime heartbeat and fencing repair; the failed run remained linked as evidence. |\n| 13 Aug 02:50–03:07 | #3059 reached the reviewed final tree, failed non-linear Project Cut replay, and closed in favor of a successor. |\n| 13 Aug 03:06 | #3064 was prepared from the current protected base with one signed linear commit and the same candidate tree reviewed in #3059. |\n| 13 Aug 04:33–05:32 | The successor passed KFD, Shifu, both native shards, and the aggregate native gate under generation `389`. |\n| 13 Aug 05:33–05:39 | Queue admission passed, protected merge completed at 05:38, and exact fenced terminal close completed at 05:39. |\n\n- Read [KFD-7](../decisions/KFD-7.md) for the active cross-domain action\n  principle and conservative session limit.\n- Read [KFD-8](../decisions/KFD-8.md), [KFD-9](../decisions/KFD-9.md), and\n  [KFD-10](../decisions/KFD-10.md) for the separately allocated draft\n  responsibilities of Atlas, Pursuit, and Warrant.\n- Read [KFD-11](../decisions/KFD-11.md) for consequential settlement and\n  [KFD-12](../decisions/KFD-12.md) plus [KFD-13](../decisions/KFD-13.md) for the\n  software-development Domain Profile.\n- Use the [terminology contract](terminology.md) before interpreting overloaded\n  names, the [formal model](formal-model.md) for precise invariants, and\n  [KFD Under Load](load-bearing-dogfood.md) for the bounded founding-adopter\n  evidence cut.",
+    "rendererContract": {
+      "showCoreModelFirst": true,
+      "showWorkedExampleAsOneSequence": true,
+      "showFailureRecoveryAndSettlement": true,
+      "showAuthorityBoundary": true,
+      "note": "Render KFD-owned wording and terminology projections without replacing canonical terms with familiar stack aliases or promoting founding-adopter fields into universal semantics."
     }
   },
   "foundationPage": {
@@ -2257,6 +2606,295 @@
     }
   ],
   "standalonePages": [
+    {
+      "id": "conceptual-compression",
+      "title": "KFD Conceptual Compression",
+      "sourcePath": "docs/conceptual-compression.md",
+      "url": "/concepts",
+      "relationship": "non-normative-reader-compression-of-numbered-decisions",
+      "normative": false,
+      "authorityNote": "Numbered decisions remain authoritative; terminology.json owns the canonical names and anti-misreading boundaries projected by this page.",
+      "lead": "# KFD Conceptual Compression",
+      "coreModel": {
+        "ontology": {
+          "structure": {
+            "termId": "fact-episode-ontology",
+            "members": [
+              "fact",
+              "episode"
+            ]
+          },
+          "terms": [
+            {
+              "id": "fact",
+              "canonical": "Fact",
+              "layer": "kfd-7-ontology-binding",
+              "subtitle": "Admitted state at a declared evidence boundary",
+              "compactSubtitle": "Admitted state",
+              "question": "What is admitted?",
+              "definition": "State admitted into a contract world under a declared source, authority, evidence, and cut boundary. Its independently addressable formal carrier is a Fact Cut.",
+              "notThis": [
+                "absolute truth",
+                "every observation",
+                "a Causal Record"
+              ]
+            },
+            {
+              "id": "episode",
+              "canonical": "Episode",
+              "layer": "kfd-7-ontology-binding",
+              "subtitle": "Replayable causal record between Fact cuts",
+              "compactSubtitle": "Replayable causal record",
+              "question": "What happened?",
+              "definition": "An independently addressable and replayable object that binds a Causal Record to declared Fact cuts, perspective, omissions, and loss.",
+              "notThis": [
+                "a session by definition",
+                "a transcript by definition",
+                "an intended or authorized action",
+                "proof of success, progress, completion, or authorization"
+              ]
+            }
+          ]
+        },
+        "actionGeometry": {
+          "structure": {
+            "termId": "action-responsibility-geometry",
+            "members": [
+              "atlas",
+              "pursuit",
+              "warrant"
+            ]
+          },
+          "terms": [
+            {
+              "id": "atlas",
+              "canonical": "Atlas",
+              "layer": "reference-coordinate",
+              "subtitle": "Declared perspective over admitted facts",
+              "compactSubtitle": "Declared perspective",
+              "question": "From where is it judged?",
+              "definition": "The independently addressable perspective coordinate that binds accepted facts, observation boundary, cut, freshness, omissions, and loss.",
+              "notThis": [
+                "complete reality",
+                "generic context without source, cut, freshness, omissions, and loss",
+                "a Pursuit or Warrant"
+              ]
+            },
+            {
+              "id": "pursuit",
+              "canonical": "Pursuit",
+              "layer": "reference-coordinate",
+              "subtitle": "Continuing direction and progress relation",
+              "compactSubtitle": "Continuing direction",
+              "question": "What change is sought?",
+              "definition": "The independently addressable direction coordinate that identifies the continuing change being sought and the relation by which progress is judged.",
+              "notThis": [
+                "a one-shot task",
+                "a plan",
+                "authority to act"
+              ]
+            },
+            {
+              "id": "warrant",
+              "canonical": "Warrant",
+              "layer": "reference-coordinate",
+              "subtitle": "Bounded authority for admissible transitions",
+              "compactSubtitle": "Bounded authority",
+              "question": "What action is allowed?",
+              "definition": "The independently addressable authority coordinate that identifies which transition may be performed, by whom, under which constraints, and until when.",
+              "notThis": [
+                "authentication",
+                "a capability alone",
+                "intention or assignment",
+                "proof that an action occurred"
+              ]
+            }
+          ]
+        },
+        "settlement": [
+          {
+            "id": "claim",
+            "canonical": "Claim",
+            "layer": "kfd-11-consequential-settlement",
+            "subtitle": "Exact proposition offered for reliance",
+            "compactSubtitle": "Bounded proposition",
+            "question": "What exact proposition is a participant asking others to rely on?",
+            "definition": "An independently addressable proposition made by a declared participant against exact Fact and evidence cuts, with an inspectable audit boundary and declared limitations.",
+            "notThis": [
+              "evidence by itself",
+              "an Episode by itself",
+              "an Assessment",
+              "a Decision"
+            ]
+          },
+          {
+            "id": "assessment",
+            "canonical": "Assessment",
+            "layer": "kfd-11-consequential-settlement",
+            "subtitle": "Purpose-bound trust judgment",
+            "compactSubtitle": "Trust judgment",
+            "question": "For what purpose and within what evidence boundary may this Claim be trusted?",
+            "definition": "A purpose-bound, revisable trust judgment over an exact Claim and checked evidence cut that exposes result, gaps, residual risk, and assurance responsibility.",
+            "notThis": [
+              "universal truth",
+              "authority to decide",
+              "a Decision",
+              "successful Admission"
+            ]
+          },
+          {
+            "id": "decision",
+            "canonical": "Decision",
+            "layer": "kfd-11-consequential-settlement",
+            "subtitle": "Authorized disposition with requested effects",
+            "compactSubtitle": "Authorized disposition",
+            "question": "Who decided what disposition under which authority?",
+            "definition": "An independently addressable disposition of assessed Claims, issued by a declared decision maker under an exact Warrant and policy, with explicit conditions, requested effects, reasons, and residual risk.",
+            "notThis": [
+              "an Assessment",
+              "occurrence",
+              "successful Admission",
+              "a successor Fact cut"
+            ]
+          },
+          {
+            "id": "admission",
+            "canonical": "Admission",
+            "layer": "kfd-11-consequential-settlement",
+            "subtitle": "Recorded result of applying an authorized transition",
+            "compactSubtitle": "Transition result",
+            "question": "Did the authorized requested effect enter the owning state authority?",
+            "definition": "The independently recorded result of presenting a Decision's requested transition to the owning admission authority, including a successor Fact cut only when admission succeeds.",
+            "notThis": [
+              "a Decision",
+              "process success",
+              "a passing Assessment",
+              "a fabricated successor state"
+            ]
+          }
+        ],
+        "softwareProfile": [
+          {
+            "id": "initiative",
+            "canonical": "Initiative",
+            "layer": "kfd-12-software-domain-work-context",
+            "subtitle": "Continuing coordinated work context",
+            "compactSubtitle": "Coordinated work context",
+            "question": "What continuing work are these responsibilities advancing?",
+            "definition": "An independently addressable software-domain context for continuing coordinated work that preserves coordination purpose, scope, participants, relevant Pursuits, Assignment relations, lineage, and settlement state without redefining Pursuit direction.",
+            "notThis": [
+              "an intention statement alone",
+              "a Pursuit",
+              "a project or repository by definition",
+              "one execution session"
+            ]
+          },
+          {
+            "id": "assignment",
+            "canonical": "Assignment",
+            "layer": "kfd-12-software-domain-bounded-responsibility",
+            "subtitle": "Responsibility proposed to, accepted by, or held by a participant",
+            "compactSubtitle": "Bounded responsibility",
+            "question": "Who is responsible for this bounded work under which evidence boundary?",
+            "definition": "An independently addressable software-domain responsibility proposed to, accepted by, or held by a participant that binds accepted responsibility, Initiative, Pursuit, Atlas, Warrant, evidence obligations, settlement policy, and lineage without duplicating Pursuit direction.",
+            "notThis": [
+              "a task description alone",
+              "a Warrant",
+              "an Episode",
+              "a completion claim"
+            ]
+          },
+          {
+            "id": "project-cut",
+            "canonical": "Project Cut",
+            "layer": "kfd-13-software-project-settlement"
+          }
+        ]
+      },
+      "sections": [
+        {
+          "id": "model-in-one-view",
+          "title": "The model in one view",
+          "sourcePath": "docs/conceptual-compression.md",
+          "sourceHeading": "The model in one view",
+          "markdown": "```text\nFact@cut0\n  + Atlas       From which admitted facts and perspective is action judged?\n  + Pursuit     What continuing change is being sought?\n  + Warrant     What bounded transition may be performed now, by whom?\n      |\n      v\n  bounded action encounters reality\n      |\n      v\n  Episode       What actually happened, with which consequence and loss?\n      |\n      v\n  Claim -> Assessment -> Decision -> Admission\n      |\n      v\nFact@cut1\n```\n\nThe model begins with five primary names, but they are not five peers:\n\n```text\nFact + Episode\n  -> Fact-Episode Ontology\n\nAtlas + Pursuit + Warrant\n  -> Action Responsibility Geometry\n```\n\nThese five explain what action is grounded in and what it produces. **Claim,\nAssessment, Decision, and Admission** are four later settlement\nresponsibilities: they explain how an Episode may, or may not, become successor\nFact.\n\n| Term | Independent responsibility | Reader question | Numbered authority |\n| --- | --- | --- | --- |\n| **Fact** | Admitted state at a declared evidence boundary | What is admitted? | [KFD-7](../decisions/KFD-7.md) |\n| **Episode** | Replayable causal record between Fact cuts | What happened? | [KFD-7](../decisions/KFD-7.md) |\n| **Atlas** | Declared perspective over admitted facts | From where is it judged? | [KFD-8](../decisions/KFD-8.md) draft |\n| **Pursuit** | Continuing direction and progress relation | What change is sought? | [KFD-9](../decisions/KFD-9.md) draft |\n| **Warrant** | Bounded authority for admissible transitions | What action is allowed? | [KFD-10](../decisions/KFD-10.md) draft |\n\nFact and Episode describe admitted state and realized occurrence in KFD's\ncontract world. Atlas, Pursuit, and Warrant constrain consequential action over\nthat world. None may silently manufacture another: intention does not grant\nauthority, available context is not complete reality, permission does not\nprove occurrence, and occurrence does not prove success or admission.\nAtlas is not whatever data happens to be available; it is the declared frame\nfrom which this action is judged."
+        },
+        {
+          "id": "one-real-software-delivery-work",
+          "title": "One real software-delivery Work",
+          "sourcePath": "docs/conceptual-compression.md",
+          "sourceHeading": "One real software-delivery Work",
+          "markdown": "### The Warrant disappeared while work was still running\n\nThis is a reconstruction of one public Kungfu delivery history from 12–13\nAugust 2026. It begins with\n[PR #3054](https://github.com/kungfu-systems/kungfu/pull/3054), passes through\nthe repair and replay attempts in\n[PR #3055](https://github.com/kungfu-systems/kungfu/pull/3055) and\n[PR #3059](https://github.com/kungfu-systems/kungfu/pull/3059), and settles with\n[PR #3064](https://github.com/kungfu-systems/kungfu/pull/3064).\n\nThe pressure can be stated in one sentence:\n\n> A healthy native run lost its Warrant while work was still running; the\n> repair then reached the same reviewed tree through a history that the\n> software Profile's project-level [Project Cut](../decisions/KFD-13.md) could\n> not admit; only a new linear successor completed protected settlement.\n\nThis delivery is one pressure field for KFD, not the boundary of the model.\nSoftware provides unusually inspectable evidence, but another domain may carry\nthe same responsibilities through different objects and records.\n\n### The five beats\n\n| Beat | What happened | What becomes impossible to confuse |\n| --- | --- | --- |\n| **1. Start** | #3054 began a bounded attempt to ship two-phase Delivery Warrant behavior. Its exact source and evidence were bound to an initial Warrant; the native run was healthy and partly complete. | A Pursuit and an executing attempt exist, but neither is admitted successor Fact. |\n| **2. Authority loss** | The old patrol closed the Warrant before the run finished. Another candidate acquired the next generation, and the running attempt stopped when it detected fence loss. | Healthy execution is not current authority. A stale attempt must stop even when its code appears sound. |\n| **3. Repair and rejection** | #3059 preserved the intended result and added full-lifetime heartbeat and fencing. It reached the reviewed result tree, but Project Cut rejected the non-linear history that produced it. | Same result tree does not mean same causal history, and a valid endpoint cannot erase an inadmissible path. |\n| **4. Successor** | #3064 was prepared from the current protected base as one signed linear successor. It carried the reviewed #3059 tree through new source and history coordinates, then passed the native gates under a successor Warrant. | Recovery can preserve the sought consequence while replacing the perspective, responsibility boundary, and authority for the next attempt. |\n| **5. Settlement** | Queue admission passed, protected merge updated the owning ref, and Buildchain closed the exact fenced attempt. | Checks support a Claim; accountable assessment, decision, and Admission are still required before successor Fact becomes current. |\n\nThe continuing **Pursuit** can be said without any issue number: *ship the\nreviewed two-phase Warrant behavior safely onto the protected development\nline*. The PR, Assignment, candidate, Warrant, run, and merge are bounded\nobjects used to pursue that direction; none is the Pursuit itself.\n\n### Watch the coordinates move independently\n\n```text\nsame continuing delivery direction\n  |\n  +-- PR #3054 / initial Warrant\n  |     -> healthy work loses fence\n  |     -> failed attempt retained\n  |\n  +-- PR #3059 / same reviewed result tree\n  |     -> non-linear history rejected by Project Cut\n  |     -> rejected attempt retained\n  |\n  +-- PR #3064 / linear successor / successor Warrant\n        -> qualified execution\n        -> protected merge\n        -> exact terminal settlement\n```\n\nRead the case once across all five coordinates:\n\n- **Fact** stays at the protected pre-admission state through both failures.\n- **Pursuit** survives the PRs, candidates, and attempts.\n- **Atlas** changes when #3064 binds a new protected base and linear history,\n  even though the reviewed result tree stays equal.\n- **Warrant** from the failed attempt cannot authorize its successor. No old generation authorizes the new attempt.\n- **Episode** keeps the cancelled run, replay rejection, and successful run as\n  three distinct causal records.\n\nThe first Atlas, Warrant, and Episode remain historical coordinates; they are\nnot edited into the successful successor.\n\nThis is the break from the agent-centered model promised at the beginning: the\nrun, PR, Assignment, Atlas, and Warrant changed, while the Pursuit and retained\ncausal history made the continuing work recognizable."
+        },
+        {
+          "id": "failure-does-not-collapse-the-model",
+          "title": "Failure does not collapse the model",
+          "sourcePath": "docs/conceptual-compression.md",
+          "sourceHeading": "Failure does not collapse the model",
+          "markdown": "After failure, the prior Fact remains current, the Pursuit may continue, and\nthe original Atlas and Episode remain replayable. The expired, revoked, or\nfence-lost Warrant cannot authorize recovery. A retry is therefore a new causal\nattempt under current facts, perspective, direction, and authority—not “the\nsame task again” under ambient permission."
+        },
+        {
+          "id": "settlement-returns-to-fact",
+          "title": "Settlement returns to Fact",
+          "sourcePath": "docs/conceptual-compression.md",
+          "sourceHeading": "Settlement returns to Fact",
+          "markdown": "Execution and settlement are distinct:\n\n```text\nexecution\n  Pursuit + Atlas + Warrant\n    -> bounded action\n    -> Episode\n\nsettlement\n  Claim + Assessment + authorized Decision\n    -> Admission\n    -> successor Fact cut only on success\n```\n\nThe agent cannot make its own output Fact. It can produce an Episode and\nsupport a Claim; the owning authorities still assess, decide, and admit the\nsuccessor.\n\nIn this history, exact checks support the **Claim**; review and queue policy\nsupply **Assessment**; the authorized merge disposition records the\n**Decision**; and the protected-ref update records **Admission**. The exact\nfenced close then settles the attempt. This is a KFD reader projection over\nnative records, not a claim that GitHub or Buildchain emitted same-named KFD\nobjects.\n\nBuildchain does not own the protected ref, so its qualified Warrant cannot\nmerge a PR. Only successful Admission publishes the successor Fact cut. A\npassing test can support a Claim, but cannot assess itself, grant decision\nauthority, or prove Admission. [KFD-11](../decisions/KFD-11.md) owns these\nboundaries.\n\nExecutable expiry, fencing, recovery, and settlement probes remain in the\n[Buildchain v3 evidence bundle](../profiles/warrant-evidence/fixtures/buildchain-v3-delivery-warrant.json)\nand [second-wave report](../evidence/primitive-evidence/second-wave-report.md)."
+        },
+        {
+          "id": "software-work-composes-the-core",
+          "title": "Software work composes the core",
+          "sourcePath": "docs/conceptual-compression.md",
+          "sourceHeading": "Software work composes the core",
+          "markdown": "KFD-12 and KFD-13 give software development a Domain Profile above the\ncross-domain core:\n\n```text\nInitiative\n  continuing coordinated software work\n    |\n    +-- Assignment\n          accepted bounded responsibility\n          + Pursuit\n          + Atlas\n          + Warrant\n          + evidence and settlement obligations\n          |\n          +-- Episode(s)\n          +-- Claim -> Assessment -> Decision -> Admission\n\nProject Cut\n  optional project-level settlement of selected authoritative roots\n```\n\nAn [Initiative](../decisions/KFD-12.md) groups continuing coordinated work. An\nAssignment records who proposed, accepted, or holds bounded responsibility; it\nis neither the Pursuit nor the Warrant. A\n[Project Cut](../decisions/KFD-13.md) publishes one verifiable project\nsettlement without absorbing its source authorities.\n\nThese are software-domain objects. Another domain may use different vocabulary,\nlifecycle, storage, and settlement objects while preserving the Fact-Episode\nOntology and Action Responsibility Geometry through its own Domain Profile."
+        },
+        {
+          "id": "common-misreadings",
+          "title": "Common misreadings",
+          "sourcePath": "docs/conceptual-compression.md",
+          "sourceHeading": "Common misreadings",
+          "markdown": "Once the agent is no longer the center of truth, context, task, permission,\nlogs, and success can no longer stand in for these independent\nresponsibilities:\n\n| Familiar compression | What KFD preserves instead |\n| --- | --- |\n| context = everything the agent can see | Atlas declares source, Fact cut, scope, freshness, omissions, conflict, and loss. |\n| task = durable intent and responsibility | Pursuit preserves direction; Assignment separately records accepted software-work responsibility. |\n| permission = capability or credential | Warrant binds exact subject, purpose, holder, constraints, validity, and authority lineage. |\n| logs = what happened | Episode binds a causal record to declared cuts, perspective, omissions, and loss; a log may be only one input. |\n| execution success = completion | Episode supports a Claim; settlement still requires Assessment, authorized Decision, and Admission. |\n| approval = admitted state | Decision requests an effect; Admission records whether the owning authority accepted it. |\n| latest state validates earlier work | Earlier Atlas, Warrant, Episode, Claim, and Assessment roots remain bound to their original cuts. |\n| five names require five forms or services | One simple session may project the distinctions when later inspection can recover every decision-relevant responsibility. |\n\nThe conservative session limit remains important. In one local, reversible,\nsingle-direction interaction, a product may present goal, context, tool\npermission, run, and result instead of exposing five objects. Complexity must\nbecome explicit only when direction, perspective, authority, Episodes, Fact\nbranches, participants, or settlement boundaries vary independently."
+        },
+        {
+          "id": "ten-minute-reading-check",
+          "title": "Ten-minute reading check",
+          "sourcePath": "docs/conceptual-compression.md",
+          "sourceHeading": "Ten-minute reading check",
+          "markdown": "After this page, a reader should be able to answer:\n\n1. Why are Fact and Episode not interchangeable?\n2. Why are Atlas, Pursuit, and Warrant three coordinates rather than generic\n   context plus a task?\n3. Why can a Pursuit continue after its current Warrant expires, is revoked,\n   or loses its fence?\n4. Why does a failed Episode remain valuable after successful recovery?\n5. Why can neither a passing test nor an Episode publish successor Fact?\n6. Which responsibilities belong to the cross-domain core, and which belong to\n   the software-development Domain Profile?\n7. Which numbered decision, terminology entry, schema, or public evidence path\n   should be inspected when a compact statement is not precise enough?\n\nIf those answers are not recoverable, the explanation has compressed away a\ndecision-relevant distinction and should fail review."
+        },
+        {
+          "id": "continue-to-authority-and-evidence",
+          "title": "Continue to authority and evidence",
+          "sourcePath": "docs/conceptual-compression.md",
+          "sourceHeading": "Continue to authority and evidence",
+          "markdown": "### Optional audit trail — skip on first read\n\nThe five beats are the reader model. These exact public coordinates preserve\nthe audit path without making identifiers part of the conceptual vocabulary.\n\n| UTC | Retained coordinate |\n| --- | --- |\n| 12 Aug 18:17 | #3054 opened with Initiative, Assignment, exact source, identity, dependency, toolchain, plan, and closure roots. |\n| 12 Aug 18:24 | Buildchain marked exact head `52373d46...` source-qualified. |\n| 12 Aug 23:21 | Exact-source run `31626882279`, attempt 3, was executing under provisional Warrant generation `376`; one native shard was still running. |\n| 12 Aug 23:31 | The old patrol closed generation `376`; a later candidate acquired `377`; the running attempt detected fence loss and cancelled. |\n| 13 Aug 00:18 | #3059 combined #3054's two-phase behavior with #3055's full-lifetime heartbeat and fencing repair; the failed run remained linked as evidence. |\n| 13 Aug 02:50–03:07 | #3059 reached the reviewed final tree, failed non-linear Project Cut replay, and closed in favor of a successor. |\n| 13 Aug 03:06 | #3064 was prepared from the current protected base with one signed linear commit and the same candidate tree reviewed in #3059. |\n| 13 Aug 04:33–05:32 | The successor passed KFD, Shifu, both native shards, and the aggregate native gate under generation `389`. |\n| 13 Aug 05:33–05:39 | Queue admission passed, protected merge completed at 05:38, and exact fenced terminal close completed at 05:39. |\n\n- Read [KFD-7](../decisions/KFD-7.md) for the active cross-domain action\n  principle and conservative session limit.\n- Read [KFD-8](../decisions/KFD-8.md), [KFD-9](../decisions/KFD-9.md), and\n  [KFD-10](../decisions/KFD-10.md) for the separately allocated draft\n  responsibilities of Atlas, Pursuit, and Warrant.\n- Read [KFD-11](../decisions/KFD-11.md) for consequential settlement and\n  [KFD-12](../decisions/KFD-12.md) plus [KFD-13](../decisions/KFD-13.md) for the\n  software-development Domain Profile.\n- Use the [terminology contract](terminology.md) before interpreting overloaded\n  names, the [formal model](formal-model.md) for precise invariants, and\n  [KFD Under Load](load-bearing-dogfood.md) for the bounded founding-adopter\n  evidence cut."
+        }
+      ],
+      "rendering": {
+        "kind": "conceptual-compression",
+        "tocDepth": 3,
+        "navigationLabel": "Concepts",
+        "navigationGroup": "foundation",
+        "navigationOrder": 10,
+        "progressiveDisclosure": [
+          "model-in-one-view",
+          "one-real-software-delivery-work",
+          "failure-does-not-collapse-the-model",
+          "settlement-returns-to-fact",
+          "software-work-composes-the-core",
+          "common-misreadings",
+          "ten-minute-reading-check",
+          "continue-to-authority-and-evidence"
+        ]
+      },
+      "markdown": "# KFD Conceptual Compression\n\nMost agent systems today are described from the agent outward: what context it\nsees, what task it has, what tools it may use, what it did, and what it\nproduced. KFD begins from a different question: **what must remain continuous\nwhen the agent, session, repository, authority, or execution path changes—but\nthe work continues?**\n\nIf the agent is treated as the center of truth, difficult cases collapse into\nfalse equivalences: a running agent appears to remain authorized; a retry\nappears to be the same task again; the same output appears to be the same\nresult; and a successful run appears to have established accepted state. Real\nsystems can break every one of those equivalences.\n\nThis guide follows one delivery in which they all failed. A healthy run lost\nits authority while it was still executing. A repair produced the same\nreviewed tree through a history that could not be admitted. Only a new\nsuccessor, acting from current facts and authority, completed settlement.\n\nThe case reveals why KFD separates Fact, Episode, Atlas, Pursuit, and\nWarrant—and why an agent is a participant in the work, not the container that\ngives the work its identity, authority, history, or truth.\n\nHere, **work** is an ordinary reader label for the continuing thing being\nexplained; it does not assert that Work is a qualified KFD Primitive or add it\nto the `2 + 3` core. Software is the example because its evidence is unusually\ninspectable; it is not the boundary of KFD. This page is a non-normative\nreader's guide: the numbered texts under `decisions/` and the\n[terminology contract](terminology.md) remain authoritative. KFD terms are not\none-to-one aliases for a familiar engineering stack.\n\n## The model in one view\n\n```text\nFact@cut0\n  + Atlas       From which admitted facts and perspective is action judged?\n  + Pursuit     What continuing change is being sought?\n  + Warrant     What bounded transition may be performed now, by whom?\n      |\n      v\n  bounded action encounters reality\n      |\n      v\n  Episode       What actually happened, with which consequence and loss?\n      |\n      v\n  Claim -> Assessment -> Decision -> Admission\n      |\n      v\nFact@cut1\n```\n\nThe model begins with five primary names, but they are not five peers:\n\n```text\nFact + Episode\n  -> Fact-Episode Ontology\n\nAtlas + Pursuit + Warrant\n  -> Action Responsibility Geometry\n```\n\nThese five explain what action is grounded in and what it produces. **Claim,\nAssessment, Decision, and Admission** are four later settlement\nresponsibilities: they explain how an Episode may, or may not, become successor\nFact.\n\n| Term | Independent responsibility | Reader question | Numbered authority |\n| --- | --- | --- | --- |\n| **Fact** | Admitted state at a declared evidence boundary | What is admitted? | [KFD-7](../decisions/KFD-7.md) |\n| **Episode** | Replayable causal record between Fact cuts | What happened? | [KFD-7](../decisions/KFD-7.md) |\n| **Atlas** | Declared perspective over admitted facts | From where is it judged? | [KFD-8](../decisions/KFD-8.md) draft |\n| **Pursuit** | Continuing direction and progress relation | What change is sought? | [KFD-9](../decisions/KFD-9.md) draft |\n| **Warrant** | Bounded authority for admissible transitions | What action is allowed? | [KFD-10](../decisions/KFD-10.md) draft |\n\nFact and Episode describe admitted state and realized occurrence in KFD's\ncontract world. Atlas, Pursuit, and Warrant constrain consequential action over\nthat world. None may silently manufacture another: intention does not grant\nauthority, available context is not complete reality, permission does not\nprove occurrence, and occurrence does not prove success or admission.\nAtlas is not whatever data happens to be available; it is the declared frame\nfrom which this action is judged.\n\n## One real software-delivery Work\n\n### The Warrant disappeared while work was still running\n\nThis is a reconstruction of one public Kungfu delivery history from 12–13\nAugust 2026. It begins with\n[PR #3054](https://github.com/kungfu-systems/kungfu/pull/3054), passes through\nthe repair and replay attempts in\n[PR #3055](https://github.com/kungfu-systems/kungfu/pull/3055) and\n[PR #3059](https://github.com/kungfu-systems/kungfu/pull/3059), and settles with\n[PR #3064](https://github.com/kungfu-systems/kungfu/pull/3064).\n\nThe pressure can be stated in one sentence:\n\n> A healthy native run lost its Warrant while work was still running; the\n> repair then reached the same reviewed tree through a history that the\n> software Profile's project-level [Project Cut](../decisions/KFD-13.md) could\n> not admit; only a new linear successor completed protected settlement.\n\nThis delivery is one pressure field for KFD, not the boundary of the model.\nSoftware provides unusually inspectable evidence, but another domain may carry\nthe same responsibilities through different objects and records.\n\n### The five beats\n\n| Beat | What happened | What becomes impossible to confuse |\n| --- | --- | --- |\n| **1. Start** | #3054 began a bounded attempt to ship two-phase Delivery Warrant behavior. Its exact source and evidence were bound to an initial Warrant; the native run was healthy and partly complete. | A Pursuit and an executing attempt exist, but neither is admitted successor Fact. |\n| **2. Authority loss** | The old patrol closed the Warrant before the run finished. Another candidate acquired the next generation, and the running attempt stopped when it detected fence loss. | Healthy execution is not current authority. A stale attempt must stop even when its code appears sound. |\n| **3. Repair and rejection** | #3059 preserved the intended result and added full-lifetime heartbeat and fencing. It reached the reviewed result tree, but Project Cut rejected the non-linear history that produced it. | Same result tree does not mean same causal history, and a valid endpoint cannot erase an inadmissible path. |\n| **4. Successor** | #3064 was prepared from the current protected base as one signed linear successor. It carried the reviewed #3059 tree through new source and history coordinates, then passed the native gates under a successor Warrant. | Recovery can preserve the sought consequence while replacing the perspective, responsibility boundary, and authority for the next attempt. |\n| **5. Settlement** | Queue admission passed, protected merge updated the owning ref, and Buildchain closed the exact fenced attempt. | Checks support a Claim; accountable assessment, decision, and Admission are still required before successor Fact becomes current. |\n\nThe continuing **Pursuit** can be said without any issue number: *ship the\nreviewed two-phase Warrant behavior safely onto the protected development\nline*. The PR, Assignment, candidate, Warrant, run, and merge are bounded\nobjects used to pursue that direction; none is the Pursuit itself.\n\n### Watch the coordinates move independently\n\n```text\nsame continuing delivery direction\n  |\n  +-- PR #3054 / initial Warrant\n  |     -> healthy work loses fence\n  |     -> failed attempt retained\n  |\n  +-- PR #3059 / same reviewed result tree\n  |     -> non-linear history rejected by Project Cut\n  |     -> rejected attempt retained\n  |\n  +-- PR #3064 / linear successor / successor Warrant\n        -> qualified execution\n        -> protected merge\n        -> exact terminal settlement\n```\n\nRead the case once across all five coordinates:\n\n- **Fact** stays at the protected pre-admission state through both failures.\n- **Pursuit** survives the PRs, candidates, and attempts.\n- **Atlas** changes when #3064 binds a new protected base and linear history,\n  even though the reviewed result tree stays equal.\n- **Warrant** from the failed attempt cannot authorize its successor. No old generation authorizes the new attempt.\n- **Episode** keeps the cancelled run, replay rejection, and successful run as\n  three distinct causal records.\n\nThe first Atlas, Warrant, and Episode remain historical coordinates; they are\nnot edited into the successful successor.\n\nThis is the break from the agent-centered model promised at the beginning: the\nrun, PR, Assignment, Atlas, and Warrant changed, while the Pursuit and retained\ncausal history made the continuing work recognizable.\n\n## Failure does not collapse the model\n\nAfter failure, the prior Fact remains current, the Pursuit may continue, and\nthe original Atlas and Episode remain replayable. The expired, revoked, or\nfence-lost Warrant cannot authorize recovery. A retry is therefore a new causal\nattempt under current facts, perspective, direction, and authority—not “the\nsame task again” under ambient permission.\n\n## Settlement returns to Fact\n\nExecution and settlement are distinct:\n\n```text\nexecution\n  Pursuit + Atlas + Warrant\n    -> bounded action\n    -> Episode\n\nsettlement\n  Claim + Assessment + authorized Decision\n    -> Admission\n    -> successor Fact cut only on success\n```\n\nThe agent cannot make its own output Fact. It can produce an Episode and\nsupport a Claim; the owning authorities still assess, decide, and admit the\nsuccessor.\n\nIn this history, exact checks support the **Claim**; review and queue policy\nsupply **Assessment**; the authorized merge disposition records the\n**Decision**; and the protected-ref update records **Admission**. The exact\nfenced close then settles the attempt. This is a KFD reader projection over\nnative records, not a claim that GitHub or Buildchain emitted same-named KFD\nobjects.\n\nBuildchain does not own the protected ref, so its qualified Warrant cannot\nmerge a PR. Only successful Admission publishes the successor Fact cut. A\npassing test can support a Claim, but cannot assess itself, grant decision\nauthority, or prove Admission. [KFD-11](../decisions/KFD-11.md) owns these\nboundaries.\n\nExecutable expiry, fencing, recovery, and settlement probes remain in the\n[Buildchain v3 evidence bundle](../profiles/warrant-evidence/fixtures/buildchain-v3-delivery-warrant.json)\nand [second-wave report](../evidence/primitive-evidence/second-wave-report.md).\n\n## Software work composes the core\n\nKFD-12 and KFD-13 give software development a Domain Profile above the\ncross-domain core:\n\n```text\nInitiative\n  continuing coordinated software work\n    |\n    +-- Assignment\n          accepted bounded responsibility\n          + Pursuit\n          + Atlas\n          + Warrant\n          + evidence and settlement obligations\n          |\n          +-- Episode(s)\n          +-- Claim -> Assessment -> Decision -> Admission\n\nProject Cut\n  optional project-level settlement of selected authoritative roots\n```\n\nAn [Initiative](../decisions/KFD-12.md) groups continuing coordinated work. An\nAssignment records who proposed, accepted, or holds bounded responsibility; it\nis neither the Pursuit nor the Warrant. A\n[Project Cut](../decisions/KFD-13.md) publishes one verifiable project\nsettlement without absorbing its source authorities.\n\nThese are software-domain objects. Another domain may use different vocabulary,\nlifecycle, storage, and settlement objects while preserving the Fact-Episode\nOntology and Action Responsibility Geometry through its own Domain Profile.\n\n## Common misreadings\n\nOnce the agent is no longer the center of truth, context, task, permission,\nlogs, and success can no longer stand in for these independent\nresponsibilities:\n\n| Familiar compression | What KFD preserves instead |\n| --- | --- |\n| context = everything the agent can see | Atlas declares source, Fact cut, scope, freshness, omissions, conflict, and loss. |\n| task = durable intent and responsibility | Pursuit preserves direction; Assignment separately records accepted software-work responsibility. |\n| permission = capability or credential | Warrant binds exact subject, purpose, holder, constraints, validity, and authority lineage. |\n| logs = what happened | Episode binds a causal record to declared cuts, perspective, omissions, and loss; a log may be only one input. |\n| execution success = completion | Episode supports a Claim; settlement still requires Assessment, authorized Decision, and Admission. |\n| approval = admitted state | Decision requests an effect; Admission records whether the owning authority accepted it. |\n| latest state validates earlier work | Earlier Atlas, Warrant, Episode, Claim, and Assessment roots remain bound to their original cuts. |\n| five names require five forms or services | One simple session may project the distinctions when later inspection can recover every decision-relevant responsibility. |\n\nThe conservative session limit remains important. In one local, reversible,\nsingle-direction interaction, a product may present goal, context, tool\npermission, run, and result instead of exposing five objects. Complexity must\nbecome explicit only when direction, perspective, authority, Episodes, Fact\nbranches, participants, or settlement boundaries vary independently.\n\n## Ten-minute reading check\n\nAfter this page, a reader should be able to answer:\n\n1. Why are Fact and Episode not interchangeable?\n2. Why are Atlas, Pursuit, and Warrant three coordinates rather than generic\n   context plus a task?\n3. Why can a Pursuit continue after its current Warrant expires, is revoked,\n   or loses its fence?\n4. Why does a failed Episode remain valuable after successful recovery?\n5. Why can neither a passing test nor an Episode publish successor Fact?\n6. Which responsibilities belong to the cross-domain core, and which belong to\n   the software-development Domain Profile?\n7. Which numbered decision, terminology entry, schema, or public evidence path\n   should be inspected when a compact statement is not precise enough?\n\nIf those answers are not recoverable, the explanation has compressed away a\ndecision-relevant distinction and should fail review.\n\n## Continue to authority and evidence\n\n### Optional audit trail — skip on first read\n\nThe five beats are the reader model. These exact public coordinates preserve\nthe audit path without making identifiers part of the conceptual vocabulary.\n\n| UTC | Retained coordinate |\n| --- | --- |\n| 12 Aug 18:17 | #3054 opened with Initiative, Assignment, exact source, identity, dependency, toolchain, plan, and closure roots. |\n| 12 Aug 18:24 | Buildchain marked exact head `52373d46...` source-qualified. |\n| 12 Aug 23:21 | Exact-source run `31626882279`, attempt 3, was executing under provisional Warrant generation `376`; one native shard was still running. |\n| 12 Aug 23:31 | The old patrol closed generation `376`; a later candidate acquired `377`; the running attempt detected fence loss and cancelled. |\n| 13 Aug 00:18 | #3059 combined #3054's two-phase behavior with #3055's full-lifetime heartbeat and fencing repair; the failed run remained linked as evidence. |\n| 13 Aug 02:50–03:07 | #3059 reached the reviewed final tree, failed non-linear Project Cut replay, and closed in favor of a successor. |\n| 13 Aug 03:06 | #3064 was prepared from the current protected base with one signed linear commit and the same candidate tree reviewed in #3059. |\n| 13 Aug 04:33–05:32 | The successor passed KFD, Shifu, both native shards, and the aggregate native gate under generation `389`. |\n| 13 Aug 05:33–05:39 | Queue admission passed, protected merge completed at 05:38, and exact fenced terminal close completed at 05:39. |\n\n- Read [KFD-7](../decisions/KFD-7.md) for the active cross-domain action\n  principle and conservative session limit.\n- Read [KFD-8](../decisions/KFD-8.md), [KFD-9](../decisions/KFD-9.md), and\n  [KFD-10](../decisions/KFD-10.md) for the separately allocated draft\n  responsibilities of Atlas, Pursuit, and Warrant.\n- Read [KFD-11](../decisions/KFD-11.md) for consequential settlement and\n  [KFD-12](../decisions/KFD-12.md) plus [KFD-13](../decisions/KFD-13.md) for the\n  software-development Domain Profile.\n- Use the [terminology contract](terminology.md) before interpreting overloaded\n  names, the [formal model](formal-model.md) for precise invariants, and\n  [KFD Under Load](load-bearing-dogfood.md) for the bounded founding-adopter\n  evidence cut.",
+      "rendererContract": {
+        "showCoreModelFirst": true,
+        "showWorkedExampleAsOneSequence": true,
+        "showFailureRecoveryAndSettlement": true,
+        "showAuthorityBoundary": true,
+        "note": "Render KFD-owned wording and terminology projections without replacing canonical terms with familiar stack aliases or promoting founding-adopter fields into universal semantics."
+      }
+    },
     {
       "id": "load-bearing-dogfood",
       "title": "KFD Under Load",
@@ -8834,6 +9472,7 @@
     "ownedByKfd": [
       "homepage title and text",
       "homepage section projection from README.md",
+      "conceptual compression page from docs/conceptual-compression.md and canonical terminology projection from terminology.json",
       "first-screen independent implementation promise, languages, commands, links, and boundaries",
       "foundation explanation page from docs/foundation.md",
       "load-bearing dogfood evidence page from docs/load-bearing-dogfood.md",
