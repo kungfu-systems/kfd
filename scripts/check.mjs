@@ -818,23 +818,36 @@ if (agentHubPage?.reportVerification?.backend !== "host-node" ||
     agentHubPage?.reportVerification?.processSpawning !== "host-only") {
   fail("site bundle Agent Hub page must preserve the host-only verification and process boundary");
 }
-if (!agentHubPage?.claimBoundary?.includes("non-certifying")) {
+if (agentHubPage?.dimensions?.behavior?.starter !== "0/20" ||
+    agentHubPage?.dimensions?.evidence?.starter !== true ||
+    agentHubPage?.dimensions?.authority?.starter?.qualifying !== false ||
+    agentHubPage?.dimensions?.authority?.starter?.certification !== false) {
+  fail("site bundle Agent Hub page must preserve independent behavior, evidence, and authority dimensions");
+}
+if (agentHubPage?.paths?.reference?.expected?.behavior !== "20/20" ||
+    agentHubPage?.paths?.starter?.expected?.behavior !== "0/20" ||
+    agentHubPage?.paths?.starter?.expected?.verifyExitCode !== 0) {
+  fail("site bundle Agent Hub page must preserve the reference and starter teaching paths");
+}
+if (!agentHubPage?.claimBoundary?.includes("neither") || !agentHubPage?.claimBoundary?.includes("certification")) {
   fail("site bundle Agent Hub page must preserve the non-certifying claim boundary");
 }
 if (!agentHubPage?.recovery?.includes("never overwrites")) {
   fail("site bundle Agent Hub page must preserve fail-closed scaffold recovery");
 }
 const requiredAgentHubSections = new Set([
+  "three-independent-dimensions",
   "five-minute-packaged-quickstart",
   "verify-the-first-party-kungfu-product",
   "scaffold-an-adopter-adapter",
+  "implement-hub-semantics",
   "run-the-fixed-suite-against-an-adopter",
   "fixed-boundaries",
   "claim-boundary",
   "executable-onboarding-surfaces",
   "adapter-binding",
   "reports-and-roots",
-  "fail-closed-verification",
+  "report-verification",
   "starter-claim-and-recovery",
   "reference-adapters",
 ]);
@@ -942,8 +955,14 @@ if (JSON.stringify(independentImplementation?.supportedLanguages?.map((entry) =>
   fail("site bundle independent implementation must expose Python, Rust, Node.js, and C++ in promise order");
 }
 if (JSON.stringify(independentImplementation?.steps?.map((entry) => entry.id)) !==
-    JSON.stringify(["scaffold", "test", "verify"])) {
-  fail("site bundle independent implementation steps must remain scaffold, test, verify");
+    JSON.stringify(["scaffold", "smoke", "implement", "test", "verify"])) {
+  fail("site bundle independent implementation steps must remain scaffold, smoke, implement, test, verify");
+}
+if (independentImplementation?.dimensions?.behavior?.starter !== "0/20" ||
+    independentImplementation?.dimensions?.evidence?.starter !== true ||
+    independentImplementation?.paths?.reference?.expected?.behavior !== "20/20" ||
+    independentImplementation?.paths?.starter?.expected?.testExitCode !== 1) {
+  fail("site bundle independent implementation must expose both teaching paths and all three dimensions");
 }
 const nativeCli = independentImplementation?.nativeCli;
 if (
@@ -960,21 +979,22 @@ if (
 }
 const exactIndependentCommands = [
   `npx --yes --package @kungfu-tech/kfd@${packageJson.version} kfd scaffold agent-hub --language python --output my-agent-hub-adapter`,
+  "python3 my-agent-hub-adapter/smoke.py",
   `npx --yes --package @kungfu-tech/kfd@${packageJson.version} kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json`,
-  `npx --yes --package @kungfu-tech/kfd@${packageJson.version} kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py --json`,
+  `npx --yes --package @kungfu-tech/kfd@${packageJson.version} kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py`,
 ];
-if (JSON.stringify(independentImplementation?.steps?.map((entry) => entry.command)) !== JSON.stringify(exactIndependentCommands)) {
-  fail("site bundle independent implementation commands must match the exact package-owned three-step path");
+if (JSON.stringify(independentImplementation?.steps?.filter((entry) => entry.command).map((entry) => entry.command)) !== JSON.stringify(exactIndependentCommands)) {
+  fail("site bundle independent implementation commands must match the exact package-owned scaffold, smoke, test, and verify path");
 }
-for (const [index, capability] of [agentHubPage.commands.scaffold, agentHubPage.commands.test, agentHubPage.commands.verify].entries()) {
-  if (independentImplementation?.steps?.[index]?.capability !== capability) {
+for (const [stepId, capability] of [["scaffold", agentHubPage.commands.scaffold], ["test", agentHubPage.commands.test], ["verify", agentHubPage.commands.verify]]) {
+  if (independentImplementation?.steps?.find((entry) => entry.id === stepId)?.capability !== capability) {
     fail("site bundle independent implementation steps must bind Agent Hub CLI capabilities");
   }
 }
-if (JSON.stringify(independentImplementation?.links?.map((entry) => entry.url)) !== JSON.stringify(["/agent-hub/", "/verify/"])) {
-  fail("site bundle independent implementation must expose /agent-hub/ and /verify/ reader links");
+if (JSON.stringify(independentImplementation?.links?.map((entry) => entry.url)) !== JSON.stringify(["/agent-hub/#report-verification", "/verify/"])) {
+  fail("site bundle independent implementation must expose Agent Hub report verification before other verification profiles");
 }
-for (const boundary of ["starterBoundary", "offlineBoundary", "claimBoundary"]) {
+for (const boundary of ["starterBoundary", "implementationBoundary", "offlineBoundary", "claimBoundary"]) {
   if (!independentImplementation?.[boundary]) fail(`site bundle independent implementation must expose ${boundary}`);
 }
 for (const nonClaim of ["certify", "security", "production fitness", "complete semantic coverage", "KFD-10 activation", "independent organization"]) {

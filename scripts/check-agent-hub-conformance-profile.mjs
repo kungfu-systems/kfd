@@ -46,7 +46,20 @@ assert.deepEqual(cliCapabilities.scaffoldLanguages, ["cpp", "node", "python", "r
 assert.equal(cliCapabilities.reportVerification.backend, "host-node");
 assert.deepEqual(cliCapabilities.reportVerification.sharedRustWasmChecks, []);
 assert.match(cliCapabilities.reportVerification.parityBoundary, /No Agent Hub report check is duplicated/u);
-assert.match(cliCapabilities.claimBoundary, /non-qualifying, non-certifying/u);
+assert.equal(cliCapabilities.dimensions.behavior.starter, "0/20");
+assert.equal(cliCapabilities.dimensions.evidence.starter, true);
+assert.deepEqual(cliCapabilities.dimensions.authority.starter, { qualifying: false, certification: false });
+assert.deepEqual(cliCapabilities.paths.starter.expected, {
+  scaffoldExitCode: 0,
+  smokeExitCode: 0,
+  testExitCode: 1,
+  behavior: "0/20",
+  verifyExitCode: 0,
+  evidence: "valid",
+  qualifying: false,
+  certification: false,
+});
+assert.match(cliCapabilities.claimBoundary, /independent dimensions/u);
 assert.equal(packageJson.exports["./agent-hub/*"], "./profiles/agent-hub/*");
 assert.equal(packageJson.exports["./agent-hub/scaffolds/*"], "./profiles/agent-hub/scaffolds/*");
 const registeredSurfacePaths = new Set(standards.standards["kfd-1"].surfaceRegister.surfaces.map(({ sourcePath }) => sourcePath));
@@ -99,16 +112,69 @@ try {
     const scaffold = JSON.parse(run("node", ["bin/kfd.mjs", "scaffold", "agent-hub", "--language", language, "--output", output, "--json"]));
     assert.equal(scaffold.language, language);
     assert.equal(scaffold.binding, "jsonl-stdio/v1");
-    assert.equal(scaffold.conformance, "starter-envelope-smoke-only");
+    assert.equal(scaffold.conformance, "evidence-valid-negative-starter");
     assert.equal(scaffold.qualifying, false);
     assert.equal(scaffold.certification, false);
     assert.equal(scaffold.next.claims.qualifying, false);
     assert.equal(scaffold.next.claims.certification, false);
-    assert.ok(scaffold.next.claims.notExecuted.includes("KFD Agent Hub 20 semantics"));
+    assert.ok(scaffold.next.claims.notExecuted.includes("product-owned KFD Agent Hub 20 semantics"));
+    assert.deepEqual(scaffold.expected, {
+      smoke: { exitCode: 0, valid: true },
+      behavior: { exitCode: 1, passed: 0, total: 20, conforming: false },
+      evidence: { exitCode: 0, valid: true, adapterArtifactChecked: true },
+      authority: { qualifying: false, certification: false },
+    });
     if (language === "node") run("node", [path.join(output, "smoke.mjs")]);
     if (language === "python") run("python3", [path.join(output, "smoke.py")]);
-    if (language === "rust") run("cargo", ["test", "--quiet", "--manifest-path", path.join(output, "Cargo.toml")]);
+    if (language === "rust") {
+      run("cargo", ["test", "--quiet", "--manifest-path", path.join(output, "Cargo.toml")]);
+      run("cargo", ["build", "--quiet", "--release", "--manifest-path", path.join(output, "Cargo.toml")]);
+    }
     if (language === "cpp") run("node", [path.join(output, "smoke.mjs")]);
+    let adapterPath;
+    if (language === "node") adapterPath = path.join(output, "adapter.mjs");
+    if (language === "python") adapterPath = path.join(output, "adapter.py");
+    if (language === "rust") adapterPath = path.join(output, "target", "release", `kfd-agent-hub-rust-starter${process.platform === "win32" ? ".exe" : ""}`);
+    if (language === "cpp") {
+      const compilerCandidates = process.env.CXX
+        ? [process.env.CXX]
+        : (process.platform === "win32" ? ["cl", "clang++", "g++"] : ["c++"]);
+      const compiler = compilerCandidates.find((candidate) => {
+        const isMsvc = /(?:^|[\\/])(?:cl|clang-cl)(?:\.exe)?$/iu.test(candidate);
+        return !spawnSync(candidate, [isMsvc ? "/?" : "--version"], { stdio: "ignore" }).error;
+      });
+      assert.ok(compiler, `no C++ compiler found; tried ${compilerCandidates.join(", ")}`);
+      const isMsvc = /(?:^|[\\/])(?:cl|clang-cl)(?:\.exe)?$/iu.test(compiler);
+      adapterPath = path.join(output, `kfd-agent-hub-cpp-starter${process.platform === "win32" ? ".exe" : ""}`);
+      const compileArgs = isMsvc
+        ? ["/std:c++17", path.join(output, "adapter.cpp"), `/Fe:${adapterPath}`]
+        : ["-std=c++17", path.join(output, "adapter.cpp"), "-o", adapterPath];
+      run(compiler, compileArgs);
+    }
+    const starterReportPath = path.join(temporary, `${language}-starter.report.json`);
+    run("node", ["bin/kfd.mjs", "test", "agent-hub", "--adapter", adapterPath, "--output", starterReportPath], 1);
+    const starterReport = JSON.parse(fs.readFileSync(starterReportPath, "utf8"));
+    assert.equal(starterReport.valid, false);
+    assert.deepEqual(starterReport.coverage, {
+      total: 20,
+      passed: 0,
+      failed: 20,
+      categories: Object.fromEntries(Object.entries(starterReport.coverage.categories).map(([category, value]) => [category, { ...value, passed: 0, failed: value.total }])),
+    });
+    assert.equal(starterReport.qualifying, false);
+    assert.equal(starterReport.certification, false);
+    const starterVerification = JSON.parse(run("node", ["bin/kfd.mjs", "verify", "agent-hub-report", starterReportPath, "--adapter", adapterPath, "--json"]));
+    assert.equal(starterVerification.valid, true);
+    assert.deepEqual(starterVerification.dimensions, {
+      behavior: { passed: 0, total: 20, conforming: false },
+      evidence: { valid: true, adapterArtifactChecked: true },
+      authority: { qualifying: false, certification: false },
+    });
+    assert.equal(starterVerification.adapterArtifactChecked, true);
+    const starterSummary = run("node", ["bin/kfd.mjs", "verify", "agent-hub-report", starterReportPath, "--adapter", adapterPath]);
+    assert.match(starterSummary, /Behavior: 0\/20 \(not conforming\)/u);
+    assert.match(starterSummary, /Evidence: valid \(adapter bytes checked\)/u);
+    assert.match(starterSummary, /Authority: qualifying=false; certification=false/u);
   }
 
   const protectedOutput = path.join(temporary, "protected-output");
@@ -171,6 +237,12 @@ try {
   const cleanStarter = path.join(temporary, "clean-pack-node-starter");
   run("node", ["bin/kfd.mjs", "scaffold", "agent-hub", "--language", "node", "--output", cleanStarter, "--json"], 0, cleanRoot);
   run("node", [path.join(cleanStarter, "smoke.mjs")], 0, cleanRoot);
+  const cleanStarterReport = path.join(temporary, "clean-pack-node-starter.report.json");
+  run("node", ["bin/kfd.mjs", "test", "agent-hub", "--adapter", path.join(cleanStarter, "adapter.mjs"), "--output", cleanStarterReport], 1, cleanRoot);
+  const cleanStarterVerification = JSON.parse(run("node", ["bin/kfd.mjs", "verify", "agent-hub-report", cleanStarterReport, "--adapter", path.join(cleanStarter, "adapter.mjs"), "--json"], 0, cleanRoot));
+  assert.equal(cleanStarterVerification.valid, true);
+  assert.deepEqual(cleanStarterVerification.dimensions.behavior, { passed: 0, total: 20, conforming: false });
+  assert.equal(cleanStarterVerification.adapterArtifactChecked, true);
 
   const consumer = path.join(temporary, "consumer"); fs.mkdirSync(consumer);
   fs.writeFileSync(path.join(consumer, "consumer-config.json"), "{}\n");
@@ -186,4 +258,4 @@ try {
 const stateAdapter = fs.readFileSync(path.join(root, "profiles/agent-hub/adapters/state-machine-adapter.mjs"), "utf8");
 const ruleAdapter = fs.readFileSync(path.join(root, "profiles/agent-hub/adapters/rule-table-adapter.mjs"), "utf8");
 assert.doesNotMatch(stateAdapter, /rule-table-adapter/u); assert.doesNotMatch(ruleAdapter, /state-machine-adapter/u);
-console.log("Agent Hub conformance profile check passed: fixed Hub 20, zero-config demo, 4 language starters, offline verifier, 11 adversarial mutations, path safety, clean npm pack");
+console.log("Agent Hub conformance profile check passed: fixed Hub 20, zero-config demo, 4 evidence-valid 0/20 starters, offline verifier, 11 adversarial mutations, path safety, clean npm pack");

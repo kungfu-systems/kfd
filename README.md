@@ -75,19 +75,25 @@ production fitness. Accountable human authority remains separate and explicit.
 **Implement KFD without Kungfu — scaffold an adapter in Python, Rust, Node.js,
 or C++, then verify it offline.**
 
-Use the immutable `@kungfu-tech/kfd@1.0.0-alpha.66` package cut and follow the
+Use the immutable `@kungfu-tech/kfd@1.0.0-alpha.67` package cut and follow the
 package-owned [Agent Hub workflow](profiles/agent-hub/README.md) or inspect the
 complete [independent verification boundary](docs/independent-verifier.md):
 
+For a two-minute success path, run `npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.67 kfd demo agent-hub --output agent-hub-demo-report.json`. It produces behavior `20/20`, evidence `valid`, and no qualification or certification.
+
 ```bash
-npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.66 kfd scaffold agent-hub --language python --output my-agent-hub-adapter
-npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.66 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json
-npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.66 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py --json
+npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.67 kfd scaffold agent-hub --language python --output my-agent-hub-adapter
+python3 my-agent-hub-adapter/smoke.py
+npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.67 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json
+npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.67 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py
 ```
 
-The scaffold is a deterministic, fail-closed starter: its smoke path checks
-only the JSONL envelope, and implementers must replace the missing product
-semantics before the fixed Hub 20 suite can pass.
+The scaffold is a deterministic, fail-closed starter. Before implementation,
+smoke exits `0`, Hub 20 exits `1` at `0/20`, and offline evidence verification
+exits `0` with `valid`; qualification and certification stay `false`.
+Implementers then replace `evaluate()` with product decisions across
+negotiation, delivery, authority, conflict, knowledge, completion, recovery,
+and portability until Hub 20 reaches `20/20`.
 
 Package acquisition is separate from offline verification. Network or a local
 package cache may be needed to obtain the immutable package bytes; after the
@@ -96,8 +102,8 @@ performs no network access.
 
 These results do not certify an implementation or prove security, production
 fitness, complete semantic coverage, KFD-10 activation, or adoption by an
-independent organization. [Open the complete Agent Hub guide](/agent-hub/) ·
-[Inspect the verifier and coverage matrix](/verify/)
+independent organization. [Verify an Agent Hub report](/agent-hub/#report-verification) ·
+[Explore other KFD verification profiles](/verify/)
 
 ### Native `kfd`
 
@@ -721,8 +727,9 @@ The first screen should be derived from this README:
   complete `2 + 3` model belongs on that depth page rather than in the first
   viewport, and familiar stack labels must not become one-to-one KFD aliases.
 - Independent implementation: the exact promise, four supported languages,
-  ordered scaffold/test/verify commands, offline boundary, non-certifying
-  boundary, and `/agent-hub/` plus `/verify/` links must appear before the
+  behavior/evidence/authority model, reference-success path, ordered
+  scaffold/smoke/implement/test/verify flow, offline boundary, non-certifying
+  boundary, and Agent Hub report-verification plus `/verify/` links must appear before the
   Foundation triad and before any installed Kungfu product projection.
 - Foundation signal: the `Foundation triad` section, especially the three
   one-line commitments and the product-witness rule immediately below them.

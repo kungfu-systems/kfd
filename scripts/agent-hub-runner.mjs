@@ -149,7 +149,11 @@ export async function runAgentHubTest(rawArgs, { quiet = false } = {}) {
   const output = path.resolve(selected.output);
   if (!fs.existsSync(path.dirname(output))) throw new Error(`output parent does not exist: ${path.dirname(output)}`);
   fs.writeFileSync(output, `${JSON.stringify(report, null, 2)}\n`, { flag: "wx" });
-  if (!quiet) console.log(`KFD Agent Hub 20: ${report.valid ? "pass" : "fail"} (${passed}/20) -> ${output}`);
+  if (!quiet) console.log([
+    `Behavior: ${passed}/20 (${report.valid ? "conforming" : "not conforming"})`,
+    `Evidence: report written; verify separately -> ${output}`,
+    "Authority: qualifying=false; certification=false",
+  ].join("\n"));
   return report.valid ? 0 : 1;
 }
 

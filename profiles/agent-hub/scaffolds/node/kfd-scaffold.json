@@ -6,9 +6,15 @@
   "run": ["node", "adapter.mjs"],
   "smoke": ["node", "smoke.mjs"],
   "claims": {
-    "executed": ["handshake and evaluate response-envelope smoke fixtures"],
-    "notExecuted": ["KFD Agent Hub 20 semantics", "production interoperability", "security assessment"],
+    "executed": ["handshake and evaluate response-envelope smoke fixtures", "two structurally complete rooted capability documents"],
+    "notExecuted": ["product-owned KFD Agent Hub 20 semantics", "production interoperability", "security assessment"],
     "qualifying": false,
     "certification": false
+  },
+  "expectedBeforeImplementation": {
+    "smoke": { "exitCode": 0 },
+    "hub20": { "exitCode": 1, "passed": 0, "total": 20, "valid": false },
+    "evidenceVerification": { "exitCode": 0, "valid": true, "adapterArtifactChecked": true },
+    "authority": { "qualifying": false, "certification": false }
   }
 }
