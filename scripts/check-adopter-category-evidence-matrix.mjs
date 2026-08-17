@@ -10,6 +10,7 @@ import { resolveAdopterCategoryProfiles } from "./adopter-category-profile-contr
 import { semanticRoot } from "./self-conformance-contract.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";
 const profileRoot = path.join(root, "profiles", "adopter-conformance");
 const catalog = JSON.parse(fs.readFileSync(path.join(profileRoot, "category-profiles.json"), "utf8"));
 const vectors = JSON.parse(fs.readFileSync(path.join(profileRoot, "evidence-matrix-vectors.json"), "utf8"));
@@ -123,10 +124,11 @@ for (const required of [
 if (process.env.KFD_EVIDENCE_MATRIX_CLEAN_ROOM !== "1") {
   const temporaryRoot = fs.mkdtempSync(path.join(os.tmpdir(), "kfd-evidence-matrix-"));
   try {
-    const packed = spawnSync("npm", ["pack", "--json", "--ignore-scripts", "--pack-destination", temporaryRoot], {
+    const packed = spawnSync(npmCommand, ["pack", "--json", "--ignore-scripts", "--pack-destination", temporaryRoot], {
       cwd: root,
       encoding: "utf8",
       env: { ...process.env, npm_config_cache: path.join(temporaryRoot, "npm-cache") },
+      shell: process.platform === "win32",
     });
     assert.equal(packed.status, 0, packed.stderr || packed.stdout);
     const [{ filename }] = JSON.parse(packed.stdout);
