@@ -8,17 +8,29 @@
       {
         "path": "schemas/kfd-adopter-conformance/manifest.schema.json",
         "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-adopter-conformance/manifest.schema.json"
+      },
+      {
+        "path": "schemas/kfd-adopter-conformance/evidence-matrix.schema.json",
+        "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-adopter-conformance/evidence-matrix.schema.json"
       }
     ],
     "vectors": [
       {
         "path": "profiles/adopter-conformance/vectors.json",
         "contract": "kfd.adopter-conformance-vectors/v1"
+      },
+      {
+        "path": "profiles/adopter-conformance/evidence-matrix-vectors.json",
+        "contract": "kfd.adopter-category-evidence-matrix-vectors/v1"
       }
     ],
     "verifiers": [
       {
         "path": "scripts/adopter-conformance-contract.mjs",
+        "kind": "source"
+      },
+      {
+        "path": "scripts/adopter-category-evidence-matrix-contract.mjs",
         "kind": "source"
       },
       {

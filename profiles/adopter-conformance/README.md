@@ -8,7 +8,7 @@ confidence: high
 sensitivity: public
 evidence_grade: B
 review_state: self-reviewed
-last_reviewed: 2026-08-11
+last_reviewed: 2026-08-17
 ---
 
 # KFD Full-Cut Adopter Conformance Manifest v1
@@ -137,6 +137,30 @@ profiles, and provide fresh project-bound evidence for every resolved
 requirement. Old evidence is reusable only when it already carries every exact
 version 1 project binding; otherwise it remains historical input rather than
 conformance evidence.
+
+## Cross-project evidence matrix
+
+`kfd.adopter-category-evidence-matrix/v1` is the package-owned aggregation
+contract for comparing category coverage across projects without transferring
+their evidence or authority. Its schema, fixed vectors, and offline verifier
+are published beside the category catalog. A matrix reproduces every catalog
+profile and resolved requirement identity, then keeps normative KFD bytes,
+category requirements, project-instance evidence, delivery evidence, runtime
+evidence, and independent review in distinct roles.
+
+Project rows may remain `pending` with no terminal root. This is a valid and
+explicit incomplete state, not conformance closure. A terminal row requires an
+exact root and only verified current evidence; category-specific delivery,
+runtime, and independent-review roles remain mandatory. Every referenced gap
+has one owner, open gaps have no closure root, and closed gaps bind exact
+evidence. Failure history is retained separately from current proof rows.
+
+The verifier reports `valid` and `complete` independently. It returns
+`complete: true` only when every project is terminal and every gap is closed,
+while always returning `qualifying: false`, `releaseAuthorized: false`,
+`runtimeAuthorized: false`, and `independentlyCertified: false`. Buildchain may
+carry the matrix through a protocol-neutral delivery gate, but it cannot
+widen, reinterpret, certify, or privately supplement KFD semantics.
 
 ## Package-only verification seam
 

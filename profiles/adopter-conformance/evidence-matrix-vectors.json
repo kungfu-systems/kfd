@@ -1,0 +1,217 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.adopter-category-evidence-matrix-vectors/v1",
+  "matrixContract": "kfd.adopter-category-evidence-matrix/v1",
+  "template": {
+    "$schema": "https://kfd.libkungfu.dev/schemas/kfd-adopter-conformance/evidence-matrix.schema.json",
+    "schemaVersion": 1,
+    "contract": "kfd.adopter-category-evidence-matrix/v1",
+    "rootAlgorithm": "sha256-kfd-canonical-json-v1",
+    "catalogRoot": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "profileMatrix": [],
+    "projectEvidence": [
+      {
+        "projectId": "example.org/clean-room-tool",
+        "selection": {
+          "schemaVersion": 1,
+          "contract": "kfd.adopter-category-profile-selection/v1",
+          "profiles": [
+            {
+              "id": "kfd.adopter-category/delivery-infrastructure",
+              "version": "1.0.0"
+            },
+            {
+              "id": "kfd.adopter-category/independent-clean-room",
+              "version": "1.0.0"
+            },
+            {
+              "id": "kfd.adopter-category/product-runtime",
+              "version": "1.0.0"
+            }
+          ]
+        },
+        "instanceManifestRoot": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "terminal": {
+          "status": "terminal",
+          "root": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+        },
+        "evidence": [
+          {
+            "role": "normative",
+            "coordinate": "pkg:npm/%40kungfu-tech/kfd@1.0.0-fixture",
+            "root": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+            "status": "verified",
+            "projectId": "example.org/clean-room-tool",
+            "instanceManifestRoot": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "role": "category",
+            "coordinate": "pkg:npm/%40kungfu-tech/kfd@1.0.0-fixture#adopter-categories",
+            "root": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+            "status": "verified",
+            "projectId": "example.org/clean-room-tool",
+            "instanceManifestRoot": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "role": "project",
+            "coordinate": "git+https://example.org/clean-room-tool.git#1111111111111111111111111111111111111111",
+            "root": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+            "status": "verified",
+            "projectId": "example.org/clean-room-tool",
+            "instanceManifestRoot": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "role": "delivery",
+            "coordinate": "https://example.org/clean-room-tool/releases/1.0.0",
+            "root": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+            "status": "verified",
+            "projectId": "example.org/clean-room-tool",
+            "instanceManifestRoot": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "role": "runtime",
+            "coordinate": "https://example.org/clean-room-tool/runtime-proof.json",
+            "root": "sha256:7777777777777777777777777777777777777777777777777777777777777777",
+            "status": "verified",
+            "projectId": "example.org/clean-room-tool",
+            "instanceManifestRoot": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "role": "independent-review",
+            "coordinate": "https://example.org/clean-room-tool/reviews/1",
+            "root": "sha256:8888888888888888888888888888888888888888888888888888888888888888",
+            "status": "verified",
+            "projectId": "example.org/clean-room-tool",
+            "instanceManifestRoot": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+          }
+        ],
+        "gapIds": []
+      }
+    ],
+    "failureHistory": [],
+    "gaps": [],
+    "authorityBoundary": {
+      "normativeSemantics": "kfd-package",
+      "categoryRequirements": "kfd-profile-catalog",
+      "projectInstanceEvidence": "project-owned",
+      "deliveryEvidence": "delivery-system-owned",
+      "runtimePermission": "adopter-runtime-owned",
+      "independentCertification": "separate-certifier-required",
+      "buildchainRole": "optional-protocol-neutral-carrier"
+    }
+  },
+  "cases": [
+    {
+      "id": "positive-complete-matrix",
+      "operations": [],
+      "valid": true,
+      "complete": true,
+      "issueCodes": []
+    },
+    {
+      "id": "positive-pending-project",
+      "operations": [
+        { "op": "replace", "path": "/projectEvidence/0/terminal/status", "value": "pending" },
+        { "op": "replace", "path": "/projectEvidence/0/terminal/root", "value": null }
+      ],
+      "valid": true,
+      "complete": false,
+      "issueCodes": []
+    },
+    {
+      "id": "positive-owned-open-gap",
+      "operations": [
+        { "op": "replace", "path": "/projectEvidence/0/terminal/status", "value": "pending" },
+        { "op": "replace", "path": "/projectEvidence/0/terminal/root", "value": null },
+        { "op": "replace", "path": "/projectEvidence/0/gapIds", "value": ["delivery-readback-pending"] },
+        {
+          "op": "replace",
+          "path": "/gaps",
+          "value": [
+            {
+              "id": "delivery-readback-pending",
+              "owner": "example.org/clean-room-tool",
+              "status": "open",
+              "evidenceRoot": null
+            }
+          ]
+        }
+      ],
+      "valid": true,
+      "complete": false,
+      "issueCodes": []
+    },
+    {
+      "id": "negative-catalog-root-substitution",
+      "operations": [
+        { "op": "replace", "path": "/catalogRoot", "value": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" }
+      ],
+      "valid": false,
+      "complete": false,
+      "issueCodes": ["acp-matrix-substitution"]
+    },
+    {
+      "id": "negative-profile-matrix-substitution",
+      "operations": [
+        { "op": "replace", "path": "/profileMatrix/0/requirementIds", "value": ["claim-boundary"] }
+      ],
+      "valid": false,
+      "complete": false,
+      "issueCodes": ["acp-matrix-substitution"]
+    },
+    {
+      "id": "negative-duplicate-project",
+      "operations": [
+        { "op": "add-copy", "path": "/projectEvidence/-", "from": "/projectEvidence/0" }
+      ],
+      "valid": false,
+      "complete": false,
+      "issueCodes": ["acp-matrix-duplicate"]
+    },
+    {
+      "id": "negative-missing-delivery-role",
+      "operations": [
+        { "op": "replace", "path": "/projectEvidence/0/evidence/3/role", "value": "project" }
+      ],
+      "valid": false,
+      "complete": false,
+      "issueCodes": ["acp-matrix-incomplete"]
+    },
+    {
+      "id": "negative-project-evidence-substitution",
+      "operations": [
+        { "op": "replace", "path": "/projectEvidence/0/evidence/2/projectId", "value": "example.org/other" }
+      ],
+      "valid": false,
+      "complete": false,
+      "issueCodes": ["acp-matrix-substitution"]
+    },
+    {
+      "id": "negative-terminal-pending-evidence",
+      "operations": [
+        { "op": "replace", "path": "/projectEvidence/0/evidence/3/status", "value": "pending" }
+      ],
+      "valid": false,
+      "complete": false,
+      "issueCodes": ["acp-matrix-incomplete"]
+    },
+    {
+      "id": "negative-unowned-project-gap",
+      "operations": [
+        { "op": "replace", "path": "/projectEvidence/0/gapIds", "value": ["missing-readback"] }
+      ],
+      "valid": false,
+      "complete": false,
+      "issueCodes": ["acp-matrix-incomplete"]
+    },
+    {
+      "id": "negative-authority-widening",
+      "operations": [
+        { "op": "replace", "path": "/authorityBoundary/buildchainRole", "value": "semantic-authority" }
+      ],
+      "valid": false,
+      "complete": false,
+      "issueCodes": ["acp-matrix-authority-widening"]
+    }
+  ]
+}

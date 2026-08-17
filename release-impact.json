@@ -13,6 +13,12 @@
   },
   "surfaceImpacts": [
     {
+      "id": "kfd-adopter-category-evidence-matrix",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD additively publishes the package-only kfd.adopter-category-evidence-matrix/v1 schema, verifier, and fixed positive and fail-closed vectors. The matrix reproduces the exact category catalog, keeps normative, category, project, delivery, runtime, and independent-review evidence in separate roles, retains owned gaps and failure history, and distinguishes valid pending state from complete terminal reconciliation. Passing grants no qualification, release, runtime, or independent-certification authority; Buildchain remains an optional protocol-neutral carrier."
+    },
+    {
       "id": "kfd-full-cut-adopter-manifest-contract",
       "impact": "minor",
       "class": "additive",
