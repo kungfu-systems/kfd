@@ -1,0 +1,231 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-adopter-conformance/evidence-matrix.schema.json",
+  "title": "KFD adopter category evidence matrix",
+  "description": "Aggregates category, project, delivery, runtime, review, failure, and gap evidence without transferring authority between those layers.",
+  "type": "object",
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "contract",
+    "rootAlgorithm",
+    "catalogRoot",
+    "profileMatrix",
+    "projectEvidence",
+    "failureHistory",
+    "gaps",
+    "authorityBoundary"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "https://kfd.libkungfu.dev/schemas/kfd-adopter-conformance/evidence-matrix.schema.json"
+    },
+    "schemaVersion": { "const": 1 },
+    "contract": { "const": "kfd.adopter-category-evidence-matrix/v1" },
+    "rootAlgorithm": { "const": "sha256-kfd-canonical-json-v1" },
+    "catalogRoot": { "$ref": "#/$defs/root" },
+    "profileMatrix": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "version", "requirementIds"],
+        "properties": {
+          "id": { "$ref": "category-profile-catalog.schema.json#/$defs/profileId" },
+          "version": { "$ref": "category-profile-catalog.schema.json#/$defs/profileVersion" },
+          "requirementIds": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": { "$ref": "#/$defs/id" }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "projectEvidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/project" }
+    },
+    "failureHistory": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/failure" }
+    },
+    "gaps": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/gap" }
+    },
+    "authorityBoundary": { "$ref": "#/$defs/authorityBoundary" }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._:/-]*$"
+    },
+    "nonEmpty": { "type": "string", "minLength": 1 },
+    "root": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "profileReference": {
+      "type": "object",
+      "required": ["id", "version"],
+      "properties": {
+        "id": { "$ref": "category-profile-catalog.schema.json#/$defs/profileId" },
+        "version": { "$ref": "category-profile-catalog.schema.json#/$defs/profileVersion" }
+      },
+      "additionalProperties": false
+    },
+    "selection": {
+      "type": "object",
+      "required": ["schemaVersion", "contract", "profiles"],
+      "properties": {
+        "schemaVersion": { "const": 1 },
+        "contract": { "const": "kfd.adopter-category-profile-selection/v1" },
+        "profiles": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/profileReference" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "terminal": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["status", "root"],
+          "properties": {
+            "status": { "const": "pending" },
+            "root": { "type": "null" }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": ["status", "root"],
+          "properties": {
+            "status": { "const": "terminal" },
+            "root": { "$ref": "#/$defs/root" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "evidence": {
+      "type": "object",
+      "required": [
+        "role",
+        "coordinate",
+        "root",
+        "status",
+        "projectId",
+        "instanceManifestRoot"
+      ],
+      "properties": {
+        "role": {
+          "enum": ["normative", "category", "project", "delivery", "runtime", "independent-review"]
+        },
+        "coordinate": { "$ref": "#/$defs/nonEmpty" },
+        "root": { "$ref": "#/$defs/root" },
+        "status": { "enum": ["verified", "pending", "invalid"] },
+        "projectId": { "$ref": "#/$defs/id" },
+        "instanceManifestRoot": { "$ref": "#/$defs/root" }
+      },
+      "additionalProperties": false
+    },
+    "project": {
+      "type": "object",
+      "required": [
+        "projectId",
+        "selection",
+        "instanceManifestRoot",
+        "terminal",
+        "evidence",
+        "gapIds"
+      ],
+      "properties": {
+        "projectId": { "$ref": "#/$defs/id" },
+        "selection": { "$ref": "#/$defs/selection" },
+        "instanceManifestRoot": { "$ref": "#/$defs/root" },
+        "terminal": { "$ref": "#/$defs/terminal" },
+        "evidence": {
+          "type": "array",
+          "minItems": 3,
+          "items": { "$ref": "#/$defs/evidence" }
+        },
+        "gapIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/id" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "failure": {
+      "type": "object",
+      "required": ["id", "stage", "issueCode", "evidenceRoot", "owner", "status"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "stage": {
+          "enum": ["schema", "composition", "project", "delivery", "runtime", "readback"]
+        },
+        "issueCode": { "$ref": "#/$defs/id" },
+        "evidenceRoot": { "$ref": "#/$defs/root" },
+        "owner": { "$ref": "#/$defs/nonEmpty" },
+        "status": { "enum": ["open", "fixed", "retained"] }
+      },
+      "additionalProperties": false
+    },
+    "gap": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["id", "owner", "status", "evidenceRoot"],
+          "properties": {
+            "id": { "$ref": "#/$defs/id" },
+            "owner": { "$ref": "#/$defs/nonEmpty" },
+            "status": { "const": "open" },
+            "evidenceRoot": { "type": "null" }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": ["id", "owner", "status", "evidenceRoot"],
+          "properties": {
+            "id": { "$ref": "#/$defs/id" },
+            "owner": { "$ref": "#/$defs/nonEmpty" },
+            "status": { "const": "closed" },
+            "evidenceRoot": { "$ref": "#/$defs/root" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "authorityBoundary": {
+      "type": "object",
+      "required": [
+        "normativeSemantics",
+        "categoryRequirements",
+        "projectInstanceEvidence",
+        "deliveryEvidence",
+        "runtimePermission",
+        "independentCertification",
+        "buildchainRole"
+      ],
+      "properties": {
+        "normativeSemantics": { "const": "kfd-package" },
+        "categoryRequirements": { "const": "kfd-profile-catalog" },
+        "projectInstanceEvidence": { "const": "project-owned" },
+        "deliveryEvidence": { "const": "delivery-system-owned" },
+        "runtimePermission": { "const": "adopter-runtime-owned" },
+        "independentCertification": { "const": "separate-certifier-required" },
+        "buildchainRole": { "const": "optional-protocol-neutral-carrier" }
+      },
+      "additionalProperties": false
+    }
+  }
+}
