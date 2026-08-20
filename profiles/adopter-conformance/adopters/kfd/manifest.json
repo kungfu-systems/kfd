@@ -9,8 +9,8 @@
     "id": "kungfu-systems/kfd",
     "artifact": {
       "kind": "other",
-      "coordinate": "kfd-adopter-package-cut:sha256:0c724a27ed0eff033c0ce345dab81c2831c7fe2aac68b92ddb60b0e915918b5c",
-      "root": "sha256:0c724a27ed0eff033c0ce345dab81c2831c7fe2aac68b92ddb60b0e915918b5c"
+      "coordinate": "kfd-adopter-package-cut:sha256:23f35d36bc16d865301bbee2d4cd18a43434cf11c9699c1078f2c65c9d7e5695",
+      "root": "sha256:23f35d36bc16d865301bbee2d4cd18a43434cf11c9699c1078f2c65c9d7e5695"
     },
     "scope": "KFD package governance, verification profiles, release evidence, and adopter-toolchain dogfood"
   },
@@ -18,7 +18,7 @@
     "package": {
       "name": "@kungfu-tech/kfd",
       "version": "1.0.0-alpha.67",
-      "artifactRoot": "sha256:0c724a27ed0eff033c0ce345dab81c2831c7fe2aac68b92ddb60b0e915918b5c"
+      "artifactRoot": "sha256:23f35d36bc16d865301bbee2d4cd18a43434cf11c9699c1078f2c65c9d7e5695"
     },
     "registry": {
       "path": "registry.json",
@@ -34,6 +34,16 @@
     },
     "schemaSet": [
       {
+        "path": "schemas/kfd-adopter-conformance/category-instance-manifest.schema.json",
+        "byteRoot": "sha256:22515a5e6d759b028ac18a81a26638e248def8706bf13c4a1499f8edc36803b4",
+        "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-adopter-conformance/category-instance-manifest.schema.json"
+      },
+      {
+        "path": "schemas/kfd-adopter-conformance/category-profile-catalog.schema.json",
+        "byteRoot": "sha256:a7280c255ae19b10cd7b6d691d888144a48b69f3af09c22ae841b1edf0788df7",
+        "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-adopter-conformance/category-profile-catalog.schema.json"
+      },
+      {
         "path": "schemas/kfd-adopter-conformance/evidence-matrix.schema.json",
         "byteRoot": "sha256:c01b0005414f39399be7f449e1c4b52de327c0b53866bd64b6801c6cab5cacf7",
         "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-adopter-conformance/evidence-matrix.schema.json"
@@ -44,8 +54,18 @@
         "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-adopter-conformance/manifest.schema.json"
       }
     ],
-    "schemaSetRoot": "sha256:90214073d762dbb5ae0fce42d5ab90e11d9896a6903c7f74e06b06eb4c3fa8fd",
+    "schemaSetRoot": "sha256:80d975b58870e47f43a59685e7cf92eee2810ca4e785ef2c543982a91cbc5052",
     "vectorSet": [
+      {
+        "path": "profiles/adopter-conformance/category-instance-vectors.json",
+        "byteRoot": "sha256:a12c44cc0585b88adea7e3758654b363e5628f9ec2ca0fecbce3f6eb59f0f7dc",
+        "contract": "kfd.adopter-category-instance-vectors/v1"
+      },
+      {
+        "path": "profiles/adopter-conformance/category-profile-vectors.json",
+        "byteRoot": "sha256:9833b5136d8cff188d6bd726bb04c0b0a304ae6c3dfc4ebbd75d27c58d72c25e",
+        "contract": "kfd.adopter-category-profile-vectors/v1"
+      },
       {
         "path": "profiles/adopter-conformance/evidence-matrix-vectors.json",
         "byteRoot": "sha256:b480e701e89b75f4ccf75f10f519118817a5746435e15a20cd0888f38461fd89",
@@ -57,11 +77,21 @@
         "contract": "kfd.adopter-conformance-vectors/v1"
       }
     ],
-    "vectorSetRoot": "sha256:06bafeb38f119aec484d6677bb0dd7456576daea0dd1710d070512b524df126e",
+    "vectorSetRoot": "sha256:874e77fc336a77e2f855926cdeceb035d60a50071879649a9bdff747f05b56a8",
     "verifierSet": [
       {
         "path": "scripts/adopter-category-evidence-matrix-contract.mjs",
         "byteRoot": "sha256:5f23236bcc572f8d6931b00653e80d3f8b3552f7b23942217ce40b73e3e1642f",
+        "kind": "source"
+      },
+      {
+        "path": "scripts/adopter-category-instance-contract.mjs",
+        "byteRoot": "sha256:fa1f75d591cff39e30c977000a317d4104bd848d12855416aa57b88e6110de78",
+        "kind": "source"
+      },
+      {
+        "path": "scripts/adopter-category-profile-contract.mjs",
+        "byteRoot": "sha256:812cc67af63883a2011f8c9702b1a397c1076b6c237db1bae2abdd06a076aaa6",
         "kind": "source"
       },
       {
@@ -75,7 +105,7 @@
         "kind": "source"
       }
     ],
-    "verifierSetRoot": "sha256:cd05af4ed3c5887930a85df41fc977365617452f09e965f3e45d855b64ada3a3",
+    "verifierSetRoot": "sha256:51af46d08fe8b9164c3e4ab32c2f32667b57bd6d34260d871f73df857c4a8d52",
     "decisionSetRoot": "sha256:c22abfcbf92313e2ed94f9d7ec01208726b99bd33f71176652f2ca0956de6c86"
   },
   "decisions": [
@@ -88,19 +118,19 @@
       "implementationEvidence": [
         {
           "kind": "implementation",
-          "coordinate": "kfd-package-cut:sha256:0c724a27ed0eff033c0ce345dab81c2831c7fe2aac68b92ddb60b0e915918b5c#.buildchain/kfd-1/contract-world.witness.json",
-          "root": "sha256:c677938bd3cef028cc705bff075845864576a19aa1cd2088a93d9f42ec35ff15",
+          "coordinate": "kfd-package-cut:sha256:23f35d36bc16d865301bbee2d4cd18a43434cf11c9699c1078f2c65c9d7e5695#.buildchain/kfd-1/contract-world.witness.json",
+          "root": "sha256:e34ee2321a1d245912c9f42828e4da54064ca2ff2675feb0ca48f53a4d981ac9",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:0c724a27ed0eff033c0ce345dab81c2831c7fe2aac68b92ddb60b0e915918b5c"
+          "kfdPackageRoot": "sha256:23f35d36bc16d865301bbee2d4cd18a43434cf11c9699c1078f2c65c9d7e5695"
         }
       ],
       "verificationEvidence": [
         {
           "kind": "verification",
-          "coordinate": "kfd-package-cut:sha256:0c724a27ed0eff033c0ce345dab81c2831c7fe2aac68b92ddb60b0e915918b5c#scripts/check.mjs",
-          "root": "sha256:9c43b1b0e83b1c26e48e0d90fc6778fd8642af6b55d9cd4b95f71d864868b6db",
+          "coordinate": "kfd-package-cut:sha256:23f35d36bc16d865301bbee2d4cd18a43434cf11c9699c1078f2c65c9d7e5695#scripts/check.mjs",
+          "root": "sha256:f05897de265a2d13faa8a8298212108b6b00c5081cc54a9757a194f54d3e01a0",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:0c724a27ed0eff033c0ce345dab81c2831c7fe2aac68b92ddb60b0e915918b5c"
+          "kfdPackageRoot": "sha256:23f35d36bc16d865301bbee2d4cd18a43434cf11c9699c1078f2c65c9d7e5695"
         }
       ],
       "negativeEvidence": [],
@@ -123,19 +153,19 @@
       "implementationEvidence": [
         {
           "kind": "implementation",
-          "coordinate": "kfd-package-cut:sha256:0c724a27ed0eff033c0ce345dab81c2831c7fe2aac68b92ddb60b0e915918b5c#.buildchain/kfd-2/public-release-trust.claim.json",
-          "root": "sha256:ef719871df47053a0fe6a46822fb0949265e4290ae4729932b97424afbd4a1b7",
+          "coordinate": "kfd-package-cut:sha256:23f35d36bc16d865301bbee2d4cd18a43434cf11c9699c1078f2c65c9d7e5695#.buildchain/kfd-2/public-release-trust.claim.json",
+          "root": "sha256:c9cd6410ce41d45bb6aeffc6c0abe3dc785395b2b4ffeedf418d5e2f57ba42c2",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:0c724a27ed0eff033c0ce345dab81c2831c7fe2aac68b92ddb60b0e915918b5c"
+          "kfdPackageRoot": "sha256:23f35d36bc16d865301bbee2d4cd18a43434cf11c9699c1078f2c65c9d7e5695"
         }
       ],
       "verificationEvidence": [
         {
           "kind": "verification",
-          "coordinate": "kfd-package-cut:sha256:0c724a27ed0eff033c0ce345dab81c2831c7fe2aac68b92ddb60b0e915918b5c#scripts/check.mjs",
-          "root": "sha256:9c43b1b0e83b1c26e48e0d90fc6778fd8642af6b55d9cd4b95f71d864868b6db",
+          "coordinate": "kfd-package-cut:sha256:23f35d36bc16d865301bbee2d4cd18a43434cf11c9699c1078f2c65c9d7e5695#scripts/check.mjs",
+          "root": "sha256:f05897de265a2d13faa8a8298212108b6b00c5081cc54a9757a194f54d3e01a0",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:0c724a27ed0eff033c0ce345dab81c2831c7fe2aac68b92ddb60b0e915918b5c"
+          "kfdPackageRoot": "sha256:23f35d36bc16d865301bbee2d4cd18a43434cf11c9699c1078f2c65c9d7e5695"
         }
       ],
       "negativeEvidence": [],
@@ -158,19 +188,19 @@
       "implementationEvidence": [
         {
           "kind": "implementation",
-          "coordinate": "kfd-package-cut:sha256:0c724a27ed0eff033c0ce345dab81c2831c7fe2aac68b92ddb60b0e915918b5c#.buildchain/kfd-3/collaboration-interface.artifact.json",
-          "root": "sha256:d5a0293badc79737b93d01ec96f055b7077ef46d03dbe0793af874342f445ccf",
+          "coordinate": "kfd-package-cut:sha256:23f35d36bc16d865301bbee2d4cd18a43434cf11c9699c1078f2c65c9d7e5695#.buildchain/kfd-3/collaboration-interface.artifact.json",
+          "root": "sha256:0e1db6543e10c854699c1a3885290a26e89e5b108eea5ae23718b4c59119550e",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:0c724a27ed0eff033c0ce345dab81c2831c7fe2aac68b92ddb60b0e915918b5c"
+          "kfdPackageRoot": "sha256:23f35d36bc16d865301bbee2d4cd18a43434cf11c9699c1078f2c65c9d7e5695"
         }
       ],
       "verificationEvidence": [
         {
           "kind": "verification",
-          "coordinate": "kfd-package-cut:sha256:0c724a27ed0eff033c0ce345dab81c2831c7fe2aac68b92ddb60b0e915918b5c#scripts/check.mjs",
-          "root": "sha256:9c43b1b0e83b1c26e48e0d90fc6778fd8642af6b55d9cd4b95f71d864868b6db",
+          "coordinate": "kfd-package-cut:sha256:23f35d36bc16d865301bbee2d4cd18a43434cf11c9699c1078f2c65c9d7e5695#scripts/check.mjs",
+          "root": "sha256:f05897de265a2d13faa8a8298212108b6b00c5081cc54a9757a194f54d3e01a0",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:0c724a27ed0eff033c0ce345dab81c2831c7fe2aac68b92ddb60b0e915918b5c"
+          "kfdPackageRoot": "sha256:23f35d36bc16d865301bbee2d4cd18a43434cf11c9699c1078f2c65c9d7e5695"
         }
       ],
       "negativeEvidence": [],
@@ -193,19 +223,19 @@
       "implementationEvidence": [
         {
           "kind": "implementation",
-          "coordinate": "kfd-package-cut:sha256:0c724a27ed0eff033c0ce345dab81c2831c7fe2aac68b92ddb60b0e915918b5c#profiles/perspective-conformance/manifest.json",
+          "coordinate": "kfd-package-cut:sha256:23f35d36bc16d865301bbee2d4cd18a43434cf11c9699c1078f2c65c9d7e5695#profiles/perspective-conformance/manifest.json",
           "root": "sha256:35dba3661b3c4fae8bfc100f1b5efd071b9454801a77cecc496d656cc072b4bc",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:0c724a27ed0eff033c0ce345dab81c2831c7fe2aac68b92ddb60b0e915918b5c"
+          "kfdPackageRoot": "sha256:23f35d36bc16d865301bbee2d4cd18a43434cf11c9699c1078f2c65c9d7e5695"
         }
       ],
       "verificationEvidence": [
         {
           "kind": "verification",
-          "coordinate": "kfd-package-cut:sha256:0c724a27ed0eff033c0ce345dab81c2831c7fe2aac68b92ddb60b0e915918b5c#scripts/check-perspective-conformance.mjs",
+          "coordinate": "kfd-package-cut:sha256:23f35d36bc16d865301bbee2d4cd18a43434cf11c9699c1078f2c65c9d7e5695#scripts/check-perspective-conformance.mjs",
           "root": "sha256:4d2636d5d68d5e5cd7162393c12bf073af9bb843f51bc3afd23f397753e5bfed",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:0c724a27ed0eff033c0ce345dab81c2831c7fe2aac68b92ddb60b0e915918b5c"
+          "kfdPackageRoot": "sha256:23f35d36bc16d865301bbee2d4cd18a43434cf11c9699c1078f2c65c9d7e5695"
         }
       ],
       "negativeEvidence": [],
@@ -228,19 +258,19 @@
       "implementationEvidence": [
         {
           "kind": "implementation",
-          "coordinate": "kfd-package-cut:sha256:0c724a27ed0eff033c0ce345dab81c2831c7fe2aac68b92ddb60b0e915918b5c#evidence/primitive-evidence/second-wave-report.json",
+          "coordinate": "kfd-package-cut:sha256:23f35d36bc16d865301bbee2d4cd18a43434cf11c9699c1078f2c65c9d7e5695#evidence/primitive-evidence/second-wave-report.json",
           "root": "sha256:b0ed807dee3e93f0e6764c9d7b4b67c2a7da5a7580e169c03811ec3ec0732149",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:0c724a27ed0eff033c0ce345dab81c2831c7fe2aac68b92ddb60b0e915918b5c"
+          "kfdPackageRoot": "sha256:23f35d36bc16d865301bbee2d4cd18a43434cf11c9699c1078f2c65c9d7e5695"
         }
       ],
       "verificationEvidence": [
         {
           "kind": "verification",
-          "coordinate": "kfd-package-cut:sha256:0c724a27ed0eff033c0ce345dab81c2831c7fe2aac68b92ddb60b0e915918b5c#scripts/check-warrant-evidence.mjs",
+          "coordinate": "kfd-package-cut:sha256:23f35d36bc16d865301bbee2d4cd18a43434cf11c9699c1078f2c65c9d7e5695#scripts/check-warrant-evidence.mjs",
           "root": "sha256:f57bc0b853d9146d1e91396ef21198ba115f0d123623de530bbba34dd8ad1220",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:0c724a27ed0eff033c0ce345dab81c2831c7fe2aac68b92ddb60b0e915918b5c"
+          "kfdPackageRoot": "sha256:23f35d36bc16d865301bbee2d4cd18a43434cf11c9699c1078f2c65c9d7e5695"
         }
       ],
       "negativeEvidence": [],
@@ -280,19 +310,19 @@
       "implementationEvidence": [
         {
           "kind": "implementation",
-          "coordinate": "kfd-package-cut:sha256:0c724a27ed0eff033c0ce345dab81c2831c7fe2aac68b92ddb60b0e915918b5c#evidence/kfd-7/activation-record.json",
+          "coordinate": "kfd-package-cut:sha256:23f35d36bc16d865301bbee2d4cd18a43434cf11c9699c1078f2c65c9d7e5695#evidence/kfd-7/activation-record.json",
           "root": "sha256:67ffebb73f943892f1854e2916a90f1fb082c61d33f64c0e7f8af5393189eb6e",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:0c724a27ed0eff033c0ce345dab81c2831c7fe2aac68b92ddb60b0e915918b5c"
+          "kfdPackageRoot": "sha256:23f35d36bc16d865301bbee2d4cd18a43434cf11c9699c1078f2c65c9d7e5695"
         }
       ],
       "verificationEvidence": [
         {
           "kind": "verification",
-          "coordinate": "kfd-package-cut:sha256:0c724a27ed0eff033c0ce345dab81c2831c7fe2aac68b92ddb60b0e915918b5c#scripts/check.mjs",
-          "root": "sha256:9c43b1b0e83b1c26e48e0d90fc6778fd8642af6b55d9cd4b95f71d864868b6db",
+          "coordinate": "kfd-package-cut:sha256:23f35d36bc16d865301bbee2d4cd18a43434cf11c9699c1078f2c65c9d7e5695#scripts/check.mjs",
+          "root": "sha256:f05897de265a2d13faa8a8298212108b6b00c5081cc54a9757a194f54d3e01a0",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:0c724a27ed0eff033c0ce345dab81c2831c7fe2aac68b92ddb60b0e915918b5c"
+          "kfdPackageRoot": "sha256:23f35d36bc16d865301bbee2d4cd18a43434cf11c9699c1078f2c65c9d7e5695"
         }
       ],
       "negativeEvidence": [],
@@ -315,19 +345,19 @@
       "implementationEvidence": [
         {
           "kind": "implementation",
-          "coordinate": "kfd-package-cut:sha256:0c724a27ed0eff033c0ce345dab81c2831c7fe2aac68b92ddb60b0e915918b5c#profiles/perspective-conformance/manifest.json",
+          "coordinate": "kfd-package-cut:sha256:23f35d36bc16d865301bbee2d4cd18a43434cf11c9699c1078f2c65c9d7e5695#profiles/perspective-conformance/manifest.json",
           "root": "sha256:35dba3661b3c4fae8bfc100f1b5efd071b9454801a77cecc496d656cc072b4bc",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:0c724a27ed0eff033c0ce345dab81c2831c7fe2aac68b92ddb60b0e915918b5c"
+          "kfdPackageRoot": "sha256:23f35d36bc16d865301bbee2d4cd18a43434cf11c9699c1078f2c65c9d7e5695"
         }
       ],
       "verificationEvidence": [
         {
           "kind": "verification",
-          "coordinate": "kfd-package-cut:sha256:0c724a27ed0eff033c0ce345dab81c2831c7fe2aac68b92ddb60b0e915918b5c#scripts/check-perspective-conformance.mjs",
+          "coordinate": "kfd-package-cut:sha256:23f35d36bc16d865301bbee2d4cd18a43434cf11c9699c1078f2c65c9d7e5695#scripts/check-perspective-conformance.mjs",
           "root": "sha256:4d2636d5d68d5e5cd7162393c12bf073af9bb843f51bc3afd23f397753e5bfed",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:0c724a27ed0eff033c0ce345dab81c2831c7fe2aac68b92ddb60b0e915918b5c"
+          "kfdPackageRoot": "sha256:23f35d36bc16d865301bbee2d4cd18a43434cf11c9699c1078f2c65c9d7e5695"
         }
       ],
       "negativeEvidence": [],
@@ -365,19 +395,19 @@
       "implementationEvidence": [
         {
           "kind": "implementation",
-          "coordinate": "kfd-package-cut:sha256:0c724a27ed0eff033c0ce345dab81c2831c7fe2aac68b92ddb60b0e915918b5c#evidence/primitive-evidence/second-wave-report.json",
+          "coordinate": "kfd-package-cut:sha256:23f35d36bc16d865301bbee2d4cd18a43434cf11c9699c1078f2c65c9d7e5695#evidence/primitive-evidence/second-wave-report.json",
           "root": "sha256:b0ed807dee3e93f0e6764c9d7b4b67c2a7da5a7580e169c03811ec3ec0732149",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:0c724a27ed0eff033c0ce345dab81c2831c7fe2aac68b92ddb60b0e915918b5c"
+          "kfdPackageRoot": "sha256:23f35d36bc16d865301bbee2d4cd18a43434cf11c9699c1078f2c65c9d7e5695"
         }
       ],
       "verificationEvidence": [
         {
           "kind": "verification",
-          "coordinate": "kfd-package-cut:sha256:0c724a27ed0eff033c0ce345dab81c2831c7fe2aac68b92ddb60b0e915918b5c#scripts/check-warrant-evidence.mjs",
+          "coordinate": "kfd-package-cut:sha256:23f35d36bc16d865301bbee2d4cd18a43434cf11c9699c1078f2c65c9d7e5695#scripts/check-warrant-evidence.mjs",
           "root": "sha256:f57bc0b853d9146d1e91396ef21198ba115f0d123623de530bbba34dd8ad1220",
           "observedAt": "2026-08-11T00:00:00Z",
-          "kfdPackageRoot": "sha256:0c724a27ed0eff033c0ce345dab81c2831c7fe2aac68b92ddb60b0e915918b5c"
+          "kfdPackageRoot": "sha256:23f35d36bc16d865301bbee2d4cd18a43434cf11c9699c1078f2c65c9d7e5695"
         }
       ],
       "negativeEvidence": [],
@@ -388,10 +418,10 @@
           "profileId": "kfd-warrant-evidence",
           "profileManifestPath": "profiles/warrant-evidence/manifest.json",
           "profileManifestRoot": "sha256:1032006a7435408761916de291abc8ee239594e70d739f28c3b29b60da75a755",
-          "witnessCoordinate": "kfd-package-cut:sha256:0c724a27ed0eff033c0ce345dab81c2831c7fe2aac68b92ddb60b0e915918b5c#evidence/primitive-evidence/second-wave-report.json",
+          "witnessCoordinate": "kfd-package-cut:sha256:23f35d36bc16d865301bbee2d4cd18a43434cf11c9699c1078f2c65c9d7e5695#evidence/primitive-evidence/second-wave-report.json",
           "witnessRoot": "sha256:b0ed807dee3e93f0e6764c9d7b4b67c2a7da5a7580e169c03811ec3ec0732149",
           "verifierRoot": "sha256:d15753d39938aa91cc50eb9bfa91dfc013570565a2395fd35d93d4ddda10adea",
-          "kfdPackageRoot": "sha256:0c724a27ed0eff033c0ce345dab81c2831c7fe2aac68b92ddb60b0e915918b5c"
+          "kfdPackageRoot": "sha256:23f35d36bc16d865301bbee2d4cd18a43434cf11c9699c1078f2c65c9d7e5695"
         }
       ],
       "releaseBindingIds": [],

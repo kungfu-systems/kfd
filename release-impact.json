@@ -13,6 +13,12 @@
   },
   "surfaceImpacts": [
     {
+      "id": "kfd-adopter-category-implementer-path",
+      "impact": "minor",
+      "class": "additive",
+      "rationale": "KFD additively publishes a package-only implementer guide, machine-readable test matrix, clean-room npm-tarball replay entrypoint, complete category schema/vector/verifier inventory, and a first-class /adopter-conformance site route. The path separates KFD, Buildchain, category, project, delivery, runtime, and independent-certification authority; passing remains non-qualifying, non-release-authorizing, non-runtime-authorizing, and non-certifying."
+    },
+    {
       "id": "kfd-adopter-category-evidence-matrix",
       "impact": "minor",
       "class": "additive",

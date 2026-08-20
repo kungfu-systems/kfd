@@ -191,6 +191,29 @@ separate required delivery surface and is not inferred from this JavaScript
 implementation. No passing report makes an adoption, release, runtime, or
 certification decision.
 
+## Independent implementer path
+
+`profiles/adopter-conformance/implementer-guide.md` and the machine-readable
+`profiles/adopter-conformance/test-matrix.json` define one package-only path
+from an exact npm tarball to the complete full-cut, category-profile,
+project-instance, evidence-matrix, and adopter-toolchain test sequence.
+`npm run check:adopter-implementer-path` extracts the package into a temporary
+clean room with an empty Home and replays that sequence without a source
+checkout, sibling repository, network requirement, or ambient cache authority.
+
+The inventory at `profiles/adopter-conformance/toolchain.json` lists every
+schema, vector, verifier, guide, and test-matrix member required by this path.
+The package and `/adopter-conformance` site route expose the same update rule:
+compatible additions receive explicit paths and inventory entries; semantic,
+profile, or project changes require successor contracts, versions, or newly
+rooted project evidence. Repaired failures remain in failure history rather
+than being overwritten.
+
+This clean-room path proves package completeness and deterministic replay only.
+It does not supply a downstream project's evidence and keeps KFD, Buildchain,
+category, project, delivery, runtime, and independent-certification authority
+separate.
+
 ## KFD self-declaration
 
 KFD dogfoods the contract at

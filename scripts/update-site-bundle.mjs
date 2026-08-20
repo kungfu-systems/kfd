@@ -20,6 +20,9 @@ const AGENT_HUB_PROFILE_PATH = "profiles/agent-hub/README.md";
 const AGENT_HUB_GUIDE_PATH = "profiles/agent-hub/implementer-guide.md";
 const AGENT_HUB_CAPABILITIES_PATH = "profiles/agent-hub/cli-capabilities.json";
 const AGENT_HUB_MANIFEST_PATH = "profiles/agent-hub/manifest.json";
+const ADOPTER_CONFORMANCE_AUTHORITY_PATH = "profiles/adopter-conformance/README.md";
+const ADOPTER_CONFORMANCE_GUIDE_PATH = "profiles/adopter-conformance/implementer-guide.md";
+const ADOPTER_CONFORMANCE_TEST_MATRIX_PATH = "profiles/adopter-conformance/test-matrix.json";
 const INDEPENDENT_VERIFIER_PATH = "docs/independent-verifier.md";
 const SEMANTIC_MATRIX_PATH = "evidence/semantic-self-sufficiency/kfd-1-13.json";
 const SEMANTIC_MATRIX_SCHEMA_PATH = "schemas/kfd-semantic-self-sufficiency-matrix.schema.json";
@@ -536,6 +539,68 @@ const buildConceptualCompressionPage = ({ text, terminology }) => {
       showFailureRecoveryAndSettlement: true,
       showAuthorityBoundary: true,
       note: "Render KFD-owned wording and terminology projections without replacing canonical terms with familiar stack aliases or promoting founding-adopter fields into universal semantics.",
+    },
+  };
+};
+
+const buildAdopterConformancePage = ({ authorityText, guideText, testMatrix }) => {
+  const authority = parseReadme(authorityText);
+  const guide = parseReadme(guideText);
+  const requiredSections = [
+    "Reproduce the complete contract surface",
+    "Run the clean-room entrypoint",
+    "Keep six authorities separate",
+    "Update without silently changing meaning",
+    "Interpret the result narrowly",
+  ];
+  for (const heading of requiredSections) {
+    if (!guide.sections[heading]) throw new Error(`Adopter implementer guide must define ${heading}`);
+  }
+  if (testMatrix.contract !== "kfd.adopter-category-implementer-test-matrix/v1") {
+    throw new Error("Adopter implementer test matrix must select the version 1 contract");
+  }
+  return {
+    id: "adopter-conformance",
+    title: guide.title,
+    sourcePath: ADOPTER_CONFORMANCE_GUIDE_PATH,
+    authorityPath: ADOPTER_CONFORMANCE_AUTHORITY_PATH,
+    testMatrixPath: ADOPTER_CONFORMANCE_TEST_MATRIX_PATH,
+    url: "/adopter-conformance",
+    relationship: "package-only-adopter-category-implementation-path",
+    normative: false,
+    lead: paragraphBlocks(guide.intro)[0] || "",
+    contract: testMatrix.contract,
+    packageOnly: testMatrix.packageOnly,
+    cleanRoom: testMatrix.cleanRoom,
+    componentChecks: testMatrix.componentChecks,
+    authorityBoundaries: testMatrix.authorityBoundaries,
+    expectedAuthorityOutputs: testMatrix.expectedAuthorityOutputs,
+    publicSurfaces: testMatrix.publicSurfaces,
+    updateMechanism: testMatrix.updateMechanism,
+    sections: requiredSections.map((heading) => ({
+      id: heading.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""),
+      title: heading,
+      sourcePath: ADOPTER_CONFORMANCE_GUIDE_PATH,
+      sourceHeading: heading,
+      defaultPresentation: "implementer-contract",
+      markdown: normalizeLines(guide.sections[heading]),
+    })),
+    authorityTitle: authority.title,
+    authorityMarkdown: stripFrontmatter(authorityText),
+    markdown: stripFrontmatter(guideText),
+    rendering: {
+      kind: "adopter-category-implementer-path",
+      navigationLabel: "Adopter conformance",
+      navigationGroup: "verify",
+      navigationOrder: 24,
+    },
+    rendererContract: {
+      showCleanRoomConstraints: true,
+      showComponentOrder: true,
+      showAuthorityBoundaries: true,
+      showUpdateMechanism: true,
+      showNonClaims: true,
+      note: "Render package-declared implementation facts without inferring project evidence, release permission, runtime permission, qualification, or independent certification.",
     },
   };
 };
@@ -1078,6 +1143,9 @@ export const buildSiteBundle = ({
   agentHubGuideText,
   agentHubCapabilities,
   agentHubManifest,
+  adopterConformanceAuthorityText,
+  adopterConformanceGuideText,
+  adopterConformanceTestMatrix,
   independentVerifierText,
   semanticMatrix,
   warrantManifest,
@@ -1142,6 +1210,11 @@ export const buildSiteBundle = ({
     guideText: agentHubGuideText,
     capabilities: agentHubCapabilities,
     manifest: agentHubManifest,
+  });
+  const adopterConformancePage = buildAdopterConformancePage({
+    authorityText: adopterConformanceAuthorityText,
+    guideText: adopterConformanceGuideText,
+    testMatrix: adopterConformanceTestMatrix,
   });
   const independentVerificationPage = buildIndependentVerificationPage({
     guideText: independentVerifierText,
@@ -1368,6 +1441,9 @@ export const buildSiteBundle = ({
       agentHubGuide: AGENT_HUB_GUIDE_PATH,
       agentHubCapabilities: AGENT_HUB_CAPABILITIES_PATH,
       agentHubManifest: AGENT_HUB_MANIFEST_PATH,
+      adopterConformanceAuthority: ADOPTER_CONFORMANCE_AUTHORITY_PATH,
+      adopterConformanceGuide: ADOPTER_CONFORMANCE_GUIDE_PATH,
+      adopterConformanceTestMatrix: ADOPTER_CONFORMANCE_TEST_MATRIX_PATH,
       independentVerifier: INDEPENDENT_VERIFIER_PATH,
       semanticSelfSufficiencyMatrix: SEMANTIC_MATRIX_PATH,
       semanticSelfSufficiencySchema: SEMANTIC_MATRIX_SCHEMA_PATH,
@@ -1402,6 +1478,7 @@ export const buildSiteBundle = ({
       candidatePattern: "/drafts/{id}",
       candidateFormalPattern: "/drafts/{id}/formal",
       agentHub: "/agent-hub",
+      adopterConformance: "/adopter-conformance",
       independentVerification: "/verify",
       selfConformance: "/verify/self-conformance",
       decisionPattern: "/{number}",
@@ -1474,7 +1551,7 @@ export const buildSiteBundle = ({
           source: FOUNDATION_PATH,
           sections: ["foundation-structure", "load-bearing-product-witness", "practice-guidelines"],
         },
-        readingPath: ["/", "/concepts", "/foundation", "/verify", "/verify/self-conformance", "/under-load", "/formal", "/cases", "/drafts", "/{number}"],
+        readingPath: ["/", "/concepts", "/foundation", "/verify", "/adopter-conformance", "/verify/self-conformance", "/under-load", "/formal", "/cases", "/drafts", "/{number}"],
         support: ["agent-quickstart", "decision-metadata"],
         currentDecisions: {
           source: REGISTRY_PATH,
@@ -1512,9 +1589,10 @@ export const buildSiteBundle = ({
     },
     loadBearingPage,
     independentVerificationPage,
+    adopterConformancePage,
     selfConformancePage,
     verificationLanes,
-    standalonePages: [conceptualCompressionPage, loadBearingPage, independentVerificationPage, selfConformancePage],
+    standalonePages: [conceptualCompressionPage, loadBearingPage, independentVerificationPage, adopterConformancePage, selfConformancePage],
     formalPage: {
       id: "formal-model",
       title: formalDocument.title,
@@ -1702,6 +1780,9 @@ export const readInputs = () => ({
   agentHubGuideText: readFileSync(AGENT_HUB_GUIDE_PATH, "utf8"),
   agentHubCapabilities: JSON.parse(readFileSync(AGENT_HUB_CAPABILITIES_PATH, "utf8")),
   agentHubManifest: JSON.parse(readFileSync(AGENT_HUB_MANIFEST_PATH, "utf8")),
+  adopterConformanceAuthorityText: readFileSync(ADOPTER_CONFORMANCE_AUTHORITY_PATH, "utf8"),
+  adopterConformanceGuideText: readFileSync(ADOPTER_CONFORMANCE_GUIDE_PATH, "utf8"),
+  adopterConformanceTestMatrix: JSON.parse(readFileSync(ADOPTER_CONFORMANCE_TEST_MATRIX_PATH, "utf8")),
   independentVerifierText: readFileSync(INDEPENDENT_VERIFIER_PATH, "utf8"),
   semanticMatrix: JSON.parse(readFileSync(SEMANTIC_MATRIX_PATH, "utf8")),
   warrantManifest: JSON.parse(readFileSync(WARRANT_MANIFEST_PATH, "utf8")),

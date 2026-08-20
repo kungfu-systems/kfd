@@ -5,7 +5,7 @@
   "assessedClaims": {
     "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-2/trust-claims.schema.json",
     "path": ".buildchain/kfd-2/kfd-foundation.trust-claims.json",
-    "digest": "sha256:27f11b31764c81b7d687724a5b50dd559353f682b81db192a43b32d05bba3406"
+    "digest": "sha256:b63c8240b87555c075d2b559623289000dcb59411ca325f72a85b881e4c439ce"
   },
   "result": "warning",
   "projection": {
@@ -55,7 +55,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": "scripts/check.mjs",
-          "digest": "sha256:9c43b1b0e83b1c26e48e0d90fc6778fd8642af6b55d9cd4b95f71d864868b6db",
+          "digest": "sha256:f05897de265a2d13faa8a8298212108b6b00c5081cc54a9757a194f54d3e01a0",
           "description": "The package check gate validates the KFD-1 schema, surface register, witness, and hashes."
         }
       ],
@@ -113,7 +113,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": "scripts/check.mjs",
-          "digest": "sha256:9c43b1b0e83b1c26e48e0d90fc6778fd8642af6b55d9cd4b95f71d864868b6db",
+          "digest": "sha256:f05897de265a2d13faa8a8298212108b6b00c5081cc54a9757a194f54d3e01a0",
           "description": "The package check gate validates KFD-3 interface closure and witness parity."
         }
       ],
@@ -214,7 +214,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": "scripts/check.mjs",
-          "digest": "sha256:9c43b1b0e83b1c26e48e0d90fc6778fd8642af6b55d9cd4b95f71d864868b6db",
+          "digest": "sha256:f05897de265a2d13faa8a8298212108b6b00c5081cc54a9757a194f54d3e01a0",
           "description": "The package check gate validates the KFD-4 timeline and replay schemas plus standards metadata; it does not assess adopter-specific capture or replay fidelity."
         }
       ],
@@ -280,7 +280,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": "scripts/check.mjs",
-          "digest": "sha256:9c43b1b0e83b1c26e48e0d90fc6778fd8642af6b55d9cd4b95f71d864868b6db",
+          "digest": "sha256:f05897de265a2d13faa8a8298212108b6b00c5081cc54a9757a194f54d3e01a0",
           "description": "The package check gate validates the KFD-5 interface and metadata; it does not certify adopter candidates."
         }
       ],
@@ -346,7 +346,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": "scripts/check.mjs",
-          "digest": "sha256:9c43b1b0e83b1c26e48e0d90fc6778fd8642af6b55d9cd4b95f71d864868b6db",
+          "digest": "sha256:f05897de265a2d13faa8a8298212108b6b00c5081cc54a9757a194f54d3e01a0",
           "description": "The package check gate validates draft status, required generation experiments, bounded method comparison, conditional boundary hypothesis, and anti-self-certification constants."
         }
       ],
@@ -471,7 +471,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": "scripts/check.mjs",
-          "digest": "sha256:9c43b1b0e83b1c26e48e0d90fc6778fd8642af6b55d9cd4b95f71d864868b6db",
+          "digest": "sha256:f05897de265a2d13faa8a8298212108b6b00c5081cc54a9757a194f54d3e01a0",
           "description": "The package check gate validates KFD-7 identity, formal binding, theorem and corollary references, Profile evidence categories, active status, activation review, trust projection, and participant-facing closure."
         }
       ],
@@ -569,7 +569,7 @@
           "result": "pass",
           "machineProvability": "machine-verifiable",
           "path": "scripts/check.mjs",
-          "digest": "sha256:9c43b1b0e83b1c26e48e0d90fc6778fd8642af6b55d9cd4b95f71d864868b6db",
+          "digest": "sha256:f05897de265a2d13faa8a8298212108b6b00c5081cc54a9757a194f54d3e01a0",
           "description": "The package gate checks KFD-11 interface identity, required separation fields, field-matrix coverage, and Foundation Revision closure."
         }
       ],
