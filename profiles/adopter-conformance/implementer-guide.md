@@ -32,7 +32,8 @@ Implement the surfaces in this order:
 4. reproduce the cross-project evidence matrix, including explicit pending
    rows, owned gaps, retained failure history, and terminal roots;
 5. verify the predecessor-family proof index without treating Assignment
-   closure as KFD semantic or delivery authority;
+   closure as KFD semantic or delivery authority, then inspect the completed
+   project evidence at `profiles/adopter-conformance/family-reconciliation.json`;
 6. run the package-only CLI toolchain and the complete test matrix.
 
 The machine-readable order, expected outputs, clean-room constraints, public
