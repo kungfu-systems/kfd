@@ -20,6 +20,10 @@
       {
         "path": "schemas/kfd-adopter-conformance/evidence-matrix.schema.json",
         "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-adopter-conformance/evidence-matrix.schema.json"
+      },
+      {
+        "path": "schemas/kfd-adopter-conformance/family-reconciliation.schema.json",
+        "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-adopter-conformance/family-reconciliation.schema.json"
       }
     ],
     "vectors": [
@@ -38,6 +42,10 @@
       {
         "path": "profiles/adopter-conformance/evidence-matrix-vectors.json",
         "contract": "kfd.adopter-category-evidence-matrix-vectors/v1"
+      },
+      {
+        "path": "profiles/adopter-conformance/family-reconciliation-vectors.json",
+        "contract": "kfd.adopter-category-family-reconciliation-vectors/v1"
       }
     ],
     "verifiers": [
@@ -55,6 +63,10 @@
       },
       {
         "path": "scripts/adopter-category-evidence-matrix-contract.mjs",
+        "kind": "source"
+      },
+      {
+        "path": "scripts/adopter-category-family-reconciliation-contract.mjs",
         "kind": "source"
       },
       {
