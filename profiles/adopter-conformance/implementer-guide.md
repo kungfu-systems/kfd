@@ -31,7 +31,9 @@ Implement the surfaces in this order:
    project-owned evidence;
 4. reproduce the cross-project evidence matrix, including explicit pending
    rows, owned gaps, retained failure history, and terminal roots;
-5. run the package-only CLI toolchain and the complete test matrix.
+5. verify the predecessor-family proof index without treating Assignment
+   closure as KFD semantic or delivery authority;
+6. run the package-only CLI toolchain and the complete test matrix.
 
 The machine-readable order, expected outputs, clean-room constraints, public
 surface paths, and authority boundaries are fixed in
@@ -57,7 +59,7 @@ contact a service. A passing run proves that the published package contains a
 self-consistent reference path and its fixed negative cases. It does not prove
 that a downstream adopter supplied real project evidence.
 
-## Keep six authorities separate
+## Keep authorities separate
 
 - **KFD specification authority** owns the adopter contracts, category
   vocabulary, schemas, fixed vectors, reference verifiers, and compatibility
@@ -65,6 +67,9 @@ that a downstream adopter supplied real project evidence.
 - **Buildchain delivery authority** may transport exact evidence and enforce a
   protocol-neutral gate. It cannot reinterpret KFD semantics or certify an
   adopter.
+- **Assignment work-control authority** owns execution and terminal closure.
+  Its seal is coordination evidence, never normative KFD or protected-delivery
+  evidence.
 - **Category composition authority** resolves only the declared, versioned
   category catalog. It transfers neither project evidence nor semantic
   authority.
@@ -84,6 +89,12 @@ category requirement, or diagnostic meaning requires a successor contract and
 new fixed vectors. Keep the prior package and rooted reports immutable; create
 new project instances or matrix rows for the successor cut instead of editing
 old evidence in place.
+
+The family proof index follows the same rule: preserve the declared child set,
+terminal roots, protected merge coordinate, release or installed-readback
+coordinates, retained failures, and owned gaps. A new family cut gets a new
+root; it does not overwrite predecessor evidence or turn Assignment closure
+into a specification claim.
 
 When a category profile changes, publish a new profile version and require an
 explicit selection update. When a project changes, bind the new source,

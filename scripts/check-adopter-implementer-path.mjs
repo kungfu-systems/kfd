@@ -40,6 +40,7 @@ assert.deepEqual(matrix.componentChecks.map(({ id }) => id), [
   "category-profiles",
   "category-instances",
   "evidence-matrix",
+  "family-reconciliation",
   "adopter-toolchain",
 ]);
 assert.deepEqual(matrix.componentChecks.map(({ command }) => command), [
@@ -47,6 +48,7 @@ assert.deepEqual(matrix.componentChecks.map(({ command }) => command), [
   "node scripts/check-adopter-category-profiles.mjs",
   "node scripts/check-adopter-category-instances.mjs",
   "node scripts/check-adopter-category-evidence-matrix.mjs",
+  "node scripts/check-adopter-category-family-reconciliation.mjs",
   "node scripts/check-adopter-toolchain.mjs",
 ]);
 assert.deepEqual(matrix.expectedAuthorityOutputs, {
@@ -58,6 +60,7 @@ assert.deepEqual(matrix.expectedAuthorityOutputs, {
 assert.deepEqual(Object.keys(matrix.authorityBoundaries), [
   "kfdSpecification",
   "buildchainDelivery",
+  "assignment",
   "categoryComposition",
   "project",
   "delivery",
@@ -67,7 +70,7 @@ assert.deepEqual(Object.keys(matrix.authorityBoundaries), [
 for (const heading of [
   "Reproduce the complete contract surface",
   "Run the clean-room entrypoint",
-  "Keep six authorities separate",
+  "Keep authorities separate",
   "Update without silently changing meaning",
   "Interpret the result narrowly",
 ]) {
@@ -81,16 +84,19 @@ assert.deepEqual(sortedPaths(inventory.surfaces.schemas), [
   "schemas/kfd-adopter-conformance/category-instance-manifest.schema.json",
   "schemas/kfd-adopter-conformance/category-profile-catalog.schema.json",
   "schemas/kfd-adopter-conformance/evidence-matrix.schema.json",
+  "schemas/kfd-adopter-conformance/family-reconciliation.schema.json",
   "schemas/kfd-adopter-conformance/manifest.schema.json",
 ]);
 assert.deepEqual(sortedPaths(inventory.surfaces.vectors), [
   "profiles/adopter-conformance/category-instance-vectors.json",
   "profiles/adopter-conformance/category-profile-vectors.json",
   "profiles/adopter-conformance/evidence-matrix-vectors.json",
+  "profiles/adopter-conformance/family-reconciliation-vectors.json",
   "profiles/adopter-conformance/vectors.json",
 ]);
 assert.deepEqual(sortedPaths(inventory.surfaces.verifiers), [
   "scripts/adopter-category-evidence-matrix-contract.mjs",
+  "scripts/adopter-category-family-reconciliation-contract.mjs",
   "scripts/adopter-category-instance-contract.mjs",
   "scripts/adopter-category-profile-contract.mjs",
   "scripts/adopter-conformance-contract.mjs",
@@ -102,6 +108,9 @@ assert.deepEqual(sortedPaths(inventory.surfaces.testMatrices), [matrixPath]);
 for (const [exportName, target] of Object.entries({
   "./adopter-conformance/implementer-guide.md": `./${guidePath}`,
   "./adopter-conformance/test-matrix.json": `./${matrixPath}`,
+  "./adopter-conformance/family-reconciliation.schema.json": "./schemas/kfd-adopter-conformance/family-reconciliation.schema.json",
+  "./adopter-conformance/family-reconciliation-vectors.json": "./profiles/adopter-conformance/family-reconciliation-vectors.json",
+  "./adopter-conformance/family-reconciliation-verifier": "./scripts/adopter-category-family-reconciliation-contract.mjs",
   "./adopter-conformance/implementer-path-check": "./scripts/check-adopter-implementer-path.mjs",
 })) {
   assert.equal(packageJson.exports?.[exportName], target, `missing exact package export ${exportName}`);
@@ -119,6 +128,7 @@ function exercise(cwd, home) {
         KFD_ADOPTER_OFFLINE: "1",
         KFD_ADOPTER_SKIP_EXTRACTION: "1",
         KFD_EVIDENCE_MATRIX_CLEAN_ROOM: "1",
+        KFD_FAMILY_RECONCILIATION_CLEAN_ROOM: "1",
         KFD_ADOPTER_TOOLCHAIN_SKIP_EXTRACTION: "1",
       },
     });

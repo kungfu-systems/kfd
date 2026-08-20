@@ -1,0 +1,234 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-adopter-conformance/family-reconciliation.schema.json",
+  "title": "KFD adopter category family reconciliation proof index",
+  "description": "Indexes terminal Assignment and delivery evidence without treating control-plane closure as KFD semantic, release, runtime, or certification authority.",
+  "type": "object",
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "contract",
+    "rootAlgorithm",
+    "initiativeId",
+    "expectedChildAssignmentIds",
+    "children",
+    "failureHistory",
+    "gaps",
+    "authorityBoundary"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "https://kfd.libkungfu.dev/schemas/kfd-adopter-conformance/family-reconciliation.schema.json"
+    },
+    "schemaVersion": { "const": 1 },
+    "contract": { "const": "kfd.adopter-category-family-reconciliation/v1" },
+    "rootAlgorithm": { "const": "sha256-kfd-canonical-json-v1" },
+    "initiativeId": { "$ref": "#/$defs/id" },
+    "expectedChildAssignmentIds": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/id" }
+    },
+    "children": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/child" }
+    },
+    "failureHistory": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/failure" }
+    },
+    "gaps": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/gap" }
+    },
+    "authorityBoundary": { "$ref": "#/$defs/authorityBoundary" }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._:/-]*$"
+    },
+    "root": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "sha": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "terminal": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["status", "root", "queryProofRoot"],
+          "properties": {
+            "status": { "const": "pending" },
+            "root": { "type": "null" },
+            "queryProofRoot": { "type": "null" }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": ["status", "root", "queryProofRoot"],
+          "properties": {
+            "status": { "const": "terminal" },
+            "root": { "$ref": "#/$defs/root" },
+            "queryProofRoot": { "$ref": "#/$defs/root" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "delivery": {
+      "type": "object",
+      "required": ["role", "coordinate", "root", "status"],
+      "properties": {
+        "role": {
+          "enum": [
+            "protected-merge",
+            "release",
+            "package",
+            "warrant",
+            "passport",
+            "installed-readback",
+            "independent-review"
+          ]
+        },
+        "coordinate": { "type": "string", "minLength": 1 },
+        "root": { "$ref": "#/$defs/root" },
+        "status": { "enum": ["verified", "pending", "invalid"] },
+        "sourceHead": { "$ref": "#/$defs/sha" },
+        "integratedHead": {
+          "oneOf": [
+            { "$ref": "#/$defs/sha" },
+            { "type": "null" }
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": { "role": { "const": "protected-merge" } },
+            "required": ["role"]
+          },
+          "then": {
+            "required": ["sourceHead", "integratedHead"],
+            "allOf": [
+              {
+                "if": {
+                  "properties": { "status": { "const": "pending" } },
+                  "required": ["status"]
+                },
+                "then": {
+                  "properties": { "integratedHead": { "type": "null" } }
+                },
+                "else": {
+                  "properties": { "integratedHead": { "$ref": "#/$defs/sha" } }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "child": {
+      "type": "object",
+      "required": [
+        "wave",
+        "assignmentId",
+        "repository",
+        "requestRoot",
+        "workDefinitionRoot",
+        "terminal",
+        "deliveryEvidence",
+        "gapIds"
+      ],
+      "properties": {
+        "wave": { "type": "integer", "minimum": 1 },
+        "assignmentId": { "$ref": "#/$defs/id" },
+        "repository": { "$ref": "#/$defs/id" },
+        "requestRoot": { "$ref": "#/$defs/root" },
+        "workDefinitionRoot": { "$ref": "#/$defs/root" },
+        "terminal": { "$ref": "#/$defs/terminal" },
+        "deliveryEvidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/delivery" }
+        },
+        "gapIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/id" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "failure": {
+      "type": "object",
+      "required": ["id", "assignmentId", "stage", "issueCode", "evidenceRoot", "owner", "status"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "assignmentId": { "$ref": "#/$defs/id" },
+        "stage": { "enum": ["schema", "composition", "project", "delivery", "runtime", "readback"] },
+        "issueCode": { "$ref": "#/$defs/id" },
+        "evidenceRoot": { "$ref": "#/$defs/root" },
+        "owner": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["open", "fixed", "retained"] }
+      },
+      "additionalProperties": false
+    },
+    "gap": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["id", "owner", "status", "evidenceRoot"],
+          "properties": {
+            "id": { "$ref": "#/$defs/id" },
+            "owner": { "type": "string", "minLength": 1 },
+            "status": { "const": "open" },
+            "evidenceRoot": { "type": "null" }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": ["id", "owner", "status", "evidenceRoot"],
+          "properties": {
+            "id": { "$ref": "#/$defs/id" },
+            "owner": { "type": "string", "minLength": 1 },
+            "status": { "const": "closed" },
+            "evidenceRoot": { "$ref": "#/$defs/root" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "authorityBoundary": {
+      "type": "object",
+      "required": [
+        "normativeSemantics",
+        "assignmentClosure",
+        "protectedDelivery",
+        "releasePermission",
+        "runtimePermission",
+        "independentCertification",
+        "buildchainRole"
+      ],
+      "properties": {
+        "normativeSemantics": { "const": "kfd-package" },
+        "assignmentClosure": { "const": "work-control-owned" },
+        "protectedDelivery": { "const": "repository-governance-owned" },
+        "releasePermission": { "const": "release-system-owned" },
+        "runtimePermission": { "const": "adopter-runtime-owned" },
+        "independentCertification": { "const": "separate-certifier-required" },
+        "buildchainRole": { "const": "optional-protocol-neutral-carrier" }
+      },
+      "additionalProperties": false
+    }
+  }
+}

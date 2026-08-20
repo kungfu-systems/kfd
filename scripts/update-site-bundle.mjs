@@ -549,7 +549,7 @@ const buildAdopterConformancePage = ({ authorityText, guideText, testMatrix }) =
   const requiredSections = [
     "Reproduce the complete contract surface",
     "Run the clean-room entrypoint",
-    "Keep six authorities separate",
+    "Keep authorities separate",
     "Update without silently changing meaning",
     "Interpret the result narrowly",
   ];

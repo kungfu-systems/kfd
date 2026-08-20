@@ -162,6 +162,26 @@ while always returning `qualifying: false`, `releaseAuthorized: false`,
 carry the matrix through a protocol-neutral delivery gate, but it cannot
 widen, reinterpret, certify, or privately supplement KFD semantics.
 
+## Family reconciliation proof index
+
+`kfd.adopter-category-family-reconciliation/v1` is a public, package-owned
+index for checking that one declared predecessor Assignment set is represented
+exactly once. Each child row binds its request and normalized work-definition
+roots, native terminal and query-proof roots, one protected-merge coordinate,
+additional release or readback evidence, retained failures, and explicitly
+owned gaps. Pending children and open gaps are valid incomplete states.
+Every delivery `root` is the canonical semantic root of that delivery row with
+the `root` field omitted; retained failure roots follow the same rule for
+`evidenceRoot`. The verifier recomputes both, so a coordinate or head cannot be
+changed without an explicit new root.
+
+Assignment closure remains work-control evidence; it is never normative KFD
+evidence. Protected merge, package or release, installed readback, runtime
+permission, and independent certification remain separately governed. The
+reference verifier therefore reports completeness independently while always
+returning `qualifying: false`, `releaseAuthorized: false`,
+`runtimeAuthorized: false`, and `independentlyCertified: false`.
+
 ## Package-only verification seam
 
 The version 1 reference seam is published as
@@ -196,7 +216,8 @@ certification decision.
 `profiles/adopter-conformance/implementer-guide.md` and the machine-readable
 `profiles/adopter-conformance/test-matrix.json` define one package-only path
 from an exact npm tarball to the complete full-cut, category-profile,
-project-instance, evidence-matrix, and adopter-toolchain test sequence.
+project-instance, evidence-matrix, family-reconciliation, and adopter-toolchain
+test sequence.
 `npm run check:adopter-implementer-path` extracts the package into a temporary
 clean room with an empty Home and replays that sequence without a source
 checkout, sibling repository, network requirement, or ambient cache authority.

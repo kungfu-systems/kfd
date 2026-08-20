@@ -1,0 +1,269 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.adopter-category-family-reconciliation-vectors/v1",
+  "familyContract": "kfd.adopter-category-family-reconciliation/v1",
+  "template": {
+    "$schema": "https://kfd.libkungfu.dev/schemas/kfd-adopter-conformance/family-reconciliation.schema.json",
+    "schemaVersion": 1,
+    "contract": "kfd.adopter-category-family-reconciliation/v1",
+    "rootAlgorithm": "sha256-kfd-canonical-json-v1",
+    "initiativeId": "example.org/adopter-category-initiative",
+    "expectedChildAssignmentIds": [
+      "example.org/adopter-category-child-1",
+      "example.org/adopter-category-child-2"
+    ],
+    "children": [
+      {
+        "wave": 1,
+        "assignmentId": "example.org/adopter-category-child-1",
+        "repository": "example.org/specification",
+        "requestRoot": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "workDefinitionRoot": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "terminal": {
+          "status": "terminal",
+          "root": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+          "queryProofRoot": "sha256:4444444444444444444444444444444444444444444444444444444444444444"
+        },
+        "deliveryEvidence": [
+          {
+            "role": "protected-merge",
+            "coordinate": "https://example.org/specification/pull/1",
+            "root": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+            "status": "verified",
+            "sourceHead": "1111111111111111111111111111111111111111",
+            "integratedHead": "2222222222222222222222222222222222222222"
+          },
+          {
+            "role": "package",
+            "coordinate": "pkg:npm/example-specification@1.0.0",
+            "root": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+            "status": "verified"
+          }
+        ],
+        "gapIds": []
+      },
+      {
+        "wave": 2,
+        "assignmentId": "example.org/adopter-category-child-2",
+        "repository": "example.org/product",
+        "requestRoot": "sha256:7777777777777777777777777777777777777777777777777777777777777777",
+        "workDefinitionRoot": "sha256:8888888888888888888888888888888888888888888888888888888888888888",
+        "terminal": {
+          "status": "terminal",
+          "root": "sha256:9999999999999999999999999999999999999999999999999999999999999999",
+          "queryProofRoot": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "deliveryEvidence": [
+          {
+            "role": "protected-merge",
+            "coordinate": "https://example.org/product/pull/2",
+            "root": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "status": "verified",
+            "sourceHead": "3333333333333333333333333333333333333333",
+            "integratedHead": "4444444444444444444444444444444444444444"
+          },
+          {
+            "role": "installed-readback",
+            "coordinate": "https://example.org/product/readback/2",
+            "root": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "status": "verified"
+          }
+        ],
+        "gapIds": []
+      }
+    ],
+    "failureHistory": [
+      {
+        "id": "example.org/failure/invalid-predecessor-attempt",
+        "assignmentId": "example.org/adopter-category-child-1",
+        "stage": "delivery",
+        "issueCode": "invalid-predecessor-attempt",
+        "evidenceRoot": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "owner": "example.org/specification",
+        "status": "retained"
+      }
+    ],
+    "gaps": [],
+    "authorityBoundary": {
+      "normativeSemantics": "kfd-package",
+      "assignmentClosure": "work-control-owned",
+      "protectedDelivery": "repository-governance-owned",
+      "releasePermission": "release-system-owned",
+      "runtimePermission": "adopter-runtime-owned",
+      "independentCertification": "separate-certifier-required",
+      "buildchainRole": "optional-protocol-neutral-carrier"
+    }
+  },
+  "cases": [
+    {
+      "id": "positive-complete-family",
+      "operations": [],
+      "valid": true,
+      "complete": true,
+      "issueCodes": []
+    },
+    {
+      "id": "positive-pending-child",
+      "operations": [
+        { "op": "replace", "path": "/children/1/terminal/status", "value": "pending" },
+        { "op": "replace", "path": "/children/1/terminal/root", "value": null },
+        { "op": "replace", "path": "/children/1/terminal/queryProofRoot", "value": null },
+        { "op": "replace", "path": "/children/1/deliveryEvidence/0/status", "value": "pending" },
+        { "op": "replace", "path": "/children/1/deliveryEvidence/0/integratedHead", "value": null },
+        { "op": "replace", "path": "/children/1/deliveryEvidence/0/root", "value": "sha256:19bb55ca06eafdeb266afdb9c7ca4ce0d25a8a98cf9f2805e3f20fd1aa78622d" }
+      ],
+      "valid": true,
+      "complete": false,
+      "issueCodes": []
+    },
+    {
+      "id": "positive-owned-open-gap",
+      "operations": [
+        { "op": "replace", "path": "/children/1/terminal/status", "value": "pending" },
+        { "op": "replace", "path": "/children/1/terminal/root", "value": null },
+        { "op": "replace", "path": "/children/1/terminal/queryProofRoot", "value": null },
+        { "op": "replace", "path": "/children/1/deliveryEvidence/0/status", "value": "pending" },
+        { "op": "replace", "path": "/children/1/deliveryEvidence/0/integratedHead", "value": null },
+        { "op": "replace", "path": "/children/1/deliveryEvidence/0/root", "value": "sha256:19bb55ca06eafdeb266afdb9c7ca4ce0d25a8a98cf9f2805e3f20fd1aa78622d" },
+        { "op": "replace", "path": "/children/1/gapIds", "value": ["example.org/gap/readback"] },
+        {
+          "op": "replace",
+          "path": "/gaps",
+          "value": [
+            {
+              "id": "example.org/gap/readback",
+              "owner": "example.org/product",
+              "status": "open",
+              "evidenceRoot": null
+            }
+          ]
+        }
+      ],
+      "valid": true,
+      "complete": false,
+      "issueCodes": []
+    },
+    {
+      "id": "negative-child-set-substitution",
+      "operations": [
+        { "op": "replace", "path": "/expectedChildAssignmentIds/1", "value": "example.org/adopter-category-child-3" }
+      ],
+      "valid": false,
+      "complete": false,
+      "issueCodes": ["acp-family-substitution"]
+    },
+    {
+      "id": "negative-duplicate-child",
+      "operations": [
+        { "op": "add-copy", "path": "/children/-", "from": "/children/1" }
+      ],
+      "valid": false,
+      "complete": false,
+      "issueCodes": ["acp-family-duplicate", "acp-family-substitution"]
+    },
+    {
+      "id": "negative-missing-protected-merge",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/children/0/deliveryEvidence",
+          "value": [
+            {
+              "role": "package",
+              "coordinate": "pkg:npm/example-specification@1.0.0",
+              "root": "sha256:4f9c989d18cf308d84053e90efb98d05c3c80de6be533beac98ef88936b27b88",
+              "status": "verified"
+            }
+          ]
+        }
+      ],
+      "valid": false,
+      "complete": false,
+      "issueCodes": ["acp-family-incomplete"]
+    },
+    {
+      "id": "negative-terminal-pending-delivery",
+      "operations": [
+        { "op": "replace", "path": "/children/1/deliveryEvidence/1/status", "value": "pending" },
+        { "op": "replace", "path": "/children/1/deliveryEvidence/1/root", "value": "sha256:26f95a5aa3d072ba35dc3512268f82bd1388a056b52cfe5b8026ee4eeb6d409e" }
+      ],
+      "valid": false,
+      "complete": false,
+      "issueCodes": ["acp-family-incomplete"]
+    },
+    {
+      "id": "negative-unowned-child-gap",
+      "operations": [
+        { "op": "replace", "path": "/children/1/gapIds", "value": ["example.org/gap/missing"] }
+      ],
+      "valid": false,
+      "complete": false,
+      "issueCodes": ["acp-family-incomplete"]
+    },
+    {
+      "id": "negative-orphan-global-gap",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/gaps",
+          "value": [
+            {
+              "id": "example.org/gap/orphan",
+              "owner": "example.org/product",
+              "status": "closed",
+              "evidenceRoot": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+            }
+          ]
+        }
+      ],
+      "valid": false,
+      "complete": false,
+      "issueCodes": ["acp-family-incomplete"]
+    },
+    {
+      "id": "negative-failure-assignment-substitution",
+      "operations": [
+        { "op": "replace", "path": "/failureHistory/0/assignmentId", "value": "example.org/adopter-category-child-3" }
+      ],
+      "valid": false,
+      "complete": false,
+      "issueCodes": ["acp-family-substitution"]
+    },
+    {
+      "id": "negative-authority-widening",
+      "operations": [
+        { "op": "replace", "path": "/authorityBoundary/assignmentClosure", "value": "kfd-package" }
+      ],
+      "valid": false,
+      "complete": false,
+      "issueCodes": ["acp-family-authority-widening"]
+    },
+    {
+      "id": "negative-terminal-root-shape",
+      "operations": [
+        { "op": "replace", "path": "/children/0/terminal/root", "value": "not-a-root" }
+      ],
+      "valid": false,
+      "complete": false,
+      "issueCodes": ["acp-family-invalid"]
+    },
+    {
+      "id": "negative-delivery-root-substitution",
+      "operations": [
+        { "op": "replace", "path": "/children/0/deliveryEvidence/0/root", "value": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" }
+      ],
+      "valid": false,
+      "complete": false,
+      "issueCodes": ["acp-family-substitution"]
+    },
+    {
+      "id": "negative-non-string-child-identity",
+      "operations": [
+        { "op": "replace", "path": "/children/0/assignmentId", "value": 1 }
+      ],
+      "valid": false,
+      "complete": false,
+      "issueCodes": ["acp-family-invalid", "acp-family-substitution"]
+    }
+  ]
+}
