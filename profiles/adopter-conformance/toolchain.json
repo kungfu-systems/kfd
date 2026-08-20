@@ -10,6 +10,14 @@
         "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-adopter-conformance/manifest.schema.json"
       },
       {
+        "path": "schemas/kfd-adopter-conformance/category-profile-catalog.schema.json",
+        "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-adopter-conformance/category-profile-catalog.schema.json"
+      },
+      {
+        "path": "schemas/kfd-adopter-conformance/category-instance-manifest.schema.json",
+        "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-adopter-conformance/category-instance-manifest.schema.json"
+      },
+      {
         "path": "schemas/kfd-adopter-conformance/evidence-matrix.schema.json",
         "schemaId": "https://kfd.libkungfu.dev/schemas/kfd-adopter-conformance/evidence-matrix.schema.json"
       }
@@ -18,6 +26,14 @@
       {
         "path": "profiles/adopter-conformance/vectors.json",
         "contract": "kfd.adopter-conformance-vectors/v1"
+      },
+      {
+        "path": "profiles/adopter-conformance/category-profile-vectors.json",
+        "contract": "kfd.adopter-category-profile-vectors/v1"
+      },
+      {
+        "path": "profiles/adopter-conformance/category-instance-vectors.json",
+        "contract": "kfd.adopter-category-instance-vectors/v1"
       },
       {
         "path": "profiles/adopter-conformance/evidence-matrix-vectors.json",
@@ -30,12 +46,32 @@
         "kind": "source"
       },
       {
+        "path": "scripts/adopter-category-profile-contract.mjs",
+        "kind": "source"
+      },
+      {
+        "path": "scripts/adopter-category-instance-contract.mjs",
+        "kind": "source"
+      },
+      {
         "path": "scripts/adopter-category-evidence-matrix-contract.mjs",
         "kind": "source"
       },
       {
         "path": "scripts/warrant-evidence-verifier.mjs",
         "kind": "source"
+      }
+    ],
+    "guides": [
+      {
+        "path": "profiles/adopter-conformance/implementer-guide.md",
+        "kind": "implementer-guide"
+      }
+    ],
+    "testMatrices": [
+      {
+        "path": "profiles/adopter-conformance/test-matrix.json",
+        "contract": "kfd.adopter-category-implementer-test-matrix/v1"
       }
     ]
   },

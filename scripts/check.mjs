@@ -56,6 +56,10 @@ const adopterCategoryInstanceSchema = JSON.parse(readFileSync(adopterCategoryIns
 const adopterCategoryInstanceVectorsPath = "profiles/adopter-conformance/category-instance-vectors.json";
 const adopterCategoryInstanceVectors = JSON.parse(readFileSync(adopterCategoryInstanceVectorsPath, "utf8"));
 const adopterCategoryInstanceVerifierPath = "scripts/adopter-category-instance-contract.mjs";
+const adopterImplementerGuidePath = "profiles/adopter-conformance/implementer-guide.md";
+const adopterImplementerTestMatrixPath = "profiles/adopter-conformance/test-matrix.json";
+const adopterImplementerTestMatrix = JSON.parse(readFileSync(adopterImplementerTestMatrixPath, "utf8"));
+const adopterImplementerCheckPath = "scripts/check-adopter-implementer-path.mjs";
 const foundationRevisionPath = "docs/foundation-revision-2026-07-21-decision-admission.json";
 const foundationRevision = JSON.parse(readFileSync(foundationRevisionPath, "utf8"));
 const packageJson = JSON.parse(readFileSync("package.json", "utf8"));
@@ -207,6 +211,8 @@ if (adopterCategoryInstanceSchema.$id !== "https://kfd.libkungfu.dev/schemas/kfd
   fail("adopter category instances must expose one exact versioned manifest, schema, and vector contract");
 }
 if (packageJson.exports?.["./adopter-conformance/README.md"] !== "./profiles/adopter-conformance/README.md" ||
+    packageJson.exports?.["./adopter-conformance/implementer-guide.md"] !== `./${adopterImplementerGuidePath}` ||
+    packageJson.exports?.["./adopter-conformance/test-matrix.json"] !== `./${adopterImplementerTestMatrixPath}` ||
     packageJson.exports?.["./adopter-conformance/manifest.schema.json"] !== `./${adopterConformanceSchemaPath}` ||
     packageJson.exports?.["./adopter-conformance/category-profile-catalog.schema.json"] !== `./${adopterCategoryProfileSchemaPath}` ||
     packageJson.exports?.["./adopter-conformance/category-instance-manifest.schema.json"] !== `./${adopterCategoryInstanceSchemaPath}` ||
@@ -217,8 +223,20 @@ if (packageJson.exports?.["./adopter-conformance/README.md"] !== "./profiles/ado
     packageJson.exports?.["./adopter-conformance/category-instance-vectors.json"] !== `./${adopterCategoryInstanceVectorsPath}` ||
     packageJson.exports?.["./adopter-conformance/verifier"] !== `./${adopterConformanceVerifierPath}` ||
     packageJson.exports?.["./adopter-conformance/category-profile-resolver"] !== `./${adopterCategoryProfileResolverPath}` ||
-    packageJson.exports?.["./adopter-conformance/category-instance-verifier"] !== `./${adopterCategoryInstanceVerifierPath}`) {
-  fail("package.json must expose adopter conformance, category-profile, and category-instance schemas, diagnostics, vectors, and verifier seams");
+    packageJson.exports?.["./adopter-conformance/category-instance-verifier"] !== `./${adopterCategoryInstanceVerifierPath}` ||
+    packageJson.exports?.["./adopter-conformance/implementer-path-check"] !== `./${adopterImplementerCheckPath}` ||
+    packageJson.scripts?.["check:adopter-implementer-path"] !== `node ${adopterImplementerCheckPath}` ||
+    !packageJson.scripts?.check?.includes("npm run check:adopter-implementer-path")) {
+  fail("package.json must expose adopter conformance, category-profile, category-instance, and independent implementer surfaces");
+}
+if (adopterImplementerTestMatrix.contract !== "kfd.adopter-category-implementer-test-matrix/v1" ||
+    adopterImplementerTestMatrix.packageOnly !== true ||
+    adopterImplementerTestMatrix.cleanRoom?.networkRequired !== false ||
+    adopterImplementerTestMatrix.expectedAuthorityOutputs?.qualifying !== false ||
+    adopterImplementerTestMatrix.expectedAuthorityOutputs?.releaseAuthorized !== false ||
+    adopterImplementerTestMatrix.expectedAuthorityOutputs?.runtimeAuthorized !== false ||
+    adopterImplementerTestMatrix.expectedAuthorityOutputs?.independentlyCertified !== false) {
+  fail("adopter implementer matrix must preserve package-only replay and all non-authority outputs");
 }
 if (adopterConformanceIssueCodes.contract !== "kfd.adopter-conformance-issue-codes/v1" ||
     adopterConformanceVectors.contract !== "kfd.adopter-conformance-vectors/v1" ||
@@ -769,6 +787,11 @@ if (siteBundle.source?.agentHubCapabilities !== "profiles/agent-hub/cli-capabili
 if (siteBundle.source?.agentHubManifest !== "profiles/agent-hub/manifest.json") {
   fail("site bundle agentHubManifest source must be profiles/agent-hub/manifest.json");
 }
+if (siteBundle.source?.adopterConformanceAuthority !== "profiles/adopter-conformance/README.md" ||
+    siteBundle.source?.adopterConformanceGuide !== adopterImplementerGuidePath ||
+    siteBundle.source?.adopterConformanceTestMatrix !== adopterImplementerTestMatrixPath) {
+  fail("site bundle must expose the adopter authority, implementer guide, and test matrix sources");
+}
 if (siteBundle.homepage?.title !== "KFD — Kung Fu Decisions") fail("site bundle homepage title must match README H1 text");
 if (!Array.isArray(siteBundle.homepage?.sections) || siteBundle.homepage.sections.length === 0) {
   fail("site bundle homepage.sections must expose generated homepage and foundation sections");
@@ -791,8 +814,20 @@ if (siteBundle.routes?.candidateFormalPattern !== "/drafts/{id}/formal") {
   fail("site bundle routes.candidateFormalPattern must be /drafts/{id}/formal");
 }
 if (siteBundle.routes?.agentHub !== "/agent-hub") fail("site bundle routes.agentHub must be /agent-hub");
+if (siteBundle.routes?.adopterConformance !== "/adopter-conformance") {
+  fail("site bundle routes.adopterConformance must be /adopter-conformance");
+}
 if (siteBundle.routes?.independentVerification !== "/verify") {
   fail("site bundle routes.independentVerification must be /verify");
+}
+const adopterConformancePage = siteBundle.adopterConformancePage;
+if (adopterConformancePage?.url !== siteBundle.routes.adopterConformance ||
+    adopterConformancePage?.contract !== adopterImplementerTestMatrix.contract ||
+    adopterConformancePage?.packageOnly !== true ||
+    adopterConformancePage?.normative !== false ||
+    JSON.stringify(adopterConformancePage?.expectedAuthorityOutputs) !== JSON.stringify(adopterImplementerTestMatrix.expectedAuthorityOutputs) ||
+    JSON.stringify(adopterConformancePage?.updateMechanism) !== JSON.stringify(adopterImplementerTestMatrix.updateMechanism)) {
+  fail("site bundle adopter page must preserve the package-only matrix, update mechanism, and non-claims");
 }
 const agentHubPage = siteBundle.agentHubPage;
 if (agentHubPage?.url !== siteBundle.routes.agentHub) fail("site bundle agentHubPage.url must match routes.agentHub");

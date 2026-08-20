@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.adopter-category-implementer-test-matrix/v1",
+  "packageOnly": true,
+  "cleanRoom": {
+    "source": "one exact @kungfu-tech/kfd npm tarball",
+    "emptyHome": true,
+    "networkRequired": false,
+    "sourceCheckoutRequired": false,
+    "siblingRepositoryRequired": false,
+    "ambientCacheAuthority": false
+  },
+  "componentChecks": [
+    {
+      "id": "full-cut-manifest",
+      "command": "node scripts/check-adopter-conformance.mjs",
+      "expected": "fixed positive and fail-closed full-cut vectors pass"
+    },
+    {
+      "id": "category-profiles",
+      "command": "node scripts/check-adopter-category-profiles.mjs",
+      "expected": "project-neutral composition and conflict vectors pass"
+    },
+    {
+      "id": "category-instances",
+      "command": "node scripts/check-adopter-category-instances.mjs",
+      "expected": "project-bound evidence and substitution vectors pass"
+    },
+    {
+      "id": "evidence-matrix",
+      "command": "node scripts/check-adopter-category-evidence-matrix.mjs",
+      "expected": "pending, terminal, gap, role, and authority vectors pass"
+    },
+    {
+      "id": "adopter-toolchain",
+      "command": "node scripts/check-adopter-toolchain.mjs",
+      "expected": "package-only init, witness, verify, diff, and bundle pass"
+    }
+  ],
+  "authorityBoundaries": {
+    "kfdSpecification": "schemas, category vocabulary, fixed vectors, reference verifiers, and compatibility",
+    "buildchainDelivery": "protocol-neutral evidence transport and delivery gating only",
+    "categoryComposition": "deterministic resolution of declared versioned profiles only",
+    "project": "project source, artifact, release, declaration, evidence, and gaps",
+    "delivery": "release permission remains external to KFD verification",
+    "runtime": "runtime action permission remains external to KFD verification",
+    "independentCertification": "requires an explicitly separate certifier"
+  },
+  "expectedAuthorityOutputs": {
+    "qualifying": false,
+    "releaseAuthorized": false,
+    "runtimeAuthorized": false,
+    "independentlyCertified": false
+  },
+  "publicSurfaces": {
+    "authority": "profiles/adopter-conformance/README.md",
+    "implementerGuide": "profiles/adopter-conformance/implementer-guide.md",
+    "testMatrix": "profiles/adopter-conformance/test-matrix.json",
+    "inventory": "profiles/adopter-conformance/toolchain.json",
+    "siteRoute": "/adopter-conformance"
+  },
+  "updateMechanism": {
+    "compatibleAddition": "add an explicit package path and inventory member",
+    "semanticChange": "publish a successor contract and fixed vectors",
+    "profileChange": "publish a new profile version and require explicit reselection",
+    "projectChange": "bind new source, artifact, release, manifest, package, and selection roots",
+    "failureRepair": "retain failureHistory and add current proof separately"
+  }
+}
