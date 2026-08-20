@@ -1,0 +1,209 @@
+{
+  "$schema": "https://kfd.libkungfu.dev/schemas/kfd-adopter-conformance/family-reconciliation.schema.json",
+  "schemaVersion": 1,
+  "contract": "kfd.adopter-category-family-reconciliation/v1",
+  "rootAlgorithm": "sha256-kfd-canonical-json-v1",
+  "initiativeId": "2026-08-12-adopter-category-profiles-and-universal-delivery-gate",
+  "expectedChildAssignmentIds": [
+    "2026-08-12-buildchain-delivery-infrastructure-self-dogfood",
+    "2026-08-12-buildchain-pluggable-adopter-delivery-gate",
+    "2026-08-12-kfd-adopter-category-profile-contract",
+    "2026-08-12-kfd-specification-authority-delivery-dogfood",
+    "2026-08-12-kungfu-core-domain-product-adopter-proof",
+    "2026-08-12-kungfu-product-runtime-category-migration",
+    "2026-08-12-non-kfd-specification-driver-clean-room-proof"
+  ],
+  "children": [
+    {
+      "wave": 1,
+      "assignmentId": "2026-08-12-kfd-adopter-category-profile-contract",
+      "repository": "kungfu-systems/kfd",
+      "requestRoot": "sha256:9ab05c70791053c0f01506f0cc890a7a10ad8075b9bfce74884d9d87a01526fa",
+      "workDefinitionRoot": "sha256:92b1c695d7a9d7581576834a0ffd52ff5167bbc946d1d0c7e97b2773251182be",
+      "terminal": {
+        "status": "terminal",
+        "root": "sha256:aa58b0cffdc2255c8bcadcf9b43456761cb15841312444c52daf13a1a6cc1721",
+        "queryProofRoot": "sha256:2535be87eedf09cc252ef308709c18ae482749dc594c3f4b0873735c0cf6e8b7"
+      },
+      "deliveryEvidence": [
+        {
+          "role": "protected-merge",
+          "coordinate": "https://github.com/kungfu-systems/kfd/pull/386",
+          "root": "sha256:97b9e5353414acfce17e42d2aaae8287f3cd1407c839cc7edeb5adc5c76fa348",
+          "status": "verified",
+          "sourceHead": "c0d4f3bc93f32ebad570df150e4a53825c47322a",
+          "integratedHead": "8dca4946e3d3fc8c51c66348c0112b638127b163"
+        }
+      ],
+      "gapIds": []
+    },
+    {
+      "wave": 2,
+      "assignmentId": "2026-08-12-buildchain-pluggable-adopter-delivery-gate",
+      "repository": "kungfu-systems/buildchain",
+      "requestRoot": "sha256:a7d4cac056a984b0edbdf630ac92ee83d7cf20406b2418598562326b69a6ab9e",
+      "workDefinitionRoot": "sha256:7ed22fb544ed6ebfd56bb836f9f98bf54b0bd5ddd752c97eb60902de086dc585",
+      "terminal": {
+        "status": "terminal",
+        "root": "sha256:c6f14479649e44ce8dd03cd34d04bdcd548d5fc5d91b2f920884a766b02f29da",
+        "queryProofRoot": "sha256:7be8e714cfe0a61fe26abe6755f86e6f3b0c788d3ff8c37784667042575b2b97"
+      },
+      "deliveryEvidence": [
+        {
+          "role": "protected-merge",
+          "coordinate": "https://github.com/kungfu-systems/buildchain/pull/2677",
+          "root": "sha256:ed8f170d395cba16ed30314e977c43d86692e253c5cf98c25e7164219aa68a99",
+          "status": "verified",
+          "sourceHead": "0da63178d3fba1be79463bf6c39822262fe44b88",
+          "integratedHead": "4ee971af40062460ed92e2d4d0137064cbc6e43f"
+        }
+      ],
+      "gapIds": []
+    },
+    {
+      "wave": 3,
+      "assignmentId": "2026-08-12-buildchain-delivery-infrastructure-self-dogfood",
+      "repository": "kungfu-systems/buildchain",
+      "requestRoot": "sha256:3f082baefd1c661b7de66fd364e5b2b7a6043d2857f3575e2b351a3869abfbae",
+      "workDefinitionRoot": "sha256:8f55ca1dff163a7b862d9e5c1a568db4a5a470fa33539226ed4f4f417b298455",
+      "terminal": {
+        "status": "terminal",
+        "root": "sha256:edc596e80f10d2589021708977b0d89e24323ac048a50b37bbc668481b1d29a8",
+        "queryProofRoot": "sha256:c7c03519da6ffeca94c68e4d565f5471c1f63ef807d3d628e9ed07acd68a6ceb"
+      },
+      "deliveryEvidence": [
+        {
+          "role": "protected-merge",
+          "coordinate": "https://github.com/kungfu-systems/buildchain/pull/2720",
+          "root": "sha256:b4e7d6c2cf782bea772c3e44264afadeec63ac80938ffcb1862dbfc199684d47",
+          "status": "verified",
+          "sourceHead": "ab61915262e35792b2c5e42a1f415ec898b85585",
+          "integratedHead": "e13ddd70673b4af5f95ef472f2358dff8b5a6b2d"
+        }
+      ],
+      "gapIds": []
+    },
+    {
+      "wave": 4,
+      "assignmentId": "2026-08-12-kfd-specification-authority-delivery-dogfood",
+      "repository": "kungfu-systems/kfd",
+      "requestRoot": "sha256:b7543ece981c5f63537ab8f39335fb7a882828b9aee66040c4ce0978e98d80cb",
+      "workDefinitionRoot": "sha256:cd4a74f778eccb564b37a231f2b46481b5946d9ceff7512e91ada4f4c4ea2b42",
+      "terminal": {
+        "status": "terminal",
+        "root": "sha256:e79c39be06cb553c09448aa92e30544cf4828ef930fc3429a1a77d0bfd858593",
+        "queryProofRoot": "sha256:2e76cf62aa5bd4fd4c7980bf62a8118983a2b46de3ffed3f37046d4c60f0411d"
+      },
+      "deliveryEvidence": [
+        {
+          "role": "protected-merge",
+          "coordinate": "https://github.com/kungfu-systems/kfd/pull/411",
+          "root": "sha256:3c24214a8d0230d7fdc470f536d18842f31ca2a52259862a3dd9c85fc19c5f4d",
+          "status": "verified",
+          "sourceHead": "42a576d102fe226de6ff715b4a2db9f5a8a7ce6d",
+          "integratedHead": "0b0a504d97ccf7a6865748cb4215de19da4c43f8"
+        }
+      ],
+      "gapIds": []
+    },
+    {
+      "wave": 5,
+      "assignmentId": "2026-08-12-kungfu-product-runtime-category-migration",
+      "repository": "kungfu-systems/kungfu",
+      "requestRoot": "sha256:610c7b9dbc28fdcf83399faa7e3f6233cd4b4ce3fc3ab8ac05bd3dc16a39c3e2",
+      "workDefinitionRoot": "sha256:fb8bd54d2e42b9dc9f03f07de39736ca3d63ae8dc8065fca95fd83048d51167d",
+      "terminal": {
+        "status": "terminal",
+        "root": "sha256:156234e79ec333ff7fb8de8ac0dd057ec96b4994b60970f871ee13ec2252eb1e",
+        "queryProofRoot": "sha256:a1abcbcfcf18173923abfa32697456625c8ed32018f786b93be38fe21b2a853a"
+      },
+      "deliveryEvidence": [
+        {
+          "role": "protected-merge",
+          "coordinate": "https://github.com/kungfu-systems/kungfu/pull/3267",
+          "root": "sha256:e6c78c66440863f110409272a25a213fda824343cd83159885a856a54987020a",
+          "status": "verified",
+          "sourceHead": "6c6b3a895b2ab55e0dc1fbb278beaa74d1f47109",
+          "integratedHead": "0dc81a5dc5ebe043b7c7d67158bb33009088f653"
+        }
+      ],
+      "gapIds": []
+    },
+    {
+      "wave": 6,
+      "assignmentId": "2026-08-12-non-kfd-specification-driver-clean-room-proof",
+      "repository": "kungfu-systems/buildchain",
+      "requestRoot": "sha256:4e6bda965a0a416b477126c9de4aed19ad20204f0e7c0b5f32d7157afe380286",
+      "workDefinitionRoot": "sha256:b3a27b636e88c3610c20d2ff0f7fa80be9d48d5475d3d239c50385d896f91c4e",
+      "terminal": {
+        "status": "terminal",
+        "root": "sha256:e040d1ac0743329667730ea8e76b1337dbc752cf53368a1d39b9c8cf0f167ce7",
+        "queryProofRoot": "sha256:0b1f6e0aad152f8f9c4893407aa8f5ade07ec4af6c7f89f5036709add53b4d87"
+      },
+      "deliveryEvidence": [
+        {
+          "role": "protected-merge",
+          "coordinate": "https://github.com/kungfu-systems/buildchain/pull/2934",
+          "root": "sha256:efa62e2628c914d1452239b9a9ef09a17be1b796480089e97592ae91f5a5d24b",
+          "status": "verified",
+          "sourceHead": "1f5ac0043f0338399db10e28fcd14b67031ebf63",
+          "integratedHead": "f4427bc2f7699817ec29bc5bd75bc5c5313c7d19"
+        }
+      ],
+      "gapIds": []
+    },
+    {
+      "wave": 7,
+      "assignmentId": "2026-08-12-kungfu-core-domain-product-adopter-proof",
+      "repository": "kungfu-systems/kungfu",
+      "requestRoot": "sha256:df4b2136f5563b98fb80db2aa26e36df065b48a2036f37388acb97cb9bf666ba",
+      "workDefinitionRoot": "sha256:e34d1e869f7366e89f81368a1daccdca27560dc04df7cfcf57bb2b95037c835b",
+      "terminal": {
+        "status": "terminal",
+        "root": "sha256:f5fdfa259929bfa2d9b26c7c9f971480e2aaa2485577003c676736f9344945df",
+        "queryProofRoot": "sha256:c66f03cc8eda4812198c5dc17f529f3d6bc5d72228ee8c2e86d220fb7d57d8d9"
+      },
+      "deliveryEvidence": [
+        {
+          "role": "protected-merge",
+          "coordinate": "https://github.com/kungfu-systems/kungfu/pull/3325",
+          "root": "sha256:4116ddefc9447e5159a23cbdfde92cf2e282c9d40dd7fe9ca55f8d3edf3ecf6e",
+          "status": "verified",
+          "sourceHead": "20871d6e5b69103fbe2ae2c7bb205745aaff4d4a",
+          "integratedHead": "be2d5a2c9c489a638a6ed92b1008036c8b853e7c"
+        }
+      ],
+      "gapIds": []
+    }
+  ],
+  "failureHistory": [
+    {
+      "id": "github.com/kungfu-systems/buildchain/pull/2685",
+      "assignmentId": "2026-08-12-buildchain-delivery-infrastructure-self-dogfood",
+      "stage": "delivery",
+      "issueCode": "invalid-assignment-root",
+      "evidenceRoot": "sha256:dd851cdfe16000daec2f8c73f67b0609f7cdb01ba36672e84c9cd7657428a71c",
+      "owner": "kungfu-systems/buildchain",
+      "status": "retained"
+    },
+    {
+      "id": "github.com/kungfu-systems/kungfu/actions/runs/32349501784",
+      "assignmentId": "2026-08-12-kungfu-core-domain-product-adopter-proof",
+      "stage": "delivery",
+      "issueCode": "missing-independent-approval",
+      "evidenceRoot": "sha256:b53e3bf739bd4ac0a44b13b1d5bbba07f8113a6b1f4288839c388862b6b73c19",
+      "owner": "kungfu-systems/kungfu",
+      "status": "fixed"
+    }
+  ],
+  "gaps": [],
+  "authorityBoundary": {
+    "normativeSemantics": "kfd-package",
+    "assignmentClosure": "work-control-owned",
+    "protectedDelivery": "repository-governance-owned",
+    "releasePermission": "release-system-owned",
+    "runtimePermission": "adopter-runtime-owned",
+    "independentCertification": "separate-certifier-required",
+    "buildchainRole": "optional-protocol-neutral-carrier"
+  }
+}

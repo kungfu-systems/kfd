@@ -12,6 +12,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";
 const profileRoot = path.join(root, "profiles", "adopter-conformance");
 const vectors = JSON.parse(fs.readFileSync(path.join(profileRoot, "family-reconciliation-vectors.json"), "utf8"));
+const reconciliation = JSON.parse(fs.readFileSync(path.join(profileRoot, "family-reconciliation.json"), "utf8"));
 const issueCodes = new Set(JSON.parse(fs.readFileSync(path.join(profileRoot, "issue-codes.json"), "utf8")).codes);
 
 function compareUtf8(left, right) {
@@ -112,6 +113,36 @@ for (const required of [
   "negative-non-string-child-identity",
 ]) {
   assert.ok(ids.has(required), `missing required family-reconciliation vector ${required}`);
+}
+
+const reconciliationReport = verifyAdopterCategoryFamilyReconciliation(reconciliation);
+assert.equal(
+  reconciliationReport.valid,
+  true,
+  `actual family reconciliation is invalid\n${JSON.stringify(reconciliationReport, null, 2)}`,
+);
+assert.equal(reconciliationReport.complete, true, "actual family reconciliation must close every declared child and gap");
+assert.deepEqual(reconciliationReport.pendingAssignmentIds, []);
+assert.deepEqual(reconciliationReport.openGapIds, []);
+assert.equal(reconciliationReport.qualifying, false, "actual reconciliation cannot qualify adoption");
+assert.equal(reconciliationReport.releaseAuthorized, false, "actual reconciliation cannot authorize release");
+assert.equal(reconciliationReport.runtimeAuthorized, false, "actual reconciliation cannot authorize runtime action");
+assert.equal(reconciliationReport.independentlyCertified, false, "actual reconciliation cannot self-certify projects");
+assert.equal(reconciliation.expectedChildAssignmentIds.length, 7, "actual reconciliation must declare the exact seven-child family");
+assert.deepEqual(
+  [...reconciliation.children.map(({ assignmentId }) => assignmentId)].sort(compareUtf8),
+  [...reconciliation.expectedChildAssignmentIds].sort(compareUtf8),
+  "actual reconciliation children must conserve the declared family set",
+);
+for (const child of reconciliation.children) {
+  assert.equal(child.terminal.status, "terminal", `${child.assignmentId} must carry native terminal evidence`);
+  assert.match(child.terminal.root, /^sha256:[0-9a-f]{64}$/);
+  assert.match(child.terminal.queryProofRoot, /^sha256:[0-9a-f]{64}$/);
+  const protectedMerge = child.deliveryEvidence.find(({ role }) => role === "protected-merge");
+  assert.ok(protectedMerge, `${child.assignmentId} must carry protected-merge evidence`);
+  assert.equal(protectedMerge.status, "verified", `${child.assignmentId} protected merge must be verified`);
+  assert.match(protectedMerge.sourceHead, /^[0-9a-f]{40}$/);
+  assert.match(protectedMerge.integratedHead, /^[0-9a-f]{40}$/);
 }
 
 if (process.env.KFD_FAMILY_RECONCILIATION_CLEAN_ROOM !== "1") {

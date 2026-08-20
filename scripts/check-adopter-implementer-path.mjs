@@ -104,12 +104,14 @@ assert.deepEqual(sortedPaths(inventory.surfaces.verifiers), [
 ]);
 assert.deepEqual(sortedPaths(inventory.surfaces.guides), [guidePath]);
 assert.deepEqual(sortedPaths(inventory.surfaces.testMatrices), [matrixPath]);
+assert.deepEqual(sortedPaths(inventory.surfaces.proofs), ["profiles/adopter-conformance/family-reconciliation.json"]);
 
 for (const [exportName, target] of Object.entries({
   "./adopter-conformance/implementer-guide.md": `./${guidePath}`,
   "./adopter-conformance/test-matrix.json": `./${matrixPath}`,
   "./adopter-conformance/family-reconciliation.schema.json": "./schemas/kfd-adopter-conformance/family-reconciliation.schema.json",
   "./adopter-conformance/family-reconciliation-vectors.json": "./profiles/adopter-conformance/family-reconciliation-vectors.json",
+  "./adopter-conformance/family-reconciliation.json": "./profiles/adopter-conformance/family-reconciliation.json",
   "./adopter-conformance/family-reconciliation-verifier": "./scripts/adopter-category-family-reconciliation-contract.mjs",
   "./adopter-conformance/implementer-path-check": "./scripts/check-adopter-implementer-path.mjs",
 })) {

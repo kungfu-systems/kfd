@@ -182,6 +182,13 @@ reference verifier therefore reports completeness independently while always
 returning `qualifying: false`, `releaseAuthorized: false`,
 `runtimeAuthorized: false`, and `independentlyCertified: false`.
 
+The completed seven-child proof for the adopter-category initiative is
+published at `profiles/adopter-conformance/family-reconciliation.json`. It is
+project evidence, not a fixed vector or normative input to KFD semantics. The
+package and `/adopter-conformance` route expose its exact path, while the
+package-only check reproduces its family root and requires terminal native
+roots plus verified protected-merge coordinates for every declared child.
+
 ## Package-only verification seam
 
 The version 1 reference seam is published as
