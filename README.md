@@ -1,3 +1,16 @@
+---
+status: active
+period: ongoing
+theme: kfd-open-standard
+doc_type: analysis
+source_level: local-files
+confidence: high
+sensitivity: public
+evidence_grade: A
+review_state: self-reviewed
+last_reviewed: 2026-08-22
+---
+
 # KFD — Kung Fu Decisions
 
 KFD's deepest question may not be **"How does an agent execute a task?"** It
@@ -45,6 +58,35 @@ agent is a participant in the work, not its center of truth.
 [See the real failure that forces this model](docs/conceptual-compression.md) ·
 [Use the terminology contract](docs/terminology.md) ·
 [Inspect the founding-adopter evidence](docs/load-bearing-dogfood.md)
+
+## Run the Delegated Work paired-world experiment
+
+The unnumbered, system-neutral [Delegated Work Paired-World Lab](profiles/delegated-work-challenge/README.md)
+shows why execution success alone can be insufficient at a decision boundary.
+Its default offline command places six World A / World B pairs behind an
+`execution-only` projection and prints the resulting canonical-root collisions:
+
+```bash
+kfd challenge delegated-work
+```
+
+Use `--projection full-semantic` to add candidate discriminating information,
+`--projection ./projection.json` to edit the visible state, `--json` for stable
+machine output, and `--output report.json` to retain an independently verifiable
+report. Package acquisition may require a network; execution and verification
+do not require a model API, provider credentials, or external service.
+
+The future public registry form is
+`npx --yes --package @kungfu-tech/kfd@<fixed-version> kfd challenge delegated-work`.
+The placeholder must name the separately promoted immutable release containing
+this profile; this source change does not publish or rewrite an npm version.
+
+The Lab proves only conditional information distinguishability in fixed
+fixtures. It does not claim that mainstream systems fail, that KFD field names
+are mandatory, that a distinguishable policy is correct or enforced, or that an
+adapter is complete or honest. No result is certification, qualification, a
+security assessment, production fitness, external adoption, or a new numbered
+KFD.
 
 ## How KFD governs its own change
 

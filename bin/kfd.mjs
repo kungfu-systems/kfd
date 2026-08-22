@@ -18,6 +18,9 @@ function usage() {
   kfd test agent-hub --adapter <path> --output <report.json>
     [--adapter-arg <arg>] [--adapter-source-commit <sha>] [--timeout-ms <ms>]
   kfd verify agent-hub-report <report.json> [--adapter <path>] [--json]
+  kfd challenge delegated-work [--pair <pair-id>] [--projection <projection-id|projection.json>]
+    [--adapter <path>] [--output <report.json>] [--json]
+  kfd verify delegated-work-challenge-report <report.json> [--adapter <path>] [--json]
   kfd verify warrant-evidence <bundle.json> [--json]
   kfd verify kfd-10-witness <witness.json> [--json]
   kfd adopter init --manifest-id <id> --adopter-id <id> --artifact-kind <kind>
@@ -97,8 +100,8 @@ function bundleObject(kind, inputPath, schemaPath) {
   };
 }
 
-async function verifyWasm(bundleText) {
-  const wasmPath = path.join(packageRoot, "verifier", "dist", "kfd_verifier.wasm");
+async function verifyWasm(bundleText, { current = false } = {}) {
+  const wasmPath = path.join(packageRoot, "verifier", "dist", current ? "kfd_verifier_current.wasm" : "kfd_verifier.wasm");
   const module = await WebAssembly.instantiate(fs.readFileSync(wasmPath), {});
   const { memory, kfd_alloc: alloc, kfd_free: free, kfd_verify: verify } = module.instance.exports;
   const input = new TextEncoder().encode(bundleText);
@@ -275,6 +278,11 @@ async function main(args) {
     process.exitCode = result.valid ? 0 : 1;
     return;
   }
+  if (args[0] === "challenge" && args[1] === "delegated-work") {
+    const { runDelegatedWorkChallenge } = await import("../scripts/delegated-work-challenge-runner.mjs");
+    process.exitCode = await runDelegatedWorkChallenge(args.slice(2));
+    return;
+  }
   if (args[0] === "scaffold" && args[1] === "agent-hub") {
     const { runAgentHubScaffold } = await import("../scripts/agent-hub-scaffold.mjs");
     process.exitCode = runAgentHubScaffold(args.slice(2));
@@ -302,6 +310,11 @@ async function main(args) {
   if (args[0] === "verify" && args[1] === "agent-hub-report") {
     const { runAgentHubReportVerifier } = await import("../scripts/agent-hub-report-verifier.mjs");
     process.exitCode = runAgentHubReportVerifier(args.slice(2));
+    return;
+  }
+  if (args[0] === "verify" && args[1] === "delegated-work-challenge-report") {
+    const { runDelegatedWorkChallengeReportVerifier } = await import("../scripts/delegated-work-challenge-report-verifier.mjs");
+    process.exitCode = runDelegatedWorkChallengeReportVerifier(args.slice(2));
     return;
   }
   if (args[0] === "verify" && args[1] === "warrant-evidence") {
@@ -336,7 +349,8 @@ async function main(args) {
     else throw new Error(`unsupported argument: ${args[index]}`);
   }
   if (command === "verify" && kind === "bundle") {
-    const report = await verifyWasm(regularText(input));
+    const bundleText = regularText(input);
+    const report = await verifyWasm(bundleText, { current: JSON.parse(bundleText)?.kind === "agent-runtime-report" });
     console.log(report);
     process.exitCode = JSON.parse(report).valid ? 0 : 1;
     return;
@@ -349,7 +363,7 @@ async function main(args) {
     return;
   }
   if (command !== "verify") throw new Error(`unsupported command: ${command}`);
-  const report = await verifyWasm(rendered);
+  const report = await verifyWasm(rendered, { current: kind === "agent-runtime-report" });
   console.log(report);
   process.exitCode = JSON.parse(report).valid ? 0 : 1;
 }

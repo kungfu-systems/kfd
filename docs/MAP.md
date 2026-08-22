@@ -1,3 +1,16 @@
+---
+status: active
+period: ongoing
+theme: kfd-documentation-map
+doc_type: analysis
+source_level: local-files
+confidence: high
+sensitivity: public
+evidence_grade: A
+review_state: self-reviewed
+last_reviewed: 2026-08-22
+---
+
 # Documentation Map
 
 ## Start here
@@ -125,6 +138,7 @@
 | How should an agent quickly understand this package? | [`../README.md`](../README.md#agent-quickstart), then [`foundation.md`](foundation.md), [`formal-model.md`](formal-model.md), and [`primitive-discovery-cases.md`](primitive-discovery-cases.md) |
 | What is the experimental transport-neutral Agent Hub interoperability profile? | [`../protocols/agent-hub/README.md`](../protocols/agent-hub/README.md), then its [`implementer guide`](../protocols/agent-hub/implementer-guide.md) and [`state machine`](../protocols/agent-hub/state-machine.md) |
 | What is the experimental dual-Hub black-box conformance profile and fixed Agent Hub 20 suite? | [`../profiles/agent-hub/README.md`](../profiles/agent-hub/README.md) and its [`implementer guide`](../profiles/agent-hub/implementer-guide.md) |
+| How can I observe delegated-work semantic collisions, change the visible projection, map an adopter system, and verify the resulting offline report? | [`../profiles/delegated-work-challenge/README.md`](../profiles/delegated-work-challenge/README.md), its [fixed suite](../profiles/delegated-work-challenge/fixtures/suite.json), and [projection schema](../schemas/kfd-delegated-work-challenge/projection.schema.json) |
 | How can a human or Agent ask the installed Kungfu product to run, explain, retain, and independently recheck that exact Hub 20 evidence? | `kungfu agent hub qualify --output-dir <new-directory> [--json]`, then [`../profiles/agent-hub/README.md`](../profiles/agent-hub/README.md#verify-the-first-party-kungfu-product) for the ownership and claim boundary |
 | What is the experimental black-box Agent runtime conformance profile and fixed KFD Runtime 100 suite? | [`../profiles/agent-runtime/README.md`](../profiles/agent-runtime/README.md), its [`normative inventory`](../profiles/agent-runtime/normative-inventory.md), and [`implementer guide`](../profiles/agent-runtime/implementer-guide.md) |
 | What is the concrete self-proof path for KFD-1 through KFD-13? | [`../README.md`](../README.md#product-proof-path), the KFD formal and usage pages, and the package witnesses under [`../.buildchain/`](../.buildchain/) |

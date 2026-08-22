@@ -19,6 +19,9 @@
     "agentHubGuide": "profiles/agent-hub/implementer-guide.md",
     "agentHubCapabilities": "profiles/agent-hub/cli-capabilities.json",
     "agentHubManifest": "profiles/agent-hub/manifest.json",
+    "delegatedWorkProfile": "profiles/delegated-work-challenge/README.md",
+    "delegatedWorkCapabilities": "profiles/delegated-work-challenge/cli-capabilities.json",
+    "delegatedWorkManifest": "profiles/delegated-work-challenge/manifest.json",
     "adopterConformanceAuthority": "profiles/adopter-conformance/README.md",
     "adopterConformanceGuide": "profiles/adopter-conformance/implementer-guide.md",
     "adopterConformanceTestMatrix": "profiles/adopter-conformance/test-matrix.json",
@@ -56,6 +59,7 @@
     "candidatePattern": "/drafts/{id}",
     "candidateFormalPattern": "/drafts/{id}/formal",
     "agentHub": "/agent-hub",
+    "delegatedWork": "/delegated-work",
     "adopterConformance": "/adopter-conformance",
     "independentVerification": "/verify",
     "selfConformance": "/verify/self-conformance",
@@ -817,7 +821,7 @@
     "relationship": "non-normative-reader-compression-of-numbered-decisions",
     "normative": false,
     "authorityNote": "Numbered decisions remain authoritative; terminology.json owns the canonical names and anti-misreading boundaries projected by this page.",
-    "lead": "# KFD Conceptual Compression",
+    "lead": "If the agent is treated as the center of truth, difficult cases collapse into false equivalences: a running agent appears to remain authorized; a retry appears to be the same task again; the same output appears to be the same result; and a successful run appears to have established accepted state. Real systems can break every one of those equivalences.",
     "coreModel": {
       "ontology": {
         "structure": {
@@ -1791,7 +1795,7 @@
     "url": "/adopter-conformance",
     "relationship": "package-only-adopter-category-implementation-path",
     "normative": false,
-    "lead": "ry-implementer-path doc_type: implementer-guide source_level: public-specifications confidence: high sensitivity: public evidence_grade: B review_state: self-reviewed last_reviewed: 2026-08-20 ---",
+    "lead": "This guide is for an implementer starting from one exact unpacked `@kungfu-tech/kfd` package. It does not require a KFD source checkout, a founding-product checkout, credentials, hosted services, mutable npm tags, ambient Home state, or network access. Retain the package tarball and its independently observed SHA-256 root before extracting it.",
     "contract": "kfd.adopter-category-implementer-test-matrix/v1",
     "packageOnly": true,
     "cleanRoom": {
@@ -2725,7 +2729,7 @@
         "url": "/profiles/self-conformance/manifest.json",
         "mediaType": "application/json",
         "role": "profile-manifest",
-        "digest": "sha256:405d367bfc17a466725f792684990f5ee578f81bb65bb3a82b2faf8c65eb9705"
+        "digest": "sha256:c48dc6a900755b515aac092f169bb976fba6703fbbbff51a51ca397dc52316f7"
       },
       {
         "sourcePath": "profiles/self-conformance/lifecycle-gates.json",
@@ -2781,7 +2785,7 @@
         "url": "/profiles/self-conformance/history/manifest.json",
         "mediaType": "application/json",
         "role": "historical-manifest",
-        "digest": "sha256:ac5c97fd354eed6b108bc6f498caf0ebcf6cc6add807785e5ba8ee860cc1b9ab"
+        "digest": "sha256:7bf2d9bc9d9f3813746eb6c6efad3d5b4b39efd7f8d1e782b8ef9325416aab1e"
       }
     ],
     "rendering": {
@@ -2830,7 +2834,7 @@
       "relationship": "non-normative-reader-compression-of-numbered-decisions",
       "normative": false,
       "authorityNote": "Numbered decisions remain authoritative; terminology.json owns the canonical names and anti-misreading boundaries projected by this page.",
-      "lead": "# KFD Conceptual Compression",
+      "lead": "If the agent is treated as the center of truth, difficult cases collapse into false equivalences: a running agent appears to remain authorized; a retry appears to be the same task again; the same output appears to be the same result; and a successful run appears to have established accepted state. Real systems can break every one of those equivalences.",
       "coreModel": {
         "ontology": {
           "structure": {
@@ -3794,7 +3798,7 @@
       "url": "/adopter-conformance",
       "relationship": "package-only-adopter-category-implementation-path",
       "normative": false,
-      "lead": "ry-implementer-path doc_type: implementer-guide source_level: public-specifications confidence: high sensitivity: public evidence_grade: B review_state: self-reviewed last_reviewed: 2026-08-20 ---",
+      "lead": "This guide is for an implementer starting from one exact unpacked `@kungfu-tech/kfd` package. It does not require a KFD source checkout, a founding-product checkout, credentials, hosted services, mutable npm tags, ambient Home state, or network access. Retain the package tarball and its independently observed SHA-256 root before extracting it.",
       "contract": "kfd.adopter-category-implementer-test-matrix/v1",
       "packageOnly": true,
       "cleanRoom": {
@@ -4728,7 +4732,7 @@
           "url": "/profiles/self-conformance/manifest.json",
           "mediaType": "application/json",
           "role": "profile-manifest",
-          "digest": "sha256:405d367bfc17a466725f792684990f5ee578f81bb65bb3a82b2faf8c65eb9705"
+          "digest": "sha256:c48dc6a900755b515aac092f169bb976fba6703fbbbff51a51ca397dc52316f7"
         },
         {
           "sourcePath": "profiles/self-conformance/lifecycle-gates.json",
@@ -4784,7 +4788,7 @@
           "url": "/profiles/self-conformance/history/manifest.json",
           "mediaType": "application/json",
           "role": "historical-manifest",
-          "digest": "sha256:ac5c97fd354eed6b108bc6f498caf0ebcf6cc6add807785e5ba8ee860cc1b9ab"
+          "digest": "sha256:7bf2d9bc9d9f3813746eb6c6efad3d5b4b39efd7f8d1e782b8ef9325416aab1e"
         }
       ],
       "rendering": {
@@ -5348,6 +5352,141 @@
         "claim-boundary"
       ],
       "note": "Render the behavior, evidence, and authority dimensions before commands. Preserve the reference 20/20 path and starter 0/20 path as different teaching flows. Do not infer certification, production fitness, or language-runtime parity from scaffold availability."
+    }
+  },
+  "delegatedWorkChallengePage": {
+    "id": "delegated-work-challenge",
+    "title": "Delegated Work Paired-World Lab",
+    "url": "/delegated-work",
+    "relationship": "experimental-information-boundary-lab",
+    "normative": false,
+    "status": "experimental",
+    "numberedDecision": false,
+    "authorityPath": "profiles/delegated-work-challenge/README.md",
+    "capabilitiesPath": "profiles/delegated-work-challenge/cli-capabilities.json",
+    "manifestPath": "profiles/delegated-work-challenge/manifest.json",
+    "lead": "This unnumbered experimental profile makes one information-boundary problem observable without a model API, provider credential, or external service. It places two worlds behind the same declared projection. World A must advance for autonomous liveness; World B must not advance for safety. If their canonical roots collide, a decision function that sees only that projection cannot meet both obligations.",
+    "profile": "kfd-delegated-work-challenge@0.1.0-alpha.1",
+    "suite": {
+      "id": "delegated-work-paired-worlds",
+      "version": "1.0.0",
+      "fixedPairCount": 6,
+      "path": "profiles/delegated-work-challenge/fixtures/suite.json"
+    },
+    "commands": {
+      "challenge": "kfd challenge delegated-work [--pair <pair-id>] [--projection <projection-id|projection.json>] [--adapter <path>] [--output <report.json>] [--json]",
+      "verify": "kfd verify delegated-work-challenge-report <report.json> [--adapter <path>] [--json]"
+    },
+    "default": {
+      "projection": "execution-only",
+      "expectedPairs": 6,
+      "expectedFinding": "COLLAPSED",
+      "exitCode": 0
+    },
+    "fullSemantic": {
+      "expectedPairs": 6,
+      "expectedFinding": "INFORMATION-DISTINGUISHABLE",
+      "claim": "candidate information is sufficient to distinguish the fixed fixtures only"
+    },
+    "exitCodes": {
+      "projection": {
+        "0": "valid completed run, including COLLAPSED",
+        "2": "invalid run"
+      },
+      "adapter": {
+        "0": "all tested safety and liveness assertions satisfied",
+        "1": "completed semantic failure or undetermined result",
+        "2": "invalid run"
+      },
+      "verify": {
+        "0": "valid evidence closure",
+        "1": "invalid evidence closure",
+        "2": "input or process failure"
+      }
+    },
+    "reportVerification": {
+      "backend": "host-node",
+      "processSpawning": "host-only",
+      "sharedRustWasmChecks": [],
+      "parityBoundary": "Delegated Work challenge semantics have one packaged host verifier. Rust/WASM verification-bundle profiles remain unchanged and are regression-tested; no partial duplicate semantic verifier is introduced."
+    },
+    "offlineAfterAcquisition": true,
+    "providerCredentialsRequired": false,
+    "qualifying": false,
+    "certification": false,
+    "claimBoundary": {
+      "experiment": "This is a conditional information-boundary experiment, not proof that mainstream systems fail.",
+      "projection": "execution-only is a declared experimental projection, not a representation of any vendor architecture.",
+      "distinguishability": "Information-distinguishable does not establish policy correctness or enforcement.",
+      "reference": "The full-semantic projection is one sufficient fixture vocabulary, not the unique or optimal design.",
+      "adapter": "An adapter result is an adopter-owned assertion bound to named adapter bytes; the adapter may be incomplete or dishonest.",
+      "authority": "No result is certification, qualification, a security assessment, production fitness, or external adoption.",
+      "normativity": "This unnumbered experimental profile does not raise any experimental KFD semantic to normative status."
+    },
+    "residualRisks": [
+      "The fixed six-pair suite is finite and cannot prove completeness for a real delegated-work system.",
+      "A projection can distinguish these fixtures while omitting information required by other worlds.",
+      "Offline verification detects report and packaged-fixture drift but does not observe a product's production enforcement path.",
+      "Adapter responses are self-asserted by the adopter and can misrepresent the mapped product."
+    ],
+    "sections": [
+      {
+        "id": "one-minute-path",
+        "title": "One-minute path",
+        "sourcePath": "profiles/delegated-work-challenge/README.md",
+        "markdown": "After acquiring a release that includes this profile, run:\n\n```bash\nkfd challenge delegated-work\n```\n\nThe default `execution-only` projection produces six explicit `COLLAPSED`\nfindings. Exit `0` means the runner formed a valid completed report; it does not\nmean that the semantics passed. Save and independently verify the same report:\n\n```bash\nkfd challenge delegated-work --output delegated-work-report.json\nkfd verify delegated-work-challenge-report delegated-work-report.json\n```\n\nThe future immutable registry form is:\n\n```bash\nnpx --yes --package @kungfu-tech/kfd@<fixed-version> kfd challenge delegated-work\n```\n\n`<fixed-version>` must be replaced by the independently promoted release that\ncontains this profile. The current source change does not publish or mutate an\nexisting npm version.",
+        "presentation": "documentation"
+      },
+      {
+        "id": "what-the-default-output-means",
+        "title": "What the default output means",
+        "sourcePath": "profiles/delegated-work-challenge/README.md",
+        "markdown": "For each pair the output names the shared visible surface, both projected\ncanonical roots, the required liveness and safety outcomes, why advancing both\nis unsafe, and why refusing both prevents autonomous completion. It then names\ncandidate fields that separate the fixed fixture.\n\nThere are six rooted pairs:\n\n1. `work-version`\n2. `authority-revocation`\n3. `causal-history`\n4. `retry-identity`\n5. `recovery-drift`\n6. `accepted-completion`\n\nSelect one with `--pair`, or ask for stable machine output with `--json`:\n\n```bash\nkfd challenge delegated-work --pair authority-revocation\nkfd challenge delegated-work --json\n```",
+        "presentation": "documentation"
+      },
+      {
+        "id": "five-minute-projection-experiment",
+        "title": "Five-minute projection experiment",
+        "sourcePath": "profiles/delegated-work-challenge/README.md",
+        "markdown": "The packaged `full-semantic` projection adds the candidate work, authority,\ncausal, exchange, recovery, and acceptance fields needed to separate all six\nfixed pairs:\n\n```bash\nkfd challenge delegated-work --projection full-semantic\n```\n\nThis establishes only `INFORMATION-DISTINGUISHABLE` for these fixtures. It does\nnot establish a correct policy or a real enforcement point.\n\nTo edit a projection from an installed package:\n\n```bash\ncp \"$(node -p \"require.resolve('@kungfu-tech/kfd/delegated-work-challenge/projections/example-projection.json')\")\" my-projection.json\nkfd challenge delegated-work --projection ./my-projection.json\n```\n\nThe public contract is\n`schemas/kfd-delegated-work-challenge/projection.schema.json`. Field paths are\ncanonicalized by UTF-8 order. Duplicate, unknown, and prohibited answer-bearing\npaths fail closed. Only allowlisted scenario-state leaves can be selected;\nworld labels, expected decisions, required outcomes, answers, and fixture\nmetadata are never selectable.",
+        "presentation": "documentation"
+      },
+      {
+        "id": "optional-adopter-adapter",
+        "title": "Optional adopter adapter",
+        "sourcePath": "profiles/delegated-work-challenge/README.md",
+        "markdown": "Copy the dependency-free Node.js starter, replace its fail-closed decision\nfunction with a mapping owned by your system, then run it:\n\n```bash\ncp \"$(node -p \"require.resolve('@kungfu-tech/kfd/delegated-work-challenge/adapters/node-starter.mjs')\")\" delegated-work-adapter.mjs\nkfd challenge delegated-work --adapter ./delegated-work-adapter.mjs --output adapter-report.json\nkfd verify delegated-work-challenge-report adapter-report.json --adapter ./delegated-work-adapter.mjs\n```\n\nThe runner uses bounded JSONL over stdio, requires an accepted handshake, sends\ntwelve evaluate requests for the full suite, rejects symlink adapter artifacts,\nrequires empty stderr, and kills a process that exceeds its timeout. Each world\nresponse declares a decision, authoritative sources, enforcement point,\nexecutor-replacement continuity mechanism, and whether human reconstruction is\nrequired. Unknown operations or pair IDs must fail closed.\n\nThe untouched starter intentionally exits the challenge at `1`: it is runnable\nbut does not claim liveness or continuity. An adapter run exits `0` only when all\nselected World A and World B assertions satisfy their fixed liveness and safety\noutcomes, explicit authority/enforcement evidence, and replacement continuity.\n\nAn adapter can lie. The report is only an adopter-owned assertion bound to the\nnamed adapter bytes, requests, responses, and transcript root. It is not a\ncertification of the adapter's mapping to a product or its production path.",
+        "presentation": "documentation"
+      },
+      {
+        "id": "reports-verification-and-exit-codes",
+        "title": "Reports, verification, and exit codes",
+        "sourcePath": "profiles/delegated-work-challenge/README.md",
+        "markdown": "Reports use `kfd.delegated-work-challenge-report/v1`. They bind the package and\nrelease-anchor cut, profile manifest, fixed suite and all fixture roots,\nprojection document and root, projected states and roots, fixed required\noutcomes, results, platform, and claim boundary. Adapter reports additionally\nbind adapter bytes and the complete request/response transcript.\n\nThe packaged verifier recomputes the suite, fixture, projection, collision,\nresult, transcript, and report closure offline. It rejects missing or duplicate\npairs, expected-outcome changes, prohibited projection paths, projected-state\nor root changes, adapter-response drift, transcript drift, adapter-byte drift\nwhen `--adapter` is supplied, and qualification or certification scope widening.\n\nExit codes preserve independent dimensions:\n\n- Projection mode: `0` means a valid completed run, including a run that finds\n  `COLLAPSED`; `2` means invocation, fixture, projection, or report generation\n  failed.\n- Adapter mode: `0` means a completed run whose assertions satisfy all tested\n  safety and liveness outcomes; `1` means a completed but collapsed, unsafe,\n  liveness-failing, human-required, continuity-failing, or undetermined run;\n  `2` means no valid completed run could be formed.\n- Verification: `0` means evidence closure is valid, even if the recorded\n  semantic finding is negative; `1` means closure is invalid; `2` means the\n  verifier could not parse or safely inspect the input.\n\nRunner execution success, report validity, semantic finding, information\ndistinguishability, adapter-declared enforcement, qualification, and\ncertification remain separate fields in machine output.",
+        "presentation": "documentation"
+      },
+      {
+        "id": "claim-boundary",
+        "title": "Claim boundary",
+        "sourcePath": "profiles/delegated-work-challenge/README.md",
+        "markdown": "- This is a conditional information-boundary experiment, not proof that\n  mainstream systems fail.\n- `execution-only` is a declared experimental projection, not a vendor model.\n- Information distinguishability is not policy correctness or enforcement.\n- `full-semantic` is one sufficient fixture vocabulary, not the unique or best\n  answer.\n- Adapter output is adopter-owned and may be incomplete or dishonest.\n- The Lab is not certification, qualification, a security assessment,\n  production fitness, or evidence of external adoption.\n- The profile creates no numbered KFD and changes no numbered decision.\n- It does not promote experimental KFD semantics to normative status.\n\nPackage acquisition can require a network or prefilled cache. After acquisition,\nthe challenge, adapter starter, report generation, and verifier require no\nruntime network or provider credentials.",
+        "presentation": "claim-boundary"
+      }
+    ],
+    "rendererContract": {
+      "primary": [
+        "one-minute-path",
+        "what-the-default-output-means",
+        "five-minute-projection-experiment"
+      ],
+      "detail": [
+        "optional-adopter-adapter",
+        "reports-verification-and-exit-codes"
+      ],
+      "boundary": [
+        "claim-boundary"
+      ],
+      "note": "Render runner execution, report validity, semantic finding, information distinguishability, adapter-declared enforcement, qualification, and certification as separate dimensions. Never turn this conditional fixture experiment into a vendor finding or certification claim."
     }
   },
   "liveCases": {
