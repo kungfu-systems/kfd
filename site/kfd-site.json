@@ -125,7 +125,7 @@
       "promise": "Implement KFD without Kungfu — scaffold an adapter in Python, Rust, Node.js, or C++, then verify it offline.",
       "release": {
         "package": "@kungfu-tech/kfd",
-        "version": "1.0.0-alpha.67",
+        "version": "1.0.0-alpha.68",
         "anchor": "kfd.release.json",
         "immutable": true
       },
@@ -155,7 +155,7 @@
         {
           "id": "scaffold",
           "label": "Scaffold",
-          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.67 kfd scaffold agent-hub --language python --output my-agent-hub-adapter",
+          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.68 kfd scaffold agent-hub --language python --output my-agent-hub-adapter",
           "capability": "kfd scaffold agent-hub --language <cpp|node|python|rust> --output <new-directory> [--json]"
         },
         {
@@ -172,14 +172,14 @@
         {
           "id": "test",
           "label": "Test Hub 20",
-          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.67 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json",
+          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.68 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json",
           "capability": "kfd test agent-hub --adapter <path> --output <report.json>",
           "starterExpectedExitCode": 1
         },
         {
           "id": "verify",
           "label": "Verify report evidence",
-          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.67 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py",
+          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.68 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py",
           "capability": "kfd verify agent-hub-report <report.json> [--adapter <path>] [--json]",
           "expectedExitCode": 0
         }
@@ -220,7 +220,7 @@
             "qualifying": false,
             "certification": false
           },
-          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.67 kfd demo agent-hub --output agent-hub-demo-report.json"
+          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.68 kfd demo agent-hub --output agent-hub-demo-report.json"
         },
         "starter": {
           "purpose": "Implement product-owned Hub semantics from a fail-closed starter.",
@@ -254,7 +254,7 @@
         "capabilityBoundary": "Each KFD GitHub Release now carries Rust-native archives for Linux x86_64 and arm64, macOS x86_64 and arm64, and Windows x86_64. The executable name is permanently `kfd` (`kfd.exe` on Windows), and `kfd --version` matches the exact KFD Release version. The native CLI provides `verify` and `bundle`; use the npm workflow above when you need `scaffold` or `test` orchestration. Every target includes a SHA-256 file and source-bound provenance. See [Native CLI downloads and capability boundaries](docs/native-cli.md).",
         "docs": {
           "label": "Native CLI downloads and capability boundaries",
-          "url": "https://github.com/kungfu-systems/kfd/blob/v1.0.0-alpha.67/docs/native-cli.md"
+          "url": "https://github.com/kungfu-systems/kfd/blob/v1.0.0-alpha.68/docs/native-cli.md"
         }
       },
       "links": [
@@ -583,7 +583,7 @@
         "homepagePriority": 8,
         "defaultPresentation": "independent-implementation-steps",
         "includeInFirstScreen": true,
-        "markdown": "**Implement KFD without Kungfu — scaffold an adapter in Python, Rust, Node.js,\nor C++, then verify it offline.**\n\nUse the immutable `@kungfu-tech/kfd@1.0.0-alpha.67` package cut and follow the\npackage-owned [Agent Hub workflow](profiles/agent-hub/README.md) or inspect the\ncomplete [independent verification boundary](docs/independent-verifier.md):\n\nFor a two-minute success path, run `npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.67 kfd demo agent-hub --output agent-hub-demo-report.json`. It produces behavior `20/20`, evidence `valid`, and no qualification or certification.\n\n```bash\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.67 kfd scaffold agent-hub --language python --output my-agent-hub-adapter\npython3 my-agent-hub-adapter/smoke.py\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.67 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.67 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py\n```\n\nThe scaffold is a deterministic, fail-closed starter. Before implementation,\nsmoke exits `0`, Hub 20 exits `1` at `0/20`, and offline evidence verification\nexits `0` with `valid`; qualification and certification stay `false`.\nImplementers then replace `evaluate()` with product decisions across\nnegotiation, delivery, authority, conflict, knowledge, completion, recovery,\nand portability until Hub 20 reaches `20/20`.\n\nPackage acquisition is separate from offline verification. Network or a local\npackage cache may be needed to obtain the immutable package bytes; after the\npackage, report, and optional adapter bytes are present, the report verifier\nperforms no network access.\n\nThese results do not certify an implementation or prove security, production\nfitness, complete semantic coverage, KFD-10 activation, or adoption by an\nindependent organization. [Verify an Agent Hub report](/agent-hub/#report-verification) ·\n[Explore other KFD verification profiles](/verify/)\n\n### Native `kfd`\n\nInstall the Rust-native offline verifier on macOS or Linux with Homebrew. No\ncoding is required to install it or verify an existing KFD report:\n\n```bash\nbrew install kungfu-systems/tap/kfd\nkfd --version\n```\n\nEach KFD GitHub Release now carries Rust-native archives for Linux x86_64 and\narm64, macOS x86_64 and arm64, and Windows x86_64. The executable name is\npermanently `kfd` (`kfd.exe` on Windows), and `kfd --version` matches the exact\nKFD Release version. The native CLI provides `verify` and `bundle`; use the npm\nworkflow above when you need `scaffold` or `test` orchestration. Every target\nincludes a SHA-256 file and source-bound provenance. See\n[Native CLI downloads and capability boundaries](docs/native-cli.md)."
+        "markdown": "**Implement KFD without Kungfu — scaffold an adapter in Python, Rust, Node.js,\nor C++, then verify it offline.**\n\nUse the immutable `@kungfu-tech/kfd@1.0.0-alpha.68` package cut and follow the\npackage-owned [Agent Hub workflow](profiles/agent-hub/README.md) or inspect the\ncomplete [independent verification boundary](docs/independent-verifier.md):\n\nFor a two-minute success path, run `npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.68 kfd demo agent-hub --output agent-hub-demo-report.json`. It produces behavior `20/20`, evidence `valid`, and no qualification or certification.\n\n```bash\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.68 kfd scaffold agent-hub --language python --output my-agent-hub-adapter\npython3 my-agent-hub-adapter/smoke.py\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.68 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.68 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py\n```\n\nThe scaffold is a deterministic, fail-closed starter. Before implementation,\nsmoke exits `0`, Hub 20 exits `1` at `0/20`, and offline evidence verification\nexits `0` with `valid`; qualification and certification stay `false`.\nImplementers then replace `evaluate()` with product decisions across\nnegotiation, delivery, authority, conflict, knowledge, completion, recovery,\nand portability until Hub 20 reaches `20/20`.\n\nPackage acquisition is separate from offline verification. Network or a local\npackage cache may be needed to obtain the immutable package bytes; after the\npackage, report, and optional adapter bytes are present, the report verifier\nperforms no network access.\n\nThese results do not certify an implementation or prove security, production\nfitness, complete semantic coverage, KFD-10 activation, or adoption by an\nindependent organization. [Verify an Agent Hub report](/agent-hub/#report-verification) ·\n[Explore other KFD verification profiles](/verify/)\n\n### Native `kfd`\n\nInstall the Rust-native offline verifier on macOS or Linux with Homebrew. No\ncoding is required to install it or verify an existing KFD report:\n\n```bash\nbrew install kungfu-systems/tap/kfd\nkfd --version\n```\n\nEach KFD GitHub Release now carries Rust-native archives for Linux x86_64 and\narm64, macOS x86_64 and arm64, and Windows x86_64. The executable name is\npermanently `kfd` (`kfd.exe` on Windows), and `kfd --version` matches the exact\nKFD Release version. The native CLI provides `verify` and `bundle`; use the npm\nworkflow above when you need `scaffold` or `test` orchestration. Every target\nincludes a SHA-256 file and source-bound provenance. See\n[Native CLI downloads and capability boundaries](docs/native-cli.md)."
       },
       {
         "id": "foundation-triad",
