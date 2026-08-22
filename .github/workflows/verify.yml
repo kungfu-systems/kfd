@@ -115,7 +115,7 @@ jobs:
       active-lease-context: Queue family lease/exact
       ready-label: state/ready
       block-labels: blocked,do-not-merge,work-in-progress
-      allowed-head-prefixes: feature/,fix/,chore/,docs/,ci/,refactor/,automation/,review/
+      allowed-head-prefixes: feature/,fix/,chore/,docs/,ci/,refactor/,automation/,review/,dev/
       landing-mode: direct
       dry-run: false
     secrets:
