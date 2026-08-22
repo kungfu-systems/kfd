@@ -15,7 +15,13 @@ const starter = path.join(root, "profiles", "delegated-work-challenge", "adapter
 const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";
 
 function run(command, args, expected, options = {}) {
-  const result = spawnSync(command, args, { cwd: options.cwd ?? root, encoding: "utf8", env: { ...process.env, ...options.env }, input: options.input });
+  const result = spawnSync(command, args, {
+    cwd: options.cwd ?? root,
+    encoding: "utf8",
+    env: { ...process.env, ...options.env },
+    input: options.input,
+    shell: process.platform === "win32" && command.toLowerCase().endsWith(".cmd"),
+  });
   assert.equal(result.status, expected, `${command} ${args.join(" ")}\nstdout:\n${result.stdout}\nstderr:\n${result.stderr}`);
   return result;
 }
