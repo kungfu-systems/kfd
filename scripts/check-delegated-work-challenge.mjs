@@ -134,15 +134,15 @@ try {
     "scripts/delegated-work-challenge-runner.mjs",
     "scripts/delegated-work-challenge-report-verifier.mjs",
   ]) assert.equal(packedPaths.has(required), true, `packed artifact is missing ${required}`);
-  run(npmCommand, ["install", "--ignore-scripts", "--offline", "--no-audit", "--no-fund", tarball], 0, { cwd: consumer });
+  run(npmCommand, ["install", "--ignore-scripts", "--no-audit", "--no-fund", tarball], 0, { cwd: consumer });
   const installedCli = path.join(consumer, "node_modules", ".bin", process.platform === "win32" ? "kfd.cmd" : "kfd");
   const installedReport = path.join(consumer, "report.json");
   const installedProjection = run(process.execPath, ["-p", "require.resolve('@kungfu-tech/kfd/delegated-work-challenge/projections/example-projection.json')"], 0, { cwd: consumer }).stdout.trim();
   const installedStarter = run(process.execPath, ["-p", "require.resolve('@kungfu-tech/kfd/delegated-work-challenge/adapters/node-starter.mjs')"], 0, { cwd: consumer }).stdout.trim();
   assert.equal(fs.lstatSync(installedProjection).isFile(), true);
   assert.equal(fs.lstatSync(installedStarter).isFile(), true);
-  run(installedCli, ["challenge", "delegated-work", "--output", installedReport], 0, { cwd: consumer });
-  run(installedCli, ["challenge", "delegated-work", "--projection", installedProjection], 0, { cwd: consumer });
+  run(installedCli, ["challenge", "delegated-work", "--output", installedReport], 0, { cwd: consumer, env: { npm_config_offline: "true" } });
+  run(installedCli, ["challenge", "delegated-work", "--projection", installedProjection], 0, { cwd: consumer, env: { npm_config_offline: "true" } });
   run(installedCli, ["verify", "delegated-work-challenge-report", installedReport, "--json"], 0, { cwd: consumer, env: { npm_config_offline: "true" } });
 
   console.log("delegated-work challenge: fixed projections, adapter boundary, mutation closure, and clean packed consumer ok");
