@@ -25,30 +25,53 @@ that adopters must use KFD storage, names, or architecture.
 
 ## One-minute path
 
-After acquiring a release that includes this profile, run:
+From a clean temporary directory with only Node.js and npm, run the immutable
+package against the most direct pair:
 
 ```bash
-kfd challenge delegated-work
+npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.68 kfd challenge delegated-work --pair accepted-completion
 ```
 
-The default `execution-only` projection produces six explicit `COLLAPSED`
-findings. Exit `0` means the runner formed a valid completed report; it does not
-mean that the semantics passed. Save and independently verify the same report:
+The expected summary is `1/1 COLLAPSED`. Both worlds expose the same successful
+execution result, but World A requires advance and World B requires refuse. The
+selected `execution-only` projection gives a decision function no information
+with which to tell them apart. Exit `0` means the runner formed a valid report;
+it does not mean the projection passed.
+
+## Fifteen-minute complete route
+
+Install the same immutable package into a disposable consumer so its exported
+projection and starter paths are directly available:
 
 ```bash
-kfd challenge delegated-work --output delegated-work-report.json
-kfd verify delegated-work-challenge-report delegated-work-report.json
+npm init -y
+npm install --ignore-scripts @kungfu-tech/kfd@1.0.0-alpha.68
 ```
 
-The future immutable registry form is:
+Run all six pairs under the default projection, then the packaged
+`full-semantic` projection:
 
 ```bash
-npx --yes --package @kungfu-tech/kfd@<fixed-version> kfd challenge delegated-work
+npx --no-install kfd challenge delegated-work
+npx --no-install kfd challenge delegated-work --projection full-semantic
 ```
 
-`<fixed-version>` must be replaced by the independently promoted release that
-contains this profile. The current source change does not publish or mutate an
-existing npm version.
+The expected summaries are `6/6 COLLAPSED` and `6/6
+INFORMATION-DISTINGUISHABLE`, respectively. The second result says only that
+this projection separates these fixed fixtures; it does not say the projection
+is a correct policy or a real enforcement point.
+
+Save a report and verify its complete root closure offline with the packaged
+verifier:
+
+```bash
+npx --no-install kfd challenge delegated-work --output delegated-work-report.json
+npx --no-install kfd verify delegated-work-challenge-report delegated-work-report.json
+```
+
+Once installed, both commands execute from local package bytes. They require no
+provider credential, model API, or external service. Share a report or a
+counterexample in [GitHub Discussion #427](https://github.com/kungfu-systems/kfd/discussions/427).
 
 ## What the default output means
 
@@ -73,7 +96,7 @@ kfd challenge delegated-work --pair authority-revocation
 kfd challenge delegated-work --json
 ```
 
-## Five-minute projection experiment
+## Modify the projection
 
 The packaged `full-semantic` projection adds the candidate work, authority,
 causal, exchange, recovery, and acceptance fields needed to separate all six
@@ -90,7 +113,7 @@ To edit a projection from an installed package:
 
 ```bash
 cp "$(node -p "require.resolve('@kungfu-tech/kfd/delegated-work-challenge/projections/example-projection.json')")" my-projection.json
-kfd challenge delegated-work --projection ./my-projection.json
+npx --no-install kfd challenge delegated-work --projection ./my-projection.json
 ```
 
 The public contract is
@@ -107,8 +130,8 @@ function with a mapping owned by your system, then run it:
 
 ```bash
 cp "$(node -p "require.resolve('@kungfu-tech/kfd/delegated-work-challenge/adapters/node-starter.mjs')")" delegated-work-adapter.mjs
-kfd challenge delegated-work --adapter ./delegated-work-adapter.mjs --output adapter-report.json
-kfd verify delegated-work-challenge-report adapter-report.json --adapter ./delegated-work-adapter.mjs
+npx --no-install kfd challenge delegated-work --adapter ./delegated-work-adapter.mjs --output adapter-report.json
+npx --no-install kfd verify delegated-work-challenge-report adapter-report.json --adapter ./delegated-work-adapter.mjs
 ```
 
 The runner uses bounded JSONL over stdio, requires an accepted handshake, sends

@@ -806,8 +806,8 @@ const buildDelegatedWorkChallengePage = ({ profileText, capabilities, manifest }
       presentation: title === "Claim boundary" ? "claim-boundary" : "documentation",
     })),
     rendererContract: {
-      primary: ["one-minute-path", "what-the-default-output-means", "five-minute-projection-experiment"],
-      detail: ["optional-adopter-adapter", "reports-verification-and-exit-codes"],
+      primary: ["one-minute-path", "fifteen-minute-complete-route", "what-the-default-output-means"],
+      detail: ["modify-the-projection", "optional-adopter-adapter", "reports-verification-and-exit-codes"],
       boundary: ["claim-boundary"],
       note: "Render runner execution, report validity, semantic finding, information distinguishability, adapter-declared enforcement, qualification, and certification as separate dimensions. Never turn this conditional fixture experiment into a vendor finding or certification claim.",
     },

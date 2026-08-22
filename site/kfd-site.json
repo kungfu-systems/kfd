@@ -5434,7 +5434,14 @@
         "id": "one-minute-path",
         "title": "One-minute path",
         "sourcePath": "profiles/delegated-work-challenge/README.md",
-        "markdown": "After acquiring a release that includes this profile, run:\n\n```bash\nkfd challenge delegated-work\n```\n\nThe default `execution-only` projection produces six explicit `COLLAPSED`\nfindings. Exit `0` means the runner formed a valid completed report; it does not\nmean that the semantics passed. Save and independently verify the same report:\n\n```bash\nkfd challenge delegated-work --output delegated-work-report.json\nkfd verify delegated-work-challenge-report delegated-work-report.json\n```\n\nThe future immutable registry form is:\n\n```bash\nnpx --yes --package @kungfu-tech/kfd@<fixed-version> kfd challenge delegated-work\n```\n\n`<fixed-version>` must be replaced by the independently promoted release that\ncontains this profile. The current source change does not publish or mutate an\nexisting npm version.",
+        "markdown": "From a clean temporary directory with only Node.js and npm, run the immutable\npackage against the most direct pair:\n\n```bash\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.68 kfd challenge delegated-work --pair accepted-completion\n```\n\nThe expected summary is `1/1 COLLAPSED`. Both worlds expose the same successful\nexecution result, but World A requires advance and World B requires refuse. The\nselected `execution-only` projection gives a decision function no information\nwith which to tell them apart. Exit `0` means the runner formed a valid report;\nit does not mean the projection passed.",
+        "presentation": "documentation"
+      },
+      {
+        "id": "fifteen-minute-complete-route",
+        "title": "Fifteen-minute complete route",
+        "sourcePath": "profiles/delegated-work-challenge/README.md",
+        "markdown": "Install the same immutable package into a disposable consumer so its exported\nprojection and starter paths are directly available:\n\n```bash\nnpm init -y\nnpm install --ignore-scripts @kungfu-tech/kfd@1.0.0-alpha.68\n```\n\nRun all six pairs under the default projection, then the packaged\n`full-semantic` projection:\n\n```bash\nnpx --no-install kfd challenge delegated-work\nnpx --no-install kfd challenge delegated-work --projection full-semantic\n```\n\nThe expected summaries are `6/6 COLLAPSED` and `6/6\nINFORMATION-DISTINGUISHABLE`, respectively. The second result says only that\nthis projection separates these fixed fixtures; it does not say the projection\nis a correct policy or a real enforcement point.\n\nSave a report and verify its complete root closure offline with the packaged\nverifier:\n\n```bash\nnpx --no-install kfd challenge delegated-work --output delegated-work-report.json\nnpx --no-install kfd verify delegated-work-challenge-report delegated-work-report.json\n```\n\nOnce installed, both commands execute from local package bytes. They require no\nprovider credential, model API, or external service. Share a report or a\ncounterexample in [GitHub Discussion #427](https://github.com/kungfu-systems/kfd/discussions/427).",
         "presentation": "documentation"
       },
       {
@@ -5445,17 +5452,17 @@
         "presentation": "documentation"
       },
       {
-        "id": "five-minute-projection-experiment",
-        "title": "Five-minute projection experiment",
+        "id": "modify-the-projection",
+        "title": "Modify the projection",
         "sourcePath": "profiles/delegated-work-challenge/README.md",
-        "markdown": "The packaged `full-semantic` projection adds the candidate work, authority,\ncausal, exchange, recovery, and acceptance fields needed to separate all six\nfixed pairs:\n\n```bash\nkfd challenge delegated-work --projection full-semantic\n```\n\nThis establishes only `INFORMATION-DISTINGUISHABLE` for these fixtures. It does\nnot establish a correct policy or a real enforcement point.\n\nTo edit a projection from an installed package:\n\n```bash\ncp \"$(node -p \"require.resolve('@kungfu-tech/kfd/delegated-work-challenge/projections/example-projection.json')\")\" my-projection.json\nkfd challenge delegated-work --projection ./my-projection.json\n```\n\nThe public contract is\n`schemas/kfd-delegated-work-challenge/projection.schema.json`. Field paths are\ncanonicalized by UTF-8 order. Duplicate, unknown, and prohibited answer-bearing\npaths fail closed. Only allowlisted scenario-state leaves can be selected;\nworld labels, expected decisions, required outcomes, answers, and fixture\nmetadata are never selectable.",
+        "markdown": "The packaged `full-semantic` projection adds the candidate work, authority,\ncausal, exchange, recovery, and acceptance fields needed to separate all six\nfixed pairs:\n\n```bash\nkfd challenge delegated-work --projection full-semantic\n```\n\nThis establishes only `INFORMATION-DISTINGUISHABLE` for these fixtures. It does\nnot establish a correct policy or a real enforcement point.\n\nTo edit a projection from an installed package:\n\n```bash\ncp \"$(node -p \"require.resolve('@kungfu-tech/kfd/delegated-work-challenge/projections/example-projection.json')\")\" my-projection.json\nnpx --no-install kfd challenge delegated-work --projection ./my-projection.json\n```\n\nThe public contract is\n`schemas/kfd-delegated-work-challenge/projection.schema.json`. Field paths are\ncanonicalized by UTF-8 order. Duplicate, unknown, and prohibited answer-bearing\npaths fail closed. Only allowlisted scenario-state leaves can be selected;\nworld labels, expected decisions, required outcomes, answers, and fixture\nmetadata are never selectable.",
         "presentation": "documentation"
       },
       {
         "id": "optional-adopter-adapter",
         "title": "Optional adopter adapter",
         "sourcePath": "profiles/delegated-work-challenge/README.md",
-        "markdown": "Copy the dependency-free Node.js starter, replace its fail-closed decision\nfunction with a mapping owned by your system, then run it:\n\n```bash\ncp \"$(node -p \"require.resolve('@kungfu-tech/kfd/delegated-work-challenge/adapters/node-starter.mjs')\")\" delegated-work-adapter.mjs\nkfd challenge delegated-work --adapter ./delegated-work-adapter.mjs --output adapter-report.json\nkfd verify delegated-work-challenge-report adapter-report.json --adapter ./delegated-work-adapter.mjs\n```\n\nThe runner uses bounded JSONL over stdio, requires an accepted handshake, sends\ntwelve evaluate requests for the full suite, rejects symlink adapter artifacts,\nrequires empty stderr, and kills a process that exceeds its timeout. Each world\nresponse declares a decision, authoritative sources, enforcement point,\nexecutor-replacement continuity mechanism, and whether human reconstruction is\nrequired. Unknown operations or pair IDs must fail closed.\n\nThe untouched starter intentionally exits the challenge at `1`: it is runnable\nbut does not claim liveness or continuity. An adapter run exits `0` only when all\nselected World A and World B assertions satisfy their fixed liveness and safety\noutcomes, explicit authority/enforcement evidence, and replacement continuity.\n\nAn adapter can lie. The report is only an adopter-owned assertion bound to the\nnamed adapter bytes, requests, responses, and transcript root. It is not a\ncertification of the adapter's mapping to a product or its production path.",
+        "markdown": "Copy the dependency-free Node.js starter, replace its fail-closed decision\nfunction with a mapping owned by your system, then run it:\n\n```bash\ncp \"$(node -p \"require.resolve('@kungfu-tech/kfd/delegated-work-challenge/adapters/node-starter.mjs')\")\" delegated-work-adapter.mjs\nnpx --no-install kfd challenge delegated-work --adapter ./delegated-work-adapter.mjs --output adapter-report.json\nnpx --no-install kfd verify delegated-work-challenge-report adapter-report.json --adapter ./delegated-work-adapter.mjs\n```\n\nThe runner uses bounded JSONL over stdio, requires an accepted handshake, sends\ntwelve evaluate requests for the full suite, rejects symlink adapter artifacts,\nrequires empty stderr, and kills a process that exceeds its timeout. Each world\nresponse declares a decision, authoritative sources, enforcement point,\nexecutor-replacement continuity mechanism, and whether human reconstruction is\nrequired. Unknown operations or pair IDs must fail closed.\n\nThe untouched starter intentionally exits the challenge at `1`: it is runnable\nbut does not claim liveness or continuity. An adapter run exits `0` only when all\nselected World A and World B assertions satisfy their fixed liveness and safety\noutcomes, explicit authority/enforcement evidence, and replacement continuity.\n\nAn adapter can lie. The report is only an adopter-owned assertion bound to the\nnamed adapter bytes, requests, responses, and transcript root. It is not a\ncertification of the adapter's mapping to a product or its production path.",
         "presentation": "documentation"
       },
       {
@@ -5476,10 +5483,11 @@
     "rendererContract": {
       "primary": [
         "one-minute-path",
-        "what-the-default-output-means",
-        "five-minute-projection-experiment"
+        "fifteen-minute-complete-route",
+        "what-the-default-output-means"
       ],
       "detail": [
+        "modify-the-projection",
         "optional-adopter-adapter",
         "reports-verification-and-exit-codes"
       ],
