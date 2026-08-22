@@ -87,29 +87,29 @@ jobs:
   deliver:
     uses: kungfu-systems/buildchain/.github/workflows/dev-pr-auto-merge.yml@v4-alpha
     with:
-      buildchain-ref: ${{ inputs.buildchain-ref }}
-      target-branch: ${{ inputs.target-branch }}
-      expected-pr-number: ${{ inputs.expected-pr-number }}
-      expected-head-sha: ${{ inputs.expected-head-sha }}
-      source-workflow-run-id: ${{ inputs.source-workflow-run-id }}
+      buildchain-ref: ${{ github.event.inputs.buildchain-ref || 'v4-alpha' }}
+      target-branch: ${{ github.event.inputs.target-branch }}
+      expected-pr-number: ${{ fromJSON(github.event.inputs.expected-pr-number) }}
+      expected-head-sha: ${{ github.event.inputs.expected-head-sha }}
+      source-workflow-run-id: ${{ fromJSON(github.event.inputs.source-workflow-run-id) }}
       delivery-warrant-mode: required
       handoff-workflow-id: verify.yml
-      assignment-root: ${{ inputs.assignment-root }}
-      initiative-root: ${{ inputs.initiative-root }}
-      source-identity-root: ${{ inputs.source-identity-root }}
-      source-patch-root: ${{ inputs.source-patch-root }}
-      plan-root: ${{ inputs.plan-root }}
-      closure-root: ${{ inputs.closure-root }}
-      dependency-root: ${{ inputs.dependency-root }}
-      toolchain-root: ${{ inputs.toolchain-root }}
-      environment-root: ${{ inputs.environment-root }}
-      affected-paths-json: ${{ inputs.affected-paths-json }}
-      shard-evidence-roots-json: ${{ inputs.shard-evidence-roots-json }}
-      native-command: ${{ inputs.native-command }}
-      native-command-root: ${{ inputs.native-command-root }}
-      native-heartbeat-seconds: ${{ inputs.native-heartbeat-seconds }}
-      delivery-class: ${{ inputs.delivery-class }}
-      delivery-priority: ${{ inputs.delivery-priority }}
+      assignment-root: ${{ github.event.inputs.assignment-root }}
+      initiative-root: ${{ github.event.inputs.initiative-root }}
+      source-identity-root: ${{ github.event.inputs.source-identity-root }}
+      source-patch-root: ${{ github.event.inputs.source-patch-root }}
+      plan-root: ${{ github.event.inputs.plan-root }}
+      closure-root: ${{ github.event.inputs.closure-root }}
+      dependency-root: ${{ github.event.inputs.dependency-root }}
+      toolchain-root: ${{ github.event.inputs.toolchain-root }}
+      environment-root: ${{ github.event.inputs.environment-root }}
+      affected-paths-json: ${{ github.event.inputs.affected-paths-json }}
+      shard-evidence-roots-json: ${{ github.event.inputs.shard-evidence-roots-json || '[]' }}
+      native-command: ${{ github.event.inputs.native-command }}
+      native-command-root: ${{ github.event.inputs.native-command-root }}
+      native-heartbeat-seconds: ${{ fromJSON(github.event.inputs.native-heartbeat-seconds) }}
+      delivery-class: ${{ github.event.inputs.delivery-class || 'native-proof-required' }}
+      delivery-priority: ${{ github.event.inputs.delivery-priority || 'ordinary' }}
       required-status-checks: check / check
       queue-admission-context: Queue admission lease
       active-lease-context: Queue family lease/exact
