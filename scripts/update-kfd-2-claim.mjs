@@ -131,7 +131,7 @@ const releaseClaim = {
   ],
   verification: {
     result: "passed",
-    command: "node scripts/check.mjs",
+    command: "kfd-self-check",
   },
   auditBoundary: {
     scope: "KFD public npm package release facts, package exports, release governance files, and Buildchain release-passport inputs",

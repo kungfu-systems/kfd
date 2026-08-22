@@ -136,7 +136,7 @@
       "id": "kfd-package-structure",
       "impact": "minor",
       "class": "additive",
-      "rationale": "The package publishes CONTRIBUTING.md and GOVERNANCE.md as offline governance surfaces, canonical terminology as docs/terminology.md plus terminology.json, formal child pages for the Atlas, Pursuit, and Warrant candidates, KFD-7 evidence surfaces, the versioned protocols/ namespace, and the profiles/ namespace for executable conformance profiles."
+      "rationale": "The package publishes CONTRIBUTING.md and GOVERNANCE.md as offline governance surfaces, canonical terminology as docs/terminology.md plus terminology.json, formal child pages for the Atlas, Pursuit, and Warrant candidates, KFD-7 evidence surfaces, the versioned protocols/ namespace, and the profiles/ namespace for executable conformance profiles. It also ships the GitHub workflow and Buildchain contract and lock facts required by its declared self-verification boundary, exposes kfd-self-check from the installed package, and clean-room replays that command from an extracted npm tarball."
     },
     {
       "id": "kfd-agent-hub-alpha-profile",
