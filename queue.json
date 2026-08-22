@@ -3,7 +3,7 @@
   "contract": "kungfu-buildchain-dev-delivery-warrant-queue",
   "repository": "kungfu-systems/kfd",
   "protectedBase": "dev/v1/v1.0",
-  "generation": 121,
+  "generation": 122,
   "fencingCounter": 32,
   "policy": {
     "agingSeconds": 900,
@@ -1255,8 +1255,56 @@
         "scripts/update-kfd-3-witness.mjs"
       ],
       "shardEvidenceRoots": []
+    },
+    {
+      "repository": "kungfu-systems/kfd",
+      "protectedBase": "dev/v1/v1.0",
+      "pullRequestNumber": 434,
+      "assignmentRoot": "sha256:7775ffb69c61b1e1de212de4ecf6cacdb0defda48bc10ae0dc46c06c2cc5cb6a",
+      "initiativeRoot": "sha256:eb5d255244dfa49cd7d8a1cc34d5ac7dd7e70b3d86de63fe09314920f27ba50a",
+      "sourceIdentityRoot": "sha256:8f8b5c9f81254e5d91303e9cf54fc833914691af4a753f78445a667162e56252",
+      "deliveryClass": "native-proof-required",
+      "candidateId": "sha256:9a84966a414533f4fdbe88a3afe3b0d8219422584a6bbec0fc4cb2c2d4104cb5",
+      "sourceHead": "e77a46a8a5fc938961dedde0c633290a9417ce98",
+      "sourcePatchRoot": "sha256:ad3cec262da7bfbbbad1d2a967e0fb9125ed7e91b833bd300dcf2e3110132dc5",
+      "sourceProofRoot": "sha256:2e5b23b88572c710c15941cfe6ee98ddf8c23d849200d989b249194d2ef299b2",
+      "planRoot": "sha256:6c551e9520683346be4b31e10a5126fde90c301d47d85cf1c865b36fd276075c",
+      "closureRoot": "sha256:1808003ddd86c5998ddf3a1b4bd7a5eff640320b18bba5722307a1e61aacf7a6",
+      "dependencyRoot": "sha256:8963d43aff6333343ade5f956f76cd9e40ee696ff5989c0666d258d84ece7ac9",
+      "toolchainRoot": "sha256:c3ecf1248aeb0ee038cfb602bdb340c18401ed384792424ede94f6261f99e436",
+      "environmentRoot": "sha256:1a59f194fbef4de1a26f2041d89f91a6d6a305b10c572cf07e908835e36f2127",
+      "nativeCommandContract": {
+        "schema": "kungfu.buildchain.native-command-contract/v1",
+        "runner": "bash-lc",
+        "command": "npm ci --ignore-scripts --no-audit --no-fund && npm run check",
+        "commandRoot": "sha256:d96027a4d134ef3af48c9e423ccb2fdcaf2b44b49705cb83db8727a4a784d390"
+      },
+      "sourceWorkflowRunId": 32584887335,
+      "priority": "ordinary",
+      "enqueuedAt": "2026-08-22T16:40:07.888Z",
+      "updatedAt": "2026-08-22T16:40:07.888Z",
+      "attempts": 1,
+      "recoveries": 0,
+      "status": "queued",
+      "terminal": null,
+      "affectedPaths": [
+        ".buildchain/kfd-1/contract-world.witness.json",
+        ".buildchain/kfd-2/public-release-trust.claim.json",
+        ".buildchain/kfd-3/collaboration-interface.artifact.json",
+        ".buildchain/kfd-3/collaboration-interface.prebuild.json",
+        "README.md",
+        "profiles/adopter-conformance/adopters/kfd/manifest.json",
+        "profiles/delegated-work-challenge/README.md",
+        "profiles/delegated-work-challenge/manifest.json",
+        "release-impact.json",
+        "scripts/check-delegated-work-challenge.mjs",
+        "scripts/check-installed-package.mjs",
+        "scripts/update-site-bundle.mjs",
+        "site/kfd-site.json"
+      ],
+      "shardEvidenceRoots": []
     }
   ],
-  "updatedAt": "2026-08-22T16:25:03.069Z",
-  "stateRoot": "sha256:0c1142530dcc8c5a66a1006a733fbd04ce451e293b95493454600006787c405f"
+  "updatedAt": "2026-08-22T16:40:07.888Z",
+  "stateRoot": "sha256:76dad78ddb2eca5b50222fdf29984eba0278fab463f7a3bdefe6f9ccf2b653f3"
 }
