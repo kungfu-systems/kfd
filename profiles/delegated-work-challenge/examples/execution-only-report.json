@@ -1,0 +1,555 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.delegated-work-challenge-report/v1",
+  "sourceCut": {
+    "repository": "kungfu-systems/kfd",
+    "package": "@kungfu-tech/kfd",
+    "packageVersion": "1.0.0-alpha.67",
+    "packageManifestDigest": "sha256:e6cb6d500071ea1ea61e2aa18afb144f42e30305ee0d4ed8c383169cdfa16fb9",
+    "releaseAnchorDigest": "sha256:9aa9182dbff522c48a3f0b9422754abfc34a289c250518e4b956fc0d13d1c7df"
+  },
+  "challenge": {
+    "id": "kfd-delegated-work-challenge",
+    "version": "0.1.0-alpha.1",
+    "status": "experimental",
+    "numberedDecision": false,
+    "manifestDigest": "sha256:cc197f11730f539678e17a27c5bb6e4bbafdef5ef1d6a9f2e34521c61c6e8da6",
+    "verifierContract": "kfd.delegated-work-challenge-report-verifier/v1",
+    "verifierArtifactDigest": "sha256:5d7e90938bf89c102f2b450938dfc54c6bc5d49d8c3d2278ada79e68c9ce5b6e"
+  },
+  "suite": {
+    "id": "delegated-work-paired-worlds",
+    "version": "1.0.0",
+    "fixedPairCount": 6,
+    "selectedPairCount": 6,
+    "suiteRoot": "sha256:16ae06cd949db3b02e67a14c9e594e6f0e5a9baa16063946029577045f8c94ec",
+    "fixtureRoots": [
+      {
+        "pairId": "work-version",
+        "root": "sha256:b005842532d3dfaaff9be69805b8c598a0150476b9d3f0df3ef707d25382f1c4"
+      },
+      {
+        "pairId": "authority-revocation",
+        "root": "sha256:641bca4b7227ff2297999a9eb850c320c15878c1edbe2b02621041ab269ee0aa"
+      },
+      {
+        "pairId": "causal-history",
+        "root": "sha256:cdce2302c12aa9676537db66a01a7e87b5927b094064541e7c93280d23959efa"
+      },
+      {
+        "pairId": "retry-identity",
+        "root": "sha256:c976232f5300a47b7fa98bf0409f68849456be8f54fa09cdee12b9d40dcce582"
+      },
+      {
+        "pairId": "recovery-drift",
+        "root": "sha256:a3b0f2ebec74e36776be47feae9213d34baae06dc07dc8dbe95393522557432c"
+      },
+      {
+        "pairId": "accepted-completion",
+        "root": "sha256:aad6b2af2cfeb6c1eb90c8b95f374f646cd0f966282ce31b23133c8b07d7ad72"
+      }
+    ]
+  },
+  "projection": {
+    "document": {
+      "schemaVersion": 1,
+      "contract": "kfd.delegated-work-projection/v1",
+      "id": "execution-only",
+      "visible": [
+        "artifact.digest",
+        "deployment.status",
+        "evaluator.status",
+        "recovery.localFilesRoot",
+        "recovery.processId",
+        "retry.idempotencyKey",
+        "run.status",
+        "task.id",
+        "task.text",
+        "tests.status"
+      ]
+    },
+    "projectionRoot": "sha256:920dd05e499c46f36b32e1073b12fe3a921ac7b17d1a007bb4f5295f6a004808",
+    "source": "packaged"
+  },
+  "platform": {
+    "os": "darwin",
+    "arch": "arm64",
+    "runtime": "node-24.16.0"
+  },
+  "execution": {
+    "runnerExecution": "success",
+    "reportValidity": "valid",
+    "offline": true,
+    "mode": "projection",
+    "requestCount": 0,
+    "transcript": [],
+    "transcriptRoot": null,
+    "resultRoot": "sha256:79803edda3b8eb7c4a8c077c8059793487256ab2ca7bd0467229fb68cce2e23e"
+  },
+  "findings": [
+    {
+      "pairId": "work-version",
+      "fixtureRoot": "sha256:b005842532d3dfaaff9be69805b8c598a0150476b9d3f0df3ef707d25382f1c4",
+      "question": "Is the executor still acting on the current objective version?",
+      "sameSurface": "Task text, artifact, tests, and run status are identical.",
+      "required": {
+        "A": {
+          "mayAdvance": true,
+          "dispositions": [
+            "continue"
+          ]
+        },
+        "B": {
+          "mayAdvance": false,
+          "dispositions": [
+            "stop",
+            "rebase",
+            "await-decision"
+          ]
+        }
+      },
+      "worlds": {
+        "A": {
+          "projectedState": {
+            "artifact": {
+              "digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+            },
+            "run": {
+              "status": "succeeded"
+            },
+            "task": {
+              "id": "task-17",
+              "text": "Deploy the approved routing change"
+            },
+            "tests": {
+              "status": "passing"
+            }
+          },
+          "projectedRoot": "sha256:ca05b06ead8cafeb9680b33d516192c6612ffa59f226ed11ee95448c0a6605dc"
+        },
+        "B": {
+          "projectedState": {
+            "artifact": {
+              "digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+            },
+            "run": {
+              "status": "succeeded"
+            },
+            "task": {
+              "id": "task-17",
+              "text": "Deploy the approved routing change"
+            },
+            "tests": {
+              "status": "passing"
+            }
+          },
+          "projectedRoot": "sha256:ca05b06ead8cafeb9680b33d516192c6612ffa59f226ed11ee95448c0a6605dc"
+        }
+      },
+      "collision": true,
+      "semanticFinding": "COLLAPSED",
+      "informationDistinguishable": false,
+      "discriminatingFields": [
+        "work.version",
+        "work.status",
+        "work.supersessionRevision"
+      ],
+      "whyUnsafe": "Advancing both worlds permits work against a superseded objective.",
+      "whyNotLive": "Refusing both worlds prevents current authorized work from completing autonomously."
+    },
+    {
+      "pairId": "authority-revocation",
+      "fixtureRoot": "sha256:641bca4b7227ff2297999a9eb850c320c15878c1edbe2b02621041ab269ee0aa",
+      "question": "Was the executor's authority still valid when the artifact was produced?",
+      "sameSurface": "Artifact bytes and execution success are identical.",
+      "required": {
+        "A": {
+          "mayAdvance": true,
+          "dispositions": [
+            "assess"
+          ]
+        },
+        "B": {
+          "mayAdvance": false,
+          "dispositions": [
+            "quarantine"
+          ]
+        }
+      },
+      "worlds": {
+        "A": {
+          "projectedState": {
+            "artifact": {
+              "digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+            },
+            "run": {
+              "status": "succeeded"
+            },
+            "task": {
+              "id": "task-28",
+              "text": "Build the delegated deployment artifact"
+            },
+            "tests": {
+              "status": "passing"
+            }
+          },
+          "projectedRoot": "sha256:75fa0e160fc96e1523064e7a278eda5f29411b670bd6ccc2c9e8bfc23b890926"
+        },
+        "B": {
+          "projectedState": {
+            "artifact": {
+              "digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+            },
+            "run": {
+              "status": "succeeded"
+            },
+            "task": {
+              "id": "task-28",
+              "text": "Build the delegated deployment artifact"
+            },
+            "tests": {
+              "status": "passing"
+            }
+          },
+          "projectedRoot": "sha256:75fa0e160fc96e1523064e7a278eda5f29411b670bd6ccc2c9e8bfc23b890926"
+        }
+      },
+      "collision": true,
+      "semanticFinding": "COLLAPSED",
+      "informationDistinguishable": false,
+      "discriminatingFields": [
+        "authority.status",
+        "authority.revision",
+        "authority.expiry",
+        "authority.delegationLineage"
+      ],
+      "whyUnsafe": "Advancing both worlds treats work produced after revocation as authorized.",
+      "whyNotLive": "Refusing both worlds blocks assessment of work produced under valid authority."
+    },
+    {
+      "pairId": "causal-history",
+      "fixtureRoot": "sha256:cdce2302c12aa9676537db66a01a7e87b5927b094064541e7c93280d23959efa",
+      "question": "Did identical artifact bytes arise from the admitted source and approved history?",
+      "sameSurface": "Artifact bytes and the test summary are identical.",
+      "required": {
+        "A": {
+          "mayAdvance": true,
+          "dispositions": [
+            "admit"
+          ]
+        },
+        "B": {
+          "mayAdvance": false,
+          "dispositions": [
+            "reassess",
+            "quarantine",
+            "reject"
+          ]
+        }
+      },
+      "worlds": {
+        "A": {
+          "projectedState": {
+            "artifact": {
+              "digest": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+            },
+            "run": {
+              "status": "succeeded"
+            },
+            "task": {
+              "id": "task-39",
+              "text": "Admit the verified release candidate"
+            },
+            "tests": {
+              "status": "passing"
+            }
+          },
+          "projectedRoot": "sha256:388a19e1adf413463e3a884d0d5b956bd5413c3067185d9f6d1ea15559bee60e"
+        },
+        "B": {
+          "projectedState": {
+            "artifact": {
+              "digest": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+            },
+            "run": {
+              "status": "succeeded"
+            },
+            "task": {
+              "id": "task-39",
+              "text": "Admit the verified release candidate"
+            },
+            "tests": {
+              "status": "passing"
+            }
+          },
+          "projectedRoot": "sha256:388a19e1adf413463e3a884d0d5b956bd5413c3067185d9f6d1ea15559bee60e"
+        }
+      },
+      "collision": true,
+      "semanticFinding": "COLLAPSED",
+      "informationDistinguishable": false,
+      "discriminatingFields": [
+        "sourceRoot",
+        "causalRoot",
+        "approvalRoot"
+      ],
+      "whyUnsafe": "Advancing both worlds admits bytes whose source or approval history is stale or unauthorized.",
+      "whyNotLive": "Refusing both worlds prevents an artifact with admitted provenance from entering admission."
+    },
+    {
+      "pairId": "retry-identity",
+      "fixtureRoot": "sha256:c976232f5300a47b7fa98bf0409f68849456be8f54fa09cdee12b9d40dcce582",
+      "question": "Does the reused idempotency key still name the same intended exchange?",
+      "sameSurface": "The idempotency key and apparent execution status are identical.",
+      "required": {
+        "A": {
+          "mayAdvance": true,
+          "dispositions": [
+            "deduplicate",
+            "resume"
+          ]
+        },
+        "B": {
+          "mayAdvance": false,
+          "dispositions": [
+            "reject"
+          ]
+        }
+      },
+      "worlds": {
+        "A": {
+          "projectedState": {
+            "artifact": {
+              "digest": "sha256:4444444444444444444444444444444444444444444444444444444444444444"
+            },
+            "retry": {
+              "idempotencyKey": "exchange-2026-044"
+            },
+            "run": {
+              "status": "pending"
+            },
+            "task": {
+              "id": "task-44",
+              "text": "Resume the delegated payment exchange"
+            },
+            "tests": {
+              "status": "not-applicable"
+            }
+          },
+          "projectedRoot": "sha256:29755d8cbe1fec768ffb68b5badff0c323d246f68183f58fe6c86c9ac5bcc7b3"
+        },
+        "B": {
+          "projectedState": {
+            "artifact": {
+              "digest": "sha256:4444444444444444444444444444444444444444444444444444444444444444"
+            },
+            "retry": {
+              "idempotencyKey": "exchange-2026-044"
+            },
+            "run": {
+              "status": "pending"
+            },
+            "task": {
+              "id": "task-44",
+              "text": "Resume the delegated payment exchange"
+            },
+            "tests": {
+              "status": "not-applicable"
+            }
+          },
+          "projectedRoot": "sha256:29755d8cbe1fec768ffb68b5badff0c323d246f68183f58fe6c86c9ac5bcc7b3"
+        }
+      },
+      "collision": true,
+      "semanticFinding": "COLLAPSED",
+      "informationDistinguishable": false,
+      "discriminatingFields": [
+        "retry.exchangeRoot"
+      ],
+      "whyUnsafe": "Advancing both worlds permits a different action to inherit an old exchange identity.",
+      "whyNotLive": "Refusing both worlds defeats safe deduplication and recovery of the original exchange."
+    },
+    {
+      "pairId": "recovery-drift",
+      "fixtureRoot": "sha256:a3b0f2ebec74e36776be47feae9213d34baae06dc07dc8dbe95393522557432c",
+      "question": "Do persisted provider, work, and evidence roots still match after executor replacement?",
+      "sameSurface": "Replacement process, local files, nominal task identifier, and status are identical.",
+      "required": {
+        "A": {
+          "mayAdvance": true,
+          "dispositions": [
+            "reopen"
+          ]
+        },
+        "B": {
+          "mayAdvance": false,
+          "dispositions": [
+            "fail-closed",
+            "reconcile"
+          ]
+        }
+      },
+      "worlds": {
+        "A": {
+          "projectedState": {
+            "artifact": {
+              "digest": "sha256:5555555555555555555555555555555555555555555555555555555555555555"
+            },
+            "recovery": {
+              "localFilesRoot": "sha256:5656565656565656565656565656565656565656565656565656565656565656",
+              "processId": "replacement-9"
+            },
+            "run": {
+              "status": "interrupted"
+            },
+            "task": {
+              "id": "task-55",
+              "text": "Recover the interrupted delegated task"
+            },
+            "tests": {
+              "status": "passing"
+            }
+          },
+          "projectedRoot": "sha256:e81a7fa88c5fabc010d1d17894cfdf47a1ea47e9f1aeba1d66dc807ee86dd57d"
+        },
+        "B": {
+          "projectedState": {
+            "artifact": {
+              "digest": "sha256:5555555555555555555555555555555555555555555555555555555555555555"
+            },
+            "recovery": {
+              "localFilesRoot": "sha256:5656565656565656565656565656565656565656565656565656565656565656",
+              "processId": "replacement-9"
+            },
+            "run": {
+              "status": "interrupted"
+            },
+            "task": {
+              "id": "task-55",
+              "text": "Recover the interrupted delegated task"
+            },
+            "tests": {
+              "status": "passing"
+            }
+          },
+          "projectedRoot": "sha256:e81a7fa88c5fabc010d1d17894cfdf47a1ea47e9f1aeba1d66dc807ee86dd57d"
+        }
+      },
+      "collision": true,
+      "semanticFinding": "COLLAPSED",
+      "informationDistinguishable": false,
+      "discriminatingFields": [
+        "recovery.providerRoot",
+        "recovery.persistedStateRoot",
+        "causalRoot"
+      ],
+      "whyUnsafe": "Advancing both worlds reopens work after its authoritative state drifted while the executor was offline.",
+      "whyNotLive": "Refusing both worlds prevents valid persisted work from reopening after routine replacement."
+    },
+    {
+      "pairId": "accepted-completion",
+      "fixtureRoot": "sha256:aad6b2af2cfeb6c1eb90c8b95f374f646cd0f966282ce31b23133c8b07d7ad72",
+      "question": "Did the owning authority verify the user-visible result and accept completion?",
+      "sameSurface": "Execution, tests, evaluator result, and deployment completion are identical.",
+      "required": {
+        "A": {
+          "mayAdvance": true,
+          "dispositions": [
+            "settle"
+          ]
+        },
+        "B": {
+          "mayAdvance": false,
+          "dispositions": [
+            "keep-active"
+          ]
+        }
+      },
+      "worlds": {
+        "A": {
+          "projectedState": {
+            "artifact": {
+              "digest": "sha256:6666666666666666666666666666666666666666666666666666666666666666"
+            },
+            "deployment": {
+              "status": "completed"
+            },
+            "evaluator": {
+              "status": "positive"
+            },
+            "run": {
+              "status": "succeeded"
+            },
+            "task": {
+              "id": "task-66",
+              "text": "Complete the user-visible delegated repair"
+            },
+            "tests": {
+              "status": "passing"
+            }
+          },
+          "projectedRoot": "sha256:21e6612fa8f4335cd8f026cb4ea9924071e3d215a332beb8c7a88e8a5ea310a5"
+        },
+        "B": {
+          "projectedState": {
+            "artifact": {
+              "digest": "sha256:6666666666666666666666666666666666666666666666666666666666666666"
+            },
+            "deployment": {
+              "status": "completed"
+            },
+            "evaluator": {
+              "status": "positive"
+            },
+            "run": {
+              "status": "succeeded"
+            },
+            "task": {
+              "id": "task-66",
+              "text": "Complete the user-visible delegated repair"
+            },
+            "tests": {
+              "status": "passing"
+            }
+          },
+          "projectedRoot": "sha256:21e6612fa8f4335cd8f026cb4ea9924071e3d215a332beb8c7a88e8a5ea310a5"
+        }
+      },
+      "collision": true,
+      "semanticFinding": "COLLAPSED",
+      "informationDistinguishable": false,
+      "discriminatingFields": [
+        "acceptance.decision",
+        "acceptance.authority",
+        "acceptance.revision"
+      ],
+      "whyUnsafe": "Advancing both worlds settles work despite missing or rejected owner acceptance.",
+      "whyNotLive": "Refusing both worlds keeps explicitly accepted work active forever."
+    }
+  ],
+  "summary": {
+    "total": 6,
+    "collapsed": 6,
+    "informationDistinguishable": 0,
+    "semanticFinding": "COLLAPSED",
+    "adapterDeclaredEnforcement": "not-tested"
+  },
+  "claimBoundary": {
+    "experiment": "This is a conditional information-boundary experiment, not proof that mainstream systems fail.",
+    "projection": "execution-only is a declared experimental projection, not a representation of any vendor architecture.",
+    "distinguishability": "Information-distinguishable does not establish policy correctness or enforcement.",
+    "reference": "The full-semantic projection is one sufficient fixture vocabulary, not the unique or optimal design.",
+    "adapter": "An adapter result is an adopter-owned assertion bound to named adapter bytes; the adapter may be incomplete or dishonest.",
+    "authority": "No result is certification, qualification, a security assessment, production fitness, or external adoption.",
+    "normativity": "This unnumbered experimental profile does not raise any experimental KFD semantic to normative status."
+  },
+  "residualRisks": [
+    "The fixed six-pair suite is finite and cannot prove completeness for a real delegated-work system.",
+    "A projection can distinguish these fixtures while omitting information required by other worlds.",
+    "Offline verification detects report and packaged-fixture drift but does not observe a product's production enforcement path.",
+    "Adapter responses are self-asserted by the adopter and can misrepresent the mapped product."
+  ],
+  "qualifying": false,
+  "certification": false,
+  "reportRoot": "sha256:f748f9b0871a519d9adb5c9a3572310055a7ef7840df640b4ca072879fe698ad"
+}

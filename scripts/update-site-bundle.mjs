@@ -20,6 +20,9 @@ const AGENT_HUB_PROFILE_PATH = "profiles/agent-hub/README.md";
 const AGENT_HUB_GUIDE_PATH = "profiles/agent-hub/implementer-guide.md";
 const AGENT_HUB_CAPABILITIES_PATH = "profiles/agent-hub/cli-capabilities.json";
 const AGENT_HUB_MANIFEST_PATH = "profiles/agent-hub/manifest.json";
+const DELEGATED_WORK_PROFILE_PATH = "profiles/delegated-work-challenge/README.md";
+const DELEGATED_WORK_CAPABILITIES_PATH = "profiles/delegated-work-challenge/cli-capabilities.json";
+const DELEGATED_WORK_MANIFEST_PATH = "profiles/delegated-work-challenge/manifest.json";
 const ADOPTER_CONFORMANCE_AUTHORITY_PATH = "profiles/adopter-conformance/README.md";
 const ADOPTER_CONFORMANCE_GUIDE_PATH = "profiles/adopter-conformance/implementer-guide.md";
 const ADOPTER_CONFORMANCE_TEST_MATRIX_PATH = "profiles/adopter-conformance/test-matrix.json";
@@ -58,7 +61,7 @@ const paragraphBlocks = (markdown) => normalizeLines(markdown)
 const stripInlineCode = (value) => String(value || "").replace(/`([^`]+)`/g, "$1");
 
 const parseReadme = (markdown) => {
-  const content = normalizeLines(markdown);
+  const content = stripFrontmatter(markdown);
   const titleMatch = content.match(/^#\s+(.+)$/m);
   if (!titleMatch) throw new Error("README.md must start with an H1 title");
 
@@ -768,6 +771,49 @@ const buildAgentHubPage = ({ profileText, guideText, capabilities, manifest }) =
   };
 };
 
+const buildDelegatedWorkChallengePage = ({ profileText, capabilities, manifest }) => {
+  const profile = parseReadme(profileText);
+  return {
+    id: "delegated-work-challenge",
+    title: profile.title,
+    url: "/delegated-work",
+    relationship: "experimental-information-boundary-lab",
+    normative: false,
+    status: manifest.profile.status,
+    numberedDecision: false,
+    authorityPath: DELEGATED_WORK_PROFILE_PATH,
+    capabilitiesPath: DELEGATED_WORK_CAPABILITIES_PATH,
+    manifestPath: DELEGATED_WORK_MANIFEST_PATH,
+    lead: paragraphBlocks(profile.intro)[0] || "",
+    profile: capabilities.profile,
+    suite: manifest.suite,
+    commands: capabilities.commands,
+    default: capabilities.default,
+    fullSemantic: capabilities.fullSemantic,
+    exitCodes: capabilities.exitCodes,
+    reportVerification: capabilities.reportVerification,
+    offlineAfterAcquisition: capabilities.offlineAfterAcquisition,
+    providerCredentialsRequired: capabilities.providerCredentialsRequired,
+    qualifying: false,
+    certification: false,
+    claimBoundary: manifest.claimBoundary,
+    residualRisks: manifest.residualRisks,
+    sections: Object.entries(profile.sections).map(([title, markdown]) => ({
+      id: title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""),
+      title,
+      sourcePath: DELEGATED_WORK_PROFILE_PATH,
+      markdown: normalizeLines(markdown),
+      presentation: title === "Claim boundary" ? "claim-boundary" : "documentation",
+    })),
+    rendererContract: {
+      primary: ["one-minute-path", "what-the-default-output-means", "five-minute-projection-experiment"],
+      detail: ["optional-adopter-adapter", "reports-verification-and-exit-codes"],
+      boundary: ["claim-boundary"],
+      note: "Render runner execution, report validity, semantic finding, information distinguishability, adapter-declared enforcement, qualification, and certification as separate dimensions. Never turn this conditional fixture experiment into a vendor finding or certification claim.",
+    },
+  };
+};
+
 const buildIndependentVerificationPage = ({
   guideText,
   semanticMatrix,
@@ -1143,6 +1189,9 @@ export const buildSiteBundle = ({
   agentHubGuideText,
   agentHubCapabilities,
   agentHubManifest,
+  delegatedWorkProfileText,
+  delegatedWorkCapabilities,
+  delegatedWorkManifest,
   adopterConformanceAuthorityText,
   adopterConformanceGuideText,
   adopterConformanceTestMatrix,
@@ -1210,6 +1259,11 @@ export const buildSiteBundle = ({
     guideText: agentHubGuideText,
     capabilities: agentHubCapabilities,
     manifest: agentHubManifest,
+  });
+  const delegatedWorkChallengePage = buildDelegatedWorkChallengePage({
+    profileText: delegatedWorkProfileText,
+    capabilities: delegatedWorkCapabilities,
+    manifest: delegatedWorkManifest,
   });
   const adopterConformancePage = buildAdopterConformancePage({
     authorityText: adopterConformanceAuthorityText,
@@ -1441,6 +1495,9 @@ export const buildSiteBundle = ({
       agentHubGuide: AGENT_HUB_GUIDE_PATH,
       agentHubCapabilities: AGENT_HUB_CAPABILITIES_PATH,
       agentHubManifest: AGENT_HUB_MANIFEST_PATH,
+      delegatedWorkProfile: DELEGATED_WORK_PROFILE_PATH,
+      delegatedWorkCapabilities: DELEGATED_WORK_CAPABILITIES_PATH,
+      delegatedWorkManifest: DELEGATED_WORK_MANIFEST_PATH,
       adopterConformanceAuthority: ADOPTER_CONFORMANCE_AUTHORITY_PATH,
       adopterConformanceGuide: ADOPTER_CONFORMANCE_GUIDE_PATH,
       adopterConformanceTestMatrix: ADOPTER_CONFORMANCE_TEST_MATRIX_PATH,
@@ -1478,6 +1535,7 @@ export const buildSiteBundle = ({
       candidatePattern: "/drafts/{id}",
       candidateFormalPattern: "/drafts/{id}/formal",
       agentHub: "/agent-hub",
+      delegatedWork: "/delegated-work",
       adopterConformance: "/adopter-conformance",
       independentVerification: "/verify",
       selfConformance: "/verify/self-conformance",
@@ -1626,6 +1684,7 @@ export const buildSiteBundle = ({
       markdown: normalizeLines(readFileSync(TERMINOLOGY_PATH, "utf8")),
     },
     agentHubPage,
+    delegatedWorkChallengePage,
     liveCases: {
       source: LIVE_CASE_REGISTRY_PATH,
       stableUrlPattern: "/cases/live/{id}",
@@ -1780,6 +1839,9 @@ export const readInputs = () => ({
   agentHubGuideText: readFileSync(AGENT_HUB_GUIDE_PATH, "utf8"),
   agentHubCapabilities: JSON.parse(readFileSync(AGENT_HUB_CAPABILITIES_PATH, "utf8")),
   agentHubManifest: JSON.parse(readFileSync(AGENT_HUB_MANIFEST_PATH, "utf8")),
+  delegatedWorkProfileText: readFileSync(DELEGATED_WORK_PROFILE_PATH, "utf8"),
+  delegatedWorkCapabilities: JSON.parse(readFileSync(DELEGATED_WORK_CAPABILITIES_PATH, "utf8")),
+  delegatedWorkManifest: JSON.parse(readFileSync(DELEGATED_WORK_MANIFEST_PATH, "utf8")),
   adopterConformanceAuthorityText: readFileSync(ADOPTER_CONFORMANCE_AUTHORITY_PATH, "utf8"),
   adopterConformanceGuideText: readFileSync(ADOPTER_CONFORMANCE_GUIDE_PATH, "utf8"),
   adopterConformanceTestMatrix: JSON.parse(readFileSync(ADOPTER_CONFORMANCE_TEST_MATRIX_PATH, "utf8")),

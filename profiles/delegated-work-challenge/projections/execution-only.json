@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.delegated-work-projection/v1",
+  "id": "execution-only",
+  "visible": [
+    "artifact.digest",
+    "deployment.status",
+    "evaluator.status",
+    "recovery.localFilesRoot",
+    "recovery.processId",
+    "retry.idempotencyKey",
+    "run.status",
+    "task.id",
+    "task.text",
+    "tests.status"
+  ]
+}

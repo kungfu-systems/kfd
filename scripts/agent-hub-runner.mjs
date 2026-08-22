@@ -1,31 +1,18 @@
 #!/usr/bin/env node
 // SPDX-License-Identifier: Apache-2.0
 import assert from "node:assert/strict";
-import crypto from "node:crypto";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import process from "node:process";
-import { spawn } from "node:child_process";
 import { fileURLToPath } from "node:url";
+import { exactByteRoot, semanticRoot } from "./self-conformance-contract.mjs";
+import { adapterCommand, executeJsonl, regularBytes } from "./jsonl-adapter-runner.mjs";
 
 const packageRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const resolvePackage = (...parts) => path.join(packageRoot, ...parts);
-const sha256 = (bytes) => `sha256:${crypto.createHash("sha256").update(bytes).digest("hex")}`;
-function canonical(value) {
-  if (value === null || typeof value === "boolean" || typeof value === "string") return JSON.stringify(value);
-  if (typeof value === "number") {
-    assert.equal(Number.isSafeInteger(value) && value >= 0, true, "canonical numbers must be non-negative safe integers");
-    return String(value);
-  }
-  if (Array.isArray(value)) return `[${value.map(canonical).join(",")}]`;
-  return `{${Object.keys(value).sort().map((key) => `${JSON.stringify(key)}:${canonical(value[key])}`).join(",")}}`;
-}
-const semanticRoot = (value) => sha256(Buffer.from(`${canonical(value)}\n`));
 function regular(filePath) {
-  const stat = fs.lstatSync(filePath);
-  if (!stat.isFile() || stat.isSymbolicLink()) throw new Error(`${filePath} must be a regular file, not a symlink`);
-  return fs.readFileSync(filePath);
+  return regularBytes(filePath);
 }
 
 function options(args) {
@@ -47,41 +34,6 @@ function options(args) {
   return value;
 }
 
-function adapterCommand(adapter, adapterArgs) {
-  const absolute = path.resolve(adapter);
-  const bytes = regular(absolute);
-  if ([".js", ".mjs", ".cjs"].includes(path.extname(absolute))) {
-    return { command: process.execPath, args: [absolute, ...adapterArgs], artifactDigest: sha256(bytes) };
-  }
-  if (path.extname(absolute) === ".py") {
-    return { command: process.env.PYTHON || "python3", args: [absolute, ...adapterArgs], artifactDigest: sha256(bytes) };
-  }
-  return { command: absolute, args: adapterArgs, artifactDigest: sha256(bytes) };
-}
-
-function execute(command, requests, timeoutMs) {
-  return new Promise((resolve, reject) => {
-    const child = spawn(command.command, command.args, { cwd: process.cwd(), env: { ...process.env, KFD_AGENT_HUB_OFFLINE: "1" }, stdio: ["pipe", "pipe", "pipe"] });
-    let stdout = "";
-    let stderr = "";
-    let timedOut = false;
-    const timer = setTimeout(() => { timedOut = true; child.kill("SIGKILL"); }, timeoutMs);
-    child.stdout.setEncoding("utf8"); child.stderr.setEncoding("utf8");
-    child.stdout.on("data", (chunk) => { stdout += chunk; }); child.stderr.on("data", (chunk) => { stderr += chunk; });
-    child.on("error", (error) => { clearTimeout(timer); reject(error); });
-    child.on("close", (code, signal) => {
-      clearTimeout(timer);
-      if (timedOut) return reject(new Error(`adapter timed out after ${timeoutMs}ms`));
-      if (code !== 0) return reject(new Error(`adapter exited with code ${code ?? "null"} signal ${signal ?? "none"}: ${stderr.trim()}`));
-      if (stderr.trim()) return reject(new Error(`adapter wrote to stderr: ${stderr.trim()}`));
-      try { resolve(stdout.split("\n").filter(Boolean).map((line) => JSON.parse(line))); }
-      catch (error) { reject(new Error(`adapter emitted invalid JSONL: ${error.message}`)); }
-    });
-    for (const request of requests) child.stdin.write(`${JSON.stringify(request)}\n`);
-    child.stdin.end();
-  });
-}
-
 export async function runAgentHubTest(rawArgs, { quiet = false } = {}) {
   const selected = options(rawArgs);
   quiet ||= selected.quiet;
@@ -99,15 +51,15 @@ export async function runAgentHubTest(rawArgs, { quiet = false } = {}) {
   assert.equal(manifest.contract, "kfd.agent-hub-conformance-manifest/v1");
   assert.equal(registry.contract, "kfd.agent-hub-vector-registry/v1");
   assert.equal(registry.vectors.length, 20);
-  assert.equal(manifest.protocol.manifestDigest, sha256(protocolBytes));
-  assert.equal(manifest.suite.vectorRoot, sha256(vectorBytes));
-  assert.equal(manifest.failureInventory.root, sha256(inventoryBytes));
-  assert.equal(manifest.runtimeDependency.manifestDigest, sha256(runtimeBytes));
+  assert.equal(manifest.protocol.manifestDigest, exactByteRoot(protocolBytes));
+  assert.equal(manifest.suite.vectorRoot, exactByteRoot(vectorBytes));
+  assert.equal(manifest.failureInventory.root, exactByteRoot(inventoryBytes));
+  assert.equal(manifest.runtimeDependency.manifestDigest, exactByteRoot(runtimeBytes));
   const adapter = adapterCommand(selected.adapter, selected.adapterArgs);
   const handshakeRequest = { schemaVersion: 1, contract: "kfd.agent-hub-adapter-request/v1", requestId: "handshake", operation: "handshake", input: { profile: `${manifest.protocol.id}@${manifest.protocol.version}`, profileManifestDigest: manifest.protocol.manifestDigest, suiteRoot: manifest.suite.vectorRoot, minimumHubCount: 2 } };
   const vectorRequests = registry.vectors.map((entry) => ({ schemaVersion: 1, contract: "kfd.agent-hub-adapter-request/v1", requestId: entry.id, operation: "evaluate", input: { category: entry.category, scenario: entry.request.scenario, input: entry.request.input } }));
   const startedAt = new Date().toISOString();
-  const responses = await execute(adapter, [handshakeRequest, ...vectorRequests], selected.timeoutMs);
+  const responses = await executeJsonl(adapter, [handshakeRequest, ...vectorRequests], selected.timeoutMs, { offlineEnvironment: { KFD_AGENT_HUB_OFFLINE: "1" } });
   const finishedAt = new Date().toISOString();
   if (responses.length !== 21) throw new Error(`adapter returned ${responses.length} responses; expected 21`);
   const byId = new Map();
@@ -133,11 +85,11 @@ export async function runAgentHubTest(rawArgs, { quiet = false } = {}) {
   const capabilities = handshake.hubs.map((hub) => ({ hubId: hub.hubId, root: hub.capabilityRoot, document: hub.capabilities }));
   const report = {
     schemaVersion: 1, contract: "kfd.agent-hub-report/v1",
-    sourceCut: { repository: "kungfu-systems/kfd", package: packageJson.name, packageVersion: packageJson.version, packageManifestDigest: sha256(packageBytes), releaseAnchorDigest: sha256(releaseBytes) },
-    profile: { id: manifest.profile.id, version: manifest.profile.version, manifestDigest: sha256(manifestBytes) },
+    sourceCut: { repository: "kungfu-systems/kfd", package: packageJson.name, packageVersion: packageJson.version, packageManifestDigest: exactByteRoot(packageBytes), releaseAnchorDigest: exactByteRoot(releaseBytes) },
+    profile: { id: manifest.profile.id, version: manifest.profile.version, manifestDigest: exactByteRoot(manifestBytes) },
     protocol: { id: manifest.protocol.id, version: manifest.protocol.version, manifestDigest: manifest.protocol.manifestDigest },
-    suite: { id: manifest.suite.id, version: manifest.suite.version, vectorCount: 20, vectorRoot: manifest.suite.vectorRoot, inventoryRoot: sha256(inventoryBytes) },
-    verifier: { contract: "kfd.agent-hub-report-verifier/v1", artifactDigest: sha256(verifierBytes), failureInventoryRoot: manifest.failureInventory.root },
+    suite: { id: manifest.suite.id, version: manifest.suite.version, vectorCount: 20, vectorRoot: manifest.suite.vectorRoot, inventoryRoot: exactByteRoot(inventoryBytes) },
+    verifier: { contract: "kfd.agent-hub-report-verifier/v1", artifactDigest: exactByteRoot(verifierBytes), failureInventoryRoot: manifest.failureInventory.root },
     adapter: { id: handshake.adapter.id, version: handshake.adapter.version, topology: handshake.adapter.topology, artifactDigest: adapter.artifactDigest, ...(selected.sourceCommit ? { sourceCommit: selected.sourceCommit } : {}), handshake, handshakeRoot: semanticRoot(handshake) },
     capabilities,
     platform: { os: os.platform(), arch: os.arch(), runtime: `node-${process.versions.node}` },
