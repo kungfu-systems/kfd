@@ -1,0 +1,178 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.delegated-work-challenge-manifest/v1",
+  "profile": {
+    "id": "kfd-delegated-work-challenge",
+    "version": "0.1.0-alpha.1",
+    "status": "experimental",
+    "numberedDecision": false,
+    "authority": "profiles/delegated-work-challenge/README.md"
+  },
+  "suite": {
+    "id": "delegated-work-paired-worlds",
+    "version": "1.0.0",
+    "fixedPairCount": 6,
+    "path": "profiles/delegated-work-challenge/fixtures/suite.json"
+  },
+  "projections": {
+    "default": "execution-only",
+    "execution-only": "profiles/delegated-work-challenge/projections/execution-only.json",
+    "full-semantic": "profiles/delegated-work-challenge/projections/full-semantic.json",
+    "example": "profiles/delegated-work-challenge/projections/example-projection.json"
+  },
+  "projection": {
+    "contract": "kfd.delegated-work-projection/v1",
+    "schema": "schemas/kfd-delegated-work-challenge/projection.schema.json",
+    "allowlistedPaths": [
+      "acceptance.authority",
+      "acceptance.decision",
+      "acceptance.revision",
+      "approvalRoot",
+      "artifact.digest",
+      "authority.delegationLineage",
+      "authority.expiry",
+      "authority.revision",
+      "authority.scope",
+      "authority.status",
+      "causalRoot",
+      "deployment.status",
+      "evaluator.status",
+      "recovery.localFilesRoot",
+      "recovery.persistedStateRoot",
+      "recovery.processId",
+      "recovery.providerRoot",
+      "retry.exchangeRoot",
+      "retry.idempotencyKey",
+      "run.status",
+      "sourceRoot",
+      "task.id",
+      "task.text",
+      "tests.status",
+      "work.id",
+      "work.status",
+      "work.supersessionRevision",
+      "work.version"
+    ],
+    "prohibitedNames": [
+      "answer",
+      "expectedDecision",
+      "expectedOutcome",
+      "fixtureMetadata",
+      "label",
+      "requiredOutcome",
+      "worldId"
+    ]
+  },
+  "adapter": {
+    "requestContract": "kfd.delegated-work-adapter-request/v1",
+    "responseContract": "kfd.delegated-work-adapter-response/v1",
+    "binding": "jsonl-stdio/v1",
+    "timeoutMs": 20000,
+    "requestSchema": "schemas/kfd-delegated-work-challenge/adapter-request.schema.json",
+    "responseSchema": "schemas/kfd-delegated-work-challenge/adapter-response.schema.json"
+  },
+  "report": {
+    "contract": "kfd.delegated-work-challenge-report/v1",
+    "schema": "schemas/kfd-delegated-work-challenge/report.schema.json",
+    "offlineVerification": true,
+    "qualifying": false,
+    "certification": false
+  },
+  "surfaces": [
+    {
+      "path": "profiles/delegated-work-challenge/README.md",
+      "role": "authority",
+      "digest": "sha256:434edc63ebf2a7dd1d17b504765a39d2074b73efd3ba04fd431c19264658b07a"
+    },
+    {
+      "path": "profiles/delegated-work-challenge/cli-capabilities.json",
+      "role": "capabilities",
+      "digest": "sha256:53e75429524ce170687758d3e0774b704b66d9d8c4fb4cb69000ced59683b714"
+    },
+    {
+      "path": "profiles/delegated-work-challenge/fixtures/suite.json",
+      "role": "fixture",
+      "digest": "sha256:eab90886e47664a1f8038eb283a8b96b1a52f39d4d0f9bbf00ebeb7984a14582"
+    },
+    {
+      "path": "profiles/delegated-work-challenge/projections/execution-only.json",
+      "role": "projection",
+      "digest": "sha256:b10575f5720118bc488b52297217b8b0a33770facbb1cefadf34d36d62a78810"
+    },
+    {
+      "path": "profiles/delegated-work-challenge/projections/full-semantic.json",
+      "role": "projection",
+      "digest": "sha256:534f4cbb0daea8daca0a8d5c77248525b92f022038dbc2fcb1b7e030d91e08f2"
+    },
+    {
+      "path": "profiles/delegated-work-challenge/projections/example-projection.json",
+      "role": "projection",
+      "digest": "sha256:b4788625c57350444861ada5f87058f870a2c02ca71d980999918aed6a288aca"
+    },
+    {
+      "path": "profiles/delegated-work-challenge/adapters/node-starter.mjs",
+      "role": "starter",
+      "digest": "sha256:1c271777125d15af7b750de84ca1f38b16008ffbab011fcfc59dc425d43f2bf5"
+    },
+    {
+      "path": "schemas/kfd-delegated-work-challenge/projection.schema.json",
+      "role": "schema",
+      "digest": "sha256:14b88115f3e75671d95275c5b6de7ffe48b8cc29f8350f653db6810406007c0a"
+    },
+    {
+      "path": "schemas/kfd-delegated-work-challenge/suite.schema.json",
+      "role": "schema",
+      "digest": "sha256:5bfd68b8b27e4463a0f887d824e70cb69c732698b554ee657de29688f3fb0fcd"
+    },
+    {
+      "path": "schemas/kfd-delegated-work-challenge/adapter-request.schema.json",
+      "role": "schema",
+      "digest": "sha256:84d2478b7a9c9357c649a56f1993cccd0227bfa672bcb8923cad6df71a03ccdb"
+    },
+    {
+      "path": "schemas/kfd-delegated-work-challenge/adapter-response.schema.json",
+      "role": "schema",
+      "digest": "sha256:2ee97c7c63b326a69f215c92469ec4e3f93d46e30b762cad457d7957188b1122"
+    },
+    {
+      "path": "schemas/kfd-delegated-work-challenge/report.schema.json",
+      "role": "schema",
+      "digest": "sha256:642275e8a742a0b8d7f98c919a54ca002907431b85e209cf61031c936dda2900"
+    },
+    {
+      "path": "scripts/jsonl-adapter-runner.mjs",
+      "role": "runner",
+      "digest": "sha256:745aebc1fba676739039dc4d06363121a9fbe55b252dfce8ed4f99ed7de9d1f8"
+    },
+    {
+      "path": "scripts/delegated-work-challenge-core.mjs",
+      "role": "runner",
+      "digest": "sha256:9fe0a0116bab774c718fead99b6cc2b8e99e0981092b0f12d75af0d2ab3989cf"
+    },
+    {
+      "path": "scripts/delegated-work-challenge-runner.mjs",
+      "role": "runner",
+      "digest": "sha256:20238344bd4029d6d8ad933ffa2ecb3ff909e8e51beb3629550a4a18ec844cc8"
+    },
+    {
+      "path": "scripts/delegated-work-challenge-report-verifier.mjs",
+      "role": "verifier",
+      "digest": "sha256:5d7e90938bf89c102f2b450938dfc54c6bc5d49d8c3d2278ada79e68c9ce5b6e"
+    }
+  ],
+  "claimBoundary": {
+    "experiment": "This is a conditional information-boundary experiment, not proof that mainstream systems fail.",
+    "projection": "execution-only is a declared experimental projection, not a representation of any vendor architecture.",
+    "distinguishability": "Information-distinguishable does not establish policy correctness or enforcement.",
+    "reference": "The full-semantic projection is one sufficient fixture vocabulary, not the unique or optimal design.",
+    "adapter": "An adapter result is an adopter-owned assertion bound to named adapter bytes; the adapter may be incomplete or dishonest.",
+    "authority": "No result is certification, qualification, a security assessment, production fitness, or external adoption.",
+    "normativity": "This unnumbered experimental profile does not raise any experimental KFD semantic to normative status."
+  },
+  "residualRisks": [
+    "The fixed six-pair suite is finite and cannot prove completeness for a real delegated-work system.",
+    "A projection can distinguish these fixtures while omitting information required by other worlds.",
+    "Offline verification detects report and packaged-fixture drift but does not observe a product's production enforcement path.",
+    "Adapter responses are self-asserted by the adopter and can misrepresent the mapped product."
+  ]
+}

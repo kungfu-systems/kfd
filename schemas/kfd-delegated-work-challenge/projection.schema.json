@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-delegated-work-challenge/projection.schema.json",
+  "title": "KFD Delegated Work challenge projection",
+  "type": "object",
+  "required": ["schemaVersion", "contract", "id", "visible"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "contract": {"const": "kfd.delegated-work-projection/v1"},
+    "id": {"type": "string", "minLength": 1},
+    "visible": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^[A-Za-z][A-Za-z0-9]*(?:\\.[A-Za-z][A-Za-z0-9]*)*$"}
+    }
+  },
+  "additionalProperties": false
+}

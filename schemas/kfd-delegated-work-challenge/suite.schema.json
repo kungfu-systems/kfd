@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-delegated-work-challenge/suite.schema.json",
+  "title": "KFD Delegated Work fixed paired-world suite",
+  "type": "object",
+  "required": ["schemaVersion", "contract", "id", "version", "pairs"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "contract": {"const": "kfd.delegated-work-paired-world-suite/v1"},
+    "id": {"const": "delegated-work-paired-worlds"},
+    "version": {"const": "1.0.0"},
+    "pairs": {"type": "array", "minItems": 6, "maxItems": 6}
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.delegated-work-challenge-cli-capabilities/v1",
+  "profile": "kfd-delegated-work-challenge@0.1.0-alpha.1",
+  "binding": "jsonl-stdio/v1",
+  "commands": {
+    "challenge": "kfd challenge delegated-work [--pair <pair-id>] [--projection <projection-id|projection.json>] [--adapter <path>] [--output <report.json>] [--json]",
+    "verify": "kfd verify delegated-work-challenge-report <report.json> [--adapter <path>] [--json]"
+  },
+  "default": {
+    "projection": "execution-only",
+    "expectedPairs": 6,
+    "expectedFinding": "COLLAPSED",
+    "exitCode": 0
+  },
+  "fullSemantic": {
+    "expectedPairs": 6,
+    "expectedFinding": "INFORMATION-DISTINGUISHABLE",
+    "claim": "candidate information is sufficient to distinguish the fixed fixtures only"
+  },
+  "exitCodes": {
+    "projection": {"0": "valid completed run, including COLLAPSED", "2": "invalid run"},
+    "adapter": {"0": "all tested safety and liveness assertions satisfied", "1": "completed semantic failure or undetermined result", "2": "invalid run"},
+    "verify": {"0": "valid evidence closure", "1": "invalid evidence closure", "2": "input or process failure"}
+  },
+  "reportVerification": {
+    "backend": "host-node",
+    "processSpawning": "host-only",
+    "sharedRustWasmChecks": [],
+    "parityBoundary": "Delegated Work challenge semantics have one packaged host verifier. Rust/WASM verification-bundle profiles remain unchanged and are regression-tested; no partial duplicate semantic verifier is introduced."
+  },
+  "offlineAfterAcquisition": true,
+  "providerCredentialsRequired": false,
+  "qualifying": false,
+  "certification": false,
+  "claimBoundary": "A conditional information-boundary experiment; not a vendor assessment, policy proof, enforcement proof, certification, qualification, security assessment, production-fitness result, or external-adoption claim."
+}
