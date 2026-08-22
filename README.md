@@ -63,23 +63,20 @@ agent is a participant in the work, not its center of truth.
 
 The unnumbered, system-neutral [Delegated Work Paired-World Lab](profiles/delegated-work-challenge/README.md)
 shows why execution success alone can be insufficient at a decision boundary.
-Its default offline command places six World A / World B pairs behind an
-`execution-only` projection and prints the resulting canonical-root collisions:
+From a clean directory with only Node.js and npm, start with the most direct
+one-minute pair:
 
 ```bash
-kfd challenge delegated-work
+npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.68 kfd challenge delegated-work --pair accepted-completion
 ```
 
-Use `--projection full-semantic` to add candidate discriminating information,
-`--projection ./projection.json` to edit the visible state, `--json` for stable
-machine output, and `--output report.json` to retain an independently verifiable
-report. Package acquisition may require a network; execution and verification
-do not require a model API, provider credentials, or external service.
-
-The future public registry form is
-`npx --yes --package @kungfu-tech/kfd@<fixed-version> kfd challenge delegated-work`.
-The placeholder must name the separately promoted immutable release containing
-this profile; this source change does not publish or rewrite an npm version.
+The result is `1/1 COLLAPSED`: the two worlds have the same successful execution
+surface, require opposite advance decisions, and cannot be distinguished by the
+declared projection. Run the full six-pair route, save and verify a report,
+modify the projection, or connect the packaged Node.js adapter starter in the
+[complete challenge guide](profiles/delegated-work-challenge/README.md).
+Package acquisition may require a network; execution and verification do not
+require a model API, provider credentials, or external service.
 
 The Lab proves only conditional information distinguishability in fixed
 fixtures. It does not claim that mainstream systems fail, that KFD field names
@@ -750,13 +747,13 @@ boundaries. From any directory, verify the exact public npm package with its
 package-owned command:
 
 ```sh
-npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.67 kfd-self-check
+npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.68 kfd-self-check
 ```
 
 `kfd-self-check` resolves the installed package root and checks only facts
 shipped in that package. It does not silently read a KFD source checkout. The
 repository gate runs `npm run check:installed-package` to pack the current
-source, extract it into a clean directory, and execute the same installed
+source, install it into a clean consumer, and execute the same installed
 command before release. A pass proves structural closure only; it does not
 certify semantic truth, external adoption, security, or production fitness.
 

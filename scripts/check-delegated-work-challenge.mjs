@@ -13,6 +13,8 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const cli = path.join(root, "bin", "kfd.mjs");
 const starter = path.join(root, "profiles", "delegated-work-challenge", "adapters", "node-starter.mjs");
 const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";
+const publicVersion = "1.0.0-alpha.68";
+const oneMinuteCommand = `npx --yes --package @kungfu-tech/kfd@${publicVersion} kfd challenge delegated-work --pair accepted-completion`;
 
 function run(command, args, expected, options = {}) {
   const result = spawnSync(command, args, {
@@ -42,6 +44,13 @@ function mutated(report, apply) {
 
 const temporary = fs.mkdtempSync(path.join(os.tmpdir(), "kfd-delegated-work-"));
 try {
+  const readme = fs.readFileSync(path.join(root, "README.md"), "utf8");
+  const challengeGuide = fs.readFileSync(path.join(root, "profiles", "delegated-work-challenge", "README.md"), "utf8");
+  assert.equal(readme.includes(oneMinuteCommand), true, "README must lead with the exact immutable one-minute command");
+  assert.equal(challengeGuide.includes(oneMinuteCommand), true, "challenge guide must lead with the exact immutable one-minute command");
+  assert.equal(challengeGuide.includes(`npm install --ignore-scripts @kungfu-tech/kfd@${publicVersion}`), true, "challenge guide must pin the complete route to the same immutable package");
+  assert.equal(readme.includes("<fixed-version>") || challengeGuide.includes("<fixed-version>"), false, "public challenge docs must not retain a version placeholder");
+
   const first = cliJson(["challenge", "delegated-work"]);
   const second = cliJson(["challenge", "delegated-work"]);
   assert.equal(first.contract, "kfd.delegated-work-challenge-report/v1");
@@ -142,16 +151,45 @@ try {
   ]) assert.equal(packedPaths.has(required), true, `packed artifact is missing ${required}`);
   run(npmCommand, ["install", "--ignore-scripts", "--no-audit", "--no-fund", tarball], 0, { cwd: consumer });
   const installedCli = path.join(consumer, "node_modules", ".bin", process.platform === "win32" ? "kfd.cmd" : "kfd");
+  const installedSelfCheck = path.join(consumer, "node_modules", ".bin", process.platform === "win32" ? "kfd-self-check.cmd" : "kfd-self-check");
   const installedReport = path.join(consumer, "report.json");
   const installedProjection = run(process.execPath, ["-p", "require.resolve('@kungfu-tech/kfd/delegated-work-challenge/projections/example-projection.json')"], 0, { cwd: consumer }).stdout.trim();
+  const installedFullProjection = run(process.execPath, ["-p", "require.resolve('@kungfu-tech/kfd/delegated-work-challenge/projections/full-semantic.json')"], 0, { cwd: consumer }).stdout.trim();
   const installedStarter = run(process.execPath, ["-p", "require.resolve('@kungfu-tech/kfd/delegated-work-challenge/adapters/node-starter.mjs')"], 0, { cwd: consumer }).stdout.trim();
+  const installedVerifier = run(process.execPath, ["-p", "require.resolve('@kungfu-tech/kfd/delegated-work-challenge/verifier')"], 0, { cwd: consumer }).stdout.trim();
   assert.equal(fs.lstatSync(installedProjection).isFile(), true);
+  assert.equal(fs.lstatSync(installedFullProjection).isFile(), true);
   assert.equal(fs.lstatSync(installedStarter).isFile(), true);
-  run(installedCli, ["challenge", "delegated-work", "--output", installedReport], 0, { cwd: consumer, env: { npm_config_offline: "true" } });
-  run(installedCli, ["challenge", "delegated-work", "--projection", installedProjection], 0, { cwd: consumer, env: { npm_config_offline: "true" } });
-  run(installedCli, ["verify", "delegated-work-challenge-report", installedReport, "--json"], 0, { cwd: consumer, env: { npm_config_offline: "true" } });
+  assert.equal(fs.lstatSync(installedVerifier).isFile(), true);
 
-  console.log("delegated-work challenge: fixed projections, adapter boundary, mutation closure, and clean packed consumer ok");
+  const installedEnv = { npm_config_offline: "true" };
+  const installedJson = (args, expected = 0) => JSON.parse(run(installedCli, [...args, "--json"], expected, { cwd: consumer, env: installedEnv }).stdout);
+  const installedSingle = installedJson(["challenge", "delegated-work", "--pair", "accepted-completion"]);
+  assert.equal(installedSingle.summary.total, 1);
+  assert.equal(installedSingle.summary.collapsed, 1);
+  const installedDefault = installedJson(["challenge", "delegated-work", "--output", installedReport]);
+  assert.equal(installedDefault.summary.total, 6);
+  assert.equal(installedDefault.summary.collapsed, 6);
+  const installedFull = installedJson(["challenge", "delegated-work", "--projection", "full-semantic"]);
+  assert.equal(installedFull.summary.total, 6);
+  assert.equal(installedFull.summary.informationDistinguishable, 6);
+
+  const copiedProjection = path.join(consumer, "my-projection.json");
+  fs.copyFileSync(installedProjection, copiedProjection);
+  const copiedProjectionRun = installedJson(["challenge", "delegated-work", "--projection", copiedProjection]);
+  assert.equal(copiedProjectionRun.summary.total, 6);
+
+  const copiedStarter = path.join(consumer, "delegated-work-adapter.mjs");
+  const installedAdapterReport = path.join(consumer, "adapter-report.json");
+  fs.copyFileSync(installedStarter, copiedStarter);
+  const installedAdapter = installedJson(["challenge", "delegated-work", "--adapter", copiedStarter, "--output", installedAdapterReport], 1);
+  assert.equal(installedAdapter.summary.adapterDeclaredEnforcement, "not-satisfied");
+
+  run(installedCli, ["verify", "delegated-work-challenge-report", installedReport, "--json"], 0, { cwd: consumer, env: installedEnv });
+  run(installedCli, ["verify", "delegated-work-challenge-report", installedAdapterReport, "--adapter", copiedStarter, "--json"], 0, { cwd: consumer, env: installedEnv });
+  run(installedSelfCheck, [], 0, { cwd: consumer, env: installedEnv });
+
+  console.log("delegated-work challenge: fixed projections, adapter boundary, mutation closure, package self-check, and clean packed consumer ok");
 } finally {
   fs.rmSync(temporary, { recursive: true, force: true });
 }

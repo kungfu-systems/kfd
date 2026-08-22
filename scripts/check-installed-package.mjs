@@ -36,14 +36,26 @@ try {
   const [{ filename }] = JSON.parse(packed.stdout);
   assert.ok(filename, "npm pack did not report a filename");
 
-  const extracted = path.join(temporary, "extracted");
-  fs.mkdirSync(extracted);
-  run("tar", ["-xzf", path.join(temporary, filename), "-C", extracted]);
+  const consumer = path.join(temporary, "consumer");
+  fs.mkdirSync(consumer);
+  fs.writeFileSync(path.join(consumer, "package.json"), `${JSON.stringify({ private: true }, null, 2)}\n`);
+  run(npmCommand, [
+    "install",
+    "--ignore-scripts",
+    "--no-audit",
+    "--no-fund",
+    path.join(temporary, filename),
+  ], { cwd: consumer });
 
-  const packageRoot = path.join(extracted, "package");
-  const checked = run(process.execPath, ["bin/kfd-self-check.mjs"], { cwd: packageRoot });
+  const installedSelfCheck = path.join(
+    consumer,
+    "node_modules",
+    ".bin",
+    process.platform === "win32" ? "kfd-self-check.cmd" : "kfd-self-check",
+  );
+  const checked = run(installedSelfCheck, [], { cwd: consumer });
   process.stdout.write(checked.stdout);
-  console.log("Installed KFD package self-verification passed from a clean npm tarball.");
+  console.log("Installed KFD package self-verification passed from a clean npm consumer.");
 } finally {
   fs.rmSync(temporary, { recursive: true, force: true });
 }
