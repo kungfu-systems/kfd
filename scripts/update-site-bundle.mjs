@@ -20,6 +20,12 @@ const AGENT_HUB_PROFILE_PATH = "profiles/agent-hub/README.md";
 const AGENT_HUB_GUIDE_PATH = "profiles/agent-hub/implementer-guide.md";
 const AGENT_HUB_CAPABILITIES_PATH = "profiles/agent-hub/cli-capabilities.json";
 const AGENT_HUB_MANIFEST_PATH = "profiles/agent-hub/manifest.json";
+const DELEGATED_WORK_PROFILE_PATH = "profiles/delegated-work-challenge/README.md";
+const DELEGATED_WORK_CAPABILITIES_PATH = "profiles/delegated-work-challenge/cli-capabilities.json";
+const DELEGATED_WORK_MANIFEST_PATH = "profiles/delegated-work-challenge/manifest.json";
+const ADOPTER_CONFORMANCE_AUTHORITY_PATH = "profiles/adopter-conformance/README.md";
+const ADOPTER_CONFORMANCE_GUIDE_PATH = "profiles/adopter-conformance/implementer-guide.md";
+const ADOPTER_CONFORMANCE_TEST_MATRIX_PATH = "profiles/adopter-conformance/test-matrix.json";
 const INDEPENDENT_VERIFIER_PATH = "docs/independent-verifier.md";
 const SEMANTIC_MATRIX_PATH = "evidence/semantic-self-sufficiency/kfd-1-13.json";
 const SEMANTIC_MATRIX_SCHEMA_PATH = "schemas/kfd-semantic-self-sufficiency-matrix.schema.json";
@@ -55,7 +61,7 @@ const paragraphBlocks = (markdown) => normalizeLines(markdown)
 const stripInlineCode = (value) => String(value || "").replace(/`([^`]+)`/g, "$1");
 
 const parseReadme = (markdown) => {
-  const content = normalizeLines(markdown);
+  const content = stripFrontmatter(markdown);
   const titleMatch = content.match(/^#\s+(.+)$/m);
   if (!titleMatch) throw new Error("README.md must start with an H1 title");
 
@@ -540,6 +546,68 @@ const buildConceptualCompressionPage = ({ text, terminology }) => {
   };
 };
 
+const buildAdopterConformancePage = ({ authorityText, guideText, testMatrix }) => {
+  const authority = parseReadme(authorityText);
+  const guide = parseReadme(guideText);
+  const requiredSections = [
+    "Reproduce the complete contract surface",
+    "Run the clean-room entrypoint",
+    "Keep authorities separate",
+    "Update without silently changing meaning",
+    "Interpret the result narrowly",
+  ];
+  for (const heading of requiredSections) {
+    if (!guide.sections[heading]) throw new Error(`Adopter implementer guide must define ${heading}`);
+  }
+  if (testMatrix.contract !== "kfd.adopter-category-implementer-test-matrix/v1") {
+    throw new Error("Adopter implementer test matrix must select the version 1 contract");
+  }
+  return {
+    id: "adopter-conformance",
+    title: guide.title,
+    sourcePath: ADOPTER_CONFORMANCE_GUIDE_PATH,
+    authorityPath: ADOPTER_CONFORMANCE_AUTHORITY_PATH,
+    testMatrixPath: ADOPTER_CONFORMANCE_TEST_MATRIX_PATH,
+    url: "/adopter-conformance",
+    relationship: "package-only-adopter-category-implementation-path",
+    normative: false,
+    lead: paragraphBlocks(guide.intro)[0] || "",
+    contract: testMatrix.contract,
+    packageOnly: testMatrix.packageOnly,
+    cleanRoom: testMatrix.cleanRoom,
+    componentChecks: testMatrix.componentChecks,
+    authorityBoundaries: testMatrix.authorityBoundaries,
+    expectedAuthorityOutputs: testMatrix.expectedAuthorityOutputs,
+    publicSurfaces: testMatrix.publicSurfaces,
+    updateMechanism: testMatrix.updateMechanism,
+    sections: requiredSections.map((heading) => ({
+      id: heading.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""),
+      title: heading,
+      sourcePath: ADOPTER_CONFORMANCE_GUIDE_PATH,
+      sourceHeading: heading,
+      defaultPresentation: "implementer-contract",
+      markdown: normalizeLines(guide.sections[heading]),
+    })),
+    authorityTitle: authority.title,
+    authorityMarkdown: stripFrontmatter(authorityText),
+    markdown: stripFrontmatter(guideText),
+    rendering: {
+      kind: "adopter-category-implementer-path",
+      navigationLabel: "Adopter conformance",
+      navigationGroup: "verify",
+      navigationOrder: 24,
+    },
+    rendererContract: {
+      showCleanRoomConstraints: true,
+      showComponentOrder: true,
+      showAuthorityBoundaries: true,
+      showUpdateMechanism: true,
+      showNonClaims: true,
+      note: "Render package-declared implementation facts without inferring project evidence, release permission, runtime permission, qualification, or independent certification.",
+    },
+  };
+};
+
 const buildAgentHubPage = ({ profileText, guideText, capabilities, manifest }) => {
   const profile = parseReadme(profileText);
   const guide = parseReadme(guideText);
@@ -699,6 +767,49 @@ const buildAgentHubPage = ({ profileText, guideText, capabilities, manifest }) =
       ],
       boundary: ["fixed-boundaries", "claim-boundary"],
       note: "Render the behavior, evidence, and authority dimensions before commands. Preserve the reference 20/20 path and starter 0/20 path as different teaching flows. Do not infer certification, production fitness, or language-runtime parity from scaffold availability.",
+    },
+  };
+};
+
+const buildDelegatedWorkChallengePage = ({ profileText, capabilities, manifest }) => {
+  const profile = parseReadme(profileText);
+  return {
+    id: "delegated-work-challenge",
+    title: profile.title,
+    url: "/delegated-work",
+    relationship: "experimental-information-boundary-lab",
+    normative: false,
+    status: manifest.profile.status,
+    numberedDecision: false,
+    authorityPath: DELEGATED_WORK_PROFILE_PATH,
+    capabilitiesPath: DELEGATED_WORK_CAPABILITIES_PATH,
+    manifestPath: DELEGATED_WORK_MANIFEST_PATH,
+    lead: paragraphBlocks(profile.intro)[0] || "",
+    profile: capabilities.profile,
+    suite: manifest.suite,
+    commands: capabilities.commands,
+    default: capabilities.default,
+    fullSemantic: capabilities.fullSemantic,
+    exitCodes: capabilities.exitCodes,
+    reportVerification: capabilities.reportVerification,
+    offlineAfterAcquisition: capabilities.offlineAfterAcquisition,
+    providerCredentialsRequired: capabilities.providerCredentialsRequired,
+    qualifying: false,
+    certification: false,
+    claimBoundary: manifest.claimBoundary,
+    residualRisks: manifest.residualRisks,
+    sections: Object.entries(profile.sections).map(([title, markdown]) => ({
+      id: title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""),
+      title,
+      sourcePath: DELEGATED_WORK_PROFILE_PATH,
+      markdown: normalizeLines(markdown),
+      presentation: title === "Claim boundary" ? "claim-boundary" : "documentation",
+    })),
+    rendererContract: {
+      primary: ["one-minute-path", "fifteen-minute-complete-route", "what-the-default-output-means"],
+      detail: ["modify-the-projection", "optional-adopter-adapter", "reports-verification-and-exit-codes"],
+      boundary: ["claim-boundary"],
+      note: "Render runner execution, report validity, semantic finding, information distinguishability, adapter-declared enforcement, qualification, and certification as separate dimensions. Never turn this conditional fixture experiment into a vendor finding or certification claim.",
     },
   };
 };
@@ -1078,6 +1189,12 @@ export const buildSiteBundle = ({
   agentHubGuideText,
   agentHubCapabilities,
   agentHubManifest,
+  delegatedWorkProfileText,
+  delegatedWorkCapabilities,
+  delegatedWorkManifest,
+  adopterConformanceAuthorityText,
+  adopterConformanceGuideText,
+  adopterConformanceTestMatrix,
   independentVerifierText,
   semanticMatrix,
   warrantManifest,
@@ -1142,6 +1259,16 @@ export const buildSiteBundle = ({
     guideText: agentHubGuideText,
     capabilities: agentHubCapabilities,
     manifest: agentHubManifest,
+  });
+  const delegatedWorkChallengePage = buildDelegatedWorkChallengePage({
+    profileText: delegatedWorkProfileText,
+    capabilities: delegatedWorkCapabilities,
+    manifest: delegatedWorkManifest,
+  });
+  const adopterConformancePage = buildAdopterConformancePage({
+    authorityText: adopterConformanceAuthorityText,
+    guideText: adopterConformanceGuideText,
+    testMatrix: adopterConformanceTestMatrix,
   });
   const independentVerificationPage = buildIndependentVerificationPage({
     guideText: independentVerifierText,
@@ -1368,6 +1495,12 @@ export const buildSiteBundle = ({
       agentHubGuide: AGENT_HUB_GUIDE_PATH,
       agentHubCapabilities: AGENT_HUB_CAPABILITIES_PATH,
       agentHubManifest: AGENT_HUB_MANIFEST_PATH,
+      delegatedWorkProfile: DELEGATED_WORK_PROFILE_PATH,
+      delegatedWorkCapabilities: DELEGATED_WORK_CAPABILITIES_PATH,
+      delegatedWorkManifest: DELEGATED_WORK_MANIFEST_PATH,
+      adopterConformanceAuthority: ADOPTER_CONFORMANCE_AUTHORITY_PATH,
+      adopterConformanceGuide: ADOPTER_CONFORMANCE_GUIDE_PATH,
+      adopterConformanceTestMatrix: ADOPTER_CONFORMANCE_TEST_MATRIX_PATH,
       independentVerifier: INDEPENDENT_VERIFIER_PATH,
       semanticSelfSufficiencyMatrix: SEMANTIC_MATRIX_PATH,
       semanticSelfSufficiencySchema: SEMANTIC_MATRIX_SCHEMA_PATH,
@@ -1402,6 +1535,8 @@ export const buildSiteBundle = ({
       candidatePattern: "/drafts/{id}",
       candidateFormalPattern: "/drafts/{id}/formal",
       agentHub: "/agent-hub",
+      delegatedWork: "/delegated-work",
+      adopterConformance: "/adopter-conformance",
       independentVerification: "/verify",
       selfConformance: "/verify/self-conformance",
       decisionPattern: "/{number}",
@@ -1474,7 +1609,7 @@ export const buildSiteBundle = ({
           source: FOUNDATION_PATH,
           sections: ["foundation-structure", "load-bearing-product-witness", "practice-guidelines"],
         },
-        readingPath: ["/", "/concepts", "/foundation", "/verify", "/verify/self-conformance", "/under-load", "/formal", "/cases", "/drafts", "/{number}"],
+        readingPath: ["/", "/concepts", "/foundation", "/verify", "/adopter-conformance", "/verify/self-conformance", "/under-load", "/formal", "/cases", "/drafts", "/{number}"],
         support: ["agent-quickstart", "decision-metadata"],
         currentDecisions: {
           source: REGISTRY_PATH,
@@ -1512,9 +1647,10 @@ export const buildSiteBundle = ({
     },
     loadBearingPage,
     independentVerificationPage,
+    adopterConformancePage,
     selfConformancePage,
     verificationLanes,
-    standalonePages: [conceptualCompressionPage, loadBearingPage, independentVerificationPage, selfConformancePage],
+    standalonePages: [conceptualCompressionPage, loadBearingPage, independentVerificationPage, adopterConformancePage, selfConformancePage],
     formalPage: {
       id: "formal-model",
       title: formalDocument.title,
@@ -1548,6 +1684,7 @@ export const buildSiteBundle = ({
       markdown: normalizeLines(readFileSync(TERMINOLOGY_PATH, "utf8")),
     },
     agentHubPage,
+    delegatedWorkChallengePage,
     liveCases: {
       source: LIVE_CASE_REGISTRY_PATH,
       stableUrlPattern: "/cases/live/{id}",
@@ -1702,6 +1839,12 @@ export const readInputs = () => ({
   agentHubGuideText: readFileSync(AGENT_HUB_GUIDE_PATH, "utf8"),
   agentHubCapabilities: JSON.parse(readFileSync(AGENT_HUB_CAPABILITIES_PATH, "utf8")),
   agentHubManifest: JSON.parse(readFileSync(AGENT_HUB_MANIFEST_PATH, "utf8")),
+  delegatedWorkProfileText: readFileSync(DELEGATED_WORK_PROFILE_PATH, "utf8"),
+  delegatedWorkCapabilities: JSON.parse(readFileSync(DELEGATED_WORK_CAPABILITIES_PATH, "utf8")),
+  delegatedWorkManifest: JSON.parse(readFileSync(DELEGATED_WORK_MANIFEST_PATH, "utf8")),
+  adopterConformanceAuthorityText: readFileSync(ADOPTER_CONFORMANCE_AUTHORITY_PATH, "utf8"),
+  adopterConformanceGuideText: readFileSync(ADOPTER_CONFORMANCE_GUIDE_PATH, "utf8"),
+  adopterConformanceTestMatrix: JSON.parse(readFileSync(ADOPTER_CONFORMANCE_TEST_MATRIX_PATH, "utf8")),
   independentVerifierText: readFileSync(INDEPENDENT_VERIFIER_PATH, "utf8"),
   semanticMatrix: JSON.parse(readFileSync(SEMANTIC_MATRIX_PATH, "utf8")),
   warrantManifest: JSON.parse(readFileSync(WARRANT_MANIFEST_PATH, "utf8")),

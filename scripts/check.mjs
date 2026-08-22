@@ -56,6 +56,10 @@ const adopterCategoryInstanceSchema = JSON.parse(readFileSync(adopterCategoryIns
 const adopterCategoryInstanceVectorsPath = "profiles/adopter-conformance/category-instance-vectors.json";
 const adopterCategoryInstanceVectors = JSON.parse(readFileSync(adopterCategoryInstanceVectorsPath, "utf8"));
 const adopterCategoryInstanceVerifierPath = "scripts/adopter-category-instance-contract.mjs";
+const adopterImplementerGuidePath = "profiles/adopter-conformance/implementer-guide.md";
+const adopterImplementerTestMatrixPath = "profiles/adopter-conformance/test-matrix.json";
+const adopterImplementerTestMatrix = JSON.parse(readFileSync(adopterImplementerTestMatrixPath, "utf8"));
+const adopterImplementerCheckPath = "scripts/check-adopter-implementer-path.mjs";
 const foundationRevisionPath = "docs/foundation-revision-2026-07-21-decision-admission.json";
 const foundationRevision = JSON.parse(readFileSync(foundationRevisionPath, "utf8"));
 const packageJson = JSON.parse(readFileSync("package.json", "utf8"));
@@ -176,8 +180,12 @@ if (/^\s*release\s*:/m.test(recoveryWorkflowText) ||
     !recoveryWorkflowText.includes("work.authority?.mode !== \"capture-only\"")) {
   fail("release propagation recovery must be manual, capture-only, paused, and free of downstream write authority");
 }
-if (packageJson.bin?.kfd !== "./bin/kfd.mjs") {
-  fail("package.json must publish the kfd verifier bin");
+if (packageJson.bin?.kfd !== "./bin/kfd.mjs" ||
+    packageJson.bin?.["kfd-self-check"] !== "./bin/kfd-self-check.mjs" ||
+    packageJson.exports?.["./self-verification"] !== "./scripts/check.mjs" ||
+    packageJson.scripts?.["check:installed-package"] !== "node scripts/check-installed-package.mjs" ||
+    !packageJson.scripts?.check?.includes("npm run check:installed-package")) {
+  fail("package.json must publish the kfd bin, installed self-verification export, and clean-package check");
 }
 if (adopterConformanceSchema.$id !== "https://kfd.libkungfu.dev/schemas/kfd-adopter-conformance/manifest.schema.json" ||
     adopterConformanceSchema.properties?.contract?.const !== "kfd.adopter-conformance-manifest/v1" ||
@@ -207,6 +215,8 @@ if (adopterCategoryInstanceSchema.$id !== "https://kfd.libkungfu.dev/schemas/kfd
   fail("adopter category instances must expose one exact versioned manifest, schema, and vector contract");
 }
 if (packageJson.exports?.["./adopter-conformance/README.md"] !== "./profiles/adopter-conformance/README.md" ||
+    packageJson.exports?.["./adopter-conformance/implementer-guide.md"] !== `./${adopterImplementerGuidePath}` ||
+    packageJson.exports?.["./adopter-conformance/test-matrix.json"] !== `./${adopterImplementerTestMatrixPath}` ||
     packageJson.exports?.["./adopter-conformance/manifest.schema.json"] !== `./${adopterConformanceSchemaPath}` ||
     packageJson.exports?.["./adopter-conformance/category-profile-catalog.schema.json"] !== `./${adopterCategoryProfileSchemaPath}` ||
     packageJson.exports?.["./adopter-conformance/category-instance-manifest.schema.json"] !== `./${adopterCategoryInstanceSchemaPath}` ||
@@ -217,8 +227,20 @@ if (packageJson.exports?.["./adopter-conformance/README.md"] !== "./profiles/ado
     packageJson.exports?.["./adopter-conformance/category-instance-vectors.json"] !== `./${adopterCategoryInstanceVectorsPath}` ||
     packageJson.exports?.["./adopter-conformance/verifier"] !== `./${adopterConformanceVerifierPath}` ||
     packageJson.exports?.["./adopter-conformance/category-profile-resolver"] !== `./${adopterCategoryProfileResolverPath}` ||
-    packageJson.exports?.["./adopter-conformance/category-instance-verifier"] !== `./${adopterCategoryInstanceVerifierPath}`) {
-  fail("package.json must expose adopter conformance, category-profile, and category-instance schemas, diagnostics, vectors, and verifier seams");
+    packageJson.exports?.["./adopter-conformance/category-instance-verifier"] !== `./${adopterCategoryInstanceVerifierPath}` ||
+    packageJson.exports?.["./adopter-conformance/implementer-path-check"] !== `./${adopterImplementerCheckPath}` ||
+    packageJson.scripts?.["check:adopter-implementer-path"] !== `node ${adopterImplementerCheckPath}` ||
+    !packageJson.scripts?.check?.includes("npm run check:adopter-implementer-path")) {
+  fail("package.json must expose adopter conformance, category-profile, category-instance, and independent implementer surfaces");
+}
+if (adopterImplementerTestMatrix.contract !== "kfd.adopter-category-implementer-test-matrix/v1" ||
+    adopterImplementerTestMatrix.packageOnly !== true ||
+    adopterImplementerTestMatrix.cleanRoom?.networkRequired !== false ||
+    adopterImplementerTestMatrix.expectedAuthorityOutputs?.qualifying !== false ||
+    adopterImplementerTestMatrix.expectedAuthorityOutputs?.releaseAuthorized !== false ||
+    adopterImplementerTestMatrix.expectedAuthorityOutputs?.runtimeAuthorized !== false ||
+    adopterImplementerTestMatrix.expectedAuthorityOutputs?.independentlyCertified !== false) {
+  fail("adopter implementer matrix must preserve package-only replay and all non-authority outputs");
 }
 if (adopterConformanceIssueCodes.contract !== "kfd.adopter-conformance-issue-codes/v1" ||
     adopterConformanceVectors.contract !== "kfd.adopter-conformance-vectors/v1" ||
@@ -769,6 +791,11 @@ if (siteBundle.source?.agentHubCapabilities !== "profiles/agent-hub/cli-capabili
 if (siteBundle.source?.agentHubManifest !== "profiles/agent-hub/manifest.json") {
   fail("site bundle agentHubManifest source must be profiles/agent-hub/manifest.json");
 }
+if (siteBundle.source?.adopterConformanceAuthority !== "profiles/adopter-conformance/README.md" ||
+    siteBundle.source?.adopterConformanceGuide !== adopterImplementerGuidePath ||
+    siteBundle.source?.adopterConformanceTestMatrix !== adopterImplementerTestMatrixPath) {
+  fail("site bundle must expose the adopter authority, implementer guide, and test matrix sources");
+}
 if (siteBundle.homepage?.title !== "KFD — Kung Fu Decisions") fail("site bundle homepage title must match README H1 text");
 if (!Array.isArray(siteBundle.homepage?.sections) || siteBundle.homepage.sections.length === 0) {
   fail("site bundle homepage.sections must expose generated homepage and foundation sections");
@@ -791,8 +818,20 @@ if (siteBundle.routes?.candidateFormalPattern !== "/drafts/{id}/formal") {
   fail("site bundle routes.candidateFormalPattern must be /drafts/{id}/formal");
 }
 if (siteBundle.routes?.agentHub !== "/agent-hub") fail("site bundle routes.agentHub must be /agent-hub");
+if (siteBundle.routes?.adopterConformance !== "/adopter-conformance") {
+  fail("site bundle routes.adopterConformance must be /adopter-conformance");
+}
 if (siteBundle.routes?.independentVerification !== "/verify") {
   fail("site bundle routes.independentVerification must be /verify");
+}
+const adopterConformancePage = siteBundle.adopterConformancePage;
+if (adopterConformancePage?.url !== siteBundle.routes.adopterConformance ||
+    adopterConformancePage?.contract !== adopterImplementerTestMatrix.contract ||
+    adopterConformancePage?.packageOnly !== true ||
+    adopterConformancePage?.normative !== false ||
+    JSON.stringify(adopterConformancePage?.expectedAuthorityOutputs) !== JSON.stringify(adopterImplementerTestMatrix.expectedAuthorityOutputs) ||
+    JSON.stringify(adopterConformancePage?.updateMechanism) !== JSON.stringify(adopterImplementerTestMatrix.updateMechanism)) {
+  fail("site bundle adopter page must preserve the package-only matrix, update mechanism, and non-claims");
 }
 const agentHubPage = siteBundle.agentHubPage;
 if (agentHubPage?.url !== siteBundle.routes.agentHub) fail("site bundle agentHubPage.url must match routes.agentHub");
@@ -2610,7 +2649,7 @@ if (!kfd2Claim) {
     kfd2Claim.artifacts.forEach((entry, index) => checkKfd2Pointer(entry, `KFD-2 release trust claim artifacts[${index}]`));
   }
   if (kfd2Claim.verification?.result !== "passed") fail("KFD-2 release trust claim verification.result must be passed");
-  if (kfd2Claim.verification?.command !== "node scripts/check.mjs") fail("KFD-2 release trust claim verification.command must be node scripts/check.mjs");
+  if (kfd2Claim.verification?.command !== "kfd-self-check") fail("KFD-2 release trust claim verification.command must be kfd-self-check");
   if (!kfd2Claim.auditBoundary?.scope) fail("KFD-2 release trust claim auditBoundary.scope is required");
   if (kfd2Claim.auditBoundary?.enumerability !== "closed-world") fail("KFD-2 release trust claim auditBoundary.enumerability must be closed-world");
   if (!kfd2Claim.responsibility?.owner) fail("KFD-2 release trust claim responsibility.owner is required");
@@ -2796,6 +2835,9 @@ if (!kfd3Interface) {
   if (!kfd3Interface.minimalEntrypoints.some((entry) => entry.id === "official-status-and-trademarks" && entry.surface === "TRADEMARKS.md")) {
     fail("KFD-3 collaboration interface must expose TRADEMARKS.md as an official-status-and-trademarks entrypoint");
   }
+  if (!kfd3Interface.minimalEntrypoints.some((entry) => entry.id === "installed-package-self-verification" && entry.surface === "bin/kfd-self-check.mjs")) {
+    fail("KFD-3 collaboration interface must expose the installed package self-verification command");
+  }
   if (!Array.isArray(kfd3Interface.surfaces) || kfd3Interface.surfaces.length === 0) fail("KFD-3 collaboration interface surfaces[] is required");
   if (!kfd3Interface.surfaces.some((entry) => entry.id === "foundation" && entry.discoverability?.path === "docs/foundation.md")) {
     fail("KFD-3 collaboration interface must classify docs/foundation.md as a participant-facing surface");
@@ -2823,6 +2865,9 @@ if (!kfd3Interface) {
   }
   if (!kfd3Interface.surfaces.some((entry) => entry.id === "official-status-and-trademarks" && entry.discoverability?.path === "TRADEMARKS.md")) {
     fail("KFD-3 collaboration interface must expose TRADEMARKS.md as a participant-facing surface");
+  }
+  if (!kfd3Interface.surfaces.some((entry) => entry.id === "installed-package-self-verification" && entry.discoverability?.path === "bin/kfd-self-check.mjs")) {
+    fail("KFD-3 collaboration interface must classify the installed package self-verification command");
   }
   for (const [surfaceId, surfacePath] of [
     ["kfd-proposal-form", ".github/ISSUE_TEMPLATE/kfd-proposal.yml"],

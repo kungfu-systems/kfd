@@ -23,6 +23,7 @@ const entries = [
   ["schemas/kfd-agent-hub/suite.schema.json", "schema"],
   ["schemas/kfd-agent-hub/report.schema.json", "schema"],
   ["scripts/agent-hub-runner.mjs", "runner"],
+  ["scripts/jsonl-adapter-runner.mjs", "runner"],
   ["scripts/agent-hub-report-verifier.mjs", "verifier"],
   ["scripts/agent-hub-scaffold.mjs", "scaffold"],
   ["scripts/generate-agent-hub-vectors.mjs", "reference"],

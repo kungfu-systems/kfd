@@ -19,6 +19,12 @@
     "agentHubGuide": "profiles/agent-hub/implementer-guide.md",
     "agentHubCapabilities": "profiles/agent-hub/cli-capabilities.json",
     "agentHubManifest": "profiles/agent-hub/manifest.json",
+    "delegatedWorkProfile": "profiles/delegated-work-challenge/README.md",
+    "delegatedWorkCapabilities": "profiles/delegated-work-challenge/cli-capabilities.json",
+    "delegatedWorkManifest": "profiles/delegated-work-challenge/manifest.json",
+    "adopterConformanceAuthority": "profiles/adopter-conformance/README.md",
+    "adopterConformanceGuide": "profiles/adopter-conformance/implementer-guide.md",
+    "adopterConformanceTestMatrix": "profiles/adopter-conformance/test-matrix.json",
     "independentVerifier": "docs/independent-verifier.md",
     "semanticSelfSufficiencyMatrix": "evidence/semantic-self-sufficiency/kfd-1-13.json",
     "semanticSelfSufficiencySchema": "schemas/kfd-semantic-self-sufficiency-matrix.schema.json",
@@ -53,6 +59,8 @@
     "candidatePattern": "/drafts/{id}",
     "candidateFormalPattern": "/drafts/{id}/formal",
     "agentHub": "/agent-hub",
+    "delegatedWork": "/delegated-work",
+    "adopterConformance": "/adopter-conformance",
     "independentVerification": "/verify",
     "selfConformance": "/verify/self-conformance",
     "decisionPattern": "/{number}",
@@ -117,7 +125,7 @@
       "promise": "Implement KFD without Kungfu — scaffold an adapter in Python, Rust, Node.js, or C++, then verify it offline.",
       "release": {
         "package": "@kungfu-tech/kfd",
-        "version": "1.0.0-alpha.67",
+        "version": "1.0.0-alpha.68",
         "anchor": "kfd.release.json",
         "immutable": true
       },
@@ -147,7 +155,7 @@
         {
           "id": "scaffold",
           "label": "Scaffold",
-          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.67 kfd scaffold agent-hub --language python --output my-agent-hub-adapter",
+          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.68 kfd scaffold agent-hub --language python --output my-agent-hub-adapter",
           "capability": "kfd scaffold agent-hub --language <cpp|node|python|rust> --output <new-directory> [--json]"
         },
         {
@@ -164,14 +172,14 @@
         {
           "id": "test",
           "label": "Test Hub 20",
-          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.67 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json",
+          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.68 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json",
           "capability": "kfd test agent-hub --adapter <path> --output <report.json>",
           "starterExpectedExitCode": 1
         },
         {
           "id": "verify",
           "label": "Verify report evidence",
-          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.67 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py",
+          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.68 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py",
           "capability": "kfd verify agent-hub-report <report.json> [--adapter <path>] [--json]",
           "expectedExitCode": 0
         }
@@ -212,7 +220,7 @@
             "qualifying": false,
             "certification": false
           },
-          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.67 kfd demo agent-hub --output agent-hub-demo-report.json"
+          "command": "npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.68 kfd demo agent-hub --output agent-hub-demo-report.json"
         },
         "starter": {
           "purpose": "Implement product-owned Hub semantics from a fail-closed starter.",
@@ -246,7 +254,7 @@
         "capabilityBoundary": "Each KFD GitHub Release now carries Rust-native archives for Linux x86_64 and arm64, macOS x86_64 and arm64, and Windows x86_64. The executable name is permanently `kfd` (`kfd.exe` on Windows), and `kfd --version` matches the exact KFD Release version. The native CLI provides `verify` and `bundle`; use the npm workflow above when you need `scaffold` or `test` orchestration. Every target includes a SHA-256 file and source-bound provenance. See [Native CLI downloads and capability boundaries](docs/native-cli.md).",
         "docs": {
           "label": "Native CLI downloads and capability boundaries",
-          "url": "https://github.com/kungfu-systems/kfd/blob/v1.0.0-alpha.67/docs/native-cli.md"
+          "url": "https://github.com/kungfu-systems/kfd/blob/v1.0.0-alpha.68/docs/native-cli.md"
         }
       },
       "links": [
@@ -575,7 +583,7 @@
         "homepagePriority": 8,
         "defaultPresentation": "independent-implementation-steps",
         "includeInFirstScreen": true,
-        "markdown": "**Implement KFD without Kungfu — scaffold an adapter in Python, Rust, Node.js,\nor C++, then verify it offline.**\n\nUse the immutable `@kungfu-tech/kfd@1.0.0-alpha.67` package cut and follow the\npackage-owned [Agent Hub workflow](profiles/agent-hub/README.md) or inspect the\ncomplete [independent verification boundary](docs/independent-verifier.md):\n\nFor a two-minute success path, run `npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.67 kfd demo agent-hub --output agent-hub-demo-report.json`. It produces behavior `20/20`, evidence `valid`, and no qualification or certification.\n\n```bash\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.67 kfd scaffold agent-hub --language python --output my-agent-hub-adapter\npython3 my-agent-hub-adapter/smoke.py\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.67 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.67 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py\n```\n\nThe scaffold is a deterministic, fail-closed starter. Before implementation,\nsmoke exits `0`, Hub 20 exits `1` at `0/20`, and offline evidence verification\nexits `0` with `valid`; qualification and certification stay `false`.\nImplementers then replace `evaluate()` with product decisions across\nnegotiation, delivery, authority, conflict, knowledge, completion, recovery,\nand portability until Hub 20 reaches `20/20`.\n\nPackage acquisition is separate from offline verification. Network or a local\npackage cache may be needed to obtain the immutable package bytes; after the\npackage, report, and optional adapter bytes are present, the report verifier\nperforms no network access.\n\nThese results do not certify an implementation or prove security, production\nfitness, complete semantic coverage, KFD-10 activation, or adoption by an\nindependent organization. [Verify an Agent Hub report](/agent-hub/#report-verification) ·\n[Explore other KFD verification profiles](/verify/)\n\n### Native `kfd`\n\nInstall the Rust-native offline verifier on macOS or Linux with Homebrew. No\ncoding is required to install it or verify an existing KFD report:\n\n```bash\nbrew install kungfu-systems/tap/kfd\nkfd --version\n```\n\nEach KFD GitHub Release now carries Rust-native archives for Linux x86_64 and\narm64, macOS x86_64 and arm64, and Windows x86_64. The executable name is\npermanently `kfd` (`kfd.exe` on Windows), and `kfd --version` matches the exact\nKFD Release version. The native CLI provides `verify` and `bundle`; use the npm\nworkflow above when you need `scaffold` or `test` orchestration. Every target\nincludes a SHA-256 file and source-bound provenance. See\n[Native CLI downloads and capability boundaries](docs/native-cli.md)."
+        "markdown": "**Implement KFD without Kungfu — scaffold an adapter in Python, Rust, Node.js,\nor C++, then verify it offline.**\n\nUse the immutable `@kungfu-tech/kfd@1.0.0-alpha.68` package cut and follow the\npackage-owned [Agent Hub workflow](profiles/agent-hub/README.md) or inspect the\ncomplete [independent verification boundary](docs/independent-verifier.md):\n\nFor a two-minute success path, run `npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.68 kfd demo agent-hub --output agent-hub-demo-report.json`. It produces behavior `20/20`, evidence `valid`, and no qualification or certification.\n\n```bash\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.68 kfd scaffold agent-hub --language python --output my-agent-hub-adapter\npython3 my-agent-hub-adapter/smoke.py\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.68 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.68 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py\n```\n\nThe scaffold is a deterministic, fail-closed starter. Before implementation,\nsmoke exits `0`, Hub 20 exits `1` at `0/20`, and offline evidence verification\nexits `0` with `valid`; qualification and certification stay `false`.\nImplementers then replace `evaluate()` with product decisions across\nnegotiation, delivery, authority, conflict, knowledge, completion, recovery,\nand portability until Hub 20 reaches `20/20`.\n\nPackage acquisition is separate from offline verification. Network or a local\npackage cache may be needed to obtain the immutable package bytes; after the\npackage, report, and optional adapter bytes are present, the report verifier\nperforms no network access.\n\nThese results do not certify an implementation or prove security, production\nfitness, complete semantic coverage, KFD-10 activation, or adoption by an\nindependent organization. [Verify an Agent Hub report](/agent-hub/#report-verification) ·\n[Explore other KFD verification profiles](/verify/)\n\n### Native `kfd`\n\nInstall the Rust-native offline verifier on macOS or Linux with Homebrew. No\ncoding is required to install it or verify an existing KFD report:\n\n```bash\nbrew install kungfu-systems/tap/kfd\nkfd --version\n```\n\nEach KFD GitHub Release now carries Rust-native archives for Linux x86_64 and\narm64, macOS x86_64 and arm64, and Windows x86_64. The executable name is\npermanently `kfd` (`kfd.exe` on Windows), and `kfd --version` matches the exact\nKFD Release version. The native CLI provides `verify` and `bundle`; use the npm\nworkflow above when you need `scaffold` or `test` orchestration. Every target\nincludes a SHA-256 file and source-bound provenance. See\n[Native CLI downloads and capability boundaries](docs/native-cli.md)."
       },
       {
         "id": "foundation-triad",
@@ -759,6 +767,7 @@
         "/concepts",
         "/foundation",
         "/verify",
+        "/adopter-conformance",
         "/verify/self-conformance",
         "/under-load",
         "/formal",
@@ -812,7 +821,7 @@
     "relationship": "non-normative-reader-compression-of-numbered-decisions",
     "normative": false,
     "authorityNote": "Numbered decisions remain authoritative; terminology.json owns the canonical names and anti-misreading boundaries projected by this page.",
-    "lead": "# KFD Conceptual Compression",
+    "lead": "If the agent is treated as the center of truth, difficult cases collapse into false equivalences: a running agent appears to remain authorized; a retry appears to be the same task again; the same output appears to be the same result; and a successful run appears to have established accepted state. Real systems can break every one of those equivalences.",
     "coreModel": {
       "ontology": {
         "structure": {
@@ -1777,6 +1786,149 @@
       }
     ]
   },
+  "adopterConformancePage": {
+    "id": "adopter-conformance",
+    "title": "Implement the adopter category contracts from one package",
+    "sourcePath": "profiles/adopter-conformance/implementer-guide.md",
+    "authorityPath": "profiles/adopter-conformance/README.md",
+    "testMatrixPath": "profiles/adopter-conformance/test-matrix.json",
+    "url": "/adopter-conformance",
+    "relationship": "package-only-adopter-category-implementation-path",
+    "normative": false,
+    "lead": "This guide is for an implementer starting from one exact unpacked `@kungfu-tech/kfd` package. It does not require a KFD source checkout, a founding-product checkout, credentials, hosted services, mutable npm tags, ambient Home state, or network access. Retain the package tarball and its independently observed SHA-256 root before extracting it.",
+    "contract": "kfd.adopter-category-implementer-test-matrix/v1",
+    "packageOnly": true,
+    "cleanRoom": {
+      "source": "one exact @kungfu-tech/kfd npm tarball",
+      "emptyHome": true,
+      "networkRequired": false,
+      "sourceCheckoutRequired": false,
+      "siblingRepositoryRequired": false,
+      "ambientCacheAuthority": false
+    },
+    "componentChecks": [
+      {
+        "id": "full-cut-manifest",
+        "command": "node scripts/check-adopter-conformance.mjs",
+        "expected": "fixed positive and fail-closed full-cut vectors pass"
+      },
+      {
+        "id": "category-profiles",
+        "command": "node scripts/check-adopter-category-profiles.mjs",
+        "expected": "project-neutral composition and conflict vectors pass"
+      },
+      {
+        "id": "category-instances",
+        "command": "node scripts/check-adopter-category-instances.mjs",
+        "expected": "project-bound evidence and substitution vectors pass"
+      },
+      {
+        "id": "evidence-matrix",
+        "command": "node scripts/check-adopter-category-evidence-matrix.mjs",
+        "expected": "pending, terminal, gap, role, and authority vectors pass"
+      },
+      {
+        "id": "family-reconciliation",
+        "command": "node scripts/check-adopter-category-family-reconciliation.mjs",
+        "expected": "predecessor child set, terminal roots, protected delivery, failure history, gaps, and authority vectors pass"
+      },
+      {
+        "id": "adopter-toolchain",
+        "command": "node scripts/check-adopter-toolchain.mjs",
+        "expected": "package-only init, witness, verify, diff, and bundle pass"
+      }
+    ],
+    "authorityBoundaries": {
+      "kfdSpecification": "schemas, category vocabulary, fixed vectors, reference verifiers, and compatibility",
+      "buildchainDelivery": "protocol-neutral evidence transport and delivery gating only",
+      "assignment": "execution and terminal work-control closure only",
+      "categoryComposition": "deterministic resolution of declared versioned profiles only",
+      "project": "project source, artifact, release, declaration, evidence, and gaps",
+      "delivery": "release permission remains external to KFD verification",
+      "runtime": "runtime action permission remains external to KFD verification",
+      "independentCertification": "requires an explicitly separate certifier"
+    },
+    "expectedAuthorityOutputs": {
+      "qualifying": false,
+      "releaseAuthorized": false,
+      "runtimeAuthorized": false,
+      "independentlyCertified": false
+    },
+    "publicSurfaces": {
+      "authority": "profiles/adopter-conformance/README.md",
+      "implementerGuide": "profiles/adopter-conformance/implementer-guide.md",
+      "testMatrix": "profiles/adopter-conformance/test-matrix.json",
+      "inventory": "profiles/adopter-conformance/toolchain.json",
+      "familyReconciliation": "profiles/adopter-conformance/family-reconciliation.json",
+      "siteRoute": "/adopter-conformance"
+    },
+    "updateMechanism": {
+      "compatibleAddition": "add an explicit package path and inventory member",
+      "semanticChange": "publish a successor contract and fixed vectors",
+      "profileChange": "publish a new profile version and require explicit reselection",
+      "projectChange": "bind new source, artifact, release, manifest, package, and selection roots",
+      "failureRepair": "retain failureHistory and add current proof separately"
+    },
+    "sections": [
+      {
+        "id": "reproduce-the-complete-contract-surface",
+        "title": "Reproduce the complete contract surface",
+        "sourcePath": "profiles/adopter-conformance/implementer-guide.md",
+        "sourceHeading": "Reproduce the complete contract surface",
+        "defaultPresentation": "implementer-contract",
+        "markdown": "Read `profiles/adopter-conformance/toolchain.json` as the package inventory.\nImplement the surfaces in this order:\n\n1. reproduce the full-cut adopter manifest schema and fixed vectors;\n2. validate the project-neutral category catalog and deterministic profile\n   composition;\n3. bind one category selection to one project instance and fresh,\n   project-owned evidence;\n4. reproduce the cross-project evidence matrix, including explicit pending\n   rows, owned gaps, retained failure history, and terminal roots;\n5. verify the predecessor-family proof index without treating Assignment\n   closure as KFD semantic or delivery authority, then inspect the completed\n   project evidence at `profiles/adopter-conformance/family-reconciliation.json`;\n6. run the package-only CLI toolchain and the complete test matrix.\n\nThe machine-readable order, expected outputs, clean-room constraints, public\nsurface paths, and authority boundaries are fixed in\n`profiles/adopter-conformance/test-matrix.json`."
+      },
+      {
+        "id": "run-the-clean-room-entrypoint",
+        "title": "Run the clean-room entrypoint",
+        "sourcePath": "profiles/adopter-conformance/implementer-guide.md",
+        "sourceHeading": "Run the clean-room entrypoint",
+        "defaultPresentation": "implementer-contract",
+        "markdown": "From the unpacked package root, run:\n\n```sh\nnpm run check:adopter-implementer-path\n```\n\nThe entrypoint first packs the exact current package and extracts it to a\ntemporary directory. It then creates an empty Home and replays the component\nchecks from the extracted package with package-only recursion guards. The\nentrypoint fails if a required package export, inventory member, guide\nboundary, component command, or expected non-claim drifts.\n\nThe test removes only its own temporary directory. It does not read sibling\nrepositories, write the source tree, use a package cache as authority, or\ncontact a service. A passing run proves that the published package contains a\nself-consistent reference path and its fixed negative cases. It does not prove\nthat a downstream adopter supplied real project evidence."
+      },
+      {
+        "id": "keep-authorities-separate",
+        "title": "Keep authorities separate",
+        "sourcePath": "profiles/adopter-conformance/implementer-guide.md",
+        "sourceHeading": "Keep authorities separate",
+        "defaultPresentation": "implementer-contract",
+        "markdown": "- **KFD specification authority** owns the adopter contracts, category\n  vocabulary, schemas, fixed vectors, reference verifiers, and compatibility\n  rules.\n- **Buildchain delivery authority** may transport exact evidence and enforce a\n  protocol-neutral gate. It cannot reinterpret KFD semantics or certify an\n  adopter.\n- **Assignment work-control authority** owns execution and terminal closure.\n  Its seal is coordination evidence, never normative KFD or protected-delivery\n  evidence.\n- **Category composition authority** resolves only the declared, versioned\n  category catalog. It transfers neither project evidence nor semantic\n  authority.\n- **Project authority** owns its source, artifact, release coordinates,\n  category-instance declaration, evidence, and residual gaps.\n- **Delivery and runtime authorities** separately decide whether an artifact\n  may be released or a runtime may act. A KFD verification report grants\n  neither permission.\n- **Independent certification authority** must be explicitly external to the\n  declaration and reference verifier. No package-only self-check mints it."
+      },
+      {
+        "id": "update-without-silently-changing-meaning",
+        "title": "Update without silently changing meaning",
+        "sourcePath": "profiles/adopter-conformance/implementer-guide.md",
+        "sourceHeading": "Update without silently changing meaning",
+        "defaultPresentation": "implementer-contract",
+        "markdown": "Compatible additions use new package paths and explicit inventory entries.\nChanging a required field, evidence role, root algorithm, authority boundary,\ncategory requirement, or diagnostic meaning requires a successor contract and\nnew fixed vectors. Keep the prior package and rooted reports immutable; create\nnew project instances or matrix rows for the successor cut instead of editing\nold evidence in place.\n\nThe family proof index follows the same rule: preserve the declared child set,\nterminal roots, protected merge coordinate, release or installed-readback\ncoordinates, retained failures, and owned gaps. A new family cut gets a new\nroot; it does not overwrite predecessor evidence or turn Assignment closure\ninto a specification claim.\n\nWhen a category profile changes, publish a new profile version and require an\nexplicit selection update. When a project changes, bind the new source,\nartifact, release, manifest, package, and selection roots. When a failure is\nrepaired, retain it in `failureHistory` and add current proof separately."
+      },
+      {
+        "id": "interpret-the-result-narrowly",
+        "title": "Interpret the result narrowly",
+        "sourcePath": "profiles/adopter-conformance/implementer-guide.md",
+        "sourceHeading": "Interpret the result narrowly",
+        "defaultPresentation": "implementer-contract",
+        "markdown": "The implementer path reports only whether the package can reproduce its\ndeclared contracts and fixed cases. Its expected authority outputs remain\n`qualifying: false`, `releaseAuthorized: false`, `runtimeAuthorized: false`,\nand `independentlyCertified: false`. Project closure requires exact,\nproject-owned evidence and an independently governed terminal decision."
+      }
+    ],
+    "authorityTitle": "KFD Full-Cut Adopter Conformance Manifest v1",
+    "authorityMarkdown": "# KFD Full-Cut Adopter Conformance Manifest v1\n\n`kfd.adopter-conformance-manifest/v1` is the KFD-owned declaration contract\nfor an adopter that binds its work to one exact packaged KFD cut. It is\npackage-only: a clean-room adopter can implement it from `@kungfu-tech/kfd`\nwithout a KFD source checkout, a founding-product checkout, hosted services,\ncredentials, private repositories, or ambient Home state.\n\nThe canonical schema is\n`schemas/kfd-adopter-conformance/manifest.schema.json`. Its required decision\nrows are derived from the `entries` array of the manifest's pinned\n`registry.json`, never from a first-party allowlist or a verifier's built-in\ndecision list.\n\n## Exact cut and canonical roots\n\nThe manifest binds the exact package artifact, `registry.json`,\n`standards.json`, schema set, vector set, verifier set, and derived decision\nset. JSON semantic and set roots use `sha256-kfd-canonical-json-v1`:\n\n- input JSON has no duplicate keys;\n- object keys are ordered by UTF-8 byte order;\n- strings and keys are NFC-normalized before admission;\n- integers are non-negative and no greater than `2^53 - 1`;\n- floats and exponent forms are forbidden;\n- canonical JSON contains no insignificant whitespace and ends in one LF;\n- SHA-256 is encoded as `sha256:` plus 64 lowercase hexadecimal digits.\n\n`sha256-bytes-v1` applies SHA-256 directly to immutable package or file bytes.\nEach schema, vector, and verifier member carries its package-relative path and\nbyte root. The corresponding set root is the semantic root of the complete\nUTF-8 path-sorted member array. Omission, duplication, path traversal, member\nsubstitution, or a member byte-root mismatch therefore changes or invalidates\nthe set root. Empty vector sets are explicit; schema and verifier sets are not.\n\nThe manifest root is computed over the complete manifest object. The object\ndoes not contain its own root, so the recursion is finite. Set-like arrays are\nUTF-8 sorted and duplicate-free. Order-sensitive registry arrays retain their\npublished order.\n\n`decisionSetRoot` is the semantic root of the ordered projection\n`[{id,number,status,path}]` from every pinned registry entry. A conforming\nverifier requires exact equality between that projection and `decisions`:\nmissing rows, duplicate rows, additional rows, changed numbers, substituted\nIDs, or stale registry status fail closed.\n\n## Decision declarations\n\nEvery registry entry has exactly one declaration row with one state:\n\n- `adopted`: the adopter declares use and binds implementation, verification,\n  decision-specific witness, and release evidence;\n- `candidate`: the adopter is evaluating or using an implementation without\n  claiming completed adoption;\n- `draft-evidence`: evidence is retained for a registry entry that is still\n  draft; it cannot widen the decision's status or authority;\n- `unsupported`: the adopter names the unresolved gap and makes no implicit\n  support claim;\n- `not-used`: the adopter declares no use and supplies no implementation,\n  verification, witness, release binding, or claim.\n\nEvidence references bind their observation time and the same KFD package root.\nWitness bindings additionally bind the decision ID, profile manifest, witness,\nverifier, and package cut. Release bindings join an exact adopter artifact and\nRelease Passport to the same KFD package root. Reusing evidence from another\ndecision, profile, package cut, or release is substitution, not conformance.\n\nThe schema expresses structural state constraints. The package verifier owns\nthe cross-object checks for set conservation, root reproduction, reference\nresolution, stale evidence, undeclared use, and claim widening.\n\n## Project-neutral category profiles\n\n`profiles/adopter-conformance/category-profiles.json` defines a versioned base\nprofile and the initial `specification-authority`, `delivery-infrastructure`,\n`product-runtime`, and `independent-clean-room` profiles. The catalog contains\nno adopter or project IDs. Each category adds evidence obligations above the\nbase full-cut declaration; it does not change the meaning of any non-KFD\nspecification.\n\n`resolveAdopterCategoryProfiles` in\n`scripts/adopter-category-profile-contract.mjs` resolves the base profile and\nall transitive parents, then emits UTF-8-sorted profile references and the\ndeterministic union of requirement identities. Repeated identical obligations\ncoalesce. The same requirement identity with different bytes, inheritance\ncycles, duplicate selections, unknown profiles, stale versions, or attempts to\nmake evidence transferable fail with stable `acp-*` issue codes.\n\nCategory resolution is declaration-only. It never transfers implementation\nevidence between adopters and never grants semantic authority, runtime\npermission, release authorization, or independent certification. The catalog\nschema and fixed cross-profile vectors are exported from the npm package so a\nclean-room implementation can reproduce these rules without a source checkout.\n\n## Project category instances and evidence ownership\n\n`kfd.adopter-category-instance-manifest/v1` is the explicit project-instance\nlayer. It binds one adopter identity and its exact source, artifact, and release\ncoordinates to one verified full-cut adopter manifest, KFD package root,\ncategory-catalog root, deterministic selection root, and the complete resolved\nrequirement set. Every evidence item repeats the project root, adopter-manifest\nroot, KFD package root, and selection root. Evidence copied from another\nproject, package cut, manifest, or category selection therefore fails closed;\ncategory composition never inherits another adopter's evidence.\n\nThe package verifier in\n`scripts/adopter-category-instance-contract.mjs` requires a valid report for\nthe referenced full-cut manifest and an explicit evidence-freshness cut. It\nthen checks exact requirement conservation and each profile's evidence-kind\nminimums. Missing evidence, stale evidence, stale profile versions, invalid\ncomposition, coordinate substitution, root drift, and authority widening use\nstable `acp-*` diagnostics. A passing report says only that this declaration\nand its evidence conform to the selected category contract. It cannot approve\nor publish a release, authorize a runtime, transfer semantic authority, or\nindependently certify the project.\n\nExisting `kfd.adopter-conformance-manifest/v1` files remain valid unprofiled\nfull-cut declarations. Absence of a category-instance manifest is never\nsilently reinterpreted as selection of the base category. Migration is\nexplicit and additive: retain the immutable full-cut manifest, create a new\ncategory-instance manifest that references its exact root, select zero\nadditional profiles for base-only conformance or name exact versioned category\nprofiles, and provide fresh project-bound evidence for every resolved\nrequirement. Old evidence is reusable only when it already carries every exact\nversion 1 project binding; otherwise it remains historical input rather than\nconformance evidence.\n\n## Cross-project evidence matrix\n\n`kfd.adopter-category-evidence-matrix/v1` is the package-owned aggregation\ncontract for comparing category coverage across projects without transferring\ntheir evidence or authority. Its schema, fixed vectors, and offline verifier\nare published beside the category catalog. A matrix reproduces every catalog\nprofile and resolved requirement identity, then keeps normative KFD bytes,\ncategory requirements, project-instance evidence, delivery evidence, runtime\nevidence, and independent review in distinct roles.\n\nProject rows may remain `pending` with no terminal root. This is a valid and\nexplicit incomplete state, not conformance closure. A terminal row requires an\nexact root and only verified current evidence; category-specific delivery,\nruntime, and independent-review roles remain mandatory. Every referenced gap\nhas one owner, open gaps have no closure root, and closed gaps bind exact\nevidence. Failure history is retained separately from current proof rows.\n\nThe verifier reports `valid` and `complete` independently. It returns\n`complete: true` only when every project is terminal and every gap is closed,\nwhile always returning `qualifying: false`, `releaseAuthorized: false`,\n`runtimeAuthorized: false`, and `independentlyCertified: false`. Buildchain may\ncarry the matrix through a protocol-neutral delivery gate, but it cannot\nwiden, reinterpret, certify, or privately supplement KFD semantics.\n\n## Family reconciliation proof index\n\n`kfd.adopter-category-family-reconciliation/v1` is a public, package-owned\nindex for checking that one declared predecessor Assignment set is represented\nexactly once. Each child row binds its request and normalized work-definition\nroots, native terminal and query-proof roots, one protected-merge coordinate,\nadditional release or readback evidence, retained failures, and explicitly\nowned gaps. Pending children and open gaps are valid incomplete states.\nEvery delivery `root` is the canonical semantic root of that delivery row with\nthe `root` field omitted; retained failure roots follow the same rule for\n`evidenceRoot`. The verifier recomputes both, so a coordinate or head cannot be\nchanged without an explicit new root.\n\nAssignment closure remains work-control evidence; it is never normative KFD\nevidence. Protected merge, package or release, installed readback, runtime\npermission, and independent certification remain separately governed. The\nreference verifier therefore reports completeness independently while always\nreturning `qualifying: false`, `releaseAuthorized: false`,\n`runtimeAuthorized: false`, and `independentlyCertified: false`.\n\nThe completed seven-child proof for the adopter-category initiative is\npublished at `profiles/adopter-conformance/family-reconciliation.json`. It is\nproject evidence, not a fixed vector or normative input to KFD semantics. The\npackage and `/adopter-conformance` route expose its exact path, while the\npackage-only check reproduces its family root and requires terminal native\nroots plus verified protected-merge coordinates for every declared child.\n\n## Package-only verification seam\n\nThe version 1 reference seam is published as\n`scripts/adopter-conformance-contract.mjs`. It accepts the manifest together\nwith strictly admitted JSON values for the pinned registry and standards plus\nexplicit bytes for schema, vector, verifier, and referenced profile-manifest\nsurfaces. The caller also supplies the expected package artifact root and an\nevidence policy containing one `verifiedAt` cut and `maxAgeSeconds`. Neither\nwall-clock time nor a local cache is read implicitly, so the same inputs\nreproduce the same result offline.\n\n`deriveAdopterCut` constructs the rooted cut from those bytes.\n`verifyAdopterManifest` returns `kfd.verification-report/v1` with stable issue\ncodes from `profiles/adopter-conformance/issue-codes.json`. The fixed suite in\n`profiles/adopter-conformance/vectors.json` retains one positive full-cut case\nand fail-closed cases for missing, duplicate, and reordered rows, registry\nmismatch, draft widening, witness and release mismatch, root substitution,\nstale evidence, undeclared use, and claims on a `not-used` row.\n\nThe package CLI exposes the same seam through `kfd adopter init`, `witness`,\n`verify`, `diff`, and `bundle`. Its fixed inventory is\n`profiles/adopter-conformance/toolchain.json`; the Agent-readable invocation,\nmachine-output, and recovery contract is\n`profiles/adopter-conformance/agent-brief.md`. The Node projection is complete\nfor these five package-only operations. Native and WebAssembly parity is a\nseparate required delivery surface and is not inferred from this JavaScript\nimplementation. No passing report makes an adoption, release, runtime, or\ncertification decision.\n\n## Independent implementer path\n\n`profiles/adopter-conformance/implementer-guide.md` and the machine-readable\n`profiles/adopter-conformance/test-matrix.json` define one package-only path\nfrom an exact npm tarball to the complete full-cut, category-profile,\nproject-instance, evidence-matrix, family-reconciliation, and adopter-toolchain\ntest sequence.\n`npm run check:adopter-implementer-path` extracts the package into a temporary\nclean room with an empty Home and replays that sequence without a source\ncheckout, sibling repository, network requirement, or ambient cache authority.\n\nThe inventory at `profiles/adopter-conformance/toolchain.json` lists every\nschema, vector, verifier, guide, and test-matrix member required by this path.\nThe package and `/adopter-conformance` site route expose the same update rule:\ncompatible additions receive explicit paths and inventory entries; semantic,\nprofile, or project changes require successor contracts, versions, or newly\nrooted project evidence. Repaired failures remain in failure history rather\nthan being overwritten.\n\nThis clean-room path proves package completeness and deterministic replay only.\nIt does not supply a downstream project's evidence and keeps KFD, Buildchain,\ncategory, project, delivery, runtime, and independent-certification authority\nseparate.\n\n## KFD self-declaration\n\nKFD dogfoods the contract at\n`profiles/adopter-conformance/adopters/kfd/manifest.json`. Its package root is\nthe canonical semantic root of the exact package name/version, registry,\nstandards, schema set, vector set, verifier set, and derived decision set. This\nfinite cut deliberately excludes the self-manifest from its own preimage.\nThe npm tarball integrity, source commit, GitHub release, and Release Passport\nremain separate publication facts and must be read back independently.\n\nThe declaration covers every registry row and preserves uncertainty: active\nuses remain `candidate` without independent decision-specific assessment,\ndraft evidence remains `draft-evidence`, unsupported surfaces remain explicit,\nand unused drafts remain `not-used`. `node scripts/check-kfd-self-adopter.mjs`\nreproduces all evidence roots, rejects cut and authority substitutions, and\nreplays from a clean packed-package extraction without Home or network state.\n\n## Five separate authorities\n\nThe following layers must not be collapsed:\n\n1. **declaration** says what the adopter claims to use;\n2. **evidence** supplies rooted observations about that declaration;\n3. **release binding** joins evidence to an exact artifact and Passport;\n4. **runtime permission** remains with the adopter's runtime authority;\n5. **independent certification** requires a separately identified certifier\n   and is never minted by this manifest or its verifier.\n\nA structurally valid or verifier-passing manifest does not activate a draft,\nestablish semantic truth, authorize runtime action, authorize release, certify\nthe adopter, or grant the right to use KFD trademarks. `claimBoundary` fixes\nthose non-claims in every manifest.\n\n## Compatibility\n\nThis version is selected by the exact contract string, schema ID, package cut,\nand rooted verifier/vector surfaces. Compatible optional additions require a\nnew schema that explicitly preserves version 1 meaning. Changes to required\nrows, states, root semantics, evidence roles, witness/release bindings, or\nauthority boundaries require a successor contract.",
+    "markdown": "# Implement the adopter category contracts from one package\n\nThis guide is for an implementer starting from one exact unpacked\n`@kungfu-tech/kfd` package. It does not require a KFD source checkout, a\nfounding-product checkout, credentials, hosted services, mutable npm tags,\nambient Home state, or network access. Retain the package tarball and its\nindependently observed SHA-256 root before extracting it.\n\n## Reproduce the complete contract surface\n\nRead `profiles/adopter-conformance/toolchain.json` as the package inventory.\nImplement the surfaces in this order:\n\n1. reproduce the full-cut adopter manifest schema and fixed vectors;\n2. validate the project-neutral category catalog and deterministic profile\n   composition;\n3. bind one category selection to one project instance and fresh,\n   project-owned evidence;\n4. reproduce the cross-project evidence matrix, including explicit pending\n   rows, owned gaps, retained failure history, and terminal roots;\n5. verify the predecessor-family proof index without treating Assignment\n   closure as KFD semantic or delivery authority, then inspect the completed\n   project evidence at `profiles/adopter-conformance/family-reconciliation.json`;\n6. run the package-only CLI toolchain and the complete test matrix.\n\nThe machine-readable order, expected outputs, clean-room constraints, public\nsurface paths, and authority boundaries are fixed in\n`profiles/adopter-conformance/test-matrix.json`.\n\n## Run the clean-room entrypoint\n\nFrom the unpacked package root, run:\n\n```sh\nnpm run check:adopter-implementer-path\n```\n\nThe entrypoint first packs the exact current package and extracts it to a\ntemporary directory. It then creates an empty Home and replays the component\nchecks from the extracted package with package-only recursion guards. The\nentrypoint fails if a required package export, inventory member, guide\nboundary, component command, or expected non-claim drifts.\n\nThe test removes only its own temporary directory. It does not read sibling\nrepositories, write the source tree, use a package cache as authority, or\ncontact a service. A passing run proves that the published package contains a\nself-consistent reference path and its fixed negative cases. It does not prove\nthat a downstream adopter supplied real project evidence.\n\n## Keep authorities separate\n\n- **KFD specification authority** owns the adopter contracts, category\n  vocabulary, schemas, fixed vectors, reference verifiers, and compatibility\n  rules.\n- **Buildchain delivery authority** may transport exact evidence and enforce a\n  protocol-neutral gate. It cannot reinterpret KFD semantics or certify an\n  adopter.\n- **Assignment work-control authority** owns execution and terminal closure.\n  Its seal is coordination evidence, never normative KFD or protected-delivery\n  evidence.\n- **Category composition authority** resolves only the declared, versioned\n  category catalog. It transfers neither project evidence nor semantic\n  authority.\n- **Project authority** owns its source, artifact, release coordinates,\n  category-instance declaration, evidence, and residual gaps.\n- **Delivery and runtime authorities** separately decide whether an artifact\n  may be released or a runtime may act. A KFD verification report grants\n  neither permission.\n- **Independent certification authority** must be explicitly external to the\n  declaration and reference verifier. No package-only self-check mints it.\n\n## Update without silently changing meaning\n\nCompatible additions use new package paths and explicit inventory entries.\nChanging a required field, evidence role, root algorithm, authority boundary,\ncategory requirement, or diagnostic meaning requires a successor contract and\nnew fixed vectors. Keep the prior package and rooted reports immutable; create\nnew project instances or matrix rows for the successor cut instead of editing\nold evidence in place.\n\nThe family proof index follows the same rule: preserve the declared child set,\nterminal roots, protected merge coordinate, release or installed-readback\ncoordinates, retained failures, and owned gaps. A new family cut gets a new\nroot; it does not overwrite predecessor evidence or turn Assignment closure\ninto a specification claim.\n\nWhen a category profile changes, publish a new profile version and require an\nexplicit selection update. When a project changes, bind the new source,\nartifact, release, manifest, package, and selection roots. When a failure is\nrepaired, retain it in `failureHistory` and add current proof separately.\n\n## Interpret the result narrowly\n\nThe implementer path reports only whether the package can reproduce its\ndeclared contracts and fixed cases. Its expected authority outputs remain\n`qualifying: false`, `releaseAuthorized: false`, `runtimeAuthorized: false`,\nand `independentlyCertified: false`. Project closure requires exact,\nproject-owned evidence and an independently governed terminal decision.",
+    "rendering": {
+      "kind": "adopter-category-implementer-path",
+      "navigationLabel": "Adopter conformance",
+      "navigationGroup": "verify",
+      "navigationOrder": 24
+    },
+    "rendererContract": {
+      "showCleanRoomConstraints": true,
+      "showComponentOrder": true,
+      "showAuthorityBoundaries": true,
+      "showUpdateMechanism": true,
+      "showNonClaims": true,
+      "note": "Render package-declared implementation facts without inferring project evidence, release permission, runtime permission, qualification, or independent certification."
+    }
+  },
   "selfConformancePage": {
     "id": "self-conformance",
     "title": "How KFD changes itself",
@@ -2577,7 +2729,7 @@
         "url": "/profiles/self-conformance/manifest.json",
         "mediaType": "application/json",
         "role": "profile-manifest",
-        "digest": "sha256:405d367bfc17a466725f792684990f5ee578f81bb65bb3a82b2faf8c65eb9705"
+        "digest": "sha256:c48dc6a900755b515aac092f169bb976fba6703fbbbff51a51ca397dc52316f7"
       },
       {
         "sourcePath": "profiles/self-conformance/lifecycle-gates.json",
@@ -2633,7 +2785,7 @@
         "url": "/profiles/self-conformance/history/manifest.json",
         "mediaType": "application/json",
         "role": "historical-manifest",
-        "digest": "sha256:ac5c97fd354eed6b108bc6f498caf0ebcf6cc6add807785e5ba8ee860cc1b9ab"
+        "digest": "sha256:7bf2d9bc9d9f3813746eb6c6efad3d5b4b39efd7f8d1e782b8ef9325416aab1e"
       }
     ],
     "rendering": {
@@ -2682,7 +2834,7 @@
       "relationship": "non-normative-reader-compression-of-numbered-decisions",
       "normative": false,
       "authorityNote": "Numbered decisions remain authoritative; terminology.json owns the canonical names and anti-misreading boundaries projected by this page.",
-      "lead": "# KFD Conceptual Compression",
+      "lead": "If the agent is treated as the center of truth, difficult cases collapse into false equivalences: a running agent appears to remain authorized; a retry appears to be the same task again; the same output appears to be the same result; and a successful run appears to have established accepted state. Real systems can break every one of those equivalences.",
       "coreModel": {
         "ontology": {
           "structure": {
@@ -3638,6 +3790,149 @@
       ]
     },
     {
+      "id": "adopter-conformance",
+      "title": "Implement the adopter category contracts from one package",
+      "sourcePath": "profiles/adopter-conformance/implementer-guide.md",
+      "authorityPath": "profiles/adopter-conformance/README.md",
+      "testMatrixPath": "profiles/adopter-conformance/test-matrix.json",
+      "url": "/adopter-conformance",
+      "relationship": "package-only-adopter-category-implementation-path",
+      "normative": false,
+      "lead": "This guide is for an implementer starting from one exact unpacked `@kungfu-tech/kfd` package. It does not require a KFD source checkout, a founding-product checkout, credentials, hosted services, mutable npm tags, ambient Home state, or network access. Retain the package tarball and its independently observed SHA-256 root before extracting it.",
+      "contract": "kfd.adopter-category-implementer-test-matrix/v1",
+      "packageOnly": true,
+      "cleanRoom": {
+        "source": "one exact @kungfu-tech/kfd npm tarball",
+        "emptyHome": true,
+        "networkRequired": false,
+        "sourceCheckoutRequired": false,
+        "siblingRepositoryRequired": false,
+        "ambientCacheAuthority": false
+      },
+      "componentChecks": [
+        {
+          "id": "full-cut-manifest",
+          "command": "node scripts/check-adopter-conformance.mjs",
+          "expected": "fixed positive and fail-closed full-cut vectors pass"
+        },
+        {
+          "id": "category-profiles",
+          "command": "node scripts/check-adopter-category-profiles.mjs",
+          "expected": "project-neutral composition and conflict vectors pass"
+        },
+        {
+          "id": "category-instances",
+          "command": "node scripts/check-adopter-category-instances.mjs",
+          "expected": "project-bound evidence and substitution vectors pass"
+        },
+        {
+          "id": "evidence-matrix",
+          "command": "node scripts/check-adopter-category-evidence-matrix.mjs",
+          "expected": "pending, terminal, gap, role, and authority vectors pass"
+        },
+        {
+          "id": "family-reconciliation",
+          "command": "node scripts/check-adopter-category-family-reconciliation.mjs",
+          "expected": "predecessor child set, terminal roots, protected delivery, failure history, gaps, and authority vectors pass"
+        },
+        {
+          "id": "adopter-toolchain",
+          "command": "node scripts/check-adopter-toolchain.mjs",
+          "expected": "package-only init, witness, verify, diff, and bundle pass"
+        }
+      ],
+      "authorityBoundaries": {
+        "kfdSpecification": "schemas, category vocabulary, fixed vectors, reference verifiers, and compatibility",
+        "buildchainDelivery": "protocol-neutral evidence transport and delivery gating only",
+        "assignment": "execution and terminal work-control closure only",
+        "categoryComposition": "deterministic resolution of declared versioned profiles only",
+        "project": "project source, artifact, release, declaration, evidence, and gaps",
+        "delivery": "release permission remains external to KFD verification",
+        "runtime": "runtime action permission remains external to KFD verification",
+        "independentCertification": "requires an explicitly separate certifier"
+      },
+      "expectedAuthorityOutputs": {
+        "qualifying": false,
+        "releaseAuthorized": false,
+        "runtimeAuthorized": false,
+        "independentlyCertified": false
+      },
+      "publicSurfaces": {
+        "authority": "profiles/adopter-conformance/README.md",
+        "implementerGuide": "profiles/adopter-conformance/implementer-guide.md",
+        "testMatrix": "profiles/adopter-conformance/test-matrix.json",
+        "inventory": "profiles/adopter-conformance/toolchain.json",
+        "familyReconciliation": "profiles/adopter-conformance/family-reconciliation.json",
+        "siteRoute": "/adopter-conformance"
+      },
+      "updateMechanism": {
+        "compatibleAddition": "add an explicit package path and inventory member",
+        "semanticChange": "publish a successor contract and fixed vectors",
+        "profileChange": "publish a new profile version and require explicit reselection",
+        "projectChange": "bind new source, artifact, release, manifest, package, and selection roots",
+        "failureRepair": "retain failureHistory and add current proof separately"
+      },
+      "sections": [
+        {
+          "id": "reproduce-the-complete-contract-surface",
+          "title": "Reproduce the complete contract surface",
+          "sourcePath": "profiles/adopter-conformance/implementer-guide.md",
+          "sourceHeading": "Reproduce the complete contract surface",
+          "defaultPresentation": "implementer-contract",
+          "markdown": "Read `profiles/adopter-conformance/toolchain.json` as the package inventory.\nImplement the surfaces in this order:\n\n1. reproduce the full-cut adopter manifest schema and fixed vectors;\n2. validate the project-neutral category catalog and deterministic profile\n   composition;\n3. bind one category selection to one project instance and fresh,\n   project-owned evidence;\n4. reproduce the cross-project evidence matrix, including explicit pending\n   rows, owned gaps, retained failure history, and terminal roots;\n5. verify the predecessor-family proof index without treating Assignment\n   closure as KFD semantic or delivery authority, then inspect the completed\n   project evidence at `profiles/adopter-conformance/family-reconciliation.json`;\n6. run the package-only CLI toolchain and the complete test matrix.\n\nThe machine-readable order, expected outputs, clean-room constraints, public\nsurface paths, and authority boundaries are fixed in\n`profiles/adopter-conformance/test-matrix.json`."
+        },
+        {
+          "id": "run-the-clean-room-entrypoint",
+          "title": "Run the clean-room entrypoint",
+          "sourcePath": "profiles/adopter-conformance/implementer-guide.md",
+          "sourceHeading": "Run the clean-room entrypoint",
+          "defaultPresentation": "implementer-contract",
+          "markdown": "From the unpacked package root, run:\n\n```sh\nnpm run check:adopter-implementer-path\n```\n\nThe entrypoint first packs the exact current package and extracts it to a\ntemporary directory. It then creates an empty Home and replays the component\nchecks from the extracted package with package-only recursion guards. The\nentrypoint fails if a required package export, inventory member, guide\nboundary, component command, or expected non-claim drifts.\n\nThe test removes only its own temporary directory. It does not read sibling\nrepositories, write the source tree, use a package cache as authority, or\ncontact a service. A passing run proves that the published package contains a\nself-consistent reference path and its fixed negative cases. It does not prove\nthat a downstream adopter supplied real project evidence."
+        },
+        {
+          "id": "keep-authorities-separate",
+          "title": "Keep authorities separate",
+          "sourcePath": "profiles/adopter-conformance/implementer-guide.md",
+          "sourceHeading": "Keep authorities separate",
+          "defaultPresentation": "implementer-contract",
+          "markdown": "- **KFD specification authority** owns the adopter contracts, category\n  vocabulary, schemas, fixed vectors, reference verifiers, and compatibility\n  rules.\n- **Buildchain delivery authority** may transport exact evidence and enforce a\n  protocol-neutral gate. It cannot reinterpret KFD semantics or certify an\n  adopter.\n- **Assignment work-control authority** owns execution and terminal closure.\n  Its seal is coordination evidence, never normative KFD or protected-delivery\n  evidence.\n- **Category composition authority** resolves only the declared, versioned\n  category catalog. It transfers neither project evidence nor semantic\n  authority.\n- **Project authority** owns its source, artifact, release coordinates,\n  category-instance declaration, evidence, and residual gaps.\n- **Delivery and runtime authorities** separately decide whether an artifact\n  may be released or a runtime may act. A KFD verification report grants\n  neither permission.\n- **Independent certification authority** must be explicitly external to the\n  declaration and reference verifier. No package-only self-check mints it."
+        },
+        {
+          "id": "update-without-silently-changing-meaning",
+          "title": "Update without silently changing meaning",
+          "sourcePath": "profiles/adopter-conformance/implementer-guide.md",
+          "sourceHeading": "Update without silently changing meaning",
+          "defaultPresentation": "implementer-contract",
+          "markdown": "Compatible additions use new package paths and explicit inventory entries.\nChanging a required field, evidence role, root algorithm, authority boundary,\ncategory requirement, or diagnostic meaning requires a successor contract and\nnew fixed vectors. Keep the prior package and rooted reports immutable; create\nnew project instances or matrix rows for the successor cut instead of editing\nold evidence in place.\n\nThe family proof index follows the same rule: preserve the declared child set,\nterminal roots, protected merge coordinate, release or installed-readback\ncoordinates, retained failures, and owned gaps. A new family cut gets a new\nroot; it does not overwrite predecessor evidence or turn Assignment closure\ninto a specification claim.\n\nWhen a category profile changes, publish a new profile version and require an\nexplicit selection update. When a project changes, bind the new source,\nartifact, release, manifest, package, and selection roots. When a failure is\nrepaired, retain it in `failureHistory` and add current proof separately."
+        },
+        {
+          "id": "interpret-the-result-narrowly",
+          "title": "Interpret the result narrowly",
+          "sourcePath": "profiles/adopter-conformance/implementer-guide.md",
+          "sourceHeading": "Interpret the result narrowly",
+          "defaultPresentation": "implementer-contract",
+          "markdown": "The implementer path reports only whether the package can reproduce its\ndeclared contracts and fixed cases. Its expected authority outputs remain\n`qualifying: false`, `releaseAuthorized: false`, `runtimeAuthorized: false`,\nand `independentlyCertified: false`. Project closure requires exact,\nproject-owned evidence and an independently governed terminal decision."
+        }
+      ],
+      "authorityTitle": "KFD Full-Cut Adopter Conformance Manifest v1",
+      "authorityMarkdown": "# KFD Full-Cut Adopter Conformance Manifest v1\n\n`kfd.adopter-conformance-manifest/v1` is the KFD-owned declaration contract\nfor an adopter that binds its work to one exact packaged KFD cut. It is\npackage-only: a clean-room adopter can implement it from `@kungfu-tech/kfd`\nwithout a KFD source checkout, a founding-product checkout, hosted services,\ncredentials, private repositories, or ambient Home state.\n\nThe canonical schema is\n`schemas/kfd-adopter-conformance/manifest.schema.json`. Its required decision\nrows are derived from the `entries` array of the manifest's pinned\n`registry.json`, never from a first-party allowlist or a verifier's built-in\ndecision list.\n\n## Exact cut and canonical roots\n\nThe manifest binds the exact package artifact, `registry.json`,\n`standards.json`, schema set, vector set, verifier set, and derived decision\nset. JSON semantic and set roots use `sha256-kfd-canonical-json-v1`:\n\n- input JSON has no duplicate keys;\n- object keys are ordered by UTF-8 byte order;\n- strings and keys are NFC-normalized before admission;\n- integers are non-negative and no greater than `2^53 - 1`;\n- floats and exponent forms are forbidden;\n- canonical JSON contains no insignificant whitespace and ends in one LF;\n- SHA-256 is encoded as `sha256:` plus 64 lowercase hexadecimal digits.\n\n`sha256-bytes-v1` applies SHA-256 directly to immutable package or file bytes.\nEach schema, vector, and verifier member carries its package-relative path and\nbyte root. The corresponding set root is the semantic root of the complete\nUTF-8 path-sorted member array. Omission, duplication, path traversal, member\nsubstitution, or a member byte-root mismatch therefore changes or invalidates\nthe set root. Empty vector sets are explicit; schema and verifier sets are not.\n\nThe manifest root is computed over the complete manifest object. The object\ndoes not contain its own root, so the recursion is finite. Set-like arrays are\nUTF-8 sorted and duplicate-free. Order-sensitive registry arrays retain their\npublished order.\n\n`decisionSetRoot` is the semantic root of the ordered projection\n`[{id,number,status,path}]` from every pinned registry entry. A conforming\nverifier requires exact equality between that projection and `decisions`:\nmissing rows, duplicate rows, additional rows, changed numbers, substituted\nIDs, or stale registry status fail closed.\n\n## Decision declarations\n\nEvery registry entry has exactly one declaration row with one state:\n\n- `adopted`: the adopter declares use and binds implementation, verification,\n  decision-specific witness, and release evidence;\n- `candidate`: the adopter is evaluating or using an implementation without\n  claiming completed adoption;\n- `draft-evidence`: evidence is retained for a registry entry that is still\n  draft; it cannot widen the decision's status or authority;\n- `unsupported`: the adopter names the unresolved gap and makes no implicit\n  support claim;\n- `not-used`: the adopter declares no use and supplies no implementation,\n  verification, witness, release binding, or claim.\n\nEvidence references bind their observation time and the same KFD package root.\nWitness bindings additionally bind the decision ID, profile manifest, witness,\nverifier, and package cut. Release bindings join an exact adopter artifact and\nRelease Passport to the same KFD package root. Reusing evidence from another\ndecision, profile, package cut, or release is substitution, not conformance.\n\nThe schema expresses structural state constraints. The package verifier owns\nthe cross-object checks for set conservation, root reproduction, reference\nresolution, stale evidence, undeclared use, and claim widening.\n\n## Project-neutral category profiles\n\n`profiles/adopter-conformance/category-profiles.json` defines a versioned base\nprofile and the initial `specification-authority`, `delivery-infrastructure`,\n`product-runtime`, and `independent-clean-room` profiles. The catalog contains\nno adopter or project IDs. Each category adds evidence obligations above the\nbase full-cut declaration; it does not change the meaning of any non-KFD\nspecification.\n\n`resolveAdopterCategoryProfiles` in\n`scripts/adopter-category-profile-contract.mjs` resolves the base profile and\nall transitive parents, then emits UTF-8-sorted profile references and the\ndeterministic union of requirement identities. Repeated identical obligations\ncoalesce. The same requirement identity with different bytes, inheritance\ncycles, duplicate selections, unknown profiles, stale versions, or attempts to\nmake evidence transferable fail with stable `acp-*` issue codes.\n\nCategory resolution is declaration-only. It never transfers implementation\nevidence between adopters and never grants semantic authority, runtime\npermission, release authorization, or independent certification. The catalog\nschema and fixed cross-profile vectors are exported from the npm package so a\nclean-room implementation can reproduce these rules without a source checkout.\n\n## Project category instances and evidence ownership\n\n`kfd.adopter-category-instance-manifest/v1` is the explicit project-instance\nlayer. It binds one adopter identity and its exact source, artifact, and release\ncoordinates to one verified full-cut adopter manifest, KFD package root,\ncategory-catalog root, deterministic selection root, and the complete resolved\nrequirement set. Every evidence item repeats the project root, adopter-manifest\nroot, KFD package root, and selection root. Evidence copied from another\nproject, package cut, manifest, or category selection therefore fails closed;\ncategory composition never inherits another adopter's evidence.\n\nThe package verifier in\n`scripts/adopter-category-instance-contract.mjs` requires a valid report for\nthe referenced full-cut manifest and an explicit evidence-freshness cut. It\nthen checks exact requirement conservation and each profile's evidence-kind\nminimums. Missing evidence, stale evidence, stale profile versions, invalid\ncomposition, coordinate substitution, root drift, and authority widening use\nstable `acp-*` diagnostics. A passing report says only that this declaration\nand its evidence conform to the selected category contract. It cannot approve\nor publish a release, authorize a runtime, transfer semantic authority, or\nindependently certify the project.\n\nExisting `kfd.adopter-conformance-manifest/v1` files remain valid unprofiled\nfull-cut declarations. Absence of a category-instance manifest is never\nsilently reinterpreted as selection of the base category. Migration is\nexplicit and additive: retain the immutable full-cut manifest, create a new\ncategory-instance manifest that references its exact root, select zero\nadditional profiles for base-only conformance or name exact versioned category\nprofiles, and provide fresh project-bound evidence for every resolved\nrequirement. Old evidence is reusable only when it already carries every exact\nversion 1 project binding; otherwise it remains historical input rather than\nconformance evidence.\n\n## Cross-project evidence matrix\n\n`kfd.adopter-category-evidence-matrix/v1` is the package-owned aggregation\ncontract for comparing category coverage across projects without transferring\ntheir evidence or authority. Its schema, fixed vectors, and offline verifier\nare published beside the category catalog. A matrix reproduces every catalog\nprofile and resolved requirement identity, then keeps normative KFD bytes,\ncategory requirements, project-instance evidence, delivery evidence, runtime\nevidence, and independent review in distinct roles.\n\nProject rows may remain `pending` with no terminal root. This is a valid and\nexplicit incomplete state, not conformance closure. A terminal row requires an\nexact root and only verified current evidence; category-specific delivery,\nruntime, and independent-review roles remain mandatory. Every referenced gap\nhas one owner, open gaps have no closure root, and closed gaps bind exact\nevidence. Failure history is retained separately from current proof rows.\n\nThe verifier reports `valid` and `complete` independently. It returns\n`complete: true` only when every project is terminal and every gap is closed,\nwhile always returning `qualifying: false`, `releaseAuthorized: false`,\n`runtimeAuthorized: false`, and `independentlyCertified: false`. Buildchain may\ncarry the matrix through a protocol-neutral delivery gate, but it cannot\nwiden, reinterpret, certify, or privately supplement KFD semantics.\n\n## Family reconciliation proof index\n\n`kfd.adopter-category-family-reconciliation/v1` is a public, package-owned\nindex for checking that one declared predecessor Assignment set is represented\nexactly once. Each child row binds its request and normalized work-definition\nroots, native terminal and query-proof roots, one protected-merge coordinate,\nadditional release or readback evidence, retained failures, and explicitly\nowned gaps. Pending children and open gaps are valid incomplete states.\nEvery delivery `root` is the canonical semantic root of that delivery row with\nthe `root` field omitted; retained failure roots follow the same rule for\n`evidenceRoot`. The verifier recomputes both, so a coordinate or head cannot be\nchanged without an explicit new root.\n\nAssignment closure remains work-control evidence; it is never normative KFD\nevidence. Protected merge, package or release, installed readback, runtime\npermission, and independent certification remain separately governed. The\nreference verifier therefore reports completeness independently while always\nreturning `qualifying: false`, `releaseAuthorized: false`,\n`runtimeAuthorized: false`, and `independentlyCertified: false`.\n\nThe completed seven-child proof for the adopter-category initiative is\npublished at `profiles/adopter-conformance/family-reconciliation.json`. It is\nproject evidence, not a fixed vector or normative input to KFD semantics. The\npackage and `/adopter-conformance` route expose its exact path, while the\npackage-only check reproduces its family root and requires terminal native\nroots plus verified protected-merge coordinates for every declared child.\n\n## Package-only verification seam\n\nThe version 1 reference seam is published as\n`scripts/adopter-conformance-contract.mjs`. It accepts the manifest together\nwith strictly admitted JSON values for the pinned registry and standards plus\nexplicit bytes for schema, vector, verifier, and referenced profile-manifest\nsurfaces. The caller also supplies the expected package artifact root and an\nevidence policy containing one `verifiedAt` cut and `maxAgeSeconds`. Neither\nwall-clock time nor a local cache is read implicitly, so the same inputs\nreproduce the same result offline.\n\n`deriveAdopterCut` constructs the rooted cut from those bytes.\n`verifyAdopterManifest` returns `kfd.verification-report/v1` with stable issue\ncodes from `profiles/adopter-conformance/issue-codes.json`. The fixed suite in\n`profiles/adopter-conformance/vectors.json` retains one positive full-cut case\nand fail-closed cases for missing, duplicate, and reordered rows, registry\nmismatch, draft widening, witness and release mismatch, root substitution,\nstale evidence, undeclared use, and claims on a `not-used` row.\n\nThe package CLI exposes the same seam through `kfd adopter init`, `witness`,\n`verify`, `diff`, and `bundle`. Its fixed inventory is\n`profiles/adopter-conformance/toolchain.json`; the Agent-readable invocation,\nmachine-output, and recovery contract is\n`profiles/adopter-conformance/agent-brief.md`. The Node projection is complete\nfor these five package-only operations. Native and WebAssembly parity is a\nseparate required delivery surface and is not inferred from this JavaScript\nimplementation. No passing report makes an adoption, release, runtime, or\ncertification decision.\n\n## Independent implementer path\n\n`profiles/adopter-conformance/implementer-guide.md` and the machine-readable\n`profiles/adopter-conformance/test-matrix.json` define one package-only path\nfrom an exact npm tarball to the complete full-cut, category-profile,\nproject-instance, evidence-matrix, family-reconciliation, and adopter-toolchain\ntest sequence.\n`npm run check:adopter-implementer-path` extracts the package into a temporary\nclean room with an empty Home and replays that sequence without a source\ncheckout, sibling repository, network requirement, or ambient cache authority.\n\nThe inventory at `profiles/adopter-conformance/toolchain.json` lists every\nschema, vector, verifier, guide, and test-matrix member required by this path.\nThe package and `/adopter-conformance` site route expose the same update rule:\ncompatible additions receive explicit paths and inventory entries; semantic,\nprofile, or project changes require successor contracts, versions, or newly\nrooted project evidence. Repaired failures remain in failure history rather\nthan being overwritten.\n\nThis clean-room path proves package completeness and deterministic replay only.\nIt does not supply a downstream project's evidence and keeps KFD, Buildchain,\ncategory, project, delivery, runtime, and independent-certification authority\nseparate.\n\n## KFD self-declaration\n\nKFD dogfoods the contract at\n`profiles/adopter-conformance/adopters/kfd/manifest.json`. Its package root is\nthe canonical semantic root of the exact package name/version, registry,\nstandards, schema set, vector set, verifier set, and derived decision set. This\nfinite cut deliberately excludes the self-manifest from its own preimage.\nThe npm tarball integrity, source commit, GitHub release, and Release Passport\nremain separate publication facts and must be read back independently.\n\nThe declaration covers every registry row and preserves uncertainty: active\nuses remain `candidate` without independent decision-specific assessment,\ndraft evidence remains `draft-evidence`, unsupported surfaces remain explicit,\nand unused drafts remain `not-used`. `node scripts/check-kfd-self-adopter.mjs`\nreproduces all evidence roots, rejects cut and authority substitutions, and\nreplays from a clean packed-package extraction without Home or network state.\n\n## Five separate authorities\n\nThe following layers must not be collapsed:\n\n1. **declaration** says what the adopter claims to use;\n2. **evidence** supplies rooted observations about that declaration;\n3. **release binding** joins evidence to an exact artifact and Passport;\n4. **runtime permission** remains with the adopter's runtime authority;\n5. **independent certification** requires a separately identified certifier\n   and is never minted by this manifest or its verifier.\n\nA structurally valid or verifier-passing manifest does not activate a draft,\nestablish semantic truth, authorize runtime action, authorize release, certify\nthe adopter, or grant the right to use KFD trademarks. `claimBoundary` fixes\nthose non-claims in every manifest.\n\n## Compatibility\n\nThis version is selected by the exact contract string, schema ID, package cut,\nand rooted verifier/vector surfaces. Compatible optional additions require a\nnew schema that explicitly preserves version 1 meaning. Changes to required\nrows, states, root semantics, evidence roles, witness/release bindings, or\nauthority boundaries require a successor contract.",
+      "markdown": "# Implement the adopter category contracts from one package\n\nThis guide is for an implementer starting from one exact unpacked\n`@kungfu-tech/kfd` package. It does not require a KFD source checkout, a\nfounding-product checkout, credentials, hosted services, mutable npm tags,\nambient Home state, or network access. Retain the package tarball and its\nindependently observed SHA-256 root before extracting it.\n\n## Reproduce the complete contract surface\n\nRead `profiles/adopter-conformance/toolchain.json` as the package inventory.\nImplement the surfaces in this order:\n\n1. reproduce the full-cut adopter manifest schema and fixed vectors;\n2. validate the project-neutral category catalog and deterministic profile\n   composition;\n3. bind one category selection to one project instance and fresh,\n   project-owned evidence;\n4. reproduce the cross-project evidence matrix, including explicit pending\n   rows, owned gaps, retained failure history, and terminal roots;\n5. verify the predecessor-family proof index without treating Assignment\n   closure as KFD semantic or delivery authority, then inspect the completed\n   project evidence at `profiles/adopter-conformance/family-reconciliation.json`;\n6. run the package-only CLI toolchain and the complete test matrix.\n\nThe machine-readable order, expected outputs, clean-room constraints, public\nsurface paths, and authority boundaries are fixed in\n`profiles/adopter-conformance/test-matrix.json`.\n\n## Run the clean-room entrypoint\n\nFrom the unpacked package root, run:\n\n```sh\nnpm run check:adopter-implementer-path\n```\n\nThe entrypoint first packs the exact current package and extracts it to a\ntemporary directory. It then creates an empty Home and replays the component\nchecks from the extracted package with package-only recursion guards. The\nentrypoint fails if a required package export, inventory member, guide\nboundary, component command, or expected non-claim drifts.\n\nThe test removes only its own temporary directory. It does not read sibling\nrepositories, write the source tree, use a package cache as authority, or\ncontact a service. A passing run proves that the published package contains a\nself-consistent reference path and its fixed negative cases. It does not prove\nthat a downstream adopter supplied real project evidence.\n\n## Keep authorities separate\n\n- **KFD specification authority** owns the adopter contracts, category\n  vocabulary, schemas, fixed vectors, reference verifiers, and compatibility\n  rules.\n- **Buildchain delivery authority** may transport exact evidence and enforce a\n  protocol-neutral gate. It cannot reinterpret KFD semantics or certify an\n  adopter.\n- **Assignment work-control authority** owns execution and terminal closure.\n  Its seal is coordination evidence, never normative KFD or protected-delivery\n  evidence.\n- **Category composition authority** resolves only the declared, versioned\n  category catalog. It transfers neither project evidence nor semantic\n  authority.\n- **Project authority** owns its source, artifact, release coordinates,\n  category-instance declaration, evidence, and residual gaps.\n- **Delivery and runtime authorities** separately decide whether an artifact\n  may be released or a runtime may act. A KFD verification report grants\n  neither permission.\n- **Independent certification authority** must be explicitly external to the\n  declaration and reference verifier. No package-only self-check mints it.\n\n## Update without silently changing meaning\n\nCompatible additions use new package paths and explicit inventory entries.\nChanging a required field, evidence role, root algorithm, authority boundary,\ncategory requirement, or diagnostic meaning requires a successor contract and\nnew fixed vectors. Keep the prior package and rooted reports immutable; create\nnew project instances or matrix rows for the successor cut instead of editing\nold evidence in place.\n\nThe family proof index follows the same rule: preserve the declared child set,\nterminal roots, protected merge coordinate, release or installed-readback\ncoordinates, retained failures, and owned gaps. A new family cut gets a new\nroot; it does not overwrite predecessor evidence or turn Assignment closure\ninto a specification claim.\n\nWhen a category profile changes, publish a new profile version and require an\nexplicit selection update. When a project changes, bind the new source,\nartifact, release, manifest, package, and selection roots. When a failure is\nrepaired, retain it in `failureHistory` and add current proof separately.\n\n## Interpret the result narrowly\n\nThe implementer path reports only whether the package can reproduce its\ndeclared contracts and fixed cases. Its expected authority outputs remain\n`qualifying: false`, `releaseAuthorized: false`, `runtimeAuthorized: false`,\nand `independentlyCertified: false`. Project closure requires exact,\nproject-owned evidence and an independently governed terminal decision.",
+      "rendering": {
+        "kind": "adopter-category-implementer-path",
+        "navigationLabel": "Adopter conformance",
+        "navigationGroup": "verify",
+        "navigationOrder": 24
+      },
+      "rendererContract": {
+        "showCleanRoomConstraints": true,
+        "showComponentOrder": true,
+        "showAuthorityBoundaries": true,
+        "showUpdateMechanism": true,
+        "showNonClaims": true,
+        "note": "Render package-declared implementation facts without inferring project evidence, release permission, runtime permission, qualification, or independent certification."
+      }
+    },
+    {
       "id": "self-conformance",
       "title": "How KFD changes itself",
       "sourcePath": "profiles/self-conformance/README.md",
@@ -4437,7 +4732,7 @@
           "url": "/profiles/self-conformance/manifest.json",
           "mediaType": "application/json",
           "role": "profile-manifest",
-          "digest": "sha256:405d367bfc17a466725f792684990f5ee578f81bb65bb3a82b2faf8c65eb9705"
+          "digest": "sha256:c48dc6a900755b515aac092f169bb976fba6703fbbbff51a51ca397dc52316f7"
         },
         {
           "sourcePath": "profiles/self-conformance/lifecycle-gates.json",
@@ -4493,7 +4788,7 @@
           "url": "/profiles/self-conformance/history/manifest.json",
           "mediaType": "application/json",
           "role": "historical-manifest",
-          "digest": "sha256:ac5c97fd354eed6b108bc6f498caf0ebcf6cc6add807785e5ba8ee860cc1b9ab"
+          "digest": "sha256:7bf2d9bc9d9f3813746eb6c6efad3d5b4b39efd7f8d1e782b8ef9325416aab1e"
         }
       ],
       "rendering": {
@@ -5057,6 +5352,149 @@
         "claim-boundary"
       ],
       "note": "Render the behavior, evidence, and authority dimensions before commands. Preserve the reference 20/20 path and starter 0/20 path as different teaching flows. Do not infer certification, production fitness, or language-runtime parity from scaffold availability."
+    }
+  },
+  "delegatedWorkChallengePage": {
+    "id": "delegated-work-challenge",
+    "title": "Delegated Work Paired-World Lab",
+    "url": "/delegated-work",
+    "relationship": "experimental-information-boundary-lab",
+    "normative": false,
+    "status": "experimental",
+    "numberedDecision": false,
+    "authorityPath": "profiles/delegated-work-challenge/README.md",
+    "capabilitiesPath": "profiles/delegated-work-challenge/cli-capabilities.json",
+    "manifestPath": "profiles/delegated-work-challenge/manifest.json",
+    "lead": "This unnumbered experimental profile makes one information-boundary problem observable without a model API, provider credential, or external service. It places two worlds behind the same declared projection. World A must advance for autonomous liveness; World B must not advance for safety. If their canonical roots collide, a decision function that sees only that projection cannot meet both obligations.",
+    "profile": "kfd-delegated-work-challenge@0.1.0-alpha.1",
+    "suite": {
+      "id": "delegated-work-paired-worlds",
+      "version": "1.0.0",
+      "fixedPairCount": 6,
+      "path": "profiles/delegated-work-challenge/fixtures/suite.json"
+    },
+    "commands": {
+      "challenge": "kfd challenge delegated-work [--pair <pair-id>] [--projection <projection-id|projection.json>] [--adapter <path>] [--output <report.json>] [--json]",
+      "verify": "kfd verify delegated-work-challenge-report <report.json> [--adapter <path>] [--json]"
+    },
+    "default": {
+      "projection": "execution-only",
+      "expectedPairs": 6,
+      "expectedFinding": "COLLAPSED",
+      "exitCode": 0
+    },
+    "fullSemantic": {
+      "expectedPairs": 6,
+      "expectedFinding": "INFORMATION-DISTINGUISHABLE",
+      "claim": "candidate information is sufficient to distinguish the fixed fixtures only"
+    },
+    "exitCodes": {
+      "projection": {
+        "0": "valid completed run, including COLLAPSED",
+        "2": "invalid run"
+      },
+      "adapter": {
+        "0": "all tested safety and liveness assertions satisfied",
+        "1": "completed semantic failure or undetermined result",
+        "2": "invalid run"
+      },
+      "verify": {
+        "0": "valid evidence closure",
+        "1": "invalid evidence closure",
+        "2": "input or process failure"
+      }
+    },
+    "reportVerification": {
+      "backend": "host-node",
+      "processSpawning": "host-only",
+      "sharedRustWasmChecks": [],
+      "parityBoundary": "Delegated Work challenge semantics have one packaged host verifier. Rust/WASM verification-bundle profiles remain unchanged and are regression-tested; no partial duplicate semantic verifier is introduced."
+    },
+    "offlineAfterAcquisition": true,
+    "providerCredentialsRequired": false,
+    "qualifying": false,
+    "certification": false,
+    "claimBoundary": {
+      "experiment": "This is a conditional information-boundary experiment, not proof that mainstream systems fail.",
+      "projection": "execution-only is a declared experimental projection, not a representation of any vendor architecture.",
+      "distinguishability": "Information-distinguishable does not establish policy correctness or enforcement.",
+      "reference": "The full-semantic projection is one sufficient fixture vocabulary, not the unique or optimal design.",
+      "adapter": "An adapter result is an adopter-owned assertion bound to named adapter bytes; the adapter may be incomplete or dishonest.",
+      "authority": "No result is certification, qualification, a security assessment, production fitness, or external adoption.",
+      "normativity": "This unnumbered experimental profile does not raise any experimental KFD semantic to normative status."
+    },
+    "residualRisks": [
+      "The fixed six-pair suite is finite and cannot prove completeness for a real delegated-work system.",
+      "A projection can distinguish these fixtures while omitting information required by other worlds.",
+      "Offline verification detects report and packaged-fixture drift but does not observe a product's production enforcement path.",
+      "Adapter responses are self-asserted by the adopter and can misrepresent the mapped product."
+    ],
+    "sections": [
+      {
+        "id": "one-minute-path",
+        "title": "One-minute path",
+        "sourcePath": "profiles/delegated-work-challenge/README.md",
+        "markdown": "From a clean temporary directory with only Node.js and npm, run the immutable\npackage against the most direct pair:\n\n```bash\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.68 kfd challenge delegated-work --pair accepted-completion\n```\n\nThe expected summary is `1/1 COLLAPSED`. Both worlds expose the same successful\nexecution result, but World A requires advance and World B requires refuse. The\nselected `execution-only` projection gives a decision function no information\nwith which to tell them apart. Exit `0` means the runner formed a valid report;\nit does not mean the projection passed.",
+        "presentation": "documentation"
+      },
+      {
+        "id": "fifteen-minute-complete-route",
+        "title": "Fifteen-minute complete route",
+        "sourcePath": "profiles/delegated-work-challenge/README.md",
+        "markdown": "Install the same immutable package into a disposable consumer so its exported\nprojection and starter paths are directly available:\n\n```bash\nnpm init -y\nnpm install --ignore-scripts @kungfu-tech/kfd@1.0.0-alpha.68\n```\n\nRun all six pairs under the default projection, then the packaged\n`full-semantic` projection:\n\n```bash\nnpx --no-install kfd challenge delegated-work\nnpx --no-install kfd challenge delegated-work --projection full-semantic\n```\n\nThe expected summaries are `6/6 COLLAPSED` and `6/6\nINFORMATION-DISTINGUISHABLE`, respectively. The second result says only that\nthis projection separates these fixed fixtures; it does not say the projection\nis a correct policy or a real enforcement point.\n\nSave a report and verify its complete root closure offline with the packaged\nverifier:\n\n```bash\nnpx --no-install kfd challenge delegated-work --output delegated-work-report.json\nnpx --no-install kfd verify delegated-work-challenge-report delegated-work-report.json\n```\n\nOnce installed, both commands execute from local package bytes. They require no\nprovider credential, model API, or external service. Share a report or a\ncounterexample in [GitHub Discussion #427](https://github.com/kungfu-systems/kfd/discussions/427).",
+        "presentation": "documentation"
+      },
+      {
+        "id": "what-the-default-output-means",
+        "title": "What the default output means",
+        "sourcePath": "profiles/delegated-work-challenge/README.md",
+        "markdown": "For each pair the output names the shared visible surface, both projected\ncanonical roots, the required liveness and safety outcomes, why advancing both\nis unsafe, and why refusing both prevents autonomous completion. It then names\ncandidate fields that separate the fixed fixture.\n\nThere are six rooted pairs:\n\n1. `work-version`\n2. `authority-revocation`\n3. `causal-history`\n4. `retry-identity`\n5. `recovery-drift`\n6. `accepted-completion`\n\nSelect one with `--pair`, or ask for stable machine output with `--json`:\n\n```bash\nkfd challenge delegated-work --pair authority-revocation\nkfd challenge delegated-work --json\n```",
+        "presentation": "documentation"
+      },
+      {
+        "id": "modify-the-projection",
+        "title": "Modify the projection",
+        "sourcePath": "profiles/delegated-work-challenge/README.md",
+        "markdown": "The packaged `full-semantic` projection adds the candidate work, authority,\ncausal, exchange, recovery, and acceptance fields needed to separate all six\nfixed pairs:\n\n```bash\nkfd challenge delegated-work --projection full-semantic\n```\n\nThis establishes only `INFORMATION-DISTINGUISHABLE` for these fixtures. It does\nnot establish a correct policy or a real enforcement point.\n\nTo edit a projection from an installed package:\n\n```bash\ncp \"$(node -p \"require.resolve('@kungfu-tech/kfd/delegated-work-challenge/projections/example-projection.json')\")\" my-projection.json\nnpx --no-install kfd challenge delegated-work --projection ./my-projection.json\n```\n\nThe public contract is\n`schemas/kfd-delegated-work-challenge/projection.schema.json`. Field paths are\ncanonicalized by UTF-8 order. Duplicate, unknown, and prohibited answer-bearing\npaths fail closed. Only allowlisted scenario-state leaves can be selected;\nworld labels, expected decisions, required outcomes, answers, and fixture\nmetadata are never selectable.",
+        "presentation": "documentation"
+      },
+      {
+        "id": "optional-adopter-adapter",
+        "title": "Optional adopter adapter",
+        "sourcePath": "profiles/delegated-work-challenge/README.md",
+        "markdown": "Copy the dependency-free Node.js starter, replace its fail-closed decision\nfunction with a mapping owned by your system, then run it:\n\n```bash\ncp \"$(node -p \"require.resolve('@kungfu-tech/kfd/delegated-work-challenge/adapters/node-starter.mjs')\")\" delegated-work-adapter.mjs\nnpx --no-install kfd challenge delegated-work --adapter ./delegated-work-adapter.mjs --output adapter-report.json\nnpx --no-install kfd verify delegated-work-challenge-report adapter-report.json --adapter ./delegated-work-adapter.mjs\n```\n\nThe runner uses bounded JSONL over stdio, requires an accepted handshake, sends\ntwelve evaluate requests for the full suite, rejects symlink adapter artifacts,\nrequires empty stderr, and kills a process that exceeds its timeout. Each world\nresponse declares a decision, authoritative sources, enforcement point,\nexecutor-replacement continuity mechanism, and whether human reconstruction is\nrequired. Unknown operations or pair IDs must fail closed.\n\nThe untouched starter intentionally exits the challenge at `1`: it is runnable\nbut does not claim liveness or continuity. An adapter run exits `0` only when all\nselected World A and World B assertions satisfy their fixed liveness and safety\noutcomes, explicit authority/enforcement evidence, and replacement continuity.\n\nAn adapter can lie. The report is only an adopter-owned assertion bound to the\nnamed adapter bytes, requests, responses, and transcript root. It is not a\ncertification of the adapter's mapping to a product or its production path.",
+        "presentation": "documentation"
+      },
+      {
+        "id": "reports-verification-and-exit-codes",
+        "title": "Reports, verification, and exit codes",
+        "sourcePath": "profiles/delegated-work-challenge/README.md",
+        "markdown": "Reports use `kfd.delegated-work-challenge-report/v1`. They bind the package and\nrelease-anchor cut, profile manifest, fixed suite and all fixture roots,\nprojection document and root, projected states and roots, fixed required\noutcomes, results, platform, and claim boundary. Adapter reports additionally\nbind adapter bytes and the complete request/response transcript.\n\nThe packaged verifier recomputes the suite, fixture, projection, collision,\nresult, transcript, and report closure offline. It rejects missing or duplicate\npairs, expected-outcome changes, prohibited projection paths, projected-state\nor root changes, adapter-response drift, transcript drift, adapter-byte drift\nwhen `--adapter` is supplied, and qualification or certification scope widening.\n\nExit codes preserve independent dimensions:\n\n- Projection mode: `0` means a valid completed run, including a run that finds\n  `COLLAPSED`; `2` means invocation, fixture, projection, or report generation\n  failed.\n- Adapter mode: `0` means a completed run whose assertions satisfy all tested\n  safety and liveness outcomes; `1` means a completed but collapsed, unsafe,\n  liveness-failing, human-required, continuity-failing, or undetermined run;\n  `2` means no valid completed run could be formed.\n- Verification: `0` means evidence closure is valid, even if the recorded\n  semantic finding is negative; `1` means closure is invalid; `2` means the\n  verifier could not parse or safely inspect the input.\n\nRunner execution success, report validity, semantic finding, information\ndistinguishability, adapter-declared enforcement, qualification, and\ncertification remain separate fields in machine output.",
+        "presentation": "documentation"
+      },
+      {
+        "id": "claim-boundary",
+        "title": "Claim boundary",
+        "sourcePath": "profiles/delegated-work-challenge/README.md",
+        "markdown": "- This is a conditional information-boundary experiment, not proof that\n  mainstream systems fail.\n- `execution-only` is a declared experimental projection, not a vendor model.\n- Information distinguishability is not policy correctness or enforcement.\n- `full-semantic` is one sufficient fixture vocabulary, not the unique or best\n  answer.\n- Adapter output is adopter-owned and may be incomplete or dishonest.\n- The Lab is not certification, qualification, a security assessment,\n  production fitness, or evidence of external adoption.\n- The profile creates no numbered KFD and changes no numbered decision.\n- It does not promote experimental KFD semantics to normative status.\n\nPackage acquisition can require a network or prefilled cache. After acquisition,\nthe challenge, adapter starter, report generation, and verifier require no\nruntime network or provider credentials.",
+        "presentation": "claim-boundary"
+      }
+    ],
+    "rendererContract": {
+      "primary": [
+        "one-minute-path",
+        "fifteen-minute-complete-route",
+        "what-the-default-output-means"
+      ],
+      "detail": [
+        "modify-the-projection",
+        "optional-adopter-adapter",
+        "reports-verification-and-exit-codes"
+      ],
+      "boundary": [
+        "claim-boundary"
+      ],
+      "note": "Render runner execution, report validity, semantic finding, information distinguishability, adapter-declared enforcement, qualification, and certification as separate dimensions. Never turn this conditional fixture experiment into a vendor finding or certification claim."
     }
   },
   "liveCases": {

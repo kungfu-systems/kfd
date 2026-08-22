@@ -24,7 +24,7 @@
     "id": "kfd-runtime-100",
     "version": "0.1.0-alpha.1",
     "manifest": "profiles/agent-runtime/manifest.json",
-    "manifestDigest": "sha256:11f940ec8e69a21b41b8e3bb413632624e0fe6777cef50ef813cb6af5d646035",
+    "manifestDigest": "sha256:ae91623d0a01b2cee24a99f5ed484b9bbc4b90f75bb71a781c4b4485ae2c2b57",
     "coreVectorCount": 35,
     "experimentalVectorCount": 65,
     "qualifying": false,
@@ -99,7 +99,12 @@
     {
       "path": "scripts/agent-hub-runner.mjs",
       "role": "runner",
-      "digest": "sha256:c02c27e076ffc3d56013b0e814a6fb7470a9b857da7dca8ed6533b85419733cb"
+      "digest": "sha256:31987c461c425545a91f00b2abcbc97d7c8bafd02be4bbd905faf00708f37e42"
+    },
+    {
+      "path": "scripts/jsonl-adapter-runner.mjs",
+      "role": "runner",
+      "digest": "sha256:745aebc1fba676739039dc4d06363121a9fbe55b252dfce8ed4f99ed7de9d1f8"
     },
     {
       "path": "scripts/agent-hub-report-verifier.mjs",

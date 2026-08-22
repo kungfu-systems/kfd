@@ -8,7 +8,7 @@ confidence: high
 sensitivity: public
 evidence_grade: B
 review_state: self-reviewed
-last_reviewed: 2026-08-11
+last_reviewed: 2026-08-17
 ---
 
 # KFD Full-Cut Adopter Conformance Manifest v1
@@ -138,6 +138,57 @@ requirement. Old evidence is reusable only when it already carries every exact
 version 1 project binding; otherwise it remains historical input rather than
 conformance evidence.
 
+## Cross-project evidence matrix
+
+`kfd.adopter-category-evidence-matrix/v1` is the package-owned aggregation
+contract for comparing category coverage across projects without transferring
+their evidence or authority. Its schema, fixed vectors, and offline verifier
+are published beside the category catalog. A matrix reproduces every catalog
+profile and resolved requirement identity, then keeps normative KFD bytes,
+category requirements, project-instance evidence, delivery evidence, runtime
+evidence, and independent review in distinct roles.
+
+Project rows may remain `pending` with no terminal root. This is a valid and
+explicit incomplete state, not conformance closure. A terminal row requires an
+exact root and only verified current evidence; category-specific delivery,
+runtime, and independent-review roles remain mandatory. Every referenced gap
+has one owner, open gaps have no closure root, and closed gaps bind exact
+evidence. Failure history is retained separately from current proof rows.
+
+The verifier reports `valid` and `complete` independently. It returns
+`complete: true` only when every project is terminal and every gap is closed,
+while always returning `qualifying: false`, `releaseAuthorized: false`,
+`runtimeAuthorized: false`, and `independentlyCertified: false`. Buildchain may
+carry the matrix through a protocol-neutral delivery gate, but it cannot
+widen, reinterpret, certify, or privately supplement KFD semantics.
+
+## Family reconciliation proof index
+
+`kfd.adopter-category-family-reconciliation/v1` is a public, package-owned
+index for checking that one declared predecessor Assignment set is represented
+exactly once. Each child row binds its request and normalized work-definition
+roots, native terminal and query-proof roots, one protected-merge coordinate,
+additional release or readback evidence, retained failures, and explicitly
+owned gaps. Pending children and open gaps are valid incomplete states.
+Every delivery `root` is the canonical semantic root of that delivery row with
+the `root` field omitted; retained failure roots follow the same rule for
+`evidenceRoot`. The verifier recomputes both, so a coordinate or head cannot be
+changed without an explicit new root.
+
+Assignment closure remains work-control evidence; it is never normative KFD
+evidence. Protected merge, package or release, installed readback, runtime
+permission, and independent certification remain separately governed. The
+reference verifier therefore reports completeness independently while always
+returning `qualifying: false`, `releaseAuthorized: false`,
+`runtimeAuthorized: false`, and `independentlyCertified: false`.
+
+The completed seven-child proof for the adopter-category initiative is
+published at `profiles/adopter-conformance/family-reconciliation.json`. It is
+project evidence, not a fixed vector or normative input to KFD semantics. The
+package and `/adopter-conformance` route expose its exact path, while the
+package-only check reproduces its family root and requires terminal native
+roots plus verified protected-merge coordinates for every declared child.
+
 ## Package-only verification seam
 
 The version 1 reference seam is published as
@@ -166,6 +217,30 @@ for these five package-only operations. Native and WebAssembly parity is a
 separate required delivery surface and is not inferred from this JavaScript
 implementation. No passing report makes an adoption, release, runtime, or
 certification decision.
+
+## Independent implementer path
+
+`profiles/adopter-conformance/implementer-guide.md` and the machine-readable
+`profiles/adopter-conformance/test-matrix.json` define one package-only path
+from an exact npm tarball to the complete full-cut, category-profile,
+project-instance, evidence-matrix, family-reconciliation, and adopter-toolchain
+test sequence.
+`npm run check:adopter-implementer-path` extracts the package into a temporary
+clean room with an empty Home and replays that sequence without a source
+checkout, sibling repository, network requirement, or ambient cache authority.
+
+The inventory at `profiles/adopter-conformance/toolchain.json` lists every
+schema, vector, verifier, guide, and test-matrix member required by this path.
+The package and `/adopter-conformance` site route expose the same update rule:
+compatible additions receive explicit paths and inventory entries; semantic,
+profile, or project changes require successor contracts, versions, or newly
+rooted project evidence. Repaired failures remain in failure history rather
+than being overwritten.
+
+This clean-room path proves package completeness and deterministic replay only.
+It does not supply a downstream project's evidence and keeps KFD, Buildchain,
+category, project, delivery, runtime, and independent-certification authority
+separate.
 
 ## KFD self-declaration
 

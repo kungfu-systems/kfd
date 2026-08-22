@@ -1,3 +1,16 @@
+---
+status: active
+period: ongoing
+theme: kfd-open-standard
+doc_type: analysis
+source_level: local-files
+confidence: high
+sensitivity: public
+evidence_grade: A
+review_state: self-reviewed
+last_reviewed: 2026-08-22
+---
+
 # KFD — Kung Fu Decisions
 
 KFD's deepest question may not be **"How does an agent execute a task?"** It
@@ -46,6 +59,32 @@ agent is a participant in the work, not its center of truth.
 [Use the terminology contract](docs/terminology.md) ·
 [Inspect the founding-adopter evidence](docs/load-bearing-dogfood.md)
 
+## Run the Delegated Work paired-world experiment
+
+The unnumbered, system-neutral [Delegated Work Paired-World Lab](profiles/delegated-work-challenge/README.md)
+shows why execution success alone can be insufficient at a decision boundary.
+From a clean directory with only Node.js and npm, start with the most direct
+one-minute pair:
+
+```bash
+npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.68 kfd challenge delegated-work --pair accepted-completion
+```
+
+The result is `1/1 COLLAPSED`: the two worlds have the same successful execution
+surface, require opposite advance decisions, and cannot be distinguished by the
+declared projection. Run the full six-pair route, save and verify a report,
+modify the projection, or connect the packaged Node.js adapter starter in the
+[complete challenge guide](profiles/delegated-work-challenge/README.md).
+Package acquisition may require a network; execution and verification do not
+require a model API, provider credentials, or external service.
+
+The Lab proves only conditional information distinguishability in fixed
+fixtures. It does not claim that mainstream systems fail, that KFD field names
+are mandatory, that a distinguishable policy is correct or enforced, or that an
+adapter is complete or honest. No result is certification, qualification, a
+security assessment, production fitness, external adoption, or a new numbered
+KFD.
+
 ## How KFD governs its own change
 
 KFD Self-Conformance has two connected lanes with different time boundaries:
@@ -75,17 +114,17 @@ production fitness. Accountable human authority remains separate and explicit.
 **Implement KFD without Kungfu — scaffold an adapter in Python, Rust, Node.js,
 or C++, then verify it offline.**
 
-Use the immutable `@kungfu-tech/kfd@1.0.0-alpha.67` package cut and follow the
+Use the immutable `@kungfu-tech/kfd@1.0.0-alpha.68` package cut and follow the
 package-owned [Agent Hub workflow](profiles/agent-hub/README.md) or inspect the
 complete [independent verification boundary](docs/independent-verifier.md):
 
-For a two-minute success path, run `npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.67 kfd demo agent-hub --output agent-hub-demo-report.json`. It produces behavior `20/20`, evidence `valid`, and no qualification or certification.
+For a two-minute success path, run `npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.68 kfd demo agent-hub --output agent-hub-demo-report.json`. It produces behavior `20/20`, evidence `valid`, and no qualification or certification.
 
 ```bash
-npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.67 kfd scaffold agent-hub --language python --output my-agent-hub-adapter
+npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.68 kfd scaffold agent-hub --language python --output my-agent-hub-adapter
 python3 my-agent-hub-adapter/smoke.py
-npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.67 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json
-npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.67 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py
+npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.68 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json
+npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.68 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py
 ```
 
 The scaffold is a deterministic, fail-closed starter. Before implementation,
@@ -702,6 +741,21 @@ production release passports. Releases are governed by Buildchain; this package
 versions itself under KFD-1's own rules: the outer package line remains `v1.0`,
 while patch and prerelease numbers are advanced by Buildchain release
 promotion.
+
+That source-checkout command and installed-artifact verification have explicit
+boundaries. From any directory, verify the exact public npm package with its
+package-owned command:
+
+```sh
+npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.68 kfd-self-check
+```
+
+`kfd-self-check` resolves the installed package root and checks only facts
+shipped in that package. It does not silently read a KFD source checkout. The
+repository gate runs `npm run check:installed-package` to pack the current
+source, install it into a clean consumer, and execute the same installed
+command before release. A pass proves structural closure only; it does not
+certify semantic truth, external adoption, security, or production fitness.
 
 ## Homepage content contract
 
