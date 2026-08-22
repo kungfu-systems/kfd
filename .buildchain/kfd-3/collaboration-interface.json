@@ -179,6 +179,12 @@
       "purpose": "Consume the shipped npm package surfaces."
     },
     {
+      "id": "installed-package-self-verification",
+      "surface": "bin/kfd-self-check.mjs",
+      "participants": ["package-consumer", "agent-reader", "release-system"],
+      "purpose": "Run kfd-self-check against the exact installed npm package without reading a source checkout."
+    },
+    {
       "id": "release-anchor",
       "surface": "kfd.release.json",
       "participants": ["release-system", "agent-reader"],
@@ -395,6 +401,14 @@
       "maturity": "stable"
     },
     {
+      "id": "installed-package-self-verification",
+      "kind": "cli-command",
+      "participants": ["package-consumer", "agent-reader", "release-system"],
+      "value": "The package-owned kfd-self-check command validates the exact installed npm artifact boundary.",
+      "discoverability": { "fromMinimalEntrypoint": true, "path": "bin/kfd-self-check.mjs" },
+      "maturity": "stable"
+    },
+    {
       "id": "site-bundle-json",
       "kind": "json-api",
       "participants": ["site-consumer", "agent-reader"],
@@ -476,6 +490,24 @@
     }
   ],
   "valueEvidence": [
+    {
+      "id": "installed-package-self-verification",
+      "claim": "A package consumer can run the declared KFD self-verification against the exact installed npm artifact without a source checkout.",
+      "participants": ["package-consumer", "agent-reader", "release-system"],
+      "facts": [
+        { "path": "README.md" },
+        { "path": "package.json" }
+      ],
+      "evidence": [
+        { "path": "bin/kfd-self-check.mjs" },
+        { "path": "scripts/check.mjs" },
+        { "path": "scripts/check-installed-package.mjs" }
+      ],
+      "trustAssessment": {
+        "path": ".buildchain/kfd-2/public-release-trust.claim.json"
+      },
+      "residualRisk": []
+    },
     {
       "id": "kfd-foundation",
       "claim": "KFD helps humans and agents understand the KFD Foundation and inspect precise non-normative formal references before adopting or extending KFD decisions.",

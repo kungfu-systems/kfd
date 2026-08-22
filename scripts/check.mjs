@@ -180,8 +180,12 @@ if (/^\s*release\s*:/m.test(recoveryWorkflowText) ||
     !recoveryWorkflowText.includes("work.authority?.mode !== \"capture-only\"")) {
   fail("release propagation recovery must be manual, capture-only, paused, and free of downstream write authority");
 }
-if (packageJson.bin?.kfd !== "./bin/kfd.mjs") {
-  fail("package.json must publish the kfd verifier bin");
+if (packageJson.bin?.kfd !== "./bin/kfd.mjs" ||
+    packageJson.bin?.["kfd-self-check"] !== "./bin/kfd-self-check.mjs" ||
+    packageJson.exports?.["./self-verification"] !== "./scripts/check.mjs" ||
+    packageJson.scripts?.["check:installed-package"] !== "node scripts/check-installed-package.mjs" ||
+    !packageJson.scripts?.check?.includes("npm run check:installed-package")) {
+  fail("package.json must publish the kfd bin, installed self-verification export, and clean-package check");
 }
 if (adopterConformanceSchema.$id !== "https://kfd.libkungfu.dev/schemas/kfd-adopter-conformance/manifest.schema.json" ||
     adopterConformanceSchema.properties?.contract?.const !== "kfd.adopter-conformance-manifest/v1" ||
@@ -2645,7 +2649,7 @@ if (!kfd2Claim) {
     kfd2Claim.artifacts.forEach((entry, index) => checkKfd2Pointer(entry, `KFD-2 release trust claim artifacts[${index}]`));
   }
   if (kfd2Claim.verification?.result !== "passed") fail("KFD-2 release trust claim verification.result must be passed");
-  if (kfd2Claim.verification?.command !== "node scripts/check.mjs") fail("KFD-2 release trust claim verification.command must be node scripts/check.mjs");
+  if (kfd2Claim.verification?.command !== "kfd-self-check") fail("KFD-2 release trust claim verification.command must be kfd-self-check");
   if (!kfd2Claim.auditBoundary?.scope) fail("KFD-2 release trust claim auditBoundary.scope is required");
   if (kfd2Claim.auditBoundary?.enumerability !== "closed-world") fail("KFD-2 release trust claim auditBoundary.enumerability must be closed-world");
   if (!kfd2Claim.responsibility?.owner) fail("KFD-2 release trust claim responsibility.owner is required");
@@ -2831,6 +2835,9 @@ if (!kfd3Interface) {
   if (!kfd3Interface.minimalEntrypoints.some((entry) => entry.id === "official-status-and-trademarks" && entry.surface === "TRADEMARKS.md")) {
     fail("KFD-3 collaboration interface must expose TRADEMARKS.md as an official-status-and-trademarks entrypoint");
   }
+  if (!kfd3Interface.minimalEntrypoints.some((entry) => entry.id === "installed-package-self-verification" && entry.surface === "bin/kfd-self-check.mjs")) {
+    fail("KFD-3 collaboration interface must expose the installed package self-verification command");
+  }
   if (!Array.isArray(kfd3Interface.surfaces) || kfd3Interface.surfaces.length === 0) fail("KFD-3 collaboration interface surfaces[] is required");
   if (!kfd3Interface.surfaces.some((entry) => entry.id === "foundation" && entry.discoverability?.path === "docs/foundation.md")) {
     fail("KFD-3 collaboration interface must classify docs/foundation.md as a participant-facing surface");
@@ -2858,6 +2865,9 @@ if (!kfd3Interface) {
   }
   if (!kfd3Interface.surfaces.some((entry) => entry.id === "official-status-and-trademarks" && entry.discoverability?.path === "TRADEMARKS.md")) {
     fail("KFD-3 collaboration interface must expose TRADEMARKS.md as a participant-facing surface");
+  }
+  if (!kfd3Interface.surfaces.some((entry) => entry.id === "installed-package-self-verification" && entry.discoverability?.path === "bin/kfd-self-check.mjs")) {
+    fail("KFD-3 collaboration interface must classify the installed package self-verification command");
   }
   for (const [surfaceId, surfacePath] of [
     ["kfd-proposal-form", ".github/ISSUE_TEMPLATE/kfd-proposal.yml"],

@@ -10,9 +10,9 @@
   "sourceRegistry": {
     "id": "kfd-collaboration-interface",
     "path": ".buildchain/kfd-3/collaboration-interface.json",
-    "sha256": "ce8551d7e17837ebadfea61b75f13d319b03de17454b5e1f0ed99b1d4f5f5fa9"
+    "sha256": "b0e85ab80aac8cfe90b48ffe3d33ae5abc1b02ca905a18549380aff58f25295e"
   },
-  "collaborationInterfaceDigest": "sha256:ce8551d7e17837ebadfea61b75f13d319b03de17454b5e1f0ed99b1d4f5f5fa9",
+  "collaborationInterfaceDigest": "sha256:b0e85ab80aac8cfe90b48ffe3d33ae5abc1b02ca905a18549380aff58f25295e",
   "collaborationInterface": {
     "schemaVersion": 1,
     "contract": "kfd-3-collaboration-interface",
@@ -265,6 +265,16 @@
           "agent-reader"
         ],
         "purpose": "Consume the shipped npm package surfaces."
+      },
+      {
+        "id": "installed-package-self-verification",
+        "surface": "bin/kfd-self-check.mjs",
+        "participants": [
+          "package-consumer",
+          "agent-reader",
+          "release-system"
+        ],
+        "purpose": "Run kfd-self-check against the exact installed npm package without reading a source checkout."
       },
       {
         "id": "release-anchor",
@@ -679,6 +689,21 @@
         "maturity": "stable"
       },
       {
+        "id": "installed-package-self-verification",
+        "kind": "cli-command",
+        "participants": [
+          "package-consumer",
+          "agent-reader",
+          "release-system"
+        ],
+        "value": "The package-owned kfd-self-check command validates the exact installed npm artifact boundary.",
+        "discoverability": {
+          "fromMinimalEntrypoint": true,
+          "path": "bin/kfd-self-check.mjs"
+        },
+        "maturity": "stable"
+      },
+      {
         "id": "site-bundle-json",
         "kind": "json-api",
         "participants": [
@@ -830,6 +855,38 @@
       }
     ],
     "valueEvidence": [
+      {
+        "id": "installed-package-self-verification",
+        "claim": "A package consumer can run the declared KFD self-verification against the exact installed npm artifact without a source checkout.",
+        "participants": [
+          "package-consumer",
+          "agent-reader",
+          "release-system"
+        ],
+        "facts": [
+          {
+            "path": "README.md"
+          },
+          {
+            "path": "package.json"
+          }
+        ],
+        "evidence": [
+          {
+            "path": "bin/kfd-self-check.mjs"
+          },
+          {
+            "path": "scripts/check.mjs"
+          },
+          {
+            "path": "scripts/check-installed-package.mjs"
+          }
+        ],
+        "trustAssessment": {
+          "path": ".buildchain/kfd-2/public-release-trust.claim.json"
+        },
+        "residualRisk": []
+      },
       {
         "id": "kfd-foundation",
         "claim": "KFD helps humans and agents understand the KFD Foundation and inspect precise non-normative formal references before adopting or extending KFD decisions.",
@@ -1525,6 +1582,17 @@
       "sourcePath": "package.json#exports"
     },
     {
+      "id": "installed-package-self-verification",
+      "name": "installed-package-self-verification",
+      "kind": "cli-command",
+      "participantProfile": "package-consumer,agent-reader,release-system",
+      "availability": "stable",
+      "visibility": "public",
+      "participantFacing": true,
+      "public": true,
+      "sourcePath": "bin/kfd-self-check.mjs"
+    },
+    {
       "id": "site-bundle-json",
       "name": "site-bundle-json",
       "kind": "json-api",
@@ -1683,7 +1751,7 @@
     {
       "id": "doc:readme",
       "sourcePath": "README.md",
-      "sha256": "1153ac092a51789c7f17351df3d4952f855b8bbf8b934af8af088c8a270c107b"
+      "sha256": "372dcecaf4990225b5203f06f66f7aa525fdbdb7a84a9ea0eb8d48d0b49e7476"
     },
     {
       "id": "doc:conceptual-compression",
@@ -2622,7 +2690,7 @@
     {
       "id": "metadata:release-impact",
       "sourcePath": "release-impact.json",
-      "sha256": "5e00e299b237679c776390d6af5fe9b68dc5ec09301f9ec7ac26cef7f328c7f3"
+      "sha256": "70a728d6e492c8a3e63d6fa380cb6f67992f939021cafd2f79069e7d3831d222"
     },
     {
       "id": "metadata:release-anchor",
@@ -2647,29 +2715,29 @@
     {
       "id": "metadata:kfd-2-public-release-trust-claim",
       "sourcePath": ".buildchain/kfd-2/public-release-trust.claim.json",
-      "sha256": "8c6b1bf3afaa9243cf99e5c88bd107ac450d40114b40cb78a2ad569149719811"
+      "sha256": "bbfbd9be2c4c9270d32b08d7a374df702069541da9e86bf14df731ebc739d3c5"
     },
     {
       "id": "metadata:kfd-2-foundation-trust-claims",
       "sourcePath": ".buildchain/kfd-2/kfd-foundation.trust-claims.json",
-      "sha256": "b63c8240b87555c075d2b559623289000dcb59411ca325f72a85b881e4c439ce"
+      "sha256": "4fce8a99628720de0c2120145fe53aae57da5abd5ee22924c93f4e5bdd13e7eb"
     },
     {
       "id": "metadata:kfd-2-foundation-trust-assessment",
       "sourcePath": ".buildchain/kfd-2/kfd-foundation.trust-assessment.json",
-      "sha256": "2379aab5b737de727c6f33118950caf3c4450f289ae47ae8b003f1f91972ca57"
+      "sha256": "a2b7771175b03d8d980d7b7fdd5fbeefbd82a407e00367f24ca83256f2114617"
     }
   ],
   "packageExports": [
     {
       "id": "export:package-json",
       "sourcePath": "package.json#exports",
-      "sha256": "e6cb6d500071ea1ea61e2aa18afb144f42e30305ee0d4ed8c383169cdfa16fb9"
+      "sha256": "34c077c4bed5ecb6a3eb4298696be3f52c72cdad405fd907065c9386a0f5d00f"
     },
     {
       "id": "export:npm-files",
       "sourcePath": "package.json#files",
-      "sha256": "e6cb6d500071ea1ea61e2aa18afb144f42e30305ee0d4ed8c383169cdfa16fb9"
+      "sha256": "34c077c4bed5ecb6a3eb4298696be3f52c72cdad405fd907065c9386a0f5d00f"
     }
   ],
   "siteConsumptionContracts": [
@@ -2720,6 +2788,6 @@
     "releasePassportProofOwner": "Buildchain"
   },
   "expectedArtifactVerification": {
-    "command": "node scripts/check.mjs"
+    "command": "kfd-self-check"
   }
 }

@@ -238,7 +238,7 @@ const prebuild = {
   residualRisk,
   responsibility,
   expectedArtifactVerification: {
-    command: "node scripts/check.mjs",
+    command: "kfd-self-check",
   },
 };
 
@@ -293,7 +293,7 @@ const artifact = {
       pointer("CONTRIBUTING.md", "Open contribution and append-only decision constraints"),
       pointer("GOVERNANCE.md", "Canonical stewardship and maintainer responsibility constraints"),
       pointer("TRADEMARKS.md", "Trademark and official-status constraints"),
-      pointer("scripts/check.mjs", "Repository self-verification gate"),
+      pointer("scripts/check.mjs", "Repository and installed-package self-verification gate"),
       pointer("site/kfd-site.json", "Site rendering boundary"),
     ],
     choicePaths: [
@@ -350,7 +350,7 @@ const artifact = {
   },
   verifier: {
     name: "kfd self-verification",
-    command: "node scripts/check.mjs",
+    command: "kfd-self-check",
   },
   residualRisk,
   result: "pass",

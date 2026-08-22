@@ -745,6 +745,21 @@ versions itself under KFD-1's own rules: the outer package line remains `v1.0`,
 while patch and prerelease numbers are advanced by Buildchain release
 promotion.
 
+That source-checkout command and installed-artifact verification have explicit
+boundaries. From any directory, verify the exact public npm package with its
+package-owned command:
+
+```sh
+npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.67 kfd-self-check
+```
+
+`kfd-self-check` resolves the installed package root and checks only facts
+shipped in that package. It does not silently read a KFD source checkout. The
+repository gate runs `npm run check:installed-package` to pack the current
+source, extract it into a clean directory, and execute the same installed
+command before release. A pass proves structural closure only; it does not
+certify semantic truth, external adoption, security, or production fitness.
+
 ## Homepage content contract
 
 This README is also the homepage text source for `https://kfd.libkungfu.dev`.

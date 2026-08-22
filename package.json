@@ -4,9 +4,11 @@
   "description": "KFD: an open, evidence-governed engineering standard for reliable action and continuity under uncertainty",
   "license": "Apache-2.0",
   "bin": {
-    "kfd": "./bin/kfd.mjs"
+    "kfd": "./bin/kfd.mjs",
+    "kfd-self-check": "./bin/kfd-self-check.mjs"
   },
   "files": [
+    ".github",
     "README.md",
     "CONTRIBUTING.md",
     "GOVERNANCE.md",
@@ -25,7 +27,9 @@
     "site",
     "scripts",
     "buildchain.contract-lock.json",
+    "buildchain.alpha-contract-lock.json",
     "buildchain.release-propagation.json",
+    "buildchain.toml",
     "release-impact.json",
     ".buildchain/kfd-1/contract-world.witness.json",
     ".buildchain/kfd-2",
@@ -76,6 +80,7 @@
     "./buildchain.contract-lock.json": "./buildchain.contract-lock.json",
     "./buildchain.release-propagation.json": "./buildchain.release-propagation.json",
     "./release-impact.json": "./release-impact.json",
+    "./self-verification": "./scripts/check.mjs",
     "./verifier/bundle.schema.json": "./schemas/kfd-verification-bundle.schema.json",
     "./verifier/report.schema.json": "./schemas/kfd-verification-report.schema.json",
     "./verifier/wasm": "./verifier/dist/kfd_verifier_current.wasm",
@@ -151,7 +156,8 @@
     "./self-conformance/historical-replay.schema.json": "./schemas/kfd-self-conformance-history/historical-replay.schema.json"
   },
   "scripts": {
-    "check": "node scripts/check.mjs && npm run check:adopter-conformance && npm run check:adopter-category-profiles && npm run check:adopter-category-instances && npm run check:adopter-category-evidence-matrix && npm run check:adopter-category-family-reconciliation && npm run check:adopter-toolchain && npm run check:adopter-implementer-path && npm run check:kfd-self-adopter && npm run check:kfd-specification-authority-delivery && npm run check:kfd-specification-authority-transition && npm run check:warrant-evidence && npm run check:agent-hub && npm run check:agent-hub-conformance && npm run check:delegated-work-challenge && npm run check:agent-runtime && npm run check:self-conformance-profile && npm run check:self-conformance-lifecycle && npm run check:self-conformance-history && npm run check:native-release && npm run check:verifier",
+    "check": "node scripts/check.mjs && npm run check:installed-package && npm run check:adopter-conformance && npm run check:adopter-category-profiles && npm run check:adopter-category-instances && npm run check:adopter-category-evidence-matrix && npm run check:adopter-category-family-reconciliation && npm run check:adopter-toolchain && npm run check:adopter-implementer-path && npm run check:kfd-self-adopter && npm run check:kfd-specification-authority-delivery && npm run check:kfd-specification-authority-transition && npm run check:warrant-evidence && npm run check:agent-hub && npm run check:agent-hub-conformance && npm run check:delegated-work-challenge && npm run check:agent-runtime && npm run check:self-conformance-profile && npm run check:self-conformance-lifecycle && npm run check:self-conformance-history && npm run check:native-release && npm run check:verifier",
+    "check:installed-package": "node scripts/check-installed-package.mjs",
     "check:adopter-conformance": "node scripts/check-adopter-conformance.mjs",
     "check:adopter-category-profiles": "node scripts/check-adopter-category-profiles.mjs",
     "check:adopter-category-instances": "node scripts/check-adopter-category-instances.mjs",

@@ -5,7 +5,7 @@
   "sourceBindings": [
     {
       "path": "package.json",
-      "sha256": "e6cb6d500071ea1ea61e2aa18afb144f42e30305ee0d4ed8c383169cdfa16fb9",
+      "sha256": "34c077c4bed5ecb6a3eb4298696be3f52c72cdad405fd907065c9386a0f5d00f",
       "id": "package-version-and-exports"
     },
     {
@@ -25,7 +25,7 @@
     },
     {
       "path": "release-impact.json",
-      "sha256": "5e00e299b237679c776390d6af5fe9b68dc5ec09301f9ec7ac26cef7f328c7f3",
+      "sha256": "70a728d6e492c8a3e63d6fa380cb6f67992f939021cafd2f79069e7d3831d222",
       "id": "release-impact-ledger"
     },
     {
@@ -47,7 +47,7 @@
   "machineEvidence": [
     {
       "path": "scripts/check.mjs",
-      "sha256": "f05897de265a2d13faa8a8298212108b6b00c5081cc54a9757a194f54d3e01a0",
+      "sha256": "df7a9ee51cc1607a7fc43e9e9127081ac5dba9990838f22d868de4b6821d089e",
       "id": "self-verification-command"
     },
     {
@@ -87,15 +87,15 @@
     }
   ],
   "hashes": {
-    "package-version-and-exports": "e6cb6d500071ea1ea61e2aa18afb144f42e30305ee0d4ed8c383169cdfa16fb9",
+    "package-version-and-exports": "34c077c4bed5ecb6a3eb4298696be3f52c72cdad405fd907065c9386a0f5d00f",
     "anchored-release-version": "9aa9182dbff522c48a3f0b9422754abfc34a289c250518e4b956fc0d13d1c7df",
     "decision-registry": "54d5e013c933cfcd6886f6b01d411d2f1888448e4b87f82cfa8d2245ab2f28a5",
     "standards-metadata": "65ba7a433345452567284f201b5c7ee8dc0e412aa66a22c880089a2b6a04c1ed",
-    "release-impact-ledger": "5e00e299b237679c776390d6af5fe9b68dc5ec09301f9ec7ac26cef7f328c7f3",
+    "release-impact-ledger": "70a728d6e492c8a3e63d6fa380cb6f67992f939021cafd2f79069e7d3831d222",
     "buildchain-release-contract": "c0d78e69d351ac23d0bfb3a5d53401f62e7d5a1e7c2858373cf9d7d5e3f2ebe4",
     "buildchain-alpha-runtime-contract-lock": "454de21cee49e99f53ef90b6df085601a5d6877aa3fcd77a81ac72d1be45f3f8",
     "buildchain-runtime-contract-lock": "4b3361400b814d8d4dece70579a9bb02d0134eec3170953f7996a88db2a2698c",
-    "self-verification-command": "f05897de265a2d13faa8a8298212108b6b00c5081cc54a9757a194f54d3e01a0",
+    "self-verification-command": "df7a9ee51cc1607a7fc43e9e9127081ac5dba9990838f22d868de4b6821d089e",
     "buildchain-build-workflow": "093562e361ac035a630311b67945dec53be392688c261f9b5028df0e99c6b5c0",
     "buildchain-promotion-workflow": "c72d1f944e646764edd868b60b2dbf50c75ae4888bba5d992c97e428e070cf5c",
     "kfd-2-trust-taxonomy-schema": "a663d301a663cadb8567e3010361f5a630b76b6518ed7603dfd58cbd4e64a658",
@@ -109,7 +109,7 @@
       "name": "@kungfu-tech/kfd",
       "version": "1.0.0-alpha.67",
       "path": "package.json",
-      "sha256": "e6cb6d500071ea1ea61e2aa18afb144f42e30305ee0d4ed8c383169cdfa16fb9"
+      "sha256": "34c077c4bed5ecb6a3eb4298696be3f52c72cdad405fd907065c9386a0f5d00f"
     },
     {
       "name": "kfd-release-anchor",
@@ -120,7 +120,7 @@
   ],
   "verification": {
     "result": "passed",
-    "command": "node scripts/check.mjs"
+    "command": "kfd-self-check"
   },
   "auditBoundary": {
     "scope": "KFD public npm package release facts, package exports, release governance files, and Buildchain release-passport inputs",
