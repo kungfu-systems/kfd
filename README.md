@@ -114,17 +114,17 @@ production fitness. Accountable human authority remains separate and explicit.
 **Implement KFD without Kungfu — scaffold an adapter in Python, Rust, Node.js,
 or C++, then verify it offline.**
 
-Use the immutable `@kungfu-tech/kfd@1.0.0-alpha.67` package cut and follow the
+Use the immutable `@kungfu-tech/kfd@1.0.0-alpha.68` package cut and follow the
 package-owned [Agent Hub workflow](profiles/agent-hub/README.md) or inspect the
 complete [independent verification boundary](docs/independent-verifier.md):
 
-For a two-minute success path, run `npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.67 kfd demo agent-hub --output agent-hub-demo-report.json`. It produces behavior `20/20`, evidence `valid`, and no qualification or certification.
+For a two-minute success path, run `npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.68 kfd demo agent-hub --output agent-hub-demo-report.json`. It produces behavior `20/20`, evidence `valid`, and no qualification or certification.
 
 ```bash
-npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.67 kfd scaffold agent-hub --language python --output my-agent-hub-adapter
+npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.68 kfd scaffold agent-hub --language python --output my-agent-hub-adapter
 python3 my-agent-hub-adapter/smoke.py
-npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.67 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json
-npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.67 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py
+npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.68 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json
+npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.68 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py
 ```
 
 The scaffold is a deterministic, fail-closed starter. Before implementation,
