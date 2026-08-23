@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.protocol-trace-fixture/v1",
+  "id": "zed-acp-resume-preserved",
+  "protocol": { "protocolId": "zed-acp", "protocolVersion": "1.0.0", "evidencePackRoot": "sha256:39da6ad7b92734a745d4667faccf56f3a4b6ec873b2d586b718848a3bc49152a" },
+  "events": [
+    { "id": "event-1", "variant": "session.new", "provenance": { "protocolId": "zed-acp", "protocolVersion": "1.0.0" }, "payload": { "sessionId": "session-7", "executorId": "agent-a" } },
+    { "id": "event-2", "variant": "session.load", "provenance": { "protocolId": "zed-acp", "protocolVersion": "1.0.0" }, "payload": { "sessionId": "session-7", "executorId": "agent-b" } }
+  ],
+  "expectation": { "scenario": "resume", "identityPreservation": "preserved" }
+}

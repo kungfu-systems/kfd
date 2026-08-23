@@ -10,6 +10,8 @@ export const CONTRACTS = Object.freeze({
   evidencePack: "kfd.protocol-evidence-pack/v1",
   evidencePackV2: "kfd.protocol-evidence-pack/v2",
   observation: "kfd.protocol-observation/v1",
+  observationV2: "kfd.protocol-observation/v2",
+  traceFixture: "kfd.protocol-trace-fixture/v1",
   route: "kfd.cross-protocol-route/v1",
   capabilityManifest: "kfd.derived-capability-manifest/v1",
   reference: "kfd.protocol-semantics-contract-reference/v1",
@@ -29,6 +31,7 @@ const PAIRED_WORLD_QUESTIONS = Object.freeze(["accepted-completion", "authority-
 const CLAIM_BOUNDARIES = Object.freeze({
   evidencePack: { evaluationInputOnly: true, certification: false, runtimeAuthority: false, commercialDemand: false },
   observation: { normalizedObservationOnly: true, certification: false, runtimeAuthority: false, policyCorrectness: false },
+  observationV2: { normalizedObservationOnly: true, nativeCoordinatesRequired: true, inferenceAllowed: false, certification: false, runtimeAuthority: false, policyCorrectness: false },
   route: { informationPreservationOnly: true, certification: false, runtimeAuthority: false, interoperabilityGuarantee: false },
   capabilityManifest: { derivedEvidenceStateOnly: true, certification: false, runtimeAuthority: false, productionFitness: false },
 });
@@ -262,6 +265,75 @@ function verifyObservation(report, document) {
   exactClaimBoundary(report, document.claimBoundary, "/claimBoundary", CLAIM_BOUNDARIES.observation);
 }
 
+function verifyObservationV2(report, document) {
+  if (!exactObject(report, document, "/", ["schemaVersion", "contract", "id", "protocol", "fixture", "adapter", "scenario", "facts", "transcriptRoot", "claimBoundary"])) return;
+  identifier(report, document.id, "/id");
+  protocolReference(report, document.protocol, "/protocol", "evidencePackRoot");
+  exactObject(report, document.fixture, "/fixture", ["id", "inputRoot"]);
+  identifier(report, document.fixture?.id, "/fixture/id");
+  root(report, document.fixture?.inputRoot, "/fixture/inputRoot");
+  exactObject(report, document.adapter, "/adapter", ["id", "version", "artifactRoot"]);
+  identifier(report, document.adapter?.id, "/adapter/id");
+  version(report, document.adapter?.version, "/adapter/version");
+  root(report, document.adapter?.artifactRoot, "/adapter/artifactRoot");
+  exactObject(report, document.scenario, "/scenario", ["kind", "identityPreservation"]);
+  if (!new Set(["executor-replacement", "retry", "resume"]).has(document.scenario?.kind)) issue(report, "psl-document-invalid", "/scenario/kind", "Scenario kind is unsupported.");
+  if (!new Set(["preserved", "ambiguous"]).has(document.scenario?.identityPreservation)) issue(report, "psl-document-invalid", "/scenario/identityPreservation", "Identity preservation must be preserved or ambiguous.");
+  if (!Array.isArray(document.facts) || document.facts.length === 0) {
+    issue(report, "psl-document-invalid", "/facts", "At least one normalized fact is required.");
+  } else {
+    const ids = new Set();
+    for (const [index, fact] of document.facts.entries()) {
+      const pointer = `/facts/${index}`;
+      if (!exactObject(report, fact, pointer, ["id", "state", "source", "evidenceRoots"], ["id", "state", "source", "evidenceRoots", "value"])) continue;
+      identifier(report, fact.id, `${pointer}/id`);
+      if (ids.has(fact.id)) issue(report, "psl-document-invalid", `${pointer}/id`, "Fact identities must be unique.");
+      ids.add(fact.id);
+      if (!REPRESENTATION_STATES.has(fact.state)) issue(report, "psl-state-contradictory", `${pointer}/state`, "Observation state is unknown.");
+      const represented = fact.state === "represented";
+      if (represented !== Object.hasOwn(fact, "value")) issue(report, "psl-state-contradictory", pointer, "Only represented facts may carry a value, and every represented fact must carry one.");
+      exactObject(report, fact.source, `${pointer}/source`, represented ? ["status", "eventId", "coordinate"] : ["status", "reason"]);
+      if (represented) {
+        if (fact.source?.status !== "native") issue(report, "psl-provenance-mismatch", `${pointer}/source/status`, "Represented facts require native provenance.");
+        identifier(report, fact.source?.eventId, `${pointer}/source/eventId`);
+        if (typeof fact.source?.coordinate !== "string" || !/^\/events\/[0-9]+\/(?:variant|payload\/[A-Za-z][A-Za-z0-9]*)$/u.test(fact.source.coordinate)) issue(report, "psl-provenance-mismatch", `${pointer}/source/coordinate`, "A represented fact must bind an exact native JSON coordinate.");
+      } else {
+        if (fact.source?.status !== "absent" || !new Set(["ambiguous", "extension-required", "not-represented", "out-of-scope"]).has(fact.source?.reason)) issue(report, "psl-provenance-mismatch", `${pointer}/source`, "An unrepresented fact must declare an explicit absence reason.");
+      }
+      roots(report, fact.evidenceRoots, `${pointer}/evidenceRoots`, { minimum: represented ? 1 : 0 });
+    }
+    const factIds = document.facts.map(({ id = "" }) => id);
+    if (!same(factIds, [...factIds].sort(compareUtf8))) issue(report, "psl-order-nondeterministic", "/facts", "Facts must use UTF-8 identifier order.");
+  }
+  root(report, document.transcriptRoot, "/transcriptRoot");
+  exactClaimBoundary(report, document.claimBoundary, "/claimBoundary", CLAIM_BOUNDARIES.observationV2);
+}
+
+function verifyTraceFixture(report, document) {
+  if (!exactObject(report, document, "/", ["schemaVersion", "contract", "id", "protocol", "events", "expectation"])) return;
+  identifier(report, document.id, "/id");
+  protocolReference(report, document.protocol, "/protocol", "evidencePackRoot");
+  if (!Array.isArray(document.events) || document.events.length === 0) {
+    issue(report, "psl-document-invalid", "/events", "At least one protocol event is required.");
+  } else {
+    const ids = new Set();
+    for (const [index, event] of document.events.entries()) {
+      const pointer = `/events/${index}`;
+      if (!exactObject(report, event, pointer, ["id", "variant", "provenance", "payload"])) continue;
+      identifier(report, event.id, `${pointer}/id`);
+      if (ids.has(event.id)) issue(report, "psl-event-duplicate", `${pointer}/id`, "Protocol event identifiers must be unique.");
+      ids.add(event.id);
+      if (typeof event.variant !== "string" || !event.variant.trim()) issue(report, "psl-event-variant-unsupported", `${pointer}/variant`, "Protocol event variant is required.");
+      exactObject(report, event.provenance, `${pointer}/provenance`, ["protocolId", "protocolVersion"]);
+      if (event.provenance?.protocolId !== document.protocol?.protocolId || event.provenance?.protocolVersion !== document.protocol?.protocolVersion) issue(report, "psl-provenance-mismatch", `${pointer}/provenance`, "Event provenance must equal the fixture protocol coordinate.");
+      if (!event.payload || typeof event.payload !== "object" || Array.isArray(event.payload)) issue(report, "psl-document-invalid", `${pointer}/payload`, "Event payload must be an object.");
+    }
+  }
+  exactObject(report, document.expectation, "/expectation", ["scenario", "identityPreservation"]);
+  if (!new Set(["executor-replacement", "retry", "resume"]).has(document.expectation?.scenario)) issue(report, "psl-document-invalid", "/expectation/scenario", "Scenario kind is unsupported.");
+  if (!new Set(["preserved", "ambiguous"]).has(document.expectation?.identityPreservation)) issue(report, "psl-document-invalid", "/expectation/identityPreservation", "Identity preservation must be preserved or ambiguous.");
+}
+
 function verifyRoute(report, document) {
   if (!exactObject(report, document, "/", ["schemaVersion", "contract", "id", "source", "target", "mappings", "claimBoundary"])) return;
   identifier(report, document.id, "/id");
@@ -356,6 +428,8 @@ export function verifyProtocolSemanticsDocument(document, options = {}) {
     [CONTRACTS.evidencePack]: (targetReport, targetDocument) => verifyEvidencePack(targetReport, targetDocument, false),
     [CONTRACTS.evidencePackV2]: (targetReport, targetDocument) => verifyEvidencePack(targetReport, targetDocument, true),
     [CONTRACTS.observation]: verifyObservation,
+    [CONTRACTS.observationV2]: verifyObservationV2,
+    [CONTRACTS.traceFixture]: verifyTraceFixture,
     [CONTRACTS.route]: verifyRoute,
     [CONTRACTS.capabilityManifest]: verifyCapabilityManifest,
   }[document.contract];

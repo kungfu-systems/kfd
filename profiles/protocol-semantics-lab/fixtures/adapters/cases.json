@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.protocol-observation-adapter-cases/v1",
+  "valid": [
+    "valid/a2a-retry-ambiguous.json",
+    "valid/a2a-retry-preserved.json",
+    "valid/ag-ui-resume-ambiguous.json",
+    "valid/mcp-executor-replacement-ambiguous.json",
+    "valid/mcp-executor-replacement-preserved.json",
+    "valid/zed-acp-resume-preserved.json"
+  ],
+  "negative": [
+    { "path": "negative/duplicate-event-id.json", "issueCode": "psl-event-duplicate" },
+    { "path": "negative/provenance-mismatch.json", "issueCode": "psl-provenance-mismatch" },
+    { "path": "negative/unknown-event-variant.json", "issueCode": "psl-event-variant-unsupported" },
+    { "path": "negative/wrong-protocol-version.json", "issueCode": "psl-protocol-version-unsupported" }
+  ]
+}

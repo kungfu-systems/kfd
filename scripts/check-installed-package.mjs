@@ -55,6 +55,40 @@ try {
   );
   const checked = run(installedSelfCheck, [], { cwd: consumer });
   process.stdout.write(checked.stdout);
+  const adapterFixture = {
+    schemaVersion: 1,
+    contract: "kfd.protocol-trace-fixture/v1",
+    id: "installed-mcp-adapter-smoke",
+    protocol: {
+      protocolId: "mcp-tasks",
+      protocolVersion: "2026.7.28",
+      evidencePackRoot: "sha256:c716585840a15bdcb1d6295703a950a927098ac7f67f48fb9c499d75d7588415",
+    },
+    events: [
+      {
+        id: "event-1",
+        variant: "task.created",
+        provenance: { protocolId: "mcp-tasks", protocolVersion: "2026.7.28" },
+        payload: { taskId: "task-1", status: "working", executorId: "executor-a" },
+      },
+      {
+        id: "event-2",
+        variant: "task.status",
+        provenance: { protocolId: "mcp-tasks", protocolVersion: "2026.7.28" },
+        payload: { taskId: "task-1", status: "completed", executorId: "executor-b" },
+      },
+    ],
+    expectation: { scenario: "executor-replacement", identityPreservation: "preserved" },
+  };
+  const adapterSmoke = [
+    "import { adaptProtocolTrace } from '@kungfu-tech/kfd/protocol-semantics-lab/observation-adapters';",
+    `const result = adaptProtocolTrace(${JSON.stringify(adapterFixture)});`,
+    "if (!result.outputRoot.startsWith('sha256:') || result.observation.claimBoundary.inferenceAllowed !== false) process.exit(1);",
+  ].join("\n");
+  run(process.execPath, ["--input-type=module", "--eval", adapterSmoke], {
+    cwd: consumer,
+    env: { ...process.env, KFD_NETWORK_DISABLED: "1" },
+  });
   console.log("Installed KFD package self-verification passed from a clean npm consumer.");
 } finally {
   fs.rmSync(temporary, { recursive: true, force: true });

@@ -1380,7 +1380,7 @@
     {
       "id": "metadata:release-impact",
       "sourcePath": "release-impact.json",
-      "sha256": "7fcd011b4cd08584209b93f07cc16386ad7ba6b5b2d80e7f0f73178c9d34708b"
+      "sha256": "a34d72f13feba73a43e73a438eae0e4d715aab17320672012a50ec4cf33e93f7"
     },
     {
       "id": "metadata:release-anchor",
@@ -1405,7 +1405,7 @@
     {
       "id": "metadata:kfd-2-public-release-trust-claim",
       "sourcePath": ".buildchain/kfd-2/public-release-trust.claim.json",
-      "sha256": "d67387aceef6855eb633a26c8944c888adc030d6687dc454f29d5a896bb9a7e2"
+      "sha256": "fbe6f436240123cffad1c2b54fd31dcca47b78d914cef2cca49137f2b8c81944"
     },
     {
       "id": "metadata:kfd-2-foundation-trust-claims",
@@ -1422,12 +1422,12 @@
     {
       "id": "export:package-json",
       "sourcePath": "package.json#exports",
-      "sha256": "47231fa1d1341ec6147d01d8aae2d43d66551eef62f572f89ee9019ad9ddb293"
+      "sha256": "f2ffc9b8fdeff16e3a681feead26ff9e3a38182b1209d37985e95e53fb21ecf3"
     },
     {
       "id": "export:npm-files",
       "sourcePath": "package.json#files",
-      "sha256": "47231fa1d1341ec6147d01d8aae2d43d66551eef62f572f89ee9019ad9ddb293"
+      "sha256": "f2ffc9b8fdeff16e3a681feead26ff9e3a38182b1209d37985e95e53fb21ecf3"
     }
   ],
   "siteConsumptionContracts": [
@@ -1521,7 +1521,7 @@
       },
       {
         "path": "package.json#exports",
-        "sha256": "47231fa1d1341ec6147d01d8aae2d43d66551eef62f572f89ee9019ad9ddb293",
+        "sha256": "f2ffc9b8fdeff16e3a681feead26ff9e3a38182b1209d37985e95e53fb21ecf3",
         "description": "Consume the shipped npm package surfaces."
       },
       {
@@ -1536,7 +1536,7 @@
       },
       {
         "path": ".buildchain/kfd-2/public-release-trust.claim.json",
-        "sha256": "d67387aceef6855eb633a26c8944c888adc030d6687dc454f29d5a896bb9a7e2",
+        "sha256": "fbe6f436240123cffad1c2b54fd31dcca47b78d914cef2cca49137f2b8c81944",
         "description": "Inspect the explicit public KFD-2 claim passed into Buildchain release passport generation."
       },
       {
@@ -1638,7 +1638,7 @@
       },
       {
         "path": ".buildchain/kfd-2/public-release-trust.claim.json",
-        "sha256": "d67387aceef6855eb633a26c8944c888adc030d6687dc454f29d5a896bb9a7e2",
+        "sha256": "fbe6f436240123cffad1c2b54fd31dcca47b78d914cef2cca49137f2b8c81944",
         "description": "KFD-2 public release trust claim"
       },
       {
@@ -1653,7 +1653,7 @@
       },
       {
         "path": "package.json",
-        "sha256": "47231fa1d1341ec6147d01d8aae2d43d66551eef62f572f89ee9019ad9ddb293",
+        "sha256": "f2ffc9b8fdeff16e3a681feead26ff9e3a38182b1209d37985e95e53fb21ecf3",
         "description": "Package export map"
       },
       {
@@ -1670,7 +1670,7 @@
       },
       {
         "path": "package.json",
-        "sha256": "47231fa1d1341ec6147d01d8aae2d43d66551eef62f572f89ee9019ad9ddb293",
+        "sha256": "f2ffc9b8fdeff16e3a681feead26ff9e3a38182b1209d37985e95e53fb21ecf3",
         "description": "KFD-3 value evidence for installed-package-self-verification: A package consumer can run the declared KFD self-verification against the exact installed npm artifact without a source checkout."
       },
       {
@@ -1685,12 +1685,12 @@
       },
       {
         "path": "scripts/check-installed-package.mjs",
-        "sha256": "219dfedbfeb6e16696158dc66748db8cfd01660efbce6b9ec27f24a84cbefcc2",
+        "sha256": "b41a7e5416b57202a4479dfd467052d4f17c99772bdbad22412898e89d812376",
         "description": "KFD-3 value evidence for installed-package-self-verification: A package consumer can run the declared KFD self-verification against the exact installed npm artifact without a source checkout."
       },
       {
         "path": ".buildchain/kfd-2/public-release-trust.claim.json",
-        "sha256": "d67387aceef6855eb633a26c8944c888adc030d6687dc454f29d5a896bb9a7e2",
+        "sha256": "fbe6f436240123cffad1c2b54fd31dcca47b78d914cef2cca49137f2b8c81944",
         "description": "KFD-3 value evidence for installed-package-self-verification: A package consumer can run the declared KFD self-verification against the exact installed npm artifact without a source checkout."
       },
       {
@@ -1815,7 +1815,7 @@
       },
       {
         "path": "package.json#exports",
-        "sha256": "47231fa1d1341ec6147d01d8aae2d43d66551eef62f572f89ee9019ad9ddb293",
+        "sha256": "f2ffc9b8fdeff16e3a681feead26ff9e3a38182b1209d37985e95e53fb21ecf3",
         "description": "KFD-3 value evidence for kfd-machine-consumption: KFD gives agents and release systems machine-readable standards, schemas, package exports, and witnesses so they can consume KFD without relying on private context."
       },
       {
@@ -2034,7 +2034,7 @@
       },
       {
         "path": ".buildchain/kfd-2/public-release-trust.claim.json",
-        "sha256": "d67387aceef6855eb633a26c8944c888adc030d6687dc454f29d5a896bb9a7e2",
+        "sha256": "fbe6f436240123cffad1c2b54fd31dcca47b78d914cef2cca49137f2b8c81944",
         "description": "Agent release trust claim path"
       },
       {
@@ -2049,7 +2049,7 @@
       },
       {
         "path": "package.json",
-        "sha256": "47231fa1d1341ec6147d01d8aae2d43d66551eef62f572f89ee9019ad9ddb293",
+        "sha256": "f2ffc9b8fdeff16e3a681feead26ff9e3a38182b1209d37985e95e53fb21ecf3",
         "description": "Package consumption path"
       }
     ],
