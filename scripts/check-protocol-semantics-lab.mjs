@@ -18,6 +18,12 @@ import {
   adapterInventory,
   inspectProtocolTraceFixture,
 } from "./protocol-observation-adapters.mjs";
+import {
+  FIXED_ROUTE_IDS,
+  ROUTE_RESULT_STATES,
+  analyzeCrossProtocolRouteSuite,
+  buildFixedCrossProtocolRouteSuite,
+} from "./cross-protocol-route-analyzer.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const profileRoot = path.join(root, "profiles", "protocol-semantics-lab");
@@ -191,6 +197,59 @@ for (const testCase of adapterCases.negative) {
   assert.throws(() => adaptProtocolTrace(fixture), /failed closed/u);
 }
 
+const routeSuite = buildFixedCrossProtocolRouteSuite();
+const routeReport = analyzeCrossProtocolRouteSuite(routeSuite);
+assert.equal(routeReport.valid, true, JSON.stringify(routeReport.issues));
+assert.deepEqual(routeSuite.routes.map(({ id }) => id), [...FIXED_ROUTE_IDS]);
+assert.deepEqual(ROUTE_RESULT_STATES, ["preserved", "extension-required", "out-of-scope", "collapsed"]);
+assert.equal(routeSuite.routes.some((route) => route.result.state === "preserved" && route.hops.every((hop) => hop.mappings.every((mapping) => mapping.state === "preserved"))), true);
+assert.equal(routeSuite.routes.some((route) => route.result.state === "collapsed" && route.result.pairedWorldCollapse), true);
+assert.equal(routeSuite.routes.find(({ id }) => id === "commerce-authorization-to-accepted-completion").hops.length, 2);
+for (const route of routeSuite.routes) {
+  assert.equal(route.hops.every((hop) => ["input", "output", "mappings", "losses", "inference", "authorityTransition"].every((field) => Object.hasOwn(hop, field))), true, `${route.id}: every hop must declare the exact semantic surfaces`);
+}
+
+function routeMutation(mutator) {
+  const mutated = structuredClone(routeSuite);
+  mutator(mutated);
+  return analyzeCrossProtocolRouteSuite(mutated);
+}
+
+const permutation = routeMutation((suite) => suite.routes[2].hops.reverse());
+assert.equal(permutation.valid, false);
+assert.equal(permutation.issues.some(({ code }) => code === "psl-route-permutation-invalid"), true);
+const omittedHop = routeMutation((suite) => suite.routes[2].hops.pop());
+assert.equal(omittedHop.valid, false);
+assert.equal(omittedHop.issues.some(({ code }) => code === "psl-route-hop-omitted"), true);
+const stalePack = routeMutation((suite) => { suite.routes[0].hops[0].input.evidencePackRoot = `sha256:${"0".repeat(64)}`; });
+assert.equal(stalePack.valid, false);
+assert.equal(stalePack.issues.some(({ code }) => code === "psl-route-stale-pack"), true);
+const authorityRevision = routeMutation((suite) => { suite.routes[0].hops[0].authorityTransition.toRevision = `sha256:${"1".repeat(64)}`; });
+assert.equal(authorityRevision.valid, false);
+assert.equal(authorityRevision.issues.some(({ code }) => code === "psl-authority-revision-mismatch"), true);
+const unknownRouteState = routeMutation((suite) => { suite.routes[0].hops[0].mappings[0].state = "represented"; });
+assert.equal(unknownRouteState.valid, false);
+assert.equal(unknownRouteState.issues.some(({ code }) => code === "psl-state-contradictory"), true);
+const hiddenLoss = routeMutation((suite) => { suite.routes[0].hops[0].losses = []; });
+assert.equal(hiddenLoss.valid, false);
+assert.equal(hiddenLoss.issues.some(({ code }) => code === "psl-route-loss-hidden"), true);
+const replacedWork = routeMutation((suite) => { suite.routes[0].hops[0].output.canonicalWorkRoot = `sha256:${"2".repeat(64)}`; });
+assert.equal(replacedWork.valid, false);
+assert.equal(replacedWork.issues.some(({ code }) => code === "psl-work-identity-synthetic"), true);
+for (const syntheticKind of ["session", "task", "invocation", "payment", "message"]) {
+  const syntheticIdentity = routeMutation((suite) => {
+    suite.routes[0].hops[0].input.canonicalWorkRoot = `${syntheticKind}-123`;
+    suite.routes[0].hops[0].input.canonicalWorkSource = syntheticKind;
+  });
+  assert.equal(syntheticIdentity.valid, false, `${syntheticKind} identity cannot substitute for canonical Work`);
+  assert.equal(syntheticIdentity.issues.some(({ code }) => code === "psl-work-identity-synthetic"), true);
+  assert.equal(syntheticIdentity.issues.some(({ code }) => code === "psl-root-missing"), true);
+}
+const analyzerSource = fs.readFileSync(path.join(root, "scripts", "cross-protocol-route-analyzer.mjs"), "utf8");
+for (const forbidden of ["node:http", "node:https", "node:net", "node:tls", "fetch(", "WebSocket"]) {
+  assert.equal(analyzerSource.includes(forbidden), false, `offline route analyzer must not contain network primitive: ${forbidden}`);
+}
+
 for (const relativePath of cases.valid) {
   const document = readJson(path.join(profileRoot, "fixtures", relativePath));
   const first = verifyProtocolSemanticsDocument(document);
@@ -252,6 +311,7 @@ const exactExports = {
   "./protocol-semantics-lab/catalog-comparison.md": "./profiles/protocol-semantics-lab/generated/catalog-comparison.md",
   "./protocol-semantics-lab/verifier": "./scripts/protocol-semantics-contract.mjs",
   "./protocol-semantics-lab/observation-adapters": "./scripts/protocol-observation-adapters.mjs",
+  "./protocol-semantics-lab/route-analyzer": "./scripts/cross-protocol-route-analyzer.mjs",
 };
 for (const [exportName, target] of Object.entries(exactExports)) assert.equal(packageJson.exports?.[exportName], target);
 for (const directory of ["profiles", "schemas", "scripts"]) assert.equal(packageJson.files?.includes(directory), true, `npm files must include ${directory}`);
@@ -260,4 +320,4 @@ assert.equal(packageJson.scripts?.["check:protocol-semantics-lab"], "node script
 assert.equal(packageJson.scripts?.["generate:protocol-semantics-reference"], "node scripts/generate-protocol-semantics-reference.mjs --write");
 assert.equal(packageJson.scripts?.check?.includes("npm run check:protocol-semantics-lab"), true);
 
-console.log(`protocol semantics lab: ${cases.valid.length} architecture fixtures, ${adapterCases.valid.length} deterministic adapter traces, ${adapterCases.negative.length} adapter negatives, ${catalog.packs.length} frozen packs, six-pair compatibility, roots, exports, and generated references ok`);
+console.log(`protocol semantics lab: ${cases.valid.length} architecture fixtures, ${adapterCases.valid.length} deterministic adapter traces, ${adapterCases.negative.length} adapter negatives, ${routeSuite.routes.length} fixed routes, ${catalog.packs.length} frozen packs, six-pair compatibility, roots, exports, and generated references ok`);

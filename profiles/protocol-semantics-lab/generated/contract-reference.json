@@ -30,6 +30,12 @@
       "byteDigest": "sha256:a39160d08eb06dcc20117bd66b5ca281b618832fa785fb578222a22735e18123"
     },
     {
+      "id": "kfd.cross-protocol-route/v2",
+      "schema": "schemas/kfd-protocol-semantics/cross-protocol-route-v2.schema.json",
+      "export": "./protocol-semantics-lab/cross-protocol-route-v2.schema.json",
+      "byteDigest": "sha256:a6ca570dd39f1b9db67f131581b6ec499a453941ebb269f40a83f0a878302437"
+    },
+    {
       "id": "kfd.derived-capability-manifest/v1",
       "schema": "schemas/kfd-protocol-semantics/derived-capability-manifest.schema.json",
       "export": "./protocol-semantics-lab/derived-capability-manifest.schema.json",
@@ -79,5 +85,5 @@
     "runtimeEnforcement": false,
     "commercialDemand": false
   },
-  "referenceRoot": "sha256:56a57c0778a8005d28c7bb891a6fb1a7ad42a2c3a7d3e7117a4a0f7a5cf77946"
+  "referenceRoot": "sha256:809b9f3b1ea91aa7a84ef303282b112390071df1b6a3ee9ab7ce308b00c90572"
 }
