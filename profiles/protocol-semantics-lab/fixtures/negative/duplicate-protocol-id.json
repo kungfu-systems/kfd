@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.protocol-evidence-pack-registry/v1",
+  "rootAlgorithm": "sha256-kfd-canonical-json-v1",
+  "entries": [
+    {
+      "protocolId": "fixture-protocol",
+      "protocolVersion": "1.0.0",
+      "packPath": "profiles/protocol-semantics-lab/packs/fixture-protocol-1.0.0.json",
+      "packRoot": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+    },
+    {
+      "protocolId": "fixture-protocol",
+      "protocolVersion": "2.0.0",
+      "packPath": "profiles/protocol-semantics-lab/packs/fixture-protocol-2.0.0.json",
+      "packRoot": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-protocol-semantics/protocol-evidence-pack.schema.json",
+  "title": "KFD Protocol Evidence Pack",
+  "description": "A fixed, bounded semantic input for the unnumbered Protocol Semantics Lab. It does not certify a protocol implementation or transfer runtime authority.",
+  "type": "object",
+  "required": ["schemaVersion", "contract", "protocol", "source", "semantics", "claimBoundary"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "contract": { "const": "kfd.protocol-evidence-pack/v1" },
+    "protocol": {
+      "type": "object",
+      "required": ["id", "title", "version", "kind"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string", "minLength": 1 },
+        "version": { "$ref": "#/$defs/version" },
+        "kind": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "source": {
+      "type": "object",
+      "required": ["coordinate", "revision", "contentRoot", "locators"],
+      "properties": {
+        "coordinate": {
+          "type": "string",
+          "pattern": "^\\S+@(?:[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?|[0-9a-f]{40}|sha256:[0-9a-f]{64})$"
+        },
+        "revision": { "type": "string", "pattern": "^(?:[0-9a-f]{40}|sha256:[0-9a-f]{64})$" },
+        "contentRoot": { "$ref": "#/$defs/root" },
+        "locators": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      },
+      "additionalProperties": false
+    },
+    "semantics": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "state", "summary", "evidenceRoots"],
+        "properties": {
+          "id": { "$ref": "#/$defs/id" },
+          "state": { "$ref": "#/$defs/representationState" },
+          "summary": { "type": "string", "minLength": 1 },
+          "evidenceRoots": { "$ref": "#/$defs/roots" }
+        },
+        "allOf": [
+          {
+            "if": { "properties": { "state": { "const": "represented" } }, "required": ["state"] },
+            "then": { "properties": { "evidenceRoots": { "minItems": 1 } } }
+          }
+        ],
+        "additionalProperties": false
+      }
+    },
+    "claimBoundary": {
+      "type": "object",
+      "required": ["evaluationInputOnly", "certification", "runtimeAuthority", "commercialDemand"],
+      "properties": {
+        "evaluationInputOnly": { "const": true },
+        "certification": { "const": false },
+        "runtimeAuthority": { "const": false },
+        "commercialDemand": { "const": false }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z][a-z0-9]*(?:[.-][a-z0-9]+)*$" },
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$" },
+    "root": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "roots": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/root" } },
+    "representationState": { "enum": ["represented", "extension-required", "out-of-scope", "unresolved"] }
+  },
+  "additionalProperties": false
+}

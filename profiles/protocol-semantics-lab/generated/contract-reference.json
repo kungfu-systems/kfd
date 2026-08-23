@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.protocol-semantics-contract-reference/v1",
+  "profile": {
+    "id": "kfd-protocol-semantics-lab",
+    "version": "0.1.0-alpha.1",
+    "status": "experimental",
+    "numberedDecision": false,
+    "authority": "profiles/protocol-semantics-lab/README.md"
+  },
+  "kernel": {
+    "profileId": "kfd-delegated-work-challenge",
+    "manifestPath": "profiles/delegated-work-challenge/manifest.json",
+    "suiteId": "delegated-work-paired-worlds",
+    "fixedPairCount": 6,
+    "defaultProjection": "execution-only",
+    "fullSemanticProjection": "full-semantic",
+    "reportContract": "kfd.delegated-work-challenge-report/v1",
+    "relationship": "projection-and-declarative-input-only"
+  },
+  "registry": {
+    "path": "profiles/protocol-semantics-lab/registry.json",
+    "root": "sha256:18e1e8c02b5b02d1884ea18e97817ea3640a7e4397bbc2fe7d73f48fd4488526"
+  },
+  "contracts": [
+    {
+      "id": "kfd.cross-protocol-route/v1",
+      "schema": "schemas/kfd-protocol-semantics/cross-protocol-route.schema.json",
+      "export": "./protocol-semantics-lab/cross-protocol-route.schema.json",
+      "byteDigest": "sha256:a39160d08eb06dcc20117bd66b5ca281b618832fa785fb578222a22735e18123"
+    },
+    {
+      "id": "kfd.derived-capability-manifest/v1",
+      "schema": "schemas/kfd-protocol-semantics/derived-capability-manifest.schema.json",
+      "export": "./protocol-semantics-lab/derived-capability-manifest.schema.json",
+      "byteDigest": "sha256:a7b671086fc0eb783d880dbbe1a050cde5349f9ad6e6cfe1bebdd5aac389c46d"
+    },
+    {
+      "id": "kfd.protocol-evidence-pack-registry/v1",
+      "schema": "schemas/kfd-protocol-semantics/protocol-evidence-pack-registry.schema.json",
+      "export": "./protocol-semantics-lab/protocol-evidence-pack-registry.schema.json",
+      "byteDigest": "sha256:921f7f32b87ca45815d801bec023d7e764226c483796931302d334fee302a57e"
+    },
+    {
+      "id": "kfd.protocol-evidence-pack/v1",
+      "schema": "schemas/kfd-protocol-semantics/protocol-evidence-pack.schema.json",
+      "export": "./protocol-semantics-lab/protocol-evidence-pack.schema.json",
+      "byteDigest": "sha256:2b8f6094c70ce02a9a6ba46ecefbbd0beec6e222d490b003f10d71bf1a810018"
+    },
+    {
+      "id": "kfd.protocol-observation/v1",
+      "schema": "schemas/kfd-protocol-semantics/protocol-observation.schema.json",
+      "export": "./protocol-semantics-lab/protocol-observation.schema.json",
+      "byteDigest": "sha256:0fa624984e3ad2430a2141c34fc8c216ef0a77f46186918556ebb8c5ee4450ea"
+    }
+  ],
+  "claimBoundary": {
+    "informationRepresentationExperiment": true,
+    "numberedKfdAuthority": false,
+    "vendorCertification": false,
+    "runtimeEnforcement": false,
+    "commercialDemand": false
+  },
+  "referenceRoot": "sha256:f88a0b54b1f39c0ecb2a2091c9eee3d277435668a095d217538399bcb93dc65f"
+}

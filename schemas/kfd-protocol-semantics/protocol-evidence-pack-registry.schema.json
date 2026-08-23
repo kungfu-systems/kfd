@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-protocol-semantics/protocol-evidence-pack-registry.schema.json",
+  "title": "KFD Protocol Evidence Pack Registry",
+  "type": "object",
+  "required": ["schemaVersion", "contract", "rootAlgorithm", "entries"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "contract": { "const": "kfd.protocol-evidence-pack-registry/v1" },
+    "rootAlgorithm": { "const": "sha256-kfd-canonical-json-v1" },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["protocolId", "protocolVersion", "packPath", "packRoot"],
+        "properties": {
+          "protocolId": { "type": "string", "pattern": "^[a-z][a-z0-9]*(?:[.-][a-z0-9]+)*$" },
+          "protocolVersion": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$" },
+          "packPath": { "type": "string", "pattern": "^profiles/protocol-semantics-lab/packs/[a-z0-9.-]+\\.json$" },
+          "packRoot": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
