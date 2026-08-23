@@ -1,8 +1,31 @@
 {
   "schemaVersion": 1,
-  "contract": "kfd.protocol-evidence-pack-registry/v1",
-  "rootAlgorithm": "sha256-kfd-canonical-json-v1",
-  "entries": [
+  "contract": "kfd.protocol-evidence-catalog-reference/v1",
+  "frozenAt": "2026-08-23",
+  "sourcePolicy": "Frozen semantics are the authorized design input. Locators are citations, never generator dependencies; later drift requires a new pack version.",
+  "sourceCatalogIds": [
+    "a2a-dev-2026-08-23",
+    "a2ui-v0.9",
+    "ag-ui-2026-08-23",
+    "agentic-commerce-2026-h1",
+    "agntcy-v1-2026-08-23",
+    "durable-runtime-counterexamples-2026-08-23",
+    "ietf-aiagent-auth-draft-03",
+    "kfd-alpha68",
+    "mcp-tasks-2026-07-28",
+    "webmcp-cg-draft-2026-08-23",
+    "zed-acp-v1-2026-04-22"
+  ],
+  "questionIds": [
+    "accepted-completion",
+    "authority-revocation",
+    "causal-history",
+    "recovery-drift",
+    "retry-identity",
+    "work-version"
+  ],
+  "registryRoot": "sha256:74b218b2d363eab72350cd81d6f49bc0843d722fe30fd233265a5ab4add6081b",
+  "packs": [
     {
       "protocolId": "a2a-task",
       "protocolVersion": "2026.8.23",
@@ -75,5 +98,12 @@
       "packPath": "profiles/protocol-semantics-lab/packs/zed-acp-1.0.0.json",
       "packRoot": "sha256:39da6ad7b92734a745d4667faccf56f3a4b6ec873b2d586b718848a3bc49152a"
     }
-  ]
+  ],
+  "claimBoundary": {
+    "evaluationInputOnly": true,
+    "certification": false,
+    "runtimeAuthority": false,
+    "commercialDemand": false
+  },
+  "catalogRoot": "sha256:9fb02453236e847be8494a49d095da45bd484d40d914fe8a9f04d36f09b35879"
 }

@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.protocol-evidence-pack/v2",
+  "protocol": {
+    "id": "a2ui",
+    "title": "A2UI",
+    "version": "0.9.0",
+    "kind": "declarative-ui"
+  },
+  "source": {
+    "coordinate": "a2ui-v0.9@sha256:1a26d74287f6edc61cea4c37a5e93b33e92dde1c37edc304f22b2142d0599dbd",
+    "revision": "sha256:1a26d74287f6edc61cea4c37a5e93b33e92dde1c37edc304f22b2142d0599dbd",
+    "contentRoot": "sha256:1a26d74287f6edc61cea4c37a5e93b33e92dde1c37edc304f22b2142d0599dbd",
+    "locators": [
+      "https://developers.googleblog.com/en/a2ui-v0-9-generative-ui/"
+    ]
+  },
+  "semantics": [
+    {
+      "id": "accepted-completion",
+      "state": "out-of-scope",
+      "summary": "accepted completion is outside A2UI's frozen protocol responsibility; this is not a protocol failure.",
+      "evidenceRoots": []
+    },
+    {
+      "id": "authority-revocation",
+      "state": "out-of-scope",
+      "summary": "authority revocation is outside A2UI's frozen protocol responsibility; this is not a protocol failure.",
+      "evidenceRoots": []
+    },
+    {
+      "id": "causal-history",
+      "state": "out-of-scope",
+      "summary": "causal history is outside A2UI's frozen protocol responsibility; this is not a protocol failure.",
+      "evidenceRoots": []
+    },
+    {
+      "id": "recovery-drift",
+      "state": "out-of-scope",
+      "summary": "recovery drift is outside A2UI's frozen protocol responsibility; this is not a protocol failure.",
+      "evidenceRoots": []
+    },
+    {
+      "id": "retry-identity",
+      "state": "out-of-scope",
+      "summary": "retry identity is outside A2UI's frozen protocol responsibility; this is not a protocol failure.",
+      "evidenceRoots": []
+    },
+    {
+      "id": "work-version",
+      "state": "out-of-scope",
+      "summary": "work version is outside A2UI's frozen protocol responsibility; this is not a protocol failure.",
+      "evidenceRoots": []
+    }
+  ],
+  "catalogSourceId": "a2ui-v0.9",
+  "maturity": {
+    "status": "experimental",
+    "authority": "A2UI v0.9 announcement",
+    "asOf": "2026-08-23"
+  },
+  "responsibility": {
+    "protocolOwns": [
+      "declarative UI projection",
+      "framework-neutral UI description"
+    ],
+    "kfdWorkOwns": [
+      "accepted completion",
+      "authority lineage",
+      "canonical Work identity",
+      "causal Work history",
+      "exact Work version",
+      "recovery semantics"
+    ],
+    "outOfScopeIsFailure": false
+  },
+  "nativeSurface": {
+    "objects": [
+      "declarative UI document"
+    ],
+    "states": []
+  },
+  "extensionPoints": [
+    "Work evidence binding"
+  ],
+  "nonClaims": [
+    "This pack does not evaluate renderer quality.",
+    "UI projection is not Work authority."
+  ],
+  "evidenceGrade": "B",
+  "drift": {
+    "frozenAt": "2026-08-23",
+    "policy": "new-pack-version-required",
+    "sourceStatus": "experimental"
+  },
+  "sourceBoundary": {
+    "mode": "bounded-paraphrase",
+    "fullSpecificationVendored": false,
+    "excerptWords": 0
+  },
+  "claimBoundary": {
+    "evaluationInputOnly": true,
+    "certification": false,
+    "runtimeAuthority": false,
+    "commercialDemand": false
+  }
+}

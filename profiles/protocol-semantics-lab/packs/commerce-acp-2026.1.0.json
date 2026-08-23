@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.protocol-evidence-pack/v2",
+  "protocol": {
+    "id": "commerce-acp",
+    "title": "AP2, UCP and Agentic Commerce Protocol Family",
+    "version": "2026.1.0",
+    "kind": "domain-protocol-family"
+  },
+  "source": {
+    "coordinate": "agentic-commerce-2026-h1@sha256:2b7ad77446e43431c61d1590f335838e07eaca29f9705fa69d9943e95b2751be",
+    "revision": "sha256:2b7ad77446e43431c61d1590f335838e07eaca29f9705fa69d9943e95b2751be",
+    "contentRoot": "sha256:2b7ad77446e43431c61d1590f335838e07eaca29f9705fa69d9943e95b2751be",
+    "locators": [
+      "https://developers.googleblog.com/en/under-the-hood-universal-commerce-protocol-ucp/",
+      "https://fidoalliance.org/building-the-trust-layer-for-agentic-payments-with-ap2-and-verifiable-intent/",
+      "https://stripe.com/blog/developing-an-open-standard-for-agentic-commerce"
+    ]
+  },
+  "semantics": [
+    {
+      "id": "accepted-completion",
+      "state": "extension-required",
+      "summary": "AP2, UCP and Agentic Commerce Protocol Family's frozen protocol-owned surface requires a separately versioned extension to carry accepted completion.",
+      "evidenceRoots": []
+    },
+    {
+      "id": "authority-revocation",
+      "state": "unresolved",
+      "summary": "AP2, UCP and Agentic Commerce Protocol Family's frozen bounded input does not determine authority revocation.",
+      "evidenceRoots": []
+    },
+    {
+      "id": "causal-history",
+      "state": "unresolved",
+      "summary": "AP2, UCP and Agentic Commerce Protocol Family's frozen bounded input does not determine causal history.",
+      "evidenceRoots": []
+    },
+    {
+      "id": "recovery-drift",
+      "state": "out-of-scope",
+      "summary": "recovery drift is outside AP2, UCP and Agentic Commerce Protocol Family's frozen protocol responsibility; this is not a protocol failure.",
+      "evidenceRoots": []
+    },
+    {
+      "id": "retry-identity",
+      "state": "out-of-scope",
+      "summary": "retry identity is outside AP2, UCP and Agentic Commerce Protocol Family's frozen protocol responsibility; this is not a protocol failure.",
+      "evidenceRoots": []
+    },
+    {
+      "id": "work-version",
+      "state": "out-of-scope",
+      "summary": "work version is outside AP2, UCP and Agentic Commerce Protocol Family's frozen protocol responsibility; this is not a protocol failure.",
+      "evidenceRoots": []
+    }
+  ],
+  "catalogSourceId": "agentic-commerce-2026-h1",
+  "maturity": {
+    "status": "domain-family",
+    "authority": "AP2, UCP and commerce ACP public materials",
+    "asOf": "2026-08-23"
+  },
+  "responsibility": {
+    "protocolOwns": [
+      "authorization intent",
+      "merchant acceptance boundary",
+      "payment execution"
+    ],
+    "kfdWorkOwns": [
+      "accepted completion outside commerce",
+      "canonical Work identity",
+      "universal Work certification"
+    ],
+    "outOfScopeIsFailure": false
+  },
+  "nativeSurface": {
+    "objects": [
+      "authorization intent",
+      "merchant acceptance",
+      "payment execution"
+    ],
+    "states": [
+      "accepted",
+      "authorized",
+      "executed"
+    ]
+  },
+  "extensionPoints": [
+    "canonical Work binding",
+    "non-commerce acceptance binding"
+  ],
+  "nonClaims": [
+    "Commerce acceptance is not universal Work certification.",
+    "This family pack does not collapse payment authorization into execution."
+  ],
+  "evidenceGrade": "B",
+  "drift": {
+    "frozenAt": "2026-08-23",
+    "policy": "new-pack-version-required",
+    "sourceStatus": "domain-family"
+  },
+  "sourceBoundary": {
+    "mode": "bounded-paraphrase",
+    "fullSpecificationVendored": false,
+    "excerptWords": 0
+  },
+  "claimBoundary": {
+    "evaluationInputOnly": true,
+    "certification": false,
+    "runtimeAuthority": false,
+    "commercialDemand": false
+  }
+}

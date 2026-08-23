@@ -12,6 +12,7 @@ import {
   semanticRoot,
   verifyProtocolSemanticsDocument,
 } from "./protocol-semantics-contract.mjs";
+import { buildProtocolEvidenceCatalog } from "./protocol-evidence-catalog.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const profileRoot = path.join(root, "profiles", "protocol-semantics-lab");
@@ -66,7 +67,85 @@ assert.equal(fullReport.summary.total, 6);
 assert.equal(fullReport.summary.informationDistinguishable, 6);
 
 assert.equal(verifyProtocolSemanticsDocument(registry, { rootDirectory: root }).valid, true);
-assert.deepEqual(registry.entries, [], "architecture registry must remain empty until protocol packs are reviewed");
+const catalog = buildProtocolEvidenceCatalog();
+assert.equal(registry.entries.length, 12, "frozen catalog must bind twelve exact packs from eleven source entries");
+assert.deepEqual(registry, catalog.registry, "stored registry must equal deterministic catalog output");
+
+const questionIds = ["accepted-completion", "authority-revocation", "causal-history", "recovery-drift", "retry-identity", "work-version"];
+const coveredSources = new Set();
+for (const pack of catalog.packs) {
+  const report = verifyProtocolSemanticsDocument(pack);
+  assert.equal(report.valid, true, `${pack.protocol.id}: ${JSON.stringify(report.issues)}`);
+  assert.deepEqual(pack.semantics.map(({ id }) => id), questionIds, `${pack.protocol.id}: exact six-question mapping required`);
+  assert.equal(pack.responsibility.outOfScopeIsFailure, false);
+  assert.equal(pack.responsibility.protocolOwns.some((value) => pack.responsibility.kfdWorkOwns.includes(value)), false, `${pack.protocol.id}: protocol and KFD Work responsibility must remain separate`);
+  assert.deepEqual(pack.sourceBoundary, { mode: "bounded-paraphrase", fullSpecificationVendored: false, excerptWords: 0 });
+  coveredSources.add(pack.catalogSourceId);
+}
+assert.deepEqual([...coveredSources].sort(), catalog.source.sourceCatalog.map(({ id }) => id).sort(), "every frozen source entry must produce at least one pack");
+assert.equal(catalog.packs.some((pack) => pack.protocol.id === "acp"), false, "bare ACP identity is ambiguous");
+assert.equal(catalog.packs.some((pack) => pack.protocol.id === "zed-acp"), true);
+assert.equal(catalog.packs.some((pack) => pack.protocol.id === "commerce-acp"), true);
+assert.equal(catalog.packs.find((pack) => pack.protocol.id === "ietf-aiagent-auth-draft-03").maturity.status, "draft");
+assert.equal(catalog.packs.find((pack) => pack.protocol.id === "webmcp-cg-draft").maturity.status, "incubating");
+
+function catalogMutationIssues(pack) {
+  const issues = verifyProtocolSemanticsDocument(pack).issues.map(({ code }) => code);
+  if (pack.protocol?.id === "acp") issues.push("psl-acp-namespace-invalid");
+  if (pack.protocol?.id === "ietf-aiagent-auth-draft-03" && pack.maturity?.status !== "draft") issues.push("psl-maturity-invalid");
+  if (pack.protocol?.id === "webmcp-cg-draft" && pack.maturity?.status !== "incubating") issues.push("psl-maturity-invalid");
+  return [...new Set(issues)].sort();
+}
+
+const mutationCases = [
+  {
+    name: "missing paired-world question",
+    source: "mcp-tasks",
+    mutate(pack) { pack.semantics.pop(); },
+    issue: "psl-semantic-coverage-incomplete",
+  },
+  {
+    name: "out-of-scope scored as failure",
+    source: "a2ui",
+    mutate(pack) { pack.responsibility.outOfScopeIsFailure = true; },
+    issue: "psl-responsibility-collapsed",
+  },
+  {
+    name: "mutable drift policy",
+    source: "ag-ui",
+    mutate(pack) { pack.drift.policy = "follow-latest"; },
+    issue: "psl-coordinate-mutable",
+  },
+  {
+    name: "bare ACP namespace",
+    source: "zed-acp",
+    mutate(pack) { pack.protocol.id = "acp"; },
+    issue: "psl-acp-namespace-invalid",
+  },
+  {
+    name: "IETF draft rendered stable",
+    source: "ietf-aiagent-auth-draft-03",
+    mutate(pack) { pack.maturity.status = "stable"; pack.drift.sourceStatus = "stable"; },
+    issue: "psl-maturity-invalid",
+  },
+  {
+    name: "WebMCP incubation rendered stable",
+    source: "webmcp-cg-draft",
+    mutate(pack) { pack.maturity.status = "stable"; pack.drift.sourceStatus = "stable"; },
+    issue: "psl-maturity-invalid",
+  },
+  {
+    name: "vendored specification boundary",
+    source: "a2a-task",
+    mutate(pack) { pack.sourceBoundary.fullSpecificationVendored = true; },
+    issue: "psl-source-boundary-invalid",
+  },
+];
+for (const testCase of mutationCases) {
+  const mutated = structuredClone(catalog.packs.find((pack) => pack.protocol.id === testCase.source));
+  testCase.mutate(mutated);
+  assert.equal(catalogMutationIssues(mutated).includes(testCase.issue), true, `${testCase.name} must fail with ${testCase.issue}`);
+}
 
 for (const relativePath of cases.valid) {
   const document = readJson(path.join(profileRoot, "fixtures", relativePath));
@@ -115,11 +194,18 @@ const storedReference = readJson(generatedPath);
 const storedRoot = storedReference.referenceRoot;
 delete storedReference.referenceRoot;
 assert.equal(storedRoot, semanticRoot(storedReference));
+for (const [relativePath, bytes] of catalog.files) {
+  assert.equal(fs.readFileSync(path.join(root, relativePath), "utf8"), bytes, `${relativePath} is stale or nondeterministic`);
+}
+const expectedPackFiles = registry.entries.map(({ packPath }) => path.basename(packPath)).sort();
+assert.deepEqual(fs.readdirSync(path.join(profileRoot, "packs")).filter((name) => name.endsWith(".json")).sort(), expectedPackFiles, "pack directory must contain exactly the registered generated files");
 
 const exactExports = {
   "./protocol-semantics-lab/manifest.json": "./profiles/protocol-semantics-lab/manifest.json",
   "./protocol-semantics-lab/registry.json": "./profiles/protocol-semantics-lab/registry.json",
   "./protocol-semantics-lab/contract-reference.json": "./profiles/protocol-semantics-lab/generated/contract-reference.json",
+  "./protocol-semantics-lab/catalog-reference.json": "./profiles/protocol-semantics-lab/generated/catalog-reference.json",
+  "./protocol-semantics-lab/catalog-comparison.md": "./profiles/protocol-semantics-lab/generated/catalog-comparison.md",
   "./protocol-semantics-lab/verifier": "./scripts/protocol-semantics-contract.mjs",
 };
 for (const [exportName, target] of Object.entries(exactExports)) assert.equal(packageJson.exports?.[exportName], target);
@@ -129,4 +215,4 @@ assert.equal(packageJson.scripts?.["check:protocol-semantics-lab"], "node script
 assert.equal(packageJson.scripts?.["generate:protocol-semantics-reference"], "node scripts/generate-protocol-semantics-reference.mjs --write");
 assert.equal(packageJson.scripts?.check?.includes("npm run check:protocol-semantics-lab"), true);
 
-console.log(`protocol semantics lab: ${cases.valid.length} valid and ${cases.negative.length} negative fixtures, six-pair compatibility, roots, exports, and generated reference ok`);
+console.log(`protocol semantics lab: ${cases.valid.length} valid fixtures, ${cases.negative.length} architecture negatives, ${catalog.packs.length} frozen packs, ${mutationCases.length} catalog mutations, six-pair compatibility, roots, exports, and generated references ok`);

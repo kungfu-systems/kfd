@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-protocol-semantics/protocol-evidence-pack-v2.schema.json",
+  "title": "KFD Protocol Evidence Pack v2",
+  "description": "A fixed, license-bounded semantic input with explicit maturity, responsibility, drift and six-question representation metadata. It does not certify a protocol implementation or transfer runtime authority.",
+  "type": "object",
+  "required": ["schemaVersion", "contract", "protocol", "source", "semantics", "catalogSourceId", "maturity", "responsibility", "nativeSurface", "extensionPoints", "nonClaims", "evidenceGrade", "drift", "sourceBoundary", "claimBoundary"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "contract": { "const": "kfd.protocol-evidence-pack/v2" },
+    "protocol": {
+      "type": "object",
+      "required": ["id", "title", "version", "kind"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string", "minLength": 1 },
+        "version": { "$ref": "#/$defs/version" },
+        "kind": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "source": {
+      "type": "object",
+      "required": ["coordinate", "revision", "contentRoot", "locators"],
+      "properties": {
+        "coordinate": { "type": "string", "pattern": "^\\S+@(?:[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?|[0-9a-f]{40}|sha256:[0-9a-f]{64})$" },
+        "revision": { "type": "string", "pattern": "^(?:[0-9a-f]{40}|sha256:[0-9a-f]{64})$" },
+        "contentRoot": { "$ref": "#/$defs/root" },
+        "locators": { "$ref": "#/$defs/nonEmptyStrings" }
+      },
+      "additionalProperties": false
+    },
+    "semantics": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "allOf": [
+        { "contains": { "type": "object", "properties": { "id": { "const": "accepted-completion" } }, "required": ["id"] } },
+        { "contains": { "type": "object", "properties": { "id": { "const": "authority-revocation" } }, "required": ["id"] } },
+        { "contains": { "type": "object", "properties": { "id": { "const": "causal-history" } }, "required": ["id"] } },
+        { "contains": { "type": "object", "properties": { "id": { "const": "recovery-drift" } }, "required": ["id"] } },
+        { "contains": { "type": "object", "properties": { "id": { "const": "retry-identity" } }, "required": ["id"] } },
+        { "contains": { "type": "object", "properties": { "id": { "const": "work-version" } }, "required": ["id"] } }
+      ],
+      "items": {
+        "type": "object",
+        "required": ["id", "state", "summary", "evidenceRoots"],
+        "properties": {
+          "id": { "$ref": "#/$defs/id" },
+          "state": { "$ref": "#/$defs/representationState" },
+          "summary": { "type": "string", "minLength": 1 },
+          "evidenceRoots": { "$ref": "#/$defs/roots" }
+        },
+        "allOf": [{ "if": { "properties": { "state": { "const": "represented" } }, "required": ["state"] }, "then": { "properties": { "evidenceRoots": { "type": "array", "minItems": 1 } } } }],
+        "additionalProperties": false
+      }
+    },
+    "catalogSourceId": { "$ref": "#/$defs/id" },
+    "maturity": {
+      "type": "object",
+      "required": ["status", "authority", "asOf"],
+      "properties": {
+        "status": { "enum": ["stable", "draft", "incubating", "experimental", "implementation", "domain-family"] },
+        "authority": { "type": "string", "minLength": 1 },
+        "asOf": { "$ref": "#/$defs/date" }
+      },
+      "additionalProperties": false
+    },
+    "responsibility": {
+      "type": "object",
+      "required": ["protocolOwns", "kfdWorkOwns", "outOfScopeIsFailure"],
+      "properties": {
+        "protocolOwns": { "$ref": "#/$defs/nonEmptyStrings" },
+        "kfdWorkOwns": { "$ref": "#/$defs/nonEmptyStrings" },
+        "outOfScopeIsFailure": { "const": false }
+      },
+      "additionalProperties": false
+    },
+    "nativeSurface": {
+      "type": "object",
+      "required": ["objects", "states"],
+      "properties": {
+        "objects": { "$ref": "#/$defs/strings" },
+        "states": { "$ref": "#/$defs/strings" }
+      },
+      "additionalProperties": false
+    },
+    "extensionPoints": { "$ref": "#/$defs/strings" },
+    "nonClaims": { "$ref": "#/$defs/nonEmptyStrings" },
+    "evidenceGrade": { "enum": ["A", "B", "C"] },
+    "drift": {
+      "type": "object",
+      "required": ["frozenAt", "policy", "sourceStatus"],
+      "properties": {
+        "frozenAt": { "$ref": "#/$defs/date" },
+        "policy": { "const": "new-pack-version-required" },
+        "sourceStatus": { "enum": ["stable", "draft", "incubating", "experimental", "implementation", "domain-family"] }
+      },
+      "additionalProperties": false
+    },
+    "sourceBoundary": {
+      "type": "object",
+      "required": ["mode", "fullSpecificationVendored", "excerptWords"],
+      "properties": {
+        "mode": { "const": "bounded-paraphrase" },
+        "fullSpecificationVendored": { "const": false },
+        "excerptWords": { "const": 0 }
+      },
+      "additionalProperties": false
+    },
+    "claimBoundary": {
+      "type": "object",
+      "required": ["evaluationInputOnly", "certification", "runtimeAuthority", "commercialDemand"],
+      "properties": {
+        "evaluationInputOnly": { "const": true },
+        "certification": { "const": false },
+        "runtimeAuthority": { "const": false },
+        "commercialDemand": { "const": false }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z][a-z0-9]*(?:[.-][a-z0-9]+)*$" },
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$" },
+    "date": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+    "root": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "roots": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/root" } },
+    "strings": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+    "nonEmptyStrings": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+    "representationState": { "enum": ["represented", "extension-required", "out-of-scope", "unresolved"] }
+  },
+  "additionalProperties": false
+}
