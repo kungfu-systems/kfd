@@ -3,7 +3,7 @@
   "contract": "kungfu-buildchain-dev-delivery-warrant-queue",
   "repository": "kungfu-systems/kfd",
   "protectedBase": "dev/v1/v1.0",
-  "generation": 181,
+  "generation": 182,
   "fencingCounter": 38,
   "policy": {
     "agingSeconds": 900,
@@ -13,7 +13,7 @@
   },
   "activeWarrant": {
     "schema": "kungfu.buildchain.dev-delivery-warrant/v1",
-    "phase": "provisional",
+    "phase": "qualified",
     "repository": "kungfu-systems/kfd",
     "protectedBase": "dev/v1/v1.0",
     "candidateId": "sha256:bbfd918528e43995c669526d8fc59337a3a2aba74b81fff19340a175b69d21b5",
@@ -51,8 +51,13 @@
     "issuedAt": "2026-08-23T16:30:15.056Z",
     "expiresAt": "2026-08-23T17:33:24.752Z",
     "fencingToken": "sha256:5dabf233df15a3ef805fc576257746f2a2088d520cd3472e67ce22a3f204a1ab",
-    "nextAction": "Run or reuse exact native proof under this fence, then atomically qualify before merge admission.",
-    "heartbeatAt": "2026-08-23T16:33:24.752Z"
+    "nextAction": "Enter the GitHub merge queue at the exact fenced PR head; merge_group remains final authority.",
+    "heartbeatAt": "2026-08-23T16:33:24.752Z",
+    "nativeProofRoot": "sha256:e34bd9bec977c1efe7d90dbab195412c428c63e98a75343641f6fde584da3cc0",
+    "nativeExecutionReceiptRoot": "sha256:31e3e02d0f73dc629eb9ec32ff3127032b0c226d79d6727cd8b1cf337f3bae08",
+    "nativeProofReuseRoot": "sha256:0731b1deb3720713e4466c94a99afea87a1a9b723f720f0a343f525d752aca2a",
+    "qualificationReceiptRoot": "sha256:60234d79e8a8ce8e099d4859d64b4d0a88ff15465b00299b311282c0df451e54",
+    "qualifiedAt": "2026-08-23T16:33:51.857Z"
   },
   "candidates": [
     {
@@ -1572,10 +1577,10 @@
       "sourceWorkflowRunId": 32651157152,
       "priority": "ordinary",
       "enqueuedAt": "2026-08-23T16:30:11.412Z",
-      "updatedAt": "2026-08-23T16:33:24.752Z",
+      "updatedAt": "2026-08-23T16:33:51.857Z",
       "attempts": 1,
       "recoveries": 0,
-      "status": "proving",
+      "status": "qualified",
       "terminal": null,
       "affectedPaths": [
         ".buildchain/kfd-3/collaboration-interface.artifact.json",
@@ -1587,6 +1592,6 @@
       ]
     }
   ],
-  "updatedAt": "2026-08-23T16:33:24.752Z",
-  "stateRoot": "sha256:346ef8b1924a3bbf4a233161efa87ddff481c4e66177124d455007c577eab012"
+  "updatedAt": "2026-08-23T16:33:51.857Z",
+  "stateRoot": "sha256:729f44aaf5be93e140e62df3ee2761eba4b9a7dfabc5eaa88bb0dd8215c68196"
 }
