@@ -8,6 +8,7 @@ export const packageRoot = path.resolve(path.dirname(fileURLToPath(import.meta.u
 export const CONTRACTS = Object.freeze({
   registry: "kfd.protocol-evidence-pack-registry/v1",
   evidencePack: "kfd.protocol-evidence-pack/v1",
+  evidencePackV2: "kfd.protocol-evidence-pack/v2",
   observation: "kfd.protocol-observation/v1",
   route: "kfd.cross-protocol-route/v1",
   capabilityManifest: "kfd.derived-capability-manifest/v1",
@@ -22,6 +23,9 @@ const FIXED_COORDINATE_PATTERN = /^\S+@(?:[0-9]+\.[0-9]+\.[0-9]+(?:-[0-9A-Za-z.-
 const REPRESENTATION_STATES = new Set(["represented", "extension-required", "out-of-scope", "unresolved"]);
 const ROUTE_STATES = new Set(["preserved", "loss-declared", "extension-required", "out-of-scope", "unresolved"]);
 const CAPABILITY_STATES = new Set(["declared", "observed", "verified"]);
+const MATURITY_STATES = new Set(["stable", "draft", "incubating", "experimental", "implementation", "domain-family"]);
+const EVIDENCE_GRADES = new Set(["A", "B", "C"]);
+const PAIRED_WORLD_QUESTIONS = Object.freeze(["accepted-completion", "authority-revocation", "causal-history", "recovery-drift", "retry-identity", "work-version"]);
 const CLAIM_BOUNDARIES = Object.freeze({
   evidencePack: { evaluationInputOnly: true, certification: false, runtimeAuthority: false, commercialDemand: false },
   observation: { normalizedObservationOnly: true, certification: false, runtimeAuthority: false, policyCorrectness: false },
@@ -97,6 +101,15 @@ function version(report, value, pointer) {
   if (!VERSION_PATTERN.test(value ?? "")) issue(report, "psl-document-invalid", pointer, "An exact semantic version is required.");
 }
 
+function nonEmptyStrings(report, value, pointer, { minimum = 0 } = {}) {
+  if (!Array.isArray(value) || value.length < minimum || value.some((entry) => typeof entry !== "string" || !entry.trim())) {
+    issue(report, "psl-document-invalid", pointer, `Expected at least ${minimum} non-empty string value(s).`);
+    return;
+  }
+  if (new Set(value).size !== value.length) issue(report, "psl-document-invalid", pointer, "Values must be unique.");
+  if (!same(value, [...value].sort(compareUtf8))) issue(report, "psl-order-nondeterministic", pointer, "Values must use UTF-8 byte order.");
+}
+
 function protocolReference(report, value, pointer, rootField) {
   exactObject(report, value, pointer, ["protocolId", "protocolVersion", rootField]);
   identifier(report, value?.protocolId, `${pointer}/protocolId`);
@@ -158,8 +171,10 @@ function verifyRegistryBindings(report, document, rootDirectory) {
   }
 }
 
-function verifyEvidencePack(report, document) {
-  if (!exactObject(report, document, "/", ["schemaVersion", "contract", "protocol", "source", "semantics", "claimBoundary"])) return;
+function verifyEvidencePack(report, document, extended = false) {
+  const extendedFields = ["catalogSourceId", "maturity", "responsibility", "nativeSurface", "extensionPoints", "nonClaims", "evidenceGrade", "drift", "sourceBoundary"];
+  const required = ["schemaVersion", "contract", "protocol", "source", "semantics", "claimBoundary", ...(extended ? extendedFields : [])];
+  if (!exactObject(report, document, "/", required)) return;
   exactObject(report, document.protocol, "/protocol", ["id", "title", "version", "kind"]);
   identifier(report, document.protocol?.id, "/protocol/id");
   version(report, document.protocol?.version, "/protocol/version");
@@ -188,6 +203,33 @@ function verifyEvidencePack(report, document) {
       if (!REPRESENTATION_STATES.has(semantic.state)) issue(report, "psl-state-contradictory", `${pointer}/state`, "Representation state is unknown.");
       if (typeof semantic.summary !== "string" || !semantic.summary.trim()) issue(report, "psl-document-invalid", `${pointer}/summary`, "Semantic summary is required.");
       roots(report, semantic.evidenceRoots, `${pointer}/evidenceRoots`, { minimum: semantic.state === "represented" ? 1 : 0 });
+    }
+  }
+  if (extended) {
+    const semanticIds = (document.semantics ?? []).map((entry) => entry?.id);
+    if (!same(semanticIds, PAIRED_WORLD_QUESTIONS)) issue(report, "psl-semantic-coverage-incomplete", "/semantics", "Evidence Pack v2 must explicitly map the exact six paired-world questions in UTF-8 order.");
+    identifier(report, document.catalogSourceId, "/catalogSourceId");
+    exactObject(report, document.maturity, "/maturity", ["status", "authority", "asOf"]);
+    if (!MATURITY_STATES.has(document.maturity?.status)) issue(report, "psl-maturity-invalid", "/maturity/status", "Protocol maturity status is unsupported.");
+    if (typeof document.maturity?.authority !== "string" || !document.maturity.authority.trim()) issue(report, "psl-document-invalid", "/maturity/authority", "Maturity authority is required.");
+    if (!/^\d{4}-\d{2}-\d{2}$/u.test(document.maturity?.asOf ?? "")) issue(report, "psl-document-invalid", "/maturity/asOf", "Maturity date must be exact YYYY-MM-DD.");
+    exactObject(report, document.responsibility, "/responsibility", ["protocolOwns", "kfdWorkOwns", "outOfScopeIsFailure"]);
+    nonEmptyStrings(report, document.responsibility?.protocolOwns, "/responsibility/protocolOwns", { minimum: 1 });
+    nonEmptyStrings(report, document.responsibility?.kfdWorkOwns, "/responsibility/kfdWorkOwns", { minimum: 1 });
+    if (document.responsibility?.outOfScopeIsFailure !== false) issue(report, "psl-responsibility-collapsed", "/responsibility/outOfScopeIsFailure", "Out-of-scope representation is not protocol failure.");
+    exactObject(report, document.nativeSurface, "/nativeSurface", ["objects", "states"]);
+    nonEmptyStrings(report, document.nativeSurface?.objects, "/nativeSurface/objects");
+    nonEmptyStrings(report, document.nativeSurface?.states, "/nativeSurface/states");
+    nonEmptyStrings(report, document.extensionPoints, "/extensionPoints");
+    nonEmptyStrings(report, document.nonClaims, "/nonClaims", { minimum: 1 });
+    if (!EVIDENCE_GRADES.has(document.evidenceGrade)) issue(report, "psl-document-invalid", "/evidenceGrade", "Evidence grade must be A, B, or C.");
+    exactObject(report, document.drift, "/drift", ["frozenAt", "policy", "sourceStatus"]);
+    if (!/^\d{4}-\d{2}-\d{2}$/u.test(document.drift?.frozenAt ?? "")) issue(report, "psl-document-invalid", "/drift/frozenAt", "Frozen date must be exact YYYY-MM-DD.");
+    if (document.drift?.policy !== "new-pack-version-required") issue(report, "psl-coordinate-mutable", "/drift/policy", "Source drift must require a new pack version.");
+    if (document.drift?.sourceStatus !== document.maturity?.status) issue(report, "psl-maturity-invalid", "/drift/sourceStatus", "Drift status must preserve the frozen maturity state.");
+    exactObject(report, document.sourceBoundary, "/sourceBoundary", ["mode", "fullSpecificationVendored", "excerptWords"]);
+    if (document.sourceBoundary?.mode !== "bounded-paraphrase" || document.sourceBoundary?.fullSpecificationVendored !== false || document.sourceBoundary?.excerptWords !== 0) {
+      issue(report, "psl-source-boundary-invalid", "/sourceBoundary", "Catalog packs must use bounded paraphrases without vendored specification text or excerpts.");
     }
   }
   exactClaimBoundary(report, document.claimBoundary, "/claimBoundary", CLAIM_BOUNDARIES.evidencePack);
@@ -311,7 +353,8 @@ export function verifyProtocolSemanticsDocument(document, options = {}) {
   if (document.schemaVersion !== 1) issue(report, "psl-contract-unsupported", "/schemaVersion", "Only schema version 1 is supported.");
   const verifier = {
     [CONTRACTS.registry]: verifyRegistry,
-    [CONTRACTS.evidencePack]: verifyEvidencePack,
+    [CONTRACTS.evidencePack]: (targetReport, targetDocument) => verifyEvidencePack(targetReport, targetDocument, false),
+    [CONTRACTS.evidencePackV2]: (targetReport, targetDocument) => verifyEvidencePack(targetReport, targetDocument, true),
     [CONTRACTS.observation]: verifyObservation,
     [CONTRACTS.route]: verifyRoute,
     [CONTRACTS.capabilityManifest]: verifyCapabilityManifest,

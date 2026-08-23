@@ -1,0 +1,278 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.protocol-evidence-catalog-source/v1",
+  "frozenAt": "2026-08-23",
+  "sourcePolicy": "Frozen semantics are the authorized design input. Locators are citations, never generator dependencies; later drift requires a new pack version.",
+  "pairedWorldQuestionIds": [
+    "accepted-completion",
+    "authority-revocation",
+    "causal-history",
+    "recovery-drift",
+    "retry-identity",
+    "work-version"
+  ],
+  "sourceCatalog": [
+    {
+      "id": "a2a-dev-2026-08-23",
+      "kind": "protocol",
+      "locators": ["https://a2a-protocol.org/dev/specification/"],
+      "frozenSemantics": ["Task has id context status artifacts history metadata", "completed denotes successful task finish", "messages are not guaranteed durable authority unless separately negotiated"]
+    },
+    {
+      "id": "a2ui-v0.9",
+      "kind": "declarative-ui",
+      "locators": ["https://developers.googleblog.com/en/a2ui-v0-9-generative-ui/"],
+      "frozenSemantics": ["framework-agnostic declarative UI", "UI projection is not Work authority"]
+    },
+    {
+      "id": "agentic-commerce-2026-h1",
+      "kind": "domain-protocol-family",
+      "locators": ["https://developers.googleblog.com/en/under-the-hood-universal-commerce-protocol-ucp/", "https://fidoalliance.org/building-the-trust-layer-for-agentic-payments-with-ap2-and-verifiable-intent/", "https://stripe.com/blog/developing-an-open-standard-for-agentic-commerce"],
+      "frozenSemantics": ["authorization intent and payment execution are distinct", "commerce acceptance is a domain case, not a universal Work certification", "merchant acceptance remains a separate responsibility boundary"]
+    },
+    {
+      "id": "ag-ui-2026-08-23",
+      "kind": "protocol",
+      "locators": ["https://docs.ag-ui.com/concepts/capabilities"],
+      "frozenSemantics": ["RunFinished success or interrupt is not independent accepted-completion authority", "event and state transport between agent and UI", "interrupt and resume surfaces"]
+    },
+    {
+      "id": "agntcy-v1-2026-08-23",
+      "kind": "protocol-stack",
+      "locators": ["https://docs.agntcy.org/index.html"],
+      "frozenSemantics": ["SLIM and directory transport identity do not by themselves own Work authority", "directory identity messaging observability"]
+    },
+    {
+      "id": "durable-runtime-counterexamples-2026-08-23",
+      "kind": "implementation-counterexample-set",
+      "locators": ["https://docs.dbos.dev/explanations/concurrent-executions", "https://docs.restate.dev/references/architecture"],
+      "frozenSemantics": ["runtime completion remains separately tested against canonical Work and acceptance semantics", "runtime invocation identity fencing checkpointing and recovery can provide strong counterexamples"]
+    },
+    {
+      "id": "ietf-aiagent-auth-draft-03",
+      "kind": "individual-internet-draft",
+      "locators": ["https://datatracker.ietf.org/doc/draft-klrc-aiagent-auth/"],
+      "frozenSemantics": ["agents are workloads with delegated user or system context", "individual Internet-Draft with no formal IETF standing", "policy engines and runtime enforcement points may be distributed"]
+    },
+    {
+      "id": "kfd-alpha68",
+      "kind": "experimental-profile",
+      "coordinate": "@kungfu-tech/kfd@1.0.0-alpha.68",
+      "gitHead": "966215abb1122f8f3f36b817cfcb9ce248cb91a8",
+      "locators": ["https://github.com/kungfu-systems/kfd/discussions/427"],
+      "frozenSemantics": ["default projection collapses all six pairs", "full-semantic projection distinguishes all six pairs", "offline verification proves report closure only", "six paired worlds remain the immutable regression kernel"]
+    },
+    {
+      "id": "mcp-tasks-2026-07-28",
+      "kind": "protocol",
+      "locators": ["https://modelcontextprotocol.io/extensions/tasks/overview"],
+      "frozenSemantics": ["completed denotes operation completion, not independent accepted Work completion", "cooperative cancellation and capability negotiation", "durable task handle", "working input_required completed failed cancelled states"]
+    },
+    {
+      "id": "webmcp-cg-draft-2026-08-23",
+      "kind": "incubating-draft",
+      "locators": ["https://github.com/webmachinelearning/webmcp"],
+      "frozenSemantics": ["browser-mediated page tool API", "community draft with unresolved design items", "not treated as a Recommendation-track stable standard"]
+    },
+    {
+      "id": "zed-acp-v1-2026-04-22",
+      "kind": "protocol",
+      "locators": ["https://agentclientprotocol.com/protocol/v1/session-setup"],
+      "frozenSemantics": ["session identity is conversation context and not automatically canonical Work identity", "session/load replays history", "session/resume restores without replay"]
+    }
+  ],
+  "packs": [
+    {
+      "id": "a2a-task",
+      "title": "A2A Task",
+      "version": "2026.8.23",
+      "kind": "protocol",
+      "sourceId": "a2a-dev-2026-08-23",
+      "maturity": { "status": "experimental", "authority": "A2A development specification frozen on 2026-08-23" },
+      "protocolOwns": ["artifacts and messages", "task context and history", "task identity and status"],
+      "kfdWorkOwns": ["accepted completion", "authority lineage", "canonical Work identity", "exact Work version"],
+      "nativeObjects": ["artifact", "message", "task"],
+      "nativeStates": ["completed", "failed", "input-required", "submitted", "working"],
+      "extensionPoints": ["durable authority binding", "independent acceptance binding"],
+      "nonClaims": ["Task completion is not independent accepted Work completion.", "Task identity is not automatically canonical KFD Work identity."],
+      "evidenceGrade": "B",
+      "states": { "accepted-completion": "extension-required", "authority-revocation": "unresolved", "causal-history": "represented", "recovery-drift": "represented", "retry-identity": "represented", "work-version": "extension-required" }
+    },
+    {
+      "id": "a2ui",
+      "title": "A2UI",
+      "version": "0.9.0",
+      "kind": "declarative-ui",
+      "sourceId": "a2ui-v0.9",
+      "maturity": { "status": "experimental", "authority": "A2UI v0.9 announcement" },
+      "protocolOwns": ["declarative UI projection", "framework-neutral UI description"],
+      "kfdWorkOwns": ["accepted completion", "authority lineage", "canonical Work identity", "causal Work history", "exact Work version", "recovery semantics"],
+      "nativeObjects": ["declarative UI document"],
+      "nativeStates": [],
+      "extensionPoints": ["Work evidence binding"],
+      "nonClaims": ["UI projection is not Work authority.", "This pack does not evaluate renderer quality."],
+      "evidenceGrade": "B",
+      "states": { "accepted-completion": "out-of-scope", "authority-revocation": "out-of-scope", "causal-history": "out-of-scope", "recovery-drift": "out-of-scope", "retry-identity": "out-of-scope", "work-version": "out-of-scope" }
+    },
+    {
+      "id": "ag-ui",
+      "title": "AG-UI",
+      "version": "2026.8.23",
+      "kind": "protocol",
+      "sourceId": "ag-ui-2026-08-23",
+      "maturity": { "status": "experimental", "authority": "AG-UI capability documentation frozen on 2026-08-23" },
+      "protocolOwns": ["agent-to-UI event transport", "interrupt and resume surfaces", "UI state transport"],
+      "kfdWorkOwns": ["accepted completion", "canonical Work identity", "exact Work version"],
+      "nativeObjects": ["event", "run", "state"],
+      "nativeStates": ["interrupted", "run-finished", "running"],
+      "extensionPoints": ["accepted-completion binding", "canonical Work binding"],
+      "nonClaims": ["RunFinished is not independent accepted Work completion.", "Transport success is not runtime enforcement proof."],
+      "evidenceGrade": "B",
+      "states": { "accepted-completion": "extension-required", "authority-revocation": "unresolved", "causal-history": "represented", "recovery-drift": "represented", "retry-identity": "unresolved", "work-version": "out-of-scope" }
+    },
+    {
+      "id": "agntcy",
+      "title": "AGNTCY",
+      "version": "1.0.0",
+      "kind": "protocol-stack",
+      "sourceId": "agntcy-v1-2026-08-23",
+      "maturity": { "status": "experimental", "authority": "AGNTCY documentation frozen on 2026-08-23" },
+      "protocolOwns": ["directory identity", "messaging transport", "observability surfaces"],
+      "kfdWorkOwns": ["accepted completion", "authority lineage", "canonical Work identity", "causal Work history", "exact Work version", "recovery semantics"],
+      "nativeObjects": ["directory entry", "message", "transport identity"],
+      "nativeStates": [],
+      "extensionPoints": ["canonical Work binding", "Work authority binding"],
+      "nonClaims": ["Directory identity is not canonical Work identity.", "Transport identity does not own Work authority."],
+      "evidenceGrade": "B",
+      "states": { "accepted-completion": "out-of-scope", "authority-revocation": "extension-required", "causal-history": "out-of-scope", "recovery-drift": "out-of-scope", "retry-identity": "unresolved", "work-version": "out-of-scope" }
+    },
+    {
+      "id": "commerce-acp",
+      "title": "AP2, UCP and Agentic Commerce Protocol Family",
+      "version": "2026.1.0",
+      "kind": "domain-protocol-family",
+      "sourceId": "agentic-commerce-2026-h1",
+      "maturity": { "status": "domain-family", "authority": "AP2, UCP and commerce ACP public materials" },
+      "protocolOwns": ["authorization intent", "merchant acceptance boundary", "payment execution"],
+      "kfdWorkOwns": ["accepted completion outside commerce", "canonical Work identity", "universal Work certification"],
+      "nativeObjects": ["authorization intent", "merchant acceptance", "payment execution"],
+      "nativeStates": ["accepted", "authorized", "executed"],
+      "extensionPoints": ["canonical Work binding", "non-commerce acceptance binding"],
+      "nonClaims": ["Commerce acceptance is not universal Work certification.", "This family pack does not collapse payment authorization into execution."],
+      "evidenceGrade": "B",
+      "states": { "accepted-completion": "extension-required", "authority-revocation": "unresolved", "causal-history": "unresolved", "recovery-drift": "out-of-scope", "retry-identity": "out-of-scope", "work-version": "out-of-scope" }
+    },
+    {
+      "id": "dbos",
+      "title": "DBOS Durable Runtime Counterexample",
+      "version": "2026.8.23",
+      "kind": "implementation-counterexample",
+      "sourceId": "durable-runtime-counterexamples-2026-08-23",
+      "maturity": { "status": "implementation", "authority": "DBOS documentation bounded by the frozen runtime counterexample input" },
+      "protocolOwns": ["concurrent execution identity", "durable runtime recovery"],
+      "kfdWorkOwns": ["accepted completion", "authority lineage", "canonical Work identity", "exact Work version"],
+      "nativeObjects": ["execution", "runtime checkpoint"],
+      "nativeStates": ["completed", "recovered", "running"],
+      "extensionPoints": ["accepted-completion binding", "canonical Work binding"],
+      "nonClaims": ["Runtime completion is not independent accepted Work completion.", "This pack is a counterexample input, not vendor certification."],
+      "evidenceGrade": "C",
+      "states": { "accepted-completion": "extension-required", "authority-revocation": "out-of-scope", "causal-history": "represented", "recovery-drift": "represented", "retry-identity": "represented", "work-version": "extension-required" }
+    },
+    {
+      "id": "ietf-aiagent-auth-draft-03",
+      "title": "IETF AI Agent Authorization Internet-Draft 03",
+      "version": "0.0.3",
+      "kind": "individual-internet-draft",
+      "sourceId": "ietf-aiagent-auth-draft-03",
+      "maturity": { "status": "draft", "authority": "Individual Internet-Draft with no formal IETF standing" },
+      "protocolOwns": ["delegated workload context", "distributed policy engine", "runtime enforcement point"],
+      "kfdWorkOwns": ["accepted completion", "canonical Work identity", "causal Work history", "exact Work version", "recovery semantics"],
+      "nativeObjects": ["agent workload", "delegated context", "enforcement point", "policy engine"],
+      "nativeStates": ["authorized", "denied", "revoked"],
+      "extensionPoints": ["canonical Work binding", "Work lifecycle binding"],
+      "nonClaims": ["Draft 03 is not an adopted stable IETF standard.", "Distributed enforcement does not prove policy correctness."],
+      "evidenceGrade": "B",
+      "states": { "accepted-completion": "out-of-scope", "authority-revocation": "unresolved", "causal-history": "out-of-scope", "recovery-drift": "unresolved", "retry-identity": "out-of-scope", "work-version": "out-of-scope" }
+    },
+    {
+      "id": "kfd-delegated-work-alpha68",
+      "title": "KFD Delegated Work Paired-World Kernel alpha.68",
+      "version": "1.0.0-alpha.68",
+      "kind": "experimental-profile",
+      "sourceId": "kfd-alpha68",
+      "maturity": { "status": "experimental", "authority": "KFD delegated-work paired-world profile" },
+      "protocolOwns": ["fixed six-pair regression kernel", "offline report closure", "projection distinguishability"],
+      "kfdWorkOwns": ["adopter enforcement", "production qualification", "runtime authority"],
+      "nativeObjects": ["paired world", "projection", "report"],
+      "nativeStates": ["collapsed", "information-distinguishable"],
+      "extensionPoints": ["adopter-declared enforcement"],
+      "nonClaims": ["Offline verification proves report closure only.", "Passing does not grant qualification or runtime authority."],
+      "evidenceGrade": "A",
+      "states": { "accepted-completion": "represented", "authority-revocation": "represented", "causal-history": "represented", "recovery-drift": "represented", "retry-identity": "represented", "work-version": "represented" }
+    },
+    {
+      "id": "mcp-tasks",
+      "title": "Model Context Protocol Tasks",
+      "version": "2026.7.28",
+      "kind": "protocol-extension",
+      "sourceId": "mcp-tasks-2026-07-28",
+      "maturity": { "status": "experimental", "authority": "MCP Tasks extension documentation frozen on 2026-07-28" },
+      "protocolOwns": ["cooperative cancellation", "durable task handle", "task capability negotiation", "task operation state"],
+      "kfdWorkOwns": ["accepted completion", "authority lineage", "canonical Work identity", "exact Work version"],
+      "nativeObjects": ["task", "task handle"],
+      "nativeStates": ["cancelled", "completed", "failed", "input-required", "working"],
+      "extensionPoints": ["accepted-completion binding", "canonical Work binding"],
+      "nonClaims": ["Task completion is not independent accepted Work completion.", "This pack does not certify an MCP implementation."],
+      "evidenceGrade": "B",
+      "states": { "accepted-completion": "extension-required", "authority-revocation": "extension-required", "causal-history": "unresolved", "recovery-drift": "represented", "retry-identity": "represented", "work-version": "extension-required" }
+    },
+    {
+      "id": "restate",
+      "title": "Restate Durable Runtime Counterexample",
+      "version": "2026.8.23",
+      "kind": "implementation-counterexample",
+      "sourceId": "durable-runtime-counterexamples-2026-08-23",
+      "maturity": { "status": "implementation", "authority": "Restate documentation bounded by the frozen runtime counterexample input" },
+      "protocolOwns": ["invocation identity fencing", "runtime checkpointing", "runtime recovery"],
+      "kfdWorkOwns": ["accepted completion", "authority lineage", "canonical Work identity", "exact Work version"],
+      "nativeObjects": ["invocation", "runtime checkpoint"],
+      "nativeStates": ["completed", "recovered", "running"],
+      "extensionPoints": ["accepted-completion binding", "canonical Work binding"],
+      "nonClaims": ["Runtime completion is not independent accepted Work completion.", "This pack is a counterexample input, not vendor certification."],
+      "evidenceGrade": "C",
+      "states": { "accepted-completion": "extension-required", "authority-revocation": "out-of-scope", "causal-history": "represented", "recovery-drift": "represented", "retry-identity": "represented", "work-version": "extension-required" }
+    },
+    {
+      "id": "webmcp-cg-draft",
+      "title": "WebMCP Community Group Draft",
+      "version": "0.0.1-20260823",
+      "kind": "incubating-draft",
+      "sourceId": "webmcp-cg-draft-2026-08-23",
+      "maturity": { "status": "incubating", "authority": "WebMCP Community Group draft repository" },
+      "protocolOwns": ["browser-mediated page tool API", "page tool exposure"],
+      "kfdWorkOwns": ["accepted completion", "authority lineage", "canonical Work identity", "causal Work history", "exact Work version", "recovery semantics"],
+      "nativeObjects": ["page tool", "tool invocation"],
+      "nativeStates": [],
+      "extensionPoints": ["Work evidence binding", "stable protocol adoption"],
+      "nonClaims": ["This community draft is not a Recommendation-track stable standard.", "Unresolved design items are not treated as adopted semantics."],
+      "evidenceGrade": "B",
+      "states": { "accepted-completion": "out-of-scope", "authority-revocation": "out-of-scope", "causal-history": "out-of-scope", "recovery-drift": "out-of-scope", "retry-identity": "out-of-scope", "work-version": "out-of-scope" }
+    },
+    {
+      "id": "zed-acp",
+      "title": "Zed Agent Client Protocol",
+      "version": "1.0.0",
+      "kind": "protocol",
+      "sourceId": "zed-acp-v1-2026-04-22",
+      "maturity": { "status": "experimental", "authority": "Agent Client Protocol v1 session setup frozen on 2026-04-22" },
+      "protocolOwns": ["conversation session identity", "session history replay", "session resume"],
+      "kfdWorkOwns": ["accepted completion", "authority lineage", "canonical Work identity", "exact Work version"],
+      "nativeObjects": ["conversation history", "session"],
+      "nativeStates": ["loaded", "resumed"],
+      "extensionPoints": ["canonical Work binding", "independent acceptance binding"],
+      "nonClaims": ["Session identity is not automatically canonical Work identity.", "Session restoration is not accepted Work completion."],
+      "evidenceGrade": "B",
+      "states": { "accepted-completion": "out-of-scope", "authority-revocation": "unresolved", "causal-history": "represented", "recovery-drift": "represented", "retry-identity": "extension-required", "work-version": "out-of-scope" }
+    }
+  ]
+}

@@ -3,7 +3,7 @@
   "contract": "kfd.protocol-semantics-lab-manifest/v1",
   "profile": {
     "id": "kfd-protocol-semantics-lab",
-    "version": "0.1.0-alpha.1",
+    "version": "0.1.0-alpha.2",
     "status": "experimental",
     "numberedDecision": false,
     "authority": "profiles/protocol-semantics-lab/README.md"
@@ -20,6 +20,8 @@
   },
   "registry": "profiles/protocol-semantics-lab/registry.json",
   "generatedReference": "profiles/protocol-semantics-lab/generated/contract-reference.json",
+  "generatedCatalogReference": "profiles/protocol-semantics-lab/generated/catalog-reference.json",
+  "generatedCatalogComparison": "profiles/protocol-semantics-lab/generated/catalog-comparison.md",
   "contracts": [
     {
       "id": "kfd.cross-protocol-route/v1",
@@ -40,6 +42,11 @@
       "id": "kfd.protocol-evidence-pack/v1",
       "schema": "schemas/kfd-protocol-semantics/protocol-evidence-pack.schema.json",
       "export": "./protocol-semantics-lab/protocol-evidence-pack.schema.json"
+    },
+    {
+      "id": "kfd.protocol-evidence-pack/v2",
+      "schema": "schemas/kfd-protocol-semantics/protocol-evidence-pack-v2.schema.json",
+      "export": "./protocol-semantics-lab/protocol-evidence-pack-v2.schema.json"
     },
     {
       "id": "kfd.protocol-observation/v1",

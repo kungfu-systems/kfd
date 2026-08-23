@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.protocol-evidence-pack/v2",
+  "protocol": {
+    "id": "kfd-delegated-work-alpha68",
+    "title": "KFD Delegated Work Paired-World Kernel alpha.68",
+    "version": "1.0.0-alpha.68",
+    "kind": "experimental-profile"
+  },
+  "source": {
+    "coordinate": "@kungfu-tech/kfd@1.0.0-alpha.68",
+    "revision": "966215abb1122f8f3f36b817cfcb9ce248cb91a8",
+    "contentRoot": "sha256:01c0c9d8a9c9e05c17cada9886a136fdd5b73a8bcf9a6f0f9ab74aec9585f6b9",
+    "locators": [
+      "https://github.com/kungfu-systems/kfd/discussions/427"
+    ]
+  },
+  "semantics": [
+    {
+      "id": "accepted-completion",
+      "state": "represented",
+      "summary": "KFD Delegated Work Paired-World Kernel alpha.68's frozen bounded input explicitly represents accepted completion.",
+      "evidenceRoots": [
+        "sha256:01c0c9d8a9c9e05c17cada9886a136fdd5b73a8bcf9a6f0f9ab74aec9585f6b9"
+      ]
+    },
+    {
+      "id": "authority-revocation",
+      "state": "represented",
+      "summary": "KFD Delegated Work Paired-World Kernel alpha.68's frozen bounded input explicitly represents authority revocation.",
+      "evidenceRoots": [
+        "sha256:01c0c9d8a9c9e05c17cada9886a136fdd5b73a8bcf9a6f0f9ab74aec9585f6b9"
+      ]
+    },
+    {
+      "id": "causal-history",
+      "state": "represented",
+      "summary": "KFD Delegated Work Paired-World Kernel alpha.68's frozen bounded input explicitly represents causal history.",
+      "evidenceRoots": [
+        "sha256:01c0c9d8a9c9e05c17cada9886a136fdd5b73a8bcf9a6f0f9ab74aec9585f6b9"
+      ]
+    },
+    {
+      "id": "recovery-drift",
+      "state": "represented",
+      "summary": "KFD Delegated Work Paired-World Kernel alpha.68's frozen bounded input explicitly represents recovery drift.",
+      "evidenceRoots": [
+        "sha256:01c0c9d8a9c9e05c17cada9886a136fdd5b73a8bcf9a6f0f9ab74aec9585f6b9"
+      ]
+    },
+    {
+      "id": "retry-identity",
+      "state": "represented",
+      "summary": "KFD Delegated Work Paired-World Kernel alpha.68's frozen bounded input explicitly represents retry identity.",
+      "evidenceRoots": [
+        "sha256:01c0c9d8a9c9e05c17cada9886a136fdd5b73a8bcf9a6f0f9ab74aec9585f6b9"
+      ]
+    },
+    {
+      "id": "work-version",
+      "state": "represented",
+      "summary": "KFD Delegated Work Paired-World Kernel alpha.68's frozen bounded input explicitly represents work version.",
+      "evidenceRoots": [
+        "sha256:01c0c9d8a9c9e05c17cada9886a136fdd5b73a8bcf9a6f0f9ab74aec9585f6b9"
+      ]
+    }
+  ],
+  "catalogSourceId": "kfd-alpha68",
+  "maturity": {
+    "status": "experimental",
+    "authority": "KFD delegated-work paired-world profile",
+    "asOf": "2026-08-23"
+  },
+  "responsibility": {
+    "protocolOwns": [
+      "fixed six-pair regression kernel",
+      "offline report closure",
+      "projection distinguishability"
+    ],
+    "kfdWorkOwns": [
+      "adopter enforcement",
+      "production qualification",
+      "runtime authority"
+    ],
+    "outOfScopeIsFailure": false
+  },
+  "nativeSurface": {
+    "objects": [
+      "paired world",
+      "projection",
+      "report"
+    ],
+    "states": [
+      "collapsed",
+      "information-distinguishable"
+    ]
+  },
+  "extensionPoints": [
+    "adopter-declared enforcement"
+  ],
+  "nonClaims": [
+    "Offline verification proves report closure only.",
+    "Passing does not grant qualification or runtime authority."
+  ],
+  "evidenceGrade": "A",
+  "drift": {
+    "frozenAt": "2026-08-23",
+    "policy": "new-pack-version-required",
+    "sourceStatus": "experimental"
+  },
+  "sourceBoundary": {
+    "mode": "bounded-paraphrase",
+    "fullSpecificationVendored": false,
+    "excerptWords": 0
+  },
+  "claimBoundary": {
+    "evaluationInputOnly": true,
+    "certification": false,
+    "runtimeAuthority": false,
+    "commercialDemand": false
+  }
+}

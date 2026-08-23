@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.protocol-evidence-pack/v2",
+  "protocol": {
+    "id": "a2a-task",
+    "title": "A2A Task",
+    "version": "2026.8.23",
+    "kind": "protocol"
+  },
+  "source": {
+    "coordinate": "a2a-dev-2026-08-23@sha256:5f5d17aae1acbab9769a21a77744a922266ec43b1b402ba9e44ed4eab376bd97",
+    "revision": "sha256:5f5d17aae1acbab9769a21a77744a922266ec43b1b402ba9e44ed4eab376bd97",
+    "contentRoot": "sha256:5f5d17aae1acbab9769a21a77744a922266ec43b1b402ba9e44ed4eab376bd97",
+    "locators": [
+      "https://a2a-protocol.org/dev/specification/"
+    ]
+  },
+  "semantics": [
+    {
+      "id": "accepted-completion",
+      "state": "extension-required",
+      "summary": "A2A Task's frozen protocol-owned surface requires a separately versioned extension to carry accepted completion.",
+      "evidenceRoots": []
+    },
+    {
+      "id": "authority-revocation",
+      "state": "unresolved",
+      "summary": "A2A Task's frozen bounded input does not determine authority revocation.",
+      "evidenceRoots": []
+    },
+    {
+      "id": "causal-history",
+      "state": "represented",
+      "summary": "A2A Task's frozen bounded input explicitly represents causal history.",
+      "evidenceRoots": [
+        "sha256:5f5d17aae1acbab9769a21a77744a922266ec43b1b402ba9e44ed4eab376bd97"
+      ]
+    },
+    {
+      "id": "recovery-drift",
+      "state": "represented",
+      "summary": "A2A Task's frozen bounded input explicitly represents recovery drift.",
+      "evidenceRoots": [
+        "sha256:5f5d17aae1acbab9769a21a77744a922266ec43b1b402ba9e44ed4eab376bd97"
+      ]
+    },
+    {
+      "id": "retry-identity",
+      "state": "represented",
+      "summary": "A2A Task's frozen bounded input explicitly represents retry identity.",
+      "evidenceRoots": [
+        "sha256:5f5d17aae1acbab9769a21a77744a922266ec43b1b402ba9e44ed4eab376bd97"
+      ]
+    },
+    {
+      "id": "work-version",
+      "state": "extension-required",
+      "summary": "A2A Task's frozen protocol-owned surface requires a separately versioned extension to carry work version.",
+      "evidenceRoots": []
+    }
+  ],
+  "catalogSourceId": "a2a-dev-2026-08-23",
+  "maturity": {
+    "status": "experimental",
+    "authority": "A2A development specification frozen on 2026-08-23",
+    "asOf": "2026-08-23"
+  },
+  "responsibility": {
+    "protocolOwns": [
+      "artifacts and messages",
+      "task context and history",
+      "task identity and status"
+    ],
+    "kfdWorkOwns": [
+      "accepted completion",
+      "authority lineage",
+      "canonical Work identity",
+      "exact Work version"
+    ],
+    "outOfScopeIsFailure": false
+  },
+  "nativeSurface": {
+    "objects": [
+      "artifact",
+      "message",
+      "task"
+    ],
+    "states": [
+      "completed",
+      "failed",
+      "input-required",
+      "submitted",
+      "working"
+    ]
+  },
+  "extensionPoints": [
+    "durable authority binding",
+    "independent acceptance binding"
+  ],
+  "nonClaims": [
+    "Task completion is not independent accepted Work completion.",
+    "Task identity is not automatically canonical KFD Work identity."
+  ],
+  "evidenceGrade": "B",
+  "drift": {
+    "frozenAt": "2026-08-23",
+    "policy": "new-pack-version-required",
+    "sourceStatus": "experimental"
+  },
+  "sourceBoundary": {
+    "mode": "bounded-paraphrase",
+    "fullSpecificationVendored": false,
+    "excerptWords": 0
+  },
+  "claimBoundary": {
+    "evaluationInputOnly": true,
+    "certification": false,
+    "runtimeAuthority": false,
+    "commercialDemand": false
+  }
+}

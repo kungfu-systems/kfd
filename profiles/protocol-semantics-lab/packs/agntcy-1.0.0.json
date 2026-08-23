@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.protocol-evidence-pack/v2",
+  "protocol": {
+    "id": "agntcy",
+    "title": "AGNTCY",
+    "version": "1.0.0",
+    "kind": "protocol-stack"
+  },
+  "source": {
+    "coordinate": "agntcy-v1-2026-08-23@sha256:62268734e1483f87b72545a5a9f7bd58c1465731c22c61a88e23f4cdc63bf3e9",
+    "revision": "sha256:62268734e1483f87b72545a5a9f7bd58c1465731c22c61a88e23f4cdc63bf3e9",
+    "contentRoot": "sha256:62268734e1483f87b72545a5a9f7bd58c1465731c22c61a88e23f4cdc63bf3e9",
+    "locators": [
+      "https://docs.agntcy.org/index.html"
+    ]
+  },
+  "semantics": [
+    {
+      "id": "accepted-completion",
+      "state": "out-of-scope",
+      "summary": "accepted completion is outside AGNTCY's frozen protocol responsibility; this is not a protocol failure.",
+      "evidenceRoots": []
+    },
+    {
+      "id": "authority-revocation",
+      "state": "extension-required",
+      "summary": "AGNTCY's frozen protocol-owned surface requires a separately versioned extension to carry authority revocation.",
+      "evidenceRoots": []
+    },
+    {
+      "id": "causal-history",
+      "state": "out-of-scope",
+      "summary": "causal history is outside AGNTCY's frozen protocol responsibility; this is not a protocol failure.",
+      "evidenceRoots": []
+    },
+    {
+      "id": "recovery-drift",
+      "state": "out-of-scope",
+      "summary": "recovery drift is outside AGNTCY's frozen protocol responsibility; this is not a protocol failure.",
+      "evidenceRoots": []
+    },
+    {
+      "id": "retry-identity",
+      "state": "unresolved",
+      "summary": "AGNTCY's frozen bounded input does not determine retry identity.",
+      "evidenceRoots": []
+    },
+    {
+      "id": "work-version",
+      "state": "out-of-scope",
+      "summary": "work version is outside AGNTCY's frozen protocol responsibility; this is not a protocol failure.",
+      "evidenceRoots": []
+    }
+  ],
+  "catalogSourceId": "agntcy-v1-2026-08-23",
+  "maturity": {
+    "status": "experimental",
+    "authority": "AGNTCY documentation frozen on 2026-08-23",
+    "asOf": "2026-08-23"
+  },
+  "responsibility": {
+    "protocolOwns": [
+      "directory identity",
+      "messaging transport",
+      "observability surfaces"
+    ],
+    "kfdWorkOwns": [
+      "accepted completion",
+      "authority lineage",
+      "canonical Work identity",
+      "causal Work history",
+      "exact Work version",
+      "recovery semantics"
+    ],
+    "outOfScopeIsFailure": false
+  },
+  "nativeSurface": {
+    "objects": [
+      "directory entry",
+      "message",
+      "transport identity"
+    ],
+    "states": []
+  },
+  "extensionPoints": [
+    "Work authority binding",
+    "canonical Work binding"
+  ],
+  "nonClaims": [
+    "Directory identity is not canonical Work identity.",
+    "Transport identity does not own Work authority."
+  ],
+  "evidenceGrade": "B",
+  "drift": {
+    "frozenAt": "2026-08-23",
+    "policy": "new-pack-version-required",
+    "sourceStatus": "experimental"
+  },
+  "sourceBoundary": {
+    "mode": "bounded-paraphrase",
+    "fullSpecificationVendored": false,
+    "excerptWords": 0
+  },
+  "claimBoundary": {
+    "evaluationInputOnly": true,
+    "certification": false,
+    "runtimeAuthority": false,
+    "commercialDemand": false
+  }
+}
