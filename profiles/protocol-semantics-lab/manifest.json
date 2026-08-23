@@ -28,27 +28,11 @@
     "protocolCount": 4,
     "networkRequired": false
   },
-  "routeAnalyzer": {
-    "module": "scripts/cross-protocol-route-analyzer.mjs",
-    "fixedRouteCount": 6,
-    "networkRequired": false,
-    "resultStates": [
-      "preserved",
-      "extension-required",
-      "out-of-scope",
-      "collapsed"
-    ]
-  },
   "contracts": [
     {
       "id": "kfd.cross-protocol-route/v1",
       "schema": "schemas/kfd-protocol-semantics/cross-protocol-route.schema.json",
       "export": "./protocol-semantics-lab/cross-protocol-route.schema.json"
-    },
-    {
-      "id": "kfd.cross-protocol-route/v2",
-      "schema": "schemas/kfd-protocol-semantics/cross-protocol-route-v2.schema.json",
-      "export": "./protocol-semantics-lab/cross-protocol-route-v2.schema.json"
     },
     {
       "id": "kfd.derived-capability-manifest/v1",
