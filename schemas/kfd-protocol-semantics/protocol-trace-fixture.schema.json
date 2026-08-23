@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-protocol-semantics/protocol-trace-fixture.schema.json",
+  "title": "KFD Protocol Trace Fixture",
+  "type": "object",
+  "required": ["schemaVersion", "contract", "id", "protocol", "events", "expectation"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "contract": { "const": "kfd.protocol-trace-fixture/v1" },
+    "id": { "$ref": "#/$defs/id" },
+    "protocol": { "$ref": "#/$defs/protocolReference" },
+    "events": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "variant", "provenance", "payload"],
+        "properties": {
+          "id": { "$ref": "#/$defs/id" },
+          "variant": { "type": "string", "minLength": 1 },
+          "provenance": {
+            "type": "object",
+            "required": ["protocolId", "protocolVersion"],
+            "properties": {
+              "protocolId": { "$ref": "#/$defs/id" },
+              "protocolVersion": { "$ref": "#/$defs/version" }
+            },
+            "additionalProperties": false
+          },
+          "payload": { "type": "object" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "expectation": {
+      "type": "object",
+      "required": ["scenario", "identityPreservation"],
+      "properties": {
+        "scenario": { "enum": ["executor-replacement", "retry", "resume"] },
+        "identityPreservation": { "enum": ["preserved", "ambiguous"] }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z][a-z0-9]*(?:[.-][a-z0-9]+)*$" },
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$" },
+    "root": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "protocolReference": {
+      "type": "object",
+      "required": ["protocolId", "protocolVersion", "evidencePackRoot"],
+      "properties": {
+        "protocolId": { "$ref": "#/$defs/id" },
+        "protocolVersion": { "$ref": "#/$defs/version" },
+        "evidencePackRoot": { "$ref": "#/$defs/root" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

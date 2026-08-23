@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.protocol-trace-fixture/v1",
+  "id": "unknown-event-variant",
+  "protocol": { "protocolId": "mcp-tasks", "protocolVersion": "2026.7.28", "evidencePackRoot": "sha256:c716585840a15bdcb1d6295703a950a927098ac7f67f48fb9c499d75d7588415" },
+  "events": [
+    { "id": "event-1", "variant": "task.teleported", "provenance": { "protocolId": "mcp-tasks", "protocolVersion": "2026.7.28" }, "payload": { "taskId": "task-1" } }
+  ],
+  "expectation": { "scenario": "resume", "identityPreservation": "ambiguous" }
+}

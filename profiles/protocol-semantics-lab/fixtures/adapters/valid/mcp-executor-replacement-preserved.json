@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.protocol-trace-fixture/v1",
+  "id": "mcp-executor-replacement-preserved",
+  "protocol": { "protocolId": "mcp-tasks", "protocolVersion": "2026.7.28", "evidencePackRoot": "sha256:c716585840a15bdcb1d6295703a950a927098ac7f67f48fb9c499d75d7588415" },
+  "events": [
+    { "id": "event-1", "variant": "task.created", "provenance": { "protocolId": "mcp-tasks", "protocolVersion": "2026.7.28" }, "payload": { "taskId": "task-41", "status": "working", "executorId": "executor-a" } },
+    { "id": "event-2", "variant": "task.status", "provenance": { "protocolId": "mcp-tasks", "protocolVersion": "2026.7.28" }, "payload": { "taskId": "task-41", "status": "completed", "executorId": "executor-b" } }
+  ],
+  "expectation": { "scenario": "executor-replacement", "identityPreservation": "preserved" }
+}

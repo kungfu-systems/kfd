@@ -3,7 +3,7 @@
   "contract": "kfd.protocol-semantics-contract-reference/v1",
   "profile": {
     "id": "kfd-protocol-semantics-lab",
-    "version": "0.1.0-alpha.2",
+    "version": "0.1.0-alpha.3",
     "status": "experimental",
     "numberedDecision": false,
     "authority": "profiles/protocol-semantics-lab/README.md"
@@ -58,6 +58,18 @@
       "schema": "schemas/kfd-protocol-semantics/protocol-observation.schema.json",
       "export": "./protocol-semantics-lab/protocol-observation.schema.json",
       "byteDigest": "sha256:0fa624984e3ad2430a2141c34fc8c216ef0a77f46186918556ebb8c5ee4450ea"
+    },
+    {
+      "id": "kfd.protocol-observation/v2",
+      "schema": "schemas/kfd-protocol-semantics/protocol-observation-v2.schema.json",
+      "export": "./protocol-semantics-lab/protocol-observation-v2.schema.json",
+      "byteDigest": "sha256:9a8b71558f5b2402b55ba6deb87a367cb415182faff044e0931e6c77f941969e"
+    },
+    {
+      "id": "kfd.protocol-trace-fixture/v1",
+      "schema": "schemas/kfd-protocol-semantics/protocol-trace-fixture.schema.json",
+      "export": "./protocol-semantics-lab/protocol-trace-fixture.schema.json",
+      "byteDigest": "sha256:baa16b998c9db674803785c6f6ac38aae80ceaf27859b2de9f0c04d4d9b775a0"
     }
   ],
   "claimBoundary": {
@@ -67,5 +79,5 @@
     "runtimeEnforcement": false,
     "commercialDemand": false
   },
-  "referenceRoot": "sha256:639bb064e451b3a08bdc46d899709259b99b560a5284666a2f8ca5ea73020954"
+  "referenceRoot": "sha256:56a57c0778a8005d28c7bb891a6fb1a7ad42a2c3a7d3e7117a4a0f7a5cf77946"
 }

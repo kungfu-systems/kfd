@@ -3,7 +3,7 @@
   "contract": "kfd.protocol-semantics-lab-manifest/v1",
   "profile": {
     "id": "kfd-protocol-semantics-lab",
-    "version": "0.1.0-alpha.2",
+    "version": "0.1.0-alpha.3",
     "status": "experimental",
     "numberedDecision": false,
     "authority": "profiles/protocol-semantics-lab/README.md"
@@ -22,6 +22,12 @@
   "generatedReference": "profiles/protocol-semantics-lab/generated/contract-reference.json",
   "generatedCatalogReference": "profiles/protocol-semantics-lab/generated/catalog-reference.json",
   "generatedCatalogComparison": "profiles/protocol-semantics-lab/generated/catalog-comparison.md",
+  "observationAdapters": {
+    "module": "scripts/protocol-observation-adapters.mjs",
+    "fixtureCases": "profiles/protocol-semantics-lab/fixtures/adapters/cases.json",
+    "protocolCount": 4,
+    "networkRequired": false
+  },
   "contracts": [
     {
       "id": "kfd.cross-protocol-route/v1",
@@ -52,6 +58,16 @@
       "id": "kfd.protocol-observation/v1",
       "schema": "schemas/kfd-protocol-semantics/protocol-observation.schema.json",
       "export": "./protocol-semantics-lab/protocol-observation.schema.json"
+    },
+    {
+      "id": "kfd.protocol-observation/v2",
+      "schema": "schemas/kfd-protocol-semantics/protocol-observation-v2.schema.json",
+      "export": "./protocol-semantics-lab/protocol-observation-v2.schema.json"
+    },
+    {
+      "id": "kfd.protocol-trace-fixture/v1",
+      "schema": "schemas/kfd-protocol-semantics/protocol-trace-fixture.schema.json",
+      "export": "./protocol-semantics-lab/protocol-trace-fixture.schema.json"
     }
   ],
   "claimBoundary": {

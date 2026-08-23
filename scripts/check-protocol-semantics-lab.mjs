@@ -13,6 +13,11 @@ import {
   verifyProtocolSemanticsDocument,
 } from "./protocol-semantics-contract.mjs";
 import { buildProtocolEvidenceCatalog } from "./protocol-evidence-catalog.mjs";
+import {
+  adaptProtocolTrace,
+  adapterInventory,
+  inspectProtocolTraceFixture,
+} from "./protocol-observation-adapters.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const profileRoot = path.join(root, "profiles", "protocol-semantics-lab");
@@ -20,6 +25,7 @@ const manifest = readJson(path.join(profileRoot, "manifest.json"));
 const registry = readJson(path.join(profileRoot, "registry.json"));
 const cases = readJson(path.join(profileRoot, "fixtures", "cases.json"));
 const packageJson = readJson(path.join(root, "package.json"));
+const adapterCases = readJson(path.join(profileRoot, "fixtures", "adapters", "cases.json"));
 
 function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
@@ -147,6 +153,44 @@ for (const testCase of mutationCases) {
   assert.equal(catalogMutationIssues(mutated).includes(testCase.issue), true, `${testCase.name} must fail with ${testCase.issue}`);
 }
 
+const inventory = adapterInventory();
+assert.equal(inventory.length, 4);
+assert.deepEqual(inventory.map(({ protocolId }) => protocolId).sort(), ["a2a-task", "ag-ui", "mcp-tasks", "zed-acp"]);
+assert.equal(manifest.observationAdapters.protocolCount, inventory.length);
+assert.equal(manifest.observationAdapters.networkRequired, false);
+const adapterSource = fs.readFileSync(path.join(root, manifest.observationAdapters.module), "utf8");
+for (const forbidden of ["node:http", "node:https", "node:net", "node:tls", "fetch(", "WebSocket"]) {
+  assert.equal(adapterSource.includes(forbidden), false, `offline adapter must not contain network primitive: ${forbidden}`);
+}
+
+const observedScenarios = new Set();
+const preservationStates = new Set();
+for (const relativePath of adapterCases.valid) {
+  const fixture = readJson(path.join(profileRoot, "fixtures", "adapters", relativePath));
+  assert.equal(inspectProtocolTraceFixture(fixture).valid, true, relativePath);
+  const first = adaptProtocolTrace(fixture);
+  const second = adaptProtocolTrace(JSON.parse(JSON.stringify(fixture)));
+  assert.deepEqual(first, second, `${relativePath}: adapter output and roots must be deterministic`);
+  assert.equal(verifyProtocolSemanticsDocument(first.observation).valid, true, relativePath);
+  assert.equal(first.outputRoot, semanticRoot(first.observation));
+  assert.equal(first.transcriptRoot, first.observation.transcriptRoot);
+  assert.equal(first.observation.facts.every((fact) => fact.source.status === "native" ? fact.evidenceRoots.length === 1 : fact.source.status === "absent" && fact.evidenceRoots.length === 0), true);
+  assert.equal(first.observation.facts.some((fact) => fact.id === "work-id" && fact.source.status === "absent"), true, "adapter must not invent canonical Work identity");
+  assert.equal(first.observation.facts.some((fact) => fact.id === "accepted-completion" && fact.source.status === "absent"), true, "adapter must not invent accepted completion");
+  observedScenarios.add(first.observation.scenario.kind);
+  preservationStates.add(first.observation.scenario.identityPreservation);
+}
+assert.deepEqual([...observedScenarios].sort(), ["executor-replacement", "resume", "retry"]);
+assert.deepEqual([...preservationStates].sort(), ["ambiguous", "preserved"]);
+
+for (const testCase of adapterCases.negative) {
+  const fixture = readJson(path.join(profileRoot, "fixtures", "adapters", testCase.path));
+  const inspection = inspectProtocolTraceFixture(fixture);
+  assert.equal(inspection.valid, false, `${testCase.path} must fail closed`);
+  assert.equal(inspection.issues.some(({ code }) => code === testCase.issueCode), true, `${testCase.path} must report ${testCase.issueCode}`);
+  assert.throws(() => adaptProtocolTrace(fixture), /failed closed/u);
+}
+
 for (const relativePath of cases.valid) {
   const document = readJson(path.join(profileRoot, "fixtures", relativePath));
   const first = verifyProtocolSemanticsDocument(document);
@@ -207,6 +251,7 @@ const exactExports = {
   "./protocol-semantics-lab/catalog-reference.json": "./profiles/protocol-semantics-lab/generated/catalog-reference.json",
   "./protocol-semantics-lab/catalog-comparison.md": "./profiles/protocol-semantics-lab/generated/catalog-comparison.md",
   "./protocol-semantics-lab/verifier": "./scripts/protocol-semantics-contract.mjs",
+  "./protocol-semantics-lab/observation-adapters": "./scripts/protocol-observation-adapters.mjs",
 };
 for (const [exportName, target] of Object.entries(exactExports)) assert.equal(packageJson.exports?.[exportName], target);
 for (const directory of ["profiles", "schemas", "scripts"]) assert.equal(packageJson.files?.includes(directory), true, `npm files must include ${directory}`);
@@ -215,4 +260,4 @@ assert.equal(packageJson.scripts?.["check:protocol-semantics-lab"], "node script
 assert.equal(packageJson.scripts?.["generate:protocol-semantics-reference"], "node scripts/generate-protocol-semantics-reference.mjs --write");
 assert.equal(packageJson.scripts?.check?.includes("npm run check:protocol-semantics-lab"), true);
 
-console.log(`protocol semantics lab: ${cases.valid.length} valid fixtures, ${cases.negative.length} architecture negatives, ${catalog.packs.length} frozen packs, ${mutationCases.length} catalog mutations, six-pair compatibility, roots, exports, and generated references ok`);
+console.log(`protocol semantics lab: ${cases.valid.length} architecture fixtures, ${adapterCases.valid.length} deterministic adapter traces, ${adapterCases.negative.length} adapter negatives, ${catalog.packs.length} frozen packs, six-pair compatibility, roots, exports, and generated references ok`);

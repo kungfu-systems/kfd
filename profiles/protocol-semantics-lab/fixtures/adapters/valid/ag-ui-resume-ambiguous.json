@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.protocol-trace-fixture/v1",
+  "id": "ag-ui-resume-ambiguous",
+  "protocol": { "protocolId": "ag-ui", "protocolVersion": "2026.8.23", "evidencePackRoot": "sha256:83518d60f55a441feb9d140ea850e49650e6e926544ab6ee919814c45af3cc62" },
+  "events": [
+    { "id": "event-1", "variant": "RUN_STARTED", "provenance": { "protocolId": "ag-ui", "protocolVersion": "2026.8.23" }, "payload": { "runId": "run-a", "threadId": "thread-5", "executorId": "agent-a" } },
+    { "id": "event-2", "variant": "RUN_INTERRUPTED", "provenance": { "protocolId": "ag-ui", "protocolVersion": "2026.8.23" }, "payload": { "runId": "run-a", "threadId": "thread-5", "executorId": "agent-a" } },
+    { "id": "event-3", "variant": "RUN_RESUMED", "provenance": { "protocolId": "ag-ui", "protocolVersion": "2026.8.23" }, "payload": { "runId": "run-b", "threadId": "thread-5", "executorId": "agent-b" } }
+  ],
+  "expectation": { "scenario": "resume", "identityPreservation": "ambiguous" }
+}
