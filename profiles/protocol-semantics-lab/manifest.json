@@ -3,10 +3,14 @@
   "contract": "kfd.protocol-semantics-lab-manifest/v1",
   "profile": {
     "id": "kfd-protocol-semantics-lab",
-    "version": "0.1.0-alpha.3",
+    "version": "0.1.0-alpha.4",
     "status": "experimental",
     "numberedDecision": false,
     "authority": "profiles/protocol-semantics-lab/README.md"
+  },
+  "sourceCut": {
+    "repository": "kungfu-systems/kfd",
+    "baselineGitHead": "d0542ea9bb8bfb3ed9004c28bc6629edf0ca21d4"
   },
   "kernel": {
     "profileId": "kfd-delegated-work-challenge",
@@ -38,6 +42,13 @@
       "out-of-scope",
       "collapsed"
     ]
+  },
+  "reportCli": {
+    "module": "scripts/protocol-semantics-report.mjs",
+    "reportContract": "kfd.protocol-semantics-report/v1",
+    "verifierContract": "kfd.protocol-semantics-report-verifier/v1",
+    "networkRequired": false,
+    "claim": "evidence-closure-only"
   },
   "contracts": [
     {

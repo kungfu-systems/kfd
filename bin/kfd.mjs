@@ -20,7 +20,15 @@ function usage() {
   kfd verify agent-hub-report <report.json> [--adapter <path>] [--json]
   kfd challenge delegated-work [--pair <pair-id>] [--projection <projection-id|projection.json>]
     [--adapter <path>] [--output <report.json>] [--json]
+  kfd challenge delegated-work protocol list [--json]
+  kfd challenge delegated-work protocol inspect <protocol-id> [--json]
+  kfd challenge delegated-work protocol analyze --fixture <packaged-fixture-id>
+    [--output <report.json>] [--json]
+  kfd challenge delegated-work route analyze --route <fixed-route-id>
+    [--output <report.json>] [--json]
+  kfd challenge delegated-work manifest derive <report.json> [--output <manifest.json>] [--json]
   kfd verify delegated-work-challenge-report <report.json> [--adapter <path>] [--json]
+  kfd verify delegated-work-protocol-report <report.json> [--json]
   kfd verify warrant-evidence <bundle.json> [--json]
   kfd verify kfd-10-witness <witness.json> [--json]
   kfd adopter init --manifest-id <id> --adopter-id <id> --artifact-kind <kind>
@@ -279,6 +287,11 @@ async function main(args) {
     return;
   }
   if (args[0] === "challenge" && args[1] === "delegated-work") {
+    if (["protocol", "route", "manifest"].includes(args[2])) {
+      const { runProtocolSemanticsCli } = await import("../scripts/protocol-semantics-report.mjs");
+      process.exitCode = runProtocolSemanticsCli(args.slice(2));
+      return;
+    }
     const { runDelegatedWorkChallenge } = await import("../scripts/delegated-work-challenge-runner.mjs");
     process.exitCode = await runDelegatedWorkChallenge(args.slice(2));
     return;
@@ -315,6 +328,11 @@ async function main(args) {
   if (args[0] === "verify" && args[1] === "delegated-work-challenge-report") {
     const { runDelegatedWorkChallengeReportVerifier } = await import("../scripts/delegated-work-challenge-report-verifier.mjs");
     process.exitCode = runDelegatedWorkChallengeReportVerifier(args.slice(2));
+    return;
+  }
+  if (args[0] === "verify" && args[1] === "delegated-work-protocol-report") {
+    const { runProtocolSemanticsVerifier } = await import("../scripts/protocol-semantics-report.mjs");
+    process.exitCode = runProtocolSemanticsVerifier(args.slice(2));
     return;
   }
   if (args[0] === "verify" && args[1] === "warrant-evidence") {
