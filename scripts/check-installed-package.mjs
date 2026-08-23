@@ -13,6 +13,7 @@ const commandNeedsShell = (command, platform = process.platform) =>
   platform === "win32" && /\.(?:cmd|bat)$/iu.test(command);
 
 assert.equal(commandNeedsShell("npm.cmd", "win32"), true);
+assert.equal(commandNeedsShell("node.exe", "win32"), false);
 assert.equal(commandNeedsShell(process.execPath, "win32"), false);
 
 const run = (command, args, options = {}) => {
