@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-protocol-semantics/derived-capability-manifest.schema.json",
+  "title": "KFD Derived Capability Manifest",
+  "type": "object",
+  "required": ["schemaVersion", "contract", "id", "subject", "capabilities", "claimBoundary"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "contract": { "const": "kfd.derived-capability-manifest/v1" },
+    "id": { "$ref": "#/$defs/id" },
+    "subject": {
+      "type": "object",
+      "required": ["protocolId", "protocolVersion", "evidencePackRoot", "observationRoot"],
+      "properties": {
+        "protocolId": { "$ref": "#/$defs/id" },
+        "protocolVersion": { "$ref": "#/$defs/version" },
+        "evidencePackRoot": { "$ref": "#/$defs/root" },
+        "observationRoot": { "$ref": "#/$defs/root" }
+      },
+      "additionalProperties": false
+    },
+    "capabilities": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "state", "declarationRoots", "observationRoots", "verificationRoots"],
+        "properties": {
+          "id": { "$ref": "#/$defs/id" },
+          "state": { "enum": ["declared", "observed", "verified"] },
+          "declarationRoots": { "$ref": "#/$defs/nonemptyRoots" },
+          "observationRoots": { "$ref": "#/$defs/roots" },
+          "verificationRoots": { "$ref": "#/$defs/roots" }
+        },
+        "allOf": [
+          {
+            "if": { "properties": { "state": { "const": "declared" } }, "required": ["state"] },
+            "then": {
+              "properties": {
+                "observationRoots": { "maxItems": 0 },
+                "verificationRoots": { "maxItems": 0 }
+              }
+            }
+          },
+          {
+            "if": { "properties": { "state": { "const": "observed" } }, "required": ["state"] },
+            "then": {
+              "properties": {
+                "observationRoots": { "minItems": 1 },
+                "verificationRoots": { "maxItems": 0 }
+              }
+            }
+          },
+          {
+            "if": { "properties": { "state": { "const": "verified" } }, "required": ["state"] },
+            "then": {
+              "properties": {
+                "observationRoots": { "minItems": 1 },
+                "verificationRoots": { "minItems": 1 }
+              }
+            }
+          }
+        ],
+        "additionalProperties": false
+      }
+    },
+    "claimBoundary": {
+      "type": "object",
+      "required": ["derivedEvidenceStateOnly", "certification", "runtimeAuthority", "productionFitness"],
+      "properties": {
+        "derivedEvidenceStateOnly": { "const": true },
+        "certification": { "const": false },
+        "runtimeAuthority": { "const": false },
+        "productionFitness": { "const": false }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z][a-z0-9]*(?:[.-][a-z0-9]+)*$" },
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$" },
+    "root": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "roots": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/root" } },
+    "nonemptyRoots": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/root" } }
+  },
+  "additionalProperties": false
+}

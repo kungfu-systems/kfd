@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.cross-protocol-route/v1",
+  "id": "minimal-route",
+  "source": {
+    "protocolId": "kfd-alpha68",
+    "protocolVersion": "1.0.0-alpha.68",
+    "evidencePackRoot": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+  },
+  "target": {
+    "protocolId": "fixture-target",
+    "protocolVersion": "1.0.0",
+    "evidencePackRoot": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+  },
+  "mappings": [
+    {
+      "id": "accepted-completion",
+      "sourceSemanticId": "accepted-completion",
+      "targetSemanticId": "completed",
+      "state": "loss-declared",
+      "losses": [
+        {
+          "id": "acceptance-authority-loss",
+          "kind": "authority-collapse",
+          "summary": "The target completion state does not carry independent acceptance authority.",
+          "evidenceRoots": ["sha256:3333333333333333333333333333333333333333333333333333333333333333"]
+        }
+      ]
+    },
+    {
+      "id": "durable-task",
+      "sourceSemanticId": "task-id",
+      "targetSemanticId": "task-id",
+      "state": "preserved",
+      "losses": []
+    }
+  ],
+  "claimBoundary": {
+    "informationPreservationOnly": true,
+    "certification": false,
+    "runtimeAuthority": false,
+    "interoperabilityGuarantee": false
+  }
+}

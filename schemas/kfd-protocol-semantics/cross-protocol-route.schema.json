@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-protocol-semantics/cross-protocol-route.schema.json",
+  "title": "KFD Cross-Protocol Route and Loss Declaration",
+  "type": "object",
+  "required": ["schemaVersion", "contract", "id", "source", "target", "mappings", "claimBoundary"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "contract": { "const": "kfd.cross-protocol-route/v1" },
+    "id": { "$ref": "#/$defs/id" },
+    "source": { "$ref": "#/$defs/protocolReference" },
+    "target": { "$ref": "#/$defs/protocolReference" },
+    "mappings": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "sourceSemanticId", "targetSemanticId", "state", "losses"],
+        "properties": {
+          "id": { "$ref": "#/$defs/id" },
+          "sourceSemanticId": { "$ref": "#/$defs/id" },
+          "targetSemanticId": { "$ref": "#/$defs/id" },
+          "state": { "enum": ["preserved", "loss-declared", "extension-required", "out-of-scope", "unresolved"] },
+          "losses": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["id", "kind", "summary", "evidenceRoots"],
+              "properties": {
+                "id": { "$ref": "#/$defs/id" },
+                "kind": { "$ref": "#/$defs/id" },
+                "summary": { "type": "string", "minLength": 1 },
+                "evidenceRoots": { "$ref": "#/$defs/nonemptyRoots" }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "allOf": [
+          {
+            "if": { "properties": { "state": { "const": "preserved" } }, "required": ["state"] },
+            "then": { "properties": { "losses": { "maxItems": 0 } } },
+            "else": { "properties": { "losses": { "minItems": 1 } } }
+          }
+        ],
+        "additionalProperties": false
+      }
+    },
+    "claimBoundary": {
+      "type": "object",
+      "required": ["informationPreservationOnly", "certification", "runtimeAuthority", "interoperabilityGuarantee"],
+      "properties": {
+        "informationPreservationOnly": { "const": true },
+        "certification": { "const": false },
+        "runtimeAuthority": { "const": false },
+        "interoperabilityGuarantee": { "const": false }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z][a-z0-9]*(?:[.-][a-z0-9]+)*$" },
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$" },
+    "root": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "nonemptyRoots": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/root" } },
+    "protocolReference": {
+      "type": "object",
+      "required": ["protocolId", "protocolVersion", "evidencePackRoot"],
+      "properties": {
+        "protocolId": { "$ref": "#/$defs/id" },
+        "protocolVersion": { "$ref": "#/$defs/version" },
+        "evidencePackRoot": { "$ref": "#/$defs/root" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

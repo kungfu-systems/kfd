@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.derived-capability-manifest/v1",
+  "id": "missing-verification-root",
+  "subject": {
+    "protocolId": "fixture-protocol",
+    "protocolVersion": "1.0.0",
+    "evidencePackRoot": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+    "observationRoot": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+  },
+  "capabilities": [
+    {
+      "id": "completion",
+      "state": "verified",
+      "declarationRoots": ["sha256:3333333333333333333333333333333333333333333333333333333333333333"],
+      "observationRoots": [],
+      "verificationRoots": []
+    }
+  ],
+  "claimBoundary": {
+    "derivedEvidenceStateOnly": true,
+    "certification": false,
+    "runtimeAuthority": false,
+    "productionFitness": false
+  }
+}
