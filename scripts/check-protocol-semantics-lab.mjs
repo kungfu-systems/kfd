@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 import assert from "node:assert/strict";
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import process from "node:process";
 import { spawnSync } from "node:child_process";
@@ -24,6 +25,13 @@ import {
   analyzeCrossProtocolRouteSuite,
   buildFixedCrossProtocolRouteSuite,
 } from "./cross-protocol-route-analyzer.mjs";
+import {
+  buildProtocolSemanticsReport,
+  buildRouteSemanticsReport,
+  deriveCapabilityManifest,
+  listProtocolSemantics,
+  verifyProtocolSemanticsReport,
+} from "./protocol-semantics-report.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const profileRoot = path.join(root, "profiles", "protocol-semantics-lab");
@@ -250,6 +258,85 @@ for (const forbidden of ["node:http", "node:https", "node:net", "node:tls", "fet
   assert.equal(analyzerSource.includes(forbidden), false, `offline route analyzer must not contain network primitive: ${forbidden}`);
 }
 
+assert.deepEqual(manifest.sourceCut, {
+  repository: "kungfu-systems/kfd",
+  baselineGitHead: "d0542ea9bb8bfb3ed9004c28bc6629edf0ca21d4",
+});
+assert.deepEqual(manifest.reportCli, {
+  module: "scripts/protocol-semantics-report.mjs",
+  reportContract: "kfd.protocol-semantics-report/v1",
+  verifierContract: "kfd.protocol-semantics-report-verifier/v1",
+  networkRequired: false,
+  claim: "evidence-closure-only",
+});
+const protocolCatalog = listProtocolSemantics();
+assert.equal(protocolCatalog.protocols.length, 12);
+assert.equal(protocolCatalog.fixtures.length, adapterCases.valid.length);
+assert.equal(protocolCatalog.routes.length, FIXED_ROUTE_IDS.length);
+
+const protocolReport = buildProtocolSemanticsReport({ fixtureId: "mcp-executor-replacement-preserved" });
+const protocolVerification = verifyProtocolSemanticsReport(protocolReport);
+assert.equal(protocolVerification.valid, true, JSON.stringify(protocolVerification.issues));
+assert.equal(protocolReport.sourceCut.package, "@kungfu-tech/kfd");
+assert.equal(protocolReport.sourceCut.gitHead, manifest.sourceCut.baselineGitHead);
+for (const binding of [
+  protocolReport.suite.root,
+  protocolReport.pack.root,
+  protocolReport.mapping.root,
+  protocolReport.route.suiteRoot,
+  protocolReport.fixture.documentRoot,
+  protocolReport.adapter.artifactRoot,
+  protocolReport.transcript.root,
+  protocolReport.result.resultRoot,
+  protocolReport.claimBoundary.root,
+  protocolReport.residualRisks.root,
+  protocolReport.reportRoot,
+]) assert.match(binding, /^sha256:[0-9a-f]{64}$/u);
+
+const protocolJson = cliJson(["challenge", "delegated-work", "protocol", "analyze", "--fixture", "mcp-executor-replacement-preserved"]);
+const protocolHuman = run(process.execPath, [path.join(root, "bin", "kfd.mjs"), "challenge", "delegated-work", "protocol", "analyze", "--fixture", "mcp-executor-replacement-preserved"]).stdout;
+assert.equal(protocolJson.result.resultRoot, protocolReport.result.resultRoot);
+assert.match(protocolHuman, new RegExp(protocolReport.result.resultRoot.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&"), "u"));
+
+for (const [name, mutate, issueCode] of [
+  ["fixture bytes", (report) => { report.fixture.byteRoot = `sha256:${"0".repeat(64)}`; }, "fixture-drift"],
+  ["residual-risk order", (report) => { report.residualRisks.risks.reverse(); }, "residual-risk-drift"],
+  ["source", (report) => { report.sourceCut.gitHead = "0".repeat(40); }, "source-byte-drift"],
+  ["adapter", (report) => { report.adapter.artifactRoot = `sha256:${"1".repeat(64)}`; }, "adapter-drift"],
+  ["claim boundary", (report) => { report.claimBoundary.claim = "broader-claim"; }, "claim-boundary-drift"],
+]) {
+  const mutated = structuredClone(protocolReport);
+  mutate(mutated);
+  const verification = verifyProtocolSemanticsReport(mutated);
+  assert.equal(verification.valid, false, `${name} mutation must fail closed`);
+  assert.equal(verification.issues.some(({ code }) => code === issueCode), true, `${name} must report ${issueCode}`);
+}
+
+const preservedRouteReport = buildRouteSemanticsReport({ routeId: "mcp-to-a2a" });
+const collapsedRouteReport = buildRouteSemanticsReport({ routeId: "durable-runtime-recovery-to-canonical-work" });
+assert.equal(preservedRouteReport.result.state, "preserved");
+assert.equal(collapsedRouteReport.result.state, "collapsed");
+assert.equal(verifyProtocolSemanticsReport(preservedRouteReport).valid, true);
+assert.equal(verifyProtocolSemanticsReport(collapsedRouteReport).valid, true);
+
+const derived = deriveCapabilityManifest(protocolReport);
+assert.equal(derived.sourceReportRoot, protocolReport.reportRoot);
+assert.equal(verifyProtocolSemanticsDocument(derived.manifest).valid, true);
+assert.equal(derived.manifest.capabilities.some(({ state }) => state === "verified"), true);
+assert.equal(derived.manifest.capabilities.every(({ state, verificationRoots }) => state !== "verified" || verificationRoots.includes(protocolReport.reportRoot)), true);
+
+const reportTemporary = fs.mkdtempSync(path.join(os.tmpdir(), "kfd-protocol-report-"));
+try {
+  const reportPath = path.join(reportTemporary, "report.json");
+  fs.writeFileSync(reportPath, `${JSON.stringify(protocolReport, null, 2)}\n`);
+  const verifierHuman = run(process.execPath, [path.join(root, "bin", "kfd.mjs"), "verify", "delegated-work-protocol-report", reportPath]).stdout;
+  assert.match(verifierHuman, /Evidence closure: valid/u);
+  assert.match(verifierHuman, /Claim: evidence-closure-only/u);
+  assert.equal(/certif|production[- ]fitness/iu.test(verifierHuman), false, "verifier output must remain closure-only");
+} finally {
+  fs.rmSync(reportTemporary, { recursive: true, force: true });
+}
+
 for (const relativePath of cases.valid) {
   const document = readJson(path.join(profileRoot, "fixtures", relativePath));
   const first = verifyProtocolSemanticsDocument(document);
@@ -312,6 +399,9 @@ const exactExports = {
   "./protocol-semantics-lab/verifier": "./scripts/protocol-semantics-contract.mjs",
   "./protocol-semantics-lab/observation-adapters": "./scripts/protocol-observation-adapters.mjs",
   "./protocol-semantics-lab/route-analyzer": "./scripts/cross-protocol-route-analyzer.mjs",
+  "./protocol-semantics-lab/report.schema.json": "./schemas/kfd-protocol-semantics/protocol-semantics-report.schema.json",
+  "./protocol-semantics-lab/report-cli": "./scripts/protocol-semantics-report.mjs",
+  "./protocol-semantics-lab/report-verifier": "./scripts/protocol-semantics-report.mjs",
 };
 for (const [exportName, target] of Object.entries(exactExports)) assert.equal(packageJson.exports?.[exportName], target);
 for (const directory of ["profiles", "schemas", "scripts"]) assert.equal(packageJson.files?.includes(directory), true, `npm files must include ${directory}`);

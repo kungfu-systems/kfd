@@ -147,6 +147,39 @@ states all fail closed. The analyzer reads only the frozen local registry and
 does not claim interoperability, vendor correctness, runtime authority, or
 certification.
 
+## Delegated-work report commands
+
+The report surface stays under the existing `challenge delegated-work` command
+family. It reads only packaged packs, fixtures, mappings, routes, adapters and
+release coordinates:
+
+```bash
+kfd challenge delegated-work protocol list
+kfd challenge delegated-work protocol inspect mcp-tasks
+kfd challenge delegated-work protocol analyze \
+  --fixture mcp-executor-replacement-preserved \
+  --output protocol-report.json
+kfd challenge delegated-work route analyze --route mcp-to-a2a
+kfd challenge delegated-work route analyze \
+  --route durable-runtime-recovery-to-canonical-work
+kfd verify delegated-work-protocol-report protocol-report.json
+kfd challenge delegated-work manifest derive protocol-report.json \
+  --output capabilities.json
+```
+
+Human and `--json` output carry the same `resultRoot`. Protocol reports bind the
+package and frozen Git baseline cut, paired-world suite, evidence pack, six-question
+mapping, fixed route suite, fixture bytes, adapter artifact, transcript,
+result, claim boundary and residual-risk roots. The verifier recomputes those
+bindings from installed package bytes without a network call and states only
+`evidence-closure-only`. Capability manifests are emitted only after that
+report verifies; represented facts carry declared, observed and verified roots,
+while absent facts remain declared rather than being promoted by inference.
+
+These commands do not observe an external product, grant runtime authority, or
+change any numbered KFD meaning. A valid report says only that its bounded local
+evidence closure reproduces.
+
 ## Validation
 
 Run the architecture contract and the unchanged paired-world regression:

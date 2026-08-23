@@ -61,6 +61,12 @@ try {
   );
   const checked = run(installedSelfCheck, [], { cwd: consumer });
   process.stdout.write(checked.stdout);
+  const installedKfd = path.join(
+    consumer,
+    "node_modules",
+    ".bin",
+    process.platform === "win32" ? "kfd.cmd" : "kfd",
+  );
   const adapterFixture = {
     schemaVersion: 1,
     contract: "kfd.protocol-trace-fixture/v1",
@@ -95,6 +101,39 @@ try {
     cwd: consumer,
     env: { ...process.env, KFD_NETWORK_DISABLED: "1" },
   });
+  const offlineEnvironment = { ...process.env, KFD_NETWORK_DISABLED: "1", KFD_DELEGATED_WORK_OFFLINE: "1" };
+  const catalog = JSON.parse(run(installedKfd, ["challenge", "delegated-work", "protocol", "list", "--json"], {
+    cwd: consumer,
+    env: offlineEnvironment,
+  }).stdout);
+  assert.equal(catalog.protocols.length, 12);
+  const protocolReportPath = path.join(consumer, "protocol-report.json");
+  const protocolReport = JSON.parse(run(installedKfd, [
+    "challenge", "delegated-work", "protocol", "analyze",
+    "--fixture", "mcp-executor-replacement-preserved",
+    "--output", protocolReportPath,
+    "--json",
+  ], { cwd: consumer, env: offlineEnvironment }).stdout);
+  assert.match(protocolReport.result.resultRoot, /^sha256:[0-9a-f]{64}$/u);
+  const preservedRoute = JSON.parse(run(installedKfd, [
+    "challenge", "delegated-work", "route", "analyze", "--route", "mcp-to-a2a", "--json",
+  ], { cwd: consumer, env: offlineEnvironment }).stdout);
+  const collapsedRoute = JSON.parse(run(installedKfd, [
+    "challenge", "delegated-work", "route", "analyze", "--route", "durable-runtime-recovery-to-canonical-work", "--json",
+  ], { cwd: consumer, env: offlineEnvironment }).stdout);
+  assert.equal(preservedRoute.result.state, "preserved");
+  assert.equal(collapsedRoute.result.state, "collapsed");
+  const verification = JSON.parse(run(installedKfd, [
+    "verify", "delegated-work-protocol-report", protocolReportPath, "--json",
+  ], { cwd: consumer, env: offlineEnvironment }).stdout);
+  assert.equal(verification.valid, true);
+  const capabilityPath = path.join(consumer, "capabilities.json");
+  const capabilities = JSON.parse(run(installedKfd, [
+    "challenge", "delegated-work", "manifest", "derive", protocolReportPath,
+    "--output", capabilityPath,
+    "--json",
+  ], { cwd: consumer, env: offlineEnvironment }).stdout);
+  assert.equal(capabilities.capabilities.some(({ state }) => state === "verified"), true);
   console.log("Installed KFD package self-verification passed from a clean npm consumer.");
 } finally {
   fs.rmSync(temporary, { recursive: true, force: true });
