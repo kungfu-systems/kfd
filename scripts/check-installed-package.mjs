@@ -9,12 +9,17 @@ import { fileURLToPath } from "node:url";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const temporary = fs.mkdtempSync(path.join(os.tmpdir(), "kfd-installed-package-"));
 const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";
+const commandNeedsShell = (command, platform = process.platform) =>
+  platform === "win32" && /\.(?:cmd|bat)$/iu.test(command);
+
+assert.equal(commandNeedsShell("npm.cmd", "win32"), true);
+assert.equal(commandNeedsShell(process.execPath, "win32"), false);
 
 const run = (command, args, options = {}) => {
   const result = spawnSync(command, args, {
     cwd: root,
     encoding: "utf8",
-    shell: process.platform === "win32",
+    shell: commandNeedsShell(command),
     ...options,
   });
   assert.equal(
