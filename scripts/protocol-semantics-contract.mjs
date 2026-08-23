@@ -13,6 +13,7 @@ export const CONTRACTS = Object.freeze({
   observationV2: "kfd.protocol-observation/v2",
   traceFixture: "kfd.protocol-trace-fixture/v1",
   route: "kfd.cross-protocol-route/v1",
+  routeV2: "kfd.cross-protocol-route/v2",
   capabilityManifest: "kfd.derived-capability-manifest/v1",
   reference: "kfd.protocol-semantics-contract-reference/v1",
 });
@@ -24,6 +25,9 @@ const VERSION_PATTERN = /^[0-9]+\.[0-9]+\.[0-9]+(?:-[0-9A-Za-z.-]+)?$/u;
 const FIXED_COORDINATE_PATTERN = /^\S+@(?:[0-9]+\.[0-9]+\.[0-9]+(?:-[0-9A-Za-z.-]+)?|[0-9a-f]{40}|sha256:[0-9a-f]{64})$/u;
 const REPRESENTATION_STATES = new Set(["represented", "extension-required", "out-of-scope", "unresolved"]);
 const ROUTE_STATES = new Set(["preserved", "loss-declared", "extension-required", "out-of-scope", "unresolved"]);
+const ROUTE_V2_STATES = new Set(["preserved", "extension-required", "out-of-scope", "collapsed"]);
+const ROUTE_V2_INFERENCE_MODES = new Set(["none", "declared"]);
+const ROUTE_V2_NATIVE_IDENTITIES = new Set(["invocation", "message", "payment", "runtime", "session", "task"]);
 const CAPABILITY_STATES = new Set(["declared", "observed", "verified"]);
 const MATURITY_STATES = new Set(["stable", "draft", "incubating", "experimental", "implementation", "domain-family"]);
 const EVIDENCE_GRADES = new Set(["A", "B", "C"]);
@@ -370,6 +374,84 @@ function verifyRoute(report, document) {
   exactClaimBoundary(report, document.claimBoundary, "/claimBoundary", CLAIM_BOUNDARIES.route);
 }
 
+function verifyRouteV2Endpoint(report, endpoint, pointer) {
+  if (!exactObject(report, endpoint, pointer, ["protocolId", "protocolVersion", "evidencePackRoot", "canonicalWorkRoot", "canonicalWorkSource", "nativeIdentity", "authorityRevision"])) return;
+  identifier(report, endpoint.protocolId, `${pointer}/protocolId`);
+  version(report, endpoint.protocolVersion, `${pointer}/protocolVersion`);
+  root(report, endpoint.evidencePackRoot, `${pointer}/evidencePackRoot`);
+  root(report, endpoint.canonicalWorkRoot, `${pointer}/canonicalWorkRoot`);
+  root(report, endpoint.authorityRevision, `${pointer}/authorityRevision`);
+  if (endpoint.canonicalWorkSource !== "work") issue(report, "psl-work-identity-synthetic", `${pointer}/canonicalWorkSource`, "Canonical Work identity must come from rooted Work authority.");
+  exactObject(report, endpoint.nativeIdentity, `${pointer}/nativeIdentity`, ["kind", "identityRoot"]);
+  if (!ROUTE_V2_NATIVE_IDENTITIES.has(endpoint.nativeIdentity?.kind)) issue(report, "psl-document-invalid", `${pointer}/nativeIdentity/kind`, "Native protocol identity kind is unsupported.");
+  root(report, endpoint.nativeIdentity?.identityRoot, `${pointer}/nativeIdentity/identityRoot`);
+}
+
+function verifyRouteV2(report, document) {
+  if (!exactObject(report, document, "/", ["schemaVersion", "contract", "id", "requiredSemantics", "expectedHopIds", "hops", "result", "claimBoundary"])) return;
+  identifier(report, document.id, "/id");
+  nonEmptyStrings(report, document.requiredSemantics, "/requiredSemantics", { minimum: 1 });
+  nonEmptyStrings(report, document.expectedHopIds, "/expectedHopIds", { minimum: 1 });
+  if (!Array.isArray(document.hops) || document.hops.length === 0) {
+    issue(report, "psl-route-hop-omitted", "/hops", "At least one ordered route hop is required.");
+  } else {
+    const hopIds = [];
+    for (const [index, hop] of document.hops.entries()) {
+      const pointer = `/hops/${index}`;
+      if (!exactObject(report, hop, pointer, ["id", "input", "output", "mappings", "losses", "inference", "authorityTransition"])) continue;
+      identifier(report, hop.id, `${pointer}/id`);
+      hopIds.push(hop.id);
+      verifyRouteV2Endpoint(report, hop.input, `${pointer}/input`);
+      verifyRouteV2Endpoint(report, hop.output, `${pointer}/output`);
+      if (!Array.isArray(hop.mappings) || hop.mappings.length !== document.requiredSemantics?.length) {
+        issue(report, "psl-route-mapping-incomplete", `${pointer}/mappings`, "Every hop must map every required semantic exactly once.");
+      } else {
+        const semanticIds = [];
+        for (const [mappingIndex, mapping] of hop.mappings.entries()) {
+          const mappingPointer = `${pointer}/mappings/${mappingIndex}`;
+          if (!exactObject(report, mapping, mappingPointer, ["semanticId", "state", "evidenceRoots"])) continue;
+          identifier(report, mapping.semanticId, `${mappingPointer}/semanticId`);
+          semanticIds.push(mapping.semanticId);
+          if (!ROUTE_V2_STATES.has(mapping.state)) issue(report, "psl-state-contradictory", `${mappingPointer}/state`, "Route v2 state is unknown.");
+          roots(report, mapping.evidenceRoots, `${mappingPointer}/evidenceRoots`, { minimum: 1 });
+        }
+        if (!same(semanticIds, document.requiredSemantics)) issue(report, "psl-route-mapping-incomplete", `${pointer}/mappings`, "Mapping order and identities must equal requiredSemantics.");
+      }
+      if (!Array.isArray(hop.losses)) issue(report, "psl-document-invalid", `${pointer}/losses`, "Loss declarations must be an array.");
+      else for (const [lossIndex, loss] of hop.losses.entries()) {
+        const lossPointer = `${pointer}/losses/${lossIndex}`;
+        if (!exactObject(report, loss, lossPointer, ["semanticId", "kind", "summary", "evidenceRoots"])) continue;
+        identifier(report, loss.semanticId, `${lossPointer}/semanticId`);
+        identifier(report, loss.kind, `${lossPointer}/kind`);
+        if (!document.requiredSemantics?.includes(loss.semanticId)) issue(report, "psl-document-invalid", `${lossPointer}/semanticId`, "Loss semantic must be required by the route.");
+        if (typeof loss.summary !== "string" || !loss.summary.trim()) issue(report, "psl-document-invalid", `${lossPointer}/summary`, "Loss summary is required.");
+        roots(report, loss.evidenceRoots, `${lossPointer}/evidenceRoots`, { minimum: 1 });
+      }
+      const nonPreservedSemanticIds = (hop.mappings ?? []).filter(({ state }) => state !== "preserved").map(({ semanticId }) => semanticId);
+      const lossSemanticIds = (hop.losses ?? []).map(({ semanticId }) => semanticId);
+      if (!same(nonPreservedSemanticIds, lossSemanticIds)) issue(report, "psl-route-loss-hidden", `${pointer}/losses`, "Every non-preserved mapping requires one ordered loss declaration and preserved mappings cannot declare loss.");
+      if (hop.input?.canonicalWorkRoot !== hop.output?.canonicalWorkRoot) issue(report, "psl-work-identity-synthetic", `${pointer}/output/canonicalWorkRoot`, "A protocol hop cannot replace canonical Work identity.");
+      exactObject(report, hop.inference, `${pointer}/inference`, ["mode", "evidenceRoots"]);
+      if (!ROUTE_V2_INFERENCE_MODES.has(hop.inference?.mode)) issue(report, "psl-document-invalid", `${pointer}/inference/mode`, "Inference mode is unsupported.");
+      roots(report, hop.inference?.evidenceRoots, `${pointer}/inference/evidenceRoots`, { minimum: hop.inference?.mode === "declared" ? 1 : 0 });
+      if (hop.inference?.mode === "none" && hop.inference?.evidenceRoots?.length) issue(report, "psl-inferred-field", `${pointer}/inference/evidenceRoots`, "No-inference hops cannot carry inference evidence.");
+      exactObject(report, hop.authorityTransition, `${pointer}/authorityTransition`, ["fromRevision", "toRevision", "changed", "evidenceRoots"]);
+      root(report, hop.authorityTransition?.fromRevision, `${pointer}/authorityTransition/fromRevision`);
+      root(report, hop.authorityTransition?.toRevision, `${pointer}/authorityTransition/toRevision`);
+      roots(report, hop.authorityTransition?.evidenceRoots, `${pointer}/authorityTransition/evidenceRoots`, { minimum: 1 });
+      if (hop.authorityTransition?.fromRevision !== hop.input?.authorityRevision || hop.authorityTransition?.toRevision !== hop.output?.authorityRevision) issue(report, "psl-authority-revision-mismatch", `${pointer}/authorityTransition`, "Authority transition must bind the hop input and output revisions.");
+      if (typeof hop.authorityTransition?.changed !== "boolean" || hop.authorityTransition.changed !== (hop.authorityTransition.fromRevision !== hop.authorityTransition.toRevision)) issue(report, "psl-authority-revision-mismatch", `${pointer}/authorityTransition/changed`, "Authority change flag must equal revision change.");
+      if (index > 0 && !same(document.hops[index - 1]?.output, hop.input)) issue(report, "psl-route-permutation-invalid", pointer, "Adjacent route hops must preserve the exact prior output as the next input.");
+    }
+    if (!same(hopIds, document.expectedHopIds)) issue(report, "psl-route-hop-omitted", "/hops", "Actual ordered hop identities must equal expectedHopIds.");
+  }
+  exactObject(report, document.result, "/result", ["state", "pairedWorldCollapse", "evidenceRoots"]);
+  if (!ROUTE_V2_STATES.has(document.result?.state)) issue(report, "psl-state-contradictory", "/result/state", "Route v2 result state is unknown.");
+  if (typeof document.result?.pairedWorldCollapse !== "boolean" || document.result.pairedWorldCollapse !== (document.result.state === "collapsed")) issue(report, "psl-state-contradictory", "/result/pairedWorldCollapse", "Paired-world collapse must be explicit and agree with the collapsed result state.");
+  roots(report, document.result?.evidenceRoots, "/result/evidenceRoots", { minimum: 1 });
+  exactClaimBoundary(report, document.claimBoundary, "/claimBoundary", CLAIM_BOUNDARIES.route);
+}
+
 function verifyCapabilityManifest(report, document) {
   if (!exactObject(report, document, "/", ["schemaVersion", "contract", "id", "subject", "capabilities", "claimBoundary"])) return;
   identifier(report, document.id, "/id");
@@ -431,6 +513,7 @@ export function verifyProtocolSemanticsDocument(document, options = {}) {
     [CONTRACTS.observationV2]: verifyObservationV2,
     [CONTRACTS.traceFixture]: verifyTraceFixture,
     [CONTRACTS.route]: verifyRoute,
+    [CONTRACTS.routeV2]: verifyRouteV2,
     [CONTRACTS.capabilityManifest]: verifyCapabilityManifest,
   }[document.contract];
   if (!verifier) issue(report, "psl-contract-unsupported", "/contract", "Protocol Semantics Lab contract is unsupported.");

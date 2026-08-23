@@ -127,6 +127,26 @@ duplicate event identifiers, unexpected payload fields, and provenance
 mismatches fail closed before an observation is emitted. Repeated adaptation
 binds the same input, adapter artifact, transcript, and output roots.
 
+## Ordered cross-protocol routes
+
+The package export `protocol-semantics-lab/route-analyzer` builds and verifies
+six fixed offline routes: MCP to A2A, A2A to MCP, Zed ACP resume to A2A
+continuation, AG-UI interrupt to backend Task resume, commerce authorization
+through merchant acceptance to accepted completion, and a durable-runtime
+recovery counterexample. Each ordered hop declares its rooted input and output,
+all six semantic mappings, losses, inference mode, and authority transition.
+The additive `kfd.cross-protocol-route/v2` contract leaves route v1 unchanged.
+
+Route v2 uses exactly `preserved`, `extension-required`, `out-of-scope`, and
+`collapsed`. Native session, task, invocation, payment, and message identities
+remain separate rooted coordinates and cannot substitute for canonical Work.
+One fixed MCP-to-A2A route preserves all six semantics; the durable-runtime
+counterexample explicitly collapses a paired world. Hop permutation, omission,
+stale pack roots, authority-revision drift, synthetic Work identity, and unknown
+states all fail closed. The analyzer reads only the frozen local registry and
+does not claim interoperability, vendor correctness, runtime authority, or
+certification.
+
 ## Validation
 
 Run the architecture contract and the unchanged paired-world regression:
@@ -136,9 +156,11 @@ npm run check:protocol-semantics-lab
 npm run check:delegated-work-challenge
 ```
 
-The fixtures include explicit failures for duplicate protocol identities,
-hidden inference, missing verification evidence, mutable `latest` coordinates,
-and unsupported schema versions. Catalog mutations additionally reject a
+The fixtures and analyzer mutations include explicit failures for duplicate
+protocol identities, hidden inference, missing verification evidence, mutable
+`latest` coordinates, unsupported schema versions, hop permutation or omission,
+stale packs, authority-revision drift, and synthetic Work identity. Catalog
+mutations additionally reject a
 missing paired-world row, collapsed responsibility, a mutable drift policy,
 bare ACP identity, and stable rendering of draft or incubating sources. Offline
 validation proves document closure only; it does not observe a production
