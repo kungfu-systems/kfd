@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kungfu-systems.github.io/kfd/schemas/protocol-semantics-design-review-deliverable-v1.json",
+  "title": "KFD Protocol Semantics Design Review Deliverable",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "contract", "engagementId", "intakeRoot", "packageCoordinate", "reports", "findings", "residualRisks", "conclusion", "claimBoundary"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "contract": { "const": "kfd.protocol-semantics-design-review-deliverable/v1" },
+    "engagementId": { "type": "string", "pattern": "^[a-z][a-z0-9-]{2,63}$" },
+    "intakeRoot": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "packageCoordinate": { "type": "string", "pattern": "^@kungfu-tech/kfd@[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$" },
+    "reports": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "reportRoot", "resultRoot", "state"],
+        "properties": {
+          "path": { "type": "string", "minLength": 1 },
+          "reportRoot": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+          "resultRoot": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+          "state": { "enum": ["preserved", "collapsed", "extension-required", "out-of-scope", "ambiguous"] }
+        }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "status", "summary", "evidenceRoots"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]+$" },
+          "status": { "enum": ["supported", "unsupported", "unresolved"] },
+          "summary": { "type": "string", "minLength": 1 },
+          "evidenceRoots": { "type": "array", "uniqueItems": true, "items": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" } }
+        }
+      }
+    },
+    "residualRisks": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+    "conclusion": { "enum": ["fit-for-declared-gate", "not-fit-for-declared-gate", "insufficient-evidence"] },
+    "claimBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidenceClosureOnly", "certification", "productionFitness", "runtimeAuthority"],
+      "properties": {
+        "evidenceClosureOnly": { "const": true },
+        "certification": { "const": false },
+        "productionFitness": { "const": false },
+        "runtimeAuthority": { "const": false }
+      }
+    }
+  }
+}

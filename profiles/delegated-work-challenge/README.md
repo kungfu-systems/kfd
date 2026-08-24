@@ -29,7 +29,7 @@ From a clean temporary directory with only Node.js and npm, run the immutable
 package against the most direct pair:
 
 ```bash
-npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.68 kfd challenge delegated-work --pair accepted-completion
+npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.69 kfd challenge delegated-work --pair accepted-completion
 ```
 
 The expected summary is `1/1 COLLAPSED`. Both worlds expose the same successful
@@ -45,7 +45,7 @@ projection and starter paths are directly available:
 
 ```bash
 npm init -y
-npm install --ignore-scripts @kungfu-tech/kfd@1.0.0-alpha.68
+npm install --ignore-scripts @kungfu-tech/kfd@1.0.0-alpha.69
 ```
 
 Run all six pairs under the default projection, then the packaged

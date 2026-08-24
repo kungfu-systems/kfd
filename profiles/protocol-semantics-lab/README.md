@@ -1,14 +1,14 @@
 ---
-status: draft
-period: 2026-08-23
+status: active
+period: ongoing
 theme: protocol-semantics-lab
 doc_type: architecture
 source_level: local-files
 confidence: high
 sensitivity: public
 evidence_grade: A
-review_state: unreviewed
-last_reviewed: 2026-08-23
+review_state: self-reviewed
+last_reviewed: 2026-08-24
 ---
 
 # Protocol Semantics Lab
@@ -18,6 +18,62 @@ bounded question: what information survives when one protocol vocabulary is
 normalized or routed into another? It does not add a KFD, replace a protocol,
 certify a vendor, prove runtime enforcement, rank adoption, or establish
 commercial demand.
+
+## One-minute installed-package baseline
+
+From a clean directory with Node.js and npm, install the exact successor alpha,
+list the frozen catalog, and inspect the MCP Tasks pack:
+
+```bash
+npm init -y
+npm install --ignore-scripts @kungfu-tech/kfd@1.0.0-alpha.69
+npx --no-install kfd challenge delegated-work protocol list
+npx --no-install kfd challenge delegated-work protocol inspect mcp-tasks
+```
+
+The list contains exact versions and pack roots. Inspection shows all six
+paired-world questions, each representation state, and the separate protocol
+and KFD Work responsibility boundaries.
+
+Run a preserved route, save it, and verify the same bytes offline. Then inspect
+the fixed collapsed counterexample:
+
+```bash
+npx --no-install kfd challenge delegated-work route analyze --route mcp-to-a2a --output preserved-route.json
+npx --no-install kfd verify delegated-work-protocol-report preserved-route.json
+npx --no-install kfd challenge delegated-work route analyze --route durable-runtime-recovery-to-canonical-work
+```
+
+After npm has acquired the package, these commands read no network service and
+require no model API or provider credential. The expected states are
+`preserved` and `collapsed`; verifier validity is an independent evidence-
+closure result.
+
+## First-stage product interface
+
+- [`examples/manifest.json`](examples/manifest.json) binds four checked-in,
+  deterministically generated MCP, A2A, Zed ACP, and commerce reports to their
+  exact bytes, result roots, and report roots.
+- [`design-review/intake.template.json`](design-review/intake.template.json)
+  and [`design-review/deliverable.template.json`](design-review/deliverable.template.json)
+  are valid instances of their adjacent strict JSON Schemas and can be used
+  without oral setup.
+- [`service-boundaries.md`](service-boundaries.md) separates the free public
+  evidence surface from possible future design review, private adapter, and CI
+  assessment work without promising a hosted service.
+- [`ci-compatibility-gate.md`](ci-compatibility-gate.md) shows how to pin the
+  package, retain a report, verify it offline, and apply a repository-owned
+  route policy.
+
+Reproduce all four examples from the package source with:
+
+```bash
+npm run generate:protocol-semantics-commercialization
+git diff --exit-code -- profiles/protocol-semantics-lab/examples
+```
+
+The sole public discussion entry is [Discussion 427](https://github.com/kungfu-systems/kfd/discussions/427).
+No second site, intake portal, or protocol standard is created.
 
 ## Authority map
 

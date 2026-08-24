@@ -13,7 +13,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const cli = path.join(root, "bin", "kfd.mjs");
 const starter = path.join(root, "profiles", "delegated-work-challenge", "adapters", "node-starter.mjs");
 const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";
-const publicVersion = "1.0.0-alpha.68";
+const publicVersion = "1.0.0-alpha.69";
 const oneMinuteCommand = `npx --yes --package @kungfu-tech/kfd@${publicVersion} kfd challenge delegated-work --pair accepted-completion`;
 
 function run(command, args, expected, options = {}) {
