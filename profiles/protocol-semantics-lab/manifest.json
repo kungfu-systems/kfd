@@ -3,7 +3,7 @@
   "contract": "kfd.protocol-semantics-lab-manifest/v1",
   "profile": {
     "id": "kfd-protocol-semantics-lab",
-    "version": "0.1.0-alpha.4",
+    "version": "0.1.0-alpha.5",
     "status": "experimental",
     "numberedDecision": false,
     "authority": "profiles/protocol-semantics-lab/README.md"
@@ -49,6 +49,17 @@
     "verifierContract": "kfd.protocol-semantics-report-verifier/v1",
     "networkRequired": false,
     "claim": "evidence-closure-only"
+  },
+  "commercialization": {
+    "publicEntry": "https://github.com/kungfu-systems/kfd/discussions/427",
+    "examplesManifest": "profiles/protocol-semantics-lab/examples/manifest.json",
+    "designReviewIntakeSchema": "profiles/protocol-semantics-lab/design-review/intake.schema.json",
+    "designReviewIntakeTemplate": "profiles/protocol-semantics-lab/design-review/intake.template.json",
+    "designReviewDeliverableSchema": "profiles/protocol-semantics-lab/design-review/deliverable.schema.json",
+    "designReviewDeliverableTemplate": "profiles/protocol-semantics-lab/design-review/deliverable.template.json",
+    "serviceBoundary": "profiles/protocol-semantics-lab/service-boundaries.md",
+    "ciGuide": "profiles/protocol-semantics-lab/ci-compatibility-gate.md",
+    "hostedServicePromised": false
   },
   "contracts": [
     {

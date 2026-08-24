@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.protocol-semantics-design-review-intake/v1",
+  "engagementId": "example-review",
+  "subject": {
+    "system": "example delegated-work system",
+    "version": "example-cut-1",
+    "sourceCoordinates": [
+      "git:example/repository@0123456789012345678901234567890123456789"
+    ]
+  },
+  "reviewScope": {
+    "protocols": [
+      "a2a-task@2026.8.23",
+      "mcp-tasks@2026.7.28"
+    ],
+    "routes": [
+      "mcp-to-a2a"
+    ],
+    "questions": [
+      "Does executor replacement preserve canonical Work identity?",
+      "Which accepted-completion fact is explicit rather than inferred?"
+    ]
+  },
+  "evidence": {
+    "artifacts": [
+      {
+        "coordinate": "fixture:example-cut-1/trace.json",
+        "root": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+      }
+    ],
+    "exclusions": [
+      "No live service, credential, or production traffic is included."
+    ]
+  },
+  "constraints": {
+    "networkAccess": false,
+    "privateAdapterAvailable": false,
+    "dataMayLeaveOwnerEnvironment": false
+  },
+  "claimBoundary": {
+    "certificationRequested": false,
+    "productionEnforcementObserved": false,
+    "commercialAgreementIncluded": false
+  }
+}

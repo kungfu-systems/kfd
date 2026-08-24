@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.protocol-semantics-commercial-examples/v1",
+  "package": {
+    "name": "@kungfu-tech/kfd",
+    "version": "1.0.0-alpha.69"
+  },
+  "entries": [
+    {
+      "id": "a2a-retry",
+      "kind": "protocol",
+      "command": "kfd challenge delegated-work protocol analyze --fixture a2a-retry-preserved",
+      "path": "profiles/protocol-semantics-lab/examples/a2a-retry.report.json",
+      "resultState": "preserved",
+      "resultRoot": "sha256:1cd8f35e0f8e04452a212bfcad0a55bf42cce0e3b299a7c85e956f0ddc017e59",
+      "reportRoot": "sha256:3106fbd428811fc67d23bc50fd65c8cd624a08f4ac508a5a05aec64ff8555424",
+      "byteRoot": "sha256:31af43dfe3b9c3b55a37c52c28876cc8e65afb4c6ee252a6698feb49e134c005"
+    },
+    {
+      "id": "commerce-authorization-route",
+      "kind": "route",
+      "command": "kfd challenge delegated-work route analyze --route commerce-authorization-to-accepted-completion",
+      "path": "profiles/protocol-semantics-lab/examples/commerce-authorization-route.report.json",
+      "resultState": "extension-required",
+      "resultRoot": "sha256:29594167f8bb4aece8d3df2bf64faa7382ff5e6a7dc999d07d1a883193247af8",
+      "reportRoot": "sha256:f219ff66f697acfbd0833fc1f0daf27b1629f8b8c1f2f57837ab502cb4dc8ab0",
+      "byteRoot": "sha256:6e90fc71396cd201e28a22024a64847c3da17f8549b7c9fea58bd2d179a42c22"
+    },
+    {
+      "id": "mcp-executor-replacement",
+      "kind": "protocol",
+      "command": "kfd challenge delegated-work protocol analyze --fixture mcp-executor-replacement-preserved",
+      "path": "profiles/protocol-semantics-lab/examples/mcp-executor-replacement.report.json",
+      "resultState": "preserved",
+      "resultRoot": "sha256:b67eaeb3c15d65a18cc19447658975feee64de6eecca3509f02a60a21eff2e0e",
+      "reportRoot": "sha256:9d8e8d9651924e0e9875e9c5ef8220a5ad3aedd17f5f26c0a7144a63b2b04671",
+      "byteRoot": "sha256:4389c2c732e01bd091d7e4aa07e4b43f9a4bf487e20149a0bc2524f9ca8a3eea"
+    },
+    {
+      "id": "zed-acp-resume",
+      "kind": "protocol",
+      "command": "kfd challenge delegated-work protocol analyze --fixture zed-acp-resume-preserved",
+      "path": "profiles/protocol-semantics-lab/examples/zed-acp-resume.report.json",
+      "resultState": "preserved",
+      "resultRoot": "sha256:2e589a42c81855cefe08fb6db69c6815d1837b4eb10a57545df7ba46cb7a7322",
+      "reportRoot": "sha256:1b6267d84d010753aded3bddf6a331db56ad52b609bb440b23ecf399ae81f8ec",
+      "byteRoot": "sha256:913424e0798e4e27f97d1026808ccfd32070ba7c689f76c3683c52292242bed8"
+    }
+  ],
+  "claim": "reproducible-packaged-evidence-only",
+  "manifestRoot": "sha256:cae0a8d1f29cb824402830c214db30e42305644f57831715b1e4255a44bd6745"
+}

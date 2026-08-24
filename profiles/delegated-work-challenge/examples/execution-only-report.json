@@ -4,16 +4,16 @@
   "sourceCut": {
     "repository": "kungfu-systems/kfd",
     "package": "@kungfu-tech/kfd",
-    "packageVersion": "1.0.0-alpha.68",
-    "packageManifestDigest": "sha256:af8f935e47c4016ee7981552ae963900205181d972829f4379107b15dcf0893b",
-    "releaseAnchorDigest": "sha256:96b0abdf0e8f81e463ad2794516b3583b2f7bc7e8130ce457b59ed92f380fcd8"
+    "packageVersion": "1.0.0-alpha.69",
+    "packageManifestDigest": "sha256:5941d3bf7d5595c64e5271f182744d4fbea4eefce3096909496b1f1c12e5ad74",
+    "releaseAnchorDigest": "sha256:596ddafbcc19ea93b4591a04443677c285cc575339fde3bf187d3c67c3a189e9"
   },
   "challenge": {
     "id": "kfd-delegated-work-challenge",
     "version": "0.1.0-alpha.1",
     "status": "experimental",
     "numberedDecision": false,
-    "manifestDigest": "sha256:e7cb3d0d7f780193ee394b4517cb2fe4bc21469c052a36a4f15ee72785cf860e",
+    "manifestDigest": "sha256:f4f3a0e7e1ca1ea3697f54a25dd08a705c3e978fa34b2f028620d998d1acde25",
     "verifierContract": "kfd.delegated-work-challenge-report-verifier/v1",
     "verifierArtifactDigest": "sha256:5d7e90938bf89c102f2b450938dfc54c6bc5d49d8c3d2278ada79e68c9ce5b6e"
   },
@@ -72,8 +72,8 @@
     "source": "packaged"
   },
   "platform": {
-    "os": "darwin",
-    "arch": "arm64",
+    "os": "linux",
+    "arch": "x64",
     "runtime": "node-24.16.0"
   },
   "execution": {
@@ -551,5 +551,5 @@
   ],
   "qualifying": false,
   "certification": false,
-  "reportRoot": "sha256:4cca3c88e2b18e947a6def26d2601e24fd02b3d1f1624528e7233a476d725acd"
+  "reportRoot": "sha256:f5f6287234e29e6b469643a6dbf16465e8b8d83ef6c4809dff3bc31db6f2fc5f"
 }

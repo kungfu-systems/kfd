@@ -10,6 +10,7 @@ import { fileURLToPath } from "node:url";
 import {
   CONTRACTS,
   buildContractReference,
+  exactByteRoot,
   semanticRoot,
   verifyProtocolSemanticsDocument,
 } from "./protocol-semantics-contract.mjs";
@@ -32,6 +33,7 @@ import {
   listProtocolSemantics,
   verifyProtocolSemanticsReport,
 } from "./protocol-semantics-report.mjs";
+import { generateProtocolSemanticsCommercializationExamples } from "./generate-protocol-semantics-commercialization.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const profileRoot = path.join(root, "profiles", "protocol-semantics-lab");
@@ -43,6 +45,32 @@ const adapterCases = readJson(path.join(profileRoot, "fixtures", "adapters", "ca
 
 function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
+}
+
+function schemaIssues(schema, value, pointer = "$") {
+  const issues = [];
+  if (Object.hasOwn(schema, "const") && JSON.stringify(value) !== JSON.stringify(schema.const)) issues.push(`${pointer}: const`);
+  if (schema.enum && !schema.enum.some((candidate) => JSON.stringify(candidate) === JSON.stringify(value))) issues.push(`${pointer}: enum`);
+  if (schema.type === "object") {
+    if (!value || typeof value !== "object" || Array.isArray(value)) return [...issues, `${pointer}: object`];
+    for (const key of schema.required ?? []) if (!Object.hasOwn(value, key)) issues.push(`${pointer}.${key}: required`);
+    if (schema.additionalProperties === false) {
+      for (const key of Object.keys(value)) if (!Object.hasOwn(schema.properties ?? {}, key)) issues.push(`${pointer}.${key}: additional`);
+    }
+    for (const [key, child] of Object.entries(schema.properties ?? {})) {
+      if (Object.hasOwn(value, key)) issues.push(...schemaIssues(child, value[key], `${pointer}.${key}`));
+    }
+  } else if (schema.type === "array") {
+    if (!Array.isArray(value)) return [...issues, `${pointer}: array`];
+    if (value.length < (schema.minItems ?? 0)) issues.push(`${pointer}: minItems`);
+    if (schema.uniqueItems && new Set(value.map((entry) => JSON.stringify(entry))).size !== value.length) issues.push(`${pointer}: uniqueItems`);
+    value.forEach((entry, index) => issues.push(...schemaIssues(schema.items ?? {}, entry, `${pointer}[${index}]`)));
+  } else if (schema.type === "string") {
+    if (typeof value !== "string") return [...issues, `${pointer}: string`];
+    if (value.length < (schema.minLength ?? 0)) issues.push(`${pointer}: minLength`);
+    if (schema.pattern && !new RegExp(schema.pattern, "u").test(value)) issues.push(`${pointer}: pattern`);
+  } else if (schema.type === "boolean" && typeof value !== "boolean") issues.push(`${pointer}: boolean`);
+  return issues;
 }
 
 function run(command, args, expected = 0) {
@@ -269,6 +297,56 @@ assert.deepEqual(manifest.reportCli, {
   networkRequired: false,
   claim: "evidence-closure-only",
 });
+assert.deepEqual(manifest.commercialization, {
+  publicEntry: "https://github.com/kungfu-systems/kfd/discussions/427",
+  examplesManifest: "profiles/protocol-semantics-lab/examples/manifest.json",
+  designReviewIntakeSchema: "profiles/protocol-semantics-lab/design-review/intake.schema.json",
+  designReviewIntakeTemplate: "profiles/protocol-semantics-lab/design-review/intake.template.json",
+  designReviewDeliverableSchema: "profiles/protocol-semantics-lab/design-review/deliverable.schema.json",
+  designReviewDeliverableTemplate: "profiles/protocol-semantics-lab/design-review/deliverable.template.json",
+  serviceBoundary: "profiles/protocol-semantics-lab/service-boundaries.md",
+  ciGuide: "profiles/protocol-semantics-lab/ci-compatibility-gate.md",
+  hostedServicePromised: false,
+});
+for (const pathValue of Object.values(manifest.commercialization).filter((value) => typeof value === "string" && !value.startsWith("https://"))) {
+  assert.equal(fs.lstatSync(path.join(root, pathValue)).isFile(), true, `${pathValue} must be a packaged regular file`);
+}
+
+for (const prefix of ["intake", "deliverable"]) {
+  const schema = readJson(path.join(profileRoot, "design-review", `${prefix}.schema.json`));
+  const template = readJson(path.join(profileRoot, "design-review", `${prefix}.template.json`));
+  assert.deepEqual(schemaIssues(schema, template), [], `${prefix} template must be valid without oral context`);
+  assert.equal(schema.additionalProperties, false, `${prefix} schema must reject unknown top-level fields`);
+}
+
+const generatedCommercialExamples = generateProtocolSemanticsCommercializationExamples();
+for (const [name, bytes] of generatedCommercialExamples) {
+  assert.equal(fs.readFileSync(path.join(profileRoot, "examples", name), "utf8"), bytes, `${name} must reproduce byte-for-byte`);
+}
+const commercialExamples = readJson(path.join(profileRoot, "examples", "manifest.json"));
+assert.equal(commercialExamples.entries.length, 4);
+assert.deepEqual(commercialExamples.entries.map(({ id }) => id), [
+  "a2a-retry",
+  "commerce-authorization-route",
+  "mcp-executor-replacement",
+  "zed-acp-resume",
+]);
+for (const entry of commercialExamples.entries) {
+  const reportPath = path.join(root, entry.path);
+  const report = readJson(reportPath);
+  assert.equal(exactByteRoot(fs.readFileSync(reportPath)), entry.byteRoot, `${entry.id}: byte root drifted`);
+  assert.equal(report.reportRoot, entry.reportRoot, `${entry.id}: report root drifted`);
+  assert.equal(report.result.resultRoot, entry.resultRoot, `${entry.id}: result root drifted`);
+  assert.equal(verifyProtocolSemanticsReport(report).valid, true, `${entry.id}: checked-in report must verify offline`);
+}
+const commercialManifestWithoutRoot = structuredClone(commercialExamples);
+delete commercialManifestWithoutRoot.manifestRoot;
+assert.equal(commercialExamples.manifestRoot, semanticRoot(commercialManifestWithoutRoot));
+const profileReadme = fs.readFileSync(path.join(profileRoot, "README.md"), "utf8");
+const serviceBoundary = fs.readFileSync(path.join(profileRoot, "service-boundaries.md"), "utf8");
+assert.equal(profileReadme.includes(manifest.commercialization.publicEntry), true);
+assert.equal(serviceBoundary.includes(manifest.commercialization.publicEntry), true);
+assert.equal(serviceBoundary.includes("No hosted analysis service"), true, "service boundary must reject a hosted-service promise");
 const protocolCatalog = listProtocolSemantics();
 assert.equal(protocolCatalog.protocols.length, 12);
 assert.equal(protocolCatalog.fixtures.length, adapterCases.valid.length);
@@ -402,12 +480,18 @@ const exactExports = {
   "./protocol-semantics-lab/report.schema.json": "./schemas/kfd-protocol-semantics/protocol-semantics-report.schema.json",
   "./protocol-semantics-lab/report-cli": "./scripts/protocol-semantics-report.mjs",
   "./protocol-semantics-lab/report-verifier": "./scripts/protocol-semantics-report.mjs",
+  "./protocol-semantics-lab/examples/manifest.json": "./profiles/protocol-semantics-lab/examples/manifest.json",
+  "./protocol-semantics-lab/design-review/intake.schema.json": "./profiles/protocol-semantics-lab/design-review/intake.schema.json",
+  "./protocol-semantics-lab/design-review/intake.template.json": "./profiles/protocol-semantics-lab/design-review/intake.template.json",
+  "./protocol-semantics-lab/design-review/deliverable.schema.json": "./profiles/protocol-semantics-lab/design-review/deliverable.schema.json",
+  "./protocol-semantics-lab/design-review/deliverable.template.json": "./profiles/protocol-semantics-lab/design-review/deliverable.template.json",
 };
 for (const [exportName, target] of Object.entries(exactExports)) assert.equal(packageJson.exports?.[exportName], target);
 for (const directory of ["profiles", "schemas", "scripts"]) assert.equal(packageJson.files?.includes(directory), true, `npm files must include ${directory}`);
-assert.equal(packageJson.version, "1.0.0-alpha.68", "architecture work must not rewrite the immutable alpha.68 coordinate");
+assert.equal(packageJson.version, "1.0.0-alpha.69", "commercialization release must bind the successor alpha.69 coordinate");
 assert.equal(packageJson.scripts?.["check:protocol-semantics-lab"], "node scripts/check-protocol-semantics-lab.mjs");
 assert.equal(packageJson.scripts?.["generate:protocol-semantics-reference"], "node scripts/generate-protocol-semantics-reference.mjs --write");
+assert.equal(packageJson.scripts?.["generate:protocol-semantics-commercialization"], "node scripts/generate-protocol-semantics-commercialization.mjs --write");
 assert.equal(packageJson.scripts?.check?.includes("npm run check:protocol-semantics-lab"), true);
 
 console.log(`protocol semantics lab: ${cases.valid.length} architecture fixtures, ${adapterCases.valid.length} deterministic adapter traces, ${adapterCases.negative.length} adapter negatives, ${routeSuite.routes.length} fixed routes, ${catalog.packs.length} frozen packs, six-pair compatibility, roots, exports, and generated references ok`);

@@ -1,6 +1,6 @@
 {
   "name": "@kungfu-tech/kfd",
-  "version": "1.0.0-alpha.68",
+  "version": "1.0.0-alpha.69",
   "description": "KFD: an open, evidence-governed engineering standard for reliable action and continuity under uncertainty",
   "license": "Apache-2.0",
   "bin": {
@@ -80,6 +80,11 @@
     "./protocol-semantics-lab/report.schema.json": "./schemas/kfd-protocol-semantics/protocol-semantics-report.schema.json",
     "./protocol-semantics-lab/report-cli": "./scripts/protocol-semantics-report.mjs",
     "./protocol-semantics-lab/report-verifier": "./scripts/protocol-semantics-report.mjs",
+    "./protocol-semantics-lab/examples/manifest.json": "./profiles/protocol-semantics-lab/examples/manifest.json",
+    "./protocol-semantics-lab/design-review/intake.schema.json": "./profiles/protocol-semantics-lab/design-review/intake.schema.json",
+    "./protocol-semantics-lab/design-review/intake.template.json": "./profiles/protocol-semantics-lab/design-review/intake.template.json",
+    "./protocol-semantics-lab/design-review/deliverable.schema.json": "./profiles/protocol-semantics-lab/design-review/deliverable.schema.json",
+    "./protocol-semantics-lab/design-review/deliverable.template.json": "./profiles/protocol-semantics-lab/design-review/deliverable.template.json",
     "./protocols/*": "./protocols/*",
     "./cases/registry.json": "./cases/registry.json",
     "./cases/*": "./cases/*",
@@ -203,6 +208,7 @@
     "generate:agent-runtime-vectors": "node scripts/generate-agent-runtime-vectors.mjs --write",
     "generate:agent-hub-vectors": "node scripts/generate-agent-hub-vectors.mjs --write && node scripts/update-agent-hub-manifest.mjs",
     "generate:protocol-semantics-reference": "node scripts/generate-protocol-semantics-reference.mjs --write",
+    "generate:protocol-semantics-commercialization": "node scripts/generate-protocol-semantics-commercialization.mjs --write",
     "update:delegated-work-challenge-manifest": "node scripts/update-delegated-work-challenge-manifest.mjs",
     "prepack": "npm run check:verifier-artifact",
     "update:evidence": "node scripts/update-site-bundle.mjs && node scripts/update-kfd-2-claim.mjs && node scripts/update-kfd-1-witness.mjs && node scripts/update-kfd-3-witness.mjs",
