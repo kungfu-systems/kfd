@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.protocol-evidence-pack/v2",
+  "protocol": {
+    "id": "zed-acp",
+    "title": "Zed Agent Client Protocol",
+    "version": "1.0.0",
+    "kind": "protocol"
+  },
+  "source": {
+    "coordinate": "zed-acp-v1-2026-04-22@sha256:8f23ab8114eaca8633b84b1d0bb28e93212e4794a8d452a45fbd8af30b6ad9df",
+    "revision": "sha256:8f23ab8114eaca8633b84b1d0bb28e93212e4794a8d452a45fbd8af30b6ad9df",
+    "contentRoot": "sha256:8f23ab8114eaca8633b84b1d0bb28e93212e4794a8d452a45fbd8af30b6ad9df",
+    "locators": [
+      "https://agentclientprotocol.com/protocol/v1/session-setup"
+    ]
+  },
+  "semantics": [
+    {
+      "id": "accepted-completion",
+      "state": "out-of-scope",
+      "summary": "accepted completion is outside Zed Agent Client Protocol's frozen protocol responsibility; this is not a protocol failure.",
+      "evidenceRoots": []
+    },
+    {
+      "id": "authority-revocation",
+      "state": "unresolved",
+      "summary": "Zed Agent Client Protocol's frozen bounded input does not determine authority revocation.",
+      "evidenceRoots": []
+    },
+    {
+      "id": "causal-history",
+      "state": "represented",
+      "summary": "Zed Agent Client Protocol's frozen bounded input explicitly represents causal history.",
+      "evidenceRoots": [
+        "sha256:8f23ab8114eaca8633b84b1d0bb28e93212e4794a8d452a45fbd8af30b6ad9df"
+      ]
+    },
+    {
+      "id": "recovery-drift",
+      "state": "represented",
+      "summary": "Zed Agent Client Protocol's frozen bounded input explicitly represents recovery drift.",
+      "evidenceRoots": [
+        "sha256:8f23ab8114eaca8633b84b1d0bb28e93212e4794a8d452a45fbd8af30b6ad9df"
+      ]
+    },
+    {
+      "id": "retry-identity",
+      "state": "extension-required",
+      "summary": "Zed Agent Client Protocol's frozen protocol-owned surface requires a separately versioned extension to carry retry identity.",
+      "evidenceRoots": []
+    },
+    {
+      "id": "work-version",
+      "state": "out-of-scope",
+      "summary": "work version is outside Zed Agent Client Protocol's frozen protocol responsibility; this is not a protocol failure.",
+      "evidenceRoots": []
+    }
+  ],
+  "catalogSourceId": "zed-acp-v1-2026-04-22",
+  "maturity": {
+    "status": "experimental",
+    "authority": "Agent Client Protocol v1 session setup frozen on 2026-04-22",
+    "asOf": "2026-08-23"
+  },
+  "responsibility": {
+    "protocolOwns": [
+      "conversation session identity",
+      "session history replay",
+      "session resume"
+    ],
+    "kfdWorkOwns": [
+      "accepted completion",
+      "authority lineage",
+      "canonical Work identity",
+      "exact Work version"
+    ],
+    "outOfScopeIsFailure": false
+  },
+  "nativeSurface": {
+    "objects": [
+      "conversation history",
+      "session"
+    ],
+    "states": [
+      "loaded",
+      "resumed"
+    ]
+  },
+  "extensionPoints": [
+    "canonical Work binding",
+    "independent acceptance binding"
+  ],
+  "nonClaims": [
+    "Session identity is not automatically canonical Work identity.",
+    "Session restoration is not accepted Work completion."
+  ],
+  "evidenceGrade": "B",
+  "drift": {
+    "frozenAt": "2026-08-23",
+    "policy": "new-pack-version-required",
+    "sourceStatus": "experimental"
+  },
+  "sourceBoundary": {
+    "mode": "bounded-paraphrase",
+    "fullSpecificationVendored": false,
+    "excerptWords": 0
+  },
+  "claimBoundary": {
+    "evaluationInputOnly": true,
+    "certification": false,
+    "runtimeAuthority": false,
+    "commercialDemand": false
+  }
+}

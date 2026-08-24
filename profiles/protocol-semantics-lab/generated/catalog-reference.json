@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.protocol-evidence-catalog-reference/v1",
+  "frozenAt": "2026-08-23",
+  "sourcePolicy": "Frozen semantics are the authorized design input. Locators are citations, never generator dependencies; later drift requires a new pack version.",
+  "sourceCatalogIds": [
+    "a2a-dev-2026-08-23",
+    "a2ui-v0.9",
+    "ag-ui-2026-08-23",
+    "agentic-commerce-2026-h1",
+    "agntcy-v1-2026-08-23",
+    "durable-runtime-counterexamples-2026-08-23",
+    "ietf-aiagent-auth-draft-03",
+    "kfd-alpha68",
+    "mcp-tasks-2026-07-28",
+    "webmcp-cg-draft-2026-08-23",
+    "zed-acp-v1-2026-04-22"
+  ],
+  "questionIds": [
+    "accepted-completion",
+    "authority-revocation",
+    "causal-history",
+    "recovery-drift",
+    "retry-identity",
+    "work-version"
+  ],
+  "registryRoot": "sha256:74b218b2d363eab72350cd81d6f49bc0843d722fe30fd233265a5ab4add6081b",
+  "packs": [
+    {
+      "protocolId": "a2a-task",
+      "protocolVersion": "2026.8.23",
+      "packPath": "profiles/protocol-semantics-lab/packs/a2a-task-2026.8.23.json",
+      "packRoot": "sha256:c6e4e9f0dfb92eb182b08681b0698ea43e046814ef09b120cbcb1eb1cab565e0"
+    },
+    {
+      "protocolId": "a2ui",
+      "protocolVersion": "0.9.0",
+      "packPath": "profiles/protocol-semantics-lab/packs/a2ui-0.9.0.json",
+      "packRoot": "sha256:f1dcf1f0f6d1a6929acaf00b7514c182a3b845fee0d7770630a92c0989a02670"
+    },
+    {
+      "protocolId": "ag-ui",
+      "protocolVersion": "2026.8.23",
+      "packPath": "profiles/protocol-semantics-lab/packs/ag-ui-2026.8.23.json",
+      "packRoot": "sha256:83518d60f55a441feb9d140ea850e49650e6e926544ab6ee919814c45af3cc62"
+    },
+    {
+      "protocolId": "agntcy",
+      "protocolVersion": "1.0.0",
+      "packPath": "profiles/protocol-semantics-lab/packs/agntcy-1.0.0.json",
+      "packRoot": "sha256:59ea6adf7d4885f5b2265ef267467a7fcdd88fbf9813046c16f672330dcd7f71"
+    },
+    {
+      "protocolId": "commerce-acp",
+      "protocolVersion": "2026.1.0",
+      "packPath": "profiles/protocol-semantics-lab/packs/commerce-acp-2026.1.0.json",
+      "packRoot": "sha256:c77a113517eedfbae0905ace7d2ed6855cc36ea63c19d25fb099e45c3451a1f6"
+    },
+    {
+      "protocolId": "dbos",
+      "protocolVersion": "2026.8.23",
+      "packPath": "profiles/protocol-semantics-lab/packs/dbos-2026.8.23.json",
+      "packRoot": "sha256:66b1859d01bfb9c7f6ea1272a64d564d9fed01f6c5b7049c005c0294b4fc8ff3"
+    },
+    {
+      "protocolId": "ietf-aiagent-auth-draft-03",
+      "protocolVersion": "0.0.3",
+      "packPath": "profiles/protocol-semantics-lab/packs/ietf-aiagent-auth-draft-03-0.0.3.json",
+      "packRoot": "sha256:7fb5d0cddd1004da6143573b5e0b081bce5e3379fab0656d482dc2d04015d8a5"
+    },
+    {
+      "protocolId": "kfd-delegated-work-alpha68",
+      "protocolVersion": "1.0.0-alpha.68",
+      "packPath": "profiles/protocol-semantics-lab/packs/kfd-delegated-work-alpha68-1.0.0-alpha.68.json",
+      "packRoot": "sha256:fb8e42476a6d0e5c8e10ced4ae7e0363db044d3867449eff78e7a3c9cb4b843a"
+    },
+    {
+      "protocolId": "mcp-tasks",
+      "protocolVersion": "2026.7.28",
+      "packPath": "profiles/protocol-semantics-lab/packs/mcp-tasks-2026.7.28.json",
+      "packRoot": "sha256:c716585840a15bdcb1d6295703a950a927098ac7f67f48fb9c499d75d7588415"
+    },
+    {
+      "protocolId": "restate",
+      "protocolVersion": "2026.8.23",
+      "packPath": "profiles/protocol-semantics-lab/packs/restate-2026.8.23.json",
+      "packRoot": "sha256:4bbd53af7002e3dbf609b3f5af9d2934037faa6f7d223394033116eb1d1415ca"
+    },
+    {
+      "protocolId": "webmcp-cg-draft",
+      "protocolVersion": "0.0.1-20260823",
+      "packPath": "profiles/protocol-semantics-lab/packs/webmcp-cg-draft-0.0.1-20260823.json",
+      "packRoot": "sha256:8bf5dee1cdb79f8085fdb55f40978abf8f85e1fc750fed3ef544a5ce3d20de77"
+    },
+    {
+      "protocolId": "zed-acp",
+      "protocolVersion": "1.0.0",
+      "packPath": "profiles/protocol-semantics-lab/packs/zed-acp-1.0.0.json",
+      "packRoot": "sha256:39da6ad7b92734a745d4667faccf56f3a4b6ec873b2d586b718848a3bc49152a"
+    }
+  ],
+  "claimBoundary": {
+    "evaluationInputOnly": true,
+    "certification": false,
+    "runtimeAuthority": false,
+    "commercialDemand": false
+  },
+  "catalogRoot": "sha256:9fb02453236e847be8494a49d095da45bd484d40d914fe8a9f04d36f09b35879"
+}

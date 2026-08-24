@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kfd.libkungfu.dev/schemas/kfd-protocol-semantics/protocol-observation-v2.schema.json",
+  "title": "KFD Native-Coordinate Protocol Observation",
+  "type": "object",
+  "required": ["schemaVersion", "contract", "id", "protocol", "fixture", "adapter", "scenario", "facts", "transcriptRoot", "claimBoundary"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "contract": { "const": "kfd.protocol-observation/v2" },
+    "id": { "$ref": "#/$defs/id" },
+    "protocol": { "$ref": "#/$defs/protocolReference" },
+    "fixture": {
+      "type": "object",
+      "required": ["id", "inputRoot"],
+      "properties": { "id": { "$ref": "#/$defs/id" }, "inputRoot": { "$ref": "#/$defs/root" } },
+      "additionalProperties": false
+    },
+    "adapter": {
+      "type": "object",
+      "required": ["id", "version", "artifactRoot"],
+      "properties": { "id": { "$ref": "#/$defs/id" }, "version": { "$ref": "#/$defs/version" }, "artifactRoot": { "$ref": "#/$defs/root" } },
+      "additionalProperties": false
+    },
+    "scenario": {
+      "type": "object",
+      "required": ["kind", "identityPreservation"],
+      "properties": { "kind": { "enum": ["executor-replacement", "retry", "resume"] }, "identityPreservation": { "enum": ["preserved", "ambiguous"] } },
+      "additionalProperties": false
+    },
+    "facts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "required": ["id", "state", "source", "evidenceRoots", "value"],
+            "properties": {
+              "id": { "$ref": "#/$defs/id" },
+              "state": { "const": "represented" },
+              "source": { "$ref": "#/$defs/nativeSource" },
+              "evidenceRoots": { "$ref": "#/$defs/nonemptyRoots" },
+              "value": {}
+            },
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "required": ["id", "state", "source", "evidenceRoots"],
+            "properties": {
+              "id": { "$ref": "#/$defs/id" },
+              "state": { "enum": ["extension-required", "out-of-scope", "unresolved"] },
+              "source": { "$ref": "#/$defs/absentSource" },
+              "evidenceRoots": { "type": "array", "maxItems": 0 }
+            },
+            "additionalProperties": false
+          }
+        ]
+      }
+    },
+    "transcriptRoot": { "$ref": "#/$defs/root" },
+    "claimBoundary": {
+      "type": "object",
+      "required": ["normalizedObservationOnly", "nativeCoordinatesRequired", "inferenceAllowed", "certification", "runtimeAuthority", "policyCorrectness"],
+      "properties": {
+        "normalizedObservationOnly": { "const": true },
+        "nativeCoordinatesRequired": { "const": true },
+        "inferenceAllowed": { "const": false },
+        "certification": { "const": false },
+        "runtimeAuthority": { "const": false },
+        "policyCorrectness": { "const": false }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z][a-z0-9]*(?:[.-][a-z0-9]+)*$" },
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$" },
+    "root": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "nonemptyRoots": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/root" } },
+    "protocolReference": {
+      "type": "object",
+      "required": ["protocolId", "protocolVersion", "evidencePackRoot"],
+      "properties": { "protocolId": { "$ref": "#/$defs/id" }, "protocolVersion": { "$ref": "#/$defs/version" }, "evidencePackRoot": { "$ref": "#/$defs/root" } },
+      "additionalProperties": false
+    },
+    "nativeSource": {
+      "type": "object",
+      "required": ["status", "eventId", "coordinate"],
+      "properties": { "status": { "const": "native" }, "eventId": { "$ref": "#/$defs/id" }, "coordinate": { "type": "string", "pattern": "^/events/[0-9]+/(variant|payload/[A-Za-z][A-Za-z0-9]*)$" } },
+      "additionalProperties": false
+    },
+    "absentSource": {
+      "type": "object",
+      "required": ["status", "reason"],
+      "properties": { "status": { "const": "absent" }, "reason": { "enum": ["ambiguous", "extension-required", "not-represented", "out-of-scope"] } },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

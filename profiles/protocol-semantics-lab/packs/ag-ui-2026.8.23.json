@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.protocol-evidence-pack/v2",
+  "protocol": {
+    "id": "ag-ui",
+    "title": "AG-UI",
+    "version": "2026.8.23",
+    "kind": "protocol"
+  },
+  "source": {
+    "coordinate": "ag-ui-2026-08-23@sha256:7e1f9313f49d203e01d3d77991060f8719f59506c13e7c7474105fdcee94d9de",
+    "revision": "sha256:7e1f9313f49d203e01d3d77991060f8719f59506c13e7c7474105fdcee94d9de",
+    "contentRoot": "sha256:7e1f9313f49d203e01d3d77991060f8719f59506c13e7c7474105fdcee94d9de",
+    "locators": [
+      "https://docs.ag-ui.com/concepts/capabilities"
+    ]
+  },
+  "semantics": [
+    {
+      "id": "accepted-completion",
+      "state": "extension-required",
+      "summary": "AG-UI's frozen protocol-owned surface requires a separately versioned extension to carry accepted completion.",
+      "evidenceRoots": []
+    },
+    {
+      "id": "authority-revocation",
+      "state": "unresolved",
+      "summary": "AG-UI's frozen bounded input does not determine authority revocation.",
+      "evidenceRoots": []
+    },
+    {
+      "id": "causal-history",
+      "state": "represented",
+      "summary": "AG-UI's frozen bounded input explicitly represents causal history.",
+      "evidenceRoots": [
+        "sha256:7e1f9313f49d203e01d3d77991060f8719f59506c13e7c7474105fdcee94d9de"
+      ]
+    },
+    {
+      "id": "recovery-drift",
+      "state": "represented",
+      "summary": "AG-UI's frozen bounded input explicitly represents recovery drift.",
+      "evidenceRoots": [
+        "sha256:7e1f9313f49d203e01d3d77991060f8719f59506c13e7c7474105fdcee94d9de"
+      ]
+    },
+    {
+      "id": "retry-identity",
+      "state": "unresolved",
+      "summary": "AG-UI's frozen bounded input does not determine retry identity.",
+      "evidenceRoots": []
+    },
+    {
+      "id": "work-version",
+      "state": "out-of-scope",
+      "summary": "work version is outside AG-UI's frozen protocol responsibility; this is not a protocol failure.",
+      "evidenceRoots": []
+    }
+  ],
+  "catalogSourceId": "ag-ui-2026-08-23",
+  "maturity": {
+    "status": "experimental",
+    "authority": "AG-UI capability documentation frozen on 2026-08-23",
+    "asOf": "2026-08-23"
+  },
+  "responsibility": {
+    "protocolOwns": [
+      "UI state transport",
+      "agent-to-UI event transport",
+      "interrupt and resume surfaces"
+    ],
+    "kfdWorkOwns": [
+      "accepted completion",
+      "canonical Work identity",
+      "exact Work version"
+    ],
+    "outOfScopeIsFailure": false
+  },
+  "nativeSurface": {
+    "objects": [
+      "event",
+      "run",
+      "state"
+    ],
+    "states": [
+      "interrupted",
+      "run-finished",
+      "running"
+    ]
+  },
+  "extensionPoints": [
+    "accepted-completion binding",
+    "canonical Work binding"
+  ],
+  "nonClaims": [
+    "RunFinished is not independent accepted Work completion.",
+    "Transport success is not runtime enforcement proof."
+  ],
+  "evidenceGrade": "B",
+  "drift": {
+    "frozenAt": "2026-08-23",
+    "policy": "new-pack-version-required",
+    "sourceStatus": "experimental"
+  },
+  "sourceBoundary": {
+    "mode": "bounded-paraphrase",
+    "fullSpecificationVendored": false,
+    "excerptWords": 0
+  },
+  "claimBoundary": {
+    "evaluationInputOnly": true,
+    "certification": false,
+    "runtimeAuthority": false,
+    "commercialDemand": false
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.protocol-evidence-pack/v1",
+  "protocol": {
+    "id": "fixture-protocol",
+    "title": "Mutable fixture",
+    "version": "1.0.0",
+    "kind": "fixture"
+  },
+  "source": {
+    "coordinate": "fixture-protocol@latest",
+    "revision": "1111111111111111111111111111111111111111",
+    "contentRoot": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+    "locators": ["https://example.invalid/fixed-locator"]
+  },
+  "semantics": [
+    {
+      "id": "completion",
+      "state": "represented",
+      "summary": "Fixture completion state.",
+      "evidenceRoots": ["sha256:3333333333333333333333333333333333333333333333333333333333333333"]
+    }
+  ],
+  "claimBoundary": {
+    "evaluationInputOnly": true,
+    "certification": false,
+    "runtimeAuthority": false,
+    "commercialDemand": false
+  }
+}

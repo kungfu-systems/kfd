@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.protocol-semantics-lab-manifest/v1",
+  "profile": {
+    "id": "kfd-protocol-semantics-lab",
+    "version": "0.1.0-alpha.5",
+    "status": "experimental",
+    "numberedDecision": false,
+    "authority": "profiles/protocol-semantics-lab/README.md"
+  },
+  "sourceCut": {
+    "repository": "kungfu-systems/kfd",
+    "baselineGitHead": "d0542ea9bb8bfb3ed9004c28bc6629edf0ca21d4"
+  },
+  "kernel": {
+    "profileId": "kfd-delegated-work-challenge",
+    "manifestPath": "profiles/delegated-work-challenge/manifest.json",
+    "suiteId": "delegated-work-paired-worlds",
+    "fixedPairCount": 6,
+    "defaultProjection": "execution-only",
+    "fullSemanticProjection": "full-semantic",
+    "reportContract": "kfd.delegated-work-challenge-report/v1",
+    "relationship": "projection-and-declarative-input-only"
+  },
+  "registry": "profiles/protocol-semantics-lab/registry.json",
+  "generatedReference": "profiles/protocol-semantics-lab/generated/contract-reference.json",
+  "generatedCatalogReference": "profiles/protocol-semantics-lab/generated/catalog-reference.json",
+  "generatedCatalogComparison": "profiles/protocol-semantics-lab/generated/catalog-comparison.md",
+  "observationAdapters": {
+    "module": "scripts/protocol-observation-adapters.mjs",
+    "fixtureCases": "profiles/protocol-semantics-lab/fixtures/adapters/cases.json",
+    "protocolCount": 4,
+    "networkRequired": false
+  },
+  "routeAnalyzer": {
+    "module": "scripts/cross-protocol-route-analyzer.mjs",
+    "fixedRouteCount": 6,
+    "networkRequired": false,
+    "resultStates": [
+      "preserved",
+      "extension-required",
+      "out-of-scope",
+      "collapsed"
+    ]
+  },
+  "reportCli": {
+    "module": "scripts/protocol-semantics-report.mjs",
+    "reportContract": "kfd.protocol-semantics-report/v1",
+    "verifierContract": "kfd.protocol-semantics-report-verifier/v1",
+    "networkRequired": false,
+    "claim": "evidence-closure-only"
+  },
+  "commercialization": {
+    "publicEntry": "https://github.com/kungfu-systems/kfd/discussions/427",
+    "examplesManifest": "profiles/protocol-semantics-lab/examples/manifest.json",
+    "designReviewIntakeSchema": "profiles/protocol-semantics-lab/design-review/intake.schema.json",
+    "designReviewIntakeTemplate": "profiles/protocol-semantics-lab/design-review/intake.template.json",
+    "designReviewDeliverableSchema": "profiles/protocol-semantics-lab/design-review/deliverable.schema.json",
+    "designReviewDeliverableTemplate": "profiles/protocol-semantics-lab/design-review/deliverable.template.json",
+    "serviceBoundary": "profiles/protocol-semantics-lab/service-boundaries.md",
+    "ciGuide": "profiles/protocol-semantics-lab/ci-compatibility-gate.md",
+    "hostedServicePromised": false
+  },
+  "contracts": [
+    {
+      "id": "kfd.cross-protocol-route/v1",
+      "schema": "schemas/kfd-protocol-semantics/cross-protocol-route.schema.json",
+      "export": "./protocol-semantics-lab/cross-protocol-route.schema.json"
+    },
+    {
+      "id": "kfd.cross-protocol-route/v2",
+      "schema": "schemas/kfd-protocol-semantics/cross-protocol-route-v2.schema.json",
+      "export": "./protocol-semantics-lab/cross-protocol-route-v2.schema.json"
+    },
+    {
+      "id": "kfd.derived-capability-manifest/v1",
+      "schema": "schemas/kfd-protocol-semantics/derived-capability-manifest.schema.json",
+      "export": "./protocol-semantics-lab/derived-capability-manifest.schema.json"
+    },
+    {
+      "id": "kfd.protocol-evidence-pack-registry/v1",
+      "schema": "schemas/kfd-protocol-semantics/protocol-evidence-pack-registry.schema.json",
+      "export": "./protocol-semantics-lab/protocol-evidence-pack-registry.schema.json"
+    },
+    {
+      "id": "kfd.protocol-evidence-pack/v1",
+      "schema": "schemas/kfd-protocol-semantics/protocol-evidence-pack.schema.json",
+      "export": "./protocol-semantics-lab/protocol-evidence-pack.schema.json"
+    },
+    {
+      "id": "kfd.protocol-evidence-pack/v2",
+      "schema": "schemas/kfd-protocol-semantics/protocol-evidence-pack-v2.schema.json",
+      "export": "./protocol-semantics-lab/protocol-evidence-pack-v2.schema.json"
+    },
+    {
+      "id": "kfd.protocol-observation/v1",
+      "schema": "schemas/kfd-protocol-semantics/protocol-observation.schema.json",
+      "export": "./protocol-semantics-lab/protocol-observation.schema.json"
+    },
+    {
+      "id": "kfd.protocol-observation/v2",
+      "schema": "schemas/kfd-protocol-semantics/protocol-observation-v2.schema.json",
+      "export": "./protocol-semantics-lab/protocol-observation-v2.schema.json"
+    },
+    {
+      "id": "kfd.protocol-trace-fixture/v1",
+      "schema": "schemas/kfd-protocol-semantics/protocol-trace-fixture.schema.json",
+      "export": "./protocol-semantics-lab/protocol-trace-fixture.schema.json"
+    }
+  ],
+  "claimBoundary": {
+    "informationRepresentationExperiment": true,
+    "numberedKfdAuthority": false,
+    "vendorCertification": false,
+    "runtimeEnforcement": false,
+    "commercialDemand": false
+  }
+}

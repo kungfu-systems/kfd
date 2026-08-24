@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.protocol-observation/v1",
+  "id": "unknown-representation-state",
+  "protocol": {
+    "protocolId": "fixture-protocol",
+    "protocolVersion": "1.0.0",
+    "evidencePackRoot": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+  },
+  "adapter": {
+    "id": "fixture-adapter",
+    "version": "1.0.0",
+    "artifactRoot": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+  },
+  "facts": [
+    {
+      "id": "completion",
+      "state": "assumed",
+      "evidenceRoots": []
+    }
+  ],
+  "claimBoundary": {
+    "normalizedObservationOnly": true,
+    "certification": false,
+    "runtimeAuthority": false,
+    "policyCorrectness": false
+  }
+}

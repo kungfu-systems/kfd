@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.protocol-evidence-pack/v2",
+  "protocol": {
+    "id": "ietf-aiagent-auth-draft-03",
+    "title": "IETF AI Agent Authorization Internet-Draft 03",
+    "version": "0.0.3",
+    "kind": "individual-internet-draft"
+  },
+  "source": {
+    "coordinate": "ietf-aiagent-auth-draft-03@sha256:4087952c6f69dfabd94987ca7b01e1fd51dc3607862971462158e68928d0ef96",
+    "revision": "sha256:4087952c6f69dfabd94987ca7b01e1fd51dc3607862971462158e68928d0ef96",
+    "contentRoot": "sha256:4087952c6f69dfabd94987ca7b01e1fd51dc3607862971462158e68928d0ef96",
+    "locators": [
+      "https://datatracker.ietf.org/doc/draft-klrc-aiagent-auth/"
+    ]
+  },
+  "semantics": [
+    {
+      "id": "accepted-completion",
+      "state": "out-of-scope",
+      "summary": "accepted completion is outside IETF AI Agent Authorization Internet-Draft 03's frozen protocol responsibility; this is not a protocol failure.",
+      "evidenceRoots": []
+    },
+    {
+      "id": "authority-revocation",
+      "state": "unresolved",
+      "summary": "IETF AI Agent Authorization Internet-Draft 03's frozen bounded input does not determine authority revocation.",
+      "evidenceRoots": []
+    },
+    {
+      "id": "causal-history",
+      "state": "out-of-scope",
+      "summary": "causal history is outside IETF AI Agent Authorization Internet-Draft 03's frozen protocol responsibility; this is not a protocol failure.",
+      "evidenceRoots": []
+    },
+    {
+      "id": "recovery-drift",
+      "state": "unresolved",
+      "summary": "IETF AI Agent Authorization Internet-Draft 03's frozen bounded input does not determine recovery drift.",
+      "evidenceRoots": []
+    },
+    {
+      "id": "retry-identity",
+      "state": "out-of-scope",
+      "summary": "retry identity is outside IETF AI Agent Authorization Internet-Draft 03's frozen protocol responsibility; this is not a protocol failure.",
+      "evidenceRoots": []
+    },
+    {
+      "id": "work-version",
+      "state": "out-of-scope",
+      "summary": "work version is outside IETF AI Agent Authorization Internet-Draft 03's frozen protocol responsibility; this is not a protocol failure.",
+      "evidenceRoots": []
+    }
+  ],
+  "catalogSourceId": "ietf-aiagent-auth-draft-03",
+  "maturity": {
+    "status": "draft",
+    "authority": "Individual Internet-Draft with no formal IETF standing",
+    "asOf": "2026-08-23"
+  },
+  "responsibility": {
+    "protocolOwns": [
+      "delegated workload context",
+      "distributed policy engine",
+      "runtime enforcement point"
+    ],
+    "kfdWorkOwns": [
+      "accepted completion",
+      "canonical Work identity",
+      "causal Work history",
+      "exact Work version",
+      "recovery semantics"
+    ],
+    "outOfScopeIsFailure": false
+  },
+  "nativeSurface": {
+    "objects": [
+      "agent workload",
+      "delegated context",
+      "enforcement point",
+      "policy engine"
+    ],
+    "states": [
+      "authorized",
+      "denied",
+      "revoked"
+    ]
+  },
+  "extensionPoints": [
+    "Work lifecycle binding",
+    "canonical Work binding"
+  ],
+  "nonClaims": [
+    "Distributed enforcement does not prove policy correctness.",
+    "Draft 03 is not an adopted stable IETF standard."
+  ],
+  "evidenceGrade": "B",
+  "drift": {
+    "frozenAt": "2026-08-23",
+    "policy": "new-pack-version-required",
+    "sourceStatus": "draft"
+  },
+  "sourceBoundary": {
+    "mode": "bounded-paraphrase",
+    "fullSpecificationVendored": false,
+    "excerptWords": 0
+  },
+  "claimBoundary": {
+    "evaluationInputOnly": true,
+    "certification": false,
+    "runtimeAuthority": false,
+    "commercialDemand": false
+  }
+}

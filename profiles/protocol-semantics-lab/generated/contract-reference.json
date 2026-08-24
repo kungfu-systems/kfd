@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.protocol-semantics-contract-reference/v1",
+  "profile": {
+    "id": "kfd-protocol-semantics-lab",
+    "version": "0.1.0-alpha.5",
+    "status": "experimental",
+    "numberedDecision": false,
+    "authority": "profiles/protocol-semantics-lab/README.md"
+  },
+  "kernel": {
+    "profileId": "kfd-delegated-work-challenge",
+    "manifestPath": "profiles/delegated-work-challenge/manifest.json",
+    "suiteId": "delegated-work-paired-worlds",
+    "fixedPairCount": 6,
+    "defaultProjection": "execution-only",
+    "fullSemanticProjection": "full-semantic",
+    "reportContract": "kfd.delegated-work-challenge-report/v1",
+    "relationship": "projection-and-declarative-input-only"
+  },
+  "registry": {
+    "path": "profiles/protocol-semantics-lab/registry.json",
+    "root": "sha256:74b218b2d363eab72350cd81d6f49bc0843d722fe30fd233265a5ab4add6081b"
+  },
+  "contracts": [
+    {
+      "id": "kfd.cross-protocol-route/v1",
+      "schema": "schemas/kfd-protocol-semantics/cross-protocol-route.schema.json",
+      "export": "./protocol-semantics-lab/cross-protocol-route.schema.json",
+      "byteDigest": "sha256:a39160d08eb06dcc20117bd66b5ca281b618832fa785fb578222a22735e18123"
+    },
+    {
+      "id": "kfd.cross-protocol-route/v2",
+      "schema": "schemas/kfd-protocol-semantics/cross-protocol-route-v2.schema.json",
+      "export": "./protocol-semantics-lab/cross-protocol-route-v2.schema.json",
+      "byteDigest": "sha256:a6ca570dd39f1b9db67f131581b6ec499a453941ebb269f40a83f0a878302437"
+    },
+    {
+      "id": "kfd.derived-capability-manifest/v1",
+      "schema": "schemas/kfd-protocol-semantics/derived-capability-manifest.schema.json",
+      "export": "./protocol-semantics-lab/derived-capability-manifest.schema.json",
+      "byteDigest": "sha256:a7b671086fc0eb783d880dbbe1a050cde5349f9ad6e6cfe1bebdd5aac389c46d"
+    },
+    {
+      "id": "kfd.protocol-evidence-pack-registry/v1",
+      "schema": "schemas/kfd-protocol-semantics/protocol-evidence-pack-registry.schema.json",
+      "export": "./protocol-semantics-lab/protocol-evidence-pack-registry.schema.json",
+      "byteDigest": "sha256:921f7f32b87ca45815d801bec023d7e764226c483796931302d334fee302a57e"
+    },
+    {
+      "id": "kfd.protocol-evidence-pack/v1",
+      "schema": "schemas/kfd-protocol-semantics/protocol-evidence-pack.schema.json",
+      "export": "./protocol-semantics-lab/protocol-evidence-pack.schema.json",
+      "byteDigest": "sha256:2b8f6094c70ce02a9a6ba46ecefbbd0beec6e222d490b003f10d71bf1a810018"
+    },
+    {
+      "id": "kfd.protocol-evidence-pack/v2",
+      "schema": "schemas/kfd-protocol-semantics/protocol-evidence-pack-v2.schema.json",
+      "export": "./protocol-semantics-lab/protocol-evidence-pack-v2.schema.json",
+      "byteDigest": "sha256:39ad64800c6104e2dcf16b5c10b4433ca50120d44b57c16b742c4087fdd5a84b"
+    },
+    {
+      "id": "kfd.protocol-observation/v1",
+      "schema": "schemas/kfd-protocol-semantics/protocol-observation.schema.json",
+      "export": "./protocol-semantics-lab/protocol-observation.schema.json",
+      "byteDigest": "sha256:0fa624984e3ad2430a2141c34fc8c216ef0a77f46186918556ebb8c5ee4450ea"
+    },
+    {
+      "id": "kfd.protocol-observation/v2",
+      "schema": "schemas/kfd-protocol-semantics/protocol-observation-v2.schema.json",
+      "export": "./protocol-semantics-lab/protocol-observation-v2.schema.json",
+      "byteDigest": "sha256:9a8b71558f5b2402b55ba6deb87a367cb415182faff044e0931e6c77f941969e"
+    },
+    {
+      "id": "kfd.protocol-trace-fixture/v1",
+      "schema": "schemas/kfd-protocol-semantics/protocol-trace-fixture.schema.json",
+      "export": "./protocol-semantics-lab/protocol-trace-fixture.schema.json",
+      "byteDigest": "sha256:baa16b998c9db674803785c6f6ac38aae80ceaf27859b2de9f0c04d4d9b775a0"
+    }
+  ],
+  "claimBoundary": {
+    "informationRepresentationExperiment": true,
+    "numberedKfdAuthority": false,
+    "vendorCertification": false,
+    "runtimeEnforcement": false,
+    "commercialDemand": false
+  },
+  "referenceRoot": "sha256:c7d3f18569ca0242f9e0dd87885369f53758b78a2693d328f926e9a2c1ebf777"
+}

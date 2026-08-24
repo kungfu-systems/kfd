@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.protocol-semantics-design-review-deliverable/v1",
+  "engagementId": "example-review",
+  "intakeRoot": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+  "packageCoordinate": "@kungfu-tech/kfd@1.0.0-alpha.69",
+  "reports": [
+    {
+      "path": "protocol-report.json",
+      "reportRoot": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+      "resultRoot": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+      "state": "ambiguous"
+    }
+  ],
+  "findings": [
+    {
+      "id": "example-unresolved-finding",
+      "status": "unresolved",
+      "summary": "Replace this example with a conclusion supported by retained report roots.",
+      "evidenceRoots": []
+    }
+  ],
+  "residualRisks": [
+    "Offline evidence closure does not observe production enforcement."
+  ],
+  "conclusion": "insufficient-evidence",
+  "claimBoundary": {
+    "evidenceClosureOnly": true,
+    "certification": false,
+    "productionFitness": false,
+    "runtimeAuthority": false
+  }
+}

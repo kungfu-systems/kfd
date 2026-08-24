@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.protocol-evidence-pack/v2",
+  "protocol": {
+    "id": "webmcp-cg-draft",
+    "title": "WebMCP Community Group Draft",
+    "version": "0.0.1-20260823",
+    "kind": "incubating-draft"
+  },
+  "source": {
+    "coordinate": "webmcp-cg-draft-2026-08-23@sha256:85c8509e32637c2019a92dea469d573c3610ff667cacd471d0252af6b023de1f",
+    "revision": "sha256:85c8509e32637c2019a92dea469d573c3610ff667cacd471d0252af6b023de1f",
+    "contentRoot": "sha256:85c8509e32637c2019a92dea469d573c3610ff667cacd471d0252af6b023de1f",
+    "locators": [
+      "https://github.com/webmachinelearning/webmcp"
+    ]
+  },
+  "semantics": [
+    {
+      "id": "accepted-completion",
+      "state": "out-of-scope",
+      "summary": "accepted completion is outside WebMCP Community Group Draft's frozen protocol responsibility; this is not a protocol failure.",
+      "evidenceRoots": []
+    },
+    {
+      "id": "authority-revocation",
+      "state": "out-of-scope",
+      "summary": "authority revocation is outside WebMCP Community Group Draft's frozen protocol responsibility; this is not a protocol failure.",
+      "evidenceRoots": []
+    },
+    {
+      "id": "causal-history",
+      "state": "out-of-scope",
+      "summary": "causal history is outside WebMCP Community Group Draft's frozen protocol responsibility; this is not a protocol failure.",
+      "evidenceRoots": []
+    },
+    {
+      "id": "recovery-drift",
+      "state": "out-of-scope",
+      "summary": "recovery drift is outside WebMCP Community Group Draft's frozen protocol responsibility; this is not a protocol failure.",
+      "evidenceRoots": []
+    },
+    {
+      "id": "retry-identity",
+      "state": "out-of-scope",
+      "summary": "retry identity is outside WebMCP Community Group Draft's frozen protocol responsibility; this is not a protocol failure.",
+      "evidenceRoots": []
+    },
+    {
+      "id": "work-version",
+      "state": "out-of-scope",
+      "summary": "work version is outside WebMCP Community Group Draft's frozen protocol responsibility; this is not a protocol failure.",
+      "evidenceRoots": []
+    }
+  ],
+  "catalogSourceId": "webmcp-cg-draft-2026-08-23",
+  "maturity": {
+    "status": "incubating",
+    "authority": "WebMCP Community Group draft repository",
+    "asOf": "2026-08-23"
+  },
+  "responsibility": {
+    "protocolOwns": [
+      "browser-mediated page tool API",
+      "page tool exposure"
+    ],
+    "kfdWorkOwns": [
+      "accepted completion",
+      "authority lineage",
+      "canonical Work identity",
+      "causal Work history",
+      "exact Work version",
+      "recovery semantics"
+    ],
+    "outOfScopeIsFailure": false
+  },
+  "nativeSurface": {
+    "objects": [
+      "page tool",
+      "tool invocation"
+    ],
+    "states": []
+  },
+  "extensionPoints": [
+    "Work evidence binding",
+    "stable protocol adoption"
+  ],
+  "nonClaims": [
+    "This community draft is not a Recommendation-track stable standard.",
+    "Unresolved design items are not treated as adopted semantics."
+  ],
+  "evidenceGrade": "B",
+  "drift": {
+    "frozenAt": "2026-08-23",
+    "policy": "new-pack-version-required",
+    "sourceStatus": "incubating"
+  },
+  "sourceBoundary": {
+    "mode": "bounded-paraphrase",
+    "fullSpecificationVendored": false,
+    "excerptWords": 0
+  },
+  "claimBoundary": {
+    "evaluationInputOnly": true,
+    "certification": false,
+    "runtimeAuthority": false,
+    "commercialDemand": false
+  }
+}

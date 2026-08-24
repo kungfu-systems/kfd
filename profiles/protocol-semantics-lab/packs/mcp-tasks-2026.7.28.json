@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.protocol-evidence-pack/v2",
+  "protocol": {
+    "id": "mcp-tasks",
+    "title": "Model Context Protocol Tasks",
+    "version": "2026.7.28",
+    "kind": "protocol-extension"
+  },
+  "source": {
+    "coordinate": "mcp-tasks-2026-07-28@sha256:569938a3ff7475e5f99436f541939b1d9379340bc692d56d102feca71cae27c6",
+    "revision": "sha256:569938a3ff7475e5f99436f541939b1d9379340bc692d56d102feca71cae27c6",
+    "contentRoot": "sha256:569938a3ff7475e5f99436f541939b1d9379340bc692d56d102feca71cae27c6",
+    "locators": [
+      "https://modelcontextprotocol.io/extensions/tasks/overview"
+    ]
+  },
+  "semantics": [
+    {
+      "id": "accepted-completion",
+      "state": "extension-required",
+      "summary": "Model Context Protocol Tasks's frozen protocol-owned surface requires a separately versioned extension to carry accepted completion.",
+      "evidenceRoots": []
+    },
+    {
+      "id": "authority-revocation",
+      "state": "extension-required",
+      "summary": "Model Context Protocol Tasks's frozen protocol-owned surface requires a separately versioned extension to carry authority revocation.",
+      "evidenceRoots": []
+    },
+    {
+      "id": "causal-history",
+      "state": "unresolved",
+      "summary": "Model Context Protocol Tasks's frozen bounded input does not determine causal history.",
+      "evidenceRoots": []
+    },
+    {
+      "id": "recovery-drift",
+      "state": "represented",
+      "summary": "Model Context Protocol Tasks's frozen bounded input explicitly represents recovery drift.",
+      "evidenceRoots": [
+        "sha256:569938a3ff7475e5f99436f541939b1d9379340bc692d56d102feca71cae27c6"
+      ]
+    },
+    {
+      "id": "retry-identity",
+      "state": "represented",
+      "summary": "Model Context Protocol Tasks's frozen bounded input explicitly represents retry identity.",
+      "evidenceRoots": [
+        "sha256:569938a3ff7475e5f99436f541939b1d9379340bc692d56d102feca71cae27c6"
+      ]
+    },
+    {
+      "id": "work-version",
+      "state": "extension-required",
+      "summary": "Model Context Protocol Tasks's frozen protocol-owned surface requires a separately versioned extension to carry work version.",
+      "evidenceRoots": []
+    }
+  ],
+  "catalogSourceId": "mcp-tasks-2026-07-28",
+  "maturity": {
+    "status": "experimental",
+    "authority": "MCP Tasks extension documentation frozen on 2026-07-28",
+    "asOf": "2026-08-23"
+  },
+  "responsibility": {
+    "protocolOwns": [
+      "cooperative cancellation",
+      "durable task handle",
+      "task capability negotiation",
+      "task operation state"
+    ],
+    "kfdWorkOwns": [
+      "accepted completion",
+      "authority lineage",
+      "canonical Work identity",
+      "exact Work version"
+    ],
+    "outOfScopeIsFailure": false
+  },
+  "nativeSurface": {
+    "objects": [
+      "task",
+      "task handle"
+    ],
+    "states": [
+      "cancelled",
+      "completed",
+      "failed",
+      "input-required",
+      "working"
+    ]
+  },
+  "extensionPoints": [
+    "accepted-completion binding",
+    "canonical Work binding"
+  ],
+  "nonClaims": [
+    "Task completion is not independent accepted Work completion.",
+    "This pack does not certify an MCP implementation."
+  ],
+  "evidenceGrade": "B",
+  "drift": {
+    "frozenAt": "2026-08-23",
+    "policy": "new-pack-version-required",
+    "sourceStatus": "experimental"
+  },
+  "sourceBoundary": {
+    "mode": "bounded-paraphrase",
+    "fullSpecificationVendored": false,
+    "excerptWords": 0
+  },
+  "claimBoundary": {
+    "evaluationInputOnly": true,
+    "certification": false,
+    "runtimeAuthority": false,
+    "commercialDemand": false
+  }
+}

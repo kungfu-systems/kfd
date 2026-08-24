@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.protocol-trace-fixture/v1",
+  "id": "a2a-retry-preserved",
+  "protocol": { "protocolId": "a2a-task", "protocolVersion": "2026.8.23", "evidencePackRoot": "sha256:c6e4e9f0dfb92eb182b08681b0698ea43e046814ef09b120cbcb1eb1cab565e0" },
+  "events": [
+    { "id": "event-1", "variant": "task", "provenance": { "protocolId": "a2a-task", "protocolVersion": "2026.8.23" }, "payload": { "taskId": "task-a", "contextId": "context-9", "status": "failed", "executorId": "executor-a" } },
+    { "id": "event-2", "variant": "task", "provenance": { "protocolId": "a2a-task", "protocolVersion": "2026.8.23" }, "payload": { "taskId": "task-b", "contextId": "context-9", "status": "working", "executorId": "executor-b", "retryOf": "task-a" } }
+  ],
+  "expectation": { "scenario": "retry", "identityPreservation": "preserved" }
+}

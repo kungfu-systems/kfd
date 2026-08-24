@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.protocol-observation/v1",
+  "id": "minimal-observation",
+  "protocol": {
+    "protocolId": "kfd-alpha68",
+    "protocolVersion": "1.0.0-alpha.68",
+    "evidencePackRoot": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+  },
+  "adapter": {
+    "id": "fixed-fixture-adapter",
+    "version": "1.0.0",
+    "artifactRoot": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+  },
+  "facts": [
+    {
+      "id": "accepted-completion",
+      "state": "represented",
+      "evidenceRoots": ["sha256:3333333333333333333333333333333333333333333333333333333333333333"],
+      "value": { "separateAuthority": true }
+    },
+    {
+      "id": "external-feedback",
+      "state": "out-of-scope",
+      "evidenceRoots": []
+    },
+    {
+      "id": "protocol-extension",
+      "state": "extension-required",
+      "evidenceRoots": []
+    },
+    {
+      "id": "runtime-enforcement",
+      "state": "unresolved",
+      "evidenceRoots": []
+    }
+  ],
+  "claimBoundary": {
+    "normalizedObservationOnly": true,
+    "certification": false,
+    "runtimeAuthority": false,
+    "policyCorrectness": false
+  }
+}

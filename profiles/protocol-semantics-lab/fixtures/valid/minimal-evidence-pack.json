@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.protocol-evidence-pack/v1",
+  "protocol": {
+    "id": "kfd-alpha68",
+    "title": "KFD Delegated Work paired-world semantic kernel",
+    "version": "1.0.0-alpha.68",
+    "kind": "experimental-profile"
+  },
+  "source": {
+    "coordinate": "kfd-alpha68@1.0.0-alpha.68",
+    "revision": "966215abb1122f8f3f36b817cfcb9ce248cb91a8",
+    "contentRoot": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+    "locators": ["profiles/delegated-work-challenge/manifest.json"]
+  },
+  "semantics": [
+    {
+      "id": "accepted-completion",
+      "state": "represented",
+      "summary": "Accepted completion remains distinct from execution completion.",
+      "evidenceRoots": ["sha256:2222222222222222222222222222222222222222222222222222222222222222"]
+    },
+    {
+      "id": "external-feedback",
+      "state": "out-of-scope",
+      "summary": "External feedback is outside this fixed architecture fixture.",
+      "evidenceRoots": []
+    },
+    {
+      "id": "protocol-extension",
+      "state": "extension-required",
+      "summary": "Protocol-specific content is supplied by a later versioned pack.",
+      "evidenceRoots": []
+    },
+    {
+      "id": "runtime-enforcement",
+      "state": "unresolved",
+      "summary": "A declaration alone does not resolve runtime enforcement.",
+      "evidenceRoots": []
+    }
+  ],
+  "claimBoundary": {
+    "evaluationInputOnly": true,
+    "certification": false,
+    "runtimeAuthority": false,
+    "commercialDemand": false
+  }
+}

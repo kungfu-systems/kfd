@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.protocol-semantics-fixture-cases/v1",
+  "valid": [
+    "valid/minimal-evidence-pack.json",
+    "valid/minimal-observation.json",
+    "valid/minimal-route.json",
+    "valid/minimal-capability-manifest.json"
+  ],
+  "negative": [
+    {
+      "path": "negative/duplicate-protocol-id.json",
+      "issueCodes": ["psl-protocol-duplicate"]
+    },
+    {
+      "path": "negative/hidden-inferred-field.json",
+      "issueCodes": ["psl-inferred-field"]
+    },
+    {
+      "path": "negative/missing-verification-root.json",
+      "issueCodes": ["psl-evidence-insufficient", "psl-root-missing"]
+    },
+    {
+      "path": "negative/mutable-latest-coordinate.json",
+      "issueCodes": ["psl-coordinate-mutable"]
+    },
+    {
+      "path": "negative/unsupported-schema-version.json",
+      "issueCodes": ["psl-contract-unsupported"]
+    },
+    {
+      "path": "negative/unknown-representation-state.json",
+      "issueCodes": ["psl-state-contradictory"]
+    },
+    {
+      "path": "negative/represented-without-value.json",
+      "issueCodes": ["psl-state-contradictory"]
+    }
+  ]
+}

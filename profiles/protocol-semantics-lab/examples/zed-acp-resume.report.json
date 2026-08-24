@@ -1,0 +1,223 @@
+{
+  "schemaVersion": 1,
+  "contract": "kfd.protocol-semantics-report/v1",
+  "mode": "protocol",
+  "sourceCut": {
+    "repository": "kungfu-systems/kfd",
+    "package": "@kungfu-tech/kfd",
+    "packageVersion": "1.0.0-alpha.69",
+    "gitHead": "d0542ea9bb8bfb3ed9004c28bc6629edf0ca21d4",
+    "packageManifestRoot": "sha256:5941d3bf7d5595c64e5271f182744d4fbea4eefce3096909496b1f1c12e5ad74",
+    "releaseAnchorRoot": "sha256:596ddafbcc19ea93b4591a04443677c285cc575339fde3bf187d3c67c3a189e9",
+    "profileManifestRoot": "sha256:2980fbfeb13007b5520c4172ad1a48e9a26e6684ade3b75918fe7238c2a19f82"
+  },
+  "suite": {
+    "id": "delegated-work-paired-worlds",
+    "version": "1.0.0",
+    "root": "sha256:16ae06cd949db3b02e67a14c9e594e6f0e5a9baa16063946029577045f8c94ec"
+  },
+  "registry": {
+    "root": "sha256:74b218b2d363eab72350cd81d6f49bc0843d722fe30fd233265a5ab4add6081b"
+  },
+  "pack": {
+    "protocolId": "zed-acp",
+    "protocolVersion": "1.0.0",
+    "root": "sha256:39da6ad7b92734a745d4667faccf56f3a4b6ec873b2d586b718848a3bc49152a"
+  },
+  "mapping": {
+    "root": "sha256:8227ecb75982c521a2ac8ea8389bb3bacc394555a5b66e3fefa6d1432a6cc587"
+  },
+  "route": {
+    "suiteRoot": "sha256:5be752670ec012894c6820195c76b90e68223ecdab70ef49c94e4247b0ee518e",
+    "verificationRoot": "sha256:44d9bf19bbc7cc69839bd3d769f6493b17ed206996fd950cee9171fb3ebb1aa7"
+  },
+  "fixture": {
+    "id": "zed-acp-resume-preserved",
+    "source": "profiles/protocol-semantics-lab/fixtures/adapters/valid/zed-acp-resume-preserved.json",
+    "byteRoot": "sha256:6b790f1eac00e2e59c69760b7ee1b3e31d9637bc85bbb9a27994fbdeab6f2a98",
+    "documentRoot": "sha256:e15be25598f4f6cb88917d5e7541d3435b5fe4a7731efb4717b298d285dbea58"
+  },
+  "adapter": {
+    "id": "zed-acp-observation-adapter",
+    "version": "0.1.0",
+    "artifactRoot": "sha256:6019a86a51878e74de2e05c591f77d13aa12c8d51c698ef0abcf38cd6b4effbe"
+  },
+  "transcript": {
+    "root": "sha256:9ccb2ef9a7626dfee4da86cb2dfb47ac3e2f8dafe4c059752dbfdad342fd73db"
+  },
+  "result": {
+    "state": "preserved",
+    "observationRoot": "sha256:c18b988a6dede657a8d9070facb8db4dc6f34644fda8841fcacc908fbb002e17",
+    "resultRoot": "sha256:2e589a42c81855cefe08fb6db69c6815d1837b4eb10a57545df7ba46cb7a7322"
+  },
+  "observation": {
+    "schemaVersion": 1,
+    "contract": "kfd.protocol-observation/v2",
+    "id": "zed-acp-resume-preserved",
+    "protocol": {
+      "protocolId": "zed-acp",
+      "protocolVersion": "1.0.0",
+      "evidencePackRoot": "sha256:39da6ad7b92734a745d4667faccf56f3a4b6ec873b2d586b718848a3bc49152a"
+    },
+    "fixture": {
+      "id": "zed-acp-resume-preserved",
+      "inputRoot": "sha256:e15be25598f4f6cb88917d5e7541d3435b5fe4a7731efb4717b298d285dbea58"
+    },
+    "adapter": {
+      "id": "zed-acp-observation-adapter",
+      "version": "0.1.0",
+      "artifactRoot": "sha256:6019a86a51878e74de2e05c591f77d13aa12c8d51c698ef0abcf38cd6b4effbe"
+    },
+    "scenario": {
+      "kind": "resume",
+      "identityPreservation": "preserved"
+    },
+    "facts": [
+      {
+        "id": "accepted-completion",
+        "state": "out-of-scope",
+        "source": {
+          "status": "absent",
+          "reason": "out-of-scope"
+        },
+        "evidenceRoots": []
+      },
+      {
+        "id": "authority-id",
+        "state": "unresolved",
+        "source": {
+          "status": "absent",
+          "reason": "not-represented"
+        },
+        "evidenceRoots": []
+      },
+      {
+        "id": "executor-id",
+        "state": "represented",
+        "source": {
+          "status": "native",
+          "eventId": "event-2",
+          "coordinate": "/events/1/payload/executorId"
+        },
+        "evidenceRoots": [
+          "sha256:3556653d4280d4f8ff2574549ae2a879c380337ccda20a8bfb9ad17b0571f2ae"
+        ],
+        "value": "agent-b"
+      },
+      {
+        "id": "operation-state",
+        "state": "out-of-scope",
+        "source": {
+          "status": "absent",
+          "reason": "out-of-scope"
+        },
+        "evidenceRoots": []
+      },
+      {
+        "id": "protocol-object-id",
+        "state": "represented",
+        "source": {
+          "status": "native",
+          "eventId": "event-2",
+          "coordinate": "/events/1/payload/sessionId"
+        },
+        "evidenceRoots": [
+          "sha256:44c7c40b243d197586b8d59a3997835ee1d8da1c20cd9b38d241561ec1ef393e"
+        ],
+        "value": "session-7"
+      },
+      {
+        "id": "recovery-drift",
+        "state": "represented",
+        "source": {
+          "status": "native",
+          "eventId": "event-2",
+          "coordinate": "/events/1/payload/executorId"
+        },
+        "evidenceRoots": [
+          "sha256:230163c4f4e8b7b5a26c27877b87d7bb63f6a35a2a50f5b14f90fedd4f139611"
+        ],
+        "value": "executor-replaced"
+      },
+      {
+        "id": "resume-identity",
+        "state": "represented",
+        "source": {
+          "status": "native",
+          "eventId": "event-2",
+          "coordinate": "/events/1/payload/sessionId"
+        },
+        "evidenceRoots": [
+          "sha256:44c7c40b243d197586b8d59a3997835ee1d8da1c20cd9b38d241561ec1ef393e"
+        ],
+        "value": "session-7"
+      },
+      {
+        "id": "retry-identity",
+        "state": "unresolved",
+        "source": {
+          "status": "absent",
+          "reason": "not-represented"
+        },
+        "evidenceRoots": []
+      },
+      {
+        "id": "work-id",
+        "state": "out-of-scope",
+        "source": {
+          "status": "absent",
+          "reason": "out-of-scope"
+        },
+        "evidenceRoots": []
+      },
+      {
+        "id": "work-version",
+        "state": "out-of-scope",
+        "source": {
+          "status": "absent",
+          "reason": "out-of-scope"
+        },
+        "evidenceRoots": []
+      }
+    ],
+    "transcriptRoot": "sha256:9ccb2ef9a7626dfee4da86cb2dfb47ac3e2f8dafe4c059752dbfdad342fd73db",
+    "claimBoundary": {
+      "normalizedObservationOnly": true,
+      "nativeCoordinatesRequired": true,
+      "inferenceAllowed": false,
+      "certification": false,
+      "runtimeAuthority": false,
+      "policyCorrectness": false
+    }
+  },
+  "claimBoundary": {
+    "claim": "evidence-closure-only",
+    "informationRepresentationExperiment": true,
+    "runtimeAuthority": false,
+    "numberedKfdAuthority": false,
+    "externalRealityObserved": false,
+    "root": "sha256:a413c92424d234e80bd087364e7f565375f83574b0e52f230badf439ed25cbde"
+  },
+  "residualRisks": {
+    "risks": [
+      {
+        "summary": "The fixed six-pair suite is finite and cannot prove completeness for a real delegated-work system.",
+        "root": "sha256:26a326fd5d48802284a1e8eebfed7259ec934106b981c26b278bef387ba3ab55"
+      },
+      {
+        "summary": "A projection can distinguish these fixtures while omitting information required by other worlds.",
+        "root": "sha256:eeae547426fb4a5c05d0ad76aecd5308022a531f60c61bc5dd81874bc4a3ef14"
+      },
+      {
+        "summary": "Offline verification detects report and packaged-fixture drift but does not observe a product's production enforcement path.",
+        "root": "sha256:0e2ecd2b27ef163c4ca4aba8d59f9038ab7250edc1709072790ce9803d907851"
+      },
+      {
+        "summary": "Adapter responses are self-asserted by the adopter and can misrepresent the mapped product.",
+        "root": "sha256:be3ac491dfdd02219fba4457491587d552bed66817fe2303107f7a5c183ed5ce"
+      }
+    ],
+    "root": "sha256:d240cca7465866846a9ff4e036a73bb524087b5aeaae115865995f2da3fef8f7"
+  },
+  "reportRoot": "sha256:1b6267d84d010753aded3bddf6a331db56ad52b609bb440b23ecf399ae81f8ec"
+}
