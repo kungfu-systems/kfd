@@ -914,8 +914,6 @@ for (const requiredField of [
   "future-picture.question",
   "future-picture.engineeringAnswer",
   "future-picture.claimBoundary",
-  "future-picture.pastToFuture",
-  "future-picture.kungfuPath",
 ]) {
   if (!siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes(requiredField)) {
     fail(`site bundle homepage displayPlan firstScreen must include ${requiredField}`);
@@ -941,7 +939,7 @@ if (
   conceptualCompressionTeaser?.model !== conceptualCompressionTeaser.falseEquivalences.join("\n") ||
   conceptualCompressionTeaser?.boundary !== conceptualCompressionTeaser.failurePrompt ||
   JSON.stringify(conceptualCompressionTeaser?.links?.map((entry) => entry.url)) !==
-    JSON.stringify(["/concepts", "/terminology", "/under-load"])
+    JSON.stringify(["/concepts", "/challenge/delegated-work"])
 ) {
   fail("site bundle homepage conceptual compression must expose the work-centered hook, four false equivalences, real-failure CTA, and exact reader links");
 }
@@ -956,15 +954,6 @@ for (const requiredField of [
   if (!siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes(requiredField)) {
     fail(`site bundle homepage displayPlan firstScreen must include ${requiredField}`);
   }
-}
-if (!siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes("foundation-triad")) {
-  fail("site bundle homepage displayPlan firstScreen must include foundation-triad");
-}
-if (!siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes("product-witness.principle")) {
-  fail("site bundle homepage displayPlan firstScreen must include product-witness.principle");
-}
-if (!siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes("foundation-triad.links")) {
-  fail("site bundle homepage displayPlan firstScreen must include foundation-triad.links");
 }
 if (!siteBundle.homepage?.foundationTriad?.links?.some((entry) => entry.url === "/foundation")) {
   fail("site bundle homepage foundation triad must expose the /foundation depth choice");
@@ -1044,21 +1033,31 @@ for (const nonClaim of ["certify", "security", "production fitness", "complete s
 if (!independentImplementation?.offlineBoundary?.includes("performs no network access")) {
   fail("site bundle independent implementation must distinguish package acquisition from offline verification");
 }
-for (const requiredField of [
-  "independent-implementation.promise",
-  "independent-implementation.supportedLanguages",
-  "independent-implementation.nativeCli",
-  "independent-implementation.steps",
-  "independent-implementation.links",
-  "independent-implementation.offlineBoundary",
-  "independent-implementation.claimBoundary",
-]) {
-  if (!siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes(requiredField)) {
-    fail(`site bundle homepage displayPlan firstScreen must include ${requiredField}`);
-  }
+const firstScreenPlan = siteBundle.homepage?.displayPlan?.firstScreen;
+if (
+  firstScreenPlan?.maxPrimarySections !== 2 ||
+  firstScreenPlan?.maxWords !== 180 ||
+  firstScreenPlan?.maxCodeBlocks !== 1 ||
+  firstScreenPlan?.maxPrimaryCtas !== 2
+) {
+  fail("site bundle homepage first screen must preserve the two-section, 180-word, one-code-block, two-CTA budget");
 }
-if (siteBundle.homepage?.displayPlan?.firstScreen?.maxPrimarySections !== 5) {
-  fail("site bundle homepage first screen must reserve five primary sections");
+const firstScreenSections = siteBundle.homepage?.sections?.filter((entry) => entry.includeInFirstScreen) ?? [];
+if (JSON.stringify(firstScreenSections.map((entry) => entry.id)) !== JSON.stringify(["future-picture", "conceptual-compression"])) {
+  fail("site bundle homepage first screen must contain only future-picture and conceptual-compression");
+}
+const firstScreenWordCount = firstScreenSections.reduce((total, entry) =>
+  total + entry.markdown.split(/\s+/).filter(Boolean).length, 0);
+if (firstScreenWordCount > firstScreenPlan.maxWords) {
+  fail(`site bundle homepage first screen exceeds ${firstScreenPlan.maxWords} words: ${firstScreenWordCount}`);
+}
+const firstScreenCodeBlocks = firstScreenSections.reduce((total, entry) =>
+  total + ((entry.markdown.match(/```/g) ?? []).length / 2), 0);
+if (firstScreenCodeBlocks > firstScreenPlan.maxCodeBlocks) {
+  fail(`site bundle homepage first screen exceeds ${firstScreenPlan.maxCodeBlocks} code block`);
+}
+if ((conceptualCompressionTeaser?.links?.length ?? 0) > firstScreenPlan.maxPrimaryCtas) {
+  fail(`site bundle homepage first screen exceeds ${firstScreenPlan.maxPrimaryCtas} primary calls to action`);
 }
 const requiredHomepageSections = {
   "future-picture": "README.md",
@@ -1302,12 +1301,9 @@ if (
   selfConformanceReaderModel?.authorityBoundary?.verifierSufficient !== false ||
   selfConformanceReaderModel?.authorityBoundary?.humanApprovalRequired !== true ||
   selfConformanceReaderModel?.authorityBoundary?.forbiddenInferences?.length !== 6 ||
-  JSON.stringify(siteBundle.homepage?.selfConformance?.readerModel) !== JSON.stringify(selfConformanceReaderModel) ||
-  !siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes("self-conformance.readerModel.prospective") ||
-  !siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes("self-conformance.readerModel.retrospective") ||
-  !siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes("self-conformance.readerModel.authorityBoundary")
+  JSON.stringify(siteBundle.homepage?.selfConformance?.readerModel) !== JSON.stringify(selfConformanceReaderModel)
 ) {
-  fail("site bundle must expose one first-screen reader model for prospective governance and retrospective structural conformance without widening authority");
+  fail("site bundle must expose one reader model for prospective governance and retrospective structural conformance without widening authority");
 }
 if (
   selfConformancePage?.recursiveCase?.candidate?.status !== "merged" ||

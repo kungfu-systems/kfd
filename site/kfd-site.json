@@ -71,15 +71,15 @@
   },
   "homepage": {
     "title": "KFD — Kung Fu Decisions",
-    "lead": "KFD's deepest question may not be **\"How does an agent execute a task?\"** It may be: **How can a bounded, goal-directed system act and change in an unpredictable world without losing continuity with itself?**",
+    "lead": "KFD asks: **How can a bounded, goal-directed system act and change in an unpredictable world without losing continuity with itself?**",
     "decisionKinds": "KFDs can be **principles** or **procedures**. Principles state what must remain true within a declared adoption scope; procedures state how a class of work enforces or protects a principle. During the pre-stable line, maintainer-authorized Foundation Revision remains possible under the evidence, lineage, and review requirements in `CONTRIBUTING.md`, while every published prerelease coordinate stays immutable. The first stable release freezes number-to-meaning mappings. After that freeze, substantive change mints a new KFD that explicitly supersedes the old number. The numbered decisions remain authoritative; the [KFD Foundation](docs/foundation.md) explains how they fit together.",
     "futurePicture": {
       "heading": "Core question",
-      "question": "KFD's deepest question may not be **\"How does an agent execute a task?\"** It may be: **How can a bounded, goal-directed system act and change in an unpredictable world without losing continuity with itself?**",
-      "engineeringAnswer": "KFD is an open, evidence-governed engineering standard for preserving facts, boundaries, perspective, and responsibility when the path is not known in advance. It develops a small set of portable principles, procedures, schemas, and verification contracts through which humans, agents, organizations, and software systems can act, learn, and change without silent drift. It therefore treats a well-formed Episode as more than a trace: it is a durable historical asset that future humans and agents can replay when today's ontology no longer explains reality.",
-      "claimBoundary": "KFD does not claim to be the final answer or a complete theory of complex systems. It publishes a small, testable foundation for adoption, implementation, challenge, counterevidence, and revision. The breadth covered by its current decisions is evidence that a general action structure may exist, not proof that KFD has finished discovering it. Kungfu is its founding implementation, not its adoption boundary. Accumulating Episodes alone does not discover or prove a Primitive; KFD-5 and KFD-6 keep generation, qualification, and promotion separate.",
-      "pastToFuture": "KFD's deepest question may not be **\"How does an agent execute a task?\"** It may be: **How can a bounded, goal-directed system act and change in an unpredictable world without losing continuity with itself?**",
-      "kungfuPath": "KFD is an open, evidence-governed engineering standard for preserving facts, boundaries, perspective, and responsibility when the path is not known in advance. It develops a small set of portable principles, procedures, schemas, and verification contracts through which humans, agents, organizations, and software systems can act, learn, and change without silent drift. It therefore treats a well-formed Episode as more than a trace: it is a durable historical asset that future humans and agents can replay when today's ontology no longer explains reality."
+      "question": "KFD asks: **How can a bounded, goal-directed system act and change in an unpredictable world without losing continuity with itself?**",
+      "engineeringAnswer": "KFD is an open engineering standard for keeping facts, boundaries, perspective, and responsibility inspectable while work moves across humans, agents, organizations, software systems, and changing execution paths.",
+      "claimBoundary": "KFD does not claim to be the final answer or a complete theory of complex systems. It publishes a small, testable foundation, not certification or a requirement to adopt Kungfu.",
+      "pastToFuture": "KFD asks: **How can a bounded, goal-directed system act and change in an unpredictable world without losing continuity with itself?**",
+      "kungfuPath": "KFD is an open engineering standard for keeping facts, boundaries, perspective, and responsibility inspectable while work moves across humans, agents, organizations, software systems, and changing execution paths."
     },
     "conceptualCompression": {
       "eyebrow": "Start here · 10-minute model",
@@ -91,7 +91,7 @@
         "same output != same result",
         "success != admitted Fact"
       ],
-      "failurePrompt": "One real delivery broke all four equivalences. Following it from healthy action through authority loss, rejected recovery, a valid successor, and settlement reveals why KFD separates Fact, Episode, Atlas, Pursuit, and Warrant—and why the agent is a participant in the work, not its center of truth.",
+      "failurePrompt": "One real delivery broke all four equivalences. It shows why an agent participates in work but does not define its identity, authority, history, or truth.",
       "cta": {
         "label": "See the real failure that forces this model",
         "sourceTarget": "docs/conceptual-compression.md",
@@ -99,9 +99,9 @@
       },
       "label": "The agent is not the center of truth.",
       "url": "/concepts",
-      "summary": "Most agent systems are described from the agent outward: its context, task, tools, actions, and output. KFD starts from the continuity of the work instead.",
+      "summary": "Most agent systems center the agent, its task, tools, and output. KFD centers the continuity of the work instead.",
       "model": "running != authorized\nretry != same attempt\nsame output != same result\nsuccess != admitted Fact",
-      "boundary": "One real delivery broke all four equivalences. Following it from healthy action through authority loss, rejected recovery, a valid successor, and settlement reveals why KFD separates Fact, Episode, Atlas, Pursuit, and Warrant—and why the agent is a participant in the work, not its center of truth.",
+      "boundary": "One real delivery broke all four equivalences. It shows why an agent participates in work but does not define its identity, authority, history, or truth.",
       "links": [
         {
           "label": "See the real failure that forces this model",
@@ -109,14 +109,9 @@
           "url": "/concepts"
         },
         {
-          "label": "Use the terminology contract",
-          "sourceTarget": "docs/terminology.md",
-          "url": "/terminology"
-        },
-        {
-          "label": "Inspect the founding-adopter evidence",
-          "sourceTarget": "docs/load-bearing-dogfood.md",
-          "url": "/under-load"
+          "label": "Run the one-minute paired-world experiment",
+          "sourceTarget": "profiles/delegated-work-challenge/README.md",
+          "url": "/challenge/delegated-work"
         }
       ]
     },
@@ -309,34 +304,9 @@
           "url": "/formal"
         },
         {
-          "label": "Use the terminology contract",
-          "sourceTarget": "docs/terminology.md",
-          "url": "docs/terminology.md"
-        },
-        {
           "label": "See primitives in history",
           "sourceTarget": "docs/primitive-discovery-cases.md",
           "url": "/cases"
-        },
-        {
-          "label": "Inspect live Primitive cases",
-          "sourceTarget": "cases/registry.json",
-          "url": "cases/registry.json"
-        },
-        {
-          "label": "Inspect KFD candidates",
-          "sourceTarget": "drafts/registry.json",
-          "url": "drafts/registry.json"
-        },
-        {
-          "label": "Explore current decisions",
-          "sourceTarget": "#current-decisions",
-          "url": "#current-decisions"
-        },
-        {
-          "label": "Inspect the product proof path",
-          "sourceTarget": "#product-proof-path",
-          "url": "#product-proof-path"
         }
       ]
     },
@@ -550,7 +520,7 @@
         "homepagePriority": 5,
         "defaultPresentation": "future-picture",
         "includeInFirstScreen": true,
-        "markdown": "KFD's deepest question may not be **\"How does an agent execute a task?\"** It\nmay be: **How can a bounded, goal-directed system act and change in an\nunpredictable world without losing continuity with itself?**\n\nKFD is an open, evidence-governed engineering standard for preserving facts,\nboundaries, perspective, and responsibility when the path is not known in\nadvance. It develops a small set of portable principles, procedures, schemas,\nand verification contracts through which humans, agents, organizations, and\nsoftware systems can act, learn, and change without silent drift. It therefore\ntreats a well-formed Episode as more than a trace: it is a durable historical\nasset that future humans and agents can replay when today's ontology no longer\nexplains reality.\n\nKFD does not claim to be the final answer or a complete theory of complex\nsystems. It publishes a small, testable foundation for adoption,\nimplementation, challenge, counterevidence, and revision. The breadth covered\nby its current decisions is evidence that a general action structure may\nexist, not proof that KFD has finished discovering it. Kungfu is its founding\nimplementation, not its adoption boundary. Accumulating Episodes alone does\nnot discover or prove a Primitive; KFD-5 and KFD-6 keep generation,\nqualification, and promotion separate."
+        "markdown": "KFD asks: **How can a bounded, goal-directed system act and change in an\nunpredictable world without losing continuity with itself?**\n\nKFD is an open engineering standard for keeping facts, boundaries,\nperspective, and responsibility inspectable while work moves across humans,\nagents, organizations, software systems, and changing execution paths.\n\nKFD does not claim to be the final answer or a complete theory of complex\nsystems. It publishes a small, testable foundation, not certification or a\nrequirement to adopt Kungfu."
       },
       {
         "id": "conceptual-compression",
@@ -561,17 +531,17 @@
         "homepagePriority": 6,
         "defaultPresentation": "conceptual-compression",
         "includeInFirstScreen": true,
-        "markdown": "Most agent systems are described from the agent outward: its context, task,\ntools, actions, and output. KFD starts from the continuity of the work instead.\n\nWhat must remain continuous when the agent, session, repository, authority, or\nexecution path changes—but the work continues?\n\n```text\nrunning != authorized\nretry != same attempt\nsame output != same result\nsuccess != admitted Fact\n```\n\nOne real delivery broke all four equivalences. Following it from healthy action\nthrough authority loss, rejected recovery, a valid successor, and settlement\nreveals why KFD separates Fact, Episode, Atlas, Pursuit, and Warrant—and why the\nagent is a participant in the work, not its center of truth.\n\n[See the real failure that forces this model](docs/conceptual-compression.md) ·\n[Use the terminology contract](docs/terminology.md) ·\n[Inspect the founding-adopter evidence](docs/load-bearing-dogfood.md)"
+        "markdown": "Most agent systems center the agent, its task, tools, and output. KFD centers\nthe continuity of the work instead.\n\nWhat must remain continuous when the agent, session, repository, authority, or\nexecution path changes—but the work continues?\n\n```text\nrunning != authorized\nretry != same attempt\nsame output != same result\nsuccess != admitted Fact\n```\n\nOne real delivery broke all four equivalences. It shows why an agent\nparticipates in work but does not define its identity, authority, history, or\ntruth.\n\n[See the real failure that forces this model](docs/conceptual-compression.md) ·\n[Run the one-minute paired-world experiment](profiles/delegated-work-challenge/README.md)"
       },
       {
         "id": "self-conformance-reader-model",
         "sourcePath": "README.md",
         "sourceHeading": "How KFD governs its own change",
         "title": "How KFD governs its own change",
-        "renderRole": "first-screen",
-        "homepagePriority": 7,
+        "renderRole": "detail",
+        "homepagePriority": 40,
         "defaultPresentation": "self-conformance-reader-model",
-        "includeInFirstScreen": true,
+        "includeInFirstScreen": false,
         "markdown": "KFD Self-Conformance has two connected lanes with different time boundaries:\n\n- **Prospective governance** gates official Candidate genesis, qualification,\n  numbering, status, Foundation Revision, and release-packaging transitions\n  under the live Profile. Ordinary repository edits do not silently become\n  lifecycle transitions.\n- **Retrospective structural conformance** replays immutable public evidence\n  from the alpha.28 Foundation Cut and converges additively on the alpha.55\n  pre-Profile live anchor. Every replay declares `retrospective: true` and\n  `profileAvailableAtEvent: false`; it never projects the later Profile into\n  the historical event.\n\nIn both lanes, structural verification is necessary but not sufficient.\nPassing evidence cannot approve, number, activate, certify, publish, or\nauthorize a release, and it cannot establish semantic truth, adoption, or\nproduction fitness. Accountable human authority remains separate and explicit.\n\n[Read the Self-Conformance Profile](profiles/self-conformance/README.md) ·\n[Replay the historical lineage](profiles/self-conformance/history/README.md) ·\n[Inspect the historical report](profiles/self-conformance/history/historical-lineage.report.json) ·\n[Inspect the live manifest](profiles/self-conformance/manifest.json)"
       },
       {
@@ -579,10 +549,10 @@
         "sourcePath": "README.md",
         "sourceHeading": "Implement and verify KFD independently",
         "title": "Implement and verify KFD independently",
-        "renderRole": "first-screen",
-        "homepagePriority": 8,
+        "renderRole": "primary",
+        "homepagePriority": 20,
         "defaultPresentation": "independent-implementation-steps",
-        "includeInFirstScreen": true,
+        "includeInFirstScreen": false,
         "markdown": "**Implement KFD without Kungfu — scaffold an adapter in Python, Rust, Node.js,\nor C++, then verify it offline.**\n\nUse the immutable `@kungfu-tech/kfd@1.0.0-alpha.69` package cut and follow the\npackage-owned [Agent Hub workflow](profiles/agent-hub/README.md) or inspect the\ncomplete [independent verification boundary](docs/independent-verifier.md):\n\nFor a two-minute success path, run `npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.69 kfd demo agent-hub --output agent-hub-demo-report.json`. It produces behavior `20/20`, evidence `valid`, and no qualification or certification.\n\n```bash\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.69 kfd scaffold agent-hub --language python --output my-agent-hub-adapter\npython3 my-agent-hub-adapter/smoke.py\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.69 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json\nnpx --yes --package @kungfu-tech/kfd@1.0.0-alpha.69 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py\n```\n\nThe scaffold is a deterministic, fail-closed starter. Before implementation,\nsmoke exits `0`, Hub 20 exits `1` at `0/20`, and offline evidence verification\nexits `0` with `valid`; qualification and certification stay `false`.\nImplementers then replace `evaluate()` with product decisions across\nnegotiation, delivery, authority, conflict, knowledge, completion, recovery,\nand portability until Hub 20 reaches `20/20`.\n\nPackage acquisition is separate from offline verification. Network or a local\npackage cache may be needed to obtain the immutable package bytes; after the\npackage, report, and optional adapter bytes are present, the report verifier\nperforms no network access.\n\nThese results do not certify an implementation or prove security, production\nfitness, complete semantic coverage, KFD-10 activation, or adoption by an\nindependent organization. [Verify an Agent Hub report](/agent-hub/#report-verification) ·\n[Explore other KFD verification profiles](/verify/)\n\n### Native `kfd`\n\nInstall the Rust-native offline verifier on macOS or Linux with Homebrew. No\ncoding is required to install it or verify an existing KFD report:\n\n```bash\nbrew install kungfu-systems/tap/kfd\nkfd --version\n```\n\nEach KFD GitHub Release now carries Rust-native archives for Linux x86_64 and\narm64, macOS x86_64 and arm64, and Windows x86_64. The executable name is\npermanently `kfd` (`kfd.exe` on Windows), and `kfd --version` matches the exact\nKFD Release version. The native CLI provides `verify` and `bundle`; use the npm\nworkflow above when you need `scaffold` or `test` orchestration. Every target\nincludes a SHA-256 file and source-bound provenance. See\n[Native CLI downloads and capability boundaries](docs/native-cli.md)."
       },
       {
@@ -590,11 +560,11 @@
         "sourcePath": "README.md",
         "sourceHeading": "Foundation triad",
         "title": "Foundation triad",
-        "renderRole": "first-screen",
+        "renderRole": "primary",
         "homepagePriority": 10,
         "defaultPresentation": "triad-cards",
-        "includeInFirstScreen": true,
-        "markdown": "The first three KFDs form the public foundation for KFD adopters and the\nbinding foundation for kungfu-systems:\n\n```text\nKFD-1: facts must not drift.\nKFD-2: trust must start from facts.\nKFD-3: cooperation must start from trusted value.\n```\n\nTogether they define a load-bearing path for systems acting under uncertainty:\nkeep facts non-drifting, make trust inspectable from those facts, and let\nparticipants cooperate through trusted value rather than hidden pressure where\nmultiple reasoning participants are involved. Kungfu carries this foundation\nas its founding implementation.\n\nNo principle is load-bearing until it has an inspectable product witness.\n\n[Read the KFD Foundation](docs/foundation.md) ·\n[See KFD under load](docs/load-bearing-dogfood.md) ·\n[Inspect the formal model](docs/formal-model.md) ·\n[Use the terminology contract](docs/terminology.md) ·\n[See primitives in history](docs/primitive-discovery-cases.md) ·\n[Inspect live Primitive cases](cases/registry.json) ·\n[Inspect KFD candidates](drafts/registry.json) ·\n[Explore current decisions](#current-decisions) ·\n[Inspect the product proof path](#product-proof-path)"
+        "includeInFirstScreen": false,
+        "markdown": "The first three KFDs form the public foundation for KFD adopters and the\nbinding foundation for kungfu-systems:\n\n```text\nKFD-1: facts must not drift.\nKFD-2: trust must start from facts.\nKFD-3: cooperation must start from trusted value.\n```\n\nTogether they define a load-bearing path for systems acting under uncertainty:\nkeep facts non-drifting, make trust inspectable from those facts, and let\nparticipants cooperate through trusted value rather than hidden pressure where\nmultiple reasoning participants are involved. Kungfu carries this foundation\nas its founding implementation.\n\nNo principle is load-bearing until it has an inspectable product witness.\n\n[Read the KFD Foundation](docs/foundation.md) ·\n[See KFD under load](docs/load-bearing-dogfood.md) ·\n[Inspect the formal model](docs/formal-model.md) ·\n[See primitives in history](docs/primitive-discovery-cases.md)"
       },
       {
         "id": "why-this-question-matters",
@@ -638,7 +608,7 @@
         "homepagePriority": 20,
         "defaultPresentation": "registry-introduction",
         "includeInFirstScreen": false,
-        "markdown": "KFD is an open engineering standard for a small, testable foundation for\nreliable action and continuity under uncertainty. Its portable norms can be\nadopted by products, organizations, humans, agents, and other bounded systems.\nThis repository is KFD's canonical open decision registry. Each numbered\ndecision has a kind, a status, and a single authoritative text here.\n\nKungfu-systems founded KFD, stewards the official namespace and release\nsurfaces, and adopts active KFDs across the scopes declared by its products.\nOther adopters remain independent: they declare their own adoption scope,\nProfile mapping, evidence, qualification, and residual risk.\n\nA **KFD Candidate** is a non-normative, pre-number draft under `drafts/`. It may\ncarry a non-binding slot hint, but only explicit promotion allocates a KFD\nnumber. A **numbered draft** already appears under `decisions/` and\n`registry.json`; its number is allocated even while its activation gate remains\nopen.\n\nKFDs can be **principles** or **procedures**. Principles state what must remain\ntrue within a declared adoption scope; procedures state how a class of work\nenforces or protects a principle. During the pre-stable line,\nmaintainer-authorized\nFoundation Revision remains possible under the evidence, lineage, and review\nrequirements in `CONTRIBUTING.md`, while every published prerelease coordinate\nstays immutable. The first stable release freezes number-to-meaning mappings.\nAfter that freeze, substantive change mints a new KFD that explicitly\nsupersedes the old number. The numbered decisions remain authoritative; the\n[KFD Foundation](docs/foundation.md) explains how they fit together.\n\nStable rendered site: `https://kfd.libkungfu.dev`."
+        "markdown": "KFD is an open engineering standard for a small, testable foundation for\nreliable action and continuity under uncertainty. Its portable norms can be\nadopted by products, organizations, humans, agents, and other bounded systems.\nThis repository is KFD's canonical open decision registry. Each numbered\ndecision has a kind, a status, and a single authoritative text here.\n\nKungfu is its founding implementation, not its adoption boundary.\n\nKungfu-systems founded KFD, stewards the official namespace and release\nsurfaces, and adopts active KFDs across the scopes declared by its products.\nOther adopters remain independent: they declare their own adoption scope,\nProfile mapping, evidence, qualification, and residual risk.\n\nA **KFD Candidate** is a non-normative, pre-number draft under `drafts/`. It may\ncarry a non-binding slot hint, but only explicit promotion allocates a KFD\nnumber. A **numbered draft** already appears under `decisions/` and\n`registry.json`; its number is allocated even while its activation gate remains\nopen.\n\nKFDs can be **principles** or **procedures**. Principles state what must remain\ntrue within a declared adoption scope; procedures state how a class of work\nenforces or protects a principle. During the pre-stable line,\nmaintainer-authorized\nFoundation Revision remains possible under the evidence, lineage, and review\nrequirements in `CONTRIBUTING.md`, while every published prerelease coordinate\nstays immutable. The first stable release freezes number-to-meaning mappings.\nAfter that freeze, substantive change mints a new KFD that explicitly\nsupersedes the old number. The numbered decisions remain authoritative; the\n[KFD Foundation](docs/foundation.md) explains how they fit together.\n\nStable rendered site: `https://kfd.libkungfu.dev`."
       },
       {
         "id": "adoption-boundary",
@@ -714,42 +684,28 @@
           "future-picture.question",
           "future-picture.engineeringAnswer",
           "future-picture.claimBoundary",
-          "future-picture.pastToFuture",
-          "future-picture.kungfuPath",
           "conceptual-compression.eyebrow",
           "conceptual-compression.title",
           "conceptual-compression.question",
           "conceptual-compression.falseEquivalences",
           "conceptual-compression.failurePrompt",
-          "conceptual-compression.cta",
-          "self-conformance.readerModel.prospective",
-          "self-conformance.readerModel.retrospective",
-          "self-conformance.readerModel.authorityBoundary",
-          "independent-implementation.promise",
-          "independent-implementation.supportedLanguages",
-          "independent-implementation.nativeCli",
-          "independent-implementation.dimensions",
-          "independent-implementation.paths",
-          "independent-implementation.steps",
-          "independent-implementation.links",
-          "independent-implementation.offlineBoundary",
-          "independent-implementation.claimBoundary",
-          "foundation-triad",
-          "product-witness.principle",
-          "foundation-triad.links"
+          "conceptual-compression.cta"
         ],
-        "maxPrimarySections": 5,
-        "note": "The first viewport should move readers from an agent-centered model to work continuity, expose the four false equivalences and the /concepts real-failure route without duplicating the complete model, connect prospective governance with retrospective structural conformance without widening authority, make independent implementation and offline verification directly actionable, and begin the reference-success or five-step adopter path before installed-product, registry, or renderer detail."
+        "maxPrimarySections": 2,
+        "maxWords": 180,
+        "maxCodeBlocks": 1,
+        "maxPrimaryCtas": 2,
+        "note": "The first viewport answers what KFD is, exposes the work-continuity break through four false equivalences, and offers one understanding route plus one experiment route. Foundation, implementation, Self-Conformance, release, registry, and renderer detail follow through progressive disclosure."
       },
       "primary": [
         "future-picture",
         "conceptual-compression",
-        "self-conformance-reader-model",
-        "independent-implementation",
         "foundation-triad",
+        "independent-implementation",
         "why-this-question-matters",
         "what-kfd-is",
         "adoption-boundary",
+        "self-conformance-reader-model",
         "current-candidates",
         "product-proof-path"
       ],
@@ -808,7 +764,7 @@
       "homepagePriority": 90,
       "defaultPresentation": "developer-note",
       "includeInFirstScreen": false,
-      "markdown": "This README is also the homepage text source for `https://kfd.libkungfu.dev`.\nWhen `site-libkungfu-dev` consumes the `@kungfu-tech/kfd` npm package to render\nthe KFD site, it should treat this file as the canonical homepage copy, not as\nan implementation note to paraphrase in the site repository.\n\nThe first screen should be derived from this README:\n\n- Page identity: the top-level heading.\n- Core question: the opening paragraph must ask how a bounded, goal-directed\n  system can act and change in an unpredictable world without losing continuity\n  with itself. KFD must not be reduced to an Agent task-execution protocol.\n- Engineering answer: the second paragraph must identify facts, boundaries,\n  perspective, and responsibility as the inspectable basis for action when the\n  path is not known in advance.\n- Claim boundary: the third paragraph must state that KFD is a small, testable\n  foundation rather than a final answer or complete theory of complex systems.\n- Conceptual compression: `Start here: the agent is not the center of truth`\n  must expose the work-centered question, all four false equivalences, and the\n  real-failure call to action, with `/concepts` as the first depth route. The\n  complete `2 + 3` model belongs on that depth page rather than in the first\n  viewport, and familiar stack labels must not become one-to-one KFD aliases.\n- Independent implementation: the exact promise, four supported languages,\n  behavior/evidence/authority model, reference-success path, ordered\n  scaffold/smoke/implement/test/verify flow, offline boundary, non-certifying\n  boundary, and Agent Hub report-verification plus `/verify/` links must appear before the\n  Foundation triad and before any installed Kungfu product projection.\n- Foundation signal: the `Foundation triad` section, especially the three\n  one-line commitments and the product-witness rule immediately below them.\n- Depth choice: the foundation link must route to the non-numbered explanatory\n  page at `/foundation`, and the historical cases link must route to `/cases`;\n  registry, renderer, and implementation detail stay outside the first screen.\n\nDecision cards, detail links, and machine paths should come from\n`registry.json`. The machine-readable site bundle lives at `site/kfd-site.json`\nand gives renderers stable fields for the homepage, the foundation explanation\npage, product proof path, decision routes, candidate routes, and rendering\nboundary. `candidatePages` owns the `/drafts/` index and stable\n`/drafts/{id}/` page declarations; renderers must not infer those routes from\nthe package directory layout. A site renderer may adapt layout, navigation,\ntypography, and visual assets, but it should not maintain separate wording that\ncan drift from this package.\n\n`site/kfd-site.json` is generated from this README,\n`docs/conceptual-compression.md`, `docs/foundation.md`, and\n`docs/primitive-discovery-cases.md` by `scripts/update-site-bundle.mjs`. The\nREADME owns the concise homepage; the conceptual-compression document owns the\nten-minute reader model; the foundation document owns the complete\nexplanation; the cases document owns the non-normative historical anchors. The\ngenerated bundle exposes ordered homepage sections, the `/concepts`,\n`/foundation`, and `/cases` pages, and a display plan that separates\nfirst-screen, primary, detail, and support content. Site repositories should\nconsume that bundle instead of parsing the Markdown files. The renderer\ncontract remains machine metadata, not ordinary homepage content.",
+      "markdown": "This README is also the homepage text source for `https://kfd.libkungfu.dev`.\nWhen `site-libkungfu-dev` consumes the `@kungfu-tech/kfd` npm package to render\nthe KFD site, it should treat this file as the canonical homepage copy, not as\nan implementation note to paraphrase in the site repository.\n\nThe first screen is a bounded orientation surface derived from this README. It\nmust contain no more than two source sections, 180 rendered words, one code\nblock, and two primary calls to action:\n\n- Page identity: the top-level heading.\n- Core question: the opening paragraph must ask how a bounded, goal-directed\n  system can act and change in an unpredictable world without losing continuity\n  with itself. KFD must not be reduced to an Agent task-execution protocol.\n- Engineering answer: the second paragraph must identify facts, boundaries,\n  perspective, and responsibility as the inspectable basis for action when the\n  path is not known in advance.\n- Claim boundary: the third paragraph must state that KFD is a small, testable\n  foundation rather than a final answer or complete theory of complex systems.\n- Conceptual compression: `Start here: the agent is not the center of truth`\n  must expose the work-centered question, all four false equivalences, and the\n  real-failure and paired-world calls to action. The complete `2 + 3` model\n  belongs on `/concepts`, while experiment commands belong below the first\n  screen or on their depth page.\n- Progressive disclosure: `Foundation triad` is the first primary section\n  after the opening surface. Independent implementation, Self-Conformance,\n  release coordinates, registry detail, and renderer detail remain available\n  below it rather than competing for the first viewport.\n\nDecision cards, detail links, and machine paths should come from\n`registry.json`. The machine-readable site bundle lives at `site/kfd-site.json`\nand gives renderers stable fields for the homepage, the foundation explanation\npage, product proof path, decision routes, candidate routes, and rendering\nboundary. `candidatePages` owns the `/drafts/` index and stable\n`/drafts/{id}/` page declarations; renderers must not infer those routes from\nthe package directory layout. A site renderer may adapt layout, navigation,\ntypography, and visual assets, but it should not maintain separate wording that\ncan drift from this package.\n\n`site/kfd-site.json` is generated from this README,\n`docs/conceptual-compression.md`, `docs/foundation.md`, and\n`docs/primitive-discovery-cases.md` by `scripts/update-site-bundle.mjs`. The\nREADME owns the concise homepage; the conceptual-compression document owns the\nten-minute reader model; the foundation document owns the complete\nexplanation; the cases document owns the non-normative historical anchors. The\ngenerated bundle exposes ordered homepage sections, the `/concepts`,\n`/foundation`, and `/cases` pages, and a display plan that separates\nfirst-screen, primary, detail, and support content. Site repositories should\nconsume that bundle instead of parsing the Markdown files. The renderer\ncontract remains machine metadata, not ordinary homepage content.",
       "renderAsHomepageContent": false,
       "note": "This is a machine/renderer contract for site implementers. It should not be rendered as ordinary homepage content."
     }
