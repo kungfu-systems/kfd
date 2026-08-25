@@ -305,7 +305,25 @@ for (const governancePath of ["CONTRIBUTING.md", "GOVERNANCE.md"]) {
     fail(`package.json exports must publish ${governancePath}`);
   }
 }
+const normalizeWhitespace = (value) => value.replace(/\s+/g, " ").trim();
 const readmeText = readFileSync("README.md", "utf8");
+if (readmeText.startsWith("---\n")) {
+  fail("root README must start with its H1, not YAML frontmatter");
+}
+const readmeWordCount = normalizeWhitespace(readmeText).split(" ").filter(Boolean).length;
+const readmeHeadings = [...readmeText.matchAll(/^## (.+)$/gm)].map((match) => match[1]);
+const readmeSectionCount = readmeHeadings.length;
+if (readmeText.split("\n").length > 120 || readmeWordCount > 700 || readmeSectionCount > 5) {
+  fail(`root README exceeds the progressive-disclosure budget: ${readmeText.split("\n").length} lines, ${readmeWordCount} words, ${readmeSectionCount} sections`);
+}
+if (JSON.stringify(readmeHeadings) !== JSON.stringify([
+  "Start here: the agent is not the center of truth",
+  "Choose a path",
+  "Foundation triad",
+  "About this repository",
+])) {
+  fail("root README must preserve the problem -> choice -> foundation -> repository reading slope");
+}
 const contributingText = readFileSync("CONTRIBUTING.md", "utf8");
 const governanceText = readFileSync("GOVERNANCE.md", "utf8");
 const foundationText = readFileSync("docs/foundation.md", "utf8");
@@ -316,7 +334,6 @@ const formalModelText = readFileSync("docs/formal-model.md", "utf8");
 const candidateIndexText = readFileSync("drafts/README.md", "utf8");
 const liveCaseText = readFileSync("cases/live/proof-carrying-work-object/README.md", "utf8");
 const distinguishabilityText = readFileSync("cases/live/proof-carrying-work-object/distinguishability.md", "utf8");
-const normalizeWhitespace = (value) => value.replace(/\s+/g, " ").trim();
 if (!normalizeWhitespace(readmeText).includes("Kungfu is its founding implementation, not its adoption boundary.")) {
   fail("README must distinguish KFD's founding implementation from its adoption boundary");
 }
@@ -758,6 +775,9 @@ if (JSON.stringify(siteBundle) !== JSON.stringify(expectedSiteBundle)) {
   fail("site/kfd-site.json must match the generated README.md homepage bundle; run npm run update:site-bundle");
 }
 if (siteBundle.source?.homepageTextSource !== "README.md") fail("site bundle homepageTextSource must be README.md");
+if (siteBundle.source?.repositoryGuideTextSource !== "docs/repository-guide.md") {
+  fail("site bundle repositoryGuideTextSource must be docs/repository-guide.md");
+}
 if (siteBundle.source?.conceptualCompressionTextSource !== "docs/conceptual-compression.md") {
   fail("site bundle conceptualCompressionTextSource must be docs/conceptual-compression.md");
 }
@@ -935,7 +955,7 @@ if (
   conceptualCompressionTeaser?.cta?.url !== "/concepts" ||
   conceptualCompressionTeaser?.label !== "The agent is not the center of truth." ||
   conceptualCompressionTeaser?.url !== "/concepts" ||
-  !conceptualCompressionTeaser?.summary?.includes("agent systems") ||
+  !conceptualCompressionTeaser?.summary?.includes("same output") ||
   conceptualCompressionTeaser?.model !== conceptualCompressionTeaser.falseEquivalences.join("\n") ||
   conceptualCompressionTeaser?.boundary !== conceptualCompressionTeaser.failurePrompt ||
   JSON.stringify(conceptualCompressionTeaser?.links?.map((entry) => entry.url)) !==
@@ -1062,16 +1082,16 @@ if ((conceptualCompressionTeaser?.links?.length ?? 0) > firstScreenPlan.maxPrima
 const requiredHomepageSections = {
   "future-picture": "README.md",
   "conceptual-compression": "README.md",
-  "self-conformance-reader-model": "README.md",
-  "independent-implementation": "README.md",
+  "self-conformance-reader-model": "docs/repository-guide.md",
+  "independent-implementation": "docs/repository-guide.md",
   "foundation-triad": "README.md",
-  "why-this-question-matters": "README.md",
-  "what-kfd-is": "README.md",
-  "adoption-boundary": "README.md",
-  "current-candidates": "README.md",
-  "product-proof-path": "README.md",
-  "agent-quickstart": "README.md",
-  "decision-metadata": "README.md",
+  "why-this-question-matters": "docs/repository-guide.md",
+  "what-kfd-is": "docs/repository-guide.md",
+  "adoption-boundary": "docs/repository-guide.md",
+  "current-candidates": "docs/repository-guide.md",
+  "product-proof-path": "docs/repository-guide.md",
+  "agent-quickstart": "docs/repository-guide.md",
+  "decision-metadata": "docs/repository-guide.md",
   "foundation-structure": "docs/foundation.md",
   "load-bearing-product-witness": "docs/foundation.md",
   "practice-guidelines": "docs/foundation.md",
@@ -2495,8 +2515,10 @@ const boundary = siteBundle.renderingBoundary ?? {};
 if (!Array.isArray(boundary.ownedByKfd) || !boundary.ownedByKfd.includes("homepage title and text")) {
   fail("site bundle renderingBoundary.ownedByKfd must include homepage title and text");
 }
-if (!Array.isArray(boundary.ownedByKfd) || !boundary.ownedByKfd.includes("homepage section projection from README.md")) {
-  fail("site bundle renderingBoundary.ownedByKfd must include homepage section projection from README.md");
+if (!Array.isArray(boundary.ownedByKfd) ||
+    !boundary.ownedByKfd.includes("concise homepage introduction and reading path from README.md") ||
+    !boundary.ownedByKfd.includes("supporting homepage and repository detail from docs/repository-guide.md")) {
+  fail("site bundle renderingBoundary.ownedByKfd must separate concise README content from supporting repository detail");
 }
 if (!Array.isArray(boundary.ownedByKfd) ||
     !boundary.ownedByKfd.includes("conceptual compression page from docs/conceptual-compression.md and canonical terminology projection from terminology.json")) {
