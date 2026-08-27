@@ -114,6 +114,22 @@ const releasePropagationConfig = JSON.parse(readFileSync("buildchain.release-pro
 const buildWorkflowText = readFileSync(".github/workflows/build.yml", "utf8");
 const promotionWorkflowText = readFileSync(".github/workflows/buildchain-ref-promotion.yml", "utf8");
 const recoveryWorkflowText = readFileSync(".github/workflows/release-propagation.yml", "utf8");
+const expectedNativeBuildPaths = [
+  "verifier/**",
+  "schemas/**",
+  "profiles/agent-runtime/**",
+  "profiles/self-conformance/**",
+  "package.json",
+  "package-lock.json",
+  "rust-toolchain.toml",
+  "kfd.release.json",
+  "scripts/build-native-release.mjs",
+];
+const nativeBuildPathBlock = buildWorkflowText.match(/\n    paths:\n((?:      - [^\n]+\n)+)  workflow_dispatch:/u)?.[1];
+const nativeBuildPaths = nativeBuildPathBlock
+  ?.trim()
+  .split("\n")
+  .map((line) => line.replace(/^\s*-\s*/u, ""));
 if (packageJson.scripts?.["update:evidence"] !== expectedEvidenceUpdate) {
   fail("package.json update:evidence must preserve the site -> KFD-2 -> KFD-1 -> KFD-3 dependency order");
 }
@@ -172,6 +188,9 @@ if (!promotionWorkflowText.includes("uses: kungfu-systems/buildchain/.github/wor
 if (!buildWorkflowText.includes("uses: kungfu-systems/buildchain/.github/workflows/build.yml@v3-alpha") ||
     !/^\s*checkout-history-mode:\s*full\s*$/m.test(buildWorkflowText)) {
   fail("Buildchain verification must retain full source history for KFD historical self-conformance replay");
+}
+if (JSON.stringify(nativeBuildPaths) !== JSON.stringify(expectedNativeBuildPaths)) {
+  fail("the five-platform Build workflow must be limited to native executable and version-contract inputs");
 }
 if (/^\s*release\s*:/m.test(recoveryWorkflowText) ||
     /gh pr (?:create|merge)|git push/.test(recoveryWorkflowText) ||
