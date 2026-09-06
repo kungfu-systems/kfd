@@ -3,15 +3,53 @@
   "contract": "kungfu-buildchain-dev-delivery-warrant-queue",
   "repository": "kungfu-systems/kfd",
   "protectedBase": "dev/v1/v1.0",
-  "generation": 231,
-  "fencingCounter": 44,
+  "generation": 232,
+  "fencingCounter": 45,
   "policy": {
     "agingSeconds": 900,
     "maxPriority": 2,
     "leaseSeconds": 3600,
     "emergencyPolicy": "reviewed-explicit-only"
   },
-  "activeWarrant": null,
+  "activeWarrant": {
+    "schema": "kungfu.buildchain.dev-delivery-warrant/v1",
+    "repository": "kungfu-systems/kfd",
+    "protectedBase": "dev/v1/v1.0",
+    "candidateId": "sha256:c1583ee6dfcd7320662f30c64ed0345b8d20a11674107a8443afdfd026356f34",
+    "pullRequestNumber": 460,
+    "sourceHead": "dec665840bc9d5e01f20644a479da508c9fe9bf7",
+    "sourceRoot": "sha256:d87667ec37e7153891977613e06cdb32ffdf231f1edd4f8593bf2b8bbba3bc72",
+    "sourceIdentityRoot": "sha256:d8c18ac32d14066660961cad4acac431fb015d9c07d089facda19844e77ad38e",
+    "sourcePatchRoot": "sha256:641cc8c1a249909526aa81b53e5f8b181f6c0b3cf75eefde3a15d011adf332bd",
+    "sourceProofRoot": "sha256:e247034eb2e523affb98c515cb247dac82017ba7ddd19127cd3e9a61c91a239a",
+    "planRoot": "sha256:a5faa529268c7dbb930d96e87e79d98fa3e508df132535f5cc96bd30c0818bd1",
+    "closureRoot": "sha256:83dabce5381638b17bca54254875e8775d81ec9275c073c986049ff42ca7c893",
+    "dependencyRoot": "sha256:d01cda2ad9de28e03c0e76a74053f27abc379dff79642305d2b86db7192e6e2c",
+    "toolchainRoot": "sha256:d9936bd42a5a02fd678293f01e6b282b22cfd869b514aec5c7a36695cd40a6e1",
+    "affectedPaths": [
+      ".buildchain/kfd-1/contract-world.witness.json",
+      ".buildchain/kfd-2/kfd-foundation.trust-assessment.json",
+      ".buildchain/kfd-2/kfd-foundation.trust-claims.json",
+      ".buildchain/kfd-2/public-release-trust.claim.json",
+      ".buildchain/kfd-3/collaboration-interface.artifact.json",
+      ".buildchain/kfd-3/collaboration-interface.prebuild.json",
+      ".github/workflows/verify.yml",
+      "profiles/adopter-conformance/adopters/kfd/manifest.json",
+      "scripts/check.mjs"
+    ],
+    "shardEvidenceRoots": [
+      "sha256:9739bc661b085f1008a1e4f3b672e2fd923f91d44487e7fc7511a1602201f717"
+    ],
+    "sourceWorkflowRunId": 34026329738,
+    "deliveryClass": "non-native-fast",
+    "priority": "ordinary",
+    "generation": 45,
+    "expectedOldStateRoot": "sha256:ead58d23aa958ca59f87607dce4454cf7b9005dcfe8a7b4439ec0d6f82d44a19",
+    "issuedAt": "2026-09-06T10:07:57.433Z",
+    "expiresAt": "2026-09-06T11:37:57.433Z",
+    "fencingToken": "sha256:8ed59b9491ec72d226c4886689e491fca66705989f3d649c24f4c2ced1b122ab",
+    "nextAction": "Replay on the exact current dev base, prove required checks, then enqueue the unchanged PR head."
+  },
   "candidates": [
     {
       "repository": "kungfu-systems/kfd",
@@ -1960,10 +1998,10 @@
       "sourceWorkflowRunId": 34026329738,
       "priority": "ordinary",
       "enqueuedAt": "2026-09-06T10:07:17.353Z",
-      "updatedAt": "2026-09-06T10:07:17.353Z",
+      "updatedAt": "2026-09-06T10:07:57.433Z",
       "attempts": 1,
       "recoveries": 0,
-      "status": "queued",
+      "status": "selected",
       "terminal": null,
       "affectedPaths": [
         ".buildchain/kfd-1/contract-world.witness.json",
@@ -1981,6 +2019,6 @@
       ]
     }
   ],
-  "updatedAt": "2026-09-06T10:07:17.353Z",
-  "stateRoot": "sha256:ead58d23aa958ca59f87607dce4454cf7b9005dcfe8a7b4439ec0d6f82d44a19"
+  "updatedAt": "2026-09-06T10:07:57.433Z",
+  "stateRoot": "sha256:87e71e61a568b863d4eeb6dffb9ad0df4e9aff5d44a3b9a2eb7e5b5bd0a65cfd"
 }
