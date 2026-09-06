@@ -1,6 +1,6 @@
 {
   "name": "@kungfu-tech/kfd",
-  "version": "1.0.0-alpha.69",
+  "version": "1.0.0-alpha.70",
   "description": "KFD: an open, evidence-governed engineering standard for reliable action and continuity under uncertainty",
   "license": "Apache-2.0",
   "bin": {
@@ -26,6 +26,8 @@
     "schemas",
     "site",
     "scripts",
+    ".buildchain/contract-lock.json",
+    ".buildchain/alpha-contract-lock.json",
     "buildchain.contract-lock.json",
     "buildchain.alpha-contract-lock.json",
     "buildchain.release-propagation.json",
@@ -221,7 +223,7 @@
     "check:self-conformance-history": "node scripts/check-self-conformance-history.mjs"
   },
   "dependencies": {
-    "@kungfu-tech/buildchain": "3.0.9-alpha.11"
+    "@kungfu-tech/buildchain": "4.0.2-alpha.39"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",

@@ -2,6 +2,7 @@ name: Verify
 
 on:
   pull_request:
+  merge_group:
   push:
     branches:
       - dev/v*/v*
@@ -10,12 +11,15 @@ on:
   workflow_dispatch:
 
 permissions:
+  actions: read
   contents: read
+  pull-requests: read
 
 jobs:
   check:
-    uses: kungfu-systems/buildchain/.github/workflows/check.yml@v3
+    uses: kungfu-systems/buildchain/.github/workflows/public-build-check.yml@v4-alpha
     with:
+      buildchain-ref: v4-alpha
       require-version-state: true
       upload-artifacts: true
       mode: source

@@ -114,6 +114,24 @@ const releasePropagationConfig = JSON.parse(readFileSync("buildchain.release-pro
 const buildWorkflowText = readFileSync(".github/workflows/build.yml", "utf8");
 const promotionWorkflowText = readFileSync(".github/workflows/buildchain-ref-promotion.yml", "utf8");
 const recoveryWorkflowText = readFileSync(".github/workflows/release-propagation.yml", "utf8");
+const verifyWorkflowText = readFileSync(".github/workflows/verify.yml", "utf8");
+if (!verifyWorkflowText.includes("public-build-check.yml@v4-alpha") ||
+    !/^\s*buildchain-ref:\s*v4-alpha\s*$/m.test(verifyWorkflowText)) {
+  fail("source verification must use the public Buildchain v4 Alpha workflow and runtime");
+}
+for (const [channel, canonical, legacy] of [
+  ["v4", ".buildchain/contract-lock.json", "buildchain.contract-lock.json"],
+  ["v4-alpha", ".buildchain/alpha-contract-lock.json", "buildchain.alpha-contract-lock.json"],
+]) {
+  const lock = JSON.parse(readFileSync(canonical, "utf8"));
+  if (lock.contract !== "kungfu-buildchain-contract-lock" ||
+      lock.buildchain?.ref !== channel || lock.buildchain?.majorLine !== "v4" ||
+      !/^[0-9a-f]{40}$/.test(lock.buildchain?.resolvedSha ?? "") ||
+      sha256File(canonical) !== sha256File(legacy)) {
+    fail(`${canonical} must bind its exact v4 channel and preserve the published lock projection`);
+  }
+}
+
 const expectedNativeBuildPaths = [
   "verifier/**",
   "schemas/**",
@@ -136,11 +154,11 @@ if (packageJson.scripts?.["update:evidence"] !== expectedEvidenceUpdate) {
 if (packageJson.description !== expectedPackageDescription) {
   fail("package.json description must preserve KFD's open-standard positioning");
 }
-if (packageJson.dependencies?.["@kungfu-tech/buildchain"] !== "3.0.9-alpha.11" ||
+if (packageJson.dependencies?.["@kungfu-tech/buildchain"] !== "4.0.2-alpha.39" ||
     packageJson.exports?.["./adopter-conformance/specification-authority-delivery"] !== "./scripts/kfd-specification-authority-delivery.mjs" ||
     packageJson.scripts?.["check:kfd-specification-authority-delivery"] !== "node scripts/check-kfd-specification-authority-delivery.mjs" ||
     !packageJson.scripts?.check?.includes("npm run check:kfd-specification-authority-delivery")) {
-  fail("KFD specification-authority delivery must pin Buildchain Alpha.11 and publish its checked adapter");
+  fail("KFD specification-authority delivery must pin Buildchain v4 Alpha.39 and publish its checked adapter");
 }
 if (packageJson.exports?.["./adopter-conformance/specification-authority-transition"] !== "./scripts/kfd-specification-authority-transition-contract.mjs" ||
     packageJson.exports?.["./adopter-conformance/specification-authority-transition.schema.json"] !== "./schemas/kfd-adopter-conformance/specification-authority-transition.schema.json" ||
@@ -181,11 +199,11 @@ if (releasePropagationProfile?.contract !== "kungfu-buildchain-github-web-surfac
     !releasePropagationProfile?.updateCommand || !releasePropagationProfile?.prepareCommand || !releasePropagationProfile?.verifyCommand) {
   fail("KFD release propagation must carry the exact site execution and production-readback profile");
 }
-if (!promotionWorkflowText.includes("uses: kungfu-systems/buildchain/.github/workflows/release-candidate-promote.yml@v3-alpha") ||
+if (!promotionWorkflowText.includes("uses: kungfu-systems/buildchain/.github/workflows/release-candidate-promote.yml@v4-alpha") ||
     !promotionWorkflowText.includes("release-propagation-config-path: buildchain.release-propagation.json")) {
-  fail("Buildchain promotion must capture KFD propagation Work through the v3 alpha contract");
+  fail("Buildchain promotion must capture KFD propagation Work through the v4 alpha contract");
 }
-if (!buildWorkflowText.includes("uses: kungfu-systems/buildchain/.github/workflows/build.yml@v3-alpha") ||
+if (!buildWorkflowText.includes("uses: kungfu-systems/buildchain/.github/workflows/build.yml@v4-alpha") ||
     !/^\s*checkout-history-mode:\s*full\s*$/m.test(buildWorkflowText)) {
   fail("Buildchain verification must retain full source history for KFD historical self-conformance replay");
 }
