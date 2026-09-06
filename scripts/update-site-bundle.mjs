@@ -3,6 +3,7 @@ import { createHash } from "node:crypto";
 import { pathToFileURL } from "node:url";
 
 const README_PATH = "README.md";
+const REPOSITORY_GUIDE_PATH = "docs/repository-guide.md";
 const CONCEPTUAL_COMPRESSION_PATH = "docs/conceptual-compression.md";
 const FOUNDATION_PATH = "docs/foundation.md";
 const LOAD_BEARING_PATH = "docs/load-bearing-dogfood.md";
@@ -436,6 +437,8 @@ const parseConceptualCompressionTeaser = (markdown) => {
     sourceTarget: link[2],
     url: link[2] === CONCEPTUAL_COMPRESSION_PATH
       ? "/concepts"
+      : link[2] === "profiles/delegated-work-challenge/README.md"
+        ? "/challenge/delegated-work"
       : link[2] === TERMINOLOGY_PATH
         ? "/terminology"
         : link[2] === LOAD_BEARING_PATH
@@ -1173,6 +1176,7 @@ const buildSelfConformancePage = ({
 
 export const buildSiteBundle = ({
   readmeText,
+  repositoryGuideText,
   conceptualCompressionText,
   foundationText,
   loadBearingText,
@@ -1215,6 +1219,7 @@ export const buildSiteBundle = ({
   releaseAnchor,
 }) => {
   const readme = parseReadme(readmeText);
+  const repositoryGuide = parseReadme(repositoryGuideText);
   const conceptualCompressionDocument = parseReadme(conceptualCompressionText);
   const foundationDocument = parseReadme(foundationText);
   const loadBearingDocument = parseReadme(loadBearingText);
@@ -1225,17 +1230,17 @@ export const buildSiteBundle = ({
     readme.sections["Start here: the agent is not the center of truth"] || "",
   );
   const { lead } = introLead(readme.intro);
-  const { decisionKinds } = introLead(readme.sections["What KFD is"] || "");
+  const { decisionKinds } = introLead(repositoryGuide.sections["What KFD is"] || "");
   const foundationTriad = parseFoundationTriad(readme.sections["Foundation triad"] || "");
   const independentImplementation = parseIndependentImplementation(
-    readme.sections["Implement and verify KFD independently"] || "",
+    repositoryGuide.sections["Implement and verify KFD independently"] || "",
     agentHubCapabilities,
     releaseAnchor,
   );
   const foundation = parseFoundation(foundationDocument.sections["Foundation structure"] || "");
   const productWitness = parseProductWitness(foundationDocument.sections["Load-bearing product witness"] || "");
   const practiceGuidelines = parsePracticeGuidelines(foundationDocument.sections["Practice guidelines"] || "");
-  const productProofPath = parseProductProofPath(readme.sections["Product proof path"] || "");
+  const productProofPath = parseProductProofPath(repositoryGuide.sections["Product proof path"] || "");
   const entries = registry.entries || [];
   const liveCasePages = buildLiveCasePages(liveCaseRegistry);
   const candidatePages = buildCandidatePages(candidateRegistry);
@@ -1353,40 +1358,40 @@ export const buildSiteBundle = ({
       id: "self-conformance-reader-model",
       sourceHeading: "How KFD governs its own change",
       title: "How KFD governs its own change",
-      markdown: readme.sections["How KFD governs its own change"],
-      role: "first-screen",
-      priority: 7,
+      markdown: repositoryGuide.sections["How KFD governs its own change"],
+      role: "detail",
+      priority: 40,
       presentation: "self-conformance-reader-model",
-      firstScreen: true,
+      sourcePath: REPOSITORY_GUIDE_PATH,
     }),
     section({
       id: "independent-implementation",
       sourceHeading: "Implement and verify KFD independently",
       title: "Implement and verify KFD independently",
-      markdown: readme.sections["Implement and verify KFD independently"],
-      role: "first-screen",
-      priority: 8,
+      markdown: repositoryGuide.sections["Implement and verify KFD independently"],
+      role: "primary",
+      priority: 20,
       presentation: "independent-implementation-steps",
-      firstScreen: true,
+      sourcePath: REPOSITORY_GUIDE_PATH,
     }),
     section({
       id: "foundation-triad",
       sourceHeading: "Foundation triad",
       title: "Foundation triad",
       markdown: readme.sections["Foundation triad"],
-      role: "first-screen",
+      role: "primary",
       priority: 10,
       presentation: "triad-cards",
-      firstScreen: true,
     }),
     section({
       id: "why-this-question-matters",
       sourceHeading: "Why this question matters",
       title: "Why this question matters",
-      markdown: readme.sections["Why this question matters"],
+      markdown: repositoryGuide.sections["Why this question matters"],
       role: "primary",
       priority: 15,
       presentation: "historical-context",
+      sourcePath: REPOSITORY_GUIDE_PATH,
     }),
     section({
       id: "foundation-structure",
@@ -1412,28 +1417,31 @@ export const buildSiteBundle = ({
       id: "what-kfd-is",
       sourceHeading: "What KFD is",
       title: "What KFD is",
-      markdown: readme.sections["What KFD is"],
+      markdown: repositoryGuide.sections["What KFD is"],
       role: "primary",
       priority: 20,
       presentation: "registry-introduction",
+      sourcePath: REPOSITORY_GUIDE_PATH,
     }),
     section({
       id: "adoption-boundary",
       sourceHeading: "Adoption boundary",
       title: "Adoption boundary",
-      markdown: readme.sections["Adoption boundary"],
+      markdown: repositoryGuide.sections["Adoption boundary"],
       role: "primary",
       priority: 25,
       presentation: "boundary-note",
+      sourcePath: REPOSITORY_GUIDE_PATH,
     }),
     section({
       id: "current-candidates",
       sourceHeading: "Candidate lineage",
       title: "Candidate lineage",
-      markdown: readme.sections["Candidate lineage"],
+      markdown: repositoryGuide.sections["Candidate lineage"],
       role: "primary",
       priority: 27,
       presentation: "candidate-summary",
+      sourcePath: REPOSITORY_GUIDE_PATH,
     }),
     section({
       id: "practice-guidelines",
@@ -1449,28 +1457,31 @@ export const buildSiteBundle = ({
       id: "product-proof-path",
       sourceHeading: "Product proof path",
       title: "Product proof path",
-      markdown: readme.sections["Product proof path"],
+      markdown: repositoryGuide.sections["Product proof path"],
       role: "primary",
       priority: 30,
       presentation: "proof-path",
+      sourcePath: REPOSITORY_GUIDE_PATH,
     }),
     section({
       id: "agent-quickstart",
       sourceHeading: "Agent Quickstart",
       title: "Agent Quickstart",
-      markdown: readme.sections["Agent Quickstart"],
+      markdown: repositoryGuide.sections["Agent Quickstart"],
       role: "support",
       priority: 40,
       presentation: "ordered-steps",
+      sourcePath: REPOSITORY_GUIDE_PATH,
     }),
     section({
       id: "decision-metadata",
       sourceHeading: "Decision metadata",
       title: "Decision metadata",
-      markdown: readme.sections["Decision metadata"],
+      markdown: repositoryGuide.sections["Decision metadata"],
       role: "support",
       priority: 50,
       presentation: "fact-source",
+      sourcePath: REPOSITORY_GUIDE_PATH,
     }),
   ];
 
@@ -1480,6 +1491,7 @@ export const buildSiteBundle = ({
     source: {
       package: "@kungfu-tech/kfd",
       homepageTextSource: README_PATH,
+      repositoryGuideTextSource: REPOSITORY_GUIDE_PATH,
       conceptualCompressionTextSource: CONCEPTUAL_COMPRESSION_PATH,
       foundationTextSource: FOUNDATION_PATH,
       loadBearingTextSource: LOAD_BEARING_PATH,
@@ -1576,34 +1588,20 @@ export const buildSiteBundle = ({
             "future-picture.question",
             "future-picture.engineeringAnswer",
             "future-picture.claimBoundary",
-            "future-picture.pastToFuture",
-            "future-picture.kungfuPath",
             "conceptual-compression.eyebrow",
             "conceptual-compression.title",
             "conceptual-compression.question",
             "conceptual-compression.falseEquivalences",
             "conceptual-compression.failurePrompt",
             "conceptual-compression.cta",
-            "self-conformance.readerModel.prospective",
-            "self-conformance.readerModel.retrospective",
-            "self-conformance.readerModel.authorityBoundary",
-            "independent-implementation.promise",
-            "independent-implementation.supportedLanguages",
-            "independent-implementation.nativeCli",
-            "independent-implementation.dimensions",
-            "independent-implementation.paths",
-            "independent-implementation.steps",
-            "independent-implementation.links",
-            "independent-implementation.offlineBoundary",
-            "independent-implementation.claimBoundary",
-            "foundation-triad",
-            "product-witness.principle",
-            "foundation-triad.links",
           ],
-          maxPrimarySections: 5,
-          note: "The first viewport should move readers from an agent-centered model to work continuity, expose the four false equivalences and the /concepts real-failure route without duplicating the complete model, connect prospective governance with retrospective structural conformance without widening authority, make independent implementation and offline verification directly actionable, and begin the reference-success or five-step adopter path before installed-product, registry, or renderer detail.",
+          maxPrimarySections: 2,
+          maxWords: 180,
+          maxCodeBlocks: 1,
+          maxPrimaryCtas: 2,
+          note: "The first viewport answers what KFD is, exposes the work-continuity break through four false equivalences, and offers one understanding route plus one experiment route. Foundation, implementation, Self-Conformance, release, registry, and renderer detail follow through progressive disclosure.",
         },
-        primary: ["future-picture", "conceptual-compression", "self-conformance-reader-model", "independent-implementation", "foundation-triad", "why-this-question-matters", "what-kfd-is", "adoption-boundary", "current-candidates", "product-proof-path"],
+        primary: ["future-picture", "conceptual-compression", "foundation-triad", "independent-implementation", "why-this-question-matters", "what-kfd-is", "adoption-boundary", "self-conformance-reader-model", "current-candidates", "product-proof-path"],
         detail: {
           route: "/foundation",
           source: FOUNDATION_PATH,
@@ -1622,7 +1620,8 @@ export const buildSiteBundle = ({
           id: "homepage-content-contract",
           sourceHeading: "Homepage content contract",
           title: "Homepage content contract",
-          markdown: readme.sections["Homepage content contract"],
+          markdown: repositoryGuide.sections["Homepage content contract"],
+          sourcePath: REPOSITORY_GUIDE_PATH,
           role: "renderer-contract",
           priority: 90,
           presentation: "developer-note",
@@ -1779,9 +1778,10 @@ export const buildSiteBundle = ({
     renderingBoundary: {
       ownedByKfd: [
         "homepage title and text",
-        "homepage section projection from README.md",
+        "concise homepage introduction and reading path from README.md",
+        "supporting homepage and repository detail from docs/repository-guide.md",
         "conceptual compression page from docs/conceptual-compression.md and canonical terminology projection from terminology.json",
-        "first-screen independent implementation promise, languages, commands, links, and boundaries",
+        "independent implementation promise, languages, commands, links, and boundaries",
         "foundation explanation page from docs/foundation.md",
         "load-bearing dogfood evidence page from docs/load-bearing-dogfood.md",
         "formal reference overview from docs/formal-model.md",
@@ -1823,6 +1823,7 @@ export const buildSiteBundle = ({
 
 export const readInputs = () => ({
   readmeText: readFileSync(README_PATH, "utf8"),
+  repositoryGuideText: readFileSync(REPOSITORY_GUIDE_PATH, "utf8"),
   conceptualCompressionText: readFileSync(CONCEPTUAL_COMPRESSION_PATH, "utf8"),
   foundationText: readFileSync(FOUNDATION_PATH, "utf8"),
   loadBearingText: readFileSync(LOAD_BEARING_PATH, "utf8"),

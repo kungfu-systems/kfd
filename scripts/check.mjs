@@ -114,17 +114,53 @@ const releasePropagationConfig = JSON.parse(readFileSync("buildchain.release-pro
 const buildWorkflowText = readFileSync(".github/workflows/build.yml", "utf8");
 const promotionWorkflowText = readFileSync(".github/workflows/buildchain-ref-promotion.yml", "utf8");
 const recoveryWorkflowText = readFileSync(".github/workflows/release-propagation.yml", "utf8");
+const verifyWorkflowText = readFileSync(".github/workflows/verify.yml", "utf8");
+const expectedSourceProofReuse = "source-proof-reuse: ${{ (github.event_name == 'pull_request' && startsWith(github.base_ref, 'dev/')) || (github.event_name == 'merge_group' && startsWith(github.event.merge_group.base_ref, 'refs/heads/dev/')) }}";
+if (!verifyWorkflowText.includes("public-build-check.yml@v4-alpha") ||
+    !/^\s*buildchain-ref:\s*v4-alpha\s*$/m.test(verifyWorkflowText) ||
+    !verifyWorkflowText.includes(expectedSourceProofReuse)) {
+  fail("source verification must use the public Buildchain v4 Alpha workflow and limit dev source proofs to dev PRs and merge groups");
+}
+for (const [channel, canonical, legacy] of [
+  ["v4", ".buildchain/contract-lock.json", "buildchain.contract-lock.json"],
+  ["v4-alpha", ".buildchain/alpha-contract-lock.json", "buildchain.alpha-contract-lock.json"],
+]) {
+  const lock = JSON.parse(readFileSync(canonical, "utf8"));
+  if (lock.contract !== "kungfu-buildchain-contract-lock" ||
+      lock.buildchain?.ref !== channel || lock.buildchain?.majorLine !== "v4" ||
+      !/^[0-9a-f]{40}$/.test(lock.buildchain?.resolvedSha ?? "") ||
+      sha256File(canonical) !== sha256File(legacy)) {
+    fail(`${canonical} must bind its exact v4 channel and preserve the published lock projection`);
+  }
+}
+
+const expectedNativeBuildPaths = [
+  "verifier/**",
+  "schemas/**",
+  "profiles/agent-runtime/**",
+  "profiles/self-conformance/**",
+  "package.json",
+  "package-lock.json",
+  "rust-toolchain.toml",
+  "kfd.release.json",
+  "scripts/build-native-release.mjs",
+];
+const nativeBuildPathBlock = buildWorkflowText.match(/\n    paths:\n((?:      - [^\n]+\n)+)  workflow_dispatch:/u)?.[1];
+const nativeBuildPaths = nativeBuildPathBlock
+  ?.trim()
+  .split("\n")
+  .map((line) => line.replace(/^\s*-\s*/u, ""));
 if (packageJson.scripts?.["update:evidence"] !== expectedEvidenceUpdate) {
   fail("package.json update:evidence must preserve the site -> KFD-2 -> KFD-1 -> KFD-3 dependency order");
 }
 if (packageJson.description !== expectedPackageDescription) {
   fail("package.json description must preserve KFD's open-standard positioning");
 }
-if (packageJson.dependencies?.["@kungfu-tech/buildchain"] !== "3.0.9-alpha.11" ||
+if (packageJson.dependencies?.["@kungfu-tech/buildchain"] !== "4.0.2-alpha.39" ||
     packageJson.exports?.["./adopter-conformance/specification-authority-delivery"] !== "./scripts/kfd-specification-authority-delivery.mjs" ||
     packageJson.scripts?.["check:kfd-specification-authority-delivery"] !== "node scripts/check-kfd-specification-authority-delivery.mjs" ||
     !packageJson.scripts?.check?.includes("npm run check:kfd-specification-authority-delivery")) {
-  fail("KFD specification-authority delivery must pin Buildchain Alpha.11 and publish its checked adapter");
+  fail("KFD specification-authority delivery must pin Buildchain v4 Alpha.39 and publish its checked adapter");
 }
 if (packageJson.exports?.["./adopter-conformance/specification-authority-transition"] !== "./scripts/kfd-specification-authority-transition-contract.mjs" ||
     packageJson.exports?.["./adopter-conformance/specification-authority-transition.schema.json"] !== "./schemas/kfd-adopter-conformance/specification-authority-transition.schema.json" ||
@@ -165,13 +201,16 @@ if (releasePropagationProfile?.contract !== "kungfu-buildchain-github-web-surfac
     !releasePropagationProfile?.updateCommand || !releasePropagationProfile?.prepareCommand || !releasePropagationProfile?.verifyCommand) {
   fail("KFD release propagation must carry the exact site execution and production-readback profile");
 }
-if (!promotionWorkflowText.includes("uses: kungfu-systems/buildchain/.github/workflows/release-candidate-promote.yml@v3-alpha") ||
+if (!promotionWorkflowText.includes("uses: kungfu-systems/buildchain/.github/workflows/release-candidate-promote.yml@v4-alpha") ||
     !promotionWorkflowText.includes("release-propagation-config-path: buildchain.release-propagation.json")) {
-  fail("Buildchain promotion must capture KFD propagation Work through the v3 alpha contract");
+  fail("Buildchain promotion must capture KFD propagation Work through the v4 alpha contract");
 }
-if (!buildWorkflowText.includes("uses: kungfu-systems/buildchain/.github/workflows/build.yml@v3-alpha") ||
+if (!buildWorkflowText.includes("uses: kungfu-systems/buildchain/.github/workflows/build.yml@v4-alpha") ||
     !/^\s*checkout-history-mode:\s*full\s*$/m.test(buildWorkflowText)) {
   fail("Buildchain verification must retain full source history for KFD historical self-conformance replay");
+}
+if (JSON.stringify(nativeBuildPaths) !== JSON.stringify(expectedNativeBuildPaths)) {
+  fail("the five-platform Build workflow must be limited to native executable and version-contract inputs");
 }
 if (/^\s*release\s*:/m.test(recoveryWorkflowText) ||
     /gh pr (?:create|merge)|git push/.test(recoveryWorkflowText) ||
@@ -305,7 +344,25 @@ for (const governancePath of ["CONTRIBUTING.md", "GOVERNANCE.md"]) {
     fail(`package.json exports must publish ${governancePath}`);
   }
 }
+const normalizeWhitespace = (value) => value.replace(/\s+/g, " ").trim();
 const readmeText = readFileSync("README.md", "utf8");
+if (readmeText.startsWith("---\n")) {
+  fail("root README must start with its H1, not YAML frontmatter");
+}
+const readmeWordCount = normalizeWhitespace(readmeText).split(" ").filter(Boolean).length;
+const readmeHeadings = [...readmeText.matchAll(/^## (.+)$/gm)].map((match) => match[1]);
+const readmeSectionCount = readmeHeadings.length;
+if (readmeText.split("\n").length > 120 || readmeWordCount > 700 || readmeSectionCount > 5) {
+  fail(`root README exceeds the progressive-disclosure budget: ${readmeText.split("\n").length} lines, ${readmeWordCount} words, ${readmeSectionCount} sections`);
+}
+if (JSON.stringify(readmeHeadings) !== JSON.stringify([
+  "Start here: the agent is not the center of truth",
+  "Choose a path",
+  "Foundation triad",
+  "About this repository",
+])) {
+  fail("root README must preserve the problem -> choice -> foundation -> repository reading slope");
+}
 const contributingText = readFileSync("CONTRIBUTING.md", "utf8");
 const governanceText = readFileSync("GOVERNANCE.md", "utf8");
 const foundationText = readFileSync("docs/foundation.md", "utf8");
@@ -316,7 +373,6 @@ const formalModelText = readFileSync("docs/formal-model.md", "utf8");
 const candidateIndexText = readFileSync("drafts/README.md", "utf8");
 const liveCaseText = readFileSync("cases/live/proof-carrying-work-object/README.md", "utf8");
 const distinguishabilityText = readFileSync("cases/live/proof-carrying-work-object/distinguishability.md", "utf8");
-const normalizeWhitespace = (value) => value.replace(/\s+/g, " ").trim();
 if (!normalizeWhitespace(readmeText).includes("Kungfu is its founding implementation, not its adoption boundary.")) {
   fail("README must distinguish KFD's founding implementation from its adoption boundary");
 }
@@ -758,6 +814,9 @@ if (JSON.stringify(siteBundle) !== JSON.stringify(expectedSiteBundle)) {
   fail("site/kfd-site.json must match the generated README.md homepage bundle; run npm run update:site-bundle");
 }
 if (siteBundle.source?.homepageTextSource !== "README.md") fail("site bundle homepageTextSource must be README.md");
+if (siteBundle.source?.repositoryGuideTextSource !== "docs/repository-guide.md") {
+  fail("site bundle repositoryGuideTextSource must be docs/repository-guide.md");
+}
 if (siteBundle.source?.conceptualCompressionTextSource !== "docs/conceptual-compression.md") {
   fail("site bundle conceptualCompressionTextSource must be docs/conceptual-compression.md");
 }
@@ -914,8 +973,6 @@ for (const requiredField of [
   "future-picture.question",
   "future-picture.engineeringAnswer",
   "future-picture.claimBoundary",
-  "future-picture.pastToFuture",
-  "future-picture.kungfuPath",
 ]) {
   if (!siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes(requiredField)) {
     fail(`site bundle homepage displayPlan firstScreen must include ${requiredField}`);
@@ -937,11 +994,11 @@ if (
   conceptualCompressionTeaser?.cta?.url !== "/concepts" ||
   conceptualCompressionTeaser?.label !== "The agent is not the center of truth." ||
   conceptualCompressionTeaser?.url !== "/concepts" ||
-  !conceptualCompressionTeaser?.summary?.includes("agent systems") ||
+  !conceptualCompressionTeaser?.summary?.includes("same output") ||
   conceptualCompressionTeaser?.model !== conceptualCompressionTeaser.falseEquivalences.join("\n") ||
   conceptualCompressionTeaser?.boundary !== conceptualCompressionTeaser.failurePrompt ||
   JSON.stringify(conceptualCompressionTeaser?.links?.map((entry) => entry.url)) !==
-    JSON.stringify(["/concepts", "/terminology", "/under-load"])
+    JSON.stringify(["/concepts", "/challenge/delegated-work"])
 ) {
   fail("site bundle homepage conceptual compression must expose the work-centered hook, four false equivalences, real-failure CTA, and exact reader links");
 }
@@ -956,15 +1013,6 @@ for (const requiredField of [
   if (!siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes(requiredField)) {
     fail(`site bundle homepage displayPlan firstScreen must include ${requiredField}`);
   }
-}
-if (!siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes("foundation-triad")) {
-  fail("site bundle homepage displayPlan firstScreen must include foundation-triad");
-}
-if (!siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes("product-witness.principle")) {
-  fail("site bundle homepage displayPlan firstScreen must include product-witness.principle");
-}
-if (!siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes("foundation-triad.links")) {
-  fail("site bundle homepage displayPlan firstScreen must include foundation-triad.links");
 }
 if (!siteBundle.homepage?.foundationTriad?.links?.some((entry) => entry.url === "/foundation")) {
   fail("site bundle homepage foundation triad must expose the /foundation depth choice");
@@ -1044,35 +1092,45 @@ for (const nonClaim of ["certify", "security", "production fitness", "complete s
 if (!independentImplementation?.offlineBoundary?.includes("performs no network access")) {
   fail("site bundle independent implementation must distinguish package acquisition from offline verification");
 }
-for (const requiredField of [
-  "independent-implementation.promise",
-  "independent-implementation.supportedLanguages",
-  "independent-implementation.nativeCli",
-  "independent-implementation.steps",
-  "independent-implementation.links",
-  "independent-implementation.offlineBoundary",
-  "independent-implementation.claimBoundary",
-]) {
-  if (!siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes(requiredField)) {
-    fail(`site bundle homepage displayPlan firstScreen must include ${requiredField}`);
-  }
+const firstScreenPlan = siteBundle.homepage?.displayPlan?.firstScreen;
+if (
+  firstScreenPlan?.maxPrimarySections !== 2 ||
+  firstScreenPlan?.maxWords !== 180 ||
+  firstScreenPlan?.maxCodeBlocks !== 1 ||
+  firstScreenPlan?.maxPrimaryCtas !== 2
+) {
+  fail("site bundle homepage first screen must preserve the two-section, 180-word, one-code-block, two-CTA budget");
 }
-if (siteBundle.homepage?.displayPlan?.firstScreen?.maxPrimarySections !== 5) {
-  fail("site bundle homepage first screen must reserve five primary sections");
+const firstScreenSections = siteBundle.homepage?.sections?.filter((entry) => entry.includeInFirstScreen) ?? [];
+if (JSON.stringify(firstScreenSections.map((entry) => entry.id)) !== JSON.stringify(["future-picture", "conceptual-compression"])) {
+  fail("site bundle homepage first screen must contain only future-picture and conceptual-compression");
+}
+const firstScreenWordCount = firstScreenSections.reduce((total, entry) =>
+  total + entry.markdown.split(/\s+/).filter(Boolean).length, 0);
+if (firstScreenWordCount > firstScreenPlan.maxWords) {
+  fail(`site bundle homepage first screen exceeds ${firstScreenPlan.maxWords} words: ${firstScreenWordCount}`);
+}
+const firstScreenCodeBlocks = firstScreenSections.reduce((total, entry) =>
+  total + ((entry.markdown.match(/```/g) ?? []).length / 2), 0);
+if (firstScreenCodeBlocks > firstScreenPlan.maxCodeBlocks) {
+  fail(`site bundle homepage first screen exceeds ${firstScreenPlan.maxCodeBlocks} code block`);
+}
+if ((conceptualCompressionTeaser?.links?.length ?? 0) > firstScreenPlan.maxPrimaryCtas) {
+  fail(`site bundle homepage first screen exceeds ${firstScreenPlan.maxPrimaryCtas} primary calls to action`);
 }
 const requiredHomepageSections = {
   "future-picture": "README.md",
   "conceptual-compression": "README.md",
-  "self-conformance-reader-model": "README.md",
-  "independent-implementation": "README.md",
+  "self-conformance-reader-model": "docs/repository-guide.md",
+  "independent-implementation": "docs/repository-guide.md",
   "foundation-triad": "README.md",
-  "why-this-question-matters": "README.md",
-  "what-kfd-is": "README.md",
-  "adoption-boundary": "README.md",
-  "current-candidates": "README.md",
-  "product-proof-path": "README.md",
-  "agent-quickstart": "README.md",
-  "decision-metadata": "README.md",
+  "why-this-question-matters": "docs/repository-guide.md",
+  "what-kfd-is": "docs/repository-guide.md",
+  "adoption-boundary": "docs/repository-guide.md",
+  "current-candidates": "docs/repository-guide.md",
+  "product-proof-path": "docs/repository-guide.md",
+  "agent-quickstart": "docs/repository-guide.md",
+  "decision-metadata": "docs/repository-guide.md",
   "foundation-structure": "docs/foundation.md",
   "load-bearing-product-witness": "docs/foundation.md",
   "practice-guidelines": "docs/foundation.md",
@@ -1302,12 +1360,9 @@ if (
   selfConformanceReaderModel?.authorityBoundary?.verifierSufficient !== false ||
   selfConformanceReaderModel?.authorityBoundary?.humanApprovalRequired !== true ||
   selfConformanceReaderModel?.authorityBoundary?.forbiddenInferences?.length !== 6 ||
-  JSON.stringify(siteBundle.homepage?.selfConformance?.readerModel) !== JSON.stringify(selfConformanceReaderModel) ||
-  !siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes("self-conformance.readerModel.prospective") ||
-  !siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes("self-conformance.readerModel.retrospective") ||
-  !siteBundle.homepage?.displayPlan?.firstScreen?.include?.includes("self-conformance.readerModel.authorityBoundary")
+  JSON.stringify(siteBundle.homepage?.selfConformance?.readerModel) !== JSON.stringify(selfConformanceReaderModel)
 ) {
-  fail("site bundle must expose one first-screen reader model for prospective governance and retrospective structural conformance without widening authority");
+  fail("site bundle must expose one reader model for prospective governance and retrospective structural conformance without widening authority");
 }
 if (
   selfConformancePage?.recursiveCase?.candidate?.status !== "merged" ||
@@ -2499,8 +2554,10 @@ const boundary = siteBundle.renderingBoundary ?? {};
 if (!Array.isArray(boundary.ownedByKfd) || !boundary.ownedByKfd.includes("homepage title and text")) {
   fail("site bundle renderingBoundary.ownedByKfd must include homepage title and text");
 }
-if (!Array.isArray(boundary.ownedByKfd) || !boundary.ownedByKfd.includes("homepage section projection from README.md")) {
-  fail("site bundle renderingBoundary.ownedByKfd must include homepage section projection from README.md");
+if (!Array.isArray(boundary.ownedByKfd) ||
+    !boundary.ownedByKfd.includes("concise homepage introduction and reading path from README.md") ||
+    !boundary.ownedByKfd.includes("supporting homepage and repository detail from docs/repository-guide.md")) {
+  fail("site bundle renderingBoundary.ownedByKfd must separate concise README content from supporting repository detail");
 }
 if (!Array.isArray(boundary.ownedByKfd) ||
     !boundary.ownedByKfd.includes("conceptual compression page from docs/conceptual-compression.md and canonical terminology projection from terminology.json")) {

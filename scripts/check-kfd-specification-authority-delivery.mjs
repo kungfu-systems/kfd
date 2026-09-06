@@ -87,7 +87,7 @@ try {
       "utf8",
     ),
   );
-  assert.equal(buildchainPackage.version, "3.0.9-alpha.11");
+  assert.equal(buildchainPackage.version, "4.0.2-alpha.39");
   assert.equal(kfdPackage.version, "1.0.0-alpha.62");
 
   const buildchainArchive = pack(buildchainPackageRoot, scratch);
@@ -204,7 +204,7 @@ try {
     verifiedAt,
   });
   assert.equal(result.status, "passed");
-  assert.equal(result.authority.buildchain.version, "3.0.9-alpha.11");
+  assert.equal(result.authority.buildchain.version, "4.0.2-alpha.39");
   assert.equal(result.authority.kfd.version, "1.0.0-alpha.62");
   assert.equal(result.candidate.version, "1.0.0-alpha.64");
   assert.equal(result.instanceReport.valid, true);
@@ -249,24 +249,26 @@ try {
       artifactRoot: currentManifest.kfdCut.package.artifactRoot,
     },
   };
+  const nextVersion = currentPackage.version.replace(/alpha\.(\d+)$/, (_, sequence) => `alpha.${Number(sequence) + 1}`);
+  assert.notEqual(nextVersion, currentPackage.version, "prior-cut fixture requires a successor alpha");
   const priorCutCandidate = {
     ...candidate,
-    instanceId: "kungfu-systems/kfd@1.0.0-alpha.70",
-    version: "1.0.0-alpha.70",
+    instanceId: `kungfu-systems/kfd@${nextVersion}`,
+    version: nextVersion,
     artifact: coordinate(
       "package",
-      "@kungfu-tech/kfd@1.0.0-alpha.70",
+      `@kungfu-tech/kfd@${nextVersion}`,
       "next-candidate-package",
     ),
     release: coordinate(
       "release",
-      "https://github.com/kungfu-systems/kfd/releases/tag/v1.0.0-alpha.70",
+      `https://github.com/kungfu-systems/kfd/releases/tag/v${nextVersion}`,
       "next-candidate-release-passport",
     ),
   };
   const priorCutTransition = {
     ...specificationTransition,
-    transitionId: "kfd-alpha69-to-alpha70-delivery-prior-cut",
+    transitionId: `kfd-${currentPackage.version}-to-${nextVersion}-delivery-prior-cut`,
     mode: "prior-cut",
     authority: {
       packageVersion: currentPackage.version,
@@ -282,8 +284,8 @@ try {
       .filter(({ id }) => id !== "verifier")
       .map((surface) => ({
         ...surface,
-        beforeRoot: semanticRoot({ surface: surface.id, cut: "alpha69" }),
-        afterRoot: semanticRoot({ surface: surface.id, cut: "alpha70" }),
+        beforeRoot: semanticRoot({ surface: surface.id, cut: currentPackage.version }),
+        afterRoot: semanticRoot({ surface: surface.id, cut: nextVersion }),
       })),
     bootstrapAnchor: null,
   };

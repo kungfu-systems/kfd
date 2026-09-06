@@ -46,8 +46,9 @@ assert.deepEqual(
 assert.equal(report.outcomes.find(({ subjectId }) => subjectId === "kfd-self-conformance-pressure").terminalState, "no-new-kfd");
 assert.equal(report.convergence.liveAnchorId, "kfd-alpha-55-pre-profile");
 assert.equal(report.convergence.historicalDoesNotReplaceLive, true);
+const rootReadme = fs.readFileSync(path.join(root, "README.md"), "utf8");
+assert.match(rootReadme, /docs\/repository-guide\.md/, "README.md: supporting guide route missing");
 for (const relative of [
-  "README.md",
   "profiles/self-conformance/README.md",
   "profiles/self-conformance/history/README.md",
   "profiles/self-conformance/history/implementer-guide.md",

@@ -7,6 +7,20 @@ on:
       - dev/v*/v*.*
       - alpha/v*/v*.*
       - release/v*/v*.*
+    # Keep the five-platform native build tied to inputs that can change the
+    # executable or its version contract. Repository metadata, documentation,
+    # evidence, cases, and other source-only package content remain covered by
+    # the lightweight Verify workflow.
+    paths:
+      - verifier/**
+      - schemas/**
+      - profiles/agent-runtime/**
+      - profiles/self-conformance/**
+      - package.json
+      - package-lock.json
+      - rust-toolchain.toml
+      - kfd.release.json
+      - scripts/build-native-release.mjs
   workflow_dispatch:
 
 permissions:
@@ -17,15 +31,15 @@ permissions:
 
 jobs:
   kfd:
-    uses: kungfu-systems/buildchain/.github/workflows/build.yml@v3-alpha
+    uses: kungfu-systems/buildchain/.github/workflows/build.yml@v4-alpha
     secrets: inherit
     with:
-      buildchain-alpha-contract-lock-path: buildchain.alpha-contract-lock.json
-      buildchain-stable-contract-lock-path: buildchain.contract-lock.json
+      buildchain-alpha-contract-lock-path: .buildchain/alpha-contract-lock.json
+      buildchain-stable-contract-lock-path: .buildchain/contract-lock.json
       checkout-history-mode: full
       runner-preset: custom
       platforms-json: >-
-        [{"id":"x86_64-unknown-linux-gnu","name":"Linux x86_64","runner":"[\"ubuntu-24.04\"]"},{"id":"aarch64-unknown-linux-gnu","name":"Linux arm64","runner":"[\"ubuntu-24.04-arm\"]"},{"id":"x86_64-apple-darwin","name":"macOS x86_64","runner":"[\"macos-15-intel\"]"},{"id":"aarch64-apple-darwin","name":"macOS arm64","runner":"[\"macos-15\"]"},{"id":"x86_64-pc-windows-msvc","name":"Windows x86_64","runner":"[\"windows-2022\"]"}]
+        [{"id":"linux-x64","name":"Linux x86_64","runner":"[\"ubuntu-24.04\"]"},{"id":"linux-arm64","name":"Linux arm64","runner":"[\"ubuntu-24.04-arm\"]"},{"id":"macos-x64","name":"macOS x86_64","runner":"[\"macos-15-intel\"]"},{"id":"macos-arm64","name":"macOS arm64","runner":"[\"macos-15\"]"},{"id":"windows-x64","name":"Windows x86_64","runner":"[\"windows-2022\"]"}]
       setup-node: true
       node-version: "24"
       setup-rust: true
@@ -62,6 +76,8 @@ jobs:
         docs/load-bearing-dogfood.md
         buildchain.alpha-contract-lock.json
         buildchain.contract-lock.json
+        .buildchain/alpha-contract-lock.json
+        .buildchain/contract-lock.json
         buildchain.release-propagation.json
         .buildchain/kfd-1/contract-world.witness.json
         .buildchain/kfd-2
@@ -71,4 +87,4 @@ jobs:
       release-candidate: true
       publish-channel: ${{ startsWith(github.base_ref, 'release/') && 'release' || (startsWith(github.base_ref, 'alpha/') && 'alpha' || 'none') }}
       expected-artifacts-json: >-
-        {"minFiles":66,"requiredPaths":["README.md","TRADEMARKS.md","kfd.release.json","registry.json","standards.json","drafts/README.md","drafts/registry.json","drafts/action-state-separation.md","docs/formal-model.md","docs/KFD-1-formal.md","docs/KFD-2-formal.md","docs/KFD-3-formal.md","docs/KFD-4-formal.md","docs/KFD-5-formal.md","docs/KFD-6-formal.md","docs/KFD-7-activation.md","docs/verifier.md","docs/native-cli.md","evidence/kfd-7/activation-record.json","cases/registry.json","cases/live/proof-carrying-work-object/README.md","cases/live/proof-carrying-work-object/genesis.md","cases/live/proof-carrying-work-object/ontology-split.md","cases/live/proof-carrying-work-object/distinguishability.md","cases/live/proof-carrying-work-object/kfd-method-trace.md","cases/live/proof-carrying-work-object/propagation-hypothesis.md","cases/live/proof-carrying-work-object/cuts/0001-genesis.json","cases/live/proof-carrying-work-object/cuts/0002-pursuit.json","cases/live/proof-carrying-work-object/cuts/0002-warrant.json","cases/live/proof-carrying-work-object/reviews/README.md","schemas/kfd-candidate-registry.schema.json","schemas/kfd-live-case-registry.schema.json","schemas/kfd-standards.schema.json","schemas/kfd-verification-bundle.schema.json","schemas/kfd-verification-report.schema.json","schemas/kfd-1/contract-world.schema.json","schemas/kfd-1/witness.schema.json","schemas/kfd-2/release-claims.schema.json","schemas/kfd-2/release-trust-passport.schema.json","schemas/kfd-3/collaboration-interface.schema.json","schemas/kfd-3/witness.schema.json","schemas/kfd-4/observer-perspective.schema.json","schemas/kfd-4/perspective-replay.schema.json","schemas/kfd-5/primitive-discovery.schema.json","schemas/kfd-6/autonomous-discovery-loop.schema.json","site/kfd-site.json","scripts/check.mjs","scripts/check-verifier.mjs","scripts/check-verifier-artifact.mjs","scripts/check-native-release.mjs","scripts/build-native-release.mjs","scripts/update-site-bundle.mjs","scripts/update-kfd-1-witness.mjs","scripts/update-kfd-2-claim.mjs","scripts/update-kfd-3-witness.mjs","scripts/npm-publish-transaction.mjs","bin/kfd.mjs","verifier/Cargo.toml","verifier/dist/kfd_verifier.wasm","dist/native/manifest.json","buildchain.alpha-contract-lock.json","buildchain.contract-lock.json","buildchain.release-propagation.json",".buildchain/kfd-1/contract-world.witness.json",".buildchain/kfd-2/public-release-trust.claim.json",".buildchain/kfd-3/collaboration-interface.json",".buildchain/kfd-3/collaboration-interface.prebuild.json",".buildchain/kfd-3/collaboration-interface.artifact.json","package.json","release-impact.json"]}
+        {"minFiles":66,"requiredPaths":["README.md","TRADEMARKS.md","kfd.release.json","registry.json","standards.json","drafts/README.md","drafts/registry.json","drafts/action-state-separation.md","docs/formal-model.md","docs/KFD-1-formal.md","docs/KFD-2-formal.md","docs/KFD-3-formal.md","docs/KFD-4-formal.md","docs/KFD-5-formal.md","docs/KFD-6-formal.md","docs/KFD-7-activation.md","docs/verifier.md","docs/native-cli.md","evidence/kfd-7/activation-record.json","cases/registry.json","cases/live/proof-carrying-work-object/README.md","cases/live/proof-carrying-work-object/genesis.md","cases/live/proof-carrying-work-object/ontology-split.md","cases/live/proof-carrying-work-object/distinguishability.md","cases/live/proof-carrying-work-object/kfd-method-trace.md","cases/live/proof-carrying-work-object/propagation-hypothesis.md","cases/live/proof-carrying-work-object/cuts/0001-genesis.json","cases/live/proof-carrying-work-object/cuts/0002-pursuit.json","cases/live/proof-carrying-work-object/cuts/0002-warrant.json","cases/live/proof-carrying-work-object/reviews/README.md","schemas/kfd-candidate-registry.schema.json","schemas/kfd-live-case-registry.schema.json","schemas/kfd-standards.schema.json","schemas/kfd-verification-bundle.schema.json","schemas/kfd-verification-report.schema.json","schemas/kfd-1/contract-world.schema.json","schemas/kfd-1/witness.schema.json","schemas/kfd-2/release-claims.schema.json","schemas/kfd-2/release-trust-passport.schema.json","schemas/kfd-3/collaboration-interface.schema.json","schemas/kfd-3/witness.schema.json","schemas/kfd-4/observer-perspective.schema.json","schemas/kfd-4/perspective-replay.schema.json","schemas/kfd-5/primitive-discovery.schema.json","schemas/kfd-6/autonomous-discovery-loop.schema.json","site/kfd-site.json","scripts/check.mjs","scripts/check-verifier.mjs","scripts/check-verifier-artifact.mjs","scripts/check-native-release.mjs","scripts/build-native-release.mjs","scripts/update-site-bundle.mjs","scripts/update-kfd-1-witness.mjs","scripts/update-kfd-2-claim.mjs","scripts/update-kfd-3-witness.mjs","scripts/npm-publish-transaction.mjs","bin/kfd.mjs","verifier/Cargo.toml","verifier/dist/kfd_verifier.wasm","dist/native/manifest.json","buildchain.alpha-contract-lock.json","buildchain.contract-lock.json",".buildchain/alpha-contract-lock.json",".buildchain/contract-lock.json","buildchain.release-propagation.json",".buildchain/kfd-1/contract-world.witness.json",".buildchain/kfd-2/public-release-trust.claim.json",".buildchain/kfd-3/collaboration-interface.json",".buildchain/kfd-3/collaboration-interface.prebuild.json",".buildchain/kfd-3/collaboration-interface.artifact.json","package.json","release-impact.json"]}

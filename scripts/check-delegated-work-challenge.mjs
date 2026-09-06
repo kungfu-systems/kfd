@@ -13,7 +13,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const cli = path.join(root, "bin", "kfd.mjs");
 const starter = path.join(root, "profiles", "delegated-work-challenge", "adapters", "node-starter.mjs");
 const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";
-const publicVersion = "1.0.0-alpha.69";
+const publicVersion = "1.0.0-alpha.70";
 const oneMinuteCommand = `npx --yes --package @kungfu-tech/kfd@${publicVersion} kfd challenge delegated-work --pair accepted-completion`;
 
 function run(command, args, expected, options = {}) {
@@ -46,7 +46,11 @@ const temporary = fs.mkdtempSync(path.join(os.tmpdir(), "kfd-delegated-work-"));
 try {
   const readme = fs.readFileSync(path.join(root, "README.md"), "utf8");
   const challengeGuide = fs.readFileSync(path.join(root, "profiles", "delegated-work-challenge", "README.md"), "utf8");
-  assert.equal(readme.includes(oneMinuteCommand), true, "README must lead with the exact immutable one-minute command");
+  assert.equal(
+    readme.includes("profiles/delegated-work-challenge/README.md"),
+    true,
+    "README must route readers to the delegated-work challenge guide",
+  );
   assert.equal(challengeGuide.includes(oneMinuteCommand), true, "challenge guide must lead with the exact immutable one-minute command");
   assert.equal(challengeGuide.includes(`npm install --ignore-scripts @kungfu-tech/kfd@${publicVersion}`), true, "challenge guide must pin the complete route to the same immutable package");
   assert.equal(readme.includes("<fixed-version>") || challengeGuide.includes("<fixed-version>"), false, "public challenge docs must not retain a version placeholder");
