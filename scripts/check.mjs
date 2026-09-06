@@ -116,7 +116,8 @@ const promotionWorkflowText = readFileSync(".github/workflows/buildchain-ref-pro
 const recoveryWorkflowText = readFileSync(".github/workflows/release-propagation.yml", "utf8");
 const verifyWorkflowText = readFileSync(".github/workflows/verify.yml", "utf8");
 if (!verifyWorkflowText.includes("public-build-check.yml@v4-alpha") ||
-    !/^\s*buildchain-ref:\s*v4-alpha\s*$/m.test(verifyWorkflowText)) {
+    !/^\s*buildchain-ref:\s*v4-alpha\s*$/m.test(verifyWorkflowText) ||
+    !/^\s*source-proof-reuse:\s*true\s*$/m.test(verifyWorkflowText)) {
   fail("source verification must use the public Buildchain v4 Alpha workflow and runtime");
 }
 for (const [channel, canonical, legacy] of [

@@ -23,3 +23,12 @@ jobs:
       require-version-state: true
       upload-artifacts: true
       mode: source
+      source-proof-reuse: true
+      source-proof-policy-paths-json: >-
+        [".github/workflows/verify.yml","AGENTS.md","CONTRIBUTING.md","buildchain.toml","scripts/check.mjs"]
+      source-proof-closure-paths-json: >-
+        [".buildchain",".github",".gitignore",".xinfa","AGENTS.md","CONTRIBUTING.md","GOVERNANCE.md","LICENSE","README.md","SECURITY.md","TRADEMARKS.md","activation-contracts.json","bin","buildchain.alpha-contract-lock.json","buildchain.contract-lock.json","buildchain.release-propagation.json","buildchain.toml","cases","decisions","docs","drafts","evidence","kfd.release.json","package-lock.json","package.json","profiles","protocols","registry.json","release-impact.json","rust-toolchain.toml","schemas","scripts","site","standards.json","terminology.json","verifier"]
+      source-proof-dependency-paths-json: >-
+        ["package-lock.json","package.json","rust-toolchain.toml","verifier/Cargo.lock","verifier/Cargo.toml"]
+      source-proof-required-contexts-json: >-
+        ["check / check"]
