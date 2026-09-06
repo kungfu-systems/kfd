@@ -23,7 +23,7 @@ on:
         default: "true"
 
 permissions:
-  # Buildchain v3 validates the reusable graph against the caller envelope
+  # Buildchain v4 validates the reusable graph against the caller envelope
   # before any job starts, so these capabilities must remain explicit here.
   artifact-metadata: write
   attestations: write
@@ -63,17 +63,17 @@ jobs:
       id-token: write
       issues: write
       pull-requests: write
-    uses: kungfu-systems/buildchain/.github/workflows/release-candidate-promote.yml@v3-alpha
+    uses: kungfu-systems/buildchain/.github/workflows/release-candidate-promote.yml@v4-alpha
     secrets:
       BUILDCHAIN_PROMOTION_TOKEN: ${{ secrets.BUILDCHAIN_PROMOTION_TOKEN }}
       KUNGFU_GOVERNANCE_AUDITOR_APP_PRIVATE_KEY: ${{ secrets.KUNGFU_GOVERNANCE_AUDITOR_APP_PRIVATE_KEY }}
       buildchain-issue-app-id: ${{ secrets.BUILDCHAIN_ISSUE_APP_ID }}
       buildchain-issue-app-private-key: ${{ secrets.BUILDCHAIN_ISSUE_APP_PRIVATE_KEY }}
     with:
-      buildchain-ref: ${{ startsWith(github.event.workflow_run.head_branch || inputs['target-ref'], 'alpha/') && 'v3-alpha' || 'v3' }}
+      buildchain-ref: ${{ startsWith(github.event.workflow_run.head_branch || inputs['target-ref'], 'alpha/') && 'v4-alpha' || 'v4' }}
       target-ref: ${{ github.event.workflow_run.head_branch || inputs['target-ref'] }}
       target-sha: ${{ github.event.workflow_run.head_sha || inputs.sha || github.sha }}
-      buildchain-contract-lock-path: ${{ startsWith(github.event.workflow_run.head_branch || inputs['target-ref'], 'alpha/') && 'buildchain.alpha-contract-lock.json' || 'buildchain.contract-lock.json' }}
+      buildchain-contract-lock-path: ${{ startsWith(github.event.workflow_run.head_branch || inputs['target-ref'], 'alpha/') && '.buildchain/alpha-contract-lock.json' || '.buildchain/contract-lock.json' }}
       package-manager: npm
       artifact-name: kfd
       artifact-patterns: |

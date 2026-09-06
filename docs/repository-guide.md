@@ -91,7 +91,7 @@ successor alpha and run the one-minute baseline:
 
 ```bash
 npm init -y
-npm install --ignore-scripts @kungfu-tech/kfd@1.0.0-alpha.69
+npm install --ignore-scripts @kungfu-tech/kfd@1.0.0-alpha.70
 npx --no-install kfd challenge delegated-work protocol list
 npx --no-install kfd challenge delegated-work protocol inspect mcp-tasks
 ```
@@ -119,7 +119,7 @@ From a clean directory with only Node.js and npm, start with the most direct
 one-minute pair:
 
 ```bash
-npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.69 kfd challenge delegated-work --pair accepted-completion
+npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.70 kfd challenge delegated-work --pair accepted-completion
 ```
 
 The result is `1/1 COLLAPSED`: the two worlds have the same successful execution
@@ -142,17 +142,17 @@ KFD.
 **Implement KFD without Kungfu — scaffold an adapter in Python, Rust, Node.js,
 or C++, then verify it offline.**
 
-Use the immutable `@kungfu-tech/kfd@1.0.0-alpha.69` package cut and follow the
+Use the immutable `@kungfu-tech/kfd@1.0.0-alpha.70` package cut and follow the
 package-owned [Agent Hub workflow](profiles/agent-hub/README.md) or inspect the
 complete [independent verification boundary](docs/independent-verifier.md):
 
-For a two-minute success path, run `npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.69 kfd demo agent-hub --output agent-hub-demo-report.json`. It produces behavior `20/20`, evidence `valid`, and no qualification or certification.
+For a two-minute success path, run `npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.70 kfd demo agent-hub --output agent-hub-demo-report.json`. It produces behavior `20/20`, evidence `valid`, and no qualification or certification.
 
 ```bash
-npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.69 kfd scaffold agent-hub --language python --output my-agent-hub-adapter
+npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.70 kfd scaffold agent-hub --language python --output my-agent-hub-adapter
 python3 my-agent-hub-adapter/smoke.py
-npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.69 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json
-npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.69 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py
+npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.70 kfd test agent-hub --adapter ./my-agent-hub-adapter/adapter.py --output agent-hub-report.json
+npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.70 kfd verify agent-hub-report agent-hub-report.json --adapter ./my-agent-hub-adapter/adapter.py
 ```
 
 The scaffold is a deterministic, fail-closed starter. Before implementation,
@@ -772,7 +772,7 @@ boundaries. From any directory, verify the exact public npm package with its
 package-owned command:
 
 ```sh
-npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.69 kfd-self-check
+npx --yes --package @kungfu-tech/kfd@1.0.0-alpha.70 kfd-self-check
 ```
 
 `kfd-self-check` resolves the installed package root and checks only facts

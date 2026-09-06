@@ -488,7 +488,7 @@ const exactExports = {
 };
 for (const [exportName, target] of Object.entries(exactExports)) assert.equal(packageJson.exports?.[exportName], target);
 for (const directory of ["profiles", "schemas", "scripts"]) assert.equal(packageJson.files?.includes(directory), true, `npm files must include ${directory}`);
-assert.equal(packageJson.version, "1.0.0-alpha.69", "commercialization release must bind the successor alpha.69 coordinate");
+assert.equal(packageJson.version, "1.0.0-alpha.70", "commercialization release must bind the successor alpha.70 coordinate");
 assert.equal(packageJson.scripts?.["check:protocol-semantics-lab"], "node scripts/check-protocol-semantics-lab.mjs");
 assert.equal(packageJson.scripts?.["generate:protocol-semantics-reference"], "node scripts/generate-protocol-semantics-reference.mjs --write");
 assert.equal(packageJson.scripts?.["generate:protocol-semantics-commercialization"], "node scripts/generate-protocol-semantics-commercialization.mjs --write");
