@@ -85,7 +85,7 @@ jobs:
       release-candidate-workflow-file: build.yml
       release-candidate-workflow-name: Build
       required-status-check: "check / check"
-      required-artifact-count: 0
+      required-artifact-count: 1
       publish-required-artifacts-json: "[]"
       publish-mode: publish-final-version
       publish-dist-tag: ${{ startsWith(github.event.workflow_run.head_branch || inputs['target-ref'], 'alpha/') && 'alpha' || 'latest' }}
