@@ -23,7 +23,7 @@ jobs:
       require-version-state: true
       upload-artifacts: true
       mode: source
-      source-proof-reuse: true
+      source-proof-reuse: ${{ (github.event_name == 'pull_request' && startsWith(github.base_ref, 'dev/')) || (github.event_name == 'merge_group' && startsWith(github.event.merge_group.base_ref, 'refs/heads/dev/')) }}
       source-proof-policy-paths-json: >-
         [".github/workflows/verify.yml","AGENTS.md","CONTRIBUTING.md","buildchain.toml","scripts/check.mjs"]
       source-proof-closure-paths-json: >-

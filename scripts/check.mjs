@@ -115,10 +115,11 @@ const buildWorkflowText = readFileSync(".github/workflows/build.yml", "utf8");
 const promotionWorkflowText = readFileSync(".github/workflows/buildchain-ref-promotion.yml", "utf8");
 const recoveryWorkflowText = readFileSync(".github/workflows/release-propagation.yml", "utf8");
 const verifyWorkflowText = readFileSync(".github/workflows/verify.yml", "utf8");
+const expectedSourceProofReuse = "source-proof-reuse: ${{ (github.event_name == 'pull_request' && startsWith(github.base_ref, 'dev/')) || (github.event_name == 'merge_group' && startsWith(github.event.merge_group.base_ref, 'refs/heads/dev/')) }}";
 if (!verifyWorkflowText.includes("public-build-check.yml@v4-alpha") ||
     !/^\s*buildchain-ref:\s*v4-alpha\s*$/m.test(verifyWorkflowText) ||
-    !/^\s*source-proof-reuse:\s*true\s*$/m.test(verifyWorkflowText)) {
-  fail("source verification must use the public Buildchain v4 Alpha workflow and runtime");
+    !verifyWorkflowText.includes(expectedSourceProofReuse)) {
+  fail("source verification must use the public Buildchain v4 Alpha workflow and limit dev source proofs to dev PRs and merge groups");
 }
 for (const [channel, canonical, legacy] of [
   ["v4", ".buildchain/contract-lock.json", "buildchain.contract-lock.json"],
