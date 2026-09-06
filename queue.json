@@ -3,7 +3,7 @@
   "contract": "kungfu-buildchain-dev-delivery-warrant-queue",
   "repository": "kungfu-systems/kfd",
   "protectedBase": "dev/v1/v1.0",
-  "generation": 236,
+  "generation": 237,
   "fencingCounter": 46,
   "policy": {
     "agingSeconds": 900,
@@ -2032,8 +2032,45 @@
       "shardEvidenceRoots": [
         "sha256:0db81021faa95e15692abe172d514f1bab14eba7ac8b174f56356ad44cd44b07"
       ]
+    },
+    {
+      "repository": "kungfu-systems/kfd",
+      "protectedBase": "dev/v1/v1.0",
+      "pullRequestNumber": 464,
+      "sourceRoot": "sha256:0553a8db00ef8c9be52add3375359404b8d3b75dccb69371f80a499cf0f0d7ea",
+      "sourceIdentityRoot": "sha256:e6f6f1aa9eabf2fd7c2b1de07f7ac3bb9091cd13acfd8f30ee403e203ce0836f",
+      "deliveryClass": "non-native-fast",
+      "candidateId": "sha256:baeed17acb66852d8e62894ba8bd48835f54b1f886d5c87b65865f8ad7b17044",
+      "sourceHead": "754d9d898ca950025fddae1213276bf545b58830",
+      "sourcePatchRoot": "sha256:b1b3b9d4928019692fa258ed47dc9870a21447fc3992a3f9f709ab9e9840d0be",
+      "sourceProofRoot": "sha256:f5b9f5baf312bb45a3da22ea870b4e5ad6bbeaab780da5e64b360bcdb28aecf2",
+      "planRoot": "sha256:a5faa529268c7dbb930d96e87e79d98fa3e508df132535f5cc96bd30c0818bd1",
+      "closureRoot": "sha256:0b19987099cb96609f8da44234e2a25ccea9f0b6a8aa8c07895dca3490628b8b",
+      "dependencyRoot": "sha256:d01cda2ad9de28e03c0e76a74053f27abc379dff79642305d2b86db7192e6e2c",
+      "toolchainRoot": "sha256:e6c3e943e0343709ac30114bcdd83e8a7a0c4bb2ab8db3cfb70966437c45f3c8",
+      "sourceWorkflowRunId": 34029601151,
+      "priority": "ordinary",
+      "enqueuedAt": "2026-09-06T11:18:20.134Z",
+      "updatedAt": "2026-09-06T11:18:20.134Z",
+      "attempts": 1,
+      "recoveries": 0,
+      "status": "queued",
+      "terminal": null,
+      "affectedPaths": [
+        ".buildchain/kfd-1/contract-world.witness.json",
+        ".buildchain/kfd-2/public-release-trust.claim.json",
+        ".buildchain/kfd-3/collaboration-interface.artifact.json",
+        ".buildchain/kfd-3/collaboration-interface.prebuild.json",
+        ".github/workflows/buildchain-ref-promotion.yml",
+        "profiles/adopter-conformance/adopters/kfd/manifest.json",
+        "scripts/build-native-release.mjs",
+        "scripts/check-native-release.mjs"
+      ],
+      "shardEvidenceRoots": [
+        "sha256:274832de8fb4e829583209692df574f1ad9d2a15c1c3fbe059fbe2b2be0f04a1"
+      ]
     }
   ],
-  "updatedAt": "2026-09-06T10:44:05.391Z",
-  "stateRoot": "sha256:47ec0830e8dd23a157c1e1fdab281e459051cea5d569cdb5e57ffcf2a2b12986"
+  "updatedAt": "2026-09-06T11:18:20.134Z",
+  "stateRoot": "sha256:320a4d74a1472ccc063069cad5a7fbda32e6fd40c0ca19dfb80c2e389b56ee2b"
 }
