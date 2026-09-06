@@ -55,6 +55,7 @@ assert.match(workflow, /rust-toolchain:\s*"1\.95\.0"/u);
 assert.match(workflow, /build-command:\s*npm run build:native-release/u);
 assert.match(workflow, /require-build:\s*true/u);
 assert.match(workflow, /dist\/native/u);
+assert.match(promotion, /required-artifact-count:\s*1\b/u, "promotion must require the sealed npm candidate");
 for (const pattern of ["kfd-*.tar.gz", "kfd-*.zip", "kfd-*.sha256", "kfd-*.provenance.json"]) {
   assert.equal(promotion.includes(pattern), true, `promotion is missing ${pattern}`);
 }
@@ -67,6 +68,12 @@ if (fs.existsSync(manifestPath)) {
   assert.equal(manifest.schema, "kfd.native-release-build/v1");
   assert.equal(manifest.name, "kfd");
   assert.equal(manifest.version, packageJson.version);
+  const npmCandidates = fs.readdirSync(path.dirname(manifestPath)).filter((name) => name.endsWith(".tgz"));
+  assert.equal(
+    npmCandidates.length,
+    manifest.target === "x86_64-unknown-linux-gnu" ? 1 : 0,
+    "only the Linux x64 candidate must carry the single platform-independent npm tarball",
+  );
   assert.equal(manifest.files.length, 3);
   const names = new Set(manifest.files.map(({ name }) => name));
   assert.equal([...names].some((name) => name.endsWith(".tar.gz") || name.endsWith(".zip")), true);

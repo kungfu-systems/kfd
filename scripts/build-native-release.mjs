@@ -305,4 +305,18 @@ const manifest = {
 fs.writeFileSync(path.join(outputDirectory, "manifest.json"), `${JSON.stringify(manifest, null, 2)}\n`);
 fs.rmSync(temporary, { recursive: true, force: true });
 
+// The platform-independent npm package has one candidate producer. Buildchain
+// seals this tarball with the native payloads and publishes those exact bytes.
+if (target === "x86_64-unknown-linux-gnu") {
+  const packed = JSON.parse(run("npm", [
+    "pack", "--ignore-scripts", "--json", "--pack-destination", outputDirectory,
+  ]).stdout);
+  assert.equal(packed.length, 1, "the candidate must contain one npm package");
+  assert.equal(packed[0].name, "@kungfu-tech/kfd");
+  assert.equal(packed[0].version, version);
+  const tarball = packed[0].filename;
+  assert.equal(path.basename(tarball), tarball, "npm tarball must remain inside the artifact directory");
+  assert.equal(fs.existsSync(path.join(outputDirectory, tarball)), true, "npm candidate tarball is missing");
+}
+
 console.log(`Native KFD release assets built: ${baseName}`);
