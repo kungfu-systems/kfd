@@ -39,7 +39,7 @@ jobs:
       checkout-history-mode: full
       runner-preset: custom
       platforms-json: >-
-        [{"id":"x86_64-unknown-linux-gnu","name":"Linux x86_64","runner":"[\"ubuntu-24.04\"]"},{"id":"aarch64-unknown-linux-gnu","name":"Linux arm64","runner":"[\"ubuntu-24.04-arm\"]"},{"id":"x86_64-apple-darwin","name":"macOS x86_64","runner":"[\"macos-15-intel\"]"},{"id":"aarch64-apple-darwin","name":"macOS arm64","runner":"[\"macos-15\"]"},{"id":"x86_64-pc-windows-msvc","name":"Windows x86_64","runner":"[\"windows-2022\"]"}]
+        [{"id":"linux-x64","name":"Linux x86_64","runner":"[\"ubuntu-24.04\"]"},{"id":"linux-arm64","name":"Linux arm64","runner":"[\"ubuntu-24.04-arm\"]"},{"id":"macos-x64","name":"macOS x86_64","runner":"[\"macos-15-intel\"]"},{"id":"macos-arm64","name":"macOS arm64","runner":"[\"macos-15\"]"},{"id":"windows-x64","name":"Windows x86_64","runner":"[\"windows-2022\"]"}]
       setup-node: true
       node-version: "24"
       setup-rust: true

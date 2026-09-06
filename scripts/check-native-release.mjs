@@ -32,15 +32,23 @@ assert.match(cargo, /members\s*=\s*\[[\s\S]*"crates\/cli"/u);
 assert.match(read("verifier/crates/cli/Cargo.toml"), /\[\[bin\]\][\s\S]*name\s*=\s*"kfd"/u);
 assert.match(read("verifier/crates/cli/src/main.rs"), /CARGO_PKG_VERSION/u);
 
-for (const target of [
-  "x86_64-unknown-linux-gnu",
-  "aarch64-unknown-linux-gnu",
-  "x86_64-apple-darwin",
-  "aarch64-apple-darwin",
-  "x86_64-pc-windows-msvc",
-]) assert.match(workflow, new RegExp(target, "u"), `build matrix is missing ${target}`);
-for (const runner of ["ubuntu-24.04", "ubuntu-24.04-arm", "macos-15-intel", "macos-15", "windows-2022"]) {
-  assert.match(workflow, new RegExp(runner, "u"), `build matrix is missing ${runner}`);
+const nativeTargets = {
+  "linux-x64": ["x86_64-unknown-linux-gnu", "ubuntu-24.04"],
+  "linux-arm64": ["aarch64-unknown-linux-gnu", "ubuntu-24.04-arm"],
+  "macos-x64": ["x86_64-apple-darwin", "macos-15-intel"],
+  "macos-arm64": ["aarch64-apple-darwin", "macos-15"],
+  "windows-x64": ["x86_64-pc-windows-msvc", "windows-2022"],
+};
+const platforms = JSON.parse(workflow.match(/platforms-json:\s*>-\s*\n\s*(\[[^\n]+\])/u)?.[1] || "null");
+assert.ok(Array.isArray(platforms), "build matrix must declare its native platforms");
+assert.deepEqual(platforms.map(({ id }) => id).sort(), Object.keys(nativeTargets).sort());
+for (const { id, runner } of platforms) {
+  assert.match(id, /^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/u, "Buildchain v4 Stage Capsule platform IDs must be ASCII tokens");
+  const [target, expectedRunner] = nativeTargets[id];
+  assert.deepEqual(JSON.parse(runner), [expectedRunner], `${id} must retain its native runner`);
+  assert.ok(read("scripts/build-native-release.mjs").includes(`"${target}"`), `native builder is missing ${target}`);
+  assert.ok(nativeGuide.includes(target), `public native archive target changed: ${target}`);
+  assert.ok(promotion.includes(`kfd-${id}-*`), `promotion is missing the ${id} provider artifact`);
 }
 assert.match(workflow, /setup-rust:\s*true/u);
 assert.match(workflow, /rust-toolchain:\s*"1\.95\.0"/u);
