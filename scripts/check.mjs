@@ -135,6 +135,9 @@ for (const [channel, canonical, legacy] of [
 }
 
 const expectedNativeBuildPaths = [
+  ".github/workflows/build.yml",
+  ".github/workflows/buildchain-ref-promotion.yml",
+  "buildchain.toml",
   "verifier/**",
   "schemas/**",
   "profiles/agent-runtime/**",
@@ -144,6 +147,7 @@ const expectedNativeBuildPaths = [
   "rust-toolchain.toml",
   "kfd.release.json",
   "scripts/build-native-release.mjs",
+  "scripts/check-native-release.mjs",
 ];
 const nativeBuildPathBlock = buildWorkflowText.match(/\n    paths:\n((?:      - [^\n]+\n)+)  workflow_dispatch:/u)?.[1];
 const nativeBuildPaths = nativeBuildPathBlock
@@ -210,7 +214,7 @@ if (!buildWorkflowText.includes("uses: kungfu-systems/buildchain/.github/workflo
   fail("Buildchain verification must retain full source history for KFD historical self-conformance replay");
 }
 if (JSON.stringify(nativeBuildPaths) !== JSON.stringify(expectedNativeBuildPaths)) {
-  fail("the five-platform Build workflow must be limited to native executable and version-contract inputs");
+  fail("the five-platform Build workflow must cover native, version, and candidate publication contract inputs");
 }
 if (/^\s*release\s*:/m.test(recoveryWorkflowText) ||
     /gh pr (?:create|merge)|git push/.test(recoveryWorkflowText) ||

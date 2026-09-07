@@ -8,10 +8,13 @@ on:
       - alpha/v*/v*.*
       - release/v*/v*.*
     # Keep the five-platform native build tied to inputs that can change the
-    # executable or its version contract. Repository metadata, documentation,
+    # executable, version, or candidate publication contract. Other metadata,
     # evidence, cases, and other source-only package content remain covered by
     # the lightweight Verify workflow.
     paths:
+      - .github/workflows/build.yml
+      - .github/workflows/buildchain-ref-promotion.yml
+      - buildchain.toml
       - verifier/**
       - schemas/**
       - profiles/agent-runtime/**
@@ -21,6 +24,7 @@ on:
       - rust-toolchain.toml
       - kfd.release.json
       - scripts/build-native-release.mjs
+      - scripts/check-native-release.mjs
   workflow_dispatch:
 
 permissions:
