@@ -3,7 +3,7 @@
   "contract": "kungfu-buildchain-dev-delivery-warrant-queue",
   "repository": "kungfu-systems/kfd",
   "protectedBase": "dev/v1/v1.0",
-  "generation": 239,
+  "generation": 240,
   "fencingCounter": 47,
   "policy": {
     "agingSeconds": 900,
@@ -2077,8 +2077,48 @@
       "shardEvidenceRoots": [
         "sha256:274832de8fb4e829583209692df574f1ad9d2a15c1c3fbe059fbe2b2be0f04a1"
       ]
+    },
+    {
+      "repository": "kungfu-systems/kfd",
+      "protectedBase": "dev/v1/v1.0",
+      "pullRequestNumber": 466,
+      "sourceRoot": "sha256:e56abcd021c615edbf0b0df42e2da6bf996694c7682360f4a59681e9df02196f",
+      "sourceIdentityRoot": "sha256:eab52760d77d628339d44c401ac09260d5e59c8b2841a55de080b4be190eadd7",
+      "deliveryClass": "non-native-fast",
+      "candidateId": "sha256:3b5d6475178f5a7fd634b9521c2f2b782fc2f8040c761c607f445d6edb54167e",
+      "sourceHead": "c2194c372d2091982c08e17f05330da535035820",
+      "sourcePatchRoot": "sha256:aaee3e457dcc8aced77b20cb540f1098410120029cdbcb470a019efa7211ba26",
+      "sourceProofRoot": "sha256:d2dcd150fcd01783aad0c5bd0b04ef578d8de35347ffb117babda93391bba4b8",
+      "planRoot": "sha256:a5faa529268c7dbb930d96e87e79d98fa3e508df132535f5cc96bd30c0818bd1",
+      "closureRoot": "sha256:121844dd583c894e13d549f09ce57903300e040b0459ff12ae7bd69fcbe7f3f3",
+      "dependencyRoot": "sha256:d01cda2ad9de28e03c0e76a74053f27abc379dff79642305d2b86db7192e6e2c",
+      "toolchainRoot": "sha256:2131424c3f804688768faaf844f0dcd675962efbb7b25c39c6924355ded9b726",
+      "sourceWorkflowRunId": 34078654342,
+      "priority": "ordinary",
+      "enqueuedAt": "2026-09-07T03:20:06.605Z",
+      "updatedAt": "2026-09-07T03:20:06.605Z",
+      "attempts": 1,
+      "recoveries": 0,
+      "status": "queued",
+      "terminal": null,
+      "affectedPaths": [
+        ".buildchain/kfd-1/contract-world.witness.json",
+        ".buildchain/kfd-2/kfd-foundation.trust-assessment.json",
+        ".buildchain/kfd-2/kfd-foundation.trust-claims.json",
+        ".buildchain/kfd-2/public-release-trust.claim.json",
+        ".buildchain/kfd-3/collaboration-interface.artifact.json",
+        ".buildchain/kfd-3/collaboration-interface.prebuild.json",
+        ".github/workflows/build.yml",
+        ".github/workflows/buildchain-ref-promotion.yml",
+        "profiles/adopter-conformance/adopters/kfd/manifest.json",
+        "scripts/check-native-release.mjs",
+        "scripts/check.mjs"
+      ],
+      "shardEvidenceRoots": [
+        "sha256:364ac4f824fe1a43dc72a1adabaab1fe372e850a7dc72a59023efa4b5dfcfa07"
+      ]
     }
   ],
-  "updatedAt": "2026-09-06T11:24:09.878Z",
-  "stateRoot": "sha256:7f2c124bdbbd9a640f30c72e8d92d2cdafa28bf3ed57dd93a053da19357467e7"
+  "updatedAt": "2026-09-07T03:20:06.605Z",
+  "stateRoot": "sha256:8d088d35b97c0082466b1f16f0b79fb65067c2a4908bbc81d1ba2e27bf047a26"
 }
