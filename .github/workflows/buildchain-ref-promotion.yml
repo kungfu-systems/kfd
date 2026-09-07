@@ -87,7 +87,6 @@ jobs:
       required-status-check: "check / check"
       required-artifact-count: 1
       publish-required-artifacts-json: "[]"
-      publish-mode: publish-final-version
       publish-dist-tag: ${{ startsWith(github.event.workflow_run.head_branch || inputs['target-ref'], 'alpha/') && 'alpha' || 'latest' }}
       publish-package-set-order: as-provided
       publish-package-main: "@kungfu-tech/kfd"

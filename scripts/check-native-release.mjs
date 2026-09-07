@@ -56,6 +56,9 @@ assert.match(workflow, /build-command:\s*npm run build:native-release/u);
 assert.match(workflow, /require-build:\s*true/u);
 assert.match(workflow, /dist\/native/u);
 assert.match(promotion, /required-artifact-count:\s*1\b/u, "promotion must require the sealed npm candidate");
+assert.doesNotMatch(promotion, /^\s+(?:publish-mode|publish-command):/mu, "the v4 publisher owns its mode and command");
+assert.match(promotion, /publish-package-set-order:\s*as-provided\b/u, "the single npm package uses the v4 default ordering");
+assert.doesNotMatch(promotion, /trusted-publishing:\s*false\b/u, "v4 npm publication requires trusted publishing");
 for (const pattern of ["kfd-*.tar.gz", "kfd-*.zip", "kfd-*.sha256", "kfd-*.provenance.json"]) {
   assert.equal(promotion.includes(pattern), true, `promotion is missing ${pattern}`);
 }
